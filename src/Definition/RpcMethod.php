@@ -23,6 +23,12 @@ final class RpcMethod
     const IDENTIFY = 'connector.identify';
     const FINISH = 'connector.finish';
 
+    protected static $mappedMethods = [
+        self::IDENTIFY => 'core.connector.identify',
+        self::FINISH => 'core.connector.finish',
+        self::CLEAR => 'core.connector.clear',
+    ];
+
     /**
      * @param string $methodName
      * @return boolean
@@ -39,5 +45,14 @@ final class RpcMethod
         }
         
         return false;
+    }
+
+    /**
+     * @param $method
+     * @return string
+     */
+    public static function mapMethod($method): string
+    {
+        return self::$mappedMethods[$method] ?? $method;
     }
 }

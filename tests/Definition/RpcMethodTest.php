@@ -43,6 +43,32 @@ class RpcMethodTest extends TestCase
         $customTests[] = ['very.long.method.name', true];
 
         return array_merge_recursive($definedMethods, $customTests);
+    }
 
+    /**
+     * @dataProvider mapMethodDataProvider
+     *
+     * @param $methodName
+     * @param $expectedMapping
+     */
+    public function testMapMethod(string $methodName, string $expectedMapping)
+    {
+        $mappedName = RpcMethod::mapMethod($methodName);
+        $this->assertSame($expectedMapping,$mappedName);
+    }
+
+    /**
+     * @return array
+     */
+    public function mapMethodDataProvider()
+    {
+        return [
+            [RpcMethod::CLEAR, 'core.connector.clear'],
+            [RpcMethod::IDENTIFY, 'core.connector.identify'],
+            [RpcMethod::FINISH, 'core.connector.finish'],
+            [RpcMethod::AUTH, RpcMethod::AUTH],
+            ['', ''],
+            ['foo', 'foo']
+        ];
     }
 }

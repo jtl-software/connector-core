@@ -3,6 +3,7 @@ namespace Jtl\Connector\Core\Test\Controller;
 
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
+use Jtl\Connector\Core\Connector\ConnectorInterface;
 use Jtl\Connector\Core\Controller\ConnectorController;
 use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\AuthenticationException;
@@ -196,11 +197,60 @@ class ConnectorTest extends TestCase
     /**
      *
      */
+    public function testIdentify()
+    {
+        $endpointVersion = "1.0";
+        $platformName = "ConnectorPlatform";
+        $platformVersion = "0.1";
+
+        $endpointConnector = \Mockery::mock(ConnectorInterface::class);
+        $endpointConnector->shouldReceive('getEndpointVersion')->andReturn($endpointVersion);
+        $endpointConnector->shouldReceive('getPlatformVersion')->andReturn($platformVersion);
+        $endpointConnector->shouldReceive('getPlatformName')->andReturn($platformName);
+
+        $controller = $this->createConnectorController();
+        $connectorIdentification = $controller->identify($endpointConnector);
+
+        $this->assertSame($endpointVersion, $connectorIdentification->getEndpointVersion());
+        $this->assertSame($platformName, $connectorIdentification->getPlatformName());
+        $this->assertSame($platformVersion, $connectorIdentification->getPlatformVersion());
+        $this->assertSame(Application::PROTOCOL_VERSION, $connectorIdentification->getProtocolVersion());
+    }
+
+    /**
+     *
+     */
+    public function testClearSuccess()
+    {
+        $application = \Mockery::mock(Application::class);
+        $application->shouldReceive('getLinker->clear')->andReturnTrue();
+
+        $linker = new ConnectorController($application);
+
+        $response = $linker->clear(['foo']);
+        $this->assertTrue($response);
+    }
+
+    /**
+     *
+     */
+    public function testClearFailure()
+    {
+        $application = \Mockery::mock(Application::class);
+        $application->shouldReceive('getLinker->clear')->andReturnFalse();
+
+        $linker = new ConnectorController($application);
+
+        $response = $linker->clear(true);
+        $this->assertFalse($response);
+    }
+
+    /**
+     *
+     */
     protected function tearDown(): void
     {
         parent::tearDown();
         \Mockery::close();
     }
-
-
 }

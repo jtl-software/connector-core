@@ -153,7 +153,8 @@ class Application
         try {
             $jtlrpc = HttpRequest::getJtlrpc();
             $requestPacket = RequestPacket::createFromJtlrpc($jtlrpc, $this->serializer);
-            $method = Method::createFromRequestPacket($requestPacket);
+
+            $method = Method::createFromRpcMethod(RpcMethod::mapMethod($requestPacket->getMethod()));
 
             if (!$requestPacket->isValid() || !RpcMethod::isMethod($requestPacket->getMethod())) {
                 throw new RpcException("Invalid request", ErrorCode::INVALID_REQUEST);
@@ -458,7 +459,9 @@ class Application
                     throw $ex;
                 }
                 break;
-
+            case Action::IDENTIFY:
+                $result = $controllerObject->$action($this->getEndpointConnector());
+                break;
             default:
                 $param = count($params) > 0 ? reset($params) : null;
                 $result = $controllerObject->$action($param);
