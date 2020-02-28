@@ -1,7 +1,6 @@
 <?php
 namespace Jtl\Connector\Core\Model\Generator;
 
-
 use Jtl\Connector\Core\Exception\NotImplementedException;
 
 class I18nFactory extends AbstractModelFactory

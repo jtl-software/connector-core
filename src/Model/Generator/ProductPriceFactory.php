@@ -38,12 +38,12 @@ class ProductPriceFactory extends AbstractModelFactory
         if ($withBulkPrices === true) {
             $pricesCount = mt_rand(1, mt_rand(1, 30));
             $maxQuantity = mt_rand($pricesCount, mt_rand($pricesCount, 500));
-            $step = (int)floor($maxQuantity/$pricesCount);
+            $step = (int)floor($maxQuantity / $pricesCount);
 
             $quantity = 0;
             for ($i = 0; $i < $pricesCount; $i++) {
                 $quantity = mt_rand($quantity + 1, $quantity + $step);
-                $price = mt_rand($items[$i]['netPrice'] + 1, $items[$i]['netPrice'] * mt_rand(2,3));
+                $price = mt_rand($items[$i]['netPrice'] + 1, $items[$i]['netPrice'] * mt_rand(2, 3));
                 $items[] = $this->generateItem($quantity, $price);
             }
         }

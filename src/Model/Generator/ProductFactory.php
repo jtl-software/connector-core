@@ -5,6 +5,7 @@ namespace Jtl\Connector\Core\Model\Generator;
 use Jtl\Connector\Core\Definition\IdentityType;
 use Jtl\Connector\Core\Model\Manufacturer;
 use Jtl\Connector\Core\Model\Product;
+use Jtl\Connector\Core\Serializer\SerializerBuilder;
 
 class ProductFactory extends AbstractModelFactory
 {
@@ -22,11 +23,11 @@ class ProductFactory extends AbstractModelFactory
         return array_merge([
             'basePriceUnitId' => $identityFactory->makeOneArray(),
             'manufacturerId' => $this->makeIdentity(IdentityType::MANUFACTURER),
-            'measurementUnitId' => null,
-            'partsListId' => null,
-            'productTypeId' => null,
-            'shippingClassId' => null,
-            'unitId' => null,
+            'measurementUnitId' => $identityFactory->makeOneArray(),
+            'partsListId' => $identityFactory->makeOneArray(),
+            'productTypeId' => $identityFactory->makeOneArray(),
+            'shippingClassId' => $identityFactory->makeOneArray(),
+            'unitId' => $identityFactory->makeOneArray(),
             'asin' => '',
             'availableFrom' => null,
             //'basePriceDivisor' => 0.0,
@@ -93,7 +94,7 @@ class ProductFactory extends AbstractModelFactory
             'invisibilities' => [],
             'mediaFiles' => [],
             'partsLists' => [],
-            'prices' => $this->getFactory('ProductPrice')->makeOneArray(['customerGroupId' => $this->getFactory('Identity')->makeOneArray([1 => 0])]),
+            //'prices' => $this->getFactory('ProductPrice')->makeOneArray(['customerGroupId' => $this->getFactory('Identity')->makeOneArray([1 => 0])]),
             'specialPrices' => [],
             'specifics' => [],
             //'varCombinations' => [],
@@ -102,20 +103,23 @@ class ProductFactory extends AbstractModelFactory
         ], $override);
     }
 
-    public function makeOneProductVariantArray(int $languagesQuantity = 2, int $variationsQuantity = 2)
+    public function makeOneProductVariantArray(array $i18ns = null)
     {
-        $i18ns = $this->getFactory('I18n')->makeArray($languagesQuantity);
+        $variationsQuantity = 2;
+        if (is_null($i18ns)) {
+            $i18ns = $this->getFactory('I18n')->makeArray(mt_rand(1, 3));
+        }
+
         $variantsQuantity = 1;
         $variations = [];
         for ($i = 0; $i < $variationsQuantity; $i++) {
-            $variationI8ns = [];
-            foreach ($i18ns as $i18n) {
-                $variationI8ns[] = $this->getFactory('ProductVariationI18n')->makeOneArray($i18n);
-            }
+            $variationI18ns = array_map(function (array $i18n) {
+                return $this->getFactory('ProductVariationI18n')->makeOneArray($i18n);
+            }, $i18ns);
 
             $values = [];
             $valuesQuantity = mt_rand(1, 10);
-            $variantsQuantity += $valuesQuantity;
+            $variantsQuantity *= $valuesQuantity;
             for ($j = 0; $j < $valuesQuantity; $j++) {
                 $valueI18ns = [];
                 foreach ($i18ns as $i18n) {
@@ -124,22 +128,35 @@ class ProductFactory extends AbstractModelFactory
                 $values[] = $this->getFactory('ProductVariationValue')->makeOneArray(['i18ns' => $valueI18ns]);
             }
 
-            $variations[] = $this->getFactory('ProductVariation')->makeOneArray(['i18ns' => $variationI8ns, 'values' => $values]);
+            $variations[] = $this->getFactory('ProductVariation')->makeOneArray(['i18ns' => $variationI18ns, 'values' => $values]);
         }
 
         $parentId = $this->getFactory('Identity')->makeOneArray();
         $variants = [$this->makeOneArray(['id' => $parentId, 'isMasterProduct' => true, 'variations' => $variations])];
-        foreach ($variations as $i => $variation) {
-            foreach ($variation['values'] as $value) {
+
+        foreach ($variations[0]['values'] as $i => $firstValue) {
+            foreach ($variations[1]['values'] as $j => $secondValue) {
                 $variants[] = $this->makeOneArray([
                     'masterProductId' => $parentId,
                     'isMasterProduct' => false,
-                    'variations' => array_merge($variation, ['values' => [$value]])
+                    'variations' => [array_merge($variations[0], ['values' => [$firstValue]]), array_merge($variations[1], ['values' => [$secondValue]])]
                 ]);
             }
         }
 
         return $variants;
+    }
+
+    /**
+     * @param array|null $i18ns
+     * @return mixed
+     */
+    public function makeOneProductVariant(array $i18ns = null)
+    {
+        $serializer = SerializerBuilder::getInstance()->build();
+        $type = sprintf('array<%s>', Product::class);
+        $data = $this->makeOneProductVariantArray($i18ns);
+        return $serializer->fromArray($data, $type);
     }
 
     /**
