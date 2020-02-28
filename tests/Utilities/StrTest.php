@@ -49,7 +49,7 @@ class StrTest extends TestCase
      */
     public function testPascalCase($data, $expectedResult)
     {
-        $this->assertSame($expectedResult,Str::toPascalCase($data));
+        $this->assertSame($expectedResult, Str::toPascalCase($data));
     }
 
     /**
@@ -65,7 +65,7 @@ class StrTest extends TestCase
             ['snake__case', 'SnakeCase'],
             [12345, '12345'],
             ['    ', '    '],
-            ['sna\\ke', 'Sna\\Ke']
+            ['sna\\ke', 'Sna\\ke']
         ];
     }
 
