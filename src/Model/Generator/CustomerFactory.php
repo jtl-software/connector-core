@@ -26,8 +26,8 @@ class CustomerFactory extends AbstractModelFactory
     public function makeOneArray(array $override = []): array
     {
         return array_merge([
-            'id' => $this->makeIdentity(IdentityType::CUSTOMER),
-            'customerGroupId' => $this->makeIdentity(IdentityType::CUSTOMER_GROUP),
+            'id' => $this->makeIdentityArray(IdentityType::CUSTOMER),
+            'customerGroupId' => $this->makeIdentityArray(IdentityType::CUSTOMER_GROUP),
             'accountCredit' => $this->faker->numberBetween(),
             'birthday' => $this->dateBetween('-40 years', '-30 years'),
             'city' => $this->faker->city,

@@ -17,11 +17,11 @@ class ProductPriceFactory extends AbstractModelFactory
     public function makeOneArray(array $override = []): array
     {
         return array_merge([
-            'id' => $this->makeIdentity(IdentityType::PRODUCT_PRICE),
-            'customerGroupId' => $this->makeIdentity(IdentityType::CUSTOMER_GROUP),
+            'id' => $this->makeIdentityArray(IdentityType::PRODUCT_PRICE),
+            'customerGroupId' => $this->makeIdentityArray(IdentityType::CUSTOMER_GROUP),
             //'customerId' => null,
-            'productId' => $this->makeIdentity(IdentityType::PRODUCT),
-            'items' => $this->generateItemsArray($this->withBulkPrices),
+            'productId' => $this->makeIdentityArray(IdentityType::PRODUCT),
+            'items' => $this->makeItemsArray($this->withBulkPrices),
         ], $override);
     }
 
@@ -29,10 +29,10 @@ class ProductPriceFactory extends AbstractModelFactory
      * @param bool $withBulkPrices
      * @return array
      */
-    public function generateItemsArray(bool $withBulkPrices = false): array
+    public function makeItemsArray(bool $withBulkPrices = false): array
     {
         $items = [
-            $this->generateItem(0, $this->faker->randomFloat())
+            $this->makeItemArray(0, $this->faker->randomFloat())
         ];
 
         if ($withBulkPrices === true) {
@@ -44,7 +44,7 @@ class ProductPriceFactory extends AbstractModelFactory
             for ($i = 0; $i < $pricesCount; $i++) {
                 $quantity = mt_rand($quantity + 1, $quantity + $step);
                 $price = mt_rand($items[$i]['netPrice'] + 1, $items[$i]['netPrice'] * mt_rand(2, 3));
-                $items[] = $this->generateItem($quantity, $price);
+                $items[] = $this->makeItemArray($quantity, $price);
             }
         }
 
@@ -56,12 +56,22 @@ class ProductPriceFactory extends AbstractModelFactory
      * @param float $netPrice
      * @return mixed[]
      */
-    public function generateItem(int $quantity, float $netPrice): array
+    public function makeItemArray(int $quantity, float $netPrice): array
     {
         return [
             'quantity' => $quantity,
             'netPrice' => $netPrice,
         ];
+    }
+
+    /**
+     * @param bool $withBulkPrices
+     * @return ProductPriceFactory
+     */
+    public function setWithBulkPrices(bool $withBulkPrices): ProductPriceFactory
+    {
+        $this->withBulkPrices = $withBulkPrices;
+        return $this;
     }
 
     /**

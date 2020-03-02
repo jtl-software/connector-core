@@ -7,6 +7,10 @@ class I18nFactory extends AbstractModelFactory
 {
     protected $usedLanguages = [];
 
+    /**
+     * @param array $override
+     * @return array
+     */
     public function makeOneArray(array $override = []): array
     {
         if(!isset($override['languageIso'])) {
@@ -31,7 +35,6 @@ class I18nFactory extends AbstractModelFactory
     {
         throw new NotImplementedException('This factory can be used for making array only');
     }
-
 
     /**
      * @return void

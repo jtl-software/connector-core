@@ -3,18 +3,10 @@
 namespace Jtl\Connector\Core\Model\Generator;
 
 use Jtl\Connector\Core\Definition\IdentityType;
-use Jtl\Connector\Core\Model\Manufacturer;
 use Jtl\Connector\Core\Model\Product;
-use Jtl\Connector\Core\Serializer\SerializerBuilder;
 
 class ProductFactory extends AbstractModelFactory
 {
-    protected $withSpecialPrices = false;
-
-    protected $withVariations = false;
-
-    protected $isVariationParent = false;
-
     public function makeOneArray(array $override = []): array
     {
         /** @var IdentityFactory $identityFactory */
@@ -22,7 +14,7 @@ class ProductFactory extends AbstractModelFactory
 
         return array_merge([
             'basePriceUnitId' => $identityFactory->makeOneArray(),
-            'manufacturerId' => $this->makeIdentity(IdentityType::MANUFACTURER),
+            'manufacturerId' => $this->makeIdentityArray(IdentityType::MANUFACTURER),
             'measurementUnitId' => $identityFactory->makeOneArray(),
             'partsListId' => $identityFactory->makeOneArray(),
             'productTypeId' => $identityFactory->makeOneArray(),
@@ -125,21 +117,31 @@ class ProductFactory extends AbstractModelFactory
                 foreach ($i18ns as $i18n) {
                     $valueI18ns[] = $this->getFactory('ProductVariationValueI18n')->makeOneArray($i18n);
                 }
-                $values[] = $this->getFactory('ProductVariationValue')->makeOneArray(['i18ns' => $valueI18ns]);
+
+                $values[] = $this->getFactory('ProductVariationValue')->makeOneArray([
+                    'i18ns' => $valueI18ns,
+                    'sort' => $j
+                ]);
             }
 
-            $variations[] = $this->getFactory('ProductVariation')->makeOneArray(['i18ns' => $variationI18ns, 'values' => $values]);
+            $variations[] = $this->getFactory('ProductVariation')->makeOneArray([
+                'i18ns' => $variationI18ns,
+                'values' => $values,
+                'sort' => $i
+            ]);
         }
 
         $parentId = $this->getFactory('Identity')->makeOneArray();
-        $variants = [$this->makeOneArray(['id' => $parentId, 'isMasterProduct' => true, 'variations' => $variations])];
+        $variants = [$this->makeOneArray(['id' => $parentId, 'isMasterProduct' => true, 'variations' => $variations, 'sort' => 0])];
 
-        foreach ($variations[0]['values'] as $i => $firstValue) {
-            foreach ($variations[1]['values'] as $j => $secondValue) {
+        $i = 0;
+        foreach ($variations[0]['values'] as $firstValue) {
+            foreach ($variations[1]['values'] as $secondValue) {
                 $variants[] = $this->makeOneArray([
                     'masterProductId' => $parentId,
                     'isMasterProduct' => false,
-                    'variations' => [array_merge($variations[0], ['values' => [$firstValue]]), array_merge($variations[1], ['values' => [$secondValue]])]
+                    'variations' => [array_merge($variations[0], ['values' => [$firstValue]]), array_merge($variations[1], ['values' => [$secondValue]])],
+                    'sort' => ++$i
                 ]);
             }
         }
@@ -149,14 +151,13 @@ class ProductFactory extends AbstractModelFactory
 
     /**
      * @param array|null $i18ns
-     * @return mixed
+     * @return array
+     * @throws \Exception
      */
     public function makeOneProductVariant(array $i18ns = null)
     {
-        $serializer = SerializerBuilder::getInstance()->build();
-        $type = sprintf('array<%s>', Product::class);
         $data = $this->makeOneProductVariantArray($i18ns);
-        return $serializer->fromArray($data, $type);
+        return $this->make(count($data), $data);
     }
 
     /**

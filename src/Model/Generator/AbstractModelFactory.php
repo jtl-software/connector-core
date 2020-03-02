@@ -8,6 +8,7 @@ use Jawira\CaseConverter\CaseConverterException;
 use Jawira\CaseConverter\Convert;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Exception\DefinitionException;
+use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 
 /**
@@ -64,18 +65,18 @@ abstract class AbstractModelFactory
 
     /**
      * @param int $quantity
-     * @param array $override
+     * @param array $overrides
      * @return array
      * @throws \Exception
      */
-    public function make(int $quantity, array $override = []): array
+    public function make(int $quantity, array $overrides = []): array
     {
         $models = [];
 
         $serializer = SerializerBuilder::getInstance()->build();
 
         for ($i = 0; $i < $quantity; $i++) {
-            $model = $serializer->fromArray($this->makeOneArray($override), $this->getModelClass());
+            $model = $serializer->fromArray($this->makeOneArray($overrides[$i] ?? []), $this->getModelClass());
             $models[] = $model;
         }
 
@@ -84,14 +85,14 @@ abstract class AbstractModelFactory
 
     /**
      * @param int $quantity
-     * @param array $override
+     * @param array $overrides
      * @return array
      */
-    public function makeArray(int $quantity, array $override = []): array
+    public function makeArray(int $quantity, array $overrides = []): array
     {
         $models = [];
         for ($i = 0; $i < $quantity; $i++) {
-            $models[] = $this->makeOneArray($override);
+            $models[] = $this->makeOneArray($overrides[$i] ?? []);
         }
         return $models;
     }
@@ -111,7 +112,7 @@ abstract class AbstractModelFactory
      * @return mixed[]
      * @throws \Exception
      */
-    public function makeIdentity(int $identityType)
+    public function makeIdentityArray(int $identityType)
     {
         do {
             list($endpoint, $host) = $this->getFactory('Identity')->makeOneArray();
@@ -122,6 +123,16 @@ abstract class AbstractModelFactory
 
         self::setIdentity($identityType, $endpoint, $host);
         return self::getIdentity($identityType, $endpoint);
+    }
+
+    /**
+     * @param integer $identityType
+     * @return mixed
+     * @throws \Exception
+     */
+    public function makeIdentity(int $identityType)
+    {
+        return SerializerBuilder::getInstance()->fromArray($this->makeIdentityArray($identityType), Identity::class);
     }
 
     /**
@@ -161,7 +172,7 @@ abstract class AbstractModelFactory
      */
     public static function getIdentityByHost(int $identityType, int $host): ?array
     {
-        if(self::hasIdentityByHost($identityType, $host)) {
+        if (self::hasIdentityByHost($identityType, $host)) {
             return self::getIdentity($identityType, array_search($host, self::$identities[$identityType]));
         }
         return null;
@@ -205,7 +216,6 @@ abstract class AbstractModelFactory
      * @param string $locale
      * @param Generator|null $faker
      * @return AbstractModelFactory
-     * @throws CaseConverterException
      */
     public static function createFactory(string $name, string $locale = 'de_DE', Generator $faker = null)
     {
