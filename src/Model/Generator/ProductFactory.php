@@ -86,7 +86,11 @@ class ProductFactory extends AbstractModelFactory
             'invisibilities' => [],
             'mediaFiles' => [],
             'partsLists' => [],
-            //'prices' => $this->getFactory('ProductPrice')->makeOneArray(['customerGroupId' => $this->getFactory('Identity')->makeOneArray([1 => 0])]),
+            'prices' => [
+                $this->getFactory('ProductPrice')
+                    ->setWithBulkPrices(mt_rand(0, 1) === 1)
+                    ->makeOneArray(['customerGroupId' => $identityFactory->makeOneArray([1 => 0])])
+            ],
             'specialPrices' => [],
             'specifics' => [],
             //'varCombinations' => [],
@@ -141,7 +145,8 @@ class ProductFactory extends AbstractModelFactory
                     'masterProductId' => $parentId,
                     'isMasterProduct' => false,
                     'variations' => [array_merge($variations[0], ['values' => [$firstValue]]), array_merge($variations[1], ['values' => [$secondValue]])],
-                    'sort' => ++$i
+                    'sort' => ++$i,
+                    'prices' => $variants[0]['prices']
                 ]);
             }
         }

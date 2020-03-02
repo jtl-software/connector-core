@@ -32,19 +32,24 @@ class ProductPriceFactory extends AbstractModelFactory
     public function makeItemsArray(bool $withBulkPrices = false): array
     {
         $items = [
-            $this->makeItemArray(0, $this->faker->randomFloat())
+            $this->makeItemArray(['quantity' => 0, 'netPrice' => $this->faker->randomFloat(4, 1)])
         ];
 
         if ($withBulkPrices === true) {
             $pricesCount = mt_rand(1, mt_rand(1, 30));
             $maxQuantity = mt_rand($pricesCount, mt_rand($pricesCount, 500));
             $step = (int)floor($maxQuantity / $pricesCount);
+            $priceStep = floor($items[0]['netPrice'] / $pricesCount);
 
             $quantity = 0;
             for ($i = 0; $i < $pricesCount; $i++) {
-                $quantity = mt_rand($quantity + 1, $quantity + $step);
-                $price = mt_rand($items[$i]['netPrice'] + 1, $items[$i]['netPrice'] * mt_rand(2, 3));
-                $items[] = $this->makeItemArray($quantity, $price);
+                $quantity += $step;
+                $minPrice = $items[$i]['netPrice'] - $priceStep;
+                if ($minPrice > $items[$i]['netPrice'] || $minPrice < 0) {
+                    $minPrice = (($items[$i]['netPrice'] - 0.1) / 2);
+                }
+                $price = mt_rand($minPrice, $items[$i]['netPrice']);
+                $items[] = $this->makeItemArray(['quantity' => $quantity, 'netPrice' => $price]);
             }
         }
 
@@ -52,16 +57,15 @@ class ProductPriceFactory extends AbstractModelFactory
     }
 
     /**
-     * @param int $quantity
-     * @param float $netPrice
+     * @param mixe[] $override
      * @return mixed[]
      */
-    public function makeItemArray(int $quantity, float $netPrice): array
+    public function makeItemArray(array $override = []): array
     {
-        return [
-            'quantity' => $quantity,
-            'netPrice' => $netPrice,
-        ];
+        return array_merge([
+            'quantity' => $this->faker->numberBetween(),
+            'netPrice' => $this->faker->randomFloat(4, 1),
+        ], $override);
     }
 
     /**
