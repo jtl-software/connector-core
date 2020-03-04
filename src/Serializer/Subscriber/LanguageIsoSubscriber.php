@@ -49,8 +49,12 @@ class LanguageIsoSubscriber implements EventSubscriberInterface
     {
         $model = $event->getObject();
         if($model instanceof AbstractI18n) {
-            $language = $this->languages->findByCode1($model->getLanguageIso());
-            $event->getVisitor()->visitProperty(new StaticPropertyMetadata('', 'languageISO', $language->code2b()), $language->code2b());
+            $languageIso = $model->getLanguageIso();
+            if(strlen($languageIso) === 2) {
+                $languageIso = $this->languages->findByCode1($languageIso)->code2b() ?? $languageIso;
+            }
+
+            $event->getVisitor()->visitProperty(new StaticPropertyMetadata('', 'languageISO', $languageIso), $languageIso);
         }
     }
 
@@ -62,7 +66,7 @@ class LanguageIsoSubscriber implements EventSubscriberInterface
         $data = $event->getData();
         if(is_array($data) && isset($data['languageISO']) && !isset($data['languageIso'])) {
             $language = $this->languages->findByCode2b($data['languageISO']);
-            $data['languageIso'] = $language->code1();
+            $data['languageIso'] = $language->code1() ?? $data['languageISO'];
             $event->setData($data);
         }
     }

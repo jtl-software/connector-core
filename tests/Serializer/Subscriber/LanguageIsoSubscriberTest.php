@@ -42,8 +42,9 @@ class LanguageIsoSubscriberTest extends TestCase
         $serializedData = $this->serializeModel($i18nModel);
 
         $jsonObj = json_decode($serializedData);
-        $this->assertObjectNotHasAttribute('languageISO', $jsonObj);
+        $this->assertObjectHasAttribute('languageISO', $jsonObj);
         $this->assertObjectHasAttribute('languageIso', $jsonObj);
+        $this->assertEquals($jsonObj->languageISO, $jsonObj->languageIso);
     }
 
     /**

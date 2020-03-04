@@ -65,7 +65,7 @@ class StrTest extends TestCase
             ['snake__case', 'SnakeCase'],
             [12345, '12345'],
             ['    ', '    '],
-            ['sna\\ke', 'Sna\\ke']
+            ['sna\\ke', 'Sna\\Ke']
         ];
     }
 
