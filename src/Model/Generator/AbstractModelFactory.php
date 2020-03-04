@@ -104,7 +104,7 @@ abstract class AbstractModelFactory
      */
     public function makeOne(array $override = [])
     {
-        return $this->make(1, $override)[0];
+        return $this->make(1, [$override])[0];
     }
 
     /**
