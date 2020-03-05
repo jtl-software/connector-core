@@ -181,7 +181,8 @@ class Application
             }
             $this->endpointConnector->initialize($this);
 
-            $event = new RpcEvent(Json::decode((string)$jtlrpc, true), $method->getController(), $method->getAction());
+            $eventData = Json::decode((string)$jtlrpc, true);
+            $event = new RpcEvent($eventData, $method->getController(), $method->getAction());
             $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::BEFORE));
 
             $responsePacket = $this->execute($requestPacket, $method);
