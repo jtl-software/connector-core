@@ -10,12 +10,12 @@ class ProductVariationValueI18nFactory extends AbstractModelFactory
      * @param mixed[] $override
      * @return mixed[]
      */
-    public function makeOneArray(array $override = []): array
+    protected function makeFakeArray(): array
     {
-        return array_merge([
+        return [
             'languageIso' => $this->faker->languageCode,
             'name' => $this->faker->text(80),
-        ], $override);
+        ];
     }
 
     /**

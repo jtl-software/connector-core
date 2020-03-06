@@ -10,19 +10,18 @@ class ProductPriceFactory extends AbstractModelFactory
     protected $withBulkPrices = false;
 
     /**
-     * @param array $override
-     * @return array
+     * @return mixed[]
      * @throws \Exception
      */
-    public function makeOneArray(array $override = []): array
+    protected function makeFakeArray(): array
     {
-        return array_merge([
+        return [
             'id' => $this->makeIdentityArray(IdentityType::PRODUCT_PRICE),
             'customerGroupId' => $this->makeIdentityArray(IdentityType::CUSTOMER_GROUP),
             //'customerId' => null,
             'productId' => $this->makeIdentityArray(IdentityType::PRODUCT),
             'items' => $this->makeItemsArray($this->withBulkPrices),
-        ], $override);
+        ];
     }
 
     /**

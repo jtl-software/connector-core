@@ -2,17 +2,22 @@
 
 namespace Jtl\Connector\Core\Model\Generator;
 
+use Jawira\CaseConverter\CaseConverterException;
 use Jtl\Connector\Core\Definition\IdentityType;
 use Jtl\Connector\Core\Model\Product;
 
 class ProductFactory extends AbstractModelFactory
 {
-    public function makeOneArray(array $override = []): array
+    /**
+     * @return mixed[]
+     * @throws CaseConverterException
+     */
+    protected function makeFakeArray(): array
     {
         /** @var IdentityFactory $identityFactory */
         $identityFactory = $this->getFactory('Identity');
 
-        return array_merge([
+        return [
             'basePriceUnitId' => $identityFactory->makeOneArray(),
             'manufacturerId' => $this->makeIdentityArray(IdentityType::MANUFACTURER),
             'measurementUnitId' => $identityFactory->makeOneArray(),
@@ -96,7 +101,7 @@ class ProductFactory extends AbstractModelFactory
             //'varCombinations' => [],
             'variations' => [],
             //'warehouseInfo' => [],
-        ], $override);
+        ];
     }
 
     public function makeOneProductVariantArray(array $i18ns = null)

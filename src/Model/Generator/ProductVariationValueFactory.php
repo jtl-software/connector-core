@@ -11,12 +11,12 @@ class ProductVariationValueFactory extends AbstractModelFactory
      * @return array
      * @throws CaseConverterException
      */
-    public function makeOneArray(array $override = []): array
+    protected function makeFakeArray(): array
     {
-        return array_merge([
+        return [
             'sort' => $this->faker->numberBetween(),
             'i18ns' => $this->getFactory('ProductVariationValueI18n')->makeArray(mt_rand(1, 5))
-        ], $override);
+        ];
     }
 
     /**

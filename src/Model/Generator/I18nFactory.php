@@ -8,10 +8,9 @@ class I18nFactory extends AbstractModelFactory
     protected $usedLanguages = [];
 
     /**
-     * @param array $override
-     * @return array
+     * @return mixed[]
      */
-    public function makeOneArray(array $override = []): array
+    protected function makeFakeArray(): array
     {
         if(!isset($override['languageIso'])) {
             while(true) {

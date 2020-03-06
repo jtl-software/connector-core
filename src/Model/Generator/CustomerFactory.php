@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Model\Generator;
 
 use Jtl\Connector\Core\Definition\IdentityType;
@@ -19,13 +20,12 @@ class CustomerFactory extends AbstractModelFactory
     }
 
     /**
-     * @param array $override
-     * @return array
+     * @return mixed[]
      * @throws \Exception
      */
-    public function makeOneArray(array $override = []): array
+    protected function makeFakeArray(): array
     {
-        return array_merge([
+        return [
             'id' => $this->makeIdentityArray(IdentityType::CUSTOMER),
             'customerGroupId' => $this->makeIdentityArray(IdentityType::CUSTOMER_GROUP),
             'accountCredit' => $this->faker->numberBetween(),
@@ -57,6 +57,6 @@ class CustomerFactory extends AbstractModelFactory
             'websiteUrl' => $this->faker->safeEmailDomain,
             'zipCode' => $this->faker->postcode,
             'languageIso' => $this->faker->languageCode
-        ], $override);
+        ];
     }
 }

@@ -38,10 +38,9 @@ abstract class AbstractModelFactory
     protected static $factories = [];
 
     /**
-     * @param array $override
      * @return array
      */
-    abstract public function makeOneArray(array $override = []): array;
+    abstract protected function makeFakeArray(): array;
 
     /**
      * @return string
@@ -105,6 +104,15 @@ abstract class AbstractModelFactory
     public function makeOne(array $override = [])
     {
         return $this->make(1, [$override])[0];
+    }
+
+    /**
+     * @param mixed[] $override
+     * @return mixed[]
+     */
+    public function makeOneArray(array $override = []): array
+    {
+        return array_merge($this->makeFakeArray(), $override);
     }
 
     /**
@@ -203,8 +211,7 @@ abstract class AbstractModelFactory
 
     /**
      * @param string $name
-     * @return $this
-     * @throws CaseConverterException
+     * @return AbstractModelFactory
      */
     public function getFactory(string $name): self
     {
