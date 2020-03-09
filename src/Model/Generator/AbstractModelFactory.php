@@ -215,25 +215,25 @@ abstract class AbstractModelFactory
      */
     public function getFactory(string $name): self
     {
-        return self::createFactory($name, $this->defaultLocale, $this->faker);
+        return self::createFactory($name, $this->defaultLocale);
     }
 
     /**
      * @param string $name
      * @param string $locale
-     * @param Generator|null $faker
      * @return AbstractModelFactory
      */
-    public static function createFactory(string $name, string $locale = 'de_DE', Generator $faker = null)
+    public static function createFactory(string $name, string $locale = 'de_DE')
     {
         $className = sprintf('%s\\%sFactory', __NAMESPACE__, ucfirst($name));
         if (!class_exists($className)) {
             throw new \RuntimeException(sprintf('Class %s not found', $className));
         }
 
+        $locale = str_replace('-', '_', $locale);
         $factoriesIndex = md5(sprintf('%s%s', $className, $locale));
         if (!isset(self::$factories[$factoriesIndex])) {
-            self::$factories[$factoriesIndex] = new $className($locale, $faker);
+            self::$factories[$factoriesIndex] = new $className($locale);
         }
 
         return self::$factories[$factoriesIndex];
