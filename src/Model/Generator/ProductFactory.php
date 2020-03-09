@@ -9,8 +9,8 @@ use Jtl\Connector\Core\Model\Product;
 class ProductFactory extends AbstractModelFactory
 {
     /**
-     * @return mixed[]
-     * @throws CaseConverterException
+     * @return array
+     * @throws \Exception
      */
     protected function makeFakeArray(): array
     {
@@ -111,6 +111,8 @@ class ProductFactory extends AbstractModelFactory
             $i18ns = $this->getFactory('I18n')->makeArray(mt_rand(1, 3));
         }
 
+        $productI18ns = $this->getFactory('ProductI18n')->makeArray(count($i18ns), $i18ns);
+
         $variantsQuantity = 1;
         $variations = [];
         for ($i = 0; $i < $variationsQuantity; $i++) {
@@ -141,7 +143,7 @@ class ProductFactory extends AbstractModelFactory
         }
 
         $parentId = $this->getFactory('Identity')->makeOneArray();
-        $variants = [$this->makeOneArray(['id' => $parentId, 'isMasterProduct' => true, 'variations' => $variations, 'sort' => 0])];
+        $variants = [$this->makeOneArray(['id' => $parentId, 'isMasterProduct' => true, 'variations' => $variations, 'sort' => 0, 'i18ns' => $productI18ns])];
 
         $i = 0;
         foreach ($variations[0]['values'] as $firstValue) {
@@ -151,7 +153,8 @@ class ProductFactory extends AbstractModelFactory
                     'isMasterProduct' => false,
                     'variations' => [array_merge($variations[0], ['values' => [$firstValue]]), array_merge($variations[1], ['values' => [$secondValue]])],
                     'sort' => ++$i,
-                    'prices' => $variants[0]['prices']
+                    'prices' => $variants[0]['prices'],
+                    'i18ns' => $productI18ns
                 ]);
             }
         }
