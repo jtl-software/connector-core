@@ -713,6 +713,14 @@ class Product extends AbstractIdentity implements IdentificationInterface
     }
 
     /**
+     * @return boolean
+     */
+    public function isVariation(): bool
+    {
+        return $this->isMasterProduct === true || $this->masterProductId->getHost() !== 0;
+    }
+
+    /**
      * @param Identity $basePriceUnitId Optional reference to basePriceUnit
      * @return Product
      * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
