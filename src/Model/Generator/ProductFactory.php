@@ -2,17 +2,22 @@
 
 namespace Jtl\Connector\Core\Model\Generator;
 
+use Jawira\CaseConverter\CaseConverterException;
 use Jtl\Connector\Core\Definition\IdentityType;
 use Jtl\Connector\Core\Model\Product;
 
 class ProductFactory extends AbstractModelFactory
 {
-    public function makeOneArray(array $override = []): array
+    /**
+     * @return array
+     * @throws \Exception
+     */
+    protected function makeFakeArray(): array
     {
         /** @var IdentityFactory $identityFactory */
         $identityFactory = $this->getFactory('Identity');
 
-        return array_merge([
+        return [
             'basePriceUnitId' => $identityFactory->makeOneArray(),
             'manufacturerId' => $this->makeIdentityArray(IdentityType::MANUFACTURER),
             'measurementUnitId' => $identityFactory->makeOneArray(),
@@ -96,7 +101,7 @@ class ProductFactory extends AbstractModelFactory
             //'varCombinations' => [],
             'variations' => [],
             //'warehouseInfo' => [],
-        ], $override);
+        ];
     }
 
     public function makeOneProductVariantArray(array $i18ns = null)
@@ -105,6 +110,8 @@ class ProductFactory extends AbstractModelFactory
         if (is_null($i18ns)) {
             $i18ns = $this->getFactory('I18n')->makeArray(mt_rand(1, 3));
         }
+
+        $productI18ns = $this->getFactory('ProductI18n')->makeArray(count($i18ns), $i18ns);
 
         $variantsQuantity = 1;
         $variations = [];
@@ -136,7 +143,7 @@ class ProductFactory extends AbstractModelFactory
         }
 
         $parentId = $this->getFactory('Identity')->makeOneArray();
-        $variants = [$this->makeOneArray(['id' => $parentId, 'isMasterProduct' => true, 'variations' => $variations, 'sort' => 0])];
+        $variants = [$this->makeOneArray(['id' => $parentId, 'isMasterProduct' => true, 'variations' => $variations, 'sort' => 0, 'i18ns' => $productI18ns])];
 
         $i = 0;
         foreach ($variations[0]['values'] as $firstValue) {
@@ -146,7 +153,8 @@ class ProductFactory extends AbstractModelFactory
                     'isMasterProduct' => false,
                     'variations' => [array_merge($variations[0], ['values' => [$firstValue]]), array_merge($variations[1], ['values' => [$secondValue]])],
                     'sort' => ++$i,
-                    'prices' => $variants[0]['prices']
+                    'prices' => $variants[0]['prices'],
+                    'i18ns' => $productI18ns
                 ]);
             }
         }

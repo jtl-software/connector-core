@@ -6,16 +6,16 @@ use Jtl\Connector\Core\Model\ProductVariation;
 
 class ProductVariationFactory extends AbstractModelFactory
 {
-    public function makeOneArray(array $override = []): array
+    protected function makeFakeArray(): array
     {
-        return array_merge([
+        return [
             'id' => $this->makeIdentityArray(IdentityType::PRODUCT_VARIATION),
             'sort' => $this->faker->numberBetween(),
             //'type' => '',
             'i18ns' => $this->getFactory('ProductVariationI18n')->makeArray(mt_rand(1, 5)),
             //'inivisibilities' => [],
             'values' => []
-        ], $override);
+        ];
     }
 
     /**

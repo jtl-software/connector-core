@@ -6,12 +6,12 @@ use Jtl\Connector\Core\Model\ProductVariationI18n;
 
 class ProductVariationI18nFactory extends AbstractModelFactory
 {
-    public function makeOneArray(array $override = []): array
+    protected function makeFakeArray(): array
     {
-        return array_merge([
+        return [
             'name' => $this->faker->text,
             'languageIso' => $this->faker->languageCode
-        ], $override);
+        ];
     }
 
     protected function getModelClass(): string

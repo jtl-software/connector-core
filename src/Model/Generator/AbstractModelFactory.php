@@ -38,10 +38,9 @@ abstract class AbstractModelFactory
     protected static $factories = [];
 
     /**
-     * @param array $override
      * @return array
      */
-    abstract public function makeOneArray(array $override = []): array;
+    abstract protected function makeFakeArray(): array;
 
     /**
      * @return string
@@ -105,6 +104,15 @@ abstract class AbstractModelFactory
     public function makeOne(array $override = [])
     {
         return $this->make(1, [$override])[0];
+    }
+
+    /**
+     * @param mixed[] $override
+     * @return mixed[]
+     */
+    public function makeOneArray(array $override = []): array
+    {
+        return array_merge($this->makeFakeArray(), $override);
     }
 
     /**
@@ -203,30 +211,29 @@ abstract class AbstractModelFactory
 
     /**
      * @param string $name
-     * @return $this
-     * @throws CaseConverterException
+     * @return AbstractModelFactory
      */
     public function getFactory(string $name): self
     {
-        return self::createFactory($name, $this->defaultLocale, $this->faker);
+        return self::createFactory($name, $this->defaultLocale);
     }
 
     /**
      * @param string $name
      * @param string $locale
-     * @param Generator|null $faker
      * @return AbstractModelFactory
      */
-    public static function createFactory(string $name, string $locale = 'de_DE', Generator $faker = null)
+    public static function createFactory(string $name, string $locale = 'de_DE')
     {
         $className = sprintf('%s\\%sFactory', __NAMESPACE__, ucfirst($name));
         if (!class_exists($className)) {
             throw new \RuntimeException(sprintf('Class %s not found', $className));
         }
 
+        $locale = str_replace('-', '_', $locale);
         $factoriesIndex = md5(sprintf('%s%s', $className, $locale));
         if (!isset(self::$factories[$factoriesIndex])) {
-            self::$factories[$factoriesIndex] = new $className($locale, $faker);
+            self::$factories[$factoriesIndex] = new $className($locale);
         }
 
         return self::$factories[$factoriesIndex];
