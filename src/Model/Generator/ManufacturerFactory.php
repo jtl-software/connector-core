@@ -17,7 +17,7 @@ class ManufacturerFactory extends AbstractModelFactory
      * @return array
      * @throws \Jawira\CaseConverter\CaseConverterException
      */
-    public function makeOneArray(array $override = []): array
+    public function makeFakeArray(array $override = []): array
     {
         return array_merge([
             'id' => $this->getFactory('Identity')->makeOneArray(),

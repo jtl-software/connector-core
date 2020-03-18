@@ -14,7 +14,7 @@ class ManufacturerI18nFactory extends AbstractModelFactory
      * @param array $override
      * @return array
      */
-    public function makeOneArray(array $override = []): array
+    public function makeFakeArray(array $override = []): array
     {
         return array_merge([
             'description' => $this->faker->text(),
