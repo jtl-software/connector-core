@@ -14,6 +14,7 @@ class DefinitionException extends \Exception
     const UNKNOWN_ACTION = 90;
     const UNKNOWN_MOMENT = 100;
     const UNKNOWN_IDENTITY_TYPE_MAPPING = 110;
+    const UNKNOWN_IMAGE_IDENTITY_TYPE_MAPPING = 120;
 
     /**
      * @param string $model
@@ -124,5 +125,15 @@ class DefinitionException extends \Exception
     {
         $msg = sprintf('Unknown identity type mapping (%s)', $relationType);
         return new static($msg, self::UNKNOWN_IDENTITY_TYPE_MAPPING);
+    }
+
+    /**
+     * @param string $relationType
+     * @return DefinitionException
+     */
+    public static function unknownImageIdentityTypeMapping(string $relationType): DefinitionException
+    {
+        $msg = sprintf('Unknown image identity type mapping (%s)', $relationType);
+        return new static($msg, self::UNKNOWN_IMAGE_IDENTITY_TYPE_MAPPING);
     }
 }

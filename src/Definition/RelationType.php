@@ -3,6 +3,7 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Linker
  */
+
 namespace Jtl\Connector\Core\Definition;
 
 use Jtl\Connector\Core\Exception\DefinitionException;
@@ -18,7 +19,7 @@ final class RelationType
     const SPECIFIC_VALUE = 'specificValue';
 
     /**
-     * @var string[]
+     * @var int[]
      */
     protected static $mappings = [
         self::CATEGORY => IdentityType::CATEGORY,
@@ -27,7 +28,20 @@ final class RelationType
         self::PRODUCT => IdentityType::PRODUCT,
         self::PRODUCT_VARIATION_VALUE => IdentityType::PRODUCT_VARIATION_VALUE,
         self::SPECIFIC => IdentityType::SPECIFIC,
-        self::SPECIFIC_VALUE => IdentityType::SPECIFIC_VALUE,
+        self::SPECIFIC_VALUE => IdentityType::SPECIFIC_VALUE
+    ];
+
+    /**
+     * @var int[]
+     */
+    protected static $imageMappings = [
+        self::CATEGORY => IdentityType::CATEGORY_IMAGE,
+        self::CONFIG_GROUP => IdentityType::CONFIG_GROUP_IMAGE,
+        self::MANUFACTURER => IdentityType::MANUFACTURER_IMAGE,
+        self::PRODUCT => IdentityType::PRODUCT_IMAGE,
+        self::PRODUCT_VARIATION_VALUE => IdentityType::PRODUCT_VARIATION_VALUE_IMAGE,
+        self::SPECIFIC => IdentityType::SPECIFIC_IMAGE,
+        self::SPECIFIC_VALUE => IdentityType::SPECIFIC_VALUE_IMAGE
     ];
 
     /**
@@ -37,6 +51,15 @@ final class RelationType
     public static function hasIdentityType(string $relationType): bool
     {
         return isset(self::$mappings[$relationType]);
+    }
+
+    /**
+     * @param string $relationType
+     * @return boolean
+     */
+    public static function hasImageIdentityType(string $relationType): bool
+    {
+        return isset(self::$imageMappings[$relationType]);
     }
 
     /**
@@ -52,6 +75,21 @@ final class RelationType
         }
 
         throw DefinitionException::unknownIdentityTypeMapping($relationType);
+    }
+
+    /**
+     * @param string $relationType
+     * @return int
+     * @throws DefinitionException
+     * @throws \ReflectionException
+     */
+    public static function getImageIdentityType(string $relationType): int
+    {
+        if (self::hasImageIdentityType($relationType) && IdentityType::isType($type = self::$imageMappings[$relationType])) {
+            return $type;
+        }
+
+        throw DefinitionException::unknownImageIdentityTypeMapping($relationType);
     }
 
     /**
