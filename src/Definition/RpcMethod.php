@@ -27,6 +27,7 @@ final class RpcMethod
         self::IDENTIFY => 'core.connector.identify',
         self::FINISH => 'core.connector.finish',
         self::CLEAR => 'core.connector.clear',
+        'CustomerOrder.statistic' => 'customer_order.statistic',
     ];
 
     /**
