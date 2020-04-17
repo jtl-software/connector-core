@@ -1,3 +1,11 @@
+3.1.14
+-----
+- Removed incompatible symfony/event-dispatcher version from composer
+
+3.1.13
+-----
+- Removed stripslashes call
+
 3.1.12
 -----
 - Removed log level and display errors calls in error handler
