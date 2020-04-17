@@ -1,3 +1,11 @@
+2.7.2
+-----
+- Removed incompatible symfony/event-dispatcher version from composer
+
+2.7.1
+-----
+- Removed stripslashes call
+
 2.7.0
 -----
 - Removed log level and display errors calls in error handler
