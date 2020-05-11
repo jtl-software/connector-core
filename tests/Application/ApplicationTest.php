@@ -93,7 +93,7 @@ class ApplicationTest extends TestCase
 
         $this->expectException(ApplicationException::class);
 
-        $application->handleRequest($request, $application->getEndpointConnector());
+        $application->handleRequest($request);
     }
 
     /**
@@ -117,7 +117,7 @@ class ApplicationTest extends TestCase
 
         $request = Request::create(Controller::PRODUCT, $action, [$parameter]);
 
-        $result = $application->handleRequest($request, $application->getEndpointConnector());
+        $result = $application->handleRequest($request);
 
         switch ($action) {
             case Action::STATISTIC:
@@ -167,7 +167,7 @@ class ApplicationTest extends TestCase
 
         $request = Request::create(Controller::CATEGORY, Action::DELETE, [$category]);
 
-        $result = $application->handleRequest($request, $application->getEndpointConnector());
+        $result = $application->handleRequest($request);
 
         $this->assertCount(1, $result->getResult());
 
@@ -202,7 +202,7 @@ class ApplicationTest extends TestCase
 
         $request = Request::create(Controller::CONNECTOR, Action::ACK, [$ack]);
 
-        $response = $application->handleRequest($request, $application->getEndpointConnector());
+        $response = $application->handleRequest($request);
 
         $this->assertTrue($response->getResult());
     }
@@ -229,7 +229,7 @@ class ApplicationTest extends TestCase
         $request = Request::create(Controller::CATEGORY, Action::DELETE, [$category]);
 
         try {
-            $application->handleRequest($request, $application->getEndpointConnector());
+            $application->handleRequest($request);
         } catch(\Exception $e){}
 
         $spy->shouldHaveReceived('beginTransaction')

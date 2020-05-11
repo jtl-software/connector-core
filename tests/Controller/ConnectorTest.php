@@ -118,7 +118,7 @@ class ConnectorTest extends TestCase
         $this->expectExceptionObject(AuthenticationException::failed());
 
         $application = \Mockery::mock(Application::class);
-        $application->shouldReceive('getEndpointConnector->getTokenValidator')->andReturnUsing(function(){
+        $application->shouldReceive('getConnector->getTokenValidator')->andReturnUsing(function(){
             return new class implements TokenValidatorInterface {
                 public function validate(string $token): bool
                 {
@@ -144,7 +144,7 @@ class ConnectorTest extends TestCase
         $this->expectExceptionObject(ApplicationException::noSession());
 
         $application = \Mockery::mock(Application::class);
-        $application->shouldReceive('getEndpointConnector->getTokenValidator')->andReturnUsing(function(){
+        $application->shouldReceive('getConnector->getTokenValidator')->andReturnUsing(function(){
             return new class implements TokenValidatorInterface {
                 public function validate(string $token): bool
                 {
@@ -170,7 +170,7 @@ class ConnectorTest extends TestCase
     public function testAuthCorrect()
     {
         $application = \Mockery::mock(Application::class);
-        $application->shouldReceive('getEndpointConnector->getTokenValidator')->andReturnUsing(function(){
+        $application->shouldReceive('getConnector->getTokenValidator')->andReturnUsing(function(){
             return new class implements TokenValidatorInterface {
                 public function validate(string $token): bool
                 {

@@ -58,7 +58,6 @@ use Jtl\Connector\Core\Config\FileConfig;
 use Jtl\Connector\Core\Exception\LinkerException;
 use Jtl\Connector\Core\Subscriber\PrepareProductPricesSubscriber;
 use Jtl\Connector\Core\Definition\RpcMethod;
-use Jtl\Connector\Core\Connector\CoreConnector;
 use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Rpc\Method;
 use Jtl\Connector\Core\Linker\IdentityLinker;
@@ -78,7 +77,7 @@ class Application
     /**
      * @var ConnectorInterface
      */
-    protected $endpointConnector = null;
+    protected $connector = null;
 
     /**
      * @var FileConfig;
@@ -127,12 +126,12 @@ class Application
      */
     public function __construct(ConnectorInterface $endpointConnector)
     {
-        $this->endpointConnector = $endpointConnector;
+        $this->connector = $endpointConnector;
         $this->eventDispatcher = new EventDispatcher();
         $this->errorHandler = new ErrorHandler($this);
         $this->container = (new ContainerBuilder())->build();
         $this->container->set(Application::class, $this);
-        $this->linker = new IdentityLinker($this->endpointConnector->getPrimaryKeyMapper());
+        $this->linker = new IdentityLinker($this->connector->getPrimaryKeyMapper());
         $this->serializer = SerializerBuilder::getInstance()->build();
     }
 
@@ -176,10 +175,10 @@ class Application
 
             $this->startSession($requestPacket->getMethod());
             PluginManager::loadPlugins($this->eventDispatcher);
-            if ($this->endpointConnector instanceof UseChecksumInterface) {
-                ChecksumLinker::setChecksumLoader($this->endpointConnector->getChecksumLoader());
+            if ($this->connector instanceof UseChecksumInterface) {
+                ChecksumLinker::setChecksumLoader($this->connector->getChecksumLoader());
             }
-            $this->endpointConnector->initialize($this);
+            $this->connector->initialize($this);
 
             $eventData = Json::decode((string)$jtlrpc, true);
             $event = new RpcEvent($eventData, $method->getController(), $method->getAction());
@@ -247,18 +246,9 @@ class Application
      */
     protected function execute(RequestPacket $requestPacket, Method $method): ResponsePacket
     {
-        if ($method->isCore()) {
-            $connector = new CoreConnector(
-                $this->endpointConnector->getPrimaryKeyMapper(),
-                $this->endpointConnector->getTokenValidator()
-            );
-        } else {
-            $connector = $this->getEndpointConnector();
-        }
-
         $modelNamespace = Model::MODEL_NAMESPACE;
-        if ($connector instanceof ModelInterface) {
-            $modelNamespace = $connector->getModelNamespace();
+        if ($this->connector instanceof ModelInterface) {
+            $modelNamespace = $this->connector->getModelNamespace();
         }
 
         $request = $this->createHandleRequest($requestPacket, $method, $modelNamespace);
@@ -271,10 +261,10 @@ class Application
             Event::createHandleEventName($request->getController(), $request->getAction(), Event::BEFORE)
         );
 
-        if ($connector instanceof HandleRequestInterface) {
-            $response = $connector->handle($this, $request);
+        if (!$method->isCore() && $this->connector instanceof HandleRequestInterface) {
+            $response = $this->connector->handle($this, $request);
         } else {
-            $response = $this->handleRequest($request, $connector);
+            $response = $this->handleRequest($request);
         }
 
         $this->eventDispatcher->dispatch(
@@ -295,7 +285,7 @@ class Application
         $resultData = is_array($response->getResult()) ? $response->getResult() : [$response->getResult()];
         foreach ($resultData as $result) {
 
-            if ($connector instanceof HandleRequestInterface ||
+            if ($this->connector instanceof HandleRequestInterface ||
                 in_array($request->getAction(), [Action::PUSH, Action::DELETE]) === false)
             {
                 if ($result instanceof AbstractDataModel) {
@@ -404,7 +394,6 @@ class Application
 
     /**
      * @param Request $request
-     * @param ConnectorInterface $connector
      * @return Response
      * @throws ApplicationException
      * @throws DependencyException
@@ -412,14 +401,15 @@ class Application
      * @throws \ReflectionException
      * @throws \Throwable
      */
-    public function handleRequest(Request $request, ConnectorInterface $connector): Response
+    public function handleRequest(Request $request): Response
     {
         $controller = $request->getController();
         $action = $request->getAction();
         $params = $request->getParams();
 
         if (!$this->container->has($controller)) {
-            $controllerClass = sprintf("%s\\%sController", $connector->getControllerNamespace(), $controller);
+            $controllerNamespace = Action::isCoreAction($action) ? 'Jtl\\Connector\\Core\\Controller' : $this->connector->getControllerNamespace();
+            $controllerClass = sprintf("%s\\%sController", $controllerNamespace, $controller);
             if (!class_exists($controllerClass)) {
                 throw new ApplicationException(sprintf('Controller class %s does not exist!', $controllerClass));
             }
@@ -461,7 +451,7 @@ class Application
                 }
                 break;
             case Action::IDENTIFY:
-                $result = $controllerObject->$action($this->getEndpointConnector());
+                $result = $controllerObject->$action($this->getConnector());
                 break;
             default:
                 $param = count($params) > 0 ? reset($params) : null;
@@ -678,9 +668,9 @@ class Application
      *
      * @return ConnectorInterface
      */
-    public function getEndpointConnector(): ?ConnectorInterface
+    public function getConnector(): ?ConnectorInterface
     {
-        return $this->endpointConnector;
+        return $this->connector;
     }
 
     /**

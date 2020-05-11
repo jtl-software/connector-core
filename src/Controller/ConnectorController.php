@@ -129,7 +129,7 @@ class ConnectorController extends AbstractController
             throw AuthenticationException::tokenMissing();
         }
 
-        $tokenValidator = $this->application->getEndpointConnector()->getTokenValidator();
+        $tokenValidator = $this->application->getConnector()->getTokenValidator();
         if ($tokenValidator->validate($auth->getToken()) === false) {
             Logger::write(sprintf("Unauthorized access with token (%s) from ip (%s)", $auth->getToken(), $_SERVER['REMOTE_ADDR']), Logger::WARNING);
             throw AuthenticationException::failed();
