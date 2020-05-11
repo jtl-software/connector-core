@@ -71,8 +71,10 @@ use Symfony\Component\Finder\Finder;
 
 class Application
 {
-    const PROTOCOL_VERSION = 7;
-    const MIN_PHP_VERSION = '7.2';
+    public const
+        PROTOCOL_VERSION = 7,
+        MIN_PHP_VERSION = '7.2',
+        CORE_CONTROLLER_NAMESPACE = 'Jtl\\Connector\\Core\\Controller';
 
     /**
      * @var ConnectorInterface
@@ -286,8 +288,7 @@ class Application
         foreach ($resultData as $result) {
 
             if ($this->connector instanceof HandleRequestInterface ||
-                in_array($request->getAction(), [Action::PUSH, Action::DELETE]) === false)
-            {
+                in_array($request->getAction(), [Action::PUSH, Action::DELETE]) === false) {
                 if ($result instanceof AbstractDataModel) {
                     $this->linker->linkModel($result, ($request->getAction() === Action::DELETE));
                     $this->linkChecksum($result);
@@ -408,7 +409,7 @@ class Application
         $params = $request->getParams();
 
         if (!$this->container->has($controller)) {
-            $controllerNamespace = Action::isCoreAction($action) ? 'Jtl\\Connector\\Core\\Controller' : $this->connector->getControllerNamespace();
+            $controllerNamespace = Action::isCoreAction($action) ? self::CORE_CONTROLLER_NAMESPACE : $this->connector->getControllerNamespace();
             $controllerClass = sprintf("%s\\%sController", $controllerNamespace, $controller);
             if (!class_exists($controllerClass)) {
                 throw new ApplicationException(sprintf('Controller class %s does not exist!', $controllerClass));
