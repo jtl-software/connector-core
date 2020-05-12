@@ -31,8 +31,7 @@ class ModelTest extends TestCase
         $mappings = $propertyMappings->getValue($definition);
 
         foreach ($mappings as $modelName => $identityMappings) {
-
-            if (in_array($modelName, $exceptions)) {
+            if (in_array($modelName, $exceptions, true)) {
                 continue;
             }
 

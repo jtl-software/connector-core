@@ -64,11 +64,11 @@ class ConfigOption
      */
     public static function getDefaultValue(string $option)
     {
-        if(!static::isOption($option)) {
+        if (!static::isOption($option)) {
             throw DefinitionException::unknownConfigOption($option);
         }
 
-        if(!static::hasDefaultValue($option)) {
+        if (!static::hasDefaultValue($option)) {
             throw DefinitionException::defaultValueNotExists($option);
         }
 

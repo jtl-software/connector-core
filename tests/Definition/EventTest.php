@@ -107,6 +107,4 @@ class EventTest extends TestCase
 
         $this->assertSame('product.before.push', $eventName);
     }
-
-
 }

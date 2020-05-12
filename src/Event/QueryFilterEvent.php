@@ -31,6 +31,4 @@ class QueryFilterEvent extends Event
     {
         return $this->queryFilter;
     }
-
-
 }

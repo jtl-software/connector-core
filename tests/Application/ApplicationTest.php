@@ -230,7 +230,8 @@ class ApplicationTest extends TestCase
 
         try {
             $application->handleRequest($request);
-        } catch(\Exception $e){}
+        } catch (\Exception $e) {
+        }
 
         $spy->shouldHaveReceived('beginTransaction')
             ->once();

@@ -5,7 +5,6 @@ use Jtl\Connector\Core\Model\ProductI18n;
 
 class ProductI18nFactory extends AbstractModelFactory
 {
-
     protected function makeFakeArray(): array
     {
         return [

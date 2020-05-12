@@ -20,7 +20,7 @@ class StrTest extends TestCase
      */
     public function testToCamelCase($data, $expectedResult)
     {
-        $this->assertSame($expectedResult,Str::toCamelCase($data));
+        $this->assertSame($expectedResult, Str::toCamelCase($data));
     }
 
     /**
@@ -78,7 +78,7 @@ class StrTest extends TestCase
      */
     public function testSnakeCase($data, $expectedResult)
     {
-        $this->assertSame($expectedResult,Str::toSnakeCase($data));
+        $this->assertSame($expectedResult, Str::toSnakeCase($data));
     }
 
     /**
@@ -97,7 +97,4 @@ class StrTest extends TestCase
             ['sna\\ke', 'sna\\ke']
         ];
     }
-
-
-
 }

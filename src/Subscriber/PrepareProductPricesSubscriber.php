@@ -38,10 +38,11 @@ class PrepareProductPricesSubscriber implements EventSubscriberInterface
 
             /** @var ProductPrice $price */
             foreach ($prices as $price) {
-
                 if ($price instanceof ProductPrice === false) {
-                    throw SubscriberException::invalidModelTypeInArray(ProductPrice::class,
-                        is_object($price) ? get_class($price) : 'variable');
+                    throw SubscriberException::invalidModelTypeInArray(
+                        ProductPrice::class,
+                        is_object($price) ? get_class($price) : 'variable'
+                    );
                 }
 
                 $hostId = $price->getProductId()->getHost();

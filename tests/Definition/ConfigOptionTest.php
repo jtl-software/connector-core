@@ -54,6 +54,4 @@ class ConfigOptionTest extends TestCase
 
         return $testCases;
     }
-
-
 }

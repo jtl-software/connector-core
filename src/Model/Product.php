@@ -693,7 +693,7 @@ class Product extends AbstractIdentity implements IdentificationInterface
 
         $strings = [];
 
-        if(!empty($this->sku)) {
+        if (!empty($this->sku)) {
             $strings[] = sprintf('SKU = %s', $this->sku);
         }
 
@@ -705,7 +705,7 @@ class Product extends AbstractIdentity implements IdentificationInterface
             }
         }
 
-        if(!empty($name)) {
+        if (!empty($name)) {
             $strings[] = sprintf('Name = %s', $name);
         }
 

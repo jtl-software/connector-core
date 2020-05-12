@@ -112,6 +112,4 @@ class RequestPacketTest extends TestCase
         $this->assertSame($expectedParams[2], $requestPacket->getParams());
         $this->assertSame($isValid, $requestPacket->isValid());
     }
-
-
 }

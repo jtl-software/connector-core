@@ -58,7 +58,7 @@ class RuntimeConfigTest extends TestCase
         $runtimeConfig->set("option_2", rand());
         $runtimeConfig->set("option_3", rand());
 
-        $this->assertCount(3,$runtimeConfig->all());
+        $this->assertCount(3, $runtimeConfig->all());
     }
 
     /**
@@ -70,10 +70,9 @@ class RuntimeConfigTest extends TestCase
         $reflection = new \ReflectionClass($runtimeConfig);
         $property = $reflection->getProperty('options');
         $property->setAccessible(true);
-        $property->setValue($runtimeConfig,[]);
+        $property->setValue($runtimeConfig, []);
         $property->setAccessible(false);
 
         parent::tearDown();
     }
-
 }

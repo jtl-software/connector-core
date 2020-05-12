@@ -31,6 +31,4 @@ class ModelEvent extends Event
     {
         return $this->model;
     }
-
-
 }

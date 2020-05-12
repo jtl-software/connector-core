@@ -181,7 +181,7 @@ abstract class AbstractModelFactory
     public static function getIdentityByHost(int $identityType, int $host): ?array
     {
         if (self::hasIdentityByHost($identityType, $host)) {
-            return self::getIdentity($identityType, array_search($host, self::$identities[$identityType]));
+            return self::getIdentity($identityType, array_search($host, self::$identities[$identityType], true));
         }
         return null;
     }

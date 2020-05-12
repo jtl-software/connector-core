@@ -4,6 +4,7 @@ namespace Jtl\Connector\Core\Rpc;
 use JMS\Serializer\Annotation as Serializer;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use JMS\Serializer\Serializer as JmsSerializer;
+
 /**
  * Rpc Request Packet
  *
@@ -107,7 +108,7 @@ class RequestPacket extends Packet
      */
     public static function createFromJtlrpc(?string $jtlrpc, JmsSerializer $serializer = null): RequestPacket
     {
-        if(is_null($serializer)) {
+        if (is_null($serializer)) {
             $serializer = SerializerBuilder::getInstance()->build();
         }
 

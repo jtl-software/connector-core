@@ -54,7 +54,7 @@ class RpcMethodTest extends TestCase
     public function testMapMethod(string $methodName, string $expectedMapping)
     {
         $mappedName = RpcMethod::mapMethod($methodName);
-        $this->assertSame($expectedMapping,$mappedName);
+        $this->assertSame($expectedMapping, $mappedName);
     }
 
     /**

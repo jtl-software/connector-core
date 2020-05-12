@@ -23,5 +23,4 @@ class ApplicationException extends \Exception
     {
         return new static('Could not get any Session', ErrorCode::NO_SESSION);
     }
-
 }

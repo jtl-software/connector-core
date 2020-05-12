@@ -102,19 +102,19 @@ class Category extends AbstractIdentity implements IdentificationInterface
         $mainLanguage = RuntimeConfig::getInstance()->get(ConfigOption::MAIN_LANGUAGE, ConfigOption::getDefaultValue(ConfigOption::MAIN_LANGUAGE));
 
         $strings = [];
-        if($this->getParentCategoryId()->getHost() > 0) {
+        if ($this->getParentCategoryId()->getHost() > 0) {
             $strings[] = sprintf('Parent Wawi PK = %s', $this->getParentCategoryId()->getHost());
         }
 
         $name = '';
-        foreach($this->getI18ns() as $i18n) {
+        foreach ($this->getI18ns() as $i18n) {
             $name = $i18n->getName();
-            if($mainLanguage === $i18n->getLanguageIso()) {
+            if ($mainLanguage === $i18n->getLanguageIso()) {
                 break;
             }
         }
 
-        if(!empty($name)) {
+        if (!empty($name)) {
             $strings[] = sprintf('Name = %s', $name);
         }
 

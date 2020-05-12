@@ -48,7 +48,7 @@ class FileConfigTest extends TestCase
 
         $fileConfig = $this->getFileConfig();
 
-        $fileConfig->set("","");
+        $fileConfig->set("", "");
     }
 
     /**
@@ -69,5 +69,4 @@ class FileConfigTest extends TestCase
 
         return new FileConfig($tmpJson);
     }
-
 }

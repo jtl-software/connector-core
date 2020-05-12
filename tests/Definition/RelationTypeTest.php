@@ -98,6 +98,4 @@ class RelationTypeTest extends TestCase
         $hasIdentityType = RelationType::isRelationType($relationType);
         $this->assertSame($hasIdentityType, $shouldBeRelationType);
     }
-
-
 }

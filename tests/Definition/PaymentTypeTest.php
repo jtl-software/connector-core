@@ -37,5 +37,4 @@ class PaymentTypeTest extends TestCase
 
         return $testCases;
     }
-
 }

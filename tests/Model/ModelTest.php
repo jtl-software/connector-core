@@ -34,11 +34,10 @@ class ModelTest extends TestCase
         $serializer = SerializerBuilder::getInstance()->build();
 
         foreach ($models as $model) {
-
             $fileInfo = new \SplFileInfo($model);
             $modelName = $fileInfo->getBasename('.php');
 
-            if (in_array($modelName, $ignoreModels)) {
+            if (in_array($modelName, $ignoreModels, true)) {
                 continue;
             }
 

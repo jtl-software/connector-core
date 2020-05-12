@@ -24,15 +24,15 @@ final class Event
      */
     public static function createEventName(string $controllerName, string $actionName, string $moment): string
     {
-        if(!Controller::isController($controllerName)) {
+        if (!Controller::isController($controllerName)) {
             throw DefinitionException::unknownController($controllerName);
         }
 
-        if(!Action::isAction($actionName)) {
+        if (!Action::isAction($actionName)) {
             throw DefinitionException::unknownAction($actionName);
         }
 
-        if(!self::isMoment($moment)) {
+        if (!self::isMoment($moment)) {
             throw DefinitionException::unknownMoment($moment);
         }
 
@@ -72,7 +72,7 @@ final class Event
      */
     public static function createRpcEventName(string $moment): string
     {
-        if(!self::isMoment($moment)) {
+        if (!self::isMoment($moment)) {
             throw DefinitionException::unknownMoment($moment);
         }
 
@@ -85,6 +85,6 @@ final class Event
      */
     public static function isMoment(string $moment): bool
     {
-        return in_array($moment, [self::BEFORE, self::AFTER]);
+        return in_array($moment, [self::BEFORE, self::AFTER], true);
     }
 }

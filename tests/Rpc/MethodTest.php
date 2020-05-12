@@ -57,5 +57,4 @@ class MethodTest extends TestCase
             ['..', '', '', false]
         ];
     }
-
 }

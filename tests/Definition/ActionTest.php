@@ -83,8 +83,7 @@ class ActionTest extends TestCase
             [Action::PULL, false],
             [false, false],
             ['autH', false],
-            [rand(-9999,9999), false],
+            [rand(-9999, 9999), false],
         ];
     }
-
 }

@@ -44,8 +44,7 @@ class PacketTest extends TestCase
      */
     protected function stubPacket(): Packet
     {
-        return new class extends Packet
-        {
+        return new class extends Packet {
             public function isValid(): bool
             {
                 return false;

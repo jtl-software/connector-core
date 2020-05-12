@@ -44,7 +44,8 @@ class ObjectTypesSubscriberTest extends TestCase
         $attributeId = new Identity($this->createEndpointId(), $this->createHostId());
         $attribute = new TranslatableAttribute();
         if ($setId) {
-            $attribute->setId($attributeId);;
+            $attribute->setId($attributeId);
+            ;
         }
 
         $translatableModel->addAttribute($attribute);
@@ -177,7 +178,4 @@ class ObjectTypesSubscriberTest extends TestCase
 
         $this->assertObjectNotHasAttribute('productAttrId', $i18n);
     }
-
-
-
 }

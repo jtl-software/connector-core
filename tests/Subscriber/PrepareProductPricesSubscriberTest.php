@@ -66,12 +66,11 @@ class PrepareProductPricesSubscriberTest extends TestCase
     {
         $controllers = Controller::getControllers();
 
-        unset($controllers[array_search(Controller::PRODUCT_PRICE, $controllers)]);
+        unset($controllers[array_search(Controller::PRODUCT_PRICE, $controllers, true)]);
 
         $subscriber = new PrepareProductPricesSubscriber();
 
-        foreach($controllers as $controller) {
-
+        foreach ($controllers as $controller) {
             $params = [
                 $id = $this->createIdentity()
             ];
@@ -96,9 +95,9 @@ class PrepareProductPricesSubscriberTest extends TestCase
      * @param $expected
      * @throws SubscriberException
      */
-    public function testPrepareProductPricesThrowsExceptionWhenInvalidModelIsInArray($params,$expected)
+    public function testPrepareProductPricesThrowsExceptionWhenInvalidModelIsInArray($params, $expected)
     {
-        $this->expectExceptionObject(SubscriberException::invalidModelTypeInArray($expected[0],$expected[1]));
+        $this->expectExceptionObject(SubscriberException::invalidModelTypeInArray($expected[0], $expected[1]));
 
         $subscriber = new PrepareProductPricesSubscriber();
 
@@ -136,5 +135,4 @@ class PrepareProductPricesSubscriberTest extends TestCase
             ]
         ];
     }
-
 }

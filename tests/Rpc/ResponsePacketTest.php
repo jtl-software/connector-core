@@ -52,6 +52,4 @@ class ResponsePacketTest extends TestCase
             [' ', null, [], '2.0', true]
         ];
     }
-
-
 }

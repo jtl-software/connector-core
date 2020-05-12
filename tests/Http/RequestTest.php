@@ -108,7 +108,7 @@ class RequestTest extends TestCase
     {
         $files = [];
 
-        for($i=0;$i<$quantity;$i++){
+        for ($i=0;$i<$quantity;$i++) {
             $file = vfsStream::newFile(time() . $i . '-file');
 
             $this->rootDir->addChild($file);

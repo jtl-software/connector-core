@@ -16,7 +16,7 @@ class I18nFactory extends AbstractModelFactory
         $data = [];
         while (true) {
             $languageCode = $this->faker->languageCode;
-            if (!in_array($languageCode, $this->usedLanguages)) {
+            if (!in_array($languageCode, $this->usedLanguages, true)) {
                 $data['languageIso'] = $languageCode;
                 $this->usedLanguages[] = $languageCode;
                 break;

@@ -79,7 +79,7 @@ class TransactionalControllerStub implements DeleteInterface, StatisticInterface
      */
     public function commit(): bool
     {
-        if($this->commitThrowsException){
+        if ($this->commitThrowsException) {
             throw new \Exception("Transaction exception");
         }
         return true;

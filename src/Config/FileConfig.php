@@ -50,7 +50,7 @@ class FileConfig extends Config
      */
     public function set($key, $value)
     {
-        if(empty($key)) {
+        if (empty($key)) {
             throw ConfigException::keyIsEmpty();
         }
 

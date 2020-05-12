@@ -78,7 +78,7 @@ class Logger
     public static function createExceptionInfos(\Throwable $exception, bool $maskFilePath, string $additionalMessage = null): string
     {
         $file = $exception->getFile();
-        if($maskFilePath) {
+        if ($maskFilePath) {
             $file = sprintf('...%s', substr($file, strlen(CONNECTOR_DIR)));
         }
 
@@ -90,7 +90,7 @@ class Logger
             $exception->getLine()
         );
 
-        if(is_string($additionalMessage)) {
+        if (is_string($additionalMessage)) {
             $infos .= sprintf(' - %s', $additionalMessage);
         }
 

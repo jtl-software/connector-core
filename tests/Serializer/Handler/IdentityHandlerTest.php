@@ -26,8 +26,12 @@ class IdentityHandlerTest extends TestCase
         $identity = new Identity($endpointId, $hostId);
 
         $identityHandler = new IdentityHandler();
-        $result = $identityHandler->serializeIdentity(new JsonSerializationVisitor(), $identity, [],
-            new SerializationContext());
+        $result = $identityHandler->serializeIdentity(
+            new JsonSerializationVisitor(),
+            $identity,
+            [],
+            new SerializationContext()
+        );
 
         $this->assertSame([$endpointId, $hostId], $result);
     }
@@ -47,8 +51,12 @@ class IdentityHandlerTest extends TestCase
         $visitor = new JsonDeserializationVisitor();
         $visitor->setCurrentObject($identity);
 
-        $result = $identityHandler->deserializeIdentity($visitor, [$endpointId, $hostId], [],
-            new DeserializationContext());
+        $result = $identityHandler->deserializeIdentity(
+            $visitor,
+            [$endpointId, $hostId],
+            [],
+            new DeserializationContext()
+        );
 
         $this->assertEquals($result, $identity);
     }
@@ -66,8 +74,12 @@ class IdentityHandlerTest extends TestCase
         $visitor = new JsonDeserializationVisitor();
         $visitor->setCurrentObject($identity);
 
-        $result = $identityHandler->deserializeIdentity($visitor, $identityArray, [],
-            new DeserializationContext());
+        $result = $identityHandler->deserializeIdentity(
+            $visitor,
+            $identityArray,
+            [],
+            new DeserializationContext()
+        );
 
         $this->assertEquals($identity, $result);
     }

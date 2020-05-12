@@ -48,9 +48,9 @@ class LanguageIsoSubscriber implements EventSubscriberInterface
     public function onPostSerialize(ObjectEvent $event)
     {
         $model = $event->getObject();
-        if($model instanceof AbstractI18n) {
+        if ($model instanceof AbstractI18n) {
             $languageIso = $model->getLanguageIso();
-            if(strlen($languageIso) === 2) {
+            if (strlen($languageIso) === 2) {
                 $languageIso = $this->languages->findByCode1($languageIso)->code2b() ?? $languageIso;
             }
 
@@ -64,7 +64,7 @@ class LanguageIsoSubscriber implements EventSubscriberInterface
     public function onPreDeserialize(PreDeserializeEvent $event)
     {
         $data = $event->getData();
-        if(is_array($data) && isset($data['languageISO']) && !isset($data['languageIso'])) {
+        if (is_array($data) && isset($data['languageISO']) && !isset($data['languageIso'])) {
             $language = $this->languages->findByCode2b($data['languageISO']);
             $data['languageIso'] = $language->code1() ?? $data['languageISO'];
             $event->setData($data);

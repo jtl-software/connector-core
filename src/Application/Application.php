@@ -171,8 +171,11 @@ class Application
             // Log incoming request packet (debug only and configuration must be initialized)
             Logger::write(sprintf('Request packet: %s', $logJtlrpc), Logger::DEBUG, Logger::CHANNEL_RPC);
             if ($requestPacket->getMethod() !== RpcMethod::AUTH && !empty($requestPacket->getParams())) {
-                Logger::write(sprintf('Params: %s', Json::encode($requestPacket->getParams())), Logger::DEBUG,
-                    Logger::CHANNEL_RPC);
+                Logger::write(
+                    sprintf('Params: %s', Json::encode($requestPacket->getParams())),
+                    Logger::DEBUG,
+                    Logger::CHANNEL_RPC
+                );
             }
 
             $this->startSession($requestPacket->getMethod());
@@ -198,7 +201,6 @@ class Application
             $responsePacket = (new ResponsePacket())
                 ->setId($requestPacket->getId())
                 ->setError($error);
-
         } finally {
             if (count($this->imagesToDelete) > 0) {
                 HttpRequest::deleteFileUploads($this->imagesToDelete);
@@ -286,9 +288,8 @@ class Application
         // Identity mapping
         $resultData = is_array($response->getResult()) ? $response->getResult() : [$response->getResult()];
         foreach ($resultData as $result) {
-
             if ($this->connector instanceof HandleRequestInterface ||
-                in_array($request->getAction(), [Action::PUSH, Action::DELETE]) === false) {
+                in_array($request->getAction(), [Action::PUSH, Action::DELETE], true) === false) {
                 if ($result instanceof AbstractDataModel) {
                     $this->linker->linkModel($result, ($request->getAction() === Action::DELETE));
                     $this->linkChecksum($result);
@@ -335,8 +336,7 @@ class Application
         RequestPacket $requestPacket,
         Method $method,
         string $modelNamespace
-    ): Request
-    {
+    ): Request {
         $controller = $method->getController();
         $action = $method->getAction();
 
@@ -504,8 +504,10 @@ class Application
         $this->config = new FileConfig($configFile);
         $logLevel = $this->config->get(ConfigOption::LOG_LEVEL, Logger::INFO);
         RuntimeConfig::getInstance()->set(ConfigOption::LOG_LEVEL, $logLevel);
-        $mainLanguage = $this->config->get(ConfigOption::MAIN_LANGUAGE,
-            ConfigOption::getDefaultValue(ConfigOption::MAIN_LANGUAGE));
+        $mainLanguage = $this->config->get(
+            ConfigOption::MAIN_LANGUAGE,
+            ConfigOption::getDefaultValue(ConfigOption::MAIN_LANGUAGE)
+        );
         RuntimeConfig::getInstance()->set(ConfigOption::MAIN_LANGUAGE, $mainLanguage);
     }
 
@@ -582,8 +584,10 @@ class Application
             if (!empty($image->getRemoteUrl())) {
                 $imageData = file_get_contents($image->getRemoteUrl());
                 if ($imageData === false) {
-                    throw new ApplicationException(sprintf('Could not get any data from url: %s',
-                        $image->getRemoteUrl()));
+                    throw new ApplicationException(sprintf(
+                        'Could not get any data from url: %s',
+                        $image->getRemoteUrl()
+                    ));
                 }
 
                 $path = parse_url($image->getRemoteUrl(), PHP_URL_PATH);
@@ -628,8 +632,7 @@ class Application
         ?object $model,
         string $controller,
         string $action
-    )
-    {
+    ) {
         $messages = [
             sprintf('Controller = %s', $controller),
             sprintf('Action = %s', $action),
