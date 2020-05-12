@@ -53,6 +53,15 @@ class SessionHelperTest extends TestCase
         $this->assertEquals('miau', $_SESSION['yo']['lo']);
     }
 
+    public function testUnset()
+    {
+        $helper = new SessionHelper('tests');
+        $_SESSION['tests']['foo'] = 'bar';
+        $this->assertArrayHasKey('foo', $_SESSION['tests']);
+        $helper->unset('foo');
+        $this->assertArrayNotHasKey('foo', $_SESSION['tests']);
+    }
+
     public function testCreateByObjectClass()
     {
         $expectedNamespace = \ZipArchive::class;

@@ -60,6 +60,18 @@ class SessionHelper
     }
 
     /**
+     * @param string $name
+     * @return SessionHelper
+     */
+    public function unset(string $name): self
+    {
+        if($this->has($name)) {
+            unset($_SESSION[$this->namespace][$name]);
+        }
+        return $this;
+    }
+
+    /**
      * @param $name
      * @param $value
      * @throws SessionException
@@ -111,9 +123,7 @@ class SessionHelper
             throw new SessionException("The '{$name}' key must be a non-empty string");
         }
 
-        if ($this->has($name)) {
-            unset($_SESSION[$this->namespace][$name]);
-        }
+        $this->unset($name);
     }
 
     /**
