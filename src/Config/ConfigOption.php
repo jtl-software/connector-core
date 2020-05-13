@@ -151,6 +151,6 @@ class ConfigOption
      */
     public static function create(string $key, string $type = self::TYPE_STRING, $defaultValue = null): ConfigOption
     {
-        return (new static($key, $type, $defaultValue))->setDefaultValue($defaultValue);
+        return (new static($key, $type))->setDefaultValue($defaultValue);
     }
 }
