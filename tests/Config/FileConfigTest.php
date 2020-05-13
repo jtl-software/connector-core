@@ -13,24 +13,11 @@ use Jtl\Connector\Core\Test\TestCase;
 class FileConfigTest extends TestCase
 {
     /**
-     * @var string
-     */
-    protected $configFile;
-
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-        if (file_exists($this->configFile)) {
-            unlink($this->configFile);
-        }
-    }
-
-    /**
      *
      */
     public function testConfigSetParameter()
     {
-        $fileConfig = $this->getFileConfig();
+        $fileConfig = $this->createFileConfig();
 
         $testKey = 'test';
         $testValue = rand();
@@ -49,7 +36,7 @@ class FileConfigTest extends TestCase
         $this->expectException(ConfigException::class);
         $this->getExpectedExceptionCode(ConfigException::EMPTY_KEY);
 
-        $fileConfig = $this->getFileConfig();
+        $fileConfig = $this->createFileConfig();
 
         $fileConfig->set("", "");
     }
@@ -69,27 +56,5 @@ class FileConfigTest extends TestCase
         $this->assertEquals('lo', $data['yo']);
         $this->assertArrayHasKey('foo', $data);
         $this->assertEquals('bar', $data['foo']);
-    }
-
-    /**
-     * @param string $payload
-     * @param string $extension
-     * @return FileConfig
-     */
-    protected function getFileConfig(string $payload = "{}", string $extension = 'json'): FileConfig
-    {
-        return new FileConfig($this->createConfigFile($payload, $extension));
-    }
-
-    /**
-     * @param string $payload
-     * @param string $extension
-     * @return string
-     */
-    protected function createConfigFile(string $payload = '{}', string $extension = 'json'): string
-    {
-        $this->configFile = sprintf('%s/%s.%s', sys_get_temp_dir(), uniqid('connector-config', true), $extension);
-        file_put_contents($this->configFile, $payload);
-        return $this->configFile;
     }
 }

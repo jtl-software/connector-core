@@ -10,7 +10,7 @@ use Doctrine\Common\Annotations\AnnotationRegistry;
 use JMS\Serializer\Serializer;
 use Jtl\Connector\Core\Config\RuntimeConfig;
 use Jtl\Connector\Core\Controller\StatisticInterface;
-use Jtl\Connector\Core\Config\ConfigOptions;
+use Jtl\Connector\Core\Config\ConfigSchema;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Definition\ErrorCode;
 use Jtl\Connector\Core\Definition\Event;
@@ -33,6 +33,7 @@ use Jtl\Connector\Core\Event\QueryFilterEvent;
 use Jtl\Connector\Core\Event\RpcEvent;
 use Jtl\Connector\Core\Event\StatisticEvent;
 use Jtl\Connector\Core\Exception\CompressionException;
+use Jtl\Connector\Core\Exception\ConfigException;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\HttpException;
 use Jtl\Connector\Core\IO\Temp;
@@ -93,9 +94,9 @@ class Application
     protected $configFilePath;
 
     /**
-     * @var ConfigOptions
+     * @var ConfigSchema
      */
-    protected $configOptions;
+    protected $configSchema;
 
     /**
      * @var \SessionHandlerInterface
@@ -135,10 +136,10 @@ class Application
     /**
      * Application constructor.
      * @param ConnectorInterface $endpointConnector
-     * @param ConfigOptions|null $configOptions
+     * @param ConfigSchema|null $configSchema
      * @throws \Exception
      */
-    public function __construct(ConnectorInterface $endpointConnector, ConfigOptions $configOptions = null)
+    public function __construct(ConnectorInterface $endpointConnector, ConfigSchema $configSchema = null)
     {
         $this->connector = $endpointConnector;
         $this->eventDispatcher = new EventDispatcher();
@@ -148,21 +149,15 @@ class Application
         $this->linker = new IdentityLinker($this->connector->getPrimaryKeyMapper());
         $this->serializer = SerializerBuilder::getInstance()->build();
 
-        if (is_null($configOptions)) {
-            $configOptions = new ConfigOptions();
+        if (is_null($configSchema)) {
+            $configSchema = new ConfigSchema();
         }
 
-        foreach(ConfigOptions::createDefaultOptions() as $defaultOption) {
-            if(!$configOptions->isOption($defaultOption->getKey())) {
-                $configOptions->setOption($defaultOption);
-            }
-        }
-
-        $this->configOptions = $configOptions;
+        $this->configSchema = $configSchema;
     }
 
     /**
-     * @throws \Exception
+     * @throws DefinitionException
      */
     public function run(): void
     {
@@ -171,7 +166,7 @@ class Application
         }
 
         AnnotationRegistry::registerLoader('class_exists');
-        $this->startConfiguration();
+        $this->prepareConfiguration();
         $this->eventDispatcher->addSubscriber(new PrepareProductPricesSubscriber());
         $this->errorHandler->register();
 
@@ -207,12 +202,13 @@ class Application
             if ($this->connector instanceof UseChecksumInterface) {
                 ChecksumLinker::setChecksumLoader($this->connector->getChecksumLoader());
             }
-            $this->connector->initialize($this);
 
             $eventData = Json::decode((string)$jtlrpc, true);
             $event = new RpcEvent($eventData, $method->getController(), $method->getAction());
             $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::BEFORE));
 
+            $this->connector->initialize($this);
+            $this->configSchema->validateConfig($this->config);
             $responsePacket = $this->execute($requestPacket, $method);
         } catch (\Throwable $ex) {
             Logger::writeException($ex);
@@ -360,7 +356,8 @@ class Application
         RequestPacket $requestPacket,
         Method $method,
         string $modelNamespace
-    ): Request {
+    ): Request
+    {
         $controller = $method->getController();
         $action = $method->getAction();
 
@@ -517,17 +514,23 @@ class Application
     }
 
     /**
-     * Initialises the connector configuration instance.
+     * @throws ConfigException
      */
-    protected function startConfiguration(): void
+    protected function prepareConfiguration(): void
     {
+        foreach (ConfigSchema::createDefaultOptions() as $defaultOption) {
+            if (!$this->configSchema->isOption($defaultOption->getKey())) {
+                $this->configSchema->setOption($defaultOption);
+            }
+        }
+
         if (!$this->config instanceof ConfigInterface) {
             $configFile = $this->configFilePath ?? Path::combine(CONNECTOR_DIR, 'config', 'config.json');
             $this->config = new FileConfig($configFile);
         }
 
         $runtimeConfig = RuntimeConfig::getInstance();
-        foreach ($this->configOptions->getDefaultValues() as $key => $value) {
+        foreach ($this->configSchema->getDefaultValues() as $key => $value) {
             if (!$this->config->has($key)) {
                 $this->config->set($key, $value);
             }
@@ -658,7 +661,8 @@ class Application
         ?object $model,
         string $controller,
         string $action
-    ) {
+    )
+    {
         $messages = [
             sprintf('Controller = %s', $controller),
             sprintf('Action = %s', $action),

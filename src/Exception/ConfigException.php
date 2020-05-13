@@ -8,7 +8,8 @@ class ConfigException extends \Exception
         EMPTY_KEY = 10,
         UNKNOWN_TYPE = 20,
         WRONG_TYPE = 30,
-        UNKNOWN_OPTION = 40;
+        UNKNOWN_OPTION = 40,
+        SCHEMA_VALIDATION_ERRORS = 50;
 
     /**
      * @return ConfigException
@@ -44,5 +45,24 @@ class ConfigException extends \Exception
     public static function unknownOption(string $key): self
     {
         return new static(sprintf('Option (%s) does not exist', $key), self::UNKNOWN_OPTION);
+    }
+
+    /**
+     * @param array $invalidValues
+     * @param array $missingRequiredProperties
+     * @return ConfigException
+     */
+    public static function schemaValidationErrors(array $invalidValues, array $missingRequiredProperties): self
+    {
+        $msg = 'Configuration could not get validated.';
+        if(count($invalidValues) > 0) {
+            $msg .= sprintf(' The properties "%s" have invalid values.', implode(', ', $invalidValues));
+        }
+
+        if(count($missingRequiredProperties) > 0) {
+            $msg .= sprintf(' The required properties "%s" are missing.', implode(', ', $missingRequiredProperties));
+        }
+
+        return new static($msg, self::SCHEMA_VALIDATION_ERRORS);
     }
 }

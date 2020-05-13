@@ -1,6 +1,7 @@
 <?php
 namespace Jtl\Connector\Core\Test;
 
+use Jtl\Connector\Core\Config\FileConfig;
 use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Test\Stub\Logger\LoggerStub;
@@ -12,6 +13,11 @@ use Jtl\Connector\Core\Test\Stub\Logger\LoggerStub;
 class TestCase extends \PHPUnit\Framework\TestCase
 {
     /**
+     * @var string
+     */
+    protected $configFile;
+
+    /**
      *
      */
     protected function setUp(): void
@@ -19,6 +25,14 @@ class TestCase extends \PHPUnit\Framework\TestCase
         \Mockery::namedMock(Logger::class, LoggerStub::class)
             ->shouldReceive('write')
             ->withAnyArgs();
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        if (file_exists($this->configFile)) {
+            unlink($this->configFile);
+        }
     }
 
     /**
@@ -64,5 +78,28 @@ class TestCase extends \PHPUnit\Framework\TestCase
         }
 
         return $testCases;
+    }
+
+
+    /**
+     * @param string $payload
+     * @param string $extension
+     * @return FileConfig
+     */
+    protected function createFileConfig(string $payload = "{}", string $extension = 'json'): FileConfig
+    {
+        return new FileConfig($this->createConfigFile($payload, $extension));
+    }
+
+    /**
+     * @param string $payload
+     * @param string $extension
+     * @return string
+     */
+    protected function createConfigFile(string $payload = '{}', string $extension = 'json'): string
+    {
+        $this->configFile = sprintf('%s/%s.%s', sys_get_temp_dir(), uniqid('connector-config', true), $extension);
+        file_put_contents($this->configFile, $payload);
+        return $this->configFile;
     }
 }

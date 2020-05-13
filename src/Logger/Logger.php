@@ -7,7 +7,7 @@
 namespace Jtl\Connector\Core\Logger;
 
 use Jtl\Connector\Core\Config\RuntimeConfig;
-use Jtl\Connector\Core\Config\ConfigOptions;
+use Jtl\Connector\Core\Config\ConfigSchema;
 use Jtl\Connector\Core\IO\Path;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger as MonoLogger;
@@ -42,7 +42,7 @@ class Logger
     {
         $runtimeConfig = RuntimeConfig::getInstance();
 
-        $logLevelOption = $runtimeConfig->get(ConfigOptions::LOG_LEVEL, self::INFO);
+        $logLevelOption = $runtimeConfig->get(ConfigSchema::LOG_LEVEL, self::INFO);
         $logLevel = MonoLogger::INFO;
         if (isset(self::$logLevelMappings[$logLevelOption])) {
             $logLevel = self::$logLevelMappings[$logLevelOption];

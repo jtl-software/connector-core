@@ -6,7 +6,7 @@
  */
 namespace Jtl\Connector\Core\Config;
 
-use Jtl\Connector\Core\Config\ConfigOptions;
+use Jtl\Connector\Core\Config\ConfigSchema;
 use Jtl\Connector\Core\Exception\ConfigException;
 use Noodlehaus\Config;
 use Noodlehaus\Parser\Json;

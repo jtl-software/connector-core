@@ -4,7 +4,7 @@ namespace Jtl\Connector\Core\Config;
 
 use Jtl\Connector\Core\Exception\ConfigException;
 
-class ConfigOption
+class ConfigSchemaOption
 {
     public const
         TYPE_BOOLEAN = 'boolean',
@@ -33,20 +33,27 @@ class ConfigOption
     protected $type;
 
     /**
+     * @var bool
+     */
+    protected $required = false;
+
+    /**
      * @var mixed
      */
     protected $defaultValue;
 
     /**
-     * Option constructor.
+     * ConfigOption constructor.
      * @param string $key
      * @param string $type
+     * @param bool $required
      * @throws ConfigException
      */
-    public function __construct(string $key, string $type)
+    public function __construct(string $key, string $type, bool $required = false)
     {
         $this->setKey($key);
         $this->setType($type);
+        $this->required = $required;
     }
 
     /**
@@ -62,7 +69,7 @@ class ConfigOption
      * @return $this
      * @throws ConfigException
      */
-    protected function setKey(string $key): ConfigOption
+    protected function setKey(string $key): ConfigSchemaOption
     {
         if (empty($key)) {
             throw ConfigException::keyIsEmpty();
@@ -85,7 +92,7 @@ class ConfigOption
      * @return $this
      * @throws ConfigException
      */
-    protected function setType(string $type): ConfigOption
+    protected function setType(string $type): ConfigSchemaOption
     {
         if (!self::isType($type)) {
             throw ConfigException::unknownType($type);
@@ -93,6 +100,15 @@ class ConfigOption
         $this->type = $type;
         return $this;
     }
+
+    /**
+     * @return bool
+     */
+    public function isRequired(): bool
+    {
+        return $this->required;
+    }
+
 
     /**
      * @return boolean
@@ -115,7 +131,7 @@ class ConfigOption
      * @return $this
      * @throws ConfigException
      */
-    public function setDefaultValue($defaultValue): ConfigOption
+    public function setDefaultValue($defaultValue): ConfigSchemaOption
     {
         if (!is_null($defaultValue) && !$this->isValidValue($defaultValue)) {
             throw ConfigException::wrongType($this->getType(), gettype($defaultValue));
@@ -145,12 +161,13 @@ class ConfigOption
     /**
      * @param string $key
      * @param string $type
+     * @param bool $required
      * @param null $defaultValue
-     * @return ConfigOption
+     * @return ConfigSchemaOption
      * @throws ConfigException
      */
-    public static function create(string $key, string $type = self::TYPE_STRING, $defaultValue = null): ConfigOption
+    public static function create(string $key, string $type = self::TYPE_STRING, bool $required = false, $defaultValue = null): ConfigSchemaOption
     {
-        return (new static($key, $type))->setDefaultValue($defaultValue);
+        return (new static($key, $type, $required))->setDefaultValue($defaultValue);
     }
 }

@@ -9,7 +9,7 @@ namespace Jtl\Connector\Core\Model;
 
 use InvalidArgumentException;
 use Jtl\Connector\Core\Config\RuntimeConfig;
-use Jtl\Connector\Core\Config\ConfigOptions;
+use Jtl\Connector\Core\Config\ConfigSchema;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -99,7 +99,7 @@ class Category extends AbstractIdentity implements IdentificationInterface
 
     public function getIdentificationStrings(): array
     {
-        $mainLanguage = RuntimeConfig::getInstance()->get(ConfigOptions::MAIN_LANGUAGE, 'de');
+        $mainLanguage = RuntimeConfig::getInstance()->get(ConfigSchema::MAIN_LANGUAGE, 'de');
 
         $strings = [];
         if ($this->getParentCategoryId()->getHost() > 0) {

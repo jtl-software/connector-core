@@ -2,11 +2,11 @@
 
 namespace Jtl\Connector\Core\Test\Config;
 
-use Jtl\Connector\Core\Config\ConfigOption;
+use Jtl\Connector\Core\Config\ConfigSchemaOption;
 use Jtl\Connector\Core\Exception\ConfigException;
 use PHPUnit\Framework\TestCase;
 
-class ConfigOptionTest extends TestCase
+class ConfigSchemaOptionTest extends TestCase
 {
 
     /**
@@ -19,7 +19,7 @@ class ConfigOptionTest extends TestCase
      */
     public function testIsValidValueString(string $type, $validValue, array $invalidValues)
     {
-        $option = new ConfigOption('foo', $type);
+        $option = new ConfigSchemaOption('foo', $type);
         $this->assertTrue($option->isValidValue($validValue));
         foreach ($invalidValues as $invalidValue) {
             $this->assertFalse($option->isValidValue($invalidValue));
@@ -36,7 +36,7 @@ class ConfigOptionTest extends TestCase
      */
     public function testSetDefaultValue(string $type, $validValue, array $invalidValues)
     {
-        $option = new ConfigOption('foo', $type);
+        $option = new ConfigSchemaOption('foo', $type);
         $option->setDefaultValue($validValue);
         $this->assertEquals($validValue, $option->getDefaultValue());
     }
@@ -53,7 +53,7 @@ class ConfigOptionTest extends TestCase
     {
         $this->expectException(ConfigException::class);
         $this->expectExceptionCode(ConfigException::WRONG_TYPE);
-        $option = new ConfigOption('foo', $type);
+        $option = new ConfigSchemaOption('foo', $type);
         $invalidValuesCount = count($invalidValues);
         $invalidValuesIndex = mt_rand(1, $invalidValuesCount - 1);
         $option->setDefaultValue($invalidValues[$invalidValuesIndex]);
@@ -63,7 +63,7 @@ class ConfigOptionTest extends TestCase
     {
         $this->expectException(ConfigException::class);
         $this->expectExceptionCode(ConfigException::UNKNOWN_TYPE);
-        $option = new ConfigOption('foo', ConfigOption::TYPE_BOOLEAN);
+        $option = new ConfigSchemaOption('foo', ConfigSchemaOption::TYPE_BOOLEAN);
         $reflectionClass = new \ReflectionClass($option);
         $reflectionMethod = $reflectionClass->getMethod('setType');
         $reflectionMethod->setAccessible(true);
@@ -74,7 +74,7 @@ class ConfigOptionTest extends TestCase
     {
         $this->expectException(ConfigException::class);
         $this->expectExceptionCode(ConfigException::EMPTY_KEY);
-        $option = new ConfigOption('foo', ConfigOption::TYPE_INTEGER);
+        $option = new ConfigSchemaOption('foo', ConfigSchemaOption::TYPE_INTEGER);
         $reflectionClass = new \ReflectionClass($option);
         $reflectionMethod = $reflectionClass->getMethod('setKey');
         $reflectionMethod->setAccessible(true);
@@ -91,7 +91,7 @@ class ConfigOptionTest extends TestCase
      */
     public function testHasDefaultValue(string $type, $validValue, array $invalidValues)
     {
-        $option = new ConfigOption('foo', $type);
+        $option = new ConfigSchemaOption('foo', $type);
         $this->assertFalse($option->hasDefaultValue());
         $option->setDefaultValue($validValue);
         $this->assertTrue($option->hasDefaultValue());
@@ -103,11 +103,11 @@ class ConfigOptionTest extends TestCase
     public function dataProvider()
     {
         return [
-            [ConfigOption::TYPE_STRING, 'foo', [null, 5, false, true, 0.1]],
-            [ConfigOption::TYPE_BOOLEAN, true, ['yolo', 49]],
-            [ConfigOption::TYPE_DOUBLE, 0.2, ['1', 1, true]],
-            [ConfigOption::TYPE_INTEGER, 22, [2.1, 'yo', false]],
-            [ConfigOption::TYPE_INTEGER, -3, [-0.1, true, 'baz']],
+            [ConfigSchemaOption::TYPE_STRING, 'foo', [null, 5, false, true, 0.1]],
+            [ConfigSchemaOption::TYPE_BOOLEAN, true, ['yolo', 49]],
+            [ConfigSchemaOption::TYPE_DOUBLE, 0.2, ['1', 1, true]],
+            [ConfigSchemaOption::TYPE_INTEGER, 22, [2.1, 'yo', false]],
+            [ConfigSchemaOption::TYPE_INTEGER, -3, [-0.1, true, 'baz']],
         ];
     }
 }
