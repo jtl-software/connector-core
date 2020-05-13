@@ -35,7 +35,7 @@ class ConfigSchemaOption
     /**
      * @var bool
      */
-    protected $required = false;
+    protected $required = true;
 
     /**
      * @var mixed
@@ -49,7 +49,7 @@ class ConfigSchemaOption
      * @param bool $required
      * @throws ConfigException
      */
-    public function __construct(string $key, string $type, bool $required = false)
+    public function __construct(string $key, string $type, bool $required = true)
     {
         $this->setKey($key);
         $this->setType($type);
@@ -166,7 +166,7 @@ class ConfigSchemaOption
      * @return ConfigSchemaOption
      * @throws ConfigException
      */
-    public static function create(string $key, string $type = self::TYPE_STRING, bool $required = false, $defaultValue = null): ConfigSchemaOption
+    public static function create(string $key, string $type = self::TYPE_STRING, bool $required = true, $defaultValue = null): ConfigSchemaOption
     {
         return (new static($key, $type, $required))->setDefaultValue($defaultValue);
     }

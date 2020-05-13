@@ -25,11 +25,6 @@ class FileConfig extends Config
     protected $filePath = '';
 
     /**
-     * @var Config
-     */
-    protected $config;
-
-    /**
      * FileConfig constructor.
      * @param string $filePath
      */
