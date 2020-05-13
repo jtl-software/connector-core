@@ -10,7 +10,7 @@ use Doctrine\Common\Annotations\AnnotationRegistry;
 use JMS\Serializer\Serializer;
 use Jtl\Connector\Core\Config\RuntimeConfig;
 use Jtl\Connector\Core\Controller\StatisticInterface;
-use Jtl\Connector\Core\Definition\ConfigOption;
+use Jtl\Connector\Core\Config\ConfigOptions;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Definition\ErrorCode;
 use Jtl\Connector\Core\Definition\Event;
@@ -90,7 +90,12 @@ class Application
     /**
      * @var string
      */
-    protected $configFile;
+    protected $configFilePath;
+
+    /**
+     * @var ConfigOptions
+     */
+    protected $configOptions;
 
     /**
      * @var \SessionHandlerInterface
@@ -130,9 +135,10 @@ class Application
     /**
      * Application constructor.
      * @param ConnectorInterface $endpointConnector
+     * @param ConfigOptions|null $configOptions
      * @throws \Exception
      */
-    public function __construct(ConnectorInterface $endpointConnector)
+    public function __construct(ConnectorInterface $endpointConnector, ConfigOptions $configOptions = null)
     {
         $this->connector = $endpointConnector;
         $this->eventDispatcher = new EventDispatcher();
@@ -141,6 +147,18 @@ class Application
         $this->container->set(Application::class, $this);
         $this->linker = new IdentityLinker($this->connector->getPrimaryKeyMapper());
         $this->serializer = SerializerBuilder::getInstance()->build();
+
+        if (is_null($configOptions)) {
+            $configOptions = new ConfigOptions();
+        }
+
+        foreach(ConfigOptions::createDefaultOptions() as $defaultOption) {
+            if(!$configOptions->isOption($defaultOption->getKey())) {
+                $configOptions->setOption($defaultOption);
+            }
+        }
+
+        $this->configOptions = $configOptions;
     }
 
     /**
@@ -504,12 +522,12 @@ class Application
     protected function startConfiguration(): void
     {
         if (!$this->config instanceof ConfigInterface) {
-            $configFile = $this->configFile ?? Path::combine(CONNECTOR_DIR, 'config', 'config.json');
+            $configFile = $this->configFilePath ?? Path::combine(CONNECTOR_DIR, 'config', 'config.json');
             $this->config = new FileConfig($configFile);
         }
 
         $runtimeConfig = RuntimeConfig::getInstance();
-        foreach (ConfigOption::getDefaultValues() as $key => $value) {
+        foreach ($this->configOptions->getDefaultValues() as $key => $value) {
             if (!$this->config->has($key)) {
                 $this->config->set($key, $value);
             }
@@ -736,18 +754,18 @@ class Application
     /**
      * @return string
      */
-    public function getConfigFile(): ?string
+    public function getConfigFilePath(): ?string
     {
-        return $this->configFile;
+        return $this->configFilePath;
     }
 
     /**
-     * @param string $configFile
+     * @param string $configFilePath
      * @return Application
      */
-    public function setConfigFile(string $configFile): Application
+    public function setConfigFilePath(string $configFilePath): Application
     {
-        $this->configFile = $configFile;
+        $this->configFilePath = $configFilePath;
         return $this;
     }
 

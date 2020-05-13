@@ -6,7 +6,7 @@
  */
 namespace Jtl\Connector\Core\Config;
 
-use Jtl\Connector\Core\Definition\ConfigOption;
+use Jtl\Connector\Core\Config\ConfigOptions;
 use Jtl\Connector\Core\Exception\ConfigException;
 use Noodlehaus\Config;
 use Noodlehaus\Parser\Json;
@@ -57,13 +57,5 @@ class FileConfig extends Config
     public function write(): void
     {
         parent::toFile($this->filePath);
-    }
-
-    /**
-     * @return array|mixed[]|string[]
-     */
-    protected function getDefaults()
-    {
-        return ConfigOption::getDefaultValues();
     }
 }

@@ -47,7 +47,7 @@ class FileConfigTest extends TestCase
     public function testConfigSetParameterCannotBeEmpty()
     {
         $this->expectException(ConfigException::class);
-        $this->getExpectedExceptionCode(ConfigException::KEY_IS_EMPTY);
+        $this->getExpectedExceptionCode(ConfigException::EMPTY_KEY);
 
         $fileConfig = $this->getFileConfig();
 
