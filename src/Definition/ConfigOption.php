@@ -20,7 +20,7 @@ class ConfigOption
      */
     protected static $defaultValues = [
         self::LOG_LEVEL => Logger::INFO,
-        self::MAIN_LANGUAGE => 'ger',
+        self::MAIN_LANGUAGE => 'de',
     ];
 
     /**

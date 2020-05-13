@@ -3,7 +3,8 @@ namespace Jtl\Connector\Core\Exception;
 
 class ConfigException extends \Exception
 {
-    const KEY_IS_EMPTY = 10;
+    public const
+        KEY_IS_EMPTY = 10;
 
     /**
      * @return ConfigException

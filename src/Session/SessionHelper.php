@@ -65,7 +65,7 @@ class SessionHelper
      */
     public function unset(string $name): self
     {
-        if($this->has($name)) {
+        if ($this->has($name)) {
             unset($_SESSION[$this->namespace][$name]);
         }
         return $this;

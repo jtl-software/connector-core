@@ -66,6 +66,7 @@ use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Session\SqliteSession;
 use Jtl\Connector\Core\IO\Path;
+use Noodlehaus\ConfigInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Finder\Finder;
 
@@ -82,9 +83,14 @@ class Application
     protected $connector = null;
 
     /**
-     * @var FileConfig;
+     * @var ConfigInterface;
      */
     protected $config;
+
+    /**
+     * @var string
+     */
+    protected $configFile;
 
     /**
      * @var \SessionHandlerInterface
@@ -497,24 +503,26 @@ class Application
      */
     protected function startConfiguration(): void
     {
-        $configFile = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
-        if (!file_exists($configFile)) {
-            file_put_contents($configFile, Json::encode(ConfigOption::getDefaultValues(), true));
+        if (!$this->config instanceof ConfigInterface) {
+            $configFile = $this->configFile ?? Path::combine(CONNECTOR_DIR, 'config', 'config.json');
+            $this->config = new FileConfig($configFile);
         }
-        $this->config = new FileConfig($configFile);
-        $logLevel = $this->config->get(ConfigOption::LOG_LEVEL, Logger::INFO);
-        RuntimeConfig::getInstance()->set(ConfigOption::LOG_LEVEL, $logLevel);
-        $mainLanguage = $this->config->get(
-            ConfigOption::MAIN_LANGUAGE,
-            ConfigOption::getDefaultValue(ConfigOption::MAIN_LANGUAGE)
-        );
-        RuntimeConfig::getInstance()->set(ConfigOption::MAIN_LANGUAGE, $mainLanguage);
+
+        $runtimeConfig = RuntimeConfig::getInstance();
+        foreach (ConfigOption::getDefaultValues() as $key => $value) {
+            if (!$this->config->has($key)) {
+                $this->config->set($key, $value);
+            }
+
+            if (!$runtimeConfig->has($key)) {
+                $runtimeConfig->set($key, $value);
+            }
+        }
     }
 
     /**
      * @param string $rpcMethod
-     * @throws ApplicationException
-     * @throws SessionException
+     * @throws SessionException|HttpException
      */
     protected function startSession(string $rpcMethod): void
     {
@@ -708,11 +716,39 @@ class Application
     }
 
     /**
-     * @return FileConfig
+     * @return ConfigInterface
      */
-    public function getConfig(): ?FileConfig
+    public function getConfig(): ?ConfigInterface
     {
         return $this->config;
+    }
+
+    /**
+     * @param ConfigInterface $config
+     * @return Application
+     */
+    public function setConfig(ConfigInterface $config): Application
+    {
+        $this->config = $config;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getConfigFile(): ?string
+    {
+        return $this->configFile;
+    }
+
+    /**
+     * @param string $configFile
+     * @return Application
+     */
+    public function setConfigFile(string $configFile): Application
+    {
+        $this->configFile = $configFile;
+        return $this;
     }
 
     /**

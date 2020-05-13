@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Config;
 
 use Jtl\Connector\Core\Config\FileConfig;
@@ -12,15 +13,16 @@ use Jtl\Connector\Core\Test\TestCase;
 class FileConfigTest extends TestCase
 {
     /**
-     *
+     * @var string
      */
-    public function testConfigFileDoesntExists()
+    protected $configFile;
+
+    protected function tearDown(): void
     {
-        $filePath = "foo_bar";
-
-        $this->expectException(\InvalidArgumentException::class);
-
-        $fileConfig = new FileConfig($filePath);
+        parent::tearDown();
+        if (file_exists($this->configFile)) {
+            unlink($this->configFile);
+        }
     }
 
     /**
@@ -35,7 +37,7 @@ class FileConfigTest extends TestCase
 
         $fileConfig->set($testKey, $testValue);
 
-        $this->assertNotSame('', $fileConfig->get($testKey));
+        $this->assertNotNull($fileConfig->get($testKey, null));
         $this->assertSame($testValue, $fileConfig->get($testKey));
     }
 
@@ -45,28 +47,49 @@ class FileConfigTest extends TestCase
     public function testConfigSetParameterCannotBeEmpty()
     {
         $this->expectException(ConfigException::class);
+        $this->getExpectedExceptionCode(ConfigException::KEY_IS_EMPTY);
 
         $fileConfig = $this->getFileConfig();
 
         $fileConfig->set("", "");
     }
 
+    public function testSave()
+    {
+        $file = $this->createConfigFile();
+        $data = json_decode(file_get_contents($file), true);
+        $this->assertArrayNotHasKey('yo', $data);
+        $this->assertArrayNotHasKey('foo', $data);
+        $config = new FileConfig($file);
+        $config->set('yo', 'lo');
+        $config->set('foo', 'bar');
+        $config->write();
+        $data = json_decode(file_get_contents($file), true);
+        $this->assertArrayHasKey('yo', $data);
+        $this->assertEquals('lo', $data['yo']);
+        $this->assertArrayHasKey('foo', $data);
+        $this->assertEquals('bar', $data['foo']);
+    }
+
     /**
      * @param string $payload
+     * @param string $extension
      * @return FileConfig
      */
-    protected function getFileConfig(string $payload = "{}"): FileConfig
+    protected function getFileConfig(string $payload = "{}", string $extension = 'json'): FileConfig
     {
-        $tmp = tempnam(sys_get_temp_dir(), "connector_core");
+        return new FileConfig($this->createConfigFile($payload, $extension));
+    }
 
-        $tmpJson = $tmp . '.json';
-
-        copy($tmp, $tmpJson);
-
-        unlink($tmp);
-
-        file_put_contents($tmpJson, $payload);
-
-        return new FileConfig($tmpJson);
+    /**
+     * @param string $payload
+     * @param string $extension
+     * @return string
+     */
+    protected function createConfigFile(string $payload = '{}', string $extension = 'json'): string
+    {
+        $this->configFile = sprintf('%s/%s.%s', sys_get_temp_dir(), uniqid('connector-config', true), $extension);
+        file_put_contents($this->configFile, $payload);
+        return $this->configFile;
     }
 }

@@ -6,8 +6,10 @@
  */
 namespace Jtl\Connector\Core\Config;
 
+use Jtl\Connector\Core\Definition\ConfigOption;
 use Jtl\Connector\Core\Exception\ConfigException;
 use Noodlehaus\Config;
+use Noodlehaus\Parser\Json;
 
 /**
  * Config Class
@@ -28,16 +30,11 @@ class FileConfig extends Config
     protected $config;
 
     /**
-     * Config constructor.
+     * FileConfig constructor.
      * @param string $filePath
-     * @throws \InvalidArgumentException
      */
     public function __construct(string $filePath)
     {
-        if (!file_exists($filePath)) {
-            throw new \InvalidArgumentException(sprintf('File %s does not exist', $filePath));
-        }
-
         $this->filePath = $filePath;
         parent::__construct($filePath);
     }
@@ -55,6 +52,18 @@ class FileConfig extends Config
         }
 
         parent::set($key, $value);
+    }
+
+    public function write(): void
+    {
         parent::toFile($this->filePath);
+    }
+
+    /**
+     * @return array|mixed[]|string[]
+     */
+    protected function getDefaults()
+    {
+        return ConfigOption::getDefaultValues();
     }
 }
