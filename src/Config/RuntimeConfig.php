@@ -13,11 +13,6 @@ class RuntimeConfig implements ConfigInterface
     protected static $instance;
 
     /**
-     * @var mixed[]
-     */
-    protected $options = [];
-
-    /**
      * @var AbstractConfig
      */
     protected $config;
