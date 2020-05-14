@@ -2,10 +2,7 @@
 
 namespace Jtl\Connector\Core\Config;
 
-use Noodlehaus\AbstractConfig;
-use Noodlehaus\ConfigInterface;
-
-class RuntimeConfig implements ConfigInterface
+class RuntimeConfig extends ArrayConfig
 {
     /**
      * @var RuntimeConfig
@@ -13,13 +10,11 @@ class RuntimeConfig implements ConfigInterface
     protected static $instance;
 
     /**
-     * @var AbstractConfig
+     * RuntimeConfig constructor.
      */
-    protected $config;
-
     private function __construct()
     {
-        $this->config = new ArrayConfig([]);
+        parent::__construct([]);
     }
 
     /**
@@ -32,42 +27,5 @@ class RuntimeConfig implements ConfigInterface
         }
 
         return self::$instance;
-    }
-
-
-    /**
-     * @param string $key
-     * @param mixed $default
-     * @return mixed
-     */
-    public function get($key, $default = null)
-    {
-        return $this->config->get($key, $default);
-    }
-
-    /**
-     * @param string $key
-     * @param mixed $value
-     */
-    public function set($key, $value)
-    {
-        $this->config->set($key, $value);
-    }
-
-    /**
-     * @param string $key
-     * @return boolean
-     */
-    public function has($key)
-    {
-        return $this->config->has($key);
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function all()
-    {
-        return $this->config->all();
     }
 }
