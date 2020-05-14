@@ -25,7 +25,7 @@ class ConfigException extends \Exception
      */
     public static function unknownType(string $type): self
     {
-        return new static(sprintf('Option type (%s) does not exist', $type), self::UNKNOWN_TYPE);
+        return new static(sprintf('Parameter data type (%s) does not exist', $type), self::UNKNOWN_TYPE);
     }
 
     /**
@@ -35,16 +35,16 @@ class ConfigException extends \Exception
      */
     public static function wrongType(string $expectedType, string $givenType): self
     {
-        return new static(sprintf('Wrong data type. %s was expected but %s is given', $expectedType, $givenType), self::WRONG_TYPE);
+        return new static(sprintf('Wrong parameter data type. %s was expected but %s is given', $expectedType, $givenType), self::WRONG_TYPE);
     }
 
     /**
      * @param string $key
      * @return ConfigException
      */
-    public static function unknownOption(string $key): self
+    public static function unknownParameter(string $key): self
     {
-        return new static(sprintf('Option (%s) does not exist', $key), self::UNKNOWN_OPTION);
+        return new static(sprintf('Parameter (%s) does not exist', $key), self::UNKNOWN_OPTION);
     }
 
     /**

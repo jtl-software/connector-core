@@ -209,6 +209,7 @@ class Application
 
             $this->connector->initialize($this);
             $this->configSchema->validateConfig($this->config);
+            $this->prepareContainer();
             $responsePacket = $this->execute($requestPacket, $method);
         } catch (\Throwable $ex) {
             Logger::writeException($ex);
@@ -518,9 +519,9 @@ class Application
      */
     protected function prepareConfiguration(): void
     {
-        foreach (ConfigSchema::createDefaultOptions() as $defaultOption) {
-            if (!$this->configSchema->isOption($defaultOption->getKey())) {
-                $this->configSchema->setOption($defaultOption);
+        foreach (ConfigSchema::createDefaultParameters() as $defaultOption) {
+            if (!$this->configSchema->hasParameter($defaultOption->getKey())) {
+                $this->configSchema->setParameter($defaultOption);
             }
         }
 
@@ -537,6 +538,16 @@ class Application
 
             if (!$runtimeConfig->has($key)) {
                 $runtimeConfig->set($key, $value);
+            }
+        }
+    }
+
+    protected function prepareContainer(): void
+    {
+        foreach($this->configSchema->getParameters() as $parameter) {
+            $key = $parameter->getKey();
+            if($this->config->has($key)) {
+                $this->container->set($key, $this->config->get($key));
             }
         }
     }

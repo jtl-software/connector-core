@@ -2,9 +2,13 @@
 namespace Jtl\Connector\Core\Test;
 
 use Jtl\Connector\Core\Config\FileConfig;
+use Jtl\Connector\Core\Config\RuntimeConfig;
 use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Test\Stub\Logger\LoggerStub;
+use Noodlehaus\AbstractConfig;
+use Noodlehaus\Config;
+use Noodlehaus\Parser\Json;
 
 /**
  * Class TestCase
@@ -22,6 +26,13 @@ class TestCase extends \PHPUnit\Framework\TestCase
      */
     protected function setUp(): void
     {
+        $runtimeConfig = RuntimeConfig::getInstance();
+        $reflectionClass = new \ReflectionClass($runtimeConfig);
+        $reflectionProperty = $reflectionClass->getProperty('instance');
+        $reflectionProperty->setAccessible(true);
+        $reflectionProperty->setValue($runtimeConfig, null);
+        $reflectionProperty->setAccessible(false);
+
         \Mockery::namedMock(Logger::class, LoggerStub::class)
             ->shouldReceive('write')
             ->withAnyArgs();
@@ -80,6 +91,44 @@ class TestCase extends \PHPUnit\Framework\TestCase
         return $testCases;
     }
 
+
+    /**
+     * @param string $className
+     * @param string $methodName
+     * @param mixed ...$methodArgs
+     * @return mixed
+     * @throws \ReflectionException
+     */
+    protected function invokeMethod(string $className, string $methodName, ...$methodArgs)
+    {
+        return $this->invokeMethodFromObject($this->createMock($className), $methodName, ...$methodArgs);
+    }
+
+    /**
+     * @param object $object
+     * @param string $methodName
+     * @param mixed ...$methodArgs
+     * @return mixed
+     * @throws \ReflectionException
+     */
+    protected function invokeMethodFromObject(object $object, string $methodName, ...$methodArgs)
+    {
+        $reflection = new \ReflectionClass($object);
+        $method = $reflection->getMethod($methodName);
+        $method->setAccessible(true);
+        return $method->invoke($object, ...$methodArgs);
+    }
+
+    /**
+     * @param array $data
+     * @return AbstractConfig|__anonymous@2834
+     */
+    protected function createConfig(array $data = [])
+    {
+        return new class($data) extends AbstractConfig {
+
+        };
+    }
 
     /**
      * @param string $payload

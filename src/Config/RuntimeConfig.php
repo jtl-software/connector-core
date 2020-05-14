@@ -1,6 +1,8 @@
 <?php
+
 namespace Jtl\Connector\Core\Config;
 
+use Noodlehaus\AbstractConfig;
 use Noodlehaus\ConfigInterface;
 
 class RuntimeConfig implements ConfigInterface
@@ -15,8 +17,15 @@ class RuntimeConfig implements ConfigInterface
      */
     protected $options = [];
 
+    /**
+     * @var AbstractConfig
+     */
+    protected $config;
+
     private function __construct()
     {
+        $this->config = new class([]) extends AbstractConfig {
+        };
     }
 
     /**
@@ -39,10 +48,7 @@ class RuntimeConfig implements ConfigInterface
      */
     public function get($key, $default = null)
     {
-        if ($this->has($key)) {
-            return $this->options[$key];
-        }
-        return $default;
+        return $this->config->get($key, $default);
     }
 
     /**
@@ -51,7 +57,7 @@ class RuntimeConfig implements ConfigInterface
      */
     public function set($key, $value)
     {
-        $this->options[$key] = $value;
+        $this->config->set($key, $value);
     }
 
     /**
@@ -60,7 +66,7 @@ class RuntimeConfig implements ConfigInterface
      */
     public function has($key)
     {
-        return isset($this->options[$key]);
+        return $this->config->has($key);
     }
 
     /**
@@ -68,6 +74,6 @@ class RuntimeConfig implements ConfigInterface
      */
     public function all()
     {
-        return $this->options;
+        return $this->config->all();
     }
 }

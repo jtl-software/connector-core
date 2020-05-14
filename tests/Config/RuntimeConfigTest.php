@@ -2,7 +2,7 @@
 namespace Jtl\Connector\Core\Test\Config;
 
 use Jtl\Connector\Core\Config\RuntimeConfig;
-use PHPUnit\Framework\TestCase;
+use Jtl\Connector\Core\Test\TestCase;
 
 /**
  * Class RuntimeConfigTest
@@ -59,20 +59,5 @@ class RuntimeConfigTest extends TestCase
         $runtimeConfig->set("option_3", rand());
 
         $this->assertCount(3, $runtimeConfig->all());
-    }
-
-    /**
-     *
-     */
-    protected function tearDown(): void
-    {
-        $runtimeConfig = RuntimeConfig::getInstance();
-        $reflection = new \ReflectionClass($runtimeConfig);
-        $property = $reflection->getProperty('options');
-        $property->setAccessible(true);
-        $property->setValue($runtimeConfig, []);
-        $property->setAccessible(false);
-
-        parent::tearDown();
     }
 }

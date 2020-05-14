@@ -4,7 +4,7 @@ namespace Jtl\Connector\Core\Config;
 
 use Jtl\Connector\Core\Exception\ConfigException;
 
-class ConfigSchemaOption
+class ConfigParameter
 {
     public const
         TYPE_BOOLEAN = 'boolean',
@@ -69,7 +69,7 @@ class ConfigSchemaOption
      * @return $this
      * @throws ConfigException
      */
-    protected function setKey(string $key): ConfigSchemaOption
+    protected function setKey(string $key): ConfigParameter
     {
         if (empty($key)) {
             throw ConfigException::keyIsEmpty();
@@ -92,7 +92,7 @@ class ConfigSchemaOption
      * @return $this
      * @throws ConfigException
      */
-    protected function setType(string $type): ConfigSchemaOption
+    protected function setType(string $type): ConfigParameter
     {
         if (!self::isType($type)) {
             throw ConfigException::unknownType($type);
@@ -131,7 +131,7 @@ class ConfigSchemaOption
      * @return $this
      * @throws ConfigException
      */
-    public function setDefaultValue($defaultValue): ConfigSchemaOption
+    public function setDefaultValue($defaultValue): ConfigParameter
     {
         if (!is_null($defaultValue) && !$this->isValidValue($defaultValue)) {
             throw ConfigException::wrongType($this->getType(), gettype($defaultValue));
@@ -163,10 +163,10 @@ class ConfigSchemaOption
      * @param string $type
      * @param bool $required
      * @param null $defaultValue
-     * @return ConfigSchemaOption
+     * @return ConfigParameter
      * @throws ConfigException
      */
-    public static function create(string $key, string $type = self::TYPE_STRING, bool $required = true, $defaultValue = null): ConfigSchemaOption
+    public static function create(string $key, string $type = self::TYPE_STRING, bool $required = true, $defaultValue = null): ConfigParameter
     {
         return (new static($key, $type, $required))->setDefaultValue($defaultValue);
     }

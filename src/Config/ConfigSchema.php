@@ -14,58 +14,58 @@ class ConfigSchema
         MAIN_LANGUAGE = 'main_language';
 
     /**
-     * @var ConfigSchemaOption[]
+     * @var ConfigParameter[]
      */
-    protected $options = [];
+    protected $parameters = [];
 
     /**
      * @param string $key
      * @return boolean
      */
-    public function isOption(string $key): bool
+    public function hasParameter(string $key): bool
     {
-        return isset($this->options[$key]);
+        return isset($this->parameters[$key]);
     }
 
     /**
      * @param string $key
-     * @return ConfigSchemaOption
+     * @return ConfigParameter
      * @throws ConfigException
      */
-    public function getOption(string $key): ConfigSchemaOption
+    public function getParameter(string $key): ConfigParameter
     {
-        if (!$this->isOption($key)) {
-            throw ConfigException::unknownOption($key);
+        if (!$this->hasParameter($key)) {
+            throw ConfigException::unknownParameter($key);
         }
-        return $this->options[$key];
+        return $this->parameters[$key];
     }
 
     /**
-     * @param ConfigSchemaOption $option
+     * @param ConfigParameter $parameter
      * @return ConfigSchema
      */
-    public function setOption(ConfigSchemaOption $option): self
+    public function setParameter(ConfigParameter $parameter): self
     {
-        $this->options[$option->getKey()] = $option;
+        $this->parameters[$parameter->getKey()] = $parameter;
         return $this;
     }
 
     /**
-     * @return mixed[]
+     * @return ConfigParameter[]
      */
-    public function getOptions(): array
+    public function getParameters(): array
     {
-        return array_values($this->options);
+        return array_values($this->parameters);
     }
 
     /**
-     * @param ConfigSchemaOption ...$options
+     * @param ConfigParameter ...$parameters
      * @return ConfigSchema
      */
-    public function setOptions(ConfigSchemaOption ...$options): self
+    public function setParameters(ConfigParameter ...$parameters): self
     {
-        foreach ($options as $option) {
-            $this->setOption($option);
+        foreach ($parameters as $option) {
+            $this->setParameter($option);
         }
         return $this;
     }
@@ -75,9 +75,9 @@ class ConfigSchema
      */
     public function getDefaultValues(): array
     {
-        return array_map(function (ConfigSchemaOption $option) {
+        return array_map(function (ConfigParameter $option) {
             return $option->getDefaultValue();
-        }, array_filter($this->options, function (ConfigSchemaOption $option) {
+        }, array_filter($this->parameters, function (ConfigParameter $option) {
             return $option->hasDefaultValue();
         }));
     }
@@ -90,7 +90,7 @@ class ConfigSchema
     {
         $invalidValues = [];
         $missingProperties = [];
-        foreach($this->options as $option) {
+        foreach($this->parameters as $option) {
             $configValue = $config->get($option->getKey());
             if(!is_null($configValue) && !$option->isValidValue($configValue)) {
                 $invalidValues[] = $option->getKey();
@@ -105,14 +105,14 @@ class ConfigSchema
     }
 
     /**
-     * @return ConfigSchemaOption[]
+     * @return ConfigParameter[]
      * @throws ConfigException
      */
-    public static function createDefaultOptions(): array
+    public static function createDefaultParameters(): array
     {
         return [
-            ConfigSchemaOption::create(self::LOG_LEVEL, ConfigSchemaOption::TYPE_STRING, true, Logger::INFO),
-            ConfigSchemaOption::create(self::MAIN_LANGUAGE, ConfigSchemaOption::TYPE_STRING, true, 'de')
+            ConfigParameter::create(self::LOG_LEVEL, ConfigParameter::TYPE_STRING, true, Logger::INFO),
+            ConfigParameter::create(self::MAIN_LANGUAGE, ConfigParameter::TYPE_STRING, true, 'de')
         ];
     }
 }
