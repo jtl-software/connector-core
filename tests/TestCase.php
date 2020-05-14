@@ -1,14 +1,13 @@
 <?php
 namespace Jtl\Connector\Core\Test;
 
+use Jtl\Connector\Core\Config\ArrayConfig;
 use Jtl\Connector\Core\Config\FileConfig;
 use Jtl\Connector\Core\Config\RuntimeConfig;
 use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Test\Stub\Logger\LoggerStub;
 use Noodlehaus\AbstractConfig;
-use Noodlehaus\Config;
-use Noodlehaus\Parser\Json;
 
 /**
  * Class TestCase
@@ -125,9 +124,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
      */
     protected function createConfig(array $data = [])
     {
-        return new class($data) extends AbstractConfig {
-
-        };
+        return new ArrayConfig($data);
     }
 
     /**

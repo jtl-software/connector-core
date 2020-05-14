@@ -21,8 +21,6 @@ use Jtl\Connector\Core\Model\QueryFilter;
 use Jtl\Connector\Core\Test\TestCase;
 use Jtl\Connector\Core\Test\Stub\Controller\TransactionalControllerStub;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
-use Noodlehaus\Config;
-use Noodlehaus\Parser\Json;
 
 /**
  * Class ApplicationTest

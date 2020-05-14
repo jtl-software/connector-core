@@ -24,8 +24,7 @@ class RuntimeConfig implements ConfigInterface
 
     private function __construct()
     {
-        $this->config = new class([]) extends AbstractConfig {
-        };
+        $this->config = new ArrayConfig([]);
     }
 
     /**
