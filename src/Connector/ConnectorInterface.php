@@ -18,7 +18,7 @@ interface ConnectorInterface
     /**
      * Main initialize method
      */
-    public function initialize(Application $application);
+    public function initialize(Application $application): void;
     
     /**
      * @return PrimaryKeyMapperInterface
