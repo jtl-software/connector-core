@@ -10,7 +10,7 @@ namespace Jtl\Connector\Core\Model;
 use DateTime;
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
-use Jtl\Connector\Core\Config\RuntimeConfig;
+use Jtl\Connector\Core\Config\GlobalConfig;
 use Jtl\Connector\Core\Config\ConfigSchema;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use stdClass;
@@ -689,7 +689,7 @@ class Product extends AbstractIdentity implements IdentificationInterface
      */
     public function getIdentificationStrings(): array
     {
-        $mainLanguage = RuntimeConfig::getInstance()->get(ConfigSchema::MAIN_LANGUAGE, 'de');
+        $mainLanguage = GlobalConfig::getInstance()->get(ConfigSchema::MAIN_LANGUAGE, 'de');
 
         $strings = [];
 

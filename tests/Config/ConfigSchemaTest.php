@@ -69,7 +69,8 @@ class ConfigSchemaTest extends TestCase
     {
         $schema = (new ConfigSchema())->setParameters(...ConfigSchema::createDefaultParameters());
         $expected = [ConfigSchema::LOG_LEVEL => 'info', ConfigSchema::MAIN_LANGUAGE => 'de'];
-        $this->assertEquals($expected, $schema->getDefaultValues());
+        $actual = $schema->getDefaultValues();
+        $this->assertEquals($expected, $actual);
     }
 
     public function testValidate()

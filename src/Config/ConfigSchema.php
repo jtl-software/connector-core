@@ -3,7 +3,6 @@
 namespace Jtl\Connector\Core\Config;
 
 use Jtl\Connector\Core\Exception\ConfigException;
-use Jtl\Connector\Core\Exception\ConfigSchemaValidationException;
 use Jtl\Connector\Core\Logger\Logger;
 use Noodlehaus\ConfigInterface;
 
@@ -111,8 +110,8 @@ class ConfigSchema
     public static function createDefaultParameters(): array
     {
         return [
-            ConfigParameter::create(self::LOG_LEVEL, ConfigParameter::TYPE_STRING, true, Logger::INFO),
-            ConfigParameter::create(self::MAIN_LANGUAGE, ConfigParameter::TYPE_STRING, true, 'de')
+            ConfigParameter::create(self::LOG_LEVEL, ConfigParameter::TYPE_STRING, true, true, Logger::INFO),
+            ConfigParameter::create(self::MAIN_LANGUAGE, ConfigParameter::TYPE_STRING, true, true, 'de')
         ];
     }
 }

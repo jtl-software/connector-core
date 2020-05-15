@@ -2,17 +2,21 @@
 
 namespace Jtl\Connector\Core\Test\Application;
 
+use DI\DependencyException;
+use DI\NotFoundException;
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Application\Request;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
+use Jtl\Connector\Core\Config\ArrayConfig;
 use Jtl\Connector\Core\Config\ConfigParameter;
 use Jtl\Connector\Core\Config\ConfigSchema;
-use Jtl\Connector\Core\Config\RuntimeConfig;
+use Jtl\Connector\Core\Config\GlobalConfig;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
 use Jtl\Connector\Core\Controller\PushInterface;
 use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Exception\ApplicationException;
+use Jtl\Connector\Core\Exception\ConfigException;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Category;
@@ -21,6 +25,7 @@ use Jtl\Connector\Core\Model\QueryFilter;
 use Jtl\Connector\Core\Test\TestCase;
 use Jtl\Connector\Core\Test\Stub\Controller\TransactionalControllerStub;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use Noodlehaus\ConfigInterface;
 
 /**
  * Class ApplicationTest
@@ -71,23 +76,28 @@ class ApplicationTest extends TestCase
 
     /**
      * @param ConnectorInterface|null $connector
+     * @param ConfigInterface|null $config
      * @param ConfigSchema|null $configSchema
      * @return Application
-     * @throws \Exception
+     * @throws ApplicationException
      */
-    protected function createApplication(ConnectorInterface $connector = null, ConfigSchema $configSchema = null): Application
+    protected function createApplication(ConnectorInterface $connector = null, ConfigInterface $config = null, ConfigSchema $configSchema = null): Application
     {
         if (is_null($connector)) {
             $connector = $this->createConnector();
         }
 
-        return new Application($connector, $configSchema);
+        if (is_null($config)) {
+            $config = new ArrayConfig([]);
+        }
+
+        return new Application($connector, $config, $configSchema);
     }
 
     /**
      * @throws ApplicationException
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
+     * @throws DependencyException
+     * @throws NotFoundException
      * @throws \ReflectionException
      * @throws \Throwable
      */
@@ -110,12 +120,12 @@ class ApplicationTest extends TestCase
      * @param $action
      * @param $parameter
      * @throws ApplicationException
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
+     * @throws DependencyException
+     * @throws NotFoundException
      * @throws \ReflectionException
      * @throws \Throwable
      */
-    public function testHandleRequestControllerAction($action, $parameter)
+    public function testHandleRequestControllerAction(string $action, $parameter)
     {
         $application = $this->createApplication();
 
@@ -156,8 +166,8 @@ class ApplicationTest extends TestCase
 
     /**
      * @throws ApplicationException
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
+     * @throws DependencyException
+     * @throws NotFoundException
      * @throws \ReflectionException
      * @throws \Throwable
      */
@@ -195,16 +205,14 @@ class ApplicationTest extends TestCase
 
     /**
      * @throws ApplicationException
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
+     * @throws DependencyException
+     * @throws NotFoundException
      * @throws \ReflectionException
      * @throws \Throwable
      */
     public function testHandleRequestControllerClassNeedToBeInitialized()
     {
-        $application = $this->createApplication($this->createConnector(
-            "Jtl\Connector\Core\Controller"
-        ));
+        $application = $this->createApplication($this->createConnector("Jtl\Connector\Core\Controller"));
 
         $ack = new Ack();
 
@@ -217,9 +225,6 @@ class ApplicationTest extends TestCase
 
     /**
      * @throws ApplicationException
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
-     * @throws \ReflectionException
      * @throws \Throwable
      */
     public function testHandleRequestTransactionalControllerFail()
@@ -255,13 +260,18 @@ class ApplicationTest extends TestCase
             ->once();
     }
 
+    /**
+     * @throws ApplicationException
+     * @throws DependencyException
+     * @throws NotFoundException
+     * @throws \ReflectionException
+     */
     public function testPrepareContainer()
     {
         $schema = (new ConfigSchema())
             ->setParameter(new ConfigParameter('foo', ConfigParameter::TYPE_STRING))
             ->setParameter(new ConfigParameter('bar', ConfigParameter::TYPE_STRING));
-        $application = $this->createApplication(null, $schema);
-        $application->setConfig($this->createConfig(['foo' => 'you', 'bar' => 'jau']));
+        $application = $this->createApplication(null, $this->createConfig(['foo' => 'you', 'bar' => 'jau']), $schema);
         $container = $application->getContainer();
         $this->assertFalse($container->has('foo'));
         $this->assertFalse($container->has('bar'));
@@ -270,48 +280,76 @@ class ApplicationTest extends TestCase
         $this->assertEquals('jau', $container->get('bar'));
     }
 
+    /**
+     * @throws ApplicationException
+     * @throws ConfigException
+     * @throws \ReflectionException
+     */
     public function testPrepareConfigurationSetDefaultParameters()
     {
-        $parameters = ConfigSchema::createDefaultParameters();
+        $defaultParameters = ConfigSchema::createDefaultParameters();
         $schema = new ConfigSchema();
-        $application = $this->createApplication(null, $schema);
-        $application->setConfig($this->createConfig([]));
-        foreach($parameters as $parameter) {
+        $application = $this->createApplication(null, null, $schema);
+        foreach ($defaultParameters as $parameter) {
             $this->assertFalse($schema->hasParameter($parameter->getKey()));
         }
         $this->invokeMethodFromObject($application, 'prepareConfiguration');
-        foreach($parameters as $parameter) {
+        foreach ($defaultParameters as $parameter) {
             $this->assertEquals($parameter, $schema->getParameter($parameter->getKey()));
         }
     }
 
-    public function testPrepareConfigurationSetDefaultValues()
+    /**
+     * @throws ApplicationException
+     * @throws ConfigException
+     * @throws \ReflectionException
+     */
+    public function testPrepareConfigurationSetDefaultValuesInConfig()
     {
         $schema = (new ConfigSchema())
-            ->setParameter(ConfigParameter::create('foo', ConfigParameter::TYPE_INTEGER, true, 42))
+            ->setParameter(ConfigParameter::create('foo', ConfigParameter::TYPE_INTEGER, true, false, 42))
             ->setParameter(ConfigParameter::create('bar', ConfigParameter::TYPE_BOOLEAN, false))
-            ->setParameters(...ConfigSchema::createDefaultParameters())
-        ;
+            ->setParameter(ConfigParameter::create('baz', ConfigParameter::TYPE_STRING, true, true, 'yes'));
 
-        $application = $this->createApplication(null, $schema);
-        $application->setConfig($this->createConfig([]));
+        $config = $this->createConfig();
 
-        $runtimeConfig = RuntimeConfig::getInstance();
-        $config = $application->getConfig();
-        foreach($schema->getParameters() as $parameter) {
-            $this->assertFalse($config->has($parameter->getKey()));
-            $this->assertFalse($runtimeConfig->has($parameter->getKey()));
-        }
+        $this->assertFalse($config->has('foo'));
+        $this->assertFalse($config->has('bar'));
+        $this->assertFalse($config->has('baz'));
+
+        $application = $this->createApplication(null, $config, $schema);
         $this->invokeMethodFromObject($application, 'prepareConfiguration');
-        foreach($schema->getParameters() as $parameter) {
-            if($parameter->hasDefaultValue()) {
-                $this->assertEquals($parameter->getDefaultValue(), $config->get($parameter->getKey()));
-                $this->assertEquals($parameter->getDefaultValue(), $runtimeConfig->get($parameter->getKey()));
-            } else {
-                $this->assertFalse($config->has($parameter->getKey()));
-                $this->assertFalse($runtimeConfig->has($parameter->getKey()));
-            }
-        }
+
+        $this->assertEquals(42, $config->get('foo'));
+        $this->assertFalse($config->has('bar'));
+        $this->assertEquals('yes', $config->get('baz'));
+    }
+
+    public function testPrepareConfigurationSetGlobalParametersInRuntimeConfig()
+    {
+        $schema = (new ConfigSchema())
+            ->setParameter(ConfigParameter::create('foo', ConfigParameter::TYPE_INTEGER, true, false))
+            ->setParameter(ConfigParameter::create('bar', ConfigParameter::TYPE_BOOLEAN, false, true))
+            ->setParameter(ConfigParameter::create('baz', ConfigParameter::TYPE_STRING, true, true))
+            ->setParameter(ConfigParameter::create('tri', ConfigParameter::TYPE_DOUBLE, false, true))
+            ->setParameter(ConfigParameter::create('tra', ConfigParameter::TYPE_DOUBLE, true, false));
+
+        $config = $this->createConfig(['foo' => 122, 'bar' => true, 'baz' => 'schnatz', 'tri' => 0.315, 'tra' => 0.99]);
+        $application = $this->createApplication(null, $config, $schema);
+
+        $globalConfig = GlobalConfig::getInstance();
+        $this->assertFalse($globalConfig->has('foo'));
+        $this->assertFalse($globalConfig->has('bar'));
+        $this->assertFalse($globalConfig->has('baz'));
+        $this->assertFalse($globalConfig->has('tri'));
+        $this->assertFalse($globalConfig->has('tra'));
+
+        $this->invokeMethodFromObject($application, 'prepareConfiguration');
+        $this->assertFalse($globalConfig->has('foo'));
+        $this->assertEquals(true, $globalConfig->get('bar'));
+        $this->assertEquals('schnatz', $globalConfig->get('baz'));
+        $this->assertEquals(0.315, $globalConfig->get('tri'));
+        $this->assertFalse($globalConfig->has('tra'));
     }
 
     /**

@@ -2,10 +2,10 @@
 
 namespace Jtl\Connector\Core\Config;
 
-class RuntimeConfig extends ArrayConfig
+class GlobalConfig extends ArrayConfig
 {
     /**
-     * @var RuntimeConfig
+     * @var GlobalConfig
      */
     protected static $instance;
 
@@ -18,9 +18,9 @@ class RuntimeConfig extends ArrayConfig
     }
 
     /**
-     * @return RuntimeConfig
+     * @return GlobalConfig
      */
-    public static function getInstance(): RuntimeConfig
+    public static function getInstance(): GlobalConfig
     {
         if (is_null(self::$instance)) {
             self::$instance = new self();

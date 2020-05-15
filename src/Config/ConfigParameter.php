@@ -38,22 +38,29 @@ class ConfigParameter
     protected $required = true;
 
     /**
+     * @var bool
+     */
+    protected $global = false;
+
+    /**
      * @var mixed
      */
     protected $defaultValue;
 
     /**
-     * ConfigOption constructor.
+     * ConfigParameter constructor.
      * @param string $key
      * @param string $type
      * @param bool $required
+     * @param bool $global
      * @throws ConfigException
      */
-    public function __construct(string $key, string $type, bool $required = true)
+    public function __construct(string $key, string $type, bool $required = true, bool $global = false)
     {
         $this->setKey($key);
         $this->setType($type);
         $this->required = $required;
+        $this->global = $global;
     }
 
     /**
@@ -109,6 +116,14 @@ class ConfigParameter
         return $this->required;
     }
 
+    /**
+     * @return bool
+     */
+    public function isGlobal(): bool
+    {
+        return $this->global;
+    }
+
 
     /**
      * @return boolean
@@ -162,12 +177,13 @@ class ConfigParameter
      * @param string $key
      * @param string $type
      * @param bool $required
+     * @param bool $global
      * @param null $defaultValue
      * @return ConfigParameter
      * @throws ConfigException
      */
-    public static function create(string $key, string $type = self::TYPE_STRING, bool $required = true, $defaultValue = null): ConfigParameter
+    public static function create(string $key, string $type = self::TYPE_STRING, bool $required = true, $global = false, $defaultValue = null): ConfigParameter
     {
-        return (new static($key, $type, $required))->setDefaultValue($defaultValue);
+        return (new static($key, $type, $required, $global))->setDefaultValue($defaultValue);
     }
 }

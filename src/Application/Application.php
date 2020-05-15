@@ -8,7 +8,7 @@ use DI\DependencyException;
 use DI\NotFoundException;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use JMS\Serializer\Serializer;
-use Jtl\Connector\Core\Config\RuntimeConfig;
+use Jtl\Connector\Core\Config\GlobalConfig;
 use Jtl\Connector\Core\Controller\StatisticInterface;
 use Jtl\Connector\Core\Config\ConfigSchema;
 use Jtl\Connector\Core\Definition\Controller;
@@ -89,11 +89,6 @@ class Application
     protected $config;
 
     /**
-     * @var string
-     */
-    protected $configFilePath;
-
-    /**
      * @var ConfigSchema
      */
     protected $configSchema;
@@ -136,11 +131,16 @@ class Application
     /**
      * Application constructor.
      * @param ConnectorInterface $endpointConnector
+     * @param ConfigInterface|null $config
      * @param ConfigSchema|null $configSchema
-     * @throws \Exception
+     * @throws ApplicationException
      */
-    public function __construct(ConnectorInterface $endpointConnector, ConfigSchema $configSchema = null)
+    public function __construct(ConnectorInterface $endpointConnector, ConfigInterface $config = null, ConfigSchema $configSchema = null)
     {
+        if (!defined('CONNECTOR_DIR')) {
+            throw ApplicationException::connectorDirMissing();
+        }
+
         $this->connector = $endpointConnector;
         $this->eventDispatcher = new EventDispatcher();
         $this->errorHandler = new ErrorHandler($this);
@@ -149,22 +149,22 @@ class Application
         $this->linker = new IdentityLinker($this->connector->getPrimaryKeyMapper());
         $this->serializer = SerializerBuilder::getInstance()->build();
 
+        if(is_null($config)) {
+            $config = new FileConfig(Path::combine(CONNECTOR_DIR, 'config', 'config.json'));
+        }
+        $this->config = $config;
+
         if (is_null($configSchema)) {
             $configSchema = new ConfigSchema();
         }
-
         $this->configSchema = $configSchema;
     }
 
     /**
-     * @throws DefinitionException
+     * @throws DefinitionException|ConfigException
      */
     public function run(): void
     {
-        if (!defined('CONNECTOR_DIR')) {
-            throw new \Exception('Constant CONNECTOR_DIR is not defined.');
-        }
-
         AnnotationRegistry::registerLoader('class_exists');
         $this->prepareConfiguration();
         $this->eventDispatcher->addSubscriber(new PrepareProductPricesSubscriber());
@@ -519,25 +519,21 @@ class Application
      */
     protected function prepareConfiguration(): void
     {
-        foreach (ConfigSchema::createDefaultParameters() as $defaultOption) {
-            if (!$this->configSchema->hasParameter($defaultOption->getKey())) {
-                $this->configSchema->setParameter($defaultOption);
+        foreach (ConfigSchema::createDefaultParameters() as $parameter) {
+            if (!$this->configSchema->hasParameter($parameter->getKey())) {
+                $this->configSchema->setParameter($parameter);
             }
         }
 
-        if (!$this->config instanceof ConfigInterface) {
-            $configFile = $this->configFilePath ?? Path::combine(CONNECTOR_DIR, 'config', 'config.json');
-            $this->config = new FileConfig($configFile);
-        }
-
-        $runtimeConfig = RuntimeConfig::getInstance();
-        foreach ($this->configSchema->getDefaultValues() as $key => $value) {
-            if (!$this->config->has($key)) {
-                $this->config->set($key, $value);
+        $globalConfig = GlobalConfig::getInstance();
+        foreach($this->configSchema->getParameters() as $parameter) {
+            $key = $parameter->getKey();
+            if($parameter->hasDefaultValue() && !$this->config->has($key)) {
+                $this->config->set($key, $parameter->getDefaultValue());
             }
 
-            if (!$runtimeConfig->has($key)) {
-                $runtimeConfig->set($key, $value);
+            if($parameter->isGlobal() && $this->config->has($key)) {
+                $globalConfig->set($key, $this->config->get($key));
             }
         }
     }
@@ -751,37 +747,9 @@ class Application
     /**
      * @return ConfigInterface
      */
-    public function getConfig(): ?ConfigInterface
+    public function getConfig(): ConfigInterface
     {
         return $this->config;
-    }
-
-    /**
-     * @param ConfigInterface $config
-     * @return Application
-     */
-    public function setConfig(ConfigInterface $config): Application
-    {
-        $this->config = $config;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getConfigFilePath(): ?string
-    {
-        return $this->configFilePath;
-    }
-
-    /**
-     * @param string $configFilePath
-     * @return Application
-     */
-    public function setConfigFilePath(string $configFilePath): Application
-    {
-        $this->configFilePath = $configFilePath;
-        return $this;
     }
 
     /**

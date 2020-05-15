@@ -3,7 +3,7 @@ namespace Jtl\Connector\Core\Test;
 
 use Jtl\Connector\Core\Config\ArrayConfig;
 use Jtl\Connector\Core\Config\FileConfig;
-use Jtl\Connector\Core\Config\RuntimeConfig;
+use Jtl\Connector\Core\Config\GlobalConfig;
 use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Test\Stub\Logger\LoggerStub;
@@ -25,7 +25,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
      */
     protected function setUp(): void
     {
-        $runtimeConfig = RuntimeConfig::getInstance();
+        $runtimeConfig = GlobalConfig::getInstance();
         $reflectionClass = new \ReflectionClass($runtimeConfig);
         $reflectionProperty = $reflectionClass->getProperty('instance');
         $reflectionProperty->setAccessible(true);
