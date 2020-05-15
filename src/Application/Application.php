@@ -8,6 +8,7 @@ use DI\DependencyException;
 use DI\NotFoundException;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use JMS\Serializer\Serializer;
+use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
 use Jtl\Connector\Core\Config\GlobalConfig;
 use Jtl\Connector\Core\Controller\StatisticInterface;
 use Jtl\Connector\Core\Config\ConfigSchema;
@@ -104,11 +105,6 @@ class Application
     protected $eventDispatcher;
 
     /**
-     * @var IdentityLinker
-     */
-    protected $linker;
-
-    /**
      * @var AbstractErrorHandler
      */
     protected $errorHandler;
@@ -146,7 +142,6 @@ class Application
         $this->errorHandler = new ErrorHandler($this);
         $this->container = (new ContainerBuilder())->build();
         $this->container->set(Application::class, $this);
-        $this->linker = new IdentityLinker($this->connector->getPrimaryKeyMapper());
         $this->serializer = SerializerBuilder::getInstance()->build();
 
         if(is_null($config)) {
@@ -312,7 +307,7 @@ class Application
             if ($this->connector instanceof HandleRequestInterface ||
                 in_array($request->getAction(), [Action::PUSH, Action::DELETE], true) === false) {
                 if ($result instanceof AbstractDataModel) {
-                    $this->linker->linkModel($result, ($request->getAction() === Action::DELETE));
+                    $this->container->get(IdentityLinker::class)->linkModel($result, ($request->getAction() === Action::DELETE));
                     $this->linkChecksum($result);
                 }
             }
@@ -348,10 +343,6 @@ class Application
      * @param RequestPacket $requestPacket
      * @param Method $method
      * @param string $modelNamespace
-     * @return Request
-     * @throws DefinitionException
-     * @throws LinkerException
-     * @throws \ReflectionException
      */
     protected function createHandleRequest(
         RequestPacket $requestPacket,
@@ -397,7 +388,7 @@ class Application
             switch ($action) {
                 case Action::PUSH:
                 case Action::DELETE:
-                    $this->linker->linkModel($param);
+                    $this->container->get(IdentityLinker::class)->linkModel($param);
                     $this->linkChecksum($param);
                     $eventArg = new $eventArgClass($param);
                     break;
@@ -454,7 +445,7 @@ class Application
 
                         $dataModel = $controllerObject->$action($model);
                         if ($dataModel instanceof AbstractDataModel) {
-                            $this->linker->linkModel($dataModel, ($request->getAction() === Action::DELETE));
+                            $this->container->get(IdentityLinker::class)->linkModel($dataModel, ($request->getAction() === Action::DELETE));
                             $this->linkChecksum($dataModel);
                         }
                         $result[] = $dataModel;
@@ -538,6 +529,9 @@ class Application
         }
     }
 
+    /**
+     *
+     */
     protected function prepareContainer(): void
     {
         foreach($this->configSchema->getParameters() as $parameter) {
@@ -546,6 +540,10 @@ class Application
                 $this->container->set($key, $this->config->get($key));
             }
         }
+
+        $this->container->set(\SessionHandlerInterface::class, $this->getSessionHandler());
+        $this->container->set(TokenValidatorInterface::class, $this->getConnector()->getTokenValidator());
+        $this->container->set(IdentityLinker::class, new IdentityLinker($this->getConnector()->getPrimaryKeyMapper()));
     }
 
     /**
@@ -709,7 +707,7 @@ class Application
      *
      * @return ConnectorInterface
      */
-    public function getConnector(): ?ConnectorInterface
+    public function getConnector(): ConnectorInterface
     {
         return $this->connector;
     }
@@ -785,14 +783,6 @@ class Application
     public function getContainer(): Container
     {
         return $this->container;
-    }
-
-    /**
-     * @return IdentityLinker
-     */
-    public function getLinker(): IdentityLinker
-    {
-        return $this->linker;
     }
 
     /**

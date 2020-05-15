@@ -128,13 +128,10 @@ class ApplicationTest extends TestCase
     public function testHandleRequestControllerAction(string $action, $parameter)
     {
         $application = $this->createApplication();
-
         $controller = $this->createTransactionalController();
-
         $application->getContainer()->set(Controller::PRODUCT, $controller);
-
         $request = Request::create(Controller::PRODUCT, $action, [$parameter]);
-
+        $this->invokeMethodFromObject($application, 'prepareContainer');
         $result = $application->handleRequest($request);
 
         switch ($action) {
@@ -174,21 +171,14 @@ class ApplicationTest extends TestCase
     public function testHandleRequestTransactionalMethodsCalls()
     {
         $application = $this->createApplication();
-
         $controller = $this->createTransactionalController();
-
         $spy = \Mockery::spy($controller);
-
         $application->getContainer()->set(Controller::CATEGORY, $spy);
-
         $category = new Category();
-
         $request = Request::create(Controller::CATEGORY, Action::DELETE, [$category]);
-
+        $this->invokeMethodFromObject($application, 'prepareContainer');
         $result = $application->handleRequest($request);
-
         $this->assertCount(1, $result->getResult());
-
         $spy->shouldHaveReceived('delete')
             ->with($category)
             ->once();
@@ -213,11 +203,11 @@ class ApplicationTest extends TestCase
     public function testHandleRequestControllerClassNeedToBeInitialized()
     {
         $application = $this->createApplication($this->createConnector("Jtl\Connector\Core\Controller"));
-
+        $application->setSessionHandler($this->createMock(\SessionHandlerInterface::class));
         $ack = new Ack();
 
         $request = Request::create(Controller::CONNECTOR, Action::ACK, [$ack]);
-
+        $this->invokeMethodFromObject($application, 'prepareContainer');
         $response = $application->handleRequest($request);
 
         $this->assertTrue($response->getResult());
@@ -230,17 +220,12 @@ class ApplicationTest extends TestCase
     public function testHandleRequestTransactionalControllerFail()
     {
         $application = $this->createApplication();
-
         $controller = $this->createTransactionalController(true);
-
         $spy = \Mockery::spy($controller);
-
         $application->getContainer()->set(Controller::CATEGORY, $spy);
-
         $category = new Category();
-
         $request = Request::create(Controller::CATEGORY, Action::DELETE, [$category]);
-
+        $this->invokeMethodFromObject($application, 'prepareContainer');
         try {
             $application->handleRequest($request);
         } catch (\Exception $e) {

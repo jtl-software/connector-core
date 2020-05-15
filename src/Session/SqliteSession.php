@@ -22,7 +22,10 @@ final class SqliteSession implements \SessionHandlerInterface
      * @var int
      */
     private $lifetime;
-    /** @var Sqlite3 */
+
+    /**
+     * @var Sqlite3
+     */
     private $db;
     
     public function __construct()

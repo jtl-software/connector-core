@@ -7,13 +7,12 @@ use Jtl\Connector\Core\Connector\ConnectorInterface;
 use Jtl\Connector\Core\Controller\ConnectorController;
 use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\AuthenticationException;
-use Jtl\Connector\Core\Exception\MissingRequirementException;
+use Jtl\Connector\Core\Linker\IdentityLinker;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
 use Jtl\Connector\Core\Model\Features;
 use Jtl\Connector\Core\Model\Session;
 use Jtl\Connector\Core\Test\TestCase;
-use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 
 /**
  * Class ConnectorTest
@@ -21,23 +20,30 @@ use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
  */
 class ConnectorTest extends TestCase
 {
-    use MockeryPHPUnitIntegration;
-
     /**
+     * @param IdentityLinker|null $linker
+     * @param \SessionHandlerInterface|null $sessionHandler
+     * @param TokenValidatorInterface|null $tokenValidator
      * @return ConnectorController
      */
-    protected function createConnectorController(): ConnectorController
+    protected function createConnectorController(
+        IdentityLinker $linker = null,
+        \SessionHandlerInterface $sessionHandler = null,
+        TokenValidatorInterface $tokenValidator = null
+    ): ConnectorController
     {
-        $application = \Mockery::mock(Application::class);
-        return new ConnectorController($application);
-    }
+        if(is_null($linker)) {
+            $linker = $this->createMock(IdentityLinker::class);
+        }
 
-    /**
-     * @throws MissingRequirementException
-     */
-    public function testInit()
-    {
-        $this->assertTrue($this->createConnectorController()->init());
+        if(is_null($sessionHandler)) {
+            $sessionHandler = $this->createMock(\SessionHandlerInterface::class);
+        }
+
+        if(is_null($tokenValidator)) {
+            $tokenValidator = $this->createMock(TokenValidatorInterface::class);
+        }
+        return new ConnectorController($linker, $sessionHandler, $tokenValidator);
     }
 
     /**
@@ -45,13 +51,16 @@ class ConnectorTest extends TestCase
      */
     public function testFeatures()
     {
-        $connector = \Mockery::mock(ConnectorController::class)->shouldAllowMockingProtectedMethods()->makePartial();
+        $controller = $this->getMockBuilder(ConnectorController::class)
+            ->onlyMethods(['readFeaturesData'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
 
         $jsonFeatures = json_encode(["entities" => ["Category" => ["push" => true]]]);
+        $controller->expects($this->once())->method('readFeaturesData')->willReturn($jsonFeatures);
 
-        $connector->shouldReceive('readFeaturesData')->andReturn($jsonFeatures);
-
-        $features = $connector->features();
+        $features = $controller->features();
 
         $this->assertInstanceOf(Features::class, $features);
         $this->assertCount(1, $features->getEntities());
@@ -72,11 +81,9 @@ class ConnectorTest extends TestCase
      */
     public function testAckInvalidModelName()
     {
-        $application = \Mockery::mock(Application::class);
-        $application->shouldReceive('getLinker->save')->times(3)->andReturnTrue();
-
-        $connector = new ConnectorController($application);
-
+        $linker = $this->createMock(IdentityLinker::class);
+        $linker->expects($this->exactly(3))->method('save')->willReturn(true);
+        $connector = $this->createConnectorController($linker);
         $ack = new Ack();
         $ack->setIdentities([
             "Foo" => [
@@ -116,51 +123,14 @@ class ConnectorTest extends TestCase
         $_SERVER['REMOTE_ADDR'] = '';
 
         $this->expectExceptionObject(AuthenticationException::failed());
-
-        $application = \Mockery::mock(Application::class);
-        $application->shouldReceive('getConnector->getTokenValidator')->andReturnUsing(function () {
-            return new class implements TokenValidatorInterface {
-                public function validate(string $token): bool
-                {
-                    return false;
-                }
-            };
-        });
-
-        $connector = new ConnectorController($application);
+        $tokenValidator = $this->createMock(TokenValidatorInterface::class);
+        $tokenValidator->expects($this->once())->method('validate')->willReturn(false);
+        $controller = $this->createConnectorController(null, null, $tokenValidator);
 
         $auth = new Authentication();
         $auth->setToken(md5(time()));
 
-        $connector->auth($auth);
-    }
-
-    /**
-     * @throws ApplicationException
-     * @throws AuthenticationException
-     */
-    public function testAuthSessionHandlerIsNotSet()
-    {
-        $this->expectExceptionObject(ApplicationException::noSession());
-
-        $application = \Mockery::mock(Application::class);
-        $application->shouldReceive('getConnector->getTokenValidator')->andReturnUsing(function () {
-            return new class implements TokenValidatorInterface {
-                public function validate(string $token): bool
-                {
-                    return true;
-                }
-            };
-        });
-
-        $application->shouldReceive('getSessionHandler')->andReturnNull();
-
-        $connector = new ConnectorController($application);
-
-        $auth = new Authentication();
-        $auth->setToken(md5(time()));
-
-        $connector->auth($auth);
+        $controller->auth($auth);
     }
 
     /**
@@ -169,21 +139,11 @@ class ConnectorTest extends TestCase
      */
     public function testAuthCorrect()
     {
-        $application = \Mockery::mock(Application::class);
-        $application->shouldReceive('getConnector->getTokenValidator')->andReturnUsing(function () {
-            return new class implements TokenValidatorInterface {
-                public function validate(string $token): bool
-                {
-                    return true;
-                }
-            };
-        });
+        $tokenValidator = $this->createMock(TokenValidatorInterface::class);
+        $tokenValidator->expects($this->once())->method('validate')->willReturn(true);
 
-        $application->shouldReceive('getSessionHandler')->andReturnUsing(function () {
-            return \Mockery::mock(\SessionHandlerInterface::class);
-        });
 
-        $connector = new ConnectorController($application);
+        $connector = $this->createConnectorController(null, null, $tokenValidator);
 
         $auth = new Authentication();
         $auth->setToken(md5(time()));
@@ -203,13 +163,13 @@ class ConnectorTest extends TestCase
         $platformName = "ConnectorPlatform";
         $platformVersion = "0.1";
 
-        $endpointConnector = \Mockery::mock(ConnectorInterface::class);
-        $endpointConnector->shouldReceive('getEndpointVersion')->andReturn($endpointVersion);
-        $endpointConnector->shouldReceive('getPlatformVersion')->andReturn($platformVersion);
-        $endpointConnector->shouldReceive('getPlatformName')->andReturn($platformName);
+        $connector = $this->createMock(ConnectorInterface::class);
+        $connector->expects($this->once())->method('getEndpointVersion')->willReturn($endpointVersion);
+        $connector->expects($this->once())->method('getPlatformVersion')->willReturn($platformVersion);
+        $connector->expects($this->once())->method('getPlatformName')->willReturn($platformName);
 
         $controller = $this->createConnectorController();
-        $connectorIdentification = $controller->identify($endpointConnector);
+        $connectorIdentification = $controller->identify($connector);
 
         $this->assertSame($endpointVersion, $connectorIdentification->getEndpointVersion());
         $this->assertSame($platformName, $connectorIdentification->getPlatformName());
@@ -222,12 +182,11 @@ class ConnectorTest extends TestCase
      */
     public function testClearSuccess()
     {
-        $application = \Mockery::mock(Application::class);
-        $application->shouldReceive('getLinker->clear')->andReturnTrue();
+        $linker = $this->createMock(IdentityLinker::class);
+        $linker->expects($this->once())->method('clear')->willReturn(true);
+        $controller = $this->createConnectorController($linker);
 
-        $linker = new ConnectorController($application);
-
-        $response = $linker->clear(['foo']);
+        $response = $controller->clear(['foo']);
         $this->assertTrue($response);
     }
 
@@ -236,21 +195,11 @@ class ConnectorTest extends TestCase
      */
     public function testClearFailure()
     {
-        $application = \Mockery::mock(Application::class);
-        $application->shouldReceive('getLinker->clear')->andReturnFalse();
+        $linker = $this->createMock(IdentityLinker::class);
+        $linker->expects($this->once())->method('clear')->willReturn(false);
+        $controller = $this->createConnectorController($linker);
 
-        $linker = new ConnectorController($application);
-
-        $response = $linker->clear(true);
+        $response = $controller->clear(true);
         $this->assertFalse($response);
-    }
-
-    /**
-     *
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-        \Mockery::close();
     }
 }

@@ -8,12 +8,14 @@
 namespace Jtl\Connector\Core\Controller;
 
 use Jtl\Connector\Core\Application\Application;
+use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\AuthenticationException;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\MissingRequirementException;
+use Jtl\Connector\Core\Linker\IdentityLinker;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
 use Jtl\Connector\Core\Model\ConnectorIdentification;
@@ -32,8 +34,37 @@ use Jtl\Connector\Core\Utilities\Str;
  *
  * @access public
  */
-class ConnectorController extends AbstractController
+class ConnectorController
 {
+    /**
+     * @var IdentityLinker
+     */
+    protected $linker;
+
+    /**
+     * @var \SessionHandlerInterface
+     */
+    protected $sessionHandler;
+
+    /**
+     * @var TokenValidatorInterface
+     */
+    protected $tokenValidator;
+
+    /**
+     * ConnectorController constructor.
+     * @param TokenValidatorInterface $tokenValidator
+     * @param \SessionHandlerInterface $sessionHandler
+     * @param IdentityLinker $linker
+     */
+    public function __construct(IdentityLinker $linker, \SessionHandlerInterface $sessionHandler, TokenValidatorInterface $tokenValidator)
+    {
+        $this->linker = $linker;
+        $this->sessionHandler = $sessionHandler;
+        $this->tokenValidator = $tokenValidator;
+    }
+
+
     /**
      * @param null $params
      * @return bool
@@ -94,7 +125,7 @@ class ConnectorController extends AbstractController
             }
 
             foreach ($identities as $identity) {
-                $this->application->getLinker()->save($identity->getEndpoint(), $identity->getHost(), $normalizedName);
+                $this->linker->save($identity->getEndpoint(), $identity->getHost(), $normalizedName);
             }
         }
 
@@ -129,13 +160,12 @@ class ConnectorController extends AbstractController
             throw AuthenticationException::tokenMissing();
         }
 
-        $tokenValidator = $this->application->getConnector()->getTokenValidator();
-        if ($tokenValidator->validate($auth->getToken()) === false) {
+        if ($this->tokenValidator->validate($auth->getToken()) === false) {
             Logger::write(sprintf("Unauthorized access with token (%s) from ip (%s)", $auth->getToken(), $_SERVER['REMOTE_ADDR']), Logger::WARNING);
             throw AuthenticationException::failed();
         }
 
-        if ($this->application->getSessionHandler() === null) {
+        if ($this->sessionHandler === null) {
             Logger::write('Could not get any Session', Logger::ERROR);
             throw ApplicationException::noSession();
         }
@@ -199,6 +229,6 @@ class ConnectorController extends AbstractController
     public function clear($params = null)
     {
         //TODO: set type in clear method
-        return $this->application->getLinker()->clear();
+        return $this->linker->clear();
     }
 }
