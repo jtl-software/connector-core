@@ -6,5 +6,4 @@ use Noodlehaus\AbstractConfig;
 
 class ArrayConfig extends AbstractConfig
 {
-
 }

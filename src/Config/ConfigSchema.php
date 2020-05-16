@@ -63,8 +63,8 @@ class ConfigSchema
      */
     public function setParameters(ConfigParameter ...$parameters): self
     {
-        foreach ($parameters as $option) {
-            $this->setParameter($option);
+        foreach ($parameters as $parameter) {
+            $this->setParameter($parameter);
         }
         return $this;
     }
@@ -89,16 +89,16 @@ class ConfigSchema
     {
         $invalidValues = [];
         $missingProperties = [];
-        foreach($this->parameters as $option) {
-            $configValue = $config->get($option->getKey());
-            if(!is_null($configValue) && !$option->isValidValue($configValue)) {
-                $invalidValues[] = $option->getKey();
-            } elseif (is_null($configValue) && $option->isRequired()) {
-                $missingProperties[] = $option->getKey();
+        foreach ($this->parameters as $parameter) {
+            $configValue = $config->get($parameter->getKey());
+            if (!is_null($configValue) && !$parameter->isValidValue($configValue)) {
+                $invalidValues[] = $parameter->getKey();
+            } elseif (is_null($configValue) && $parameter->isRequired()) {
+                $missingProperties[] = $parameter->getKey();
             }
         }
 
-        if(count($invalidValues) > 0 || count($missingProperties) > 0) {
+        if (count($invalidValues) > 0 || count($missingProperties) > 0) {
             throw ConfigException::schemaValidationErrors($invalidValues, $missingProperties);
         }
     }

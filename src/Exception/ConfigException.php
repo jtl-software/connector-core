@@ -55,11 +55,11 @@ class ConfigException extends \Exception
     public static function schemaValidationErrors(array $invalidValues, array $missingRequiredProperties): self
     {
         $msg = 'Configuration could not get validated.';
-        if(count($invalidValues) > 0) {
+        if (count($invalidValues) > 0) {
             $msg .= sprintf(' The properties "%s" have invalid values.', implode(', ', $invalidValues));
         }
 
-        if(count($missingRequiredProperties) > 0) {
+        if (count($missingRequiredProperties) > 0) {
             $msg .= sprintf(' The required properties "%s" are missing.', implode(', ', $missingRequiredProperties));
         }
 

@@ -38,6 +38,7 @@ use Jtl\Connector\Core\Exception\ConfigException;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\HttpException;
 use Jtl\Connector\Core\IO\Temp;
+use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Jtl\Connector\Core\Model\AbstractImage;
 use Jtl\Connector\Core\Model\AbstractModel;
 use Jtl\Connector\Core\Model\Ack;
@@ -136,15 +137,16 @@ class Application
         if (!defined('CONNECTOR_DIR')) {
             throw ApplicationException::connectorDirMissing();
         }
+        AnnotationRegistry::registerLoader('class_exists');
 
         $this->connector = $endpointConnector;
         $this->eventDispatcher = new EventDispatcher();
-        $this->errorHandler = new ErrorHandler($this);
+        $this->serializer = SerializerBuilder::getInstance()->build();
+        $this->errorHandler = new ErrorHandler($this->eventDispatcher, $this->serializer);
         $this->container = (new ContainerBuilder())->build();
         $this->container->set(Application::class, $this);
-        $this->serializer = SerializerBuilder::getInstance()->build();
 
-        if(is_null($config)) {
+        if (is_null($config)) {
             $config = new FileConfig(Path::combine(CONNECTOR_DIR, 'config', 'config.json'));
         }
         $this->config = $config;
@@ -160,8 +162,7 @@ class Application
      */
     public function run(): void
     {
-        AnnotationRegistry::registerLoader('class_exists');
-        $this->prepareConfiguration();
+        $this->prepareConfig();
         $this->eventDispatcher->addSubscriber(new PrepareProductPricesSubscriber());
         $this->errorHandler->register();
 
@@ -202,7 +203,7 @@ class Application
             $event = new RpcEvent($eventData, $method->getController(), $method->getAction());
             $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::BEFORE));
 
-            $this->connector->initialize($this);
+            $this->connector->initialize($this->container, $this->config);
             $this->configSchema->validateConfig($this->config);
             $this->prepareContainer();
             $responsePacket = $this->execute($requestPacket, $method);
@@ -348,8 +349,7 @@ class Application
         RequestPacket $requestPacket,
         Method $method,
         string $modelNamespace
-    ): Request
-    {
+    ): Request {
         $controller = $method->getController();
         $action = $method->getAction();
 
@@ -372,9 +372,7 @@ class Application
                 $type = $className = QueryFilter::class;
         }
 
-        /** @var Serializer $serializer */
-        $serializer = SerializerBuilder::getInstance()->build();
-        $params = $serializer->fromArray($requestPacket->getParams(), $type);
+        $params = $this->serializer->fromArray($requestPacket->getParams(), $type);
 
         if (!is_array($params)) {
             $params = [$params];
@@ -508,7 +506,7 @@ class Application
     /**
      * @throws ConfigException
      */
-    protected function prepareConfiguration(): void
+    protected function prepareConfig(): void
     {
         foreach (ConfigSchema::createDefaultParameters() as $parameter) {
             if (!$this->configSchema->hasParameter($parameter->getKey())) {
@@ -517,13 +515,13 @@ class Application
         }
 
         $globalConfig = GlobalConfig::getInstance();
-        foreach($this->configSchema->getParameters() as $parameter) {
+        foreach ($this->configSchema->getParameters() as $parameter) {
             $key = $parameter->getKey();
-            if($parameter->hasDefaultValue() && !$this->config->has($key)) {
+            if ($parameter->hasDefaultValue() && !$this->config->has($key)) {
                 $this->config->set($key, $parameter->getDefaultValue());
             }
 
-            if($parameter->isGlobal() && $this->config->has($key)) {
+            if ($parameter->isGlobal() && $this->config->has($key)) {
                 $globalConfig->set($key, $this->config->get($key));
             }
         }
@@ -534,16 +532,16 @@ class Application
      */
     protected function prepareContainer(): void
     {
-        foreach($this->configSchema->getParameters() as $parameter) {
+        foreach ($this->configSchema->getParameters() as $parameter) {
             $key = $parameter->getKey();
-            if($this->config->has($key)) {
+            if ($this->config->has($key)) {
                 $this->container->set($key, $this->config->get($key));
             }
         }
 
         $this->container->set(\SessionHandlerInterface::class, $this->getSessionHandler());
-        $this->container->set(TokenValidatorInterface::class, $this->getConnector()->getTokenValidator());
-        $this->container->set(IdentityLinker::class, new IdentityLinker($this->getConnector()->getPrimaryKeyMapper()));
+        $this->container->set(TokenValidatorInterface::class, $this->connector->getTokenValidator());
+        $this->container->set(PrimaryKeyMapperInterface::class, $this->connector->getPrimaryKeyMapper());
     }
 
     /**
@@ -559,22 +557,20 @@ class Application
             throw new SessionException('No session', ErrorCode::NO_SESSION);
         }
 
-        if ($this->getSessionHandler() === null) {
-            $this->setSessionHandler(new SqliteSession());
-        }
+        $sessionHandler = $this->getSessionHandler();
 
         ini_set("session.gc_probability", 25);
 
         session_name($sessionName);
         if ($sessionId !== null) {
-            if ($this->getSessionHandler()->check($sessionId)) {
+            if ($sessionHandler->check($sessionId)) {
                 session_id($sessionId);
             } else {
                 throw new SessionException("Session is invalid", ErrorCode::INVALID_SESSION);
             }
         }
 
-        session_set_save_handler($this->getSessionHandler());
+        session_set_save_handler($sessionHandler);
 
         session_start();
 
@@ -666,8 +662,7 @@ class Application
         ?object $model,
         string $controller,
         string $action
-    )
-    {
+    ) {
         $messages = [
             sprintf('Controller = %s', $controller),
             sprintf('Action = %s', $action),
@@ -717,8 +712,11 @@ class Application
      *
      * @return \SessionHandlerInterface
      */
-    public function getSessionHandler(): ?\SessionHandlerInterface
+    public function getSessionHandler(): \SessionHandlerInterface
     {
+        if (is_null($this->sessionHandler)) {
+            $this->sessionHandler = new SqliteSession();
+        }
         return $this->sessionHandler;
     }
 

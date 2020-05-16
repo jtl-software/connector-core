@@ -13,10 +13,13 @@ use Jtl\Connector\Core\Config\ConfigSchema;
 use Jtl\Connector\Core\Config\GlobalConfig;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
 use Jtl\Connector\Core\Controller\PushInterface;
+use Jtl\Connector\Core\Controller\TransactionalInterface;
 use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\ConfigException;
+use Jtl\Connector\Core\Exception\ControllerException;
+use Jtl\Connector\Core\Linker\IdentityLinker;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Category;
@@ -24,8 +27,8 @@ use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Model\QueryFilter;
 use Jtl\Connector\Core\Test\TestCase;
 use Jtl\Connector\Core\Test\Stub\Controller\TransactionalControllerStub;
-use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Noodlehaus\ConfigInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Class ApplicationTest
@@ -33,36 +36,23 @@ use Noodlehaus\ConfigInterface;
  */
 class ApplicationTest extends TestCase
 {
-    use MockeryPHPUnitIntegration;
-
     /**
      * @param string $controllerNamespace
-     * @return ConnectorInterface|\Mockery\LegacyMockInterface|\Mockery\MockInterface
+     * @param bool $tokenValidatorValidateValue
+     * @return ConnectorInterface|MockObject
      */
-    public function createConnector($controllerNamespace = "")
+    public function createConnector($controllerNamespace = "", bool $tokenValidatorValidateValue = true)
     {
-        $tokenValidator = \Mockery::mock(TokenValidatorInterface::class);
-        $tokenValidator->shouldReceive('validate')->andReturnTrue();
+        $tokenValidator = $this->createMock(TokenValidatorInterface::class);
+        $tokenValidator->expects($this->any())->method('validate')->willReturn($tokenValidatorValidateValue);
+        $pkMapper = $this->createMock(PrimaryKeyMapperInterface::class);
+        $connector = $this->createMock(ConnectorInterface::class);
+        $connector->expects($this->any())->method('initialize');
+        $connector->expects($this->any())->method('getControllerNamespace')->willReturn($controllerNamespace);
+        $connector->expects($this->any())->method('getTokenValidator')->willReturn($tokenValidator);
+        $connector->expects($this->any())->method('getPrimaryKeyMapper')->willReturn($pkMapper);
 
-        $primaryKeyMapper = \Mockery::mock(PrimaryKeyMapperInterface::class);
-
-        $endpointConnector = \Mockery::mock(ConnectorInterface::class);
-        $endpointConnector->shouldReceive('initialize');
-        $endpointConnector->shouldReceive('getControllerNamespace')->andReturn($controllerNamespace);
-        $endpointConnector->shouldReceive('getTokenValidator')->andReturn($tokenValidator);
-        $endpointConnector->shouldReceive('getPrimaryKeyMapper')->andReturn($primaryKeyMapper);
-
-        return $endpointConnector;
-    }
-
-    /**
-     * @return PushInterface|\Mockery\LegacyMockInterface|\Mockery\MockInterface
-     */
-    public function createEndpointController()
-    {
-        $controller = \Mockery::mock(PushInterface::class);
-
-        return $controller;
+        return $connector;
     }
 
     /**
@@ -95,6 +85,22 @@ class ApplicationTest extends TestCase
     }
 
     /**
+     * @param ConnectorInterface|null $connector
+     * @param ConfigInterface|null $config
+     * @param ConfigSchema|null $configSchema
+     * @return Application
+     * @throws ApplicationException
+     */
+    protected function createInitializedApplication(ConnectorInterface $connector = null, ConfigInterface $config = null, ConfigSchema $configSchema = null)
+    {
+        $app = $this->createApplication($connector, $config, $configSchema);
+        $app->getContainer()->set(PrimaryKeyMapperInterface::class, $this->createMock(PrimaryKeyMapperInterface::class));
+        $app->getContainer()->set(\SessionHandlerInterface::class, $this->createMock(\SessionHandlerInterface::class));
+        $app->getContainer()->set(TokenValidatorInterface::class, $this->createMock(TokenValidatorInterface::class));
+        return $app;
+    }
+
+    /**
      * @throws ApplicationException
      * @throws DependencyException
      * @throws NotFoundException
@@ -104,13 +110,9 @@ class ApplicationTest extends TestCase
     public function testHandleRequestControllerClassNotFoundException()
     {
         $application = $this->createApplication();
-
         $ack = new Ack();
-
         $request = Request::create(Controller::PRODUCT, Action::ACK, [$ack]);
-
         $this->expectException(ApplicationException::class);
-
         $application->handleRequest($request);
     }
 
@@ -127,11 +129,10 @@ class ApplicationTest extends TestCase
      */
     public function testHandleRequestControllerAction(string $action, $parameter)
     {
-        $application = $this->createApplication();
+        $application = $this->createInitializedApplication();
         $controller = $this->createTransactionalController();
         $application->getContainer()->set(Controller::PRODUCT, $controller);
         $request = Request::create(Controller::PRODUCT, $action, [$parameter]);
-        $this->invokeMethodFromObject($application, 'prepareContainer');
         $result = $application->handleRequest($request);
 
         switch ($action) {
@@ -170,28 +171,40 @@ class ApplicationTest extends TestCase
      */
     public function testHandleRequestTransactionalMethodsCalls()
     {
-        $application = $this->createApplication();
-        $controller = $this->createTransactionalController();
-        $spy = \Mockery::spy($controller);
-        $application->getContainer()->set(Controller::CATEGORY, $spy);
+        $application = $this->createInitializedApplication();
+        $controller = $this->createMock(TransactionalControllerStub::class);
+        $application->getContainer()->set(Controller::CATEGORY, $controller);
         $category = new Category();
+
+        $controller->expects($this->once())->method('delete')->with($category)->willReturn($category);
+        $controller->expects($this->once())->method('beginTransaction');
+        $controller->expects($this->once())->method('commit');
+        $controller->expects($this->never())->method('rollback');
+
         $request = Request::create(Controller::CATEGORY, Action::DELETE, [$category]);
-        $this->invokeMethodFromObject($application, 'prepareContainer');
         $result = $application->handleRequest($request);
         $this->assertCount(1, $result->getResult());
-        $spy->shouldHaveReceived('delete')
-            ->with($category)
-            ->once();
-
-        $spy->shouldHaveReceived('beginTransaction')
-            ->once();
-
-        $spy->shouldHaveReceived('commit')
-            ->once();
-
-        $spy->shouldNotReceive('rollback');
     }
 
+    /**
+     * @throws ApplicationException
+     * @throws \Throwable
+     */
+    public function testHandleRequestTransactionalControllerFail()
+    {
+        $this->expectException(ControllerException::class);
+        $category = new Category();
+        $application = $this->createInitializedApplication();
+        $controller = $this->createMock(TransactionalControllerStub::class);
+        $controller->expects($this->once())->method('delete')->with($category)->willThrowException(new ControllerException());
+        $controller->expects($this->once())->method('beginTransaction');
+        $controller->expects($this->never())->method('commit');
+        $controller->expects($this->once())->method('rollback');
+        $application->getContainer()->set(Controller::CATEGORY, $controller);
+
+        $request = Request::create(Controller::CATEGORY, Action::DELETE, [$category]);
+        $application->handleRequest($request);
+    }
 
     /**
      * @throws ApplicationException
@@ -202,47 +215,12 @@ class ApplicationTest extends TestCase
      */
     public function testHandleRequestControllerClassNeedToBeInitialized()
     {
-        $application = $this->createApplication($this->createConnector("Jtl\Connector\Core\Controller"));
-        $application->setSessionHandler($this->createMock(\SessionHandlerInterface::class));
+        $application = $this->createInitializedApplication($this->createConnector("Jtl\Connector\Core\Controller"));
         $ack = new Ack();
-
         $request = Request::create(Controller::CONNECTOR, Action::ACK, [$ack]);
-        $this->invokeMethodFromObject($application, 'prepareContainer');
         $response = $application->handleRequest($request);
 
         $this->assertTrue($response->getResult());
-    }
-
-    /**
-     * @throws ApplicationException
-     * @throws \Throwable
-     */
-    public function testHandleRequestTransactionalControllerFail()
-    {
-        $application = $this->createApplication();
-        $controller = $this->createTransactionalController(true);
-        $spy = \Mockery::spy($controller);
-        $application->getContainer()->set(Controller::CATEGORY, $spy);
-        $category = new Category();
-        $request = Request::create(Controller::CATEGORY, Action::DELETE, [$category]);
-        $this->invokeMethodFromObject($application, 'prepareContainer');
-        try {
-            $application->handleRequest($request);
-        } catch (\Exception $e) {
-        }
-
-        $spy->shouldHaveReceived('beginTransaction')
-            ->once();
-
-        $spy->shouldHaveReceived('delete')
-            ->with($category)
-            ->once();
-
-        $spy->shouldHaveReceived('commit')
-            ->once();
-
-        $spy->shouldHaveReceived('rollback')
-            ->once();
     }
 
     /**
@@ -258,9 +236,16 @@ class ApplicationTest extends TestCase
             ->setParameter(new ConfigParameter('bar', ConfigParameter::TYPE_STRING));
         $application = $this->createApplication(null, $this->createConfig(['foo' => 'you', 'bar' => 'jau']), $schema);
         $container = $application->getContainer();
+
+        $this->assertFalse($container->has(TokenValidatorInterface::class));
+        $this->assertFalse($container->has(PrimaryKeyMapperInterface::class));
+        $this->assertFalse($container->has(\SessionHandlerInterface::class));
         $this->assertFalse($container->has('foo'));
         $this->assertFalse($container->has('bar'));
         $this->invokeMethodFromObject($application, 'prepareContainer');
+        $this->assertTrue($container->has(TokenValidatorInterface::class));
+        $this->assertTrue($container->has(PrimaryKeyMapperInterface::class));
+        $this->assertTrue($container->has(\SessionHandlerInterface::class));
         $this->assertEquals('you', $container->get('foo'));
         $this->assertEquals('jau', $container->get('bar'));
     }
@@ -278,7 +263,7 @@ class ApplicationTest extends TestCase
         foreach ($defaultParameters as $parameter) {
             $this->assertFalse($schema->hasParameter($parameter->getKey()));
         }
-        $this->invokeMethodFromObject($application, 'prepareConfiguration');
+        $this->invokeMethodFromObject($application, 'prepareConfig');
         foreach ($defaultParameters as $parameter) {
             $this->assertEquals($parameter, $schema->getParameter($parameter->getKey()));
         }
@@ -303,7 +288,7 @@ class ApplicationTest extends TestCase
         $this->assertFalse($config->has('baz'));
 
         $application = $this->createApplication(null, $config, $schema);
-        $this->invokeMethodFromObject($application, 'prepareConfiguration');
+        $this->invokeMethodFromObject($application, 'prepareConfig');
 
         $this->assertEquals(42, $config->get('foo'));
         $this->assertFalse($config->has('bar'));
@@ -329,20 +314,11 @@ class ApplicationTest extends TestCase
         $this->assertFalse($globalConfig->has('tri'));
         $this->assertFalse($globalConfig->has('tra'));
 
-        $this->invokeMethodFromObject($application, 'prepareConfiguration');
+        $this->invokeMethodFromObject($application, 'prepareConfig');
         $this->assertFalse($globalConfig->has('foo'));
         $this->assertEquals(true, $globalConfig->get('bar'));
         $this->assertEquals('schnatz', $globalConfig->get('baz'));
         $this->assertEquals(0.315, $globalConfig->get('tri'));
         $this->assertFalse($globalConfig->has('tra'));
-    }
-
-    /**
-     *
-     */
-    public function tearDown(): void
-    {
-        parent::tearDown();
-        \Mockery::close();
     }
 }

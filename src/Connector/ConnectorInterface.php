@@ -5,20 +5,18 @@
  */
 namespace Jtl\Connector\Core\Connector;
 
+use DI\Container;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
-use Jtl\Connector\Core\Application\Application;
+use Noodlehaus\ConfigInterface;
 
-/**
- * @access public
- * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
- */
 interface ConnectorInterface
 {
     /**
-     * Main initialize method
+     * @param Container $container
+     * @param ConfigInterface $config
      */
-    public function initialize(Application $application): void;
+    public function initialize(Container $container, ConfigInterface $config): void;
     
     /**
      * @return PrimaryKeyMapperInterface

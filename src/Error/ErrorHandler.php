@@ -5,6 +5,7 @@
  */
 namespace Jtl\Connector\Core\Error;
 
+use JMS\Serializer\Serializer;
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Definition\Event;
 use Jtl\Connector\Core\Event\RpcEvent;
@@ -14,21 +15,29 @@ use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
 use Jtl\Connector\Core\Rpc\Method;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class ErrorHandler extends AbstractErrorHandler
 {
     /**
      * @var Application
      */
-    protected $application;
+    protected $eventDispatcher;
+
+    /**
+     * @var Serializer
+     */
+    protected $serializer;
 
     /**
      * ErrorHandler constructor.
-     * @param Application $application
+     * @param EventDispatcher $eventDispatcher
+     * @param Serializer $serializer
      */
-    public function __construct(Application $application)
+    public function __construct(EventDispatcher $eventDispatcher, Serializer $serializer)
     {
-        $this->application = $application;
+        $this->eventDispatcher = $eventDispatcher;
+        $this->serializer = $serializer;
     }
 
     /**
@@ -40,7 +49,7 @@ class ErrorHandler extends AbstractErrorHandler
     {
         $method = Method::createFromRpcMethod($rpcMethod);
         $event = new RpcEvent($response, $method->getController(), $method->getAction());
-        $this->application->getEventDispatcher()->dispatch($event, Event::createRpcEventName(Event::AFTER));
+        $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::AFTER));
     }
 
     /**
@@ -72,7 +81,7 @@ class ErrorHandler extends AbstractErrorHandler
                 $rpcMethod = $requestPacket->getMethod();
             }
 
-            $arrayResponse = $responsePacket->toArray($this->application->getSerializer());
+            $arrayResponse = $responsePacket->toArray($this->serializer);
             $this->triggerRpcAfterEvent($arrayResponse, $rpcMethod);
             Response::send($arrayResponse);
         };
@@ -145,7 +154,7 @@ class ErrorHandler extends AbstractErrorHandler
                         ->setError($error)
                         ->setId('unknown');
 
-                    $arrayResponse = $responsePacket->toArray($this->application->getSerializer());
+                    $arrayResponse = $responsePacket->toArray($this->serializer);
                     $this->triggerRpcAfterEvent($arrayResponse, 'unknown.unknown');
                     Response::send($arrayResponse);
                 }

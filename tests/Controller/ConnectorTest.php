@@ -30,17 +30,16 @@ class ConnectorTest extends TestCase
         IdentityLinker $linker = null,
         \SessionHandlerInterface $sessionHandler = null,
         TokenValidatorInterface $tokenValidator = null
-    ): ConnectorController
-    {
-        if(is_null($linker)) {
+    ): ConnectorController {
+        if (is_null($linker)) {
             $linker = $this->createMock(IdentityLinker::class);
         }
 
-        if(is_null($sessionHandler)) {
+        if (is_null($sessionHandler)) {
             $sessionHandler = $this->createMock(\SessionHandlerInterface::class);
         }
 
-        if(is_null($tokenValidator)) {
+        if (is_null($tokenValidator)) {
             $tokenValidator = $this->createMock(TokenValidatorInterface::class);
         }
         return new ConnectorController($linker, $sessionHandler, $tokenValidator);
