@@ -203,7 +203,7 @@ class Application
             $event = new RpcEvent($eventData, $method->getController(), $method->getAction());
             $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::BEFORE));
 
-            $this->connector->initialize($this->container, $this->config);
+            $this->connector->initialize($this->config, $this->container);
             $this->configSchema->validateConfig($this->config);
             $this->prepareContainer();
             $responsePacket = $this->execute($requestPacket, $method);

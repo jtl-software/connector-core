@@ -13,10 +13,10 @@ use Noodlehaus\ConfigInterface;
 interface ConnectorInterface
 {
     /**
-     * @param Container $container
      * @param ConfigInterface $config
+     * @param Container $container
      */
-    public function initialize(Container $container, ConfigInterface $config): void;
+    public function initialize(ConfigInterface $config, Container $container): void;
     
     /**
      * @return PrimaryKeyMapperInterface

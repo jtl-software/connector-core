@@ -37,70 +37,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 class ApplicationTest extends TestCase
 {
     /**
-     * @param string $controllerNamespace
-     * @param bool $tokenValidatorValidateValue
-     * @return ConnectorInterface|MockObject
-     */
-    public function createConnector($controllerNamespace = "", bool $tokenValidatorValidateValue = true)
-    {
-        $tokenValidator = $this->createMock(TokenValidatorInterface::class);
-        $tokenValidator->expects($this->any())->method('validate')->willReturn($tokenValidatorValidateValue);
-        $pkMapper = $this->createMock(PrimaryKeyMapperInterface::class);
-        $connector = $this->createMock(ConnectorInterface::class);
-        $connector->expects($this->any())->method('initialize');
-        $connector->expects($this->any())->method('getControllerNamespace')->willReturn($controllerNamespace);
-        $connector->expects($this->any())->method('getTokenValidator')->willReturn($tokenValidator);
-        $connector->expects($this->any())->method('getPrimaryKeyMapper')->willReturn($pkMapper);
-
-        return $connector;
-    }
-
-    /**
-     * @param bool $commitThrowsException
-     * @return TransactionalControllerStub
-     */
-    public function createTransactionalController($commitThrowsException = false): TransactionalControllerStub
-    {
-        return new TransactionalControllerStub($commitThrowsException);
-    }
-
-    /**
-     * @param ConnectorInterface|null $connector
-     * @param ConfigInterface|null $config
-     * @param ConfigSchema|null $configSchema
-     * @return Application
-     * @throws ApplicationException
-     */
-    protected function createApplication(ConnectorInterface $connector = null, ConfigInterface $config = null, ConfigSchema $configSchema = null): Application
-    {
-        if (is_null($connector)) {
-            $connector = $this->createConnector();
-        }
-
-        if (is_null($config)) {
-            $config = new ArrayConfig([]);
-        }
-
-        return new Application($connector, $config, $configSchema);
-    }
-
-    /**
-     * @param ConnectorInterface|null $connector
-     * @param ConfigInterface|null $config
-     * @param ConfigSchema|null $configSchema
-     * @return Application
-     * @throws ApplicationException
-     */
-    protected function createInitializedApplication(ConnectorInterface $connector = null, ConfigInterface $config = null, ConfigSchema $configSchema = null)
-    {
-        $app = $this->createApplication($connector, $config, $configSchema);
-        $app->getContainer()->set(PrimaryKeyMapperInterface::class, $this->createMock(PrimaryKeyMapperInterface::class));
-        $app->getContainer()->set(\SessionHandlerInterface::class, $this->createMock(\SessionHandlerInterface::class));
-        $app->getContainer()->set(TokenValidatorInterface::class, $this->createMock(TokenValidatorInterface::class));
-        return $app;
-    }
-
-    /**
      * @throws ApplicationException
      * @throws DependencyException
      * @throws NotFoundException
@@ -320,5 +256,81 @@ class ApplicationTest extends TestCase
         $this->assertEquals('schnatz', $globalConfig->get('baz'));
         $this->assertEquals(0.315, $globalConfig->get('tri'));
         $this->assertFalse($globalConfig->has('tra'));
+    }
+
+    public function testRun()
+    {
+        $connector = $this->createConnector('Jtl\Connector\Core\Test\Stub\Controller');
+        $config = $this->createMock(ConfigInterface::class);
+        $configSchema = $this->createMock(ConfigSchema::class);
+        $controller = $this->createMock(TransactionalControllerStub::class);
+        /** @var Application $app */
+        $app = $this->getMockBuilder(Application::class)->setConstructorArgs([$connector, $config, $configSchema])->getMock();
+        $app->getContainer()->set(Controller::CUSTOMER, $controller);
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @param ConnectorInterface|null $connector
+     * @param ConfigInterface|null $config
+     * @param ConfigSchema|null $configSchema
+     * @return Application
+     * @throws ApplicationException
+     */
+    protected function createApplication(ConnectorInterface $connector = null, ConfigInterface $config = null, ConfigSchema $configSchema = null): Application
+    {
+        if (is_null($connector)) {
+            $connector = $this->createConnector();
+        }
+
+        if (is_null($config)) {
+            $config = new ArrayConfig([]);
+        }
+
+        return new Application($connector, $config, $configSchema);
+    }
+
+    /**
+     * @param ConnectorInterface|null $connector
+     * @param ConfigInterface|null $config
+     * @param ConfigSchema|null $configSchema
+     * @return Application
+     * @throws ApplicationException
+     */
+    protected function createInitializedApplication(ConnectorInterface $connector = null, ConfigInterface $config = null, ConfigSchema $configSchema = null)
+    {
+        $app = $this->createApplication($connector, $config, $configSchema);
+        $app->getContainer()->set(PrimaryKeyMapperInterface::class, $this->createMock(PrimaryKeyMapperInterface::class));
+        $app->getContainer()->set(\SessionHandlerInterface::class, $this->createMock(\SessionHandlerInterface::class));
+        $app->getContainer()->set(TokenValidatorInterface::class, $this->createMock(TokenValidatorInterface::class));
+        return $app;
+    }
+
+    /**
+     * @param string $controllerNamespace
+     * @param bool $tokenValidatorValidateValue
+     * @return ConnectorInterface|MockObject
+     */
+    public function createConnector($controllerNamespace = "", bool $tokenValidatorValidateValue = true)
+    {
+        $tokenValidator = $this->createMock(TokenValidatorInterface::class);
+        $tokenValidator->expects($this->any())->method('validate')->willReturn($tokenValidatorValidateValue);
+        $pkMapper = $this->createMock(PrimaryKeyMapperInterface::class);
+        $connector = $this->createMock(ConnectorInterface::class);
+        $connector->expects($this->any())->method('initialize');
+        $connector->expects($this->any())->method('getControllerNamespace')->willReturn($controllerNamespace);
+        $connector->expects($this->any())->method('getTokenValidator')->willReturn($tokenValidator);
+        $connector->expects($this->any())->method('getPrimaryKeyMapper')->willReturn($pkMapper);
+
+        return $connector;
+    }
+
+    /**
+     * @param bool $commitThrowsException
+     * @return TransactionalControllerStub
+     */
+    public function createTransactionalController($commitThrowsException = false): TransactionalControllerStub
+    {
+        return new TransactionalControllerStub($commitThrowsException);
     }
 }
