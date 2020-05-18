@@ -189,7 +189,6 @@ class IdentityLinkerTest extends TestCase
 
         $clearResult = $linker->clear();
         $this->assertTrue($clearResult);
-        ;
     }
 
     /**

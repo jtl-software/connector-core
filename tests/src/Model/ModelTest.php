@@ -13,7 +13,7 @@ class ModelTest extends TestCase
      */
     public function testModelsInitialization()
     {
-        $modelsPattern = dirname(__DIR__).'/../src/Model/*.php';
+        $modelsPattern = dirname(TEST_DIR).'/src/Model/*.php';
 
         $models = glob($modelsPattern);
 

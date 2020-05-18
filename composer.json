@@ -32,7 +32,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Jtl\\Connector\\Core\\Test\\": "tests/"
+            "Jtl\\Connector\\Core\\Test\\": "tests/src"
         }
     },
     "require-dev": {

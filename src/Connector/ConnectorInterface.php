@@ -9,14 +9,16 @@ use DI\Container;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Noodlehaus\ConfigInterface;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 interface ConnectorInterface
 {
     /**
      * @param ConfigInterface $config
      * @param Container $container
+     * @param EventDispatcher $eventDispatcher
      */
-    public function initialize(ConfigInterface $config, Container $container): void;
+    public function initialize(ConfigInterface $config, Container $container, EventDispatcher $eventDispatcher): void;
     
     /**
      * @return PrimaryKeyMapperInterface

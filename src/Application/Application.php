@@ -47,6 +47,7 @@ use Jtl\Connector\Core\Model\IdentityInterface;
 use Jtl\Connector\Core\Model\IdentificationInterface;
 use Jtl\Connector\Core\Model\QueryFilter;
 use Jtl\Connector\Core\Model\Statistic;
+use Jtl\Connector\Core\Plugin\PluginInterface;
 use Jtl\Connector\Core\Plugin\PluginManager;
 use Jtl\Connector\Core\Serializer\Json;
 use Jtl\Connector\Core\Exception\RpcException;
@@ -194,7 +195,7 @@ class Application
             }
 
             $this->startSession($requestPacket->getMethod());
-            PluginManager::loadPlugins($this->eventDispatcher);
+            $this->loadPlugins($this->eventDispatcher);
             if ($this->connector instanceof UseChecksumInterface) {
                 ChecksumLinker::setChecksumLoader($this->connector->getChecksumLoader());
             }
@@ -203,13 +204,11 @@ class Application
             $event = new RpcEvent($eventData, $method->getController(), $method->getAction());
             $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::BEFORE));
 
-            $this->connector->initialize($this->config, $this->container);
+            $this->connector->initialize($this->config, $this->container, $this->eventDispatcher);
             $this->configSchema->validateConfig($this->config);
             $this->prepareContainer();
             $responsePacket = $this->execute($requestPacket, $method);
         } catch (\Throwable $ex) {
-            Logger::writeException($ex);
-
             $error = (new Error())
                 ->setCode($ex->getCode())
                 ->setMessage($ex->getMessage())
@@ -218,6 +217,8 @@ class Application
             $responsePacket = (new ResponsePacket())
                 ->setId($requestPacket->getId())
                 ->setError($error);
+
+            Logger::writeException($ex);
         } finally {
             if (count($this->imagesToDelete) > 0) {
                 HttpRequest::deleteFileUploads($this->imagesToDelete);
@@ -501,6 +502,28 @@ class Application
         }
 
         return $responsePacket;
+    }
+
+    /**
+     *
+     */
+    protected function loadPlugins(): void
+    {
+        $pluginsDir = sprintf('%s/plugins', CONNECTOR_DIR);
+        if (is_dir($pluginsDir)) {
+            $finder = (new Finder())->files()->name('/(b|B)ootstrap.php/')->in($pluginsDir);
+            foreach ($finder as $file) {
+                include($file->getPathName());
+
+                $class = sprintf('\\%s\\Bootstrap', str_replace(DIRECTORY_SEPARATOR, '\\', $file->getRelativePath()));
+                if (class_exists($class)) {
+                    $plugin = new $class();
+                    if ($plugin instanceof PluginInterface) {
+                        $plugin->registerListener($this->eventDispatcher);
+                    }
+                }
+            }
+        }
     }
 
     /**

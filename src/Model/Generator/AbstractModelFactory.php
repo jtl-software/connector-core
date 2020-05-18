@@ -144,6 +144,14 @@ abstract class AbstractModelFactory
     }
 
     /**
+     * @return Generator
+     */
+    public function getFaker(): Generator
+    {
+        return $this->faker;
+    }
+
+    /**
      * @param integer $identityType
      * @param string $endpoint
      * @param integer $host

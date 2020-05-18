@@ -15,6 +15,8 @@ use Noodlehaus\AbstractConfig;
  */
 class TestCase extends \PHPUnit\Framework\TestCase
 {
+    protected $connectorDir = CONNECTOR_DIR;
+
     /**
      * @var string
      */
@@ -33,16 +35,49 @@ class TestCase extends \PHPUnit\Framework\TestCase
         $reflectionProperty->setAccessible(false);
 
         \Mockery::namedMock(Logger::class, LoggerStub::class)
-            ->shouldReceive('write')
+            ->shouldReceive('write', 'createExceptionInfos', 'writeException')
             ->withAnyArgs();
+
+
+        unset($_POST);
     }
 
     protected function tearDown(): void
     {
         parent::tearDown();
-        if (file_exists($this->configFile)) {
-            unlink($this->configFile);
+        $files = [
+            $this->configFile,
+        ];
+
+        foreach($files as $file) {
+            if(is_file($file)) {
+                unlink($file);
+            }
         }
+
+        $dirs = [
+            sprintf('%s/plugins', $this->connectorDir),
+            sprintf('%s/db', $this->connectorDir),
+        ];
+
+        foreach($dirs as $dir) {
+            if(is_dir($dir)) {
+                $this->removeDirRecursive($dir);
+            }
+        }
+    }
+
+    /**
+     * @param string $dirname
+     */
+    protected function removeDirRecursive(string $dirname)
+    {
+        $elements = glob($dirname . '/*');
+        foreach ($elements as $element) {
+            is_dir($element) ? $this->removeDirRecursive($element) : unlink($element);
+        }
+        rmdir($dirname);
+        return;
     }
 
     /**

@@ -16,17 +16,26 @@ use Jtl\Connector\Core\Controller\PushInterface;
 use Jtl\Connector\Core\Controller\TransactionalInterface;
 use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Controller;
+use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\ConfigException;
 use Jtl\Connector\Core\Exception\ControllerException;
+use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Linker\IdentityLinker;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Category;
+use Jtl\Connector\Core\Model\Generator\AbstractModelFactory;
+use Jtl\Connector\Core\Model\Generator\ManufacturerFactory;
+use Jtl\Connector\Core\Model\Manufacturer;
 use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Model\QueryFilter;
+use Jtl\Connector\Core\Rpc\RequestPacket;
+use Jtl\Connector\Core\Rpc\ResponsePacket;
+use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Test\TestCase;
 use Jtl\Connector\Core\Test\Stub\Controller\TransactionalControllerStub;
+use MyPlugin\Bootstrap;
 use Noodlehaus\ConfigInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -231,6 +240,11 @@ class ApplicationTest extends TestCase
         $this->assertEquals('yes', $config->get('baz'));
     }
 
+    /**
+     * @throws ApplicationException
+     * @throws ConfigException
+     * @throws \ReflectionException
+     */
     public function testPrepareConfigurationSetGlobalParametersInRuntimeConfig()
     {
         $schema = (new ConfigSchema())
@@ -258,16 +272,65 @@ class ApplicationTest extends TestCase
         $this->assertFalse($globalConfig->has('tra'));
     }
 
+    /**
+     * @throws ApplicationException
+     * @throws \ReflectionException
+     */
+    public function testLoadPlugins()
+    {
+        $app = $this->createInitializedApplication();
+        $myPluginDirSrc = sprintf('%s/fixtures/MyPlugin', $this->connectorDir);
+        $myPluginDirDst = sprintf('%s/plugins/MyPlugin', $this->connectorDir);
+        mkdir($myPluginDirDst, 0777, true);
+        $data = file_get_contents(sprintf('%s/Bootstrap.php', $myPluginDirSrc));
+        file_put_contents(sprintf('%s/Bootstrap.php', $myPluginDirDst), $data);
+        $this->assertFalse(class_exists(Bootstrap::class));
+        $this->invokeMethodFromObject($app, 'loadPlugins');
+        $this->assertTrue(class_exists(Bootstrap::class));
+    }
+
+    /**
+     *
+     * @throws ConfigException
+     * @throws DefinitionException
+     */
     public function testRun()
     {
+        $serializer = SerializerBuilder::getInstance()->build();
+        $factory = AbstractModelFactory::createFactory(Model::MANUFACTURER);
+        $id = $factory->getFaker()->uuid;
+        /** @var Manufacturer $manufacturer */
+        $manufacturer = $factory->makeOne();
+        $manufacturerArray = $serializer->toArray($manufacturer);
+        $requestPacket = (new RequestPacket())->setMethod('manufacturer.push')->setParams([$manufacturerArray])->setId($id)->toArray();
+        $responsePacket = (new ResponsePacket())->setId($id)->setResult([$manufacturer]);
+        $_POST['jtlrpc'] = json_encode($requestPacket);
+
         $connector = $this->createConnector('Jtl\Connector\Core\Test\Stub\Controller');
         $config = $this->createMock(ConfigInterface::class);
         $configSchema = $this->createMock(ConfigSchema::class);
         $controller = $this->createMock(TransactionalControllerStub::class);
-        /** @var Application $app */
-        $app = $this->getMockBuilder(Application::class)->setConstructorArgs([$connector, $config, $configSchema])->getMock();
-        $app->getContainer()->set(Controller::CUSTOMER, $controller);
-        $this->assertTrue(true);
+
+        /** @var Application|MockObject $app */
+        $app = $this->getMockBuilder(Application::class)
+            ->setConstructorArgs([$connector, $config, $configSchema])
+            ->onlyMethods(['prepareConfig', 'startSession', 'loadPlugins', 'prepareContainer'])
+            ->getMock();
+        $app->setSessionHandler($this->createMock(\SessionHandlerInterface::class));
+        $app->getContainer()->set(\SessionHandlerInterface::class, $this->createMock(\SessionHandlerInterface::class));
+        $app->getContainer()->set(TokenValidatorInterface::class, $this->createMock(TokenValidatorInterface::class));
+        $app->getContainer()->set(PrimaryKeyMapperInterface::class, $this->createMock(PrimaryKeyMapperInterface::class));
+        $app->getContainer()->set(Controller::MANUFACTURER, $controller);
+
+        $app->expects($this->once())->method('prepareConfig');
+        $app->expects($this->once())->method('startSession');
+        $app->expects($this->once())->method('loadPlugins');
+        $app->expects($this->once())->method('prepareContainer');
+        $connector->expects($this->once())->method('initialize')->with($config, $app->getContainer(), $app->getEventDispatcher());
+        $configSchema->expects($this->once())->method('validateConfig')->with($config);
+        $controller->expects($this->once())->method('push')->willReturn($manufacturer);
+        $this->expectOutputString(json_encode($responsePacket->toArray($serializer)));
+        $app->run();
     }
 
     /**
@@ -299,9 +362,11 @@ class ApplicationTest extends TestCase
      */
     protected function createInitializedApplication(ConnectorInterface $connector = null, ConfigInterface $config = null, ConfigSchema $configSchema = null)
     {
+        $sessionHandler = $this->createMock(\SessionHandlerInterface::class);
         $app = $this->createApplication($connector, $config, $configSchema);
+        $app->setSessionHandler($sessionHandler);
         $app->getContainer()->set(PrimaryKeyMapperInterface::class, $this->createMock(PrimaryKeyMapperInterface::class));
-        $app->getContainer()->set(\SessionHandlerInterface::class, $this->createMock(\SessionHandlerInterface::class));
+        $app->getContainer()->set(\SessionHandlerInterface::class, $sessionHandler);
         $app->getContainer()->set(TokenValidatorInterface::class, $this->createMock(TokenValidatorInterface::class));
         return $app;
     }

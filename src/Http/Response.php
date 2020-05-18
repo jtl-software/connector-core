@@ -23,7 +23,7 @@ class Response
      *
      * Http Response sender
      *
-     * @param string $response
+     * @param mixed[] $response
      */
     public static function send(array $response)
     {
@@ -35,7 +35,5 @@ class Response
         header('Content-type: application/json', true, 200);
 
         echo $jsonResponse;
-
-        exit();
     }
 }

@@ -26,7 +26,7 @@ class RequestTest extends TestCase
     }
 
     /**
-     * @throws \Jtl\Connector\Core\Exception\HttpException
+     * @throws HttpException
      */
     public function testGetPost()
     {
@@ -174,7 +174,7 @@ class RequestTest extends TestCase
     }
 
     /**
-     * @throws \Jtl\Connector\Core\Exception\HttpException
+     * @throws HttpException
      */
     public function testJtlAuthIsPresentOnGetSession()
     {
@@ -188,7 +188,7 @@ class RequestTest extends TestCase
     }
 
     /**
-     * @throws \Jtl\Connector\Core\Exception\HttpException
+     * @throws HttpException
      */
     public function testJtlAuthIsMissingOnGetSession()
     {
