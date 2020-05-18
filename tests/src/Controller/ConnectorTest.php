@@ -8,6 +8,7 @@ use Jtl\Connector\Core\Controller\ConnectorController;
 use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\AuthenticationException;
 use Jtl\Connector\Core\Exception\DefinitionException;
+use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Linker\IdentityLinker;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
@@ -23,6 +24,7 @@ class ConnectorTest extends TestCase
 {
     /**
      * @param IdentityLinker|null $linker
+     * @param ChecksumLinker|null $checksumLinker
      * @param \SessionHandlerInterface|null $sessionHandler
      * @param TokenValidatorInterface|null $tokenValidator
      * @param string $featuresPath
@@ -30,12 +32,17 @@ class ConnectorTest extends TestCase
      */
     protected function createConnectorController(
         IdentityLinker $linker = null,
+        ChecksumLinker $checksumLinker = null,
         \SessionHandlerInterface $sessionHandler = null,
         TokenValidatorInterface $tokenValidator = null,
         string $featuresPath = ''
     ): ConnectorController {
         if (is_null($linker)) {
             $linker = $this->createMock(IdentityLinker::class);
+        }
+
+        if (is_null($checksumLinker)) {
+            $checksumLinker = $this->createMock(ChecksumLinker::class);
         }
 
         if (is_null($sessionHandler)) {
@@ -45,7 +52,7 @@ class ConnectorTest extends TestCase
         if (is_null($tokenValidator)) {
             $tokenValidator = $this->createMock(TokenValidatorInterface::class);
         }
-        return new ConnectorController($featuresPath, $linker, $sessionHandler, $tokenValidator);
+        return new ConnectorController($featuresPath, $linker, $checksumLinker, $sessionHandler, $tokenValidator);
     }
 
     /**
@@ -128,7 +135,7 @@ class ConnectorTest extends TestCase
         $this->expectExceptionObject(AuthenticationException::failed());
         $tokenValidator = $this->createMock(TokenValidatorInterface::class);
         $tokenValidator->expects($this->once())->method('validate')->willReturn(false);
-        $controller = $this->createConnectorController(null, null, $tokenValidator);
+        $controller = $this->createConnectorController(null, null, null, $tokenValidator);
 
         $auth = new Authentication();
         $auth->setToken(md5(time()));
@@ -146,7 +153,7 @@ class ConnectorTest extends TestCase
         $tokenValidator->expects($this->once())->method('validate')->willReturn(true);
 
 
-        $connector = $this->createConnectorController(null, null, $tokenValidator);
+        $connector = $this->createConnectorController(null, null, null, $tokenValidator);
 
         $auth = new Authentication();
         $auth->setToken(md5(time()));

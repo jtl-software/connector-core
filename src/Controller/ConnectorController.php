@@ -58,16 +58,28 @@ class ConnectorController
     protected $tokenValidator;
 
     /**
+     * @var ChecksumLinker
+     */
+    protected $checksumLinker;
+
+    /**
      * ConnectorController constructor.
      * @param string $featuresPath
      * @param IdentityLinker $linker
+     * @param ChecksumLinker $checksumLinker
      * @param \SessionHandlerInterface $sessionHandler
      * @param TokenValidatorInterface $tokenValidator
      */
-    public function __construct(string $featuresPath, IdentityLinker $linker, \SessionHandlerInterface $sessionHandler, TokenValidatorInterface $tokenValidator)
-    {
+    public function __construct(
+        string $featuresPath,
+        IdentityLinker $linker,
+        ChecksumLinker $checksumLinker,
+        \SessionHandlerInterface $sessionHandler,
+        TokenValidatorInterface $tokenValidator
+    ) {
         $this->featuresPath = $featuresPath;
         $this->linker = $linker;
+        $this->checksumLinker = $checksumLinker;
         $this->sessionHandler = $sessionHandler;
         $this->tokenValidator = $tokenValidator;
     }
@@ -136,18 +148,16 @@ class ConnectorController
             }
         }
 
-        if (ChecksumLinker::checksumLoaderExists()) {
-            // Checksum linking
-            foreach ($ack->getChecksums() as $checksum) {
-                if ($checksum instanceof ChecksumInterface) {
-                    if (!ChecksumLinker::save($checksum)) {
-                        Logger::write(sprintf(
-                            'Could not save checksum for endpoint (%s), host (%s) and type (%s)',
-                            $checksum->getForeignKey()->getEndpoint(),
-                            $checksum->getForeignKey()->getHost(),
-                            $checksum->getType()
-                        ), Logger::WARNING, Logger::CHANNEL_CHECKSUM);
-                    }
+        // Checksum linking
+        foreach ($ack->getChecksums() as $checksum) {
+            if ($checksum instanceof ChecksumInterface) {
+                if (!$this->checksumLinker->save($checksum)) {
+                    Logger::write(sprintf(
+                        'Could not save checksum for endpoint (%s), host (%s) and type (%s)',
+                        $checksum->getForeignKey()->getEndpoint(),
+                        $checksum->getForeignKey()->getHost(),
+                        $checksum->getType()
+                    ), Logger::WARNING, Logger::CHANNEL_CHECKSUM);
                 }
             }
         }
@@ -179,8 +189,7 @@ class ConnectorController
 
         return (new Session())
             ->setSessionId(session_id())
-            ->setLifetime((int)ini_get('session.gc_maxlifetime'))
-        ;
+            ->setLifetime((int)ini_get('session.gc_maxlifetime'));
     }
 
     /**

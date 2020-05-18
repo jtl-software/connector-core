@@ -9,6 +9,7 @@ use DI\NotFoundException;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use JMS\Serializer\Serializer;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
+use Jtl\Connector\Core\Checksum\ChecksumLoaderInterface;
 use Jtl\Connector\Core\Config\GlobalConfig;
 use Jtl\Connector\Core\Controller\ConnectorController;
 use Jtl\Connector\Core\Controller\StatisticInterface;
@@ -214,11 +215,6 @@ class Application
             }
 
             $this->startSession($requestPacket->getMethod());
-            $this->loadPlugins();
-            if ($this->connector instanceof UseChecksumInterface) {
-                ChecksumLinker::setChecksumLoader($this->connector->getChecksumLoader());
-            }
-
             $eventData = Json::decode((string)$jtlrpc, true);
             $event = new RpcEvent($eventData, $method->getController(), $method->getAction());
             $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::BEFORE));
@@ -226,6 +222,7 @@ class Application
             $this->connector->initialize($this->config, $this->container, $this->eventDispatcher);
             $this->configSchema->validateConfig($this->config);
             $this->prepareContainer();
+            $this->loadPlugins();
             $responsePacket = $this->execute($requestPacket, $method);
         } catch (\Throwable $ex) {
             $error = (new Error())
@@ -329,7 +326,7 @@ class Application
                 in_array($request->getAction(), [Action::PUSH, Action::DELETE], true) === false) {
                 if ($result instanceof AbstractDataModel) {
                     $this->container->get(IdentityLinker::class)->linkModel($result, ($request->getAction() === Action::DELETE));
-                    $this->linkChecksum($result);
+                    $this->container->get(ChecksumLinker::class)->link($result);
                 }
             }
 
@@ -407,7 +404,7 @@ class Application
                 case Action::PUSH:
                 case Action::DELETE:
                     $this->container->get(IdentityLinker::class)->linkModel($param);
-                    $this->linkChecksum($param);
+                    $this->container->get(ChecksumLinker::class)->link($param);
                     $eventArg = new $eventArgClass($param);
                     break;
                 case Action::PULL:
@@ -444,6 +441,7 @@ class Application
                     return new ConnectorController(
                         $this->featuresPath,
                         $container->get(IdentityLinker::class),
+                        $container->get(ChecksumLinker::class),
                         $container->get(\SessionHandlerInterface::class),
                         $container->get(TokenValidatorInterface::class)
                     );
@@ -473,7 +471,7 @@ class Application
                         $dataModel = $controllerObject->$action($model);
                         if ($dataModel instanceof AbstractDataModel) {
                             $this->container->get(IdentityLinker::class)->linkModel($dataModel, ($request->getAction() === Action::DELETE));
-                            $this->linkChecksum($dataModel);
+                            $this->container->get(ChecksumLinker::class)->link($dataModel);
                         }
                         $result[] = $dataModel;
 
@@ -537,7 +535,7 @@ class Application
      */
     protected function loadPlugins(): void
     {
-        $pluginsDir = sprintf('%s/plugins', $this->connectorDir);
+        $pluginsDir = $this->config->get(ConfigSchema::PLUGINS_DIR);
         if (is_dir($pluginsDir)) {
             $finder = (new Finder())->files()->name('/(b|B)ootstrap.php/')->in($pluginsDir);
             foreach ($finder as $file) {
@@ -595,6 +593,9 @@ class Application
         $this->container->set(\SessionHandlerInterface::class, $this->getSessionHandler());
         $this->container->set(TokenValidatorInterface::class, $this->connector->getTokenValidator());
         $this->container->set(PrimaryKeyMapperInterface::class, $this->connector->getPrimaryKeyMapper());
+        if ($this->connector instanceof UseChecksumInterface) {
+            $this->container->set(ChecksumLoaderInterface::class, $this->connector->getChecksumLoader());
+        }
     }
 
     /**
@@ -690,16 +691,6 @@ class Application
                     }
                 }
             }
-        }
-    }
-
-    /**
-     * @param AbstractModel $model
-     */
-    protected function linkChecksum(AbstractModel $model): void
-    {
-        if (ChecksumLinker::checksumLoaderExists()) {
-            ChecksumLinker::link($model);
         }
     }
 

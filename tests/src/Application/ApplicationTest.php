@@ -379,6 +379,14 @@ class ApplicationTest extends TestCase
         string $connectorDir = null
     ) {
         $sessionHandler = $this->createMock(\SessionHandlerInterface::class);
+        if(is_null($configSchema)) {
+            $configSchema = (new ConfigSchema())->setParameters(...ConfigSchema::createDefaultParameters($this->connectorDir));
+        }
+
+        if(is_null($config)) {
+            $config = new ArrayConfig($configSchema->getDefaultValues());
+        }
+
         $app = $this->createApplication($connector, $config, $configSchema, $connectorDir);
         $app->setSessionHandler($sessionHandler);
         $app->getContainer()->set(PrimaryKeyMapperInterface::class, $this->createMock(PrimaryKeyMapperInterface::class));
