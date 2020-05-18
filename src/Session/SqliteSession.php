@@ -27,10 +27,15 @@ final class SqliteSession implements \SessionHandlerInterface
      * @var Sqlite3
      */
     private $db;
-    
-    public function __construct()
+
+    /**
+     * SqliteSession constructor.
+     * @param string $connectorDir
+     * @throws ApplicationException
+     */
+    public function __construct(string $connectorDir)
     {
-        $dir = Path::combine(CONNECTOR_DIR, 'db');
+        $dir = sprintf('%s/db', $connectorDir);
         if (!is_dir($dir)) {
             if (!mkdir($dir)) {
                 throw new ApplicationException('Could not create sqlite database directory');
@@ -40,7 +45,7 @@ final class SqliteSession implements \SessionHandlerInterface
         $this->lifetime = ((int) ini_get('session.gc_maxlifetime') > 0) ? (int) ini_get('session.gc_maxlifetime') : 7200;
         
         $sqlite3 = new Sqlite3();
-        $sqlite3->connect(['location' => Path::combine($dir, 'connector.s3db')]);
+        $sqlite3->connect(['location' => sprintf('%s/connector.s3db', $dir)]);
         $this->db = $sqlite3;
         
         $this->initializeTables();

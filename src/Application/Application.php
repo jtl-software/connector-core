@@ -10,6 +10,7 @@ use Doctrine\Common\Annotations\AnnotationRegistry;
 use JMS\Serializer\Serializer;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
 use Jtl\Connector\Core\Config\GlobalConfig;
+use Jtl\Connector\Core\Controller\ConnectorController;
 use Jtl\Connector\Core\Controller\StatisticInterface;
 use Jtl\Connector\Core\Config\ConfigSchema;
 use Jtl\Connector\Core\Definition\Controller;
@@ -48,7 +49,6 @@ use Jtl\Connector\Core\Model\IdentificationInterface;
 use Jtl\Connector\Core\Model\QueryFilter;
 use Jtl\Connector\Core\Model\Statistic;
 use Jtl\Connector\Core\Plugin\PluginInterface;
-use Jtl\Connector\Core\Plugin\PluginManager;
 use Jtl\Connector\Core\Serializer\Json;
 use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Exception\SessionException;
@@ -69,8 +69,8 @@ use Jtl\Connector\Core\Model\AbstractDataModel;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Session\SqliteSession;
-use Jtl\Connector\Core\IO\Path;
 use Noodlehaus\ConfigInterface;
+use Psr\Container\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Finder\Finder;
 
@@ -78,8 +78,12 @@ class Application
 {
     public const
         PROTOCOL_VERSION = 7,
-        MIN_PHP_VERSION = '7.2',
-        CORE_CONTROLLER_NAMESPACE = 'Jtl\\Connector\\Core\\Controller';
+        MIN_PHP_VERSION = '7.2';
+
+    /**
+     * @var string
+     */
+    protected $connectorDir;
 
     /**
      * @var ConnectorInterface
@@ -95,6 +99,11 @@ class Application
      * @var ConfigSchema
      */
     protected $configSchema;
+
+    /**
+     * @var string
+     */
+    protected $featuresPath;
 
     /**
      * @var \SessionHandlerInterface
@@ -122,33 +131,43 @@ class Application
     protected $serializer;
 
     /**
+     * @var Temp
+     */
+    protected $temp;
+
+    /**
      * @var string[]
      */
     protected $imagesToDelete = [];
 
     /**
      * Application constructor.
+     * @param string $connectorDir
      * @param ConnectorInterface $endpointConnector
      * @param ConfigInterface|null $config
      * @param ConfigSchema|null $configSchema
      * @throws ApplicationException
+     * @throws ConfigException
      */
-    public function __construct(ConnectorInterface $endpointConnector, ConfigInterface $config = null, ConfigSchema $configSchema = null)
+    public function __construct(string $connectorDir, ConnectorInterface $endpointConnector, ConfigInterface $config = null, ConfigSchema $configSchema = null)
     {
-        if (!defined('CONNECTOR_DIR')) {
-            throw ApplicationException::connectorDirMissing();
+        if (!is_dir($connectorDir)) {
+            throw ApplicationException::connectorDirNotExists($connectorDir);
         }
         AnnotationRegistry::registerLoader('class_exists');
 
+        $this->connectorDir = $connectorDir;
         $this->connector = $endpointConnector;
         $this->eventDispatcher = new EventDispatcher();
         $this->serializer = SerializerBuilder::getInstance()->build();
         $this->errorHandler = new ErrorHandler($this->eventDispatcher, $this->serializer);
         $this->container = (new ContainerBuilder())->build();
         $this->container->set(Application::class, $this);
+        $this->featuresPath = sprintf('%s/config/features.json', $this->connectorDir);
+        $this->temp = new Temp($this->connectorDir);
 
         if (is_null($config)) {
-            $config = new FileConfig(Path::combine(CONNECTOR_DIR, 'config', 'config.json'));
+            $config = new FileConfig(sprintf('%s/config/config.json', $this->connectorDir));
         }
         $this->config = $config;
 
@@ -195,7 +214,7 @@ class Application
             }
 
             $this->startSession($requestPacket->getMethod());
-            $this->loadPlugins($this->eventDispatcher);
+            $this->loadPlugins();
             if ($this->connector instanceof UseChecksumInterface) {
                 ChecksumLinker::setChecksumLoader($this->connector->getChecksumLoader());
             }
@@ -419,14 +438,23 @@ class Application
         $controller = $request->getController();
         $action = $request->getAction();
         $params = $request->getParams();
-
         if (!$this->container->has($controller)) {
-            $controllerNamespace = Action::isCoreAction($action) ? self::CORE_CONTROLLER_NAMESPACE : $this->connector->getControllerNamespace();
-            $controllerClass = sprintf("%s\\%sController", $controllerNamespace, $controller);
-            if (!class_exists($controllerClass)) {
-                throw new ApplicationException(sprintf('Controller class %s does not exist!', $controllerClass));
+            if (Action::isCoreAction($action)) {
+                $this->container->set($controller, function (ContainerInterface $container) {
+                    return new ConnectorController(
+                        $this->featuresPath,
+                        $container->get(IdentityLinker::class),
+                        $container->get(\SessionHandlerInterface::class),
+                        $container->get(TokenValidatorInterface::class)
+                    );
+                });
+            } else {
+                $controllerClass = sprintf("%s\\%sController", $this->connector->getControllerNamespace(), $controller);
+                if (!class_exists($controllerClass)) {
+                    throw new ApplicationException(sprintf('Controller class %s does not exist!', $controllerClass));
+                }
+                $this->container->set($controller, $this->container->get($controllerClass));
             }
-            $this->container->set($controller, $this->container->get($controllerClass));
         }
 
         $controllerObject = $this->container->get($controller);
@@ -509,7 +537,7 @@ class Application
      */
     protected function loadPlugins(): void
     {
-        $pluginsDir = sprintf('%s/plugins', CONNECTOR_DIR);
+        $pluginsDir = sprintf('%s/plugins', $this->connectorDir);
         if (is_dir($pluginsDir)) {
             $finder = (new Finder())->files()->name('/(b|B)ootstrap.php/')->in($pluginsDir);
             foreach ($finder as $file) {
@@ -531,11 +559,13 @@ class Application
      */
     protected function prepareConfig(): void
     {
-        foreach (ConfigSchema::createDefaultParameters() as $parameter) {
+        foreach (ConfigSchema::createDefaultParameters($this->connectorDir) as $parameter) {
             if (!$this->configSchema->hasParameter($parameter->getKey())) {
                 $this->configSchema->setParameter($parameter);
             }
         }
+
+        $this->config->set(ConfigSchema::CONNECTOR_DIR, $this->connectorDir);
 
         $globalConfig = GlobalConfig::getInstance();
         foreach ($this->configSchema->getParameters() as $parameter) {
@@ -609,8 +639,8 @@ class Application
     protected function handleImagePush(AbstractImage ...$images): void
     {
         $imagePaths = [];
-        $zipFile = HttpRequest::handleFileUpload();
-        $tempDir = Temp::createDirectory();
+        $zipFile = HttpRequest::handleFileUpload($this->temp);
+        $tempDir = $this->temp->createDirectory();
         if ($zipFile !== null && $tempDir !== null) {
             $archive = new Zip();
             if ($archive->extract($zipFile, $tempDir)) {
@@ -645,7 +675,7 @@ class Application
 
                 $path = parse_url($image->getRemoteUrl(), PHP_URL_PATH);
                 $fileName = pathinfo($path, PATHINFO_BASENAME);
-                $imagePath = sprintf('%s/%s_%s', Temp::getDirectory(), uniqid(), $fileName);
+                $imagePath = sprintf('%s/%s_%s', $this->temp->getDirectory(), uniqid(), $fileName);
                 file_put_contents($imagePath, $imageData);
                 $image->setFilename($imagePath);
             } else {
@@ -731,6 +761,16 @@ class Application
     }
 
     /**
+     * @param string $featuresPath
+     * @return Application
+     */
+    public function setFeaturesPath(string $featuresPath): Application
+    {
+        $this->featuresPath = $featuresPath;
+        return $this;
+    }
+
+    /**
      * Session getter
      *
      * @return \SessionHandlerInterface
@@ -738,7 +778,7 @@ class Application
     public function getSessionHandler(): \SessionHandlerInterface
     {
         if (is_null($this->sessionHandler)) {
-            $this->sessionHandler = new SqliteSession();
+            $this->sessionHandler = new SqliteSession($this->connectorDir);
         }
         return $this->sessionHandler;
     }

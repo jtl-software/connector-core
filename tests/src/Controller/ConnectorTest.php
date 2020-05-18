@@ -7,6 +7,7 @@ use Jtl\Connector\Core\Connector\ConnectorInterface;
 use Jtl\Connector\Core\Controller\ConnectorController;
 use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\AuthenticationException;
+use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Linker\IdentityLinker;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
@@ -24,12 +25,14 @@ class ConnectorTest extends TestCase
      * @param IdentityLinker|null $linker
      * @param \SessionHandlerInterface|null $sessionHandler
      * @param TokenValidatorInterface|null $tokenValidator
+     * @param string $featuresPath
      * @return ConnectorController
      */
     protected function createConnectorController(
         IdentityLinker $linker = null,
         \SessionHandlerInterface $sessionHandler = null,
-        TokenValidatorInterface $tokenValidator = null
+        TokenValidatorInterface $tokenValidator = null,
+        string $featuresPath = ''
     ): ConnectorController {
         if (is_null($linker)) {
             $linker = $this->createMock(IdentityLinker::class);
@@ -42,7 +45,7 @@ class ConnectorTest extends TestCase
         if (is_null($tokenValidator)) {
             $tokenValidator = $this->createMock(TokenValidatorInterface::class);
         }
-        return new ConnectorController($linker, $sessionHandler, $tokenValidator);
+        return new ConnectorController($featuresPath, $linker, $sessionHandler, $tokenValidator);
     }
 
     /**
@@ -51,13 +54,13 @@ class ConnectorTest extends TestCase
     public function testFeatures()
     {
         $controller = $this->getMockBuilder(ConnectorController::class)
-            ->onlyMethods(['readFeaturesData'])
+            ->onlyMethods(['fetchFeaturesData'])
             ->disableOriginalConstructor()
             ->getMock();
 
 
-        $jsonFeatures = json_encode(["entities" => ["Category" => ["push" => true]]]);
-        $controller->expects($this->once())->method('readFeaturesData')->willReturn($jsonFeatures);
+        $jsonFeatures = ["entities" => ["Category" => ["push" => true]]];
+        $controller->expects($this->once())->method('fetchFeaturesData')->willReturn($jsonFeatures);
 
         $features = $controller->features();
 
@@ -76,7 +79,8 @@ class ConnectorTest extends TestCase
     }
 
     /**
-     * @throws \Exception
+     * @throws DefinitionException
+     * @throws \ReflectionException
      */
     public function testAckInvalidModelName()
     {
@@ -100,7 +104,7 @@ class ConnectorTest extends TestCase
 
     /**
      * @throws AuthenticationException
-     * @throws \Jtl\Connector\Core\Exception\ApplicationException
+     * @throws ApplicationException
      */
     public function testAuthMissingToken()
     {
@@ -115,7 +119,7 @@ class ConnectorTest extends TestCase
 
     /**
      * @throws AuthenticationException
-     * @throws \Jtl\Connector\Core\Exception\ApplicationException
+     * @throws ApplicationException
      */
     public function testAuthTokenIsInvalid()
     {

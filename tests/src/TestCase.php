@@ -15,7 +15,7 @@ use Noodlehaus\AbstractConfig;
  */
 class TestCase extends \PHPUnit\Framework\TestCase
 {
-    protected $connectorDir = CONNECTOR_DIR;
+    protected $connectorDir = TEST_DIR;
 
     /**
      * @var string
@@ -38,7 +38,6 @@ class TestCase extends \PHPUnit\Framework\TestCase
             ->shouldReceive('write', 'createExceptionInfos', 'writeException')
             ->withAnyArgs();
 
-
         unset($_POST);
     }
 
@@ -49,8 +48,8 @@ class TestCase extends \PHPUnit\Framework\TestCase
             $this->configFile,
         ];
 
-        foreach($files as $file) {
-            if(is_file($file)) {
+        foreach ($files as $file) {
+            if (is_file($file)) {
                 unlink($file);
             }
         }
@@ -60,8 +59,8 @@ class TestCase extends \PHPUnit\Framework\TestCase
             sprintf('%s/db', $this->connectorDir),
         ];
 
-        foreach($dirs as $dir) {
-            if(is_dir($dir)) {
+        foreach ($dirs as $dir) {
+            if (is_dir($dir)) {
                 $this->removeDirRecursive($dir);
             }
         }

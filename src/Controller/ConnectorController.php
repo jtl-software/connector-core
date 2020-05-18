@@ -9,6 +9,7 @@ namespace Jtl\Connector\Core\Controller;
 
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
+use Jtl\Connector\Core\Config\GlobalConfig;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Exception\ApplicationException;
@@ -37,6 +38,11 @@ use Jtl\Connector\Core\Utilities\Str;
 class ConnectorController
 {
     /**
+     * @var string
+     */
+    protected $featuresPath;
+
+    /**
      * @var IdentityLinker
      */
     protected $linker;
@@ -53,12 +59,14 @@ class ConnectorController
 
     /**
      * ConnectorController constructor.
-     * @param TokenValidatorInterface $tokenValidator
-     * @param \SessionHandlerInterface $sessionHandler
+     * @param string $featuresPath
      * @param IdentityLinker $linker
+     * @param \SessionHandlerInterface $sessionHandler
+     * @param TokenValidatorInterface $tokenValidator
      */
-    public function __construct(IdentityLinker $linker, \SessionHandlerInterface $sessionHandler, TokenValidatorInterface $tokenValidator)
+    public function __construct(string $featuresPath, IdentityLinker $linker, \SessionHandlerInterface $sessionHandler, TokenValidatorInterface $tokenValidator)
     {
+        $this->featuresPath = $featuresPath;
         $this->linker = $linker;
         $this->sessionHandler = $sessionHandler;
         $this->tokenValidator = $tokenValidator;
@@ -82,8 +90,7 @@ class ConnectorController
      */
     public function features($params = null)
     {
-        $featureData = $this->readFeaturesData();
-        $features = Json::decode($featureData, true);
+        $features = $this->fetchFeaturesData();
 
         $entities = [];
         if (isset($features['entities']) && is_array($features['entities'])) {
@@ -99,11 +106,11 @@ class ConnectorController
     }
 
     /**
-     * @return false|string
+     * @return mixed[]
      */
-    protected function readFeaturesData()
+    protected function fetchFeaturesData()
     {
-        return file_get_contents(CONNECTOR_DIR . '/config/features.json');
+        return Json::decode(file_get_contents($this->featuresPath), true);
     }
 
     /**

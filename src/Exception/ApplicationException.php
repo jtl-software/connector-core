@@ -9,14 +9,12 @@ namespace Jtl\Connector\Core\Exception;
 use Jtl\Connector\Core\Definition\ErrorCode;
 
 /**
- * Application Exception Class
- *
- * @access public
- * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
+ * Class ApplicationException
+ * @package Jtl\Connector\Core\Exception
  */
 class ApplicationException extends \Exception
 {
-    const CONNECTOR_DIR_MISSING = 10;
+    const CONNECTOR_DIR_NOT_EXISTS = 10;
 
     /**
      * @return ApplicationException
@@ -27,10 +25,11 @@ class ApplicationException extends \Exception
     }
 
     /**
+     * @param string $connectorDir
      * @return ApplicationException
      */
-    public static function connectorDirMissing(): self
+    public static function connectorDirNotExists(string $connectorDir): self
     {
-        return new static('Constant CONNECTOR_DIR is not defined', self::CONNECTOR_DIR_MISSING);
+        return new static(sprintf('Connector directory "%s" does not exist', $connectorDir), self::CONNECTOR_DIR_NOT_EXISTS);
     }
 }

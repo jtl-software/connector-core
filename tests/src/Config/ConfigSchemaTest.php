@@ -11,7 +11,7 @@ class ConfigSchemaTest extends TestCase
 {
     public function testGetOption()
     {
-        $schema = (new ConfigSchema())->setParameters(...ConfigSchema::createDefaultParameters());
+        $schema = (new ConfigSchema())->setParameters(...ConfigSchema::createDefaultParameters($this->connectorDir));
         $this->assertInstanceOf(ConfigParameter::class, $schema->getParameter(ConfigSchema::LOG_LEVEL));
     }
 
@@ -24,7 +24,7 @@ class ConfigSchemaTest extends TestCase
 
     public function testIsOption()
     {
-        $schema = (new ConfigSchema())->setParameters(...ConfigSchema::createDefaultParameters());
+        $schema = (new ConfigSchema())->setParameters(...ConfigSchema::createDefaultParameters($this->connectorDir));
         $this->assertTrue($schema->hasParameter(ConfigSchema::LOG_LEVEL));
         $this->assertFalse($schema->hasParameter('yolo'));
     }
@@ -61,14 +61,20 @@ class ConfigSchemaTest extends TestCase
         $reflectionProperty = $reflectionClass->getProperty('parameters');
         $reflectionProperty->setAccessible(true);
         $this->assertCount(0, $reflectionProperty->getValue($schema));
-        $schema->setParameters(...ConfigSchema::createDefaultParameters());
-        $this->assertCount(2, $reflectionProperty->getValue($schema));
+        $schema->setParameters(...ConfigSchema::createDefaultParameters($this->connectorDir));
+        $this->assertCount(5, $reflectionProperty->getValue($schema));
     }
 
     public function testGetDefaultValues()
     {
-        $schema = (new ConfigSchema())->setParameters(...ConfigSchema::createDefaultParameters());
-        $expected = [ConfigSchema::LOG_LEVEL => 'info', ConfigSchema::MAIN_LANGUAGE => 'de'];
+        $schema = (new ConfigSchema())->setParameters(...ConfigSchema::createDefaultParameters($this->connectorDir));
+        $expected = [
+            ConfigSchema::LOG_LEVEL => 'info',
+            ConfigSchema::MAIN_LANGUAGE => 'de',
+            ConfigSchema::CONNECTOR_DIR => $this->connectorDir,
+            ConfigSchema::LOGS_DIR => sprintf('%s/logs', $this->connectorDir),
+            ConfigSchema::PLUGINS_DIR => sprintf('%s/plugins', $this->connectorDir),
+        ];
         $actual = $schema->getDefaultValues();
         $this->assertEquals($expected, $actual);
     }

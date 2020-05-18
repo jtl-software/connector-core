@@ -10,7 +10,11 @@ class ConfigSchema
 {
     public const
         LOG_LEVEL = 'log_level',
-        MAIN_LANGUAGE = 'main_language';
+        MAIN_LANGUAGE = 'main_language',
+        CONNECTOR_DIR = 'connector_dir',
+        LOGS_DIR = 'logs_dir',
+        PLUGINS_DIR = 'plugins_dir';
+
 
     /**
      * @var ConfigParameter[]
@@ -104,14 +108,18 @@ class ConfigSchema
     }
 
     /**
-     * @return ConfigParameter[]
+     * @param string $connectorDir
+     * @return array
      * @throws ConfigException
      */
-    public static function createDefaultParameters(): array
+    public static function createDefaultParameters(string $connectorDir): array
     {
         return [
             ConfigParameter::create(self::LOG_LEVEL, ConfigParameter::TYPE_STRING, true, true, Logger::INFO),
-            ConfigParameter::create(self::MAIN_LANGUAGE, ConfigParameter::TYPE_STRING, true, true, 'de')
+            ConfigParameter::create(self::MAIN_LANGUAGE, ConfigParameter::TYPE_STRING, true, true, 'de'),
+            ConfigParameter::create(self::CONNECTOR_DIR, ConfigParameter::TYPE_STRING, true, true, $connectorDir),
+            ConfigParameter::create(self::LOGS_DIR, ConfigParameter::TYPE_STRING, true, true, sprintf('%s/logs', $connectorDir)),
+            ConfigParameter::create(self::PLUGINS_DIR, ConfigParameter::TYPE_STRING, true, false, sprintf('%s/plugins', $connectorDir)),
         ];
     }
 }

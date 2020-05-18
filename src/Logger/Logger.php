@@ -36,7 +36,6 @@ class Logger
      * @param string $message
      * @param string $level
      * @param string $channel
-     * @return boolean
      */
     public static function write(string $message, string $level = self::INFO, string $channel = self::CHANNEL_GLOBAL): void
     {
@@ -50,7 +49,7 @@ class Logger
 
         $log = self::getLogger($channel);
         if (!$log->isHandling($logLevel)) {
-            $path = Path::combine(CONNECTOR_DIR, 'logs', sprintf('%s.log', $channel));
+            $path = sprintf('%s/%s.log', $config->get(ConfigSchema::LOGS_DIR), $channel);
             $log->pushHandler(new RotatingFileHandler($path, 2, $logLevel));
         }
 
@@ -77,9 +76,11 @@ class Logger
      */
     public static function createExceptionInfos(\Throwable $exception, bool $maskFilePath, string $additionalMessage = null): string
     {
+        $config = GlobalConfig::getInstance();
+
         $file = $exception->getFile();
         if ($maskFilePath) {
-            $file = sprintf('...%s', substr($file, strlen(CONNECTOR_DIR)));
+            $file = sprintf('...%s', substr($file, strlen($config->get(ConfigSchema::CONNECTOR_DIR, __DIR__))));
         }
 
         $infos = sprintf(

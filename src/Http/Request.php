@@ -98,13 +98,12 @@ class Request
     }
 
     /**
-     * File Upload Handler
-     *
+     * @param Temp $temp
      * @param string $name
+     * @return string|null
      * @throws HttpException
-     * @return string|NULL
      */
-    public static function handleFileUpload($name = "file")
+    public static function handleFileUpload(Temp $temp, $name = "file")
     {
         if (Request::isFileUpload($name)) {
             $pathInfo = pathinfo($_FILES[$name]["name"]);
@@ -112,7 +111,7 @@ class Request
             if (isset($pathInfo["extension"])) {
                 $extension = $pathInfo["extension"];
                 $filename = uniqid() . ".{$extension}";
-                $path = Temp::getDirectory() . DIRECTORY_SEPARATOR;
+                $path = $temp->getDirectory() . DIRECTORY_SEPARATOR;
 
                 if (Request::moveFileUpload($path, $filename, $name)) {
                     return "{$path}{$filename}";

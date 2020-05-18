@@ -9,17 +9,31 @@ namespace Jtl\Connector\Core\IO;
 class Temp
 {
     /**
+     * @var string
+     */
+    protected $connectorDir;
+
+    /**
+     * Temp constructor.
+     * @param string $connectorDir
+     */
+    public function __construct(string $connectorDir)
+    {
+        $this->connectorDir = $connectorDir;
+    }
+
+    /**
      * @param string ...$path
      * @return string
      * @throws \Exception
      */
-    public static function createDirectory(string ...$path): string
+    public function createDirectory(string ...$path): string
     {
         if (empty($path)) {
-            $path = [self::getDirectory(), 'con-' . uniqid()];
+            $path = [$this->getDirectory(), 'con-' . uniqid()];
         }
 
-        $dir = Path::combine(...$path);
+        $dir = implode('/', $path);
         if (mkdir($dir)) {
             return $dir;
         }
@@ -31,15 +45,11 @@ class Temp
      * @return string
      * @throws \Exception
      */
-    public static function getDirectory(): string
+    public function getDirectory(): string
     {
         $dir = sys_get_temp_dir();
         if (!is_writeable($dir)) {
-            if (!defined('CONNECTOR_DIR')) {
-                throw new \Exception('Constant CONNECTOR_DIR is not defined');
-            }
-
-            $dir = Path::combine(CONNECTOR_DIR, 'tmp');
+            $dir = sprintf('%s/tmp', $this->connectorDir);
         }
 
         if (!is_writeable($dir)) {

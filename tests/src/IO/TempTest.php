@@ -15,8 +15,8 @@ class TempTest extends TestCase
      */
     public function testGetDirectory()
     {
-        $dir = Temp::getDirectory();
-        $this->assertContains($dir, [CONNECTOR_DIR, sys_get_temp_dir()]);
+        $dir = (new Temp($this->connectorDir))->getDirectory();
+        $this->assertContains($dir, [$this->connectorDir, sys_get_temp_dir()]);
     }
 
     /**
@@ -24,7 +24,7 @@ class TempTest extends TestCase
      */
     public function testCreateDirectory()
     {
-        $dir = Temp::createDirectory();
+        $dir = (new Temp($this->connectorDir))->createDirectory();
 
         $this->assertDirectoryExists($dir);
 
@@ -38,7 +38,8 @@ class TempTest extends TestCase
      */
     public function testCreateDirectoryWithDifferentName()
     {
-        $dir = Temp::createDirectory(...[Temp::getDirectory(), 'foo-bar-' . uniqid()]);
+        $temp = new Temp($this->connectorDir);
+        $dir = $temp->createDirectory(...[$temp->getDirectory(), 'foo-bar-' . uniqid()]);
 
         $this->assertDirectoryExists($dir);
 
