@@ -42,7 +42,6 @@ use Jtl\Connector\Core\Exception\HttpException;
 use Jtl\Connector\Core\IO\Temp;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Jtl\Connector\Core\Model\AbstractImage;
-use Jtl\Connector\Core\Model\AbstractModel;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
 use Jtl\Connector\Core\Model\IdentityInterface;
@@ -215,14 +214,16 @@ class Application
             }
 
             $this->startSession($requestPacket->getMethod());
+            $this->connector->initialize($this->config, $this->container, $this->eventDispatcher);
+            $this->config->set(ConfigSchema::CONNECTOR_DIR, $this->connectorDir);
+            $this->configSchema->validateConfig($this->config);
+            $this->prepareContainer();
+            $this->loadPlugins();
+
             $eventData = Json::decode((string)$jtlrpc, true);
             $event = new RpcEvent($eventData, $method->getController(), $method->getAction());
             $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::BEFORE));
 
-            $this->connector->initialize($this->config, $this->container, $this->eventDispatcher);
-            $this->configSchema->validateConfig($this->config);
-            $this->prepareContainer();
-            $this->loadPlugins();
             $responsePacket = $this->execute($requestPacket, $method);
         } catch (\Throwable $ex) {
             $error = (new Error())
