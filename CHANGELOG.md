@@ -1,3 +1,8 @@
+Unreleased
+-----
+- Added possibility to change log formatter
+- Fixed compatibility to Symfony event-dispatcher 5 
+
 2.7.2
 -----
 - Removed incompatible symfony/event-dispatcher version from composer

@@ -1,7 +1,7 @@
 <?php
 namespace jtl\Connector\Event\Category;
 
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 use jtl\Connector\Model\Category;
 
 

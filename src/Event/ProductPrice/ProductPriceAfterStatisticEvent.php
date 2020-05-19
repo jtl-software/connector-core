@@ -1,7 +1,7 @@
 <?php
 namespace jtl\Connector\Event\ProductPrice;
 
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 use jtl\Connector\Model\Statistic;
 
 

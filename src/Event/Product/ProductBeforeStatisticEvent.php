@@ -1,7 +1,7 @@
 <?php
 namespace jtl\Connector\Event\Product;
 
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 use jtl\Connector\Core\Model\QueryFilter;
 
 
