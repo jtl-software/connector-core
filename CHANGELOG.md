@@ -1,4 +1,4 @@
-Unreleased
+2.7.3
 -----
 - Added possibility to change log formatter
 - Fixed compatibility to Symfony event-dispatcher 5 
