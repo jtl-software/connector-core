@@ -101,11 +101,6 @@ class Application
     protected $configSchema;
 
     /**
-     * @var string
-     */
-    protected $featuresPath;
-
-    /**
      * @var \SessionHandlerInterface
      */
     protected $sessionHandler;
@@ -163,7 +158,6 @@ class Application
         $this->errorHandler = new ErrorHandler($this->eventDispatcher, $this->serializer);
         $this->container = (new ContainerBuilder())->build();
         $this->container->set(Application::class, $this);
-        $this->featuresPath = sprintf('%s/config/features.json', $this->connectorDir);
         $this->temp = new Temp($this->connectorDir);
 
         if (is_null($config)) {
@@ -194,7 +188,7 @@ class Application
                 throw RpcException::invalidRequest();
             }
 
-            $method = Method::createFromRpcMethod(RpcMethod::mapMethod($requestPacket->getMethod()));
+            $method = Method::createFromRequestPacket($requestPacket);
             if (!Controller::isController($method->getController())) {
                 throw DefinitionException::unknownController($method->getController());
             }
@@ -445,7 +439,7 @@ class Application
             if (Action::isCoreAction($action)) {
                 $this->container->set($controller, function (ContainerInterface $container) {
                     return new ConnectorController(
-                        $this->featuresPath,
+                        $this->config->get(ConfigSchema::FEATURES_PATH),
                         $container->get(IdentityLinker::class),
                         $container->get(ChecksumLinker::class),
                         $container->get(\SessionHandlerInterface::class),
@@ -756,16 +750,6 @@ class Application
     public function getConnector(): ConnectorInterface
     {
         return $this->connector;
-    }
-
-    /**
-     * @param string $featuresPath
-     * @return Application
-     */
-    public function setFeaturesPath(string $featuresPath): Application
-    {
-        $this->featuresPath = $featuresPath;
-        return $this;
     }
 
     /**

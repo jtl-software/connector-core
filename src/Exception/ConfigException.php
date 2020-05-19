@@ -8,7 +8,7 @@ class ConfigException extends \Exception
         EMPTY_KEY = 10,
         UNKNOWN_TYPE = 20,
         WRONG_TYPE = 30,
-        UNKNOWN_OPTION = 40,
+        UNKNOWN_PARAMETER = 40,
         SCHEMA_VALIDATION_ERRORS = 50;
 
     /**
@@ -44,7 +44,7 @@ class ConfigException extends \Exception
      */
     public static function unknownParameter(string $key): self
     {
-        return new static(sprintf('Parameter (%s) does not exist', $key), self::UNKNOWN_OPTION);
+        return new static(sprintf('Parameter (%s) does not exist', $key), self::UNKNOWN_PARAMETER);
     }
 
     /**

@@ -15,21 +15,21 @@ class ConfigSchemaTest extends TestCase
         $this->assertInstanceOf(ConfigParameter::class, $schema->getParameter(ConfigSchema::LOG_LEVEL));
     }
 
-    public function testGetNotExistingOption()
+    public function testGetNotExistingParameter()
     {
         $this->expectException(ConfigException::class);
-        $this->expectExceptionCode(ConfigException::UNKNOWN_OPTION);
+        $this->expectExceptionCode(ConfigException::UNKNOWN_PARAMETER);
         (new ConfigSchema())->getParameter('foobar');
     }
 
-    public function testIsOption()
+    public function testIsParameter()
     {
         $schema = (new ConfigSchema())->setParameters(...ConfigSchema::createDefaultParameters($this->connectorDir));
         $this->assertTrue($schema->hasParameter(ConfigSchema::LOG_LEVEL));
         $this->assertFalse($schema->hasParameter('yolo'));
     }
 
-    public function testGetOptions()
+    public function testGetParameters()
     {
         $schema = new ConfigSchema();
         $schema->setParameter(new ConfigParameter('foo', ConfigParameter::TYPE_INTEGER));
@@ -40,7 +40,7 @@ class ConfigSchemaTest extends TestCase
         $this->assertEquals(array_values($schemaArray), $schema->getParameters());
     }
 
-    public function testSetOption()
+    public function testSetparameter()
     {
         $schema = new ConfigSchema();
         $reflectionClass = new \ReflectionClass($schema);
@@ -54,7 +54,7 @@ class ConfigSchemaTest extends TestCase
         $this->assertEquals($option, $actualOption);
     }
 
-    public function testSetOptions()
+    public function testSetParameters()
     {
         $schema = new ConfigSchema();
         $reflectionClass = new \ReflectionClass($schema);
@@ -62,7 +62,7 @@ class ConfigSchemaTest extends TestCase
         $reflectionProperty->setAccessible(true);
         $this->assertCount(0, $reflectionProperty->getValue($schema));
         $schema->setParameters(...ConfigSchema::createDefaultParameters($this->connectorDir));
-        $this->assertCount(5, $reflectionProperty->getValue($schema));
+        $this->assertCount(6, $reflectionProperty->getValue($schema));
     }
 
     public function testGetDefaultValues()
@@ -74,6 +74,7 @@ class ConfigSchemaTest extends TestCase
             ConfigSchema::CONNECTOR_DIR => $this->connectorDir,
             ConfigSchema::LOGS_DIR => sprintf('%s/logs', $this->connectorDir),
             ConfigSchema::PLUGINS_DIR => sprintf('%s/plugins', $this->connectorDir),
+            ConfigSchema::FEATURES_PATH => sprintf('%s/config/features.json', $this->connectorDir),
         ];
         $actual = $schema->getDefaultValues();
         $this->assertEquals($expected, $actual);

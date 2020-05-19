@@ -102,6 +102,6 @@ class Method
      */
     public static function createFromRequestPacket(RequestPacket $packet): Method
     {
-        return static::createFromRpcMethod($packet->getMethod());
+        return static::createFromRpcMethod(RpcMethod::mapMethod($packet->getMethod()));
     }
 }

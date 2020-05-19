@@ -13,8 +13,8 @@ class ConfigSchema
         MAIN_LANGUAGE = 'main_language',
         CONNECTOR_DIR = 'connector_dir',
         LOGS_DIR = 'logs_dir',
-        PLUGINS_DIR = 'plugins_dir';
-
+        PLUGINS_DIR = 'plugins_dir',
+        FEATURES_PATH = 'features_path';
 
     /**
      * @var ConfigParameter[]
@@ -120,6 +120,7 @@ class ConfigSchema
             ConfigParameter::create(self::CONNECTOR_DIR, ConfigParameter::TYPE_STRING, true, true, $connectorDir),
             ConfigParameter::create(self::LOGS_DIR, ConfigParameter::TYPE_STRING, true, true, sprintf('%s/logs', $connectorDir)),
             ConfigParameter::create(self::PLUGINS_DIR, ConfigParameter::TYPE_STRING, true, false, sprintf('%s/plugins', $connectorDir)),
+            ConfigParameter::create(self::FEATURES_PATH, ConfigParameter::TYPE_STRING, true, false, sprintf('%s/config/features.json', $connectorDir)),
         ];
     }
 }
