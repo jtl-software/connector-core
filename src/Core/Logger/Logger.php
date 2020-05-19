@@ -7,6 +7,7 @@
 namespace jtl\Connector\Core\Logger;
 
 use jtl\Connector\Core\IO\Path;
+use Monolog\Formatter\JsonFormatter;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Handler\StreamHandler;
 
@@ -19,6 +20,8 @@ class Logger extends \Monolog\Logger
     const CHANNEL_LINKER = 'linker';
     const CHANNEL_RPC = 'rpc';
     const CHANNEL_SECURITY = 'security';
+
+    protected static $format = '';
 
     /**
      * Adds a log record at an arbitrary level.
@@ -54,10 +57,15 @@ class Logger extends \Monolog\Logger
                 "{$channel}.log"
             );
         }
-        
+
         $log = self::getLogger($channel);
         if (!$log->isHandling($level)) {
-            $log->pushHandler(new RotatingFileHandler(implode(DIRECTORY_SEPARATOR, $path)), 2, $level);
+            $handler = new RotatingFileHandler(implode(DIRECTORY_SEPARATOR, $path));
+            $formatterClass = sprintf('Monolog\Formatter\%sFormatter', ucfirst(self::$format));
+            if(class_exists($formatterClass)) {
+                $handler->setFormatter(new $formatterClass());
+            }
+            $log->pushHandler($handler, 2, $level);
         }
 
         return @$log->log($level, $message);
@@ -72,5 +80,10 @@ class Logger extends \Monolog\Logger
     public static function getLogger($channel)
     {
         return LoggerFactory::get($channel);
+    }
+
+    public static function setFormat(string $format)
+    {
+        self::$format = $format;
     }
 }
