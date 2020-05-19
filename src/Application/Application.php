@@ -137,38 +137,33 @@ class Application
 
     /**
      * Application constructor.
+     * @param ConfigSchema $configSchema
+     * @param ConnectorInterface $connector
      * @param string $connectorDir
-     * @param ConnectorInterface $endpointConnector
      * @param ConfigInterface|null $config
-     * @param ConfigSchema|null $configSchema
      * @throws ApplicationException
-     * @throws ConfigException
      */
-    public function __construct(string $connectorDir, ConnectorInterface $endpointConnector, ConfigInterface $config = null, ConfigSchema $configSchema = null)
+    public function __construct(ConfigSchema $configSchema, ConnectorInterface $connector, string $connectorDir, ConfigInterface $config = null)
     {
         if (!is_dir($connectorDir)) {
             throw ApplicationException::connectorDirNotExists($connectorDir);
         }
         AnnotationRegistry::registerLoader('class_exists');
 
+        $this->configSchema = $configSchema;
+        $this->connector = $connector;
         $this->connectorDir = $connectorDir;
-        $this->connector = $endpointConnector;
-        $this->eventDispatcher = new EventDispatcher();
-        $this->serializer = SerializerBuilder::getInstance()->build();
-        $this->errorHandler = new ErrorHandler($this->eventDispatcher, $this->serializer);
         $this->container = (new ContainerBuilder())->build();
         $this->container->set(Application::class, $this);
+        $this->eventDispatcher = new EventDispatcher();
+        $this->serializer = SerializerBuilder::getInstance()->build();
         $this->temp = new Temp($this->connectorDir);
+        $this->errorHandler = new ErrorHandler($this->eventDispatcher, $this->serializer);
 
         if (is_null($config)) {
             $config = new FileConfig(sprintf('%s/config/config.json', $this->connectorDir));
         }
         $this->config = $config;
-
-        if (is_null($configSchema)) {
-            $configSchema = new ConfigSchema();
-        }
-        $this->configSchema = $configSchema;
     }
 
     /**

@@ -58,7 +58,7 @@ class ApplicationTest extends TestCase
     public function testHandleRequestControllerClassNotFoundException()
     {
         $connector = $this->createConnector('FooBar');
-        $application = $this->createInitializedApplication($connector);
+        $application = $this->createInitializedApplication(null, $connector);
         $request = Request::create(Controller::PRODUCT, Action::PUSH, [new Product()]);
         $this->expectException(ApplicationException::class);
         $application->handleRequest($request);
@@ -163,7 +163,7 @@ class ApplicationTest extends TestCase
      */
     public function testHandleRequestControllerClassNeedToBeInitialized()
     {
-        $application = $this->createInitializedApplication($this->createConnector("Jtl\Connector\Core\Controller"));
+        $application = $this->createInitializedApplication(null, $this->createConnector("Jtl\Connector\Core\Controller"));
         $ack = new Ack();
         $request = Request::create(Controller::CONNECTOR, Action::ACK, [$ack]);
         $response = $application->handleRequest($request);
@@ -173,6 +173,7 @@ class ApplicationTest extends TestCase
 
     /**
      * @throws ApplicationException
+     * @throws ConfigException
      * @throws DependencyException
      * @throws NotFoundException
      * @throws \ReflectionException
@@ -182,7 +183,7 @@ class ApplicationTest extends TestCase
         $schema = (new ConfigSchema())
             ->setParameter(new ConfigParameter('foo', ConfigParameter::TYPE_STRING))
             ->setParameter(new ConfigParameter('bar', ConfigParameter::TYPE_STRING));
-        $application = $this->createApplication(null, $this->createConfig(['foo' => 'you', 'bar' => 'jau']), $schema);
+        $application = $this->createApplication($schema, null, null, $this->createConfig(['foo' => 'you', 'bar' => 'jau']));
         $container = $application->getContainer();
 
         $this->assertFalse($container->has(TokenValidatorInterface::class));
@@ -207,7 +208,7 @@ class ApplicationTest extends TestCase
     {
         $defaultParameters = ConfigSchema::createDefaultParameters($this->connectorDir);
         $schema = new ConfigSchema();
-        $application = $this->createApplication(null, null, $schema);
+        $application = $this->createApplication($schema);
         foreach ($defaultParameters as $parameter) {
             $this->assertFalse($schema->hasParameter($parameter->getKey()));
         }
@@ -235,7 +236,7 @@ class ApplicationTest extends TestCase
         $this->assertFalse($config->has('bar'));
         $this->assertFalse($config->has('baz'));
 
-        $application = $this->createApplication(null, $config, $schema);
+        $application = $this->createApplication($schema,null, null, $config);
         $this->invokeMethodFromObject($application, 'prepareConfig');
 
         $this->assertEquals(42, $config->get('foo'));
@@ -258,7 +259,7 @@ class ApplicationTest extends TestCase
             ->setParameter(ConfigParameter::create('tra', ConfigParameter::TYPE_DOUBLE, true, false));
 
         $config = $this->createConfig(['foo' => 122, 'bar' => true, 'baz' => 'schnatz', 'tri' => 0.315, 'tra' => 0.99]);
-        $application = $this->createApplication(null, $config, $schema);
+        $application = $this->createApplication($schema,null, null, $config);
 
         $globalConfig = GlobalConfig::getInstance();
         $this->assertFalse($globalConfig->has('foo'));
@@ -316,7 +317,7 @@ class ApplicationTest extends TestCase
 
         /** @var Application|MockObject $app */
         $app = $this->getMockBuilder(Application::class)
-            ->setConstructorArgs([$this->connectorDir, $connector, $config, $configSchema])
+            ->setConstructorArgs([$configSchema, $connector, $this->connectorDir, $config])
             ->onlyMethods(['prepareConfig', 'startSession', 'loadPlugins', 'prepareContainer'])
             ->getMock();
         $app->setSessionHandler($this->createMock(\SessionHandlerInterface::class));
@@ -385,11 +386,16 @@ class ApplicationTest extends TestCase
      * @throws ConfigException
      */
     protected function createApplication(
-        ConnectorInterface $connector = null,
-        ConfigInterface $config = null,
         ConfigSchema $configSchema = null,
-        string $connectorDir = null
-    ): Application {
+        ConnectorInterface $connector = null,
+        string $connectorDir = null,
+        ConfigInterface $config = null
+    ): Application
+    {
+        if (is_null($configSchema)) {
+            $configSchema = new ConfigSchema();
+        }
+
         if (is_null($connector)) {
             $connector = $this->createConnector();
         }
@@ -402,7 +408,7 @@ class ApplicationTest extends TestCase
             $connectorDir = $this->connectorDir;
         }
 
-        return new Application($connectorDir, $connector, $config, $configSchema);
+        return new Application($configSchema, $connector, $connectorDir, $config);
     }
 
     /**
@@ -415,21 +421,22 @@ class ApplicationTest extends TestCase
      * @throws ConfigException
      */
     protected function createInitializedApplication(
-        ConnectorInterface $connector = null,
-        ConfigInterface $config = null,
         ConfigSchema $configSchema = null,
-        string $connectorDir = null
-    ) {
+        ConnectorInterface $connector = null,
+        string $connectorDir = null,
+        ConfigInterface $config = null
+    )
+    {
         $sessionHandler = $this->createMock(\SessionHandlerInterface::class);
-        if(is_null($configSchema)) {
+        if (is_null($configSchema)) {
             $configSchema = (new ConfigSchema())->setParameters(...ConfigSchema::createDefaultParameters($this->connectorDir));
         }
 
-        if(is_null($config)) {
+        if (is_null($config)) {
             $config = new ArrayConfig($configSchema->getDefaultValues());
         }
 
-        $app = $this->createApplication($connector, $config, $configSchema, $connectorDir);
+        $app = $this->createApplication($configSchema, $connector, $connectorDir, $config);
         $app->setSessionHandler($sessionHandler);
         $app->getContainer()->set(PrimaryKeyMapperInterface::class, $this->createMock(PrimaryKeyMapperInterface::class));
         $app->getContainer()->set(\SessionHandlerInterface::class, $sessionHandler);
