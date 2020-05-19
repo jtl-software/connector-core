@@ -185,16 +185,30 @@ class Application
         $this->prepareConfig();
         $this->eventDispatcher->addSubscriber(new PrepareProductPricesSubscriber());
         $this->errorHandler->register();
+        $method = Method::createFromRpcMethod('unknown.unknown');
 
         try {
             $jtlrpc = HttpRequest::getJtlrpc();
             $requestPacket = RequestPacket::createFromJtlrpc($jtlrpc, $this->serializer);
+            if (!$requestPacket->isValid()) {
+                throw RpcException::invalidRequest();
+            }
 
             $method = Method::createFromRpcMethod(RpcMethod::mapMethod($requestPacket->getMethod()));
-
-            if (!$requestPacket->isValid() || !RpcMethod::isMethod($requestPacket->getMethod())) {
-                throw new RpcException("Invalid request", ErrorCode::INVALID_REQUEST);
+            if (!Controller::isController($method->getController())) {
+                throw DefinitionException::unknownController($method->getController());
             }
+
+            if (!Action::isAction($method->getAction())) {
+                throw DefinitionException::unknownAction($method->getAction());
+            }
+
+            $this->startSession($requestPacket->getMethod());
+            $this->connector->initialize($this->config, $this->container, $this->eventDispatcher);
+            $this->config->set(ConfigSchema::CONNECTOR_DIR, $this->connectorDir);
+            $this->configSchema->validateConfig($this->config);
+            $this->prepareContainer();
+            $this->loadPlugins();
 
             $logJtlrpc = $jtlrpc;
             if ($requestPacket->getMethod() === RpcMethod::AUTH) {
@@ -212,13 +226,6 @@ class Application
                     Logger::CHANNEL_RPC
                 );
             }
-
-            $this->startSession($requestPacket->getMethod());
-            $this->connector->initialize($this->config, $this->container, $this->eventDispatcher);
-            $this->config->set(ConfigSchema::CONNECTOR_DIR, $this->connectorDir);
-            $this->configSchema->validateConfig($this->config);
-            $this->prepareContainer();
-            $this->loadPlugins();
 
             $eventData = Json::decode((string)$jtlrpc, true);
             $event = new RpcEvent($eventData, $method->getController(), $method->getAction());
@@ -275,10 +282,7 @@ class Application
      * @throws ApplicationException
      * @throws CompressionException
      * @throws DefinitionException
-     * @throws DependencyException
      * @throws HttpException
-     * @throws LinkerException
-     * @throws NotFoundException
      * @throws RpcException
      * @throws \ReflectionException
      * @throws \Throwable
@@ -367,7 +371,8 @@ class Application
         RequestPacket $requestPacket,
         Method $method,
         string $modelNamespace
-    ): Request {
+    ): Request
+    {
         $controller = $method->getController();
         $action = $method->getAction();
 
@@ -707,7 +712,8 @@ class Application
         ?object $model,
         string $controller,
         string $action
-    ) {
+    )
+    {
         $messages = [
             sprintf('Controller = %s', $controller),
             sprintf('Action = %s', $action),

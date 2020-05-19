@@ -5,6 +5,11 @@
  */
 namespace Jtl\Connector\Core\Rpc;
 
+use Jtl\Connector\Core\Definition\Action;
+use Jtl\Connector\Core\Definition\Controller;
+use Jtl\Connector\Core\Definition\RpcMethod;
+use Jtl\Connector\Core\Exception\DefinitionException;
+use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Utilities\Str;
 
 class Method

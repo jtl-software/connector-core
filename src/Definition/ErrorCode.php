@@ -7,10 +7,14 @@ namespace Jtl\Connector\Core\Definition;
 
 final class ErrorCode
 {
-    const NO_SESSION = 789;
-    const AUTHENTICATION_FAILED = 790;
-    const INVALID_SESSION = -32000;
-    const UNINITIALIZED_SESSION = -32001;
-    const INVALID_REQUEST = -32600;
-    const PARSE_ERROR = -32700;
+    public const
+        NO_SESSION = 789,
+        AUTHENTICATION_FAILED = 790,
+        INVALID_SESSION = -32000,
+        UNINITIALIZED_SESSION = -32001,
+        INVALID_REQUEST = -32600,
+        PARSE_ERROR = -32700,
+        INVALID_METHOD = -32701,
+        UNKNOWN_CONTROLLER = 33000,
+        UNKNOWN_ACTION = 33001;
 }

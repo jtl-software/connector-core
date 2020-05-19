@@ -16,11 +16,13 @@ use Jtl\Connector\Core\Controller\PushInterface;
 use Jtl\Connector\Core\Controller\TransactionalInterface;
 use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Controller;
+use Jtl\Connector\Core\Definition\ErrorCode;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\ConfigException;
 use Jtl\Connector\Core\Exception\ControllerException;
 use Jtl\Connector\Core\Exception\DefinitionException;
+use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Linker\IdentityLinker;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Jtl\Connector\Core\Model\Ack;
@@ -30,6 +32,7 @@ use Jtl\Connector\Core\Model\Generator\ManufacturerFactory;
 use Jtl\Connector\Core\Model\Manufacturer;
 use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Model\QueryFilter;
+use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
@@ -331,6 +334,45 @@ class ApplicationTest extends TestCase
         $controller->expects($this->once())->method('push')->willReturn($manufacturer);
         $this->expectOutputString(json_encode($responsePacket->toArray($serializer)));
         $app->run();
+    }
+
+    public function testRunInvalidRpcMethod()
+    {
+        $serializer = SerializerBuilder::getInstance()->build();
+        $factory = AbstractModelFactory::createFactory(Model::MANUFACTURER);
+        $id = $factory->getFaker()->uuid;
+        $requestPacket = (new RequestPacket())->setMethod('yoo')->setParams([])->setId($id)->toArray();
+        $_POST['jtlrpc'] = json_encode($requestPacket);
+        $error = (new Error())->setCode(ErrorCode::INVALID_REQUEST)->setMessage("Invalid request");
+        $responsePacket = (new ResponsePacket())->setId($id)->setError($error);
+        $this->expectOutputString(json_encode($responsePacket->toArray($serializer)));
+        $this->createApplication()->run();
+    }
+
+    public function testRunUnknwonController()
+    {
+        $serializer = SerializerBuilder::getInstance()->build();
+        $factory = AbstractModelFactory::createFactory(Model::MANUFACTURER);
+        $id = $factory->getFaker()->uuid;
+        $requestPacket = (new RequestPacket())->setMethod('foo.bar')->setParams([])->setId($id)->toArray();
+        $_POST['jtlrpc'] = json_encode($requestPacket);
+        $error = (new Error())->setCode(ErrorCode::UNKNOWN_CONTROLLER)->setMessage("Unknown controller (Foo)");
+        $responsePacket = (new ResponsePacket())->setId($id)->setError($error);
+        $this->expectOutputString(json_encode($responsePacket->toArray($serializer)));
+        $this->createApplication()->run();
+    }
+
+    public function testRunUnknwonAction()
+    {
+        $serializer = SerializerBuilder::getInstance()->build();
+        $factory = AbstractModelFactory::createFactory(Model::MANUFACTURER);
+        $id = $factory->getFaker()->uuid;
+        $requestPacket = (new RequestPacket())->setMethod('category.bar')->setParams([])->setId($id)->toArray();
+        $_POST['jtlrpc'] = json_encode($requestPacket);
+        $error = (new Error())->setCode(ErrorCode::UNKNOWN_ACTION)->setMessage("Unknown action (bar)");
+        $responsePacket = (new ResponsePacket())->setId($id)->setError($error);
+        $this->expectOutputString(json_encode($responsePacket->toArray($serializer)));
+        $this->createApplication()->run();
     }
 
     /**

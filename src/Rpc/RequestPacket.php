@@ -2,6 +2,7 @@
 namespace Jtl\Connector\Core\Rpc;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Definition\RpcMethod;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use JMS\Serializer\Serializer as JmsSerializer;
 
@@ -88,7 +89,7 @@ class RequestPacket extends Packet
         }
 
         // A String containing the name of the method to be invoked
-        if ($this->getMethod() === '') {
+        if (!RpcMethod::isMethod($this->getMethod())) {
             $isValid = false;
         }
 
