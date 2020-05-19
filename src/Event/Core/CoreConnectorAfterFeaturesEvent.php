@@ -1,7 +1,7 @@
 <?php
 namespace jtl\Connector\Event\Core;
 
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class CoreConnectorAfterFeaturesEvent extends Event
 {

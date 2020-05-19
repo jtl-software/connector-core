@@ -1,3 +1,8 @@
+3.1.15
+-----
+- Added possibility to change log formatter
+- Fixed compatibility to Symfony event-dispatcher 5 
+
 3.1.14
 -----
 - Removed incompatible symfony/event-dispatcher version from composer

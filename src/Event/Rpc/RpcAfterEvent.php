@@ -1,7 +1,7 @@
 <?php
 namespace jtl\Connector\Event\Rpc;
 
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class RpcAfterEvent extends Event
 {

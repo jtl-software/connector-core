@@ -1,7 +1,7 @@
 <?php
 namespace jtl\Connector\Event\DeliveryNote;
 
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 use jtl\Connector\Model\DeliveryNote;
 
 

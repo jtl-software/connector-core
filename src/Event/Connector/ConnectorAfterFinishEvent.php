@@ -2,7 +2,7 @@
 namespace jtl\Connector\Event\Connector;
 
 use jtl\Connector\Model\BoolResult;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class ConnectorAfterFinishEvent extends Event
 {
