@@ -12,8 +12,6 @@ use Jtl\Connector\Core\Config\ConfigParameter;
 use Jtl\Connector\Core\Config\ConfigSchema;
 use Jtl\Connector\Core\Config\GlobalConfig;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
-use Jtl\Connector\Core\Controller\PushInterface;
-use Jtl\Connector\Core\Controller\TransactionalInterface;
 use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Definition\ErrorCode;
@@ -22,13 +20,10 @@ use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\ConfigException;
 use Jtl\Connector\Core\Exception\ControllerException;
 use Jtl\Connector\Core\Exception\DefinitionException;
-use Jtl\Connector\Core\Exception\RpcException;
-use Jtl\Connector\Core\Linker\IdentityLinker;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Category;
 use Jtl\Connector\Core\Model\Generator\AbstractModelFactory;
-use Jtl\Connector\Core\Model\Generator\ManufacturerFactory;
 use Jtl\Connector\Core\Model\Manufacturer;
 use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Model\QueryFilter;
@@ -36,6 +31,7 @@ use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
+use Jtl\Connector\Core\Session\SessionHandlerInterface;
 use Jtl\Connector\Core\Test\TestCase;
 use Jtl\Connector\Core\Test\Stub\Controller\TransactionalControllerStub;
 use MyPlugin\Bootstrap;
@@ -188,13 +184,13 @@ class ApplicationTest extends TestCase
 
         $this->assertFalse($container->has(TokenValidatorInterface::class));
         $this->assertFalse($container->has(PrimaryKeyMapperInterface::class));
-        $this->assertFalse($container->has(\SessionHandlerInterface::class));
+        $this->assertFalse($container->has(SessionHandlerInterface::class));
         $this->assertFalse($container->has('foo'));
         $this->assertFalse($container->has('bar'));
         $this->invokeMethodFromObject($application, 'prepareContainer');
         $this->assertTrue($container->has(TokenValidatorInterface::class));
         $this->assertTrue($container->has(PrimaryKeyMapperInterface::class));
-        $this->assertTrue($container->has(\SessionHandlerInterface::class));
+        $this->assertTrue($container->has(SessionHandlerInterface::class));
         $this->assertEquals('you', $container->get('foo'));
         $this->assertEquals('jau', $container->get('bar'));
     }
@@ -320,8 +316,8 @@ class ApplicationTest extends TestCase
             ->setConstructorArgs([$configSchema, $connector, $this->connectorDir, $config])
             ->onlyMethods(['prepareConfig', 'startSession', 'loadPlugins', 'prepareContainer'])
             ->getMock();
-        $app->setSessionHandler($this->createMock(\SessionHandlerInterface::class));
-        $app->getContainer()->set(\SessionHandlerInterface::class, $this->createMock(\SessionHandlerInterface::class));
+        $app->setSessionHandler($this->createMock(SessionHandlerInterface::class));
+        $app->getContainer()->set(SessionHandlerInterface::class, $this->createMock(SessionHandlerInterface::class));
         $app->getContainer()->set(TokenValidatorInterface::class, $this->createMock(TokenValidatorInterface::class));
         $app->getContainer()->set(PrimaryKeyMapperInterface::class, $this->createMock(PrimaryKeyMapperInterface::class));
         $app->getContainer()->set(Controller::MANUFACTURER, $controller);
@@ -427,7 +423,7 @@ class ApplicationTest extends TestCase
         ConfigInterface $config = null
     )
     {
-        $sessionHandler = $this->createMock(\SessionHandlerInterface::class);
+        $sessionHandler = $this->createMock(SessionHandlerInterface::class);
         if (is_null($configSchema)) {
             $configSchema = (new ConfigSchema())->setParameters(...ConfigSchema::createDefaultParameters($this->connectorDir));
         }
@@ -439,7 +435,7 @@ class ApplicationTest extends TestCase
         $app = $this->createApplication($configSchema, $connector, $connectorDir, $config);
         $app->setSessionHandler($sessionHandler);
         $app->getContainer()->set(PrimaryKeyMapperInterface::class, $this->createMock(PrimaryKeyMapperInterface::class));
-        $app->getContainer()->set(\SessionHandlerInterface::class, $sessionHandler);
+        $app->getContainer()->set(SessionHandlerInterface::class, $sessionHandler);
         $app->getContainer()->set(TokenValidatorInterface::class, $this->createMock(TokenValidatorInterface::class));
         return $app;
     }

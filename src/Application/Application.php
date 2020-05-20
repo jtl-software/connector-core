@@ -59,7 +59,6 @@ use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Http\Request as HttpRequest;
 use Jtl\Connector\Core\Http\Response as HttpResponse;
 use Jtl\Connector\Core\Config\FileConfig;
-use Jtl\Connector\Core\Exception\LinkerException;
 use Jtl\Connector\Core\Subscriber\PrepareProductPricesSubscriber;
 use Jtl\Connector\Core\Definition\RpcMethod;
 use Jtl\Connector\Core\Logger\Logger;
@@ -68,7 +67,8 @@ use Jtl\Connector\Core\Linker\IdentityLinker;
 use Jtl\Connector\Core\Model\AbstractDataModel;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
-use Jtl\Connector\Core\Session\SqliteSession;
+use Jtl\Connector\Core\Session\SqliteSessionHandler;
+use Jtl\Connector\Core\Session\SessionHandlerInterface;
 use Noodlehaus\ConfigInterface;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -101,7 +101,7 @@ class Application
     protected $configSchema;
 
     /**
-     * @var \SessionHandlerInterface
+     * @var SessionHandlerInterface
      */
     protected $sessionHandler;
 
@@ -437,7 +437,7 @@ class Application
                         $this->config->get(ConfigSchema::FEATURES_PATH),
                         $container->get(IdentityLinker::class),
                         $container->get(ChecksumLinker::class),
-                        $container->get(\SessionHandlerInterface::class),
+                        $container->get(SessionHandlerInterface::class),
                         $container->get(TokenValidatorInterface::class)
                     );
                 });
@@ -585,7 +585,7 @@ class Application
             }
         }
 
-        $this->container->set(\SessionHandlerInterface::class, $this->getSessionHandler());
+        $this->container->set(SessionHandlerInterface::class, $this->getSessionHandler());
         $this->container->set(TokenValidatorInterface::class, $this->connector->getTokenValidator());
         $this->container->set(PrimaryKeyMapperInterface::class, $this->connector->getPrimaryKeyMapper());
         if ($this->connector instanceof UseChecksumInterface) {
@@ -612,7 +612,7 @@ class Application
 
         session_name($sessionName);
         if ($sessionId !== null) {
-            if ($sessionHandler->check($sessionId)) {
+            if ($sessionHandler->isValid($sessionId)) {
                 session_id($sessionId);
             } else {
                 throw new SessionException("Session is invalid", ErrorCode::INVALID_SESSION);
@@ -750,12 +750,12 @@ class Application
     /**
      * Session getter
      *
-     * @return \SessionHandlerInterface
+     * @return SessionHandlerInterface
      */
-    public function getSessionHandler(): \SessionHandlerInterface
+    public function getSessionHandler(): SessionHandlerInterface
     {
         if (is_null($this->sessionHandler)) {
-            $this->sessionHandler = new SqliteSession($this->connectorDir);
+            $this->sessionHandler = new SqliteSessionHandler($this->connectorDir);
         }
         return $this->sessionHandler;
     }
@@ -763,10 +763,10 @@ class Application
     /**
      * Session getter
      *
-     * @param \SessionHandlerInterface $sessionHandler
+     * @param SessionHandlerInterface $sessionHandler
      * @return Application
      */
-    public function setSessionHandler(\SessionHandlerInterface $sessionHandler): Application
+    public function setSessionHandler(SessionHandlerInterface $sessionHandler): Application
     {
         $this->sessionHandler = $sessionHandler;
         return $this;

@@ -16,7 +16,7 @@ use Jtl\Connector\Core\Database\Sqlite3;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-final class SqliteSession implements \SessionHandlerInterface
+final class SqliteSessionHandler implements SessionHandlerInterface
 {
     /**
      * @var int
@@ -82,7 +82,7 @@ final class SqliteSession implements \SessionHandlerInterface
      * @param string $sessionId
      * @return boolean
      */
-    public function check(string $sessionId)
+    public function isValid(string $sessionId): bool
     {
         $sessionId = $this->db->escapeString($sessionId);
         
