@@ -16,6 +16,7 @@ use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Definition\ErrorCode;
 use Jtl\Connector\Core\Definition\Model;
+use Jtl\Connector\Core\Definition\RpcMethod;
 use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\ConfigException;
 use Jtl\Connector\Core\Exception\ControllerException;
@@ -32,6 +33,7 @@ use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Session\SessionHandlerInterface;
+use Jtl\Connector\Core\Session\SqliteSessionHandler;
 use Jtl\Connector\Core\Test\TestCase;
 use Jtl\Connector\Core\Test\Stub\Controller\TransactionalControllerStub;
 use MyPlugin\Bootstrap;
@@ -379,7 +381,6 @@ class ApplicationTest extends TestCase
      * @param string|null $connectorDir
      * @return Application
      * @throws ApplicationException
-     * @throws ConfigException
      */
     protected function createApplication(
         ConfigSchema $configSchema = null,

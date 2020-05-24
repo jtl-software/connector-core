@@ -21,6 +21,7 @@ use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
 use Jtl\Connector\Core\Model\ConnectorIdentification;
 use Jtl\Connector\Core\Model\ConnectorServerInfo;
+use Jtl\Connector\Core\Model\FeatureFlag;
 use Jtl\Connector\Core\Model\Features;
 use Jtl\Connector\Core\Model\Session;
 use Jtl\Connector\Core\Serializer\Json;
@@ -114,7 +115,9 @@ class ConnectorController
             $flags = $features['flags'];
         }
 
-        return Features::create($entities, $flags);
+        $features = Features::create($entities, $flags);
+        $features->setFlag(new FeatureFlag('needs_finish_call', true));
+        return $features;
     }
 
     /**
@@ -235,6 +238,9 @@ class ConnectorController
      */
     public function finish(): bool
     {
+        if(session_status() === \PHP_SESSION_ACTIVE) {
+            session_destroy();
+        }
         return true;
     }
 

@@ -97,7 +97,7 @@ class RequestTest extends TestCase
         $isDeleted = Request::deleteFileUpload($file);
 
         $this->assertTrue($isDeleted);
-        $this->assertFileNotExists($file);
+        $this->assertFileDoesNotExist($file);
     }
 
     /**
@@ -143,9 +143,9 @@ class RequestTest extends TestCase
 
         Request::deleteFileUploads($files);
 
-        $this->assertDirectoryNotExists($tmpDir);
+        $this->assertDirectoryDoesNotExist($tmpDir);
         foreach ($files as $file) {
-            $this->assertFileNotExists($file);
+            $this->assertFileDoesNotExist($file);
         }
     }
 

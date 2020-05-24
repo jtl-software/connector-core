@@ -69,11 +69,13 @@ class ConnectorTest extends TestCase
         $jsonFeatures = ["entities" => ["Category" => ["push" => true]]];
         $controller->expects($this->once())->method('fetchFeaturesData')->willReturn($jsonFeatures);
 
+        /** @var Features $features */
         $features = $controller->features();
 
         $this->assertInstanceOf(Features::class, $features);
         $this->assertCount(1, $features->getEntities());
-        $this->assertCount(0, $features->getFlags());
+        $this->assertTrue($features->hasFlag('needs_finish_call'));
+        $this->assertTrue($features->getFlag('needs_finish_call')->isActive());
     }
 
     /**

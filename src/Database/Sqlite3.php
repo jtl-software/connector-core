@@ -112,11 +112,11 @@ class Sqlite3 implements DatabaseInterface
             case "SELECT":
                 return $this->fetch($query);
             case "UPDATE":
-                return $this->_exec($query);
+                return $this->exec($query);
             case "INSERT":
                 return $this->insert($query);
             case "DELETE":
-                return $this->_exec($query);
+                return $this->exec($query);
         }
 
         return null;
@@ -157,17 +157,6 @@ class Sqlite3 implements DatabaseInterface
         }
 
         return null;
-    }
-
-    /**
-     * Sqlite Update or Delete
-     *
-     * @param string $query
-     * @return boolean
-     */
-    protected function _exec($query)
-    {
-        return $this->db->exec($query);
     }
 
     /**

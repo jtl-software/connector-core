@@ -30,7 +30,7 @@ class TempTest extends TestCase
 
         rmdir($dir);
 
-        $this->assertDirectoryNotExists($dir);
+        $this->assertDirectoryDoesNotExist($dir);
     }
 
     /**
@@ -45,6 +45,6 @@ class TempTest extends TestCase
 
         rmdir($dir);
 
-        $this->assertDirectoryNotExists($dir);
+        $this->assertDirectoryDoesNotExist($dir);
     }
 }

@@ -595,7 +595,9 @@ class Application
 
     /**
      * @param string $rpcMethod
-     * @throws SessionException|HttpException
+     * @throws ApplicationException
+     * @throws HttpException
+     * @throws SessionException
      */
     protected function startSession(string $rpcMethod): void
     {
@@ -608,18 +610,16 @@ class Application
 
         $sessionHandler = $this->getSessionHandler();
 
-        ini_set("session.gc_probability", 25);
-
         session_name($sessionName);
         if ($sessionId !== null) {
-            if ($sessionHandler->isValid($sessionId)) {
+            if ($sessionHandler->validateId($sessionId)) {
                 session_id($sessionId);
             } else {
                 throw new SessionException("Session is invalid", ErrorCode::INVALID_SESSION);
             }
         }
 
-        session_set_save_handler($sessionHandler);
+        session_set_save_handler($sessionHandler, true);
 
         session_start();
 
@@ -748,9 +748,8 @@ class Application
     }
 
     /**
-     * Session getter
-     *
      * @return SessionHandlerInterface
+     * @throws ApplicationException
      */
     public function getSessionHandler(): SessionHandlerInterface
     {
@@ -761,8 +760,6 @@ class Application
     }
 
     /**
-     * Session getter
-     *
      * @param SessionHandlerInterface $sessionHandler
      * @return Application
      */

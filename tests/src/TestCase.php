@@ -1,6 +1,8 @@
 <?php
 namespace Jtl\Connector\Core\Test;
 
+use Faker\Factory;
+use Faker\Generator;
 use Jtl\Connector\Core\Config\ArrayConfig;
 use Jtl\Connector\Core\Config\FileConfig;
 use Jtl\Connector\Core\Config\GlobalConfig;
@@ -23,6 +25,11 @@ class TestCase extends \PHPUnit\Framework\TestCase
     protected $configFile;
 
     /**
+     * @var Generator
+     */
+    protected $faker;
+
+    /**
      *
      */
     protected function setUp(): void
@@ -39,6 +46,8 @@ class TestCase extends \PHPUnit\Framework\TestCase
             ->withAnyArgs();
 
         unset($_POST);
+
+        $this->faker = Factory::create();
     }
 
     protected function tearDown(): void
