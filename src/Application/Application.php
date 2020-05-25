@@ -244,6 +244,10 @@ class Application
             $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::AFTER));
 
             HttpResponse::send($arrayResponse);
+
+            if(mt_rand(0, 99) === 0) {
+                $this->getSessionHandler()->gc((int)ini_get('session.gc_maxlifetime'));
+            }
         }
     }
 
