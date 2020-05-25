@@ -115,9 +115,7 @@ class ConnectorController
             $flags = $features['flags'];
         }
 
-        $features = Features::create($entities, $flags);
-        $features->setFlag(new FeatureFlag('needs_finish_call', true));
-        return $features;
+        return Features::create($entities, $flags);
     }
 
     /**

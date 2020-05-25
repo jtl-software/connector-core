@@ -39,6 +39,7 @@ use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\ConfigException;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\HttpException;
+use Jtl\Connector\Core\Exception\LinkerException;
 use Jtl\Connector\Core\IO\Temp;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Jtl\Connector\Core\Model\AbstractImage;
@@ -59,6 +60,7 @@ use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Http\Request as HttpRequest;
 use Jtl\Connector\Core\Http\Response as HttpResponse;
 use Jtl\Connector\Core\Config\FileConfig;
+use Jtl\Connector\Core\Subscriber\CoreFeaturesSubscriber;
 use Jtl\Connector\Core\Subscriber\PrepareProductPricesSubscriber;
 use Jtl\Connector\Core\Definition\RpcMethod;
 use Jtl\Connector\Core\Logger\Logger;
@@ -137,20 +139,19 @@ class Application
 
     /**
      * Application constructor.
-     * @param ConfigSchema $configSchema
      * @param ConnectorInterface $connector
      * @param string $connectorDir
      * @param ConfigInterface|null $config
+     * @param ConfigSchema $configSchema |null
      * @throws ApplicationException
      */
-    public function __construct(ConfigSchema $configSchema, ConnectorInterface $connector, string $connectorDir, ConfigInterface $config = null)
+    public function __construct(ConnectorInterface $connector, string $connectorDir, ConfigInterface $config = null, ConfigSchema $configSchema = null)
     {
         if (!is_dir($connectorDir)) {
             throw ApplicationException::connectorDirNotExists($connectorDir);
         }
         AnnotationRegistry::registerLoader('class_exists');
 
-        $this->configSchema = $configSchema;
         $this->connector = $connector;
         $this->connectorDir = $connectorDir;
         $this->container = (new ContainerBuilder())->build();
@@ -164,15 +165,23 @@ class Application
             $config = new FileConfig(sprintf('%s/config/config.json', $this->connectorDir));
         }
         $this->config = $config;
+
+        if (is_null($configSchema)) {
+            $configSchema = new ConfigSchema();
+        }
+        $this->configSchema = $configSchema;
     }
 
     /**
-     * @throws DefinitionException|ConfigException
+     * @throws ApplicationException
+     * @throws ConfigException
+     * @throws DefinitionException
      */
     public function run(): void
     {
         $this->prepareConfig();
         $this->eventDispatcher->addSubscriber(new PrepareProductPricesSubscriber());
+        $this->eventDispatcher->addSubscriber(new CoreFeaturesSubscriber());
         $this->errorHandler->register();
         $method = Method::createFromRpcMethod('unknown.unknown');
 
@@ -245,7 +254,7 @@ class Application
 
             HttpResponse::send($arrayResponse);
 
-            if(mt_rand(0, 99) === 0) {
+            if (mt_rand(0, 99) === 0) {
                 $this->getSessionHandler()->gc((int)ini_get('session.gc_maxlifetime'));
             }
         }
@@ -359,6 +368,12 @@ class Application
      * @param RequestPacket $requestPacket
      * @param Method $method
      * @param string $modelNamespace
+     * @return Request
+     * @throws DefinitionException
+     * @throws DependencyException
+     * @throws NotFoundException
+     * @throws LinkerException
+     * @throws \ReflectionException
      */
     protected function createHandleRequest(
         RequestPacket $requestPacket,
@@ -434,24 +449,23 @@ class Application
         $controller = $request->getController();
         $action = $request->getAction();
         $params = $request->getParams();
-        if (!$this->container->has($controller)) {
-            if (Action::isCoreAction($action)) {
-                $this->container->set($controller, function (ContainerInterface $container) {
-                    return new ConnectorController(
-                        $this->config->get(ConfigSchema::FEATURES_PATH),
-                        $container->get(IdentityLinker::class),
-                        $container->get(ChecksumLinker::class),
-                        $container->get(SessionHandlerInterface::class),
-                        $container->get(TokenValidatorInterface::class)
-                    );
-                });
-            } else {
-                $controllerClass = sprintf("%s\\%sController", $this->connector->getControllerNamespace(), $controller);
-                if (!class_exists($controllerClass)) {
-                    throw new ApplicationException(sprintf('Controller class %s does not exist!', $controllerClass));
-                }
-                $this->container->set($controller, $this->container->get($controllerClass));
+
+        if (Action::isCoreAction($action)) {
+            $this->container->set($controller, function (ContainerInterface $container) {
+                return new ConnectorController(
+                    $this->config->get(ConfigSchema::FEATURES_PATH),
+                    $container->get(IdentityLinker::class),
+                    $container->get(ChecksumLinker::class),
+                    $container->get(SessionHandlerInterface::class),
+                    $container->get(TokenValidatorInterface::class)
+                );
+            });
+        } elseif (!$this->container->has($controller)) {
+            $controllerClass = sprintf("%s\\%sController", $this->connector->getControllerNamespace(), $controller);
+            if (!class_exists($controllerClass)) {
+                throw new ApplicationException(sprintf('Controller class %s does not exist!', $controllerClass));
             }
+            $this->container->set($controller, $this->container->get($controllerClass));
         }
 
         $controllerObject = $this->container->get($controller);

@@ -15,6 +15,7 @@ use Jtl\Connector\Core\Connector\ConnectorInterface;
 use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Definition\ErrorCode;
+use Jtl\Connector\Core\Definition\Event;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Definition\RpcMethod;
 use Jtl\Connector\Core\Exception\ApplicationException;
@@ -34,6 +35,8 @@ use Jtl\Connector\Core\Rpc\ResponsePacket;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Session\SessionHandlerInterface;
 use Jtl\Connector\Core\Session\SqliteSessionHandler;
+use Jtl\Connector\Core\Subscriber\CoreFeaturesSubscriber;
+use Jtl\Connector\Core\Subscriber\PrepareProductPricesSubscriber;
 use Jtl\Connector\Core\Test\TestCase;
 use Jtl\Connector\Core\Test\Stub\Controller\TransactionalControllerStub;
 use MyPlugin\Bootstrap;
@@ -292,9 +295,10 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     *
+     * @throws ApplicationException
      * @throws ConfigException
      * @throws DefinitionException
+     * @throws \ReflectionException
      */
     public function testRun()
     {
@@ -315,7 +319,7 @@ class ApplicationTest extends TestCase
 
         /** @var Application|MockObject $app */
         $app = $this->getMockBuilder(Application::class)
-            ->setConstructorArgs([$configSchema, $connector, $this->connectorDir, $config])
+            ->setConstructorArgs([$connector, $this->connectorDir, $config, $configSchema])
             ->onlyMethods(['prepareConfig', 'startSession', 'loadPlugins', 'prepareContainer'])
             ->getMock();
         $app->setSessionHandler($this->createMock(SessionHandlerInterface::class));
@@ -333,6 +337,32 @@ class ApplicationTest extends TestCase
         $controller->expects($this->once())->method('push')->willReturn($manufacturer);
         $this->expectOutputString(json_encode($responsePacket->toArray($serializer)));
         $app->run();
+
+        $eventDispatcher = $app->getEventDispatcher();
+        $productPricesListeners = $eventDispatcher->getListeners(Event::createHandleEventName('ProductPrice', 'push', 'before'));
+        $this->assertGreaterThan(0, $productPricesListeners);
+
+        $prepareProductPriceSubscriberFound = false;
+        foreach($productPricesListeners as $listener) {
+            if($listener[0] instanceof PrepareProductPricesSubscriber) {
+                $prepareProductPriceSubscriberFound = true;
+                break;
+            }
+        }
+
+        $coreFeaturesListeners = $eventDispatcher->getListeners(Event::createCoreEventName('Connector', 'features', 'after'));
+        $this->assertGreaterThan(0, $coreFeaturesListeners);
+
+        $coreFeaturesListenerFound = false;
+        foreach($coreFeaturesListeners as $listener) {
+            if($listener[0] instanceof CoreFeaturesSubscriber) {
+                $coreFeaturesListenerFound = true;
+                break;
+            }
+        }
+
+        $this->assertTrue($prepareProductPriceSubscriberFound, 'No PrepareProductPricesSubscriber is registered');
+        $this->assertTrue($coreFeaturesListenerFound, 'No CoreFeaturesSubscriber is registered');
     }
 
     public function testRunInvalidRpcMethod()
@@ -405,7 +435,7 @@ class ApplicationTest extends TestCase
             $connectorDir = $this->connectorDir;
         }
 
-        return new Application($configSchema, $connector, $connectorDir, $config);
+        return new Application($connector, $connectorDir, $config, $configSchema);
     }
 
     /**

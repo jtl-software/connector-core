@@ -74,8 +74,6 @@ class ConnectorTest extends TestCase
 
         $this->assertInstanceOf(Features::class, $features);
         $this->assertCount(1, $features->getEntities());
-        $this->assertTrue($features->hasFlag('needs_finish_call'));
-        $this->assertTrue($features->getFlag('needs_finish_call')->isActive());
     }
 
     /**

@@ -20,7 +20,7 @@ class PrepareProductPricesSubscriber implements EventSubscriberInterface
     {
         return [
             Event::createHandleEventName(Controller::PRODUCT_PRICE, Action::PUSH, Event::BEFORE) => [
-                ['prepareProductPrices', 255]
+                ['prepareProductPrices', 10000]
             ]
         ];
     }
