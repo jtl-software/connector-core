@@ -12,8 +12,6 @@ use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 use Jtl\Connector\Core\Config\GlobalConfig;
 use Jtl\Connector\Core\Config\ConfigSchema;
-use Jtl\Connector\Core\Exception\DefinitionException;
-use stdClass;
 
 /**
  * Product properties.
@@ -88,7 +86,15 @@ class Product extends AbstractIdentity implements IdentificationInterface
      * @Serializer\Accessor(getter="getUnitId",setter="setUnitId")
      */
     protected $unitId = null;
-    
+
+    /**
+     * @var integer
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("additionalHandlingTime")
+     * @Serializer\Accessor(getter="getAdditionalHandlingTime",setter="setAdditionalHandlingTime")
+     */
+    protected $additionalHandlingTime = 0;
+
     /**
      * @var string Optional Amazon Standard Identification Number
      * @Serializer\Type("string")
@@ -684,8 +690,19 @@ class Product extends AbstractIdentity implements IdentificationInterface
     }
 
     /**
-     * @return array
-     * @throws DefinitionException
+     * @return integer
+     */
+    public function calculateHandlingTime(): int
+    {
+        $handlingTime = $this->getAdditionalHandlingTime();
+        if($this->getStockLevel()->getStockLevel() === 0.) {
+            $handlingTime += $this->getSupplierDeliveryTime();
+        }
+        return $handlingTime;
+    }
+
+    /**
+     * @return string[]
      */
     public function getIdentificationStrings(): array
     {
@@ -878,6 +895,24 @@ class Product extends AbstractIdentity implements IdentificationInterface
     public function getUnitId(): Identity
     {
         return $this->unitId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAdditionalHandlingTime(): int
+    {
+        return $this->additionalHandlingTime;
+    }
+
+    /**
+     * @param int $additionalHandlingTime
+     * @return Product
+     */
+    public function setAdditionalHandlingTime(int $additionalHandlingTime): Product
+    {
+        $this->additionalHandlingTime = $additionalHandlingTime;
+        return $this;
     }
     
     /**
