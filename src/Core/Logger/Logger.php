@@ -60,12 +60,12 @@ class Logger extends \Monolog\Logger
 
         $log = self::getLogger($channel);
         if (!$log->isHandling($level)) {
-            $handler = new RotatingFileHandler(implode(DIRECTORY_SEPARATOR, $path));
+            $handler = new RotatingFileHandler(implode(DIRECTORY_SEPARATOR, $path), 2, $level);
             $formatterClass = sprintf('Monolog\Formatter\%sFormatter', ucfirst(self::$format));
             if(class_exists($formatterClass)) {
                 $handler->setFormatter(new $formatterClass());
             }
-            $log->pushHandler($handler, 2, $level);
+            $log->pushHandler($handler);
         }
 
         return @$log->log($level, $message);
@@ -82,6 +82,9 @@ class Logger extends \Monolog\Logger
         return LoggerFactory::get($channel);
     }
 
+    /**
+     * @param string $format
+     */
     public static function setFormat(string $format)
     {
         self::$format = $format;
