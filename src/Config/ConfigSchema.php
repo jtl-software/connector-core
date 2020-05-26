@@ -12,9 +12,9 @@ class ConfigSchema
         LOG_LEVEL = 'log_level',
         MAIN_LANGUAGE = 'main_language',
         CONNECTOR_DIR = 'connector_dir',
-        LOGS_DIR = 'logs_dir',
-        PLUGINS_DIR = 'plugins_dir',
+        LOG_DIR = 'log_dir',
         CACHE_DIR = 'cache_dir',
+        PLUGINS_DIR = 'plugins_dir',
         FEATURES_PATH = 'features_path';
 
     /**
@@ -119,9 +119,9 @@ class ConfigSchema
             ConfigParameter::create(self::LOG_LEVEL, ConfigParameter::TYPE_STRING, true, true, Logger::INFO),
             ConfigParameter::create(self::MAIN_LANGUAGE, ConfigParameter::TYPE_STRING, true, true, 'de'),
             ConfigParameter::create(self::CONNECTOR_DIR, ConfigParameter::TYPE_STRING, true, true, $connectorDir),
-            ConfigParameter::create(self::LOGS_DIR, ConfigParameter::TYPE_STRING, true, true, sprintf('%s/logs', $connectorDir)),
+            ConfigParameter::create(self::LOG_DIR, ConfigParameter::TYPE_STRING, true, true, sprintf('%s/var/log', $connectorDir)),
+            ConfigParameter::create(self::CACHE_DIR, ConfigParameter::TYPE_STRING, false, false, sprintf('%s/var/cache', $connectorDir)),
             ConfigParameter::create(self::PLUGINS_DIR, ConfigParameter::TYPE_STRING, true, false, sprintf('%s/plugins', $connectorDir)),
-            ConfigParameter::create(self::CACHE_DIR, ConfigParameter::TYPE_STRING, false, false),
             ConfigParameter::create(self::FEATURES_PATH, ConfigParameter::TYPE_STRING, true, false, sprintf('%s/config/features.json', $connectorDir)),
         ];
     }

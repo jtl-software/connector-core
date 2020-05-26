@@ -73,7 +73,8 @@ class ConfigSchemaTest extends TestCase
             ConfigSchema::LOG_LEVEL => 'info',
             ConfigSchema::MAIN_LANGUAGE => 'de',
             ConfigSchema::CONNECTOR_DIR => $this->connectorDir,
-            ConfigSchema::LOGS_DIR => sprintf('%s/logs', $this->connectorDir),
+            ConfigSchema::LOG_DIR => sprintf('%s/var/log', $this->connectorDir),
+            ConfigSchema::CACHE_DIR => sprintf('%s/var/cache', $this->connectorDir),
             ConfigSchema::PLUGINS_DIR => sprintf('%s/plugins', $this->connectorDir),
             ConfigSchema::FEATURES_PATH => sprintf('%s/config/features.json', $this->connectorDir),
         ];
