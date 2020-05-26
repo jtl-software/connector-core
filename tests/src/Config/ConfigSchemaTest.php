@@ -61,8 +61,9 @@ class ConfigSchemaTest extends TestCase
         $reflectionProperty = $reflectionClass->getProperty('parameters');
         $reflectionProperty->setAccessible(true);
         $this->assertCount(0, $reflectionProperty->getValue($schema));
-        $schema->setParameters(...ConfigSchema::createDefaultParameters($this->connectorDir));
-        $this->assertCount(6, $reflectionProperty->getValue($schema));
+        $defaultParameters = ConfigSchema::createDefaultParameters($this->connectorDir);
+        $schema->setParameters(...$defaultParameters);
+        $this->assertCount(count($defaultParameters), $reflectionProperty->getValue($schema));
     }
 
     public function testGetDefaultValues()

@@ -110,7 +110,7 @@ class RequestPacket extends Packet
     public static function createFromJtlrpc(?string $jtlrpc, JmsSerializer $serializer = null): RequestPacket
     {
         if (is_null($serializer)) {
-            $serializer = SerializerBuilder::getInstance()->build();
+            $serializer = SerializerBuilder::create()->build();
         }
 
         if ($jtlrpc !== null) {

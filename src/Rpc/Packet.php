@@ -87,7 +87,7 @@ abstract class Packet extends AbstractModel
     public function toArray(JmsSerializer $serializer = null): array
     {
         if (is_null($serializer)) {
-            $serializer = SerializerBuilder::getInstance()->build();
+            $serializer = SerializerBuilder::create()->build();
         }
 
         $context = (new SerializationContext())->setSerializeNull(true);

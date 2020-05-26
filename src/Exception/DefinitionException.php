@@ -142,7 +142,7 @@ class DefinitionException extends \Exception
      * @param string $rpcMethod
      * @return DefinitionException
      */
-    public static function unknownRpcMethod(string $rpcMethod): self 
+    public static function unknownRpcMethod(string $rpcMethod): self
     {
         $msg = sprintf('Unknown rpc method (%s)', $rpcMethod);
         return new static($msg, self::UNKNOWN_RPC_METHOD);

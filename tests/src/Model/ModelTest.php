@@ -31,7 +31,7 @@ class ModelTest extends TestCase
             'AbstractOrderAddress',
         ];
 
-        $serializer = SerializerBuilder::getInstance()->build();
+        $serializer = SerializerBuilder::create()->build();
 
         foreach ($models as $model) {
             $fileInfo = new \SplFileInfo($model);

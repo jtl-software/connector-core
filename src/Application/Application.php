@@ -143,7 +143,7 @@ class Application
      * @param string $connectorDir
      * @param ConfigInterface|null $config
      * @param ConfigSchema $configSchema |null
-     * @throws ApplicationException
+     * @throws ApplicationException|ConfigException
      */
     public function __construct(ConnectorInterface $connector, string $connectorDir, ConfigInterface $config = null, ConfigSchema $configSchema = null)
     {
@@ -152,34 +152,34 @@ class Application
         }
         AnnotationRegistry::registerLoader('class_exists');
 
-        $this->connector = $connector;
-        $this->connectorDir = $connectorDir;
-        $this->container = (new ContainerBuilder())->build();
-        $this->container->set(Application::class, $this);
-        $this->eventDispatcher = new EventDispatcher();
-        $this->serializer = SerializerBuilder::getInstance()->build();
-        $this->temp = new Temp($this->connectorDir);
-        $this->errorHandler = new ErrorHandler($this->eventDispatcher, $this->serializer);
-
         if (is_null($config)) {
-            $config = new FileConfig(sprintf('%s/config/config.json', $this->connectorDir));
+            $config = new FileConfig(sprintf('%s/config/config.json', $connectorDir));
         }
-        $this->config = $config;
 
         if (is_null($configSchema)) {
             $configSchema = new ConfigSchema();
         }
+
+        $this->prepareConfig($connectorDir, $config, $configSchema);
+
+        $this->connector = $connector;
+        $this->connectorDir = $connectorDir;
+        $this->config = $config;
         $this->configSchema = $configSchema;
+        $this->container = (new ContainerBuilder())->build();
+        $this->container->set(Application::class, $this);
+        $this->eventDispatcher = new EventDispatcher();
+        $this->serializer = SerializerBuilder::create($this->config->get(ConfigSchema::CACHE_DIR))->build();
+        $this->errorHandler = new ErrorHandler($this->eventDispatcher, $this->serializer);
+        $this->temp = new Temp($this->connectorDir);
     }
 
     /**
      * @throws ApplicationException
-     * @throws ConfigException
      * @throws DefinitionException
      */
     public function run(): void
     {
-        $this->prepareConfig();
         $this->eventDispatcher->addSubscriber(new PrepareProductPricesSubscriber());
         $this->eventDispatcher->addSubscriber(new CoreFeaturesSubscriber());
         $this->errorHandler->register();
@@ -205,8 +205,8 @@ class Application
             $this->connector->initialize($this->config, $this->container, $this->eventDispatcher);
             $this->config->set(ConfigSchema::CONNECTOR_DIR, $this->connectorDir);
             $this->configSchema->validateConfig($this->config);
-            $this->prepareContainer();
-            $this->loadPlugins();
+            $this->prepareContainer($this, $this->container);
+            $this->loadPlugins($this->config->get(ConfigSchema::PLUGINS_DIR), $this->eventDispatcher);
 
             $logJtlrpc = $jtlrpc;
             if ($requestPacket->getMethod() === RpcMethod::AUTH) {
@@ -379,8 +379,7 @@ class Application
         RequestPacket $requestPacket,
         Method $method,
         string $modelNamespace
-    ): Request
-    {
+    ): Request {
         $controller = $method->getController();
         $action = $method->getAction();
 
@@ -544,11 +543,11 @@ class Application
     }
 
     /**
-     *
+     * @param string $pluginsDir
+     * @param EventDispatcher $eventDispatcher
      */
-    protected function loadPlugins(): void
+    protected function loadPlugins(string $pluginsDir, EventDispatcher $eventDispatcher): void
     {
-        $pluginsDir = $this->config->get(ConfigSchema::PLUGINS_DIR);
         if (is_dir($pluginsDir)) {
             $finder = (new Finder())->files()->name('/(b|B)ootstrap.php/')->in($pluginsDir);
             foreach ($finder as $file) {
@@ -558,7 +557,7 @@ class Application
                 if (class_exists($class)) {
                     $plugin = new $class();
                     if ($plugin instanceof PluginInterface) {
-                        $plugin->registerListener($this->eventDispatcher);
+                        $plugin->registerListener($eventDispatcher);
                     }
                 }
             }
@@ -566,48 +565,49 @@ class Application
     }
 
     /**
+     * @param string $connectorDir
+     * @param ConfigInterface $config
+     * @param ConfigSchema $configSchema
      * @throws ConfigException
      */
-    protected function prepareConfig(): void
+    protected function prepareConfig(string $connectorDir, ConfigInterface $config, ConfigSchema $configSchema): void
     {
-        foreach (ConfigSchema::createDefaultParameters($this->connectorDir) as $parameter) {
-            if (!$this->configSchema->hasParameter($parameter->getKey())) {
-                $this->configSchema->setParameter($parameter);
+        foreach (ConfigSchema::createDefaultParameters($connectorDir) as $parameter) {
+            if ($configSchema->hasParameter($parameter->getKey())) {
+                $parameter->setDefaultValue($configSchema->getParameter($parameter->getKey())->getDefaultValue());
             }
+            $configSchema->setParameter($parameter);
         }
 
-        $this->config->set(ConfigSchema::CONNECTOR_DIR, $this->connectorDir);
+        $config->set(ConfigSchema::CONNECTOR_DIR, $connectorDir);
 
         $globalConfig = GlobalConfig::getInstance();
-        foreach ($this->configSchema->getParameters() as $parameter) {
+        foreach ($configSchema->getParameters() as $parameter) {
             $key = $parameter->getKey();
-            if ($parameter->hasDefaultValue() && !$this->config->has($key)) {
-                $this->config->set($key, $parameter->getDefaultValue());
+            if ($parameter->hasDefaultValue() && !$config->has($key)) {
+                $config->set($key, $parameter->getDefaultValue());
             }
 
-            if ($parameter->isGlobal() && $this->config->has($key)) {
-                $globalConfig->set($key, $this->config->get($key));
+            if ($parameter->isGlobal() && $config->has($key)) {
+                $globalConfig->set($key, $config->get($key));
             }
         }
     }
 
     /**
-     *
+     * @param Application $application
+     * @param Container $container
+     * @throws ApplicationException
      */
-    protected function prepareContainer(): void
+    protected function prepareContainer(Application $application, Container $container): void
     {
-        foreach ($this->configSchema->getParameters() as $parameter) {
-            $key = $parameter->getKey();
-            if ($this->config->has($key)) {
-                $this->container->set($key, $this->config->get($key));
-            }
-        }
-
-        $this->container->set(SessionHandlerInterface::class, $this->getSessionHandler());
-        $this->container->set(TokenValidatorInterface::class, $this->connector->getTokenValidator());
-        $this->container->set(PrimaryKeyMapperInterface::class, $this->connector->getPrimaryKeyMapper());
-        if ($this->connector instanceof UseChecksumInterface) {
-            $this->container->set(ChecksumLoaderInterface::class, $this->connector->getChecksumLoader());
+        $connector = $application->getConnector();
+        $container->set(ConfigInterface::class, $application->getConfig());
+        $container->set(SessionHandlerInterface::class, $application->getSessionHandler());
+        $container->set(TokenValidatorInterface::class, $connector->getTokenValidator());
+        $container->set(PrimaryKeyMapperInterface::class, $connector->getPrimaryKeyMapper());
+        if ($connector instanceof UseChecksumInterface) {
+            $container->set(ChecksumLoaderInterface::class, $connector->getChecksumLoader());
         }
     }
 
@@ -719,8 +719,7 @@ class Application
         ?object $model,
         string $controller,
         string $action
-    )
-    {
+    ) {
         $messages = [
             sprintf('Controller = %s', $controller),
             sprintf('Action = %s', $action),
@@ -801,14 +800,6 @@ class Application
     public function getConfig(): ConfigInterface
     {
         return $this->config;
-    }
-
-    /**
-     * @return AbstractErrorHandler
-     */
-    public function getErrorHandler(): AbstractErrorHandler
-    {
-        return $this->errorHandler;
     }
 
     /**

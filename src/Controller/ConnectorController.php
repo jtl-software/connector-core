@@ -236,7 +236,7 @@ class ConnectorController
      */
     public function finish(): bool
     {
-        if(session_status() === \PHP_SESSION_ACTIVE) {
+        if (session_status() === \PHP_SESSION_ACTIVE) {
             session_destroy();
         }
         return true;

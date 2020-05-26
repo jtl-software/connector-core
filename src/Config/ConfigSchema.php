@@ -14,6 +14,7 @@ class ConfigSchema
         CONNECTOR_DIR = 'connector_dir',
         LOGS_DIR = 'logs_dir',
         PLUGINS_DIR = 'plugins_dir',
+        CACHE_DIR = 'cache_dir',
         FEATURES_PATH = 'features_path';
 
     /**
@@ -109,7 +110,7 @@ class ConfigSchema
 
     /**
      * @param string $connectorDir
-     * @return array
+     * @return ConfigParameter[]
      * @throws ConfigException
      */
     public static function createDefaultParameters(string $connectorDir): array
@@ -120,6 +121,7 @@ class ConfigSchema
             ConfigParameter::create(self::CONNECTOR_DIR, ConfigParameter::TYPE_STRING, true, true, $connectorDir),
             ConfigParameter::create(self::LOGS_DIR, ConfigParameter::TYPE_STRING, true, true, sprintf('%s/logs', $connectorDir)),
             ConfigParameter::create(self::PLUGINS_DIR, ConfigParameter::TYPE_STRING, true, false, sprintf('%s/plugins', $connectorDir)),
+            ConfigParameter::create(self::CACHE_DIR, ConfigParameter::TYPE_STRING, false, false),
             ConfigParameter::create(self::FEATURES_PATH, ConfigParameter::TYPE_STRING, true, false, sprintf('%s/config/features.json', $connectorDir)),
         ];
     }
