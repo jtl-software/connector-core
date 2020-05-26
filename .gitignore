@@ -1,5 +1,3 @@
-tests/db
-tests/plugins
 .idea
 vendor
 composer.lock

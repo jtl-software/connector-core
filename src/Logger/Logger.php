@@ -49,7 +49,7 @@ class Logger
 
         $log = self::getLogger($channel);
         if (!$log->isHandling($logLevel)) {
-            $path = sprintf('%s/%s.log', $config->get(ConfigSchema::LOGS_DIR), $channel);
+            $path = sprintf('%s/%s.log', $config->get(ConfigSchema::LOG_DIR), $channel);
             $log->pushHandler(new RotatingFileHandler($path, 2, $logLevel));
         }
 

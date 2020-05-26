@@ -72,7 +72,7 @@ abstract class AbstractModelFactory
     {
         $models = [];
 
-        $serializer = SerializerBuilder::getInstance()->build();
+        $serializer = SerializerBuilder::create()->build();
 
         for ($i = 0; $i < $quantity; $i++) {
             $model = $serializer->fromArray($this->makeOneArray($overrides[$i] ?? []), $this->getModelClass());
@@ -140,7 +140,7 @@ abstract class AbstractModelFactory
      */
     public function makeIdentity(int $identityType)
     {
-        return SerializerBuilder::getInstance()->fromArray($this->makeIdentityArray($identityType), Identity::class);
+        return SerializerBuilder::create()->fromArray($this->makeIdentityArray($identityType), Identity::class);
     }
 
     /**

@@ -186,7 +186,7 @@ class SqliteSessionHandlerTest extends TestCase
         $stmt->execute();
         $data = $stmt->fetch(\PDO::FETCH_ASSOC);
         if (is_array($data)) {
-            $data['sessionData'] = base64_decode($data['sessionData']);
+            $data['sessionData'] = base64_decode($data['sessionData'], true);
             return $data;
         }
         return null;
@@ -210,6 +210,4 @@ class SqliteSessionHandlerTest extends TestCase
         $db->close();
         parent::tearDown();
     }
-
-
 }

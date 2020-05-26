@@ -17,25 +17,14 @@ use Jtl\Connector\Core\Serializer\Subscriber\ObjectTypesSubscriber;
 
 class SerializerBuilder
 {
-    /**
-     * @var JmsBuilder
-     */
-    protected static $instance;
 
     /**
-     * SerializerBuilder constructor.
-     */
-    private function __construct()
-    {
-    }
-
-    /**
+     * @param string|null $cacheDir
      * @return JmsBuilder
      */
-    public static function getInstance(): JmsBuilder
+    public static function create(string $cacheDir = null): JmsBuilder
     {
-        if (is_null(self::$instance)) {
-            self::$instance = \JMS\Serializer\SerializerBuilder::create()
+        $builder = \JMS\Serializer\SerializerBuilder::create()
                 ->addDefaultHandlers()
                 ->setObjectConstructor(new ObjectConstructor())
                 ->configureListeners(function (EventDispatcher $dispatcher) {
@@ -47,8 +36,11 @@ class SerializerBuilder
                     $registry->registerSubscribingHandler(new IdentityHandler());
                     $registry->registerSubscribingHandler(new FeaturesHandler());
                 });
+
+        if (!is_null($cacheDir)) {
+            $builder->setCacheDir($cacheDir);
         }
 
-        return self::$instance;
+        return $builder;
     }
 }

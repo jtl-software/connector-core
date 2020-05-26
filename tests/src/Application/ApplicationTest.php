@@ -40,8 +40,10 @@ use Jtl\Connector\Core\Subscriber\PrepareProductPricesSubscriber;
 use Jtl\Connector\Core\Test\TestCase;
 use Jtl\Connector\Core\Test\Stub\Controller\TransactionalControllerStub;
 use MyPlugin\Bootstrap;
+use Noodlehaus\Config;
 use Noodlehaus\ConfigInterface;
 use PHPUnit\Framework\MockObject\MockObject;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * Class ApplicationTest
@@ -181,23 +183,20 @@ class ApplicationTest extends TestCase
      */
     public function testPrepareContainer()
     {
-        $schema = (new ConfigSchema())
-            ->setParameter(new ConfigParameter('foo', ConfigParameter::TYPE_STRING))
-            ->setParameter(new ConfigParameter('bar', ConfigParameter::TYPE_STRING));
-        $application = $this->createApplication($schema, null, null, $this->createConfig(['foo' => 'you', 'bar' => 'jau']));
+        $config = $this->createConfig(['foo' => 'you', 'bar' => 'jau']);
+        $connector = $this->createConnector(ConnectorInterface::class);
+        $application = $this->createApplication(null, $connector, null, $config);
         $container = $application->getContainer();
 
+        $this->assertFalse($container->has(ConfigInterface::class));
         $this->assertFalse($container->has(TokenValidatorInterface::class));
         $this->assertFalse($container->has(PrimaryKeyMapperInterface::class));
         $this->assertFalse($container->has(SessionHandlerInterface::class));
-        $this->assertFalse($container->has('foo'));
-        $this->assertFalse($container->has('bar'));
-        $this->invokeMethodFromObject($application, 'prepareContainer');
-        $this->assertTrue($container->has(TokenValidatorInterface::class));
-        $this->assertTrue($container->has(PrimaryKeyMapperInterface::class));
-        $this->assertTrue($container->has(SessionHandlerInterface::class));
-        $this->assertEquals('you', $container->get('foo'));
-        $this->assertEquals('jau', $container->get('bar'));
+        $this->invokeMethodFromObject($application, 'prepareContainer', $application, $container);
+        $this->assertEquals($container->get(ConfigInterface::class), $config);
+        $this->assertEquals($container->get(TokenValidatorInterface::class), $connector->getTokenValidator());
+        $this->assertEquals($container->get(PrimaryKeyMapperInterface::class), $connector->getPrimaryKeyMapper());
+        $this->assertEquals($container->get(SessionHandlerInterface::class), $application->getSessionHandler());
     }
 
     /**
@@ -205,15 +204,15 @@ class ApplicationTest extends TestCase
      * @throws ConfigException
      * @throws \ReflectionException
      */
-    public function testPrepareConfigurationSetDefaultParameters()
+    public function testPrepareConfigSetDefaultParameters()
     {
         $defaultParameters = ConfigSchema::createDefaultParameters($this->connectorDir);
         $schema = new ConfigSchema();
-        $application = $this->createApplication($schema);
+        $application = $this->getMockBuilder(Application::class)->disableOriginalConstructor()->getMock();
         foreach ($defaultParameters as $parameter) {
             $this->assertFalse($schema->hasParameter($parameter->getKey()));
         }
-        $this->invokeMethodFromObject($application, 'prepareConfig');
+        $this->invokeMethodFromObject($application, 'prepareConfig', $this->connectorDir, $this->createConfig(), $schema);
         foreach ($defaultParameters as $parameter) {
             $this->assertEquals($parameter, $schema->getParameter($parameter->getKey()));
         }
@@ -237,8 +236,8 @@ class ApplicationTest extends TestCase
         $this->assertFalse($config->has('bar'));
         $this->assertFalse($config->has('baz'));
 
-        $application = $this->createApplication($schema,null, null, $config);
-        $this->invokeMethodFromObject($application, 'prepareConfig');
+        $application = $this->getMockBuilder(Application::class)->disableOriginalConstructor()->getMock();
+        $this->invokeMethodFromObject($application, 'prepareConfig', '', $config, $schema);
 
         $this->assertEquals(42, $config->get('foo'));
         $this->assertFalse($config->has('bar'));
@@ -260,7 +259,7 @@ class ApplicationTest extends TestCase
             ->setParameter(ConfigParameter::create('tra', ConfigParameter::TYPE_DOUBLE, true, false));
 
         $config = $this->createConfig(['foo' => 122, 'bar' => true, 'baz' => 'schnatz', 'tri' => 0.315, 'tra' => 0.99]);
-        $application = $this->createApplication($schema,null, null, $config);
+        $application = $this->getMockBuilder(Application::class)->disableOriginalConstructor()->getMock();
 
         $globalConfig = GlobalConfig::getInstance();
         $this->assertFalse($globalConfig->has('foo'));
@@ -269,7 +268,7 @@ class ApplicationTest extends TestCase
         $this->assertFalse($globalConfig->has('tri'));
         $this->assertFalse($globalConfig->has('tra'));
 
-        $this->invokeMethodFromObject($application, 'prepareConfig');
+        $this->invokeMethodFromObject($application, 'prepareConfig', '', $config, $schema);
         $this->assertFalse($globalConfig->has('foo'));
         $this->assertEquals(true, $globalConfig->get('bar'));
         $this->assertEquals('schnatz', $globalConfig->get('baz'));
@@ -283,14 +282,15 @@ class ApplicationTest extends TestCase
      */
     public function testLoadPlugins()
     {
-        $app = $this->createInitializedApplication();
+        $eventDispatcher = $this->createMock(EventDispatcher::class);
+        $app = $this->getMockBuilder(Application::class)->disableOriginalConstructor()->getMock();
         $myPluginDirSrc = sprintf('%s/fixtures/MyPlugin', $this->connectorDir);
         $myPluginDirDst = sprintf('%s/plugins/MyPlugin', $this->connectorDir);
         mkdir($myPluginDirDst, 0777, true);
         $data = file_get_contents(sprintf('%s/Bootstrap.php', $myPluginDirSrc));
         file_put_contents(sprintf('%s/Bootstrap.php', $myPluginDirDst), $data);
         $this->assertFalse(class_exists(Bootstrap::class));
-        $this->invokeMethodFromObject($app, 'loadPlugins');
+        $this->invokeMethodFromObject($app, 'loadPlugins', $myPluginDirDst, $eventDispatcher);
         $this->assertTrue(class_exists(Bootstrap::class));
     }
 
@@ -302,7 +302,7 @@ class ApplicationTest extends TestCase
      */
     public function testRun()
     {
-        $serializer = SerializerBuilder::getInstance()->build();
+        $serializer = SerializerBuilder::create()->build();
         $factory = AbstractModelFactory::createFactory(Model::MANUFACTURER);
         $id = $factory->getFaker()->uuid;
         /** @var Manufacturer $manufacturer */
@@ -313,14 +313,14 @@ class ApplicationTest extends TestCase
         $_POST['jtlrpc'] = json_encode($requestPacket);
 
         $connector = $this->createConnector('Jtl\Connector\Core\Test\Stub\Controller');
-        $config = $this->createMock(ConfigInterface::class);
-        $configSchema = $this->createMock(ConfigSchema::class);
+        $config = $this->createConfig();
+        $configSchema = $this->getMockBuilder(ConfigSchema::class)->onlyMethods(['validateConfig'])->getMock();
         $controller = $this->createMock(TransactionalControllerStub::class);
 
         /** @var Application|MockObject $app */
         $app = $this->getMockBuilder(Application::class)
             ->setConstructorArgs([$connector, $this->connectorDir, $config, $configSchema])
-            ->onlyMethods(['prepareConfig', 'startSession', 'loadPlugins', 'prepareContainer'])
+            ->onlyMethods(['startSession', 'loadPlugins', 'prepareContainer'])
             ->getMock();
         $app->setSessionHandler($this->createMock(SessionHandlerInterface::class));
         $app->getContainer()->set(SessionHandlerInterface::class, $this->createMock(SessionHandlerInterface::class));
@@ -328,7 +328,6 @@ class ApplicationTest extends TestCase
         $app->getContainer()->set(PrimaryKeyMapperInterface::class, $this->createMock(PrimaryKeyMapperInterface::class));
         $app->getContainer()->set(Controller::MANUFACTURER, $controller);
 
-        $app->expects($this->once())->method('prepareConfig');
         $app->expects($this->once())->method('startSession');
         $app->expects($this->once())->method('loadPlugins');
         $app->expects($this->once())->method('prepareContainer');
@@ -343,8 +342,8 @@ class ApplicationTest extends TestCase
         $this->assertGreaterThan(0, $productPricesListeners);
 
         $prepareProductPriceSubscriberFound = false;
-        foreach($productPricesListeners as $listener) {
-            if($listener[0] instanceof PrepareProductPricesSubscriber) {
+        foreach ($productPricesListeners as $listener) {
+            if ($listener[0] instanceof PrepareProductPricesSubscriber) {
                 $prepareProductPriceSubscriberFound = true;
                 break;
             }
@@ -354,8 +353,8 @@ class ApplicationTest extends TestCase
         $this->assertGreaterThan(0, $coreFeaturesListeners);
 
         $coreFeaturesListenerFound = false;
-        foreach($coreFeaturesListeners as $listener) {
-            if($listener[0] instanceof CoreFeaturesSubscriber) {
+        foreach ($coreFeaturesListeners as $listener) {
+            if ($listener[0] instanceof CoreFeaturesSubscriber) {
                 $coreFeaturesListenerFound = true;
                 break;
             }
@@ -367,7 +366,7 @@ class ApplicationTest extends TestCase
 
     public function testRunInvalidRpcMethod()
     {
-        $serializer = SerializerBuilder::getInstance()->build();
+        $serializer = SerializerBuilder::create()->build();
         $factory = AbstractModelFactory::createFactory(Model::MANUFACTURER);
         $id = $factory->getFaker()->uuid;
         $requestPacket = (new RequestPacket())->setMethod('yoo')->setParams([])->setId($id)->toArray();
@@ -380,7 +379,7 @@ class ApplicationTest extends TestCase
 
     public function testRunUnknwonController()
     {
-        $serializer = SerializerBuilder::getInstance()->build();
+        $serializer = SerializerBuilder::create()->build();
         $factory = AbstractModelFactory::createFactory(Model::MANUFACTURER);
         $id = $factory->getFaker()->uuid;
         $requestPacket = (new RequestPacket())->setMethod('foo.bar')->setParams([])->setId($id)->toArray();
@@ -393,7 +392,7 @@ class ApplicationTest extends TestCase
 
     public function testRunUnknwonAction()
     {
-        $serializer = SerializerBuilder::getInstance()->build();
+        $serializer = SerializerBuilder::create()->build();
         $factory = AbstractModelFactory::createFactory(Model::MANUFACTURER);
         $id = $factory->getFaker()->uuid;
         $requestPacket = (new RequestPacket())->setMethod('category.bar')->setParams([])->setId($id)->toArray();
@@ -417,8 +416,7 @@ class ApplicationTest extends TestCase
         ConnectorInterface $connector = null,
         string $connectorDir = null,
         ConfigInterface $config = null
-    ): Application
-    {
+    ): Application {
         if (is_null($configSchema)) {
             $configSchema = new ConfigSchema();
         }
@@ -452,8 +450,7 @@ class ApplicationTest extends TestCase
         ConnectorInterface $connector = null,
         string $connectorDir = null,
         ConfigInterface $config = null
-    )
-    {
+    ) {
         $sessionHandler = $this->createMock(SessionHandlerInterface::class);
         if (is_null($configSchema)) {
             $configSchema = (new ConfigSchema())->setParameters(...ConfigSchema::createDefaultParameters($this->connectorDir));

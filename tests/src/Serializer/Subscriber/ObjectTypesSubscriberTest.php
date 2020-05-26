@@ -80,7 +80,7 @@ class ObjectTypesSubscriberTest extends TestCase
         $this->addTranslatableAttributeI18n($attributes[] = $this->addTranslatableAttribute($product));
         $this->addTranslatableAttributeI18n($attributes[] = $this->addTranslatableAttribute($product));
 
-        $serializer = SerializerBuilder::getInstance();
+        $serializer = SerializerBuilder::create();
 
         $serializedProduct = $serializer->build()->serialize($product, 'json');
 
@@ -101,7 +101,7 @@ class ObjectTypesSubscriberTest extends TestCase
         $attribute = $this->addTranslatableAttribute($product);
         $this->addTranslatableAttributeI18n($attribute);
 
-        $serializer = SerializerBuilder::getInstance();
+        $serializer = SerializerBuilder::create();
 
         $response = new ResponsePacket();
         $response->setResult([$product]);
@@ -126,7 +126,7 @@ class ObjectTypesSubscriberTest extends TestCase
         $attribute = $this->addTranslatableAttribute($product, false);
         $this->addTranslatableAttributeI18n($attribute);
 
-        $serializer = SerializerBuilder::getInstance();
+        $serializer = SerializerBuilder::create();
 
         $serializedProduct = $serializer->build()->serialize($product, 'json');
 
@@ -147,7 +147,7 @@ class ObjectTypesSubscriberTest extends TestCase
         $product = $this->createProduct();
         $this->addTranslatableAttribute($product, false);
 
-        $serializer = SerializerBuilder::getInstance();
+        $serializer = SerializerBuilder::create();
 
         $serializedProduct = $serializer->build()->serialize($product, 'json');
 
@@ -168,7 +168,7 @@ class ObjectTypesSubscriberTest extends TestCase
         $attribute = $this->addTranslatableAttribute($category, false);
         $this->addTranslatableAttributeI18n($attribute);
 
-        $serializer = SerializerBuilder::getInstance();
+        $serializer = SerializerBuilder::create();
 
         $serializedProduct = $serializer->build()->serialize($category, 'json');
 

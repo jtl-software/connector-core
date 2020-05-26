@@ -61,8 +61,9 @@ class ConfigSchemaTest extends TestCase
         $reflectionProperty = $reflectionClass->getProperty('parameters');
         $reflectionProperty->setAccessible(true);
         $this->assertCount(0, $reflectionProperty->getValue($schema));
-        $schema->setParameters(...ConfigSchema::createDefaultParameters($this->connectorDir));
-        $this->assertCount(6, $reflectionProperty->getValue($schema));
+        $defaultParameters = ConfigSchema::createDefaultParameters($this->connectorDir);
+        $schema->setParameters(...$defaultParameters);
+        $this->assertCount(count($defaultParameters), $reflectionProperty->getValue($schema));
     }
 
     public function testGetDefaultValues()
@@ -72,7 +73,8 @@ class ConfigSchemaTest extends TestCase
             ConfigSchema::LOG_LEVEL => 'info',
             ConfigSchema::MAIN_LANGUAGE => 'de',
             ConfigSchema::CONNECTOR_DIR => $this->connectorDir,
-            ConfigSchema::LOGS_DIR => sprintf('%s/logs', $this->connectorDir),
+            ConfigSchema::LOG_DIR => sprintf('%s/var/log', $this->connectorDir),
+            ConfigSchema::CACHE_DIR => sprintf('%s/var/cache', $this->connectorDir),
             ConfigSchema::PLUGINS_DIR => sprintf('%s/plugins', $this->connectorDir),
             ConfigSchema::FEATURES_PATH => sprintf('%s/config/features.json', $this->connectorDir),
         ];

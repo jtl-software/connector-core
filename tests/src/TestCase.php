@@ -66,6 +66,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
         $dirs = [
             sprintf('%s/plugins', $this->connectorDir),
             sprintf('%s/db', $this->connectorDir),
+            sprintf('%s/var', $this->connectorDir),
         ];
 
         foreach ($dirs as $dir) {

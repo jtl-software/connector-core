@@ -137,7 +137,7 @@ class LanguageIsoSubscriberTest extends TestCase
      */
     protected function serializeAndDeserializeModel(AbstractI18n $i18nModel)
     {
-        $serializer = SerializerBuilder::getInstance()->build();
+        $serializer = SerializerBuilder::create()->build();
         return $serializer->deserialize($serializer->serialize($i18nModel, 'json'), ProductI18n::class, 'json');
     }
 
@@ -147,7 +147,7 @@ class LanguageIsoSubscriberTest extends TestCase
      */
     protected function serializeModel(AbstractI18n $i18nModel): string
     {
-        $serializer = SerializerBuilder::getInstance()->build();
+        $serializer = SerializerBuilder::create()->build();
         return $serializer->serialize($i18nModel, 'json');
     }
 }
