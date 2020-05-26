@@ -77,6 +77,7 @@ class ConfigSchemaTest extends TestCase
             ConfigSchema::CACHE_DIR => sprintf('%s/var/cache', $this->connectorDir),
             ConfigSchema::PLUGINS_DIR => sprintf('%s/plugins', $this->connectorDir),
             ConfigSchema::FEATURES_PATH => sprintf('%s/config/features.json', $this->connectorDir),
+            ConfigSchema::DEBUG => false,
         ];
         $actual = $schema->getDefaultValues();
         $this->assertEquals($expected, $actual);

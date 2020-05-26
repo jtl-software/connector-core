@@ -162,6 +162,8 @@ class Application
 
         $this->prepareConfig($connectorDir, $config, $configSchema);
 
+        $serializerCacheDir = $config->get(ConfigSchema::DEBUG, false) === true ? $config->get(ConfigSchema::CACHE_DIR) : null;
+
         $this->connector = $connector;
         $this->connectorDir = $connectorDir;
         $this->config = $config;
@@ -169,7 +171,7 @@ class Application
         $this->container = (new ContainerBuilder())->build();
         $this->container->set(Application::class, $this);
         $this->eventDispatcher = new EventDispatcher();
-        $this->serializer = SerializerBuilder::create($this->config->get(ConfigSchema::CACHE_DIR))->build();
+        $this->serializer = SerializerBuilder::create($serializerCacheDir)->build();
         $this->errorHandler = new ErrorHandler($this->eventDispatcher, $this->serializer);
         $this->temp = new Temp($this->connectorDir);
     }

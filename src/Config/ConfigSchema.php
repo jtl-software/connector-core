@@ -15,7 +15,8 @@ class ConfigSchema
         LOG_DIR = 'log_dir',
         CACHE_DIR = 'cache_dir',
         PLUGINS_DIR = 'plugins_dir',
-        FEATURES_PATH = 'features_path';
+        FEATURES_PATH = 'features_path',
+        DEBUG = 'debug';
 
     /**
      * @var ConfigParameter[]
@@ -123,6 +124,7 @@ class ConfigSchema
             ConfigParameter::create(self::CACHE_DIR, ConfigParameter::TYPE_STRING, false, false, sprintf('%s/var/cache', $connectorDir)),
             ConfigParameter::create(self::PLUGINS_DIR, ConfigParameter::TYPE_STRING, true, false, sprintf('%s/plugins', $connectorDir)),
             ConfigParameter::create(self::FEATURES_PATH, ConfigParameter::TYPE_STRING, true, false, sprintf('%s/config/features.json', $connectorDir)),
+            ConfigParameter::create(self::DEBUG, ConfigParameter::TYPE_BOOLEAN, true, true, false),
         ];
     }
 }
