@@ -1,3 +1,7 @@
+3.1.17
+-----
+- Fixed setting paramaters in file handler
+
 3.1.16
 -----
 - Added additional handling time property
