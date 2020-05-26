@@ -1,3 +1,8 @@
+2.7.4
+-----
+- Added additional handling time property
+- Added calculate handling time method
+
 2.7.3
 -----
 - Added possibility to change log formatter
