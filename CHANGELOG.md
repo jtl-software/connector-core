@@ -1,3 +1,7 @@
+2.7.5
+-----
+- Fixed setting paramaters in file handler
+
 2.7.4
 -----
 - Added additional handling time property
