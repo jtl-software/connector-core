@@ -8,7 +8,7 @@ namespace Jtl\Connector\Core\Logger;
 
 use Jtl\Connector\Core\Config\GlobalConfig;
 use Jtl\Connector\Core\Config\ConfigSchema;
-use Jtl\Connector\Core\IO\Path;
+use Monolog\Formatter\JsonFormatter;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger as MonoLogger;
 
@@ -24,6 +24,11 @@ class Logger
     const WARNING = 'warning';
     const DEBUG = 'debug';
     const ERROR = 'error';
+
+    /**
+     * @var string|null
+     */
+    protected static $format;
 
     protected static $logLevelMappings = [
         self::INFO => MonoLogger::INFO,
@@ -50,7 +55,14 @@ class Logger
         $log = self::getLogger($channel);
         if (!$log->isHandling($logLevel)) {
             $path = sprintf('%s/%s.log', $config->get(ConfigSchema::LOG_DIR), $channel);
-            $log->pushHandler(new RotatingFileHandler($path, 2, $logLevel));
+            $handler = new RotatingFileHandler($path, 2, $logLevel);
+            if(!is_null(self::$format)) {
+                $formatterClass = sprintf('Monolog\Formatter\%sFormatter', ucfirst(self::$format));
+                if(class_exists($formatterClass)) {
+                    $handler->setFormatter(new $formatterClass());
+                }
+            }
+            $log->pushHandler($handler);
         }
 
         $log->log($level, $message);
@@ -107,5 +119,13 @@ class Logger
     public static function getLogger($channel): MonoLogger
     {
         return LoggerFactory::get($channel);
+    }
+
+    /**
+     * @param string $format
+     */
+    public static function setFormat(string $format): void
+    {
+        self::$format = $format;
     }
 }
