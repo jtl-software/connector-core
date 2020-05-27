@@ -112,7 +112,7 @@ abstract class AbstractModelFactory
      */
     public function makeOneArray(array $override = []): array
     {
-        return array_merge($this->makeFakeArray(), $override);
+        return $override + $this->makeFakeArray();
     }
 
     /**
