@@ -175,13 +175,13 @@ class Request
      * @return string|null
      * @throws HttpException
      */
-    public static function getJtlrpc(): ?string
+    public static function getJtlrpc(): string
     {
         $result = [];
         parse_str(file_get_contents('php://input'), $result);
         $jtlrpc = !empty($result['jtlrpc']) ? $result['jtlrpc'] : self::get('post', 'jtlrpc');
 
-        return $jtlrpc;
+        return (string)$jtlrpc;
     }
 
     /**

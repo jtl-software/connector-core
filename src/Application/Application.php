@@ -227,7 +227,7 @@ class Application
                 );
             }
 
-            $eventData = Json::decode((string)$jtlrpc, true);
+            $eventData = Json::decode($jtlrpc, true);
             $event = new RpcEvent($eventData, $method->getController(), $method->getAction());
             $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::BEFORE));
 
@@ -238,8 +238,7 @@ class Application
                 ->setMessage($ex->getMessage())
                 ->setData(Logger::createExceptionInfos($ex, true));
 
-            $responsePacket = (new ResponsePacket())
-                ->setId($requestPacket->getId())
+            $responsePacket = ResponsePacket::create($requestPacket->getId())
                 ->setError($error);
 
             Logger::writeException($ex);
@@ -533,8 +532,7 @@ class Application
      */
     protected function buildRpcResponse(RequestPacket $requestPacket, Response $response): ResponsePacket
     {
-        $responsePacket = new ResponsePacket();
-        $responsePacket->setId($requestPacket->getId())
+        $responsePacket = ResponsePacket::create($requestPacket->getId())
             ->setResult($response->getResult());
 
         if (!$responsePacket->isValid()) {

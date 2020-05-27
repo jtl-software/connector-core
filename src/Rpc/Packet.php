@@ -22,7 +22,7 @@ abstract class Packet extends AbstractModel
      * @var string
      * @Serializer\Type("string")
      */
-    protected $jtlrpc = '2.0';
+    protected $jtlrpc = '';
     
     /**
      * @var string
@@ -92,5 +92,15 @@ abstract class Packet extends AbstractModel
 
         $context = (new SerializationContext())->setSerializeNull(true);
         return $serializer->toArray($this, $context);
+    }
+
+    /**
+     * @param string $id
+     * @param string $jtlrpc
+     * @return Packet
+     */
+    public static function create(string $id, string $jtlrpc = '2.0'): self
+    {
+        return (new static())->setId($id)->setJtlrpc($jtlrpc);
     }
 }

@@ -68,7 +68,7 @@ class RequestPacketTest extends TestCase
      * @param array $expectedParams
      * @param bool $isValid
      */
-    public function testCreateFromJtlrpc(?string $jtlRpcInput, array $expectedParams, bool $isValid)
+    public function testCreateFromJtlrpc(string $jtlRpcInput, array $expectedParams, bool $isValid)
     {
         $requestPacket = RequestPacket::createFromJtlrpc($jtlRpcInput);
 
@@ -85,11 +85,13 @@ class RequestPacketTest extends TestCase
     public function createFromJtlRpcDataProvider(): array
     {
         return [
-            [null, ['2.0', 'undefined.undefined', []], false],
+            ['', ['', 'undefined.undefined', []], false],
             ['{"jtlrpc":"3.0","method":"jtlmethod"}', ['3.0', 'jtlmethod', []], false],
-            ['{}', ['2.0', 'undefined.undefined', []], false],
-            ['{"id":"1"}', ['2.0', 'undefined.undefined', []], true],
-            ['{"params":[1,2,3]}', ['2.0', 'undefined.undefined', [1, 2, 3]], false]
+            ['{}', ['', 'undefined.undefined', []], false],
+            ['{"id":"1"}', ['', 'undefined.undefined', []], false],
+            ['{"jtlrpc":"2.0","id":"1"}', ['2.0', 'undefined.undefined', []], true],
+            ['{"jtlrpc":"2.0","id":"1","params":["a","b"]}', ['2.0', 'undefined.undefined', ["a", "b"]], true],
+            ['{"params":[1,2,3]}', ['', 'undefined.undefined', [1, 2, 3]], false]
         ];
     }
 
@@ -100,10 +102,9 @@ class RequestPacketTest extends TestCase
      * @param array $expectedParams
      * @param bool $isValid
      */
-    public function testCreateFromJtlRpcUseAnotherSerializer(?string $jtlRpcInput, array $expectedParams, bool $isValid)
+    public function testCreateFromJtlRpcUseAnotherSerializer(string $jtlRpcInput, array $expectedParams, bool $isValid)
     {
-        $jmsSerializer = SerializerBuilder::create();
-        $jmsSerializer = $jmsSerializer->build();
+        $jmsSerializer = SerializerBuilder::create()->build();
 
         $requestPacket = RequestPacket::createFromJtlrpc($jtlRpcInput, $jmsSerializer);
 

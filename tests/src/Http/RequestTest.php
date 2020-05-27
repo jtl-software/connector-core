@@ -170,7 +170,7 @@ class RequestTest extends TestCase
     public function testJtlRpcIsMissingOnHandleRequest()
     {
         $result = Request::getJtlrpc();
-        $this->assertNull($result);
+        $this->assertEquals('', $result);
     }
 
     /**

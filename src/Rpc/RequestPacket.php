@@ -84,7 +84,7 @@ class RequestPacket extends Packet
         $isValid = true;
 
         // JSON-RPC protocol
-        if ($this->getJtlrpc() != "2.0") {
+        if ($this->getJtlrpc() != '2.0') {
             $isValid = false;
         }
 
@@ -103,20 +103,20 @@ class RequestPacket extends Packet
     }
 
     /**
-     * @param string|null $jtlrpc
-     * @param JmsSerializer $serializer
+     * @param string $jtlrpc
+     * @param JmsSerializer|null $serializer
      * @return RequestPacket
      */
-    public static function createFromJtlrpc(?string $jtlrpc, JmsSerializer $serializer = null): RequestPacket
+    public static function createFromJtlrpc(string $jtlrpc, JmsSerializer $serializer = null): RequestPacket
     {
         if (is_null($serializer)) {
             $serializer = SerializerBuilder::create()->build();
         }
 
-        if ($jtlrpc !== null) {
+        if ($jtlrpc !== '') {
             return $serializer->deserialize($jtlrpc, RequestPacket::class, 'json');
         } else {
-            return (new static())->setMethod('undefined.undefined');
+            return new static();
         }
     }
 }

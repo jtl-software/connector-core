@@ -26,10 +26,9 @@ class RpcEvent extends Event
 
     /**
      * RpcEvent constructor.
-     * @param array $data
+     * @param mixed[] $data
      * @param string $controller
      * @param string $action
-     * @param string $moment
      */
     public function __construct(array &$data, string $controller, string $action)
     {

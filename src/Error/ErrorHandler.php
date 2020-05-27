@@ -71,9 +71,8 @@ class ErrorHandler extends AbstractErrorHandler
 
             Logger::writeException($ex);
 
-            $responsePacket = (new ResponsePacket())
-                ->setError($error)
-                ->setId('unknown');
+            $responsePacket = ResponsePacket::create('unknown')
+                ->setError($error);
 
             $rpcMethod = 'unknown.unknown';
             if ($requestPacket !== null && is_object($requestPacket) && $requestPacket instanceof RequestPacket) {
@@ -150,9 +149,8 @@ class ErrorHandler extends AbstractErrorHandler
                         $error->getMessage()
                     ), Logger::ERROR);
 
-                    $responsePacket = (new ResponsePacket())
-                        ->setError($error)
-                        ->setId('unknown');
+                    $responsePacket = ResponsePacket::create('unknown')
+                        ->setError($error);
 
                     $arrayResponse = $responsePacket->toArray($this->serializer);
                     $this->triggerRpcAfterEvent($arrayResponse, 'unknown.unknown');
