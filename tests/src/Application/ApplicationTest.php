@@ -63,7 +63,7 @@ class ApplicationTest extends TestCase
         $application = $this->createInitializedApplication(null, $connector);
         $request = Request::create(Controller::PRODUCT, Action::PUSH, [new Product()]);
         $this->expectException(ApplicationException::class);
-        $application->handleRequest($request);
+        $this->invokeMethodFromObject($application, 'handleRequest', $request);
     }
 
     /**
@@ -83,7 +83,7 @@ class ApplicationTest extends TestCase
         $controller = $this->createTransactionalController();
         $application->getContainer()->set(Controller::PRODUCT, $controller);
         $request = Request::create(Controller::PRODUCT, $action, [$parameter]);
-        $result = $application->handleRequest($request);
+        $result = $this->invokeMethodFromObject($application, 'handleRequest', $request);
 
         switch ($action) {
             case Action::STATISTIC:
@@ -132,7 +132,7 @@ class ApplicationTest extends TestCase
         $controller->expects($this->never())->method('rollback');
 
         $request = Request::create(Controller::CATEGORY, Action::DELETE, [$category]);
-        $result = $application->handleRequest($request);
+        $result = $this->invokeMethodFromObject($application, 'handleRequest', $request);
         $this->assertCount(1, $result->getResult());
     }
 
@@ -153,7 +153,7 @@ class ApplicationTest extends TestCase
         $application->getContainer()->set(Controller::CATEGORY, $controller);
 
         $request = Request::create(Controller::CATEGORY, Action::DELETE, [$category]);
-        $application->handleRequest($request);
+        $this->invokeMethodFromObject($application, 'handleRequest', $request);
     }
 
     /**
@@ -168,7 +168,7 @@ class ApplicationTest extends TestCase
         $application = $this->createInitializedApplication(null, $this->createConnector("Jtl\Connector\Core\Controller"));
         $ack = new Ack();
         $request = Request::create(Controller::CONNECTOR, Action::ACK, [$ack]);
-        $response = $application->handleRequest($request);
+        $response = $this->invokeMethodFromObject($application, 'handleRequest', $request);
 
         $this->assertTrue($response->getResult());
     }

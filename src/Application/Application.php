@@ -75,6 +75,7 @@ use Monolog\ErrorHandler as MonologErrorHandler;
 use Noodlehaus\ConfigInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Finder\Finder;
 
@@ -127,7 +128,7 @@ class Application
     /**
      * @var LoggerService
      */
-    protected $loggers;
+    protected $loggerService;
 
     /**
      * @var SessionHandlerInterface
@@ -175,14 +176,36 @@ class Application
         $this->connectorDir = $connectorDir;
         $this->config = $config;
         $this->configSchema = $configSchema;
-        $this->container = (new ContainerBuilder())->build();
+        $this->container = (new ContainerBuilder())
+            ->useAnnotations(true)
+            ->useAutowiring(true)
+            ->build();
         $this->container->set(Application::class, $this);
         $this->eventDispatcher = new EventDispatcher();
-        $this->loggers = new LoggerService($this->config->get(ConfigSchema::LOG_DIR), $this->config->get(ConfigSchema::LOG_LEVEL));
+        $this->loggerService = new LoggerService($this->config->get(ConfigSchema::LOG_DIR), $this->config->get(ConfigSchema::LOG_LEVEL));
+        $this->container->set(LoggerService::class, $this->loggerService);
+        $this->container->set(LoggerInterface::class, $this->loggerService->get(LoggerService::CHANNEL_GLOBAL));
         $this->serializer = SerializerBuilder::create($serializerCacheDir)->build();
         $this->errorHandler = new ErrorHandler($this->connectorDir, $this->eventDispatcher, $this->serializer);
-        $this->errorHandler->setLogger($this->loggers->get(LoggerService::CHANNEL_RPC));
+        $this->errorHandler->setLogger($this->loggerService->get(LoggerService::CHANNEL_RPC));
         $this->temp = new Temp($this->connectorDir);
+    }
+
+    /**
+     * @param string $controllerName
+     * @param object $instance
+     * @return Application
+     * @throws DefinitionException
+     * @throws \ReflectionException
+     */
+    public function registerController(string $controllerName, object $instance): Application
+    {
+        if (!Controller::isController($controllerName)) {
+            throw DefinitionException::unknownController($controllerName);
+        }
+
+        $this->container->set($controllerName, $instance);
+        return $this;
     }
 
     /**
@@ -195,7 +218,7 @@ class Application
         $this->eventDispatcher->addSubscriber(new PrepareProductPricesSubscriber());
         $this->eventDispatcher->addSubscriber(new CoreFeaturesSubscriber());
         $this->errorHandler->register();
-        MonologErrorHandler::register($this->loggers->get(LoggerService::CHANNEL_ERROR));
+        MonologErrorHandler::register($this->loggerService->get(LoggerService::CHANNEL_ERROR));
         $method = Method::createFromRpcMethod('unknown.unknown');
         $jtlrpc = HttpRequest::getJtlrpc();
         $requestPacket = RequestPacket::createFromJtlrpc($jtlrpc, $this->serializer);
@@ -230,9 +253,9 @@ class Application
             }
 
             // Log incoming request packet (debug only and configuration must be initialized)
-            $this->loggers->get(LoggerService::CHANNEL_RPC)->debug('Request packet: {packet}', ['packet' => $logJtlrpc]);
+            $this->loggerService->get(LoggerService::CHANNEL_RPC)->debug('Request packet: {packet}', ['packet' => $logJtlrpc]);
             if ($requestPacket->getMethod() !== RpcMethod::AUTH && !empty($requestPacket->getParams())) {
-                $this->loggers->get(LoggerService::CHANNEL_RPC)->debug('Params: {params}', ['params' => Json::encode($requestPacket->getParams())]);
+                $this->loggerService->get(LoggerService::CHANNEL_RPC)->debug('Params: {params}', ['params' => Json::encode($requestPacket->getParams())]);
             }
 
             $eventData = Json::decode($jtlrpc, true);
@@ -261,7 +284,7 @@ class Application
             $event = new RpcEvent($arrayResponse, $method->getController(), $method->getAction());
             $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::AFTER));
 
-            HttpResponse::send($arrayResponse, $this->loggers->get(LoggerService::CHANNEL_RPC));
+            HttpResponse::send($arrayResponse, $this->loggerService->get(LoggerService::CHANNEL_RPC));
 
             if (mt_rand(0, 99) === 0) {
                 $this->getSessionHandler()->gc((int)ini_get('session.gc_maxlifetime'));
@@ -270,20 +293,195 @@ class Application
     }
 
     /**
-     * @param string $controllerName
-     * @param object $instance
-     * @return Application
-     * @throws DefinitionException
-     * @throws \ReflectionException
+     * Connector getter
+     *
+     * @return ConnectorInterface
      */
-    public function registerController(string $controllerName, object $instance): Application
+    public function getConnector(): ConnectorInterface
     {
-        if (!Controller::isController($controllerName)) {
-            throw DefinitionException::unknownController($controllerName);
+        return $this->connector;
+    }
+
+    /**
+     * @return ConfigInterface
+     */
+    public function getConfig(): ConfigInterface
+    {
+        return $this->config;
+    }
+
+    /**
+     * @return Container
+     */
+    public function getContainer(): Container
+    {
+        return $this->container;
+    }
+
+    /**
+     * @param AbstractErrorHandler $handler
+     * @return $this
+     */
+    public function setErrorHandler(AbstractErrorHandler $handler): Application
+    {
+        $this->errorHandler = $handler;
+
+        return $this;
+    }
+
+    /**
+     * @return EventDispatcher
+     */
+    public function getEventDispatcher(): EventDispatcher
+    {
+        return $this->eventDispatcher;
+    }
+
+    /**
+     * @return LoggerService
+     */
+    public function getLoggerService(): LoggerService
+    {
+        return $this->loggerService;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProtocolVersion(): int
+    {
+        return self::PROTOCOL_VERSION;
+    }
+
+    /**
+     * @return Serializer
+     */
+    public function getSerializer(): Serializer
+    {
+        return $this->serializer;
+    }
+
+    /**
+     * @return SessionHandlerInterface
+     * @throws ApplicationException
+     */
+    public function getSessionHandler(): SessionHandlerInterface
+    {
+        if (is_null($this->sessionHandler)) {
+            $this->sessionHandler = new SqliteSessionHandler($this->connectorDir);
+        }
+        return $this->sessionHandler;
+    }
+
+    /**
+     * @param SessionHandlerInterface $sessionHandler
+     * @return Application
+     */
+    public function setSessionHandler(SessionHandlerInterface $sessionHandler): Application
+    {
+        $this->sessionHandler = $sessionHandler;
+        return $this;
+    }
+
+    /**
+     * @param RequestPacket $requestPacket
+     * @param Response $response
+     * @return ResponsePacket
+     * @throws RpcException
+     */
+    protected function buildRpcResponse(RequestPacket $requestPacket, Response $response): ResponsePacket
+    {
+        $responsePacket = ResponsePacket::create($requestPacket->getId())
+            ->setResult($response->getResult());
+
+        if (!$responsePacket->isValid()) {
+            throw new RpcException("Parse error", ErrorCode::PARSE_ERROR);
         }
 
-        $this->container->set($controllerName, $instance);
-        return $this;
+        return $responsePacket;
+    }
+
+    /**
+     * @param RequestPacket $requestPacket
+     * @param Method $method
+     * @param string $modelNamespace
+     * @return Request
+     * @throws DefinitionException
+     * @throws DependencyException
+     * @throws NotFoundException
+     * @throws \ReflectionException
+     */
+    protected function createHandleRequest(
+        RequestPacket $requestPacket,
+        Method $method,
+        string $modelNamespace
+    ): Request
+    {
+        $controller = $method->getController();
+        $action = $method->getAction();
+
+        switch ($action) {
+            case Action::AUTH:
+                $type = $className = Authentication::class;
+                break;
+            case Action::ACK:
+                $type = $className = Ack::class;
+                break;
+            case Action::PUSH:
+            case Action::DELETE:
+                $className = sprintf('%s\%s', $modelNamespace, $controller);
+                if ($controller === Controller::IMAGE) {
+                    $className = AbstractImage::class;
+                }
+                $type = sprintf("array<%s>", $className);
+                break;
+            default:
+                $type = $className = QueryFilter::class;
+        }
+
+        $params = $this->serializer->fromArray($requestPacket->getParams(), $type);
+
+        if (!is_array($params)) {
+            $params = [$params];
+        }
+
+        $eventArgClass = $this->createModelEventClassName($controller);
+
+        // Identity mapping
+        foreach ($params as $param) {
+            $eventArg = null;
+            switch ($action) {
+                case Action::PUSH:
+                case Action::DELETE:
+                    $this->container->get(IdentityLinker::class)->linkModel($param);
+                    $this->container->get(ChecksumLinker::class)->link($param);
+                    $eventArg = new $eventArgClass($param);
+                    break;
+                case Action::PULL:
+                case Action::STATISTIC:
+                    $eventArg = new QueryFilterEvent($param);
+                    break;
+            }
+
+            if (!is_null($eventArg)) {
+                $this->eventDispatcher->dispatch($eventArg, Event::createEventName($controller, $action, Event::BEFORE));
+            }
+        }
+
+        return Request::create($controller, $action, $params);
+    }
+
+    /**
+     * @param string $controllerName
+     * @return string
+     */
+    protected function createModelEventClassName(string $controllerName): string
+    {
+        $eventArgClass = sprintf('Jtl\\Connector\\Core\\Event\\%sEvent', $controllerName);
+        if (!class_exists($eventArgClass)) {
+            $eventArgClass = ModelEvent::class;
+        }
+        return $eventArgClass;
     }
 
     /**
@@ -374,74 +572,101 @@ class Application
     }
 
     /**
-     * @param RequestPacket $requestPacket
-     * @param Method $method
-     * @param string $modelNamespace
-     * @return Request
-     * @throws DefinitionException
-     * @throws DependencyException
-     * @throws NotFoundException
-     * @throws LinkerException
+     * @param \Throwable $ex
+     * @param object|null $model
+     * @param string $controller
+     * @param string $action
      * @throws \ReflectionException
      */
-    protected function createHandleRequest(
-        RequestPacket $requestPacket,
-        Method $method,
-        string $modelNamespace
-    ): Request
+    protected function extendExceptionMessageWithIdentifiers(
+        \Throwable $ex,
+        ?object $model,
+        string $controller,
+        string $action
+    )
     {
-        $controller = $method->getController();
-        $action = $method->getAction();
+        $messages = [
+            sprintf('Controller = %s', $controller),
+            sprintf('Action = %s', $action),
+        ];
 
-        switch ($action) {
-            case Action::AUTH:
-                $type = $className = Authentication::class;
-                break;
-            case Action::ACK:
-                $type = $className = Ack::class;
-                break;
-            case Action::PUSH:
-            case Action::DELETE:
-                $className = sprintf('%s\%s', $modelNamespace, $controller);
-                if ($controller === Controller::IMAGE) {
-                    $className = AbstractImage::class;
+        if ($model instanceof IdentityInterface && $model->getId()->getHost() > 0) {
+            $messages[] = sprintf('Wawi PK = %s', $model->getId()->getHost());
+        }
+
+        if ($model instanceof IdentificationInterface) {
+            $messages = array_merge($messages, $model->getIdentificationStrings());
+        }
+
+        $messages[] = $ex->getMessage();
+        $reflectionClass = new \ReflectionClass($ex);
+        $reflectionProperty = $reflectionClass->getProperty('message');
+        $reflectionProperty->setAccessible(true);
+        $reflectionProperty->setValue($ex, implode(' | ', $messages));
+        $reflectionProperty->setAccessible(false);
+    }
+
+    /**
+     * @param AbstractImage ...$images
+     * @throws ApplicationException
+     * @throws CompressionException
+     * @throws HttpException
+     */
+    protected function handleImagePush(AbstractImage ...$images): void
+    {
+        $imagePaths = [];
+        $zipFile = HttpRequest::handleFileUpload($this->temp);
+        $tempDir = $this->temp->createDirectory();
+        if ($zipFile !== null && $tempDir !== null) {
+            $archive = new Zip();
+            if ($archive->extract($zipFile, $tempDir)) {
+                $finder = new Finder();
+                $finder->files()->ignoreDotFiles(true)->in($tempDir);
+                foreach ($finder as $file) {
+                    $imagePaths[] = $this->imagesToDelete[] = $file->getRealpath();
                 }
-                $type = sprintf("array<%s>", $className);
-                break;
-            default:
-                $type = $className = QueryFilter::class;
-        }
+            } else {
+                @rmdir($tempDir);
+                @unlink($zipFile);
 
-        $params = $this->serializer->fromArray($requestPacket->getParams(), $type);
-
-        if (!is_array($params)) {
-            $params = [$params];
-        }
-
-        $eventArgClass = $this->createModelEventClassName($controller);
-
-        // Identity mapping
-        foreach ($params as $param) {
-            $eventArg = null;
-            switch ($action) {
-                case Action::PUSH:
-                case Action::DELETE:
-                    $this->container->get(IdentityLinker::class)->linkModel($param);
-                    $this->container->get(ChecksumLinker::class)->link($param);
-                    $eventArg = new $eventArgClass($param);
-                    break;
-                case Action::PULL:
-                case Action::STATISTIC:
-                    $eventArg = new QueryFilterEvent($param);
-                    break;
+                throw new ApplicationException(sprintf('Zip file (%s) could not be extracted', $zipFile));
             }
 
-            if (!is_null($eventArg)) {
-                $this->eventDispatcher->dispatch($eventArg, Event::createEventName($controller, $action, Event::BEFORE));
+            if ($zipFile !== null) {
+                @unlink($zipFile);
             }
+        } else {
+            throw new ApplicationException('Zip file or temp dir is null');
         }
 
-        return Request::create($controller, $action, $params);
+        foreach ($images as $image) {
+            if (!empty($image->getRemoteUrl())) {
+                $imageData = file_get_contents($image->getRemoteUrl());
+                if ($imageData === false) {
+                    throw new ApplicationException(sprintf(
+                        'Could not get any data from url: %s',
+                        $image->getRemoteUrl()
+                    ));
+                }
+
+                $path = parse_url($image->getRemoteUrl(), PHP_URL_PATH);
+                $fileName = pathinfo($path, PATHINFO_BASENAME);
+                $imagePath = sprintf('%s/%s_%s', $this->temp->getDirectory(), uniqid(), $fileName);
+                file_put_contents($imagePath, $imageData);
+                $image->setFilename($imagePath);
+            } else {
+                foreach ($imagePaths as $imagePath) {
+                    $infos = pathinfo($imagePath);
+                    list($hostId, $relationType) = explode('_', $infos['filename']);
+                    if ((int)$hostId == $image->getId()->getHost()
+                        && strtolower($relationType) === strtolower($image->getRelationType())
+                    ) {
+                        $image->setFilename($imagePath);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -453,7 +678,7 @@ class Application
      * @throws \ReflectionException
      * @throws \Throwable
      */
-    public function handleRequest(Request $request): Response
+    protected function handleRequest(Request $request): Response
     {
         $controller = $request->getController();
         $action = $request->getAction();
@@ -468,7 +693,7 @@ class Application
                     $container->get(SessionHandlerInterface::class),
                     $container->get(TokenValidatorInterface::class)
                 );
-                $controller->setLogger($this->loggers->get(LoggerService::CHANNEL_GLOBAL));
+                $controller->setLogger($this->loggerService->get(LoggerService::CHANNEL_GLOBAL));
                 return $controller;
             });
         } elseif (!$this->container->has($controller)) {
@@ -533,24 +758,6 @@ class Application
         }
 
         return $result;
-    }
-
-    /**
-     * @param RequestPacket $requestPacket
-     * @param Response $response
-     * @return ResponsePacket
-     * @throws RpcException
-     */
-    protected function buildRpcResponse(RequestPacket $requestPacket, Response $response): ResponsePacket
-    {
-        $responsePacket = ResponsePacket::create($requestPacket->getId())
-            ->setResult($response->getResult());
-
-        if (!$responsePacket->isValid()) {
-            throw new RpcException("Parse error", ErrorCode::PARSE_ERROR);
-        }
-
-        return $responsePacket;
     }
 
     /**
@@ -625,13 +832,13 @@ class Application
         $container->set(ChecksumLinker::class, function(ContainerInterface $container) {
             $loader = $container->has(ChecksumLoaderInterface::class) ? $container->get(ChecksumLoaderInterface::class) : null;
             $linker = new ChecksumLinker($loader);
-            $linker->setLogger($this->loggers->get(LoggerService::CHANNEL_CHECKSUM));
+            $linker->setLogger($this->loggerService->get(LoggerService::CHANNEL_CHECKSUM));
             return $linker;
         });
 
         $container->set(IdentityLinker::class, function(ContainerInterface $container) {
             $linker = new IdentityLinker($container->get(PrimaryKeyMapperInterface::class));
-            $linker->setLogger($this->loggers->get(LoggerService::CHANNEL_LINKER));
+            $linker->setLogger($this->loggerService->get(LoggerService::CHANNEL_LINKER));
             return $linker;
         });
     }
@@ -654,7 +861,7 @@ class Application
         $sessionHandler = $this->getSessionHandler();
 
         if($sessionHandler instanceof LoggerAwareInterface) {
-            $sessionHandler->setLogger($this->loggers->get(LoggerService::CHANNEL_SESSION));
+            $sessionHandler->setLogger($this->loggerService->get(LoggerService::CHANNEL_SESSION));
         }
 
         session_name($sessionName);
@@ -669,200 +876,6 @@ class Application
         session_set_save_handler($sessionHandler, true);
 
         session_start();
-        $this->loggers->get(LoggerService::CHANNEL_SESSION)->debug('Session started with id ({sessionId})', ['sessionId' => session_id()]);
-    }
-
-    /**
-     * @param AbstractImage ...$images
-     * @throws ApplicationException
-     * @throws CompressionException
-     * @throws HttpException
-     */
-    protected function handleImagePush(AbstractImage ...$images): void
-    {
-        $imagePaths = [];
-        $zipFile = HttpRequest::handleFileUpload($this->temp);
-        $tempDir = $this->temp->createDirectory();
-        if ($zipFile !== null && $tempDir !== null) {
-            $archive = new Zip();
-            if ($archive->extract($zipFile, $tempDir)) {
-                $finder = new Finder();
-                $finder->files()->ignoreDotFiles(true)->in($tempDir);
-                foreach ($finder as $file) {
-                    $imagePaths[] = $this->imagesToDelete[] = $file->getRealpath();
-                }
-            } else {
-                @rmdir($tempDir);
-                @unlink($zipFile);
-
-                throw new ApplicationException(sprintf('Zip file (%s) could not be extracted', $zipFile));
-            }
-
-            if ($zipFile !== null) {
-                @unlink($zipFile);
-            }
-        } else {
-            throw new ApplicationException('Zip file or temp dir is null');
-        }
-
-        foreach ($images as $image) {
-            if (!empty($image->getRemoteUrl())) {
-                $imageData = file_get_contents($image->getRemoteUrl());
-                if ($imageData === false) {
-                    throw new ApplicationException(sprintf(
-                        'Could not get any data from url: %s',
-                        $image->getRemoteUrl()
-                    ));
-                }
-
-                $path = parse_url($image->getRemoteUrl(), PHP_URL_PATH);
-                $fileName = pathinfo($path, PATHINFO_BASENAME);
-                $imagePath = sprintf('%s/%s_%s', $this->temp->getDirectory(), uniqid(), $fileName);
-                file_put_contents($imagePath, $imageData);
-                $image->setFilename($imagePath);
-            } else {
-                foreach ($imagePaths as $imagePath) {
-                    $infos = pathinfo($imagePath);
-                    list($hostId, $relationType) = explode('_', $infos['filename']);
-                    if ((int)$hostId == $image->getId()->getHost()
-                        && strtolower($relationType) === strtolower($image->getRelationType())
-                    ) {
-                        $image->setFilename($imagePath);
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * @param \Throwable $ex
-     * @param object|null $model
-     * @param string $controller
-     * @param string $action
-     * @throws \ReflectionException
-     */
-    protected function extendExceptionMessageWithIdentifiers(
-        \Throwable $ex,
-        ?object $model,
-        string $controller,
-        string $action
-    )
-    {
-        $messages = [
-            sprintf('Controller = %s', $controller),
-            sprintf('Action = %s', $action),
-        ];
-
-        if ($model instanceof IdentityInterface && $model->getId()->getHost() > 0) {
-            $messages[] = sprintf('Wawi PK = %s', $model->getId()->getHost());
-        }
-
-        if ($model instanceof IdentificationInterface) {
-            $messages = array_merge($messages, $model->getIdentificationStrings());
-        }
-
-        $messages[] = $ex->getMessage();
-        $reflectionClass = new \ReflectionClass($ex);
-        $reflectionProperty = $reflectionClass->getProperty('message');
-        $reflectionProperty->setAccessible(true);
-        $reflectionProperty->setValue($ex, implode(' | ', $messages));
-        $reflectionProperty->setAccessible(false);
-    }
-
-    /**
-     * @param string $controllerName
-     * @return string
-     */
-    protected function createModelEventClassName(string $controllerName): string
-    {
-        $eventArgClass = sprintf('Jtl\\Connector\\Core\\Event\\%sEvent', $controllerName);
-        if (!class_exists($eventArgClass)) {
-            $eventArgClass = ModelEvent::class;
-        }
-        return $eventArgClass;
-    }
-
-    /**
-     * Connector getter
-     *
-     * @return ConnectorInterface
-     */
-    public function getConnector(): ConnectorInterface
-    {
-        return $this->connector;
-    }
-
-    /**
-     * @return SessionHandlerInterface
-     * @throws ApplicationException
-     */
-    public function getSessionHandler(): SessionHandlerInterface
-    {
-        if (is_null($this->sessionHandler)) {
-            $this->sessionHandler = new SqliteSessionHandler($this->connectorDir);
-        }
-        return $this->sessionHandler;
-    }
-
-    /**
-     * @param SessionHandlerInterface $sessionHandler
-     * @return Application
-     */
-    public function setSessionHandler(SessionHandlerInterface $sessionHandler): Application
-    {
-        $this->sessionHandler = $sessionHandler;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getProtocolVersion(): int
-    {
-        return self::PROTOCOL_VERSION;
-    }
-
-    /**
-     * @return ConfigInterface
-     */
-    public function getConfig(): ConfigInterface
-    {
-        return $this->config;
-    }
-
-    /**
-     * @param AbstractErrorHandler $handler
-     * @return $this
-     */
-    public function setErrorHandler(AbstractErrorHandler $handler): Application
-    {
-        $this->errorHandler = $handler;
-
-        return $this;
-    }
-
-    /**
-     * @return EventDispatcher
-     */
-    public function getEventDispatcher(): EventDispatcher
-    {
-        return $this->eventDispatcher;
-    }
-
-    /**
-     * @return Container
-     */
-    public function getContainer(): Container
-    {
-        return $this->container;
-    }
-
-    /**
-     * @return Serializer
-     */
-    public function getSerializer(): Serializer
-    {
-        return $this->serializer;
+        $this->loggerService->get(LoggerService::CHANNEL_SESSION)->debug('Session started with id ({sessionId})', ['sessionId' => session_id()]);
     }
 }
