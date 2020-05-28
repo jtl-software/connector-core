@@ -9,7 +9,6 @@ namespace Jtl\Connector\Core\Controller;
 
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
-use Jtl\Connector\Core\Config\GlobalConfig;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Exception\ApplicationException;
@@ -21,22 +20,23 @@ use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
 use Jtl\Connector\Core\Model\ConnectorIdentification;
 use Jtl\Connector\Core\Model\ConnectorServerInfo;
-use Jtl\Connector\Core\Model\FeatureFlag;
 use Jtl\Connector\Core\Model\Features;
 use Jtl\Connector\Core\Model\Session;
 use Jtl\Connector\Core\Serializer\Json;
 use Jtl\Connector\Core\System\Check;
-use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Checksum\ChecksumInterface;
 use Jtl\Connector\Core\Utilities\Str;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 /**
  * Base Config Controller
  *
  * @access public
  */
-class ConnectorController
+class ConnectorController implements LoggerAwareInterface
 {
     /**
      * @var string
@@ -47,6 +47,11 @@ class ConnectorController
      * @var IdentityLinker
      */
     protected $linker;
+
+    /**
+     * @var LoggerInterface
+     */
+    protected $logger;
 
     /**
      * @var \SessionHandlerInterface
@@ -66,21 +71,24 @@ class ConnectorController
     /**
      * ConnectorController constructor.
      * @param string $featuresPath
-     * @param IdentityLinker $linker
      * @param ChecksumLinker $checksumLinker
+     * @param IdentityLinker $linker
      * @param \SessionHandlerInterface $sessionHandler
      * @param TokenValidatorInterface $tokenValidator
      */
     public function __construct(
         string $featuresPath,
-        IdentityLinker $linker,
         ChecksumLinker $checksumLinker,
+        IdentityLinker $linker,
         \SessionHandlerInterface $sessionHandler,
         TokenValidatorInterface $tokenValidator
-    ) {
+    )
+    {
+
         $this->featuresPath = $featuresPath;
-        $this->linker = $linker;
         $this->checksumLinker = $checksumLinker;
+        $this->linker = $linker;
+        $this->logger = new NullLogger();
         $this->sessionHandler = $sessionHandler;
         $this->tokenValidator = $tokenValidator;
     }
@@ -119,14 +127,6 @@ class ConnectorController
     }
 
     /**
-     * @return mixed[]
-     */
-    protected function fetchFeaturesData()
-    {
-        return Json::decode(file_get_contents($this->featuresPath), true);
-    }
-
-    /**
      * @param Ack $ack
      * @return bool
      * @throws DefinitionException
@@ -137,10 +137,7 @@ class ConnectorController
         foreach ($ack->getIdentities() as $modelName => $identities) {
             $normalizedName = Str::toPascalCase($modelName);
             if (!Model::isModel($normalizedName)) {
-                Logger::write(sprintf(
-                    'ACK: Unknown core entity (%s)! Skipping related ack\'s...',
-                    $normalizedName
-                ), Logger::WARNING);
+                $this->logger->warning('ACK: Unknown core entity ({name})! Skipping related ack\'s...', ['name' => $normalizedName]);
                 continue;
             }
 
@@ -153,12 +150,12 @@ class ConnectorController
         foreach ($ack->getChecksums() as $checksum) {
             if ($checksum instanceof ChecksumInterface) {
                 if (!$this->checksumLinker->save($checksum)) {
-                    Logger::write(sprintf(
-                        'Could not save checksum for endpoint (%s), host (%s) and type (%s)',
-                        $checksum->getForeignKey()->getEndpoint(),
-                        $checksum->getForeignKey()->getHost(),
-                        $checksum->getType()
-                    ), Logger::WARNING, Logger::CHANNEL_CHECKSUM);
+                    $context = [
+                        'endpoint' => $checksum->getForeignKey()->getEndpoint(),
+                        'host' => $checksum->getForeignKey()->getHost(),
+                        'type' => $checksum->getType(),
+                    ];
+                    $this->logger->warning('Could not save checksum for endpoint ({endpoint}), host ({host}) and type ({type})', $context);
                 }
             }
         }
@@ -179,12 +176,13 @@ class ConnectorController
         }
 
         if ($this->tokenValidator->validate($auth->getToken()) === false) {
-            Logger::write(sprintf("Unauthorized access with token (%s) from ip (%s)", $auth->getToken(), $_SERVER['REMOTE_ADDR']), Logger::WARNING);
+            $context = ['token' => $auth->getToken(), 'ip' => $_SERVER['REMOTE_ADDR']];
+            $this->logger->warning("Unauthorized access with token ({token}) from ip ({ip})", $context);
             throw AuthenticationException::failed();
         }
 
         if ($this->sessionHandler === null) {
-            Logger::write('Could not get any Session', Logger::ERROR);
+            $this->logger->error('Could not get any Session');
             throw ApplicationException::noSession();
         }
 
@@ -250,5 +248,21 @@ class ConnectorController
     {
         //TODO: set type in clear method
         return $this->linker->clear();
+    }
+
+    /**
+     * @param LoggerInterface $logger
+     */
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
+    /**
+     * @return mixed[]
+     */
+    protected function fetchFeaturesData()
+    {
+        return Json::decode(file_get_contents($this->featuresPath), true);
     }
 }

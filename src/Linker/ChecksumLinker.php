@@ -9,10 +9,17 @@ namespace Jtl\Connector\Core\Linker;
 use Jtl\Connector\Core\Checksum\ChecksumLoaderInterface;
 use Jtl\Connector\Core\Checksum\ChecksumInterface;
 use Jtl\Connector\Core\Model\AbstractModel;
-use Jtl\Connector\Core\Logger\Logger;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
-class ChecksumLinker
+class ChecksumLinker implements LoggerAwareInterface
 {
+    /**
+     * @var LoggerInterface
+     */
+    protected $logger;
+
     /**
      * @var ChecksumLoaderInterface
      */
@@ -20,10 +27,11 @@ class ChecksumLinker
 
     /**
      * ChecksumLinker constructor.
-     * @param ChecksumLoaderInterface $loader
+     * @param ChecksumLoaderInterface|null $loader
      */
     public function __construct(ChecksumLoaderInterface $loader = null)
     {
+        $this->logger = new NullLogger();
         $this->loader = $loader;
     }
 
@@ -37,25 +45,25 @@ class ChecksumLinker
             $checksums = $model->getChecksums();
             foreach ($checksums as &$checksum) {
                 if ($checksum instanceof ChecksumInterface && ($type === null || $checksum->getType() == $type)) {
-                    Logger::write(sprintf('Checksum linking type (%s)...', $type), Logger::DEBUG, Logger::CHANNEL_CHECKSUM);
+                    $this->logger->debug('Checksum linking type ({type})...', ['type' => $type]);
 
                     if ($model->getId()->getEndpoint() !== null && strlen($model->getId()->getEndpoint()) > 0) {
                         $checksum->setEndpoint($this->loader->read($model->getId()->getEndpoint(), $checksum->getType()));
 
                         if ($checksum->getEndpoint() !== null && strlen($checksum->getEndpoint()) > 0) {
                             if (($checksum->getEndpoint() !== $checksum->getHost())) {
-                                Logger::write(sprintf('Changed checksum for endpoint (%s) type (%s)', $model->getId()->getEndpoint(), $type), Logger::DEBUG, Logger::CHANNEL_CHECKSUM);
+                                $this->logger->debug('Changed checksum for endpoint ({endpoint}) type ({type})', ['endpoint' => $model->getId()->getEndpoint(), 'type' => $type]);
                                 $checksum->setHasChanged(true);
                                 $this->loader->delete($model->getId()->getEndpoint(), $checksum->getType());
                                 $this->loader->write($model->getId()->getEndpoint(), $checksum->getType(), $checksum->getHost());
                             }
                         } else {
-                            Logger::write(sprintf('Write new checksum for endpoint (%s) type (%s)', $model->getId()->getEndpoint(), $type), Logger::DEBUG, Logger::CHANNEL_CHECKSUM);
+                            $this->logger->debug('Write new checksum for endpoint ({endpoint}) type ({type})', ['endpoint' => $model->getId()->getEndpoint(), 'type' => $type]);
                             $checksum->setHasChanged(true);
                             $this->loader->write($model->getId()->getEndpoint(), $checksum->getType(), $checksum->getHost());
                         }
                     } else {
-                        Logger::write(sprintf('New checksum with empty endpoint type (%s)', $model->getId()->getEndpoint(), $type), Logger::DEBUG, Logger::CHANNEL_CHECKSUM);
+                        $this->logger->debug('New checksum with empty endpoint type ({type})', ['type' => $type]);
                         $checksum->setHasChanged(true);
                     }
                 }
@@ -80,6 +88,14 @@ class ChecksumLinker
         }
 
         return false;
+    }
+
+    /**
+     * @param LoggerInterface $logger
+     */
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
     }
 
     /**

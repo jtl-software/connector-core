@@ -10,19 +10,28 @@ use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Definition\Event;
 use Jtl\Connector\Core\Event\RpcEvent;
 use Jtl\Connector\Core\Http\Response;
-use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
 use Jtl\Connector\Core\Rpc\Method;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-class ErrorHandler extends AbstractErrorHandler
+class ErrorHandler extends AbstractErrorHandler implements LoggerAwareInterface
 {
+    protected $connectorDir;
+
     /**
      * @var Application
      */
     protected $eventDispatcher;
+
+    /**
+     * @var LoggerInterface
+     */
+    protected $logger;
 
     /**
      * @var Serializer
@@ -30,14 +39,22 @@ class ErrorHandler extends AbstractErrorHandler
     protected $serializer;
 
     /**
+     * @var RequestPacket
+     */
+    protected $requestPacket;
+
+    /**
      * ErrorHandler constructor.
+     * @param string $connectorDir
      * @param EventDispatcher $eventDispatcher
      * @param Serializer $serializer
      */
-    public function __construct(EventDispatcher $eventDispatcher, Serializer $serializer)
+    public function __construct(string $connectorDir, EventDispatcher $eventDispatcher, Serializer $serializer)
     {
+        $this->connectorDir = $connectorDir;
         $this->eventDispatcher = $eventDispatcher;
         $this->serializer = $serializer;
+        $this->logger = new NullLogger();
     }
 
     /**
@@ -52,76 +69,20 @@ class ErrorHandler extends AbstractErrorHandler
         $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::AFTER));
     }
 
-    /**
-     * @return callable
-     */
-    public function getExceptionHandler(): callable
+    public function getExceptionHandler(): ?callable
     {
-        return function (\Throwable $ex) {
-            $trace = $ex->getTrace();
-            $requestPacket = null;
-            if (isset($trace[0]['args'][0])) {
-                $requestPacket = $trace[0]['args'][0];
-            }
-
-            $error = (new Error())
-                ->setCode($ex->getCode())
-                ->setData(Logger::createExceptionInfos($ex, true))
-                ->setMessage($ex->getMessage());
-
-            Logger::writeException($ex);
-
-            $responsePacket = ResponsePacket::create('unknown')
-                ->setError($error);
-
-            $rpcMethod = 'unknown.unknown';
-            if ($requestPacket !== null && is_object($requestPacket) && $requestPacket instanceof RequestPacket) {
-                $responsePacket->setId($requestPacket->getId());
-                $rpcMethod = $requestPacket->getMethod();
-            }
-
-            $arrayResponse = $responsePacket->toArray($this->serializer);
-            $this->triggerRpcAfterEvent($arrayResponse, $rpcMethod);
-            Response::send($arrayResponse);
-        };
+        return null;
     }
 
-    /**
-     * @return callable
-     */
-    public function getErrorHandler(): callable
+    public function getErrorHandler(): ?callable
     {
-        return function ($errno, $errstr, $errfile, $errline, $errcontext) {
-            $types = [
-                E_ERROR => [Logger::ERROR, 'E_ERROR'],
-                E_WARNING => [Logger::WARNING, 'E_WARNING'],
-                E_PARSE => [Logger::WARNING, 'E_PARSE'],
-                E_NOTICE => [Logger::WARNING, 'E_NOTICE'],
-                E_CORE_ERROR => [Logger::ERROR, 'E_CORE_ERROR'],
-                E_CORE_WARNING => [Logger::WARNING, 'E_CORE_WARNING'],
-                E_COMPILE_ERROR => [Logger::ERROR, 'E_COMPILE_ERROR'],
-                E_USER_ERROR => [Logger::ERROR, 'E_USER_ERROR'],
-                E_USER_WARNING => [Logger::WARNING, 'E_USER_WARNING'],
-                E_USER_NOTICE => [Logger::WARNING, 'E_USER_NOTICE'],
-                E_STRICT => [Logger::WARNING, 'E_STRICT'],
-                E_RECOVERABLE_ERROR => [Logger::ERROR, 'E_RECOVERABLE_ERROR'],
-                E_DEPRECATED => [Logger::INFO, 'E_DEPRECATED'],
-                E_USER_DEPRECATED => [Logger::INFO, 'E_USER_DEPRECATED'],
-            ];
-
-            if (isset($types[$errno])) {
-                $err = "(" . $types[$errno][1] . ") File ({$errfile}, {$errline}): {$errstr}";
-                Logger::write($err, $types[$errno][0]);
-            } else {
-                Logger::write("File ({$errfile}, {$errline}): {$errstr}", Logger::ERROR);
-            }
-        };
+        return null;
     }
 
     /**
      * @return \Closure
      */
-    public function getShutdownHandler(): callable
+    public function getShutdownHandler(): ?callable
     {
         return function () {
             if (($err = error_get_last())) {
@@ -137,26 +98,48 @@ class ErrorHandler extends AbstractErrorHandler
                 if (in_array($err['type'], $allowed, true)) {
                     ob_clean();
 
+                    $file = sprintf('...%s', substr($err['file'], strrpos($err['file'], '/') + 1));
+
                     $error = new Error();
                     $error->setCode($err['type'])
-                        ->setData('Shutdown! File: ' . $err['file'] . ' - Line: ' . $err['line'])
+                        ->setData('Shutdown! File: ' . $file . ' - Line: ' . $err['line'])
                         ->setMessage($err['message']);
-
-                    Logger::write(sprintf(
-                        '%s - Type: %s - Message: %s',
-                        $error->getData(),
-                        $err['type'],
-                        $error->getMessage()
-                    ), Logger::ERROR);
 
                     $responsePacket = ResponsePacket::create('unknown')
                         ->setError($error);
 
+                    $rpcMethod = 'unknown.unknown';
+                    if(!is_null($this->requestPacket)) {
+                        $responsePacket
+                            ->setJtlrpc($this->requestPacket->getJtlrpc())
+                            ->setId($this->requestPacket->getId());
+
+                        $rpcMethod = $this->requestPacket->getMethod();
+                    }
+
                     $arrayResponse = $responsePacket->toArray($this->serializer);
-                    $this->triggerRpcAfterEvent($arrayResponse, 'unknown.unknown');
-                    Response::send($arrayResponse);
+                    $this->triggerRpcAfterEvent($arrayResponse, $rpcMethod);
+                    Response::send($arrayResponse, $this->logger);
                 }
             }
         };
+    }
+
+    /**
+     * @param RequestPacket $requestPacket
+     * @return ErrorHandler
+     */
+    public function setRequestPacket(RequestPacket $requestPacket): ErrorHandler
+    {
+        $this->requestPacket = $requestPacket;
+        return $this;
+    }
+
+    /**
+     * @param LoggerInterface $logger
+     */
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
     }
 }

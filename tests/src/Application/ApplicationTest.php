@@ -17,11 +17,10 @@ use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Definition\ErrorCode;
 use Jtl\Connector\Core\Definition\Event;
 use Jtl\Connector\Core\Definition\Model;
-use Jtl\Connector\Core\Definition\RpcMethod;
 use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\ConfigException;
-use Jtl\Connector\Core\Exception\ControllerException;
 use Jtl\Connector\Core\Exception\DefinitionException;
+use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Category;
@@ -143,11 +142,11 @@ class ApplicationTest extends TestCase
      */
     public function testHandleRequestTransactionalControllerFail()
     {
-        $this->expectException(ControllerException::class);
+        $this->expectException(\RuntimeException::class);
         $category = new Category();
         $application = $this->createInitializedApplication();
         $controller = $this->createMock(TransactionalControllerStub::class);
-        $controller->expects($this->once())->method('delete')->with($category)->willThrowException(new ControllerException());
+        $controller->expects($this->once())->method('delete')->with($category)->willThrowException(new \RuntimeException());
         $controller->expects($this->once())->method('beginTransaction');
         $controller->expects($this->never())->method('commit');
         $controller->expects($this->once())->method('rollback');
@@ -295,10 +294,12 @@ class ApplicationTest extends TestCase
     }
 
     /**
+     * @runInSeparateProcess
+     *
      * @throws ApplicationException
-     * @throws ConfigException
      * @throws DefinitionException
      * @throws \ReflectionException
+     * @throws \Throwable
      */
     public function testRun()
     {
@@ -364,40 +365,78 @@ class ApplicationTest extends TestCase
         $this->assertTrue($coreFeaturesListenerFound, 'No CoreFeaturesSubscriber is registered');
     }
 
+    /**
+     * @runInSeparateProcess
+     *
+     * @throws ApplicationException
+     * @throws DefinitionException
+     * @throws \Throwable
+     */
     public function testRunInvalidRpcMethod()
     {
+        $this->expectException(RpcException::class);
+        $this->expectExceptionCode(ErrorCode::INVALID_REQUEST);
         $serializer = SerializerBuilder::create()->build();
         $factory = AbstractModelFactory::createFactory(Model::MANUFACTURER);
         $id = $factory->getFaker()->uuid;
         $requestPacket = (new RequestPacket())->setJtlrpc("2.0")->setMethod('yoo')->setParams([])->setId($id)->toArray();
         $_POST['jtlrpc'] = json_encode($requestPacket);
-        $error = (new Error())->setCode(ErrorCode::INVALID_REQUEST)->setMessage("Invalid request");
+        $ex = RpcException::invalidRequest();
+        $error = (new Error())->setCode(ErrorCode::INVALID_REQUEST)->setMessage("Invalid request")->setData(Error::createDataFromException($ex));
         $responsePacket = (new ResponsePacket())->setJtlrpc("2.0")->setId($id)->setError($error);
         $this->expectOutputString(json_encode($responsePacket->toArray($serializer)));
         $this->createApplication()->run();
     }
 
+    /**
+     * @runInSeparateProcess
+     *
+     * @throws ApplicationException
+     * @throws DefinitionException
+     * @throws \Throwable
+     */
     public function testRunUnknwonController()
     {
+        $this->expectException(DefinitionException::class);
+        $this->expectExceptionCode(ErrorCode::UNKNOWN_CONTROLLER);
         $serializer = SerializerBuilder::create()->build();
         $factory = AbstractModelFactory::createFactory(Model::MANUFACTURER);
         $id = $factory->getFaker()->uuid;
         $requestPacket = (new RequestPacket())->setJtlrpc("2.0")->setMethod('foo.bar')->setParams([])->setId($id)->toArray();
         $_POST['jtlrpc'] = json_encode($requestPacket);
-        $error = (new Error())->setCode(ErrorCode::UNKNOWN_CONTROLLER)->setMessage("Unknown controller (Foo)");
-        $responsePacket = (new ResponsePacket())->setJtlrpc("2.0")->setId($id)->setError($error);
+        $ex = DefinitionException::unknownController('foo');
+        $error = (new Error())
+            ->setCode(ErrorCode::UNKNOWN_CONTROLLER)
+            ->setMessage("Unknown controller (Foo)")
+            ->setData(Error::createDataFromException($ex));
+
+        $responsePacket = (new ResponsePacket())
+            ->setJtlrpc("2.0")
+            ->setId($id)
+            ->setError($error);
+
         $this->expectOutputString(json_encode($responsePacket->toArray($serializer)));
         $this->createApplication()->run();
     }
 
+    /**
+     * @runInSeparateProcess
+     *
+     * @throws ApplicationException
+     * @throws DefinitionException
+     * @throws \Throwable
+     */
     public function testRunUnknwonAction()
     {
+        $this->expectException(DefinitionException::class);
+        $this->expectExceptionCode(ErrorCode::UNKNOWN_ACTION);
         $serializer = SerializerBuilder::create()->build();
         $factory = AbstractModelFactory::createFactory(Model::MANUFACTURER);
         $id = $factory->getFaker()->uuid;
         $requestPacket = (new RequestPacket())->setJtlrpc("2.0")->setMethod('category.bar')->setParams([])->setId($id)->toArray();
         $_POST['jtlrpc'] = json_encode($requestPacket);
-        $error = (new Error())->setCode(ErrorCode::UNKNOWN_ACTION)->setMessage("Unknown action (bar)");
+        $ex = DefinitionException::unknownAction('bar');
+        $error = (new Error())->setCode(ErrorCode::UNKNOWN_ACTION)->setMessage("Unknown action (bar)")->setData(Error::createDataFromException($ex));
         $responsePacket = (new ResponsePacket())->setJtlrpc("2.0")->setId($id)->setError($error);
         $this->expectOutputString(json_encode($responsePacket->toArray($serializer)));
         $this->createApplication()->run();

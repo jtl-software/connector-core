@@ -7,9 +7,8 @@
 
 namespace Jtl\Connector\Core\Http;
 
-use Jtl\Connector\Core\Rpc\ResponsePacket;
 use Jtl\Connector\Core\Serializer\Json;
-use Jtl\Connector\Core\Logger\Logger;
+use Psr\Log\LoggerInterface;
 
 /**
  * Http Response Handler
@@ -20,15 +19,15 @@ use Jtl\Connector\Core\Logger\Logger;
 class Response
 {
     /**
-     *
-     * Http Response sender
-     *
      * @param mixed[] $response
+     * @param LoggerInterface|null $rpcLogger
      */
-    public static function send(array $response)
+    public static function send(array $response, LoggerInterface $rpcLogger = null)
     {
         $jsonResponse = Json::encode($response);
-        Logger::write($jsonResponse, Logger::DEBUG, Logger::CHANNEL_RPC);
+        if(!is_null($rpcLogger)) {
+            $rpcLogger->debug($jsonResponse);
+        }
 
         header('Cache-Control: no-cache, must-revalidate');
         header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');

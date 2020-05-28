@@ -12,7 +12,9 @@ use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Jtl\Connector\Core\Model\AbstractDataModel;
 use Jtl\Connector\Core\Exception\LinkerException;
 use Jtl\Connector\Core\Model\Identity;
-use Jtl\Connector\Core\Logger\Logger;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 /**
  * Identity Connector Linker
@@ -20,10 +22,15 @@ use Jtl\Connector\Core\Logger\Logger;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.com>
  */
-class IdentityLinker
+class IdentityLinker implements LoggerAwareInterface
 {
     const CACHE_TYPE_HOST = 'h';
     const CACHE_TYPE_ENDPOINT = 'e';
+
+    /**
+     * @var LoggerInterface
+     */
+    protected $logger;
 
     /**
      * Session Database Mapper
@@ -48,6 +55,7 @@ class IdentityLinker
      */
     public function __construct(PrimaryKeyMapperInterface $mapper)
     {
+        $this->logger = new NullLogger();
         $this->mapper = $mapper;
     }
 
@@ -88,22 +96,14 @@ class IdentityLinker
                         } elseif ($entity instanceof Identity && Model::isIdentityProperty($reflect->getShortName(), $propertyInfo->getName())) {
                             $this->linkIdentityList($entity, $reflect->getShortName(), $propertyInfo->getName(), $isDeleted);
                         } else {
-                            Logger::write(
-                                sprintf('Property (%s) from model (%s) is not an instance of DataModel or Identity', $propertyInfo->getName(), $reflect->getShortName()),
-                                Logger::WARNING,
-                                Logger::CHANNEL_LINKER
-                            );
+                            $this->logger->warning('Property ({property}) from model ({model}) is not an instance of DataModel or Identity', ['property' => $propertyInfo->getName(), 'model' => $reflect->getShortName()]);
                         }
                     }
                 } elseif ($model->{$getter}() instanceof AbstractDataModel) {
                     $entity = $model->{$getter}();
                     $this->linkModel($entity, $isDeleted);
                 } else {
-                    Logger::write(
-                        sprintf('Property (%s) from model (%s) is not an array or an instance of DataModel', $propertyInfo->getName(), $reflect->getShortName()),
-                        Logger::WARNING,
-                        Logger::CHANNEL_LINKER
-                    );
+                    $this->logger->warning('Property ({property}) from model ({model}) is not an array or an instance of DataModel', ['property' => $propertyInfo->getName(), 'model' => $reflect->getShortName()]);
                 }
             } elseif ($propertyInfo->isIdentity() && Model::isIdentityProperty($reflect->getShortName(), $propertyInfo->getName())) {
                 $identity = $model->{$getter}();
@@ -340,6 +340,7 @@ class IdentityLinker
      */
     public function clear(int $type = null): bool
     {
+
         return $this->mapper->clear($type);
     }
 
@@ -391,6 +392,15 @@ class IdentityLinker
     }
 
     /**
+     * @param LoggerInterface $logger
+     */
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
+
+    /**
      * @param mixed $id
      * @param integer $type
      * @param string $cacheType
@@ -400,14 +410,14 @@ class IdentityLinker
     {
         $result = $this->useCache && array_key_exists($this->buildKey($id, $type, $cacheType), $this->cache);
 
-        // Debug
-        Logger::write(sprintf(
-            'Checkcache (id: %s, type: %s, cacheType: %s) with result %s',
-            $id,
-            $type,
-            $cacheType,
-            $result ? 'true' : 'false'
-        ), Logger::DEBUG, Logger::CHANNEL_LINKER);
+        $context = [
+            'id' => $id,
+            'type' => $type,
+            'cacheType' => $cacheType,
+            'result' => $result ? 'true' : 'false',
+        ];
+
+        $this->logger->debug('CheckCache (id: {id}, type: {type}, cacheType: {cacheType}) with result {result}', $context);
 
         return $result;
     }
@@ -422,14 +432,14 @@ class IdentityLinker
     {
         $result = $this->checkCache($id, $type, $cacheType) ? $this->cache[$this->buildKey($id, $type, $cacheType)] : null;
 
-        // Debug
-        Logger::write(sprintf(
-            'LoadCache (id: %s, type: %s, cacheType: %s) with result %s',
-            $id,
-            $type,
-            $cacheType,
-            $result
-        ), Logger::DEBUG, Logger::CHANNEL_LINKER);
+        $context = [
+            'id' => $id,
+            'type' => $type,
+            'cacheType' => $cacheType,
+            'result' => $result ? 'true' : 'false',
+        ];
+
+        $this->logger->debug('LoadCache (id: {id}, type: {type}, cacheType: {cacheType}) with result {result}', $context);
 
         return $result;
     }
@@ -442,14 +452,14 @@ class IdentityLinker
      */
     protected function saveCache(string $endpointId, int $hostId, int $type, string $cacheType)
     {
-        // Debug
-        Logger::write(sprintf(
-            'SaveCache (endpointId: %s, hostId: %s, type: %s, cacheType: %s)',
-            $endpointId,
-            $hostId,
-            $type,
-            $cacheType
-        ), Logger::DEBUG, Logger::CHANNEL_LINKER);
+        $context = [
+            'endpoint' => $endpointId,
+            'host' => $hostId,
+            'type' => $type,
+            'cacheType' => $cacheType
+        ];
+
+        $this->logger->debug('SaveCache (endpointId: {endpoint}, hostId: {host}, type: {type}, cacheType: {cacheType})', $context);
 
         if ($this->useCache) {
             switch ($cacheType) {
@@ -471,14 +481,14 @@ class IdentityLinker
      */
     protected function deleteCache(int $type, string $cacheType, string $endpointId = null, int $hostId = null)
     {
-        // Debug
-        Logger::write(sprintf(
-            'DeleteCache (endpointId: %s, hostId: %s, type: %s, cacheType: %s)',
-            $endpointId,
-            $hostId,
-            $type,
-            $cacheType
-        ), Logger::DEBUG, Logger::CHANNEL_LINKER);
+        $context = [
+            'endpoint' => $endpointId,
+            'host' => $hostId,
+            'type' => $type,
+            'cacheType' => $cacheType
+        ];
+
+        $this->logger->debug('DeleteCache (endpointId: {endpoint}, hostId: {host}, type: {type}, cacheType: {cacheType})', $context);
 
         if ($this->useCache) {
             switch ($cacheType) {

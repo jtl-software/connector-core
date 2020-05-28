@@ -41,6 +41,7 @@ use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\HttpException;
 use Jtl\Connector\Core\Exception\LinkerException;
 use Jtl\Connector\Core\IO\Temp;
+use Jtl\Connector\Core\Logger\LoggerService;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Jtl\Connector\Core\Model\AbstractImage;
 use Jtl\Connector\Core\Model\Ack;
@@ -63,7 +64,6 @@ use Jtl\Connector\Core\Config\FileConfig;
 use Jtl\Connector\Core\Subscriber\CoreFeaturesSubscriber;
 use Jtl\Connector\Core\Subscriber\PrepareProductPricesSubscriber;
 use Jtl\Connector\Core\Definition\RpcMethod;
-use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Rpc\Method;
 use Jtl\Connector\Core\Linker\IdentityLinker;
 use Jtl\Connector\Core\Model\AbstractDataModel;
@@ -71,8 +71,10 @@ use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Session\SqliteSessionHandler;
 use Jtl\Connector\Core\Session\SessionHandlerInterface;
+use Monolog\ErrorHandler as MonologErrorHandler;
 use Noodlehaus\ConfigInterface;
 use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerAwareInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Finder\Finder;
 
@@ -81,16 +83,6 @@ class Application
     public const
         PROTOCOL_VERSION = 7,
         MIN_PHP_VERSION = '7.2';
-
-    /**
-     * @var string
-     */
-    protected $connectorDir;
-
-    /**
-     * @var ConnectorInterface
-     */
-    protected $connector = null;
 
     /**
      * @var ConfigInterface;
@@ -103,14 +95,19 @@ class Application
     protected $configSchema;
 
     /**
-     * @var SessionHandlerInterface
+     * @var ConnectorInterface
      */
-    protected $sessionHandler;
+    protected $connector;
 
     /**
-     * @var EventDispatcher
+     * @var string
      */
-    protected $eventDispatcher;
+    protected $connectorDir;
+
+    /**
+     * @var Container
+     */
+    protected $container;
 
     /**
      * @var AbstractErrorHandler
@@ -118,9 +115,24 @@ class Application
     protected $errorHandler;
 
     /**
-     * @var Container
+     * @var EventDispatcher
      */
-    protected $container;
+    protected $eventDispatcher;
+
+    /**
+     * @var string[]
+     */
+    protected $imagesToDelete = [];
+
+    /**
+     * @var LoggerService
+     */
+    protected $loggers;
+
+    /**
+     * @var SessionHandlerInterface
+     */
+    protected $sessionHandler;
 
     /**
      * @var Serializer
@@ -131,11 +143,6 @@ class Application
      * @var Temp
      */
     protected $temp;
-
-    /**
-     * @var string[]
-     */
-    protected $imagesToDelete = [];
 
     /**
      * Application constructor.
@@ -171,25 +178,30 @@ class Application
         $this->container = (new ContainerBuilder())->build();
         $this->container->set(Application::class, $this);
         $this->eventDispatcher = new EventDispatcher();
+        $this->loggers = new LoggerService($this->config->get(ConfigSchema::LOG_DIR), $this->config->get(ConfigSchema::LOG_LEVEL));
         $this->serializer = SerializerBuilder::create($serializerCacheDir)->build();
-        $this->errorHandler = new ErrorHandler($this->eventDispatcher, $this->serializer);
+        $this->errorHandler = new ErrorHandler($this->connectorDir, $this->eventDispatcher, $this->serializer);
+        $this->errorHandler->setLogger($this->loggers->get(LoggerService::CHANNEL_RPC));
         $this->temp = new Temp($this->connectorDir);
     }
 
     /**
      * @throws ApplicationException
      * @throws DefinitionException
+     * @throws \Throwable
      */
     public function run(): void
     {
         $this->eventDispatcher->addSubscriber(new PrepareProductPricesSubscriber());
         $this->eventDispatcher->addSubscriber(new CoreFeaturesSubscriber());
         $this->errorHandler->register();
+        MonologErrorHandler::register($this->loggers->get(LoggerService::CHANNEL_ERROR));
         $method = Method::createFromRpcMethod('unknown.unknown');
+        $jtlrpc = HttpRequest::getJtlrpc();
+        $requestPacket = RequestPacket::createFromJtlrpc($jtlrpc, $this->serializer);
 
         try {
-            $jtlrpc = HttpRequest::getJtlrpc();
-            $requestPacket = RequestPacket::createFromJtlrpc($jtlrpc, $this->serializer);
+            $this->errorHandler->setRequestPacket($requestPacket);
             if (!$requestPacket->isValid()) {
                 throw RpcException::invalidRequest();
             }
@@ -218,13 +230,9 @@ class Application
             }
 
             // Log incoming request packet (debug only and configuration must be initialized)
-            Logger::write(sprintf('Request packet: %s', $logJtlrpc), Logger::DEBUG, Logger::CHANNEL_RPC);
+            $this->loggers->get(LoggerService::CHANNEL_RPC)->debug('Request packet: {packet}', ['packet' => $logJtlrpc]);
             if ($requestPacket->getMethod() !== RpcMethod::AUTH && !empty($requestPacket->getParams())) {
-                Logger::write(
-                    sprintf('Params: %s', Json::encode($requestPacket->getParams())),
-                    Logger::DEBUG,
-                    Logger::CHANNEL_RPC
-                );
+                $this->loggers->get(LoggerService::CHANNEL_RPC)->debug('Params: {params}', ['params' => Json::encode($requestPacket->getParams())]);
             }
 
             $eventData = Json::decode($jtlrpc, true);
@@ -236,12 +244,12 @@ class Application
             $error = (new Error())
                 ->setCode($ex->getCode())
                 ->setMessage($ex->getMessage())
-                ->setData(Logger::createExceptionInfos($ex, true));
+                ->setData(Error::createDataFromException($ex));
 
             $responsePacket = ResponsePacket::create($requestPacket->getId())
                 ->setError($error);
 
-            Logger::writeException($ex);
+            throw $ex;
         } finally {
             if (count($this->imagesToDelete) > 0) {
                 HttpRequest::deleteFileUploads($this->imagesToDelete);
@@ -253,7 +261,7 @@ class Application
             $event = new RpcEvent($arrayResponse, $method->getController(), $method->getAction());
             $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::AFTER));
 
-            HttpResponse::send($arrayResponse);
+            HttpResponse::send($arrayResponse, $this->loggers->get(LoggerService::CHANNEL_RPC));
 
             if (mt_rand(0, 99) === 0) {
                 $this->getSessionHandler()->gc((int)ini_get('session.gc_maxlifetime'));
@@ -380,7 +388,8 @@ class Application
         RequestPacket $requestPacket,
         Method $method,
         string $modelNamespace
-    ): Request {
+    ): Request
+    {
         $controller = $method->getController();
         $action = $method->getAction();
 
@@ -452,13 +461,15 @@ class Application
 
         if (Action::isCoreAction($action)) {
             $this->container->set($controller, function (ContainerInterface $container) {
-                return new ConnectorController(
+                $controller = new ConnectorController(
                     $this->config->get(ConfigSchema::FEATURES_PATH),
-                    $container->get(IdentityLinker::class),
                     $container->get(ChecksumLinker::class),
+                    $container->get(IdentityLinker::class),
                     $container->get(SessionHandlerInterface::class),
                     $container->get(TokenValidatorInterface::class)
                 );
+                $controller->setLogger($this->loggers->get(LoggerService::CHANNEL_GLOBAL));
+                return $controller;
             });
         } elseif (!$this->container->has($controller)) {
             $controllerClass = sprintf("%s\\%sController", $this->connector->getControllerNamespace(), $controller);
@@ -606,9 +617,23 @@ class Application
         $container->set(SessionHandlerInterface::class, $application->getSessionHandler());
         $container->set(TokenValidatorInterface::class, $connector->getTokenValidator());
         $container->set(PrimaryKeyMapperInterface::class, $connector->getPrimaryKeyMapper());
+
         if ($connector instanceof UseChecksumInterface) {
             $container->set(ChecksumLoaderInterface::class, $connector->getChecksumLoader());
         }
+
+        $container->set(ChecksumLinker::class, function(ContainerInterface $container) {
+            $loader = $container->has(ChecksumLoaderInterface::class) ? $container->get(ChecksumLoaderInterface::class) : null;
+            $linker = new ChecksumLinker($loader);
+            $linker->setLogger($this->loggers->get(LoggerService::CHANNEL_CHECKSUM));
+            return $linker;
+        });
+
+        $container->set(IdentityLinker::class, function(ContainerInterface $container) {
+            $linker = new IdentityLinker($container->get(PrimaryKeyMapperInterface::class));
+            $linker->setLogger($this->loggers->get(LoggerService::CHANNEL_LINKER));
+            return $linker;
+        });
     }
 
     /**
@@ -628,6 +653,10 @@ class Application
 
         $sessionHandler = $this->getSessionHandler();
 
+        if($sessionHandler instanceof LoggerAwareInterface) {
+            $sessionHandler->setLogger($this->loggers->get(LoggerService::CHANNEL_SESSION));
+        }
+
         session_name($sessionName);
         if ($sessionId !== null) {
             if ($sessionHandler->validateId($sessionId)) {
@@ -640,8 +669,7 @@ class Application
         session_set_save_handler($sessionHandler, true);
 
         session_start();
-
-        Logger::write(sprintf('Session started with id (%s)', session_id()), Logger::DEBUG, Logger::CHANNEL_SESSION);
+        $this->loggers->get(LoggerService::CHANNEL_SESSION)->debug('Session started with id ({sessionId})', ['sessionId' => session_id()]);
     }
 
     /**
@@ -719,7 +747,8 @@ class Application
         ?object $model,
         string $controller,
         string $action
-    ) {
+    )
+    {
         $messages = [
             sprintf('Controller = %s', $controller),
             sprintf('Action = %s', $action),

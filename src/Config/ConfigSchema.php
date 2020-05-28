@@ -3,8 +3,8 @@
 namespace Jtl\Connector\Core\Config;
 
 use Jtl\Connector\Core\Exception\ConfigException;
-use Jtl\Connector\Core\Logger\Logger;
 use Noodlehaus\ConfigInterface;
+use Psr\Log\LogLevel;
 
 class ConfigSchema
 {
@@ -117,7 +117,7 @@ class ConfigSchema
     public static function createDefaultParameters(string $connectorDir): array
     {
         return [
-            ConfigParameter::create(self::LOG_LEVEL, ConfigParameter::TYPE_STRING, true, true, Logger::INFO),
+            ConfigParameter::create(self::LOG_LEVEL, ConfigParameter::TYPE_STRING, true, true, LogLevel::INFO),
             ConfigParameter::create(self::MAIN_LANGUAGE, ConfigParameter::TYPE_STRING, true, true, 'de'),
             ConfigParameter::create(self::CONNECTOR_DIR, ConfigParameter::TYPE_STRING, true, true, $connectorDir),
             ConfigParameter::create(self::LOG_DIR, ConfigParameter::TYPE_STRING, true, true, sprintf('%s/var/log', $connectorDir)),

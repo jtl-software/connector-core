@@ -141,4 +141,29 @@ class Error extends AbstractModel
             throw RpcException::parseError();
         }
     }
+
+    /**
+     * @param \Throwable $exception
+     * @param string|null $additionalMessage
+     * @return string
+     */
+    public static function createDataFromException(\Throwable $exception, string $additionalMessage = null): string
+    {
+        $lastSlashPos = strrpos($exception->getFile(), '/');
+        $file = sprintf('...%s', substr($exception->getFile(), $lastSlashPos + 1));
+
+        $data = sprintf(
+            "%s (Code: %s) in %s:%s",
+            get_class($exception),
+            $exception->getCode(),
+            $file,
+            $exception->getLine()
+        );
+
+        if (is_string($additionalMessage)) {
+            $data .= sprintf(' - %s', $additionalMessage);
+        }
+
+        return $data;
+    }
 }

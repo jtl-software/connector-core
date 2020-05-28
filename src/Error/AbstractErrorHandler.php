@@ -5,23 +5,34 @@ abstract class AbstractErrorHandler
 {
     public function register(): void
     {
-        set_exception_handler($this->getExceptionHandler());
-        set_error_handler($this->getErrorHandler());
-        register_shutdown_function($this->getShutdownHandler());
+        $exceptionHandler = $this->getExceptionHandler();
+        if(!is_null($exceptionHandler)) {
+            set_exception_handler($exceptionHandler);
+        }
+
+        $errorHandler = $this->getErrorHandler();
+        if(!is_null($errorHandler)) {
+            set_error_handler($errorHandler);
+        }
+
+        $shutDownHandler = $this->getShutdownHandler();
+        if(!is_null($shutDownHandler)) {
+            register_shutdown_function($shutDownHandler);
+        }
     }
 
     /**
      * @return callable
      */
-    abstract public function getExceptionHandler(): callable;
+    abstract public function getExceptionHandler(): ?callable;
 
     /**
      * @return callable
      */
-    abstract public function getErrorHandler(): callable;
+    abstract public function getErrorHandler(): ?callable;
 
     /**
      * @return callable
      */
-    abstract public function getShutdownHandler(): callable;
+    abstract public function getShutdownHandler(): ?callable;
 }

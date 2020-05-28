@@ -44,7 +44,7 @@ interface PrimaryKeyMapperInterface
      * @return boolean
      */
     public function delete(int $type, string $endpointId = null, int $hostId = null): bool;
-    
+
     /**
      * Clears the entire link table
      *

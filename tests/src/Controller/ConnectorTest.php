@@ -52,7 +52,7 @@ class ConnectorTest extends TestCase
         if (is_null($tokenValidator)) {
             $tokenValidator = $this->createMock(TokenValidatorInterface::class);
         }
-        return new ConnectorController($featuresPath, $linker, $checksumLinker, $sessionHandler, $tokenValidator);
+        return new ConnectorController($featuresPath, $checksumLinker, $linker, $sessionHandler, $tokenValidator);
     }
 
     /**
