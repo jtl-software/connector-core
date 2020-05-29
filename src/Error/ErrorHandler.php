@@ -81,12 +81,20 @@ class ErrorHandler extends AbstractErrorHandler implements LoggerAwareInterface
         $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::AFTER));
     }
 
-    public function getExceptionHandler(): ?callable
+    /**
+     * @return callable
+     */
+    public function getExceptionHandler(): callable
     {
-        return null;
+        return function(\Throwable $ex) {
+            return null;
+        };
     }
 
-    public function getErrorHandler(): ?callable
+    /**
+     * @return callable
+     */
+    public function getErrorHandler(): callable
     {
         return function ($errno, $errstr, $errfile, $errline, $errcontext) {
             return !in_array($errno, static::$shutdownHandleErrors);
@@ -94,9 +102,9 @@ class ErrorHandler extends AbstractErrorHandler implements LoggerAwareInterface
     }
 
     /**
-     * @return \Closure
+     * @return callable
      */
-    public function getShutdownHandler(): ?callable
+    public function getShutdownHandler(): callable
     {
         return function () {
             if (($err = error_get_last())) {

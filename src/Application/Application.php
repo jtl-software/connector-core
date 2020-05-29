@@ -263,6 +263,7 @@ class Application
             $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::BEFORE));
 
             $responsePacket = $this->execute($requestPacket, $method);
+            session_write_close();
         } catch (\Throwable $ex) {
             $error = (new Error())
                 ->setCode($ex->getCode())
