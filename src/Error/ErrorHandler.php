@@ -44,6 +44,18 @@ class ErrorHandler extends AbstractErrorHandler implements LoggerAwareInterface
     protected $requestPacket;
 
     /**
+     * @var integer[]
+     */
+    protected static $shutdownHandleErrors = [
+        E_ERROR,
+        E_CORE_ERROR,
+        E_USER_ERROR,
+        E_RECOVERABLE_ERROR,
+        E_COMPILE_ERROR,
+        E_PARSE,
+    ];
+
+    /**
      * ErrorHandler constructor.
      * @param string $connectorDir
      * @param EventDispatcher $eventDispatcher
@@ -76,7 +88,9 @@ class ErrorHandler extends AbstractErrorHandler implements LoggerAwareInterface
 
     public function getErrorHandler(): ?callable
     {
-        return null;
+        return function ($errno, $errstr, $errfile, $errline, $errcontext) {
+            return !in_array($errno, static::$shutdownHandleErrors);
+        };
     }
 
     /**
@@ -86,16 +100,7 @@ class ErrorHandler extends AbstractErrorHandler implements LoggerAwareInterface
     {
         return function () {
             if (($err = error_get_last())) {
-                $allowed = [
-                    E_ERROR,
-                    E_CORE_ERROR,
-                    E_USER_ERROR,
-                    E_RECOVERABLE_ERROR,
-                    E_COMPILE_ERROR,
-                    E_PARSE,
-                ];
-
-                if (in_array($err['type'], $allowed, true)) {
+                if (in_array($err['type'], static::$shutdownHandleErrors, true)) {
                     ob_clean();
 
                     $file = sprintf('...%s', substr($err['file'], strrpos($err['file'], '/') + 1));
