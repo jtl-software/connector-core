@@ -29,13 +29,15 @@ class StrTest extends TestCase
     public function toCamelCaseDataProvider(): array
     {
         return [
-            ['camel_case', 'camelCase'],
+            ['snake_case', 'snakeCase'],
+            ['PascalCase', 'pascalCase'],
+            ['camelCase', 'camelCase'],
             [false, ''],
             ['', ''],
             ['_snake_case_', 'snakeCase'],
             ['snake__case', 'snakeCase'],
             [12345, '12345'],
-            ['    ', '    '],
+            ['    ', ''],
             ['sna\\ke', 'sna\\ke']
         ];
     }
@@ -58,13 +60,15 @@ class StrTest extends TestCase
     public function toPascalCaseDataProvider(): array
     {
         return [
-            ['camel_case', 'CamelCase'],
+            ['snake_case', 'SnakeCase'],
+            ['camelCase', 'CamelCase'],
+            ['PascalCase', 'PascalCase'],
             [false, ''],
             ['', ''],
             ['_snake_case_', 'SnakeCase'],
             ['snake__case', 'SnakeCase'],
             [12345, '12345'],
-            ['    ', '    '],
+            ['    ', ''],
             ['sna\\ke', 'Sna\\Ke']
         ];
     }
@@ -88,12 +92,14 @@ class StrTest extends TestCase
     {
         return [
             ['snake_case', 'snake_case'],
+            ['camelCase', 'camel_case'],
+            ['PascalCase', 'pascal_case'],
             [false, ''],
             ['', ''],
-            ['_snake_case_', '_snake_case_'],
-            ['snake__case', 'snake__case'],
+            ['_snake_case_', 'snake_case'],
+            ['snake__case', 'snake_case'],
             [12345, '12345'],
-            ['    ', '    '],
+            ['    ', ''],
             ['sna\\ke', 'sna\\ke']
         ];
     }

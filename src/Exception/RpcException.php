@@ -4,6 +4,7 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Exception
  */
+
 namespace Jtl\Connector\Core\Exception;
 
 use Jtl\Connector\Core\Definition\ErrorCode;
@@ -33,10 +34,11 @@ class RpcException extends \Exception
     }
 
     /**
+     * @param string $method
      * @return RpcException
      */
-    public static function invalidMethod(): self
+    public static function invalidMethod(string $method): self
     {
-        return new static('Invalid method', ErrorCode::INVALID_METHOD);
+        return new static(sprintf('Invalid method (%s)', $method), ErrorCode::INVALID_METHOD);
     }
 }

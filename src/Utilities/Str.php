@@ -12,7 +12,7 @@ class Str
      */
     public static function toCamelCase(string $string): string
     {
-        return (new Convert($string))->fromSnake()->toCamel();
+        return (new Convert($string))->toCamel();
     }
 
     /**
@@ -22,7 +22,7 @@ class Str
      */
     public static function toPascalCase(string $string): string
     {
-        return (new Convert($string))->fromSnake()->toPascal();
+        return (new Convert($string))->toPascal();
     }
 
     /**
@@ -32,6 +32,6 @@ class Str
      */
     public static function toSnakeCase(string $string): string
     {
-        return (new Convert($string))->fromPascal()->toSnake();
+        return (new Convert($string))->toSnake();
     }
 }

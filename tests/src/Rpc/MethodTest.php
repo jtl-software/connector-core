@@ -3,6 +3,8 @@ namespace Jtl\Connector\Core\Test\Rpc;
 
 use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Controller;
+use Jtl\Connector\Core\Definition\ErrorCode;
+use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Rpc\Method;
 use Jtl\Connector\Core\Test\TestCase;
 
@@ -45,6 +47,16 @@ class MethodTest extends TestCase
     }
 
     /**
+     * @throws RpcException
+     */
+    public function testCreateFromRpcMethodIsInvalid()
+    {
+        $this->expectException(RpcException::class);
+        $this->expectExceptionCode(ErrorCode::INVALID_METHOD);
+        Method::createFromRpcMethod('abcd');
+    }
+
+    /**
      * @return array
      */
     public function createFromRpcMethodDataProvider(): array
@@ -52,7 +64,7 @@ class MethodTest extends TestCase
         return [
             ['product.pull', 'Product', 'pull', false],
             ['core.connector.auth', 'Connector', 'auth', true],
-            [' category. pull', ' Category', ' pull', false],
+            [' category. pull', 'Category', 'pull', false],
             ['.', '', '', false],
             ['..', '', '', false]
         ];

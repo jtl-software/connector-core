@@ -36,7 +36,7 @@ final class Event
             throw DefinitionException::unknownMoment($moment);
         }
 
-        return Str::toSnakeCase(sprintf("%s.%s.%s", $controllerName, $moment, $actionName));
+        return sprintf("%s.%s.%s", Str::toSnakeCase($controllerName), $moment, $actionName);
     }
 
     /**

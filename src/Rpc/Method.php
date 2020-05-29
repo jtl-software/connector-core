@@ -84,12 +84,16 @@ class Method
     /**
      * @param string $rpcMethod
      * @return Method
-     * @throws \Exception
+     * @throws RpcException
      */
     public static function createFromRpcMethod(string $rpcMethod): Method
     {
         $splitted = explode('.', $rpcMethod);
-        $offset = count($splitted) === 3 ? 1 : 0;
+        $partsCount = count($splitted);
+        if($partsCount < 2) {
+            throw RpcException::invalidMethod($rpcMethod);
+        }
+        $offset = $partsCount === 3 ? 1 : 0;
         $controller = Str::toPascalCase($splitted[0 + $offset]);
         $action = Str::toCamelCase($splitted[1 + $offset]);
         return new static($rpcMethod, $controller, $action);
