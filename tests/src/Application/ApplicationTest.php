@@ -34,8 +34,8 @@ use Jtl\Connector\Core\Rpc\ResponsePacket;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Session\SessionHandlerInterface;
 use Jtl\Connector\Core\Session\SqliteSessionHandler;
-use Jtl\Connector\Core\Subscriber\CoreFeaturesSubscriber;
-use Jtl\Connector\Core\Subscriber\PrepareProductPricesSubscriber;
+use Jtl\Connector\Core\Subscriber\FeaturesSubscriber;
+use Jtl\Connector\Core\Subscriber\ProductPriceSubscriber;
 use Jtl\Connector\Core\Test\TestCase;
 use Jtl\Connector\Core\Test\Stub\Controller\TransactionalControllerStub;
 use MyPlugin\Bootstrap;
@@ -344,7 +344,7 @@ class ApplicationTest extends TestCase
 
         $prepareProductPriceSubscriberFound = false;
         foreach ($productPricesListeners as $listener) {
-            if ($listener[0] instanceof PrepareProductPricesSubscriber) {
+            if ($listener[0] instanceof ProductPriceSubscriber) {
                 $prepareProductPriceSubscriberFound = true;
                 break;
             }
@@ -355,7 +355,7 @@ class ApplicationTest extends TestCase
 
         $coreFeaturesListenerFound = false;
         foreach ($coreFeaturesListeners as $listener) {
-            if ($listener[0] instanceof CoreFeaturesSubscriber) {
+            if ($listener[0] instanceof FeaturesSubscriber) {
                 $coreFeaturesListenerFound = true;
                 break;
             }

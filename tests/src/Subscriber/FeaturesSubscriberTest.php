@@ -4,26 +4,37 @@ namespace Jtl\Connector\Core\Test\Subscriber;
 
 use Jtl\Connector\Core\Definition\Event;
 use Jtl\Connector\Core\Event\FeaturesEvent;
+use Jtl\Connector\Core\Model\FeatureFlag;
 use Jtl\Connector\Core\Model\Features;
-use Jtl\Connector\Core\Subscriber\CoreFeaturesSubscriber;
+use Jtl\Connector\Core\Subscriber\FeaturesSubscriber;
 use PHPUnit\Framework\TestCase;
 
-class ConnectorFeaturesSubscriberTest extends TestCase
+class FeaturesSubscriberTest extends TestCase
 {
-    public function testLockNeedsFinishCall()
+    public function testSetNeedsFinishCallActive()
     {
-        $subscriber = new CoreFeaturesSubscriber();
+        $subscriber = new FeaturesSubscriber();
         $features = Features::create();
         $this->assertFalse($features->hasFlag('needs_finish_call'));
-        $subscriber->forceSetFinishCallFlag(new FeaturesEvent($features));
+        $subscriber->setNeedsFinishCallActive(new FeaturesEvent($features));
         $this->assertTrue($features->hasFlag('needs_finish_call'));
+        $this->assertTrue($features->getFlag('needs_finish_call')->isActive());
+    }
+
+    public function testSetNeedsFinishCallActiveOverrideInactive()
+    {
+        $subscriber = new FeaturesSubscriber();
+        $features = Features::create()->setFlag(new FeatureFlag('needs_finish_call'));
+        $this->assertTrue($features->hasFlag('needs_finish_call'));
+        $this->assertFalse($features->getFlag('needs_finish_call')->isActive());
+        $subscriber->setNeedsFinishCallActive(new FeaturesEvent($features));
         $this->assertTrue($features->getFlag('needs_finish_call')->isActive());
     }
 
     public function testGetSubscribedEvents()
     {
         $expectedEventName = Event::createCoreEventName('Connector', 'features', 'after');
-        $subscribedEvents = CoreFeaturesSubscriber::getSubscribedEvents();
+        $subscribedEvents = FeaturesSubscriber::getSubscribedEvents();
         $this->assertArrayHasKey($expectedEventName, $subscribedEvents);
         $listeners = $subscribedEvents[$expectedEventName];
         $this->assertIsArray($listeners);
@@ -32,7 +43,7 @@ class ConnectorFeaturesSubscriberTest extends TestCase
         $event = $listeners[0];
         $this->assertCount(2, $event);
         $this->assertArrayHasKey(0, $event);
-        $this->assertEquals('forceSetFinishCallFlag', $event[0]);
+        $this->assertEquals('setNeedsFinishCallActive', $event[0]);
         $this->assertArrayHasKey(1, $event);
         $this->assertEquals(-10000, $event[1]);
     }

@@ -9,18 +9,21 @@ use Jtl\Connector\Core\Event\FeaturesEvent;
 use Jtl\Connector\Core\Model\FeatureFlag;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class CoreFeaturesSubscriber implements EventSubscriberInterface
+class FeaturesSubscriber implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {
         return [
             Event::createCoreEventName(Controller::CONNECTOR, Action::FEATURES, Event::AFTER) => [
-                ['forceSetFinishCallFlag', -10000]
+                ['setNeedsFinishCallActive', -10000]
             ]
         ];
     }
 
-    public function forceSetFinishCallFlag(FeaturesEvent $event)
+    /**
+     * @param FeaturesEvent $event
+     */
+    public function setNeedsFinishCallActive(FeaturesEvent $event)
     {
         $event->getFeatures()->setFlag(new FeatureFlag('needs_finish_call', true));
     }

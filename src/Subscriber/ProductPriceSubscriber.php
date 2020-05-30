@@ -10,7 +10,7 @@ use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Model\ProductPrice;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class PrepareProductPricesSubscriber implements EventSubscriberInterface
+class ProductPriceSubscriber implements EventSubscriberInterface
 {
     /**
      * @return array

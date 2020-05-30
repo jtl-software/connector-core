@@ -61,8 +61,8 @@ use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Http\Request as HttpRequest;
 use Jtl\Connector\Core\Http\Response as HttpResponse;
 use Jtl\Connector\Core\Config\FileConfig;
-use Jtl\Connector\Core\Subscriber\CoreFeaturesSubscriber;
-use Jtl\Connector\Core\Subscriber\PrepareProductPricesSubscriber;
+use Jtl\Connector\Core\Subscriber\FeaturesSubscriber;
+use Jtl\Connector\Core\Subscriber\ProductPriceSubscriber;
 use Jtl\Connector\Core\Definition\RpcMethod;
 use Jtl\Connector\Core\Rpc\Method;
 use Jtl\Connector\Core\Linker\IdentityLinker;
@@ -215,8 +215,8 @@ class Application
      */
     public function run(): void
     {
-        $this->eventDispatcher->addSubscriber(new PrepareProductPricesSubscriber());
-        $this->eventDispatcher->addSubscriber(new CoreFeaturesSubscriber());
+        $this->eventDispatcher->addSubscriber(new ProductPriceSubscriber());
+        $this->eventDispatcher->addSubscriber(new FeaturesSubscriber());
         $this->errorHandler->register();
         MonologErrorHandler::register($this->loggerService->get(LoggerService::CHANNEL_ERROR));
         $method = Method::createFromRpcMethod('unknown.unknown');
@@ -370,6 +370,7 @@ class Application
     {
         if (is_null($this->sessionHandler)) {
             $this->sessionHandler = new SqliteSessionHandler($this->connectorDir);
+            $this->sessionHandler->setLogger($this->loggerService->get(LoggerService::CHANNEL_SESSION));
         }
         return $this->sessionHandler;
     }

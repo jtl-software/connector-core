@@ -34,14 +34,14 @@ class ErrorHandler extends AbstractErrorHandler implements LoggerAwareInterface
     protected $logger;
 
     /**
-     * @var Serializer
-     */
-    protected $serializer;
-
-    /**
      * @var RequestPacket
      */
     protected $requestPacket;
+
+    /**
+     * @var Serializer
+     */
+    protected $serializer;
 
     /**
      * @var integer[]

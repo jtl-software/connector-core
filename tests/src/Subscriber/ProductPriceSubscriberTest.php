@@ -10,7 +10,7 @@ use Jtl\Connector\Core\Model\Category;
 use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Model\ProductPrice;
 use Jtl\Connector\Core\Model\ProductPriceItem;
-use Jtl\Connector\Core\Subscriber\PrepareProductPricesSubscriber;
+use Jtl\Connector\Core\Subscriber\ProductPriceSubscriber;
 use Jtl\Connector\Core\Test\TestCase;
 
 /**
@@ -24,7 +24,7 @@ class PrepareProductPricesSubscriberTest extends TestCase
      */
     public function testPrepareProductPrices()
     {
-        $subscriber = new PrepareProductPricesSubscriber();
+        $subscriber = new ProductPriceSubscriber();
 
         $params = [
             (new ProductPrice())->setProductId($firstProductId = $this->createIdentity())->addItem(new ProductPriceItem()),
@@ -68,7 +68,7 @@ class PrepareProductPricesSubscriberTest extends TestCase
 
         unset($controllers[array_search(Controller::PRODUCT_PRICE, $controllers, true)]);
 
-        $subscriber = new PrepareProductPricesSubscriber();
+        $subscriber = new ProductPriceSubscriber();
 
         foreach ($controllers as $controller) {
             $params = [
@@ -99,7 +99,7 @@ class PrepareProductPricesSubscriberTest extends TestCase
     {
         $this->expectExceptionObject(SubscriberException::invalidModelTypeInArray($expected[0], $expected[1]));
 
-        $subscriber = new PrepareProductPricesSubscriber();
+        $subscriber = new ProductPriceSubscriber();
 
         $request = new Request(Controller::PRODUCT_PRICE, Action::PUSH, $params);
         $event = new RequestEvent($request);
