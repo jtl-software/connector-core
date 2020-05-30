@@ -702,12 +702,11 @@ class Product extends AbstractIdentity implements IdentificationInterface
     }
 
     /**
+     * @param string $mainLanguageIso
      * @return string[]
      */
-    public function getIdentificationStrings(): array
+    public function getIdentificationStrings(string $mainLanguageIso): array
     {
-        $mainLanguage = GlobalConfig::getInstance()->get(ConfigSchema::MAIN_LANGUAGE, 'de');
-
         $strings = [];
 
         if (!empty($this->sku)) {
@@ -717,7 +716,7 @@ class Product extends AbstractIdentity implements IdentificationInterface
         $name = '';
         foreach ($this->getI18ns() as $i18n) {
             $name = $i18n->getName();
-            if ($mainLanguage === $i18n->getLanguageIso()) {
+            if ($mainLanguageIso === $i18n->getLanguageIso()) {
                 break;
             }
         }

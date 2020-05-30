@@ -597,7 +597,7 @@ class Application
         }
 
         if ($model instanceof IdentificationInterface) {
-            $messages = array_merge($messages, $model->getIdentificationStrings());
+            $messages = array_merge($messages, $model->getIdentificationStrings($this->config->get(ConfigSchema::MAIN_LANGUAGE, 'de')));
         }
 
         $messages[] = $ex->getMessage();

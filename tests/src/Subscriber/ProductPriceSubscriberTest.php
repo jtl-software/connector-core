@@ -17,7 +17,7 @@ use Jtl\Connector\Core\Test\TestCase;
  * Class PrepareProductPricesSubscriberTest
  * @package Jtl\Connector\Core\Test\Subscriber
  */
-class PrepareProductPricesSubscriberTest extends TestCase
+class ProductPriceSubscriberTest extends TestCase
 {
     /**
      * @throws SubscriberException

@@ -97,10 +97,8 @@ class Category extends AbstractIdentity implements IdentificationInterface
         $this->parentCategoryId = new Identity();
     }
 
-    public function getIdentificationStrings(): array
+    public function getIdentificationStrings(string $mainLanguageIso): array
     {
-        $mainLanguage = GlobalConfig::getInstance()->get(ConfigSchema::MAIN_LANGUAGE, 'de');
-
         $strings = [];
         if ($this->getParentCategoryId()->getHost() > 0) {
             $strings[] = sprintf('Parent Wawi PK = %s', $this->getParentCategoryId()->getHost());
@@ -109,7 +107,7 @@ class Category extends AbstractIdentity implements IdentificationInterface
         $name = '';
         foreach ($this->getI18ns() as $i18n) {
             $name = $i18n->getName();
-            if ($mainLanguage === $i18n->getLanguageIso()) {
+            if ($mainLanguageIso === $i18n->getLanguageIso()) {
                 break;
             }
         }
