@@ -121,7 +121,7 @@ class ConfigSchema
             ConfigParameter::create(self::MAIN_LANGUAGE, ConfigParameter::TYPE_STRING, true, true, 'de'),
             ConfigParameter::create(self::CONNECTOR_DIR, ConfigParameter::TYPE_STRING, true, true, $connectorDir),
             ConfigParameter::create(self::LOG_DIR, ConfigParameter::TYPE_STRING, true, true, sprintf('%s/var/log', $connectorDir)),
-            ConfigParameter::create(self::CACHE_DIR, ConfigParameter::TYPE_STRING, false, false, sprintf('%s/var/cache', $connectorDir)),
+            ConfigParameter::create(self::CACHE_DIR, ConfigParameter::TYPE_STRING, true, false, sprintf('%s/var/cache', $connectorDir)),
             ConfigParameter::create(self::PLUGINS_DIR, ConfigParameter::TYPE_STRING, true, false, sprintf('%s/plugins', $connectorDir)),
             ConfigParameter::create(self::FEATURES_PATH, ConfigParameter::TYPE_STRING, true, false, sprintf('%s/config/features.json', $connectorDir)),
             ConfigParameter::create(self::DEBUG, ConfigParameter::TYPE_BOOLEAN, true, true, false),

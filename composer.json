@@ -23,7 +23,9 @@
         "ext-sqlite3": "*",
         "php-di/php-di": "^6.0",
         "gmo/iso-639": "^1.0",
-        "jawira/case-converter": "^3.4"
+        "jawira/case-converter": "^3.4",
+        "symfony/http-foundation": "^5.1",
+        "symfony/filesystem": "^5.1"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.15",

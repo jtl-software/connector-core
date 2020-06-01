@@ -44,7 +44,7 @@ class SqliteSessionHandlerTest extends TestCase
     public function testDestroy()
     {
         $sessionId = uniqid('wtfsess', true);
-        $sessionData = $this->faker->text;
+        $sessionData = $this->getFaker()->text;
         $expires = time() + 1;
         $this->assertTrue($this->insertSessionData($sessionId, $sessionData, $expires));
         $this->handler->destroy($sessionId);
@@ -54,7 +54,7 @@ class SqliteSessionHandlerTest extends TestCase
     public function testWriteInsert()
     {
         $sessionId = uniqid('wtfsess', true);
-        $sessionData = $this->faker->text;
+        $sessionData = $this->getFaker()->text;
         $now = time();
         $this->assertNull($this->findSessionData($sessionId));
         $this->handler->write($sessionId, $sessionData);
@@ -68,10 +68,10 @@ class SqliteSessionHandlerTest extends TestCase
     public function testWriteUpdate()
     {
         $sessionId = uniqid('wtfsess', true);
-        $sessionData = $this->faker->text;
+        $sessionData = $this->getFaker()->text;
         $expires = time() + 1;
         $this->assertTrue($this->insertSessionData($sessionId, $sessionData, $expires));
-        $newData = $this->faker->text . '213';
+        $newData = $this->getFaker()->text . '213';
         $this->handler->write($sessionId, $newData);
         $data = $this->findSessionData($sessionId);
         $this->assertIsArray($data);
@@ -83,7 +83,7 @@ class SqliteSessionHandlerTest extends TestCase
     {
         foreach ([-2, -5, 4, 6, -7, -42] as $expireOffset) {
             $sessionId = uniqid('wtfsess', true);
-            $sessionData = $this->faker->text;
+            $sessionData = $this->getFaker()->text;
             $expires = time() + $expireOffset;
             $this->insertSessionData($sessionId, $sessionData, $expires);
         }
@@ -95,7 +95,7 @@ class SqliteSessionHandlerTest extends TestCase
     public function testValidateIdSuccess()
     {
         $sessionId = uniqid('wtfsess', true);
-        $sessionData = $this->faker->text;
+        $sessionData = $this->getFaker()->text;
         $expires = time() + 1;
         $this->insertSessionData($sessionId, $sessionData, $expires);
         $this->assertTrue($this->handler->validateId($sessionId));
@@ -104,7 +104,7 @@ class SqliteSessionHandlerTest extends TestCase
     public function testValidateIdFailsSessionExpired()
     {
         $sessionId = uniqid('wtfsess', true);
-        $sessionData = $this->faker->text;
+        $sessionData = $this->getFaker()->text;
         $expires = time() - 1;
         $this->insertSessionData($sessionId, $sessionData, $expires);
         $this->assertFalse($this->handler->validateId($sessionId));
@@ -124,7 +124,7 @@ class SqliteSessionHandlerTest extends TestCase
     public function testReadSuccess()
     {
         $sessionId = uniqid('wtfsess', true);
-        $sessionData = $this->faker->text;
+        $sessionData = $this->getFaker()->text;
         $expires = time() + 1;
         $this->insertSessionData($sessionId, $sessionData, $expires);
         $this->assertEquals($sessionData, $this->handler->read($sessionId));
@@ -133,7 +133,7 @@ class SqliteSessionHandlerTest extends TestCase
     public function testReadFailedSessionExpired()
     {
         $sessionId = uniqid('wtfsess', true);
-        $sessionData = $this->faker->text;
+        $sessionData = $this->getFaker()->text;
         $expires = time() - 1;
         $this->insertSessionData($sessionId, $sessionData, $expires);
         $this->assertEquals('', $this->handler->read($sessionId));
@@ -148,7 +148,7 @@ class SqliteSessionHandlerTest extends TestCase
     public function testUpdateTimestamp()
     {
         $sessionId = uniqid('wtfsess', true);
-        $sessionData = $this->faker->text;
+        $sessionData = $this->getFaker()->text;
         $expires = time() + 1;
         $this->insertSessionData($sessionId, $sessionData, $expires);
         $this->assertTrue($this->handler->updateTimestamp($sessionId, $sessionData));

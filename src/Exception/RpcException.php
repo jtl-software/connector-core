@@ -41,4 +41,12 @@ class RpcException extends \Exception
     {
         return new static(sprintf('Invalid method (%s)', $method), ErrorCode::INVALID_METHOD);
     }
+
+    /**
+     * @return RpcException
+     */
+    public static function unpreparedResponse(): self
+    {
+        return new static('Response is not prepared', ErrorCode::SERVER_ERROR);
+    }
 }

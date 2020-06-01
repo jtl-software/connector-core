@@ -39,8 +39,6 @@ use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\ConfigException;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\HttpException;
-use Jtl\Connector\Core\Exception\LinkerException;
-use Jtl\Connector\Core\IO\Temp;
 use Jtl\Connector\Core\Logger\LoggerService;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Jtl\Connector\Core\Model\AbstractImage;
@@ -58,8 +56,7 @@ use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
 use Jtl\Connector\Core\Rpc\Error;
-use Jtl\Connector\Core\Http\Request as HttpRequest;
-use Jtl\Connector\Core\Http\Response as HttpResponse;
+use Jtl\Connector\Core\Http\JsonResponse as HttpResponse;
 use Jtl\Connector\Core\Config\FileConfig;
 use Jtl\Connector\Core\Subscriber\FeaturesSubscriber;
 use Jtl\Connector\Core\Subscriber\ProductPriceSubscriber;
@@ -77,7 +74,10 @@ use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
 class Application
 {
@@ -111,6 +111,11 @@ class Application
     protected $container;
 
     /**
+     * @var string[]
+     */
+    protected $deleteFromFileSystem = [];
+
+    /**
      * @var AbstractErrorHandler
      */
     protected $errorHandler;
@@ -121,14 +126,24 @@ class Application
     protected $eventDispatcher;
 
     /**
-     * @var string[]
+     * @var Filesystem
      */
-    protected $imagesToDelete = [];
+    protected $fileSystem;
 
     /**
      * @var LoggerService
      */
     protected $loggerService;
+
+    /**
+     * @var HttpRequest
+     */
+    protected $request;
+
+    /**
+     * @var HttpResponse
+     */
+    protected $response;
 
     /**
      * @var SessionHandlerInterface
@@ -139,11 +154,6 @@ class Application
      * @var Serializer
      */
     protected $serializer;
-
-    /**
-     * @var Temp
-     */
-    protected $temp;
 
     /**
      * Application constructor.
@@ -182,13 +192,15 @@ class Application
             ->build();
         $this->container->set(Application::class, $this);
         $this->eventDispatcher = new EventDispatcher();
+        $this->fileSystem = new Filesystem();
         $this->loggerService = new LoggerService($this->config->get(ConfigSchema::LOG_DIR), $this->config->get(ConfigSchema::LOG_LEVEL));
         $this->container->set(LoggerService::class, $this->loggerService);
         $this->container->set(LoggerInterface::class, $this->loggerService->get(LoggerService::CHANNEL_GLOBAL));
+        $this->request = HttpRequest::createFromGlobals();
         $this->serializer = SerializerBuilder::create($serializerCacheDir)->build();
-        $this->errorHandler = new ErrorHandler($this->connectorDir, $this->eventDispatcher, $this->serializer);
-        $this->errorHandler->setLogger($this->loggerService->get(LoggerService::CHANNEL_RPC));
-        $this->temp = new Temp($this->connectorDir);
+        $this->response = new HttpResponse($this->eventDispatcher, $this->serializer);
+        $this->response->setLogger($this->loggerService->get(LoggerService::CHANNEL_RPC));
+        $this->errorHandler = new ErrorHandler($this->response);
     }
 
     /**
@@ -220,7 +232,7 @@ class Application
         $this->errorHandler->register();
         MonologErrorHandler::register($this->loggerService->get(LoggerService::CHANNEL_ERROR));
         $method = Method::createFromRpcMethod('unknown.unknown');
-        $jtlrpc = HttpRequest::getJtlrpc();
+        $jtlrpc = $this->request->get('jtlrpc', '');
         $requestPacket = RequestPacket::createFromJtlrpc($jtlrpc, $this->serializer);
 
         try {
@@ -275,17 +287,9 @@ class Application
 
             throw $ex;
         } finally {
-            if (count($this->imagesToDelete) > 0) {
-                HttpRequest::deleteFileUploads($this->imagesToDelete);
-                $this->imagesToDelete = [];
-            }
+            $this->fileSystem->remove($this->deleteFromFileSystem);
 
-            $arrayResponse = $responsePacket->toArray($this->serializer);
-
-            $event = new RpcEvent($arrayResponse, $method->getController(), $method->getAction());
-            $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::AFTER));
-
-            HttpResponse::send($arrayResponse, $this->loggerService->get(LoggerService::CHANNEL_RPC));
+            $this->response->prepareAndSend($requestPacket, $responsePacket);
 
             if (mt_rand(0, 99) === 0) {
                 $this->getSessionHandler()->gc((int)ini_get('session.gc_maxlifetime'));
@@ -352,6 +356,16 @@ class Application
     public function getProtocolVersion(): int
     {
         return self::PROTOCOL_VERSION;
+    }
+
+    /**
+     * @param HttpRequest $request
+     * @return Application
+     */
+    public function setRequest(HttpRequest $request): self
+    {
+        $this->request = $request;
+        return $this;
     }
 
     /**
@@ -612,33 +626,27 @@ class Application
      * @param AbstractImage ...$images
      * @throws ApplicationException
      * @throws CompressionException
-     * @throws HttpException
      */
     protected function handleImagePush(AbstractImage ...$images): void
     {
         $imagePaths = [];
-        $zipFile = HttpRequest::handleFileUpload($this->temp);
-        $tempDir = $this->temp->createDirectory();
-        if ($zipFile !== null && $tempDir !== null) {
-            $archive = new Zip();
-            if ($archive->extract($zipFile, $tempDir)) {
-                $finder = new Finder();
-                $finder->files()->ignoreDotFiles(true)->in($tempDir);
-                foreach ($finder as $file) {
-                    $imagePaths[] = $this->imagesToDelete[] = $file->getRealpath();
-                }
-            } else {
-                @rmdir($tempDir);
-                @unlink($zipFile);
+        if (!$this->request->files->has('file')) {
+            throw ApplicationException::uploadedFileNotFound();
+        }
 
-                throw new ApplicationException(sprintf('Zip file (%s) could not be extracted', $zipFile));
-            }
+        /** @var UploadedFile $zipFile */
+        $zipFile = $this->request->files->get('file');
+        $tempDir = $this->deleteFromFileSystem[] = sprintf('%s/%s', $this->config->get(ConfigSchema::CACHE_DIR), uniqid('images-'));
+        $this->fileSystem->mkdir($tempDir);
 
-            if ($zipFile !== null) {
-                @unlink($zipFile);
+        $archive = new Zip();
+        if ($archive->extract($zipFile->getRealPath(), $tempDir)) {
+            $finder = (new Finder())->files()->ignoreDotFiles(true)->in($tempDir);
+            foreach ($finder as $file) {
+                $imagePaths[] = $file->getRealpath();
             }
         } else {
-            throw new ApplicationException('Zip file or temp dir is null');
+            throw ApplicationException::fileCouldNotGetExtracted();
         }
 
         foreach ($images as $image) {
@@ -653,7 +661,7 @@ class Application
 
                 $path = parse_url($image->getRemoteUrl(), PHP_URL_PATH);
                 $fileName = pathinfo($path, PATHINFO_BASENAME);
-                $imagePath = sprintf('%s/%s_%s', $this->temp->getDirectory(), uniqid(), $fileName);
+                $imagePath = sprintf('%s/%s_%s', $tempDir, uniqid(), $fileName);
                 file_put_contents($imagePath, $imageData);
                 $image->setFilename($imagePath);
             } else {
@@ -831,14 +839,14 @@ class Application
             $container->set(ChecksumLoaderInterface::class, $connector->getChecksumLoader());
         }
 
-        $container->set(ChecksumLinker::class, function(ContainerInterface $container) {
+        $container->set(ChecksumLinker::class, function (ContainerInterface $container) {
             $loader = $container->has(ChecksumLoaderInterface::class) ? $container->get(ChecksumLoaderInterface::class) : null;
             $linker = new ChecksumLinker($loader);
             $linker->setLogger($this->loggerService->get(LoggerService::CHANNEL_CHECKSUM));
             return $linker;
         });
 
-        $container->set(IdentityLinker::class, function(ContainerInterface $container) {
+        $container->set(IdentityLinker::class, function (ContainerInterface $container) {
             $linker = new IdentityLinker($container->get(PrimaryKeyMapperInterface::class));
             $linker->setLogger($this->loggerService->get(LoggerService::CHANNEL_LINKER));
             return $linker;
@@ -853,7 +861,7 @@ class Application
      */
     protected function startSession(string $rpcMethod): void
     {
-        $sessionId = HttpRequest::getSession();
+        $sessionId = $this->request->get('jtlauth');
         $sessionName = 'JtlConnector';
 
         if ($sessionId === null && $rpcMethod !== RpcMethod::AUTH) {
@@ -862,7 +870,7 @@ class Application
 
         $sessionHandler = $this->getSessionHandler();
 
-        if($sessionHandler instanceof LoggerAwareInterface) {
+        if ($sessionHandler instanceof LoggerAwareInterface) {
             $sessionHandler->setLogger($this->loggerService->get(LoggerService::CHANNEL_SESSION));
         }
 

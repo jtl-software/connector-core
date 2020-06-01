@@ -6,42 +6,22 @@
 namespace Jtl\Connector\Core\Error;
 
 use JMS\Serializer\Serializer;
-use Jtl\Connector\Core\Application\Application;
-use Jtl\Connector\Core\Definition\Event;
-use Jtl\Connector\Core\Event\RpcEvent;
-use Jtl\Connector\Core\Http\Response;
+use Jtl\Connector\Core\Http\JsonResponse;
 use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
-use Jtl\Connector\Core\Rpc\Method;
-use Psr\Log\LoggerAwareInterface;
-use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 
-class ErrorHandler extends AbstractErrorHandler implements LoggerAwareInterface
+class ErrorHandler extends AbstractErrorHandler
 {
-    protected $connectorDir;
-
-    /**
-     * @var Application
-     */
-    protected $eventDispatcher;
-
-    /**
-     * @var LoggerInterface
-     */
-    protected $logger;
-
     /**
      * @var RequestPacket
      */
     protected $requestPacket;
 
     /**
-     * @var Serializer
+     * @var JsonResponse
      */
-    protected $serializer;
+    protected $response;
 
     /**
      * @var integer[]
@@ -57,28 +37,11 @@ class ErrorHandler extends AbstractErrorHandler implements LoggerAwareInterface
 
     /**
      * ErrorHandler constructor.
-     * @param string $connectorDir
-     * @param EventDispatcher $eventDispatcher
-     * @param Serializer $serializer
+     * @param JsonResponse $response
      */
-    public function __construct(string $connectorDir, EventDispatcher $eventDispatcher, Serializer $serializer)
+    public function __construct(JsonResponse $response)
     {
-        $this->connectorDir = $connectorDir;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->serializer = $serializer;
-        $this->logger = new NullLogger();
-    }
-
-    /**
-     * @param array $response
-     * @param string $rpcMethod
-     * @throws \Exception
-     */
-    protected function triggerRpcAfterEvent(array $response, string $rpcMethod)
-    {
-        $method = Method::createFromRpcMethod($rpcMethod);
-        $event = new RpcEvent($response, $method->getController(), $method->getAction());
-        $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::AFTER));
+        $this->response = $response;
     }
 
     /**
@@ -118,21 +81,15 @@ class ErrorHandler extends AbstractErrorHandler implements LoggerAwareInterface
                         ->setData('Shutdown! File: ' . $file . ' - Line: ' . $err['line'])
                         ->setMessage($err['message']);
 
-                    $responsePacket = ResponsePacket::create('unknown')
-                        ->setError($error);
-
-                    $rpcMethod = 'unknown.unknown';
+                    $requestPacket = RequestPacket::create('unknown')->setMethod('unknown.unknown');
                     if(!is_null($this->requestPacket)) {
-                        $responsePacket
-                            ->setJtlrpc($this->requestPacket->getJtlrpc())
-                            ->setId($this->requestPacket->getId());
-
-                        $rpcMethod = $this->requestPacket->getMethod();
+                        $requestPacket = $this->requestPacket;
                     }
 
-                    $arrayResponse = $responsePacket->toArray($this->serializer);
-                    $this->triggerRpcAfterEvent($arrayResponse, $rpcMethod);
-                    Response::send($arrayResponse, $this->logger);
+                    $responsePacket = ResponsePacket::create($requestPacket->getId(), $requestPacket->getJtlrpc())
+                        ->setError($error);
+
+                    $this->response->prepareAndSend($requestPacket, $responsePacket);
                 }
             }
         };
@@ -146,13 +103,5 @@ class ErrorHandler extends AbstractErrorHandler implements LoggerAwareInterface
     {
         $this->requestPacket = $requestPacket;
         return $this;
-    }
-
-    /**
-     * @param LoggerInterface $logger
-     */
-    public function setLogger(LoggerInterface $logger)
-    {
-        $this->logger = $logger;
     }
 }

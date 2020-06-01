@@ -3,6 +3,7 @@
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Rpc
  */
+
 namespace Jtl\Connector\Core\Rpc;
 
 use Jtl\Connector\Core\Definition\Action;
@@ -20,21 +21,21 @@ class Method
      * @var string
      */
     protected $rpcMethod = '';
-    
+
     /**
      * Connector Controller
      *
      * @var string
      */
     protected $controller = '';
-    
+
     /**
      * Connector Action
      *
      * @var string
      */
     protected $action = '';
-    
+
     /**
      * Constructor
      *
@@ -48,7 +49,7 @@ class Method
         $this->controller = $controller;
         $this->action = $action;
     }
-    
+
     /**
      * @return string
      */
@@ -84,18 +85,18 @@ class Method
     /**
      * @param string $rpcMethod
      * @return Method
-     * @throws RpcException
+     * @throws \Exception
      */
     public static function createFromRpcMethod(string $rpcMethod): Method
     {
-        $splitted = explode('.', $rpcMethod);
-        $partsCount = count($splitted);
-        if($partsCount < 2) {
-            throw RpcException::invalidMethod($rpcMethod);
+        $parts = explode('.', $rpcMethod);
+        $partsCount = count($parts);
+        if (!in_array($partsCount, [2,3], true)) {
+            $parts = ['invalid', 'invalid'];
         }
         $offset = $partsCount === 3 ? 1 : 0;
-        $controller = Str::toPascalCase($splitted[0 + $offset]);
-        $action = Str::toCamelCase($splitted[1 + $offset]);
+        $controller = Str::toPascalCase($parts[0 + $offset]);
+        $action = Str::toCamelCase($parts[1 + $offset]);
         return new static($rpcMethod, $controller, $action);
     }
 

@@ -16,5 +16,7 @@ final class ErrorCode
         PARSE_ERROR = -32700,
         INVALID_METHOD = -32701,
         UNKNOWN_CONTROLLER = 33000,
-        UNKNOWN_ACTION = 33001;
+        UNKNOWN_ACTION = 33001,
+        REQUEST_ERROR = 400,
+        SERVER_ERROR = 500;
 }

@@ -47,16 +47,6 @@ class MethodTest extends TestCase
     }
 
     /**
-     * @throws RpcException
-     */
-    public function testCreateFromRpcMethodIsInvalid()
-    {
-        $this->expectException(RpcException::class);
-        $this->expectExceptionCode(ErrorCode::INVALID_METHOD);
-        Method::createFromRpcMethod('abcd');
-    }
-
-    /**
      * @return array
      */
     public function createFromRpcMethodDataProvider(): array
@@ -66,7 +56,9 @@ class MethodTest extends TestCase
             ['core.connector.auth', 'Connector', 'auth', true],
             [' category. pull', 'Category', 'pull', false],
             ['.', '', '', false],
-            ['..', '', '', false]
+            ['..', '', '', false],
+            ['some', 'Invalid', 'invalid', false],
+            ['yo.lo.mio.rio', 'Invalid', 'invalid', false],
         ];
     }
 }

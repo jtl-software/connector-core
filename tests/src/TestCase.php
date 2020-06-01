@@ -10,6 +10,8 @@ use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Test\Stub\Logger\LoggerStub;
 use Noodlehaus\AbstractConfig;
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
 
 /**
  * Class TestCase
@@ -27,7 +29,12 @@ class TestCase extends \PHPUnit\Framework\TestCase
     /**
      * @var Generator
      */
-    protected $faker;
+    private $faker;
+
+    /**
+     * @var vfsStreamDirectory
+     */
+    private $rootDir;
 
     /**
      *
@@ -45,9 +52,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
             ->shouldReceive('write', 'createExceptionInfos', 'writeException')
             ->withAnyArgs();
 
-        unset($_POST);
-
-        $this->faker = Factory::create();
+        $_POST = [];
     }
 
     protected function tearDown(): void
@@ -191,5 +196,54 @@ class TestCase extends \PHPUnit\Framework\TestCase
         $this->configFile = sprintf('%s/%s.%s', sys_get_temp_dir(), uniqid('connector-config', true), $extension);
         file_put_contents($this->configFile, $payload);
         return $this->configFile;
+    }
+
+    /**
+     * @return vfsStreamDirectory
+     */
+    protected function getRootDir(): vfsStreamDirectory
+    {
+        if(is_null($this->rootDir)) {
+            $this->rootDir = vfsStream::setup();
+        }
+        return $this->rootDir;
+    }
+
+    /**
+     * @param int $quantity
+     * @return string[]
+     */
+    protected function createFiles($quantity = 2): array
+    {
+        $files = [];
+
+        for ($i=0;$i<$quantity;$i++) {
+            $file = vfsStream::newFile(time() . $i . '-file');
+
+            $this->getRootDir()->addChild($file);
+
+            $files[] = vfsStream::url($file->path());
+        }
+
+        return $files;
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function createFile(): string
+    {
+        return $this->createFiles(1)[0];
+    }
+
+    /**
+     * @return Generator
+     */
+    protected function getFaker(): Generator
+    {
+        if(is_null($this->faker)) {
+            $this->faker = Factory::create();
+        }
+        return $this->faker;
     }
 }

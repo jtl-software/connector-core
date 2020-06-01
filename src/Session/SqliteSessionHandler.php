@@ -8,7 +8,6 @@ namespace Jtl\Connector\Core\Session;
 
 use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\SessionException;
-use Jtl\Connector\Core\IO\Path;
 use Jtl\Connector\Core\Database\Sqlite3;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;

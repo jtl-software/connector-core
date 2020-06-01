@@ -22,27 +22,31 @@ use Jtl\Connector\Core\Exception\ConfigException;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
+use Jtl\Connector\Core\Model\AbstractImage;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Category;
 use Jtl\Connector\Core\Model\Generator\AbstractModelFactory;
 use Jtl\Connector\Core\Model\Manufacturer;
 use Jtl\Connector\Core\Model\Product;
+use Jtl\Connector\Core\Model\ProductImage;
 use Jtl\Connector\Core\Model\QueryFilter;
 use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Session\SessionHandlerInterface;
-use Jtl\Connector\Core\Session\SqliteSessionHandler;
 use Jtl\Connector\Core\Subscriber\FeaturesSubscriber;
 use Jtl\Connector\Core\Subscriber\ProductPriceSubscriber;
 use Jtl\Connector\Core\Test\TestCase;
 use Jtl\Connector\Core\Test\Stub\Controller\TransactionalControllerStub;
+use Jtl\Connector\Core\Utilities\Str;
 use MyPlugin\Bootstrap;
-use Noodlehaus\Config;
 use Noodlehaus\ConfigInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\FileBag;
+use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
 /**
  * Class ApplicationTest
@@ -52,10 +56,8 @@ class ApplicationTest extends TestCase
 {
     /**
      * @throws ApplicationException
-     * @throws DependencyException
-     * @throws NotFoundException
+     * @throws ConfigException
      * @throws \ReflectionException
-     * @throws \Throwable
      */
     public function testHandleRequestControllerClassNotFoundException()
     {
@@ -294,8 +296,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws ApplicationException
      * @throws DefinitionException
      * @throws \ReflectionException
@@ -366,8 +366,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws ApplicationException
      * @throws DefinitionException
      * @throws \Throwable
@@ -389,8 +387,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws ApplicationException
      * @throws DefinitionException
      * @throws \Throwable
@@ -420,8 +416,6 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     *
      * @throws ApplicationException
      * @throws DefinitionException
      * @throws \Throwable
@@ -440,6 +434,65 @@ class ApplicationTest extends TestCase
         $responsePacket = (new ResponsePacket())->setJtlrpc("2.0")->setId($id)->setError($error);
         $this->expectOutputString(json_encode($responsePacket->toArray($serializer)));
         $this->createApplication()->run();
+    }
+
+    public function testHandleImagePushWithFilesSentByWawi()
+    {
+        $serializer = SerializerBuilder::create()->build();
+        $data = file_get_contents(sprintf('%s/fixtures/images_push.json', TEST_DIR));
+        $type = sprintf('array<%s>', AbstractImage::class);
+        /** @var ProductImage[] $images */
+        $images = $serializer->deserialize($data, $type, 'json');
+        $uploadedFilePath = sprintf('%s/fixtures/images_push.zip', TEST_DIR);
+        $file = new UploadedFile($uploadedFilePath, 'images.zip', 'application/octet-stream', UPLOAD_ERR_OK, true);
+        $filebag = new FileBag(['file' => $file]);
+        $request = $this->getMockBuilder(HttpRequest::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $request->files = $filebag;
+
+        $app = $this->createApplication()->setRequest($request);
+        $this->invokeMethodFromObject($app, 'handleImagePush', ...$images);
+        foreach($images as $image) {
+            $this->assertFileExists($image->getFilename());
+            $expectedFilename = sprintf('%d_%s.jpg', $image->getId()->getHost(), Str::toPascalCase($image->getRelationType()));
+            $this->assertEquals($expectedFilename, substr($image->getFilename(), strrpos($image->getFilename(), '/') + 1));
+        }
+    }
+
+    public function testHandleImagePushUploadedFileNotFound()
+    {
+        $this->expectException(ApplicationException::class);
+        $this->expectExceptionCode(ErrorCode::REQUEST_ERROR);
+        $serializer = SerializerBuilder::create()->build();
+        $data = file_get_contents(sprintf('%s/fixtures/images_push.json', TEST_DIR));
+        $type = sprintf('array<%s>', AbstractImage::class);
+        /** @var ProductImage[] $images */
+        $images = $serializer->deserialize($data, $type, 'json');
+        $app = $this->createApplication();
+        $this->invokeMethodFromObject($app, 'handleImagePush', ...$images);
+    }
+
+    public function testHandleImagePushFileExtractionFailed()
+    {
+        $this->expectException(ApplicationException::class);
+        $this->expectExceptionCode(ErrorCode::SERVER_ERROR);
+        $serializer = SerializerBuilder::create()->build();
+        $data = file_get_contents(sprintf('%s/fixtures/images_push.json', TEST_DIR));
+        $type = sprintf('array<%s>', AbstractImage::class);
+        /** @var ProductImage[] $images */
+        $images = $serializer->deserialize($data, $type, 'json');
+        $uploadedFilePath = sprintf('%s/fixtures/images_push.json', TEST_DIR);
+        $file = new UploadedFile($uploadedFilePath, 'images.zip', 'application/octet-stream', UPLOAD_ERR_OK, true);
+        $filebag = new FileBag(['file' => $file]);
+        $request = $this->getMockBuilder(HttpRequest::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $request->files = $filebag;
+        $app = $this->createApplication()->setRequest($request);
+        $this->invokeMethodFromObject($app, 'handleImagePush', ...$images);
     }
 
     /**
