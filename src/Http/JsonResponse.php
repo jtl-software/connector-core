@@ -1,6 +1,7 @@
 <?php
 namespace Jtl\Connector\Core\Http;
 
+use Jawira\CaseConverter\CaseConverterException;
 use JMS\Serializer\Serializer;
 use Jtl\Connector\Core\Definition\Event;
 use Jtl\Connector\Core\Event\RpcEvent;
@@ -55,6 +56,7 @@ class JsonResponse extends SymfonyJsonResponse implements LoggerAwareInterface
      * @param ResponsePacket $responsePacket
      * @return JsonResponse
      * @throws DefinitionException
+     * @throws CaseConverterException
      */
     public function prepareAndSend(RequestPacket $requestPacket, ResponsePacket $responsePacket)
     {

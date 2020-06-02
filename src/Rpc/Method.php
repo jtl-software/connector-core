@@ -6,6 +6,7 @@
 
 namespace Jtl\Connector\Core\Rpc;
 
+use Jawira\CaseConverter\CaseConverterException;
 use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Definition\RpcMethod;
@@ -85,7 +86,7 @@ class Method
     /**
      * @param string $rpcMethod
      * @return Method
-     * @throws \Exception
+     * @throws CaseConverterException
      */
     public static function createFromRpcMethod(string $rpcMethod): Method
     {
@@ -103,7 +104,7 @@ class Method
     /**
      * @param RequestPacket $packet
      * @return Method
-     * @throws \Exception
+     * @throws CaseConverterException
      */
     public static function createFromRequestPacket(RequestPacket $packet): Method
     {

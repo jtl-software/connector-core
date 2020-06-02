@@ -233,9 +233,9 @@ class Application
         $method = Method::createFromRpcMethod('unknown.unknown');
         $jtlrpc = $this->request->get('jtlrpc', '');
         $requestPacket = RequestPacket::createFromJtlrpc($jtlrpc, $this->serializer);
+        $this->errorHandler->setRequestPacket($requestPacket);
 
         try {
-            $this->errorHandler->setRequestPacket($requestPacket);
             if (!$requestPacket->isValid()) {
                 throw RpcException::invalidRequest();
             }
@@ -262,12 +262,8 @@ class Application
                 $replacement = '"token": "******************"';
                 $logJtlrpc = preg_replace($pattern, $replacement, $logJtlrpc);
             }
-
             // Log incoming request packet (debug only and configuration must be initialized)
-            $this->loggerService->get(LoggerService::CHANNEL_RPC)->debug('Request packet: {packet}', ['packet' => $logJtlrpc]);
-            if ($requestPacket->getMethod() !== RpcMethod::AUTH && !empty($requestPacket->getParams())) {
-                $this->loggerService->get(LoggerService::CHANNEL_RPC)->debug('Params: {params}', ['params' => Json::encode($requestPacket->getParams())]);
-            }
+            $this->loggerService->get(LoggerService::CHANNEL_RPC)->debug($logJtlrpc);
 
             $eventData = Json::decode($jtlrpc, true);
             $event = new RpcEvent($eventData, $method->getController(), $method->getAction());
@@ -287,7 +283,6 @@ class Application
             throw $ex;
         } finally {
             $this->fileSystem->remove($this->deleteFromFileSystem);
-
             $this->response->prepareAndSend($requestPacket, $responsePacket);
 
             if (mt_rand(0, 99) === 0) {

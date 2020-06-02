@@ -1,6 +1,7 @@
 <?php
 namespace Jtl\Connector\Core\Utilities;
 
+use Jawira\CaseConverter\CaseConverterException;
 use Jawira\CaseConverter\Convert;
 
 class Str
@@ -8,7 +9,7 @@ class Str
     /**
      * @param string $string
      * @return string
-     * @throws \Exception
+     * @throws CaseConverterException
      */
     public static function toCamelCase(string $string): string
     {
@@ -18,7 +19,7 @@ class Str
     /**
      * @param string $string
      * @return string
-     * @throws \Exception
+     * @throws CaseConverterException
      */
     public static function toPascalCase(string $string): string
     {
@@ -28,7 +29,7 @@ class Str
     /**
      * @param string $string
      * @return string
-     * @throws \Exception
+     * @throws CaseConverterException
      */
     public static function toSnakeCase(string $string): string
     {
