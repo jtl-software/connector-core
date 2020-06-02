@@ -5,10 +5,8 @@ use Faker\Factory;
 use Faker\Generator;
 use Jtl\Connector\Core\Config\ArrayConfig;
 use Jtl\Connector\Core\Config\FileConfig;
-use Jtl\Connector\Core\Config\GlobalConfig;
 use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Model\Identity;
-use Jtl\Connector\Core\Test\Stub\Logger\LoggerStub;
 use Noodlehaus\AbstractConfig;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
@@ -41,17 +39,6 @@ class TestCase extends \PHPUnit\Framework\TestCase
      */
     protected function setUp(): void
     {
-        $runtimeConfig = GlobalConfig::getInstance();
-        $reflectionClass = new \ReflectionClass($runtimeConfig);
-        $reflectionProperty = $reflectionClass->getProperty('instance');
-        $reflectionProperty->setAccessible(true);
-        $reflectionProperty->setValue($runtimeConfig, null);
-        $reflectionProperty->setAccessible(false);
-
-        \Mockery::namedMock(Logger::class, LoggerStub::class)
-            ->shouldReceive('write', 'createExceptionInfos', 'writeException')
-            ->withAnyArgs();
-
         $_POST = [];
     }
 

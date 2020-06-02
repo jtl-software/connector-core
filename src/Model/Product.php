@@ -10,8 +10,6 @@ namespace Jtl\Connector\Core\Model;
 use DateTime;
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
-use Jtl\Connector\Core\Config\GlobalConfig;
-use Jtl\Connector\Core\Config\ConfigSchema;
 
 /**
  * Product properties.

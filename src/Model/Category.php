@@ -8,8 +8,6 @@
 namespace Jtl\Connector\Core\Model;
 
 use InvalidArgumentException;
-use Jtl\Connector\Core\Config\GlobalConfig;
-use Jtl\Connector\Core\Config\ConfigSchema;
 use JMS\Serializer\Annotation as Serializer;
 
 /**

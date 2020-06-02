@@ -10,7 +10,6 @@ use Doctrine\Common\Annotations\AnnotationRegistry;
 use JMS\Serializer\Serializer;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
 use Jtl\Connector\Core\Checksum\ChecksumLoaderInterface;
-use Jtl\Connector\Core\Config\GlobalConfig;
 use Jtl\Connector\Core\Controller\ConnectorController;
 use Jtl\Connector\Core\Controller\StatisticInterface;
 use Jtl\Connector\Core\Config\ConfigSchema;
@@ -630,50 +629,57 @@ class Application
     protected function handleImagePush(AbstractImage ...$images): void
     {
         $imagePaths = [];
-        if (!$this->request->files->has('file')) {
-            throw ApplicationException::uploadedFileNotFound();
-        }
-
-        /** @var UploadedFile $zipFile */
-        $zipFile = $this->request->files->get('file');
         $tempDir = $this->deleteFromFileSystem[] = sprintf('%s/%s', $this->config->get(ConfigSchema::CACHE_DIR), uniqid('images-'));
         $this->fileSystem->mkdir($tempDir);
 
-        $archive = new Zip();
-        if ($archive->extract($zipFile->getRealPath(), $tempDir)) {
-            $finder = (new Finder())->files()->ignoreDotFiles(true)->in($tempDir);
-            foreach ($finder as $file) {
-                $imagePaths[] = $file->getRealpath();
+        if ($this->request->files->has('file')) {
+            /** @var UploadedFile $zipFile */
+            $zipFile = $this->request->files->get('file');
+            $archive = new Zip();
+            if ($archive->extract($zipFile->getRealPath(), $tempDir)) {
+                $finder = (new Finder())->files()->ignoreDotFiles(true)->in($tempDir);
+                foreach ($finder as $file) {
+                    $imagePaths[] = $file->getRealpath();
+                }
+            } else {
+                throw ApplicationException::fileCouldNotGetExtracted();
             }
-        } else {
-            throw ApplicationException::fileCouldNotGetExtracted();
         }
 
         foreach ($images as $image) {
             if (!empty($image->getRemoteUrl())) {
                 $imageData = file_get_contents($image->getRemoteUrl());
                 if ($imageData === false) {
-                    throw new ApplicationException(sprintf(
-                        'Could not get any data from url: %s',
-                        $image->getRemoteUrl()
-                    ));
+                    throw ApplicationException::remoteImageNotFound($image);
                 }
-
                 $path = parse_url($image->getRemoteUrl(), PHP_URL_PATH);
                 $fileName = pathinfo($path, PATHINFO_BASENAME);
                 $imagePath = sprintf('%s/%s_%s', $tempDir, uniqid(), $fileName);
-                file_put_contents($imagePath, $imageData);
+                if (file_put_contents($imagePath, $imageData) === false) {
+                    throw ApplicationException::canNotCreateFile($imagePath);
+                }
                 $image->setFilename($imagePath);
             } else {
+                if (!$this->request->files->has('file')) {
+                    throw ApplicationException::uploadedFileNotFound();
+                }
+
+                $imageFound = false;
                 foreach ($imagePaths as $imagePath) {
+                    $imageFound = false;
                     $infos = pathinfo($imagePath);
                     list($hostId, $relationType) = explode('_', $infos['filename']);
                     if ((int)$hostId == $image->getId()->getHost()
                         && strtolower($relationType) === strtolower($image->getRelationType())
                     ) {
                         $image->setFilename($imagePath);
+                        $imageFound = true;
                         break;
                     }
+                }
+
+                if (!$imageFound) {
+                    throw ApplicationException::imageNotFound($image);
                 }
             }
         }
@@ -808,16 +814,10 @@ class Application
         }
 
         $config->set(ConfigSchema::CONNECTOR_DIR, $connectorDir);
-
-        $globalConfig = GlobalConfig::getInstance();
         foreach ($configSchema->getParameters() as $parameter) {
             $key = $parameter->getKey();
             if ($parameter->hasDefaultValue() && !$config->has($key)) {
                 $config->set($key, $parameter->getDefaultValue());
-            }
-
-            if ($parameter->isGlobal() && $config->has($key)) {
-                $globalConfig->set($key, $config->get($key));
             }
         }
     }

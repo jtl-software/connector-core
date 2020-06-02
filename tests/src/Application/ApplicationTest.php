@@ -10,7 +10,6 @@ use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
 use Jtl\Connector\Core\Config\ArrayConfig;
 use Jtl\Connector\Core\Config\ConfigParameter;
 use Jtl\Connector\Core\Config\ConfigSchema;
-use Jtl\Connector\Core\Config\GlobalConfig;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
 use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Controller;
@@ -243,38 +242,6 @@ class ApplicationTest extends TestCase
         $this->assertEquals(42, $config->get('foo'));
         $this->assertFalse($config->has('bar'));
         $this->assertEquals('yes', $config->get('baz'));
-    }
-
-    /**
-     * @throws ApplicationException
-     * @throws ConfigException
-     * @throws \ReflectionException
-     */
-    public function testPrepareConfigurationSetGlobalParametersInRuntimeConfig()
-    {
-        $schema = (new ConfigSchema())
-            ->setParameter(ConfigParameter::create('foo', ConfigParameter::TYPE_INTEGER, true, false))
-            ->setParameter(ConfigParameter::create('bar', ConfigParameter::TYPE_BOOLEAN, false, true))
-            ->setParameter(ConfigParameter::create('baz', ConfigParameter::TYPE_STRING, true, true))
-            ->setParameter(ConfigParameter::create('tri', ConfigParameter::TYPE_DOUBLE, false, true))
-            ->setParameter(ConfigParameter::create('tra', ConfigParameter::TYPE_DOUBLE, true, false));
-
-        $config = $this->createConfig(['foo' => 122, 'bar' => true, 'baz' => 'schnatz', 'tri' => 0.315, 'tra' => 0.99]);
-        $application = $this->getMockBuilder(Application::class)->disableOriginalConstructor()->getMock();
-
-        $globalConfig = GlobalConfig::getInstance();
-        $this->assertFalse($globalConfig->has('foo'));
-        $this->assertFalse($globalConfig->has('bar'));
-        $this->assertFalse($globalConfig->has('baz'));
-        $this->assertFalse($globalConfig->has('tri'));
-        $this->assertFalse($globalConfig->has('tra'));
-
-        $this->invokeMethodFromObject($application, 'prepareConfig', '', $config, $schema);
-        $this->assertFalse($globalConfig->has('foo'));
-        $this->assertEquals(true, $globalConfig->get('bar'));
-        $this->assertEquals('schnatz', $globalConfig->get('baz'));
-        $this->assertEquals(0.315, $globalConfig->get('tri'));
-        $this->assertFalse($globalConfig->has('tra'));
     }
 
     /**
