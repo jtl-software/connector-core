@@ -1955,11 +1955,11 @@ class Product extends AbstractIdentity implements IdentificationInterface
         
         return $this;
     }
-    
+
     /**
-     * @return string
+     * @return float
      */
-    public function getVat(): string
+    public function getVat(): float
     {
         return $this->vat;
     }
