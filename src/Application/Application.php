@@ -28,6 +28,7 @@ use Jtl\Connector\Core\Controller\TransactionalInterface;
 use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Event\BoolEvent;
 use Jtl\Connector\Core\Event\FeaturesEvent;
+use Jtl\Connector\Core\Event\ProductEvent;
 use Jtl\Connector\Core\Event\ResponseEvent;
 use Jtl\Connector\Core\Event\RequestEvent;
 use Jtl\Connector\Core\Event\ModelEvent;
@@ -67,6 +68,7 @@ use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Session\SqliteSessionHandler;
 use Jtl\Connector\Core\Session\SessionHandlerInterface;
+use Jtl\Connector\Core\Subscriber\ProductStockLevelSubscriber;
 use Monolog\ErrorHandler as MonologErrorHandler;
 use Noodlehaus\ConfigInterface;
 use Psr\Container\ContainerInterface;
@@ -179,7 +181,7 @@ class Application
 
         $this->prepareConfig($connectorDir, $config, $configSchema);
 
-        $serializerCacheDir = $config->get(ConfigSchema::DEBUG, false) === true ? $config->get(ConfigSchema::CACHE_DIR) : null;
+        $serializerCacheDir = $config->get(ConfigSchema::DEBUG, false) === false ? $config->get(ConfigSchema::CACHE_DIR) : null;
 
         $this->connector = $connector;
         $this->connectorDir = $connectorDir;
@@ -227,6 +229,7 @@ class Application
     public function run(): void
     {
         $this->eventDispatcher->addSubscriber(new ProductPriceSubscriber());
+        $this->eventDispatcher->addSubscriber(new ProductStockLevelSubscriber());
         $this->eventDispatcher->addSubscriber(new FeaturesSubscriber());
         $this->errorHandler->register();
         MonologErrorHandler::register($this->loggerService->get(LoggerService::CHANNEL_ERROR));
@@ -425,8 +428,7 @@ class Application
         RequestPacket $requestPacket,
         Method $method,
         string $modelNamespace
-    ): Request
-    {
+    ): Request {
         $controller = $method->getController();
         $action = $method->getAction();
 
@@ -488,9 +490,14 @@ class Application
     protected function createModelEventClassName(string $controllerName): string
     {
         $eventArgClass = sprintf('Jtl\\Connector\\Core\\Event\\%sEvent', $controllerName);
+        if (in_array($controllerName, [Controller::PRODUCT_STOCK_LEVEL, Controller::PRODUCT_PRICE], true)) {
+            $eventArgClass = ProductEvent::class;
+        }
+
         if (!class_exists($eventArgClass)) {
             $eventArgClass = ModelEvent::class;
         }
+
         return $eventArgClass;
     }
 
@@ -593,8 +600,7 @@ class Application
         ?object $model,
         string $controller,
         string $action
-    )
-    {
+    ) {
         $messages = [
             sprintf('Controller = %s', $controller),
             sprintf('Action = %s', $action),

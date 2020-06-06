@@ -2,21 +2,18 @@
 
 namespace Jtl\Connector\Core\Serializer\Subscriber;
 
+use Jawira\CaseConverter\CaseConverterException;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
-use JMS\Serializer\EventDispatcher\PreSerializeEvent;
 use JMS\Serializer\Metadata\StaticPropertyMetadata;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Exception\SerializerException;
 use Jtl\Connector\Core\Model\AbstractImage;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Identity;
-use Jtl\Connector\Core\Model\Product;
-use Jtl\Connector\Core\Model\TranslatableAttribute;
-use Jtl\Connector\Core\Model\TranslatableAttributeI18n;
 use Jtl\Connector\Core\Utilities\Str;
 
-class ObjectTypesSubscriber implements EventSubscriberInterface
+class ImageSubscriber implements EventSubscriberInterface
 {
     /**
      * @return array
@@ -24,11 +21,6 @@ class ObjectTypesSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            [
-                'event' => 'serializer.pre_serialize',
-                'method' => 'onPreSerialize',
-                'format' => 'json'
-            ],
             [
                 'event' => 'serializer.post_serialize',
                 'method' => 'onPostSerialize',
@@ -43,17 +35,6 @@ class ObjectTypesSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param PreSerializeEvent $event
-     */
-    public function onPreSerialize(PreSerializeEvent $event)
-    {
-        $object = $event->getObject();
-        if ($object instanceof Product) {
-            $event->setType(Product::class);
-        }
-    }
-
-    /**
      * @param ObjectEvent $event
      */
     public function onPostSerialize(ObjectEvent $event)
@@ -64,31 +45,13 @@ class ObjectTypesSubscriber implements EventSubscriberInterface
             $id->setEndpoint(sprintf('%s#=#%s', $object->getRelationType(), $id->getEndpoint()));
             $serializedId = $id->toArray();
             $event->getVisitor()->visitProperty(new StaticPropertyMetadata('', 'id', $serializedId), $serializedId);
-        } elseif ($object instanceof TranslatableAttributeI18n) {
-            $product = null;
-            /** @var \SplObjectStorage $visitingSet */
-            $visitingSet = $event->getContext()->getVisitingSet();
-            foreach ($visitingSet as $index => $element) {
-                if ($element instanceof Product) {
-                    $product = $element;
-                    break;
-                }
-            }
-
-            if (!is_null($product)) {
-                $visitingSet->offsetSet($product);
-                $visitingSet->next();
-                /** @var TranslatableAttribute $attribute */
-                $attribute = $visitingSet->current();
-                $productAttrId = $attribute->getId()->toArray();
-                $event->getVisitor()->visitProperty(new StaticPropertyMetadata('', 'productAttrId', $productAttrId), $productAttrId);
-            }
         }
     }
 
     /**
      * @param ObjectEvent $event
      * @throws SerializerException
+     * @throws CaseConverterException
      */
     public function onPostDeserialize(ObjectEvent $event)
     {

@@ -2,7 +2,6 @@
 
 namespace Jtl\Connector\Core\Exception;
 
-
 class LoggerException extends \Exception
 {
     public const

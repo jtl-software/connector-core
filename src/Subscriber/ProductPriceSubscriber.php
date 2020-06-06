@@ -48,8 +48,7 @@ class ProductPriceSubscriber implements EventSubscriberInterface
                 $hostId = $price->getProductId()->getHost();
 
                 if (!isset($resortedPrices[$hostId])) {
-                    $resortedPrices[$hostId] = new Product();
-                    $resortedPrices[$hostId]->setId($price->getProductId());
+                    $resortedPrices[$hostId] = (new Product())->setId($price->getProductId());
                 }
 
                 $resortedPrices[$hostId]->addPrice($price);

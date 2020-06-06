@@ -421,7 +421,7 @@ class ApplicationTest extends TestCase
 
         $app = $this->createApplication()->setRequest($request);
         $this->invokeMethodFromObject($app, 'handleImagePush', ...$images);
-        foreach($images as $image) {
+        foreach ($images as $image) {
             $this->assertFileExists($image->getFilename());
             $expectedFilename = sprintf('%d_%s.jpg', $image->getId()->getHost(), Str::toPascalCase($image->getRelationType()));
             $this->assertEquals($expectedFilename, substr($image->getFilename(), strrpos($image->getFilename(), '/') + 1));

@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Subscriber;
 
 use Jtl\Connector\Core\Application\Request;

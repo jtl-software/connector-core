@@ -340,7 +340,6 @@ class IdentityLinker implements LoggerAwareInterface
      */
     public function clear(int $type = null): bool
     {
-
         return $this->mapper->clear($type);
     }
 

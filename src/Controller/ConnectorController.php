@@ -82,9 +82,7 @@ class ConnectorController implements LoggerAwareInterface
         IdentityLinker $linker,
         \SessionHandlerInterface $sessionHandler,
         TokenValidatorInterface $tokenValidator
-    )
-    {
-
+    ) {
         $this->featuresPath = $featuresPath;
         $this->checksumLinker = $checksumLinker;
         $this->linker = $linker;

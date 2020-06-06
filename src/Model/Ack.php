@@ -22,7 +22,7 @@ use Jtl\Connector\Core\Checksum\ChecksumInterface;
 class Ack extends AbstractModel
 {
     /**
-     * @var ArrayCollection list
+     * @var Identity[]
      * @Serializer\Type("array<string, array<Jtl\Connector\Core\Model\Identity>>")
      * @Serializer\SerializedName("identities")
      * @Serializer\Accessor(getter="getIdentities",setter="setIdentities")

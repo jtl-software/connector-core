@@ -58,13 +58,13 @@ class LoggerServiceTest extends TestCase
     public function testSetFormatterToExistingLoggers()
     {
         $formatterMock = $this->createMock(FormatterInterface::class);
-        foreach(['foo', 'bar', 'foobar'] as $channel) {
+        foreach (['foo', 'bar', 'foobar'] as $channel) {
             $fooLogger = $this->factory->get($channel);
             $handlers = $fooLogger->getHandlers();
             $this->assertNotEquals($formatterMock, $handlers[0]->getFormatter());
         }
         $this->factory->setFormatter($formatterMock);
-        foreach(['foo', 'bar', 'foobar'] as $channel) {
+        foreach (['foo', 'bar', 'foobar'] as $channel) {
             $fooLogger = $this->factory->get($channel);
             $handlers = $fooLogger->getHandlers();
             $this->assertEquals($formatterMock, $handlers[0]->getFormatter());

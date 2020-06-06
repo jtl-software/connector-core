@@ -82,7 +82,7 @@ class LoggerService
         if (!$this->channels[$channel]->isHandling($logLevel)) {
             $fileName = sprintf('%s/%s.log', $this->logDir, $channel);
             $handler = new RotatingFileHandler($fileName, $this->maxFiles, $logLevel);
-            if(!is_null($this->formatter)) {
+            if (!is_null($this->formatter)) {
                 $handler->setFormatter($this->formatter);
             }
             $this->channels[$channel]->pushHandler($handler);

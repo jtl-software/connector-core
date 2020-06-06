@@ -190,7 +190,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
      */
     protected function getRootDir(): vfsStreamDirectory
     {
-        if(is_null($this->rootDir)) {
+        if (is_null($this->rootDir)) {
             $this->rootDir = vfsStream::setup();
         }
         return $this->rootDir;
@@ -228,7 +228,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
      */
     protected function getFaker(): Generator
     {
-        if(is_null($this->faker)) {
+        if (is_null($this->faker)) {
             $this->faker = Factory::create();
         }
         return $this->faker;

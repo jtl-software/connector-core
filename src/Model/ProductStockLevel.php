@@ -36,7 +36,6 @@ class ProductStockLevel extends AbstractDataModel
 
     /**
      * ProductStockLevel constructor.
-     * @param Identity $productId
      */
     public function __construct()
     {
@@ -45,8 +44,7 @@ class ProductStockLevel extends AbstractDataModel
 
     /**
      * @param Identity $productId
-     * @return Jtl\Connector\Core\Model\ProductStockLevel
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
+     * @return ProductStockLevel
      */
     public function setProductId(Identity $productId): ProductStockLevel
     {

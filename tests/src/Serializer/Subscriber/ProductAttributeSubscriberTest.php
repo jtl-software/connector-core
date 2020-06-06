@@ -15,7 +15,7 @@ use Jtl\Connector\Core\Test\TestCase;
  * Class ObjectTypesSubscriberTest
  * @package Jtl\Connector\Core\Serializer\Subscriber
  */
-class ObjectTypesSubscriberTest extends TestCase
+class ProductAttributeSubscriberTest extends TestCase
 {
 
     /**

@@ -476,14 +476,14 @@ class Product extends AbstractIdentity implements IdentificationInterface
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
-    
+
     /**
-     * @var ProductStockLevel
-     * @Serializer\Type("Jtl\Connector\Core\Model\ProductStockLevel")
+     * @var double
+     * @Serializer\Type("double")
      * @Serializer\SerializedName("stockLevel")
      * @Serializer\Accessor(getter="getStockLevel",setter="setStockLevel")
      */
-    protected $stockLevel = null;
+    protected $stockLevel = 0.0;
     
     /**
      * @var integer
@@ -693,7 +693,7 @@ class Product extends AbstractIdentity implements IdentificationInterface
     public function calculateHandlingTime(): int
     {
         $handlingTime = $this->getAdditionalHandlingTime();
-        if($this->getStockLevel()->getStockLevel() === 0.) {
+        if ($this->stockLevel === 0.) {
             $handlingTime += $this->getSupplierDeliveryTime();
         }
         return $handlingTime;
@@ -1829,23 +1829,22 @@ class Product extends AbstractIdentity implements IdentificationInterface
     {
         return $this->sort;
     }
-    
+
     /**
-     * @param ProductStockLevel $stockLevel
-     * @return Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'ProductStockLevel'.
+     * @param float $stockLevel
+     * @return $this
      */
-    public function setStockLevel(ProductStockLevel $stockLevel = null): Product
+    public function setStockLevel(float $stockLevel): Product
     {
         $this->stockLevel = $stockLevel;
         
         return $this;
     }
-    
+
     /**
-     * @return ProductStockLevel
+     * @return float
      */
-    public function getStockLevel(): ?ProductStockLevel
+    public function getStockLevel(): float
     {
         return $this->stockLevel;
     }

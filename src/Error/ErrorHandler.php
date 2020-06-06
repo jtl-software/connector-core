@@ -49,7 +49,7 @@ class ErrorHandler extends AbstractErrorHandler
      */
     public function getExceptionHandler(): callable
     {
-        return function(\Throwable $ex) {
+        return function (\Throwable $ex) {
             return null;
         };
     }
@@ -60,7 +60,7 @@ class ErrorHandler extends AbstractErrorHandler
     public function getErrorHandler(): callable
     {
         return function ($errno, $errstr, $errfile, $errline, $errcontext) {
-            return !in_array($errno, static::$shutdownHandleErrors);
+            return !in_array($errno, static::$shutdownHandleErrors, true);
         };
     }
 
@@ -82,7 +82,7 @@ class ErrorHandler extends AbstractErrorHandler
                         ->setMessage($err['message']);
 
                     $requestPacket = RequestPacket::create('unknown')->setMethod('unknown.unknown');
-                    if(!is_null($this->requestPacket)) {
+                    if (!is_null($this->requestPacket)) {
                         $requestPacket = $this->requestPacket;
                     }
 

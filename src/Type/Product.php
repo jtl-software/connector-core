@@ -75,7 +75,7 @@ class Product extends AbstractDataType
             new PropertyInfo('shippingWeight', 'double', 0.0, false, false, false),
             new PropertyInfo('sku', 'string', '', false, false, false),
             new PropertyInfo('sort', 'integer', 0, false, false, false),
-            new PropertyInfo('stockLevel', 'Jtl\Connector\Core\Model\ProductStockLevel', null, false, false, true),
+            new PropertyInfo('stockLevel', 'double', 0.0, false, false, false),
             new PropertyInfo('supplierDeliveryTime', 'integer', 0, false, false, false),
             new PropertyInfo('supplierStockLevel', 'double', 0.0, false, false, false),
             new PropertyInfo('taric', 'string', '', false, false, false),
