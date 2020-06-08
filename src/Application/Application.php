@@ -283,6 +283,8 @@ class Application
             $responsePacket = ResponsePacket::create($requestPacket->getId())
                 ->setError($error);
 
+            $this->loggerService->get(LoggerService::CHANNEL_ERROR)->debug($ex->getTraceAsString());
+
             throw $ex;
         } finally {
             $this->fileSystem->remove($this->deleteFromFileSystem);
