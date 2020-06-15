@@ -7,8 +7,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use DateTime;
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -22,16 +20,16 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductSpecialPrice extends AbstractIdentity
 {
     /**
-     * @var DateTime Optional: Activate special price from date
-     * @Serializer\Type("DateTime")
+     * @var \DateTimeInterface Optional: Activate special price from date
+     * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("activeFromDate")
      * @Serializer\Accessor(getter="getActiveFromDate",setter="setActiveFromDate")
      */
     protected $activeFromDate = null;
     
     /**
-     * @var DateTime Optional: Special price active until date
-     * @Serializer\Type("DateTime")
+     * @var \DateTimeInterface Optional: Special price active until date
+     * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("activeUntilDate")
      * @Serializer\Accessor(getter="getActiveUntilDate",setter="setActiveUntilDate")
      */
@@ -80,7 +78,6 @@ class ProductSpecialPrice extends AbstractIdentity
     /**
      * @param \DateTimeInterface $activeFromDate Optional: Activate special price from date
      * @return ProductSpecialPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
     public function setActiveFromDate(\DateTimeInterface $activeFromDate = null): ProductSpecialPrice
     {
@@ -90,7 +87,7 @@ class ProductSpecialPrice extends AbstractIdentity
     }
     
     /**
-     * @return DateTime Optional: Activate special price from date
+     * @return \DateTimeInterface Optional: Activate special price from date
      */
     public function getActiveFromDate(): ?\DateTimeInterface
     {
@@ -100,7 +97,6 @@ class ProductSpecialPrice extends AbstractIdentity
     /**
      * @param \DateTimeInterface $activeUntilDate Optional: Special price active until date
      * @return ProductSpecialPrice
-     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
     public function setActiveUntilDate(\DateTimeInterface $activeUntilDate = null): ProductSpecialPrice
     {
@@ -110,7 +106,7 @@ class ProductSpecialPrice extends AbstractIdentity
     }
     
     /**
-     * @return DateTime Optional: Special price active until date
+     * @return \DateTimeInterface Optional: Special price active until date
      */
     public function getActiveUntilDate(): ?\DateTimeInterface
     {

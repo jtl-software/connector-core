@@ -7,7 +7,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -45,7 +44,6 @@ class ImageI18n extends AbstractI18n implements IdentityInterface
     /**
      * @param Identity $id
      * @return ImageI18n
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id): ImageI18n
     {

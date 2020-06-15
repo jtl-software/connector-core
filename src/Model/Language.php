@@ -7,7 +7,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -63,7 +62,6 @@ class Language extends AbstractI18n implements IdentityInterface
     /**
      * @param Identity $id Unique language id
      * @return Language
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id): Language
     {

@@ -7,7 +7,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -55,7 +54,6 @@ class ProductWarehouseInfo extends AbstractDataModel
     /**
      * @param Identity $warehouseId
      * @return ProductWarehouseInfo
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setWarehouseId(Identity $warehouseId): ProductWarehouseInfo
     {

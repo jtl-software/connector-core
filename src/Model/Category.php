@@ -7,7 +7,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -120,7 +119,6 @@ class Category extends AbstractIdentity implements IdentificationInterface
     /**
      * @param Identity $parentCategoryId Optional reference to parent category id
      * @return Category
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setParentCategoryId(Identity $parentCategoryId): Category
     {

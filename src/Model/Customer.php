@@ -7,8 +7,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use DateTime;
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -46,8 +44,8 @@ class Customer extends AbstractI18n implements IdentityInterface
     protected $accountCredit = 0.0;
     
     /**
-     * @var DateTime Date of birth
-     * @Serializer\Type("DateTime")
+     * @var \DateTimeInterface Date of birth
+     * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("birthday")
      * @Serializer\Accessor(getter="getBirthday",setter="setBirthday")
      */
@@ -78,8 +76,8 @@ class Customer extends AbstractI18n implements IdentityInterface
     protected $countryIso = '';
     
     /**
-     * @var DateTime
-     * @Serializer\Type("DateTime")
+     * @var \DateTimeInterface
+     * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("creationDate")
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
@@ -281,7 +279,6 @@ class Customer extends AbstractI18n implements IdentityInterface
     /**
      * @param Identity $customerGroupId References a customer group
      * @return Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerGroupId(Identity $customerGroupId): Customer
     {
@@ -301,7 +298,6 @@ class Customer extends AbstractI18n implements IdentityInterface
     /**
      * @param Identity $id Unique customer id
      * @return Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id): Customer
     {
@@ -340,7 +336,6 @@ class Customer extends AbstractI18n implements IdentityInterface
     /**
      * @param \DateTimeInterface $birthday Date of birth
      * @return Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
     public function setBirthday(\DateTimeInterface $birthday = null): Customer
     {
@@ -350,7 +345,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     }
     
     /**
-     * @return DateTime Date of birth
+     * @return \DateTimeInterface Date of birth
      */
     public function getBirthday(): ?\DateTimeInterface
     {
@@ -417,7 +412,6 @@ class Customer extends AbstractI18n implements IdentityInterface
     /**
      * @param \DateTimeInterface $creationDate
      * @return Customer
-     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
     public function setCreationDate(\DateTimeInterface $creationDate = null): Customer
     {
@@ -427,7 +421,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     }
     
     /**
-     * @return DateTime
+     * @return \DateTimeInterface
      */
     public function getCreationDate(): ?\DateTimeInterface
     {

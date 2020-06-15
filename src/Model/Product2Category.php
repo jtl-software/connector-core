@@ -7,7 +7,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -42,7 +41,6 @@ class Product2Category extends AbstractIdentity
     /**
      * @param Identity $categoryId Reference to category
      * @return Product2Category
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCategoryId(Identity $categoryId): Product2Category
     {

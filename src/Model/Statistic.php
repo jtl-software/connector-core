@@ -7,8 +7,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use InvalidArgumentException;
-use stdClass;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -47,7 +45,6 @@ class Statistic extends AbstractDataModel
     /**
      * @param integer $available
      * @return Statistic
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
      */
     public function setAvailable(int $available): Statistic
     {
@@ -67,7 +64,6 @@ class Statistic extends AbstractDataModel
     /**
      * @param string $controllerName
      * @return Statistic
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setControllerName(string $controllerName): Statistic
     {

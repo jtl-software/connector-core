@@ -7,8 +7,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use DateTime;
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -28,8 +26,8 @@ class DeliveryNoteItemInfo extends AbstractDataModel
     protected $batch = '';
     
     /**
-     * @var DateTime
-     * @Serializer\Type("DateTime")
+     * @var \DateTimeInterface
+     * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("bestBefore")
      * @Serializer\Accessor(getter="getBestBefore",setter="setBestBefore")
      */
@@ -74,7 +72,6 @@ class DeliveryNoteItemInfo extends AbstractDataModel
     /**
      * @param \DateTimeInterface $bestBefore
      * @return DeliveryNoteItemInfo
-     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
     public function setBestBefore(\DateTimeInterface $bestBefore = null): DeliveryNoteItemInfo
     {
@@ -84,7 +81,7 @@ class DeliveryNoteItemInfo extends AbstractDataModel
     }
     
     /**
-     * @return DateTime
+     * @return \DateTimeInterface
      */
     public function getBestBefore(): ?\DateTimeInterface
     {

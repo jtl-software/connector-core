@@ -7,8 +7,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use DateTime;
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -36,8 +34,8 @@ class Payment extends AbstractIdentity
     protected $billingInfo = '';
     
     /**
-     * @var DateTime
-     * @Serializer\Type("DateTime")
+     * @var \DateTimeInterface
+     * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("creationDate")
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
@@ -81,7 +79,6 @@ class Payment extends AbstractIdentity
     /**
      * @param Identity $customerOrderId
      * @return Payment
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerOrderId(Identity $customerOrderId): Payment
     {
@@ -120,7 +117,6 @@ class Payment extends AbstractIdentity
     /**
      * @param \DateTimeInterface $creationDate
      * @return Payment
-     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
     public function setCreationDate(\DateTimeInterface $creationDate = null): Payment
     {
@@ -130,7 +126,7 @@ class Payment extends AbstractIdentity
     }
     
     /**
-     * @return DateTime
+     * @return \DateTimeInterface
      */
     public function getCreationDate(): ?\DateTimeInterface
     {

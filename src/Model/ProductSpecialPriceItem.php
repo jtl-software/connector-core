@@ -7,7 +7,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -47,7 +46,6 @@ class ProductSpecialPriceItem extends AbstractDataModel
     /**
      * @param Identity $customerGroupId Reference to customerGroup
      * @return ProductSpecialPriceItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerGroupId(Identity $customerGroupId): ProductSpecialPriceItem
     {

@@ -7,7 +7,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -42,7 +41,6 @@ class ProductSpecific extends AbstractIdentity
     /**
      * @param Identity $specificValueId Reference to specificValue
      * @return ProductSpecific
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setSpecificValueId(Identity $specificValueId): ProductSpecific
     {

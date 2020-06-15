@@ -7,8 +7,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use DateTime;
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -20,8 +18,8 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductFileDownload extends AbstractDataModel
 {
     /**
-     * @var DateTime
-     * @Serializer\Type("DateTime")
+     * @var \DateTimeInterface
+     * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("creationDate")
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
@@ -78,7 +76,6 @@ class ProductFileDownload extends AbstractDataModel
     /**
      * @param \DateTimeInterface $creationDate
      * @return ProductFileDownload
-     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
     public function setCreationDate(\DateTimeInterface $creationDate = null): ProductFileDownload
     {
@@ -88,7 +85,7 @@ class ProductFileDownload extends AbstractDataModel
     }
     
     /**
-     * @return DateTime
+     * @return \DateTimeInterface
      */
     public function getCreationDate(): ?\DateTimeInterface
     {

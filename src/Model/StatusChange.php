@@ -7,7 +7,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -53,7 +52,6 @@ class StatusChange extends AbstractDataModel
     /**
      * @param Identity $customerOrderId
      * @return StatusChange
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerOrderId(Identity $customerOrderId): StatusChange
     {
@@ -73,7 +71,6 @@ class StatusChange extends AbstractDataModel
     /**
      * @param string $orderStatus
      * @return StatusChange
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setOrderStatus(string $orderStatus): StatusChange
     {
@@ -93,7 +90,6 @@ class StatusChange extends AbstractDataModel
     /**
      * @param string $paymentStatus
      * @return StatusChange
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setPaymentStatus(string $paymentStatus): StatusChange
     {

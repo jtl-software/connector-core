@@ -7,9 +7,7 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use Exception;
 use InvalidArgumentException;
-use Jtl\Connector\Core\Model\AbstractModel;
 use JMS\Serializer\Annotation as Serializer;
 
 /**

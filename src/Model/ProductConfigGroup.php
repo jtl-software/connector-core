@@ -7,7 +7,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -47,7 +46,6 @@ class ProductConfigGroup extends AbstractDataModel
     /**
      * @param Identity $configGroupId Reference to configGroup
      * @return ProductConfigGroup
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setConfigGroupId(Identity $configGroupId): ProductConfigGroup
     {

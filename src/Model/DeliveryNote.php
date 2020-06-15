@@ -7,8 +7,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use DateTime;
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -30,8 +28,8 @@ class DeliveryNote extends AbstractIdentity
     protected $customerOrderId = null;
 
     /**
-     * @var DateTime Creation date
-     * @Serializer\Type("DateTime")
+     * @var \DateTimeInterface Creation date
+     * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("creationDate")
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
@@ -83,7 +81,6 @@ class DeliveryNote extends AbstractIdentity
     /**
      * @param Identity $customerOrderId Reference to customerOrder
      * @return DeliveryNote
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerOrderId(Identity $customerOrderId): DeliveryNote
     {
@@ -103,7 +100,6 @@ class DeliveryNote extends AbstractIdentity
     /**
      * @param \DateTimeInterface $creationDate Creation date
      * @return DeliveryNote
-     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
     public function setCreationDate(\DateTimeInterface $creationDate = null): DeliveryNote
     {
@@ -113,7 +109,7 @@ class DeliveryNote extends AbstractIdentity
     }
     
     /**
-     * @return DateTime Creation date
+     * @return \DateTimeInterface Creation date
      */
     public function getCreationDate(): ?\DateTimeInterface
     {

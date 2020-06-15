@@ -7,7 +7,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -83,7 +82,6 @@ class CustomerOrderItemVariation extends AbstractIdentity
     /**
      * @param Identity $productVariationId Reference to productVariation
      * @return CustomerOrderItemVariation
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductVariationId(Identity $productVariationId): CustomerOrderItemVariation
     {
@@ -103,7 +101,6 @@ class CustomerOrderItemVariation extends AbstractIdentity
     /**
      * @param Identity $productVariationValueId Reference to productVariationValue
      * @return CustomerOrderItemVariation
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductVariationValueId(Identity $productVariationValueId): CustomerOrderItemVariation
     {

@@ -7,9 +7,7 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
-use Jtl\Connector\Core\Model\Customer\Attribute;
 
 /**
  * Monolingual customer group attribute.
@@ -40,7 +38,6 @@ class CustomerGroupAttr extends KeyValueAttribute implements IdentityInterface
     /**
      * @param Identity $id Unique customerGroupAttr id
      * @return CustomerGroupAttr
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id): CustomerGroupAttr
     {

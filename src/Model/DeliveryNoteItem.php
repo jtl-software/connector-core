@@ -7,7 +7,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -65,7 +64,6 @@ class DeliveryNoteItem extends AbstractIdentity
     /**
      * @param Identity $customerOrderItemId
      * @return DeliveryNoteItem
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerOrderItemId(Identity $customerOrderItemId): DeliveryNoteItem
     {

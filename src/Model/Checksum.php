@@ -7,7 +7,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 use Jtl\Connector\Core\Checksum\ChecksumInterface;
 
@@ -75,7 +74,6 @@ class Checksum extends AbstractDataModel implements ChecksumInterface
     /**
      * @param Identity $foreignKey
      * @return Checksum
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setForeignKey(Identity $foreignKey)
     {
@@ -160,7 +158,6 @@ class Checksum extends AbstractDataModel implements ChecksumInterface
     /**
      * @param integer $type
      * @return Checksum
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
      */
     public function setType(int $type)
     {

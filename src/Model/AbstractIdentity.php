@@ -26,7 +26,6 @@ abstract class AbstractIdentity extends AbstractDataModel implements IdentityInt
     /**
      * @param Identity $id Unique id
      * @return self
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id): self
     {

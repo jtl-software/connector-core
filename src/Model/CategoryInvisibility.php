@@ -7,7 +7,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -39,7 +38,6 @@ class CategoryInvisibility extends AbstractDataModel
     /**
      * @param Identity $customerGroupId Reference to customerGroup that is not allowed to view categoryId
      * @return CategoryInvisibility
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerGroupId(Identity $customerGroupId): CategoryInvisibility
     {

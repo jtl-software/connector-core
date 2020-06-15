@@ -7,8 +7,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use DateTime;
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -102,8 +100,8 @@ class Product extends AbstractIdentity implements IdentificationInterface
     protected $asin = '';
     
     /**
-     * @var DateTime Optional available from date. Specify a date, upon when product can be purchased.
-     * @Serializer\Type("DateTime")
+     * @var \DateTimeInterface Optional available from date. Specify a date, upon when product can be purchased.
+     * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("availableFrom")
      * @Serializer\Accessor(getter="getAvailableFrom",setter="setAvailableFrom")
      */
@@ -174,8 +172,8 @@ class Product extends AbstractIdentity implements IdentificationInterface
     protected $considerVariationStock = false;
     
     /**
-     * @var DateTime Creation date
-     * @Serializer\Type("DateTime")
+     * @var \DateTimeInterface Creation date
+     * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("creationDate")
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
@@ -334,8 +332,8 @@ class Product extends AbstractIdentity implements IdentificationInterface
     protected $measurementUnitCode = '';
     
     /**
-     * @var DateTime
-     * @Serializer\Type("DateTime")
+     * @var \DateTimeInterface
+     * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("minBestBeforeDate")
      * @Serializer\Accessor(getter="getMinBestBeforeDate",setter="setMinBestBeforeDate")
      */
@@ -358,24 +356,24 @@ class Product extends AbstractIdentity implements IdentificationInterface
     protected $minimumQuantity = 0.0;
     
     /**
-     * @var DateTime
-     * @Serializer\Type("DateTime")
+     * @var \DateTimeInterface
+     * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("modified")
      * @Serializer\Accessor(getter="getModified",setter="setModified")
      */
     protected $modified = null;
     
     /**
-     * @var DateTime
-     * @Serializer\Type("DateTime")
+     * @var \DateTimeInterface
+     * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("newReleaseDate")
      * @Serializer\Accessor(getter="getNewReleaseDate",setter="setNewReleaseDate")
      */
     protected $newReleaseDate = null;
     
     /**
-     * @var DateTime Contains the date of the next available inflow.
-     * @Serializer\Type("DateTime")
+     * @var \DateTimeInterface Contains the date of the next available inflow.
+     * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("nextAvailableInflowDate")
      * @Serializer\Accessor(getter="getNextAvailableInflowDate",setter="setNextAvailableInflowDate")
      */
@@ -737,7 +735,6 @@ class Product extends AbstractIdentity implements IdentificationInterface
     /**
      * @param Identity $basePriceUnitId Optional reference to basePriceUnit
      * @return Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setBasePriceUnitId(Identity $basePriceUnitId): Product
     {
@@ -757,7 +754,6 @@ class Product extends AbstractIdentity implements IdentificationInterface
     /**
      * @param Identity $manufacturerId Reference to manufacturer
      * @return Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setManufacturerId(Identity $manufacturerId): Product
     {
@@ -777,7 +773,6 @@ class Product extends AbstractIdentity implements IdentificationInterface
     /**
      * @param Identity $masterProductId Reference to master product
      * @return Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setMasterProductId(Identity $masterProductId): Product
     {
@@ -797,7 +792,6 @@ class Product extends AbstractIdentity implements IdentificationInterface
     /**
      * @param Identity $measurementUnitId Optional reference to measurement unit id
      * @return Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setMeasurementUnitId(Identity $measurementUnitId): Product
     {
@@ -817,7 +811,6 @@ class Product extends AbstractIdentity implements IdentificationInterface
     /**
      * @param Identity $partsListId Optional reference to partsList
      * @return Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setPartsListId(Identity $partsListId): Product
     {
@@ -837,7 +830,6 @@ class Product extends AbstractIdentity implements IdentificationInterface
     /**
      * @param Identity $productTypeId Optional reference to productType
      * @return Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductTypeId(Identity $productTypeId): Product
     {
@@ -857,7 +849,6 @@ class Product extends AbstractIdentity implements IdentificationInterface
     /**
      * @param Identity $shippingClassId Reference to shippingClass
      * @return Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setShippingClassId(Identity $shippingClassId): Product
     {
@@ -877,7 +868,6 @@ class Product extends AbstractIdentity implements IdentificationInterface
     /**
      * @param Identity $unitId Reference to unit
      * @return Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setUnitId(Identity $unitId): Product
     {
@@ -934,7 +924,6 @@ class Product extends AbstractIdentity implements IdentificationInterface
     /**
      * @param \DateTimeInterface $availableFrom Optional available from date. Specify a date, upon when product can be purchased.
      * @return Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
     public function setAvailableFrom(\DateTimeInterface $availableFrom = null): Product
     {
@@ -944,7 +933,7 @@ class Product extends AbstractIdentity implements IdentificationInterface
     }
     
     /**
-     * @return DateTime Optional available from date. Specify a date, upon when product can be purchased.
+     * @return \DateTimeInterface Optional available from date. Specify a date, upon when product can be purchased.
      */
     public function getAvailableFrom(): ?\DateTimeInterface
     {
@@ -1106,7 +1095,6 @@ class Product extends AbstractIdentity implements IdentificationInterface
     /**
      * @param \DateTimeInterface $creationDate Creation date
      * @return Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
     public function setCreationDate(\DateTimeInterface $creationDate = null): Product
     {
@@ -1116,7 +1104,7 @@ class Product extends AbstractIdentity implements IdentificationInterface
     }
     
     /**
-     * @return DateTime Creation date
+     * @return \DateTimeInterface Creation date
      */
     public function getCreationDate(): ?\DateTimeInterface
     {
@@ -1487,7 +1475,6 @@ class Product extends AbstractIdentity implements IdentificationInterface
     /**
      * @param \DateTimeInterface $minBestBeforeDate
      * @return Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
     public function setMinBestBeforeDate(\DateTimeInterface $minBestBeforeDate = null): Product
     {
@@ -1497,7 +1484,7 @@ class Product extends AbstractIdentity implements IdentificationInterface
     }
     
     /**
-     * @return DateTime
+     * @return \DateTimeInterface
      */
     public function getMinBestBeforeDate(): ?\DateTimeInterface
     {
@@ -1545,7 +1532,6 @@ class Product extends AbstractIdentity implements IdentificationInterface
     /**
      * @param \DateTimeInterface $modified
      * @return Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
     public function setModified(\DateTimeInterface $modified = null): Product
     {
@@ -1555,7 +1541,7 @@ class Product extends AbstractIdentity implements IdentificationInterface
     }
     
     /**
-     * @return DateTime
+     * @return \DateTimeInterface
      */
     public function getModified(): ?\DateTimeInterface
     {
@@ -1565,7 +1551,6 @@ class Product extends AbstractIdentity implements IdentificationInterface
     /**
      * @param \DateTimeInterface $newReleaseDate
      * @return Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
     public function setNewReleaseDate(\DateTimeInterface $newReleaseDate = null): Product
     {
@@ -1575,7 +1560,7 @@ class Product extends AbstractIdentity implements IdentificationInterface
     }
     
     /**
-     * @return DateTime
+     * @return \DateTimeInterface
      */
     public function getNewReleaseDate(): ?\DateTimeInterface
     {
@@ -1585,7 +1570,6 @@ class Product extends AbstractIdentity implements IdentificationInterface
     /**
      * @param \DateTimeInterface $nextAvailableInflowDate Contains the date of the next available inflow.
      * @return Product
-     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
     public function setNextAvailableInflowDate(\DateTimeInterface $nextAvailableInflowDate = null): Product
     {
@@ -1595,7 +1579,7 @@ class Product extends AbstractIdentity implements IdentificationInterface
     }
     
     /**
-     * @return DateTime Contains the date of the next available inflow.
+     * @return \DateTimeInterface Contains the date of the next available inflow.
      */
     public function getNextAvailableInflowDate(): ?\DateTimeInterface
     {

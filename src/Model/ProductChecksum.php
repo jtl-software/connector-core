@@ -7,7 +7,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -66,7 +65,6 @@ class ProductChecksum extends Checksum
     /**
      * @param Identity $foreignKey
      * @return ProductChecksum
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setForeignKey(Identity $foreignKey): ProductChecksum
     {
@@ -86,7 +84,6 @@ class ProductChecksum extends Checksum
     /**
      * @param string $endpoint
      * @return ProductChecksum
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setEndpoint(string $endpoint): ProductChecksum
     {
@@ -106,7 +103,6 @@ class ProductChecksum extends Checksum
     /**
      * @param boolean $hasChanged
      * @return ProductChecksum
-     * @throws InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
     public function setHasChanged(bool $hasChanged): ProductChecksum
     {
@@ -134,7 +130,6 @@ class ProductChecksum extends Checksum
     /**
      * @param string $host
      * @return ProductChecksum
-     * @throws InvalidArgumentException if the provided argument is not of type 'string'.
      */
     public function setHost(string $host): ProductChecksum
     {
@@ -154,7 +149,6 @@ class ProductChecksum extends Checksum
     /**
      * @param integer $type
      * @return ProductChecksum
-     * @throws InvalidArgumentException if the provided argument is not of type 'integer'.
      */
     public function setType(int $type): ProductChecksum
     {

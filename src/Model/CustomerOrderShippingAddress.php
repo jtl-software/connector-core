@@ -7,7 +7,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -38,7 +37,6 @@ class CustomerOrderShippingAddress extends AbstractOrderAddress
     /**
      * @param Identity $customerId Reference to customer
      * @return CustomerOrderShippingAddress
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerId(Identity $customerId): CustomerOrderShippingAddress
     {

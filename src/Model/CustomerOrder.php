@@ -7,8 +7,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use DateTime;
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -89,8 +87,8 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     protected $carrierName = '';
     
     /**
-     * @var DateTime Date of creation
-     * @Serializer\Type("DateTime")
+     * @var \DateTimeInterface Date of creation
+     * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("creationDate")
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
@@ -105,8 +103,8 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     protected $currencyIso = '';
     
     /**
-     * @var DateTime
-     * @Serializer\Type("DateTime")
+     * @var \DateTimeInterface
+     * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("estimatedDeliveryDate")
      * @Serializer\Accessor(getter="getEstimatedDeliveryDate",setter="setEstimatedDeliveryDate")
      */
@@ -129,8 +127,8 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     protected $orderNumber = '';
     
     /**
-     * @var DateTime Payment date
-     * @Serializer\Type("DateTime")
+     * @var \DateTimeInterface Payment date
+     * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("paymentDate")
      * @Serializer\Accessor(getter="getPaymentDate",setter="setPaymentDate")
      */
@@ -177,8 +175,8 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     protected $shippingAddress = null;
     
     /**
-     * @var DateTime Shipping date
-     * @Serializer\Type("DateTime")
+     * @var \DateTimeInterface Shipping date
+     * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("shippingDate")
      * @Serializer\Accessor(getter="getShippingDate",setter="setShippingDate")
      */
@@ -261,7 +259,6 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param Identity $customerId Optional reference to customer.
      * @return CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerId(Identity $customerId): CustomerOrder
     {
@@ -281,7 +278,6 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param Identity $id Unique customerOrder id
      * @return CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id): CustomerOrder
     {
@@ -301,7 +297,6 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param CustomerOrderBillingAddress $billingAddress Billing address
      * @return CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'CustomerOrderBillingAddress'.
      */
     public function setBillingAddress(CustomerOrderBillingAddress $billingAddress = null): CustomerOrder
     {
@@ -340,7 +335,6 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param \DateTimeInterface $creationDate Date of creation
      * @return CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
     public function setCreationDate(\DateTimeInterface $creationDate = null): CustomerOrder
     {
@@ -350,7 +344,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     }
     
     /**
-     * @return DateTime Date of creation
+     * @return \DateTimeInterface Date of creation
      */
     public function getCreationDate(): ?\DateTimeInterface
     {
@@ -379,7 +373,6 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param \DateTimeInterface $estimatedDeliveryDate
      * @return CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
     public function setEstimatedDeliveryDate(\DateTimeInterface $estimatedDeliveryDate = null): CustomerOrder
     {
@@ -389,7 +382,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     }
     
     /**
-     * @return DateTime
+     * @return \DateTimeInterface
      */
     public function getEstimatedDeliveryDate(): ?\DateTimeInterface
     {
@@ -437,7 +430,6 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param \DateTimeInterface $paymentDate Payment date
      * @return CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
     public function setPaymentDate(\DateTimeInterface $paymentDate = null): CustomerOrder
     {
@@ -447,7 +439,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     }
     
     /**
-     * @return DateTime Payment date
+     * @return \DateTimeInterface Payment date
      */
     public function getPaymentDate(): ?\DateTimeInterface
     {
@@ -457,7 +449,6 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param CustomerOrderPaymentInfo $paymentInfo
      * @return CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'CustomerOrderPaymentInfo'.
      */
     public function setPaymentInfo(CustomerOrderPaymentInfo $paymentInfo = null): CustomerOrder
     {
@@ -534,7 +525,6 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param CustomerOrderShippingAddress $shippingAddress Shipping address
      * @return CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'CustomerOrderShippingAddress'.
      */
     public function setShippingAddress(CustomerOrderShippingAddress $shippingAddress = null): CustomerOrder
     {
@@ -554,7 +544,6 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param \DateTimeInterface $shippingDate Shipping date
      * @return CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
     public function setShippingDate(\DateTimeInterface $shippingDate = null): CustomerOrder
     {
@@ -564,7 +553,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     }
     
     /**
-     * @return DateTime Shipping date
+     * @return \DateTimeInterface Shipping date
      */
     public function getShippingDate(): ?\DateTimeInterface
     {
@@ -593,7 +582,6 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param Identity $shippingMethodId Optional reference to customer.
      * @return CustomerOrder
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setShippingMethodId(Identity $shippingMethodId): CustomerOrder
     {

@@ -7,7 +7,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -66,7 +65,6 @@ class FileUpload extends AbstractIdentity
     /**
      * @param Identity $productId Reference to product
      * @return FileUpload
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductId(Identity $productId): FileUpload
     {

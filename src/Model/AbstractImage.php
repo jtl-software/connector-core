@@ -2,7 +2,6 @@
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
-use stdClass;
 
 /**
  * @access public
@@ -92,7 +91,6 @@ abstract class AbstractImage extends AbstractIdentity
     /**
      * @param Identity $foreignKey
      * @return $this
-     * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setForeignKey(Identity $foreignKey): self
     {

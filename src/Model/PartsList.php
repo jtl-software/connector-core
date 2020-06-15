@@ -7,7 +7,6 @@
 
 namespace Jtl\Connector\Core\Model;
 
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -50,7 +49,6 @@ class PartsList extends AbstractIdentity
     /**
      * @param Identity $productId Reference to a component / product
      * @return PartsList
-     * @throws InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductId(Identity $productId): PartsList
     {
