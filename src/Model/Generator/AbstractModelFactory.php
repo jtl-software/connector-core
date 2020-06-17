@@ -4,10 +4,7 @@ namespace Jtl\Connector\Core\Model\Generator;
 
 use Faker\Factory;
 use Faker\Generator;
-use Jawira\CaseConverter\CaseConverterException;
-use Jawira\CaseConverter\Convert;
-use Jtl\Connector\Core\Definition\Model;
-use Jtl\Connector\Core\Exception\DefinitionException;
+use JMS\Serializer\Serializer;
 use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 
@@ -18,14 +15,19 @@ use Jtl\Connector\Core\Serializer\SerializerBuilder;
 abstract class AbstractModelFactory
 {
     /**
+     * @var string
+     */
+    protected $defaultLocale;
+
+    /**
      * @var Generator
      */
     protected $faker;
 
     /**
-     * @var string
+     * @var Serializer
      */
-    protected $defaultLocale;
+    protected $serializer;
 
     /**
      * @var array
@@ -51,15 +53,21 @@ abstract class AbstractModelFactory
      * AbstractModelFactory constructor.
      * @param string $defaultLocale
      * @param Generator|null $faker
+     * @param Serializer|null $serializer
      */
-    public function __construct(string $defaultLocale = 'de_DE', Generator $faker = null)
+    public function __construct(string $defaultLocale = 'de_DE', Generator $faker = null, Serializer $serializer = null)
     {
         $this->defaultLocale = $defaultLocale;
+
         if (is_null($faker)) {
             $faker = Factory::create($defaultLocale);
         }
-
         $this->faker = $faker;
+
+        if(is_null($serializer)) {
+            $serializer = SerializerBuilder::create()->build();
+        }
+        $this->serializer = $serializer;
     }
 
     /**
@@ -72,10 +80,8 @@ abstract class AbstractModelFactory
     {
         $models = [];
 
-        $serializer = SerializerBuilder::create()->build();
-
         for ($i = 0; $i < $quantity; $i++) {
-            $model = $serializer->fromArray($this->makeOneArray($overrides[$i] ?? []), $this->getModelClass());
+            $model = $this->serializer->fromArray($this->makeOneArray($overrides[$i] ?? []), $this->getModelClass());
             $models[] = $model;
         }
 
@@ -140,7 +146,7 @@ abstract class AbstractModelFactory
      */
     public function makeIdentity(int $identityType)
     {
-        return SerializerBuilder::create()->fromArray($this->makeIdentityArray($identityType), Identity::class);
+        return $this->serializer->fromArray($this->makeIdentityArray($identityType), Identity::class);
     }
 
     /**
@@ -223,15 +229,17 @@ abstract class AbstractModelFactory
      */
     public function getFactory(string $name): self
     {
-        return self::createFactory($name, $this->defaultLocale);
+        return self::createFactory($name, $this->defaultLocale, $this->faker, $this->serializer);
     }
 
     /**
      * @param string $name
      * @param string $locale
+     * @param Generator|null $faker
+     * @param Serializer|null $serializer
      * @return AbstractModelFactory
      */
-    public static function createFactory(string $name, string $locale = 'de_DE')
+    public static function createFactory(string $name, string $locale = 'de_DE', Generator $faker = null, Serializer $serializer = null)
     {
         $className = sprintf('%s\\%sFactory', __NAMESPACE__, ucfirst($name));
         if (!class_exists($className)) {
@@ -241,7 +249,7 @@ abstract class AbstractModelFactory
         $locale = str_replace('-', '_', $locale);
         $factoriesIndex = md5(sprintf('%s%s', $className, $locale));
         if (!isset(self::$factories[$factoriesIndex])) {
-            self::$factories[$factoriesIndex] = new $className($locale);
+            self::$factories[$factoriesIndex] = new $className($locale, $faker, $serializer);
         }
 
         return self::$factories[$factoriesIndex];
