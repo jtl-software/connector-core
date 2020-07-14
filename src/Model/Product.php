@@ -178,7 +178,15 @@ class Product extends AbstractIdentity implements IdentificationInterface
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
     protected $creationDate = null;
-    
+
+    /**
+     * @var boolean
+     * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("discountable")
+     * @Serializer\Accessor(getter="getDiscountable",setter="setDiscountable")
+     */
+    protected $discountable = true;
+
     /**
      * @var string Optional European Article Number (EAN)
      * @Serializer\Type("string")
@@ -1109,6 +1117,24 @@ class Product extends AbstractIdentity implements IdentificationInterface
     public function getCreationDate(): ?\DateTimeInterface
     {
         return $this->creationDate;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getDiscountable(): bool
+    {
+        return $this->discountable;
+    }
+
+    /**
+     * @param bool $discountable
+     * @return Product
+     */
+    public function setDiscountable(bool $discountable): Product
+    {
+        $this->discountable = $discountable;
+        return $this;
     }
     
     /**
