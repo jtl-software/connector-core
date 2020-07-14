@@ -190,6 +190,14 @@ class Product extends DataModel
     protected $creationDate = null;
 
     /**
+     * @var boolean
+     * @Serializer\Type("boolean")
+     * @Serializer\SerializedName("discountable")
+     * @Serializer\Accessor(getter="getDiscountable",setter="setDiscountable")
+     */
+    protected $discountable = true;
+
+    /**
      * @var string Optional European Article Number (EAN)
      * @Serializer\Type("string")
      * @Serializer\SerializedName("ean")
@@ -698,8 +706,8 @@ class Product extends DataModel
      */
     public function calculateHandlingTime(): int
     {
-        $handlingTime = $this->getAdditionalHandlingTime();
-        if($this->getStockLevel()->getStockLevel() === 0.) {
+        $handlingTime = $this->additionalHandlingTime;
+        if(!is_null($this->stockLevel) && $this->stockLevel->getStockLevel() === 0.) {
             $handlingTime += $this->getSupplierDeliveryTime();
         }
         return $handlingTime;
@@ -1072,6 +1080,24 @@ class Product extends DataModel
     public function getCreationDate()
     {
         return $this->creationDate;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getDiscountable(): bool
+    {
+        return $this->discountable;
+    }
+
+    /**
+     * @param bool $discountable
+     * @return Product
+     */
+    public function setDiscountable(bool $discountable): Product
+    {
+        $this->discountable = $discountable;
+        return $this;
     }
 
     /**
