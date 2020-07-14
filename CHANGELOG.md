@@ -1,3 +1,7 @@
+2.7.6
+-----
+- Added discountable property to product
+
 2.7.5
 -----
 - Fixed setting paramaters in file handler
