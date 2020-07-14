@@ -38,6 +38,7 @@ class Product extends DataType
             new PropertyInfo('considerStock', 'boolean', false, false, false, false),
             new PropertyInfo('considerVariationStock', 'boolean', false, false, false, false),
             new PropertyInfo('creationDate', 'DateTime', null, false, false, false),
+            new PropertyInfo('discountable', 'boolean', false, false, false, false),
             new PropertyInfo('ean', 'string', '', false, false, false),
             new PropertyInfo('epid', 'string', '', false, false, false),
             new PropertyInfo('hazardIdNumber', 'string', '', false, false, false),
