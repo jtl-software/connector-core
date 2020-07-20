@@ -699,7 +699,7 @@ class Product extends AbstractIdentity implements IdentificationInterface
     public function calculateHandlingTime(): int
     {
         $handlingTime = $this->getAdditionalHandlingTime();
-        if ($this->stockLevel === 0.) {
+        if ($this->stockLevel <= 0.) {
             $handlingTime += $this->getSupplierDeliveryTime();
         }
         return $handlingTime;
