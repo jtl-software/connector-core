@@ -1,3 +1,7 @@
+3.1.19
+-----
+- Added customer note property to customer order
+
 3.1.18
 -----
 - Added discountable property to product
