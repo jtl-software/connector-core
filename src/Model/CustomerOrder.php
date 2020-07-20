@@ -105,6 +105,14 @@ class CustomerOrder extends DataModel
     protected $currencyIso = '';
 
     /**
+     * @var string
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("customerNote")
+     * @Serializer\Accessor(getter="getCustomerNote",setter="setCustomerNote")
+     */
+    protected $customerNote = '';
+
+    /**
      * @var DateTime 
      * @Serializer\Type("DateTime")
      * @Serializer\SerializedName("estimatedDeliveryDate")
@@ -369,6 +377,24 @@ class CustomerOrder extends DataModel
     public function getCurrencyIso()
     {
         return $this->currencyIso;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCustomerNote(): string
+    {
+        return $this->customerNote;
+    }
+
+    /**
+     * @param string $customerNote
+     * @return CustomerOrder
+     */
+    public function setCustomerNote(string $customerNote): CustomerOrder
+    {
+        $this->customerNote = $customerNote;
+        return $this;
     }
 
     /**
