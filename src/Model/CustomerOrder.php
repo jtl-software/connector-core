@@ -101,7 +101,15 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getCurrencyIso",setter="setCurrencyIso")
      */
     protected $currencyIso = '';
-    
+
+    /**
+     * @var string
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("customerNote")
+     * @Serializer\Accessor(getter="getCustomerNote",setter="setCustomerNote")
+     */
+    protected $customerNote = '';
+
     /**
      * @var \DateTimeInterface
      * @Serializer\Type("DateTimeInterface")
@@ -350,7 +358,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     {
         return $this->creationDate;
     }
-    
+
     /**
      * @param string $currencyIso
      * @return CustomerOrder
@@ -369,7 +377,25 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     {
         return $this->currencyIso;
     }
-    
+
+    /**
+     * @param string $customerNote
+     * @return CustomerOrder
+     */
+    public function setCustomerNote(string $customerNote): CustomerOrder
+    {
+        $this->customerNote = $customerNote;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCustomerNote(): string
+    {
+        return $this->customerNote;
+    }
+
     /**
      * @param \DateTimeInterface $estimatedDeliveryDate
      * @return CustomerOrder
