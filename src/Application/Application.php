@@ -2,6 +2,7 @@
 
 namespace Jtl\Connector\Core\Application;
 
+use Composer\Autoload\ClassLoader;
 use DI\Container;
 use DI\ContainerBuilder;
 use DI\DependencyException;
@@ -254,10 +255,9 @@ class Application
 
             $this->startSession($requestPacket->getMethod());
             $this->connector->initialize($this->config, $this->container, $this->eventDispatcher);
-            $this->config->set(ConfigSchema::CONNECTOR_DIR, $this->connectorDir);
-            $this->configSchema->validateConfig($this->config);
             $this->prepareContainer($this, $this->container);
-            $this->loadPlugins($this->config->get(ConfigSchema::PLUGINS_DIR), $this->eventDispatcher);
+            $this->loadPlugins($this->config, $this->container, $this->eventDispatcher, $this->config->get(ConfigSchema::PLUGINS_DIR));
+            $this->configSchema->validateConfig($this->config);
 
             $logJtlrpc = $jtlrpc;
             if ($requestPacket->getMethod() === RpcMethod::AUTH) {
@@ -780,21 +780,25 @@ class Application
     }
 
     /**
-     * @param string $pluginsDir
+     * @param ConfigInterface $config
+     * @param Container $container
      * @param EventDispatcher $eventDispatcher
+     * @param string $pluginsDir
      */
-    protected function loadPlugins(string $pluginsDir, EventDispatcher $eventDispatcher): void
+    protected function loadPlugins(ConfigInterface $config, Container $container, EventDispatcher $eventDispatcher, string $pluginsDir): void
     {
-        if (is_dir($pluginsDir)) {
-            $finder = (new Finder())->files()->name('/(b|B)ootstrap.php/')->in($pluginsDir);
-            foreach ($finder as $file) {
-                include($file->getPathName());
+        $loader = new ClassLoader();
+        $loader->add('', $pluginsDir);
+        $loader->register();
 
+        if (is_dir($pluginsDir)) {
+            $finder = (new Finder())->files()->name('/Bootstrap.php/')->in($pluginsDir);
+            foreach ($finder as $file) {
                 $class = sprintf('\\%s\\Bootstrap', str_replace(DIRECTORY_SEPARATOR, '\\', $file->getRelativePath()));
                 if (class_exists($class)) {
                     $plugin = new $class();
                     if ($plugin instanceof PluginInterface) {
-                        $plugin->registerListener($eventDispatcher);
+                        $plugin->registerListener($config, $container, $eventDispatcher);
                     }
                 }
             }

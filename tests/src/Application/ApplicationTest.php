@@ -245,11 +245,12 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @throws ApplicationException
      * @throws \ReflectionException
      */
     public function testLoadPlugins()
     {
+        $config = $this->createMock(ConfigInterface::class);
+        $container = $this->createMock(\DI\Container::class);
         $eventDispatcher = $this->createMock(EventDispatcher::class);
         $app = $this->getMockBuilder(Application::class)->disableOriginalConstructor()->getMock();
         $myPluginDirSrc = sprintf('%s/fixtures/MyPlugin', $this->connectorDir);
@@ -258,7 +259,7 @@ class ApplicationTest extends TestCase
         $data = file_get_contents(sprintf('%s/Bootstrap.php', $myPluginDirSrc));
         file_put_contents(sprintf('%s/Bootstrap.php', $myPluginDirDst), $data);
         $this->assertFalse(class_exists(Bootstrap::class));
-        $this->invokeMethodFromObject($app, 'loadPlugins', $myPluginDirDst, $eventDispatcher);
+        $this->invokeMethodFromObject($app, 'loadPlugins', $config, $container, $eventDispatcher, $myPluginDirDst);
         $this->assertTrue(class_exists(Bootstrap::class));
     }
 
