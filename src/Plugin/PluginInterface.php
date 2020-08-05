@@ -7,5 +7,5 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 
 interface PluginInterface
 {
-    public function registerListener(ConfigInterface $config, Container $container, EventDispatcher $eventDispatcher);
+    public function registerListener(ConfigInterface $config, Container $container, EventDispatcher $dispatcher);
 }
