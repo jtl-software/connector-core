@@ -492,10 +492,6 @@ class Application
     protected function createModelEventClassName(string $controllerName): string
     {
         $eventArgClass = sprintf('Jtl\\Connector\\Core\\Event\\%sEvent', $controllerName);
-        if (in_array($controllerName, [Controller::PRODUCT_STOCK_LEVEL, Controller::PRODUCT_PRICE], true)) {
-            $eventArgClass = ProductEvent::class;
-        }
-
         if (!class_exists($eventArgClass)) {
             $eventArgClass = ModelEvent::class;
         }
