@@ -5,14 +5,22 @@
  */
 namespace jtl\Connector\Serializer\JMS;
 
+use JMS\Serializer\EventDispatcher\EventDispatcher;
+use JMS\Serializer\Handler\HandlerRegistry;
+use jtl\Connector\Serializer\Handler\IdentityHandler;
+use jtl\Connector\Serializer\Subscriber\NullValuesSubscriber;
+
 class SerializerBuilder
 {
     public static function create()
     {
         return \JMS\Serializer\SerializerBuilder::create()
                 ->addDefaultHandlers()
-                ->configureHandlers(function (\JMS\Serializer\Handler\HandlerRegistry $registry) {
-                    $registry->registerSubscribingHandler(new \jtl\Connector\Serializer\Handler\IdentityHandler());
+                ->configureHandlers(function (HandlerRegistry $registry) {
+                    $registry->registerSubscribingHandler(new IdentityHandler());
+                })
+                ->configureListeners(function(EventDispatcher $dispatcher) {
+                    $dispatcher->addSubscriber(new NullValuesSubscriber());
                 })
                 ->build();
     }
