@@ -1,3 +1,7 @@
+2.7.8
+-----
+- Added ignoring properties with null values when deserializing a model
+
 2.7.7
 -----
 - Added customer note property to customer order
