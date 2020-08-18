@@ -8,6 +8,7 @@ use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger as MonoLogger;
 use Monolog\Processor\IntrospectionProcessor;
+use Monolog\Processor\ProcessorInterface;
 use Monolog\Processor\PsrLogMessageProcessor;
 
 class LoggerService
@@ -19,6 +20,11 @@ class LoggerService
         CHANNEL_LINKER = 'linker',
         CHANNEL_RPC = 'rpc',
         CHANNEL_SESSION = 'session';
+
+    /**
+     * @var MonoLogger[]
+     */
+    protected $channels = [];
 
     /**
      * @var FormatterInterface
@@ -36,14 +42,14 @@ class LoggerService
     protected $logLevel;
 
     /**
-     * @var MonoLogger[]
-     */
-    protected $channels = [];
-
-    /**
      * @var integer
      */
     protected $maxFiles = 7;
+
+    /**
+     * @var ProcessorInterface
+     */
+    protected $processors = [];
 
     /**
      * LoggerFactory constructor.
@@ -56,6 +62,9 @@ class LoggerService
         $this->logDir = $logDir;
         $this->logLevel = $logLevel;
         $this->maxFiles = $maxFiles;
+        $this
+            ->pushProcessor(new IntrospectionProcessor())
+            ->pushProcessor(new PsrLogMessageProcessor());
     }
 
     /**
@@ -86,8 +95,9 @@ class LoggerService
                 $handler->setFormatter($this->formatter);
             }
             $this->channels[$channel]->pushHandler($handler);
-            $this->channels[$channel]->pushProcessor(new IntrospectionProcessor());
-            $this->channels[$channel]->pushProcessor(new PsrLogMessageProcessor());
+            foreach ($this->processors as $processor) {
+                $this->channels[$channel]->pushProcessor($processor);
+            }
         }
 
         return $this->channels[$channel];
@@ -107,6 +117,7 @@ class LoggerService
         }
         $formatter = (new \ReflectionClass($formatterClass))->newInstanceArgs($arguments);
         $this->setFormatter($formatter);
+
         return $this;
     }
 
@@ -124,6 +135,28 @@ class LoggerService
             }
         }
         $this->formatter = $formatter;
+
+        return $this;
+    }
+
+    /**
+     * @param ProcessorInterface $processor
+     * @return LoggerService
+     */
+    public function pushProcessor(ProcessorInterface $processor): self
+    {
+        foreach($this->processors as $tProcessor) {
+            if($processor === $tProcessor) {
+                return $this;
+            }
+        }
+
+        foreach($this->channels as $channel) {
+            $channel->pushProcessor($processor);
+        }
+
+        $this->processors[] = $processor;
+
         return $this;
     }
 }
