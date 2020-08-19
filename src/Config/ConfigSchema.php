@@ -9,7 +9,8 @@ use Psr\Log\LogLevel;
 class ConfigSchema
 {
     public const
-        LOG_LEVEL = 'log_level',
+        LOG_LEVEL = 'log.level',
+        LOG_FORMAT = 'log.format',
         MAIN_LANGUAGE = 'main_language',
         CONNECTOR_DIR = 'connector_dir',
         LOG_DIR = 'log_dir',
@@ -118,6 +119,7 @@ class ConfigSchema
     {
         return [
             ConfigParameter::create(self::LOG_LEVEL, ConfigParameter::TYPE_STRING, true, true, LogLevel::INFO),
+            ConfigParameter::create(self::LOG_FORMAT, ConfigParameter::TYPE_STRING, true, true, 'line'),
             ConfigParameter::create(self::MAIN_LANGUAGE, ConfigParameter::TYPE_STRING, true, true, 'de'),
             ConfigParameter::create(self::CONNECTOR_DIR, ConfigParameter::TYPE_STRING, true, true, $connectorDir),
             ConfigParameter::create(self::LOG_DIR, ConfigParameter::TYPE_STRING, true, true, sprintf('%s/var/log', $connectorDir)),

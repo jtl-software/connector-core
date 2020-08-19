@@ -40,6 +40,7 @@ use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\ConfigException;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\HttpException;
+use Jtl\Connector\Core\Exception\LoggerException;
 use Jtl\Connector\Core\Logger\LoggerService;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Jtl\Connector\Core\Model\AbstractImage;
@@ -162,8 +163,11 @@ class Application
      * @param ConnectorInterface $connector
      * @param string $connectorDir
      * @param ConfigInterface|null $config
-     * @param ConfigSchema $configSchema |null
-     * @throws ApplicationException|ConfigException
+     * @param ConfigSchema|null $configSchema
+     * @throws ApplicationException
+     * @throws ConfigException
+     * @throws LoggerException
+     * @throws \ReflectionException
      */
     public function __construct(ConnectorInterface $connector, string $connectorDir, ConfigInterface $config = null, ConfigSchema $configSchema = null)
     {
@@ -195,13 +199,12 @@ class Application
         $this->container->set(Application::class, $this);
         $this->eventDispatcher = new EventDispatcher();
         $this->fileSystem = new Filesystem();
-        $this->loggerService = new LoggerService($this->config->get(ConfigSchema::LOG_DIR), $this->config->get(ConfigSchema::LOG_LEVEL));
+        $this->loggerService = (new LoggerService($this->config->get(ConfigSchema::LOG_DIR), $this->config->get(ConfigSchema::LOG_LEVEL)))
+            ->setFormat($this->config->get(ConfigSchema::LOG_FORMAT));
         $this->container->set(LoggerService::class, $this->loggerService);
-        $this->container->set(LoggerInterface::class, $this->loggerService->get(LoggerService::CHANNEL_GLOBAL));
         $this->request = HttpRequest::createFromGlobals();
         $this->serializer = SerializerBuilder::create($serializerCacheDir)->build();
         $this->response = new HttpResponse($this->eventDispatcher, $this->serializer);
-        $this->response->setLogger($this->loggerService->get(LoggerService::CHANNEL_RPC));
         $this->errorHandler = new ErrorHandler($this->response);
     }
 
@@ -229,6 +232,8 @@ class Application
      */
     public function run(): void
     {
+        $this->container->set(LoggerInterface::class, $this->loggerService->get(LoggerService::CHANNEL_GLOBAL));
+        $this->response->setLogger($this->loggerService->get(LoggerService::CHANNEL_RPC));
         $this->eventDispatcher->addSubscriber(new ProductPriceSubscriber());
         $this->eventDispatcher->addSubscriber(new ProductStockLevelSubscriber());
         $this->eventDispatcher->addSubscriber(new FeaturesSubscriber());

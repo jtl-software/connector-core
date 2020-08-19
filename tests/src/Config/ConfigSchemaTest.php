@@ -71,6 +71,7 @@ class ConfigSchemaTest extends TestCase
         $schema = (new ConfigSchema())->setParameters(...ConfigSchema::createDefaultParameters($this->connectorDir));
         $expected = [
             ConfigSchema::LOG_LEVEL => 'info',
+            ConfigSchema::LOG_FORMAT => 'line',
             ConfigSchema::MAIN_LANGUAGE => 'de',
             ConfigSchema::CONNECTOR_DIR => $this->connectorDir,
             ConfigSchema::LOG_DIR => sprintf('%s/var/log', $this->connectorDir),
