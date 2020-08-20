@@ -6,7 +6,6 @@
  */
 namespace Jtl\Connector\Core\Config;
 
-use Jtl\Connector\Core\Config\ConfigSchema;
 use Jtl\Connector\Core\Exception\ConfigException;
 use Noodlehaus\Config;
 use Noodlehaus\Parser\Json;
@@ -30,8 +29,13 @@ class FileConfig extends Config
      */
     public function __construct(string $filePath)
     {
+        if(!is_file($filePath) && is_dir(dirname($filePath))) {
+            parent::__construct('{}', new Json(), true);
+        } else {
+            parent::__construct($filePath);
+        }
+
         $this->filePath = $filePath;
-        parent::__construct($filePath);
     }
 
     /**

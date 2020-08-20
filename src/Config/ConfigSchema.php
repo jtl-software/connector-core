@@ -129,4 +129,23 @@ class ConfigSchema
             ConfigParameter::create(self::DEBUG, ConfigParameter::TYPE_BOOLEAN, true, true, false),
         ];
     }
+
+    /**
+     * @param ConfigInterface|null $config
+     * @return ConfigInterface
+     */
+    public function createConfigWithDefaultValues(ConfigInterface $config = null): ConfigInterface
+    {
+        if(is_null($config)) {
+            $config = new ArrayConfig([]);
+        }
+
+        foreach($this->parameters as $parameter) {
+            if($parameter->hasDefaultValue()) {
+                $config->set($parameter->getKey(), $parameter->getDefaultValue());
+            }
+        }
+
+        return $config;
+    }
 }
