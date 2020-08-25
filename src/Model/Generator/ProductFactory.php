@@ -102,7 +102,6 @@ class ProductFactory extends AbstractModelFactory
             ],
             'specialPrices' => [],
             'specifics' => [],
-            //'varCombinations' => [],
             'variations' => [],
             //'warehouseInfo' => [],
         ];

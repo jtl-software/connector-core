@@ -652,14 +652,6 @@ class Product extends AbstractIdentity implements IdentificationInterface
     protected $specifics = [];
     
     /**
-     * @var ProductVarCombination[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductVarCombination>")
-     * @Serializer\SerializedName("varCombinations")
-     * @Serializer\AccessType("reflection")
-     */
-    protected $varCombinations = [];
-    
-    /**
      * @var ProductVariation[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductVariation>")
      * @Serializer\SerializedName("variations")
@@ -2510,46 +2502,6 @@ class Product extends AbstractIdentity implements IdentificationInterface
     public function clearSpecifics(): Product
     {
         $this->specifics = [];
-        
-        return $this;
-    }
-    
-    /**
-     * @param ProductVarCombination $varCombination
-     * @return Product
-     */
-    public function addVarCombination(ProductVarCombination $varCombination): Product
-    {
-        $this->varCombinations[] = $varCombination;
-        
-        return $this;
-    }
-
-    /**
-     * @param ProductVarCombination ...$varCombinations
-     * @return Product
-     */
-    public function setVarCombinations(ProductVarCombination ...$varCombinations): Product
-    {
-        $this->varCombinations = $varCombinations;
-        
-        return $this;
-    }
-    
-    /**
-     * @return ProductVarCombination[]
-     */
-    public function getVarCombinations(): array
-    {
-        return $this->varCombinations;
-    }
-    
-    /**
-     * @return Product
-     */
-    public function clearVarCombinations(): Product
-    {
-        $this->varCombinations = [];
         
         return $this;
     }

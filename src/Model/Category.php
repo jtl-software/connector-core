@@ -94,6 +94,10 @@ class Category extends AbstractIdentity implements IdentificationInterface
         $this->parentCategoryId = new Identity();
     }
 
+    /**
+     * @param string $mainLanguageIso
+     * @return array
+     */
     public function getIdentificationStrings(string $mainLanguageIso): array
     {
         $strings = [];
