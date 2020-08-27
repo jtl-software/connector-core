@@ -36,7 +36,7 @@ class SessionHelper
      */
     public function get(string $name, $default = null)
     {
-        return $this->has($name) ? $_SESSION[$this->namespace][$name] : $default;
+        return $_SESSION[$this->namespace][$name] ?? $default;
     }
 
     /**
@@ -95,7 +95,7 @@ class SessionHelper
             throw new SessionException("The '{$name}' key must be a non-empty string");
         }
 
-        $value = $this->get($name);
+        $value = &$_SESSION[$this->namespace][$name] ?? null;
         return $value;
     }
 
