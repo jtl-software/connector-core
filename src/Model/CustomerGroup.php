@@ -17,7 +17,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class CustomerGroup extends AbstractIdentity
+class CustomerGroup extends AbstractIdentity implements IdentificationInterface
 {
     /**
      * @var boolean Optional: Show net prices default instead of gross prices
@@ -58,6 +58,29 @@ class CustomerGroup extends AbstractIdentity
      * @Serializer\AccessType("reflection")
      */
     protected $i18ns = [];
+
+    /**
+     * @param string $mainLanguageIso
+     * @return array
+     */
+    public function getIdentificationStrings(string $mainLanguageIso): array
+    {
+        $strings = [];
+
+        $name = '';
+        foreach ($this->getI18ns() as $i18n) {
+            $name = $i18n->getName();
+            if ($mainLanguageIso === $i18n->getLanguageIso()) {
+                break;
+            }
+        }
+
+        if (!empty($name)) {
+            $strings[] = sprintf('Name = %s', $name);
+        }
+
+        return $strings;
+    }
 
     /**
      * @param boolean $applyNetPrice Optional: Show net prices default instead of gross prices
