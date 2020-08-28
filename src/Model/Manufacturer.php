@@ -17,7 +17,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Manufacturer extends AbstractIdentity
+class Manufacturer extends AbstractIdentity implements IdentificationInterface
 {
     /**
      * @var string Manufacturer (brand) name
@@ -58,6 +58,18 @@ class Manufacturer extends AbstractIdentity
      * @Serializer\AccessType("reflection")
      */
     protected $i18ns = [];
+
+    /**
+     * @param string $mainLanguageIso
+     * @return array
+     */
+    public function getIdentificationStrings(string $mainLanguageIso): array
+    {
+        $strings = [];
+        $strings[] = sprintf('Name = %s', $this->getName());
+
+        return $strings;
+    }
 
     /**
      * @param string $name Manufacturer (brand) name
