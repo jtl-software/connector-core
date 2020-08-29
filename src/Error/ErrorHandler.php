@@ -74,7 +74,7 @@ class ErrorHandler extends AbstractErrorHandler
                 if (in_array($err['type'], static::$shutdownHandleErrors, true)) {
                     ob_clean();
 
-                    $file = sprintf('...%s', substr($err['file'], strrpos($err['file'], '/') + 1));
+                    $file = sprintf('...%s', substr($err['file'], strrpos($err['file'], '/')));
 
                     $error = new Error();
                     $error->setCode($err['type'])
