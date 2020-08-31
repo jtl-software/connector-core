@@ -150,7 +150,7 @@ class Error extends AbstractModel
     public static function createDataFromException(\Throwable $exception, string $additionalMessage = null): string
     {
         $lastSlashPos = strrpos($exception->getFile(), '/');
-        $file = sprintf('...%s', substr($exception->getFile(), $lastSlashPos + 1));
+        $file = sprintf('...%s', substr($exception->getFile(), $lastSlashPos));
 
         $data = sprintf(
             "%s (Code: %s) in %s:%s",
