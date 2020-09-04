@@ -239,7 +239,7 @@ class Application
         $this->eventDispatcher->addSubscriber(new FeaturesSubscriber());
         $this->errorHandler->register();
         MonologErrorHandler::register($this->loggerService->get(LoggerService::CHANNEL_ERROR));
-        $method = Method::createFromRpcMethod('unknown.unknown');
+
         $jtlrpc = $this->request->get('jtlrpc', '');
         $requestPacket = RequestPacket::createFromJtlrpc($jtlrpc, $this->serializer);
         $this->errorHandler->setRequestPacket($requestPacket);
