@@ -25,8 +25,8 @@ class SqliteSessionHandlerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->handler = new SqliteSessionHandler($this->connectorDir);
-        $this->dbFile = sprintf('%s/db/connector.s3db', $this->connectorDir);
+        $this->handler = new SqliteSessionHandler(sprintf('%s/var', $this->connectorDir));
+        $this->dbFile = sprintf('%s/var/connector.s3db', $this->connectorDir);
         $this->pdo = new \PDO(sprintf('sqlite:%s', $this->dbFile));
     }
 

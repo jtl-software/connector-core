@@ -383,11 +383,12 @@ class Application
     /**
      * @return SessionHandlerInterface
      * @throws ApplicationException
+     * @throws SessionException
      */
     public function getSessionHandler(): SessionHandlerInterface
     {
         if (is_null($this->sessionHandler)) {
-            $this->sessionHandler = new SqliteSessionHandler($this->connectorDir);
+            $this->sessionHandler = new SqliteSessionHandler(sprintf('%s/var', $this->connectorDir));
             $this->sessionHandler->setLogger($this->loggerService->get(LoggerService::CHANNEL_SESSION));
         }
         return $this->sessionHandler;

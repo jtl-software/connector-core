@@ -38,25 +38,28 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
 
     /**
      * SqliteSession constructor.
-     * @param string $connectorDir
-     * @throws ApplicationException
+     * @param string $databaseDir
+     * @throws SessionException
      */
-    public function __construct(string $connectorDir)
+    public function __construct(string $databaseDir)
     {
-        $dir = sprintf('%s/db', $connectorDir);
-        if (!is_dir($dir)) {
-            if (!mkdir($dir)) {
+        $isNew = false;
+        if (!is_dir($databaseDir)) {
+            if (!mkdir($databaseDir)) {
                 throw new SessionException('Could not create sqlite database directory');
             }
+            $isNew = true;
         }
         $this->logger = new NullLogger();
         $this->lifetime = (int)ini_get('session.gc_maxlifetime');
 
         $sqlite3 = new Sqlite3();
-        $sqlite3->connect(['location' => sprintf('%s/connector.s3db', $dir)]);
+        $sqlite3->connect(['location' => sprintf('%s/connector.s3db', $databaseDir)]);
         $this->db = $sqlite3;
 
-        $this->initializeTables();
+        if($isNew) {
+            $this->initializeTables();
+        }
     }
 
     /**
