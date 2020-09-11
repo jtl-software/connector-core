@@ -207,7 +207,7 @@ class IdentityLinker implements LoggerAwareInterface
      * @param integer $hostId
      * @return boolean
      * @throws DefinitionException
-     * @throws LinkerException
+     * @throws LinkerException|\ReflectionException
      */
     public function hostIdExists(string $modelName, int $hostId): bool
     {
@@ -316,7 +316,7 @@ class IdentityLinker implements LoggerAwareInterface
      * @param string|null $endpointId
      * @param integer|null $hostId
      * @return boolean
-     * @throws DefinitionException
+     * @throws DefinitionException|\ReflectionException
      */
     public function delete(string $modelName, string $endpointId = null, int $hostId = null): bool
     {
@@ -334,9 +334,8 @@ class IdentityLinker implements LoggerAwareInterface
     }
 
     /**
-     * Clears the entire link table
-     * @param integer $type
-     * @return boolean
+     * @param int|null $type
+     * @return bool
      */
     public function clear(int $type = null): bool
     {
@@ -348,7 +347,7 @@ class IdentityLinker implements LoggerAwareInterface
      * @param string $property
      * @param integer $hostId
      * @return string
-     * @throws DefinitionException
+     * @throws DefinitionException|\ReflectionException
      */
     public function getEndpointId(string $modelName, string $property, int $hostId): string
     {
@@ -371,7 +370,7 @@ class IdentityLinker implements LoggerAwareInterface
      * @param string $property
      * @param string $endpointId
      * @return integer
-     * @throws DefinitionException
+     * @throws DefinitionException|\ReflectionException
      */
     public function getHostId(string $modelName, string $property, string $endpointId): int
     {
@@ -449,7 +448,7 @@ class IdentityLinker implements LoggerAwareInterface
      * @param int $type
      * @param string $cacheType
      */
-    protected function saveCache(string $endpointId, int $hostId, int $type, string $cacheType)
+    protected function saveCache(string $endpointId, int $hostId, int $type, string $cacheType): void
     {
         $context = [
             'endpoint' => $endpointId,
@@ -478,7 +477,7 @@ class IdentityLinker implements LoggerAwareInterface
      * @param string|null $endpointId
      * @param int|null $hostId
      */
-    protected function deleteCache(int $type, string $cacheType, string $endpointId = null, int $hostId = null)
+    protected function deleteCache(int $type, string $cacheType, string $endpointId = null, int $hostId = null): void
     {
         $context = [
             'endpoint' => $endpointId,

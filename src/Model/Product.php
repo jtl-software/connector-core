@@ -1091,9 +1091,9 @@ class Product extends AbstractIdentity implements IdentificationInterface
     {
         return $this->considerVariationStock;
     }
-    
+
     /**
-     * @param \DateTimeInterface $creationDate Creation date
+     * @param \DateTimeInterface|null $creationDate Creation date
      * @return Product
      */
     public function setCreationDate(\DateTimeInterface $creationDate = null): Product

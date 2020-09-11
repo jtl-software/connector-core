@@ -64,7 +64,7 @@ abstract class AbstractModelFactory
         }
         $this->faker = $faker;
 
-        if(is_null($serializer)) {
+        if (is_null($serializer)) {
             $serializer = SerializerBuilder::create()->build();
         }
         $this->serializer = $serializer;

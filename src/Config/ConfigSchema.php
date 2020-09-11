@@ -136,12 +136,12 @@ class ConfigSchema
      */
     public function createConfigWithDefaultValues(ConfigInterface $config = null): ConfigInterface
     {
-        if(is_null($config)) {
+        if (is_null($config)) {
             $config = new ArrayConfig([]);
         }
 
-        foreach($this->parameters as $parameter) {
-            if($parameter->hasDefaultValue()) {
+        foreach ($this->parameters as $parameter) {
+            if ($parameter->hasDefaultValue()) {
                 $config->set($parameter->getKey(), $parameter->getDefaultValue());
             }
         }

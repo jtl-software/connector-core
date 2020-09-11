@@ -19,16 +19,8 @@ use Jtl\Connector\Core\Checksum\ChecksumInterface;
  * @subpackage Internal
  * @Serializer\AccessType("public_method")
  */
-class Ack extends AbstractModel
+class Ack extends Identities
 {
-    /**
-     * @var Identity[]
-     * @Serializer\Type("array<string, array<Jtl\Connector\Core\Model\Identity>>")
-     * @Serializer\SerializedName("identities")
-     * @Serializer\Accessor(getter="getIdentities",setter="setIdentities")
-     */
-    protected $identities = [];
-    
     /**
      * @var Checksum[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\Checksum>")
@@ -36,32 +28,9 @@ class Ack extends AbstractModel
      * @Serializer\AccessType("reflection")
      */
     protected $checksums = [];
-    
+
     /**
-     * Identities getter
-     *
-     * @return Identity[]
-     */
-    public function getIdentities(): array
-    {
-        return $this->identities;
-    }
-    
-    /**
-     * Identities getter
-     *
-     * @param Identity[] $identities
-     * @return Ack
-     */
-    public function setIdentities(array $identities): Ack
-    {
-        $this->identities = $identities;
-        
-        return $this;
-    }
-    
-    /**
-     * @param Checksum $checksum
+     * @param ChecksumInterface $checksum
      * @return Ack
      */
     public function addChecksum(ChecksumInterface $checksum): Ack

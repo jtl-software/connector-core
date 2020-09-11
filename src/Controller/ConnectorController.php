@@ -10,7 +10,9 @@ namespace Jtl\Connector\Core\Controller;
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
+use Jtl\Connector\Core\Definition\IdentityType;
 use Jtl\Connector\Core\Definition\Model;
+use Jtl\Connector\Core\Definition\RelationType;
 use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\AuthenticationException;
 use Jtl\Connector\Core\Exception\DefinitionException;
@@ -21,6 +23,8 @@ use Jtl\Connector\Core\Model\Authentication;
 use Jtl\Connector\Core\Model\ConnectorIdentification;
 use Jtl\Connector\Core\Model\ConnectorServerInfo;
 use Jtl\Connector\Core\Model\Features;
+use Jtl\Connector\Core\Model\Identities;
+use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Model\Session;
 use Jtl\Connector\Core\Serializer\Json;
 use Jtl\Connector\Core\System\Check;
@@ -239,13 +243,30 @@ class ConnectorController implements LoggerAwareInterface
     }
 
     /**
-     * @param null $params
+     * @param Identities|null $identities
      * @return bool
+     * @throws DefinitionException
+     * @throws \ReflectionException
      */
-    public function clear($params = null)
+    public function clear(Identities $identities = null)
     {
-        //TODO: set type in clear method
-        return $this->linker->clear();
+        if (!is_null($identities) && count($identities->getIdentities()) > 0) {
+            $identities = $identities->getIdentities();
+            foreach ($identities as $relationType => $relationIdentities) {
+                if (empty($relationIdentities)) {
+                    $identityType = RelationType::getIdentityType($relationType);
+                    $this->linker->clear($identityType);
+                } elseif (is_array($relationIdentities)) {
+                    foreach ($relationIdentities as $identity) {
+                        $this->linker->delete($relationType, $identity->getEndpoint(), $identity->getHost());
+                    }
+                }
+            }
+        } else {
+            $this->linker->clear();
+        }
+
+        return true;
     }
 
     /**

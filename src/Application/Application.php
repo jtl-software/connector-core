@@ -46,6 +46,7 @@ use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Jtl\Connector\Core\Model\AbstractImage;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
+use Jtl\Connector\Core\Model\Identities;
 use Jtl\Connector\Core\Model\IdentityInterface;
 use Jtl\Connector\Core\Model\IdentificationInterface;
 use Jtl\Connector\Core\Model\QueryFilter;
@@ -447,6 +448,9 @@ class Application
             case Action::ACK:
                 $type = $className = Ack::class;
                 break;
+            case Action::CLEAR:
+                $type = $className = Identities::class;
+                break;
             case Action::PUSH:
             case Action::DELETE:
                 $className = sprintf('%s\%s', $modelNamespace, $controller);
@@ -480,6 +484,13 @@ class Application
                 case Action::PULL:
                 case Action::STATISTIC:
                     $eventArg = new QueryFilterEvent($param);
+                    break;
+                case Action::CLEAR:
+                    if (is_array($param)) {
+                        foreach ($param as $identity) {
+                            $this->container->get(IdentityLinker::class)->linkModel($identity);
+                        }
+                    }
                     break;
             }
 

@@ -10,13 +10,15 @@ use Jtl\Connector\Core\Exception\DefinitionException;
 
 final class RelationType
 {
-    const CATEGORY = 'category';
-    const CONFIG_GROUP = 'configGroup';
-    const MANUFACTURER = 'manufacturer';
-    const PRODUCT = 'product';
-    const PRODUCT_VARIATION_VALUE = 'productVariationValue';
-    const SPECIFIC = 'specific';
-    const SPECIFIC_VALUE = 'specificValue';
+    public const
+        CATEGORY = 'category',
+        CATEGORY_IMAGE = 'categoryImage',
+        CONFIG_GROUP = 'configGroup',
+        MANUFACTURER = 'manufacturer',
+        PRODUCT = 'product',
+        PRODUCT_VARIATION_VALUE = 'productVariationValue',
+        SPECIFIC = 'specific',
+        SPECIFIC_VALUE = 'specificValue';
 
     /**
      * @var int[]

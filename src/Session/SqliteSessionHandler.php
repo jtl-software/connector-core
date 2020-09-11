@@ -57,7 +57,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
         $sqlite3->connect(['location' => sprintf('%s/connector.s3db', $databaseDir)]);
         $this->db = $sqlite3;
 
-        if($isNew) {
+        if ($isNew) {
             $this->initializeTables();
         }
     }

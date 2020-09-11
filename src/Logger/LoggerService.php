@@ -145,13 +145,13 @@ class LoggerService
      */
     public function pushProcessor(ProcessorInterface $processor): self
     {
-        foreach($this->processors as $tProcessor) {
-            if($processor === $tProcessor) {
+        foreach ($this->processors as $tProcessor) {
+            if ($processor === $tProcessor) {
                 return $this;
             }
         }
 
-        foreach($this->channels as $channel) {
+        foreach ($this->channels as $channel) {
             $channel->pushProcessor($processor);
         }
 
