@@ -13,6 +13,8 @@ use Jtl\Connector\Core\Linker\IdentityLinker;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
 use Jtl\Connector\Core\Model\Features;
+use Jtl\Connector\Core\Model\Identities;
+use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Model\Session;
 use Jtl\Connector\Core\Test\TestCase;
 
@@ -196,20 +198,7 @@ class ConnectorTest extends TestCase
         $linker->expects($this->once())->method('clear')->willReturn(true);
         $controller = $this->createConnectorController($linker);
 
-        $response = $controller->clear(['foo']);
+        $response = $controller->clear(null);
         $this->assertTrue($response);
-    }
-
-    /**
-     *
-     */
-    public function testClearFailure()
-    {
-        $linker = $this->createMock(IdentityLinker::class);
-        $linker->expects($this->once())->method('clear')->willReturn(false);
-        $controller = $this->createConnectorController($linker);
-
-        $response = $controller->clear(true);
-        $this->assertFalse($response);
     }
 }

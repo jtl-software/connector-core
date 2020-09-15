@@ -86,7 +86,15 @@ abstract class AbstractImage extends AbstractIdentity
     /**
      * @return string
      */
-    abstract public function getRelationType(): string;
+    abstract protected function getRelatedModel(): string;
+
+    /**
+     * @return string
+     */
+    public function getRelationType(): string
+    {
+        return lcfirst($this->getRelatedModel());
+    }
 
     /**
      * @param Identity $foreignKey

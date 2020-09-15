@@ -1,15 +1,15 @@
 <?php
 namespace Jtl\Connector\Core\Model;
 
-use Jtl\Connector\Core\Definition\RelationType;
+use Jtl\Connector\Core\Definition\Model;
 
 class ConfigGroupImage extends AbstractImage
 {
     /**
      * @return string
      */
-    public function getRelationType(): string
+    protected function getRelatedModel(): string
     {
-        return RelationType::CONFIG_GROUP;
+        return Model::CONFIG_GROUP_IMAGE;
     }
 }

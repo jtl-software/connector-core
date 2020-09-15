@@ -1,12 +1,15 @@
 <?php
 namespace Jtl\Connector\Core\Model;
 
-use Jtl\Connector\Core\Definition\RelationType;
+use Jtl\Connector\Core\Definition\Model;
 
 class ProductVariationValueImage extends AbstractImage
 {
-    public function getRelationType(): string
+    /**
+     * @return string
+     */
+    protected function getRelatedModel(): string
     {
-        return RelationType::PRODUCT_VARIATION_VALUE;
+        return Model::PRODUCT_VARIATION;
     }
 }

@@ -1,6 +1,8 @@
 <?php
 namespace Jtl\Connector\Core\Model;
 
+use JMS\Serializer\Annotation as Serializer;
+
 /**
  * Class Identities
  * @package Jtl\Connector\Core\Model

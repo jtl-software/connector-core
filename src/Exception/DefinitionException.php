@@ -16,6 +16,7 @@ class DefinitionException extends \Exception
     const UNKNOWN_IDENTITY_TYPE_MAPPING = 110;
     const UNKNOWN_IMAGE_IDENTITY_TYPE_MAPPING = 120;
     const UNKNOWN_RPC_METHOD = 130;
+    const RELATION_TYPE_CANNOT_BE_EMPTY = 140;
 
     /**
      * @param string $model
@@ -136,6 +137,14 @@ class DefinitionException extends \Exception
     {
         $msg = sprintf('Unknown image identity type mapping (%s)', $relationType);
         return new static($msg, self::UNKNOWN_IMAGE_IDENTITY_TYPE_MAPPING);
+    }
+
+    /**
+     * @return static
+     */
+    public static function relationTypeCannotBeEmpty(): self
+    {
+        return new static("Relation type cannot be empty.", self::RELATION_TYPE_CANNOT_BE_EMPTY);
     }
 
     /**

@@ -1,15 +1,15 @@
 <?php
 namespace Jtl\Connector\Core\Model;
 
-use Jtl\Connector\Core\Definition\RelationType;
+use Jtl\Connector\Core\Definition\Model;
 
 class SpecificValueImage extends AbstractImage
 {
     /**
      * @return string
      */
-    public function getRelationType(): string
+    protected function getRelatedModel(): string
     {
-        return RelationType::SPECIFIC_VALUE;
+        return Model::SPECIFIC_VALUE;
     }
 }

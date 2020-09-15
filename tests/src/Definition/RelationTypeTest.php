@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Definition;
 
 use Jtl\Connector\Core\Definition\IdentityType;
@@ -19,10 +20,36 @@ class RelationTypeTest extends TestCase
      * @param $shouldHaveRelation
      * @throws \ReflectionException
      */
-    public function testHasIdentityType($relationType, $shouldHaveRelation)
+    public function testHasIdentityType($relationType, bool $shouldHaveRelation = null)
     {
+        if (is_null($shouldHaveRelation)) {
+            $this->expectExceptionObject(DefinitionException::relationTypeCannotBeEmpty());
+        }
+
         $hasIdentityType = RelationType::hasIdentityType($relationType);
-        $this->assertSame($hasIdentityType, $shouldHaveRelation);
+
+        if (!is_null($shouldHaveRelation)) {
+            $this->assertSame($hasIdentityType, $shouldHaveRelation);
+        }
+    }
+
+    /**
+     * @dataProvider hasIdentityTypeDataProvider
+     *
+     * @param $relationType
+     * @param bool $shouldBeRelationType
+     */
+    public function testIsRelationType($relationType, bool $shouldBeRelationType = null)
+    {
+        if (is_null($shouldBeRelationType)) {
+            $this->expectExceptionObject(DefinitionException::relationTypeCannotBeEmpty());
+        }
+
+        $hasIdentityType = RelationType::isRelationType($relationType);
+
+        if (!is_null($shouldBeRelationType)) {
+            $this->assertSame($hasIdentityType, $shouldBeRelationType);
+        }
     }
 
     /**
@@ -33,10 +60,10 @@ class RelationTypeTest extends TestCase
     {
         $testCases = $this->getCorrectConstantsTestCases(RelationType::class);
 
-        $testCases[] = [false, false];
-        $testCases[] = ['', false];
+        $testCases[] = [false, null];
+        $testCases[] = ['', null];
         $testCases[] = ['  ', false];
-        $testCases[] = ['Category', false];
+        $testCases[] = ['Category', true];
         $testCases[] = [' category', false];
 
         return $testCases;
@@ -69,33 +96,9 @@ class RelationTypeTest extends TestCase
     public function getIdentityTypeDataProvider(): array
     {
         return [
-            [RelationType::CATEGORY, IdentityType::CATEGORY],
-            [RelationType::PRODUCT_VARIATION_VALUE, IdentityType::PRODUCT_VARIATION_VALUE],
+            ['category', IdentityType::CATEGORY],
+            ['ProductVariationValue', IdentityType::PRODUCT_VARIATION_VALUE],
             ['foo', DefinitionException::unknownIdentityTypeMapping('foo')],
         ];
-    }
-
-    /**
-     * @throws \ReflectionException
-     */
-    public function testGetRelationTypesReturnSameArrayAsDefinedConstants()
-    {
-        $testCases = $this->getCorrectConstantsTestCases(RelationType::class);
-        $testCases = array_column($testCases, 0);
-        $relationTypes = RelationType::getRelationTypes();
-
-        $this->assertSame($relationTypes, $testCases);
-    }
-
-    /**
-     * @dataProvider hasIdentityTypeDataProvider
-     *
-     * @param $relationType
-     * @param bool $shouldBeRelationType
-     */
-    public function testIsRelationType($relationType, bool $shouldBeRelationType)
-    {
-        $hasIdentityType = RelationType::isRelationType($relationType);
-        $this->assertSame($hasIdentityType, $shouldBeRelationType);
     }
 }
