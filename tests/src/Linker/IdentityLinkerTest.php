@@ -363,13 +363,13 @@ class IdentityLinkerTest extends TestCase
 
         $identity = new Identity($expectedEndpointId);
 
-        $linker->linkIdentityList($identity, $modelName, 'id');
+        $linker->linkIdentity($identity, $modelName, 'id');
 
         $this->assertEquals($expectedHostId, $identity->getHost());
         $hostId = $linker->getHostId($modelName, 'id', $expectedEndpointId);
         $this->assertEquals($hostId, $expectedHostId);
 
-        $linker->linkIdentityList($identity, $modelName, 'id', true);
+        $linker->linkIdentity($identity, $modelName, 'id', true);
         $hostId = $linker->getHostId($modelName, 'id', $expectedEndpointId);
         $this->assertNotEquals($expectedHostId, $hostId);
 
