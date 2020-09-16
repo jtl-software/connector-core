@@ -29,7 +29,6 @@ use Jtl\Connector\Core\Controller\TransactionalInterface;
 use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Event\BoolEvent;
 use Jtl\Connector\Core\Event\FeaturesEvent;
-use Jtl\Connector\Core\Event\ProductEvent;
 use Jtl\Connector\Core\Event\ResponseEvent;
 use Jtl\Connector\Core\Event\RequestEvent;
 use Jtl\Connector\Core\Event\ModelEvent;
@@ -486,9 +485,9 @@ class Application
                     $eventArg = new QueryFilterEvent($param);
                     break;
                 case Action::CLEAR:
-                    if (is_array($param)) {
-                        foreach ($param as $identity) {
-                            $this->container->get(IdentityLinker::class)->linkModel($identity);
+                    foreach ($param->getIdentities() as $relationType => $identities) {
+                        foreach ($identities as $identity) {
+                            $this->container->get(IdentityLinker::class)->linkIdentity($identity, ucfirst($relationType), 'id');
                         }
                     }
                     break;
