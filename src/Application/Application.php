@@ -18,6 +18,7 @@ use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Definition\ErrorCode;
 use Jtl\Connector\Core\Definition\Event;
 use Jtl\Connector\Core\Definition\Model;
+use Jtl\Connector\Core\Definition\RelationType;
 use Jtl\Connector\Core\Error\ErrorHandler;
 use Jtl\Connector\Core\Error\AbstractErrorHandler;
 use Jtl\Connector\Core\Connector\UseChecksumInterface;
@@ -487,7 +488,7 @@ class Application
                 case Action::CLEAR:
                     foreach ($param->getIdentities() as $relationType => $identities) {
                         foreach ($identities as $identity) {
-                            $this->container->get(IdentityLinker::class)->linkIdentity($identity, ucfirst($relationType), 'id');
+                            $this->container->get(IdentityLinker::class)->linkIdentity($identity, RelationType::getModelName($relationType), 'id');
                         }
                     }
                     break;

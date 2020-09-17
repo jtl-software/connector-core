@@ -13,7 +13,7 @@ class DefinitionException extends \Exception
     const UNKNOWN_CONFIG_OPTION = 70;
     const DEFAULT_VALUE_NOT_EXISTS = 80;
     const UNKNOWN_MOMENT = 100;
-    const UNKNOWN_IDENTITY_TYPE_MAPPING = 110;
+    const UNKNOWN_RELATION_TYPE = 110;
     const UNKNOWN_IMAGE_IDENTITY_TYPE_MAPPING = 120;
     const UNKNOWN_RPC_METHOD = 130;
     const RELATION_TYPE_CANNOT_BE_EMPTY = 140;
@@ -123,20 +123,10 @@ class DefinitionException extends \Exception
      * @param string $relationType
      * @return DefinitionException
      */
-    public static function unknownIdentityTypeMapping(string $relationType): self
+    public static function unknownRelationType(string $relationType): self
     {
-        $msg = sprintf('Unknown identity type mapping (%s)', $relationType);
-        return new static($msg, self::UNKNOWN_IDENTITY_TYPE_MAPPING);
-    }
-
-    /**
-     * @param string $relationType
-     * @return DefinitionException
-     */
-    public static function unknownImageIdentityTypeMapping(string $relationType): self
-    {
-        $msg = sprintf('Unknown image identity type mapping (%s)', $relationType);
-        return new static($msg, self::UNKNOWN_IMAGE_IDENTITY_TYPE_MAPPING);
+        $msg = sprintf('Unknown relation type (%s)', $relationType);
+        return new static($msg, self::UNKNOWN_RELATION_TYPE);
     }
 
     /**

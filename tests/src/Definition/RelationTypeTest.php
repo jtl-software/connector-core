@@ -14,59 +14,85 @@ use Jtl\Connector\Core\Test\TestCase;
 class RelationTypeTest extends TestCase
 {
     /**
-     * @dataProvider hasIdentityTypeDataProvider
+     * @dataProvider relatedImageIdentityProvider
      *
-     * @param $relationType
-     * @param $shouldHaveRelation
-     * @throws \ReflectionException
+     * @param string $relationType
+     * @param bool $hasRelatedImageIdentity
+     * @throws DefinitionException
      */
-    public function testHasIdentityType($relationType, bool $shouldHaveRelation = null)
+    public function testHasRelatedImageIdentity(string $relationType, bool $hasRelatedImageIdentity)
     {
-        if (is_null($shouldHaveRelation)) {
-            $this->expectExceptionObject(DefinitionException::relationTypeCannotBeEmpty());
+        $this->assertEquals(RelationType::hasRelatedImageIdentity($relationType), $hasRelatedImageIdentity);
+    }
+
+    /**
+     * @dataProvider relationTypeProvider
+     *
+     * @param string $relationType
+     * @param bool $isRelationType
+     * @throws DefinitionException
+     */
+    public function testGetRelatedImageModelName(string $relationType, bool $isRelationType)
+    {
+        if(!$isRelationType) {
+            $this->expectExceptionObject(DefinitionException::unknownRelationType($relationType));
         }
 
+        $expectedImageModelName = sprintf('%sImage', ucfirst($relationType));
+        $this->assertEquals($expectedImageModelName, RelationType::getRelatedImageModelName($relationType));
+    }
+
+    /**
+     * @dataProvider relationTypeProvider
+     *
+     * @param $relationType
+     * @param $isRelationType
+     */
+    public function testHasIdentityType($relationType, bool $isRelationType)
+    {
         $hasIdentityType = RelationType::hasIdentityType($relationType);
-
-        if (!is_null($shouldHaveRelation)) {
-            $this->assertSame($hasIdentityType, $shouldHaveRelation);
-        }
+        $this->assertSame($hasIdentityType, $isRelationType);
     }
 
     /**
-     * @dataProvider hasIdentityTypeDataProvider
+     * @dataProvider relationTypeProvider
      *
      * @param $relationType
-     * @param bool $shouldBeRelationType
+     * @param bool $isRelationType
      */
-    public function testIsRelationType($relationType, bool $shouldBeRelationType = null)
+    public function testIsRelationType($relationType, bool $isRelationType)
     {
-        if (is_null($shouldBeRelationType)) {
-            $this->expectExceptionObject(DefinitionException::relationTypeCannotBeEmpty());
-        }
-
         $hasIdentityType = RelationType::isRelationType($relationType);
-
-        if (!is_null($shouldBeRelationType)) {
-            $this->assertSame($hasIdentityType, $shouldBeRelationType);
-        }
+        $this->assertSame($hasIdentityType, $isRelationType);
     }
 
     /**
-     * @return array
-     * @throws \ReflectionException
+     * @return mixed[]
      */
-    public function hasIdentityTypeDataProvider(): array
+    public function relationTypeProvider(): array
     {
-        $testCases = $this->getCorrectConstantsTestCases(RelationType::class);
-
-        $testCases[] = [false, null];
-        $testCases[] = ['', null];
-        $testCases[] = ['  ', false];
+        $testCases[] = [' ', false];
         $testCases[] = ['Category', true];
+        $testCases[] = ['category', true];
         $testCases[] = [' category', false];
+        $testCases[] = ['Yolo', false];
+        $testCases[] = ['CrossSelling', true];
 
         return $testCases;
+    }
+
+    /**
+     * @return mixed[]
+     */
+    public function relatedImageIdentityProvider(): array
+    {
+        return [
+            ['productStockLevel', false],
+            ['ProductStockLevel', false],
+            ['CrossSelling', false],
+            ['manufacturer', true],
+            ['Manufacturer', true],
+        ];
     }
 
     /**
@@ -98,7 +124,7 @@ class RelationTypeTest extends TestCase
         return [
             ['category', IdentityType::CATEGORY],
             ['ProductVariationValue', IdentityType::PRODUCT_VARIATION_VALUE],
-            ['foo', DefinitionException::unknownIdentityTypeMapping('foo')],
+            ['foo', DefinitionException::unknownRelationType('foo')],
         ];
     }
 }

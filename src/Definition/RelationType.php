@@ -12,19 +12,34 @@ final class RelationType
 {
     /**
      * @param string $relationType
-     * @return bool
+     * @return int
+     * @throws DefinitionException
      * @throws \ReflectionException
+     */
+    public static function getIdentityType(string $relationType): int
+    {
+        if (!self::hasIdentityType($relationType)) {
+            throw DefinitionException::unknownRelationType($relationType);
+        }
+
+        return Model::getIdentityType(self::getModelName($relationType));
+    }
+
+    /**
+     * @param string $relationType
+     * @return boolean
      */
     public static function hasIdentityType(string $relationType): bool
     {
-        return Model::isModel(self::getRelatedImageModelName($relationType));
+        return Model::hasIdentityType(self::getModelName($relationType));
     }
 
     /**
      * @param string $relationType
      * @return bool
+     * @throws DefinitionException
      */
-    public static function hasImageIdentityType(string $relationType): bool
+    public static function hasRelatedImageIdentity(string $relationType): bool
     {
         return Model::hasIdentityType(self::getRelatedImageModelName($relationType));
     }
@@ -34,10 +49,10 @@ final class RelationType
      * @return string
      * @throws DefinitionException
      */
-    protected static function getRelatedImageModelName(string $relationType): string
+    public static function getRelatedImageModelName(string $relationType): string
     {
-        if (empty($relationType)) {
-            throw DefinitionException::relationTypeCannotBeEmpty();
+        if (!self::hasIdentityType($relationType)) {
+            throw DefinitionException::unknownRelationType($relationType);
         }
 
         return sprintf('%sImage', ucfirst($relationType));
@@ -45,32 +60,11 @@ final class RelationType
 
     /**
      * @param string $relationType
-     * @return int
-     * @throws DefinitionException
-     * @throws \ReflectionException
+     * @return string
      */
-    public static function getIdentityType(string $relationType): int
+    public static function getModelName(string $relationType): string
     {
-        if (self::hasIdentityType($relationType) && IdentityType::isType($type = Model::getIdentityType(ucfirst($relationType)))) {
-            return $type;
-        }
-
-        throw DefinitionException::unknownIdentityTypeMapping($relationType);
-    }
-
-    /**
-     * @param string $relationType
-     * @return int
-     * @throws DefinitionException
-     * @throws \ReflectionException
-     */
-    public static function getImageIdentityType(string $relationType): int
-    {
-        if (self::hasImageIdentityType($relationType) && IdentityType::isType($type = Model::getIdentityType(self::getRelatedImageModelName($relationType)))) {
-            return $type;
-        }
-
-        throw DefinitionException::unknownImageIdentityTypeMapping($relationType);
+        return ucfirst($relationType);
     }
 
     /**
@@ -79,6 +73,6 @@ final class RelationType
      */
     public static function isRelationType(string $relationType): bool
     {
-        return self::hasImageIdentityType($relationType);
+        return self::hasIdentityType($relationType);
     }
 }
