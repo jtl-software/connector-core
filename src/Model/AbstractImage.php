@@ -26,14 +26,6 @@ use Jtl\Connector\Core\Definition\Model;
 abstract class AbstractImage extends AbstractIdentity
 {
     /**
-     * @var Identity
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("foreignKey")
-     * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
-     */
-    protected $foreignKey = null;
-
-    /**
      * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("filename")
@@ -42,12 +34,20 @@ abstract class AbstractImage extends AbstractIdentity
     protected $filename = '';
 
     /**
-     * @var string
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("remoteUrl")
-     * @Serializer\Accessor(getter="getRemoteUrl",setter="setRemoteUrl")
+     * @var Identity
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
+     * @Serializer\SerializedName("foreignKey")
+     * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
      */
-    protected $remoteUrl = '';
+    protected $foreignKey = null;
+
+    /**
+     * @var ImageI18n[]
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ImageI18n>")
+     * @Serializer\SerializedName("i18ns")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $i18ns = [];
 
     /**
      * @var string
@@ -58,6 +58,14 @@ abstract class AbstractImage extends AbstractIdentity
     protected $name = '';
 
     /**
+     * @var string
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("remoteUrl")
+     * @Serializer\Accessor(getter="getRemoteUrl",setter="setRemoteUrl")
+     */
+    protected $remoteUrl = '';
+
+    /**
      * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
@@ -66,12 +74,11 @@ abstract class AbstractImage extends AbstractIdentity
     protected $sort = 0;
 
     /**
-     * @var ImageI18n[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ImageI18n>")
-     * @Serializer\SerializedName("i18ns")
-     * @Serializer\AccessType("reflection")
+     * @var \ReflectionClass
+     *
+     * @Serializer\Exclude
      */
-    protected $i18ns = [];
+    protected $reflectionClass;
 
     /**
      * AbstractImage constructor.
@@ -86,24 +93,19 @@ abstract class AbstractImage extends AbstractIdentity
 
     /**
      * @return string
-     * @throws \ReflectionException
      */
-    public function getRelationType(): string
+    public function getFilename(): string
     {
-        $reflectionClass = new \ReflectionClass($this);
-        $modelName = $reflectionClass->getShortName();
-        $imagePos = strpos($modelName, 'Image');
-        return Model::getRelationType(substr($modelName, 0, $imagePos));
+        return $this->filename;
     }
 
     /**
-     * @param Identity $foreignKey
-     * @return $this
+     * @param string $filename
+     * @return AbstractImage
      */
-    public function setForeignKey(Identity $foreignKey): self
+    public function setFilename(string $filename): AbstractImage
     {
-        $this->foreignKey = $foreignKey;
-
+        $this->filename = $filename;
         return $this;
     }
 
@@ -116,79 +118,13 @@ abstract class AbstractImage extends AbstractIdentity
     }
 
     /**
-     * @param string $filename
-     * @return $this
+     * @param Identity $foreignKey
+     * @return AbstractImage
      */
-    public function setFilename(string $filename): self
+    public function setForeignKey(Identity $foreignKey): AbstractImage
     {
-        $this->filename = $filename;
-
+        $this->foreignKey = $foreignKey;
         return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFilename(): string
-    {
-        return $this->filename;
-    }
-
-    /**
-     * @param string $remoteUrl
-     * @return $this
-     */
-    public function setRemoteUrl(string $remoteUrl): self
-    {
-        $this->remoteUrl = $remoteUrl;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getRemoteUrl(): string
-    {
-        return $this->remoteUrl;
-    }
-
-    /**
-     * @param string $name
-     * @return $this
-     */
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param integer $sort
-     * @return $this
-     */
-    public function setSort(int $sort): self
-    {
-        $this->sort = $sort;
-
-        return $this;
-    }
-
-    /**
-     * @return integer
-     */
-    public function getSort(): int
-    {
-        return $this->sort;
     }
 
     /**
@@ -203,12 +139,11 @@ abstract class AbstractImage extends AbstractIdentity
     }
 
     /**
-     * @param ImageI18n ...$i18ns
      * @return $this
      */
-    public function setI18ns(ImageI18n ...$i18ns): self
+    public function clearI18ns(): self
     {
-        $this->i18ns = $i18ns;
+        $this->i18ns = [];
 
         return $this;
     }
@@ -222,12 +157,82 @@ abstract class AbstractImage extends AbstractIdentity
     }
 
     /**
+     * @param ImageI18n ...$i18ns
      * @return $this
      */
-    public function clearI18ns(): self
+    public function setI18ns(ImageI18n ...$i18ns): self
     {
-        $this->i18ns = [];
+        $this->i18ns = $i18ns;
 
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return AbstractImage
+     */
+    public function setName(string $name): AbstractImage
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return string
+     * @throws \ReflectionException
+     */
+    public function getRelationType(): string
+    {
+        if(is_null($this->reflectionClass)) {
+            $this->reflectionClass = new \ReflectionClass($this);
+        }
+        
+        $modelName = $this->reflectionClass->getShortName();
+        $imagePos = strpos($modelName, 'Image');
+        return Model::getRelationType(substr($modelName, 0, $imagePos));
+    }
+
+    /**
+     * @return string
+     */
+    public function getRemoteUrl(): string
+    {
+        return $this->remoteUrl;
+    }
+
+    /**
+     * @param string $remoteUrl
+     * @return AbstractImage
+     */
+    public function setRemoteUrl(string $remoteUrl): AbstractImage
+    {
+        $this->remoteUrl = $remoteUrl;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSort(): int
+    {
+        return $this->sort;
+    }
+
+    /**
+     * @param int $sort
+     * @return AbstractImage
+     */
+    public function setSort(int $sort): AbstractImage
+    {
+        $this->sort = $sort;
         return $this;
     }
 }
