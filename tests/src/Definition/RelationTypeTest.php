@@ -22,7 +22,7 @@ class RelationTypeTest extends TestCase
      */
     public function testGetRelatedImageIdentityType(string $relationType, ?int $relatedImageIdentityType)
     {
-        if(is_null($relatedImageIdentityType)) {
+        if (is_null($relatedImageIdentityType)) {
             $this->expectException(DefinitionException::class);
             $this->expectExceptionCode(DefinitionException::UNKNOWN_RELATION_TYPE);
         }
@@ -52,7 +52,7 @@ class RelationTypeTest extends TestCase
      */
     public function testGetRelatedImageModelName(string $relationType, bool $isRelationType)
     {
-        if(!$isRelationType) {
+        if (!$isRelationType) {
             $this->expectExceptionObject(DefinitionException::unknownRelationType($relationType));
         }
 

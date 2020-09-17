@@ -9,7 +9,6 @@ use Jtl\Connector\Core\Model\ProductImage;
 use Jtl\Connector\Core\Model\ProductVariationValueImage;
 use Jtl\Connector\Core\Test\TestCase;
 
-
 class AbstractImageTest extends TestCase
 {
     /**
