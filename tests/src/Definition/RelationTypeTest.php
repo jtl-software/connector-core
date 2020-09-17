@@ -56,8 +56,23 @@ class RelationTypeTest extends TestCase
             $this->expectExceptionObject(DefinitionException::unknownRelationType($relationType));
         }
 
-        $expectedImageModelName = sprintf('%sImage', ucfirst($relationType));
-        $this->assertEquals($expectedImageModelName, RelationType::getRelatedImageModelName($relationType));
+        $this->assertEquals(sprintf('%sImage', ucfirst($relationType)), RelationType::getRelatedImageModelName($relationType));
+    }
+
+    /**
+     * @dataProvider relationTypeProvider
+     *
+     * @param string $relationType
+     * @param bool $isRelationType
+     * @throws DefinitionException
+     */
+    public function testGetModelName(string $relationType, bool $isRelationType)
+    {
+        if (!$isRelationType) {
+            $this->expectExceptionObject(DefinitionException::unknownRelationType($relationType));
+        }
+
+        $this->assertEquals(ucfirst($relationType), RelationType::getModelName($relationType));
     }
 
     /**

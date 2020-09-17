@@ -348,7 +348,6 @@ final class Model
     /**
      * @param string $modelName
      * @return boolean
-     * @throws \ReflectionException
      */
     public static function isModel(string $modelName): bool
     {
@@ -360,7 +359,6 @@ final class Model
      * @param string $propertyName
      * @return integer
      * @throws DefinitionException
-     * @throws \ReflectionException
      */
     public static function getPropertyIdentityType(string $modelName, string $propertyName): int
     {
@@ -377,9 +375,14 @@ final class Model
     /**
      * @param string $modelName
      * @return string
+     * @throws DefinitionException
      */
     public static function getRelationType(string $modelName): string
     {
+        if (!self::isModel($modelName)) {
+            throw DefinitionException::unknownModel($modelName);
+        }
+
         return lcfirst($modelName);
     }
 }

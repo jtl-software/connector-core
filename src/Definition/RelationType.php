@@ -31,7 +31,7 @@ final class RelationType
      */
     public static function hasIdentityType(string $relationType): bool
     {
-        return Model::hasIdentityType(self::getModelName($relationType));
+        return Model::hasIdentityType(ucfirst($relationType));
     }
 
     /**
@@ -66,19 +66,20 @@ final class RelationType
      */
     public static function getRelatedImageModelName(string $relationType): string
     {
-        if (!self::hasIdentityType($relationType)) {
-            throw DefinitionException::unknownRelationType($relationType);
-        }
-
-        return sprintf('%sImage', ucfirst($relationType));
+        return sprintf('%sImage', self::getModelName($relationType));
     }
 
     /**
      * @param string $relationType
      * @return string
+     * @throws DefinitionException
      */
     public static function getModelName(string $relationType): string
     {
+        if(!self::hasIdentityType($relationType)) {
+            throw DefinitionException::unknownRelationType($relationType);
+        }
+
         return ucfirst($relationType);
     }
 

@@ -140,11 +140,10 @@ class ModelTest extends TestCase
     }
 
     /**
-     * @dataProvider isModelProvider
+     * @dataProvider modelNameProvider
      *
      * @param string $modelName
      * @param bool $expectedResult
-     * @throws \ReflectionException
      */
     public function testIsModel(string $modelName, bool $expectedResult)
     {
@@ -152,9 +151,25 @@ class ModelTest extends TestCase
     }
 
     /**
+     * @dataProvider modelNameProvider
+     *
+     * @param string $modelName
+     * @param bool $isModelName
+     * @throws DefinitionException
+     */
+    public function testGetRelationType(string $modelName, bool $isModelName)
+    {
+        if(!$isModelName) {
+            $this->expectExceptionObject(DefinitionException::unknownModel($modelName));
+        }
+
+        $this->assertEquals(lcfirst($modelName), Model::getRelationType($modelName));
+    }
+
+    /**
      * @return array
      */
-    public function isModelProvider(): array
+    public function modelNameProvider(): array
     {
         return [
             [Model::PRODUCT, true],

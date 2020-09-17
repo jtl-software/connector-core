@@ -19,84 +19,64 @@ class DefinitionException extends \Exception
     const RELATION_TYPE_CANNOT_BE_EMPTY = 140;
 
     /**
-     * @param string $model
+     * @param string $modelName
      * @return DefinitionException
      */
-    public static function modelMappingNotExists(string $model): self
+    public static function modelMappingNotExists(string $modelName): self
     {
-        $msg = sprintf('Identity type for model (%s) not found', $model);
+        $msg = sprintf('Identity type for model (%s) not found', $modelName);
         return new static($msg, self::MODEL_MAPPING_NOT_EXISTS);
     }
 
     /**
-     * @param int $type
+     * @param int $identityType
      * @return DefinitionException
      */
-    public static function identityTypeMappingNotExists(int $type): self
+    public static function identityTypeMappingNotExists(int $identityType): self
     {
-        $msg = sprintf('Model for identity type (%s) not found', $type);
+        $msg = sprintf('Model for identity type (%s) not found', $identityType);
         return new static($msg, self::IDENTITY_TYPE_MAPPING_NOT_EXISTS);
     }
 
     /**
-     * @param integer $type
+     * @param integer $identityType
      * @return DefinitionException
      */
-    public static function unknownIdentityType(int $type): self
+    public static function unknownIdentityType(int $identityType): self
     {
-        $msg = sprintf('Identity type (%s) does not exist', $type);
+        $msg = sprintf('Identity type (%s) does not exist', $identityType);
         return new static($msg, self::UNKNOWN_IDENTITY_TYPE);
     }
 
     /**
-     * @param string $model
-     * @param string $property
+     * @param string $modelName
+     * @param string $propertyName
      * @return DefinitionException
      */
-    public static function unknownIdentityProperty(string $model, string $property): self
+    public static function unknownIdentityProperty(string $modelName, string $propertyName): self
     {
-        $msg = sprintf('Unknown identity property (%s) in model (%s)', $property, $model);
+        $msg = sprintf('Unknown identity property (%s) in model (%s)', $propertyName, $modelName);
         return new static($msg, self::UNKNOWN_IDENTITY_PROPERTY);
     }
 
     /**
-     * @param string $model
+     * @param string $modelName
      * @return DefinitionException
      */
-    public static function unknownModel(string $model): self
+    public static function unknownModel(string $modelName): self
     {
-        $msg = sprintf('Model (%s) does not exist', $model);
+        $msg = sprintf('Model (%s) does not exist', $modelName);
         return new static($msg, self::UNKNOWN_MODEL);
     }
 
     /**
-     * @param string $controller
+     * @param string $controllerName
      * @return DefinitionException
      */
-    public static function unknownController(string $controller): self
+    public static function unknownController(string $controllerName): self
     {
-        $msg = sprintf('Unknown controller (%s)', $controller);
+        $msg = sprintf('Unknown controller (%s)', $controllerName);
         return new static($msg, ErrorCode::UNKNOWN_CONTROLLER);
-    }
-
-    /**
-     * @param string $option
-     * @return DefinitionException
-     */
-    public static function unknownConfigOption(string $option): self
-    {
-        $msg = sprintf('Unknown config option (%s)', $option);
-        return new static($msg, self::UNKNOWN_CONFIG_OPTION);
-    }
-
-    /**
-     * @param string $option
-     * @return DefinitionException
-     */
-    public static function defaultValueNotExists(string $option): self
-    {
-        $msg = sprintf('Default value for config option (%s) does not exist', $option);
-        return new static($msg, self::DEFAULT_VALUE_NOT_EXISTS);
     }
 
     /**
