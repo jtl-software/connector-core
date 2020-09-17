@@ -87,6 +87,7 @@ abstract class AbstractImage extends AbstractIdentity
      */
     public function __construct(string $endpoint = '', int $host = 0)
     {
+        $this->reflectionClass = new \ReflectionClass($this);
         parent::__construct($endpoint, $host);
         $this->foreignKey = new Identity();
     }
@@ -191,10 +192,6 @@ abstract class AbstractImage extends AbstractIdentity
      */
     public function getRelationType(): string
     {
-        if(is_null($this->reflectionClass)) {
-            $this->reflectionClass = new \ReflectionClass($this);
-        }
-
         $modelName = $this->reflectionClass->getShortName();
         $imagePos = strpos($modelName, 'Image');
         return Model::getRelationType(substr($modelName, 0, $imagePos));
