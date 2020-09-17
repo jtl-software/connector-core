@@ -2,6 +2,7 @@
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Definition\Model;
 
 /**
  * @access public
@@ -85,15 +86,14 @@ abstract class AbstractImage extends AbstractIdentity
 
     /**
      * @return string
-     */
-    abstract protected function getRelatedModel(): string;
-
-    /**
-     * @return string
+     * @throws \ReflectionException
      */
     public function getRelationType(): string
     {
-        return lcfirst($this->getRelatedModel());
+        $reflectionClass = new \ReflectionClass($this);
+        $modelName = $reflectionClass->getShortName();
+        $imagePos = strpos($modelName, 'Image');
+        return Model::getRelationType(substr($modelName, 0, $imagePos));
     }
 
     /**
