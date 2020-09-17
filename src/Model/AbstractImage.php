@@ -194,7 +194,7 @@ abstract class AbstractImage extends AbstractIdentity
         if(is_null($this->reflectionClass)) {
             $this->reflectionClass = new \ReflectionClass($this);
         }
-        
+
         $modelName = $this->reflectionClass->getShortName();
         $imagePos = strpos($modelName, 'Image');
         return Model::getRelationType(substr($modelName, 0, $imagePos));

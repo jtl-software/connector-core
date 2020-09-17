@@ -14,15 +14,33 @@ use Jtl\Connector\Core\Test\TestCase;
 class RelationTypeTest extends TestCase
 {
     /**
+     * @dataProvider relatedImageIdentityTypeProvider
+     *
+     * @param string $relationType
+     * @param int|null $relatedImageIdentityType
+     * @throws DefinitionException|\ReflectionException
+     */
+    public function testGetRelatedImageIdentityType(string $relationType, ?int $relatedImageIdentityType)
+    {
+        if(is_null($relatedImageIdentityType)) {
+            $this->expectException(DefinitionException::class);
+            $this->expectExceptionCode(DefinitionException::UNKNOWN_RELATION_TYPE);
+        }
+
+        $this->assertEquals($relatedImageIdentityType, RelationType::getRelatedImageIdentityType($relationType));
+    }
+
+
+    /**
      * @dataProvider relatedImageIdentityProvider
      *
      * @param string $relationType
-     * @param bool $hasRelatedImageIdentity
+     * @param bool $hasRelatedImageIdentityType
      * @throws DefinitionException
      */
-    public function testHasRelatedImageIdentity(string $relationType, bool $hasRelatedImageIdentity)
+    public function testHasRelatedImageIdentityType(string $relationType, bool $hasRelatedImageIdentityType)
     {
-        $this->assertEquals(RelationType::hasRelatedImageIdentity($relationType), $hasRelatedImageIdentity);
+        $this->assertEquals(RelationType::hasRelatedImageIdentityType($relationType), $hasRelatedImageIdentityType);
     }
 
     /**
@@ -92,6 +110,20 @@ class RelationTypeTest extends TestCase
             ['CrossSelling', false],
             ['manufacturer', true],
             ['Manufacturer', true],
+        ];
+    }
+
+    /**
+     * @return array[]
+     */
+    public function relatedImageIdentityTypeProvider(): array
+    {
+        return [
+            ['product', IdentityType::PRODUCT_IMAGE],
+            ['Product', IdentityType::PRODUCT_IMAGE],
+            ['manufacturer', IdentityType::MANUFACTURER_IMAGE],
+            ['productAttr', null],
+            ['whateverYouWant', null],
         ];
     }
 

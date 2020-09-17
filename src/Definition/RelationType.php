@@ -36,10 +36,25 @@ final class RelationType
 
     /**
      * @param string $relationType
+     * @return integer
+     * @throws DefinitionException
+     * @throws \ReflectionException
+     */
+    public function getRelatedImageIdentityType(string $relationType): int
+    {
+        if(!self::hasRelatedImageIdentityType($relationType)) {
+            throw DefinitionException::unknownRelationType(self::getRelatedImageModelName($relationType));
+        }
+
+        return Model::getIdentityType(self::getRelatedImageModelName($relationType));
+    }
+
+    /**
+     * @param string $relationType
      * @return bool
      * @throws DefinitionException
      */
-    public static function hasRelatedImageIdentity(string $relationType): bool
+    public static function hasRelatedImageIdentityType(string $relationType): bool
     {
         return Model::hasIdentityType(self::getRelatedImageModelName($relationType));
     }
