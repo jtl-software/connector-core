@@ -159,7 +159,7 @@ class ModelTest extends TestCase
      */
     public function testGetRelationType(string $modelName, bool $isModelName)
     {
-        if(!$isModelName) {
+        if (!$isModelName) {
             $this->expectExceptionObject(DefinitionException::unknownModel($modelName));
         }
 

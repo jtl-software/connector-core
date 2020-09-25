@@ -4,8 +4,15 @@ namespace Jtl\Connector\Core\Model\Generator;
 
 use Jtl\Connector\Core\Model\CategoryI18n;
 
+/**
+ * Class CategoryI18nFactory
+ * @package Jtl\Connector\Core\Model\Generator
+ */
 class CategoryI18nFactory extends AbstractModelFactory
 {
+    /**
+     * @return array
+     */
     protected function makeFakeArray() : array
     {
         return [
@@ -18,7 +25,10 @@ class CategoryI18nFactory extends AbstractModelFactory
             'languageIso' => $this->faker->languageCode
         ];
     }
-    
+
+    /**
+     * @return string
+     */
     protected function getModelClass() : string
     {
         return CategoryI18n::class;

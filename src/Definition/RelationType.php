@@ -76,7 +76,7 @@ final class RelationType
      */
     public static function getModelName(string $relationType): string
     {
-        if(!self::hasIdentityType($relationType)) {
+        if (!self::hasIdentityType($relationType)) {
             throw DefinitionException::unknownRelationType($relationType);
         }
 
