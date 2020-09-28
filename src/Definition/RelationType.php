@@ -40,7 +40,7 @@ final class RelationType
      * @throws DefinitionException
      * @throws \ReflectionException
      */
-    public function getRelatedImageIdentityType(string $relationType): int
+    public static function getRelatedImageIdentityType(string $relationType): int
     {
         if (!self::hasRelatedImageIdentityType($relationType)) {
             throw DefinitionException::unknownRelationType(self::getRelatedImageModelName($relationType));
