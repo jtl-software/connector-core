@@ -1,46 +1,121 @@
-2.6.8
+Unreleased
+----------
+- Added Action, Controller, Event, Model,... definitions
+- Added clear specific mappings support
+- Added config schema definition
+- Added flexible logging service
+- Added flexible session handler support
+- Added usage of PHP-DI container
+- Added usage of Symfony requests
+- Added unit tests
+- Refactored endpoint implementation
+  - Revised connector interface
+  - Added optional implementation of handle method by using HandleRequestInterface
+- Refactored events  
+- Refactored models
+  - Unified attribute handling
+  - Unified translations handling
+  - Switched to language iso 639-1 (and 639-2 as fallback only)
+- Removed unnecessary files
+- Removed usage of singletons
+- Renamed classes and interfaces to be conform with PSR naming conventions (https://www.php-fig.org/bylaws/psr-naming-conventions/)
+- Replaced TokenLoader by TokenValidator
+- Revised directory structure
+- Revised plugin structure
+- ...
+- ...
+- ...
+
+3.1.20
+-----
+- Added ignoring properties with null values when deserializing a model
+
+3.1.19
+-----
+- Added customer note property to customer order
+
+3.1.18
+-----
+- Added discountable property to product
+
+3.1.17
+-----
+- Fixed setting parameters in file handler
+
+3.1.16
+-----
+- Added additional handling time property
+- Added calculate handling time method
+
+3.1.15
+-----
+- Added possibility to change log formatter
+- Fixed compatibility to Symfony event-dispatcher 5 
+
+3.1.14
+-----
+- Removed incompatible symfony/event-dispatcher version from composer
+
+3.1.13
+-----
+- Removed stripslashes call
+
+3.1.12
+-----
+- Removed log level and display errors calls in error handler
+- Removed deprecated get_magic_quotes_gpc call
+- Switched order in dispatch (symfony event) calls to prevent deprecated messages
+- Updated composer dependencies to establish symfony 5 compatiblity
+- Changed doctrine array collection to array
+
+3.1.11
+-----
+- Added locale irish in Ireland
+
+3.1.10
+-----
+- Removed infinity loop in session class to avoid warning
+
+3.1.9
+-----
+- Delete old Linking before saving the new on 
+
+3.1.8
 -----
 - Exception handling while encode or decode json revised.
 
-2.6.5
+3.1.5
 -----
 - Default logging channel switched to global
 - Logging channel constants defined
 
-2.6.4
+3.1.4
 -----
 - Avoid warning in switch statement
 
-2.6.0
+3.1.0
 -----
 - CO-204 Connector linkings extended
 - Skip unknown entity ack's
 - Token loader is not needed in case a token validator is implemented
-
-2.5.2
------
-- Dependencies updated
-- Use variable as second parameter to suppress deprecated warning
-
-2.4.17
------
-- Minimum requirements changed to PHP 5.6.4
-
-2.4.16
------
 - ShippingClass identity mapping added to product
 
-2.4.15
+3.0.3
 -----
 - Cross selling events added
 
-2.4.14
+3.0.2
 -----
 - ShippingClass mappings added
 
-2.4.13
-------
+3.0.1
+-----
 - Payment types added
+
+3.0.0
+-----
+- CO-209 Added overwrite config and feature dependency
+- CO-213 Changed php requirement to >= 7.1.3
 
 2.4.12
 ------
