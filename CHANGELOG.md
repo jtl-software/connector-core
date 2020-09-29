@@ -1,5 +1,5 @@
-Unreleased
-----------
+4.0.0
+-----
 - Added Action, Controller, Event, Model,... definitions
 - Added clear specific mappings support
 - Added config schema definition
