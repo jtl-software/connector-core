@@ -1,8 +1,9 @@
-#About
+# About
 
 The official implementation of the protocol used by JTL-Connector and JTL-Wawi.
-You are free to use this library in your endpoint implementations and if they are written in the PHP programming language its use is strongly recommended to stay compatible with future versions of JTL-Wawi. 
+You are free to use this library in your endpoint implementations. 
+The use of this library is strongly recommended, to stay compatible with future versions of JTL-Wawi. 
 
-#Documentation
+# Documentation
 
-If you want to read full documentation with example connector please visit our [documentation](https://jtl-devguide.readthedocs.io/projects/jtl-connector/en/latest/).
+If you want to read the full documentation including tutorial, please visit our [documentation](https://jtl-devguide.readthedocs.io/projects/jtl-connector/en/latest/).
