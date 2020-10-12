@@ -621,7 +621,7 @@ class Application
         ];
 
         if ($model instanceof IdentityInterface && $model->getId()->getHost() > 0) {
-            $messages[] = sprintf('JTL-Wawi PK = %s', $model->getId()->getHost());
+            $messages[] = sprintf('JTL-Wawi PK = %d', $model->getId()->getHost());
         }
 
         if ($model instanceof IdentificationInterface) {

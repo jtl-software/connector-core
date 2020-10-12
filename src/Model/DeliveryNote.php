@@ -98,7 +98,7 @@ class DeliveryNote extends AbstractIdentity implements IdentificationInterface
     }
 
     /**
-     * @param \DateTimeInterface $creationDate Creation date
+     * @param \DateTimeInterface|null $creationDate Creation date
      * @return DeliveryNote
      */
     public function setCreationDate(\DateTimeInterface $creationDate = null): DeliveryNote
