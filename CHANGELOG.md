@@ -1,3 +1,7 @@
+4.0.1
+-----
+- Added identification strings to image, delivery note and status change models
+
 4.0.0
 -----
 - Added Action, Controller, Event, Model,... definitions
