@@ -15,7 +15,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class StatusChange extends AbstractDataModel
+class StatusChange extends AbstractDataModel implements IdentificationInterface
 {
     /**
      * @var Identity
@@ -67,7 +67,16 @@ class StatusChange extends AbstractDataModel
     {
         return $this->customerOrderId;
     }
-    
+
+    /**
+     * @param string $mainLanguageIso
+     * @return string[]
+     */
+    public function getIdentificationStrings(string $mainLanguageIso): array
+    {
+        return [sprintf('Related type CustomerOrder (JTL-Wawi PK = %d)', $this->getCustomerOrderId()->getHost())];
+    }
+
     /**
      * @param string $orderStatus
      * @return StatusChange

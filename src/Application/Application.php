@@ -383,7 +383,6 @@ class Application
 
     /**
      * @return SessionHandlerInterface
-     * @throws ApplicationException
      * @throws SessionException
      */
     public function getSessionHandler(): SessionHandlerInterface
@@ -622,7 +621,7 @@ class Application
         ];
 
         if ($model instanceof IdentityInterface && $model->getId()->getHost() > 0) {
-            $messages[] = sprintf('Wawi PK = %s', $model->getId()->getHost());
+            $messages[] = sprintf('JTL-Wawi PK = %s', $model->getId()->getHost());
         }
 
         if ($model instanceof IdentificationInterface) {

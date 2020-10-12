@@ -17,7 +17,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class DeliveryNote extends AbstractIdentity
+class DeliveryNote extends AbstractIdentity implements IdentificationInterface
 {
     /**
      * @var Identity Reference to customerOrder
@@ -115,7 +115,16 @@ class DeliveryNote extends AbstractIdentity
     {
         return $this->creationDate;
     }
-    
+
+    /**
+     * @param string $mainLanguageIso
+     * @return string[]
+     */
+    public function getIdentificationStrings(string $mainLanguageIso): array
+    {
+        return [sprintf('Related type CustomerOrder (JTL-Wawi PK = %d)', $this->getCustomerOrderId()->getHost())];
+    }
+
     /**
      * @param boolean $isFulfillment Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
      * @return DeliveryNote

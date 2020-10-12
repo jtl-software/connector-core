@@ -1,8 +1,10 @@
 <?php
+
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
 use Jtl\Connector\Core\Definition\Model;
+use Jtl\Connector\Core\Exception\DefinitionException;
 
 /**
  * @access public
@@ -23,7 +25,7 @@ use Jtl\Connector\Core\Definition\Model;
  *     }
  * )
  */
-abstract class AbstractImage extends AbstractIdentity
+abstract class AbstractImage extends AbstractIdentity implements IdentificationInterface
 {
     /**
      * @var string
@@ -84,6 +86,7 @@ abstract class AbstractImage extends AbstractIdentity
      * AbstractImage constructor.
      * @param string $endpoint
      * @param int $host
+     * @throws \ReflectionException
      */
     public function __construct(string $endpoint = '', int $host = 0)
     {
@@ -169,6 +172,16 @@ abstract class AbstractImage extends AbstractIdentity
     }
 
     /**
+     * @param string $mainLanguageIso
+     * @return array
+     * @throws DefinitionException
+     */
+    public function getIdentificationStrings(string $mainLanguageIso): array
+    {
+        return [sprintf('Related type %s (JTL-Wawi PK = %d)', ucfirst($this->getRelationType()), $this->getForeignKey()->getHost())];
+    }
+
+    /**
      * @return string
      */
     public function getName(): string
@@ -188,7 +201,7 @@ abstract class AbstractImage extends AbstractIdentity
 
     /**
      * @return string
-     * @throws \ReflectionException
+     * @throws DefinitionException
      */
     public function getRelationType(): string
     {
