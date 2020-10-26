@@ -29,6 +29,7 @@ use Jtl\Connector\Core\Connector\ModelInterface;
 use Jtl\Connector\Core\Controller\TransactionalInterface;
 use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Event\BoolEvent;
+use Jtl\Connector\Core\Event\ConnectorIdentificationEvent;
 use Jtl\Connector\Core\Event\FeaturesEvent;
 use Jtl\Connector\Core\Event\ResponseEvent;
 use Jtl\Connector\Core\Event\RequestEvent;
@@ -562,8 +563,6 @@ class Application
             $eventName = Event::createEventName($request->getController(), $request->getAction(), Event::AFTER);
         }
 
-        $eventArgClass = $this->createModelEventClassName($request->getController());
-
         // Identity mapping
         $resultData = is_array($response->getResult()) ? $response->getResult() : [$response->getResult()];
         foreach ($resultData as $result) {
@@ -580,6 +579,7 @@ class Application
                 case Action::PUSH:
                 case Action::PULL:
                 case Action::DELETE:
+                    $eventArgClass = $this->createModelEventClassName($request->getController());
                     $eventArg = new $eventArgClass($result);
                     break;
                 case Action::STATISTIC:
@@ -587,7 +587,11 @@ class Application
                     break;
                 case Action::CLEAR:
                 case Action::FINISH:
+                case Action::INIT:
                     $eventArg = new BoolEvent($result);
+                    break;
+                case Action::IDENTIFY:
+                    $eventArg = new ConnectorIdentificationEvent($result);
                     break;
                 case Action::FEATURES:
                     $eventArg = new FeaturesEvent($result);

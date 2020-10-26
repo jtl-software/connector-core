@@ -1,3 +1,7 @@
+4.0.2
+-----
+- Added connector identification and init event
+
 4.0.1
 -----
 - Added identification strings to image, delivery note and status change models
