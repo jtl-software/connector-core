@@ -1,3 +1,7 @@
+4.0.3
+-----
+- Added possibility to extend image identification strings during synchronisation
+
 4.0.2
 -----
 - Added connector identification and init event
