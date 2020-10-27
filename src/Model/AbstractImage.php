@@ -76,6 +76,13 @@ abstract class AbstractImage extends AbstractIdentity implements IdentificationI
     protected $sort = 0;
 
     /**
+     * @var string[]
+     *
+     * @Serializer\Exclude
+     */
+    protected $identificationStrings = [];
+
+    /**
      * @var \ReflectionClass
      *
      * @Serializer\Exclude
@@ -172,13 +179,24 @@ abstract class AbstractImage extends AbstractIdentity implements IdentificationI
     }
 
     /**
+     * @param string $identificationString
+     * @return AbstractImage
+     */
+    public function addIdentificationString(string $identificationString): self
+    {
+        $this->identificationStrings[] = $identificationString;
+        return $this;
+    }
+
+    /**
      * @param string $mainLanguageIso
      * @return array
      * @throws DefinitionException
      */
     public function getIdentificationStrings(string $mainLanguageIso): array
     {
-        return [sprintf('Related type %s (JTL-Wawi PK = %d)', ucfirst($this->getRelationType()), $this->getForeignKey()->getHost())];
+        $relatedType = sprintf('Related type %s (JTL-Wawi PK = %d)', ucfirst($this->getRelationType()), $this->getForeignKey()->getHost());
+        return array_merge([$relatedType], $this->identificationStrings);
     }
 
     /**
@@ -193,7 +211,7 @@ abstract class AbstractImage extends AbstractIdentity implements IdentificationI
      * @param string $name
      * @return AbstractImage
      */
-    public function setName(string $name): AbstractImage
+    public function setName(string $name): self
     {
         $this->name = $name;
         return $this;
@@ -222,7 +240,7 @@ abstract class AbstractImage extends AbstractIdentity implements IdentificationI
      * @param string $remoteUrl
      * @return AbstractImage
      */
-    public function setRemoteUrl(string $remoteUrl): AbstractImage
+    public function setRemoteUrl(string $remoteUrl): self
     {
         $this->remoteUrl = $remoteUrl;
         return $this;
@@ -240,7 +258,7 @@ abstract class AbstractImage extends AbstractIdentity implements IdentificationI
      * @param int $sort
      * @return AbstractImage
      */
-    public function setSort(int $sort): AbstractImage
+    public function setSort(int $sort): self
     {
         $this->sort = $sort;
         return $this;

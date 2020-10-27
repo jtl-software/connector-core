@@ -29,14 +29,4 @@ class ConnectorIdentificationEvent extends Event
     {
         return $this->connectorIdentification;
     }
-
-    /**
-     * @param ConnectorIdentification $connectorIdentification
-     * @return ConnectorIdentificationEvent
-     */
-    public function setConnectorIdentification(ConnectorIdentification $connectorIdentification): ConnectorIdentificationEvent
-    {
-        $this->connectorIdentification = $connectorIdentification;
-        return $this;
-    }
 }
