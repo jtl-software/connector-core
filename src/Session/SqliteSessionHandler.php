@@ -54,10 +54,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
         $this->lifetime = (int)ini_get('session.gc_maxlifetime');
 
         $dbLocation = sprintf('%s/connector.s3db', $databaseDir);
-        if (!file_exists($dbLocation))
-        {
-          $isNew = true;
-        }
+   $isNew = !file_exists($dbLocation);
 
         $sqlite3 = new Sqlite3();
         $sqlite3->connect(['location' => $dbLocation]);
