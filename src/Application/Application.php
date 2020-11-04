@@ -30,7 +30,9 @@ use Jtl\Connector\Core\Controller\TransactionalInterface;
 use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Event\BoolEvent;
 use Jtl\Connector\Core\Event\ConnectorIdentificationEvent;
+use Jtl\Connector\Core\Event\DataEvent;
 use Jtl\Connector\Core\Event\FeaturesEvent;
+use Jtl\Connector\Core\Event\IdentitiesEvent;
 use Jtl\Connector\Core\Event\ResponseEvent;
 use Jtl\Connector\Core\Event\RequestEvent;
 use Jtl\Connector\Core\Event\ModelEvent;
@@ -441,15 +443,16 @@ class Application
         $controller = $method->getController();
         $action = $method->getAction();
 
+        $type = null;
         switch ($action) {
             case Action::AUTH:
-                $type = $className = Authentication::class;
+                $type = Authentication::class;
                 break;
             case Action::ACK:
-                $type = $className = Ack::class;
+                $type = Ack::class;
                 break;
             case Action::CLEAR:
-                $type = $className = Identities::class;
+                $type = Identities::class;
                 break;
             case Action::PUSH:
             case Action::DELETE:
@@ -459,24 +462,31 @@ class Application
                 }
                 $type = sprintf("array<%s>", $className);
                 break;
-            default:
-                $type = $className = QueryFilter::class;
+            case Action::STATISTIC:
+            case Action::PULL:
+                $type = QueryFilter::class;
+                break;
         }
 
-        $params = $this->serializer->fromArray($requestPacket->getParams(), $type);
+        $params = $requestPacket->getParams();
+        if (!is_null($type)) {
+            $params = $this->serializer->fromArray($requestPacket->getParams(), $type);
 
-        if (!is_array($params)) {
-            $params = [$params];
+            if (!is_array($params)) {
+                $params = [$params];
+            }
         }
-
-        $eventArgClass = $this->createModelEventClassName($controller);
 
         // Identity mapping
         foreach ($params as $param) {
             $eventArg = null;
             switch ($action) {
+                case Action::ACK:
+                case Action::AUTH:
+                    break;
                 case Action::PUSH:
                 case Action::DELETE:
+                    $eventArgClass = $this->createModelEventClassName($controller);
                     $this->container->get(IdentityLinker::class)->linkModel($param);
                     $this->container->get(ChecksumLinker::class)->link($param);
                     $eventArg = new $eventArgClass($param);
@@ -486,11 +496,15 @@ class Application
                     $eventArg = new QueryFilterEvent($param);
                     break;
                 case Action::CLEAR:
+                    $eventArg = new IdentitiesEvent($param);
                     foreach ($param->getIdentities() as $relationType => $identities) {
                         foreach ($identities as $identity) {
                             $this->container->get(IdentityLinker::class)->linkIdentity($identity, RelationType::getModelName($relationType), 'id');
                         }
                     }
+                    break;
+                default:
+                    $eventArg = new DataEvent($params);
                     break;
             }
 

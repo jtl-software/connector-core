@@ -2,7 +2,6 @@
 
 namespace Jtl\Connector\Core\Event;
 
-
 use Jtl\Connector\Core\Model\ConnectorIdentification;
 use Symfony\Contracts\EventDispatcher\Event;
 
