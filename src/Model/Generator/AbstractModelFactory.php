@@ -72,16 +72,16 @@ abstract class AbstractModelFactory
 
     /**
      * @param int $quantity
-     * @param array $overrides
+     * @param array $specificOverrides
+     * @param array $globalOverrides
      * @return array
-     * @throws \Exception
      */
-    public function make(int $quantity, array $overrides = []): array
+    public function make(int $quantity, array $specificOverrides = [], array $globalOverrides = []): array
     {
         $models = [];
 
         for ($i = 0; $i < $quantity; $i++) {
-            $model = $this->serializer->fromArray($this->makeOneArray($overrides[$i] ?? []), $this->getModelClass());
+            $model = $this->serializer->fromArray($this->makeOneArray(array_merge($globalOverrides, $specificOverrides[$i] ?? [])), $this->getModelClass());
             $models[] = $model;
         }
 
@@ -90,14 +90,15 @@ abstract class AbstractModelFactory
 
     /**
      * @param int $quantity
-     * @param array $overrides
+     * @param array $specificOverrides
+     * @param array $globalOverrides
      * @return array
      */
-    public function makeArray(int $quantity, array $overrides = []): array
+    public function makeArray(int $quantity, array $specificOverrides = [], array $globalOverrides = []): array
     {
         $models = [];
         for ($i = 0; $i < $quantity; $i++) {
-            $models[] = $this->makeOneArray($overrides[$i] ?? []);
+            $models[] = $this->makeOneArray(array_merge($globalOverrides, $specificOverrides[$i] ?? []));
         }
         return $models;
     }
