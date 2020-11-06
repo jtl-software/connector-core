@@ -19,6 +19,12 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class Specific extends AbstractIdentity
 {
+    public const
+        TYPE_TEXT = 'TEXT',
+        TYPE_SELECT = 'SELECTBOX',
+        TYPE_IMAGE = 'BILD',
+        TYPE_IMAGE_TEXT = 'BILD-TEXT';
+
     /**
      * @var boolean Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
      * @Serializer\Type("boolean")
@@ -33,7 +39,7 @@ class Specific extends AbstractIdentity
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
-    protected $sort = 0;
+    protected $sort = 1;
     
     /**
      * @var string Specific type (radio, dropdown, image...)
