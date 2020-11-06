@@ -25,7 +25,7 @@ class SpecificValue extends AbstractIdentity
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
-    protected $sort = 0;
+    protected $sort = 1;
     
     /**
      * @var SpecificValueI18n[]

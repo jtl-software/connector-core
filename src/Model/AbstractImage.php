@@ -73,7 +73,7 @@ abstract class AbstractImage extends AbstractIdentity implements IdentificationI
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
-    protected $sort = 0;
+    protected $sort = 1;
 
     /**
      * @var string[]
