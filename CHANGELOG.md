@@ -1,3 +1,9 @@
+4.0.4
+-----
+- Fixed sqlite session database existence check (thanks to @infastra)
+- Added global overrides to generator factories
+- Added generator factories for specific models
+
 4.0.3
 -----
 - Added possibility to extend image identification strings during synchronisation
