@@ -1,3 +1,7 @@
+4.0.5
+-----
+- Added identification string to specific model
+
 4.0.4
 -----
 - Fixed sqlite session database existence check (thanks to @infastra)

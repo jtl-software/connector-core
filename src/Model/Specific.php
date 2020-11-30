@@ -17,7 +17,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Specific extends AbstractIdentity
+class Specific extends AbstractIdentity implements IdentificationInterface
 {
     public const
         TYPE_TEXT = 'TEXT',
@@ -64,6 +64,29 @@ class Specific extends AbstractIdentity
      * @Serializer\AccessType("reflection")
      */
     protected $values = [];
+
+    /**
+     * @param string $mainLanguageIso
+     * @return array
+     */
+    public function getIdentificationStrings(string $mainLanguageIso): array
+    {
+        $strings = [];
+
+        $name = '';
+        foreach ($this->getI18ns() as $i18n) {
+            $name = $i18n->getName();
+            if ($mainLanguageIso === $i18n->getLanguageIso()) {
+                break;
+            }
+        }
+
+        if(!empty($name)) {
+            $strings = sprintf('Name = %s', $name);
+        }
+
+        return $strings;
+    }
 
     /**
      * @param boolean $isGlobal Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
