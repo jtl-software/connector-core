@@ -82,7 +82,7 @@ class Specific extends AbstractIdentity implements IdentificationInterface
         }
 
         if(!empty($name)) {
-            $strings = sprintf('Name = %s', $name);
+            $strings[] = sprintf('Name = %s', $name);
         }
 
         return $strings;
