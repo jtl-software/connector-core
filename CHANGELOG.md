@@ -1,3 +1,11 @@
+4.0.7
+-----
+- Added simple token validator
+
+4.0.6
+-----
+- Fixed return value of identification strings method in specific model
+
 4.0.5
 -----
 - Added identification string to specific model
