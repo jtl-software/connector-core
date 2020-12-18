@@ -6,7 +6,7 @@
 
 namespace jtl\Connector\Type;
 
-use \jtl\Connector\Type\PropertyInfo;
+use jtl\Connector\Type\PropertyInfo;
 
 /**
  * @access public
@@ -18,6 +18,7 @@ class ProductStockLevel extends DataType
     {
         return array(
             new PropertyInfo('productId', 'Identity', null, false, true, false),
+            new PropertyInfo('sku', 'string', '', false, false, false),
             new PropertyInfo('stockLevel', 'double', 0.0, false, false, false),
         );
     }

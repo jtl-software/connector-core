@@ -29,6 +29,14 @@ class ProductStockLevel extends DataModel
     protected $productId = null;
 
     /**
+     * @var string Optional stock keeping unit identifier
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("sku")
+     * @Serializer\Accessor(getter="getSku",setter="setSku")
+     */
+    protected $sku = '';
+
+    /**
      * @var double 
      * @Serializer\Type("double")
      * @Serializer\SerializedName("stockLevel")
@@ -46,7 +54,7 @@ class ProductStockLevel extends DataModel
 
     /**
      * @param Identity $productId 
-     * @return \jtl\Connector\Model\ProductStockLevel
+     * @return ProductStockLevel
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductId(Identity $productId)
@@ -63,8 +71,26 @@ class ProductStockLevel extends DataModel
     }
 
     /**
+     * @return string
+     */
+    public function getSku(): string
+    {
+        return $this->sku;
+    }
+
+    /**
+     * @param string $sku
+     * @return ProductStockLevel
+     */
+    public function setSku(string $sku): ProductStockLevel
+    {
+        $this->sku = $sku;
+        return $this;
+    }
+
+    /**
      * @param double $stockLevel 
-     * @return \jtl\Connector\Model\ProductStockLevel
+     * @return ProductStockLevel
      */
     public function setStockLevel($stockLevel)
     {
