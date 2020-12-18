@@ -1,3 +1,8 @@
+2.7.9
+-----
+- Added sku and vat to product price model
+- Added sku to product stocklevel model
+
 2.7.8
 -----
 - Added ignoring properties with null values when deserializing a model
