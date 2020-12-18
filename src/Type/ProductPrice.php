@@ -6,7 +6,7 @@
 
 namespace jtl\Connector\Type;
 
-use \jtl\Connector\Type\PropertyInfo;
+use jtl\Connector\Type\PropertyInfo;
 
 /**
  * @access public
@@ -21,6 +21,8 @@ class ProductPrice extends DataType
             new PropertyInfo('customerId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('productId', 'Identity', null, false, true, false),
+            new PropertyInfo('sku', 'string', '', false, false, false),
+            new PropertyInfo('vat', 'double', null, false, false, false),
             new PropertyInfo('items', '\jtl\Connector\Model\ProductPriceItem', null, false, false, true),
         );
     }

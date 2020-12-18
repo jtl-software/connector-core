@@ -54,7 +54,23 @@ class ProductPrice extends DataModel
     protected $productId = null;
 
     /**
-     * @var \jtl\Connector\Model\ProductPriceItem[]
+     * @var string Optional stock keeping unit identifier
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("sku")
+     * @Serializer\Accessor(getter="getSku",setter="setSku")
+     */
+    protected $sku = '';
+
+    /**
+     * @var double
+     * @Serializer\Type("double")
+     * @Serializer\SerializedName("vat")
+     * @Serializer\Accessor(getter="getVat",setter="setVat")
+     */
+    protected $vat = null;
+
+    /**
+     * @var ProductPriceItem[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductPriceItem>")
      * @Serializer\SerializedName("items")
      * @Serializer\AccessType("reflection")
@@ -74,7 +90,7 @@ class ProductPrice extends DataModel
 
     /**
      * @param Identity $customerGroupId Reference to customerGroup
-     * @return \jtl\Connector\Model\ProductPrice
+     * @return ProductPrice
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerGroupId(Identity $customerGroupId)
@@ -92,7 +108,7 @@ class ProductPrice extends DataModel
 
     /**
      * @param Identity $customerId Reference to customer
-     * @return \jtl\Connector\Model\ProductPrice
+     * @return ProductPrice
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setCustomerId(Identity $customerId)
@@ -110,7 +126,7 @@ class ProductPrice extends DataModel
 
     /**
      * @param Identity $id Unique ProductPrice id
-     * @return \jtl\Connector\Model\ProductPrice
+     * @return ProductPrice
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setId(Identity $id)
@@ -128,7 +144,7 @@ class ProductPrice extends DataModel
 
     /**
      * @param Identity $productId Reference to product
-     * @return \jtl\Connector\Model\ProductPrice
+     * @return ProductPrice
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
     public function setProductId(Identity $productId)
@@ -145,10 +161,46 @@ class ProductPrice extends DataModel
     }
 
     /**
-     * @param \jtl\Connector\Model\ProductPriceItem $item
-     * @return \jtl\Connector\Model\ProductPrice
+     * @return string
      */
-    public function addItem(\jtl\Connector\Model\ProductPriceItem $item)
+    public function getSku(): string
+    {
+        return $this->sku;
+    }
+
+    /**
+     * @param string $sku
+     * @return $this
+     */
+    public function setSku(string $sku): ProductPrice
+    {
+        $this->sku = $sku;
+        return $this;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getVat(): ?float
+    {
+        return $this->vat;
+    }
+
+    /**
+     * @param float|null $vat
+     * @return $this
+     */
+    public function setVat(?float $vat): ProductPrice
+    {
+        $this->vat = $vat;
+        return $this;
+    }
+
+    /**
+     * @param ProductPriceItem $item
+     * @return ProductPrice
+     */
+    public function addItem(ProductPriceItem $item)
     {
         $this->items[] = $item;
         return $this;
@@ -156,7 +208,7 @@ class ProductPrice extends DataModel
     
     /**
      * @param array $items
-     * @return \jtl\Connector\Model\ProductPrice
+     * @return ProductPrice
      */
     public function setItems(array $items)
     {
@@ -165,7 +217,7 @@ class ProductPrice extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductPriceItem[]
+     * @return ProductPriceItem[]
      */
     public function getItems()
     {
@@ -173,7 +225,7 @@ class ProductPrice extends DataModel
     }
 
     /**
-     * @return \jtl\Connector\Model\ProductPrice
+     * @return ProductPrice
      */
     public function clearItems()
     {
