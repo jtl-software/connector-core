@@ -1,39 +1,44 @@
+3.1.21
+------
+- Added sku and vat to product price model
+- Added sku to product stocklevel model
+
 3.1.20
------
+------
 - Added ignoring properties with null values when deserializing a model
 
 3.1.19
------
+------
 - Added customer note property to customer order
 
 3.1.18
------
+------
 - Added discountable property to product
 
 3.1.17
------
+------
 - Fixed setting paramaters in file handler
 
 3.1.16
------
+------
 - Added additional handling time property
 - Added calculate handling time method
 
 3.1.15
------
+------
 - Added possibility to change log formatter
 - Fixed compatibility to Symfony event-dispatcher 5 
 
 3.1.14
------
+------
 - Removed incompatible symfony/event-dispatcher version from composer
 
 3.1.13
------
+------
 - Removed stripslashes call
 
 3.1.12
------
+------
 - Removed log level and display errors calls in error handler
 - Removed deprecated get_magic_quotes_gpc call
 - Switched order in dispatch (symfony event) calls to prevent deprecated messages
@@ -41,11 +46,11 @@
 - Changed doctrine array collection to array
 
 3.1.11
------
+------
 - Added locale irish in Ireland
 
 3.1.10
------
+------
 - Removed infinity loop in session class to avoid warning
 
 3.1.9
