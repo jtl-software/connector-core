@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class ProductPrice extends DataModel
@@ -63,6 +63,7 @@ class ProductPrice extends DataModel
 
     /**
      * @var double
+     * @Serializer\SkipWhenEmpty
      * @Serializer\Type("double")
      * @Serializer\SerializedName("vat")
      * @Serializer\Accessor(getter="getVat",setter="setVat")
@@ -205,7 +206,7 @@ class ProductPrice extends DataModel
         $this->items[] = $item;
         return $this;
     }
-    
+
     /**
      * @param array $items
      * @return ProductPrice
@@ -215,7 +216,7 @@ class ProductPrice extends DataModel
         $this->items = $items;
         return $this;
     }
-    
+
     /**
      * @return ProductPriceItem[]
      */
@@ -231,5 +232,17 @@ class ProductPrice extends DataModel
     {
         $this->items = array();
         return $this;
+    }
+
+    /**
+     * @param array|string[] $publics
+     * @return stdClass|\stdClass
+     */
+    public function getPublic(array $publics = array('fields', 'isEncrypted', 'identities', '_type'))
+    {
+        $publics[] = 'vat';
+        $publics[] = 'sku';
+
+        return parent::getPublic($publics);
     }
 }
