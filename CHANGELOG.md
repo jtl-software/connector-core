@@ -1,3 +1,7 @@
+3.1.22
+------
+- Added vat and sku in product quicsync models to publics for not getting serialized
+
 3.1.21
 ------
 - Added sku and vat to product price model
