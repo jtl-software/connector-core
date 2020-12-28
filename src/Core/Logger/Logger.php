@@ -88,6 +88,10 @@ class Logger extends \Monolog\Logger
      */
     public static function addLogProcessor(ProcessorInterface $processor)
     {
+        foreach (LoggerFactory::getAll() as $logger) {
+            $logger->pushProcessor($processor);
+        }
+
         self::$logProcessors[] = $processor;
     }
 
