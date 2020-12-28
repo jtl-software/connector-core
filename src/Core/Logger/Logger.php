@@ -10,6 +10,7 @@ use jtl\Connector\Core\IO\Path;
 use Monolog\Formatter\JsonFormatter;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Handler\StreamHandler;
+use Monolog\Processor\ProcessorInterface;
 
 class Logger extends \Monolog\Logger
 {
@@ -21,7 +22,15 @@ class Logger extends \Monolog\Logger
     const CHANNEL_RPC = 'rpc';
     const CHANNEL_SECURITY = 'security';
 
+    /**
+     * @var string
+     */
     protected static $format = '';
+
+    /**
+     * @var array
+     */
+    protected static $logProcessors = [];
 
     /**
      * Adds a log record at an arbitrary level.
@@ -57,6 +66,10 @@ class Logger extends \Monolog\Logger
             }
 
             $logger->pushHandler($handler);
+
+            foreach (self::$logProcessors as $processor) {
+                $logger->pushProcessor($processor);
+            }
         }
 
         return $logger;
@@ -68,6 +81,14 @@ class Logger extends \Monolog\Logger
     public static function setFormat(string $format)
     {
         self::$format = $format;
+    }
+
+    /**
+     * @param ProcessorInterface $processor
+     */
+    public static function addLogProcessor(ProcessorInterface $processor)
+    {
+        self::$logProcessors[] = $processor;
     }
 
     /**
