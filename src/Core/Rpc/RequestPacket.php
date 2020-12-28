@@ -120,7 +120,7 @@ class RequestPacket extends Packet
      *
      * @param string $jtlrpc
      * @throws RpcException
-     * @return \jtl\Connector\Core\Rpc\RequestPacket|multitype:\jtl\Connector\Core\Rpc\RequestPacket
+     * @return RequestPacket|multitype:\jtl\Connector\Core\Rpc\RequestPacket
      */
     public static function build($jtlrpc)
     {
@@ -134,40 +134,11 @@ class RequestPacket extends Packet
                     ->build();
 
                 return $serializer->deserialize($jtlrpc, 'jtl\Connector\Core\Rpc\RequestPacket', 'json');
-                
-                /*
-                $data = Json::decode($jtlrpc);
-    
-                // Single Mode
-                if (is_object($data)) {
-                    $requestpacket = new RequestPacket();
-                    $requestpacket->setOptions($data);
-    
-                    return $requestpacket;
-                }
-    
-                // Batch Mode
-                elseif (is_array($data)) {
-                    $requestpackets = array();
-                    foreach ($data as $packet) {
-                        $requestpacket = new RequestPacket();
-                        $requestpacket->setOptions($packet);
-                        
-                        $requestpackets[] = $requestpacket;
-                    }
-    
-                    return $requestpackets;
-                }
-                else {
-                    throw new RpcException("Invalid Request", -32600);
-                }
-                */
-            } catch (RpcException $exc) {
+
+            } catch (\Throwable $exc) {
                 Logger::write(ExceptionFormatter::format($exc), Logger::ERROR, 'global');
 
                 throw $exc;
-            } catch (\Exception $exc) {
-                throw new RpcException("Parse error", -32700);
             }
         } else {
             throw new RpcException("Invalid Request", -32600);
