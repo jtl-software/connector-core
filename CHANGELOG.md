@@ -1,3 +1,8 @@
+2.7.12
+------
+- Added possibility to extend log channels with log processors
+- Removed error silencing in rpc request packet
+
 2.7.11
 ------
 - Moved initializing log handler in static logger class
