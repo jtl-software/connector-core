@@ -1,10 +1,15 @@
+3.1.24
+------
+- Added possibility to extend log channels with log processors
+- Removed error silencing in rpc request packet
+
 3.1.23
 ------
 - Moved initializing log handler in static logger class
 
 3.1.22
 ------
-- Added vat and sku in product quicsync models to publics for not getting serialized
+- Added vat and sku in product quicksync models to publics for not getting serialized
 
 3.1.21
 ------
