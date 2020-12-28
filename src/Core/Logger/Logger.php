@@ -33,18 +33,6 @@ class Logger extends \Monolog\Logger
      */
     public static function write($message, $level = self::ERROR, $channel = self::CHANNEL_GLOBAL)
     {
-        $forceWriting = false;
-        if (function_exists('Application') && !is_null(Application()->getConfig())) {
-            try {
-                $forceWriting = Application()->getConfig()->get('developer_logging');
-            } catch (\Exception $e) {
-            }
-        }
-
-        if (!$forceWriting && $level == self::DEBUG && getenv('APPLICATION_ENV') !== 'development') {
-            return null;
-        }
-
         $log = self::getLogger($channel);
 
         return @$log->log($level, $message);
@@ -60,7 +48,8 @@ class Logger extends \Monolog\Logger
     {
         $logger = LoggerFactory::get($channel);
         if (!$logger->isHandling(Logger::DEBUG)) {
-            $handler = new RotatingFileHandler(self::createLogPath($channel), 2);
+            $logLevel = self::isDeveloperLogging() ? self::DEBUG : self::INFO;
+            $handler = new RotatingFileHandler(self::createLogPath($channel), 2, $logLevel);
             $formatterClass = sprintf('Monolog\Formatter\%sFormatter', ucfirst(self::$format));
 
             if (class_exists($formatterClass)) {
@@ -99,5 +88,21 @@ class Logger extends \Monolog\Logger
         $pathParts[] = sprintf('%s.log', $channel);
 
         return implode('/', $pathParts);
+    }
+
+    /**
+     * @return bool
+     */
+    protected static function isDeveloperLogging(): bool
+    {
+        $developerLogging = false;
+        if (function_exists('Application') && !is_null(Application()->getConfig())) {
+            try {
+                $developerLogging = (bool)Application()->getConfig()->get('developer_logging');
+            } catch (\Exception $e) {
+            }
+        }
+
+        return $developerLogging;
     }
 }
