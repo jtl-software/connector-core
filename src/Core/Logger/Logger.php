@@ -37,36 +37,15 @@ class Logger extends \Monolog\Logger
         if (function_exists('Application') && !is_null(Application()->getConfig())) {
             try {
                 $forceWriting = Application()->getConfig()->get('developer_logging');
-            } catch (\Exception $e) { }
+            } catch (\Exception $e) {
+            }
         }
 
         if (!$forceWriting && $level == self::DEBUG && getenv('APPLICATION_ENV') !== 'development') {
             return null;
         }
 
-        if (defined('LOG_DIR')) {
-            $path = array(
-                LOG_DIR,
-                "{$channel}.log"
-            );
-        }
-        else {
-            $path = array(
-                CONNECTOR_DIR,
-                'logs',
-                "{$channel}.log"
-            );
-        }
-
         $log = self::getLogger($channel);
-        if (!$log->isHandling($level)) {
-            $handler = new RotatingFileHandler(implode(DIRECTORY_SEPARATOR, $path), 2, $level);
-            $formatterClass = sprintf('Monolog\Formatter\%sFormatter', ucfirst(self::$format));
-            if(class_exists($formatterClass)) {
-                $handler->setFormatter(new $formatterClass());
-            }
-            $log->pushHandler($handler);
-        }
 
         return @$log->log($level, $message);
     }
@@ -77,9 +56,21 @@ class Logger extends \Monolog\Logger
      * @param string $channel The log channel
      * @return \Monolog\Logger
      */
-    public static function getLogger($channel)
+    public static function getLogger(string $channel): \Monolog\Logger
     {
-        return LoggerFactory::get($channel);
+        $logger = LoggerFactory::get($channel);
+        if (!$logger->isHandling(Logger::DEBUG)) {
+            $handler = new RotatingFileHandler(self::createLogPath($channel), 2);
+            $formatterClass = sprintf('Monolog\Formatter\%sFormatter', ucfirst(self::$format));
+
+            if (class_exists($formatterClass)) {
+                $handler->setFormatter(new $formatterClass());
+            }
+
+            $logger->pushHandler($handler);
+        }
+
+        return $logger;
     }
 
     /**
@@ -88,5 +79,25 @@ class Logger extends \Monolog\Logger
     public static function setFormat(string $format)
     {
         self::$format = $format;
+    }
+
+    /**
+     * @param string $channel
+     * @return string
+     */
+    protected static function createLogPath(string $channel): string
+    {
+        $pathParts = [];
+
+        if (defined('LOG_DIR')) {
+            $pathParts[] = LOG_DIR;
+        } else {
+            $pathParts[] = CONNECTOR_DIR;
+            $pathParts[] = 'logs';
+        }
+
+        $pathParts[] = sprintf('%s.log', $channel);
+
+        return implode('/', $pathParts);
     }
 }
