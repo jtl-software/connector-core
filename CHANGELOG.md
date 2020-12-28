@@ -1,3 +1,7 @@
+2.7.11
+------
+- Moved initializing log handler in static logger class
+
 2.7.10
 ------
 - Added vat and sku in product quicsync models to publics for not getting serialized
