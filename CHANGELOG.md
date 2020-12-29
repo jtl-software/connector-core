@@ -1,3 +1,7 @@
+2.7.13
+------
+- Fixed check for log channel handling
+
 2.7.12
 ------
 - Added possibility to extend log channels with log processors
