@@ -1,3 +1,7 @@
+3.1.25
+------
+- Fixed check for log channel handling
+
 3.1.24
 ------
 - Added possibility to extend log channels with log processors
