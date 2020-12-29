@@ -56,8 +56,8 @@ class Logger extends \Monolog\Logger
     public static function getLogger(string $channel): \Monolog\Logger
     {
         $logger = LoggerFactory::get($channel);
-        if (!$logger->isHandling(Logger::DEBUG)) {
-            $logLevel = self::isDeveloperLogging() ? self::DEBUG : self::INFO;
+        $logLevel = self::isDeveloperLogging() ? self::DEBUG : self::INFO;
+        if (!$logger->isHandling($logLevel)) {
             $handler = new RotatingFileHandler(self::createLogPath($channel), 2, $logLevel);
             $formatterClass = sprintf('Monolog\Formatter\%sFormatter', ucfirst(self::$format));
 
