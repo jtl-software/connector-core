@@ -2,7 +2,6 @@
 
 namespace Jtl\Connector\Core\Model\Generator;
 
-
 abstract class AbstractI18nFactory extends AbstractModelFactory
 {
     protected $usedLanguages = [];
@@ -14,7 +13,7 @@ abstract class AbstractI18nFactory extends AbstractModelFactory
     public function makeOneArray(array $override = []): array
     {
         $languageIsoAppendix = [];
-        if(!isset($override['languageIso'])) {
+        if (!isset($override['languageIso'])) {
             while (true) {
                 $languageIso = $this->faker->languageCode;
                 if (!in_array($languageIso, $this->usedLanguages, true)) {

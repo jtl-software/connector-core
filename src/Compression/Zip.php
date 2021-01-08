@@ -6,6 +6,7 @@
 namespace Jtl\Connector\Core\Compression;
 
 use Jtl\Connector\Core\Exception\CompressionException;
+use Jtl\Connector\Core\Exception\FileNotFoundException;
 use Jtl\Connector\Core\Exception\NotImplementedException;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 
@@ -18,12 +19,11 @@ use Symfony\Component\Finder\Exception\AccessDeniedException;
 class Zip
 {
     /**
-     * @param $sourceFile
-     * @param $targetFolder
+     * @param string $sourceFile
+     * @param string $targetFolder
      * @return bool
      * @throws CompressionException
-     * @throws \FileNotFoundException
-     * @throws \InvalidArgumentException
+     * @throws FileNotFoundException
      */
     public function extract(string $sourceFile, string $targetFolder): bool
     {
@@ -32,7 +32,7 @@ class Zip
         }
 
         if (!file_exists($sourceFile)) {
-            throw new \FileNotFoundException(sprintf('File (%s) not found', $sourceFile));
+            throw new FileNotFoundException(sprintf('File (%s) not found', $sourceFile));
         }
 
         if (!is_dir($targetFolder) || !is_writeable($targetFolder)) {

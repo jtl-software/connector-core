@@ -113,7 +113,7 @@ class Category extends AbstractIdentity implements IdentificationInterface
             }
         }
 
-        if (!empty($name)) {
+        if ($name !== '') {
             $strings[] = sprintf('Name = %s', $name);
         }
 

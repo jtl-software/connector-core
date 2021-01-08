@@ -6,6 +6,8 @@
 
 namespace Jtl\Connector\Core\Model;
 
+use Jtl\Connector\Core\Exception\FeaturesException;
+
 class Features extends AbstractModel
 {
     /**
@@ -47,6 +49,8 @@ class Features extends AbstractModel
         if ($this->hasEntity($name)) {
             return $this->entities[$name];
         }
+
+        throw FeaturesException::entityNotFound($name);
     }
 
     /**
@@ -91,12 +95,15 @@ class Features extends AbstractModel
     /**
      * @param string $name
      * @return FeatureFlag
+     * @throws FeaturesException
      */
     public function getFlag(string $name): FeatureFlag
     {
         if ($this->hasFlag($name)) {
             return $this->flags[$name];
         }
+
+        throw FeaturesException::flagNotFound($name);
     }
 
     /**

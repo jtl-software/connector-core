@@ -3,7 +3,6 @@
 
 namespace Jtl\Connector\Core\Model\Generator;
 
-
 use Jtl\Connector\Core\Model\SpecificValueI18n;
 
 class SpecificValueI18nFactory extends AbstractI18nFactory

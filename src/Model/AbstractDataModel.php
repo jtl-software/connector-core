@@ -164,6 +164,8 @@ abstract class AbstractDataModel extends AbstractModel
                 }
             }
         }
+
+        return $this;
     }
 
     protected function setProperty($name, $value, $type): AbstractDataModel

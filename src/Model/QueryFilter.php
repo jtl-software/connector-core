@@ -33,7 +33,7 @@ class QueryFilter
     /**
      * Query item filter (where)
      *
-     * @var multiple: string
+     * @var array<string, string>
      * @Serializer\Type("array<string, string>")
      * @Serializer\SerializedName("filters")
      */
