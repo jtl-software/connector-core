@@ -16,7 +16,7 @@ class ConfigException extends \Exception
      */
     public static function keyIsEmpty(): self
     {
-        return new static('Key must contain at least one character', self::EMPTY_KEY);
+        return new self('Key must contain at least one character', self::EMPTY_KEY);
     }
 
     /**
@@ -25,7 +25,7 @@ class ConfigException extends \Exception
      */
     public static function unknownType(string $type): self
     {
-        return new static(sprintf('Parameter data type (%s) does not exist', $type), self::UNKNOWN_TYPE);
+        return new self(sprintf('Parameter data type (%s) does not exist', $type), self::UNKNOWN_TYPE);
     }
 
     /**
@@ -35,7 +35,7 @@ class ConfigException extends \Exception
      */
     public static function wrongType(string $expectedType, string $givenType): self
     {
-        return new static(sprintf('Wrong parameter data type. %s was expected but %s is given', $expectedType, $givenType), self::WRONG_TYPE);
+        return new self(sprintf('Wrong parameter data type. %s was expected but %s is given', $expectedType, $givenType), self::WRONG_TYPE);
     }
 
     /**
@@ -44,7 +44,7 @@ class ConfigException extends \Exception
      */
     public static function unknownParameter(string $key): self
     {
-        return new static(sprintf('Parameter (%s) does not exist', $key), self::UNKNOWN_PARAMETER);
+        return new self(sprintf('Parameter (%s) does not exist', $key), self::UNKNOWN_PARAMETER);
     }
 
     /**
@@ -63,6 +63,6 @@ class ConfigException extends \Exception
             $msg .= sprintf(' The required properties "%s" are missing.', implode(', ', $missingRequiredProperties));
         }
 
-        return new static($msg, self::SCHEMA_VALIDATION_ERRORS);
+        return new self($msg, self::SCHEMA_VALIDATION_ERRORS);
     }
 }

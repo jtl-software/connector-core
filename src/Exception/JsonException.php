@@ -18,7 +18,7 @@ class JsonException extends \RuntimeException
      */
     public static function encoding($lastErrorMessage)
     {
-        return new static(sprintf("Error while encoding into JSON: %s", $lastErrorMessage), static::ENCODING_ERROR);
+        return new self(sprintf("Error while encoding into JSON: %s", $lastErrorMessage), static::ENCODING_ERROR);
     }
 
     /**
@@ -32,6 +32,6 @@ class JsonException extends \RuntimeException
         if (!is_null($jsonString)) {
             $msg = sprintf("Error while decoding JSON: %s" . \PHP_EOL . "String: %s", $lastErrorMessage, $jsonString);
         }
-        return new static($msg, static::DECODING_ERROR);
+        return new self($msg, static::DECODING_ERROR);
     }
 }

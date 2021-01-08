@@ -31,9 +31,18 @@ abstract class Packet extends AbstractModel
     protected $id = '';
 
     /**
+     * Packet constructor.
+     */
+    final public function __construct()
+    {
+    }
+
+    /**
      * @return boolean
      */
     abstract public function isValid(): bool;
+
+
 
     /**
      * Getter for $jtlrpc

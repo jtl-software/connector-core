@@ -41,6 +41,6 @@ class Response
      */
     public static function create($result): Response
     {
-        return new static($result);
+        return new self($result);
     }
 }

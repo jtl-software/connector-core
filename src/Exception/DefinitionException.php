@@ -25,7 +25,7 @@ class DefinitionException extends \Exception
     public static function modelMappingNotExists(string $modelName): self
     {
         $msg = sprintf('Identity type for model (%s) not found', $modelName);
-        return new static($msg, self::MODEL_MAPPING_NOT_EXISTS);
+        return new self($msg, self::MODEL_MAPPING_NOT_EXISTS);
     }
 
     /**
@@ -35,7 +35,7 @@ class DefinitionException extends \Exception
     public static function identityTypeMappingNotExists(int $identityType): self
     {
         $msg = sprintf('Model for identity type (%s) not found', $identityType);
-        return new static($msg, self::IDENTITY_TYPE_MAPPING_NOT_EXISTS);
+        return new self($msg, self::IDENTITY_TYPE_MAPPING_NOT_EXISTS);
     }
 
     /**
@@ -45,7 +45,7 @@ class DefinitionException extends \Exception
     public static function unknownIdentityType(int $identityType): self
     {
         $msg = sprintf('Identity type (%s) does not exist', $identityType);
-        return new static($msg, self::UNKNOWN_IDENTITY_TYPE);
+        return new self($msg, self::UNKNOWN_IDENTITY_TYPE);
     }
 
     /**
@@ -56,7 +56,7 @@ class DefinitionException extends \Exception
     public static function unknownIdentityProperty(string $modelName, string $propertyName): self
     {
         $msg = sprintf('Unknown identity property (%s) in model (%s)', $propertyName, $modelName);
-        return new static($msg, self::UNKNOWN_IDENTITY_PROPERTY);
+        return new self($msg, self::UNKNOWN_IDENTITY_PROPERTY);
     }
 
     /**
@@ -66,7 +66,7 @@ class DefinitionException extends \Exception
     public static function unknownModel(string $modelName): self
     {
         $msg = sprintf('Model (%s) does not exist', $modelName);
-        return new static($msg, self::UNKNOWN_MODEL);
+        return new self($msg, self::UNKNOWN_MODEL);
     }
 
     /**
@@ -76,7 +76,7 @@ class DefinitionException extends \Exception
     public static function unknownController(string $controllerName): self
     {
         $msg = sprintf('Unknown controller (%s)', $controllerName);
-        return new static($msg, ErrorCode::UNKNOWN_CONTROLLER);
+        return new self($msg, ErrorCode::UNKNOWN_CONTROLLER);
     }
 
     /**
@@ -86,7 +86,7 @@ class DefinitionException extends \Exception
     public static function unknownAction(string $action): self
     {
         $msg = sprintf('Unknown action (%s)', $action);
-        return new static($msg, ErrorCode::UNKNOWN_ACTION);
+        return new self($msg, ErrorCode::UNKNOWN_ACTION);
     }
 
     /**
@@ -96,7 +96,7 @@ class DefinitionException extends \Exception
     public static function unknownMoment(string $moment): self
     {
         $msg = sprintf('Unknown moment (%s)', $moment);
-        return new static($msg, self::UNKNOWN_MOMENT);
+        return new self($msg, self::UNKNOWN_MOMENT);
     }
 
     /**
@@ -106,7 +106,7 @@ class DefinitionException extends \Exception
     public static function unknownRelationType(string $relationType): self
     {
         $msg = sprintf('Unknown relation type (%s)', $relationType);
-        return new static($msg, self::UNKNOWN_RELATION_TYPE);
+        return new self($msg, self::UNKNOWN_RELATION_TYPE);
     }
 
     /**
@@ -114,7 +114,7 @@ class DefinitionException extends \Exception
      */
     public static function relationTypeCannotBeEmpty(): self
     {
-        return new static("Relation type cannot be empty.", self::RELATION_TYPE_CANNOT_BE_EMPTY);
+        return new self("Relation type cannot be empty.", self::RELATION_TYPE_CANNOT_BE_EMPTY);
     }
 
     /**
@@ -124,6 +124,6 @@ class DefinitionException extends \Exception
     public static function unknownRpcMethod(string $rpcMethod): self
     {
         $msg = sprintf('Unknown rpc method (%s)', $rpcMethod);
-        return new static($msg, self::UNKNOWN_RPC_METHOD);
+        return new self($msg, self::UNKNOWN_RPC_METHOD);
     }
 }

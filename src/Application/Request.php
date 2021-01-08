@@ -73,6 +73,6 @@ class Request
      */
     public static function create(string $controller, string $action, array $params): Request
     {
-        return new static($controller, $action, $params);
+        return new self($controller, $action, $params);
     }
 }

@@ -98,7 +98,7 @@ class Method
         $offset = $partsCount === 3 ? 1 : 0;
         $controller = Str::toPascalCase($parts[0 + $offset]);
         $action = Str::toCamelCase($parts[1 + $offset]);
-        return new static($rpcMethod, $controller, $action);
+        return new self($rpcMethod, $controller, $action);
     }
 
     /**

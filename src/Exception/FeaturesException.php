@@ -15,7 +15,7 @@ class FeaturesException extends \Exception
      */
     public static function entityNotFound(string $entityName): self
     {
-        return new static(sprintf('Entity "%s" not found', $entityName), self::ENTITY_NOT_FOUND);
+        return new self(sprintf('Entity "%s" not found', $entityName), self::ENTITY_NOT_FOUND);
     }
 
     /**
@@ -24,6 +24,6 @@ class FeaturesException extends \Exception
      */
     public static function flagNotFound(string $flagName): self
     {
-        return new static(sprintf('Flag "%s" not found', $flagName), self::FLAG_NOT_FOUND);
+        return new self(sprintf('Flag "%s" not found', $flagName), self::FLAG_NOT_FOUND);
     }
 }

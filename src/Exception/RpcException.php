@@ -22,7 +22,7 @@ class RpcException extends \Exception
      */
     public static function parseError(): self
     {
-        return new static("Parse error", ErrorCode::PARSE_ERROR);
+        return new self("Parse error", ErrorCode::PARSE_ERROR);
     }
 
     /**
@@ -30,7 +30,7 @@ class RpcException extends \Exception
      */
     public static function invalidRequest(): self
     {
-        return new static('Invalid request', ErrorCode::INVALID_REQUEST);
+        return new self('Invalid request', ErrorCode::INVALID_REQUEST);
     }
 
     /**
@@ -39,7 +39,7 @@ class RpcException extends \Exception
      */
     public static function invalidMethod(string $method): self
     {
-        return new static(sprintf('Invalid method (%s)', $method), ErrorCode::INVALID_METHOD);
+        return new self(sprintf('Invalid method (%s)', $method), ErrorCode::INVALID_METHOD);
     }
 
     /**
@@ -47,6 +47,6 @@ class RpcException extends \Exception
      */
     public static function unpreparedResponse(): self
     {
-        return new static('Response is not prepared', ErrorCode::SERVER_ERROR);
+        return new self('Response is not prepared', ErrorCode::SERVER_ERROR);
     }
 }

@@ -184,6 +184,6 @@ class ConfigParameter
      */
     public static function create(string $key, string $type = self::TYPE_STRING, bool $required = true, $global = false, $defaultValue = null): ConfigParameter
     {
-        return (new static($key, $type, $required, $global))->setDefaultValue($defaultValue);
+        return (new self($key, $type, $required, $global))->setDefaultValue($defaultValue);
     }
 }

@@ -190,6 +190,6 @@ class Features extends AbstractModel
             $featureFlags[] = new FeatureFlag($name, $value);
         }
 
-        return new static($featureEntities, $featureFlags);
+        return new self($featureEntities, $featureFlags);
     }
 }

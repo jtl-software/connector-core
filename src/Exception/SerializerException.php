@@ -11,6 +11,6 @@ class SerializerException extends \Exception
      */
     public static function wrongEndpointFormat(string $endpoint): SerializerException
     {
-        return new static(sprintf('Endpoint "%s" has the wrong format', $endpoint), self::WRONG_ENDPOINT_FORMAT);
+        return new self(sprintf('Endpoint "%s" has the wrong format', $endpoint), self::WRONG_ENDPOINT_FORMAT);
     }
 }

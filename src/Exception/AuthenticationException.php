@@ -10,7 +10,7 @@ class AuthenticationException extends \Exception
      */
     public static function failed(): AuthenticationException
     {
-        return new static('Authentication failed', ErrorCode::AUTHENTICATION_FAILED);
+        return new self('Authentication failed', ErrorCode::AUTHENTICATION_FAILED);
     }
 
     /**
@@ -18,6 +18,6 @@ class AuthenticationException extends \Exception
      */
     public static function tokenMissing(): AuthenticationException
     {
-        return new static('Token is missing', ErrorCode::AUTHENTICATION_FAILED);
+        return new self('Token is missing', ErrorCode::AUTHENTICATION_FAILED);
     }
 }

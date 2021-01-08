@@ -13,6 +13,6 @@ class LoggerException extends \Exception
      */
     public static function formatterNotExists(string $className): self
     {
-        return new static(sprintf('Formatter class "%s" does not exist', $className), self::FORMATTER_NOT_EXISTS);
+        return new self(sprintf('Formatter class "%s" does not exist', $className), self::FORMATTER_NOT_EXISTS);
     }
 }
