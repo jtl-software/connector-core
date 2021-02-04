@@ -1,3 +1,7 @@
+4.0.8
+-----
+- Replaced faker dependency, due to missing compatiblity with PHP 8
+
 4.0.7
 -----
 - Added simple token validator
