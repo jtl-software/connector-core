@@ -1,3 +1,7 @@
+4.0.9
+-----
+- Removed outdated properties and methods from abstract data model
+
 4.0.8
 -----
 - Replaced faker dependency, due to missing compatiblity with PHP 8
