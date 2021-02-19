@@ -88,7 +88,7 @@ class ErrorHandler implements IErrorHandler
 
     public function getErrorHandler()
     {
-        return function($errno, $errstr, $errfile, $errline, $errcontext) {
+        return function($errno, $errstr, $errfile, $errline) {
             $types = array(
                 E_ERROR => array(Logger::ERROR, 'E_ERROR'),
                 E_WARNING => array(Logger::WARNING, 'E_WARNING'),

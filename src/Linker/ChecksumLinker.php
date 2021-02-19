@@ -54,7 +54,7 @@ class ChecksumLinker
                             self::$loader->write($model->getId()->getEndpoint(), $checksum->getType(), $checksum->getHost());
                         }
                     } else {
-                        Logger::write(sprintf('New Checksum with empty endpoint type (%s)', $model->getId()->getEndpoint(), $type), Logger::DEBUG, 'checksum');
+                        Logger::write(sprintf('New Checksum with empty endpoint type (%s) type (%s)', $model->getId()->getEndpoint(), $type), Logger::DEBUG, 'checksum');
                         $checksum->setHasChanged(true);
                     }
                 }

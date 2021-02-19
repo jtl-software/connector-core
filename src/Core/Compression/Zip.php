@@ -8,13 +8,14 @@ namespace jtl\Connector\Core\Compression;
 
 use jtl\Connector\Core\Exception\CompressionException;
 use jtl\Connector\Core\Exception\NotImplementedException;
+use Noodlehaus\Exception\FileNotFoundException;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 /**
  * Zip
  *
  * @access public
- * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
+ * @author Daniel Bï¿½hmer <daniel.boehmer@jtl-software.de>
  */
 class Zip
 {
@@ -23,7 +24,7 @@ class Zip
      * @param $targetFolder
      * @return bool
      * @throws CompressionException
-     * @throws \FileNotFoundException
+     * @throws FileNotFoundException
      * @throws \InvalidArgumentException
      */
     public function extract($sourceFile, $targetFolder)
@@ -33,7 +34,7 @@ class Zip
         }
 
         if (!file_exists($sourceFile)) {
-            throw new \FileNotFoundException(sprintf('File (%s) not found', $sourceFile));
+            throw new FileNotFoundException(sprintf('File (%s) not found', $sourceFile));
         }
 
         if (!is_dir($targetFolder) || !is_writeable($targetFolder)) {

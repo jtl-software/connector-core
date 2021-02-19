@@ -76,7 +76,7 @@ class TaxClass extends DataModel
      * @return \jtl\Connector\Model\TaxClass
      * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
-    public function setIsDefault(boolean $isDefault)
+    public function setIsDefault(bool $isDefault)
     {
         return $this->setProperty('isDefault', $isDefault, 'boolean');
     }
