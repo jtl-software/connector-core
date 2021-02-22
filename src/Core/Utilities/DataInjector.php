@@ -24,7 +24,7 @@ final class DataInjector
                 if (!is_object($data)) {
                     throw new \InvalidArgumentException('no data object given');
                 }
-                self::injectIntoObject($data, $key, $value);
+                self::injectIntoObject($data, $key, $value, $onSubs);
                 break;
         }
     }
@@ -61,7 +61,7 @@ final class DataInjector
         }
     }
     
-    protected static function injectIntoObject(&$data, $key, $value)
+    protected static function injectIntoObject(&$data, $key, $value, $onSubs)
     {
         if ($onSubs) {
             $dataKeys = array_keys($data);

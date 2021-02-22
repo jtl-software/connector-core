@@ -56,7 +56,7 @@ abstract class DataModel extends Model
      * @param string $key
      * @return mixed:string|NULL
      */
-    public function getField($toWawi = false, $key)
+    public function getField(bool $toWawi, $key)
     {
         if ($this->fields !== null && is_array($this->fields)) {
             $fields = $this->fields;

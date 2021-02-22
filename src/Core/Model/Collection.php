@@ -73,24 +73,24 @@ class Collection implements \IteratorAggregate, \Countable
         unset($this->list[$key]);
     }
 
-    public function getAlpha($key, $default = '', $deep = false)
+    public function getAlpha($key, $default = '')
     {
-        return preg_replace('/[^[:alpha:]]/', '', $this->get($key, $default, $deep));
+        return preg_replace('/[^[:alpha:]]/', '', $this->get($key, $default));
     }
 
-    public function getAlnum($key, $default = '', $deep = false)
+    public function getAlnum($key, $default = '')
     {
-        return preg_replace('/[^[:alnum:]]/', '', $this->get($key, $default, $deep));
+        return preg_replace('/[^[:alnum:]]/', '', $this->get($key, $default));
     }
 
     public function getDigits($key, $default = '', $deep = false)
     {
-        return str_replace(['-', '+'], '', $this->filter($key, $default, $deep, FILTER_SANITIZE_NUMBER_INT));
+        return str_replace(['-', '+'], '', $this->getAlnum($key, $default));
     }
 
     public function getInt($key, $default = 0, $deep = false)
     {
-        return (int) $this->get($key, $default, $deep);
+        return (int) $this->getAlnum($key, $default);
     }
 
     public function getIterator()

@@ -595,7 +595,7 @@ class Application extends CoreApplication
      * @throws \jtl\Connector\Core\Exception\DatabaseException
      * @throws \jtl\Connector\Core\Exception\SessionException
      */
-    protected function startSession($sessionId = null, $method)
+    protected function startSession($sessionId, $method)
     {
         if ($sessionId === null && $method !== null && $method !== 'core.connector.auth') {
             throw new SessionException('No session');

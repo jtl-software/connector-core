@@ -610,7 +610,7 @@ class IdentityLinker
      * @throws \jtl\Connector\Exception\LinkerException
      * @return boolean
      */
-    public function exists($endpointId = null, $hostId = null, $modelName, $property, $validate = false)
+    public function exists($endpointId, $hostId, $modelName, $property, $validate = false)
     {
         if (!$this->isValidEndpointId($endpointId) && !$this->isValidHostId($hostId)) {
             throw new LinkerException(sprintf(
@@ -693,7 +693,7 @@ class IdentityLinker
      * @param string $modelName
      * @return boolean
      */
-    public function delete($endpointId = null, $hostId = null, $modelName)
+    public function delete($endpointId, $hostId, $modelName)
     {
         $type = $this->getType($modelName);
 
@@ -881,7 +881,7 @@ class IdentityLinker
      * @param int $type
      * @param string $cacheType
      */
-    protected function deleteCache($endpointId = null, $hostId = null, $type, $cacheType)
+    protected function deleteCache($endpointId, $hostId, $type, $cacheType)
     {
         // Debug
         Logger::write(sprintf(

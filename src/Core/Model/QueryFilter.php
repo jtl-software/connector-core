@@ -33,7 +33,7 @@ class QueryFilter
     /**
      * Query item filter (where)
      *
-     * @var multiple: string
+     * @var string[]
      * @Serializer\Type("array<string, string>")
      * @Serializer\SerializedName("filters")
      */
@@ -84,8 +84,8 @@ class QueryFilter
     /**
      * Filters Setter
      *
-     * @param multiple: string $filters
-     * @return \jtl\Connector\Model\QueryFilter
+     * @param string[] $filters
+     * @return QueryFilter
      */
     public function setFilters(array $filters)
     {

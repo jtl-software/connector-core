@@ -32,6 +32,7 @@ class Connector extends Singleton implements IEndpointConnector
     protected $checksumLoader;
     protected $eventDispatcher;
     protected $method;
+    protected $action;
     protected $useSuperGlobals = true;
     protected $modelNamespace = 'jtl\Connector\Model';
 
