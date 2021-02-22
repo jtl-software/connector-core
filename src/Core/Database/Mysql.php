@@ -285,7 +285,7 @@ class Mysql implements IDatabase
     {
         $result = $this->_db->query($query);
         if ($result) {
-            $rows = array();
+            $rows = [];
             
             switch ($return) {
                 case "assoc":
@@ -414,7 +414,7 @@ class Mysql implements IDatabase
         if (is_object($obj) && strlen($table) > 0) {
             $query = "INSERT INTO " . $this->escapeString($table) . " SET ";
     
-            $sets = array();
+            $sets = [];
             $value = "";
     
             $members = array_keys(get_object_vars($obj));
@@ -479,7 +479,7 @@ class Mysql implements IDatabase
             if ((is_array($key) && is_array($value)) || (strlen($key) > 0 && strlen($value) > 0)) {
                 $query = "UPDATE " . $this->escapeString($table) . " SET ";
                     
-                $sets = array();
+                $sets = [];
                 $membervalue = "";
                 
                 $members = array_keys(get_object_vars($obj));

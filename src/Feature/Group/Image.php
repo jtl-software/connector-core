@@ -17,13 +17,12 @@ use \jtl\Connector\Feature\Group\Base as BaseGroup;
  */
 class Image extends BaseGroup
 {
-
     const RELATIONS_KEY_NAME = 'relationTypes';
 
     /**
      * @var array
      */
-    protected $_relation_types = array();
+    protected $_relation_types = [];
 
     /**
      * Creates the instance, parses the params and will look for relation types.

@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class Category extends DataModel
@@ -38,7 +38,7 @@ class Category extends DataModel
     protected $parentCategoryId = null;
 
     /**
-     * @var boolean 
+     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isActive")
      * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
@@ -46,7 +46,7 @@ class Category extends DataModel
     protected $isActive = false;
 
     /**
-     * @var integer 
+     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("level")
      * @Serializer\Accessor(getter="getLevel",setter="setLevel")
@@ -67,7 +67,7 @@ class Category extends DataModel
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
-    protected $attributes = array();
+    protected $attributes = [];
 
     /**
      * @var \jtl\Connector\Model\CategoryCustomerGroup[]
@@ -75,7 +75,7 @@ class Category extends DataModel
      * @Serializer\SerializedName("customerGroups")
      * @Serializer\AccessType("reflection")
      */
-    protected $customerGroups = array();
+    protected $customerGroups = [];
 
     /**
      * @var \jtl\Connector\Model\CategoryI18n[]
@@ -83,7 +83,7 @@ class Category extends DataModel
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
+    protected $i18ns = [];
 
     /**
      * @var \jtl\Connector\Model\CategoryInvisibility[]
@@ -91,7 +91,7 @@ class Category extends DataModel
      * @Serializer\SerializedName("invisibilities")
      * @Serializer\AccessType("reflection")
      */
-    protected $invisibilities = array();
+    protected $invisibilities = [];
 
     /**
      * Constructor
@@ -139,7 +139,7 @@ class Category extends DataModel
     }
 
     /**
-     * @param boolean $isActive 
+     * @param boolean $isActive
      * @return \jtl\Connector\Model\Category
      */
     public function setIsActive($isActive)
@@ -148,7 +148,7 @@ class Category extends DataModel
     }
 
     /**
-     * @return boolean 
+     * @return boolean
      */
     public function getIsActive()
     {
@@ -156,7 +156,7 @@ class Category extends DataModel
     }
 
     /**
-     * @param integer $level 
+     * @param integer $level
      * @return \jtl\Connector\Model\Category
      */
     public function setLevel($level)
@@ -165,7 +165,7 @@ class Category extends DataModel
     }
 
     /**
-     * @return integer 
+     * @return integer
      */
     public function getLevel()
     {
@@ -222,7 +222,7 @@ class Category extends DataModel
      */
     public function clearAttributes()
     {
-        $this->attributes = array();
+        $this->attributes = [];
         return $this;
     }
 
@@ -259,7 +259,7 @@ class Category extends DataModel
      */
     public function clearCustomerGroups()
     {
-        $this->customerGroups = array();
+        $this->customerGroups = [];
         return $this;
     }
 
@@ -296,7 +296,7 @@ class Category extends DataModel
      */
     public function clearI18ns()
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
         return $this;
     }
 
@@ -333,7 +333,7 @@ class Category extends DataModel
      */
     public function clearInvisibilities()
     {
-        $this->invisibilities = array();
+        $this->invisibilities = [];
         return $this;
     }
 }

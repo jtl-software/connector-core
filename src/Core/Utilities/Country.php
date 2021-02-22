@@ -10,7 +10,7 @@ use \jtl\Connector\Core\Exception\CountryException;
 
 class Country
 {
-    protected static $_countries = array(
+    protected static $_countries = [
         'de' => 'deu','at' => 'aut','ch' => 'che',
         'li' => 'lie','it' => 'ita','lu' => 'lux',
         'fr' => 'fra','se' => 'swe','fi' => 'fin',
@@ -93,7 +93,7 @@ class Country
         'me' => 'mne','cd' => 'cod','gg' => 'ggy',
         'im' => 'imn','je' => 'jey','ps' => 'pse',
         'bl' => 'blm','mf' => 'maf','gs' => 'sgs'
-    );
+    ];
     
     public static function map($short = null, $long = null)
     {

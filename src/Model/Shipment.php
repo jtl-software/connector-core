@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class Shipment extends DataModel
@@ -70,7 +70,7 @@ class Shipment extends DataModel
     protected $note = '';
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("trackingUrl")
      * @Serializer\Accessor(getter="getTrackingUrl",setter="setTrackingUrl")
@@ -192,7 +192,7 @@ class Shipment extends DataModel
     }
 
     /**
-     * @param string $trackingUrl 
+     * @param string $trackingUrl
      * @return \jtl\Connector\Model\Shipment
      */
     public function setTrackingUrl($trackingUrl)
@@ -201,7 +201,7 @@ class Shipment extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getTrackingUrl()
     {

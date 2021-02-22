@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class ProductWarehouseInfo extends DataModel
@@ -30,7 +30,7 @@ class ProductWarehouseInfo extends DataModel
     protected $productId = null;
 
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("warehouseId")
      * @Serializer\Accessor(getter="getwarehouseId",setter="setwarehouseId")
@@ -46,7 +46,7 @@ class ProductWarehouseInfo extends DataModel
     protected $inflowQuantity = 0.0;
 
     /**
-     * @var double 
+     * @var double
      * @Serializer\Type("double")
      * @Serializer\SerializedName("stockLevel")
      * @Serializer\Accessor(getter="getstockLevel",setter="setstockLevel")
@@ -81,7 +81,7 @@ class ProductWarehouseInfo extends DataModel
     }
 
     /**
-     * @param Identity $warehouseId 
+     * @param Identity $warehouseId
      * @return \jtl\Connector\Model\ProductWarehouseInfo
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -91,7 +91,7 @@ class ProductWarehouseInfo extends DataModel
     }
 
     /**
-     * @return Identity 
+     * @return Identity
      */
     public function getwarehouseId()
     {
@@ -116,7 +116,7 @@ class ProductWarehouseInfo extends DataModel
     }
 
     /**
-     * @param double $stockLevel 
+     * @param double $stockLevel
      * @return \jtl\Connector\Model\ProductWarehouseInfo
      */
     public function setstockLevel($stockLevel)
@@ -125,7 +125,7 @@ class ProductWarehouseInfo extends DataModel
     }
 
     /**
-     * @return double 
+     * @return double
      */
     public function getstockLevel()
     {

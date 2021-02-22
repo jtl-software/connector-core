@@ -74,7 +74,7 @@ class ArrayExt
             }
         }
 
-        $resultArray = array();
+        $resultArray = [];
 
         foreach ($paramsInput as $row) {
             $key = $value = null;

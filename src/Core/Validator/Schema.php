@@ -21,14 +21,14 @@ class Schema
      *
      * @var mixed
      */
-    protected static $_schemaexists = array();
+    protected static $_schemaexists = [];
     
     /**
      * Json Schema Classes
      *
      * @var multiple:\jtl\Connector\Core\Validator\Json
      */
-    protected static $_jsons = array();
+    protected static $_jsons = [];
     
     /**
      * Action Validation

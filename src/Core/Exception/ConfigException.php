@@ -16,7 +16,6 @@ namespace jtl\Connector\Core\Exception;
  */
 class ConfigException extends \Exception
 {
-
     public $jtl = true;
 
     /**

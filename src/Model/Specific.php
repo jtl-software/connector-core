@@ -11,12 +11,12 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Specific is defined as a characteristic product attribute Like "color". Specifics can be used for after-search-filtering. 
+ * Specific is defined as a characteristic product attribute Like "color". Specifics can be used for after-search-filtering.
  *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class Specific extends DataModel
@@ -59,7 +59,7 @@ class Specific extends DataModel
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
+    protected $i18ns = [];
 
     /**
      * @var \jtl\Connector\Model\SpecificValue[]
@@ -67,7 +67,7 @@ class Specific extends DataModel
      * @Serializer\SerializedName("values")
      * @Serializer\AccessType("reflection")
      */
-    protected $values = array();
+    protected $values = [];
 
     /**
      * Constructor
@@ -179,7 +179,7 @@ class Specific extends DataModel
      */
     public function clearI18ns()
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
         return $this;
     }
 
@@ -216,7 +216,7 @@ class Specific extends DataModel
      */
     public function clearValues()
     {
-        $this->values = array();
+        $this->values = [];
         return $this;
     }
 }

@@ -16,10 +16,10 @@ class TaxZoneCountry extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('taxZoneId', 'Identity', null, false, true, false),
             new PropertyInfo('countryIso', 'string', '', false, false, false),
-        );
+        ];
     }
 
     public function isMain()

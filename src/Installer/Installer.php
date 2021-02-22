@@ -54,10 +54,10 @@ class Installer extends CoreApplication
      */
     protected function getInstallSteps()
     {
-        return array(
+        return [
           '\\jtl\\Connector\\Installer\\Step\\WelcomeStep',
           '\\jtl\\Connector\\Installer\\Step\\FinishStep'
-        );
+        ];
     }
 
     public function currentStep()
@@ -136,21 +136,21 @@ class Installer extends CoreApplication
         }
 
         // Creates the config instance
-        $this->config = new ConnectorConfig(array(
+        $this->config = new ConnectorConfig([
             new ConfigSystem(),
             new ConfigJson(CONNECTOR_DIR . '/config/config.json')
-        ));
+        ]);
 
         // Initialize Twig environment
-        $tplLoader = new \Twig_Loader_Filesystem(array(
+        $tplLoader = new \Twig_Loader_Filesystem([
             INSTALLER_DIR  . '/templates/',
             __DIR__ . '/../../../../install/templates/'
-        ));
-        static::$twig = new \Twig_Environment($tplLoader, array(
+        ]);
+        static::$twig = new \Twig_Environment($tplLoader, [
           'cache' => $tmpDir,
           'debug' => true,
           'auto_reload' => true
-        ));
+        ]);
         static::$twig->addExtension(new \Twig_Extension_Debug());
         static::$twig->addExtension(new \Twig_Extensions_Extension_I18n());
         static::$twig->addExtension(new TemplateGlobals());

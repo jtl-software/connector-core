@@ -25,12 +25,12 @@ final class Manager extends BaseClass
     /**
      * @var array
      */
-    protected $_methods = array();
+    protected $_methods = [];
 
     /**
      * @var array
      */
-    protected $_parameters = array();
+    protected $_parameters = [];
 
     /**
      * @var jtl\Connector\Feature\Producer

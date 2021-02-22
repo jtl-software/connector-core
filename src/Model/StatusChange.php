@@ -15,13 +15,13 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class StatusChange extends DataModel
 {
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("customerOrderId")
      * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
@@ -29,7 +29,7 @@ class StatusChange extends DataModel
     protected $customerOrderId = null;
 
     /**
-     * @var OrderStatus 
+     * @var OrderStatus
      * @Serializer\Type("string")
      * @Serializer\SerializedName("orderStatus")
      * @Serializer\Accessor(getter="getOrderStatus",setter="setOrderStatus")
@@ -37,7 +37,7 @@ class StatusChange extends DataModel
     protected $orderStatus = '';
 
     /**
-     * @var PaymentStatus 
+     * @var PaymentStatus
      * @Serializer\Type("string")
      * @Serializer\SerializedName("paymentStatus")
      * @Serializer\Accessor(getter="getPaymentStatus",setter="setPaymentStatus")
@@ -53,7 +53,7 @@ class StatusChange extends DataModel
     }
 
     /**
-     * @param Identity $customerOrderId 
+     * @param Identity $customerOrderId
      * @return \jtl\Connector\Model\StatusChange
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -63,7 +63,7 @@ class StatusChange extends DataModel
     }
 
     /**
-     * @return Identity 
+     * @return Identity
      */
     public function getCustomerOrderId()
     {
@@ -71,7 +71,7 @@ class StatusChange extends DataModel
     }
 
     /**
-     * @param string $orderStatus 
+     * @param string $orderStatus
      * @return \jtl\Connector\Model\StatusChange
      * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
@@ -81,7 +81,7 @@ class StatusChange extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getOrderStatus()
     {
@@ -89,7 +89,7 @@ class StatusChange extends DataModel
     }
 
     /**
-     * @param string $paymentStatus 
+     * @param string $paymentStatus
      * @return \jtl\Connector\Model\StatusChange
      * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
@@ -99,7 +99,7 @@ class StatusChange extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getPaymentStatus()
     {

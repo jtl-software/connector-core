@@ -13,9 +13,9 @@ class Language
     const CACHE_KEY_CONVERT = 'c';
     const CACHE_KEY_MAP = 'm';
 
-    protected static $cache = array();
+    protected static $cache = [];
 
-    protected static $locales = array(
+    protected static $locales = [
         'ar_DZ' => 'ar', 'ar_EG' => 'ar', 'ar_KW' => 'ar',
         'ar_MA' => 'ar', 'ar_SA' => 'ar', 'az_AZ' => 'az',
         'be_BY' => 'be', 'bg_BG' => 'bg', 'bn_BD' => 'bn',
@@ -48,9 +48,9 @@ class Language
         'en_JM' => 'en', 'en_PH' => 'en', 'en_ZA' => 'en',
         'en_TT' => 'en',
         'ga_IE' => 'ga'
-    );
+    ];
 
-    protected static $languages = array(
+    protected static $languages = [
         'ab' => 'abk', 'aa' => 'aar', 'af' => 'afr',
         'ak' => 'aka', 'sq' => 'alb', 'am' => 'amh',
         'ar' => 'ara', 'an' => 'arg', 'hy' => 'arm',
@@ -113,7 +113,7 @@ class Language
         'wo' => 'wol', 'fy' => 'fry', 'xh' => 'xho',
         'yi' => 'yid', 'yo' => 'yor', 'za' => 'zha',
         'zu' => 'zul'
-    );
+    ];
 
     public static function convert($short = null, $long = null)
     {

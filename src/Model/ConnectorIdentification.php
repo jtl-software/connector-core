@@ -15,13 +15,13 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class ConnectorIdentification extends DataModel
 {
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("endpointVersion")
      * @Serializer\Accessor(getter="getEndpointVersion",setter="setEndpointVersion")
@@ -29,7 +29,7 @@ class ConnectorIdentification extends DataModel
     protected $endpointVersion = '';
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("platformName")
      * @Serializer\Accessor(getter="getPlatformName",setter="setPlatformName")
@@ -37,7 +37,7 @@ class ConnectorIdentification extends DataModel
     protected $platformName = '';
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("platformVersion")
      * @Serializer\Accessor(getter="getPlatformVersion",setter="setPlatformVersion")
@@ -61,7 +61,7 @@ class ConnectorIdentification extends DataModel
     protected $serverInfo = null;
 
     /**
-     * @param string $endpointVersion 
+     * @param string $endpointVersion
      * @return \jtl\Connector\Model\ConnectorIdentification
      */
     public function setEndpointVersion($endpointVersion)
@@ -70,7 +70,7 @@ class ConnectorIdentification extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getEndpointVersion()
     {
@@ -78,7 +78,7 @@ class ConnectorIdentification extends DataModel
     }
 
     /**
-     * @param string $platformName 
+     * @param string $platformName
      * @return \jtl\Connector\Model\ConnectorIdentification
      */
     public function setPlatformName($platformName)
@@ -87,7 +87,7 @@ class ConnectorIdentification extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getPlatformName()
     {

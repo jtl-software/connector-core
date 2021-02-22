@@ -152,7 +152,7 @@ class Request
      * @param bool|true $withFolder
      * @return bool
      */
-    public static function deleteFileuploads(array $filesnames = array(), $withFolder = true)
+    public static function deleteFileuploads(array $filesnames = [], $withFolder = true)
     {
         if (count($filesnames) > 0) {
             $folder = null;

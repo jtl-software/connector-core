@@ -25,7 +25,7 @@ abstract class DataModel extends Model
      * @Serializer\Exclude
      * @Serializer\ReadOnly
      */
-    protected $fields = array();
+    protected $fields = [];
 
     /**
      * Fields Getter

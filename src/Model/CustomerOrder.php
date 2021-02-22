@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class CustomerOrder extends DataModel
@@ -57,7 +57,7 @@ class CustomerOrder extends DataModel
     const STATUS_SHIPPED = 'shipped';
 
     /**
-     * @var Identity Optional reference to customer. 
+     * @var Identity Optional reference to customer.
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("customerId")
      * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
@@ -81,7 +81,7 @@ class CustomerOrder extends DataModel
     protected $billingAddress = null;
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("carrierName")
      * @Serializer\Accessor(getter="getCarrierName",setter="setCarrierName")
@@ -97,7 +97,7 @@ class CustomerOrder extends DataModel
     protected $creationDate = null;
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("currencyIso")
      * @Serializer\Accessor(getter="getCurrencyIso",setter="setCurrencyIso")
@@ -113,7 +113,7 @@ class CustomerOrder extends DataModel
     protected $customerNote = '';
 
     /**
-     * @var DateTime 
+     * @var DateTime
      * @Serializer\Type("DateTime")
      * @Serializer\SerializedName("estimatedDeliveryDate")
      * @Serializer\Accessor(getter="getEstimatedDeliveryDate",setter="setEstimatedDeliveryDate")
@@ -121,7 +121,7 @@ class CustomerOrder extends DataModel
     protected $estimatedDeliveryDate = null;
 
     /**
-     * @var string Locale set when customerOrder was finished. Important for further E-Mail message and notification localization. 
+     * @var string Locale set when customerOrder was finished. Important for further E-Mail message and notification localization.
      * @Serializer\Type("string")
      * @Serializer\SerializedName("languageISO")
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
@@ -129,7 +129,7 @@ class CustomerOrder extends DataModel
     protected $languageISO = '';
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("note")
      * @Serializer\Accessor(getter="getNote",setter="setNote")
@@ -153,7 +153,7 @@ class CustomerOrder extends DataModel
     protected $paymentDate = null;
 
     /**
-     * @var CustomerOrderPaymentInfo 
+     * @var CustomerOrderPaymentInfo
      * @Serializer\Type("jtl\Connector\Model\CustomerOrderPaymentInfo")
      * @Serializer\SerializedName("paymentInfo")
      * @Serializer\Accessor(getter="getPaymentInfo",setter="setPaymentInfo")
@@ -161,7 +161,7 @@ class CustomerOrder extends DataModel
     protected $paymentInfo = null;
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("paymentModuleCode")
      * @Serializer\Accessor(getter="getPaymentModuleCode",setter="setPaymentModuleCode")
@@ -169,7 +169,7 @@ class CustomerOrder extends DataModel
     protected $paymentModuleCode = '';
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("paymentStatus")
      * @Serializer\Accessor(getter="getPaymentStatus",setter="setPaymentStatus")
@@ -177,7 +177,7 @@ class CustomerOrder extends DataModel
     protected $paymentStatus = '';
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("pui")
      * @Serializer\Accessor(getter="getPui",setter="setPui")
@@ -217,7 +217,7 @@ class CustomerOrder extends DataModel
     protected $shippingMethodId = null;
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("shippingMethodName")
      * @Serializer\Accessor(getter="getShippingMethodName",setter="setShippingMethodName")
@@ -233,7 +233,7 @@ class CustomerOrder extends DataModel
     protected $status = '';
 
     /**
-     * @var double 
+     * @var double
      * @Serializer\Type("double")
      * @Serializer\SerializedName("totalSum")
      * @Serializer\Accessor(getter="getTotalSum",setter="setTotalSum")
@@ -254,7 +254,7 @@ class CustomerOrder extends DataModel
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
-    protected $attributes = array();
+    protected $attributes = [];
 
     /**
      * @var \jtl\Connector\Model\CustomerOrderItem[]
@@ -262,7 +262,7 @@ class CustomerOrder extends DataModel
      * @Serializer\SerializedName("items")
      * @Serializer\AccessType("reflection")
      */
-    protected $items = array();
+    protected $items = [];
 
     /**
      * Constructor
@@ -274,7 +274,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param Identity $customerId Optional reference to customer. 
+     * @param Identity $customerId Optional reference to customer.
      * @return \jtl\Connector\Model\CustomerOrder
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -284,7 +284,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @return Identity Optional reference to customer. 
+     * @return Identity Optional reference to customer.
      */
     public function getCustomerId()
     {
@@ -328,7 +328,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param string $carrierName 
+     * @param string $carrierName
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setCarrierName($carrierName)
@@ -337,7 +337,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getCarrierName()
     {
@@ -363,7 +363,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param string $currencyIso 
+     * @param string $currencyIso
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setCurrencyIso($currencyIso)
@@ -372,7 +372,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getCurrencyIso()
     {
@@ -398,7 +398,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param DateTime $estimatedDeliveryDate 
+     * @param DateTime $estimatedDeliveryDate
      * @return \jtl\Connector\Model\CustomerOrder
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
@@ -408,7 +408,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @return DateTime 
+     * @return DateTime
      */
     public function getEstimatedDeliveryDate()
     {
@@ -416,7 +416,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param string $languageISO Locale set when customerOrder was finished. Important for further E-Mail message and notification localization. 
+     * @param string $languageISO Locale set when customerOrder was finished. Important for further E-Mail message and notification localization.
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setLanguageISO($languageISO)
@@ -425,7 +425,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @return string Locale set when customerOrder was finished. Important for further E-Mail message and notification localization. 
+     * @return string Locale set when customerOrder was finished. Important for further E-Mail message and notification localization.
      */
     public function getLanguageISO()
     {
@@ -433,7 +433,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param string $note 
+     * @param string $note
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setNote($note)
@@ -442,7 +442,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getNote()
     {
@@ -485,7 +485,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param CustomerOrderPaymentInfo $paymentInfo 
+     * @param CustomerOrderPaymentInfo $paymentInfo
      * @return \jtl\Connector\Model\CustomerOrder
      * @throws \InvalidArgumentException if the provided argument is not of type 'CustomerOrderPaymentInfo'.
      */
@@ -503,7 +503,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param string $paymentModuleCode 
+     * @param string $paymentModuleCode
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setPaymentModuleCode($paymentModuleCode)
@@ -512,7 +512,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getPaymentModuleCode()
     {
@@ -520,7 +520,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param string $paymentStatus 
+     * @param string $paymentStatus
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setPaymentStatus($paymentStatus)
@@ -529,7 +529,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getPaymentStatus()
     {
@@ -537,7 +537,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param string $pui 
+     * @param string $pui
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setPui($pui)
@@ -546,7 +546,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getPui()
     {
@@ -626,7 +626,7 @@ class CustomerOrder extends DataModel
 
     /**
      * @deprecated will be removed in 3.1. Use shippingMethodId instead.
-     * @param string $shippingMethodName 
+     * @param string $shippingMethodName
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setShippingMethodName($shippingMethodName)
@@ -636,7 +636,7 @@ class CustomerOrder extends DataModel
 
     /**
      * @deprecated will be removed in 3.1. Use shippingMethodId instead.
-     * @return string 
+     * @return string
      */
     public function getShippingMethodName()
     {
@@ -661,7 +661,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @param double $totalSum 
+     * @param double $totalSum
      * @return \jtl\Connector\Model\CustomerOrder
      */
     public function setTotalSum($totalSum)
@@ -670,7 +670,7 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @return double 
+     * @return double
      */
     public function getTotalSum()
     {
@@ -727,7 +727,7 @@ class CustomerOrder extends DataModel
      */
     public function clearAttributes()
     {
-        $this->attributes = array();
+        $this->attributes = [];
         return $this;
     }
 
@@ -764,7 +764,7 @@ class CustomerOrder extends DataModel
      */
     public function clearItems()
     {
-        $this->items = array();
+        $this->items = [];
         return $this;
     }
 }

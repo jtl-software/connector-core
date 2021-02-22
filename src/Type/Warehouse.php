@@ -16,10 +16,10 @@ class Warehouse extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('name', 'string', '', false, false, false),
-        );
+        ];
     }
 
     public function isMain()

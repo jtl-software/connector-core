@@ -83,7 +83,7 @@ class ProductVariation extends DataModel
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
+    protected $i18ns = [];
 
     /**
      * @var \jtl\Connector\Model\ProductVariationInvisibility[]
@@ -91,7 +91,7 @@ class ProductVariation extends DataModel
      * @Serializer\SerializedName("invisibilities")
      * @Serializer\AccessType("reflection")
      */
-    protected $invisibilities = array();
+    protected $invisibilities = [];
 
     /**
      * @var \jtl\Connector\Model\ProductVariationValue[]
@@ -99,7 +99,7 @@ class ProductVariation extends DataModel
      * @Serializer\SerializedName("values")
      * @Serializer\AccessType("reflection")
      */
-    protected $values = array();
+    protected $values = [];
 
     /**
      * Constructor
@@ -213,7 +213,7 @@ class ProductVariation extends DataModel
      */
     public function clearI18ns()
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
         return $this;
     }
 
@@ -250,7 +250,7 @@ class ProductVariation extends DataModel
      */
     public function clearInvisibilities()
     {
-        $this->invisibilities = array();
+        $this->invisibilities = [];
         return $this;
     }
 
@@ -287,7 +287,7 @@ class ProductVariation extends DataModel
      */
     public function clearValues()
     {
-        $this->values = array();
+        $this->values = [];
         return $this;
     }
 }

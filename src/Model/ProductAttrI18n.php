@@ -15,13 +15,13 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class ProductAttrI18n extends DataModel
 {
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("productAttrId")
      * @Serializer\Accessor(getter="getProductAttrId",setter="setProductAttrId")
@@ -29,7 +29,7 @@ class ProductAttrI18n extends DataModel
     protected $productAttrId = null;
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("languageISO")
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
@@ -37,7 +37,7 @@ class ProductAttrI18n extends DataModel
     protected $languageISO = '';
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
@@ -45,7 +45,7 @@ class ProductAttrI18n extends DataModel
     protected $name = '';
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("value")
      * @Serializer\Accessor(getter="getValue",setter="setValue")
@@ -61,7 +61,7 @@ class ProductAttrI18n extends DataModel
     }
 
     /**
-     * @param Identity $productAttrId 
+     * @param Identity $productAttrId
      * @return \jtl\Connector\Model\ProductAttrI18n
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -71,7 +71,7 @@ class ProductAttrI18n extends DataModel
     }
 
     /**
-     * @return Identity 
+     * @return Identity
      */
     public function getProductAttrId()
     {
@@ -79,7 +79,7 @@ class ProductAttrI18n extends DataModel
     }
 
     /**
-     * @param string $languageISO 
+     * @param string $languageISO
      * @return \jtl\Connector\Model\ProductAttrI18n
      */
     public function setLanguageISO($languageISO)
@@ -88,7 +88,7 @@ class ProductAttrI18n extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getLanguageISO()
     {
@@ -96,7 +96,7 @@ class ProductAttrI18n extends DataModel
     }
 
     /**
-     * @param string $name 
+     * @param string $name
      * @return \jtl\Connector\Model\ProductAttrI18n
      */
     public function setName($name)
@@ -105,7 +105,7 @@ class ProductAttrI18n extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -113,7 +113,7 @@ class ProductAttrI18n extends DataModel
     }
 
     /**
-     * @param string $value 
+     * @param string $value
      * @return \jtl\Connector\Model\ProductAttrI18n
      */
     public function setValue($value)
@@ -122,7 +122,7 @@ class ProductAttrI18n extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getValue()
     {

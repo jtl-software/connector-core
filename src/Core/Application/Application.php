@@ -16,5 +16,4 @@ use \jtl\Connector\Core\Utilities\Singleton;
  */
 abstract class Application extends Singleton implements IApplication
 {
-    
 }

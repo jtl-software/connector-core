@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class ProductMediaFile extends DataModel
@@ -83,7 +83,7 @@ class ProductMediaFile extends DataModel
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
-    protected $attributes = array();
+    protected $attributes = [];
 
     /**
      * @var \jtl\Connector\Model\ProductMediaFileI18n[]
@@ -91,7 +91,7 @@ class ProductMediaFile extends DataModel
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
+    protected $i18ns = [];
 
     /**
      * Constructor
@@ -256,7 +256,7 @@ class ProductMediaFile extends DataModel
      */
     public function clearAttributes()
     {
-        $this->attributes = array();
+        $this->attributes = [];
         return $this;
     }
 
@@ -293,7 +293,7 @@ class ProductMediaFile extends DataModel
      */
     public function clearI18ns()
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
         return $this;
     }
 }

@@ -16,7 +16,7 @@ class ConfigGroup extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('comment', 'string', '', false, false, false),
             new PropertyInfo('imagePath', 'string', '', false, false, false),
@@ -25,7 +25,7 @@ class ConfigGroup extends DataType
             new PropertyInfo('sort', 'integer', 0, false, false, false),
             new PropertyInfo('type', 'integer', 0, false, false, false),
             new PropertyInfo('i18ns', '\jtl\Connector\Model\ConfigGroupI18n', null, false, false, true),
-        );
+        ];
     }
 
     public function isMain()

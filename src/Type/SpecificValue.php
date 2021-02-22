@@ -16,12 +16,12 @@ class SpecificValue extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('specificId', 'Identity', null, false, true, false),
             new PropertyInfo('sort', 'integer', 0, false, false, false),
             new PropertyInfo('i18ns', '\jtl\Connector\Model\SpecificValueI18n', null, false, false, true),
-        );
+        ];
     }
 
     public function isMain()

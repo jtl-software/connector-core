@@ -37,8 +37,12 @@ final class Sqlite3 extends Sqlite3Core
         return self::$_instance;
     }
 
-    private function __construct() { }
-    private function __clone() { }
+    private function __construct()
+    {
+    }
+    private function __clone()
+    {
+    }
 
     public function check()
     {

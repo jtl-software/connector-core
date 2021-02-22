@@ -15,13 +15,13 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class Image extends DataModel
 {
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("foreignKey")
      * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
@@ -29,7 +29,7 @@ class Image extends DataModel
     protected $foreignKey = null;
 
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
@@ -37,7 +37,7 @@ class Image extends DataModel
     protected $id = null;
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("filename")
      * @Serializer\Accessor(getter="getFilename",setter="setFilename")
@@ -45,7 +45,7 @@ class Image extends DataModel
     protected $filename = '';
 
     /**
-     * @var ImageRelationType 
+     * @var ImageRelationType
      * @Serializer\Type("string")
      * @Serializer\SerializedName("relationType")
      * @Serializer\Accessor(getter="getRelationType",setter="setRelationType")
@@ -53,7 +53,7 @@ class Image extends DataModel
     protected $relationType = '';
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("remoteUrl")
      * @Serializer\Accessor(getter="getRemoteUrl",setter="setRemoteUrl")
@@ -69,7 +69,7 @@ class Image extends DataModel
     protected $name = '';
 
     /**
-     * @var integer 
+     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
@@ -82,7 +82,7 @@ class Image extends DataModel
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
+    protected $i18ns = [];
 
     /**
      * Constructor
@@ -94,7 +94,7 @@ class Image extends DataModel
     }
 
     /**
-     * @param Identity $foreignKey 
+     * @param Identity $foreignKey
      * @return \jtl\Connector\Model\Image
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -104,7 +104,7 @@ class Image extends DataModel
     }
 
     /**
-     * @return Identity 
+     * @return Identity
      */
     public function getForeignKey()
     {
@@ -112,7 +112,7 @@ class Image extends DataModel
     }
 
     /**
-     * @param Identity $id 
+     * @param Identity $id
      * @return \jtl\Connector\Model\Image
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -122,7 +122,7 @@ class Image extends DataModel
     }
 
     /**
-     * @return Identity 
+     * @return Identity
      */
     public function getId()
     {
@@ -130,7 +130,7 @@ class Image extends DataModel
     }
 
     /**
-     * @param string $filename 
+     * @param string $filename
      * @return \jtl\Connector\Model\Image
      */
     public function setFilename($filename)
@@ -139,7 +139,7 @@ class Image extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getFilename()
     {
@@ -156,7 +156,7 @@ class Image extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getRelationType()
     {
@@ -164,7 +164,7 @@ class Image extends DataModel
     }
 
     /**
-     * @param string $remoteUrl 
+     * @param string $remoteUrl
      * @return \jtl\Connector\Model\Image
      */
     public function setRemoteUrl($remoteUrl)
@@ -173,7 +173,7 @@ class Image extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getRemoteUrl()
     {
@@ -198,7 +198,7 @@ class Image extends DataModel
     }
 
     /**
-     * @param integer $sort 
+     * @param integer $sort
      * @return \jtl\Connector\Model\Image
      */
     public function setSort($sort)
@@ -207,7 +207,7 @@ class Image extends DataModel
     }
 
     /**
-     * @return integer 
+     * @return integer
      */
     public function getSort()
     {
@@ -247,7 +247,7 @@ class Image extends DataModel
      */
     public function clearI18ns()
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
         return $this;
     }
 }

@@ -11,12 +11,12 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Link customergroup with category. Set optional discount on category for customergroup. 
+ * Link customergroup with category. Set optional discount on category for customergroup.
  *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class CategoryCustomerGroup extends DataModel

@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class TaxZone extends DataModel
@@ -43,7 +43,7 @@ class TaxZone extends DataModel
      * @Serializer\SerializedName("countries")
      * @Serializer\AccessType("reflection")
      */
-    protected $countries = array();
+    protected $countries = [];
 
     /**
      * Constructor
@@ -111,7 +111,7 @@ class TaxZone extends DataModel
      */
     public function clearCountries()
     {
-        $this->countries = array();
+        $this->countries = [];
         return $this;
     }
 }

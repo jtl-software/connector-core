@@ -16,11 +16,11 @@ class TaxClass extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('isDefault', 'boolean', false, false, false, false),
             new PropertyInfo('name', 'string', '', false, false, false),
-        );
+        ];
     }
 
     public function isMain()

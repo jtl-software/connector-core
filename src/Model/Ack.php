@@ -29,12 +29,12 @@ class Ack extends DataModel
     protected $identities = null;
 
     /**
-     * @var Checksum[] 
+     * @var Checksum[]
      * @Serializer\Type("array<jtl\Connector\Model\Checksum>")
      * @Serializer\SerializedName("checksums")
      * @Serializer\AccessType("reflection")
      */
-    protected $checksums = array();
+    protected $checksums = [];
 
     /**
      * Identities getter
@@ -81,7 +81,7 @@ class Ack extends DataModel
      */
     public function clearChecksums()
     {
-        $this->checksums = array();
+        $this->checksums = [];
         return $this;
     }
 }

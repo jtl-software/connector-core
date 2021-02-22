@@ -16,13 +16,13 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class ProductAttr extends DataModel
 {
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
@@ -30,7 +30,7 @@ class ProductAttr extends DataModel
     protected $id = null;
 
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
@@ -38,7 +38,7 @@ class ProductAttr extends DataModel
     protected $productId = null;
 
     /**
-     * @var boolean 
+     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isCustomProperty")
      * @Serializer\Accessor(getter="getIsCustomProperty",setter="setIsCustomProperty")
@@ -46,7 +46,7 @@ class ProductAttr extends DataModel
     protected $isCustomProperty = false;
 
     /**
-     * @var boolean 
+     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isTranslated")
      * @Serializer\Accessor(getter="getIsTranslated",setter="setIsTranslated")
@@ -59,7 +59,7 @@ class ProductAttr extends DataModel
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
+    protected $i18ns = [];
 
     /**
      * Constructor
@@ -71,7 +71,7 @@ class ProductAttr extends DataModel
     }
 
     /**
-     * @param Identity $id 
+     * @param Identity $id
      * @return \jtl\Connector\Model\ProductAttr
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -81,7 +81,7 @@ class ProductAttr extends DataModel
     }
 
     /**
-     * @return Identity 
+     * @return Identity
      */
     public function getId()
     {
@@ -89,7 +89,7 @@ class ProductAttr extends DataModel
     }
 
     /**
-     * @param Identity $productId 
+     * @param Identity $productId
      * @return \jtl\Connector\Model\ProductAttr
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -99,7 +99,7 @@ class ProductAttr extends DataModel
     }
 
     /**
-     * @return Identity 
+     * @return Identity
      */
     public function getProductId()
     {
@@ -107,7 +107,7 @@ class ProductAttr extends DataModel
     }
 
     /**
-     * @param boolean $isCustomProperty 
+     * @param boolean $isCustomProperty
      * @return \jtl\Connector\Model\ProductAttr
      */
     public function setIsCustomProperty($isCustomProperty)
@@ -116,7 +116,7 @@ class ProductAttr extends DataModel
     }
 
     /**
-     * @return boolean 
+     * @return boolean
      */
     public function getIsCustomProperty()
     {
@@ -124,7 +124,7 @@ class ProductAttr extends DataModel
     }
 
     /**
-     * @param boolean $isTranslated 
+     * @param boolean $isTranslated
      * @return \jtl\Connector\Model\ProductAttr
      */
     public function setIsTranslated($isTranslated)
@@ -133,7 +133,7 @@ class ProductAttr extends DataModel
     }
 
     /**
-     * @return boolean 
+     * @return boolean
      */
     public function getIsTranslated()
     {
@@ -173,7 +173,7 @@ class ProductAttr extends DataModel
      */
     public function clearI18ns()
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
         return $this;
     }
 }

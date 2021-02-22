@@ -22,5 +22,4 @@ class ConnectorAfterFinishEvent extends Event
     {
         return $this->boolResult;
     }
-    
 }

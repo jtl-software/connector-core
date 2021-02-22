@@ -11,12 +11,12 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * File upload properties. 
+ * File upload properties.
  *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class FileUpload extends DataModel
@@ -38,7 +38,7 @@ class FileUpload extends DataModel
     protected $productId = null;
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("fileType")
      * @Serializer\Accessor(getter="getFileType",setter="setFileType")
@@ -46,7 +46,7 @@ class FileUpload extends DataModel
     protected $fileType = '';
 
     /**
-     * @var boolean 
+     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isRequired")
      * @Serializer\Accessor(getter="getIsRequired",setter="setIsRequired")
@@ -59,7 +59,7 @@ class FileUpload extends DataModel
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
+    protected $i18ns = [];
 
     /**
      * Constructor
@@ -107,7 +107,7 @@ class FileUpload extends DataModel
     }
 
     /**
-     * @param string $fileType 
+     * @param string $fileType
      * @return \jtl\Connector\Model\FileUpload
      */
     public function setFileType($fileType)
@@ -116,7 +116,7 @@ class FileUpload extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getFileType()
     {
@@ -124,7 +124,7 @@ class FileUpload extends DataModel
     }
 
     /**
-     * @param boolean $isRequired 
+     * @param boolean $isRequired
      * @return \jtl\Connector\Model\FileUpload
      */
     public function setIsRequired($isRequired)
@@ -133,7 +133,7 @@ class FileUpload extends DataModel
     }
 
     /**
-     * @return boolean 
+     * @return boolean
      */
     public function getIsRequired()
     {
@@ -173,7 +173,7 @@ class FileUpload extends DataModel
      */
     public function clearI18ns()
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
         return $this;
     }
 }

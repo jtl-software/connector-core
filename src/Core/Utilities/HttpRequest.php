@@ -22,8 +22,8 @@ class HttpRequest
      */
     public static function getAcceptedLanguages()
     {
-        $parsed_langs = array();
-        $langs = array();
+        $parsed_langs = [];
+        $langs = [];
 
         if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
             // break up string into pieces (languages and q factors)

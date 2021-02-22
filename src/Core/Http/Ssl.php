@@ -23,8 +23,8 @@ class Ssl
      */
     public static function isEnabled()
     {
-        $srv = (isset($_SERVER)) ? $_SERVER : array();
-        $https = array();
+        $srv = (isset($_SERVER)) ? $_SERVER : [];
+        $https = [];
         $https[] = isset($srv['HTTP_X_FORWARDED_HOST']) && $srv['HTTP_X_FORWARDED_HOST'] == 'ssl.webpack.de'; //Hosteurope
         $https[] = isset($srv['SCRIPT_URI']) && preg_match("/^ssl-id/", $srv['SCRIPT_URI']); //Strato
         $https[] = isset($srv['HTTP_X_FORWARDED_HOST']) && preg_match("/^ssl/", $srv['HTTP_X_FORWARDED_HOST']); //1und1

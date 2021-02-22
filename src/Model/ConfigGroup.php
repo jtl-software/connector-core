@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class ConfigGroup extends DataModel
@@ -38,7 +38,7 @@ class ConfigGroup extends DataModel
     protected $comment = '';
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("imagePath")
      * @Serializer\Accessor(getter="getImagePath",setter="setImagePath")
@@ -54,7 +54,7 @@ class ConfigGroup extends DataModel
     protected $maximumSelection = 0;
 
     /**
-     * @var integer Optional minimum number required selections. Default 0 for no minimum requirement. 
+     * @var integer Optional minimum number required selections. Default 0 for no minimum requirement.
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("minimumSelection")
      * @Serializer\Accessor(getter="getMinimumSelection",setter="setMinimumSelection")
@@ -83,7 +83,7 @@ class ConfigGroup extends DataModel
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
+    protected $i18ns = [];
 
     /**
      * Constructor
@@ -129,7 +129,7 @@ class ConfigGroup extends DataModel
     }
 
     /**
-     * @param string $imagePath 
+     * @param string $imagePath
      * @return \jtl\Connector\Model\ConfigGroup
      */
     public function setImagePath($imagePath)
@@ -138,7 +138,7 @@ class ConfigGroup extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getImagePath()
     {
@@ -163,7 +163,7 @@ class ConfigGroup extends DataModel
     }
 
     /**
-     * @param integer $minimumSelection Optional minimum number required selections. Default 0 for no minimum requirement. 
+     * @param integer $minimumSelection Optional minimum number required selections. Default 0 for no minimum requirement.
      * @return \jtl\Connector\Model\ConfigGroup
      */
     public function setMinimumSelection($minimumSelection)
@@ -172,7 +172,7 @@ class ConfigGroup extends DataModel
     }
 
     /**
-     * @return integer Optional minimum number required selections. Default 0 for no minimum requirement. 
+     * @return integer Optional minimum number required selections. Default 0 for no minimum requirement.
      */
     public function getMinimumSelection()
     {
@@ -246,7 +246,7 @@ class ConfigGroup extends DataModel
      */
     public function clearI18ns()
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
         return $this;
     }
 }

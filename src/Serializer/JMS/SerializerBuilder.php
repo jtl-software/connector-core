@@ -19,7 +19,7 @@ class SerializerBuilder
                 ->configureHandlers(function (HandlerRegistry $registry) {
                     $registry->registerSubscribingHandler(new IdentityHandler());
                 })
-                ->configureListeners(function(EventDispatcher $dispatcher) {
+                ->configureListeners(function (EventDispatcher $dispatcher) {
                     $dispatcher->addSubscriber(new NullValuesSubscriber());
                 })
                 ->build();

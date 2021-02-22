@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class Currency extends DataModel
@@ -54,7 +54,7 @@ class Currency extends DataModel
     protected $factor = 0.0;
 
     /**
-     * @var boolean Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference. 
+     * @var boolean Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("hasCurrencySignBeforeValue")
      * @Serializer\Accessor(getter="getHasCurrencySignBeforeValue",setter="setHasCurrencySignBeforeValue")
@@ -62,7 +62,7 @@ class Currency extends DataModel
     protected $hasCurrencySignBeforeValue = false;
 
     /**
-     * @var boolean Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default. 
+     * @var boolean Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isDefault")
      * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
@@ -70,7 +70,7 @@ class Currency extends DataModel
     protected $isDefault = false;
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("iso")
      * @Serializer\Accessor(getter="getIso",setter="setIso")
@@ -171,7 +171,7 @@ class Currency extends DataModel
     }
 
     /**
-     * @param boolean $hasCurrencySignBeforeValue Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference. 
+     * @param boolean $hasCurrencySignBeforeValue Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference.
      * @return \jtl\Connector\Model\Currency
      */
     public function setHasCurrencySignBeforeValue($hasCurrencySignBeforeValue)
@@ -180,7 +180,7 @@ class Currency extends DataModel
     }
 
     /**
-     * @return boolean Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference. 
+     * @return boolean Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference.
      */
     public function getHasCurrencySignBeforeValue()
     {
@@ -188,7 +188,7 @@ class Currency extends DataModel
     }
 
     /**
-     * @param boolean $isDefault Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default. 
+     * @param boolean $isDefault Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default.
      * @return \jtl\Connector\Model\Currency
      */
     public function setIsDefault($isDefault)
@@ -197,7 +197,7 @@ class Currency extends DataModel
     }
 
     /**
-     * @return boolean Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default. 
+     * @return boolean Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default.
      */
     public function getIsDefault()
     {
@@ -205,7 +205,7 @@ class Currency extends DataModel
     }
 
     /**
-     * @param string $iso 
+     * @param string $iso
      * @return \jtl\Connector\Model\Currency
      */
     public function setIso($iso)
@@ -214,7 +214,7 @@ class Currency extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getIso()
     {

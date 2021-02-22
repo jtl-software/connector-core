@@ -118,7 +118,7 @@ abstract class Image implements IDrawing
         $posX = (int)round($posX);
         $posY = (int)round($posY);
         
-        return array($posX, $posY);
+        return [$posX, $posY];
     }
     
     /**
@@ -139,6 +139,6 @@ abstract class Image implements IDrawing
         $watermark_width = (int)round($image_width * $off);
         $watermark_height = (int)round($image_height * $off);
         
-        return array($watermark_width, $watermark_height);
+        return [$watermark_width, $watermark_height];
     }
 }

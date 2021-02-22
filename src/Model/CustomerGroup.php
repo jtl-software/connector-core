@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class CustomerGroup extends DataModel
@@ -38,7 +38,7 @@ class CustomerGroup extends DataModel
     protected $applyNetPrice = false;
 
     /**
-     * @var double Optional percentual discount on all products. Negative Value means surcharge. 
+     * @var double Optional percentual discount on all products. Negative Value means surcharge.
      * @Serializer\Type("double")
      * @Serializer\SerializedName("discount")
      * @Serializer\Accessor(getter="getDiscount",setter="setDiscount")
@@ -59,7 +59,7 @@ class CustomerGroup extends DataModel
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
-    protected $attributes = array();
+    protected $attributes = [];
 
     /**
      * @var \jtl\Connector\Model\CustomerGroupI18n[]
@@ -67,7 +67,7 @@ class CustomerGroup extends DataModel
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
+    protected $i18ns = [];
 
     /**
      * Constructor
@@ -113,7 +113,7 @@ class CustomerGroup extends DataModel
     }
 
     /**
-     * @param double $discount Optional percentual discount on all products. Negative Value means surcharge. 
+     * @param double $discount Optional percentual discount on all products. Negative Value means surcharge.
      * @return \jtl\Connector\Model\CustomerGroup
      */
     public function setDiscount($discount)
@@ -122,7 +122,7 @@ class CustomerGroup extends DataModel
     }
 
     /**
-     * @return double Optional percentual discount on all products. Negative Value means surcharge. 
+     * @return double Optional percentual discount on all products. Negative Value means surcharge.
      */
     public function getDiscount()
     {
@@ -179,7 +179,7 @@ class CustomerGroup extends DataModel
      */
     public function clearAttributes()
     {
-        $this->attributes = array();
+        $this->attributes = [];
         return $this;
     }
 
@@ -216,7 +216,7 @@ class CustomerGroup extends DataModel
      */
     public function clearI18ns()
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
         return $this;
     }
 }

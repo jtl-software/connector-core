@@ -16,13 +16,13 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class CustomerAttr extends DataModel
 {
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("customerId")
      * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
@@ -54,7 +54,7 @@ class CustomerAttr extends DataModel
     }
 
     /**
-     * @param Identity $customerId 
+     * @param Identity $customerId
      * @return \jtl\Connector\Model\CustomerAttr
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -64,7 +64,7 @@ class CustomerAttr extends DataModel
     }
 
     /**
-     * @return Identity 
+     * @return Identity
      */
     public function getCustomerId()
     {

@@ -16,14 +16,14 @@ class CustomerGroup extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('applyNetPrice', 'boolean', false, false, false, false),
             new PropertyInfo('discount', 'double', 0.0, false, false, false),
             new PropertyInfo('isDefault', 'boolean', false, false, false, false),
             new PropertyInfo('attributes', '\jtl\Connector\Model\CustomerGroupAttr', null, false, false, true),
             new PropertyInfo('i18ns', '\jtl\Connector\Model\CustomerGroupI18n', null, false, false, true),
-        );
+        ];
     }
 
     public function isMain()

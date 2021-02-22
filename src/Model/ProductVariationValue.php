@@ -11,12 +11,12 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Product variation value model. Each product defines its own variations and variation values. 
+ * Product variation value model. Each product defines its own variations and variation values.
  *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class ProductVariationValue extends DataModel
@@ -38,7 +38,7 @@ class ProductVariationValue extends DataModel
     protected $productVariationId = null;
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("ean")
      * @Serializer\Accessor(getter="getEan",setter="setEan")
@@ -83,7 +83,7 @@ class ProductVariationValue extends DataModel
      * @Serializer\SerializedName("extraCharges")
      * @Serializer\AccessType("reflection")
      */
-    protected $extraCharges = array();
+    protected $extraCharges = [];
 
     /**
      * @var \jtl\Connector\Model\ProductVariationValueI18n[]
@@ -91,7 +91,7 @@ class ProductVariationValue extends DataModel
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
+    protected $i18ns = [];
 
     /**
      * @var \jtl\Connector\Model\ProductVariationValueInvisibility[]
@@ -99,7 +99,7 @@ class ProductVariationValue extends DataModel
      * @Serializer\SerializedName("invisibilities")
      * @Serializer\AccessType("reflection")
      */
-    protected $invisibilities = array();
+    protected $invisibilities = [];
 
     /**
      * Constructor
@@ -147,7 +147,7 @@ class ProductVariationValue extends DataModel
     }
 
     /**
-     * @param string $ean 
+     * @param string $ean
      * @return \jtl\Connector\Model\ProductVariationValue
      */
     public function setEan($ean)
@@ -156,7 +156,7 @@ class ProductVariationValue extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getEan()
     {
@@ -264,7 +264,7 @@ class ProductVariationValue extends DataModel
      */
     public function clearExtraCharges()
     {
-        $this->extraCharges = array();
+        $this->extraCharges = [];
         return $this;
     }
 
@@ -301,7 +301,7 @@ class ProductVariationValue extends DataModel
      */
     public function clearI18ns()
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
         return $this;
     }
 
@@ -338,7 +338,7 @@ class ProductVariationValue extends DataModel
      */
     public function clearInvisibilities()
     {
-        $this->invisibilities = array();
+        $this->invisibilities = [];
         return $this;
     }
 }

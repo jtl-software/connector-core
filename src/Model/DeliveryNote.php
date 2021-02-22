@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class DeliveryNote extends DataModel
@@ -67,7 +67,7 @@ class DeliveryNote extends DataModel
      * @Serializer\SerializedName("items")
      * @Serializer\AccessType("reflection")
      */
-    protected $items = array();
+    protected $items = [];
 
     /**
      * @var \jtl\Connector\Model\DeliveryNoteTrackingList[]
@@ -75,7 +75,7 @@ class DeliveryNote extends DataModel
      * @Serializer\SerializedName("trackingLists")
      * @Serializer\AccessType("reflection")
      */
-    protected $trackingLists = array();
+    protected $trackingLists = [];
 
     /**
      * Constructor
@@ -207,7 +207,7 @@ class DeliveryNote extends DataModel
      */
     public function clearItems()
     {
-        $this->items = array();
+        $this->items = [];
         return $this;
     }
 
@@ -244,7 +244,7 @@ class DeliveryNote extends DataModel
      */
     public function clearTrackingLists()
     {
-        $this->trackingLists = array();
+        $this->trackingLists = [];
         return $this;
     }
 }

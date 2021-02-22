@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class ProductSpecialPrice extends DataModel
@@ -70,7 +70,7 @@ class ProductSpecialPrice extends DataModel
     protected $considerStockLimit = false;
 
     /**
-     * @var boolean Special price is active? Default true, to activate specialPrice. Special price can still be inactivated, if date or stock Limitations do not match. 
+     * @var boolean Special price is active? Default true, to activate specialPrice. Special price can still be inactivated, if date or stock Limitations do not match.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isActive")
      * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
@@ -91,7 +91,7 @@ class ProductSpecialPrice extends DataModel
      * @Serializer\SerializedName("items")
      * @Serializer\AccessType("reflection")
      */
-    protected $items = array();
+    protected $items = [];
 
     /**
      * Constructor
@@ -209,7 +209,7 @@ class ProductSpecialPrice extends DataModel
     }
 
     /**
-     * @param boolean $isActive Special price is active? Default true, to activate specialPrice. Special price can still be inactivated, if date or stock Limitations do not match. 
+     * @param boolean $isActive Special price is active? Default true, to activate specialPrice. Special price can still be inactivated, if date or stock Limitations do not match.
      * @return \jtl\Connector\Model\ProductSpecialPrice
      */
     public function setIsActive($isActive)
@@ -218,7 +218,7 @@ class ProductSpecialPrice extends DataModel
     }
 
     /**
-     * @return boolean Special price is active? Default true, to activate specialPrice. Special price can still be inactivated, if date or stock Limitations do not match. 
+     * @return boolean Special price is active? Default true, to activate specialPrice. Special price can still be inactivated, if date or stock Limitations do not match.
      */
     public function getIsActive()
     {
@@ -275,7 +275,7 @@ class ProductSpecialPrice extends DataModel
      */
     public function clearItems()
     {
-        $this->items = array();
+        $this->items = [];
         return $this;
     }
 }

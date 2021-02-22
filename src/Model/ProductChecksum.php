@@ -16,7 +16,7 @@ use \jtl\Connector\Model\Identity;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class ProductChecksum extends Checksum
@@ -27,7 +27,7 @@ class ProductChecksum extends Checksum
     const TYPE_VARIATION = 1;
 
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("foreignKey")
      * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
@@ -35,7 +35,7 @@ class ProductChecksum extends Checksum
     protected $foreignKey = null;
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("endpoint")
      * @Serializer\Accessor(getter="getEndpoint",setter="setEndpoint")
@@ -43,7 +43,7 @@ class ProductChecksum extends Checksum
     protected $endpoint = '';
 
     /**
-     * @var boolean 
+     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("hasChanged")
      * @Serializer\Accessor(getter="hasChanged",setter="setHasChanged")
@@ -51,7 +51,7 @@ class ProductChecksum extends Checksum
     protected $hasChanged = false;
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("host")
      * @Serializer\Accessor(getter="getHost",setter="setHost")
@@ -67,7 +67,7 @@ class ProductChecksum extends Checksum
     protected $type = self::TYPE_VARIATION;
 
     /**
-     * @param Identity $foreignKey 
+     * @param Identity $foreignKey
      * @return \jtl\Connector\Model\ProductChecksum
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -77,7 +77,7 @@ class ProductChecksum extends Checksum
     }
 
     /**
-     * @return Identity 
+     * @return Identity
      */
     public function getForeignKey()
     {
@@ -85,7 +85,7 @@ class ProductChecksum extends Checksum
     }
 
     /**
-     * @param string $endpoint 
+     * @param string $endpoint
      * @return \jtl\Connector\Model\ProductChecksum
      * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
@@ -95,7 +95,7 @@ class ProductChecksum extends Checksum
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getEndpoint()
     {
@@ -103,7 +103,7 @@ class ProductChecksum extends Checksum
     }
 
     /**
-     * @param boolean $hasChanged 
+     * @param boolean $hasChanged
      * @return \jtl\Connector\Model\ProductChecksum
      * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
@@ -113,7 +113,7 @@ class ProductChecksum extends Checksum
     }
 
     /**
-     * @return boolean 
+     * @return boolean
      */
     public function hasChanged()
     {
@@ -121,7 +121,7 @@ class ProductChecksum extends Checksum
     }
 
     /**
-     * @return boolean 
+     * @return boolean
      */
     public function getHasChanged()
     {
@@ -129,7 +129,7 @@ class ProductChecksum extends Checksum
     }
 
     /**
-     * @param string $host 
+     * @param string $host
      * @return \jtl\Connector\Model\ProductChecksum
      * @throws \InvalidArgumentException if the provided argument is not of type 'string'.
      */
@@ -139,7 +139,7 @@ class ProductChecksum extends Checksum
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getHost()
     {

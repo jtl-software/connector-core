@@ -11,12 +11,12 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Define set articles / parts lists. 
+ * Define set articles / parts lists.
  *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class ProductPartsList extends DataModel

@@ -15,13 +15,13 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class ProductFileDownloadI18n extends DataModel
 {
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("description")
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
@@ -29,7 +29,7 @@ class ProductFileDownloadI18n extends DataModel
     protected $description = '';
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("languageISO")
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
@@ -37,7 +37,7 @@ class ProductFileDownloadI18n extends DataModel
     protected $languageISO = '';
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
@@ -46,7 +46,7 @@ class ProductFileDownloadI18n extends DataModel
 
 
     /**
-     * @param string $description 
+     * @param string $description
      * @return \jtl\Connector\Model\ProductFileDownloadI18n
      */
     public function setDescription($description)
@@ -55,7 +55,7 @@ class ProductFileDownloadI18n extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -63,7 +63,7 @@ class ProductFileDownloadI18n extends DataModel
     }
 
     /**
-     * @param string $languageISO 
+     * @param string $languageISO
      * @return \jtl\Connector\Model\ProductFileDownloadI18n
      */
     public function setLanguageISO($languageISO)
@@ -72,7 +72,7 @@ class ProductFileDownloadI18n extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getLanguageISO()
     {
@@ -80,7 +80,7 @@ class ProductFileDownloadI18n extends DataModel
     }
 
     /**
-     * @param string $name 
+     * @param string $name
      * @return \jtl\Connector\Model\ProductFileDownloadI18n
      */
     public function setName($name)
@@ -89,7 +89,7 @@ class ProductFileDownloadI18n extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getName()
     {

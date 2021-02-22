@@ -131,7 +131,7 @@ class Error extends Model
             $isValid = false;
         }
             
-            // A String providing a short description of the error. The message
+        // A String providing a short description of the error. The message
         // SHOULD be limited to a concise single sentence.
         if ($this->getMessage() === null || strlen($this->getMessage()) == 0) {
             $isValid = false;

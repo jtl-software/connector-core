@@ -134,9 +134,9 @@ class Application extends CoreApplication
 
         //Mask connector token before logging
         $reqPacketsObj = $requestpackets->getPublic();
-        if(isset($reqPacketsObj->method) && $reqPacketsObj->method === 'core.connector.auth' && isset($reqPacketsObj->params)) {
+        if (isset($reqPacketsObj->method) && $reqPacketsObj->method === 'core.connector.auth' && isset($reqPacketsObj->params)) {
             $params = Json::decode($reqPacketsObj->params, true);
-            if(isset($params['token'])) {
+            if (isset($params['token'])) {
                 $params['token'] = str_repeat('*', strlen($params['token']));
             }
             $reqPacketsObj->params = Json::encode($params);
@@ -193,7 +193,7 @@ class Application extends CoreApplication
      */
     // OLD single Image
     //protected function execute(RequestPacket $requestpacket, $rpcmode, $imagePath = null)
-    protected function execute(RequestPacket $requestpacket, $rpcmode, array $imagePaths = array())
+    protected function execute(RequestPacket $requestpacket, $rpcmode, array $imagePaths = [])
     {
         if (!RpcMethod::isMethod($requestpacket->getMethod())) {
             throw new RpcException('Invalid Request', -32600);
@@ -257,7 +257,6 @@ class Application extends CoreApplication
             if ($actionresult instanceof Action) {
                 $exists = true;
                 if ($actionresult->isHandled()) {
-
                     if ($actionresult->getError() === null) {
     
                         // Convert boolean to BoolResult
@@ -266,8 +265,8 @@ class Application extends CoreApplication
                         }
 
                         // Identity mapping
-                        $results = array();
-                        $models = is_array($actionresult->getResult()) ? $actionresult->getResult() : array($actionresult->getResult());
+                        $results = [];
+                        $models = is_array($actionresult->getResult()) ? $actionresult->getResult() : [$actionresult->getResult()];
                         
                         foreach ($models as $model) {
                             if ($model instanceof DataModel) {
@@ -425,7 +424,7 @@ class Application extends CoreApplication
      */
     protected function runBatch(array $requestpackets, $rpcmode)
     {
-        $jtlrpcreponses = array();
+        $jtlrpcreponses = [];
 
         foreach ($requestpackets as $requestpacket) {
             try {
@@ -573,7 +572,7 @@ class Application extends CoreApplication
         if (is_null($this->config)) {
             $config_file = Path::combine(CONNECTOR_DIR, 'config', 'config.json');
             if (!file_exists($config_file)) {
-                $json = json_encode(array('developer_logging' => false), JSON_PRETTY_PRINT);
+                $json = json_encode(['developer_logging' => false], JSON_PRETTY_PRINT);
 
                 if (json_last_error() !== JSON_ERROR_NONE) {
                     throw JsonException::encoding(json_last_error_msg());
@@ -610,7 +609,7 @@ class Application extends CoreApplication
         }
 
         $sqlite3 = Sqlite3::getInstance();
-        $sqlite3->connect(array('location' => Path::combine($dir, 'connector.s3db')));
+        $sqlite3->connect(['location' => Path::combine($dir, 'connector.s3db')]);
         $sqlite3->check();
 
         $this->session = new Session($sqlite3, $sessionId);
@@ -626,7 +625,7 @@ class Application extends CoreApplication
 
     // OLD single Image
     //protected function handleImagePush(RequestPacket &$requestpacket, $imagePath)
-    protected function handleImagePush(RequestPacket &$requestpacket, array $imagePaths = array())
+    protected function handleImagePush(RequestPacket &$requestpacket, array $imagePaths = [])
     {
         if ($requestpacket->getMethod() === 'image.push') {
             $images = $requestpacket->getParams();
@@ -638,7 +637,7 @@ class Application extends CoreApplication
                 for ($i = 0; $i < count($images); $i++) {
                     foreach ($imagePaths as $imagePath) {
                         $infos = pathinfo($imagePath);
-                        list ($hostId, $relationType) = explode('_', $infos['filename']);
+                        list($hostId, $relationType) = explode('_', $infos['filename']);
                         if ((int)$hostId == $images[$i]->getId()->getHost()
                             && strtolower($relationType) === strtolower($images[$i]->getRelationType())
                         ) {

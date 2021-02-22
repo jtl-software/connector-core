@@ -125,7 +125,7 @@ class Json
                 }
                 break;
             case 'color':
-                if (!in_array($entity, array(
+                if (!in_array($entity, [
                         'maroon',
                         'red',
                         'orange',
@@ -143,7 +143,7 @@ class Json
                         'gray',
                         'silver',
                         'white'
-                ))) {
+                ])) {
                     if (!preg_match('#^\#[0-9A-F]{6}$#', $entity) && !preg_match('#^\#[0-9A-F]{3}$#', $entity)) {
                         $valid = false;
                     }
@@ -237,9 +237,9 @@ class Json
         }
         
         if (!is_array($types)) {
-            $types = array(
+            $types = [
                     $types
-            );
+            ];
         }
         
         $valid = false;
@@ -768,9 +768,9 @@ class Json
             if (!$valid) {
                 $disallowedTypes = array_map(function ($item) {
                     return is_object($item) ? 'object (schema)' : $item;
-                }, is_array($schema->disallow) ? $schema->disallow : array(
+                }, is_array($schema->disallow) ? $schema->disallow : [
                         $schema->disallow
-                ));
+                ]);
                 throw new ValidationException(sprintf('Invalid value for [%s], disallowed types are [%s]', $entityName, implode(', ', $disallowedTypes)));
             }
         }

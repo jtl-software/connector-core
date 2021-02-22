@@ -16,13 +16,13 @@ class Checksum extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('foreignKey', 'Identity', null, false, true, false),
             new PropertyInfo('endpoint', 'string', '', false, false, false),
             new PropertyInfo('hasChanged', 'boolean', false, false, false, false),
             new PropertyInfo('host', 'string', '', false, false, false),
             new PropertyInfo('type', 'integer', '', false, false, false),
-        );
+        ];
     }
 
     public function isMain()

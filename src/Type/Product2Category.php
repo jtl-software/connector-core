@@ -16,11 +16,11 @@ class Product2Category extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('categoryId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('productId', 'Identity', null, false, true, false),
-        );
+        ];
     }
 
     public function isMain()

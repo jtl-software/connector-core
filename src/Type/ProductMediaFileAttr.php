@@ -16,10 +16,10 @@ class ProductMediaFileAttr extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('productMediaFileId', 'Identity', null, false, true, false),
             new PropertyInfo('i18ns', '\jtl\Connector\Model\ProductMediaFileAttrI18n', null, false, false, true),
-        );
+        ];
     }
 
     public function isMain()

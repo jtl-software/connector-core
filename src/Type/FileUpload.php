@@ -16,13 +16,13 @@ class FileUpload extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('productId', 'Identity', null, false, true, false),
             new PropertyInfo('fileType', 'string', '', false, false, false),
             new PropertyInfo('isRequired', 'boolean', false, false, false, false),
             new PropertyInfo('i18ns', '\jtl\Connector\Model\FileUploadI18n', null, false, false, true),
-        );
+        ];
     }
 
     public function isMain()

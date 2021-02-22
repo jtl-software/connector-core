@@ -6,7 +6,14 @@
  */
 namespace jtl\Connector\Core\Application;
 
+/**
+ * Interface IApplication
+ * @package jtl\Connector\Core\Application
+ */
 interface IApplication
 {
+    /**
+     * @return mixed
+     */
     public function run();
 }

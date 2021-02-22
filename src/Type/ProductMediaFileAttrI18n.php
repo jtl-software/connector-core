@@ -16,11 +16,11 @@ class ProductMediaFileAttrI18n extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('languageISO', 'string', '', false, false, false),
             new PropertyInfo('name', 'string', '', false, false, false),
             new PropertyInfo('value', 'string', '', false, false, false),
-        );
+        ];
     }
 
     public function isMain()

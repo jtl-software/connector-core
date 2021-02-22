@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class CustomerOrderItemVariation extends DataModel
@@ -54,7 +54,7 @@ class CustomerOrderItemVariation extends DataModel
     protected $productVariationValueId = null;
 
     /**
-     * @var string Optional custom text value for variation 
+     * @var string Optional custom text value for variation
      * @Serializer\Type("string")
      * @Serializer\SerializedName("freeField")
      * @Serializer\Accessor(getter="getFreeField",setter="setFreeField")
@@ -70,7 +70,7 @@ class CustomerOrderItemVariation extends DataModel
     protected $productVariationName = '';
 
     /**
-     * @var double 
+     * @var double
      * @Serializer\Type("double")
      * @Serializer\SerializedName("surcharge")
      * @Serializer\Accessor(getter="getSurcharge",setter="setSurcharge")
@@ -78,7 +78,7 @@ class CustomerOrderItemVariation extends DataModel
     protected $surcharge = 0.0;
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("valueName")
      * @Serializer\Accessor(getter="getValueName",setter="setValueName")
@@ -169,7 +169,7 @@ class CustomerOrderItemVariation extends DataModel
     }
 
     /**
-     * @param string $freeField Optional custom text value for variation 
+     * @param string $freeField Optional custom text value for variation
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
      */
     public function setFreeField($freeField)
@@ -178,7 +178,7 @@ class CustomerOrderItemVariation extends DataModel
     }
 
     /**
-     * @return string Optional custom text value for variation 
+     * @return string Optional custom text value for variation
      */
     public function getFreeField()
     {
@@ -203,7 +203,7 @@ class CustomerOrderItemVariation extends DataModel
     }
 
     /**
-     * @param double $surcharge 
+     * @param double $surcharge
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
      */
     public function setSurcharge($surcharge)
@@ -212,7 +212,7 @@ class CustomerOrderItemVariation extends DataModel
     }
 
     /**
-     * @return double 
+     * @return double
      */
     public function getSurcharge()
     {
@@ -220,7 +220,7 @@ class CustomerOrderItemVariation extends DataModel
     }
 
     /**
-     * @param string $valueName 
+     * @param string $valueName
      * @return \jtl\Connector\Model\CustomerOrderItemVariation
      */
     public function setValueName($valueName)
@@ -229,7 +229,7 @@ class CustomerOrderItemVariation extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getValueName()
     {

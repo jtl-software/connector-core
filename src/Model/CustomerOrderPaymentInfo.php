@@ -11,12 +11,12 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Additional payment info for direct debit / banktransfer or payment by credit card. 
+ * Additional payment info for direct debit / banktransfer or payment by credit card.
  *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class CustomerOrderPaymentInfo extends DataModel
@@ -86,7 +86,7 @@ class CustomerOrderPaymentInfo extends DataModel
     protected $creditCardExpiration = '';
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("creditCardHolder")
      * @Serializer\Accessor(getter="getCreditCardHolder",setter="setCreditCardHolder")
@@ -273,7 +273,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
 
     /**
-     * @param string $creditCardHolder 
+     * @param string $creditCardHolder
      * @return \jtl\Connector\Model\CustomerOrderPaymentInfo
      */
     public function setCreditCardHolder($creditCardHolder)
@@ -282,7 +282,7 @@ class CustomerOrderPaymentInfo extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getCreditCardHolder()
     {

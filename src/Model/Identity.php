@@ -2,7 +2,7 @@
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Internal 
+ * @subpackage Internal
  */
 
 namespace jtl\Connector\Model;
@@ -98,12 +98,12 @@ class Identity extends Model
      */
     public function toArray()
     {
-        return array($this->endpoint, $this->host);
+        return [$this->endpoint, $this->host];
     }
 
     /**
      * Convert the Model into array
-     *            
+     *
      * @return array
      */
     public function getPublic(array $publics = null)
@@ -120,7 +120,7 @@ class Identity extends Model
     public static function fromArray(array $data)
     {
         if ($data === null || count($data) != 2 || !array_key_exists(0, $data) || !array_key_exists(1, $data)) {
-            throw new \InvalidArgumentException('The data parameter can not be null and must contain two values'); 
+            throw new \InvalidArgumentException('The data parameter can not be null and must contain two values');
         }
 
         return new self($data[0], $data[1]);

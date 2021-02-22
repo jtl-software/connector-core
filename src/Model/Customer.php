@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class Customer extends DataModel
@@ -38,7 +38,7 @@ class Customer extends DataModel
     protected $id = null;
 
     /**
-     * @var double 
+     * @var double
      * @Serializer\Type("double")
      * @Serializer\SerializedName("accountCredit")
      * @Serializer\Accessor(getter="getAccountCredit",setter="setAccountCredit")
@@ -78,7 +78,7 @@ class Customer extends DataModel
     protected $countryIso = '';
 
     /**
-     * @var DateTime 
+     * @var DateTime
      * @Serializer\Type("DateTime")
      * @Serializer\SerializedName("creationDate")
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
@@ -142,7 +142,7 @@ class Customer extends DataModel
     protected $firstName = '';
 
     /**
-     * @var boolean 
+     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("hasCustomerAccount")
      * @Serializer\Accessor(getter="getHasCustomerAccount",setter="setHasCustomerAccount")
@@ -158,7 +158,7 @@ class Customer extends DataModel
     protected $hasNewsletterSubscription = false;
 
     /**
-     * @var boolean Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
+     * @var boolean Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isActive")
      * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
@@ -275,7 +275,7 @@ class Customer extends DataModel
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
-    protected $attributes = array();
+    protected $attributes = [];
 
     /**
      * Constructor
@@ -323,7 +323,7 @@ class Customer extends DataModel
     }
 
     /**
-     * @param double $accountCredit 
+     * @param double $accountCredit
      * @return \jtl\Connector\Model\Customer
      */
     public function setAccountCredit($accountCredit)
@@ -332,7 +332,7 @@ class Customer extends DataModel
     }
 
     /**
-     * @return double 
+     * @return double
      */
     public function getAccountCredit()
     {
@@ -409,7 +409,7 @@ class Customer extends DataModel
     }
 
     /**
-     * @param DateTime $creationDate 
+     * @param DateTime $creationDate
      * @return \jtl\Connector\Model\Customer
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
@@ -419,7 +419,7 @@ class Customer extends DataModel
     }
 
     /**
-     * @return DateTime 
+     * @return DateTime
      */
     public function getCreationDate()
     {
@@ -546,7 +546,7 @@ class Customer extends DataModel
     }
 
     /**
-     * @param boolean $hasCustomerAccount 
+     * @param boolean $hasCustomerAccount
      * @return \jtl\Connector\Model\Customer
      */
     public function setHasCustomerAccount($hasCustomerAccount)
@@ -555,7 +555,7 @@ class Customer extends DataModel
     }
 
     /**
-     * @return boolean 
+     * @return boolean
      */
     public function getHasCustomerAccount()
     {
@@ -580,7 +580,7 @@ class Customer extends DataModel
     }
 
     /**
-     * @param boolean $isActive Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
+     * @param boolean $isActive Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password.
      * @return \jtl\Connector\Model\Customer
      */
     public function setIsActive($isActive)
@@ -589,7 +589,7 @@ class Customer extends DataModel
     }
 
     /**
-     * @return boolean Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password. 
+     * @return boolean Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password.
      */
     public function getIsActive()
     {
@@ -850,7 +850,7 @@ class Customer extends DataModel
      */
     public function clearAttributes()
     {
-        $this->attributes = array();
+        $this->attributes = [];
         return $this;
     }
 }

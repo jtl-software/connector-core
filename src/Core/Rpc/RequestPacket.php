@@ -134,7 +134,6 @@ class RequestPacket extends Packet
                     ->build();
 
                 return $serializer->deserialize($jtlrpc, 'jtl\Connector\Core\Rpc\RequestPacket', 'json');
-
             } catch (\Throwable $exc) {
                 Logger::write(ExceptionFormatter::format($exc), Logger::ERROR, 'global');
 

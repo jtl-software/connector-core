@@ -16,11 +16,11 @@ class ProductStockLevel extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('productId', 'Identity', null, false, true, false),
             new PropertyInfo('sku', 'string', '', false, false, false),
             new PropertyInfo('stockLevel', 'double', 0.0, false, false, false),
-        );
+        ];
     }
 
     public function isMain()

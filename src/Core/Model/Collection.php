@@ -15,7 +15,7 @@ class Collection implements \IteratorAggregate, \Countable
 {
     protected $list;
 
-    public function __construct(array $list = array())
+    public function __construct(array $list = [])
     {
         $this->list = $list;
     }
@@ -30,12 +30,12 @@ class Collection implements \IteratorAggregate, \Countable
         return array_keys($this->list);
     }
 
-    public function replace(array $list = array())
+    public function replace(array $list = [])
     {
         $this->list = $list;
     }
 
-    public function add(array $list = array())
+    public function add(array $list = [])
     {
         $this->list = array_replace($this->list, $list);
     }
@@ -53,7 +53,7 @@ class Collection implements \IteratorAggregate, \Countable
     public function append($key, $value)
     {
         if (!$this->has($key)) {
-            $this->set($key, array());
+            $this->set($key, []);
         }
 
         if (!is_array($this->list[$key])) {
@@ -85,7 +85,7 @@ class Collection implements \IteratorAggregate, \Countable
 
     public function getDigits($key, $default = '', $deep = false)
     {
-        return str_replace(array('-', '+'), '', $this->filter($key, $default, $deep, FILTER_SANITIZE_NUMBER_INT));
+        return str_replace(['-', '+'], '', $this->filter($key, $default, $deep, FILTER_SANITIZE_NUMBER_INT));
     }
 
     public function getInt($key, $default = 0, $deep = false)

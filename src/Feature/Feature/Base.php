@@ -24,7 +24,7 @@ abstract class Base extends BaseClass implements IFeature
     /**
      * @var array
      */
-    protected $_methods = array();
+    protected $_methods = [];
 
     /**
      * Adds a new method to the feature.

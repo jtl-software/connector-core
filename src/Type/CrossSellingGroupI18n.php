@@ -16,12 +16,12 @@ class CrossSellingGroupI18n extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('crossSellingGroupId', 'Identity', null, false, true, false),
             new PropertyInfo('description', 'string', '', false, false, false),
             new PropertyInfo('languageISO', 'string', '', false, false, false),
             new PropertyInfo('name', 'string', '', false, false, false),
-        );
+        ];
     }
 
     public function isMain()

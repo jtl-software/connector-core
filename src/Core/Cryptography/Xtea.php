@@ -90,7 +90,7 @@ final class Xtea implements ICryptography
     // Entschluesseln
     public function decrypt($text)
     {
-        $plain = array();
+        $plain = [];
         $cipher = $this->_str2long(base64_decode($text));
         if ($this->cbc == 1) {
             $i = 2; // Message start at second block
@@ -104,10 +104,10 @@ final class Xtea implements ICryptography
             // beiden Bloecken
             // XORed $return with the previous ciphertext
             if ($this->cbc == 1) {
-                $plain[] = array(
+                $plain[] = [
                         $return[0] ^ $cipher[$i - 2],
                         $return[1] ^ $cipher[$i - 1]
-                );
+                ];
             }
             // EBC Mode
             else {
@@ -132,7 +132,7 @@ final class Xtea implements ICryptography
         } elseif (isset($key) && !empty($key)) {
             $this->key = $this->_str2long(str_pad($key, 16, $key));
         } else {
-            $this->key = array(0, 0, 0, 0);
+            $this->key = [0, 0, 0, 0];
         }
     }
     
@@ -159,40 +159,40 @@ final class Xtea implements ICryptography
     public function check_implementation()
     {
         $xtea = new self("");
-        $vectors = array(
-                array(
-                        array(
+        $vectors = [
+                [
+                        [
                                 0x00000000,
                                 0x00000000,
                                 0x00000000,
                                 0x00000000
-                        ),
-                        array(
+                        ],
+                        [
                                 0x41414141,
                                 0x41414141
-                        ),
-                        array(
+                        ],
+                        [
                                 0xed23375a,
                                 0x821a8c2d
-                        )
-                ),
-                array(
-                        array(
+                        ]
+                ],
+                [
+                        [
                                 0x00010203,
                                 0x04050607,
                                 0x08090a0b,
                                 0x0c0d0e0f
-                        ),
-                        array(
+                        ],
+                        [
                                 0x41424344,
                                 0x45464748
-                        ),
-                        array(
+                        ],
+                        [
                                 0x497df3d0,
                                 0x72612cb5
-                        )
-                )
-        );
+                        ]
+                ]
+        ];
         
         // Correct implementation?
         $correct = true;
@@ -234,7 +234,7 @@ final class Xtea implements ICryptography
         $v[0] = $y;
         $v[1] = $z;
         
-        return array($y, $z);
+        return [$y, $z];
     }
 
     private function block_decrypt($y, $z)
@@ -251,7 +251,7 @@ final class Xtea implements ICryptography
         }
         
         /* end cycle */
-        return array($y, $z);
+        return [$y, $z];
     }
 
     private function _rshift($integer, $n)
@@ -313,7 +313,7 @@ final class Xtea implements ICryptography
     {
         $n = strlen($data);
         $tmp = unpack('N*', $data);
-        $data_long = array();
+        $data_long = [];
         $j = 0;
         
         foreach ($tmp as $value) {

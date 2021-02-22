@@ -15,13 +15,13 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class ShippingMethod extends DataModel
 {
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
@@ -29,7 +29,7 @@ class ShippingMethod extends DataModel
     protected $id = null;
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
@@ -45,7 +45,7 @@ class ShippingMethod extends DataModel
     }
 
     /**
-     * @param Identity $id 
+     * @param Identity $id
      * @return \jtl\Connector\Model\ShippingMethod
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -55,7 +55,7 @@ class ShippingMethod extends DataModel
     }
 
     /**
-     * @return Identity 
+     * @return Identity
      */
     public function getId()
     {
@@ -63,7 +63,7 @@ class ShippingMethod extends DataModel
     }
 
     /**
-     * @param string $name 
+     * @param string $name
      * @return \jtl\Connector\Model\ShippingMethod
      */
     public function setName($name)
@@ -72,7 +72,7 @@ class ShippingMethod extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getName()
     {

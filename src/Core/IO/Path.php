@@ -24,7 +24,7 @@ class Path
 
     public static function getFileName($path)
     {
-        return self::hasExtension($path) ? self::getFileNameWithoutExtension($path) . '.' 
+        return self::hasExtension($path) ? self::getFileNameWithoutExtension($path) . '.'
             . self::getExtension($path) : self::getFileNameWithoutExtension($path);
     }
 

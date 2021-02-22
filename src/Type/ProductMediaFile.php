@@ -16,7 +16,7 @@ class ProductMediaFile extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('productId', 'Identity', null, false, true, false),
             new PropertyInfo('mediaFileCategory', 'string', '', false, false, false),
@@ -26,7 +26,7 @@ class ProductMediaFile extends DataType
             new PropertyInfo('url', 'string', '', false, false, false),
             new PropertyInfo('attributes', '\jtl\Connector\Model\ProductMediaFileAttr', null, false, false, true),
             new PropertyInfo('i18ns', '\jtl\Connector\Model\ProductMediaFileI18n', null, false, false, true),
-        );
+        ];
     }
 
     public function isMain()

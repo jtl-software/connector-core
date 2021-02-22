@@ -16,7 +16,7 @@ class ProductSpecialPrice extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('productId', 'Identity', null, false, true, false),
             new PropertyInfo('activeFromDate', 'DateTime', null, false, false, false),
@@ -26,7 +26,7 @@ class ProductSpecialPrice extends DataType
             new PropertyInfo('isActive', 'boolean', false, false, false, false),
             new PropertyInfo('stockLimit', 'integer', 0, false, false, false),
             new PropertyInfo('items', '\jtl\Connector\Model\ProductSpecialPriceItem', null, false, false, true),
-        );
+        ];
     }
 
     public function isMain()

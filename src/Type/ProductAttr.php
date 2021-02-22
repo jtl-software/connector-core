@@ -16,13 +16,13 @@ class ProductAttr extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('productId', 'Identity', null, false, true, false),
             new PropertyInfo('isCustomProperty', 'boolean', false, false, false, false),
             new PropertyInfo('isTranslated', 'boolean', false, false, false, false),
             new PropertyInfo('i18ns', '\jtl\Connector\Model\ProductAttrI18n', null, false, false, true),
-        );
+        ];
     }
 
     public function isMain()

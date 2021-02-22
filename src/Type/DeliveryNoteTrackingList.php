@@ -16,10 +16,10 @@ class DeliveryNoteTrackingList extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('name', 'string', '', false, false, false),
             new PropertyInfo('codes', 'string', null, false, false, false),
-        );
+        ];
     }
 
     public function isMain()

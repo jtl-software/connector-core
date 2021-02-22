@@ -49,7 +49,7 @@ class Response
         header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
         header('Content-type: application/json', true, 200);
         
-        $packets = array();
+        $packets = [];
         foreach ($reponsepackets as $responsepacket) {
             $response = $responsepacket->getPublic();
             Logger::write(Json::encode($response), Logger::DEBUG, 'rpc');

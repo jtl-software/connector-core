@@ -16,7 +16,7 @@ class GlobalData extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('configGroups', '\jtl\Connector\Model\ConfigGroup', null, false, false, true),
             new PropertyInfo('configItems', '\jtl\Connector\Model\ConfigItem', null, false, false, true),
             new PropertyInfo('crossSellingGroups', '\jtl\Connector\Model\CrossSellingGroup', null, false, false, true),
@@ -30,7 +30,7 @@ class GlobalData extends DataType
             new PropertyInfo('taxRates', '\jtl\Connector\Model\TaxRate', null, false, false, true),
             new PropertyInfo('units', '\jtl\Connector\Model\Unit', null, false, false, true),
             new PropertyInfo('warehouses', '\jtl\Connector\Model\Warehouse', null, false, false, true),
-        );
+        ];
     }
 
     public function isMain()

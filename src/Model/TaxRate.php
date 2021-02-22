@@ -15,13 +15,13 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class TaxRate extends DataModel
 {
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
@@ -29,7 +29,7 @@ class TaxRate extends DataModel
     protected $id = null;
 
     /**
-     * @var double 
+     * @var double
      * @Serializer\Type("double")
      * @Serializer\SerializedName("rate")
      * @Serializer\Accessor(getter="getRate",setter="setRate")
@@ -45,7 +45,7 @@ class TaxRate extends DataModel
     }
 
     /**
-     * @param Identity $id 
+     * @param Identity $id
      * @return \jtl\Connector\Model\TaxRate
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -55,7 +55,7 @@ class TaxRate extends DataModel
     }
 
     /**
-     * @return Identity 
+     * @return Identity
      */
     public function getId()
     {
@@ -63,7 +63,7 @@ class TaxRate extends DataModel
     }
 
     /**
-     * @param double $rate 
+     * @param double $rate
      * @return \jtl\Connector\Model\TaxRate
      */
     public function setRate($rate)
@@ -72,7 +72,7 @@ class TaxRate extends DataModel
     }
 
     /**
-     * @return double 
+     * @return double
      */
     public function getRate()
     {

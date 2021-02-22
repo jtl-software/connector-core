@@ -8,8 +8,8 @@ $iterator = Finder::create()
     ->name('*.php')
     ->in($dir = __DIR__ . '/src');
 
-return new Sami($iterator, array(
+return new Sami($iterator, [
     'title'         => 'JTL-Connector documentation',
     'build_dir'     => __DIR__ . '/docs',
     'cache_dir'     => __DIR__ . '/cache',
-));
+]);

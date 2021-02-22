@@ -7,16 +7,15 @@ class CoreConnectorAfterFeaturesEvent extends Event
 {
     const EVENT_NAME = 'core.connector.features';
 
-	protected $features;
+    protected $features;
 
     public function __construct(&$features)
     {
-		$this->features = $features;
+        $this->features = $features;
     }
 
     public function getFeatures()
     {
         return $this->features;
-	}
-	
+    }
 }

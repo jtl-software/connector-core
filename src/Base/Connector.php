@@ -37,7 +37,6 @@ class Connector extends Singleton implements IEndpointConnector
 
     public function initialize()
     {
-        
     }
 
     /**

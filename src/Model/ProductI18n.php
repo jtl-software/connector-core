@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class ProductI18n extends DataModel
@@ -30,7 +30,7 @@ class ProductI18n extends DataModel
     protected $productId = null;
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("deliveryStatus")
      * @Serializer\Accessor(getter="getDeliveryStatus",setter="setDeliveryStatus")
@@ -54,7 +54,7 @@ class ProductI18n extends DataModel
     protected $languageISO = '';
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("measurementUnitName")
      * @Serializer\Accessor(getter="getMeasurementUnitName",setter="setMeasurementUnitName")
@@ -62,7 +62,7 @@ class ProductI18n extends DataModel
     protected $measurementUnitName = '';
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("metaDescription")
      * @Serializer\Accessor(getter="getMetaDescription",setter="setMetaDescription")
@@ -70,7 +70,7 @@ class ProductI18n extends DataModel
     protected $metaDescription = '';
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("metaKeywords")
      * @Serializer\Accessor(getter="getMetaKeywords",setter="setMetaKeywords")
@@ -94,7 +94,7 @@ class ProductI18n extends DataModel
     protected $shortDescription = '';
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("titleTag")
      * @Serializer\Accessor(getter="getTitleTag",setter="setTitleTag")
@@ -102,7 +102,7 @@ class ProductI18n extends DataModel
     protected $titleTag = '';
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("unitName")
      * @Serializer\Accessor(getter="getUnitName",setter="setUnitName")
@@ -144,7 +144,7 @@ class ProductI18n extends DataModel
     }
 
     /**
-     * @param string $deliveryStatus 
+     * @param string $deliveryStatus
      * @return \jtl\Connector\Model\ProductI18n
      */
     public function setDeliveryStatus($deliveryStatus)
@@ -153,7 +153,7 @@ class ProductI18n extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getDeliveryStatus()
     {
@@ -195,7 +195,7 @@ class ProductI18n extends DataModel
     }
 
     /**
-     * @param string $measurementUnitName 
+     * @param string $measurementUnitName
      * @return \jtl\Connector\Model\ProductI18n
      */
     public function setMeasurementUnitName($measurementUnitName)
@@ -204,7 +204,7 @@ class ProductI18n extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getMeasurementUnitName()
     {
@@ -212,7 +212,7 @@ class ProductI18n extends DataModel
     }
 
     /**
-     * @param string $metaDescription 
+     * @param string $metaDescription
      * @return \jtl\Connector\Model\ProductI18n
      */
     public function setMetaDescription($metaDescription)
@@ -221,7 +221,7 @@ class ProductI18n extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getMetaDescription()
     {
@@ -229,7 +229,7 @@ class ProductI18n extends DataModel
     }
 
     /**
-     * @param string $metaKeywords 
+     * @param string $metaKeywords
      * @return \jtl\Connector\Model\ProductI18n
      */
     public function setMetaKeywords($metaKeywords)
@@ -238,7 +238,7 @@ class ProductI18n extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getMetaKeywords()
     {
@@ -280,7 +280,7 @@ class ProductI18n extends DataModel
     }
 
     /**
-     * @param string $titleTag 
+     * @param string $titleTag
      * @return \jtl\Connector\Model\ProductI18n
      */
     public function setTitleTag($titleTag)
@@ -289,7 +289,7 @@ class ProductI18n extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getTitleTag()
     {
@@ -297,7 +297,7 @@ class ProductI18n extends DataModel
     }
 
     /**
-     * @param string $unitName 
+     * @param string $unitName
      * @return \jtl\Connector\Model\ProductI18n
      */
     public function setUnitName($unitName)
@@ -306,7 +306,7 @@ class ProductI18n extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getUnitName()
     {

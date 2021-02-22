@@ -15,13 +15,13 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class ProductFileDownload extends DataModel
 {
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
@@ -29,7 +29,7 @@ class ProductFileDownload extends DataModel
     protected $productId = null;
 
     /**
-     * @var DateTime 
+     * @var DateTime
      * @Serializer\Type("DateTime")
      * @Serializer\SerializedName("creationDate")
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
@@ -37,7 +37,7 @@ class ProductFileDownload extends DataModel
     protected $creationDate = null;
 
     /**
-     * @var integer 
+     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("maxDays")
      * @Serializer\Accessor(getter="getMaxDays",setter="setMaxDays")
@@ -45,7 +45,7 @@ class ProductFileDownload extends DataModel
     protected $maxDays = 0;
 
     /**
-     * @var integer 
+     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("maxDownloads")
      * @Serializer\Accessor(getter="getMaxDownloads",setter="setMaxDownloads")
@@ -53,7 +53,7 @@ class ProductFileDownload extends DataModel
     protected $maxDownloads = 0;
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("path")
      * @Serializer\Accessor(getter="getPath",setter="setPath")
@@ -61,7 +61,7 @@ class ProductFileDownload extends DataModel
     protected $path = '';
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("previewPath")
      * @Serializer\Accessor(getter="getPreviewPath",setter="setPreviewPath")
@@ -69,7 +69,7 @@ class ProductFileDownload extends DataModel
     protected $previewPath = '';
 
     /**
-     * @var integer 
+     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
@@ -82,7 +82,7 @@ class ProductFileDownload extends DataModel
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
+    protected $i18ns = [];
 
     /**
      * Constructor
@@ -93,7 +93,7 @@ class ProductFileDownload extends DataModel
     }
 
     /**
-     * @param Identity $productId 
+     * @param Identity $productId
      * @return \jtl\Connector\Model\ProductFileDownload
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -103,7 +103,7 @@ class ProductFileDownload extends DataModel
     }
 
     /**
-     * @return Identity 
+     * @return Identity
      */
     public function getProductId()
     {
@@ -111,7 +111,7 @@ class ProductFileDownload extends DataModel
     }
 
     /**
-     * @param DateTime $creationDate 
+     * @param DateTime $creationDate
      * @return \jtl\Connector\Model\ProductFileDownload
      * @throws \InvalidArgumentException if the provided argument is not of type 'DateTime'.
      */
@@ -121,7 +121,7 @@ class ProductFileDownload extends DataModel
     }
 
     /**
-     * @return DateTime 
+     * @return DateTime
      */
     public function getCreationDate()
     {
@@ -129,7 +129,7 @@ class ProductFileDownload extends DataModel
     }
 
     /**
-     * @param integer $maxDays 
+     * @param integer $maxDays
      * @return \jtl\Connector\Model\ProductFileDownload
      */
     public function setMaxDays($maxDays)
@@ -138,7 +138,7 @@ class ProductFileDownload extends DataModel
     }
 
     /**
-     * @return integer 
+     * @return integer
      */
     public function getMaxDays()
     {
@@ -146,7 +146,7 @@ class ProductFileDownload extends DataModel
     }
 
     /**
-     * @param integer $maxDownloads 
+     * @param integer $maxDownloads
      * @return \jtl\Connector\Model\ProductFileDownload
      */
     public function setMaxDownloads($maxDownloads)
@@ -155,7 +155,7 @@ class ProductFileDownload extends DataModel
     }
 
     /**
-     * @return integer 
+     * @return integer
      */
     public function getMaxDownloads()
     {
@@ -163,7 +163,7 @@ class ProductFileDownload extends DataModel
     }
 
     /**
-     * @param string $path 
+     * @param string $path
      * @return \jtl\Connector\Model\ProductFileDownload
      */
     public function setPath($path)
@@ -172,7 +172,7 @@ class ProductFileDownload extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getPath()
     {
@@ -180,7 +180,7 @@ class ProductFileDownload extends DataModel
     }
 
     /**
-     * @param string $previewPath 
+     * @param string $previewPath
      * @return \jtl\Connector\Model\ProductFileDownload
      */
     public function setPreviewPath($previewPath)
@@ -189,7 +189,7 @@ class ProductFileDownload extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getPreviewPath()
     {
@@ -197,7 +197,7 @@ class ProductFileDownload extends DataModel
     }
 
     /**
-     * @param integer $sort 
+     * @param integer $sort
      * @return \jtl\Connector\Model\ProductFileDownload
      */
     public function setSort($sort)
@@ -206,7 +206,7 @@ class ProductFileDownload extends DataModel
     }
 
     /**
-     * @return integer 
+     * @return integer
      */
     public function getSort()
     {
@@ -246,7 +246,7 @@ class ProductFileDownload extends DataModel
      */
     public function clearI18ns()
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
         return $this;
     }
 }

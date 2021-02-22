@@ -27,7 +27,7 @@ use \jtl\Connector\Formatter\ExceptionFormatter;
  * @access public
  */
 class Connector extends CoreController
-{    
+{
     /**
      * Initialize the connector.
      *
@@ -105,8 +105,9 @@ class Connector extends CoreController
             $identityLinker = IdentityLinker::getInstance();
 
             foreach ($ack->getIdentities() as $modelName => $identities) {
-                if(!$identityLinker->isType($modelName)) {
-                    Logger::write(sprintf('ACK: Unknown core entity (%s)! Skipping related ack\'s...',
+                if (!$identityLinker->isType($modelName)) {
+                    Logger::write(sprintf(
+                        'ACK: Unknown core entity (%s)! Skipping related ack\'s...',
                         $modelName
                     ), Logger::WARNING, 'global');
                     continue;
@@ -121,8 +122,9 @@ class Connector extends CoreController
             foreach ($ack->getChecksums() as $checksum) {
                 if ($checksum instanceof IChecksum) {
                     if (!ChecksumLinker::save($checksum)) {
-                        Logger::write(sprintf('Could not save checksum for endpoint (%s), host (%s) and type (%s)',
-                            $checksum->getForeignKey()->getEndpoint(), 
+                        Logger::write(sprintf(
+                            'Could not save checksum for endpoint (%s), host (%s) and type (%s)',
+                            $checksum->getForeignKey()->getEndpoint(),
                             $checksum->getForeignKey()->getHost(),
                             $checksum->getType()
                         ), Logger::WARNING, 'checksum');
@@ -130,7 +132,7 @@ class Connector extends CoreController
                 }
             }
 
-            $ret->setResult(true);            
+            $ret->setResult(true);
         } catch (\Exception $e) {
             $err = new Error();
             $err->setCode($e->getCode());

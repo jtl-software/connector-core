@@ -44,7 +44,7 @@ class QueryFilter
      */
     public function __construct($limit = null)
     {
-        $this->filters = array();
+        $this->filters = [];
         
         if ($limit !== null) {
             $this->limit = $limit;
@@ -113,7 +113,7 @@ class QueryFilter
     public function addFilter($key, $value)
     {
         if ($this->filters === null) {
-            $this->filters = array();
+            $this->filters = [];
         }
         
         $this->filters[$key] = $value;

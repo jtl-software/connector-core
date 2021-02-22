@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class Language extends DataModel
@@ -38,7 +38,7 @@ class Language extends DataModel
     protected $isDefault = false;
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("languageISO")
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
@@ -105,7 +105,7 @@ class Language extends DataModel
     }
 
     /**
-     * @param string $languageISO 
+     * @param string $languageISO
      * @return \jtl\Connector\Model\Language
      */
     public function setLanguageISO($languageISO)
@@ -114,7 +114,7 @@ class Language extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getLanguageISO()
     {

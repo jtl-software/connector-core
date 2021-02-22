@@ -23,7 +23,7 @@ abstract class InstallerStep
      *
      * @var array
      */
-    private $_data = array();
+    private $_data = [];
     
     /**
      * Installer object
@@ -65,11 +65,11 @@ abstract class InstallerStep
      */
     public function run()
     {
-        $templateParams = array(
+        $templateParams = [
             'page_first_step_url'   => $this->_installer->stepUrl(1),
             'page_prev_step_url'    => $this->_installer->stepUrl($this->_installer->currentStep() - 1),
             'page_next_step_url'    => $this->_installer->stepUrl($this->_installer->currentStep() + 1)
-        );
+        ];
         
         echo Installer::$twig->render($this->_template . '.html.twig', array_merge($templateParams, $this->_data));
     }

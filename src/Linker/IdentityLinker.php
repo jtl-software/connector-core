@@ -67,7 +67,7 @@ class IdentityLinker
     /**
      * @var array
      */
-    protected static $cache = array();
+    protected static $cache = [];
 
     /**
      * @var self
@@ -77,7 +77,7 @@ class IdentityLinker
     /**
      * @var array
      */
-    protected static $types = array(
+    protected static $types = [
         'Category' => self::TYPE_CATEGORY,
         'CategoryAttr' => self::TYPE_CATEGORY_ATTRIBUTE,
         'ConfigGroup' => self::TYPE_CONFIG_GROUP,
@@ -107,7 +107,7 @@ class IdentityLinker
         'TaxRate' => self::TYPE_TAX_RATE,
         'Unit' => self::TYPE_UNIT,
         'Warehouse' => self::TYPE_WAREHOUSE,
-    );
+    ];
 
     /**
      * @var array
@@ -340,7 +340,7 @@ class IdentityLinker
     /**
      * @var array
      */
-    protected $runtimeInfos = array();
+    protected $runtimeInfos = [];
 
     /**
      * Singleton
@@ -426,7 +426,8 @@ class IdentityLinker
                         } else {
                             Logger::write(
                                 sprintf('Property (%s) from model (%s) is not an instance of DataModel or Identity', $propertyInfo->getName(), $reflect->getShortName()),
-                                Logger::WARNING, 'linker'
+                                Logger::WARNING,
+                                'linker'
                             );
                         }
                     }
@@ -436,7 +437,8 @@ class IdentityLinker
                 } else {
                     Logger::write(
                         sprintf('Property (%s) from model (%s) is not an array or an instance of DataModel', $propertyInfo->getName(), $reflect->getShortName()),
-                        Logger::WARNING, 'linker'
+                        Logger::WARNING,
+                        'linker'
                     );
                 }
             } elseif ($propertyInfo->isIdentity() && $this->isType($reflect->getShortName(), $property)) {
@@ -668,7 +670,6 @@ class IdentityLinker
      */
     public function save($endpointId, $hostId, $modelName, $property = null)
     {
-
         $type = $this->getType($modelName, $property);
         $realModel = $this->getModelName($type);
         $this->delete($endpointId, $hostId, $realModel);

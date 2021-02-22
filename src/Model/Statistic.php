@@ -2,7 +2,7 @@
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Internal 
+ * @subpackage Internal
  */
 
 namespace jtl\Connector\Model;
@@ -29,10 +29,9 @@ class Statistic extends DataModel
     /**
      * (non-PHPdoc)
      * @see \jtl\Connector\Core\Model\DataModel::map()
-     */ 
+     */
     public function map($toWawi = false, \stdClass $obj = null)
     {
-    
     }
 
     /**

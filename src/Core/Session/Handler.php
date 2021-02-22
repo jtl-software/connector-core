@@ -63,25 +63,25 @@ abstract class Handler
             }
         }
         
-        session_set_save_handler(array(
+        session_set_save_handler([
             &$this,
             'open'
-        ), array(
+        ], [
             &$this,
             'close'
-        ), array(
+        ], [
             &$this,
             'read'
-        ), array(
+        ], [
             &$this,
             'write'
-        ), array(
+        ], [
             &$this,
             'destroy'
-        ), array(
+        ], [
             &$this,
             'gc'
-        ));
+        ]);
 
         register_shutdown_function('session_write_close');
 

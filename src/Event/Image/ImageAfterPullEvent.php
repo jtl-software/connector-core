@@ -4,21 +4,19 @@ namespace jtl\Connector\Event\Image;
 use Symfony\Contracts\EventDispatcher\Event;
 use jtl\Connector\Model\Image;
 
-
 class ImageAfterPullEvent extends Event
 {
     const EVENT_NAME = 'image.after.pull';
 
-	protected $image;
+    protected $image;
 
     public function __construct(Image &$image)
     {
-		$this->image = $image;
+        $this->image = $image;
     }
 
     public function getImage()
     {
         return $this->image;
-	}
-	
+    }
 }

@@ -18,7 +18,6 @@ use \jtl\Connector\Feature\Manager;
  */
 interface IProducer
 {
-
     public function setManager(Manager $manager);
 
     public function getManager();

@@ -4,21 +4,19 @@ namespace jtl\Connector\Event\ProductPrice;
 use Symfony\Contracts\EventDispatcher\Event;
 use jtl\Connector\Model\ProductPrice;
 
-
 class ProductPriceBeforeDeleteEvent extends Event
 {
     const EVENT_NAME = 'productprice.before.delete';
 
-	protected $productPrice;
+    protected $productPrice;
 
     public function __construct(ProductPrice &$productPrice)
     {
-		$this->productPrice = $productPrice;
+        $this->productPrice = $productPrice;
     }
 
     public function getProductPrice()
     {
         return $this->productPrice;
-	}
-	
+    }
 }

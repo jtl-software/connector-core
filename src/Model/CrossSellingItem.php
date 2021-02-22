@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class CrossSellingItem extends DataModel
@@ -35,7 +35,7 @@ class CrossSellingItem extends DataModel
      * @Serializer\SerializedName("productIds")
      * @Serializer\AccessType("reflection")
      */
-    protected $productIds = array();
+    protected $productIds = [];
 
     /**
      * Constructor
@@ -96,7 +96,7 @@ class CrossSellingItem extends DataModel
      */
     public function clearProductIds()
     {
-        $this->productIds = array();
+        $this->productIds = [];
         return $this;
     }
 }

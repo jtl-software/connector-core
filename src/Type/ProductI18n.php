@@ -16,7 +16,7 @@ class ProductI18n extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('productId', 'Identity', null, true, true, false),
             new PropertyInfo('deliveryStatus', 'string', '', false, false, false),
             new PropertyInfo('description', 'string', '', false, false, false),
@@ -29,7 +29,7 @@ class ProductI18n extends DataType
             new PropertyInfo('titleTag', 'string', '', false, false, false),
             new PropertyInfo('unitName', 'string', '', false, false, false),
             new PropertyInfo('urlPath', 'string', '', false, false, false),
-        );
+        ];
     }
 
     public function isMain()

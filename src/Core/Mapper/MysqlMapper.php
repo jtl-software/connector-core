@@ -133,7 +133,7 @@ abstract class MysqlMapper extends Singleton implements IMapper
     public function getPrimaryValues(DataModel $model)
     {
         if (is_array($this->_primary)) {
-            $values = array();
+            $values = [];
             foreach ($this->_primary as $primary) {
                 $values[] = $model->$primary;
             }
@@ -157,7 +157,7 @@ abstract class MysqlMapper extends Singleton implements IMapper
     public function getPrimaryFields(DataModel $model = null, $toWawi = false)
     {
         if (is_array($this->_primary)) {
-            $fields = array();
+            $fields = [];
             
             if ($model === null) {
                 foreach ($this->_primary as $primary) {
@@ -191,7 +191,7 @@ abstract class MysqlMapper extends Singleton implements IMapper
      */
     public function getKeyValues(DataModel $model, $toWawi = false)
     {
-        $kvs = array();
+        $kvs = [];
         
         $fields = $this->getPrimaryFields($model, $toWawi);
         $values = $this->getPrimaryValues($model);
@@ -238,7 +238,7 @@ abstract class MysqlMapper extends Singleton implements IMapper
     public function limitSql(QueryFilter $filter = null)
     {
         $limit = "";
-        if ($filter !== null && $filter->isLimit()) {        
+        if ($filter !== null && $filter->isLimit()) {
             $limit = "LIMIT {$filter->getLimit()}";
         }
         

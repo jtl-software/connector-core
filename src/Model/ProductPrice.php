@@ -76,7 +76,7 @@ class ProductPrice extends DataModel
      * @Serializer\SerializedName("items")
      * @Serializer\AccessType("reflection")
      */
-    protected $items = array();
+    protected $items = [];
 
     /**
      * Constructor
@@ -230,7 +230,7 @@ class ProductPrice extends DataModel
      */
     public function clearItems()
     {
-        $this->items = array();
+        $this->items = [];
         return $this;
     }
 
@@ -238,7 +238,7 @@ class ProductPrice extends DataModel
      * @param array|string[] $publics
      * @return stdClass|\stdClass
      */
-    public function getPublic(array $publics = array('fields', 'isEncrypted', 'identities', '_type'))
+    public function getPublic(array $publics = ['fields', 'isEncrypted', 'identities', '_type'])
     {
         $publics[] = 'vat';
         $publics[] = 'sku';

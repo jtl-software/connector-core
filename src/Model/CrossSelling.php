@@ -16,13 +16,13 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class CrossSelling extends DataModel
 {
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
@@ -43,7 +43,7 @@ class CrossSelling extends DataModel
      * @Serializer\SerializedName("items")
      * @Serializer\AccessType("reflection")
      */
-    protected $items = array();
+    protected $items = [];
 
     /**
      * Constructor
@@ -55,7 +55,7 @@ class CrossSelling extends DataModel
     }
 
     /**
-     * @param Identity $id 
+     * @param Identity $id
      * @return \jtl\Connector\Model\CrossSelling
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -65,7 +65,7 @@ class CrossSelling extends DataModel
     }
 
     /**
-     * @return Identity 
+     * @return Identity
      */
     public function getId()
     {
@@ -123,7 +123,7 @@ class CrossSelling extends DataModel
      */
     public function clearItems()
     {
-        $this->items = array();
+        $this->items = [];
         return $this;
     }
 }

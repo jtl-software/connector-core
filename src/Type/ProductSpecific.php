@@ -16,11 +16,11 @@ class ProductSpecific extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('id', 'Identity', null, false, true, false),
             new PropertyInfo('productId', 'Identity', null, true, true, false),
             new PropertyInfo('specificValueId', 'Identity', null, true, true, false),
-        );
+        ];
     }
 
     public function isMain()

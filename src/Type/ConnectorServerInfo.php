@@ -16,12 +16,12 @@ class ConnectorServerInfo extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('memoryLimit', 'integer', '', false, false, false),
             new PropertyInfo('executionTime', 'integer', '', false, false, false),
             new PropertyInfo('postMaxSize', 'integer', '', false, false, false),
             new PropertyInfo('uploadMaxFilesize', 'integer', '', false, false, false),
-        );
+        ];
     }
 
     public function isMain()

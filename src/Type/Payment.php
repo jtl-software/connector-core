@@ -16,7 +16,7 @@ class Payment extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('customerOrderId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('billingInfo', 'string', '', false, false, false),
@@ -24,7 +24,7 @@ class Payment extends DataType
             new PropertyInfo('paymentModuleCode', 'string', '', false, false, false),
             new PropertyInfo('totalSum', 'double', 0.0, false, false, false),
             new PropertyInfo('transactionId', 'string', '', false, false, false),
-        );
+        ];
     }
 
     public function isMain()

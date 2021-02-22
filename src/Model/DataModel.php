@@ -2,7 +2,7 @@
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Model
- * @subpackage Internal 
+ * @subpackage Internal
  */
 
 namespace jtl\Connector\Model;
@@ -53,7 +53,7 @@ abstract class DataModel extends CoreModel
 
     /**
      * Encrypted Status
-     * 
+     *
      * @return boolean
      */
     public function isEncrypted()
@@ -67,12 +67,12 @@ abstract class DataModel extends CoreModel
      * @param array $publics
      * @return stdClass $object
      */
-    public function getPublic(array $publics = array('fields', 'isEncrypted', 'identities', '_type'))
+    public function getPublic(array $publics = ['fields', 'isEncrypted', 'identities', '_type'])
     {
         $object = new \stdClass();
 
         $recursive = function (array $subElems, array $publics) use (&$recursive) {
-            $arr = array();
+            $arr = [];
             foreach ($subElems as $subElem) {
                 if ($subElem instanceof DataModel) {
                     $arr[] = $subElem->getPublic($publics);
@@ -193,8 +193,7 @@ abstract class DataModel extends CoreModel
             return true;
         }
 
-        switch ($type)
-        {
+        switch ($type) {
             case 'boolean':
             case 'bool':
                 return is_bool($value);

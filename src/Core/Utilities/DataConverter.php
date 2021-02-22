@@ -40,12 +40,12 @@ final class DataConverter
         if (function_exists('json_encode') && !$forceOwn) {
             return json_decode(json_encode($obj), true);
         } else {
-            $arr = array();
+            $arr = [];
             if ($obj !== null) {
                 $toArray = function (array $objVars, array $arr) use (&$toArray) {
                     foreach ($objVars as $key => $var) {
                         if (is_object($var)) {
-                            $arr[$key] = array();
+                            $arr[$key] = [];
                             $arr[$key] = $toArray(get_object_vars($var), $arr[$key]);
                         } else {
                             $arr[$key] = $var;

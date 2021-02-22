@@ -11,12 +11,12 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * A config Item that is displayed in a config Group. Config item can reference to a specific productId to inherit price, name and description. 
+ * A config Item that is displayed in a config Group. Config item can reference to a specific productId to inherit price, name and description.
  *
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class ConfigItem extends DataModel
@@ -54,7 +54,7 @@ class ConfigItem extends DataModel
     protected $ignoreMultiplier = 0;
 
     /**
-     * @var boolean Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored. 
+     * @var boolean Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("inheritProductName")
      * @Serializer\Accessor(getter="getInheritProductName",setter="setInheritProductName")
@@ -62,7 +62,7 @@ class ConfigItem extends DataModel
     protected $inheritProductName = false;
 
     /**
-     * @var boolean Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price. 
+     * @var boolean Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("inheritProductPrice")
      * @Serializer\Accessor(getter="getInheritProductPrice",setter="setInheritProductPrice")
@@ -70,7 +70,7 @@ class ConfigItem extends DataModel
     protected $inheritProductPrice = false;
 
     /**
-     * @var double Optional initial / predefined quantity. Default is one (1) quantity piece. 
+     * @var double Optional initial / predefined quantity. Default is one (1) quantity piece.
      * @Serializer\Type("double")
      * @Serializer\SerializedName("initialQuantity")
      * @Serializer\Accessor(getter="getInitialQuantity",setter="setInitialQuantity")
@@ -86,7 +86,7 @@ class ConfigItem extends DataModel
     protected $isPreSelected = false;
 
     /**
-     * @var boolean Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. 
+     * @var boolean Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isRecommended")
      * @Serializer\Accessor(getter="getIsRecommended",setter="setIsRecommended")
@@ -94,7 +94,7 @@ class ConfigItem extends DataModel
     protected $isRecommended = false;
 
     /**
-     * @var double Maximum allowed quantity. Default 0 for no maximum limit. 
+     * @var double Maximum allowed quantity. Default 0 for no maximum limit.
      * @Serializer\Type("double")
      * @Serializer\SerializedName("maxQuantity")
      * @Serializer\Accessor(getter="getMaxQuantity",setter="setMaxQuantity")
@@ -102,7 +102,7 @@ class ConfigItem extends DataModel
     protected $maxQuantity = 0.0;
 
     /**
-     * @var double Optional minimum quantity required to add configItem. Default 0 for no minimum quantity. 
+     * @var double Optional minimum quantity required to add configItem. Default 0 for no minimum quantity.
      * @Serializer\Type("double")
      * @Serializer\SerializedName("minQuantity")
      * @Serializer\Accessor(getter="getMinQuantity",setter="setMinQuantity")
@@ -147,7 +147,7 @@ class ConfigItem extends DataModel
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
+    protected $i18ns = [];
 
     /**
      * @var \jtl\Connector\Model\ConfigItemPrice[]
@@ -155,7 +155,7 @@ class ConfigItem extends DataModel
      * @Serializer\SerializedName("prices")
      * @Serializer\AccessType("reflection")
      */
-    protected $prices = array();
+    protected $prices = [];
 
     /**
      * Constructor
@@ -239,7 +239,7 @@ class ConfigItem extends DataModel
     }
 
     /**
-     * @param boolean $inheritProductName Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored. 
+     * @param boolean $inheritProductName Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored.
      * @return \jtl\Connector\Model\ConfigItem
      */
     public function setInheritProductName($inheritProductName)
@@ -248,7 +248,7 @@ class ConfigItem extends DataModel
     }
 
     /**
-     * @return boolean Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored. 
+     * @return boolean Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored.
      */
     public function getInheritProductName()
     {
@@ -256,7 +256,7 @@ class ConfigItem extends DataModel
     }
 
     /**
-     * @param boolean $inheritProductPrice Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price. 
+     * @param boolean $inheritProductPrice Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price.
      * @return \jtl\Connector\Model\ConfigItem
      */
     public function setInheritProductPrice($inheritProductPrice)
@@ -265,7 +265,7 @@ class ConfigItem extends DataModel
     }
 
     /**
-     * @return boolean Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price. 
+     * @return boolean Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price.
      */
     public function getInheritProductPrice()
     {
@@ -273,7 +273,7 @@ class ConfigItem extends DataModel
     }
 
     /**
-     * @param double $initialQuantity Optional initial / predefined quantity. Default is one (1) quantity piece. 
+     * @param double $initialQuantity Optional initial / predefined quantity. Default is one (1) quantity piece.
      * @return \jtl\Connector\Model\ConfigItem
      */
     public function setInitialQuantity($initialQuantity)
@@ -282,7 +282,7 @@ class ConfigItem extends DataModel
     }
 
     /**
-     * @return double Optional initial / predefined quantity. Default is one (1) quantity piece. 
+     * @return double Optional initial / predefined quantity. Default is one (1) quantity piece.
      */
     public function getInitialQuantity()
     {
@@ -307,7 +307,7 @@ class ConfigItem extends DataModel
     }
 
     /**
-     * @param boolean $isRecommended Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. 
+     * @param boolean $isRecommended Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted.
      * @return \jtl\Connector\Model\ConfigItem
      */
     public function setIsRecommended($isRecommended)
@@ -316,7 +316,7 @@ class ConfigItem extends DataModel
     }
 
     /**
-     * @return boolean Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. 
+     * @return boolean Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted.
      */
     public function getIsRecommended()
     {
@@ -324,7 +324,7 @@ class ConfigItem extends DataModel
     }
 
     /**
-     * @param double $maxQuantity Maximum allowed quantity. Default 0 for no maximum limit. 
+     * @param double $maxQuantity Maximum allowed quantity. Default 0 for no maximum limit.
      * @return \jtl\Connector\Model\ConfigItem
      */
     public function setMaxQuantity($maxQuantity)
@@ -333,7 +333,7 @@ class ConfigItem extends DataModel
     }
 
     /**
-     * @return double Maximum allowed quantity. Default 0 for no maximum limit. 
+     * @return double Maximum allowed quantity. Default 0 for no maximum limit.
      */
     public function getMaxQuantity()
     {
@@ -341,7 +341,7 @@ class ConfigItem extends DataModel
     }
 
     /**
-     * @param double $minQuantity Optional minimum quantity required to add configItem. Default 0 for no minimum quantity. 
+     * @param double $minQuantity Optional minimum quantity required to add configItem. Default 0 for no minimum quantity.
      * @return \jtl\Connector\Model\ConfigItem
      */
     public function setMinQuantity($minQuantity)
@@ -350,7 +350,7 @@ class ConfigItem extends DataModel
     }
 
     /**
-     * @return double Optional minimum quantity required to add configItem. Default 0 for no minimum quantity. 
+     * @return double Optional minimum quantity required to add configItem. Default 0 for no minimum quantity.
      */
     public function getMinQuantity()
     {
@@ -458,7 +458,7 @@ class ConfigItem extends DataModel
      */
     public function clearI18ns()
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
         return $this;
     }
 
@@ -495,7 +495,7 @@ class ConfigItem extends DataModel
      */
     public function clearPrices()
     {
-        $this->prices = array();
+        $this->prices = [];
         return $this;
     }
 }

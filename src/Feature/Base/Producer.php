@@ -23,7 +23,6 @@ use \jtl\Connector\Feature\Base\IProducer;
  */
 abstract class Producer extends Baseclass implements IProducer
 {
-
     const FEATURES_KEY = 'features';
 
     /**
@@ -173,9 +172,9 @@ abstract class Producer extends Baseclass implements IProducer
      */
     public function export(IExporter $exporter)
     {
-        return $exporter->export(array(
+        return $exporter->export([
             self::FEATURES_KEY => $this->_importer_data
-        ));
+        ]);
     }
 
     /**

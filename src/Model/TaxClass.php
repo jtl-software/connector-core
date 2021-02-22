@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class TaxClass extends DataModel
@@ -30,7 +30,7 @@ class TaxClass extends DataModel
     protected $id = null;
 
     /**
-     * @var boolean Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
+     * @var boolean Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isDefault")
      * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
@@ -72,7 +72,7 @@ class TaxClass extends DataModel
     }
 
     /**
-     * @param boolean $isDefault Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
+     * @param boolean $isDefault Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default.
      * @return \jtl\Connector\Model\TaxClass
      * @throws \InvalidArgumentException if the provided argument is not of type 'boolean'.
      */
@@ -82,7 +82,7 @@ class TaxClass extends DataModel
     }
 
     /**
-     * @return boolean Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default. 
+     * @return boolean Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default.
      */
     public function getIsDefault()
     {

@@ -16,11 +16,11 @@ class ProductPriceItem extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('productPriceId', 'Identity', null, true, true, false),
             new PropertyInfo('netPrice', 'double', 0.0, false, false, false),
             new PropertyInfo('quantity', 'integer', 0, false, false, false),
-        );
+        ];
     }
 
     public function isMain()

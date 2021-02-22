@@ -15,13 +15,13 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class DeliveryNoteTrackingList extends DataModel
 {
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
@@ -34,11 +34,11 @@ class DeliveryNoteTrackingList extends DataModel
      * @Serializer\SerializedName("codes")
      * @Serializer\AccessType("reflection")
      */
-    protected $codes = array();
+    protected $codes = [];
 
 
     /**
-     * @param string $name 
+     * @param string $name
      * @return \jtl\Connector\Model\DeliveryNoteTrackingList
      */
     public function setName($name)
@@ -47,7 +47,7 @@ class DeliveryNoteTrackingList extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -87,7 +87,7 @@ class DeliveryNoteTrackingList extends DataModel
      */
     public function clearCodes()
     {
-        $this->codes = array();
+        $this->codes = [];
         return $this;
     }
 }

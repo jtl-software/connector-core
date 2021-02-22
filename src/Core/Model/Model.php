@@ -51,7 +51,7 @@ abstract class Model
                     $property = ucfirst($member);
                     $setter = 'set' . $property;
 
-                    if (is_callable(array($this, $setter))) {
+                    if (is_callable([$this, $setter])) {
                         $this->{$setter}($object->{$member});
                     }
                 }
@@ -63,7 +63,7 @@ abstract class Model
                     $property = ucfirst($key);
                     $setter = 'set' . $property;
 
-                    if (is_callable(array($this, $setter))) {
+                    if (is_callable([$this, $setter])) {
                         $this->{$setter}($value);
                     }
                 }
@@ -79,14 +79,14 @@ abstract class Model
      * @param array $publics
      * @return stdClass $object
      */
-    public function getPublic(array $publics = array('fields', 'isEncrypted', 'identities', '_type'))
+    public function getPublic(array $publics = ['fields', 'isEncrypted', 'identities', '_type'])
     {
         $object = new \stdClass();
         
         $members = array_keys(get_object_vars($this));
         if (is_array($members) && count($members) > 0) {
             if ($publics === null) {
-                $publics = array();
+                $publics = [];
             }
 
             foreach ($members as $member) {

@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class CategoryAttr extends DataModel
@@ -30,7 +30,7 @@ class CategoryAttr extends DataModel
     protected $categoryId = null;
 
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
@@ -38,7 +38,7 @@ class CategoryAttr extends DataModel
     protected $id = null;
 
     /**
-     * @var boolean 
+     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isCustomProperty")
      * @Serializer\Accessor(getter="getIsCustomProperty",setter="setIsCustomProperty")
@@ -46,7 +46,7 @@ class CategoryAttr extends DataModel
     protected $isCustomProperty = false;
 
     /**
-     * @var boolean 
+     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isTranslated")
      * @Serializer\Accessor(getter="getIsTranslated",setter="setIsTranslated")
@@ -59,7 +59,7 @@ class CategoryAttr extends DataModel
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = array();
+    protected $i18ns = [];
 
     /**
      * Constructor
@@ -89,7 +89,7 @@ class CategoryAttr extends DataModel
     }
 
     /**
-     * @param Identity $id 
+     * @param Identity $id
      * @return \jtl\Connector\Model\CategoryAttr
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -99,7 +99,7 @@ class CategoryAttr extends DataModel
     }
 
     /**
-     * @return Identity 
+     * @return Identity
      */
     public function getId()
     {
@@ -107,7 +107,7 @@ class CategoryAttr extends DataModel
     }
 
     /**
-     * @param boolean $isCustomProperty 
+     * @param boolean $isCustomProperty
      * @return \jtl\Connector\Model\CategoryAttr
      */
     public function setIsCustomProperty($isCustomProperty)
@@ -116,7 +116,7 @@ class CategoryAttr extends DataModel
     }
 
     /**
-     * @return boolean 
+     * @return boolean
      */
     public function getIsCustomProperty()
     {
@@ -124,7 +124,7 @@ class CategoryAttr extends DataModel
     }
 
     /**
-     * @param boolean $isTranslated 
+     * @param boolean $isTranslated
      * @return \jtl\Connector\Model\CategoryAttr
      */
     public function setIsTranslated($isTranslated)
@@ -133,7 +133,7 @@ class CategoryAttr extends DataModel
     }
 
     /**
-     * @return boolean 
+     * @return boolean
      */
     public function getIsTranslated()
     {
@@ -173,7 +173,7 @@ class CategoryAttr extends DataModel
      */
     public function clearI18ns()
     {
-        $this->i18ns = array();
+        $this->i18ns = [];
         return $this;
     }
 }

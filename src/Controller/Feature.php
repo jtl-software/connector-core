@@ -34,8 +34,8 @@ class Feature extends CoreController
     {
         unset($params); //We don't need the params parameter
         $man = new Manager(new Producer()); //Create our feature manager instance
-        $man->registerMethods(array('pull', 'push')); //Register the methods where we're looking for
-        $man->registerParameters(array('supported', 'comment')); //Register the parameters where we're looking for
+        $man->registerMethods(['pull', 'push']); //Register the methods where we're looking for
+        $man->registerParameters(['supported', 'comment']); //Register the parameters where we're looking for
         $ret = new Action();
         try {
             $datas = $man->transform(

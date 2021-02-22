@@ -50,7 +50,7 @@ class ErrorHandler implements IErrorHandler
 
     public function getExceptionHandler()
     {
-        return function($e) {
+        return function ($e) {
             $error = new Error();
             if (self::isThrowable($e)) {
                 $trace = $e->getTrace();
@@ -88,23 +88,23 @@ class ErrorHandler implements IErrorHandler
 
     public function getErrorHandler()
     {
-        return function($errno, $errstr, $errfile, $errline) {
-            $types = array(
-                E_ERROR => array(Logger::ERROR, 'E_ERROR'),
-                E_WARNING => array(Logger::WARNING, 'E_WARNING'),
-                E_PARSE => array(Logger::WARNING, 'E_PARSE'),
-                E_NOTICE => array(Logger::NOTICE, 'E_NOTICE'),
-                E_CORE_ERROR => array(Logger::ERROR, 'E_CORE_ERROR'),
-                E_CORE_WARNING => array(Logger::WARNING, 'E_CORE_WARNING'),
-                E_COMPILE_ERROR => array(Logger::ERROR, 'E_COMPILE_ERROR'),
-                E_USER_ERROR => array(Logger::ERROR, 'E_USER_ERROR'),
-                E_USER_WARNING => array(Logger::WARNING, 'E_USER_WARNING'),
-                E_USER_NOTICE => array(Logger::NOTICE, 'E_USER_NOTICE'),
-                E_STRICT => array(Logger::NOTICE, 'E_STRICT'),
-                E_RECOVERABLE_ERROR => array(Logger::ERROR, 'E_RECOVERABLE_ERROR'),
-                E_DEPRECATED => array(Logger::INFO, 'E_DEPRECATED'),
-                E_USER_DEPRECATED => array(Logger::INFO, 'E_USER_DEPRECATED')
-            );
+        return function ($errno, $errstr, $errfile, $errline) {
+            $types = [
+                E_ERROR => [Logger::ERROR, 'E_ERROR'],
+                E_WARNING => [Logger::WARNING, 'E_WARNING'],
+                E_PARSE => [Logger::WARNING, 'E_PARSE'],
+                E_NOTICE => [Logger::NOTICE, 'E_NOTICE'],
+                E_CORE_ERROR => [Logger::ERROR, 'E_CORE_ERROR'],
+                E_CORE_WARNING => [Logger::WARNING, 'E_CORE_WARNING'],
+                E_COMPILE_ERROR => [Logger::ERROR, 'E_COMPILE_ERROR'],
+                E_USER_ERROR => [Logger::ERROR, 'E_USER_ERROR'],
+                E_USER_WARNING => [Logger::WARNING, 'E_USER_WARNING'],
+                E_USER_NOTICE => [Logger::NOTICE, 'E_USER_NOTICE'],
+                E_STRICT => [Logger::NOTICE, 'E_STRICT'],
+                E_RECOVERABLE_ERROR => [Logger::ERROR, 'E_RECOVERABLE_ERROR'],
+                E_DEPRECATED => [Logger::INFO, 'E_DEPRECATED'],
+                E_USER_DEPRECATED => [Logger::INFO, 'E_USER_DEPRECATED']
+            ];
 
             if (isset($types[$errno])) {
                 $err = "(" . $types[$errno][1] . ") File ({$errfile}, {$errline}): {$errstr}";
@@ -122,16 +122,16 @@ class ErrorHandler implements IErrorHandler
 
     public function getShutdownHandler()
     {
-        return function() {
+        return function () {
             if (($err = error_get_last())) {
-                $allowed = array(
+                $allowed = [
                     E_ERROR,
                     E_CORE_ERROR,
                     E_USER_ERROR,
                     E_RECOVERABLE_ERROR,
                     E_COMPILE_ERROR,
                     E_PARSE
-                );
+                ];
 
                 if (in_array($err['type'], $allowed)) {
                     ob_clean();

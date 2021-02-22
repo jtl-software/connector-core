@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class CustomerOrderItem extends DataModel
@@ -119,7 +119,7 @@ class CustomerOrderItem extends DataModel
     protected $sku = '';
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("type")
      * @Serializer\Accessor(getter="getType",setter="setType")
@@ -156,7 +156,7 @@ class CustomerOrderItem extends DataModel
      * @Serializer\SerializedName("variations")
      * @Serializer\AccessType("reflection")
      */
-    protected $variations = array();
+    protected $variations = [];
 
     /**
      * Constructor
@@ -327,7 +327,7 @@ class CustomerOrderItem extends DataModel
     }
 
     /**
-     * @param string $type 
+     * @param string $type
      * @return \jtl\Connector\Model\CustomerOrderItem
      */
     public function setType($type)
@@ -336,7 +336,7 @@ class CustomerOrderItem extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getType()
     {
@@ -427,7 +427,7 @@ class CustomerOrderItem extends DataModel
      */
     public function clearVariations()
     {
-        $this->variations = array();
+        $this->variations = [];
         return $this;
     }
 }

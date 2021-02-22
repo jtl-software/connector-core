@@ -15,7 +15,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class GlobalData extends DataModel
@@ -26,7 +26,7 @@ class GlobalData extends DataModel
      * @Serializer\SerializedName("configGroups")
      * @Serializer\AccessType("reflection")
      */
-    protected $configGroups = array();
+    protected $configGroups = [];
 
     /**
      * @var \jtl\Connector\Model\ConfigItem[]
@@ -34,7 +34,7 @@ class GlobalData extends DataModel
      * @Serializer\SerializedName("configItems")
      * @Serializer\AccessType("reflection")
      */
-    protected $configItems = array();
+    protected $configItems = [];
 
     /**
      * @var \jtl\Connector\Model\CrossSellingGroup[]
@@ -42,7 +42,7 @@ class GlobalData extends DataModel
      * @Serializer\SerializedName("crossSellingGroups")
      * @Serializer\AccessType("reflection")
      */
-    protected $crossSellingGroups = array();
+    protected $crossSellingGroups = [];
 
     /**
      * @var \jtl\Connector\Model\Currency[]
@@ -50,7 +50,7 @@ class GlobalData extends DataModel
      * @Serializer\SerializedName("currencies")
      * @Serializer\AccessType("reflection")
      */
-    protected $currencies = array();
+    protected $currencies = [];
 
     /**
      * @var \jtl\Connector\Model\CustomerGroup[]
@@ -58,7 +58,7 @@ class GlobalData extends DataModel
      * @Serializer\SerializedName("customerGroups")
      * @Serializer\AccessType("reflection")
      */
-    protected $customerGroups = array();
+    protected $customerGroups = [];
 
     /**
      * @var \jtl\Connector\Model\Language[]
@@ -66,7 +66,7 @@ class GlobalData extends DataModel
      * @Serializer\SerializedName("languages")
      * @Serializer\AccessType("reflection")
      */
-    protected $languages = array();
+    protected $languages = [];
 
     /**
      * @var \jtl\Connector\Model\MeasurementUnit[]
@@ -74,7 +74,7 @@ class GlobalData extends DataModel
      * @Serializer\SerializedName("measurementUnits")
      * @Serializer\AccessType("reflection")
      */
-    protected $measurementUnits = array();
+    protected $measurementUnits = [];
 
     /**
      * @var \jtl\Connector\Model\ProductType[]
@@ -82,7 +82,7 @@ class GlobalData extends DataModel
      * @Serializer\SerializedName("productTypes")
      * @Serializer\AccessType("reflection")
      */
-    protected $productTypes = array();
+    protected $productTypes = [];
 
     /**
      * @var \jtl\Connector\Model\ShippingClass[]
@@ -90,7 +90,7 @@ class GlobalData extends DataModel
      * @Serializer\SerializedName("shippingClasses")
      * @Serializer\AccessType("reflection")
      */
-    protected $shippingClasses = array();
+    protected $shippingClasses = [];
 
     /**
      * @var \jtl\Connector\Model\ShippingMethod[]
@@ -98,7 +98,7 @@ class GlobalData extends DataModel
      * @Serializer\SerializedName("shippingMethods")
      * @Serializer\AccessType("reflection")
      */
-    protected $shippingMethods = array();
+    protected $shippingMethods = [];
 
     /**
      * @var \jtl\Connector\Model\TaxRate[]
@@ -106,7 +106,7 @@ class GlobalData extends DataModel
      * @Serializer\SerializedName("taxRates")
      * @Serializer\AccessType("reflection")
      */
-    protected $taxRates = array();
+    protected $taxRates = [];
 
     /**
      * @var \jtl\Connector\Model\Unit[]
@@ -114,7 +114,7 @@ class GlobalData extends DataModel
      * @Serializer\SerializedName("units")
      * @Serializer\AccessType("reflection")
      */
-    protected $units = array();
+    protected $units = [];
 
     /**
      * @var \jtl\Connector\Model\Warehouse[]
@@ -122,7 +122,7 @@ class GlobalData extends DataModel
      * @Serializer\SerializedName("warehouses")
      * @Serializer\AccessType("reflection")
      */
-    protected $warehouses = array();
+    protected $warehouses = [];
 
 
     /**
@@ -158,7 +158,7 @@ class GlobalData extends DataModel
      */
     public function clearConfigGroups()
     {
-        $this->configGroups = array();
+        $this->configGroups = [];
         return $this;
     }
 
@@ -195,7 +195,7 @@ class GlobalData extends DataModel
      */
     public function clearConfigItems()
     {
-        $this->configItems = array();
+        $this->configItems = [];
         return $this;
     }
 
@@ -232,7 +232,7 @@ class GlobalData extends DataModel
      */
     public function clearCrossSellingGroups()
     {
-        $this->crossSellingGroups = array();
+        $this->crossSellingGroups = [];
         return $this;
     }
 
@@ -269,7 +269,7 @@ class GlobalData extends DataModel
      */
     public function clearCurrencies()
     {
-        $this->currencies = array();
+        $this->currencies = [];
         return $this;
     }
 
@@ -306,7 +306,7 @@ class GlobalData extends DataModel
      */
     public function clearCustomerGroups()
     {
-        $this->customerGroups = array();
+        $this->customerGroups = [];
         return $this;
     }
 
@@ -343,7 +343,7 @@ class GlobalData extends DataModel
      */
     public function clearLanguages()
     {
-        $this->languages = array();
+        $this->languages = [];
         return $this;
     }
 
@@ -380,7 +380,7 @@ class GlobalData extends DataModel
      */
     public function clearMeasurementUnits()
     {
-        $this->measurementUnits = array();
+        $this->measurementUnits = [];
         return $this;
     }
 
@@ -417,7 +417,7 @@ class GlobalData extends DataModel
      */
     public function clearProductTypes()
     {
-        $this->productTypes = array();
+        $this->productTypes = [];
         return $this;
     }
 
@@ -454,7 +454,7 @@ class GlobalData extends DataModel
      */
     public function clearShippingClasses()
     {
-        $this->shippingClasses = array();
+        $this->shippingClasses = [];
         return $this;
     }
 
@@ -491,7 +491,7 @@ class GlobalData extends DataModel
      */
     public function clearShippingMethods()
     {
-        $this->shippingMethods = array();
+        $this->shippingMethods = [];
         return $this;
     }
 
@@ -528,7 +528,7 @@ class GlobalData extends DataModel
      */
     public function clearTaxRates()
     {
-        $this->taxRates = array();
+        $this->taxRates = [];
         return $this;
     }
 
@@ -565,7 +565,7 @@ class GlobalData extends DataModel
      */
     public function clearUnits()
     {
-        $this->units = array();
+        $this->units = [];
         return $this;
     }
 
@@ -602,7 +602,7 @@ class GlobalData extends DataModel
      */
     public function clearWarehouses()
     {
-        $this->warehouses = array();
+        $this->warehouses = [];
         return $this;
     }
 }

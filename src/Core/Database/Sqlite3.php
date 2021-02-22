@@ -148,7 +148,7 @@ class Sqlite3 implements IDatabase
     {
         $result = @$this->db->query($query);
         if ($result instanceof \SQLite3Result) {
-            $rows = array();
+            $rows = [];
             while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
                 $rows[] = $row;
             }

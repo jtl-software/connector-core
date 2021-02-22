@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class ProductPriceItem extends DataModel
@@ -38,7 +38,7 @@ class ProductPriceItem extends DataModel
     protected $netPrice = 0.0;
 
     /**
-     * @var integer Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
+     * @var integer Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items.
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("quantity")
      * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
@@ -89,7 +89,7 @@ class ProductPriceItem extends DataModel
     }
 
     /**
-     * @param integer $quantity Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
+     * @param integer $quantity Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items.
      * @return \jtl\Connector\Model\ProductPriceItem
      */
     public function setQuantity($quantity)
@@ -98,7 +98,7 @@ class ProductPriceItem extends DataModel
     }
 
     /**
-     * @return integer Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items. 
+     * @return integer Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items.
      */
     public function getQuantity()
     {

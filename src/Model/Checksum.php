@@ -16,7 +16,7 @@ use jtl\Connector\Checksum\IChecksum;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class Checksum extends DataModel implements IChecksum
@@ -27,7 +27,7 @@ class Checksum extends DataModel implements IChecksum
     const TYPE_VARIATION = 1;
 
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("foreignKey")
      * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
@@ -35,7 +35,7 @@ class Checksum extends DataModel implements IChecksum
     protected $foreignKey = null;
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("endpoint")
      * @Serializer\Accessor(getter="getEndpoint",setter="setEndpoint")
@@ -43,7 +43,7 @@ class Checksum extends DataModel implements IChecksum
     protected $endpoint = '';
 
     /**
-     * @var boolean 
+     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("hasChanged")
      * @Serializer\Accessor(getter="getHasChanged",setter="setHasChanged")
@@ -51,7 +51,7 @@ class Checksum extends DataModel implements IChecksum
     protected $hasChanged = false;
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("host")
      * @Serializer\Accessor(getter="getHost",setter="setHost")
@@ -75,7 +75,7 @@ class Checksum extends DataModel implements IChecksum
     }
 
     /**
-     * @param Identity $foreignKey 
+     * @param Identity $foreignKey
      * @return \jtl\Connector\Model\Checksum
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -85,7 +85,7 @@ class Checksum extends DataModel implements IChecksum
     }
 
     /**
-     * @return Identity 
+     * @return Identity
      */
     public function getForeignKey()
     {
@@ -93,7 +93,7 @@ class Checksum extends DataModel implements IChecksum
     }
 
     /**
-     * @param string $endpoint 
+     * @param string $endpoint
      * @return \jtl\Connector\Model\Checksum
      */
     public function setEndpoint($endpoint)
@@ -102,7 +102,7 @@ class Checksum extends DataModel implements IChecksum
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getEndpoint()
     {
@@ -110,7 +110,7 @@ class Checksum extends DataModel implements IChecksum
     }
 
     /**
-     * @param boolean $hasChanged 
+     * @param boolean $hasChanged
      * @return \jtl\Connector\Model\Checksum
      */
     public function setHasChanged($hasChanged)
@@ -119,7 +119,7 @@ class Checksum extends DataModel implements IChecksum
     }
 
     /**
-     * @return boolean 
+     * @return boolean
      */
     public function getHasChanged()
     {
@@ -135,7 +135,7 @@ class Checksum extends DataModel implements IChecksum
     }
 
     /**
-     * @param string $host 
+     * @param string $host
      * @return \jtl\Connector\Model\Checksum
      */
     public function setHost($host)
@@ -144,7 +144,7 @@ class Checksum extends DataModel implements IChecksum
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getHost()
     {

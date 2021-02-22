@@ -16,13 +16,13 @@ class CategoryAttr extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('categoryId', 'Identity', null, false, true, false),
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('isCustomProperty', 'boolean', false, false, false, false),
             new PropertyInfo('isTranslated', 'boolean', false, false, false, false),
             new PropertyInfo('i18ns', '\jtl\Connector\Model\CategoryAttrI18n', null, false, false, true),
-        );
+        ];
     }
 
     public function isMain()

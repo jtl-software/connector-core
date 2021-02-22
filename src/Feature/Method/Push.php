@@ -17,6 +17,5 @@ use \jtl\Connector\Feature\Method\Base as BaseMethod;
  */
 class Push extends BaseMethod
 {
-
     protected $_name = 'push';
 }

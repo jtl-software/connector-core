@@ -15,13 +15,13 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class FileUploadI18n extends DataModel
 {
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("description")
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
@@ -29,7 +29,7 @@ class FileUploadI18n extends DataModel
     protected $description = '';
 
     /**
-     * @var integer 
+     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("fileUploadId")
      * @Serializer\Accessor(getter="getFileUploadId",setter="setFileUploadId")
@@ -37,7 +37,7 @@ class FileUploadI18n extends DataModel
     protected $fileUploadId = 0;
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("languageISO")
      * @Serializer\Accessor(getter="getLanguageISO",setter="setLanguageISO")
@@ -45,7 +45,7 @@ class FileUploadI18n extends DataModel
     protected $languageISO = '';
 
     /**
-     * @var string 
+     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
@@ -54,7 +54,7 @@ class FileUploadI18n extends DataModel
 
 
     /**
-     * @param string $description 
+     * @param string $description
      * @return \jtl\Connector\Model\FileUploadI18n
      */
     public function setDescription($description)
@@ -63,7 +63,7 @@ class FileUploadI18n extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -71,7 +71,7 @@ class FileUploadI18n extends DataModel
     }
 
     /**
-     * @param integer $fileUploadId 
+     * @param integer $fileUploadId
      * @return \jtl\Connector\Model\FileUploadI18n
      */
     public function setFileUploadId($fileUploadId)
@@ -80,7 +80,7 @@ class FileUploadI18n extends DataModel
     }
 
     /**
-     * @return integer 
+     * @return integer
      */
     public function getFileUploadId()
     {
@@ -88,7 +88,7 @@ class FileUploadI18n extends DataModel
     }
 
     /**
-     * @param string $languageISO 
+     * @param string $languageISO
      * @return \jtl\Connector\Model\FileUploadI18n
      */
     public function setLanguageISO($languageISO)
@@ -97,7 +97,7 @@ class FileUploadI18n extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getLanguageISO()
     {
@@ -105,7 +105,7 @@ class FileUploadI18n extends DataModel
     }
 
     /**
-     * @param string $name 
+     * @param string $name
      * @return \jtl\Connector\Model\FileUploadI18n
      */
     public function setName($name)
@@ -114,7 +114,7 @@ class FileUploadI18n extends DataModel
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getName()
     {

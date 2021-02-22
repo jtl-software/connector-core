@@ -15,13 +15,13 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @package jtl\Connector\Model
  * @subpackage Product
- * 
+ *
  * @Serializer\AccessType("public_method")
  */
 class CrossSellingGroupI18n extends DataModel
 {
     /**
-     * @var Identity 
+     * @var Identity
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("crossSellingGroupId")
      * @Serializer\Accessor(getter="getCrossSellingGroupId",setter="setCrossSellingGroupId")
@@ -61,7 +61,7 @@ class CrossSellingGroupI18n extends DataModel
     }
 
     /**
-     * @param Identity $crossSellingGroupId 
+     * @param Identity $crossSellingGroupId
      * @return \jtl\Connector\Model\CrossSellingGroupI18n
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
@@ -71,7 +71,7 @@ class CrossSellingGroupI18n extends DataModel
     }
 
     /**
-     * @return Identity 
+     * @return Identity
      */
     public function getCrossSellingGroupId()
     {

@@ -19,7 +19,7 @@ abstract class Singleton
      *
      * @var multiple: \jtl\Connector\Core\Utilities\Singleton
      */
-    protected static $_instances = array();
+    protected static $_instances = [];
 
     /**
      * Basic Singleton implementation

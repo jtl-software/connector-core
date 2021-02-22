@@ -16,7 +16,7 @@ class ProductVariationValue extends DataType
 {
     protected function loadProperties()
     {
-        return array(
+        return [
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('productVariationId', 'Identity', null, false, true, false),
             new PropertyInfo('ean', 'string', '', false, false, false),
@@ -27,7 +27,7 @@ class ProductVariationValue extends DataType
             new PropertyInfo('extraCharges', '\jtl\Connector\Model\ProductVariationValueExtraCharge', null, false, false, true),
             new PropertyInfo('i18ns', '\jtl\Connector\Model\ProductVariationValueI18n', null, false, false, true),
             new PropertyInfo('invisibilities', '\jtl\Connector\Model\ProductVariationValueInvisibility', null, false, false, true),
-        );
+        ];
     }
 
     public function isMain()
