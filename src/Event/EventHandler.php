@@ -17,7 +17,10 @@ class EventHandler
             return;
         }
 
-        $class = ($class !== null) ? $class : ClassName::getFromNS(get_class($entity));
+        if ($class === null && is_object($entity)) {
+            $class = ClassName::getFromNS(get_class($entity));
+        }
+
         $event = self::createEvent($entity, $class, $action, $moment, $isCore);
 
         if ($event !== null) {
