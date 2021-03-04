@@ -675,7 +675,7 @@ class Application
                 $fileName = pathinfo($path, PATHINFO_BASENAME);
                 $imagePath = sprintf('%s/%s_%s', $tempDir, uniqid(), $fileName);
                 if (file_put_contents($imagePath, $imageData) === false) {
-                    throw ApplicationException::canNotCreateFile($imagePath);
+                    throw ApplicationException::fileCouldNotGetCreated($imagePath);
                 }
                 $image->setFilename($imagePath);
             } else {

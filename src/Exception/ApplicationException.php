@@ -70,7 +70,7 @@ class ApplicationException extends \Exception
      * @param string $fileName
      * @return ApplicationException
      */
-    public static function canNotCreateFile(string $fileName): self
+    public static function fileCouldNotGetCreated(string $fileName): self
     {
         return new self(sprintf('File (%s) could not get created. Directory permissions should get checked', $fileName), ErrorCode::SERVER_ERROR);
     }
