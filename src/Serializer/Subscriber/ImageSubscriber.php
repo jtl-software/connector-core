@@ -7,6 +7,7 @@ use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\Metadata\StaticPropertyMetadata;
 use Jtl\Connector\Core\Definition\Controller;
+use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\SerializerException;
 use Jtl\Connector\Core\Model\AbstractImage;
 use Jtl\Connector\Core\Model\Ack;
@@ -36,11 +37,12 @@ class ImageSubscriber implements EventSubscriberInterface
 
     /**
      * @param ObjectEvent $event
+     * @throws DefinitionException
      */
     public function onPostSerialize(ObjectEvent $event)
     {
         $object = $event->getObject();
-        if ($object instanceof AbstractImage) {
+        if ($object instanceof AbstractImage && $object->getRelationType() !== '' && $object->getId()->getEndpoint() !== '') {
             $id = clone $object->getId();
             $id->setEndpoint(sprintf('%s#=#%s', $object->getRelationType(), $id->getEndpoint()));
             $serializedId = $id->toArray();

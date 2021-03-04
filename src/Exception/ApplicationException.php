@@ -53,7 +53,7 @@ class ApplicationException extends \Exception
      */
     public static function imageNotFound(AbstractImage $image): self
     {
-        return new self('Image could not get found for %s (hostId = %d)', Str::toPascalCase($image->getRelationType()), $image->getForeignKey()->getHost(), self::IMAGE_NOT_FOUND);
+        return new self(sprintf('Image could not get found for %s (hostId = %d)', Str::toPascalCase($image->getRelationType()), $image->getForeignKey()->getHost()), self::IMAGE_NOT_FOUND);
     }
 
     /**
