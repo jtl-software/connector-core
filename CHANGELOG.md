@@ -1,3 +1,7 @@
+4.0.10
+-----
+- Fixed manipulating image endpoint for use with connector client
+
 4.0.9
 -----
 - Removed outdated properties and methods from abstract data model
