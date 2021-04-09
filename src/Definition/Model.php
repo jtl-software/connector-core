@@ -114,6 +114,9 @@ final class Model
             'id' => IdentityType::CATEGORY,
             'parentCategoryId' => IdentityType::CATEGORY
         ],
+        self::CATEGORY_ATTRIBUTE => [
+            'id' => IdentityType::CATEGORY_ATTRIBUTE
+        ],
         self::CONFIG_GROUP => [
             'id' => IdentityType::CONFIG_GROUP
         ],
@@ -210,6 +213,9 @@ final class Model
             'shippingClassId' => IdentityType::SHIPPING_CLASS,
             'unitId' => IdentityType::UNIT,
         ],
+        self::PRODUCT_ATTRIBUTE => [
+            'id' => IdentityType::PRODUCT_ATTRIBUTE
+        ],
         self::PRODUCT_PRICE => [
             'productId' => IdentityType::PRODUCT
         ],
@@ -218,9 +224,6 @@ final class Model
         ],
         self::PRODUCT_TO_CATEGORY => [
             'categoryId' => IdentityType::CATEGORY
-        ],
-        self::PRODUCT_ATTRIBUTE => [
-            'id' => IdentityType::PRODUCT_ATTRIBUTE
         ],
         self::PRODUCT_CONFIG_GROUP => [
             'configGroupId' => IdentityType::CONFIG_GROUP
