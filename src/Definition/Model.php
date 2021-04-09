@@ -6,11 +6,12 @@ use Jtl\Connector\Core\Exception\DefinitionException;
 
 final class Model
 {
-    const MODEL_NAMESPACE = 'Jtl\\Connector\\Core\\Model';
+    public const
+        MODEL_NAMESPACE = 'Jtl\\Connector\\Core\\Model';
 
     public const
         CATEGORY = 'Category',
-        CATEGORY_ATTRIBUTE = 'CategoryAttr',
+        CATEGORY_ATTRIBUTE = 'CategoryAttribute',
         CATEGORY_IMAGE = 'CategoryImage',
         CONFIG_GROUP = 'ConfigGroup',
         CONFIG_GROUP_IMAGE = 'ConfigGroupImage',
@@ -33,7 +34,7 @@ final class Model
         MEASUREMENT_UNIT = 'MeasurementUnit',
         PAYMENT = 'Payment',
         PRODUCT = 'Product',
-        PRODUCT_ATTRIBUTE = 'ProductAttr',
+        PRODUCT_ATTRIBUTE = 'ProductAttribute',
         PRODUCT_CONFIG_GROUP = 'ProductConfigGroup',
         PRODUCT_IMAGE = 'ProductImage',
         PRODUCT_PRICE = 'ProductPrice',
@@ -288,7 +289,6 @@ final class Model
      * @param string $modelName
      * @return integer
      * @throws DefinitionException
-     * @throws \ReflectionException
      */
     public static function getIdentityType(string $modelName): int
     {
