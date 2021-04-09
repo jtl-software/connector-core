@@ -197,7 +197,7 @@ class Category extends AbstractIdentity implements IdentificationInterface
     }
     
     /**
-     * @param CategoryAttribute $attribute
+     * @param TranslatableAttribute|CategoryAttribute $attribute
      * @return Category
      */
     public function addAttribute(TranslatableAttribute $attribute): Category
@@ -208,7 +208,7 @@ class Category extends AbstractIdentity implements IdentificationInterface
     }
     
     /**
-     * @param CategoryAttribute ...$attributes
+     * @param TranslatableAttribute|CategoryAttribute ...$attributes
      * @return Category
      */
     public function setAttributes(TranslatableAttribute ...$attributes): Category
@@ -219,7 +219,7 @@ class Category extends AbstractIdentity implements IdentificationInterface
     }
     
     /**
-     * @return CategoryAttribute[]
+     * @return TranslatableAttribute|CategoryAttribute[]
      */
     public function getAttributes(): array
     {

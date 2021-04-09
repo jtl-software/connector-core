@@ -1985,7 +1985,7 @@ class Product extends AbstractIdentity implements IdentificationInterface
     }
     
     /**
-     * @param ProductAttribute $attribute
+     * @param TranslatableAttribute|ProductAttribute $attribute
      * @return Product
      */
     public function addAttribute(TranslatableAttribute $attribute): Product
@@ -1996,7 +1996,7 @@ class Product extends AbstractIdentity implements IdentificationInterface
     }
 
     /**
-     * @param ProductAttribute ...$attributes
+     * @param TranslatableAttribute|ProductAttribute ...$attributes
      * @return Product
      */
     public function setAttributes(TranslatableAttribute ...$attributes): Product
@@ -2007,7 +2007,7 @@ class Product extends AbstractIdentity implements IdentificationInterface
     }
     
     /**
-     * @return ProductAttribute[]
+     * @return TranslatableAttribute|ProductAttribute[]
      */
     public function getAttributes(): array
     {
