@@ -52,8 +52,8 @@ class Category extends AbstractIdentity implements IdentificationInterface
     protected $sort = 0;
     
     /**
-     * @var TranslatableAttribute[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\TranslatableAttribute>")
+     * @var CategoryAttribute[]
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\CategoryAttribute>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
@@ -197,7 +197,7 @@ class Category extends AbstractIdentity implements IdentificationInterface
     }
     
     /**
-     * @param TranslatableAttribute $attribute
+     * @param TranslatableAttribute|CategoryAttribute $attribute
      * @return Category
      */
     public function addAttribute(TranslatableAttribute $attribute): Category
@@ -208,7 +208,7 @@ class Category extends AbstractIdentity implements IdentificationInterface
     }
     
     /**
-     * @param TranslatableAttribute ...$attributes
+     * @param TranslatableAttribute|CategoryAttribute ...$attributes
      * @return Category
      */
     public function setAttributes(TranslatableAttribute ...$attributes): Category
@@ -219,7 +219,7 @@ class Category extends AbstractIdentity implements IdentificationInterface
     }
     
     /**
-     * @return TranslatableAttribute[]
+     * @return TranslatableAttribute|CategoryAttribute[]
      */
     public function getAttributes(): array
     {

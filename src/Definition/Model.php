@@ -6,11 +6,12 @@ use Jtl\Connector\Core\Exception\DefinitionException;
 
 final class Model
 {
-    const MODEL_NAMESPACE = 'Jtl\\Connector\\Core\\Model';
+    public const
+        MODEL_NAMESPACE = 'Jtl\\Connector\\Core\\Model';
 
     public const
         CATEGORY = 'Category',
-        CATEGORY_ATTRIBUTE = 'CategoryAttr',
+        CATEGORY_ATTRIBUTE = 'CategoryAttribute',
         CATEGORY_IMAGE = 'CategoryImage',
         CONFIG_GROUP = 'ConfigGroup',
         CONFIG_GROUP_IMAGE = 'ConfigGroupImage',
@@ -33,7 +34,7 @@ final class Model
         MEASUREMENT_UNIT = 'MeasurementUnit',
         PAYMENT = 'Payment',
         PRODUCT = 'Product',
-        PRODUCT_ATTRIBUTE = 'ProductAttr',
+        PRODUCT_ATTRIBUTE = 'ProductAttribute',
         PRODUCT_CONFIG_GROUP = 'ProductConfigGroup',
         PRODUCT_IMAGE = 'ProductImage',
         PRODUCT_PRICE = 'ProductPrice',
@@ -112,6 +113,9 @@ final class Model
         self::CATEGORY => [
             'id' => IdentityType::CATEGORY,
             'parentCategoryId' => IdentityType::CATEGORY
+        ],
+        self::CATEGORY_ATTRIBUTE => [
+            'id' => IdentityType::CATEGORY_ATTRIBUTE
         ],
         self::CONFIG_GROUP => [
             'id' => IdentityType::CONFIG_GROUP
@@ -209,6 +213,9 @@ final class Model
             'shippingClassId' => IdentityType::SHIPPING_CLASS,
             'unitId' => IdentityType::UNIT,
         ],
+        self::PRODUCT_ATTRIBUTE => [
+            'id' => IdentityType::PRODUCT_ATTRIBUTE
+        ],
         self::PRODUCT_PRICE => [
             'productId' => IdentityType::PRODUCT
         ],
@@ -217,9 +224,6 @@ final class Model
         ],
         self::PRODUCT_TO_CATEGORY => [
             'categoryId' => IdentityType::CATEGORY
-        ],
-        self::PRODUCT_ATTRIBUTE => [
-            'id' => IdentityType::PRODUCT_ATTRIBUTE
         ],
         self::PRODUCT_CONFIG_GROUP => [
             'configGroupId' => IdentityType::CONFIG_GROUP
@@ -288,7 +292,6 @@ final class Model
      * @param string $modelName
      * @return integer
      * @throws DefinitionException
-     * @throws \ReflectionException
      */
     public static function getIdentityType(string $modelName): int
     {

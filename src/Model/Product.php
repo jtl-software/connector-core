@@ -548,8 +548,8 @@ class Product extends AbstractIdentity implements IdentificationInterface
     protected $width = 0.0;
     
     /**
-     * @var TranslatableAttribute[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\TranslatableAttribute>")
+     * @var ProductAttribute[]
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductAttribute>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
@@ -1985,7 +1985,7 @@ class Product extends AbstractIdentity implements IdentificationInterface
     }
     
     /**
-     * @param TranslatableAttribute $attribute
+     * @param TranslatableAttribute|ProductAttribute $attribute
      * @return Product
      */
     public function addAttribute(TranslatableAttribute $attribute): Product
@@ -1996,7 +1996,7 @@ class Product extends AbstractIdentity implements IdentificationInterface
     }
 
     /**
-     * @param TranslatableAttribute ...$attributes
+     * @param TranslatableAttribute|ProductAttribute ...$attributes
      * @return Product
      */
     public function setAttributes(TranslatableAttribute ...$attributes): Product
@@ -2007,7 +2007,7 @@ class Product extends AbstractIdentity implements IdentificationInterface
     }
     
     /**
-     * @return TranslatableAttribute[]
+     * @return TranslatableAttribute|ProductAttribute[]
      */
     public function getAttributes(): array
     {

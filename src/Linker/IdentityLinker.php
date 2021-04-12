@@ -85,8 +85,7 @@ class IdentityLinker implements LoggerAwareInterface
 
         foreach ($model->getModelType()->getProperties() as $propertyInfo) {
             $propertyName = $propertyInfo->getName();
-            $property = ucfirst($propertyInfo->getName());
-            $getter = 'get' . $property;
+            $getter = sprintf('get%s', ucfirst($propertyName));
 
             if ($propertyInfo->isNavigation() && $model->{$getter}() !== null) {
                 if (is_array($model->{$getter}())) {
@@ -377,7 +376,6 @@ class IdentityLinker implements LoggerAwareInterface
     {
         $this->logger = $logger;
     }
-
 
     /**
      * @param mixed $id
