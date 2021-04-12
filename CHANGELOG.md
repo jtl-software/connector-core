@@ -1,5 +1,9 @@
+4.0.11
+------
+- Added category- and product- attributes for possibility of linking them
+
 4.0.10
------
+------
 - Fixed manipulating image endpoint for use with connector client
 
 4.0.9
@@ -8,7 +12,7 @@
 
 4.0.8
 -----
-- Replaced faker dependency, due to missing compatiblity with PHP 8
+- Replaced faker dependency, due to missing compatibility with PHP 8
 
 4.0.7
 -----
