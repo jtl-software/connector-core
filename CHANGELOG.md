@@ -1,3 +1,7 @@
+4.0.12
+------
+- Added support for symfony 4 and older monolog versions
+
 4.0.11
 ------
 - Added category- and product- attributes for possibility of linking them
