@@ -15,7 +15,7 @@
         "php": ">=7.2",
         "jms/serializer": "^3.3",
         "hassankhan/config": "^2.0",
-        "monolog/monolog": "^2.0",
+        "monolog/monolog": "*",
         "symfony/finder": "*",
         "symfony/event-dispatcher": "*",
         "doctrine/collections": "^1.4",
@@ -25,8 +25,8 @@
         "php-di/php-di": "^6.0",
         "gmo/iso-639": "^1.0",
         "jawira/case-converter": "^3.4",
-        "symfony/http-foundation": "^5.1",
-        "symfony/filesystem": "^5.1",
+        "symfony/http-foundation": "^4.0|^5.0",
+        "symfony/filesystem": "^4.0|^5.0",
         "fakerphp/faker": "^1.13"
     },
     "require-dev": {
