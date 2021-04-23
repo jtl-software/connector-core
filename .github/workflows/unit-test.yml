@@ -31,4 +31,4 @@ jobs:
           version: 8
           php_version: ${{ matrix.php-versions }}
           configuration: ./phpunit.xml
-          bootstrap: ./vendor/autoload.php
+          bootstrap: ./tests/bootstrap.php
