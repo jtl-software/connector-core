@@ -21,7 +21,9 @@ jobs:
           extensions: mbstring, intl
 
       - name: Run composer
-        uses: php-actions/composer@v2
+        uses: php-actions/composer@v5
+        with:
+          php_version: ${{ matrix.php-versions }}
 
       - name: Run unit tests
         uses: php-actions/phpunit@v2
