@@ -19,14 +19,10 @@ jobs:
         with:
           php-version: ${{ matrix.php-versions }}
           extensions: mbstring, intl, zip
+          tools: composer
 
-      - name: Check php extensions
-        run: php --ini
-
-      - name: Run composer
-        uses: php-actions/composer@v5
-        with:
-          php_version: ${{ matrix.php-versions }}
+      - name: Install Composer dependencies
+        run: composer install
 
       - name: Run unit tests
         uses: php-actions/phpunit@v2
