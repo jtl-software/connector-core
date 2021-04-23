@@ -20,6 +20,9 @@ jobs:
           php-version: ${{ matrix.php-versions }}
           extensions: mbstring, intl, zip
 
+      - name: Check php extensions
+        run: php --ini
+
       - name: Run composer
         uses: php-actions/composer@v5
         with:
