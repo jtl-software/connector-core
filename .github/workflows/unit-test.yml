@@ -25,9 +25,4 @@ jobs:
         run: composer install
 
       - name: Run unit tests
-        uses: php-actions/phpunit@v2
-        with:
-          version: 8
-          php_version: ${{ matrix.php-versions }}
-          configuration: ./phpunit.xml
-          bootstrap: ./tests/bootstrap.php
+        run: ./vendor/bin/phpunit  --bootstrap=tests/bootstrap.php --config=phpunit.xml
