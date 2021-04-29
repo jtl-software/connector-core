@@ -1,3 +1,11 @@
+3.2.1
+-----
+- Added create features file helper method
+
+3.2.0
+-----
+- Added PHP 8 compatiblity
+
 3.1.25
 ------
 - Fixed check for log channel handling
