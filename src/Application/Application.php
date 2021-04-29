@@ -70,7 +70,7 @@ class Application extends CoreApplication
     /**
      * @var string
      */
-    protected $featurePath;
+    protected $featurePath = CONNECTOR_DIR . '/config/features.json';
 
     /**
      * Global Session
@@ -332,7 +332,7 @@ class Application extends CoreApplication
      * @param IEndpointConnector $endpointconnector
      * @return Application
      */
-    public function register(IEndpointConnector $endpointconnector)
+    public function register(IEndpointConnector $endpointconnector): self
     {
         $this->connector = $endpointconnector;
         
@@ -345,7 +345,7 @@ class Application extends CoreApplication
      * @param ResponsePacket $requestpacket
      * @param integer $rpcmode
      */
-    protected function runSingle(RequestPacket $requestpacket, $rpcmode)
+    protected function runSingle(RequestPacket $requestpacket, $rpcmode): void
     {
         $requestpacket->validate();
         $this->runActionValidation($requestpacket);
@@ -422,7 +422,7 @@ class Application extends CoreApplication
      * @param array $requestpackets
      * @param integer $rpcmode
      */
-    protected function runBatch(array $requestpackets, $rpcmode)
+    protected function runBatch(array $requestpackets, $rpcmode): void
     {
         $jtlrpcreponses = [];
 
@@ -449,7 +449,12 @@ class Application extends CoreApplication
         Response::sendAll($jtlrpcreponses);
     }
 
-    protected function deserializeRequestParams(RequestPacket &$requestpacket, $modelNamespace)
+    /**
+     * @param \jtl\Connector\Core\Rpc\RequestPacket $requestpacket
+     * @param $modelNamespace
+     * @throws \jtl\Connector\Exception\LinkerException
+     */
+    protected function deserializeRequestParams(RequestPacket $requestpacket, $modelNamespace): void
     {
         $method = RpcMethod::splitMethod($requestpacket->getMethod());
         $modelClass = RpcMethod::buildController($method->getController());
@@ -499,17 +504,16 @@ class Application extends CoreApplication
     }
 
     /**
-     * Build RPC Reponse Packet
+     * Build RPC Response Packet
      *
-     * @param \jtl\Connector\Core\Rpc\ResponsePacket $requestpacket
+     * @param \jtl\Connector\Core\Rpc\RequestPacket $requestpacket
      * @param \jtl\Connector\Result\Action $actionresult
      * @return \jtl\Connector\Core\Rpc\ResponsePacket
-     * @throws \jtl\Connector\Core\Exception\RpcException
      */
-    protected function buildRpcResponse(RequestPacket $requestpacket, Action $actionresult)
+    protected function buildRpcResponse(RequestPacket $requestpacket, Action $actionresult): ResponsePacket
     {
-        $responsepacket = new ResponsePacket();
-        $responsepacket->setId($requestpacket->getId())
+        $responsepacket = (new ResponsePacket())
+            ->setId($requestpacket->getId())
             ->setJtlrpc($requestpacket->getJtlrpc())
             ->setResult($actionresult->getResult())
             ->setError($actionresult->getError());
@@ -525,7 +529,7 @@ class Application extends CoreApplication
      * @param RequestPacket $requestpacket
      * @throws SchemaException
      */
-    protected function runActionValidation(RequestPacket $requestpacket)
+    protected function runActionValidation(RequestPacket $requestpacket): void
     {
         $method = RpcMethod::splitMethod($requestpacket->getMethod());
 
@@ -542,7 +546,7 @@ class Application extends CoreApplication
      * @param string $controller
      * @throws SchemaException
      */
-    protected function runModelValidation(RequestPacket $requestpacket)
+    protected function runModelValidation(RequestPacket $requestpacket): void
     {
         /*
         $method = RpcMethod::splitMethod($requestpacket->getMethod());
@@ -562,7 +566,7 @@ class Application extends CoreApplication
     /**
      * Initialises the connector configuration instance.
      */
-    protected function startConfiguration()
+    protected function startConfiguration(): void
     {
         if (!isset($this->session)) {
             throw new SessionException('Session not initialized', -32001);
@@ -593,9 +597,9 @@ class Application extends CoreApplication
      * Starting Session
      *
      * @throws \jtl\Connector\Core\Exception\DatabaseException
-     * @throws \jtl\Connector\Core\Exception\SessionException
+     * @throws \jtl\Connector\Core\Exception\SessionException|\jtl\Connector\Core\Exception\ApplicationException
      */
-    protected function startSession($sessionId, $method)
+    protected function startSession($sessionId, $method): void
     {
         if ($sessionId === null && $method !== null && $method !== 'core.connector.auth') {
             throw new SessionException('No session');
@@ -615,7 +619,7 @@ class Application extends CoreApplication
         $this->session = new Session($sqlite3, $sessionId);
     }
 
-    protected function startEventDispatcher()
+    protected function startEventDispatcher(): void
     {
         $this->connector->setEventDispatcher($this->eventDispatcher);
 
@@ -623,9 +627,12 @@ class Application extends CoreApplication
         $loader->load($this->eventDispatcher);
     }
 
-    // OLD single Image
-    //protected function handleImagePush(RequestPacket &$requestpacket, $imagePath)
-    protected function handleImagePush(RequestPacket &$requestpacket, array $imagePaths = [])
+    /**
+     * @param \jtl\Connector\Core\Rpc\RequestPacket $requestpacket
+     * @param array $imagePaths
+     * @throws \jtl\Connector\Core\Exception\ApplicationException
+     */
+    protected function handleImagePush(RequestPacket $requestpacket, array $imagePaths = []): void
     {
         if ($requestpacket->getMethod() === 'image.push') {
             $images = $requestpacket->getParams();
@@ -671,7 +678,11 @@ class Application extends CoreApplication
         }
     }
 
-    protected function triggerRpcAfterEvent($data, $method)
+    /**
+     * @param $data
+     * @param $method
+     */
+    protected function triggerRpcAfterEvent($data, $method): void
     {
         $method = RpcMethod::splitMethod($method);
         EventHandler::dispatchRpc($data, $this->eventDispatcher, $method->getController(), $method->getAction(), EventHandler::AFTER);
@@ -682,7 +693,7 @@ class Application extends CoreApplication
      *
      * @return IEndpointConnector
      */
-    public function getConnector()
+    public function getConnector(): ?IEndpointConnector
     {
         return $this->connector;
     }
@@ -692,7 +703,7 @@ class Application extends CoreApplication
      *
      * @return Session
      */
-    public function getSession()
+    public function getSession(): ?Session
     {
         return $this->session;
     }
@@ -700,7 +711,7 @@ class Application extends CoreApplication
     /**
      * @return int
      */
-    public function getProtocolVersion()
+    public function getProtocolVersion(): int
     {
         return self::PROTOCOL_VERSION;
     }
@@ -709,7 +720,7 @@ class Application extends CoreApplication
      * @param Config $config
      * @return Application
      */
-    public function setConfig(Config $config)
+    public function setConfig(Config $config): self
     {
         $this->config = $config;
         
@@ -719,7 +730,7 @@ class Application extends CoreApplication
     /**
      * @return Config
      */
-    public function getConfig()
+    public function getConfig(): ?Config
     {
         return $this->config;
     }
@@ -728,12 +739,8 @@ class Application extends CoreApplication
      * @param string $featurePath
      * @return Application
      */
-    public function setFeaturePath($featurePath)
+    public function setFeaturePath($featurePath): self
     {
-        if (!is_string($featurePath) || !file_exists($featurePath)) {
-            throw new \InvalidArgumentException('Param featurePath must be a string and the file must exists');
-        }
-        
         $this->featurePath = $featurePath;
         
         return $this;
@@ -742,7 +749,7 @@ class Application extends CoreApplication
     /**
      * @return string
      */
-    public function getFeaturePath()
+    public function getFeaturePath(): string
     {
         return $this->featurePath;
     }
@@ -750,7 +757,7 @@ class Application extends CoreApplication
     /**
      * @return IErrorHandler
      */
-    public function getErrorHandler()
+    public function getErrorHandler(): IErrorHandler
     {
         return $this->errorHandler;
     }
@@ -759,9 +766,26 @@ class Application extends CoreApplication
      * @param IErrorHandler $handler
      * @return $this
      */
-    public function setErrorHandler(IErrorHandler $handler)
+    public function setErrorHandler(IErrorHandler $handler): self
     {
         $this->errorHandler = $handler;
         return $this;
+    }
+
+    /**
+     * @param string $sourcePathFeatures
+     * @throws \Exception
+     */
+    public function createFeaturesFileIfNecessary(string $sourcePathFeatures): void
+    {
+        if(!file_exists($this->featurePath)) {
+            if(!file_exists($sourcePathFeatures)) {
+                throw new \Exception('Source file for features does not exist');
+            }
+
+            if(!copy($sourcePathFeatures, $this->featurePath)) {
+                throw new \Exception('Features file could not get copied');
+            }
+        }
     }
 }

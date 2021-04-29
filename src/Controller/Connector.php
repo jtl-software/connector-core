@@ -64,9 +64,7 @@ class Connector extends CoreController
     {
         $ret = new Action();
         try {
-            $path = !is_null(application()->getFeaturePath()) ?
-                application()->getFeaturePath() :
-                CONNECTOR_DIR . '/config/features.json';
+            $path = application()->getFeaturePath();
             
             $featureData = file_get_contents($path);
             $features = json_decode($featureData);
