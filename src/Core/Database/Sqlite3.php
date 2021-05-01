@@ -8,6 +8,7 @@
 namespace jtl\Connector\Core\Database;
 
 use \jtl\Connector\Core\Exception\DatabaseException;
+use jtl\Connector\Core\Logger\Logger;
 
 /**
  * Sqlite 3 Database Class
@@ -34,7 +35,7 @@ class Sqlite3 implements IDatabase
     /**
      * Sqlite 3 Database object
      *
-     * @var \Sqlite3|null
+     * @var \SQLite3|null
      */
     protected $db;
 
@@ -55,8 +56,7 @@ class Sqlite3 implements IDatabase
     /**
      * (non-PHPdoc)
      *
-     * @throws \jtl\Connector\Core\Exception\DatabaseException
-     * @see \jtl\Connector\Core\Database\IDatabase::connect()
+     * @throws DatabaseException
      */
     public function connect(array $options = null)
     {
@@ -70,8 +70,10 @@ class Sqlite3 implements IDatabase
         }
 
         try {
-            $this->db = new \Sqlite3($this->location, $this->mode);
+            $this->db = new \SQLite3($this->location, $this->mode);
             $this->db->busyTimeout(2000);
+            $this->db->querySingle('PRAGMA journal_mode = wal;');
+            $this->db->enableExceptions(true);
 
             $this->isConnected = true;
         } catch (\Exception $exc) {
@@ -111,12 +113,11 @@ class Sqlite3 implements IDatabase
         switch (strtoupper($command)) {
             case "SELECT":
                 return $this->fetch($query);
+            case "DELETE":
             case "UPDATE":
                 return $this->_exec($query);
             case "INSERT":
                 return $this->insert($query);
-            case "DELETE":
-                return $this->_exec($query);
         }
 
         return null;
@@ -142,21 +143,38 @@ class Sqlite3 implements IDatabase
      * Sqlite Select
      *
      * @param string $query
-     * @return multitype:array |NULL
+     * @return array|null
      */
     public function fetch($query)
     {
-        $result = @$this->db->query($query);
-        if ($result instanceof \SQLite3Result) {
-            $rows = [];
-            while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-                $rows[] = $row;
+        while (true) {
+            $result = null;
+            try {
+                $result = $this->db->query($query);
+            } catch (\Throwable $ex) {
+
             }
 
-            return $rows;
-        }
+            if ($result instanceof \SQLite3Result) {
+                $rows = [];
+                while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+                    $rows[] = $row;
+                }
 
-        return null;
+                return $rows;
+            } elseif (!is_null($result) || $this->db->lastErrorCode() !== 5) {
+                Logger::write($this->db->lastErrorMsg(), Logger::WARNING, Logger::CHANNEL_DATABASE);
+                return null;
+            }
+        }
+    }
+
+    /**
+     * @return \SQLite3|null
+     */
+    public function getDb(): ?\SQLite3
+    {
+        return $this->db;
     }
 
     /**

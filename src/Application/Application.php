@@ -25,6 +25,7 @@ use jtl\Connector\Core\Http\Response;
 use jtl\Connector\Core\Config\Config;
 use jtl\Connector\Exception\JsonException;
 use jtl\Connector\Model\BoolResult;
+use jtl\Connector\Plugin\PluginLoader;
 use jtl\Connector\Result\Action;
 use jtl\Connector\Core\Validator\Schema;
 use jtl\Connector\Core\Exception\SchemaException;
@@ -450,7 +451,7 @@ class Application extends CoreApplication
     }
 
     /**
-     * @param \jtl\Connector\Core\Rpc\RequestPacket $requestpacket
+     * @param RequestPacket $requestpacket
      * @param $modelNamespace
      * @throws \jtl\Connector\Exception\LinkerException
      */
@@ -506,7 +507,7 @@ class Application extends CoreApplication
     /**
      * Build RPC Response Packet
      *
-     * @param \jtl\Connector\Core\Rpc\RequestPacket $requestpacket
+     * @param RequestPacket $requestpacket
      * @param \jtl\Connector\Result\Action $actionresult
      * @return \jtl\Connector\Core\Rpc\ResponsePacket
      */
@@ -597,7 +598,7 @@ class Application extends CoreApplication
      * Starting Session
      *
      * @throws \jtl\Connector\Core\Exception\DatabaseException
-     * @throws \jtl\Connector\Core\Exception\SessionException|\jtl\Connector\Core\Exception\ApplicationException
+     * @throws \jtl\Connector\Core\Exception\SessionException|ApplicationException
      */
     protected function startSession($sessionId, $method): void
     {
@@ -623,14 +624,14 @@ class Application extends CoreApplication
     {
         $this->connector->setEventDispatcher($this->eventDispatcher);
 
-        $loader = new \jtl\Connector\Plugin\PluginLoader();
+        $loader = new PluginLoader();
         $loader->load($this->eventDispatcher);
     }
 
     /**
-     * @param \jtl\Connector\Core\Rpc\RequestPacket $requestpacket
+     * @param RequestPacket $requestpacket
      * @param array $imagePaths
-     * @throws \jtl\Connector\Core\Exception\ApplicationException
+     * @throws ApplicationException
      */
     protected function handleImagePush(RequestPacket $requestpacket, array $imagePaths = []): void
     {
@@ -778,12 +779,12 @@ class Application extends CoreApplication
      */
     public function createFeaturesFileIfNecessary(string $sourcePathFeatures): void
     {
-        if(!file_exists($this->featurePath)) {
-            if(!file_exists($sourcePathFeatures)) {
+        if (!file_exists($this->featurePath)) {
+            if (!file_exists($sourcePathFeatures)) {
                 throw new \Exception('Source file for features does not exist');
             }
 
-            if(!copy($sourcePathFeatures, $this->featurePath)) {
+            if (!copy($sourcePathFeatures, $this->featurePath)) {
                 throw new \Exception('Features file could not get copied');
             }
         }
