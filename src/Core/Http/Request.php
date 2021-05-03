@@ -140,8 +140,8 @@ class Request
      */
     public static function deleteFileupload($filename)
     {
-        if ($filename !== null) {
-            return @unlink($filename);
+        if ($filename !== null && file_exists($filename)) {
+            return unlink($filename);
         }
     
         return false;
@@ -162,11 +162,15 @@ class Request
                     $folder = $infos['dirname'];
                 }
 
-                @unlink($filesname);
+                if(file_exists($filesname)) {
+                    unlink($filesname);
+                }
             }
 
             if ($withFolder && $folder !== null) {
-                @rmdir($folder);
+                if(file_exists($folder)) {
+                    rmdir($folder);
+                }
             }
 
             return true;
