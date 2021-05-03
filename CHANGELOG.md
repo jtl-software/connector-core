@@ -1,3 +1,8 @@
+3.3.0
+-----
+- Revised sqlite session handling
+- Removed unnecessary file not found warnings
+
 3.2.1
 -----
 - Added create features file helper method
