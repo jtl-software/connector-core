@@ -24,6 +24,7 @@ class Product extends AbstractDataType
             new PropertyInfo('productTypeId', 'Identity', null, false, true, false),
             new PropertyInfo('shippingClassId', 'Identity', null, false, true, false),
             new PropertyInfo('unitId', 'Identity', null, false, true, false),
+            new PropertyInfo('taxClassId', 'Identity', null, false, true, false),
             new PropertyInfo('additionalHandlingTime', 'integer', 0, false, false, false),
             new PropertyInfo('asin', 'string', '', false, false, false),
             new PropertyInfo('availableFrom', 'DateTime', null, false, false, false),

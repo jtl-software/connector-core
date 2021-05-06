@@ -84,6 +84,14 @@ class Product extends AbstractIdentity implements IdentificationInterface
     protected $unitId = null;
 
     /**
+     * @var Identity Reference to tax class
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
+     * @Serializer\SerializedName("taxClassId")
+     * @Serializer\Accessor(getter="getTaxClassId",setter="setTaxClassId")
+     */
+    protected $taxClassId = null;
+
+    /**
      * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("additionalHandlingTime")
@@ -885,6 +893,24 @@ class Product extends AbstractIdentity implements IdentificationInterface
     }
 
     /**
+     * @return Identity
+     */
+    public function getTaxClassId(): ?Identity
+    {
+        return $this->taxClassId;
+    }
+
+    /**
+     * @param Identity $taxClassId
+     * @return $this
+     */
+    public function setTaxClassId(Identity $taxClassId): Product
+    {
+        $this->taxClassId = $taxClassId;
+        return $this;
+    }
+
+    /**
      * @return int
      */
     public function getAdditionalHandlingTime(): int
@@ -909,7 +935,6 @@ class Product extends AbstractIdentity implements IdentificationInterface
     public function setAsin(string $asin): Product
     {
         $this->asin = $asin;
-        
         return $this;
     }
     
@@ -920,9 +945,9 @@ class Product extends AbstractIdentity implements IdentificationInterface
     {
         return $this->asin;
     }
-    
+
     /**
-     * @param \DateTimeInterface $availableFrom Optional available from date. Specify a date, upon when product can be purchased.
+     * @param \DateTimeInterface|null $availableFrom Optional available from date. Specify a date, upon when product can be purchased.
      * @return Product
      */
     public function setAvailableFrom(\DateTimeInterface $availableFrom = null): Product
