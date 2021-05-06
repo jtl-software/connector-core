@@ -550,6 +550,14 @@ class Product extends DataModel
     protected $vat = 0.0;
 
     /**
+     * @var Identity Tax class id
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("taxClassId")
+     * @Serializer\Accessor(getter="getTaxClassId",setter="setTaxClassId")
+     */
+    protected $taxClassId = null;
+
+    /**
      * @var double Optional product width
      * @Serializer\Type("double")
      * @Serializer\SerializedName("width")
@@ -699,6 +707,7 @@ class Product extends DataModel
         $this->measurementUnitId = new Identity();
         $this->basePriceUnitId = new Identity();
         $this->unitId = new Identity();
+        $this->taxClassId = new Identity();
     }
 
     /**
@@ -1851,6 +1860,24 @@ class Product extends DataModel
     public function getVat()
     {
         return $this->vat;
+    }
+
+    /**
+     * @return Identity
+     */
+    public function getTaxClassId(): Identity
+    {
+        return $this->taxClassId;
+    }
+
+    /**
+     * @param Identity $taxClassId
+     * @return Product
+     */
+    public function setTaxClassId(Identity $taxClassId): Product
+    {
+        $this->taxClassId = $taxClassId;
+        return $this;
     }
 
     /**

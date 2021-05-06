@@ -83,6 +83,7 @@ class Product extends DataType
             new PropertyInfo('unNumber', 'string', '', false, false, false),
             new PropertyInfo('upc', 'string', '', false, false, false),
             new PropertyInfo('vat', 'double', 0.0, false, false, false),
+            new PropertyInfo('taxClassId', 'Identity', null, false, true, false),
             new PropertyInfo('width', 'double', 0.0, false, false, false),
             new PropertyInfo('attributes', '\jtl\Connector\Model\ProductAttr', null, false, false, true),
             new PropertyInfo('categories', '\jtl\Connector\Model\Product2Category', null, false, false, true),
