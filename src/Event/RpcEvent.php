@@ -1,6 +1,7 @@
 <?php
 namespace Jtl\Connector\Core\Event;
 
+use Jtl\Connector\Core\Rpc\Packet;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
@@ -10,9 +11,9 @@ use Symfony\Contracts\EventDispatcher\Event;
 class RpcEvent extends Event
 {
     /**
-     * @var array
+     * @var Packet
      */
-    protected $data;
+    protected $packet;
 
     /**
      * @var string
@@ -26,23 +27,23 @@ class RpcEvent extends Event
 
     /**
      * RpcEvent constructor.
-     * @param mixed[] $data
+     * @param Packet $packet
      * @param string $controller
      * @param string $action
      */
-    public function __construct(array &$data, string $controller, string $action)
+    public function __construct(Packet $packet, string $controller, string $action)
     {
-        $this->data = $data;
+        $this->packet = $packet;
         $this->controller = $controller;
         $this->action = $action;
     }
 
     /**
-     * @return array
+     * @return Packet
      */
-    public function getData(): array
+    public function getPacket(): Packet
     {
-        return $this->data;
+        return $this->packet;
     }
 
     /**

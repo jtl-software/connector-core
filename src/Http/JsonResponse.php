@@ -60,11 +60,10 @@ class JsonResponse extends SymfonyJsonResponse implements LoggerAwareInterface
      */
     public function prepareAndSend(RequestPacket $requestPacket, ResponsePacket $responsePacket)
     {
-        $data = $responsePacket->toArray($this->serializer);
         $method = Method::createFromRpcMethod($requestPacket->getMethod());
-        $event = new RpcEvent($data, $method->getController(), $method->getAction());
+        $event = new RpcEvent($responsePacket, $method->getController(), $method->getAction());
         $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::AFTER));
-        $this->setData($data);
+        $this->setData($responsePacket->toArray($this->serializer));
         $this->logger->debug($this->content);
         return $this->send();
     }

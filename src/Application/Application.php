@@ -276,10 +276,8 @@ class Application
             // Log incoming request packet (debug only and configuration must be initialized)
             $this->loggerService->get(LoggerService::CHANNEL_RPC)->debug($logJtlrpc);
 
-            $eventData = $requestPacket->getParams();
-            $event = new RpcEvent($eventData, $method->getController(), $method->getAction());
+            $event = new RpcEvent($requestPacket, $method->getController(), $method->getAction());
             $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::BEFORE));
-            $requestPacket->setParams($eventData);
 
             $responsePacket = $this->execute($requestPacket, $method);
             session_write_close();
