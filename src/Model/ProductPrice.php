@@ -71,6 +71,14 @@ class ProductPrice extends DataModel
     protected $vat = null;
 
     /**
+     * @var Identity Tax class id
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("taxClassId")
+     * @Serializer\Accessor(getter="getTaxClassId",setter="setTaxClassId")
+     */
+    protected $taxClassId = null;
+
+    /**
      * @var ProductPriceItem[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductPriceItem>")
      * @Serializer\SerializedName("items")
@@ -87,6 +95,7 @@ class ProductPrice extends DataModel
         $this->id = new Identity();
         $this->productId = new Identity();
         $this->customerId = new Identity();
+        $this->taxClassId = new Identity();
     }
 
     /**
@@ -194,6 +203,24 @@ class ProductPrice extends DataModel
     public function setVat(?float $vat): ProductPrice
     {
         $this->vat = $vat;
+        return $this;
+    }
+
+    /**
+     * @return Identity
+     */
+    public function getTaxClassId(): Identity
+    {
+        return $this->taxClassId;
+    }
+
+    /**
+     * @param Identity $taxClassId
+     * @return ProductPrice
+     */
+    public function setTaxClassId(Identity $taxClassId): ProductPrice
+    {
+        $this->taxClassId = $taxClassId;
         return $this;
     }
 
