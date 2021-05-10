@@ -276,9 +276,10 @@ class Application
             // Log incoming request packet (debug only and configuration must be initialized)
             $this->loggerService->get(LoggerService::CHANNEL_RPC)->debug($logJtlrpc);
 
-            $eventData = Json::decode($jtlrpc, true);
+            $eventData = $requestPacket->getParams();
             $event = new RpcEvent($eventData, $method->getController(), $method->getAction());
             $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::BEFORE));
+            $requestPacket->setParams($eventData);
 
             $responsePacket = $this->execute($requestPacket, $method);
             session_write_close();
@@ -444,13 +445,13 @@ class Application
 
         switch ($action) {
             case Action::AUTH:
-                $type = $className = Authentication::class;
+                $type = Authentication::class;
                 break;
             case Action::ACK:
-                $type = $className = Ack::class;
+                $type = Ack::class;
                 break;
             case Action::CLEAR:
-                $type = $className = Identities::class;
+                $type = Identities::class;
                 break;
             case Action::PUSH:
             case Action::DELETE:
@@ -461,7 +462,7 @@ class Application
                 $type = sprintf("array<%s>", $className);
                 break;
             default:
-                $type = $className = QueryFilter::class;
+                $type = QueryFilter::class;
         }
 
         $params = $this->serializer->fromArray($requestPacket->getParams(), $type);
