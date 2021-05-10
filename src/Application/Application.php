@@ -234,15 +234,16 @@ class Application
      */
     public function run(): void
     {
+        $jtlrpc = $this->request->get('jtlrpc', '');
+
         $this->container->set(LoggerInterface::class, $this->loggerService->get(LoggerService::CHANNEL_GLOBAL));
         $this->response->setLogger($this->loggerService->get(LoggerService::CHANNEL_RPC));
-        $this->eventDispatcher->addSubscriber(new ProductPriceSubscriber());
-        $this->eventDispatcher->addSubscriber(new ProductStockLevelSubscriber());
+        $this->eventDispatcher->addSubscriber(new ProductPriceSubscriber($this->serializer, $jtlrpc));
+        $this->eventDispatcher->addSubscriber(new ProductStockLevelSubscriber($this->serializer, $jtlrpc));
         $this->eventDispatcher->addSubscriber(new FeaturesSubscriber());
         $this->errorHandler->register();
         MonologErrorHandler::register($this->loggerService->get(LoggerService::CHANNEL_ERROR));
 
-        $jtlrpc = $this->request->get('jtlrpc', '');
         $requestPacket = RequestPacket::createFromJtlrpc($jtlrpc, $this->serializer);
         $this->errorHandler->setRequestPacket($requestPacket);
 

@@ -1,16 +1,16 @@
 <?php
+
 namespace Jtl\Connector\Core\Subscriber;
 
 use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Definition\Event;
-use Jtl\Connector\Core\Event\RequestEvent;
 use Jtl\Connector\Core\Exception\SubscriberException;
+use Jtl\Connector\Core\Model\AbstractDataModel;
 use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Model\ProductPrice;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class ProductPriceSubscriber implements EventSubscriberInterface
+class ProductPriceSubscriber extends ProductTransform
 {
     /**
      * @return array
@@ -20,41 +20,52 @@ class ProductPriceSubscriber implements EventSubscriberInterface
     {
         return [
             Event::createHandleEventName(Controller::PRODUCT_PRICE, Action::PUSH, Event::BEFORE) => [
-                ['prepareProductPrices', 10000]
+                ['swapRequestParams', 10000]
             ]
         ];
     }
 
     /**
-     * @param RequestEvent $event
+     * @param AbstractDataModel ...$models
+     * @return array
      * @throws SubscriberException
      */
-    public function prepareProductPrices(RequestEvent $event)
+    protected function transformToProductModels(AbstractDataModel ...$models): array
     {
-        $request = $event->getRequest();
-        if ($request->getController() === Controller::PRODUCT_PRICE && $request->getAction() === Action::PUSH) {
-            $prices = $request->getParams();
-            $resortedPrices = [];
+        $products = [];
 
-            /** @var ProductPrice $price */
-            foreach ($prices as $price) {
-                if ($price instanceof ProductPrice === false) {
-                    throw SubscriberException::invalidModelTypeInArray(
-                        ProductPrice::class,
-                        is_object($price) ? get_class($price) : 'variable'
-                    );
-                }
-
-                $hostId = $price->getProductId()->getHost();
-
-                if (!isset($resortedPrices[$hostId])) {
-                    $resortedPrices[$hostId] = (new Product())->setId($price->getProductId());
-                }
-
-                $resortedPrices[$hostId]->addPrice($price);
+        /** @var ProductPrice $productPrice */
+        foreach ($models as $i => $productPrice) {
+            if ($productPrice instanceof ProductPrice === false) {
+                throw SubscriberException::invalidModelTypeInArray(
+                    ProductPrice::class,
+                    is_object($productPrice) ? get_class($productPrice) : 'variable'
+                );
             }
 
-            $request->setParams(array_values($resortedPrices));
+            $hostId = $productPrice->getProductId()->getHost();
+
+            if (!isset($products[$hostId])) {
+                $product = (new Product())->setId($productPrice->getProductId());
+                $this->assignAdditionalProperties($product);
+                $products[$hostId] = $product;
+            }
+
+            $products[$hostId]->addPrice($productPrice);
         }
+
+        return array_values($products);
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getAdditionalPropertiesToAssign(): array
+    {
+        return [
+            'sku',
+            'vat',
+            'taxClassId'
+        ];
     }
 }
