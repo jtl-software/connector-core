@@ -99,7 +99,6 @@ class RequestPacketTransformSubscriber implements EventSubscriberInterface
 
             if (!isset($products[$hostId])) {
                 $product = [
-                    'prices' => [],
                     'id' => $productPrice['productId'],
                     'sku' => $productPrice['sku'] ?? '',
                     'vat' => $productPrice['vat'] ?? 0.,
@@ -107,6 +106,12 @@ class RequestPacketTransformSubscriber implements EventSubscriberInterface
                 ];
 
                 $products[$hostId] = $product;
+            }
+
+            if (isset($productPrice['items'])) {
+                usort($productPrice['items'], function ($a, $b) {
+                    return $a['quantity'] - $b['quantity'];
+                });
             }
 
             $products[$hostId]['prices'][] = $productPrice;

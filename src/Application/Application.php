@@ -452,7 +452,7 @@ class Application
             case Action::PUSH:
             case Action::DELETE:
                 $className = sprintf('%s\%s', $modelNamespace, $controller);
-                switch($controller){
+                switch ($controller) {
                     case Controller::IMAGE:
                         $className = AbstractImage::class;
                         break;
@@ -512,6 +512,10 @@ class Application
      */
     protected function createModelEventClassName(string $controllerName): string
     {
+        if (in_array($controllerName, [Controller::PRODUCT_PRICE, Controller::PRODUCT_STOCK_LEVEL], true)) {
+            $controllerName = Controller::PRODUCT;
+        }
+
         $eventArgClass = sprintf('Jtl\\Connector\\Core\\Event\\%sEvent', $controllerName);
         if (!class_exists($eventArgClass)) {
             $eventArgClass = ModelEvent::class;
