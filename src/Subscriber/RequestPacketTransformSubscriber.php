@@ -6,7 +6,6 @@ use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Definition\Event;
 use Jtl\Connector\Core\Event\RpcEvent;
-use Jtl\Connector\Core\Rpc\RequestPacket;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -34,23 +33,21 @@ class RequestPacketTransformSubscriber implements EventSubscriberInterface
     public function transformRequestParams(RpcEvent $event)
     {
         if ($event->getAction() === Action::PUSH) {
-            /** @var RequestPacket $packet */
-            $packet = $event->getPacket();
-            $params = $packet->getParams();
+            $data = $event->getData();
 
             switch ($event->getController()) {
                 case Controller::PRODUCT_PRICE:
-                    $params = $this->transformProductPriceData($params);
+                    $data = $this->transformProductPriceData($data);
                     break;
                 case Controller::PRODUCT_STOCK_LEVEL:
-                    $params = $this->transformStockLevelData($params);
+                    $data = $this->transformStockLevelData($data);
                     break;
                 case Controller::PRODUCT:
-                    $params = $this->transformProductData($params);
+                    $data = $this->transformProductData($data);
                     break;
             }
 
-            $packet->setParams($params);
+            $event->setData($data);
         }
     }
 
