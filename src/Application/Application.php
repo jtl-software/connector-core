@@ -50,10 +50,10 @@ use Jtl\Connector\Core\Model\Authentication;
 use Jtl\Connector\Core\Model\Identities;
 use Jtl\Connector\Core\Model\IdentityInterface;
 use Jtl\Connector\Core\Model\IdentificationInterface;
+use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Model\QueryFilter;
 use Jtl\Connector\Core\Model\Statistic;
 use Jtl\Connector\Core\Plugin\PluginInterface;
-use Jtl\Connector\Core\Serializer\Json;
 use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Exception\SessionException;
 use Jtl\Connector\Core\Exception\ApplicationException;
@@ -63,7 +63,7 @@ use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Http\JsonResponse as HttpResponse;
 use Jtl\Connector\Core\Config\FileConfig;
 use Jtl\Connector\Core\Subscriber\FeaturesSubscriber;
-use Jtl\Connector\Core\Subscriber\ProductPriceSubscriber;
+use Jtl\Connector\Core\Subscriber\RequestPacketTransformSubscriber;
 use Jtl\Connector\Core\Definition\RpcMethod;
 use Jtl\Connector\Core\Rpc\Method;
 use Jtl\Connector\Core\Linker\IdentityLinker;
@@ -72,7 +72,6 @@ use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Session\SqliteSessionHandler;
 use Jtl\Connector\Core\Session\SessionHandlerInterface;
-use Jtl\Connector\Core\Subscriber\ProductStockLevelSubscriber;
 use Monolog\ErrorHandler as MonologErrorHandler;
 use Noodlehaus\ConfigInterface;
 use Psr\Container\ContainerInterface;
@@ -238,8 +237,7 @@ class Application
 
         $this->container->set(LoggerInterface::class, $this->loggerService->get(LoggerService::CHANNEL_GLOBAL));
         $this->response->setLogger($this->loggerService->get(LoggerService::CHANNEL_RPC));
-        $this->eventDispatcher->addSubscriber(new ProductPriceSubscriber($this->serializer, $jtlrpc));
-        $this->eventDispatcher->addSubscriber(new ProductStockLevelSubscriber($this->serializer, $jtlrpc));
+        $this->eventDispatcher->addSubscriber(new RequestPacketTransformSubscriber());
         $this->eventDispatcher->addSubscriber(new FeaturesSubscriber());
         $this->errorHandler->register();
         MonologErrorHandler::register($this->loggerService->get(LoggerService::CHANNEL_ERROR));
@@ -454,8 +452,14 @@ class Application
             case Action::PUSH:
             case Action::DELETE:
                 $className = sprintf('%s\%s', $modelNamespace, $controller);
-                if ($controller === Controller::IMAGE) {
-                    $className = AbstractImage::class;
+                switch($controller){
+                    case Controller::IMAGE:
+                        $className = AbstractImage::class;
+                        break;
+                    case Controller::PRODUCT_PRICE:
+                    case Controller::PRODUCT_STOCK_LEVEL:
+                        $className = Product::class;
+                        break;
                 }
                 $type = sprintf("array<%s>", $className);
                 break;
