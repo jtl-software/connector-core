@@ -152,7 +152,6 @@ class Sqlite3 implements IDatabase
             try {
                 $result = $this->db->query($query);
             } catch (\Throwable $ex) {
-
             }
 
             if ($result instanceof \SQLite3Result) {

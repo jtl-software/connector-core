@@ -162,13 +162,13 @@ class Request
                     $folder = $infos['dirname'];
                 }
 
-                if(file_exists($filesname)) {
+                if (file_exists($filesname)) {
                     unlink($filesname);
                 }
             }
 
             if ($withFolder && $folder !== null) {
-                if(file_exists($folder)) {
+                if (file_exists($folder)) {
                     rmdir($folder);
                 }
             }

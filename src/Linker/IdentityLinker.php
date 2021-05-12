@@ -45,6 +45,7 @@ class IdentityLinker
     const TYPE_MEASUREMENT_UNIT = 22;
     const TYPE_PRODUCT_TYPE = 24;
     const TYPE_SHIPPING_METHOD = 26;
+    const TYPE_TAX_CLASS = 70;
     const TYPE_TAX_RATE = 28;
     const TYPE_WAREHOUSE = 30;
     const TYPE_CATEGORY_ATTRIBUTE = 34;
@@ -104,6 +105,7 @@ class IdentityLinker
         'ShippingMethod' => self::TYPE_SHIPPING_METHOD,
         'Specific' => self::TYPE_SPECIFIC,
         'SpecificValue' => self::TYPE_SPECIFIC_VALUE,
+        'TaxClass' => self::TYPE_TAX_CLASS,
         'TaxRate' => self::TYPE_TAX_RATE,
         'Unit' => self::TYPE_UNIT,
         'Warehouse' => self::TYPE_WAREHOUSE,
@@ -232,6 +234,7 @@ class IdentityLinker
             'measurementUnitId' => self::TYPE_MEASUREMENT_UNIT,
             'productTypeId' => self::TYPE_PRODUCT_TYPE,
             'shippingClassId' => self::TYPE_SHIPPING_CLASS,
+            'taxClassId' => self::TYPE_TAX_CLASS,
             'unitId' => self::TYPE_UNIT,
         ],
         'Product2Category' => [
@@ -256,7 +259,8 @@ class IdentityLinker
             'productId' => self::TYPE_PRODUCT
         ],
         'ProductPrice' => [
-            'productId' => self::TYPE_PRODUCT
+            'productId' => self::TYPE_PRODUCT,
+            'taxClassId' => self::TYPE_TAX_CLASS
         ],
         'ProductSpecialPrice' => [
             'productId' => self::TYPE_PRODUCT
