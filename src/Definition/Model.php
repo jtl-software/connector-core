@@ -56,6 +56,7 @@ final class Model
         SPECIFIC_VALUE = 'SpecificValue',
         SPECIFIC_VALUE_IMAGE = 'SpecificValueImage',
         STATUS_CHANGE = 'StatusChange',
+        TAX_CLASS = 'TaxClass',
         TAX_RATE = 'TaxRate',
         UNIT = 'Unit',
         WAREHOUSE = 'Warehouse';
@@ -104,6 +105,7 @@ final class Model
         self::SPECIFIC_IMAGE => IdentityType::SPECIFIC_IMAGE,
         self::SPECIFIC_VALUE => IdentityType::SPECIFIC_VALUE,
         self::SPECIFIC_VALUE_IMAGE => IdentityType::SPECIFIC_VALUE_IMAGE,
+        self::TAX_CLASS => IdentityType::TAX_CLASS,
         self::TAX_RATE => IdentityType::TAX_RATE,
         self::UNIT => IdentityType::UNIT,
         self::WAREHOUSE => IdentityType::WAREHOUSE,
@@ -211,6 +213,7 @@ final class Model
             'measurementUnitId' => IdentityType::MEASUREMENT_UNIT,
             'productTypeId' => IdentityType::PRODUCT_TYPE,
             'shippingClassId' => IdentityType::SHIPPING_CLASS,
+            'taxClassId' => IdentityType::TAX_CLASS,
             'unitId' => IdentityType::UNIT,
         ],
         self::PRODUCT_ATTRIBUTE => [

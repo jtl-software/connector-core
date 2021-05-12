@@ -25,6 +25,7 @@ class IdentityType
     const MEASUREMENT_UNIT = 22;
     const PRODUCT_TYPE = 24;
     const SHIPPING_METHOD = 26;
+    const TAX_CLASS = 70;
     const TAX_RATE = 28;
     const WAREHOUSE = 30;
     const CATEGORY_ATTRIBUTE = 34;
