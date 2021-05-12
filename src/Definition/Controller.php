@@ -4,23 +4,22 @@ namespace Jtl\Connector\Core\Definition;
 
 final class Controller
 {
-    const CATEGORY = 'Category';
-    const CONNECTOR = 'Connector';
-    const CROSSSELLING = 'CrossSelling';
-    const CUSTOMER = 'Customer';
-    const CUSTOMER_ORDER = 'CustomerOrder';
-    const DELIVERY_NOTE = 'DeliveryNote';
-    const GLOBAL_DATA = 'GlobalData';
-    const IMAGE = 'Image';
-    const MANUFACTURER = 'Manufacturer';
-    const PAYMENT = 'Payment';
-    const PRODUCT = 'Product';
-    const PRODUCT_PRICE = 'ProductPrice';
-    const PRODUCT_STOCK_LEVEL = 'ProductStockLevel';
-    const SPECIFIC = 'Specific';
-    const STATUS_CHANGE = 'StatusChange';
-
-    const LINKER = 'Linker';
+    public const
+        CATEGORY = 'Category',
+        CONNECTOR = 'Connector',
+        CROSSSELLING = 'CrossSelling',
+        CUSTOMER = 'Customer',
+        CUSTOMER_ORDER = 'CustomerOrder',
+        DELIVERY_NOTE = 'DeliveryNote',
+        GLOBAL_DATA = 'GlobalData',
+        IMAGE = 'Image',
+        MANUFACTURER = 'Manufacturer',
+        PAYMENT = 'Payment',
+        PRODUCT = 'Product',
+        PRODUCT_PRICE = 'ProductPrice',
+        PRODUCT_STOCK_LEVEL = 'ProductStockLevel',
+        SPECIFIC = 'Specific',
+        STATUS_CHANGE = 'StatusChange';
 
     /**
      * @var string[]|null

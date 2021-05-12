@@ -15,13 +15,14 @@ use Jtl\Connector\Core\Rpc\Method;
  */
 final class RpcMethod
 {
-    const ACK = 'core.connector.ack';
-    const AUTH = 'core.connector.auth';
-    const CLEAR = 'core.linker.clear';
-    const INIT = 'core.connector.init';
-    const FEATURES = 'core.connector.features';
-    const IDENTIFY = 'connector.identify';
-    const FINISH = 'connector.finish';
+    public const
+        ACK = 'core.connector.ack',
+        AUTH = 'core.connector.auth',
+        CLEAR = 'core.linker.clear',
+        INIT = 'core.connector.init',
+        FEATURES = 'core.connector.features',
+        IDENTIFY = 'connector.identify',
+        FINISH = 'connector.finish';
 
     protected static $mappedMethods = [
         self::IDENTIFY => 'core.connector.identify',

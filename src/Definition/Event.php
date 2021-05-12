@@ -11,8 +11,9 @@ use Jtl\Connector\Core\Utilities\Str;
  */
 final class Event
 {
-    const BEFORE = 'before';
-    const AFTER = 'after';
+    public const
+        BEFORE = 'before',
+        AFTER = 'after';
 
     /**
      * @param string $controllerName

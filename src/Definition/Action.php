@@ -3,18 +3,20 @@ namespace Jtl\Connector\Core\Definition;
 
 final class Action
 {
-    const PULL = 'pull';
-    const PUSH = 'push';
-    const DELETE = 'delete';
-    const STATISTIC = 'statistic';
+    public const
+        PULL = 'pull',
+        PUSH = 'push',
+        DELETE = 'delete',
+        STATISTIC = 'statistic';
 
-    const AUTH = 'auth';
-    const ACK = 'ack';
-    const CLEAR = 'clear';
-    const FEATURES = 'features';
-    const FINISH = 'finish';
-    const IDENTIFY = 'identify';
-    const INIT = 'init';
+    public const
+        AUTH = 'auth',
+        ACK = 'ack',
+        CLEAR = 'clear',
+        FEATURES = 'features',
+        FINISH = 'finish',
+        IDENTIFY = 'identify',
+        INIT = 'init';
 
     /**
      * @var string[]|null
@@ -36,7 +38,6 @@ final class Action
 
     /**
      * @return integer[]
-     * @throws \ReflectionException
      */
     public static function getActions(): array
     {
@@ -50,7 +51,6 @@ final class Action
     /**
      * @param string $actionName
      * @return boolean
-     * @throws \ReflectionException
      */
     public static function isAction(string $actionName): bool
     {
