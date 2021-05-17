@@ -6,11 +6,9 @@ use JMS\Serializer\Serializer;
 use Jtl\Connector\Core\Definition\Event;
 use Jtl\Connector\Core\Event\RpcEvent;
 use Jtl\Connector\Core\Exception\DefinitionException;
-use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Rpc\Method;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
-use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -70,7 +68,6 @@ class JsonResponse extends SymfonyJsonResponse implements LoggerAwareInterface
         $this->logger->debug($this->content);
         return $this->send();
     }
-
 
     /**
      * @param LoggerInterface $logger

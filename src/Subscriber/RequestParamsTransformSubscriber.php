@@ -9,10 +9,10 @@ use Jtl\Connector\Core\Event\RpcEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Class ProductTransformSubscriber
+ * Class RequestParamsTransformSubscriber
  * @package Jtl\Connector\Core\Subscriber
  */
-class RequestPacketTransformSubscriber implements EventSubscriberInterface
+class RequestParamsTransformSubscriber implements EventSubscriberInterface
 {
     /**
      * @return array
@@ -62,6 +62,7 @@ class RequestPacketTransformSubscriber implements EventSubscriberInterface
                 $products[$i]['stockLevel'] = $product['stockLevel']['stockLevel'];
             }
         }
+
         return $products;
     }
 
@@ -74,12 +75,13 @@ class RequestPacketTransformSubscriber implements EventSubscriberInterface
         $products = [];
         foreach ($productStockLevel as $stockLevel) {
             $product = [
-                'id' => $stockLevel['productId'],
-                'sku' => $stockLevel['sku'],
-                'stockLevel' => $stockLevel['stockLevel']
+                'id' => $stockLevel['productId'] ?? null,
+                'sku' => $stockLevel['sku'] ?? '',
+                'stockLevel' => $stockLevel['stockLevel'] ?? 0.
             ];
             $products[] = $product;
         }
+
         return $products;
     }
 
@@ -96,7 +98,7 @@ class RequestPacketTransformSubscriber implements EventSubscriberInterface
 
             if (!isset($products[$hostId])) {
                 $product = [
-                    'id' => $productPrice['productId'],
+                    'id' => $productPrice['productId'] ?? null,
                     'sku' => $productPrice['sku'] ?? '',
                     'vat' => $productPrice['vat'] ?? 0.,
                     'taxClassId' => $productPrice['taxClassId'] ?? null,
@@ -107,7 +109,7 @@ class RequestPacketTransformSubscriber implements EventSubscriberInterface
 
             if (isset($productPrice['items'])) {
                 usort($productPrice['items'], function ($a, $b) {
-                    return $a['quantity'] - $b['quantity'];
+                    return $a['quantity'] ?? 0 - $b['quantity'] ?? 0;
                 });
             }
 

@@ -63,7 +63,7 @@ use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Http\JsonResponse as HttpResponse;
 use Jtl\Connector\Core\Config\FileConfig;
 use Jtl\Connector\Core\Subscriber\FeaturesSubscriber;
-use Jtl\Connector\Core\Subscriber\RequestPacketTransformSubscriber;
+use Jtl\Connector\Core\Subscriber\RequestParamsTransformSubscriber;
 use Jtl\Connector\Core\Definition\RpcMethod;
 use Jtl\Connector\Core\Rpc\Method;
 use Jtl\Connector\Core\Linker\IdentityLinker;
@@ -237,7 +237,7 @@ class Application
 
         $this->container->set(LoggerInterface::class, $this->loggerService->get(LoggerService::CHANNEL_GLOBAL));
         $this->response->setLogger($this->loggerService->get(LoggerService::CHANNEL_RPC));
-        $this->eventDispatcher->addSubscriber(new RequestPacketTransformSubscriber());
+        $this->eventDispatcher->addSubscriber(new RequestParamsTransformSubscriber());
         $this->eventDispatcher->addSubscriber(new FeaturesSubscriber());
         $this->errorHandler->register();
         MonologErrorHandler::register($this->loggerService->get(LoggerService::CHANNEL_ERROR));
