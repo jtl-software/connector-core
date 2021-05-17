@@ -789,4 +789,19 @@ class Application extends CoreApplication
             }
         }
     }
+
+    /**
+     * @param array $overwriteProperties
+     * @throws \Exception
+     */
+    public function updateFeaturesFile(array $overwriteProperties): void
+    {
+        $features = json_decode(file_get_contents($this->featurePath), true);
+        $newFeatures = array_replace_recursive($features, $overwriteProperties);
+
+        $wasSaved = file_put_contents($this->featurePath, json_encode($newFeatures, JSON_PRETTY_PRINT));
+        if ($wasSaved === false) {
+            throw new \Exception('Features file was not updated');
+        }
+    }
 }
