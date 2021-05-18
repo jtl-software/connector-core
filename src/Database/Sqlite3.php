@@ -8,6 +8,9 @@
 namespace Jtl\Connector\Core\Database;
 
 use Jtl\Connector\Core\Exception\DatabaseException;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 /**
  * Sqlite 3 Database Class
@@ -15,7 +18,7 @@ use Jtl\Connector\Core\Exception\DatabaseException;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-class Sqlite3 implements DatabaseInterface
+class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
 {
     /**
      * Sqlite 3 sharedcache value
@@ -34,9 +37,14 @@ class Sqlite3 implements DatabaseInterface
     /**
      * Sqlite 3 Database object
      *
-     * @var \Sqlite3|null
+     * @var \SQLite3
      */
     protected $db;
+
+    /**
+     * @var LoggerInterface
+     */
+    protected $logger;
 
     /**
      * Path to the SQLite database, or :memory: to use in-memory database.
@@ -55,26 +63,30 @@ class Sqlite3 implements DatabaseInterface
     /**
      * (non-PHPdoc)
      *
-     * @throws Jtl\Connector\Core\Exception\DatabaseException
+     * @throws Jtl\Connector\Core\Exception\DatabaseException|DatabaseException
      * @see Jtl\Connector\Core\Database\DatabaseInterface::connect()
      */
     public function connect(array $options = null)
     {
         $this->setOptions($options);
-        if (!is_string($this->location) || strlen($this->location) == 0) {
+        if (!is_string($this->location) || strlen($this->location) === 0) {
             throw new DatabaseException('Wrong type or empty location');
         }
 
         if ($this->mode === null) {
-            $this->mode = SQLITE3_OPEN_READWRITE | SQLITE3_OPEN_CREATE | self::SQLITE3_OPEN_SHAREDCACHE;
+            $this->mode = \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE | self::SQLITE3_OPEN_SHAREDCACHE;
         }
 
+        $this->logger = new NullLogger();
+
         try {
-            $this->db = new \Sqlite3($this->location, $this->mode);
+            $this->db = new \SQLite3($this->location, $this->mode);
             $this->db->busyTimeout(2000);
+            $this->db->querySingle('PRAGMA journal_mode = wal;');
+            $this->db->enableExceptions(true);
 
             $this->isConnected = true;
-        } catch (\Exception $exc) {
+        } catch (\Throwable $exc) {
             throw new DatabaseException($exc->getMessage() . ' "' . $this->location . '"');
         }
     }
@@ -112,17 +124,20 @@ class Sqlite3 implements DatabaseInterface
             case "SELECT":
                 return $this->fetch($query);
             case "UPDATE":
+            case "DELETE":
                 return $this->exec($query);
             case "INSERT":
                 return $this->insert($query);
-            case "DELETE":
-                return $this->exec($query);
         }
 
         return null;
     }
 
-    public function fetchSingle($query)
+    /**
+     * @param string $query
+     * @return mixed
+     */
+    public function fetchSingle(string $query)
     {
         return $this->db->querySingle($query);
     }
@@ -133,39 +148,51 @@ class Sqlite3 implements DatabaseInterface
      * @param string $query
      * @return \SQLite3Stmt|boolean Returns an SQLite3Stmt object on success or FALSE on failure.
      */
-    public function prepare($query)
+    public function prepare(string $query)
     {
         return $this->db->prepare($query);
     }
 
     /**
-     * Sqlite Select
-     *
      * @param string $query
-     * @return multitype:array |NULL
+     * @return array|null
+     * @throws \Throwable
      */
-    public function fetch($query)
+    public function fetch(string $query): ?array
     {
-        $result = @$this->db->query($query);
-        if ($result instanceof \SQLite3Result) {
-            $rows = [];
-            while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-                $rows[] = $row;
+        while (true) {
+            $result = null;
+            try {
+                $result = $this->db->query($query);
+            } catch (\Throwable $ex) {
+                if ($this->db->lastErrorCode() !== 5) {
+                    $this->logger->warning($this->db->lastErrorMsg());
+                    throw $ex;
+                }
             }
 
-            return $rows;
-        }
+            if ($result instanceof \SQLite3Result) {
+                $rows = [];
+                while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
+                    $rows[] = $row;
+                }
 
-        return null;
+                return $rows;
+            } elseif ($this->db->lastErrorCode() !== 5) {
+                $this->logger->warning($this->db->lastErrorMsg());
+
+                return null;
+            }
+        }
     }
 
     /**
      * Sqlite Insert
      *
      * @param string $query
-     * @return number|boolean
+     * @return boolean
      */
-    public function insert($query)
+    public function insert(string $query)
     {
         if ($this->db->exec($query)) {
             return $this->db->lastInsertRowID();
@@ -178,16 +205,15 @@ class Sqlite3 implements DatabaseInterface
      * Executes a result-less query against a given database
      *
      * @param string $query
+     * @return bool
      */
-    public function exec($query)
+    public function exec(string $query): bool
     {
         return $this->db->exec($query);
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see Jtl\Connector\Core\Database\DatabaseInterface::isConnected()
+     * @return bool
      */
     public function isConnected()
     {
@@ -197,7 +223,7 @@ class Sqlite3 implements DatabaseInterface
     /**
      * Set Options
      *
-     * @param array $options
+     * @param array|null $options
      */
     public function setOptions(array $options = null)
     {
@@ -223,8 +249,29 @@ class Sqlite3 implements DatabaseInterface
         return \Sqlite3::escapeString($query);
     }
 
-    public function getLastInsertRowId()
+    /**
+     * @return integer
+     */
+    public function getLastInsertRowId(): int
     {
         return $this->db->lastInsertRowID();
+    }
+
+    /**
+     * @return \SQLite3
+     */
+    public function getDb(): \SQLite3
+    {
+        return $this->db;
+    }
+
+    /**
+     * @param LoggerInterface $logger
+     * @return Sqlite3
+     */
+    public function setLogger(LoggerInterface $logger): Sqlite3
+    {
+        $this->logger = $logger;
+        return $this;
     }
 }

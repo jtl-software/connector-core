@@ -6,7 +6,6 @@
 
 namespace Jtl\Connector\Core\Session;
 
-use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\SessionException;
 use Jtl\Connector\Core\Database\Sqlite3;
 use Psr\Log\LoggerAwareInterface;
@@ -43,10 +42,8 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      */
     public function __construct(string $databaseDir)
     {
-        if (!is_dir($databaseDir)) {
-            if (!mkdir($databaseDir)) {
-                throw new SessionException('Could not create sqlite database directory');
-            }
+        if (!is_dir($databaseDir) && !mkdir($databaseDir)) {
+            throw new SessionException('Could not create sqlite database directory');
         }
         $this->logger = new NullLogger();
         $this->lifetime = (int)ini_get('session.gc_maxlifetime');
@@ -98,11 +95,11 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
         $sessionId = $this->db->escapeString($sessionId);
         $this->logger->debug('Read session with id ({id})', ['id' => $sessionId]);
 
-        $rows = $this->db->query(sprintf("SELECT sessionData FROM session WHERE sessionId = '%s' AND sessionExpires >= %d", $sessionId, time()));
+        $rows = $this->db->query($this->createReadQuery($sessionId, time()));
         if ($rows !== null && isset($rows[0])) {
             $row = $rows[0];
-            if (isset($row["sessionData"]) && strlen($row["sessionData"]) > 0) {
-                return base64_decode($row["sessionData"], true);
+            if (isset($row['sessionData']) && strlen($row['sessionData']) > 0) {
+                return base64_decode($row['sessionData'], true);
             }
         }
 
@@ -118,20 +115,35 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
     {
         $sessionId = $this->db->escapeString($sessionId);
         $sessionData = base64_encode($sessionData);
+        $expire = $this->calculateExpiryTime();
         $this->logger->debug('Write session with id ({id})', ['id' => $sessionId]);
 
-        $rows = $this->db->query(sprintf("SELECT sessionData FROM session WHERE sessionId = '%s'", $sessionId));
-        $stmt = $this->db->prepare("INSERT INTO session (sessionId, sessionExpires, sessionData) VALUES(:sessionId, :expire, :data)");
-        if ($rows !== null && isset($rows[0])) {
-            $stmt = $this->db->prepare("UPDATE session SET sessionData = :data, sessionExpires = :expire WHERE sessionId = :sessionId");
+        /** @var SQLite3 $db */
+        $db = $this->db->getDb();
+        $success = false;
+
+        try {
+            $stmt = $db->prepare('INSERT INTO session (sessionId, sessionExpires, sessionData) VALUES(:session_id, :expire, :data)');
+            $stmt->bindValue(':session_id', $sessionId, \SQLITE3_TEXT);
+            $stmt->bindValue(':expire', $expire, \SQLITE3_INTEGER);
+            $stmt->bindValue(':data', $sessionData, \SQLITE3_TEXT);
+
+            /** @var \SQLite3Stmt $stmt */
+            $stmt->execute();
+            $success = true;
+        } catch (\Throwable $ex) {
+            if ($db->lastErrorCode() === 19) {
+                /** @var \SQLite3Stmt $stmt */
+                $stmt = $db->prepare('UPDATE session SET sessionData = :data, sessionExpires = :expire WHERE sessionId = :session_id');
+                $stmt->bindValue(':data', $sessionData, \SQLITE3_TEXT);
+                $stmt->bindValue(':expire', $expire, \SQLITE3_INTEGER);
+                $stmt->bindValue(':session_id', $sessionId, \SQLITE3_TEXT);
+                $stmt->execute();
+                $success = true;
+            }
         }
 
-        $stmt->bindValue(":sessionId", $sessionId, SQLITE3_TEXT);
-        $stmt->bindValue(":expire", $this->calculateExpiryTime(), SQLITE3_INTEGER);
-        $stmt->bindValue(":data", $sessionData, SQLITE3_TEXT);
-        $stmt->execute();
-
-        return true;
+        return $success;
     }
 
     /**
@@ -142,7 +154,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
     {
         $sessionId = $this->db->escapeString($sessionId);
         $this->logger->debug('Destroy session with id ({id})', ['id' => $sessionId]);
-        $this->db->query(sprintf("DELETE FROM session WHERE sessionId = '%s'", $sessionId));
+        $this->db->query(sprintf('DELETE FROM session WHERE sessionId = \'%s\'', $sessionId));
 
         return true;
     }
@@ -151,10 +163,10 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      * @param int $maxLifetime
      * @return bool
      */
-    public function gc($maxLifetime)
+    public function gc($maxLifetime): bool
     {
         $this->logger->debug('Garbage collection for session with maximum lifetime ({maxLifetime})', ['maxLifetime' => $maxLifetime]);
-        $this->db->query(sprintf("DELETE FROM session WHERE sessionExpires < %d", time()));
+        $this->db->query(sprintf('DELETE FROM session WHERE sessionExpires < %d', time()));
 
         return true;
     }
@@ -165,19 +177,14 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      * @param string $sessionId
      * @return boolean
      */
-    public function validateId($sessionId)
+    public function validateId($sessionId): bool
     {
         $sessionId = $this->db->escapeString($sessionId);
         $this->logger->debug('Check session with id ({id}) and time ({time}) ...', ['id' => $sessionId, 'time' => time()]);
-
-        $rows = $this->db->query(sprintf("SELECT sessionId FROM session WHERE sessionId = '%s' AND sessionExpires >= %d", $sessionId, time()));
+        $rows = $this->db->query($this->createReadQuery($sessionId, time()));
         if ($rows !== null && isset($rows[0]['sessionId']) && $rows[0]['sessionId'] === $sessionId) {
-            $this->logger->debug('Session is valid');
-
             return true;
         }
-
-        $this->logger->debug('Session is invalid');
 
         return false;
     }
@@ -187,12 +194,12 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      * @param string $sessionData
      * @return bool
      */
-    public function updateTimestamp($sessionId, $sessionData)
+    public function updateTimestamp($sessionId, $sessionData): bool
     {
         $sql = 'UPDATE session SET sessionExpires = :sessionExpires WHERE sessionId = :sessionId';
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':sessionExpires', $this->calculateExpiryTime(), SQLITE3_INTEGER);
-        $stmt->bindValue(':sessionId', $sessionId, SQLITE3_TEXT);
+        $stmt->bindValue(':sessionExpires', $this->calculateExpiryTime(), \SQLITE3_INTEGER);
+        $stmt->bindValue(':sessionId', $sessionId, \SQLITE3_TEXT);
         $stmt->execute();
 
         return true;
@@ -204,6 +211,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
     public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
+        $this->db->setLogger($logger);
     }
 
     /**
@@ -214,27 +222,44 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
         return time() + $this->lifetime;
     }
 
+
+    /**
+     * @param string $sessionId
+     * @param integer $expiresAt
+     * @return string
+     */
+    protected function createReadQuery(string $sessionId, int $expiresAt): string
+    {
+        return sprintf('SELECT sessionId, sessionData FROM session WHERE sessionId = \'%s\' AND sessionExpires >= %d', $this->db->escapeString($sessionId), $expiresAt);
+    }
+
     /**
      * @return void
+     * @throws \Exception
      */
     protected function initializeTables(): void
     {
-        $results = $this->db->fetch("SELECT name FROM sqlite_master WHERE type='table' AND name='session'");
-        if (!is_array($results) || count($results) == 0) {
-            $this->db->exec('
-                CREATE TABLE [session] (
-                    [sessionId] VARCHAR(255)  UNIQUE NOT NULL,
-                    [sessionExpires] INTEGER  NOT NULL,
-                    [sessionData] BLOB  NULL
-                )
-            ');
+        $schemaQueries = [
+            'CREATE TABLE [session] (' . "\n" .
+            '   [sessionId] VARCHAR(255)  UNIQUE NOT NULL,' . "\n" .
+            '   [sessionExpires] INTEGER  NOT NULL,' . "\n" .
+            '   [sessionData] BLOB  NULL' . "\n" .
+            ')',
 
-            $this->db->exec('
-                CREATE INDEX [sessionIndex] ON [session](
-                    [sessionId]  ASC,
-                    [sessionExpires]  ASC
-                )
-            ');
+            'CREATE INDEX [sessionIndex] ON [session](' . "\n" .
+            '  [sessionId]  ASC,' . "\n" .
+            '  [sessionExpires]  ASC' . "\n" .
+            ')'
+        ];
+
+        $checkQuery = 'SELECT name FROM sqlite_master WHERE type = \'table\' AND name = \'session\'';
+        $checkResult = $this->db->fetchSingle($checkQuery);
+        if ($checkResult === false) {
+            throw new \Exception('Something went wrong while checking existence of session schema');
+        } elseif ($checkResult === null) {
+            foreach ($schemaQueries as $query) {
+                $this->db->exec($query);
+            }
         }
     }
 }

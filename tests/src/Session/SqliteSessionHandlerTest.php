@@ -27,7 +27,7 @@ class SqliteSessionHandlerTest extends TestCase
         parent::setUp();
         $this->handler = new SqliteSessionHandler(sprintf('%s/var', $this->connectorDir));
         $this->dbFile = sprintf('%s/var/connector.s3db', $this->connectorDir);
-        $this->pdo = new \PDO(sprintf('sqlite:%s', $this->dbFile));
+        $this->pdo = new \PDO(sprintf('sqlite:%s', $this->dbFile), null, null, [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]);
     }
 
     public function testConstruct()
