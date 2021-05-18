@@ -36,14 +36,14 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
             $data = $event->getData();
 
             switch ($event->getController()) {
+                case Controller::PRODUCT:
+                    $data = $this->transformProductData($data);
+                    break;
                 case Controller::PRODUCT_PRICE:
                     $data = $this->transformProductPriceData($data);
                     break;
                 case Controller::PRODUCT_STOCK_LEVEL:
-                    $data = $this->transformStockLevelData($data);
-                    break;
-                case Controller::PRODUCT:
-                    $data = $this->transformProductData($data);
+                    $data = $this->transformProductStockLevelData($data);
                     break;
             }
 
@@ -61,25 +61,6 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
             if (isset($product['stockLevel']['stockLevel'])) {
                 $products[$i]['stockLevel'] = $product['stockLevel']['stockLevel'];
             }
-        }
-
-        return $products;
-    }
-
-    /**
-     * @param array $productStockLevel
-     * @return array
-     */
-    public function transformStockLevelData(array $productStockLevel): array
-    {
-        $products = [];
-        foreach ($productStockLevel as $stockLevel) {
-            $product = [
-                'id' => $stockLevel['productId'] ?? null,
-                'sku' => $stockLevel['sku'] ?? '',
-                'stockLevel' => $stockLevel['stockLevel'] ?? 0.
-            ];
-            $products[] = $product;
         }
 
         return $products;
@@ -117,6 +98,25 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
         }
 
         return array_values($products);
+    }
+
+    /**
+     * @param array $productStockLevel
+     * @return array
+     */
+    public function transformProductStockLevelData(array $productStockLevel): array
+    {
+        $products = [];
+        foreach ($productStockLevel as $stockLevel) {
+            $product = [
+                'id' => $stockLevel['productId'] ?? null,
+                'sku' => $stockLevel['sku'] ?? '',
+                'stockLevel' => $stockLevel['stockLevel'] ?? 0.
+            ];
+            $products[] = $product;
+        }
+
+        return $products;
     }
 
     /**

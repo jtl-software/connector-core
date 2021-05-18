@@ -9,16 +9,6 @@ use Jtl\Connector\Core\Test\TestCase;
 
 class ProductStockLevelSubscriberTest extends TestCase
 {
-    public function testOnPreDeserialize()
-    {
-        $data = ['stockLevel' => ['productId' => ['', 1234], 'stockLevel' => 42.1]];
-        /** @var Serializer $serializer */
-        $serializer = SerializerBuilder::create()->build();
-        /** @var Product $product */
-        $product = $serializer->fromArray($data, Product::class);
-        $this->assertEquals(42.1, $product->getStockLevel());
-    }
-
     public function testOnPostSerialize()
     {
         $stocklevel = mt_rand(0, 999);

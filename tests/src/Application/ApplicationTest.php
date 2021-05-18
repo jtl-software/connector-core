@@ -35,7 +35,7 @@ use Jtl\Connector\Core\Rpc\ResponsePacket;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Session\SessionHandlerInterface;
 use Jtl\Connector\Core\Subscriber\FeaturesSubscriber;
-use Jtl\Connector\Core\Subscriber\ProductPriceSubscriber;
+use Jtl\Connector\Core\Subscriber\RequestParamsTransformSubscriber;
 use Jtl\Connector\Core\Test\TestCase;
 use Jtl\Connector\Core\Test\Stub\Controller\TransactionalControllerStub;
 use Jtl\Connector\Core\Utilities\Str;
@@ -307,13 +307,13 @@ class ApplicationTest extends TestCase
         $app->run();
 
         $eventDispatcher = $app->getEventDispatcher();
-        $productPricesListeners = $eventDispatcher->getListeners(Event::createHandleEventName('ProductPrice', 'push', 'before'));
-        $this->assertGreaterThan(0, $productPricesListeners);
+        $rpcEventListeners = $eventDispatcher->getListeners('rpc.before');
+        $this->assertGreaterThan(0, $rpcEventListeners);
 
-        $prepareProductPriceSubscriberFound = false;
-        foreach ($productPricesListeners as $listener) {
-            if ($listener[0] instanceof ProductPriceSubscriber) {
-                $prepareProductPriceSubscriberFound = true;
+        $requestParamsTransformSubscriberFound = false;
+        foreach ($rpcEventListeners as $listener) {
+            if ($listener[0] instanceof RequestParamsTransformSubscriber) {
+                $requestParamsTransformSubscriberFound = true;
                 break;
             }
         }
@@ -329,7 +329,7 @@ class ApplicationTest extends TestCase
             }
         }
 
-        $this->assertTrue($prepareProductPriceSubscriberFound, 'No PrepareProductPricesSubscriber is registered');
+        $this->assertTrue($requestParamsTransformSubscriberFound, 'No RequestParamsTransformSubscriber is registered');
         $this->assertTrue($coreFeaturesListenerFound, 'No CoreFeaturesSubscriber is registered');
     }
 
