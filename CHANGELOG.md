@@ -1,3 +1,9 @@
+4.1.0
+-----
+- Added tax class id to product
+- Revised rpc event handling
+- Moved product price and product stock transformation to rpc event 
+
 4.0.12
 ------
 - Added support for symfony 4 and older monolog versions
