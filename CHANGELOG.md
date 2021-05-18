@@ -1,3 +1,8 @@
+3.3.1
+-----
+- Added tax class id to product and product price models
+- Added updating features method
+
 3.3.0
 -----
 - Revised sqlite session handling
