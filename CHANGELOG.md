@@ -1,3 +1,7 @@
+4.1.1
+-----
+- Revised SQLite session handler
+
 4.1.0
 -----
 - Added tax class id to product
