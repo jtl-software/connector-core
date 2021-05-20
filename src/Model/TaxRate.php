@@ -18,6 +18,14 @@ use JMS\Serializer\Annotation as Serializer;
 class TaxRate extends AbstractIdentity
 {
     /**
+     * @var string
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("countryIso")
+     * @Serializer\Accessor(getter="getRate",setter="setRate")
+     */
+    protected $countryIso = '';
+
+    /**
      * @var double
      * @Serializer\Type("double")
      * @Serializer\SerializedName("rate")
@@ -42,5 +50,24 @@ class TaxRate extends AbstractIdentity
     public function getRate(): float
     {
         return $this->rate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCountryIso(): string
+    {
+        return $this->countryIso;
+    }
+
+    /**
+     * @param string $countryIso
+     * @return TaxRate
+     */
+    public function setCountryIso(string $countryIso): self
+    {
+        $this->countryIso = $countryIso;
+        
+        return $this;
     }
 }

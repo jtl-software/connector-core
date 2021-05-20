@@ -74,14 +74,6 @@ class Product extends AbstractIdentity implements IdentificationInterface
      * @Serializer\Accessor(getter="getShippingClassId",setter="setShippingClassId")
      */
     protected $shippingClassId = null;
-    
-    /**
-     * @var Identity Reference to unit
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("unitId")
-     * @Serializer\Accessor(getter="getUnitId",setter="setUnitId")
-     */
-    protected $unitId = null;
 
     /**
      * @var Identity Reference to tax class
@@ -90,6 +82,14 @@ class Product extends AbstractIdentity implements IdentificationInterface
      * @Serializer\Accessor(getter="getTaxClassId",setter="setTaxClassId")
      */
     protected $taxClassId = null;
+
+    /**
+     * @var Identity Reference to unit
+     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
+     * @Serializer\SerializedName("unitId")
+     * @Serializer\Accessor(getter="getUnitId",setter="setUnitId")
+     */
+    protected $unitId = null;
 
     /**
      * @var integer
@@ -658,6 +658,14 @@ class Product extends AbstractIdentity implements IdentificationInterface
      * @Serializer\AccessType("reflection")
      */
     protected $specifics = [];
+
+    /**
+     * @var array<TaxRate>
+     * @Serializer\Type("array<jtl\Connector\Model\TaxRate>")
+     * @Serializer\SerializedName("taxRates")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $taxRates = [];
     
     /**
      * @var ProductVariation[]
@@ -883,14 +891,6 @@ class Product extends AbstractIdentity implements IdentificationInterface
         
         return $this;
     }
-    
-    /**
-     * @return Identity Reference to unit
-     */
-    public function getUnitId(): Identity
-    {
-        return $this->unitId;
-    }
 
     /**
      * @return Identity
@@ -907,7 +907,16 @@ class Product extends AbstractIdentity implements IdentificationInterface
     public function setTaxClassId(Identity $taxClassId): Product
     {
         $this->taxClassId = $taxClassId;
+
         return $this;
+    }
+    
+    /**
+     * @return Identity Reference to unit
+     */
+    public function getUnitId(): Identity
+    {
+        return $this->unitId;
     }
 
     /**
@@ -925,6 +934,7 @@ class Product extends AbstractIdentity implements IdentificationInterface
     public function setAdditionalHandlingTime(int $additionalHandlingTime): Product
     {
         $this->additionalHandlingTime = $additionalHandlingTime;
+
         return $this;
     }
     
@@ -1609,9 +1619,9 @@ class Product extends AbstractIdentity implements IdentificationInterface
     {
         return $this->newReleaseDate;
     }
-    
+
     /**
-     * @param \DateTimeInterface $nextAvailableInflowDate Contains the date of the next available inflow.
+     * @param \DateTimeInterface|null $nextAvailableInflowDate Contains the date of the next available inflow.
      * @return Product
      */
     public function setNextAvailableInflowDate(\DateTimeInterface $nextAvailableInflowDate = null): Product
@@ -2528,6 +2538,25 @@ class Product extends AbstractIdentity implements IdentificationInterface
     {
         $this->specifics = [];
         
+        return $this;
+    }
+
+    /**
+     * @return array<TaxRate>
+     */
+    public function getTaxRates(): array
+    {
+        return $this->taxRates;
+    }
+
+    /**
+     * @param array<TaxRate> $taxRates
+     * @return Product
+     */
+    public function setTaxRates(TaxRate ...$taxRates): Product
+    {
+        $this->taxRates = $taxRates;
+
         return $this;
     }
     

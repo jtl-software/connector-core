@@ -96,6 +96,7 @@ class Product extends AbstractDataType
             new PropertyInfo('prices', 'Jtl\Connector\Core\Model\ProductPrice', null, false, false, true),
             new PropertyInfo('specialPrices', 'Jtl\Connector\Core\Model\ProductSpecialPrice', null, false, false, true),
             new PropertyInfo('specifics', 'Jtl\Connector\Core\Model\ProductSpecific', null, false, false, true),
+            new PropertyInfo('taxRates', 'Jtl\Connector\Core\Model\taxRate', null, false, false, true),
             new PropertyInfo('variations', 'Jtl\Connector\Core\Model\ProductVariation', null, false, false, true),
             new PropertyInfo('warehouseInfo', 'Jtl\Connector\Core\Model\ProductWarehouseInfo', null, false, false, true),
         ];

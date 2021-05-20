@@ -18,6 +18,7 @@ class TaxRate extends AbstractDataType
     {
         return [
             new PropertyInfo('id', 'Identity', null, false, true, false),
+            new PropertyInfo('countryIso', 'string', '', false, false, false),
             new PropertyInfo('rate', 'double', 0.0, false, false, false),
         ];
     }
