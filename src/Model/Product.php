@@ -86,6 +86,14 @@ class Product extends DataModel
     protected $shippingClassId = null;
 
     /**
+     * @var Identity Tax class id
+     * @Serializer\Type("jtl\Connector\Model\Identity")
+     * @Serializer\SerializedName("taxClassId")
+     * @Serializer\Accessor(getter="getTaxClassId",setter="setTaxClassId")
+     */
+    protected $taxClassId = null;
+
+    /**
      * @var Identity Reference to unit
      * @Serializer\Type("jtl\Connector\Model\Identity")
      * @Serializer\SerializedName("unitId")
@@ -326,7 +334,7 @@ class Product extends DataModel
     protected $manufacturerNumber = '';
     
     /**
-     * @var \jtl\Connector\Model\Manufacturer
+     * @var Manufacturer
      * @Serializer\Type("jtl\Connector\Model\Manufacturer")
      * @Serializer\SerializedName("manufacturer")
      * @Serializer\Accessor(getter="getManufacturer",setter="setManufacturer")
@@ -550,14 +558,6 @@ class Product extends DataModel
     protected $vat = 0.0;
 
     /**
-     * @var Identity Tax class id
-     * @Serializer\Type("jtl\Connector\Model\Identity")
-     * @Serializer\SerializedName("taxClassId")
-     * @Serializer\Accessor(getter="getTaxClassId",setter="setTaxClassId")
-     */
-    protected $taxClassId = null;
-
-    /**
      * @var double Optional product width
      * @Serializer\Type("double")
      * @Serializer\SerializedName("width")
@@ -566,7 +566,7 @@ class Product extends DataModel
     protected $width = 0.0;
 
     /**
-     * @var \jtl\Connector\Model\ProductAttr[]
+     * @var ProductAttr[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductAttr>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
@@ -574,7 +574,7 @@ class Product extends DataModel
     protected $attributes = [];
 
     /**
-     * @var \jtl\Connector\Model\Product2Category[]
+     * @var Product2Category[]
      * @Serializer\Type("array<jtl\Connector\Model\Product2Category>")
      * @Serializer\SerializedName("categories")
      * @Serializer\AccessType("reflection")
@@ -582,7 +582,7 @@ class Product extends DataModel
     protected $categories = [];
 
     /**
-     * @var \jtl\Connector\Model\ProductChecksum[]
+     * @var ProductChecksum[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductChecksum>")
      * @Serializer\SerializedName("checksums")
      * @Serializer\AccessType("reflection")
@@ -590,7 +590,7 @@ class Product extends DataModel
     protected $checksums = [];
 
     /**
-     * @var \jtl\Connector\Model\ProductConfigGroup[]
+     * @var ProductConfigGroup[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductConfigGroup>")
      * @Serializer\SerializedName("configGroups")
      * @Serializer\AccessType("reflection")
@@ -598,7 +598,7 @@ class Product extends DataModel
     protected $configGroups = [];
 
     /**
-     * @var \jtl\Connector\Model\CustomerGroupPackagingQuantity[]
+     * @var CustomerGroupPackagingQuantity[]
      * @Serializer\Type("array<jtl\Connector\Model\CustomerGroupPackagingQuantity>")
      * @Serializer\SerializedName("customerGroupPackagingQuantities")
      * @Serializer\AccessType("reflection")
@@ -606,7 +606,7 @@ class Product extends DataModel
     protected $customerGroupPackagingQuantities = [];
 
     /**
-     * @var \jtl\Connector\Model\ProductFileDownload[]
+     * @var ProductFileDownload[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductFileDownload>")
      * @Serializer\SerializedName("fileDownloads")
      * @Serializer\AccessType("reflection")
@@ -614,7 +614,7 @@ class Product extends DataModel
     protected $fileDownloads = [];
 
     /**
-     * @var \jtl\Connector\Model\ProductI18n[]
+     * @var ProductI18n[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
@@ -622,7 +622,7 @@ class Product extends DataModel
     protected $i18ns = [];
 
     /**
-     * @var \jtl\Connector\Model\ProductInvisibility[]
+     * @var ProductInvisibility[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductInvisibility>")
      * @Serializer\SerializedName("invisibilities")
      * @Serializer\AccessType("reflection")
@@ -630,7 +630,7 @@ class Product extends DataModel
     protected $invisibilities = [];
 
     /**
-     * @var \jtl\Connector\Model\ProductMediaFile[]
+     * @var ProductMediaFile[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductMediaFile>")
      * @Serializer\SerializedName("mediaFiles")
      * @Serializer\AccessType("reflection")
@@ -638,7 +638,7 @@ class Product extends DataModel
     protected $mediaFiles = [];
 
     /**
-     * @var \jtl\Connector\Model\ProductPartsList[]
+     * @var ProductPartsList[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductPartsList>")
      * @Serializer\SerializedName("partsLists")
      * @Serializer\AccessType("reflection")
@@ -646,7 +646,7 @@ class Product extends DataModel
     protected $partsLists = [];
 
     /**
-     * @var \jtl\Connector\Model\ProductPrice[]
+     * @var ProductPrice[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductPrice>")
      * @Serializer\SerializedName("prices")
      * @Serializer\AccessType("reflection")
@@ -654,7 +654,7 @@ class Product extends DataModel
     protected $prices = [];
 
     /**
-     * @var \jtl\Connector\Model\ProductSpecialPrice[]
+     * @var ProductSpecialPrice[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductSpecialPrice>")
      * @Serializer\SerializedName("specialPrices")
      * @Serializer\AccessType("reflection")
@@ -662,7 +662,7 @@ class Product extends DataModel
     protected $specialPrices = [];
 
     /**
-     * @var \jtl\Connector\Model\ProductSpecific[]
+     * @var ProductSpecific[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductSpecific>")
      * @Serializer\SerializedName("specifics")
      * @Serializer\AccessType("reflection")
@@ -670,7 +670,15 @@ class Product extends DataModel
     protected $specifics = [];
 
     /**
-     * @var \jtl\Connector\Model\ProductVarCombination[]
+     * @var array<TaxRate>
+     * @Serializer\Type("array<jtl\Connector\Model\TaxRate>")
+     * @Serializer\SerializedName("taxRates")
+     * @Serializer\AccessType("reflection")
+     */
+    protected $taxRates = [];
+
+    /**
+     * @var ProductVarCombination[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVarCombination>")
      * @Serializer\SerializedName("varCombinations")
      * @Serializer\AccessType("reflection")
@@ -678,7 +686,7 @@ class Product extends DataModel
     protected $varCombinations = [];
 
     /**
-     * @var \jtl\Connector\Model\ProductVariation[]
+     * @var ProductVariation[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductVariation>")
      * @Serializer\SerializedName("variations")
      * @Serializer\AccessType("reflection")
@@ -686,7 +694,7 @@ class Product extends DataModel
     protected $variations = [];
 
     /**
-     * @var \jtl\Connector\Model\ProductWarehouseInfo[]
+     * @var ProductWarehouseInfo[]
      * @Serializer\Type("array<jtl\Connector\Model\ProductWarehouseInfo>")
      * @Serializer\SerializedName("warehouseInfo")
      * @Serializer\AccessType("reflection")
@@ -864,6 +872,24 @@ class Product extends DataModel
     public function getShippingClassId()
     {
         return $this->shippingClassId;
+    }
+
+    /**
+     * @return Identity
+     */
+    public function getTaxClassId(): Identity
+    {
+        return $this->taxClassId;
+    }
+
+    /**
+     * @param Identity $taxClassId
+     * @return Product
+     */
+    public function setTaxClassId(Identity $taxClassId): Product
+    {
+        $this->taxClassId = $taxClassId;
+        return $this;
     }
 
     /**
@@ -1391,7 +1417,7 @@ class Product extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\Manufacturer|null Optional manufacturer
+     * @return Manufacturer|null Optional manufacturer
      */
     public function getManufacturer()
     {
@@ -1863,24 +1889,6 @@ class Product extends DataModel
     }
 
     /**
-     * @return Identity
-     */
-    public function getTaxClassId(): Identity
-    {
-        return $this->taxClassId;
-    }
-
-    /**
-     * @param Identity $taxClassId
-     * @return Product
-     */
-    public function setTaxClassId(Identity $taxClassId): Product
-    {
-        $this->taxClassId = $taxClassId;
-        return $this;
-    }
-
-    /**
      * @param double $width Optional product width
      * @return Product
      */
@@ -1898,10 +1906,10 @@ class Product extends DataModel
     }
 
     /**
-     * @param \jtl\Connector\Model\ProductAttr $attribute
+     * @param ProductAttr $attribute
      * @return Product
      */
-    public function addAttribute(\jtl\Connector\Model\ProductAttr $attribute)
+    public function addAttribute(ProductAttr $attribute)
     {
         $this->attributes[] = $attribute;
         return $this;
@@ -1918,9 +1926,9 @@ class Product extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductAttr[]
+     * @return ProductAttr[]
      */
-    public function getAttributes()
+    public function getAttributes(): array
     {
         return $this->attributes;
     }
@@ -1935,10 +1943,10 @@ class Product extends DataModel
     }
 
     /**
-     * @param \jtl\Connector\Model\Product2Category $category
+     * @param Product2Category $category
      * @return Product
      */
-    public function addCategory(\jtl\Connector\Model\Product2Category $category)
+    public function addCategory(Product2Category $category)
     {
         $this->categories[] = $category;
         return $this;
@@ -1955,9 +1963,9 @@ class Product extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\Product2Category[]
+     * @return Product2Category[]
      */
-    public function getCategories()
+    public function getCategories(): array
     {
         return $this->categories;
     }
@@ -1972,10 +1980,10 @@ class Product extends DataModel
     }
 
     /**
-     * @param \jtl\Connector\Model\ProductChecksum $checksum
+     * @param ProductChecksum $checksum
      * @return Product
      */
-    public function addChecksum(\jtl\Connector\Model\ProductChecksum $checksum)
+    public function addChecksum(ProductChecksum $checksum)
     {
         $this->checksums[] = $checksum;
         return $this;
@@ -1992,9 +2000,9 @@ class Product extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductChecksum[]
+     * @return ProductChecksum[]
      */
-    public function getChecksums()
+    public function getChecksums(): array
     {
         return $this->checksums;
     }
@@ -2009,10 +2017,10 @@ class Product extends DataModel
     }
 
     /**
-     * @param \jtl\Connector\Model\ProductConfigGroup $configGroup
+     * @param ProductConfigGroup $configGroup
      * @return Product
      */
-    public function addConfigGroup(\jtl\Connector\Model\ProductConfigGroup $configGroup)
+    public function addConfigGroup(ProductConfigGroup $configGroup)
     {
         $this->configGroups[] = $configGroup;
         return $this;
@@ -2029,9 +2037,9 @@ class Product extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductConfigGroup[]
+     * @return ProductConfigGroup[]
      */
-    public function getConfigGroups()
+    public function getConfigGroups(): array
     {
         return $this->configGroups;
     }
@@ -2046,10 +2054,10 @@ class Product extends DataModel
     }
 
     /**
-     * @param \jtl\Connector\Model\CustomerGroupPackagingQuantity $customerGroupPackagingQuantity
+     * @param CustomerGroupPackagingQuantity $customerGroupPackagingQuantity
      * @return Product
      */
-    public function addCustomerGroupPackagingQuantity(\jtl\Connector\Model\CustomerGroupPackagingQuantity $customerGroupPackagingQuantity)
+    public function addCustomerGroupPackagingQuantity(CustomerGroupPackagingQuantity $customerGroupPackagingQuantity)
     {
         $this->customerGroupPackagingQuantities[] = $customerGroupPackagingQuantity;
         return $this;
@@ -2066,9 +2074,9 @@ class Product extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\CustomerGroupPackagingQuantity[]
+     * @return CustomerGroupPackagingQuantity[]
      */
-    public function getCustomerGroupPackagingQuantities()
+    public function getCustomerGroupPackagingQuantities(): array
     {
         return $this->customerGroupPackagingQuantities;
     }
@@ -2083,10 +2091,10 @@ class Product extends DataModel
     }
 
     /**
-     * @param \jtl\Connector\Model\ProductFileDownload $fileDownload
+     * @param ProductFileDownload $fileDownload
      * @return Product
      */
-    public function addFileDownload(\jtl\Connector\Model\ProductFileDownload $fileDownload)
+    public function addFileDownload(ProductFileDownload $fileDownload)
     {
         $this->fileDownloads[] = $fileDownload;
         return $this;
@@ -2103,9 +2111,9 @@ class Product extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductFileDownload[]
+     * @return ProductFileDownload[]
      */
-    public function getFileDownloads()
+    public function getFileDownloads(): array
     {
         return $this->fileDownloads;
     }
@@ -2120,10 +2128,10 @@ class Product extends DataModel
     }
 
     /**
-     * @param \jtl\Connector\Model\ProductI18n $i18n
+     * @param ProductI18n $i18n
      * @return Product
      */
-    public function addI18n(\jtl\Connector\Model\ProductI18n $i18n)
+    public function addI18n(ProductI18n $i18n)
     {
         $this->i18ns[] = $i18n;
         return $this;
@@ -2140,9 +2148,9 @@ class Product extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductI18n[]
+     * @return ProductI18n[]
      */
-    public function getI18ns()
+    public function getI18ns(): array
     {
         return $this->i18ns;
     }
@@ -2157,10 +2165,10 @@ class Product extends DataModel
     }
 
     /**
-     * @param \jtl\Connector\Model\ProductInvisibility $invisibility
+     * @param ProductInvisibility $invisibility
      * @return Product
      */
-    public function addInvisibility(\jtl\Connector\Model\ProductInvisibility $invisibility)
+    public function addInvisibility(ProductInvisibility $invisibility)
     {
         $this->invisibilities[] = $invisibility;
         return $this;
@@ -2177,9 +2185,9 @@ class Product extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductInvisibility[]
+     * @return ProductInvisibility[]
      */
-    public function getInvisibilities()
+    public function getInvisibilities(): array
     {
         return $this->invisibilities;
     }
@@ -2194,10 +2202,10 @@ class Product extends DataModel
     }
 
     /**
-     * @param \jtl\Connector\Model\ProductMediaFile $mediaFile
+     * @param ProductMediaFile $mediaFile
      * @return Product
      */
-    public function addMediaFile(\jtl\Connector\Model\ProductMediaFile $mediaFile)
+    public function addMediaFile(ProductMediaFile $mediaFile)
     {
         $this->mediaFiles[] = $mediaFile;
         return $this;
@@ -2214,9 +2222,9 @@ class Product extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductMediaFile[]
+     * @return ProductMediaFile[]
      */
-    public function getMediaFiles()
+    public function getMediaFiles(): array
     {
         return $this->mediaFiles;
     }
@@ -2231,10 +2239,10 @@ class Product extends DataModel
     }
 
     /**
-     * @param \jtl\Connector\Model\ProductPartsList $partsList
+     * @param ProductPartsList $partsList
      * @return Product
      */
-    public function addPartsList(\jtl\Connector\Model\ProductPartsList $partsList)
+    public function addPartsList(ProductPartsList $partsList)
     {
         $this->partsLists[] = $partsList;
         return $this;
@@ -2251,9 +2259,9 @@ class Product extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductPartsList[]
+     * @return ProductPartsList[]
      */
-    public function getPartsLists()
+    public function getPartsLists(): array
     {
         return $this->partsLists;
     }
@@ -2268,10 +2276,10 @@ class Product extends DataModel
     }
 
     /**
-     * @param \jtl\Connector\Model\ProductPrice $price
+     * @param ProductPrice $price
      * @return Product
      */
-    public function addPrice(\jtl\Connector\Model\ProductPrice $price)
+    public function addPrice(ProductPrice $price)
     {
         $this->prices[] = $price;
         return $this;
@@ -2288,9 +2296,9 @@ class Product extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductPrice[]
+     * @return ProductPrice[]
      */
-    public function getPrices()
+    public function getPrices(): array
     {
         return $this->prices;
     }
@@ -2305,10 +2313,10 @@ class Product extends DataModel
     }
 
     /**
-     * @param \jtl\Connector\Model\ProductSpecialPrice $specialPrice
+     * @param ProductSpecialPrice $specialPrice
      * @return Product
      */
-    public function addSpecialPrice(\jtl\Connector\Model\ProductSpecialPrice $specialPrice)
+    public function addSpecialPrice(ProductSpecialPrice $specialPrice)
     {
         $this->specialPrices[] = $specialPrice;
         return $this;
@@ -2325,9 +2333,9 @@ class Product extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductSpecialPrice[]
+     * @return ProductSpecialPrice[]
      */
-    public function getSpecialPrices()
+    public function getSpecialPrices(): array
     {
         return $this->specialPrices;
     }
@@ -2342,10 +2350,10 @@ class Product extends DataModel
     }
 
     /**
-     * @param \jtl\Connector\Model\ProductSpecific $specific
+     * @param ProductSpecific $specific
      * @return Product
      */
-    public function addSpecific(\jtl\Connector\Model\ProductSpecific $specific)
+    public function addSpecific(ProductSpecific $specific)
     {
         $this->specifics[] = $specific;
         return $this;
@@ -2362,9 +2370,9 @@ class Product extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductSpecific[]
+     * @return ProductSpecific[]
      */
-    public function getSpecifics()
+    public function getSpecifics(): array
     {
         return $this->specifics;
     }
@@ -2379,10 +2387,28 @@ class Product extends DataModel
     }
 
     /**
-     * @param \jtl\Connector\Model\ProductVarCombination $varCombination
+     * @return array<TaxRate>
+     */
+    public function getTaxRates(): array
+    {
+        return $this->taxRates;
+    }
+
+    /**
+     * @param array<TaxRate> $taxRates
      * @return Product
      */
-    public function addVarCombination(\jtl\Connector\Model\ProductVarCombination $varCombination)
+    public function setTaxRates(array $taxRates): Product
+    {
+        $this->taxRates = $taxRates;
+        return $this;
+    }
+
+    /**
+     * @param ProductVarCombination $varCombination
+     * @return Product
+     */
+    public function addVarCombination(ProductVarCombination $varCombination)
     {
         $this->varCombinations[] = $varCombination;
         return $this;
@@ -2399,9 +2425,9 @@ class Product extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductVarCombination[]
+     * @return ProductVarCombination[]
      */
-    public function getVarCombinations()
+    public function getVarCombinations(): array
     {
         return $this->varCombinations;
     }
@@ -2416,10 +2442,10 @@ class Product extends DataModel
     }
 
     /**
-     * @param \jtl\Connector\Model\ProductVariation $variation
+     * @param ProductVariation $variation
      * @return Product
      */
-    public function addVariation(\jtl\Connector\Model\ProductVariation $variation)
+    public function addVariation(ProductVariation $variation)
     {
         $this->variations[] = $variation;
         return $this;
@@ -2436,9 +2462,9 @@ class Product extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductVariation[]
+     * @return ProductVariation[]
      */
-    public function getVariations()
+    public function getVariations(): array
     {
         return $this->variations;
     }
@@ -2453,10 +2479,10 @@ class Product extends DataModel
     }
 
     /**
-     * @param \jtl\Connector\Model\ProductWarehouseInfo $warehouseInfo
+     * @param ProductWarehouseInfo $warehouseInfo
      * @return Product
      */
-    public function addWarehouseInfo(\jtl\Connector\Model\ProductWarehouseInfo $warehouseInfo)
+    public function addWarehouseInfo(ProductWarehouseInfo $warehouseInfo)
     {
         $this->warehouseInfo[] = $warehouseInfo;
         return $this;
@@ -2473,9 +2499,9 @@ class Product extends DataModel
     }
     
     /**
-     * @return \jtl\Connector\Model\ProductWarehouseInfo[]
+     * @return ProductWarehouseInfo[]
      */
-    public function getWarehouseInfo()
+    public function getWarehouseInfo(): array
     {
         return $this->warehouseInfo;
     }

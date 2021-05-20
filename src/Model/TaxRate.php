@@ -29,6 +29,14 @@ class TaxRate extends DataModel
     protected $id = null;
 
     /**
+     * @var string
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("countryIso")
+     * @Serializer\Accessor(getter="getRate",setter="setRate")
+     */
+    protected $countryIso = '';
+
+    /**
      * @var double
      * @Serializer\Type("double")
      * @Serializer\SerializedName("rate")
@@ -46,36 +54,56 @@ class TaxRate extends DataModel
 
     /**
      * @param Identity $id
-     * @return \jtl\Connector\Model\TaxRate
+     * @return TaxRate
      * @throws \InvalidArgumentException if the provided argument is not of type 'Identity'.
      */
-    public function setId(Identity $id)
+    public function setId(Identity $id): self
     {
-        return $this->setProperty('id', $id, 'Identity');
+        $this->id = $id;
+        return $this;
     }
 
     /**
      * @return Identity
      */
-    public function getId()
+    public function getId(): Identity
     {
         return $this->id;
     }
 
     /**
-     * @param double $rate
-     * @return \jtl\Connector\Model\TaxRate
+     * @return string
      */
-    public function setRate($rate)
+    public function getCountryIso(): string
     {
-        return $this->setProperty('rate', $rate, 'double');
+        return $this->countryIso;
+    }
+
+    /**
+     * @param string $countryIso
+     * @return TaxRate
+     */
+    public function setCountryIso(string $countryIso): self
+    {
+        $this->countryIso = $countryIso;
+        return $this;
     }
 
     /**
      * @return double
      */
-    public function getRate()
+    public function getRate(): float
     {
         return $this->rate;
+    }
+
+    /**
+     * @param double $rate
+     * @return TaxRate
+     */
+    public function setRate(float $rate): self
+    {
+        $this->rate = $rate;
+        return $this;
     }
 }
