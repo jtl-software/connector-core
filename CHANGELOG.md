@@ -1,3 +1,8 @@
+3.3.2
+-----
+- Added tax rates to product model
+- Added country iso property to tax rate model
+
 3.3.1
 -----
 - Added tax class id to product and product price models
