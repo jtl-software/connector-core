@@ -1,3 +1,8 @@
+4.1.2
+-----
+- Added tax rates to product model
+- Added country iso property to tax rate model
+
 4.1.1
 -----
 - Revised SQLite session handler
