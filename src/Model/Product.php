@@ -2387,6 +2387,21 @@ class Product extends DataModel
     }
 
     /**
+     * @param string $countryIso
+     * @return TaxRate|null
+     */
+    public function findTaxRateByCountryIso(string $countryIso): ?TaxRate
+    {
+        foreach($this->taxRates as $taxRate) {
+            if($countryIso === $taxRate->getCountryIso()) {
+                return $taxRate;
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * @return array<TaxRate>
      */
     public function getTaxRates(): array
