@@ -21,7 +21,7 @@ class TaxRate extends AbstractIdentity
      * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("countryIso")
-     * @Serializer\Accessor(getter="getRate",setter="setRate")
+     * @Serializer\Accessor(getter="getCountryIso",setter="setCountryIso")
      */
     protected $countryIso = '';
 

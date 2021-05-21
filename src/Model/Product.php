@@ -691,13 +691,14 @@ class Product extends AbstractIdentity implements IdentificationInterface
     public function __construct(string $endpoint = '', int $host = 0)
     {
         parent::__construct($endpoint, $host);
-        $this->shippingClassId = new Identity();
+        $this->basePriceUnitId = new Identity();
+        $this->manufacturerId = new Identity();
         $this->masterProductId = new Identity();
+        $this->measurementUnitId = new Identity();
         $this->partsListId = new Identity();
         $this->productTypeId = new Identity();
-        $this->manufacturerId = new Identity();
-        $this->measurementUnitId = new Identity();
-        $this->basePriceUnitId = new Identity();
+        $this->shippingClassId = new Identity();
+        $this->taxClassId = new Identity();
         $this->unitId = new Identity();
     }
 
@@ -2539,6 +2540,21 @@ class Product extends AbstractIdentity implements IdentificationInterface
         $this->specifics = [];
         
         return $this;
+    }
+
+    /**
+     * @param string $countryIso
+     * @return TaxRate|null
+     */
+    public function findTaxRateByCountryIso(string $countryIso): ?TaxRate
+    {
+        foreach($this->taxRates as $taxRate) {
+            if($countryIso === $taxRate->getCountryIso()) {
+                return $taxRate;
+            }
+        }
+
+        return null;
     }
 
     /**
