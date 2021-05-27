@@ -1,3 +1,7 @@
+3.3.3
+-----
+- Added nullable to tax class id getter on product
+
 3.3.2
 -----
 - Added tax rates to product model

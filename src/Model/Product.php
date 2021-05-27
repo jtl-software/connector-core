@@ -877,7 +877,7 @@ class Product extends DataModel
     /**
      * @return Identity
      */
-    public function getTaxClassId(): Identity
+    public function getTaxClassId(): ?Identity
     {
         return $this->taxClassId;
     }
