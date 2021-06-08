@@ -1,3 +1,7 @@
+4.1.3
+-----
+- Fixed core clear action
+
 4.1.2
 -----
 - Added tax rates to product model
