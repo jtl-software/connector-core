@@ -254,12 +254,11 @@ class ConnectorController implements LoggerAwareInterface
             $identities = $identities->getIdentities();
             foreach ($identities as $relationType => $relationIdentities) {
                 if (empty($relationIdentities)) {
-                    $identityType = RelationType::getIdentityType($relationType);
-                    $this->linker->clear($identityType);
+                    $this->linker->clear(RelationType::getIdentityType($relationType));
                 } elseif (is_array($relationIdentities)) {
                     foreach ($relationIdentities as $identity) {
                         $endpointId = empty($identity->getEndpoint()) ? null : $identity->getEndpoint();
-                        $this->linker->delete($relationType, $endpointId, $identity->getHost());
+                        $this->linker->delete(RelationType::getModelName($relationType), $endpointId, $identity->getHost());
                     }
                 }
             }
