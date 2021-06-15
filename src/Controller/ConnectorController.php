@@ -7,10 +7,11 @@
 
 namespace Jtl\Connector\Core\Controller;
 
+use Jawira\CaseConverter\CaseConverterException;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
-use Jtl\Connector\Core\Definition\IdentityType;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Definition\RelationType;
 use Jtl\Connector\Core\Exception\ApplicationException;
@@ -24,7 +25,6 @@ use Jtl\Connector\Core\Model\ConnectorIdentification;
 use Jtl\Connector\Core\Model\ConnectorServerInfo;
 use Jtl\Connector\Core\Model\Features;
 use Jtl\Connector\Core\Model\Identities;
-use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Model\Session;
 use Jtl\Connector\Core\Serializer\Json;
 use Jtl\Connector\Core\System\Check;
@@ -48,6 +48,11 @@ class ConnectorController implements LoggerAwareInterface
     protected $featuresPath;
 
     /**
+     * @var ChecksumLinker
+     */
+    protected $checksumLinker;
+
+    /**
      * @var IdentityLinker
      */
     protected $linker;
@@ -66,11 +71,6 @@ class ConnectorController implements LoggerAwareInterface
      * @var TokenValidatorInterface
      */
     protected $tokenValidator;
-
-    /**
-     * @var ChecksumLinker
-     */
-    protected $checksumLinker;
 
     /**
      * ConnectorController constructor.
@@ -132,6 +132,7 @@ class ConnectorController implements LoggerAwareInterface
      * @param Ack $ack
      * @return bool
      * @throws DefinitionException
+     * @throws CaseConverterException
      * @throws \ReflectionException
      */
     public function ack(Ack $ack): bool
@@ -157,6 +158,7 @@ class ConnectorController implements LoggerAwareInterface
                         'host' => $checksum->getForeignKey()->getHost(),
                         'type' => $checksum->getType(),
                     ];
+
                     $this->logger->warning('Could not save checksum for endpoint ({endpoint}), host ({host}) and type ({type})', $context);
                 }
             }
@@ -179,7 +181,7 @@ class ConnectorController implements LoggerAwareInterface
 
         if ($this->tokenValidator->validate($auth->getToken()) === false) {
             $context = ['token' => $auth->getToken(), 'ip' => $_SERVER['REMOTE_ADDR']];
-            $this->logger->warning("Unauthorized access with token ({token}) from ip ({ip})", $context);
+            $this->logger->warning('Unauthorized access with token ({token}) from ip ({ip})', $context);
             throw AuthenticationException::failed();
         }
 
@@ -278,9 +280,9 @@ class ConnectorController implements LoggerAwareInterface
     }
 
     /**
-     * @return mixed[]
+     * @return array
      */
-    protected function fetchFeaturesData()
+    protected function fetchFeaturesData(): array
     {
         return Json::decode(file_get_contents($this->featuresPath), true);
     }

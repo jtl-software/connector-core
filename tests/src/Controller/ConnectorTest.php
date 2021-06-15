@@ -17,6 +17,8 @@ use Jtl\Connector\Core\Model\Identities;
 use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Model\Session;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\MockObject\Stub\ReturnStub;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * Class ConnectorTest
@@ -27,6 +29,7 @@ class ConnectorTest extends TestCase
     /**
      * @param IdentityLinker|null $linker
      * @param ChecksumLinker|null $checksumLinker
+     * @param EventDispatcher|null $eventDispatcher
      * @param \SessionHandlerInterface|null $sessionHandler
      * @param TokenValidatorInterface|null $tokenValidator
      * @param string $featuresPath
@@ -54,6 +57,7 @@ class ConnectorTest extends TestCase
         if (is_null($tokenValidator)) {
             $tokenValidator = $this->createMock(TokenValidatorInterface::class);
         }
+
         return new ConnectorController($featuresPath, $checksumLinker, $linker, $sessionHandler, $tokenValidator);
     }
 
@@ -133,14 +137,17 @@ class ConnectorTest extends TestCase
     public function testAuthTokenIsInvalid()
     {
         $_SERVER['REMOTE_ADDR'] = '';
-
         $this->expectExceptionObject(AuthenticationException::failed());
         $tokenValidator = $this->createMock(TokenValidatorInterface::class);
-        $tokenValidator->expects($this->once())->method('validate')->willReturn(false);
+
+        $tokenValidator
+            ->expects($this->once())
+            ->method('validate');
+
         $controller = $this->createConnectorController(null, null, null, $tokenValidator);
 
-        $auth = new Authentication();
-        $auth->setToken(md5(time()));
+        $auth = (new Authentication())
+            ->setToken(md5(time()));
 
         $controller->auth($auth);
     }
@@ -152,8 +159,11 @@ class ConnectorTest extends TestCase
     public function testAuthCorrect()
     {
         $tokenValidator = $this->createMock(TokenValidatorInterface::class);
-        $tokenValidator->expects($this->once())->method('validate')->willReturn(true);
 
+        $tokenValidator
+            ->expects($this->once())
+            ->method('validate')
+            ->willReturn(true);
 
         $connector = $this->createConnectorController(null, null, null, $tokenValidator);
 

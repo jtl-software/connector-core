@@ -28,6 +28,7 @@ use Jtl\Connector\Core\Connector\HandleRequestInterface;
 use Jtl\Connector\Core\Connector\ModelInterface;
 use Jtl\Connector\Core\Controller\TransactionalInterface;
 use Jtl\Connector\Core\Definition\Action;
+use Jtl\Connector\Core\Event\AckEvent;
 use Jtl\Connector\Core\Event\BoolEvent;
 use Jtl\Connector\Core\Event\ConnectorIdentificationEvent;
 use Jtl\Connector\Core\Event\FeaturesEvent;
@@ -40,6 +41,7 @@ use Jtl\Connector\Core\Event\StatisticEvent;
 use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\ConfigException;
 use Jtl\Connector\Core\Exception\DefinitionException;
+use Jtl\Connector\Core\Exception\FileNotFoundException;
 use Jtl\Connector\Core\Exception\HttpException;
 use Jtl\Connector\Core\Exception\LoggerException;
 use Jtl\Connector\Core\Logger\LoggerService;
@@ -241,7 +243,6 @@ class Application
         $this->eventDispatcher->addSubscriber(new FeaturesSubscriber());
         $this->errorHandler->register();
         MonologErrorHandler::register($this->loggerService->get(LoggerService::CHANNEL_ERROR));
-
         $requestPacket = RequestPacket::createFromJtlrpc($jtlrpc, $this->serializer);
         $this->errorHandler->setRequestPacket($requestPacket);
 
@@ -432,11 +433,8 @@ class Application
      * @throws NotFoundException
      * @throws \ReflectionException
      */
-    protected function createHandleRequest(
-        RequestPacket $requestPacket,
-        Method $method,
-        string $modelNamespace
-    ): Request {
+    protected function createHandleRequest(RequestPacket $requestPacket, Method $method, string $modelNamespace): Request
+    {
         $controller = $method->getController();
         $action = $method->getAction();
 
@@ -480,6 +478,9 @@ class Application
         foreach ($params as $param) {
             $eventArg = null;
             switch ($action) {
+                case Action::ACK:
+                    $eventArg = new AckEvent($param);
+                    break;
                 case Action::PUSH:
                 case Action::DELETE:
                     $this->container->get(IdentityLinker::class)->linkModel($param);
@@ -500,7 +501,11 @@ class Application
             }
 
             if (!is_null($eventArg)) {
-                $this->eventDispatcher->dispatch($eventArg, Event::createEventName($controller, $action, Event::BEFORE));
+                $eventName = Action::isCoreAction($action)
+                    ? Event::createCoreEventName($controller, $action, Event::BEFORE)
+                    : Event::createEventName($controller, $action, Event::BEFORE);
+
+                $this->eventDispatcher->dispatch($eventArg, $eventName);
             }
         }
 
@@ -594,6 +599,7 @@ class Application
                 case Action::STATISTIC:
                     $eventArg = new StatisticEvent($result);
                     break;
+                case Action::ACK:
                 case Action::CLEAR:
                 case Action::FINISH:
                 case Action::INIT:
@@ -627,7 +633,8 @@ class Application
         ?object $model,
         string $controller,
         string $action
-    ) {
+    )
+    {
         $messages = [
             sprintf('Controller = %s', $controller),
             sprintf('Action = %s', $action),
@@ -653,6 +660,8 @@ class Application
      * @param AbstractImage ...$images
      * @throws ApplicationException
      * @throws CompressionException
+     * @throws DefinitionException
+     * @throws FileNotFoundException
      */
     protected function handleImagePush(AbstractImage ...$images): void
     {

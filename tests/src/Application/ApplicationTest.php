@@ -73,8 +73,6 @@ class ApplicationTest extends TestCase
      * @param $action
      * @param $parameter
      * @throws ApplicationException
-     * @throws DependencyException
-     * @throws NotFoundException
      * @throws \ReflectionException
      * @throws \Throwable
      */
