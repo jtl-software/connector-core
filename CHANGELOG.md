@@ -1,3 +1,7 @@
+4.1.5
+-----
+- Fixed tax rate model namespace in annotation
+
 4.1.4
 -----
 - Added ack events
