@@ -661,7 +661,7 @@ class Product extends AbstractIdentity implements IdentificationInterface
 
     /**
      * @var array<TaxRate>
-     * @Serializer\Type("array<jtl\Connector\Model\TaxRate>")
+     * @Serializer\Type("array<Jtl\Connector\Core\Model\TaxRate>")
      * @Serializer\SerializedName("taxRates")
      * @Serializer\AccessType("reflection")
      */
