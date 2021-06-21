@@ -1,3 +1,7 @@
+4.1.6
+-----
+- Added tax rate factory
+
 4.1.5
 -----
 - Fixed tax rate model namespace in annotation
