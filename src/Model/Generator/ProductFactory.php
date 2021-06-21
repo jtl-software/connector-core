@@ -21,6 +21,11 @@ class ProductFactory extends AbstractModelFactory
 
         $units = ['mm', 'cm', 'm', 'km'];
 
+        /** @var TaxRateFactory $taxRateFactory */
+        $taxRateFactory = $this->getFactory('TaxRate');
+        $taxRates = $taxRateFactory->makeArray(mt_rand(1, 30));
+        $taxRateFactory->clearUsedCountries();
+
         return [
             'basePriceUnitId' => $identityFactory->makeOneArray(),
             'manufacturerId' => $this->makeIdentityArray(IdentityType::MANUFACTURER),
@@ -81,9 +86,10 @@ class ProductFactory extends AbstractModelFactory
             'supplierDeliveryTime' => $this->faker->numberBetween(0, 366),
             'supplierStockLevel' => $this->faker->randomFloat(),
             'taric' => $this->faker->word,
+            'taxClassId' => $this->makeIdentityArray(IdentityType::TAX_CLASS),
             'unNumber' => $this->faker->word,
             'upc' => $this->faker->uuid,
-            'vat' => $this->faker->randomFloat(2),
+            'vat' => $taxRates[mt_rand(0, count($taxRates) - 1)]['rate'],
             'width' => $this->faker->randomFloat(2),
             'attributes' => [],
             'categories' => $this->getFactory('Product2Category')->makeArray(mt_rand(1, 3)),
@@ -102,6 +108,7 @@ class ProductFactory extends AbstractModelFactory
             ],
             'specialPrices' => [],
             'specifics' => [],
+            'taxRates' => $taxRates,
             'variations' => [],
             //'warehouseInfo' => [],
         ];
