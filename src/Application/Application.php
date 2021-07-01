@@ -659,8 +659,7 @@ class Application
         ?object $model,
         string $controller,
         string $action
-    )
-    {
+    ) {
         $messages = [
             sprintf('Controller = %s', $controller),
             sprintf('Action = %s', $action),
@@ -736,7 +735,7 @@ class Application
                         && strtolower($relationType) === strtolower($image->getRelationType())
                     ) {
                         $extension = self::determineExtensionByMimeType(mime_content_type($imagePath));
-                        if($extension !== null && $fileInfo['extension'] !== $extension) {
+                        if ($extension !== null && $fileInfo['extension'] !== $extension) {
                             $newImagePath = sprintf('%s/%s.%s', $tempDir, $fileInfo['filename'], $extension);
                             rename($imagePath, $newImagePath);
                             $imagePath = $newImagePath;

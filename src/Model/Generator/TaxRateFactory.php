@@ -41,13 +41,13 @@ class TaxRateFactory extends AbstractModelFactory
      */
     protected function getUnusedCountryIso(): string
     {
-        if(count($this->usedCountries) >= 247) {
+        if (count($this->usedCountries) >= 247) {
             $this->clearUsedCountries();
         }
 
-        while(true) {
+        while (true) {
             $countryIso = $this->faker->countryCode;
-            if(!in_array($countryIso, $this->usedCountries, true)) {
+            if (!in_array($countryIso, $this->usedCountries, true)) {
                 $this->usedCountries[] = $countryIso;
                 return $countryIso;
             }

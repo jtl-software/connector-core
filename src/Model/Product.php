@@ -2548,8 +2548,8 @@ class Product extends AbstractIdentity implements IdentificationInterface
      */
     public function findTaxRateByCountryIso(string $countryIso): ?TaxRate
     {
-        foreach($this->taxRates as $taxRate) {
-            if($countryIso === $taxRate->getCountryIso()) {
+        foreach ($this->taxRates as $taxRate) {
+            if ($countryIso === $taxRate->getCountryIso()) {
                 return $taxRate;
             }
         }

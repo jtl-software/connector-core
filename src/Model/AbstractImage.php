@@ -93,13 +93,25 @@ abstract class AbstractImage extends AbstractIdentity implements IdentificationI
      * AbstractImage constructor.
      * @param string $endpoint
      * @param int $host
-     * @throws \ReflectionException
      */
     public function __construct(string $endpoint = '', int $host = 0)
     {
         $this->reflectionClass = new \ReflectionClass($this);
         parent::__construct($endpoint, $host);
         $this->foreignKey = new Identity();
+    }
+
+    /**
+     * @return string
+     */
+    public function getExtension(): string
+    {
+        $dotPos = strrpos($this->filename, '.');
+        if ($dotPos !== false) {
+            return substr($this->filename, $dotPos + 1);
+        }
+
+        return '';
     }
 
     /**

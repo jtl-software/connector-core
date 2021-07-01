@@ -2,6 +2,8 @@
 
 namespace Jtl\Connector\Core\Test\Model;
 
+use Faker\Factory;
+use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Model\AbstractImage;
 use Jtl\Connector\Core\Model\CategoryImage;
 use Jtl\Connector\Core\Model\ManufacturerImage;
@@ -16,11 +18,27 @@ class AbstractImageTest extends TestCase
      *
      * @param AbstractImage $image
      * @param string $relationType
-     * @throws \ReflectionException
+     * @throws DefinitionException
      */
     public function testGetRelationType(AbstractImage $image, string $relationType)
     {
         $this->assertEquals($relationType, $image->getRelationType());
+    }
+
+    public function testGetExtension()
+    {
+        $faker = Factory::create();
+        $expectedExtension = $faker->fileExtension;
+        $fileName = sprintf('%s.%s', $faker->filePath(), $expectedExtension);
+        $image = $this->getMockForAbstractClass(AbstractImage::class);
+        $image->setFilename($fileName);
+        $this->assertEquals($expectedExtension, $image->getExtension());
+    }
+
+    public function testGetEmptyExtension()
+    {
+        $image = $this->getMockForAbstractClass(AbstractImage::class);
+        $this->assertEquals('', $image->getExtension());
     }
 
     /**

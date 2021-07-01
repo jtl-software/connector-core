@@ -5,6 +5,7 @@ namespace Jtl\Connector\Core\Model\Generator;
 use Faker\Factory;
 use Faker\Generator;
 use JMS\Serializer\Serializer;
+use Jtl\Connector\Core\Model\AbstractModel;
 use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 
@@ -74,7 +75,7 @@ abstract class AbstractModelFactory
      * @param int $quantity
      * @param array $specificOverrides
      * @param array $globalOverrides
-     * @return array
+     * @return array<object>
      */
     public function make(int $quantity, array $specificOverrides = [], array $globalOverrides = []): array
     {
@@ -105,7 +106,7 @@ abstract class AbstractModelFactory
 
     /**
      * @param array $override
-     * @return array
+     * @return object
      * @throws \Exception
      */
     public function makeOne(array $override = [])
@@ -114,8 +115,8 @@ abstract class AbstractModelFactory
     }
 
     /**
-     * @param mixed[] $override
-     * @return mixed[]
+     * @param array $override
+     * @return array
      */
     public function makeOneArray(array $override = []): array
     {
@@ -124,10 +125,10 @@ abstract class AbstractModelFactory
 
     /**
      * @param integer $identityType
-     * @return mixed[]
+     * @return array
      * @throws \Exception
      */
-    public function makeIdentityArray(int $identityType)
+    public function makeIdentityArray(int $identityType): array
     {
         do {
             list($endpoint, $host) = $this->getFactory('Identity')->makeOneArray();
