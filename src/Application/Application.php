@@ -162,6 +162,32 @@ class Application
     protected $serializer;
 
     /**
+     * @var array<string, string>
+     */
+    protected static $mimeTypeToExtensionMappings = [
+        'image/bmp' => 'bmp',
+        'image/x-bmp' => 'bmp',
+        'image/x-bitmap' => 'bmp',
+        'image/x-xbitmap' => 'bmp',
+        'image/x-win-bitmap' => 'bmp',
+        'image/x-windows-bmp' => 'bmp',
+        'image/ms-bmp' => 'bmp',
+        'image/x-ms-bmp' => 'bmp',
+        'application/bmp' => 'bmp',
+        'application/x-bmp' => 'bmp',
+        'application/x-win-bitmap' => 'bmp',
+        'image/gif' => 'gif',
+        'image/x-icon' => 'ico',
+        'image/x-ico' => 'ico',
+        'image/vnd.microsoft.icon' => 'ico',
+        'image/jpeg' => 'jpg',
+        'image/pjpeg' => 'jpg',
+        'image/svg+xml' => 'svg',
+        'image/png' => 'png',
+        'image/x-png' => 'png',
+    ];
+
+    /**
      * Application constructor.
      * @param ConnectorInterface $connector
      * @param string $connectorDir
@@ -704,11 +730,18 @@ class Application
                 $imageFound = false;
                 foreach ($imagePaths as $imagePath) {
                     $imageFound = false;
-                    $infos = pathinfo($imagePath);
-                    list($hostId, $relationType) = explode('_', $infos['filename']);
+                    $fileInfo = pathinfo($imagePath);
+                    list($hostId, $relationType) = explode('_', $fileInfo['filename']);
                     if ((int)$hostId == $image->getId()->getHost()
                         && strtolower($relationType) === strtolower($image->getRelationType())
                     ) {
+                        $extension = self::determineExtensionByMimeType(mime_content_type($imagePath));
+                        if($extension !== null && $fileInfo['extension'] !== $extension) {
+                            $newImagePath = sprintf('%s/%s.%s', $tempDir, $fileInfo['filename'], $extension);
+                            rename($imagePath, $newImagePath);
+                            $imagePath = $newImagePath;
+                        }
+
                         $image->setFilename($imagePath);
                         $imageFound = true;
                         break;
@@ -928,5 +961,14 @@ class Application
 
         session_start();
         $this->loggerService->get(LoggerService::CHANNEL_SESSION)->debug('Session started with id ({sessionId})', ['sessionId' => session_id()]);
+    }
+
+    /**
+     * @param string $mimeType
+     * @return string
+     */
+    protected static function determineExtensionByMimeType(string $mimeType): ?string
+    {
+        return self::$mimeTypeToExtensionMappings[$mimeType] ?? null;
     }
 }
