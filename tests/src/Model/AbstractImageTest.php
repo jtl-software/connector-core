@@ -25,24 +25,8 @@ class AbstractImageTest extends TestCase
         $this->assertEquals($relationType, $image->getRelationType());
     }
 
-    public function testGetExtension()
-    {
-        $faker = Factory::create();
-        $expectedExtension = $faker->fileExtension;
-        $fileName = sprintf('%s.%s', $faker->filePath(), $expectedExtension);
-        $image = $this->getMockForAbstractClass(AbstractImage::class);
-        $image->setFilename($fileName);
-        $this->assertEquals($expectedExtension, $image->getExtension());
-    }
-
-    public function testGetEmptyExtension()
-    {
-        $image = $this->getMockForAbstractClass(AbstractImage::class);
-        $this->assertEquals('', $image->getExtension());
-    }
-
     /**
-     * @return array[]
+     * @return array
      */
     public function relationTypeProvider(): array
     {
@@ -51,6 +35,32 @@ class AbstractImageTest extends TestCase
             [new ProductImage(), 'product'],
             [new ProductVariationValueImage(), 'productVariationValue'],
             [new ManufacturerImage(), 'manufacturer'],
+        ];
+    }
+
+    /**
+     * @dataProvider extensionProvider
+     *
+     * @param string $fileName
+     * @param string $expectedExtension
+     */
+    public function testGetExtension(string $fileName, string $expectedExtension)
+    {
+        $image = $this->getMockForAbstractClass(AbstractImage::class);
+        $image->setFilename($fileName);
+        $this->assertEquals($expectedExtension, $image->getExtension());
+    }
+
+    /**
+     * @return array
+     */
+    public function extensionProvider(): array
+    {
+        return [
+            ['file.name', 'name'],
+            ['some.file.name', 'name'],
+            ['filename', ''],
+            ['', ''],
         ];
     }
 }
