@@ -1,3 +1,7 @@
+4.1.7
+-----
+- Added logic for determining image file extension by mime type
+
 4.1.6
 -----
 - Added tax rate factory

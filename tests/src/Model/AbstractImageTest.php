@@ -2,7 +2,6 @@
 
 namespace Jtl\Connector\Core\Test\Model;
 
-use Faker\Factory;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Model\AbstractImage;
 use Jtl\Connector\Core\Model\CategoryImage;
