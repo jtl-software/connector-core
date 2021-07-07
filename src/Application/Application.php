@@ -763,7 +763,7 @@ class Application
      * @throws \ReflectionException
      * @throws \Throwable
      */
-    protected function handleRequest(Request $request): Response
+    public function handleRequest(Request $request): Response
     {
         $controller = $request->getController();
         $action = $request->getAction();

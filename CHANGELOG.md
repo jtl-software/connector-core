@@ -1,3 +1,7 @@
+4.1.8
+-----
+- Changed handleRequest() method visibility to public
+
 4.1.7
 -----
 - Added logic for determining image file extension by mime type
