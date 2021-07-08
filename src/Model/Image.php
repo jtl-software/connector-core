@@ -250,4 +250,17 @@ class Image extends DataModel
         $this->i18ns = [];
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getExtension(): string
+    {
+        $dotPos = strrpos($this->filename, '.');
+        if ($dotPos !== false) {
+            return substr($this->filename, $dotPos + 1);
+        }
+
+        return '';
+    }
 }
