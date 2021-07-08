@@ -146,7 +146,7 @@ class LoggerService
     public function pushProcessor(ProcessorInterface $processor): self
     {
         foreach ($this->processors as $tProcessor) {
-            if ($processor === $tProcessor) {
+            if ($processor == $tProcessor) {
                 return $this;
             }
         }
@@ -158,5 +158,20 @@ class LoggerService
         $this->processors[] = $processor;
 
         return $this;
+    }
+
+    /**
+     * @param string $className
+     * @return ProcessorInterface|null
+     */
+    public function getProcessorByClassName(string $className): ?ProcessorInterface
+    {
+        foreach($this->processors as $processor) {
+            if(get_class($processor) === $className) {
+                return $processor;
+            }
+        }
+
+        return null;
     }
 }

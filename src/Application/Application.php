@@ -75,6 +75,7 @@ use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Session\SqliteSessionHandler;
 use Jtl\Connector\Core\Session\SessionHandlerInterface;
 use Monolog\ErrorHandler as MonologErrorHandler;
+use Monolog\Processor\UidProcessor;
 use Noodlehaus\ConfigInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerAwareInterface;
@@ -229,7 +230,8 @@ class Application
         $this->eventDispatcher = new EventDispatcher();
         $this->fileSystem = new Filesystem();
         $this->loggerService = (new LoggerService($this->config->get(ConfigSchema::LOG_DIR), $this->config->get(ConfigSchema::LOG_LEVEL)))
-            ->setFormat($this->config->get(ConfigSchema::LOG_FORMAT));
+            ->setFormat($this->config->get(ConfigSchema::LOG_FORMAT))
+            ->pushProcessor(new UidProcessor(16));
         $this->container->set(LoggerService::class, $this->loggerService);
         $this->request = HttpRequest::createFromGlobals();
         $this->serializer = SerializerBuilder::create($serializerCacheDir)->build();
@@ -261,6 +263,7 @@ class Application
      */
     public function run(): void
     {
+        $this->loggerService->getProcessorByClassName(UidProcessor::class)->reset();
         $jtlrpc = $this->request->get('jtlrpc', '');
 
         $this->container->set(LoggerInterface::class, $this->loggerService->get(LoggerService::CHANNEL_GLOBAL));
@@ -310,7 +313,7 @@ class Application
         } catch (\Throwable $ex) {
             $error = (new Error())
                 ->setCode($ex->getCode())
-                ->setMessage($ex->getMessage())
+                ->setMessage(sprintf('[%s] %s', $this->loggerService->getProcessorByClassName(UidProcessor::class)->getUid(), $ex->getMessage()))
                 ->setData(Error::createDataFromException($ex));
 
             $responsePacket = ResponsePacket::create($requestPacket->getId())
@@ -898,7 +901,7 @@ class Application
     /**
      * @param Application $application
      * @param Container $container
-     * @throws ApplicationException
+     * @throws ApplicationException|SessionException
      */
     protected function prepareContainer(Application $application, Container $container): void
     {

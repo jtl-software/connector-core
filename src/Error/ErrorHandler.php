@@ -76,8 +76,8 @@ class ErrorHandler extends AbstractErrorHandler
 
                     $file = sprintf('...%s', substr($err['file'], strrpos($err['file'], '/')));
 
-                    $error = new Error();
-                    $error->setCode($err['type'])
+                    $error = (new Error())
+                        ->setCode($err['type'])
                         ->setData('Shutdown! File: ' . $file . ' - Line: ' . $err['line'])
                         ->setMessage($err['message']);
 
