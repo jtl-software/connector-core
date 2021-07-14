@@ -22,6 +22,13 @@ class FeaturesHandler implements SubscribingHandlerInterface
         ];
     }
 
+    /**
+     * @param JsonSerializationVisitor $visitor
+     * @param Features $features
+     * @param array $type
+     * @param Context $context
+     * @return array
+     */
     public function serializeFeaturesToJson(JsonSerializationVisitor $visitor, Features $features, array $type, Context $context)
     {
         return $features->toArray();

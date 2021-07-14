@@ -10,6 +10,7 @@ use JMS\Serializer\Handler\HandlerRegistry;
 use JMS\Serializer\SerializerBuilder as JmsBuilder;
 use Jtl\Connector\Core\Serializer\Handler\FeaturesHandler;
 use Jtl\Connector\Core\Serializer\Handler\ProductHandler;
+use Jtl\Connector\Core\Serializer\Subscriber\CrossSellingSubscriber;
 use Jtl\Connector\Core\Serializer\Subscriber\LanguageIsoSubscriber;
 use Jtl\Connector\Core\Serializer\Subscriber\NullValuesSubscriber;
 use Jtl\Connector\Core\Serializer\Handler\IdentityHandler;
@@ -26,7 +27,7 @@ class SerializerBuilder
      */
     public static function create(string $cacheDir = null): JmsBuilder
     {
-        $builder = \JMS\Serializer\SerializerBuilder::create()
+        $builder = JmsBuilder::create()
                 ->addDefaultHandlers()
                 ->setObjectConstructor(new ObjectConstructor())
                 ->configureListeners(function (EventDispatcher $dispatcher) {
@@ -35,6 +36,7 @@ class SerializerBuilder
                     $dispatcher->addSubscriber(new LanguageIsoSubscriber());
                     $dispatcher->addSubscriber(new ProductAttributeSubscriber());
                     $dispatcher->addSubscriber(new ProductStockLevelSubscriber());
+                    $dispatcher->addSubscriber(new CrossSellingSubscriber());
                 })
                 ->configureHandlers(function (HandlerRegistry $registry) {
                     $registry->registerSubscribingHandler(new IdentityHandler());

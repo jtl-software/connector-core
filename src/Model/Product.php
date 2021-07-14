@@ -1468,9 +1468,9 @@ class Product extends AbstractIdentity implements IdentificationInterface
     {
         return $this->manufacturerNumber;
     }
-    
+
     /**
-     * @param Manufacturer $manufacturer Optional manufacturer
+     * @param Manufacturer|null $manufacturer Optional manufacturer
      * @return Product
      */
     public function setManufacturer(Manufacturer $manufacturer = null): Product

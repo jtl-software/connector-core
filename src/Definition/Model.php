@@ -16,9 +16,9 @@ final class Model
         CONFIG_GROUP = 'ConfigGroup',
         CONFIG_GROUP_IMAGE = 'ConfigGroupImage',
         CONFIG_ITEM = 'ConfigItem',
-        CROSSSELLING = 'CrossSelling',
-        CROSSSELLING_GROUP = 'CrossSellingGroup',
-        CROSSSELLING_ITEM = 'CrossSellingItem',
+        CROSS_SELLING = 'CrossSelling',
+        CROSS_SELLING_GROUP = 'CrossSellingGroup',
+        CROSS_SELLING_ITEM = 'CrossSellingItem',
         CURRENCY = 'Currency',
         CUSTOMER = 'Customer',
         CUSTOMER_GROUP = 'CustomerGroup',
@@ -73,9 +73,9 @@ final class Model
         self::CONFIG_GROUP => IdentityType::CONFIG_GROUP,
         self::CONFIG_GROUP_IMAGE => IdentityType::CONFIG_GROUP_IMAGE,
         self::CONFIG_ITEM => IdentityType::CONFIG_ITEM,
-        self::CROSSSELLING => IdentityType::CROSSSELLING,
-        self::CROSSSELLING_GROUP => IdentityType::CROSSSELLING_GROUP,
-        self::CROSSSELLING_ITEM => IdentityType::CROSSSELLING,
+        self::CROSS_SELLING => IdentityType::CROSS_SELLING,
+        self::CROSS_SELLING_GROUP => IdentityType::CROSS_SELLING_GROUP,
+        self::CROSS_SELLING_ITEM => IdentityType::CROSS_SELLING_ITEM,
         self::CURRENCY => IdentityType::CURRENCY,
         self::CUSTOMER => IdentityType::CUSTOMER,
         self::CUSTOMER_GROUP => IdentityType::CUSTOMER_GROUP,
@@ -126,16 +126,17 @@ final class Model
             'id' => IdentityType::CONFIG_ITEM,
             'productId' => IdentityType::PRODUCT,
         ],
-        self::CROSSSELLING => [
-            'id' => IdentityType::CROSSSELLING,
+        self::CROSS_SELLING => [
+            'id' => IdentityType::CROSS_SELLING,
             'productId' => IdentityType::PRODUCT
         ],
-        self::CROSSSELLING_ITEM => [
-            'crossSellingGroupId' => IdentityType::CROSSSELLING_GROUP,
+        self::CROSS_SELLING_ITEM => [
+            'id' => IdentityType::CROSS_SELLING_ITEM,
+            'crossSellingGroupId' => IdentityType::CROSS_SELLING_GROUP,
             'productIds' => IdentityType::PRODUCT  // List of Product identities
         ],
-        self::CROSSSELLING_GROUP => [
-            'id' => IdentityType::CROSSSELLING_GROUP
+        self::CROSS_SELLING_GROUP => [
+            'id' => IdentityType::CROSS_SELLING_GROUP
         ],
         self::CURRENCY => [
             'id' => IdentityType::CURRENCY,

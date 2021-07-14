@@ -61,9 +61,11 @@ class IdentityHandler implements SubscribingHandlerInterface
                 if (!isset($this->identities[$identityType][$identity[1]])) {
                     $this->identities[$identityType][$identity[1]] = $identityObject;
                 }
+
                 $identityObject = $this->identities[$identityType][$identity[1]];
             }
         }
+
         return $identityObject;
     }
 

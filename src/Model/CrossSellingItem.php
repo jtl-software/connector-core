@@ -17,7 +17,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class CrossSellingItem extends AbstractDataModel
+class CrossSellingItem extends AbstractIdentity
 {
     /**
      * @var Identity Reference to crossSellingGroup
@@ -26,6 +26,15 @@ class CrossSellingItem extends AbstractDataModel
      * @Serializer\Accessor(getter="getCrossSellingGroupId",setter="setCrossSellingGroupId")
      */
     protected $crossSellingGroupId = null;
+
+
+    /**
+     * @var CrossSellingGroup|null
+     * @Serializer\Type("Jtl\Connector\Core\Model\CrossSellingGroup")
+     * @Serializer\SerializedName("crossSellingGroup")
+     * @Serializer\Accessor(getter="getCrossSellingGroup",setter="setCrossSellingGroup")
+     */
+    protected $crossSellingGroup = null;
     
     /**
      * @var Identity[] Referenced target product ID
@@ -38,8 +47,9 @@ class CrossSellingItem extends AbstractDataModel
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(string $endpoint = '', int $host = 0)
     {
+        parent::__construct($endpoint, $host);
         $this->crossSellingGroupId = new Identity();
     }
     
@@ -60,6 +70,24 @@ class CrossSellingItem extends AbstractDataModel
     public function getCrossSellingGroupId(): Identity
     {
         return $this->crossSellingGroupId;
+    }
+
+    /**
+     * @return CrossSellingGroup|null
+     */
+    public function getCrossSellingGroup(): ?CrossSellingGroup
+    {
+        return $this->crossSellingGroup;
+    }
+
+    /**
+     * @param CrossSellingGroup|null $crossSellingGroup
+     * @return CrossSellingItem
+     */
+    public function setCrossSellingGroup(?CrossSellingGroup $crossSellingGroup): CrossSellingItem
+    {
+        $this->crossSellingGroup = $crossSellingGroup;
+        return $this;
     }
     
     /**
