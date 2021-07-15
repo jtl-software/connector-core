@@ -1,3 +1,9 @@
+4.2.0
+-----
+- Added id to cross-selling item model
+- Added cross-selling group property to cross-selling item model
+- Refactored cross-selling name in definition constants
+
 4.1.8
 -----
 - Changed handleRequest() method visibility to public
