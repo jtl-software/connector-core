@@ -1,3 +1,7 @@
+4.2.1
+-----
+- Added tif/tiff mime type mappings
+
 4.2.0
 -----
 - Added id to cross-selling item model
