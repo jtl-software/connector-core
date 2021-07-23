@@ -17,7 +17,8 @@ class ConfigSchema
         CACHE_DIR = 'cache_dir',
         PLUGINS_DIR = 'plugins_dir',
         FEATURES_PATH = 'features_path',
-        DEBUG = 'debug';
+        DEBUG = 'debug',
+        ENABLE_RPC_VIEWER = 'enable_rpc_viewer';
 
     /**
      * @var ConfigParameter[]
@@ -127,6 +128,7 @@ class ConfigSchema
             ConfigParameter::create(self::PLUGINS_DIR, ConfigParameter::TYPE_STRING, true, false, sprintf('%s/plugins', $connectorDir)),
             ConfigParameter::create(self::FEATURES_PATH, ConfigParameter::TYPE_STRING, true, false, sprintf('%s/config/features.json', $connectorDir)),
             ConfigParameter::create(self::DEBUG, ConfigParameter::TYPE_BOOLEAN, true, true, false),
+            ConfigParameter::create(self::ENABLE_RPC_VIEWER, ConfigParameter::TYPE_BOOLEAN, false, true, false),
         ];
     }
 

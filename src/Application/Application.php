@@ -55,6 +55,7 @@ use Jtl\Connector\Core\Model\IdentificationInterface;
 use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Model\QueryFilter;
 use Jtl\Connector\Core\Model\Statistic;
+use Jtl\Connector\Core\Plugin\BuildIn\RpcViewer\RpcViewer;
 use Jtl\Connector\Core\Plugin\PluginInterface;
 use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Exception\SessionException;
@@ -76,6 +77,7 @@ use Jtl\Connector\Core\Session\SqliteSessionHandler;
 use Jtl\Connector\Core\Session\SessionHandlerInterface;
 use Monolog\ErrorHandler as MonologErrorHandler;
 use Noodlehaus\ConfigInterface;
+use Jtl\Connector\Core\Plugin\BuildIn\RpcViewer\Listener\RpcListener;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
@@ -84,6 +86,8 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 class Application
 {
@@ -272,6 +276,83 @@ class Application
         $requestPacket = RequestPacket::createFromJtlrpc($jtlrpc, $this->serializer);
         $this->errorHandler->setRequestPacket($requestPacket);
 
+        if (!empty($this->request->get('route'))) {
+            $this->handleHttpCall();
+        }
+
+        $this->handleRpcCall($requestPacket, $jtlrpc);
+    }
+
+    /**
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    protected function handleHttpCall()
+    {
+        $this->connector->initialize($this->config, $this->container, $this->eventDispatcher);
+
+        $token = $this->request->get('token', '');
+        if ($this->getConnector()->getTokenValidator()->validate($token)) {
+            $route = $this->request->get('route');
+            if (strpos($route, RpcViewer::HTTP_ROUTE_NAMESPACE) !== false &&
+                $this->getConfig()->get(ConfigSchema::ENABLE_RPC_VIEWER, false)) {
+                $this->renderRpcViewer($route, $token);
+            }
+        }
+    }
+
+    /**
+     * @param string $route
+     * @param string $token
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    protected function renderRpcViewer(string $route, string $token): void
+    {
+        $twig = new Environment(new FilesystemLoader(RpcViewer::getPluginDirectory()));
+
+        $rpcViewer = new RpcViewer($this->getConfig()->get(ConfigSchema::LOG_DIR), $twig, $this->response);
+
+        switch ($route) {
+            case sprintf('%s/run', RpcViewer::HTTP_ROUTE_NAMESPACE):
+                $rpcViewer->run();
+                break;
+            case sprintf('%s/clear', RpcViewer::HTTP_ROUTE_NAMESPACE):
+                $rpcViewer->clear();
+                break;
+            case sprintf('%s/latest', RpcViewer::HTTP_ROUTE_NAMESPACE):
+                $rpcViewer->getLatest();
+                break;
+            case sprintf('%s/file', RpcViewer::HTTP_ROUTE_NAMESPACE):
+                $rpcViewer->renderFile($this->request->get('file'), $token);
+                break;
+            default:
+                $this->response->headers->set('Content-Type', 'text/html');
+                $this->response
+                    ->setStatusCode(404)
+                    ->setContent("404 - Not Found")
+                    ->send();
+        }
+    }
+
+    /**
+     * @param RequestPacket $requestPacket
+     * @param string $jtlrpc
+     * @throws ApplicationException
+     * @throws CompressionException
+     * @throws ConfigException
+     * @throws DefinitionException
+     * @throws HttpException
+     * @throws RpcException
+     * @throws SessionException
+     * @throws \Jawira\CaseConverter\CaseConverterException
+     * @throws \ReflectionException
+     * @throws \Throwable
+     */
+    protected function handleRpcCall(RequestPacket $requestPacket, string $jtlrpc)
+    {
         try {
             if (!$requestPacket->isValid()) {
                 throw RpcException::invalidRequest();
@@ -291,6 +372,12 @@ class Application
             $this->prepareContainer($this, $this->container);
             $this->loadPlugins($this->config, $this->container, $this->eventDispatcher, $this->config->get(ConfigSchema::PLUGINS_DIR));
             $this->configSchema->validateConfig($this->config);
+
+            if ($this->getConfig()->get(ConfigSchema::ENABLE_RPC_VIEWER, false)) {
+                $listener = new RpcListener($this->getConfig()->get(ConfigSchema::LOG_DIR));
+                $this->eventDispatcher->addListener(Event::createRpcEventName(Event::BEFORE), array($listener, 'beforeAction'));
+                $this->eventDispatcher->addListener(Event::createRpcEventName(Event::AFTER), array($listener, 'afterAction'));
+            }
 
             $logJtlrpc = $jtlrpc;
             if ($requestPacket->getMethod() === RpcMethod::AUTH) {
@@ -659,7 +746,8 @@ class Application
         ?object $model,
         string $controller,
         string $action
-    ) {
+    )
+    {
         $messages = [
             sprintf('Controller = %s', $controller),
             sprintf('Action = %s', $action),
