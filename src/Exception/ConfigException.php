@@ -48,21 +48,26 @@ class ConfigException extends \Exception
     }
 
     /**
-     * @param array $invalidValues
-     * @param array $missingRequiredProperties
+     * @param array $invalidProperties
+     * @param array $missingProperties
      * @return ConfigException
      */
-    public static function schemaValidationErrors(array $invalidValues, array $missingRequiredProperties): self
+    public static function configValidationErrors(array $invalidProperties, array $missingProperties): self
     {
-        $msg = 'Configuration could not get validated.';
-        if (count($invalidValues) > 0) {
-            $msg .= sprintf(' The properties "%s" have invalid values.', implode(', ', $invalidValues));
+        $messageParts = ['Configuration could not get validated.'];
+
+        $invalidPropertiesCount = count($invalidProperties);
+        if ($invalidPropertiesCount > 0) {
+            $message = $invalidPropertiesCount === 1 ? 'The property "%s" has an invalid value.' : 'The properties "%s" have invalid values.';
+            $messageParts[] = sprintf($message, implode(', ', $invalidProperties));
         }
 
-        if (count($missingRequiredProperties) > 0) {
-            $msg .= sprintf(' The required properties "%s" are missing.', implode(', ', $missingRequiredProperties));
+        $missingPropertiesCount = count($missingProperties);
+        if ($missingPropertiesCount > 0) {
+            $message = $missingPropertiesCount === 1 ? 'The required property "%s" is missing.' : 'The required properties "%s" are missing.';
+            $messageParts[] = sprintf($message, implode(', ', $missingProperties));
         }
 
-        return new self($msg, self::SCHEMA_VALIDATION_ERRORS);
+        return new self(implode(' ', $messageParts), self::SCHEMA_VALIDATION_ERRORS);
     }
 }

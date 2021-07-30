@@ -217,7 +217,10 @@ class Application
 
         $this->prepareConfig($connectorDir, $config, $configSchema);
 
-        $serializerCacheDir = $config->get(ConfigSchema::DEBUG, false) === false ? $config->get(ConfigSchema::CACHE_DIR) : null;
+        $serializerCacheDir = null;
+        if ($config->get(ConfigSchema::DEBUG, false) === false && $config->get(ConfigSchema::ENABLE_SERIALIZER_CACHE, true) === true) {
+            $serializerCacheDir = $config->get(ConfigSchema::CACHE_DIR);
+        }
 
         $this->connector = $connector;
         $this->connectorDir = $connectorDir;
@@ -656,12 +659,8 @@ class Application
      * @param string $action
      * @throws \ReflectionException
      */
-    protected function extendExceptionMessageWithIdentifiers(
-        \Throwable $ex,
-        ?object $model,
-        string $controller,
-        string $action
-    ) {
+    protected function extendExceptionMessageWithIdentifiers(\Throwable $ex, ?object $model, string $controller, string $action)
+    {
         $messages = [
             sprintf('Controller = %s', $controller),
             sprintf('Action = %s', $action),

@@ -17,7 +17,8 @@ class ConfigSchema
         CACHE_DIR = 'cache_dir',
         PLUGINS_DIR = 'plugins_dir',
         FEATURES_PATH = 'features_path',
-        DEBUG = 'debug';
+        DEBUG = 'debug',
+        ENABLE_SERIALIZER_CACHE = 'enable_serializer_cache';
 
     /**
      * @var ConfigParameter[]
@@ -106,7 +107,7 @@ class ConfigSchema
         }
 
         if (count($invalidValues) > 0 || count($missingProperties) > 0) {
-            throw ConfigException::schemaValidationErrors($invalidValues, $missingProperties);
+            throw ConfigException::configValidationErrors($invalidValues, $missingProperties);
         }
     }
 
@@ -127,6 +128,7 @@ class ConfigSchema
             ConfigParameter::create(self::PLUGINS_DIR, ConfigParameter::TYPE_STRING, true, false, sprintf('%s/plugins', $connectorDir)),
             ConfigParameter::create(self::FEATURES_PATH, ConfigParameter::TYPE_STRING, true, false, sprintf('%s/config/features.json', $connectorDir)),
             ConfigParameter::create(self::DEBUG, ConfigParameter::TYPE_BOOLEAN, true, true, false),
+            ConfigParameter::create(self::ENABLE_SERIALIZER_CACHE, ConfigParameter::TYPE_BOOLEAN, true, true, true),
         ];
     }
 
