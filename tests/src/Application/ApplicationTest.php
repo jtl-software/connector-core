@@ -19,6 +19,7 @@ use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\ConfigException;
 use Jtl\Connector\Core\Exception\DefinitionException;
+use Jtl\Connector\Core\Exception\LoggerException;
 use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Jtl\Connector\Core\Model\AbstractImage;
@@ -60,11 +61,11 @@ class ApplicationTest extends TestCase
      */
     public function testHandleRequestControllerClassNotFoundException()
     {
-        $connector = $this->createConnector('FooBar');
-        $application = $this->createInitializedApplication(null, $connector);
+        $application = $this->createInitializedApplication();
+        $connector = $this->createConnector();
         $request = Request::create(Controller::PRODUCT, Action::PUSH, [new Product()]);
         $this->expectException(ApplicationException::class);
-        $this->invokeMethodFromObject($application, 'handleRequest', $request);
+        $this->invokeMethodFromObject($application, 'handleRequest', $connector, $request);
     }
 
     /**
@@ -79,10 +80,11 @@ class ApplicationTest extends TestCase
     public function testHandleRequestControllerAction(string $action, $parameter)
     {
         $application = $this->createInitializedApplication();
+        $connector = $this->createConnector();
         $controller = $this->createTransactionalController();
         $application->getContainer()->set(Controller::PRODUCT, $controller);
         $request = Request::create(Controller::PRODUCT, $action, [$parameter]);
-        $result = $this->invokeMethodFromObject($application, 'handleRequest', $request);
+        $result = $this->invokeMethodFromObject($application, 'handleRequest', $connector, $request);
 
         switch ($action) {
             case Action::STATISTIC:
@@ -121,6 +123,7 @@ class ApplicationTest extends TestCase
     public function testHandleRequestTransactionalMethodsCalls()
     {
         $application = $this->createInitializedApplication();
+        $connector = $this->createConnector();
         $controller = $this->createMock(TransactionalControllerStub::class);
         $application->getContainer()->set(Controller::CATEGORY, $controller);
         $category = new Category();
@@ -131,7 +134,7 @@ class ApplicationTest extends TestCase
         $controller->expects($this->never())->method('rollback');
 
         $request = Request::create(Controller::CATEGORY, Action::DELETE, [$category]);
-        $result = $this->invokeMethodFromObject($application, 'handleRequest', $request);
+        $result = $this->invokeMethodFromObject($application, 'handleRequest', $connector, $request);
         $this->assertCount(1, $result->getResult());
     }
 
@@ -144,6 +147,8 @@ class ApplicationTest extends TestCase
         $this->expectException(\RuntimeException::class);
         $category = new Category();
         $application = $this->createInitializedApplication();
+        $connector = $this->createConnector();
+
         $controller = $this->createMock(TransactionalControllerStub::class);
         $controller->expects($this->once())->method('delete')->with($category)->willThrowException(new \RuntimeException());
         $controller->expects($this->once())->method('beginTransaction');
@@ -152,7 +157,7 @@ class ApplicationTest extends TestCase
         $application->getContainer()->set(Controller::CATEGORY, $controller);
 
         $request = Request::create(Controller::CATEGORY, Action::DELETE, [$category]);
-        $this->invokeMethodFromObject($application, 'handleRequest', $request);
+        $this->invokeMethodFromObject($application, 'handleRequest', $connector, $request);
     }
 
     /**
@@ -164,10 +169,11 @@ class ApplicationTest extends TestCase
      */
     public function testHandleRequestControllerClassNeedToBeInitialized()
     {
-        $application = $this->createInitializedApplication(null, $this->createConnector("Jtl\Connector\Core\Controller"));
+        $application = $this->createInitializedApplication();
+        $connector = $this->createConnector();
         $ack = new Ack();
         $request = Request::create(Controller::CONNECTOR, Action::ACK, [$ack]);
-        $response = $this->invokeMethodFromObject($application, 'handleRequest', $request);
+        $response = $this->invokeMethodFromObject($application, 'handleRequest', $connector, $request);
 
         $this->assertTrue($response->getResult());
     }
@@ -183,14 +189,14 @@ class ApplicationTest extends TestCase
     {
         $config = $this->createConfig(['foo' => 'you', 'bar' => 'jau']);
         $connector = $this->createConnector(ConnectorInterface::class);
-        $application = $this->createApplication(null, $connector, null, $config);
+        $application = $this->createApplication(null,  null, $config);
         $container = $application->getContainer();
 
         $this->assertFalse($container->has(ConfigInterface::class));
         $this->assertFalse($container->has(TokenValidatorInterface::class));
         $this->assertFalse($container->has(PrimaryKeyMapperInterface::class));
         $this->assertFalse($container->has(SessionHandlerInterface::class));
-        $this->invokeMethodFromObject($application, 'prepareContainer', $application, $container);
+        $this->invokeMethodFromObject($application, 'prepareContainer', $connector);
         $this->assertEquals($container->get(ConfigInterface::class), $config);
         $this->assertEquals($container->get(TokenValidatorInterface::class), $connector->getTokenValidator());
         $this->assertEquals($container->get(PrimaryKeyMapperInterface::class), $connector->getPrimaryKeyMapper());
@@ -286,9 +292,10 @@ class ApplicationTest extends TestCase
 
         /** @var Application|MockObject $app */
         $app = $this->getMockBuilder(Application::class)
-            ->setConstructorArgs([$connector, $this->connectorDir, $config, $configSchema])
+            ->setConstructorArgs([$this->connectorDir, $config, $configSchema])
             ->onlyMethods(['startSession', 'loadPlugins', 'prepareContainer'])
             ->getMock();
+
         $app->setSessionHandler($this->createMock(SessionHandlerInterface::class));
         $app->getContainer()->set(SessionHandlerInterface::class, $this->createMock(SessionHandlerInterface::class));
         $app->getContainer()->set(TokenValidatorInterface::class, $this->createMock(TokenValidatorInterface::class));
@@ -298,11 +305,17 @@ class ApplicationTest extends TestCase
         $app->expects($this->once())->method('startSession');
         $app->expects($this->once())->method('loadPlugins');
         $app->expects($this->once())->method('prepareContainer');
-        $connector->expects($this->once())->method('initialize')->with($config, $app->getContainer(), $app->getEventDispatcher());
+
+        $connector
+            ->expects($this->once())
+            ->method('initialize')
+            ->with($config, $app->getContainer(), $app->getEventDispatcher());
+
         $configSchema->expects($this->once())->method('validateConfig')->with($config);
         $controller->expects($this->once())->method('push')->willReturn($manufacturer);
         $this->expectOutputString(json_encode($responsePacket->toArray($serializer)));
-        $app->run();
+
+        $app->run($connector);
 
         $eventDispatcher = $app->getEventDispatcher();
         $rpcEventListeners = $eventDispatcher->getListeners('rpc.before');
@@ -349,7 +362,7 @@ class ApplicationTest extends TestCase
         $error = (new Error())->setCode(ErrorCode::INVALID_REQUEST)->setMessage("Invalid request")->setData(Error::createDataFromException($ex));
         $responsePacket = (new ResponsePacket())->setJtlrpc("2.0")->setId($id)->setError($error);
         $this->expectOutputString(json_encode($responsePacket->toArray($serializer)));
-        $this->createApplication()->run();
+        $this->createApplication()->run($this->createConnector());
     }
 
     /**
@@ -357,7 +370,7 @@ class ApplicationTest extends TestCase
      * @throws DefinitionException
      * @throws \Throwable
      */
-    public function testRunUnknwonController()
+    public function testRunUnknownController()
     {
         $this->expectException(DefinitionException::class);
         $this->expectExceptionCode(ErrorCode::UNKNOWN_CONTROLLER);
@@ -378,7 +391,9 @@ class ApplicationTest extends TestCase
             ->setError($error);
 
         $this->expectOutputString(json_encode($responsePacket->toArray($serializer)));
-        $this->createApplication()->run();
+
+        $this->createApplication()
+            ->run($this->createConnector());
     }
 
     /**
@@ -386,7 +401,7 @@ class ApplicationTest extends TestCase
      * @throws DefinitionException
      * @throws \Throwable
      */
-    public function testRunUnknwonAction()
+    public function testRunUnknownAction()
     {
         $this->expectException(DefinitionException::class);
         $this->expectExceptionCode(ErrorCode::UNKNOWN_ACTION);
@@ -399,7 +414,9 @@ class ApplicationTest extends TestCase
         $error = (new Error())->setCode(ErrorCode::UNKNOWN_ACTION)->setMessage("Unknown action (bar)")->setData(Error::createDataFromException($ex));
         $responsePacket = (new ResponsePacket())->setJtlrpc("2.0")->setId($id)->setError($error);
         $this->expectOutputString(json_encode($responsePacket->toArray($serializer)));
-        $this->createApplication()->run();
+
+        $this->createApplication()
+            ->run($this->createConnector());
     }
 
     public function testHandleImagePushWithFilesSentByWawi()
@@ -412,14 +429,18 @@ class ApplicationTest extends TestCase
         $uploadedFilePath = sprintf('%s/fixtures/images_push.zip', TEST_DIR);
         $file = new UploadedFile($uploadedFilePath, 'images.zip', 'application/octet-stream', UPLOAD_ERR_OK, true);
         $filebag = new FileBag(['file' => $file]);
+
         $request = $this->getMockBuilder(HttpRequest::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         $request->files = $filebag;
 
-        $app = $this->createApplication()->setRequest($request);
+        $app = $this->createApplication()
+            ->setHttpRequest($request);
+
         $this->invokeMethodFromObject($app, 'handleImagePush', ...$images);
+
         foreach ($images as $image) {
             $this->assertFileExists($image->getFilename());
             $expectedFilename = sprintf('%d_%s.jpg', $image->getId()->getHost(), Str::toPascalCase($image->getRelationType()));
@@ -457,30 +478,23 @@ class ApplicationTest extends TestCase
             ->getMock();
 
         $request->files = $filebag;
-        $app = $this->createApplication()->setRequest($request);
+        $app = $this->createApplication()->setHttpRequest($request);
         $this->invokeMethodFromObject($app, 'handleImagePush', ...$images);
     }
 
     /**
-     * @param ConnectorInterface|null $connector
-     * @param ConfigInterface|null $config
      * @param ConfigSchema|null $configSchema
      * @param string|null $connectorDir
+     * @param ConfigInterface|null $config
      * @return Application
      * @throws ApplicationException
+     * @throws ConfigException
+     * @throws LoggerException
+     * @throws \ReflectionException
      */
-    protected function createApplication(
-        ConfigSchema $configSchema = null,
-        ConnectorInterface $connector = null,
-        string $connectorDir = null,
-        ConfigInterface $config = null
-    ): Application {
+    protected function createApplication(ConfigSchema $configSchema = null, string $connectorDir = null, ConfigInterface $config = null): Application {
         if (is_null($configSchema)) {
             $configSchema = new ConfigSchema();
-        }
-
-        if (is_null($connector)) {
-            $connector = $this->createConnector();
         }
 
         if (is_null($config)) {
@@ -491,24 +505,20 @@ class ApplicationTest extends TestCase
             $connectorDir = $this->connectorDir;
         }
 
-        return new Application($connector, $connectorDir, $config, $configSchema);
+        return new Application($connectorDir, $config, $configSchema);
     }
 
     /**
-     * @param ConnectorInterface|null $connector
-     * @param ConfigInterface|null $config
      * @param ConfigSchema|null $configSchema
      * @param string|null $connectorDir
+     * @param ConfigInterface|null $config
      * @return Application
      * @throws ApplicationException
      * @throws ConfigException
+     * @throws LoggerException
+     * @throws \ReflectionException
      */
-    protected function createInitializedApplication(
-        ConfigSchema $configSchema = null,
-        ConnectorInterface $connector = null,
-        string $connectorDir = null,
-        ConfigInterface $config = null
-    ) {
+    protected function createInitializedApplication(ConfigSchema $configSchema = null, string $connectorDir = null, ConfigInterface $config = null) {
         $sessionHandler = $this->createMock(SessionHandlerInterface::class);
         if (is_null($configSchema)) {
             $configSchema = (new ConfigSchema())->setParameters(...ConfigSchema::createDefaultParameters($this->connectorDir));
@@ -518,11 +528,12 @@ class ApplicationTest extends TestCase
             $config = new ArrayConfig($configSchema->getDefaultValues());
         }
 
-        $app = $this->createApplication($configSchema, $connector, $connectorDir, $config);
+        $app = $this->createApplication($configSchema, $connectorDir, $config);
         $app->setSessionHandler($sessionHandler);
         $app->getContainer()->set(PrimaryKeyMapperInterface::class, $this->createMock(PrimaryKeyMapperInterface::class));
         $app->getContainer()->set(SessionHandlerInterface::class, $sessionHandler);
         $app->getContainer()->set(TokenValidatorInterface::class, $this->createMock(TokenValidatorInterface::class));
+
         return $app;
     }
 

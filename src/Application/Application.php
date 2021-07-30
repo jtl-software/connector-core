@@ -102,11 +102,6 @@ class Application
     protected $configSchema;
 
     /**
-     * @var ConnectorInterface
-     */
-    protected $connector;
-
-    /**
      * @var string
      */
     protected $connectorDir;
@@ -144,12 +139,12 @@ class Application
     /**
      * @var HttpRequest
      */
-    protected $request;
+    protected $httpRequest;
 
     /**
      * @var HttpResponse
      */
-    protected $response;
+    protected $httpResponse;
 
     /**
      * @var SessionHandlerInterface
@@ -191,7 +186,6 @@ class Application
 
     /**
      * Application constructor.
-     * @param ConnectorInterface $connector
      * @param string $connectorDir
      * @param ConfigInterface|null $config
      * @param ConfigSchema|null $configSchema
@@ -200,7 +194,7 @@ class Application
      * @throws LoggerException
      * @throws \ReflectionException
      */
-    public function __construct(ConnectorInterface $connector, string $connectorDir, ConfigInterface $config = null, ConfigSchema $configSchema = null)
+    public function __construct(string $connectorDir, ConfigInterface $config = null, ConfigSchema $configSchema = null)
     {
         if (!is_dir($connectorDir)) {
             throw ApplicationException::connectorDirNotExists($connectorDir);
@@ -222,7 +216,6 @@ class Application
             $serializerCacheDir = $config->get(ConfigSchema::CACHE_DIR);
         }
 
-        $this->connector = $connector;
         $this->connectorDir = $connectorDir;
         $this->config = $config;
         $this->configSchema = $configSchema;
@@ -236,10 +229,10 @@ class Application
         $this->loggerService = (new LoggerService($this->config->get(ConfigSchema::LOG_DIR), $this->config->get(ConfigSchema::LOG_LEVEL)))
             ->setFormat($this->config->get(ConfigSchema::LOG_FORMAT));
         $this->container->set(LoggerService::class, $this->loggerService);
-        $this->request = HttpRequest::createFromGlobals();
+        $this->httpRequest = HttpRequest::createFromGlobals();
         $this->serializer = SerializerBuilder::create($serializerCacheDir)->build();
-        $this->response = new HttpResponse($this->eventDispatcher, $this->serializer);
-        $this->errorHandler = new ErrorHandler($this->response);
+        $this->httpResponse = new HttpResponse($this->eventDispatcher, $this->serializer);
+        $this->errorHandler = new ErrorHandler($this->httpResponse);
     }
 
     /**
@@ -264,12 +257,12 @@ class Application
      * @throws DefinitionException
      * @throws \Throwable
      */
-    public function run(): void
+    public function run(ConnectorInterface $connector): void
     {
-        $jtlrpc = $this->request->get('jtlrpc', '');
+        $jtlrpc = $this->httpRequest->get('jtlrpc', '');
 
         $this->container->set(LoggerInterface::class, $this->loggerService->get(LoggerService::CHANNEL_GLOBAL));
-        $this->response->setLogger($this->loggerService->get(LoggerService::CHANNEL_RPC));
+        $this->httpResponse->setLogger($this->loggerService->get(LoggerService::CHANNEL_RPC));
         $this->eventDispatcher->addSubscriber(new RequestParamsTransformSubscriber());
         $this->eventDispatcher->addSubscriber(new FeaturesSubscriber());
         $this->errorHandler->register();
@@ -292,8 +285,8 @@ class Application
             }
 
             $this->startSession($requestPacket->getMethod());
-            $this->connector->initialize($this->config, $this->container, $this->eventDispatcher);
-            $this->prepareContainer($this, $this->container);
+            $connector->initialize($this->config, $this->container, $this->eventDispatcher);
+            $this->prepareContainer($connector);
             $this->loadPlugins($this->config, $this->container, $this->eventDispatcher, $this->config->get(ConfigSchema::PLUGINS_DIR));
             $this->configSchema->validateConfig($this->config);
 
@@ -310,7 +303,7 @@ class Application
             $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::BEFORE));
             $requestPacket->setParams($event->getData());
 
-            $responsePacket = $this->execute($requestPacket, $method);
+            $responsePacket = $this->execute($connector, $requestPacket, $method);
             session_write_close();
         } catch (\Throwable $ex) {
             $error = (new Error())
@@ -326,22 +319,12 @@ class Application
             throw $ex;
         } finally {
             $this->fileSystem->remove($this->deleteFromFileSystem);
-            $this->response->prepareAndSend($requestPacket, $responsePacket);
+            $this->httpResponse->prepareAndSend($requestPacket, $responsePacket);
 
             if (mt_rand(0, 99) === 0) {
                 $this->getSessionHandler()->gc((int)ini_get('session.gc_maxlifetime'));
             }
         }
-    }
-
-    /**
-     * Connector getter
-     *
-     * @return ConnectorInterface
-     */
-    public function getConnector(): ConnectorInterface
-    {
-        return $this->connector;
     }
 
     /**
@@ -396,12 +379,12 @@ class Application
     }
 
     /**
-     * @param HttpRequest $request
+     * @param HttpRequest $httpRequest
      * @return Application
      */
-    public function setRequest(HttpRequest $request): self
+    public function setHttpRequest(HttpRequest $httpRequest): self
     {
-        $this->request = $request;
+        $this->httpRequest = $httpRequest;
         return $this;
     }
 
@@ -562,22 +545,25 @@ class Application
     }
 
     /**
+     * @param ConnectorInterface $connector
      * @param RequestPacket $requestPacket
      * @param Method $method
      * @return ResponsePacket
      * @throws ApplicationException
      * @throws CompressionException
      * @throws DefinitionException
-     * @throws HttpException
+     * @throws DependencyException
+     * @throws FileNotFoundException
+     * @throws NotFoundException
      * @throws RpcException
      * @throws \ReflectionException
      * @throws \Throwable
      */
-    protected function execute(RequestPacket $requestPacket, Method $method): ResponsePacket
+    protected function execute(ConnectorInterface $connector, RequestPacket $requestPacket, Method $method): ResponsePacket
     {
         $modelNamespace = Model::MODEL_NAMESPACE;
-        if ($this->connector instanceof ModelInterface) {
-            $modelNamespace = $this->connector->getModelNamespace();
+        if ($connector instanceof ModelInterface) {
+            $modelNamespace = $connector->getModelNamespace();
         }
 
         $request = $this->createHandleRequest($requestPacket, $method, $modelNamespace);
@@ -590,10 +576,10 @@ class Application
             Event::createHandleEventName($request->getController(), $request->getAction(), Event::BEFORE)
         );
 
-        if (!$method->isCore() && $this->connector instanceof HandleRequestInterface) {
-            $response = $this->connector->handle($this, $request);
+        if (!$method->isCore() && $connector instanceof HandleRequestInterface) {
+            $response = $connector->handle($this, $request);
         } else {
-            $response = $this->handleRequest($request);
+            $response = $this->handleRequest($connector, $request);
         }
 
         $this->eventDispatcher->dispatch(
@@ -611,7 +597,7 @@ class Application
         // Identity mapping
         $resultData = is_array($response->getResult()) ? $response->getResult() : [$response->getResult()];
         foreach ($resultData as $result) {
-            if ($this->connector instanceof HandleRequestInterface ||
+            if ($connector instanceof HandleRequestInterface ||
                 in_array($request->getAction(), [Action::PUSH, Action::DELETE], true) === false) {
                 if ($result instanceof AbstractDataModel) {
                     $this->container->get(IdentityLinker::class)->linkModel($result, ($request->getAction() === Action::DELETE));
@@ -695,9 +681,9 @@ class Application
         $tempDir = $this->deleteFromFileSystem[] = sprintf('%s/%s', $this->config->get(ConfigSchema::CACHE_DIR), uniqid('images-'));
         $this->fileSystem->mkdir($tempDir);
 
-        if ($this->request->files->has('file')) {
+        if ($this->httpRequest->files->has('file')) {
             /** @var UploadedFile $zipFile */
-            $zipFile = $this->request->files->get('file');
+            $zipFile = $this->httpRequest->files->get('file');
             $archive = new Zip();
             if ($archive->extract($zipFile->getRealPath(), $tempDir)) {
                 $finder = (new Finder())->files()->ignoreDotFiles(true)->in($tempDir);
@@ -723,7 +709,7 @@ class Application
                 }
                 $image->setFilename($imagePath);
             } else {
-                if (!$this->request->files->has('file')) {
+                if (!$this->httpRequest->files->has('file')) {
                     throw ApplicationException::uploadedFileNotFound();
                 }
 
@@ -756,6 +742,7 @@ class Application
     }
 
     /**
+     * @param ConnectorInterface $connector
      * @param Request $request
      * @return Response
      * @throws ApplicationException
@@ -764,14 +751,14 @@ class Application
      * @throws \ReflectionException
      * @throws \Throwable
      */
-    public function handleRequest(Request $request): Response
+    public function handleRequest(ConnectorInterface $connector, Request $request): Response
     {
-        $controller = $request->getController();
+        $controllerName = $request->getController();
         $action = $request->getAction();
         $params = $request->getParams();
 
         if (Action::isCoreAction($action)) {
-            $this->container->set($controller, function (ContainerInterface $container) {
+            $this->container->set($controllerName, function (ContainerInterface $container) {
                 $controller = new ConnectorController(
                     $this->config->get(ConfigSchema::FEATURES_PATH),
                     $container->get(ChecksumLinker::class),
@@ -779,18 +766,20 @@ class Application
                     $container->get(SessionHandlerInterface::class),
                     $container->get(TokenValidatorInterface::class)
                 );
+
                 $controller->setLogger($this->loggerService->get(LoggerService::CHANNEL_GLOBAL));
+
                 return $controller;
             });
-        } elseif (!$this->container->has($controller)) {
-            $controllerClass = sprintf("%s\\%sController", $this->connector->getControllerNamespace(), $controller);
+        } elseif (!$this->container->has($controllerName)) {
+            $controllerClass = sprintf("%s\\%sController", $connector->getControllerNamespace(), $controllerName);
             if (!class_exists($controllerClass)) {
                 throw new ApplicationException(sprintf('Controller class %s does not exist!', $controllerClass));
             }
-            $this->container->set($controller, $this->container->get($controllerClass));
+            $this->container->set($controllerName, $this->container->get($controllerClass));
         }
 
-        $controllerObject = $this->container->get($controller);
+        $controller = $this->container->get($controllerName);
 
         $result = [];
         switch ($action) {
@@ -799,43 +788,43 @@ class Application
                 try {
                     $model = null;
                     foreach ($params as $model) {
-                        if ($controllerObject instanceof TransactionalInterface) {
-                            $controllerObject->beginTransaction();
+                        if ($controller instanceof TransactionalInterface) {
+                            $controller->beginTransaction();
                         }
 
-                        $dataModel = $controllerObject->$action($model);
+                        $dataModel = $controller->$action($model);
                         if ($dataModel instanceof AbstractDataModel) {
                             $this->container->get(IdentityLinker::class)->linkModel($dataModel, ($request->getAction() === Action::DELETE));
                             $this->container->get(ChecksumLinker::class)->link($dataModel);
                         }
                         $result[] = $dataModel;
 
-                        if ($controllerObject instanceof TransactionalInterface) {
-                            $controllerObject->commit();
+                        if ($controller instanceof TransactionalInterface) {
+                            $controller->commit();
                         }
                     }
                 } catch (\Throwable $ex) {
-                    if ($controllerObject instanceof TransactionalInterface) {
-                        $controllerObject->rollback();
+                    if ($controller instanceof TransactionalInterface) {
+                        $controller->rollback();
                     }
 
-                    $this->extendExceptionMessageWithIdentifiers($ex, $model, $controller, $action);
+                    $this->extendExceptionMessageWithIdentifiers($ex, $model, $controllerName, $action);
 
                     throw $ex;
                 }
                 break;
             case Action::IDENTIFY:
-                $result = $controllerObject->$action($this->getConnector());
+                $result = $controller->$action($connector);
                 break;
             default:
                 $param = count($params) > 0 ? reset($params) : null;
-                $result = $controllerObject->$action($param);
+                $result = $controller->$action($param);
                 break;
         }
 
-        if ($action === Action::STATISTIC && $controllerObject instanceof StatisticInterface) {
+        if ($action === Action::STATISTIC && $controller instanceof StatisticInterface) {
             $result = (new Statistic())
-                ->setControllerName($controller)
+                ->setControllerName($controllerName)
                 ->setAvailable($result);
         }
 
@@ -897,32 +886,32 @@ class Application
     }
 
     /**
-     * @param Application $application
-     * @param Container $container
-     * @throws ApplicationException
+     * @param ConnectorInterface $connector
+     * @throws SessionException
      */
-    protected function prepareContainer(Application $application, Container $container): void
+    protected function prepareContainer(ConnectorInterface $connector): void
     {
-        $connector = $application->getConnector();
-        $container->set(ConfigInterface::class, $application->getConfig());
-        $container->set(SessionHandlerInterface::class, $application->getSessionHandler());
-        $container->set(TokenValidatorInterface::class, $connector->getTokenValidator());
-        $container->set(PrimaryKeyMapperInterface::class, $connector->getPrimaryKeyMapper());
+        $this->container->set(ConfigInterface::class, $this->getConfig());
+        $this->container->set(SessionHandlerInterface::class, $this->getSessionHandler());
+        $this->container->set(TokenValidatorInterface::class, $connector->getTokenValidator());
+        $this->container->set(PrimaryKeyMapperInterface::class, $connector->getPrimaryKeyMapper());
 
         if ($connector instanceof UseChecksumInterface) {
-            $container->set(ChecksumLoaderInterface::class, $connector->getChecksumLoader());
+            $this->container->set(ChecksumLoaderInterface::class, $connector->getChecksumLoader());
         }
 
-        $container->set(ChecksumLinker::class, function (ContainerInterface $container) {
+        $this->container->set(ChecksumLinker::class, function (ContainerInterface $container) {
             $loader = $container->has(ChecksumLoaderInterface::class) ? $container->get(ChecksumLoaderInterface::class) : null;
             $linker = new ChecksumLinker($loader);
             $linker->setLogger($this->loggerService->get(LoggerService::CHANNEL_CHECKSUM));
+
             return $linker;
         });
 
-        $container->set(IdentityLinker::class, function (ContainerInterface $container) {
+        $this->container->set(IdentityLinker::class, function (ContainerInterface $container) {
             $linker = new IdentityLinker($container->get(PrimaryKeyMapperInterface::class));
             $linker->setLogger($this->loggerService->get(LoggerService::CHANNEL_LINKER));
+            
             return $linker;
         });
     }
@@ -935,7 +924,7 @@ class Application
      */
     protected function startSession(string $rpcMethod): void
     {
-        $sessionId = $this->request->get('jtlauth');
+        $sessionId = $this->httpRequest->get('jtlauth');
         $sessionName = 'JtlConnector';
 
         if ($sessionId === null && $rpcMethod !== RpcMethod::AUTH) {
