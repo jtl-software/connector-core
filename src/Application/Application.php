@@ -114,6 +114,8 @@ class Application extends CoreApplication
         'image/svg+xml' => 'svg',
         'image/png' => 'png',
         'image/x-png' => 'png',
+        'image/tiff' => 'tif',
+        'image/x-tiff' => 'tif',
     ];
 
     protected function __construct()
