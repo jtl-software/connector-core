@@ -19,7 +19,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class Manufacturer extends AbstractIdentity
 {
-    use IdentificationStringsTrait;
 
     /**
      * @var string Manufacturer (brand) name

@@ -19,7 +19,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class DeliveryNote extends AbstractIdentity
 {
-    use IdentificationStringsTrait;
 
     /**
      * @var Identity Reference to customerOrder

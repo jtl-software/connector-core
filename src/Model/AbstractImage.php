@@ -27,7 +27,6 @@ use Jtl\Connector\Core\Exception\DefinitionException;
  */
 abstract class AbstractImage extends AbstractIdentity
 {
-    use IdentificationStringsTrait;
 
     /**
      * @var string

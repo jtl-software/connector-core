@@ -19,7 +19,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class Customer extends AbstractI18n implements IdentityInterface
 {
-    use IdentificationStringsTrait;
 
     /**
      * @var Identity References a customer group

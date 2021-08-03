@@ -19,7 +19,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class Specific extends AbstractIdentity
 {
-    use IdentificationStringsTrait;
 
     public const
         TYPE_TEXT = 'TEXT',

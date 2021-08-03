@@ -47,7 +47,6 @@ use Jtl\Connector\Core\Exception\LoggerException;
 use Jtl\Connector\Core\Logger\LoggerService;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Jtl\Connector\Core\Model\AbstractImage;
-use Jtl\Connector\Core\Model\IdentificationStringsTrait;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
 use Jtl\Connector\Core\Model\Identities;
@@ -670,7 +669,7 @@ class Application
             $messages[] = sprintf('JTL-Wawi PK = %d', $model->getId()->getHost());
         }
 
-        if (in_array(IdentificationStringsTrait::class, class_uses($model))) {
+        if ($model->hasIdentificationStrings()) {
             $messages = array_merge($messages, $model->getIdentificationStrings($this->config->get(ConfigSchema::MAIN_LANGUAGE, 'de')));
         }
 

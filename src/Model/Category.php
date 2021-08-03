@@ -19,7 +19,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class Category extends AbstractIdentity
 {
-    use IdentificationStringsTrait;
 
     /**
      * @var Identity Optional reference to parent category id

@@ -19,7 +19,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class Product extends AbstractIdentity
 {
-    use IdentificationStringsTrait;
 
     /**
      * @var Identity Optional reference to basePriceUnit

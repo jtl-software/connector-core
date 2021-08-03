@@ -19,7 +19,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class CustomerGroup extends AbstractIdentity
 {
-    use IdentificationStringsTrait;
 
     /**
      * @var boolean Optional: Show net prices default instead of gross prices

@@ -17,7 +17,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class StatusChange extends AbstractDataModel
 {
-    use IdentificationStringsTrait;
 
     /**
      * @var Identity
