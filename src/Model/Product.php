@@ -17,8 +17,10 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Product extends AbstractIdentity implements IdentificationInterface
+class Product extends AbstractIdentity
 {
+    use IdentificationStringsTrait;
+
     /**
      * @var Identity Optional reference to basePriceUnit
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
@@ -720,25 +722,18 @@ class Product extends AbstractIdentity implements IdentificationInterface
      */
     public function getIdentificationStrings(string $mainLanguageIso): array
     {
-        $strings = [];
-
         if (!empty($this->sku)) {
-            $strings[] = sprintf('SKU = %s', $this->sku);
+            $this->identificationStrings[] = sprintf('SKU = %s', $this->sku);
         }
 
-        $name = '';
         foreach ($this->getI18ns() as $i18n) {
-            $name = $i18n->getName();
             if ($mainLanguageIso === $i18n->getLanguageIso()) {
+                $this->identificationStrings[] = sprintf('Name = %s', $i18n->getName());
                 break;
             }
         }
 
-        if ($name !== '') {
-            $strings[] = sprintf('Name = %s', $name);
-        }
-
-        return $strings;
+        return $this->identificationStrings;
     }
 
     /**

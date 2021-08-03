@@ -29,6 +29,7 @@ class ModelTest extends TestCase
             'FeatureEntity',
             'FeatureFlag',
             'AbstractOrderAddress',
+            'IdentificationStringsTrait',
         ];
 
         $serializer = SerializerBuilder::create()->build();

@@ -17,8 +17,10 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Category extends AbstractIdentity implements IdentificationInterface
+class Category extends AbstractIdentity
 {
+    use IdentificationStringsTrait;
+
     /**
      * @var Identity Optional reference to parent category id
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
@@ -100,24 +102,18 @@ class Category extends AbstractIdentity implements IdentificationInterface
      */
     public function getIdentificationStrings(string $mainLanguageIso): array
     {
-        $strings = [];
         if ($this->getParentCategoryId()->getHost() > 0) {
-            $strings[] = sprintf('Parent Wawi PK = %s', $this->getParentCategoryId()->getHost());
+            $this->identificationStrings[] = sprintf('Parent Wawi PK = %s', $this->getParentCategoryId()->getHost());
         }
 
-        $name = '';
         foreach ($this->getI18ns() as $i18n) {
-            $name = $i18n->getName();
             if ($mainLanguageIso === $i18n->getLanguageIso()) {
+                $this->identificationStrings[] = sprintf('Name = %s', $i18n->getName());
                 break;
             }
         }
 
-        if ($name !== '') {
-            $strings[] = sprintf('Name = %s', $name);
-        }
-
-        return $strings;
+        return $this->identificationStrings;
     }
 
     /**

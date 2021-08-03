@@ -17,8 +17,10 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Specific extends AbstractIdentity implements IdentificationInterface
+class Specific extends AbstractIdentity
 {
+    use IdentificationStringsTrait;
+
     public const
         TYPE_TEXT = 'TEXT',
         TYPE_SELECT = 'SELECTBOX',
@@ -71,21 +73,14 @@ class Specific extends AbstractIdentity implements IdentificationInterface
      */
     public function getIdentificationStrings(string $mainLanguageIso): array
     {
-        $strings = [];
-
-        $name = '';
         foreach ($this->getI18ns() as $i18n) {
-            $name = $i18n->getName();
             if ($mainLanguageIso === $i18n->getLanguageIso()) {
+                $this->identificationStrings[] = sprintf('Name = %s', $i18n->getName());
                 break;
             }
         }
 
-        if ($name !== '') {
-            $strings[] = sprintf('Name = %s', $name);
-        }
-
-        return $strings;
+        return $this->identificationStrings;
     }
 
     /**
