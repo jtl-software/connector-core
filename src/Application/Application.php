@@ -212,7 +212,7 @@ class Application
         $this->prepareConfig($connectorDir, $config, $configSchema);
 
         $serializerCacheDir = null;
-        if ($config->get(ConfigSchema::DEBUG, false) === false && $config->get(ConfigSchema::ENABLE_SERIALIZER_CACHE, true) === true) {
+        if ($config->get(ConfigSchema::DEBUG, false) === false && $config->get(ConfigSchema::SERIALIZER_ENABLE_CACHE, true) === true) {
             $serializerCacheDir = $config->get(ConfigSchema::CACHE_DIR);
         }
 
@@ -223,6 +223,7 @@ class Application
             ->useAnnotations(true)
             ->useAutowiring(true)
             ->build();
+
         $this->container->set(Application::class, $this);
         $this->eventDispatcher = new EventDispatcher();
         $this->fileSystem = new Filesystem();
