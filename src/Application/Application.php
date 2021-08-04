@@ -69,7 +69,7 @@ use Jtl\Connector\Core\Subscriber\RequestParamsTransformSubscriber;
 use Jtl\Connector\Core\Definition\RpcMethod;
 use Jtl\Connector\Core\Rpc\Method;
 use Jtl\Connector\Core\Linker\IdentityLinker;
-use Jtl\Connector\Core\Model\AbstractDataModel;
+use Jtl\Connector\Core\Model\AbstractModel;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Session\SqliteSessionHandler;
@@ -613,7 +613,7 @@ class Application
         foreach ($resultData as $result) {
             if ($this->connector instanceof HandleRequestInterface ||
                 in_array($request->getAction(), [Action::PUSH, Action::DELETE], true) === false) {
-                if ($result instanceof AbstractDataModel) {
+                if ($result instanceof AbstractModel) {
                     $this->container->get(IdentityLinker::class)->linkModel($result, ($request->getAction() === Action::DELETE));
                     $this->container->get(ChecksumLinker::class)->link($result);
                 }
@@ -804,7 +804,7 @@ class Application
                         }
 
                         $dataModel = $controllerObject->$action($model);
-                        if ($dataModel instanceof AbstractDataModel) {
+                        if ($dataModel instanceof AbstractModel) {
                             $this->container->get(IdentityLinker::class)->linkModel($dataModel, ($request->getAction() === Action::DELETE));
                             $this->container->get(ChecksumLinker::class)->link($dataModel);
                         }

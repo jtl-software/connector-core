@@ -17,7 +17,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ProductMediaFileAttr extends AbstractDataModel
+class ProductMediaFileAttr extends AbstractModel
 {
     /**
      * @var ProductMediaFileAttrI18n[]

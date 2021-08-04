@@ -6,7 +6,7 @@ use Jtl\Connector\Core\Controller\PullInterface;
 use Jtl\Connector\Core\Controller\PushInterface;
 use Jtl\Connector\Core\Controller\StatisticInterface;
 use Jtl\Connector\Core\Controller\TransactionalInterface;
-use Jtl\Connector\Core\Model\AbstractDataModel;
+use Jtl\Connector\Core\Model\AbstractModel;
 use Jtl\Connector\Core\Model\QueryFilter;
 
 /**
@@ -39,10 +39,10 @@ class TransactionalControllerStub implements DeleteInterface, StatisticInterface
     }
 
     /**
-     * @param AbstractDataModel $model
-     * @return AbstractDataModel
+     * @param AbstractModel $model
+     * @return AbstractModel
      */
-    public function delete(AbstractDataModel $model): AbstractDataModel
+    public function delete(AbstractModel $model): AbstractModel
     {
         return $model;
     }
@@ -57,10 +57,10 @@ class TransactionalControllerStub implements DeleteInterface, StatisticInterface
     }
 
     /**
-     * @param AbstractDataModel $model
-     * @return AbstractDataModel
+     * @param AbstractModel $model
+     * @return AbstractModel
      */
-    public function push(AbstractDataModel $model): AbstractDataModel
+    public function push(AbstractModel $model): AbstractModel
     {
         return $model;
     }

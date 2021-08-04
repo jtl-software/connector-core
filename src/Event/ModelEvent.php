@@ -1,7 +1,7 @@
 <?php
 namespace Jtl\Connector\Core\Event;
 
-use Jtl\Connector\Core\Model\AbstractDataModel;
+use Jtl\Connector\Core\Model\AbstractModel;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
@@ -11,23 +11,23 @@ use Symfony\Contracts\EventDispatcher\Event;
 class ModelEvent extends Event
 {
     /**
-     * @var AbstractDataModel
+     * @var AbstractModel
      */
     protected $model;
 
     /**
      * ModelAfterActionEvent constructor.
-     * @param AbstractDataModel $model
+     * @param AbstractModel $model
      */
-    public function __construct(AbstractDataModel $model)
+    public function __construct(AbstractModel $model)
     {
         $this->model = $model;
     }
 
     /**
-     * @return AbstractDataModel
+     * @return AbstractModel
      */
-    public function getModel(): AbstractDataModel
+    public function getModel(): AbstractModel
     {
         return $this->model;
     }

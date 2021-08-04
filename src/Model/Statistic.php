@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @package Jtl\Connector\Core\Model
  * @subpackage Internal
  */
-class Statistic extends AbstractDataModel
+class Statistic extends AbstractModel
 {
     /**
      * @var int

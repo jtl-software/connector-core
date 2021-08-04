@@ -1,7 +1,7 @@
 <?php
 namespace Jtl\Connector\Core\Test\Serializer\Subscriber;
 
-use Jtl\Connector\Core\Model\AbstractDataModel;
+use Jtl\Connector\Core\Model\AbstractModel;
 use Jtl\Connector\Core\Model\Category;
 use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Model\Product;
@@ -32,13 +32,13 @@ class ProductAttributeSubscriberTest extends TestCase
     }
 
     /**
-     * @param AbstractDataModel $translatableModel
+     * @param AbstractModel $translatableModel
      * @param bool $setId
      * @return TranslatableAttribute
      * @throws \Exception
      */
     protected function addTranslatableAttribute(
-        AbstractDataModel $translatableModel,
+        AbstractModel $translatableModel,
         $setId = true
     ): TranslatableAttribute {
         $attributeId = new Identity($this->createEndpointId(), $this->createHostId());

@@ -15,7 +15,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ProductFileDownload extends AbstractDataModel
+class ProductFileDownload extends AbstractModel
 {
     /**
      * @var \DateTimeInterface

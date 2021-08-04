@@ -16,7 +16,7 @@ use Jtl\Connector\Core\Checksum\ChecksumInterface;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Checksum extends AbstractDataModel implements ChecksumInterface
+class Checksum extends AbstractModel implements ChecksumInterface
 {
     /**
      * @var int - Checksum used to check variations for change

@@ -1,12 +1,12 @@
 <?php
 /**
- * @copyright JTL-Software GmbH
+ * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
+ * @subpackage Internal
  */
+
 namespace Jtl\Connector\Core\Model;
 
-use JMS\Serializer\SerializationContext;
-use stdClass;
 
 /**
  * Core Model Class
@@ -16,13 +16,5 @@ use stdClass;
  */
 abstract class AbstractModel
 {
-    /**
-     * Get the Model Properties
-     *
-     * @return array : string
-     */
-    public function getProperties(): array
-    {
-        return array_keys(get_object_vars($this));
-    }
+
 }

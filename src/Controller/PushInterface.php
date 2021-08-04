@@ -6,15 +6,15 @@
 
 namespace Jtl\Connector\Core\Controller;
 
-use Jtl\Connector\Core\Model\AbstractDataModel;
+use Jtl\Connector\Core\Model\AbstractModel;
 
 interface PushInterface
 {
     /**
      * Insert or update
      *
-     * @param AbstractDataModel $model
-     * @return AbstractDataModel
+     * @param AbstractModel $model
+     * @return AbstractModel
      */
-    public function push(AbstractDataModel $model) : AbstractDataModel;
+    public function push(AbstractModel $model) : AbstractModel;
 }

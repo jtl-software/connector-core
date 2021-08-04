@@ -3,7 +3,7 @@ namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
 
-abstract class AbstractIdentity extends AbstractDataModel implements IdentityInterface
+abstract class AbstractIdentity extends AbstractModel implements IdentityInterface
 {
     /**
      * @var Identity Unique id

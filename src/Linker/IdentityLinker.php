@@ -6,10 +6,12 @@
 
 namespace Jtl\Connector\Core\Linker;
 
+use Doctrine\Common\Annotations\AnnotationReader;
+use JMS\Serializer\Annotation\Exclude;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
-use Jtl\Connector\Core\Model\AbstractDataModel;
+use Jtl\Connector\Core\Model\AbstractModel;
 use Jtl\Connector\Core\Exception\LinkerException;
 use Jtl\Connector\Core\Model\Identity;
 use Psr\Log\LoggerAwareInterface;
@@ -40,6 +42,11 @@ class IdentityLinker implements LoggerAwareInterface
     protected $mapper;
 
     /**
+     * @var AnnotationReader
+     */
+    protected $annotationReader;
+
+    /**
      * @var bool
      */
     protected $useCache = true;
@@ -56,6 +63,7 @@ class IdentityLinker implements LoggerAwareInterface
     public function __construct(PrimaryKeyMapperInterface $mapper)
     {
         $this->logger = new NullLogger();
+        $this->annotationReader = new AnnotationReader();
         $this->mapper = $mapper;
     }
 
@@ -72,49 +80,47 @@ class IdentityLinker implements LoggerAwareInterface
     }
 
     /**
-     * @param AbstractDataModel $model
+     * @param AbstractModel $model
      * @param boolean $isDeleted
      * @throws DefinitionException
      * @throws LinkerException
      * @throws \ReflectionException
      */
-    public function linkModel(AbstractDataModel $model, $isDeleted = false): void
+    public function linkModel(AbstractModel $model, $isDeleted = false): void
     {
         $reflect = new \ReflectionClass($model);
         $modelName = $reflect->getShortName();
 
-        foreach ($model->getModelType()->getProperties() as $propertyInfo) {
+        foreach ($reflect->getProperties(\ReflectionProperty::IS_PROTECTED) as $propertyInfo) {
             $propertyName = $propertyInfo->getName();
-            $getter = sprintf('get%s', ucfirst($propertyName));
+            if ($this->isPropertyExcluded($propertyInfo) === false) {
+                $getter = sprintf('get%s', ucfirst($propertyName));
 
-            if ($propertyInfo->isNavigation() && $model->{$getter}() !== null) {
-                if (is_array($model->{$getter}())) {
-                    $list = $model->{$getter}();
-                    foreach ($list as &$entity) {
-                        if ($entity instanceof AbstractDataModel) {
+                $value = $model->{$getter}();
+                if (gettype($value) === 'array') {
+                    foreach ($value as $entity) {
+                        if ($entity instanceof AbstractModel) {
                             $this->linkModel($entity, $isDeleted);
                         } elseif ($entity instanceof Identity && Model::isIdentityProperty($modelName, $propertyName)) {
                             $this->linkIdentity($entity, $modelName, $propertyName, $isDeleted);
                         } else {
-                            $this->logger->warning('Property ({property}) from model ({model}) is not an instance of DataModel or Identity', ['property' => $propertyName, 'model' => $modelName]);
+                            $this->logger->warning('Property ({property}) from model ({model}) is not an instance of AbstractModel or Identity', ['property' => $propertyName, 'model' => $modelName]);
                         }
                     }
-                } elseif ($model->{$getter}() instanceof AbstractDataModel) {
-                    $entity = $model->{$getter}();
-                    $this->linkModel($entity, $isDeleted);
-                } else {
-                    $this->logger->warning('Property ({property}) from model ({model}) is not an array or an instance of DataModel', ['property' => $propertyName, 'model' => $modelName]);
+                } elseif ($value instanceof Identity && Model::isIdentityProperty($modelName, $propertyName)) {
+                    $this->linkIdentity($value, $modelName, $propertyName, $isDeleted);
                 }
-            } elseif ($propertyInfo->isIdentity() && Model::isIdentityProperty($modelName, $propertyName)) {
-                $identity = $model->{$getter}();
-
-                if (!($identity instanceof Identity)) {
-                    continue;
-                }
-
-                $this->linkIdentity($identity, $modelName, $propertyName, $isDeleted);
             }
         }
+    }
+
+    /**
+     * @param \ReflectionProperty $reflectionProperty
+     * @return bool
+     */
+    protected function isPropertyExcluded(\ReflectionProperty $reflectionProperty): bool
+    {
+        return $this->annotationReader->getPropertyAnnotation($reflectionProperty, Exclude::class) !== null;
     }
 
     /**
@@ -135,8 +141,7 @@ class IdentityLinker implements LoggerAwareInterface
         if (strlen($endpoint) > 0 && $host > 0) {
             if ($isDeleted) {
                 $this->delete($modelName, $endpoint, $host);
-            } elseif (!$this->propertyHostIdExists($modelName, $propertyName, $host)
-                || $this->loadCache($host, $identityType, self::CACHE_TYPE_HOST) !== $endpoint) {
+            } elseif (!$this->propertyHostIdExists($modelName, $propertyName, $host) || $this->loadCache($host, $identityType, self::CACHE_TYPE_HOST) !== $endpoint) {
                 $this->save($endpoint, $host, $modelName, $propertyName);
             }
         } else {

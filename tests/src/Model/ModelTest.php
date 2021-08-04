@@ -18,7 +18,7 @@ class ModelTest extends TestCase
         $models = glob($modelsPattern);
 
         $ignoreModels = [
-            'AbstractDataModel',
+            'AbstractModel',
             'AbstractI18n',
             'AbstractIdentity',
             'AbstractImage',

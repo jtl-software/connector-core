@@ -17,7 +17,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @access public
  * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
-class Error extends AbstractModel
+class Error
 {
     /**
      * A Number that indicates the error type that occurred.
