@@ -228,9 +228,12 @@ class Application
         $this->fileSystem = new Filesystem();
         $this->loggerService = (new LoggerService($this->config->get(ConfigSchema::LOG_DIR), $this->config->get(ConfigSchema::LOG_LEVEL)))
             ->setFormat($this->config->get(ConfigSchema::LOG_FORMAT));
+
         $this->container->set(LoggerService::class, $this->loggerService);
-        $this->httpRequest = HttpRequest::createFromGlobals();
+        $this->container->set(LoggerInterface::class, $this->loggerService->get(LoggerService::CHANNEL_GLOBAL));
+
         $this->serializer = SerializerBuilder::create($serializerCacheDir)->build();
+        $this->httpRequest = HttpRequest::createFromGlobals();
         $this->httpResponse = new HttpResponse($this->eventDispatcher, $this->serializer);
         $this->errorHandler = new ErrorHandler($this->httpResponse);
     }
@@ -259,10 +262,8 @@ class Application
      */
     public function run(ConnectorInterface $connector): void
     {
-        $jtlrpc = $this->httpRequest->get('jtlrpc', '');
-
-        $this->container->set(LoggerInterface::class, $this->loggerService->get(LoggerService::CHANNEL_GLOBAL));
-        $this->httpResponse->setLogger($this->loggerService->get(LoggerService::CHANNEL_RPC));
+        $jtlrpc = $this->request->get('jtlrpc', '');
+        $this->response->setLogger($this->loggerService->get(LoggerService::CHANNEL_RPC));
         $this->eventDispatcher->addSubscriber(new RequestParamsTransformSubscriber());
         $this->eventDispatcher->addSubscriber(new FeaturesSubscriber());
         $this->errorHandler->register();
@@ -296,6 +297,7 @@ class Application
                 $replacement = '"token": "******************"';
                 $logJtlrpc = preg_replace($pattern, $replacement, $logJtlrpc);
             }
+
             // Log incoming request packet (debug only and configuration must be initialized)
             $this->loggerService->get(LoggerService::CHANNEL_RPC)->debug($logJtlrpc);
 
@@ -776,10 +778,14 @@ class Application
             if (!class_exists($controllerClass)) {
                 throw new ApplicationException(sprintf('Controller class %s does not exist!', $controllerClass));
             }
+
             $this->container->set($controllerName, $this->container->get($controllerClass));
         }
 
         $controller = $this->container->get($controllerName);
+        if($controller instanceof LoggerAwareInterface) {
+            $controller->setLogger($this->container->get(LoggerInterface::class));
+        }
 
         $result = [];
         switch ($action) {
