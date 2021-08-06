@@ -263,6 +263,19 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
         $this->customerId = new Identity();
         $this->shippingMethodId = new Identity();
     }
+
+    /**
+     * @param string $mainLanguageIso
+     * @return array
+     */
+    public function getIdentificationStrings(string $mainLanguageIso): array
+    {
+        if ($this->orderNumber !== '') {
+            $this->identificationStrings[] = sprintf('Order number = %s', $this->orderNumber);
+        }
+
+        return $this->identificationStrings;
+    }
     
     /**
      * @param Identity $customerId Optional reference to customer.

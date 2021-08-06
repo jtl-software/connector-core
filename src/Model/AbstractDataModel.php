@@ -33,6 +33,13 @@ abstract class AbstractDataModel extends AbstractModel
     private $modelType = null;
 
     /**
+     * @var string[]
+     *
+     * @Serializer\Exclude
+     */
+    protected $identificationStrings = [];
+
+    /**
      * @return AbstractDataType
      * @throws ReflectionException
      */
@@ -54,5 +61,44 @@ abstract class AbstractDataModel extends AbstractModel
         }
 
         return $this->modelType;
+    }
+
+    /**
+     * @param string ...$identificationStrings
+     * @return AbstractDataModel
+     */
+    public function setIdentificationStrings(string ...$identificationStrings): self
+    {
+        $this->identificationStrings = $identificationStrings;
+
+        return $this;
+    }
+
+    /**
+     * @param string $identificationString
+     * @return AbstractDataModel
+     */
+    public function addIdentificationString(string $identificationString): self
+    {
+        $this->identificationStrings[] = $identificationString;
+
+        return $this;
+    }
+
+    /**
+     * @param string $mainLanguageIso
+     * @return array<string>
+     */
+    public function getIdentificationStrings(string $mainLanguageIso): array
+    {
+        return $this->identificationStrings;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasIdentificationStrings(): bool
+    {
+        return count($this->getIdentificationStrings('de')) > 0;
     }
 }
