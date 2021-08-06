@@ -124,6 +124,7 @@ class DeliveryNote extends AbstractIdentity
     public function getIdentificationStrings(string $mainLanguageIso): array
     {
         $this->identificationStrings[] = sprintf('Related type CustomerOrder (JTL-Wawi PK = %d)', $this->getCustomerOrderId()->getHost());
+
         return $this->identificationStrings;
     }
 

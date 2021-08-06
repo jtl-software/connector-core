@@ -65,25 +65,29 @@ abstract class AbstractDataModel extends AbstractModel
 
     /**
      * @param string ...$identificationStrings
+     * @return AbstractDataModel
      */
-    public function setIdentificationStrings(string ...$identificationStrings): void
+    public function setIdentificationStrings(string ...$identificationStrings): self
     {
         $this->identificationStrings = $identificationStrings;
+
+        return $this;
     }
 
     /**
      * @param string $identificationString
-     * @return $this
+     * @return AbstractDataModel
      */
     public function addIdentificationString(string $identificationString): self
     {
         $this->identificationStrings[] = $identificationString;
+
         return $this;
     }
 
     /**
      * @param string $mainLanguageIso
-     * @return array
+     * @return array<string>
      */
     public function getIdentificationStrings(string $mainLanguageIso): array
     {
@@ -95,6 +99,6 @@ abstract class AbstractDataModel extends AbstractModel
      */
     public function hasIdentificationStrings(): bool
     {
-        return count($this->identificationStrings) > 0;
+        return count($this->getIdentificationStrings('de')) > 0;
     }
 }

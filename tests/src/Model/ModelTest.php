@@ -92,7 +92,7 @@ class ModelTest extends TestCase
             $modelName = $fileInfo->getBasename('.php');
             return [$modelName];
         }, glob($modelsPattern)), function ($value) use ($ignoredModels) {
-            return !in_array($value[0], $ignoredModels);
+            return !in_array($value[0], $ignoredModels, true);
         });
     }
 }

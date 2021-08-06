@@ -669,7 +669,7 @@ class Application
             $messages[] = sprintf('JTL-Wawi PK = %d', $model->getId()->getHost());
         }
 
-        if ($model->hasIdentificationStrings()) {
+        if ($model instanceof AbstractDataModel) {
             $messages = array_merge($messages, $model->getIdentificationStrings($this->config->get(ConfigSchema::MAIN_LANGUAGE, 'de')));
         }
 
