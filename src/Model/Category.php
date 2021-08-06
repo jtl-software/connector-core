@@ -17,8 +17,9 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Category extends AbstractIdentity implements IdentificationInterface
+class Category extends AbstractIdentity
 {
+
     /**
      * @var Identity Optional reference to parent category id
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
@@ -26,7 +27,7 @@ class Category extends AbstractIdentity implements IdentificationInterface
      * @Serializer\Accessor(getter="getParentCategoryId",setter="setParentCategoryId")
      */
     protected $parentCategoryId = null;
-    
+
     /**
      * @var boolean
      * @Serializer\Type("boolean")
@@ -34,7 +35,7 @@ class Category extends AbstractIdentity implements IdentificationInterface
      * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
      */
     protected $isActive = false;
-    
+
     /**
      * @var integer
      * @Serializer\Type("integer")
@@ -42,7 +43,7 @@ class Category extends AbstractIdentity implements IdentificationInterface
      * @Serializer\Accessor(getter="getLevel",setter="setLevel")
      */
     protected $level = 0;
-    
+
     /**
      * @var integer Optional sort order number
      * @Serializer\Type("integer")
@@ -50,7 +51,7 @@ class Category extends AbstractIdentity implements IdentificationInterface
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
-    
+
     /**
      * @var CategoryAttribute[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\CategoryAttribute>")
@@ -58,7 +59,7 @@ class Category extends AbstractIdentity implements IdentificationInterface
      * @Serializer\AccessType("reflection")
      */
     protected $attributes = [];
-    
+
     /**
      * @var CategoryCustomerGroup[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\CategoryCustomerGroup>")
@@ -66,7 +67,7 @@ class Category extends AbstractIdentity implements IdentificationInterface
      * @Serializer\AccessType("reflection")
      */
     protected $customerGroups = [];
-    
+
     /**
      * @var CategoryI18n[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\CategoryI18n>")
@@ -74,7 +75,7 @@ class Category extends AbstractIdentity implements IdentificationInterface
      * @Serializer\AccessType("reflection")
      */
     protected $i18ns = [];
-    
+
     /**
      * @var CategoryInvisibility[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\CategoryInvisibility>")
@@ -100,24 +101,22 @@ class Category extends AbstractIdentity implements IdentificationInterface
      */
     public function getIdentificationStrings(string $mainLanguageIso): array
     {
-        $strings = [];
         if ($this->getParentCategoryId()->getHost() > 0) {
-            $strings[] = sprintf('Parent Wawi PK = %s', $this->getParentCategoryId()->getHost());
+            $this->identificationStrings[] = sprintf('Parent Wawi PK = %s', $this->getParentCategoryId()->getHost());
         }
 
-        $name = '';
+        $i18n = null;
         foreach ($this->getI18ns() as $i18n) {
-            $name = $i18n->getName();
             if ($mainLanguageIso === $i18n->getLanguageIso()) {
                 break;
             }
         }
 
-        if ($name !== '') {
-            $strings[] = sprintf('Name = %s', $name);
+        if ($i18n !== null && $i18n->getName() !== '') {
+            $this->identificationStrings[] = sprintf('Name = %s', $i18n->getName());
         }
 
-        return $strings;
+        return $this->identificationStrings;
     }
 
     /**
@@ -127,10 +126,10 @@ class Category extends AbstractIdentity implements IdentificationInterface
     public function setParentCategoryId(Identity $parentCategoryId): Category
     {
         $this->parentCategoryId = $parentCategoryId;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity Optional reference to parent category id
      */
@@ -138,7 +137,7 @@ class Category extends AbstractIdentity implements IdentificationInterface
     {
         return $this->parentCategoryId;
     }
-    
+
     /**
      * @param boolean $isActive
      * @return Category
@@ -146,10 +145,10 @@ class Category extends AbstractIdentity implements IdentificationInterface
     public function setIsActive(bool $isActive): Category
     {
         $this->isActive = $isActive;
-        
+
         return $this;
     }
-    
+
     /**
      * @return boolean
      */
@@ -157,7 +156,7 @@ class Category extends AbstractIdentity implements IdentificationInterface
     {
         return $this->isActive;
     }
-    
+
     /**
      * @param integer $level
      * @return Category
@@ -165,10 +164,10 @@ class Category extends AbstractIdentity implements IdentificationInterface
     public function setLevel(int $level): Category
     {
         $this->level = $level;
-        
+
         return $this;
     }
-    
+
     /**
      * @return integer
      */
@@ -176,7 +175,7 @@ class Category extends AbstractIdentity implements IdentificationInterface
     {
         return $this->level;
     }
-    
+
     /**
      * @param integer $sort Optional sort order number
      * @return Category
@@ -184,10 +183,10 @@ class Category extends AbstractIdentity implements IdentificationInterface
     public function setSort(int $sort): Category
     {
         $this->sort = $sort;
-        
+
         return $this;
     }
-    
+
     /**
      * @return integer Optional sort order number
      */
@@ -195,7 +194,7 @@ class Category extends AbstractIdentity implements IdentificationInterface
     {
         return $this->sort;
     }
-    
+
     /**
      * @param TranslatableAttribute|CategoryAttribute $attribute
      * @return Category
@@ -203,10 +202,10 @@ class Category extends AbstractIdentity implements IdentificationInterface
     public function addAttribute(TranslatableAttribute $attribute): Category
     {
         $this->attributes[] = $attribute;
-        
+
         return $this;
     }
-    
+
     /**
      * @param TranslatableAttribute|CategoryAttribute ...$attributes
      * @return Category
@@ -214,10 +213,10 @@ class Category extends AbstractIdentity implements IdentificationInterface
     public function setAttributes(TranslatableAttribute ...$attributes): Category
     {
         $this->attributes = $attributes;
-        
+
         return $this;
     }
-    
+
     /**
      * @return TranslatableAttribute|CategoryAttribute[]
      */
@@ -225,17 +224,17 @@ class Category extends AbstractIdentity implements IdentificationInterface
     {
         return $this->attributes;
     }
-    
+
     /**
      * @return Category
      */
     public function clearAttributes(): Category
     {
         $this->attributes = [];
-        
+
         return $this;
     }
-    
+
     /**
      * @param CategoryCustomerGroup $customerGroup
      * @return Category
@@ -243,10 +242,10 @@ class Category extends AbstractIdentity implements IdentificationInterface
     public function addCustomerGroup(CategoryCustomerGroup $customerGroup): Category
     {
         $this->customerGroups[] = $customerGroup;
-        
+
         return $this;
     }
-    
+
     /**
      * @param CategoryCustomerGroup ...$customerGroups
      * @return Category
@@ -254,10 +253,10 @@ class Category extends AbstractIdentity implements IdentificationInterface
     public function setCustomerGroups(CategoryCustomerGroup ...$customerGroups): Category
     {
         $this->customerGroups = $customerGroups;
-        
+
         return $this;
     }
-    
+
     /**
      * @return CategoryCustomerGroup[]
      */
@@ -265,17 +264,17 @@ class Category extends AbstractIdentity implements IdentificationInterface
     {
         return $this->customerGroups;
     }
-    
+
     /**
      * @return Category
      */
     public function clearCustomerGroups(): Category
     {
         $this->customerGroups = [];
-        
+
         return $this;
     }
-    
+
     /**
      * @param CategoryI18n $i18n
      * @return Category
@@ -283,10 +282,10 @@ class Category extends AbstractIdentity implements IdentificationInterface
     public function addI18n(CategoryI18n $i18n): Category
     {
         $this->i18ns[] = $i18n;
-        
+
         return $this;
     }
-    
+
     /**
      * @param CategoryI18n ...$i18ns
      * @return Category
@@ -294,10 +293,10 @@ class Category extends AbstractIdentity implements IdentificationInterface
     public function setI18ns(CategoryI18n ...$i18ns): Category
     {
         $this->i18ns = $i18ns;
-        
+
         return $this;
     }
-    
+
     /**
      * @return CategoryI18n[]
      */
@@ -305,17 +304,17 @@ class Category extends AbstractIdentity implements IdentificationInterface
     {
         return $this->i18ns;
     }
-    
+
     /**
      * @return Category
      */
     public function clearI18ns(): Category
     {
         $this->i18ns = [];
-        
+
         return $this;
     }
-    
+
     /**
      * @param CategoryInvisibility $invisibility
      * @return Category
@@ -323,10 +322,10 @@ class Category extends AbstractIdentity implements IdentificationInterface
     public function addInvisibility(CategoryInvisibility $invisibility): Category
     {
         $this->invisibilities[] = $invisibility;
-        
+
         return $this;
     }
-    
+
     /**
      * @param CategoryInvisibility ...$invisibilities
      * @return Category
@@ -334,10 +333,10 @@ class Category extends AbstractIdentity implements IdentificationInterface
     public function setInvisibilities(CategoryInvisibility ...$invisibilities): Category
     {
         $this->invisibilities = $invisibilities;
-        
+
         return $this;
     }
-    
+
     /**
      * @return CategoryInvisibility[]
      */
@@ -345,14 +344,14 @@ class Category extends AbstractIdentity implements IdentificationInterface
     {
         return $this->invisibilities;
     }
-    
+
     /**
      * @return Category
      */
     public function clearInvisibilities(): Category
     {
         $this->invisibilities = [];
-        
+
         return $this;
     }
 }

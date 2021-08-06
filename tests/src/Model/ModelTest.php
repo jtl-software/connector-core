@@ -1,23 +1,52 @@
 <?php
+
 namespace Jtl\Connector\Core\Tests\Model;
 
 use JMS\Serializer\SerializationContext;
 use Jtl\Connector\Core\Definition\Model;
+use Jtl\Connector\Core\Model\AbstractDataModel;
+use Jtl\Connector\Core\Model\AbstractImage;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Test\TestCase;
 
 class ModelTest extends TestCase
 {
     /**
+     * @dataProvider modelsDataProvider
      * @doesNotPerformAssertions
+     *
+     * @param $modelName
      */
-    public function testModelsInitialization()
+    public function testModelsInitialization(string $modelName)
     {
-        $modelsPattern = dirname(TEST_DIR).'/src/Model/*.php';
+        $serializer = SerializerBuilder::create()->build();
+        $fullModelClassName = sprintf("%s\\%s", Model::MODEL_NAMESPACE, $modelName);
+        $obj = new $fullModelClassName();
+        $context = (new SerializationContext())->setSerializeNull(true);
+        $serializer->toArray($obj, $context);
+    }
 
-        $models = glob($modelsPattern);
+    /**
+     * @dataProvider identificationModelsDataProvider
+     * @param string $modelName
+     * @param int $count
+     */
+    public function testIdentificationStrings(string $modelName, int $count)
+    {
+        $fullModelClassName = sprintf("%s\\%s", Model::MODEL_NAMESPACE, $modelName);
+        $obj = new $fullModelClassName();
 
-        $ignoreModels = [
+        $obj->addIdentificationString("Fooo");
+        $identificationStrings = $obj->getIdentificationStrings('de');
+        $this->assertCount($count, $identificationStrings, sprintf('Model %s', $modelName));
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function getIgnoredModels(): array
+    {
+        return [
             'AbstractDataModel',
             'AbstractI18n',
             'AbstractIdentity',
@@ -30,23 +59,40 @@ class ModelTest extends TestCase
             'FeatureFlag',
             'AbstractOrderAddress',
         ];
+    }
 
-        $serializer = SerializerBuilder::create()->build();
+    /**
+     * @return string[]
+     */
+    public static function identificationModelsDataProvider(): array
+    {
+        return [
+            ['Category', 1],
+            ['Customer', 1],
+            ['CustomerGroup', 1],
+            ['DeliveryNote', 2],
+            ['Manufacturer', 1],
+            ['Product', 1],
+            ['Specific', 1],
+            ['StatusChange', 2],
+            ['ProductImage', 2],
+            ['CategoryImage', 2],
+        ];
+    }
 
-        foreach ($models as $model) {
-            $fileInfo = new \SplFileInfo($model);
+    /**
+     * @return array
+     */
+    public function modelsDataProvider(): array
+    {
+        $ignoredModels = self::getIgnoredModels();
+        $modelsPattern = dirname(TEST_DIR) . '/src/Model/*.php';
+        return array_filter(array_map(function ($modelPath) {
+            $fileInfo = new \SplFileInfo($modelPath);
             $modelName = $fileInfo->getBasename('.php');
-
-            if (in_array($modelName, $ignoreModels, true)) {
-                continue;
-            }
-
-            $fullModelClassName = sprintf("%s\\%s", Model::MODEL_NAMESPACE, $modelName);
-
-            $obj = new $fullModelClassName();
-
-            $context = (new SerializationContext())->setSerializeNull(true);
-            $serializer->toArray($obj, $context);
-        }
+            return [$modelName];
+        }, glob($modelsPattern)), function ($value) use ($ignoredModels) {
+            return !in_array($value[0], $ignoredModels, true);
+        });
     }
 }
