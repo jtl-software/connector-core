@@ -262,8 +262,8 @@ class Application
      */
     public function run(ConnectorInterface $connector): void
     {
-        $jtlrpc = $this->request->get('jtlrpc', '');
-        $this->response->setLogger($this->loggerService->get(LoggerService::CHANNEL_RPC));
+        $jtlrpc = $this->httpRequest->get('jtlrpc', '');
+        $this->httpResponse->setLogger($this->loggerService->get(LoggerService::CHANNEL_RPC));
         $this->eventDispatcher->addSubscriber(new RequestParamsTransformSubscriber());
         $this->eventDispatcher->addSubscriber(new FeaturesSubscriber());
         $this->errorHandler->register();
