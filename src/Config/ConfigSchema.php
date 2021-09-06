@@ -18,7 +18,7 @@ class ConfigSchema
         PLUGINS_DIR = 'plugins_dir',
         FEATURES_PATH = 'features_path',
         DEBUG = 'debug',
-        ENABLE_SERIALIZER_CACHE = 'enable_serializer_cache';
+        SERIALIZER_ENABLE_CACHE = 'serializer.enable_cache';
 
     /**
      * @var ConfigParameter[]
@@ -74,6 +74,7 @@ class ConfigSchema
         foreach ($parameters as $parameter) {
             $this->setParameter($parameter);
         }
+
         return $this;
     }
 
@@ -128,7 +129,7 @@ class ConfigSchema
             ConfigParameter::create(self::PLUGINS_DIR, ConfigParameter::TYPE_STRING, true, false, sprintf('%s/plugins', $connectorDir)),
             ConfigParameter::create(self::FEATURES_PATH, ConfigParameter::TYPE_STRING, true, false, sprintf('%s/config/features.json', $connectorDir)),
             ConfigParameter::create(self::DEBUG, ConfigParameter::TYPE_BOOLEAN, true, true, false),
-            ConfigParameter::create(self::ENABLE_SERIALIZER_CACHE, ConfigParameter::TYPE_BOOLEAN, true, true, true),
+            ConfigParameter::create(self::SERIALIZER_ENABLE_CACHE, ConfigParameter::TYPE_BOOLEAN, true, true, true),
         ];
     }
 

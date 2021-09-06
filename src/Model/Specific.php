@@ -17,7 +17,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Specific extends AbstractIdentity implements IdentificationInterface
+class Specific extends AbstractIdentity
 {
     public const
         TYPE_TEXT = 'TEXT',
@@ -71,21 +71,18 @@ class Specific extends AbstractIdentity implements IdentificationInterface
      */
     public function getIdentificationStrings(string $mainLanguageIso): array
     {
-        $strings = [];
-
-        $name = '';
+        $i18n = null;
         foreach ($this->getI18ns() as $i18n) {
-            $name = $i18n->getName();
             if ($mainLanguageIso === $i18n->getLanguageIso()) {
                 break;
             }
         }
 
-        if ($name !== '') {
-            $strings[] = sprintf('Name = %s', $name);
+        if ($i18n !== null && $i18n->getName() !== '') {
+            $this->identificationStrings[] = sprintf('Name = %s', $i18n->getName());
         }
 
-        return $strings;
+        return $this->identificationStrings;
     }
 
     /**

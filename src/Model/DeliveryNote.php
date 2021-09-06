@@ -17,8 +17,9 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class DeliveryNote extends AbstractIdentity implements IdentificationInterface
+class DeliveryNote extends AbstractIdentity
 {
+
     /**
      * @var Identity Reference to customerOrder
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
@@ -122,7 +123,9 @@ class DeliveryNote extends AbstractIdentity implements IdentificationInterface
      */
     public function getIdentificationStrings(string $mainLanguageIso): array
     {
-        return [sprintf('Related type CustomerOrder (JTL-Wawi PK = %d)', $this->getCustomerOrderId()->getHost())];
+        $this->identificationStrings[] = sprintf('Related type CustomerOrder (JTL-Wawi PK = %d)', $this->getCustomerOrderId()->getHost());
+
+        return $this->identificationStrings;
     }
 
     /**

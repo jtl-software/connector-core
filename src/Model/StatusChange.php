@@ -15,8 +15,9 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class StatusChange extends AbstractModel implements IdentificationInterface
+class StatusChange extends AbstractModel
 {
+
     /**
      * @var Identity
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
@@ -74,7 +75,9 @@ class StatusChange extends AbstractModel implements IdentificationInterface
      */
     public function getIdentificationStrings(string $mainLanguageIso): array
     {
-        return [sprintf('JTL-Wawi PK = %d', $this->getCustomerOrderId()->getHost())];
+        $this->identificationStrings[] = sprintf('JTL-Wawi PK = %d', $this->getCustomerOrderId()->getHost());
+
+        return $this->identificationStrings;
     }
 
     /**

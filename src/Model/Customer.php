@@ -17,8 +17,9 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Customer extends AbstractI18n implements IdentityInterface, IdentificationInterface
+class Customer extends AbstractI18n implements IdentityInterface
 {
+
     /**
      * @var Identity References a customer group
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
@@ -282,13 +283,11 @@ class Customer extends AbstractI18n implements IdentityInterface, Identification
      */
     public function getIdentificationStrings(string $mainLanguageIso): array
     {
-        $strings = [];
-
-        if (!empty($customerNumber = $this->getCustomerNumber())) {
-            $strings[] = sprintf('Customer number = %s', $customerNumber);
+        if ($this->customerNumber !== '') {
+            $this->identificationStrings[] = sprintf('Customer number = %s', $this->customerNumber);
         }
 
-        return $strings;
+        return $this->identificationStrings;
     }
 
     /**

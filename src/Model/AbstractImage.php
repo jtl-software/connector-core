@@ -25,8 +25,9 @@ use Jtl\Connector\Core\Exception\DefinitionException;
  *     }
  * )
  */
-abstract class AbstractImage extends AbstractIdentity implements IdentificationInterface
+abstract class AbstractImage extends AbstractIdentity
 {
+
     /**
      * @var string
      * @Serializer\Type("string")
@@ -74,13 +75,6 @@ abstract class AbstractImage extends AbstractIdentity implements IdentificationI
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 1;
-
-    /**
-     * @var string[]
-     *
-     * @Serializer\Exclude
-     */
-    protected $identificationStrings = [];
 
     /**
      * @var \ReflectionClass
@@ -191,24 +185,14 @@ abstract class AbstractImage extends AbstractIdentity implements IdentificationI
     }
 
     /**
-     * @param string $identificationString
-     * @return AbstractImage
-     */
-    public function addIdentificationString(string $identificationString): self
-    {
-        $this->identificationStrings[] = $identificationString;
-        return $this;
-    }
-
-    /**
      * @param string $mainLanguageIso
      * @return array
      * @throws DefinitionException
      */
     public function getIdentificationStrings(string $mainLanguageIso): array
     {
-        $relatedType = sprintf('Related type %s (JTL-Wawi PK = %d)', ucfirst($this->getRelationType()), $this->getForeignKey()->getHost());
-        return array_merge([$relatedType], $this->identificationStrings);
+        $this->identificationStrings[] = sprintf('Related type %s (JTL-Wawi PK = %d)', ucfirst($this->getRelationType()), $this->getForeignKey()->getHost());
+        return $this->identificationStrings;
     }
 
     /**
