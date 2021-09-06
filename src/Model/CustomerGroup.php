@@ -64,7 +64,7 @@ class CustomerGroup extends AbstractIdentity
      * @param string $mainLanguageIso
      * @return array
      */
-    public function getIdentificationStrings(string $mainLanguageIso): array
+    public function getIdentificationStrings(string $mainLanguageIso = 'de'): array
     {
         foreach ($this->getI18ns() as $i18n) {
             if ($mainLanguageIso === $i18n->getLanguageIso()) {

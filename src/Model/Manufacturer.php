@@ -64,7 +64,7 @@ class Manufacturer extends AbstractIdentity
      * @param string $mainLanguageIso
      * @return array
      */
-    public function getIdentificationStrings(string $mainLanguageIso): array
+    public function getIdentificationStrings(string $mainLanguageIso = 'de'): array
     {
         if ($this->name !== '') {
             $this->identificationStrings[] = sprintf('Name = %s', $this->name);

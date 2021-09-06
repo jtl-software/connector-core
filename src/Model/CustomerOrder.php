@@ -268,7 +268,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
      * @param string $mainLanguageIso
      * @return array
      */
-    public function getIdentificationStrings(string $mainLanguageIso): array
+    public function getIdentificationStrings(string $mainLanguageIso = 'de'): array
     {
         if ($this->orderNumber !== '') {
             $this->identificationStrings[] = sprintf('Order number = %s', $this->orderNumber);

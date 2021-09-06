@@ -189,7 +189,7 @@ abstract class AbstractImage extends AbstractIdentity
      * @return array
      * @throws DefinitionException
      */
-    public function getIdentificationStrings(string $mainLanguageIso): array
+    public function getIdentificationStrings(string $mainLanguageIso = 'de'): array
     {
         $this->identificationStrings[] = sprintf('Related type %s (JTL-Wawi PK = %d)', ucfirst($this->getRelationType()), $this->getForeignKey()->getHost());
         return $this->identificationStrings;

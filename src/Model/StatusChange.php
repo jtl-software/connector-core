@@ -73,7 +73,7 @@ class StatusChange extends AbstractModel
      * @param string $mainLanguageIso
      * @return string[]
      */
-    public function getIdentificationStrings(string $mainLanguageIso): array
+    public function getIdentificationStrings(string $mainLanguageIso = 'de'): array
     {
         $this->identificationStrings[] = sprintf('JTL-Wawi PK = %d', $this->getCustomerOrderId()->getHost());
 

@@ -7,6 +7,7 @@
 
 namespace Jtl\Connector\Core\Model;
 
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Core Model Class
@@ -50,7 +51,7 @@ abstract class AbstractModel
      * @param string $mainLanguageIso
      * @return array<string>
      */
-    public function getIdentificationStrings(string $mainLanguageIso): array
+    public function getIdentificationStrings(string $mainLanguageIso = 'de'): array
     {
         return $this->identificationStrings;
     }
