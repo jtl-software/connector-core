@@ -625,7 +625,6 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @deprecated will be removed in 3.1. Use shippingMethodId instead.
      * @param string $shippingMethodName
      * @return \jtl\Connector\Model\CustomerOrder
      */
@@ -635,7 +634,6 @@ class CustomerOrder extends DataModel
     }
 
     /**
-     * @deprecated will be removed in 3.1. Use shippingMethodId instead.
      * @return string
      */
     public function getShippingMethodName()
