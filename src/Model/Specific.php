@@ -69,7 +69,7 @@ class Specific extends AbstractIdentity
      * @param string $mainLanguageIso
      * @return array
      */
-    public function getIdentificationStrings(string $mainLanguageIso): array
+    public function getIdentificationStrings(string $mainLanguageIso = 'de'): array
     {
         $i18n = null;
         foreach ($this->getI18ns() as $i18n) {

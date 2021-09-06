@@ -720,7 +720,7 @@ class Product extends AbstractIdentity
      * @param string $mainLanguageIso
      * @return string[]
      */
-    public function getIdentificationStrings(string $mainLanguageIso): array
+    public function getIdentificationStrings(string $mainLanguageIso = 'de'): array
     {
         if ($this->sku !== '') {
             $this->identificationStrings[] = sprintf('SKU = %s', $this->sku);

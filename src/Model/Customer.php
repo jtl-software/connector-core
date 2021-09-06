@@ -281,7 +281,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @param string $mainLanguageIso
      * @return array
      */
-    public function getIdentificationStrings(string $mainLanguageIso): array
+    public function getIdentificationStrings(string $mainLanguageIso = 'de'): array
     {
         if ($this->customerNumber !== '') {
             $this->identificationStrings[] = sprintf('Customer number = %s', $this->customerNumber);

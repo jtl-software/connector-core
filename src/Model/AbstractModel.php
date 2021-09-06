@@ -5,9 +5,6 @@
  */
 namespace Jtl\Connector\Core\Model;
 
-use JMS\Serializer\SerializationContext;
-use stdClass;
-
 /**
  * Core Model Class
  *

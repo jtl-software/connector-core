@@ -99,7 +99,7 @@ class Category extends AbstractIdentity
      * @param string $mainLanguageIso
      * @return array
      */
-    public function getIdentificationStrings(string $mainLanguageIso): array
+    public function getIdentificationStrings(string $mainLanguageIso = 'de'): array
     {
         if ($this->getParentCategoryId()->getHost() > 0) {
             $this->identificationStrings[] = sprintf('Parent Wawi PK = %s', $this->getParentCategoryId()->getHost());

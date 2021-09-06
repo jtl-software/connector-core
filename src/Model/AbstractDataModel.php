@@ -89,7 +89,7 @@ abstract class AbstractDataModel extends AbstractModel
      * @param string $mainLanguageIso
      * @return array<string>
      */
-    public function getIdentificationStrings(string $mainLanguageIso): array
+    public function getIdentificationStrings(string $mainLanguageIso = 'de'): array
     {
         return $this->identificationStrings;
     }
@@ -99,6 +99,6 @@ abstract class AbstractDataModel extends AbstractModel
      */
     public function hasIdentificationStrings(): bool
     {
-        return count($this->getIdentificationStrings('de')) > 0;
+        return count($this->getIdentificationStrings()) > 0;
     }
 }
