@@ -189,7 +189,7 @@ class ApplicationTest extends TestCase
     {
         $config = $this->createConfig(['foo' => 'you', 'bar' => 'jau']);
         $connector = $this->createConnector(ConnectorInterface::class);
-        $application = $this->createApplication(null,  null, $config);
+        $application = $this->createApplication(null, null, $config);
         $container = $application->getContainer();
 
         $this->assertFalse($container->has(ConfigInterface::class));
@@ -492,7 +492,8 @@ class ApplicationTest extends TestCase
      * @throws LoggerException
      * @throws \ReflectionException
      */
-    protected function createApplication(ConfigSchema $configSchema = null, string $connectorDir = null, ConfigInterface $config = null): Application {
+    protected function createApplication(ConfigSchema $configSchema = null, string $connectorDir = null, ConfigInterface $config = null): Application
+    {
         if (is_null($configSchema)) {
             $configSchema = new ConfigSchema();
         }
@@ -518,7 +519,8 @@ class ApplicationTest extends TestCase
      * @throws LoggerException
      * @throws \ReflectionException
      */
-    protected function createInitializedApplication(ConfigSchema $configSchema = null, string $connectorDir = null, ConfigInterface $config = null) {
+    protected function createInitializedApplication(ConfigSchema $configSchema = null, string $connectorDir = null, ConfigInterface $config = null)
+    {
         $sessionHandler = $this->createMock(SessionHandlerInterface::class);
         if (is_null($configSchema)) {
             $configSchema = (new ConfigSchema())->setParameters(...ConfigSchema::createDefaultParameters($this->connectorDir));

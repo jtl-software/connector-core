@@ -98,18 +98,16 @@ class IdentityLinker implements LoggerAwareInterface
                 $getter = sprintf('get%s', ucfirst($propertyName));
 
                 $value = $model->{$getter}();
-                if (gettype($value) === 'array') {
-                    foreach ($value as $entity) {
-                        if ($entity instanceof AbstractModel) {
-                            $this->linkModel($entity, $isDeleted);
-                        } elseif ($entity instanceof Identity && Model::isIdentityProperty($modelName, $propertyName)) {
-                            $this->linkIdentity($entity, $modelName, $propertyName, $isDeleted);
-                        } else {
-                            $this->logger->warning('Property ({property}) from model ({model}) is not an instance of AbstractModel or Identity', ['property' => $propertyName, 'model' => $modelName]);
-                        }
+                if (!is_array($value)) {
+                    $value = [$value];
+                }
+
+                foreach ($value as $entity) {
+                    if ($entity instanceof Identity && Model::isIdentityProperty($modelName, $propertyName)) {
+                        $this->linkIdentity($entity, $modelName, $propertyName, $isDeleted);
+                    } elseif ($entity instanceof AbstractModel) {
+                        $this->linkModel($entity, $isDeleted);
                     }
-                } elseif ($value instanceof Identity && Model::isIdentityProperty($modelName, $propertyName)) {
-                    $this->linkIdentity($value, $modelName, $propertyName, $isDeleted);
                 }
             }
         }

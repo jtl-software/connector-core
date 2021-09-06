@@ -783,7 +783,7 @@ class Application
         }
 
         $controller = $this->container->get($controllerName);
-        if($controller instanceof LoggerAwareInterface) {
+        if ($controller instanceof LoggerAwareInterface) {
             $controller->setLogger($this->container->get(LoggerInterface::class));
         }
 
