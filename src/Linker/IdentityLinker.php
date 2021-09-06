@@ -26,8 +26,14 @@ use Psr\Log\NullLogger;
  */
 class IdentityLinker implements LoggerAwareInterface
 {
-    const CACHE_TYPE_HOST = 'h';
-    const CACHE_TYPE_ENDPOINT = 'e';
+    public const
+        CACHE_TYPE_HOST = 'h',
+        CACHE_TYPE_ENDPOINT = 'e';
+
+    /**
+     * @var AnnotationReader
+     */
+    protected $annotationReader;
 
     /**
      * @var LoggerInterface
@@ -40,11 +46,6 @@ class IdentityLinker implements LoggerAwareInterface
      * @var PrimaryKeyMapperInterface
      */
     protected $mapper;
-
-    /**
-     * @var AnnotationReader
-     */
-    protected $annotationReader;
 
     /**
      * @var bool
@@ -73,7 +74,7 @@ class IdentityLinker implements LoggerAwareInterface
      * @param boolean $useCache
      * @return IdentityLinker
      */
-    public function setUseCache(bool $useCache)
+    public function setUseCache(bool $useCache): IdentityLinker
     {
         $this->useCache = $useCache;
         return $this;
@@ -86,7 +87,7 @@ class IdentityLinker implements LoggerAwareInterface
      * @throws LinkerException
      * @throws \ReflectionException
      */
-    public function linkModel(AbstractModel $model, $isDeleted = false): void
+    public function linkModel(AbstractModel $model, bool $isDeleted = false): void
     {
         $reflect = new \ReflectionClass($model);
         $modelName = $reflect->getShortName();
@@ -375,6 +376,32 @@ class IdentityLinker implements LoggerAwareInterface
     }
 
     /**
+     * @param mixed $endpointId
+     * @return boolean
+     */
+    public function isValidEndpointId(?string $endpointId): bool
+    {
+        return !is_null($endpointId) && strlen(trim($endpointId)) > 0;
+    }
+
+    /**
+     * @param mixed $hostId
+     * @return boolean
+     */
+    public function isValidHostId(?int $hostId): bool
+    {
+        return !is_null($hostId) && $hostId > 0;
+    }
+
+    /**
+     * @return array
+     */
+    public function getCache(): array
+    {
+        return $this->cache;
+    }
+
+    /**
      * @param LoggerInterface $logger
      */
     public function setLogger(LoggerInterface $logger)
@@ -493,31 +520,5 @@ class IdentityLinker implements LoggerAwareInterface
     protected function buildKey($id, int $identityType, string $cacheType): string
     {
         return sprintf('%s_%s_%s', $cacheType, $id, $identityType);
-    }
-
-    /**
-     * @return array
-     */
-    public function getCache(): array
-    {
-        return $this->cache;
-    }
-
-    /**
-     * @param mixed $endpointId
-     * @return boolean
-     */
-    public function isValidEndpointId(?string $endpointId): bool
-    {
-        return !is_null($endpointId) && strlen(trim($endpointId)) > 0;
-    }
-
-    /**
-     * @param mixed $hostId
-     * @return boolean
-     */
-    public function isValidHostId(?int $hostId): bool
-    {
-        return !is_null($hostId) && $hostId > 0;
     }
 }

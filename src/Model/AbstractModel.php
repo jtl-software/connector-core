@@ -17,7 +17,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 abstract class AbstractModel
 {
-
     /**
      * @var string[]
      *
