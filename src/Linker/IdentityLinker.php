@@ -31,11 +31,6 @@ class IdentityLinker implements LoggerAwareInterface
         CACHE_TYPE_ENDPOINT = 'e';
 
     /**
-     * @var AnnotationReader
-     */
-    protected $annotationReader;
-
-    /**
      * @var LoggerInterface
      */
     protected $logger;
@@ -64,7 +59,6 @@ class IdentityLinker implements LoggerAwareInterface
     public function __construct(PrimaryKeyMapperInterface $mapper)
     {
         $this->logger = new NullLogger();
-        $this->annotationReader = new AnnotationReader();
         $this->mapper = $mapper;
     }
 
@@ -94,9 +88,9 @@ class IdentityLinker implements LoggerAwareInterface
 
         foreach ($reflect->getProperties(\ReflectionProperty::IS_PROTECTED) as $propertyInfo) {
             $propertyName = $propertyInfo->getName();
-            if ($this->isPropertyExcluded($propertyInfo) === false) {
-                $getter = sprintf('get%s', ucfirst($propertyName));
+            $getter = sprintf('get%s', ucfirst($propertyName));
 
+            if (is_callable([$model, $getter])) {
                 $value = $model->{$getter}();
                 if (!is_array($value)) {
                     $value = [$value];
@@ -111,15 +105,6 @@ class IdentityLinker implements LoggerAwareInterface
                 }
             }
         }
-    }
-
-    /**
-     * @param \ReflectionProperty $reflectionProperty
-     * @return bool
-     */
-    protected function isPropertyExcluded(\ReflectionProperty $reflectionProperty): bool
-    {
-        return $this->annotationReader->getPropertyAnnotation($reflectionProperty, Exclude::class) !== null;
     }
 
     /**
