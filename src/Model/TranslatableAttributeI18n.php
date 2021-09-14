@@ -62,12 +62,36 @@ class TranslatableAttributeI18n extends AbstractI18n
         
         return $this;
     }
-    
+
     /**
      * @return string
      */
     public function getValue(): string
     {
         return $this->value;
+    }
+
+    /**
+     * @param string $type
+     * @return bool|float|int|string
+     */
+    public function getCastedValue(string $type = TranslatableAttribute::TYPE_STRING)
+    {
+        $value = $this->value;
+        switch ($type) {
+            case TranslatableAttribute::TYPE_BOOL:
+                $value = !('false' === $this->value) && boolval($this->value);
+                break;
+
+            case TranslatableAttribute::TYPE_INT:
+                $value = (int)$this->value;
+                break;
+
+            case TranslatableAttribute::TYPE_FLOAT:
+                $value = (float)$this->value;
+                break;
+        }
+
+        return $value;
     }
 }
