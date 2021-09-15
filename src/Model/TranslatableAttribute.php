@@ -71,7 +71,7 @@ class TranslatableAttribute extends AbstractIdentity
      * @param bool $isTranslated
      * @return TranslatableAttribute
      */
-    public function setIsTranslated(bool $isTranslated): TranslatableAttribute
+    public function setIsTranslated(bool $isTranslated): self
     {
         $this->isTranslated = $isTranslated;
 
@@ -90,7 +90,7 @@ class TranslatableAttribute extends AbstractIdentity
      * @param bool $isCustomProperty
      * @return TranslatableAttribute
      */
-    public function setIsCustomProperty(bool $isCustomProperty): TranslatableAttribute
+    public function setIsCustomProperty(bool $isCustomProperty): self
     {
         $this->isCustomProperty = $isCustomProperty;
 
@@ -118,7 +118,7 @@ class TranslatableAttribute extends AbstractIdentity
      * @return $this
      * @throws ModelException
      */
-    public function setType(string $type): TranslatableAttribute
+    public function setType(string $type): self
     {
         if (!self::isType($type)) {
             throw ModelException::translatableAttributeTypeUnknown($type);
@@ -152,7 +152,7 @@ class TranslatableAttribute extends AbstractIdentity
      */
     public function findCastedValue(string $languageIso, string $castToType = null)
     {
-        if($castToType === null) {
+        if ($castToType === null) {
             $castToType = $this->type;
         }
 
@@ -176,7 +176,7 @@ class TranslatableAttribute extends AbstractIdentity
      * @param TranslatableAttributeI18n $i18n
      * @return TranslatableAttribute
      */
-    public function addI18n(TranslatableAttributeI18n $i18n): TranslatableAttribute
+    public function addI18n(TranslatableAttributeI18n $i18n): self
     {
         $this->i18ns[] = $i18n;
 
@@ -186,7 +186,7 @@ class TranslatableAttribute extends AbstractIdentity
     /**
      * @return TranslatableAttribute
      */
-    public function clearI18ns(): TranslatableAttribute
+    public function clearI18ns(): self
     {
         $this->i18ns = [];
 
@@ -197,7 +197,7 @@ class TranslatableAttribute extends AbstractIdentity
      * @param TranslatableAttributeI18n ...$i18ns
      * @return TranslatableAttribute
      */
-    public function setI18ns(TranslatableAttributeI18n ...$i18ns): TranslatableAttribute
+    public function setI18ns(TranslatableAttributeI18n ...$i18ns): self
     {
         $this->i18ns = $i18ns;
 

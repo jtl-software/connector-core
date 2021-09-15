@@ -8,6 +8,7 @@
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\ModelException;
 
 /**
  * @access public
@@ -37,7 +38,7 @@ class TranslatableAttributeI18n extends AbstractI18n
      * @param string $name
      * @return TranslatableAttributeI18n
      */
-    public function setName(string $name): TranslatableAttributeI18n
+    public function setName(string $name): self
     {
         $this->name = $name;
         
@@ -51,15 +52,30 @@ class TranslatableAttributeI18n extends AbstractI18n
     {
         return $this->name;
     }
-    
+
     /**
-     * @param string $value
+     * @param mixed $value
      * @return TranslatableAttributeI18n
+     * @throws ModelException
      */
-    public function setValue(string $value): TranslatableAttributeI18n
+    public function setValue($value): self
     {
-        $this->value = $value;
-        
+        $type = gettype($value);
+
+        if (!in_array($type, ['boolean', 'integer', 'double', 'string'], true)) {
+            throw ModelException::translatableAttributeValueTypeInvalid($type);
+        }
+
+        switch ($type) {
+            case 'boolean':
+                $this->value = $value === true ? '1' : '0';
+                break;
+
+            default:
+                $this->value = (string)$value;
+                break;
+        }
+
         return $this;
     }
 
