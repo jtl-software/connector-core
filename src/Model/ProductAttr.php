@@ -19,7 +19,7 @@ use JMS\Serializer\Annotation as Serializer;
  *
  * @Serializer\AccessType("public_method")
  */
-class ProductAttr extends DataModel
+class ProductAttr extends DataModel implements AttrTypeInterface
 {
     /**
      * @var Identity
@@ -52,6 +52,14 @@ class ProductAttr extends DataModel
      * @Serializer\Accessor(getter="getIsTranslated",setter="setIsTranslated")
      */
     protected $isTranslated = false;
+
+    /**
+     * @var string
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("type")
+     * @Serializer\Accessor(getter="getType",setter="setType")
+     */
+    protected $type = self::TYPE_STRING;
 
     /**
      * @var \jtl\Connector\Model\ProductAttrI18n[]
@@ -138,6 +146,25 @@ class ProductAttr extends DataModel
     public function getIsTranslated()
     {
         return $this->isTranslated;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     * @return $this
+     */
+    public function setType(string $type)
+    {
+        $this->type = $type;
+
+        return $this;
     }
 
     /**
