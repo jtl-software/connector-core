@@ -130,41 +130,6 @@ class TranslatableAttribute extends AbstractIdentity
     }
 
     /**
-     * @param string $languageIso
-     * @return TranslatableAttributeI18n|null
-     */
-    public function findTranslation(string $languageIso): ?TranslatableAttributeI18n
-    {
-        $i18n = null;
-        foreach (array_reverse($this->i18ns) as $i18n) {
-            if ($i18n->getLanguageIso() === $languageIso) {
-                break;
-            }
-        }
-
-        return $i18n;
-    }
-
-    /**
-     * @param string $languageIso
-     * @param string|null $castToType
-     * @return bool|float|int|string|null
-     */
-    public function findCastedValue(string $languageIso, string $castToType = null)
-    {
-        if ($castToType === null) {
-            $castToType = $this->type;
-        }
-
-        $i18n = $this->findTranslation($languageIso);
-        if ($i18n instanceof TranslatableAttributeI18n) {
-            return $i18n->getCastedValue($castToType);
-        }
-
-        return null;
-    }
-
-    /**
      * @return TranslatableAttributeI18n[]
      */
     public function getI18ns(): array
@@ -202,6 +167,73 @@ class TranslatableAttribute extends AbstractIdentity
         $this->i18ns = $i18ns;
 
         return $this;
+    }
+
+    /**
+     * @param string $languageIso
+     * @return string
+     */
+    public function getName(string $languageIso = ''): string
+    {
+        $translation = $this->findTranslation($languageIso);
+        if ($translation !== null) {
+            return $translation->getName();
+        }
+
+        return '';
+    }
+
+    /**
+     * @param string $languageIso
+     * @return TranslatableAttributeI18n|null
+     */
+    public function findTranslation(string $languageIso): ?TranslatableAttributeI18n
+    {
+        $i18n = null;
+        foreach (array_reverse($this->i18ns) as $i18n) {
+            if ($i18n->getLanguageIso() === $languageIso) {
+                break;
+            }
+        }
+
+        return $i18n;
+    }
+
+    /**
+     * @param string $languageIso
+     * @param string|null $castToType
+     * @return bool|float|int|string|null
+     */
+    public function findValue(string $languageIso, string $castToType = null)
+    {
+        if ($castToType === null) {
+            $castToType = $this->type;
+        }
+
+        $i18n = $this->findTranslation($languageIso);
+        if ($i18n instanceof TranslatableAttributeI18n) {
+            return $i18n->getValue($castToType);
+        }
+
+        return null;
+    }
+
+    /**
+     * @param string|null $castToType
+     * @return array
+     */
+    public function getValues(string $castToType = null): array
+    {
+        if ($castToType === null) {
+            $castToType = $this->type;
+        }
+
+        $values = [];
+        foreach ($this->i18ns as $i18n) {
+            $values[$i18n->getLanguageIso()] = $i18n->getValue($castToType);
+        }
+
+        return $values;
     }
 
     /**

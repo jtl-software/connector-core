@@ -10,27 +10,27 @@ use stdClass;
 class TranslatableAttributeI18nTest extends TestCase
 {
     /**
-     * @dataProvider castedValuesProvider
+     * @dataProvider getValueProvider
      *
      * @param string $type
      * @param $originalValue
-     * @param $castedValue
+     * @param $expectedValue
      * @throws ModelException
      */
-    public function testGetCastedValue(string $type, $originalValue, $castedValue)
+    public function testGetValue(string $type, $originalValue, $expectedValue)
     {
         $i18n = (new TranslatableAttributeI18n())
             ->setValue($originalValue);
 
-        $actualValue = $i18n->getCastedValue($type);
+        $actualValue = $i18n->getValue($type);
 
-        $this->assertTrue($castedValue === $actualValue, sprintf('Casted value (%s) has the wrong type', $actualValue));
+        $this->assertTrue($expectedValue === $actualValue, sprintf('Casted value (%s) has the wrong type', $actualValue));
     }
 
     /**
      * @return array
      */
-    public function castedValuesProvider(): array
+    public function getValueProvider(): array
     {
         return [
             ['int', '2', 2],
@@ -53,13 +53,13 @@ class TranslatableAttributeI18nTest extends TestCase
     /**
      * @dataProvider setValueProvider
      *
-     * @param $rawValue
+     * @param $value
      * @param string $expectedValue
      * @throws ModelException
      */
-    public function testSetValue($rawValue, string $expectedValue)
+    public function testSetValue($value, string $expectedValue)
     {
-        $translation = (new TranslatableAttributeI18n())->setValue($rawValue);
+        $translation = (new TranslatableAttributeI18n())->setValue($value);
 
         $this->assertTrue($translation->getValue() === $expectedValue, sprintf('Value (%s) is not equal to expected value (%s)', $translation->getValue(), $expectedValue));
     }
@@ -84,13 +84,13 @@ class TranslatableAttributeI18nTest extends TestCase
     /**
      * @dataProvider setValueInvalidTypeProvider
      *
-     * @param $rawValue
+     * @param $value
      */
-    public function testSetValueWrongType($rawValue)
+    public function testSetValueWrongType($value)
     {
         $this->expectException(ModelException::class);
         $this->expectExceptionCode(ModelException::TRANSLATABLE_ATTRIBUTE_VALUE_TYPE_INVALID);
-        $this->testSetValue($rawValue, 'foo');
+        $this->testSetValue($value, 'foo');
     }
 
     /**

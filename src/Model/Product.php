@@ -1526,7 +1526,7 @@ class Product extends AbstractIdentity
     }
 
     /**
-     * @param \DateTimeInterface $minBestBeforeDate
+     * @param \DateTimeInterface|null $minBestBeforeDate
      * @return Product
      */
     public function setMinBestBeforeDate(\DateTimeInterface $minBestBeforeDate = null): Product
