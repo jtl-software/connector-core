@@ -33,7 +33,7 @@ class ModelTest extends TestCase
     {
         $fullModelClassName = sprintf("%s\\%s", Model::MODEL_NAMESPACE, $modelName);
         $obj = new $fullModelClassName();
-        $obj->addIdentificationString("Fooo");
+        $obj->setIdentificationString("Fooo");
         $identificationStrings = $obj->getIdentificationStrings('de');
         $this->assertCount($count, $identificationStrings, sprintf('Model %s', $modelName));
     }
