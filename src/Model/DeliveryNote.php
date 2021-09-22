@@ -123,7 +123,7 @@ class DeliveryNote extends AbstractIdentity
      */
     public function getIdentificationStrings(string $mainLanguageIso = 'de'): array
     {
-        $this->identificationStrings[] = sprintf('Related type CustomerOrder (JTL-Wawi PK = %d)', $this->getCustomerOrderId()->getHost());
+        $this->setIdentificationString(sprintf('Related type CustomerOrder (JTL-Wawi PK = %d)', $this->getCustomerOrderId()->getHost()));
 
         return $this->identificationStrings;
     }

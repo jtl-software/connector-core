@@ -79,7 +79,7 @@ class Specific extends AbstractIdentity
         }
 
         if ($i18n !== null && $i18n->getName() !== '') {
-            $this->identificationStrings[] = sprintf('Name = %s', $i18n->getName());
+            $this->setIdentificationString(sprintf('Name = %s', $i18n->getName()));
         }
 
         return $this->identificationStrings;

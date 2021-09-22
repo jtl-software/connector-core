@@ -66,10 +66,15 @@ class CustomerGroup extends AbstractIdentity
      */
     public function getIdentificationStrings(string $mainLanguageIso = 'de'): array
     {
+        $i18n = null;
         foreach ($this->getI18ns() as $i18n) {
             if ($mainLanguageIso === $i18n->getLanguageIso()) {
-                $this->identificationStrings[] = sprintf('Name = %s', $i18n->getName());
+                break;
             }
+        }
+
+        if ($i18n !== null) {
+            $this->setIdentificationString(sprintf('Name = %s', $i18n->getName()));
         }
 
         return $this->identificationStrings;
