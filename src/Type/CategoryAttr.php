@@ -6,7 +6,7 @@
 
 namespace jtl\Connector\Type;
 
-use \jtl\Connector\Type\PropertyInfo;
+use jtl\Connector\Model\AttrTypeInterface;
 
 /**
  * @access public
@@ -21,6 +21,7 @@ class CategoryAttr extends DataType
             new PropertyInfo('id', 'Identity', null, true, true, false),
             new PropertyInfo('isCustomProperty', 'boolean', false, false, false, false),
             new PropertyInfo('isTranslated', 'boolean', false, false, false, false),
+            new PropertyInfo('type', 'string', AttrTypeInterface::TYPE_STRING, false, false, false),
             new PropertyInfo('i18ns', '\jtl\Connector\Model\CategoryAttrI18n', null, false, false, true),
         ];
     }
