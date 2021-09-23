@@ -22,7 +22,7 @@ abstract class AbstractModel
      *
      * @Serializer\Exclude
      */
-    protected $identificationStrings = [];
+    private $identificationStrings = [];
 
     /**
      * @param string ...$identificationStrings
@@ -37,11 +37,14 @@ abstract class AbstractModel
 
     /**
      * @param string $identificationString
-     * @return $this
+     * @param string|null $subject
+     * @return AbstractModel
      */
-    public function setIdentificationString(string $identificationString): self
+    public function setIdentificationString(string $identificationString, string $subject = null): self
     {
-        if (!in_array($identificationString, $this->identificationStrings, true)) {
+        if ($subject !== null) {
+            $this->identificationStrings[$subject] = $identificationString;
+        } elseif (!in_array($identificationString, $this->identificationStrings, true)) {
             $this->identificationStrings[] = $identificationString;
         }
 
@@ -54,7 +57,7 @@ abstract class AbstractModel
      */
     public function getIdentificationStrings(string $mainLanguageIso = 'de'): array
     {
-        return $this->identificationStrings;
+        return array_values($this->identificationStrings);
     }
 
     /**

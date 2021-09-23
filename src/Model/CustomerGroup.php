@@ -77,7 +77,7 @@ class CustomerGroup extends AbstractIdentity
             $this->setIdentificationString(sprintf('Name = %s', $i18n->getName()));
         }
 
-        return $this->identificationStrings;
+        return parent::getIdentificationStrings($mainLanguageIso);
     }
 
     /**

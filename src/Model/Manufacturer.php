@@ -70,7 +70,7 @@ class Manufacturer extends AbstractIdentity
             $this->setIdentificationString(sprintf('Name = %s', $this->name));
         }
 
-        return $this->identificationStrings;
+        return parent::getIdentificationStrings($mainLanguageIso);
     }
 
     /**

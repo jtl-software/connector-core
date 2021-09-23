@@ -77,7 +77,7 @@ class StatusChange extends AbstractModel
     {
         $this->setIdentificationString(sprintf('JTL-Wawi PK = %d', $this->getCustomerOrderId()->getHost()));
 
-        return $this->identificationStrings;
+        return parent::getIdentificationStrings($mainLanguageIso);
     }
 
     /**

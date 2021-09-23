@@ -287,7 +287,7 @@ class Customer extends AbstractI18n implements IdentityInterface
             $this->setIdentificationString(sprintf('Customer number = %s', $this->customerNumber));
         }
 
-        return $this->identificationStrings;
+        return parent::getIdentificationStrings($mainLanguageIso);
     }
 
     /**

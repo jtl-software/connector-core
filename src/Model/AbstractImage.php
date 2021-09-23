@@ -193,7 +193,7 @@ abstract class AbstractImage extends AbstractIdentity
     {
         $this->setIdentificationString(sprintf('Related type %s (JTL-Wawi PK = %d)', ucfirst($this->getRelationType()), $this->getForeignKey()->getHost()));
 
-        return $this->identificationStrings;
+        return parent::getIdentificationStrings($mainLanguageIso);
     }
 
     /**

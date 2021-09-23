@@ -274,7 +274,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
             $this->setIdentificationString(sprintf('Order number = %s', $this->orderNumber));
         }
 
-        return $this->identificationStrings;
+        return parent::getIdentificationStrings($mainLanguageIso);
     }
     
     /**
