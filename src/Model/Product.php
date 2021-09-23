@@ -723,7 +723,7 @@ class Product extends AbstractIdentity
     public function getIdentificationStrings(string $mainLanguageIso = 'de'): array
     {
         if ($this->sku !== '') {
-            $this->identificationStrings[] = sprintf('SKU = %s', $this->sku);
+            $this->setIdentificationString(sprintf('SKU = %s', $this->sku));
         }
 
         $i18n = null;
@@ -734,7 +734,7 @@ class Product extends AbstractIdentity
         }
 
         if ($i18n !== null && $i18n->getName() !== '') {
-            $this->identificationStrings[] = sprintf('Name = %s', $i18n->getName());
+            $this->setIdentificationString(sprintf('Name = %s', $i18n->getName()));
         }
 
         return $this->identificationStrings;

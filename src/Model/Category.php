@@ -102,7 +102,7 @@ class Category extends AbstractIdentity
     public function getIdentificationStrings(string $mainLanguageIso = 'de'): array
     {
         if ($this->getParentCategoryId()->getHost() > 0) {
-            $this->identificationStrings[] = sprintf('Parent Wawi PK = %s', $this->getParentCategoryId()->getHost());
+            $this->setIdentificationString(sprintf('Parent Wawi PK = %s', $this->getParentCategoryId()->getHost()));
         }
 
         $i18n = null;
@@ -113,7 +113,7 @@ class Category extends AbstractIdentity
         }
 
         if ($i18n !== null && $i18n->getName() !== '') {
-            $this->identificationStrings[] = sprintf('Name = %s', $i18n->getName());
+            $this->setIdentificationString(sprintf('Name = %s', $i18n->getName()));
         }
 
         return $this->identificationStrings;

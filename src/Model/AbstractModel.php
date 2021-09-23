@@ -37,11 +37,13 @@ abstract class AbstractModel
 
     /**
      * @param string $identificationString
-     * @return AbstractModel
+     * @return $this
      */
-    public function addIdentificationString(string $identificationString): self
+    public function setIdentificationString(string $identificationString): self
     {
-        $this->identificationStrings[] = $identificationString;
+        if (!in_array($identificationString, $this->identificationStrings, true)) {
+            $this->identificationStrings[] = $identificationString;
+        }
 
         return $this;
     }
