@@ -90,6 +90,34 @@ class Application extends CoreApplication
      */
     protected $errorHandler;
 
+    /**
+     * @var array<string, string>
+     */
+    protected static $mimeTypeToExtensionMappings = [
+        'image/bmp' => 'bmp',
+        'image/x-bmp' => 'bmp',
+        'image/x-bitmap' => 'bmp',
+        'image/x-xbitmap' => 'bmp',
+        'image/x-win-bitmap' => 'bmp',
+        'image/x-windows-bmp' => 'bmp',
+        'image/ms-bmp' => 'bmp',
+        'image/x-ms-bmp' => 'bmp',
+        'application/bmp' => 'bmp',
+        'application/x-bmp' => 'bmp',
+        'application/x-win-bitmap' => 'bmp',
+        'image/gif' => 'gif',
+        'image/x-icon' => 'ico',
+        'image/x-ico' => 'ico',
+        'image/vnd.microsoft.icon' => 'ico',
+        'image/jpeg' => 'jpg',
+        'image/pjpeg' => 'jpg',
+        'image/svg+xml' => 'svg',
+        'image/png' => 'png',
+        'image/x-png' => 'png',
+        'image/tiff' => 'tif',
+        'image/x-tiff' => 'tif',
+    ];
+
     protected function __construct()
     {
         require_once(dirname(__FILE__) . '/../bootstrap.php');
@@ -644,11 +672,18 @@ class Application extends CoreApplication
             if (count($imagePaths) > 0) {
                 for ($i = 0; $i < count($images); $i++) {
                     foreach ($imagePaths as $imagePath) {
-                        $infos = pathinfo($imagePath);
-                        list($hostId, $relationType) = explode('_', $infos['filename']);
+                        $fileInfo = pathinfo($imagePath);
+                        list($hostId, $relationType) = explode('_', $fileInfo['filename']);
                         if ((int)$hostId == $images[$i]->getId()->getHost()
                             && strtolower($relationType) === strtolower($images[$i]->getRelationType())
                         ) {
+                            $extension = self::determineExtensionByMimeType(mime_content_type($imagePath));
+                            if($extension !== null && $fileInfo['extension'] !== $extension) {
+                                $newImagePath = sprintf('%s/%s.%s', dirname($imagePath), $fileInfo['filename'], $extension);
+                                rename($imagePath, $newImagePath);
+                                $imagePath = $newImagePath;
+                            }
+
                             $images[$i]->setFilename($imagePath);
                         }
                     }
@@ -803,5 +838,14 @@ class Application extends CoreApplication
         if ($wasSaved === false) {
             throw new \Exception('Features file was not updated');
         }
+    }
+
+    /**
+     * @param string $mimeType
+     * @return string
+     */
+    protected static function determineExtensionByMimeType(string $mimeType): ?string
+    {
+        return self::$mimeTypeToExtensionMappings[$mimeType] ?? null;
     }
 }
