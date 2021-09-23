@@ -7,7 +7,7 @@
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
-use Jtl\Connector\Core\Exception\ModelException;
+use Jtl\Connector\Core\Exception\TranslatableAttributeException;
 
 /**
  * TranslatableAttribute class
@@ -22,6 +22,7 @@ class TranslatableAttribute extends AbstractIdentity
         TYPE_BOOL = 'bool',
         TYPE_FLOAT = 'float',
         TYPE_INT = 'int',
+        TYPE_JSON = 'json',
         TYPE_STRING = 'string';
 
     /**
@@ -64,6 +65,7 @@ class TranslatableAttribute extends AbstractIdentity
         self::TYPE_BOOL,
         self::TYPE_FLOAT,
         self::TYPE_INT,
+        self::TYPE_JSON,
         self::TYPE_STRING,
     ];
 
@@ -116,12 +118,12 @@ class TranslatableAttribute extends AbstractIdentity
     /**
      * @param string $type
      * @return $this
-     * @throws ModelException
+     * @throws TranslatableAttributeException
      */
     public function setType(string $type): self
     {
         if (!self::isType($type)) {
-            throw ModelException::translatableAttributeTypeUnknown($type);
+            throw TranslatableAttributeException::typeUnknown($type);
         }
 
         $this->type = $type;
@@ -221,6 +223,7 @@ class TranslatableAttribute extends AbstractIdentity
     /**
      * @param string|null $castToType
      * @return array
+     * @throws TranslatableAttributeException
      */
     public function getValues(string $castToType = null): array
     {

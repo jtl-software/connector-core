@@ -2,7 +2,7 @@
 
 namespace src\Model;
 
-use Jtl\Connector\Core\Exception\ModelException;
+use Jtl\Connector\Core\Exception\TranslatableAttributeException;
 use Jtl\Connector\Core\Model\Generator\AbstractModelFactory;
 use Jtl\Connector\Core\Model\Generator\TranslatableAttributeI18nFactory;
 use Jtl\Connector\Core\Model\TranslatableAttribute;
@@ -53,7 +53,7 @@ class TranslatableAttributeTest extends TestCase
      * @param string $type
      * @param TranslatableAttributeI18n|null $translation
      * @param $expectedValue
-     * @throws ModelException
+     * @throws TranslatableAttributeException
      */
     public function testFindValue(string $type, ?TranslatableAttributeI18n $translation, $expectedValue)
     {

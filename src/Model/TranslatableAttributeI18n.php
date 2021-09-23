@@ -8,7 +8,7 @@
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
-use Jtl\Connector\Core\Exception\ModelException;
+use Jtl\Connector\Core\Exception\TranslatableAttributeException;
 
 /**
  * @access public
@@ -25,7 +25,7 @@ class TranslatableAttributeI18n extends AbstractI18n
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-    
+
     /**
      * @var string
      * @Serializer\Type("string")
@@ -35,16 +35,30 @@ class TranslatableAttributeI18n extends AbstractI18n
     protected $value = '';
 
     /**
+     * @var bool
+     * @Serializer\Exclude
+     */
+    protected $strictMode = false;
+
+    /**
+     * @param bool $strictMode
+     */
+    public function __construct(bool $strictMode = false)
+    {
+        $this->strictMode = $strictMode;
+    }
+
+    /**
      * @param string $name
      * @return TranslatableAttributeI18n
      */
     public function setName(string $name): self
     {
         $this->name = $name;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -56,19 +70,24 @@ class TranslatableAttributeI18n extends AbstractI18n
     /**
      * @param mixed $value
      * @return TranslatableAttributeI18n
-     * @throws ModelException
+     * @throws TranslatableAttributeException
      */
     public function setValue($value): self
     {
         $type = gettype($value);
 
-        if (!in_array($type, ['boolean', 'integer', 'double', 'string'], true)) {
-            throw ModelException::translatableAttributeValueTypeInvalid($type);
+        if (!in_array($type, ['array', 'object', 'boolean', 'integer', 'double', 'string'], true)) {
+            throw TranslatableAttributeException::valueTypeInvalid($type);
         }
 
         switch ($type) {
             case 'boolean':
                 $this->value = $value === true ? '1' : '0';
+                break;
+
+            case 'array':
+            case 'object':
+                $this->value = json_encode($value);
                 break;
 
             default:
@@ -82,6 +101,7 @@ class TranslatableAttributeI18n extends AbstractI18n
     /**
      * @param string $castToType
      * @return bool|float|int|string
+     * @throws TranslatableAttributeException
      */
     public function getValue(string $castToType = TranslatableAttribute::TYPE_STRING)
     {
@@ -93,6 +113,13 @@ class TranslatableAttributeI18n extends AbstractI18n
 
             case TranslatableAttribute::TYPE_INT:
                 $value = (int)$this->value;
+                break;
+
+            case TranslatableAttribute::TYPE_JSON:
+                $value = json_decode($value, true);
+                if ($this->strictMode && json_last_error() !== \JSON_ERROR_NONE) {
+                    throw TranslatableAttributeException::decodingValueFailed($this->name, json_last_error_msg());
+                }
                 break;
 
             case TranslatableAttribute::TYPE_FLOAT:
