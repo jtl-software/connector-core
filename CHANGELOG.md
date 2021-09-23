@@ -1,3 +1,8 @@
+3.3.4
+-----
+- Added type to category and product attributes
+- Added image extension check
+
 3.3.3
 -----
 - Added nullable to tax class id getter on product
