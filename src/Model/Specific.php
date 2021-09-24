@@ -66,30 +66,10 @@ class Specific extends AbstractIdentity
     protected $values = [];
 
     /**
-     * @param string $mainLanguageIso
-     * @return array
-     */
-    public function getIdentificationStrings(string $mainLanguageIso = 'de'): array
-    {
-        $i18n = null;
-        foreach ($this->getI18ns() as $i18n) {
-            if ($mainLanguageIso === $i18n->getLanguageIso()) {
-                break;
-            }
-        }
-
-        if ($i18n !== null && $i18n->getName() !== '') {
-            $this->setIdentificationString(sprintf('Name = %s', $i18n->getName()));
-        }
-
-        return parent::getIdentificationStrings($mainLanguageIso);
-    }
-
-    /**
      * @param boolean $isGlobal Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
      * @return Specific
      */
-    public function setIsGlobal(bool $isGlobal): Specific
+    public function setIsGlobal(bool $isGlobal): self
     {
         $this->isGlobal = $isGlobal;
         
@@ -108,7 +88,7 @@ class Specific extends AbstractIdentity
      * @param integer $sort Optional sort number
      * @return Specific
      */
-    public function setSort(int $sort): Specific
+    public function setSort(int $sort): self
     {
         $this->sort = $sort;
         
@@ -127,7 +107,7 @@ class Specific extends AbstractIdentity
      * @param string $type Specific type (radio, dropdown, image...)
      * @return Specific
      */
-    public function setType(string $type): Specific
+    public function setType(string $type): self
     {
         $this->type = $type;
         
@@ -146,7 +126,7 @@ class Specific extends AbstractIdentity
      * @param SpecificI18n $i18n
      * @return Specific
      */
-    public function addI18n(SpecificI18n $i18n): Specific
+    public function addI18n(SpecificI18n $i18n): self
     {
         $this->i18ns[] = $i18n;
         
@@ -157,7 +137,7 @@ class Specific extends AbstractIdentity
      * @param SpecificI18n ...$i18ns
      * @return Specific
      */
-    public function setI18ns(SpecificI18n ...$i18ns): Specific
+    public function setI18ns(SpecificI18n ...$i18ns): self
     {
         $this->i18ns = $i18ns;
         
@@ -175,7 +155,7 @@ class Specific extends AbstractIdentity
     /**
      * @return Specific
      */
-    public function clearI18ns(): Specific
+    public function clearI18ns(): self
     {
         $this->i18ns = [];
         
@@ -186,7 +166,7 @@ class Specific extends AbstractIdentity
      * @param SpecificValue $value
      * @return Specific
      */
-    public function addValue(SpecificValue $value): Specific
+    public function addValue(SpecificValue $value): self
     {
         $this->values[] = $value;
         
@@ -197,7 +177,7 @@ class Specific extends AbstractIdentity
      * @param SpecificValue ...$values
      * @return Specific
      */
-    public function setValues(SpecificValue ...$values): Specific
+    public function setValues(SpecificValue ...$values): self
     {
         $this->values = $values;
         
@@ -215,10 +195,25 @@ class Specific extends AbstractIdentity
     /**
      * @return Specific
      */
-    public function clearValues(): Specific
+    public function clearValues(): self
     {
         $this->values = [];
         
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getIdentificationStrings(): array
+    {
+        foreach ($this->getI18ns() as $i18n) {
+            if ($i18n->getName() !== '') {
+                $this->setIdentificationStringBySubject('name', sprintf('Name = %s', $i18n->getName()) );
+                break;
+            }
+        }
+
+        return parent::getIdentificationStrings();
     }
 }

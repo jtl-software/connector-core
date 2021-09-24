@@ -96,34 +96,10 @@ class Category extends AbstractIdentity
     }
 
     /**
-     * @param string $mainLanguageIso
-     * @return array
-     */
-    public function getIdentificationStrings(string $mainLanguageIso = 'de'): array
-    {
-        if ($this->getParentCategoryId()->getHost() > 0) {
-            $this->setIdentificationString(sprintf('Parent Wawi PK = %s', $this->getParentCategoryId()->getHost()));
-        }
-
-        $i18n = null;
-        foreach ($this->getI18ns() as $i18n) {
-            if ($mainLanguageIso === $i18n->getLanguageIso()) {
-                break;
-            }
-        }
-
-        if ($i18n !== null && $i18n->getName() !== '') {
-            $this->setIdentificationString(sprintf('Name = %s', $i18n->getName()));
-        }
-
-        return parent::getIdentificationStrings($mainLanguageIso);
-    }
-
-    /**
      * @param Identity $parentCategoryId Optional reference to parent category id
      * @return Category
      */
-    public function setParentCategoryId(Identity $parentCategoryId): Category
+    public function setParentCategoryId(Identity $parentCategoryId): self
     {
         $this->parentCategoryId = $parentCategoryId;
 
@@ -142,7 +118,7 @@ class Category extends AbstractIdentity
      * @param boolean $isActive
      * @return Category
      */
-    public function setIsActive(bool $isActive): Category
+    public function setIsActive(bool $isActive): self
     {
         $this->isActive = $isActive;
 
@@ -161,7 +137,7 @@ class Category extends AbstractIdentity
      * @param integer $level
      * @return Category
      */
-    public function setLevel(int $level): Category
+    public function setLevel(int $level): self
     {
         $this->level = $level;
 
@@ -180,7 +156,7 @@ class Category extends AbstractIdentity
      * @param integer $sort Optional sort order number
      * @return Category
      */
-    public function setSort(int $sort): Category
+    public function setSort(int $sort): self
     {
         $this->sort = $sort;
 
@@ -199,7 +175,7 @@ class Category extends AbstractIdentity
      * @param TranslatableAttribute|CategoryAttribute $attribute
      * @return Category
      */
-    public function addAttribute(TranslatableAttribute $attribute): Category
+    public function addAttribute(TranslatableAttribute $attribute): self
     {
         $this->attributes[] = $attribute;
 
@@ -210,7 +186,7 @@ class Category extends AbstractIdentity
      * @param TranslatableAttribute|CategoryAttribute ...$attributes
      * @return Category
      */
-    public function setAttributes(TranslatableAttribute ...$attributes): Category
+    public function setAttributes(TranslatableAttribute ...$attributes): self
     {
         $this->attributes = $attributes;
 
@@ -228,7 +204,7 @@ class Category extends AbstractIdentity
     /**
      * @return Category
      */
-    public function clearAttributes(): Category
+    public function clearAttributes(): self
     {
         $this->attributes = [];
 
@@ -239,7 +215,7 @@ class Category extends AbstractIdentity
      * @param CategoryCustomerGroup $customerGroup
      * @return Category
      */
-    public function addCustomerGroup(CategoryCustomerGroup $customerGroup): Category
+    public function addCustomerGroup(CategoryCustomerGroup $customerGroup): self
     {
         $this->customerGroups[] = $customerGroup;
 
@@ -250,7 +226,7 @@ class Category extends AbstractIdentity
      * @param CategoryCustomerGroup ...$customerGroups
      * @return Category
      */
-    public function setCustomerGroups(CategoryCustomerGroup ...$customerGroups): Category
+    public function setCustomerGroups(CategoryCustomerGroup ...$customerGroups): self
     {
         $this->customerGroups = $customerGroups;
 
@@ -268,7 +244,7 @@ class Category extends AbstractIdentity
     /**
      * @return Category
      */
-    public function clearCustomerGroups(): Category
+    public function clearCustomerGroups(): self
     {
         $this->customerGroups = [];
 
@@ -279,7 +255,7 @@ class Category extends AbstractIdentity
      * @param CategoryI18n $i18n
      * @return Category
      */
-    public function addI18n(CategoryI18n $i18n): Category
+    public function addI18n(CategoryI18n $i18n): self
     {
         $this->i18ns[] = $i18n;
 
@@ -290,7 +266,7 @@ class Category extends AbstractIdentity
      * @param CategoryI18n ...$i18ns
      * @return Category
      */
-    public function setI18ns(CategoryI18n ...$i18ns): Category
+    public function setI18ns(CategoryI18n ...$i18ns): self
     {
         $this->i18ns = $i18ns;
 
@@ -308,7 +284,7 @@ class Category extends AbstractIdentity
     /**
      * @return Category
      */
-    public function clearI18ns(): Category
+    public function clearI18ns(): self
     {
         $this->i18ns = [];
 
@@ -319,7 +295,7 @@ class Category extends AbstractIdentity
      * @param CategoryInvisibility $invisibility
      * @return Category
      */
-    public function addInvisibility(CategoryInvisibility $invisibility): Category
+    public function addInvisibility(CategoryInvisibility $invisibility): self
     {
         $this->invisibilities[] = $invisibility;
 
@@ -330,7 +306,7 @@ class Category extends AbstractIdentity
      * @param CategoryInvisibility ...$invisibilities
      * @return Category
      */
-    public function setInvisibilities(CategoryInvisibility ...$invisibilities): Category
+    public function setInvisibilities(CategoryInvisibility ...$invisibilities): self
     {
         $this->invisibilities = $invisibilities;
 
@@ -348,10 +324,27 @@ class Category extends AbstractIdentity
     /**
      * @return Category
      */
-    public function clearInvisibilities(): Category
+    public function clearInvisibilities(): self
     {
         $this->invisibilities = [];
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getIdentificationStrings(): array
+    {
+        $this->setIdentificationStringBySubject('parentCategoryId', sprintf('Parent Wawi PK = %s', $this->parentCategoryId->getHost()));
+
+        foreach ($this->getI18ns() as $i18n) {
+            if($i18n->getName() !== '') {
+                $this->setIdentificationStringBySubject('name', sprintf('Name = %s', $i18n->getName()));
+            }
+            break;
+        }
+
+        return parent::getIdentificationStrings();
     }
 }

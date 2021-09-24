@@ -61,24 +61,12 @@ class Manufacturer extends AbstractIdentity
     protected $i18ns = [];
 
     /**
-     * @param string $mainLanguageIso
-     * @return array
-     */
-    public function getIdentificationStrings(string $mainLanguageIso = 'de'): array
-    {
-        if ($this->name !== '') {
-            $this->setIdentificationString(sprintf('Name = %s', $this->name));
-        }
-
-        return parent::getIdentificationStrings($mainLanguageIso);
-    }
-
-    /**
      * @param string $name Manufacturer (brand) name
      * @return Manufacturer
      */
-    public function setName(string $name): Manufacturer
+    public function setName(string $name): self
     {
+        $this->setIdentificationStringBySubject('name', sprintf('Name = %s', $name));
         $this->name = $name;
         
         return $this;
@@ -96,7 +84,7 @@ class Manufacturer extends AbstractIdentity
      * @param integer $sort Optional sort number
      * @return Manufacturer
      */
-    public function setSort(int $sort): Manufacturer
+    public function setSort(int $sort): self
     {
         $this->sort = $sort;
         
@@ -115,7 +103,7 @@ class Manufacturer extends AbstractIdentity
      * @param string $urlPath Optional url path e.g. 'Products-manufactured-by-X'
      * @return Manufacturer
      */
-    public function setUrlPath(string $urlPath): Manufacturer
+    public function setUrlPath(string $urlPath): self
     {
         $this->urlPath = $urlPath;
         
@@ -134,7 +122,7 @@ class Manufacturer extends AbstractIdentity
      * @param string $websiteUrl Optional manufacturer website URL
      * @return Manufacturer
      */
-    public function setWebsiteUrl(string $websiteUrl): Manufacturer
+    public function setWebsiteUrl(string $websiteUrl): self
     {
         $this->websiteUrl = $websiteUrl;
         
@@ -153,7 +141,7 @@ class Manufacturer extends AbstractIdentity
      * @param ManufacturerI18n $i18n
      * @return Manufacturer
      */
-    public function addI18n(ManufacturerI18n $i18n): Manufacturer
+    public function addI18n(ManufacturerI18n $i18n): self
     {
         $this->i18ns[] = $i18n;
         
@@ -164,7 +152,7 @@ class Manufacturer extends AbstractIdentity
      * @param ManufacturerI18n ...$i18ns
      * @return Manufacturer
      */
-    public function setI18ns(ManufacturerI18n ...$i18ns): Manufacturer
+    public function setI18ns(ManufacturerI18n ...$i18ns): self
     {
         $this->i18ns = $i18ns;
         
@@ -182,7 +170,7 @@ class Manufacturer extends AbstractIdentity
     /**
      * @return Manufacturer
      */
-    public function clearI18ns(): Manufacturer
+    public function clearI18ns(): self
     {
         $this->i18ns = [];
         

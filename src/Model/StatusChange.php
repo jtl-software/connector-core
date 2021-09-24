@@ -54,7 +54,7 @@ class StatusChange extends AbstractModel
      * @param Identity $customerOrderId
      * @return StatusChange
      */
-    public function setCustomerOrderId(Identity $customerOrderId): StatusChange
+    public function setCustomerOrderId(Identity $customerOrderId): self
     {
         $this->customerOrderId = $customerOrderId;
         
@@ -70,21 +70,10 @@ class StatusChange extends AbstractModel
     }
 
     /**
-     * @param string $mainLanguageIso
-     * @return string[]
-     */
-    public function getIdentificationStrings(string $mainLanguageIso = 'de'): array
-    {
-        $this->setIdentificationString(sprintf('JTL-Wawi PK = %d', $this->getCustomerOrderId()->getHost()));
-
-        return parent::getIdentificationStrings($mainLanguageIso);
-    }
-
-    /**
      * @param string $orderStatus
      * @return StatusChange
      */
-    public function setOrderStatus(string $orderStatus): StatusChange
+    public function setOrderStatus(string $orderStatus): self
     {
         $this->orderStatus = $orderStatus;
         
@@ -103,7 +92,7 @@ class StatusChange extends AbstractModel
      * @param string $paymentStatus
      * @return StatusChange
      */
-    public function setPaymentStatus(string $paymentStatus): StatusChange
+    public function setPaymentStatus(string $paymentStatus): self
     {
         $this->paymentStatus = $paymentStatus;
         
@@ -116,5 +105,15 @@ class StatusChange extends AbstractModel
     public function getPaymentStatus(): string
     {
         return $this->paymentStatus;
+    }
+
+    /**
+     * @return array
+     */
+    public function getIdentificationStrings(): array
+    {
+        $this->setIdentificationStringBySubject('customerOrderId', sprintf('JTL-Wawi PK = %d', $this->customerOrderId->getHost()));
+
+        return parent::getIdentificationStrings();
     }
 }

@@ -5,7 +5,6 @@ use Faker\Factory;
 use Faker\Generator;
 use Jtl\Connector\Core\Config\ArrayConfig;
 use Jtl\Connector\Core\Config\FileConfig;
-use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Model\Identity;
 use Noodlehaus\AbstractConfig;
 use org\bovigo\vfs\vfsStream;
@@ -15,7 +14,7 @@ use org\bovigo\vfs\vfsStreamDirectory;
  * Class TestCase
  * @package Jtl\Connector\Core\Tests
  */
-class TestCase extends \PHPUnit\Framework\TestCase
+class TestCase extends \Jtl\UnitTest\TestCase
 {
     protected $connectorDir = TEST_DIR;
 
@@ -126,37 +125,9 @@ class TestCase extends \PHPUnit\Framework\TestCase
         return $testCases;
     }
 
-
-    /**
-     * @param string $className
-     * @param string $methodName
-     * @param mixed ...$methodArgs
-     * @return mixed
-     * @throws \ReflectionException
-     */
-    protected function invokeMethod(string $className, string $methodName, ...$methodArgs)
-    {
-        return $this->invokeMethodFromObject($this->createMock($className), $methodName, ...$methodArgs);
-    }
-
-    /**
-     * @param object $object
-     * @param string $methodName
-     * @param mixed ...$methodArgs
-     * @return mixed
-     * @throws \ReflectionException
-     */
-    protected function invokeMethodFromObject(object $object, string $methodName, ...$methodArgs)
-    {
-        $reflection = new \ReflectionClass($object);
-        $method = $reflection->getMethod($methodName);
-        $method->setAccessible(true);
-        return $method->invoke($object, ...$methodArgs);
-    }
-
     /**
      * @param array $data
-     * @return AbstractConfig|__anonymous@2834
+     * @return ArrayConfig
      */
     protected function createConfig(array $data = [])
     {

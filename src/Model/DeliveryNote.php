@@ -118,17 +118,6 @@ class DeliveryNote extends AbstractIdentity
     }
 
     /**
-     * @param string $mainLanguageIso
-     * @return string[]
-     */
-    public function getIdentificationStrings(string $mainLanguageIso = 'de'): array
-    {
-        $this->setIdentificationString(sprintf('Related type CustomerOrder (JTL-Wawi PK = %d)', $this->getCustomerOrderId()->getHost()));
-
-        return parent::getIdentificationStrings($mainLanguageIso);
-    }
-
-    /**
      * @param boolean $isFulfillment Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
      * @return DeliveryNote
      */
@@ -244,5 +233,15 @@ class DeliveryNote extends AbstractIdentity
         $this->trackingLists = [];
         
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getIdentificationStrings(): array
+    {
+        $this->setIdentificationStringBySubject('customerOrderId', sprintf('Related type CustomerOrder (JTL-Wawi PK = %d)', $this->customerOrderId->getHost()));
+
+        return parent::getIdentificationStrings();
     }
 }

@@ -659,7 +659,7 @@ class Application
         }
 
         if ($model instanceof AbstractModel) {
-            $messages = array_merge($messages, $model->getIdentificationStrings($this->config->get(ConfigSchema::MAIN_LANGUAGE, 'de')));
+            $messages = array_merge($messages, $model->getIdentificationStrings());
         }
 
         $messages[] = $ex->getMessage();

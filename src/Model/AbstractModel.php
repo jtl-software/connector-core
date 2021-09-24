@@ -37,14 +37,11 @@ abstract class AbstractModel
 
     /**
      * @param string $identificationString
-     * @param string|null $subject
      * @return AbstractModel
      */
-    public function setIdentificationString(string $identificationString, string $subject = null): self
+    public function setIdentificationString(string $identificationString): self
     {
-        if ($subject !== null) {
-            $this->identificationStrings[$subject] = $identificationString;
-        } elseif (!in_array($identificationString, $this->identificationStrings, true)) {
+        if (!in_array($identificationString, $this->identificationStrings, true)) {
             $this->identificationStrings[] = $identificationString;
         }
 
@@ -52,10 +49,46 @@ abstract class AbstractModel
     }
 
     /**
-     * @param string $mainLanguageIso
+     * @param string $subject
+     * @param string $identificationString
+     * @return $this
+     */
+    public function setIdentificationStringBySubject(string $subject, string $identificationString): self
+    {
+        $this->identificationStrings[$subject] = $identificationString;
+
+        return $this;
+    }
+
+    /**
+     * @param string $identificationString
+     * @return AbstractModel
+     */
+    public function unsetIdentificationString(string $identificationString): self
+    {
+        $index = array_search($identificationString, $this->identificationStrings, true);
+        if($index !== false) {
+            unset($this->identificationStrings[$index]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string $subject
+     * @return AbstractModel
+     */
+    public function unsetIdentificationStringBySubject(string $subject): self
+    {
+        unset($this->identificationStrings[$subject]);
+
+        return $this;
+    }
+
+    /**
      * @return array<string>
      */
-    public function getIdentificationStrings(string $mainLanguageIso = 'de'): array
+    public function getIdentificationStrings(): array
     {
         return array_values($this->identificationStrings);
     }
@@ -65,6 +98,6 @@ abstract class AbstractModel
      */
     public function hasIdentificationStrings(): bool
     {
-        return count($this->getIdentificationStrings()) > 0;
+        return count($this->identificationStrings) > 0;
     }
 }

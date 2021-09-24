@@ -136,11 +136,13 @@ abstract class AbstractImage extends AbstractIdentity
 
     /**
      * @param Identity $foreignKey
-     * @return AbstractImage
+     * @return $this
+     * @throws DefinitionException
      */
     public function setForeignKey(Identity $foreignKey): AbstractImage
     {
         $this->foreignKey = $foreignKey;
+
         return $this;
     }
 
@@ -182,18 +184,6 @@ abstract class AbstractImage extends AbstractIdentity
         $this->i18ns = $i18ns;
 
         return $this;
-    }
-
-    /**
-     * @param string $mainLanguageIso
-     * @return array
-     * @throws DefinitionException
-     */
-    public function getIdentificationStrings(string $mainLanguageIso = 'de'): array
-    {
-        $this->setIdentificationString(sprintf('Related type %s (JTL-Wawi PK = %d)', ucfirst($this->getRelationType()), $this->getForeignKey()->getHost()));
-
-        return parent::getIdentificationStrings($mainLanguageIso);
     }
 
     /**
@@ -259,5 +249,16 @@ abstract class AbstractImage extends AbstractIdentity
     {
         $this->sort = $sort;
         return $this;
+    }
+
+    /**
+     * @return array
+     * @throws DefinitionException
+     */
+    public function getIdentificationStrings(): array
+    {
+        $this->setIdentificationStringBySubject('foreignKey', sprintf('Related type %s (JTL-Wawi PK = %d)', ucfirst($this->getRelationType()), $this->foreignKey->getHost()));
+
+        return parent::getIdentificationStrings();
     }
 }

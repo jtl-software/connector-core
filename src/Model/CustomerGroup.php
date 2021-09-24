@@ -61,30 +61,10 @@ class CustomerGroup extends AbstractIdentity
     protected $i18ns = [];
 
     /**
-     * @param string $mainLanguageIso
-     * @return array
-     */
-    public function getIdentificationStrings(string $mainLanguageIso = 'de'): array
-    {
-        $i18n = null;
-        foreach ($this->getI18ns() as $i18n) {
-            if ($mainLanguageIso === $i18n->getLanguageIso()) {
-                break;
-            }
-        }
-
-        if ($i18n !== null) {
-            $this->setIdentificationString(sprintf('Name = %s', $i18n->getName()));
-        }
-
-        return parent::getIdentificationStrings($mainLanguageIso);
-    }
-
-    /**
      * @param boolean $applyNetPrice Optional: Show net prices default instead of gross prices
      * @return CustomerGroup
      */
-    public function setApplyNetPrice(bool $applyNetPrice): CustomerGroup
+    public function setApplyNetPrice(bool $applyNetPrice): self
     {
         $this->applyNetPrice = $applyNetPrice;
         
@@ -103,7 +83,7 @@ class CustomerGroup extends AbstractIdentity
      * @param double $discount Optional percentual discount on all products. Negative Value means surcharge.
      * @return CustomerGroup
      */
-    public function setDiscount(float $discount): CustomerGroup
+    public function setDiscount(float $discount): self
     {
         $this->discount = $discount;
         
@@ -122,7 +102,7 @@ class CustomerGroup extends AbstractIdentity
      * @param boolean $isDefault Optional: Flag default customer group
      * @return CustomerGroup
      */
-    public function setIsDefault(bool $isDefault): CustomerGroup
+    public function setIsDefault(bool $isDefault): self
     {
         $this->isDefault = $isDefault;
         
@@ -141,7 +121,7 @@ class CustomerGroup extends AbstractIdentity
      * @param CustomerGroupAttr $attribute
      * @return CustomerGroup
      */
-    public function addAttribute(CustomerGroupAttr $attribute): CustomerGroup
+    public function addAttribute(CustomerGroupAttr $attribute): self
     {
         $this->attributes[] = $attribute;
         
@@ -152,7 +132,7 @@ class CustomerGroup extends AbstractIdentity
      * @param CustomerGroupAttr ...$attributes
      * @return CustomerGroup
      */
-    public function setAttributes(CustomerGroupAttr ...$attributes): CustomerGroup
+    public function setAttributes(CustomerGroupAttr ...$attributes): self
     {
         $this->attributes = $attributes;
         
@@ -170,7 +150,7 @@ class CustomerGroup extends AbstractIdentity
     /**
      * @return CustomerGroup
      */
-    public function clearAttributes(): CustomerGroup
+    public function clearAttributes(): self
     {
         $this->attributes = [];
         
@@ -181,7 +161,7 @@ class CustomerGroup extends AbstractIdentity
      * @param CustomerGroupI18n $i18n
      * @return CustomerGroup
      */
-    public function addI18n(CustomerGroupI18n $i18n): CustomerGroup
+    public function addI18n(CustomerGroupI18n $i18n): self
     {
         $this->i18ns[] = $i18n;
         
@@ -192,7 +172,7 @@ class CustomerGroup extends AbstractIdentity
      * @param CustomerGroupI18n ...$i18ns
      * @return CustomerGroup
      */
-    public function setI18ns(CustomerGroupI18n ...$i18ns): CustomerGroup
+    public function setI18ns(CustomerGroupI18n ...$i18ns): self
     {
         $this->i18ns = $i18ns;
         
@@ -210,10 +190,25 @@ class CustomerGroup extends AbstractIdentity
     /**
      * @return CustomerGroup
      */
-    public function clearI18ns(): CustomerGroup
+    public function clearI18ns(): self
     {
         $this->i18ns = [];
         
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getIdentificationStrings(): array
+    {
+        foreach ($this->getI18ns() as $i18n) {
+            if ($i18n->getName() !== '') {
+                $this->setIdentificationStringBySubject('name', sprintf('Name = %s', $i18n->getName()));
+                break;
+            }
+        }
+
+        return parent::getIdentificationStrings();
     }
 }
