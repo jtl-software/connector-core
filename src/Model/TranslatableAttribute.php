@@ -205,6 +205,7 @@ class TranslatableAttribute extends AbstractIdentity
      * @param string $languageIso
      * @param string|null $castToType
      * @return bool|float|int|string|null
+     * @throws TranslatableAttributeException
      */
     public function findValue(string $languageIso, string $castToType = null)
     {

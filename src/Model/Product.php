@@ -17,8 +17,9 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Product extends AbstractIdentity
+class Product extends AbstractIdentity implements TranslatableAttributesInterface
 {
+    use TranslatableAttributesTrait;
 
     /**
      * @var Identity Optional reference to basePriceUnit
@@ -421,7 +422,7 @@ class Product extends AbstractIdentity
     protected $originCountry = '';
 
     /**
-     * @var double Optional: Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
+     * @var double Optional: self can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
      * @Serializer\Type("double")
      * @Serializer\SerializedName("packagingQuantity")
      * @Serializer\Accessor(getter="getPackagingQuantity",setter="setPackagingQuantity")
@@ -752,7 +753,7 @@ class Product extends AbstractIdentity
      * @param Identity $basePriceUnitId Optional reference to basePriceUnit
      * @return Product
      */
-    public function setBasePriceUnitId(Identity $basePriceUnitId): Product
+    public function setBasePriceUnitId(Identity $basePriceUnitId): self
     {
         $this->basePriceUnitId = $basePriceUnitId;
 
@@ -771,7 +772,7 @@ class Product extends AbstractIdentity
      * @param Identity $manufacturerId Reference to manufacturer
      * @return Product
      */
-    public function setManufacturerId(Identity $manufacturerId): Product
+    public function setManufacturerId(Identity $manufacturerId): self
     {
         $this->manufacturerId = $manufacturerId;
 
@@ -790,7 +791,7 @@ class Product extends AbstractIdentity
      * @param Identity $masterProductId Reference to master product
      * @return Product
      */
-    public function setMasterProductId(Identity $masterProductId): Product
+    public function setMasterProductId(Identity $masterProductId): self
     {
         $this->masterProductId = $masterProductId;
 
@@ -809,7 +810,7 @@ class Product extends AbstractIdentity
      * @param Identity $measurementUnitId Optional reference to measurement unit id
      * @return Product
      */
-    public function setMeasurementUnitId(Identity $measurementUnitId): Product
+    public function setMeasurementUnitId(Identity $measurementUnitId): self
     {
         $this->measurementUnitId = $measurementUnitId;
 
@@ -828,7 +829,7 @@ class Product extends AbstractIdentity
      * @param Identity $partsListId Optional reference to partsList
      * @return Product
      */
-    public function setPartsListId(Identity $partsListId): Product
+    public function setPartsListId(Identity $partsListId): self
     {
         $this->partsListId = $partsListId;
 
@@ -847,7 +848,7 @@ class Product extends AbstractIdentity
      * @param Identity $productTypeId Optional reference to productType
      * @return Product
      */
-    public function setProductTypeId(Identity $productTypeId): Product
+    public function setProductTypeId(Identity $productTypeId): self
     {
         $this->productTypeId = $productTypeId;
 
@@ -866,7 +867,7 @@ class Product extends AbstractIdentity
      * @param Identity $shippingClassId Reference to shippingClass
      * @return Product
      */
-    public function setShippingClassId(Identity $shippingClassId): Product
+    public function setShippingClassId(Identity $shippingClassId): self
     {
         $this->shippingClassId = $shippingClassId;
 
@@ -885,7 +886,7 @@ class Product extends AbstractIdentity
      * @param Identity $unitId Reference to unit
      * @return Product
      */
-    public function setUnitId(Identity $unitId): Product
+    public function setUnitId(Identity $unitId): self
     {
         $this->unitId = $unitId;
 
@@ -904,7 +905,7 @@ class Product extends AbstractIdentity
      * @param Identity $taxClassId
      * @return $this
      */
-    public function setTaxClassId(Identity $taxClassId): Product
+    public function setTaxClassId(Identity $taxClassId): self
     {
         $this->taxClassId = $taxClassId;
 
@@ -931,7 +932,7 @@ class Product extends AbstractIdentity
      * @param int $additionalHandlingTime
      * @return Product
      */
-    public function setAdditionalHandlingTime(int $additionalHandlingTime): Product
+    public function setAdditionalHandlingTime(int $additionalHandlingTime): self
     {
         $this->additionalHandlingTime = $additionalHandlingTime;
 
@@ -942,7 +943,7 @@ class Product extends AbstractIdentity
      * @param string $asin Optional Amazon Standard Identification Number
      * @return Product
      */
-    public function setAsin(string $asin): Product
+    public function setAsin(string $asin): self
     {
         $this->asin = $asin;
         return $this;
@@ -960,7 +961,7 @@ class Product extends AbstractIdentity
      * @param \DateTimeInterface|null $availableFrom Optional available from date. Specify a date, upon when product can be purchased.
      * @return Product
      */
-    public function setAvailableFrom(\DateTimeInterface $availableFrom = null): Product
+    public function setAvailableFrom(\DateTimeInterface $availableFrom = null): self
     {
         $this->availableFrom = $availableFrom;
 
@@ -979,7 +980,7 @@ class Product extends AbstractIdentity
      * @param double $basePriceDivisor Optional base price divisor. Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure. E.g. 75ml / 100ml = 0.75
      * @return Product
      */
-    public function setBasePriceDivisor(float $basePriceDivisor): Product
+    public function setBasePriceDivisor(float $basePriceDivisor): self
     {
         $this->basePriceDivisor = $basePriceDivisor;
 
@@ -998,7 +999,7 @@ class Product extends AbstractIdentity
      * @param double $basePriceFactor
      * @return Product
      */
-    public function setBasePriceFactor(float $basePriceFactor): Product
+    public function setBasePriceFactor(float $basePriceFactor): self
     {
         $this->basePriceFactor = $basePriceFactor;
 
@@ -1017,7 +1018,7 @@ class Product extends AbstractIdentity
      * @param double $basePriceQuantity Optional base price quantity
      * @return Product
      */
-    public function setBasePriceQuantity(float $basePriceQuantity): Product
+    public function setBasePriceQuantity(float $basePriceQuantity): self
     {
         $this->basePriceQuantity = $basePriceQuantity;
 
@@ -1036,7 +1037,7 @@ class Product extends AbstractIdentity
      * @param string $basePriceUnitCode
      * @return Product
      */
-    public function setBasePriceUnitCode(string $basePriceUnitCode): Product
+    public function setBasePriceUnitCode(string $basePriceUnitCode): self
     {
         $this->basePriceUnitCode = $basePriceUnitCode;
 
@@ -1055,7 +1056,7 @@ class Product extends AbstractIdentity
      * @param string $basePriceUnitName
      * @return Product
      */
-    public function setBasePriceUnitName(string $basePriceUnitName): Product
+    public function setBasePriceUnitName(string $basePriceUnitName): self
     {
         $this->basePriceUnitName = $basePriceUnitName;
 
@@ -1074,7 +1075,7 @@ class Product extends AbstractIdentity
      * @param boolean $considerBasePrice Optional: Set to true to display base price / unit pricing measure
      * @return Product
      */
-    public function setConsiderBasePrice(bool $considerBasePrice): Product
+    public function setConsiderBasePrice(bool $considerBasePrice): self
     {
         $this->considerBasePrice = $considerBasePrice;
 
@@ -1093,7 +1094,7 @@ class Product extends AbstractIdentity
      * @param boolean $considerStock Consider stock level? If true, product can only be purchased with a positive stockLevel or when permitNegativeStock is set to true
      * @return Product
      */
-    public function setConsiderStock(bool $considerStock): Product
+    public function setConsiderStock(bool $considerStock): self
     {
         $this->considerStock = $considerStock;
 
@@ -1112,7 +1113,7 @@ class Product extends AbstractIdentity
      * @param boolean $considerVariationStock Optional: Consider stock levels of productVariations. Same as considerStock but for variations.
      * @return Product
      */
-    public function setConsiderVariationStock(bool $considerVariationStock): Product
+    public function setConsiderVariationStock(bool $considerVariationStock): self
     {
         $this->considerVariationStock = $considerVariationStock;
 
@@ -1131,7 +1132,7 @@ class Product extends AbstractIdentity
      * @param \DateTimeInterface|null $creationDate Creation date
      * @return Product
      */
-    public function setCreationDate(\DateTimeInterface $creationDate = null): Product
+    public function setCreationDate(\DateTimeInterface $creationDate = null): self
     {
         $this->creationDate = $creationDate;
 
@@ -1158,7 +1159,7 @@ class Product extends AbstractIdentity
      * @param bool $discountable
      * @return Product
      */
-    public function setDiscountable(bool $discountable): Product
+    public function setDiscountable(bool $discountable): self
     {
         $this->discountable = $discountable;
         return $this;
@@ -1168,7 +1169,7 @@ class Product extends AbstractIdentity
      * @param string $ean Optional European Article Number (EAN)
      * @return Product
      */
-    public function setEan(string $ean): Product
+    public function setEan(string $ean): self
     {
         $this->ean = $ean;
 
@@ -1187,7 +1188,7 @@ class Product extends AbstractIdentity
      * @param string $epid Optional Ebay product ID
      * @return Product
      */
-    public function setEpid(string $epid): Product
+    public function setEpid(string $epid): self
     {
         $this->epid = $epid;
 
@@ -1206,7 +1207,7 @@ class Product extends AbstractIdentity
      * @param string $hazardIdNumber Optional Hazard identifier, encodes general hazard class und subdivision
      * @return Product
      */
-    public function setHazardIdNumber(string $hazardIdNumber): Product
+    public function setHazardIdNumber(string $hazardIdNumber): self
     {
         $this->hazardIdNumber = $hazardIdNumber;
 
@@ -1225,7 +1226,7 @@ class Product extends AbstractIdentity
      * @param double $height Optional product height
      * @return Product
      */
-    public function setHeight(float $height): Product
+    public function setHeight(float $height): self
     {
         $this->height = $height;
 
@@ -1244,7 +1245,7 @@ class Product extends AbstractIdentity
      * @param boolean $isActive
      * @return Product
      */
-    public function setIsActive(bool $isActive): Product
+    public function setIsActive(bool $isActive): self
     {
         $this->isActive = $isActive;
 
@@ -1263,7 +1264,7 @@ class Product extends AbstractIdentity
      * @param boolean $isBatch
      * @return Product
      */
-    public function setIsBatch(bool $isBatch): Product
+    public function setIsBatch(bool $isBatch): self
     {
         $this->isBatch = $isBatch;
 
@@ -1282,7 +1283,7 @@ class Product extends AbstractIdentity
      * @param boolean $isBestBefore
      * @return Product
      */
-    public function setIsBestBefore(bool $isBestBefore): Product
+    public function setIsBestBefore(bool $isBestBefore): self
     {
         $this->isBestBefore = $isBestBefore;
 
@@ -1301,7 +1302,7 @@ class Product extends AbstractIdentity
      * @param string $isbn Optional International Standard Book Number
      * @return Product
      */
-    public function setIsbn(string $isbn): Product
+    public function setIsbn(string $isbn): self
     {
         $this->isbn = $isbn;
 
@@ -1320,7 +1321,7 @@ class Product extends AbstractIdentity
      * @param boolean $isDivisible Optional: Set to true to allow non-integer quantites for purchase
      * @return Product
      */
-    public function setIsDivisible(bool $isDivisible): Product
+    public function setIsDivisible(bool $isDivisible): self
     {
         $this->isDivisible = $isDivisible;
 
@@ -1339,7 +1340,7 @@ class Product extends AbstractIdentity
      * @param boolean $isMasterProduct Optional flag if product is master product
      * @return Product
      */
-    public function setIsMasterProduct(bool $isMasterProduct): Product
+    public function setIsMasterProduct(bool $isMasterProduct): self
     {
         $this->isMasterProduct = $isMasterProduct;
 
@@ -1358,7 +1359,7 @@ class Product extends AbstractIdentity
      * @param boolean $isNewProduct Optional flag new product. If true, product will be highlighted as new (creation date may also be considered)
      * @return Product
      */
-    public function setIsNewProduct(bool $isNewProduct): Product
+    public function setIsNewProduct(bool $isNewProduct): self
     {
         $this->isNewProduct = $isNewProduct;
 
@@ -1377,7 +1378,7 @@ class Product extends AbstractIdentity
      * @param boolean $isSerialNumber
      * @return Product
      */
-    public function setIsSerialNumber(bool $isSerialNumber): Product
+    public function setIsSerialNumber(bool $isSerialNumber): self
     {
         $this->isSerialNumber = $isSerialNumber;
 
@@ -1396,7 +1397,7 @@ class Product extends AbstractIdentity
      * @param boolean $isTopProduct Optional flag top product. If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
      * @return Product
      */
-    public function setIsTopProduct(bool $isTopProduct): Product
+    public function setIsTopProduct(bool $isTopProduct): self
     {
         $this->isTopProduct = $isTopProduct;
 
@@ -1415,7 +1416,7 @@ class Product extends AbstractIdentity
      * @param string $keywords Optional internal keywords and synonyms for product
      * @return Product
      */
-    public function setKeywords(string $keywords): Product
+    public function setKeywords(string $keywords): self
     {
         $this->keywords = $keywords;
 
@@ -1434,7 +1435,7 @@ class Product extends AbstractIdentity
      * @param double $length Optional product length
      * @return Product
      */
-    public function setLength(float $length): Product
+    public function setLength(float $length): self
     {
         $this->length = $length;
 
@@ -1453,7 +1454,7 @@ class Product extends AbstractIdentity
      * @param string $manufacturerNumber Optional manufacturer number
      * @return Product
      */
-    public function setManufacturerNumber(string $manufacturerNumber): Product
+    public function setManufacturerNumber(string $manufacturerNumber): self
     {
         $this->manufacturerNumber = $manufacturerNumber;
 
@@ -1472,7 +1473,7 @@ class Product extends AbstractIdentity
      * @param Manufacturer|null $manufacturer Optional manufacturer
      * @return Product
      */
-    public function setManufacturer(Manufacturer $manufacturer = null): Product
+    public function setManufacturer(Manufacturer $manufacturer = null): self
     {
         $this->manufacturer = $manufacturer;
 
@@ -1491,7 +1492,7 @@ class Product extends AbstractIdentity
      * @param double $measurementQuantity Optional measurement quantity
      * @return Product
      */
-    public function setMeasurementQuantity(float $measurementQuantity): Product
+    public function setMeasurementQuantity(float $measurementQuantity): self
     {
         $this->measurementQuantity = $measurementQuantity;
 
@@ -1510,7 +1511,7 @@ class Product extends AbstractIdentity
      * @param string $measurementUnitCode
      * @return Product
      */
-    public function setMeasurementUnitCode(string $measurementUnitCode): Product
+    public function setMeasurementUnitCode(string $measurementUnitCode): self
     {
         $this->measurementUnitCode = $measurementUnitCode;
 
@@ -1529,7 +1530,7 @@ class Product extends AbstractIdentity
      * @param \DateTimeInterface|null $minBestBeforeDate
      * @return Product
      */
-    public function setMinBestBeforeDate(\DateTimeInterface $minBestBeforeDate = null): Product
+    public function setMinBestBeforeDate(\DateTimeInterface $minBestBeforeDate = null): self
     {
         $this->minBestBeforeDate = $minBestBeforeDate;
 
@@ -1548,7 +1549,7 @@ class Product extends AbstractIdentity
      * @param double $minimumOrderQuantity
      * @return Product
      */
-    public function setMinimumOrderQuantity(float $minimumOrderQuantity): Product
+    public function setMinimumOrderQuantity(float $minimumOrderQuantity): self
     {
         $this->minimumOrderQuantity = $minimumOrderQuantity;
 
@@ -1567,7 +1568,7 @@ class Product extends AbstractIdentity
      * @param double $minimumQuantity
      * @return Product
      */
-    public function setMinimumQuantity(float $minimumQuantity): Product
+    public function setMinimumQuantity(float $minimumQuantity): self
     {
         $this->minimumQuantity = $minimumQuantity;
 
@@ -1586,7 +1587,7 @@ class Product extends AbstractIdentity
      * @param \DateTimeInterface $modified
      * @return Product
      */
-    public function setModified(\DateTimeInterface $modified = null): Product
+    public function setModified(\DateTimeInterface $modified = null): self
     {
         $this->modified = $modified;
 
@@ -1605,7 +1606,7 @@ class Product extends AbstractIdentity
      * @param \DateTimeInterface $newReleaseDate
      * @return Product
      */
-    public function setNewReleaseDate(\DateTimeInterface $newReleaseDate = null): Product
+    public function setNewReleaseDate(\DateTimeInterface $newReleaseDate = null): self
     {
         $this->newReleaseDate = $newReleaseDate;
 
@@ -1624,7 +1625,7 @@ class Product extends AbstractIdentity
      * @param \DateTimeInterface|null $nextAvailableInflowDate Contains the date of the next available inflow.
      * @return Product
      */
-    public function setNextAvailableInflowDate(\DateTimeInterface $nextAvailableInflowDate = null): Product
+    public function setNextAvailableInflowDate(\DateTimeInterface $nextAvailableInflowDate = null): self
     {
         $this->nextAvailableInflowDate = $nextAvailableInflowDate;
 
@@ -1643,7 +1644,7 @@ class Product extends AbstractIdentity
      * @param double $nextAvailableInflowQuantity Contains the quantity of the next available inflow.
      * @return Product
      */
-    public function setNextAvailableInflowQuantity(float $nextAvailableInflowQuantity): Product
+    public function setNextAvailableInflowQuantity(float $nextAvailableInflowQuantity): self
     {
         $this->nextAvailableInflowQuantity = $nextAvailableInflowQuantity;
 
@@ -1662,7 +1663,7 @@ class Product extends AbstractIdentity
      * @param string $note Optional internal product note
      * @return Product
      */
-    public function setNote(string $note): Product
+    public function setNote(string $note): self
     {
         $this->note = $note;
 
@@ -1681,7 +1682,7 @@ class Product extends AbstractIdentity
      * @param string $originCountry Optional Origin country
      * @return Product
      */
-    public function setOriginCountry(string $originCountry): Product
+    public function setOriginCountry(string $originCountry): self
     {
         $this->originCountry = $originCountry;
 
@@ -1697,10 +1698,10 @@ class Product extends AbstractIdentity
     }
 
     /**
-     * @param double $packagingQuantity Optional: Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
+     * @param double $packagingQuantity Optional: self can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
      * @return Product
      */
-    public function setPackagingQuantity(float $packagingQuantity): Product
+    public function setPackagingQuantity(float $packagingQuantity): self
     {
         $this->packagingQuantity = $packagingQuantity;
 
@@ -1708,7 +1709,7 @@ class Product extends AbstractIdentity
     }
 
     /**
-     * @return double Optional: Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
+     * @return double Optional: self can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
      */
     public function getPackagingQuantity(): float
     {
@@ -1719,7 +1720,7 @@ class Product extends AbstractIdentity
      * @param boolean $permitNegativeStock Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true.
      * @return Product
      */
-    public function setPermitNegativeStock(bool $permitNegativeStock): Product
+    public function setPermitNegativeStock(bool $permitNegativeStock): self
     {
         $this->permitNegativeStock = $permitNegativeStock;
 
@@ -1738,7 +1739,7 @@ class Product extends AbstractIdentity
      * @param double $productWeight Productweight exclusive packaging
      * @return Product
      */
-    public function setProductWeight(float $productWeight): Product
+    public function setProductWeight(float $productWeight): self
     {
         $this->productWeight = $productWeight;
 
@@ -1757,7 +1758,7 @@ class Product extends AbstractIdentity
      * @param double $purchasePrice
      * @return Product
      */
-    public function setPurchasePrice(float $purchasePrice): Product
+    public function setPurchasePrice(float $purchasePrice): self
     {
         $this->purchasePrice = $purchasePrice;
 
@@ -1776,7 +1777,7 @@ class Product extends AbstractIdentity
      * @param double $recommendedRetailPrice Optional recommended retail price (gross)
      * @return Product
      */
-    public function setRecommendedRetailPrice(float $recommendedRetailPrice): Product
+    public function setRecommendedRetailPrice(float $recommendedRetailPrice): self
     {
         $this->recommendedRetailPrice = $recommendedRetailPrice;
 
@@ -1795,7 +1796,7 @@ class Product extends AbstractIdentity
      * @param string $serialNumber Optional serial number
      * @return Product
      */
-    public function setSerialNumber(string $serialNumber): Product
+    public function setSerialNumber(string $serialNumber): self
     {
         $this->serialNumber = $serialNumber;
 
@@ -1814,7 +1815,7 @@ class Product extends AbstractIdentity
      * @param double $shippingWeight Productweight inclusive packaging
      * @return Product
      */
-    public function setShippingWeight(float $shippingWeight): Product
+    public function setShippingWeight(float $shippingWeight): self
     {
         $this->shippingWeight = $shippingWeight;
 
@@ -1833,7 +1834,7 @@ class Product extends AbstractIdentity
      * @param string $sku Optional stock keeping unit identifier
      * @return Product
      */
-    public function setSku(string $sku): Product
+    public function setSku(string $sku): self
     {
         $this->sku = $sku;
 
@@ -1852,7 +1853,7 @@ class Product extends AbstractIdentity
      * @param integer $sort Optional sort number for product sorting in lists
      * @return Product
      */
-    public function setSort(int $sort): Product
+    public function setSort(int $sort): self
     {
         $this->sort = $sort;
 
@@ -1871,7 +1872,7 @@ class Product extends AbstractIdentity
      * @param float $stockLevel
      * @return $this
      */
-    public function setStockLevel(float $stockLevel): Product
+    public function setStockLevel(float $stockLevel): self
     {
         $this->stockLevel = $stockLevel;
 
@@ -1890,7 +1891,7 @@ class Product extends AbstractIdentity
      * @param integer $supplierDeliveryTime
      * @return Product
      */
-    public function setSupplierDeliveryTime(int $supplierDeliveryTime): Product
+    public function setSupplierDeliveryTime(int $supplierDeliveryTime): self
     {
         $this->supplierDeliveryTime = $supplierDeliveryTime;
 
@@ -1909,7 +1910,7 @@ class Product extends AbstractIdentity
      * @param double $supplierStockLevel
      * @return Product
      */
-    public function setSupplierStockLevel(float $supplierStockLevel): Product
+    public function setSupplierStockLevel(float $supplierStockLevel): self
     {
         $this->supplierStockLevel = $supplierStockLevel;
 
@@ -1928,7 +1929,7 @@ class Product extends AbstractIdentity
      * @param string $taric Optional TARIC
      * @return Product
      */
-    public function setTaric(string $taric): Product
+    public function setTaric(string $taric): self
     {
         $this->taric = $taric;
 
@@ -1947,7 +1948,7 @@ class Product extends AbstractIdentity
      * @param string $unNumber Optional UN number, used to define hazardous properties
      * @return Product
      */
-    public function setUnNumber(string $unNumber): Product
+    public function setUnNumber(string $unNumber): self
     {
         $this->unNumber = $unNumber;
 
@@ -1966,7 +1967,7 @@ class Product extends AbstractIdentity
      * @param string $upc Optional Universal Product Code
      * @return Product
      */
-    public function setUpc(string $upc): Product
+    public function setUpc(string $upc): self
     {
         $this->upc = $upc;
 
@@ -1985,7 +1986,7 @@ class Product extends AbstractIdentity
      * @param double $vat
      * @return Product
      */
-    public function setVat(float $vat): Product
+    public function setVat(float $vat): self
     {
         $this->vat = $vat;
 
@@ -2004,7 +2005,7 @@ class Product extends AbstractIdentity
      * @param double $width Optional product width
      * @return Product
      */
-    public function setWidth(float $width): Product
+    public function setWidth(float $width): self
     {
         $this->width = $width;
 
@@ -2023,7 +2024,7 @@ class Product extends AbstractIdentity
      * @param TranslatableAttribute|ProductAttribute $attribute
      * @return Product
      */
-    public function addAttribute(TranslatableAttribute $attribute): Product
+    public function addAttribute(TranslatableAttribute $attribute): self
     {
         $this->attributes[] = $attribute;
 
@@ -2034,7 +2035,7 @@ class Product extends AbstractIdentity
      * @param TranslatableAttribute|ProductAttribute ...$attributes
      * @return Product
      */
-    public function setAttributes(TranslatableAttribute ...$attributes): Product
+    public function setAttributes(TranslatableAttribute ...$attributes): TranslatableAttributesInterface
     {
         $this->attributes = $attributes;
 
@@ -2052,7 +2053,7 @@ class Product extends AbstractIdentity
     /**
      * @return Product
      */
-    public function clearAttributes(): Product
+    public function clearAttributes(): self
     {
         $this->attributes = [];
 
@@ -2063,7 +2064,7 @@ class Product extends AbstractIdentity
      * @param Product2Category $category
      * @return Product
      */
-    public function addCategory(Product2Category $category): Product
+    public function addCategory(Product2Category $category): self
     {
         $this->categories[] = $category;
 
@@ -2074,7 +2075,7 @@ class Product extends AbstractIdentity
      * @param Product2Category ...$categories
      * @return Product
      */
-    public function setCategories(Product2Category ...$categories): Product
+    public function setCategories(Product2Category ...$categories): self
     {
         $this->categories = $categories;
 
@@ -2092,7 +2093,7 @@ class Product extends AbstractIdentity
     /**
      * @return Product
      */
-    public function clearCategories(): Product
+    public function clearCategories(): self
     {
         $this->categories = [];
 
@@ -2103,7 +2104,7 @@ class Product extends AbstractIdentity
      * @param ProductChecksum $checksum
      * @return Product
      */
-    public function addChecksum(ProductChecksum $checksum): Product
+    public function addChecksum(ProductChecksum $checksum): self
     {
         $this->checksums[] = $checksum;
 
@@ -2114,7 +2115,7 @@ class Product extends AbstractIdentity
      * @param ProductChecksum ...$checksums
      * @return Product
      */
-    public function setChecksums(ProductChecksum ...$checksums): Product
+    public function setChecksums(ProductChecksum ...$checksums): self
     {
         $this->checksums = $checksums;
 
@@ -2132,7 +2133,7 @@ class Product extends AbstractIdentity
     /**
      * @return Product
      */
-    public function clearChecksums(): Product
+    public function clearChecksums(): self
     {
         $this->checksums = [];
 
@@ -2143,7 +2144,7 @@ class Product extends AbstractIdentity
      * @param ProductConfigGroup $configGroup
      * @return Product
      */
-    public function addConfigGroup(ProductConfigGroup $configGroup): Product
+    public function addConfigGroup(ProductConfigGroup $configGroup): self
     {
         $this->configGroups[] = $configGroup;
 
@@ -2154,7 +2155,7 @@ class Product extends AbstractIdentity
      * @param ProductConfigGroup ...$configGroups
      * @return Product
      */
-    public function setConfigGroups(ProductConfigGroup ...$configGroups): Product
+    public function setConfigGroups(ProductConfigGroup ...$configGroups): self
     {
         $this->configGroups = $configGroups;
 
@@ -2172,7 +2173,7 @@ class Product extends AbstractIdentity
     /**
      * @return Product
      */
-    public function clearConfigGroups(): Product
+    public function clearConfigGroups(): self
     {
         $this->configGroups = [];
 
@@ -2197,7 +2198,7 @@ class Product extends AbstractIdentity
      */
     public function setCustomerGroupPackagingQuantities(
         CustomerGroupPackagingQuantity ...$customerGroupPackagingQuantities
-    ): Product {
+    ): self {
         $this->customerGroupPackagingQuantities = $customerGroupPackagingQuantities;
 
         return $this;
@@ -2214,7 +2215,7 @@ class Product extends AbstractIdentity
     /**
      * @return Product
      */
-    public function clearCustomerGroupPackagingQuantities(): Product
+    public function clearCustomerGroupPackagingQuantities(): self
     {
         $this->customerGroupPackagingQuantities = [];
 
@@ -2225,7 +2226,7 @@ class Product extends AbstractIdentity
      * @param ProductFileDownload $fileDownload
      * @return Product
      */
-    public function addFileDownload(ProductFileDownload $fileDownload): Product
+    public function addFileDownload(ProductFileDownload $fileDownload): self
     {
         $this->fileDownloads[] = $fileDownload;
 
@@ -2236,7 +2237,7 @@ class Product extends AbstractIdentity
      * @param ProductFileDownload ...$fileDownloads
      * @return Product
      */
-    public function setFileDownloads(ProductFileDownload ...$fileDownloads): Product
+    public function setFileDownloads(ProductFileDownload ...$fileDownloads): self
     {
         $this->fileDownloads = $fileDownloads;
 
@@ -2254,7 +2255,7 @@ class Product extends AbstractIdentity
     /**
      * @return Product
      */
-    public function clearFileDownloads(): Product
+    public function clearFileDownloads(): self
     {
         $this->fileDownloads = [];
 
@@ -2265,7 +2266,7 @@ class Product extends AbstractIdentity
      * @param ProductI18n $i18n
      * @return Product
      */
-    public function addI18n(ProductI18n $i18n): Product
+    public function addI18n(ProductI18n $i18n): self
     {
         $this->i18ns[] = $i18n;
 
@@ -2276,7 +2277,7 @@ class Product extends AbstractIdentity
      * @param ProductI18n ...$i18ns
      * @return Product
      */
-    public function setI18ns(ProductI18n ...$i18ns): Product
+    public function setI18ns(ProductI18n ...$i18ns): self
     {
         $this->i18ns = $i18ns;
 
@@ -2294,7 +2295,7 @@ class Product extends AbstractIdentity
     /**
      * @return Product
      */
-    public function clearI18ns(): Product
+    public function clearI18ns(): self
     {
         $this->i18ns = [];
 
@@ -2305,7 +2306,7 @@ class Product extends AbstractIdentity
      * @param ProductInvisibility $invisibility
      * @return Product
      */
-    public function addInvisibility(ProductInvisibility $invisibility): Product
+    public function addInvisibility(ProductInvisibility $invisibility): self
     {
         $this->invisibilities[] = $invisibility;
 
@@ -2316,7 +2317,7 @@ class Product extends AbstractIdentity
      * @param ProductInvisibility ...$invisibilities
      * @return Product
      */
-    public function setInvisibilities(ProductInvisibility ...$invisibilities): Product
+    public function setInvisibilities(ProductInvisibility ...$invisibilities): self
     {
         $this->invisibilities = $invisibilities;
 
@@ -2334,7 +2335,7 @@ class Product extends AbstractIdentity
     /**
      * @return Product
      */
-    public function clearInvisibilities(): Product
+    public function clearInvisibilities(): self
     {
         $this->invisibilities = [];
 
@@ -2345,7 +2346,7 @@ class Product extends AbstractIdentity
      * @param ProductMediaFile $mediaFile
      * @return Product
      */
-    public function addMediaFile(ProductMediaFile $mediaFile): Product
+    public function addMediaFile(ProductMediaFile $mediaFile): self
     {
         $this->mediaFiles[] = $mediaFile;
 
@@ -2356,7 +2357,7 @@ class Product extends AbstractIdentity
      * @param ProductMediaFile ...$mediaFiles
      * @return Product
      */
-    public function setMediaFiles(ProductMediaFile ...$mediaFiles): Product
+    public function setMediaFiles(ProductMediaFile ...$mediaFiles): self
     {
         $this->mediaFiles = $mediaFiles;
 
@@ -2374,7 +2375,7 @@ class Product extends AbstractIdentity
     /**
      * @return Product
      */
-    public function clearMediaFiles(): Product
+    public function clearMediaFiles(): self
     {
         $this->mediaFiles = [];
 
@@ -2385,7 +2386,7 @@ class Product extends AbstractIdentity
      * @param ProductPartsList $partsList
      * @return Product
      */
-    public function addPartsList(ProductPartsList $partsList): Product
+    public function addPartsList(ProductPartsList $partsList): self
     {
         $this->partsLists[] = $partsList;
 
@@ -2396,7 +2397,7 @@ class Product extends AbstractIdentity
      * @param ProductPartsList ...$partsLists
      * @return Product
      */
-    public function setPartsLists(ProductPartsList ...$partsLists): Product
+    public function setPartsLists(ProductPartsList ...$partsLists): self
     {
         $this->partsLists = $partsLists;
 
@@ -2414,7 +2415,7 @@ class Product extends AbstractIdentity
     /**
      * @return Product
      */
-    public function clearPartsLists(): Product
+    public function clearPartsLists(): self
     {
         $this->partsLists = [];
 
@@ -2425,7 +2426,7 @@ class Product extends AbstractIdentity
      * @param ProductPrice $price
      * @return Product
      */
-    public function addPrice(ProductPrice $price): Product
+    public function addPrice(ProductPrice $price): self
     {
         $this->prices[] = $price;
 
@@ -2436,7 +2437,7 @@ class Product extends AbstractIdentity
      * @param ProductPrice ...$prices
      * @return Product
      */
-    public function setPrices(ProductPrice ...$prices): Product
+    public function setPrices(ProductPrice ...$prices): self
     {
         $this->prices = $prices;
 
@@ -2454,7 +2455,7 @@ class Product extends AbstractIdentity
     /**
      * @return Product
      */
-    public function clearPrices(): Product
+    public function clearPrices(): self
     {
         $this->prices = [];
 
@@ -2465,7 +2466,7 @@ class Product extends AbstractIdentity
      * @param ProductSpecialPrice $specialPrice
      * @return Product
      */
-    public function addSpecialPrice(ProductSpecialPrice $specialPrice): Product
+    public function addSpecialPrice(ProductSpecialPrice $specialPrice): self
     {
         $this->specialPrices[] = $specialPrice;
 
@@ -2476,7 +2477,7 @@ class Product extends AbstractIdentity
      * @param ProductSpecialPrice ...$specialPrices
      * @return Product
      */
-    public function setSpecialPrices(ProductSpecialPrice ...$specialPrices): Product
+    public function setSpecialPrices(ProductSpecialPrice ...$specialPrices): self
     {
         $this->specialPrices = $specialPrices;
 
@@ -2494,7 +2495,7 @@ class Product extends AbstractIdentity
     /**
      * @return Product
      */
-    public function clearSpecialPrices(): Product
+    public function clearSpecialPrices(): self
     {
         $this->specialPrices = [];
 
@@ -2505,7 +2506,7 @@ class Product extends AbstractIdentity
      * @param ProductSpecific $specific
      * @return Product
      */
-    public function addSpecific(ProductSpecific $specific): Product
+    public function addSpecific(ProductSpecific $specific): self
     {
         $this->specifics[] = $specific;
 
@@ -2516,7 +2517,7 @@ class Product extends AbstractIdentity
      * @param ProductSpecific ...$specifics
      * @return Product
      */
-    public function setSpecifics(ProductSpecific ...$specifics): Product
+    public function setSpecifics(ProductSpecific ...$specifics): self
     {
         $this->specifics = $specifics;
 
@@ -2534,7 +2535,7 @@ class Product extends AbstractIdentity
     /**
      * @return Product
      */
-    public function clearSpecifics(): Product
+    public function clearSpecifics(): self
     {
         $this->specifics = [];
 
@@ -2568,7 +2569,7 @@ class Product extends AbstractIdentity
      * @param array<TaxRate> $taxRates
      * @return Product
      */
-    public function setTaxRates(TaxRate ...$taxRates): Product
+    public function setTaxRates(TaxRate ...$taxRates): self
     {
         $this->taxRates = $taxRates;
 
@@ -2579,7 +2580,7 @@ class Product extends AbstractIdentity
      * @param ProductVariation $variation
      * @return Product
      */
-    public function addVariation(ProductVariation $variation): Product
+    public function addVariation(ProductVariation $variation): self
     {
         $this->variations[] = $variation;
 
@@ -2590,7 +2591,7 @@ class Product extends AbstractIdentity
      * @param ProductVariation ...$variations
      * @return Product
      */
-    public function setVariations(ProductVariation ...$variations): Product
+    public function setVariations(ProductVariation ...$variations): self
     {
         $this->variations = $variations;
 
@@ -2608,7 +2609,7 @@ class Product extends AbstractIdentity
     /**
      * @return Product
      */
-    public function clearVariations(): Product
+    public function clearVariations(): self
     {
         $this->variations = [];
 
@@ -2619,7 +2620,7 @@ class Product extends AbstractIdentity
      * @param ProductWarehouseInfo $warehouseInfo
      * @return Product
      */
-    public function addWarehouseInfo(ProductWarehouseInfo $warehouseInfo): Product
+    public function addWarehouseInfo(ProductWarehouseInfo $warehouseInfo): self
     {
         $this->warehouseInfo[] = $warehouseInfo;
 
@@ -2630,7 +2631,7 @@ class Product extends AbstractIdentity
      * @param ProductWarehouseInfo ...$warehouseInfo
      * @return Product
      */
-    public function setWarehouseInfo(ProductWarehouseInfo ...$warehouseInfo): Product
+    public function setWarehouseInfo(ProductWarehouseInfo ...$warehouseInfo): self
     {
         $this->warehouseInfo = $warehouseInfo;
 
@@ -2648,7 +2649,7 @@ class Product extends AbstractIdentity
     /**
      * @return Product
      */
-    public function clearWarehouseInfo(): Product
+    public function clearWarehouseInfo(): self
     {
         $this->warehouseInfo = [];
 
