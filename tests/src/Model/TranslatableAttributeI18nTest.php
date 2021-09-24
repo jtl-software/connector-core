@@ -10,6 +10,13 @@ use stdClass;
 
 class TranslatableAttributeI18nTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        TranslatableAttributeI18n::setStrictMode(false);
+    }
+
+
     /**
      * @dataProvider getValueProvider
      *
@@ -21,7 +28,9 @@ class TranslatableAttributeI18nTest extends TestCase
      */
     public function testGetValue(string $type, $originalValue, $expectedValue, bool $strictMode = false)
     {
-        $i18n = (new TranslatableAttributeI18n($strictMode))
+        TranslatableAttributeI18n::setStrictMode($strictMode);
+
+        $i18n = (new TranslatableAttributeI18n())
             ->setValue($originalValue);
 
         $actualValue = $i18n->getValue($type);
@@ -60,7 +69,9 @@ class TranslatableAttributeI18nTest extends TestCase
         $this->expectException(TranslatableAttributeException::class);
         $this->expectExceptionCode(TranslatableAttributeException::DECODING_VALUE_FAILED);
 
-        $i18n = (new TranslatableAttributeI18n(true))
+        TranslatableAttributeI18n::setStrictMode(true);
+
+        $i18n = (new TranslatableAttributeI18n())
             ->setValue('asdasdas');
 
         $i18n->getValue(TranslatableAttribute::TYPE_JSON);

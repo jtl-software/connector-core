@@ -19,12 +19,13 @@ class TranslatableAttributeException extends \Exception
     }
 
     /**
+     * @param string $attributeName
      * @param string $type
      * @return TranslatableAttributeException
      */
-    public static function valueTypeInvalid(string $type): self
+    public static function valueTypeInvalid(string $attributeName, string $type): self
     {
-        return new self(sprintf('"%s" is not a valid translatable attribute value type', $type), self::VALUE_TYPE_INVALID);
+        return new self(sprintf('[%s] "%s" is not a valid translatable attribute value type', $attributeName, $type), self::VALUE_TYPE_INVALID);
     }
 
     /**
@@ -34,6 +35,6 @@ class TranslatableAttributeException extends \Exception
      */
     public static function decodingValueFailed(string $attributeName, string $errorMessage): self
     {
-        return new self(sprintf('Decoding attribute (%s) value failed: %s', $attributeName, $errorMessage), self::DECODING_VALUE_FAILED);
+        return new self(sprintf('[%s] Decoding translatable attribute value failed: %s', $attributeName, $errorMessage), self::DECODING_VALUE_FAILED);
     }
 }

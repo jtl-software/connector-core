@@ -38,15 +38,7 @@ class TranslatableAttributeI18n extends AbstractI18n
      * @var bool
      * @Serializer\Exclude
      */
-    protected $strictMode = false;
-
-    /**
-     * @param bool $strictMode
-     */
-    public function __construct(bool $strictMode = false)
-    {
-        $this->strictMode = $strictMode;
-    }
+    protected static $strictMode = false;
 
     /**
      * @param string $name
@@ -77,7 +69,7 @@ class TranslatableAttributeI18n extends AbstractI18n
         $type = gettype($value);
 
         if (!in_array($type, ['array', 'object', 'boolean', 'integer', 'double', 'string'], true)) {
-            throw TranslatableAttributeException::valueTypeInvalid($type);
+            throw TranslatableAttributeException::valueTypeInvalid($this->name, $type);
         }
 
         switch ($type) {
@@ -117,7 +109,7 @@ class TranslatableAttributeI18n extends AbstractI18n
 
             case TranslatableAttribute::TYPE_JSON:
                 $value = json_decode($value, true);
-                if ($this->strictMode && json_last_error() !== \JSON_ERROR_NONE) {
+                if (self::$strictMode && json_last_error() !== \JSON_ERROR_NONE) {
                     throw TranslatableAttributeException::decodingValueFailed($this->name, json_last_error_msg());
                 }
                 break;
@@ -128,5 +120,21 @@ class TranslatableAttributeI18n extends AbstractI18n
         }
 
         return $value;
+    }
+
+    /**
+     * @return bool
+     */
+    public static function isStrictMode(): bool
+    {
+        return self::$strictMode;
+    }
+
+    /**
+     * @param bool $strictMode
+     */
+    public static function setStrictMode(bool $strictMode): void
+    {
+        self::$strictMode = $strictMode;
     }
 }
