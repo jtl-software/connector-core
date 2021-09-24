@@ -203,38 +203,28 @@ class TranslatableAttribute extends AbstractIdentity
 
     /**
      * @param string $languageIso
-     * @param string|null $castToType
      * @return bool|float|int|string|null
      * @throws TranslatableAttributeException
      */
-    public function findValue(string $languageIso, string $castToType = null)
+    public function findValue(string $languageIso)
     {
-        if ($castToType === null) {
-            $castToType = $this->type;
-        }
-
         $i18n = $this->findTranslation($languageIso);
         if ($i18n instanceof TranslatableAttributeI18n) {
-            return $i18n->getValue($castToType);
+            return $i18n->getValue($this->type);
         }
 
         return null;
     }
 
     /**
-     * @param string|null $castToType
      * @return array
      * @throws TranslatableAttributeException
      */
-    public function getValues(string $castToType = null): array
+    public function getValues(): array
     {
-        if ($castToType === null) {
-            $castToType = $this->type;
-        }
-
         $values = [];
         foreach ($this->i18ns as $i18n) {
-            $values[$i18n->getLanguageIso()] = $i18n->getValue($castToType);
+            $values[$i18n->getLanguageIso()] = $i18n->getValue($this->type);
         }
 
         return $values;
