@@ -17,8 +17,9 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Category extends AbstractIdentity
+class Category extends AbstractIdentity implements TranslatableAttributesInterface
 {
+    use TranslatableAttributesTrait;
 
     /**
      * @var Identity Optional reference to parent category id
@@ -186,7 +187,7 @@ class Category extends AbstractIdentity
      * @param TranslatableAttribute|CategoryAttribute ...$attributes
      * @return Category
      */
-    public function setAttributes(TranslatableAttribute ...$attributes): self
+    public function setAttributes(TranslatableAttribute ...$attributes): TranslatableAttributesInterface
     {
         $this->attributes = $attributes;
 

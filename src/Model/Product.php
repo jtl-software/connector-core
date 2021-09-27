@@ -17,8 +17,9 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class Product extends AbstractIdentity
+class Product extends AbstractIdentity implements TranslatableAttributesInterface
 {
+    use TranslatableAttributesTrait;
 
     /**
      * @var Identity Optional reference to basePriceUnit
@@ -1489,7 +1490,7 @@ class Product extends AbstractIdentity
     }
 
     /**
-     * @param \DateTimeInterface $minBestBeforeDate
+     * @param \DateTimeInterface|null $minBestBeforeDate
      * @return Product
      */
     public function setMinBestBeforeDate(\DateTimeInterface $minBestBeforeDate = null): self
@@ -1998,7 +1999,7 @@ class Product extends AbstractIdentity
      * @param TranslatableAttribute|ProductAttribute ...$attributes
      * @return Product
      */
-    public function setAttributes(TranslatableAttribute ...$attributes): self
+    public function setAttributes(TranslatableAttribute ...$attributes): TranslatableAttributesInterface
     {
         $this->attributes = $attributes;
 
@@ -2147,9 +2148,8 @@ class Product extends AbstractIdentity
      * @param CustomerGroupPackagingQuantity $customerGroupPackagingQuantity
      * @return Product
      */
-    public function addCustomerGroupPackagingQuantity(
-        CustomerGroupPackagingQuantity $customerGroupPackagingQuantity
-    ) {
+    public function addCustomerGroupPackagingQuantity(CustomerGroupPackagingQuantity $customerGroupPackagingQuantity): self
+    {
         $this->customerGroupPackagingQuantities[] = $customerGroupPackagingQuantity;
 
         return $this;
@@ -2159,9 +2159,8 @@ class Product extends AbstractIdentity
      * @param array $customerGroupPackagingQuantities
      * @return Product
      */
-    public function setCustomerGroupPackagingQuantities(
-        CustomerGroupPackagingQuantity ...$customerGroupPackagingQuantities
-    ): self {
+    public function setCustomerGroupPackagingQuantities(CustomerGroupPackagingQuantity ...$customerGroupPackagingQuantities): self
+    {
         $this->customerGroupPackagingQuantities = $customerGroupPackagingQuantities;
 
         return $this;

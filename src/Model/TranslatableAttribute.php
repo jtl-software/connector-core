@@ -3,9 +3,11 @@
  * @author    Patryk Gorol <patryk.gorol@jtl-software.com>
  * @copyright 2010-2019 JTL-Software GmbH
  */
+
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\TranslatableAttributeException;
 
 /**
  * TranslatableAttribute class
@@ -16,6 +18,13 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class TranslatableAttribute extends AbstractIdentity
 {
+    public const
+        TYPE_BOOL = 'bool',
+        TYPE_FLOAT = 'float',
+        TYPE_INT = 'int',
+        TYPE_JSON = 'json',
+        TYPE_STRING = 'string';
+
     /**
      * @var boolean
      * @Serializer\Type("boolean")
@@ -33,6 +42,14 @@ class TranslatableAttribute extends AbstractIdentity
     protected $isCustomProperty = false;
 
     /**
+     * @var string
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("type")
+     * @Serializer\Accessor(getter="getType",setter="setType")
+     */
+    protected $type = self::TYPE_STRING;
+
+    /**
      * @var TranslatableAttributeI18n[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\TranslatableAttributeI18n>")
      * @Serializer\SerializedName("i18ns")
@@ -41,10 +58,22 @@ class TranslatableAttribute extends AbstractIdentity
     protected $i18ns = [];
 
     /**
+     * @var string[]
+     * @Serializer\Exclude
+     */
+    protected static $types = [
+        self::TYPE_BOOL,
+        self::TYPE_FLOAT,
+        self::TYPE_INT,
+        self::TYPE_JSON,
+        self::TYPE_STRING,
+    ];
+
+    /**
      * @param bool $isTranslated
      * @return TranslatableAttribute
      */
-    public function setIsTranslated(bool $isTranslated): TranslatableAttribute
+    public function setIsTranslated(bool $isTranslated): self
     {
         $this->isTranslated = $isTranslated;
 
@@ -63,7 +92,7 @@ class TranslatableAttribute extends AbstractIdentity
      * @param bool $isCustomProperty
      * @return TranslatableAttribute
      */
-    public function setIsCustomProperty(bool $isCustomProperty): TranslatableAttribute
+    public function setIsCustomProperty(bool $isCustomProperty): self
     {
         $this->isCustomProperty = $isCustomProperty;
 
@@ -79,6 +108,30 @@ class TranslatableAttribute extends AbstractIdentity
     }
 
     /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     * @return $this
+     * @throws TranslatableAttributeException
+     */
+    public function setType(string $type): self
+    {
+        if (!self::isType($type)) {
+            throw TranslatableAttributeException::typeUnknown($type);
+        }
+
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
      * @return TranslatableAttributeI18n[]
      */
     public function getI18ns(): array
@@ -90,7 +143,7 @@ class TranslatableAttribute extends AbstractIdentity
      * @param TranslatableAttributeI18n $i18n
      * @return TranslatableAttribute
      */
-    public function addI18n(TranslatableAttributeI18n $i18n): TranslatableAttribute
+    public function addI18n(TranslatableAttributeI18n $i18n): self
     {
         $this->i18ns[] = $i18n;
 
@@ -100,7 +153,7 @@ class TranslatableAttribute extends AbstractIdentity
     /**
      * @return TranslatableAttribute
      */
-    public function clearI18ns(): TranslatableAttribute
+    public function clearI18ns(): self
     {
         $this->i18ns = [];
 
@@ -111,10 +164,78 @@ class TranslatableAttribute extends AbstractIdentity
      * @param TranslatableAttributeI18n ...$i18ns
      * @return TranslatableAttribute
      */
-    public function setI18ns(TranslatableAttributeI18n ...$i18ns): TranslatableAttribute
+    public function setI18ns(TranslatableAttributeI18n ...$i18ns): self
     {
         $this->i18ns = $i18ns;
 
         return $this;
+    }
+
+    /**
+     * @param string $languageIso
+     * @return string
+     */
+    public function getName(string $languageIso = ''): string
+    {
+        $translation = $this->findTranslation($languageIso);
+        if ($translation !== null) {
+            return $translation->getName();
+        }
+
+        return '';
+    }
+
+    /**
+     * @param string $languageIso
+     * @return TranslatableAttributeI18n|null
+     */
+    public function findTranslation(string $languageIso): ?TranslatableAttributeI18n
+    {
+        $i18n = null;
+        foreach (array_reverse($this->i18ns) as $i18n) {
+            if ($i18n->getLanguageIso() === $languageIso) {
+                break;
+            }
+        }
+
+        return $i18n;
+    }
+
+    /**
+     * @param string $languageIso
+     * @return bool|float|int|string|null
+     * @throws TranslatableAttributeException
+     */
+    public function findValue(string $languageIso)
+    {
+        $i18n = $this->findTranslation($languageIso);
+        if ($i18n instanceof TranslatableAttributeI18n) {
+            return $i18n->getValue($this->type);
+        }
+
+        return null;
+    }
+
+    /**
+     * @return array
+     * @throws TranslatableAttributeException
+     */
+    public function getValues(): array
+    {
+        $values = [];
+        foreach ($this->i18ns as $i18n) {
+            $values[$i18n->getLanguageIso()] = $i18n->getValue($this->type);
+        }
+
+        return $values;
+    }
+
+    /**
+     * @param string $type
+     * @return bool
+     */
+    public static function isType(string $type): bool
+    {
+        return in_array($type, self::$types, true);
     }
 }

@@ -37,12 +37,14 @@ class ModelTest extends TestCase
             'AbstractIdentity',
             'AbstractImage',
             'AbstractModel',
+            'AbstractOrderAddress',
             'IdentificationInterface',
             'IdentityInterface',
             'I18nInterface',
             'FeatureEntity',
             'FeatureFlag',
-            'AbstractOrderAddress',
+            'TranslatableAttributesInterface',
+            'TranslatableAttributesTrait',
         ];
     }
 
