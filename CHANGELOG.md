@@ -1,3 +1,16 @@
+5.0.1
+-----
+- Switched logging exception stack trace to error level
+
+5.0.0
+-----
+- Added config option serializer.enable_cache
+- Added types to translatable attributes
+- Moved connector dependency to run method
+- Removed type classes
+- Revised identification string handling in models
+- Simplified translatable attributes handling
+
 4.2.1
 -----
 - Added tif/tiff mime type mappings
