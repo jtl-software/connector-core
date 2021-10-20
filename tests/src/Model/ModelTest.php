@@ -76,16 +76,16 @@ class ModelTest extends TestCase
         $model = $this->getMockForAbstractClass(AbstractModel::class);
         $stringCount = mt_rand(0, 10);
 
-        $identificationStrings = array_map(function($whatever) {
+        $identificationStrings = array_map(function ($whatever) {
             return uniqid('rand-', true);
         }, array_fill(0, $stringCount, 'foo'));
 
-        if($setString) {
+        if ($setString) {
             $identificationStrings = array_merge($identificationStrings, [$identificationString]);
             shuffle($identificationStrings);
         }
 
-        foreach($identificationStrings as $strings) {
+        foreach ($identificationStrings as $strings) {
             $model->setIdentificationString($strings);
         }
 
@@ -107,20 +107,20 @@ class ModelTest extends TestCase
         $model = $this->getMockForAbstractClass(AbstractModel::class);
         $stringCount = mt_rand(0, 10);
 
-        $identificationStrings = array_map(function($whatever) {
+        $identificationStrings = array_map(function ($whatever) {
             return uniqid('rand-', true);
         }, array_fill(0, $stringCount, 'foo'));
 
-        if($setString) {
+        if ($setString) {
             $identificationStrings = array_merge($identificationStrings, [$identificationString]);
             shuffle($identificationStrings);
         }
 
-        foreach($identificationStrings as $string) {
-            if($string === $identificationString) {
+        foreach ($identificationStrings as $string) {
+            if ($string === $identificationString) {
                 $model->setIdentificationStringBySubject($subject, $string);
             } else {
-                switch (mt_rand(0,1)) {
+                switch (mt_rand(0, 1)) {
                     case 0:
                         $model->setIdentificationString($string);
                         break;

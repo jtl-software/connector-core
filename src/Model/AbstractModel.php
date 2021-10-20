@@ -67,7 +67,7 @@ abstract class AbstractModel
     public function unsetIdentificationString(string $identificationString): self
     {
         $index = array_search($identificationString, $this->identificationStrings, true);
-        if($index !== false) {
+        if ($index !== false) {
             unset($this->identificationStrings[$index]);
         }
 
