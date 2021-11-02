@@ -1,3 +1,7 @@
+5.0.2
+-----
+- Revised identification string handling in some models
+
 5.0.1
 -----
 - Switched logging exception stack trace to error level
