@@ -3,12 +3,11 @@ namespace Jtl\Connector\Core\Model\Generator;
 
 use Jtl\Connector\Core\Model\ProductI18n;
 
-class ProductI18nFactory extends AbstractModelFactory
+class ProductI18nFactory extends AbstractI18nFactory
 {
     protected function makeFakeArray(): array
     {
         return [
-            'languageIso' => $this->faker->languageCode,
             'deliveryStatus' => $this->faker->word,
             'description' => $this->faker->sentence,
             'measurementUnitName' => $this->faker->randomElement(['Kilogram', 'Centimeter', '']),
