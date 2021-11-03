@@ -61,6 +61,12 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
             if (isset($product['stockLevel']['stockLevel'])) {
                 $products[$i]['stockLevel'] = $product['stockLevel']['stockLevel'];
             }
+
+            if (isset($product['prices']) && is_array($product['prices'])) {
+                foreach ($products[$i]['prices'] as $j => $productPrice) {
+                    $products[$i]['prices'][$j] = self::sortProductPriceItems($productPrice);
+                }
+            }
         }
 
         return $products;
@@ -88,13 +94,7 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
                 $products[$hostId] = $product;
             }
 
-            if (isset($productPrice['items'])) {
-                usort($productPrice['items'], function ($a, $b) {
-                    return $a['quantity'] ?? 0 - $b['quantity'] ?? 0;
-                });
-            }
-
-            $products[$hostId]['prices'][] = $productPrice;
+            $products[$hostId]['prices'][] = self::sortProductPriceItems($productPrice);
         }
 
         return array_values($products);
@@ -127,5 +127,20 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
     {
         list($endpointId, $hostId) = $identity;
         return $hostId;
+    }
+
+    /**
+     * @param array $productPrice
+     * @return array
+     */
+    protected static function sortProductPriceItems(array $productPrice): array
+    {
+        if (isset($productPrice['items'])) {
+            usort($productPrice['items'], function ($a, $b) {
+                return ($a['quantity'] ?? 0) - ($b['quantity'] ?? 0);
+            });
+        }
+
+        return $productPrice;
     }
 }

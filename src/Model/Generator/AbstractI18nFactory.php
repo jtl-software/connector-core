@@ -18,7 +18,7 @@ abstract class AbstractI18nFactory extends AbstractModelFactory
         $languageIsoAppendix = [];
         if (!isset($override['languageIso'])) {
             while (true) {
-                if(count($this->usedLanguages) > 180) {
+                if (count($this->usedLanguages) > 180) {
                     $this->clearUsedLanguages();
                 }
 
@@ -43,7 +43,7 @@ abstract class AbstractI18nFactory extends AbstractModelFactory
     public function makeArray(int $quantity, array $specificOverrides = [], array $globalOverrides = []): array
     {
         $usedLanguagesCount = count($this->usedLanguages);
-        if($quantity >= $usedLanguagesCount || $usedLanguagesCount - $quantity > 180) {
+        if ($quantity >= $usedLanguagesCount || $usedLanguagesCount - $quantity > 180) {
             $this->clearUsedLanguages();
         }
 

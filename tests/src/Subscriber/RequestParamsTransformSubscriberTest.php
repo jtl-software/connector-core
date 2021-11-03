@@ -44,39 +44,39 @@ class RequestParamsTransformSubscriberTest extends TestCase
      * @dataProvider transformProductProvider
      *
      * @param array $products
-     * @param array $transformedData
+     * @param array $expectedResult
      */
-    public function testTransformProductData(array $products, array $transformedData)
+    public function testTransformProductData(array $products, array $expectedResult)
     {
         $subscriber = new RequestParamsTransformSubscriber();
-        $givenData = $subscriber->transformProductData($products);
-        $this->assertEquals($transformedData, $givenData);
+        $actualResult = $subscriber->transformProductData($products);
+        $this->assertEquals($expectedResult, $actualResult);
     }
 
     /**
      * @dataProvider transformProductPriceProvider
      *
      * @param array $productPrices
-     * @param array $transformedData
+     * @param array $expectedResult
      */
-    public function testTransformProductPriceData(array $productPrices, array $transformedData)
+    public function testTransformProductPriceData(array $productPrices, array $expectedResult)
     {
         $subscriber = new RequestParamsTransformSubscriber();
-        $givenData = $subscriber->transformProductPriceData($productPrices);
-        $this->assertEquals($transformedData, $givenData);
+        $actualResult = $subscriber->transformProductPriceData($productPrices);
+        $this->assertEquals($expectedResult, $actualResult);
     }
 
     /**
      * @dataProvider transformProductStockLevelProvider
      *
      * @param array $productStock
-     * @param array $transformedData
+     * @param array $expectedResult
      */
-    public function testTransformStockLevelData(array $productStock, array $transformedData)
+    public function testTransformStockLevelData(array $productStock, array $expectedResult)
     {
         $subscriber = new RequestParamsTransformSubscriber();
-        $givenData = $subscriber->transformProductStockLevelData($productStock);
-        $this->assertEquals($transformedData, $givenData);
+        $actualResult = $subscriber->transformProductStockLevelData($productStock);
+        $this->assertEquals($expectedResult, $actualResult);
     }
 
     public function testGetSubscribedEvents()
@@ -110,14 +110,17 @@ class RequestParamsTransformSubscriberTest extends TestCase
             [[['some' => 'thing'], ['foo' => 'bar', 'stockLevel' => ['stockLevel' => 3.]]], [['some' => 'thing'], ['foo' => 'bar', 'stockLevel' => 3.]]],
             [[['yo' => 'lo']], [['yo' => 'lo']]],
             [[['stockLevel' => ['stockLevel' => 42.]]], [['stockLevel' => 42.]]],
+            [[['prices' => [['items' => [['productPriceId' => ['', 1], 'quantity' => 10, 'netPrice' => 42.334], ['productPriceId' => ['', 1], 'quantity' => 0, 'netPrice' => 24.3697]]]]]], [['prices' => [['items' => [['productPriceId' => ['', 1], 'quantity' => 0, 'netPrice' => 24.3697,], ['productPriceId' => ['', 1], 'quantity' => 10, 'netPrice' => 42.334]]]]]]]
         ];
     }
 
     public function transformProductPriceProvider(): array
     {
         return [
-            [[['customerId' => ['', 0], 'items' => [['productPriceId' => ['', 1], 'quantity' => 0, 'netPrice' => 24.3697,]], 'customerGroupId' => ['cfbd5018d38d41d8adca10d94fc8bdd6', 1], 'sku' => 'foo', 'vat' => 19.0, 'taxClassId' => ['', 42], 'id' => ['', 1], 'productId' => ['', 1]], ['customerId' => ['', 0], 'items' => [['productPriceId' => ['', 2], 'quantity' => 0, 'netPrice' => 24.3697,]], 'customerGroupId' => ['2fa802a6db864bd49fe41f5f3ed6d8e7', 2], 'sku' => 'foo', 'vat' => 19.0, 'taxClassId' => ['', 42], 'id' => ['', 2], 'productId' => ['', 1]], 2 => ['customerId' => ['', 0], 'items' => [['productPriceId' => ['', 0], 'quantity' => 0, 'netPrice' => 24.3697,]], 'customerGroupId' => ['', 0], 'sku' => 'foo', 'vat' => 19.0, 'taxClassId' => ['', 42], 'id' => ['', 0], 'productId' => ['', 1]]],
-            [['id' => ["", 1], 'sku' => 'foo', 'vat' => 19., 'taxClassId' => ["", 42], 'prices' => [['customerId' => ['', 0], 'items' => [['productPriceId' => ['', 1], 'quantity' => 0, 'netPrice' => 24.3697,]], 'customerGroupId' => ['cfbd5018d38d41d8adca10d94fc8bdd6', 1], 'sku' => 'foo', 'vat' => 19.0, 'taxClassId' => ['', 42], 'id' => ['', 1], 'productId' => ['', 1]], ['customerId' => ['', 0], 'items' => [['productPriceId' => ['', 2], 'quantity' => 0, 'netPrice' => 24.3697,]], 'customerGroupId' => ['2fa802a6db864bd49fe41f5f3ed6d8e7', 2], 'sku' => 'foo', 'vat' => 19.0, 'taxClassId' => ['', 42], 'id' => ['', 2], 'productId' => ['', 1]], 2 => ['customerId' => ['', 0], 'items' => [['productPriceId' => ['', 0], 'quantity' => 0, 'netPrice' => 24.3697,]], 'customerGroupId' => ['', 0], 'sku' => 'foo', 'vat' => 19.0, 'taxClassId' => ['', 42], 'id' => ['', 0], 'productId' => ['', 1]]]]]],
+            [
+                [['customerId' => ['', 0], 'items' => [['productPriceId' => ['', 1], 'quantity' => 10, 'netPrice' => 42.334], ['productPriceId' => ['', 1], 'quantity' => 0, 'netPrice' => 24.3697]], 'customerGroupId' => ['cfbd5018d38d41d8adca10d94fc8bdd6', 1], 'sku' => 'foo', 'vat' => 19.0, 'taxClassId' => ['', 42], 'id' => ['', 1], 'productId' => ['', 1]], ['customerId' => ['', 0], 'items' => [['productPriceId' => ['', 2], 'quantity' => 0, 'netPrice' => 24.3697,]], 'customerGroupId' => ['2fa802a6db864bd49fe41f5f3ed6d8e7', 2], 'sku' => 'foo', 'vat' => 19.0, 'taxClassId' => ['', 42], 'id' => ['', 2], 'productId' => ['', 1]], 2 => ['customerId' => ['', 0], 'items' => [['productPriceId' => ['', 0], 'quantity' => 0, 'netPrice' => 24.3697,]], 'customerGroupId' => ['', 0], 'sku' => 'foo', 'vat' => 19.0, 'taxClassId' => ['', 42], 'id' => ['', 0], 'productId' => ['', 1]]],
+                [['id' => ["", 1], 'sku' => 'foo', 'vat' => 19., 'taxClassId' => ["", 42], 'prices' => [['customerId' => ['', 0], 'items' => [['productPriceId' => ['', 1], 'quantity' => 0, 'netPrice' => 24.3697,], ['productPriceId' => ['', 1], 'quantity' => 10, 'netPrice' => 42.334]], 'customerGroupId' => ['cfbd5018d38d41d8adca10d94fc8bdd6', 1], 'sku' => 'foo', 'vat' => 19.0, 'taxClassId' => ['', 42], 'id' => ['', 1], 'productId' => ['', 1]], ['customerId' => ['', 0], 'items' => [['productPriceId' => ['', 2], 'quantity' => 0, 'netPrice' => 24.3697,]], 'customerGroupId' => ['2fa802a6db864bd49fe41f5f3ed6d8e7', 2], 'sku' => 'foo', 'vat' => 19.0, 'taxClassId' => ['', 42], 'id' => ['', 2], 'productId' => ['', 1]], 2 => ['customerId' => ['', 0], 'items' => [['productPriceId' => ['', 0], 'quantity' => 0, 'netPrice' => 24.3697,]], 'customerGroupId' => ['', 0], 'sku' => 'foo', 'vat' => 19.0, 'taxClassId' => ['', 42], 'id' => ['', 0], 'productId' => ['', 1]]]]]
+            ],
         ];
     }
 
