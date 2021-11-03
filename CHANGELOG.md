@@ -1,3 +1,7 @@
+5.0.3
+-----
+- Fixed sorting product price items
+
 5.0.2
 -----
 - Revised identification string handling in some models
