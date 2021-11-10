@@ -221,7 +221,9 @@ final class Model
             'id' => IdentityType::PRODUCT_ATTRIBUTE
         ],
         self::PRODUCT_PRICE => [
-            'productId' => IdentityType::PRODUCT
+            'customerId' => IdentityType::CUSTOMER,
+            'productId' => IdentityType::PRODUCT,
+            'customerGroupId' => IdentityType::CUSTOMER_GROUP,
         ],
         self::PRODUCT_STOCK_LEVEL => [
             'productId' => IdentityType::PRODUCT
