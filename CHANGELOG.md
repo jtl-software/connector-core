@@ -1,3 +1,7 @@
+5.0.4
+-----
+- Updated product price model definition
+
 5.0.3
 -----
 - Fixed sorting product price items
