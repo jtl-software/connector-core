@@ -647,7 +647,7 @@ class Application
      * @param string $action
      * @throws \ReflectionException
      */
-    protected function extendExceptionMessageWithIdentifiers(\Throwable $ex, ?object $model, string $controller, string $action)
+    protected function extendExceptionMessageWithIdentifiers(\Throwable $ex, ?object $model, string $controller, string $action): void
     {
         $messages = [
             sprintf('Controller = %s', $controller),

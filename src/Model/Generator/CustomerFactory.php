@@ -53,7 +53,7 @@ class CustomerFactory extends AbstractModelFactory
             'state' => '',
             'street' => $this->faker->streetAddress,
             'title' => $this->faker->title,
-            'vatNumber' => $this->faker->vat(true),
+            'vatNumber' => $this->faker->uuid,
             'websiteUrl' => $this->faker->safeEmailDomain,
             'zipCode' => $this->faker->postcode,
             'languageIso' => $this->faker->languageCode

@@ -80,7 +80,6 @@ abstract class AbstractModelFactory
     public function make(int $quantity, array $specificOverrides = [], array $globalOverrides = []): array
     {
         $models = [];
-
         for ($i = 0; $i < $quantity; $i++) {
             $model = $this->serializer->fromArray($this->makeOneArray(array_merge($globalOverrides, $specificOverrides[$i] ?? [])), $this->getModelClass());
             $models[] = $model;
