@@ -1,3 +1,11 @@
+5.0.6
+-----
+- Added Mollie payment type
+
+5.0.5
+-----
+- Replaced vat with uuid
+
 5.0.4
 -----
 - Updated product price model definition

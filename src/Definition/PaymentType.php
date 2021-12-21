@@ -53,6 +53,7 @@ final class PaymentType
         KLARNA = 'pm_klarna',
         MOBILPENGE = 'pm_mobilpenge',
         MODUSLINK = 'pm_moduslink',
+        MOLLIE = 'pm_mollie',
         MPP_GLOBAL_SOLUTIONS = 'pm_mpp_global_solutions',
         NETELLER = 'pm_neteller',
         NOCHEX = 'pm_nochex',
