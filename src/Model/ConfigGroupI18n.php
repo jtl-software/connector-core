@@ -58,7 +58,7 @@ class ConfigGroupI18n extends AbstractI18n
      * @param string $name Config group name
      * @return ConfigGroupI18n
      */
-    public function setName(string $name): string
+    public function setName(string $name): AbstractI18n
     {
         $this->name = $name;
         
