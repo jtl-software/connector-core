@@ -11,6 +11,7 @@ use Jtl\Connector\Core\Database\Sqlite3;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use ReturnTypeWillChange;
 
 /**
  * Session Class
@@ -67,6 +68,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      * @param $sessionName
      * @return bool
      */
+    #[ReturnTypeWillChange]
     public function open($savePath, $sessionName)
     {
         $this->logger->debug('Open session with save path ({path}) and session name ({name})', ['path' => $savePath, 'name' => $sessionName]);
@@ -77,7 +79,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
     /**
      * Close Sesssion
      */
-    public function close()
+    public function close(): bool
     {
         $this->logger->debug('Close session');
 
@@ -90,6 +92,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      * @param string $sessionId
      * @return false|string
      */
+    #[ReturnTypeWillChange]
     public function read($sessionId)
     {
         $sessionId = $this->db->escapeString($sessionId);
@@ -111,6 +114,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      * @param string $sessionData
      * @return bool
      */
+    #[ReturnTypeWillChange]
     public function write($sessionId, $sessionData)
     {
         $sessionId = $this->db->escapeString($sessionId);
@@ -118,7 +122,6 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
         $expire = $this->calculateExpiryTime();
         $this->logger->debug('Write session with id ({id})', ['id' => $sessionId]);
 
-        /** @var \SQLite3 $db */
         $db = $this->db->getDb();
         $success = false;
 
@@ -150,7 +153,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      * @param string $sessionId
      * @return bool
      */
-    public function destroy($sessionId)
+    public function destroy($sessionId): bool
     {
         $sessionId = $this->db->escapeString($sessionId);
         $this->logger->debug('Destroy session with id ({id})', ['id' => $sessionId]);
@@ -163,6 +166,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      * @param int $maxLifetime
      * @return bool
      */
+    #[ReturnTypeWillChange]
     public function gc($maxLifetime): bool
     {
         $this->logger->debug('Garbage collection for session with maximum lifetime ({maxLifetime})', ['maxLifetime' => $maxLifetime]);
