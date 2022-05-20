@@ -118,7 +118,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
         $expire = $this->calculateExpiryTime();
         $this->logger->debug('Write session with id ({id})', ['id' => $sessionId]);
 
-        /** @var SQLite3 $db */
+        /** @var \SQLite3 $db */
         $db = $this->db->getDb();
         $success = false;
 
@@ -207,8 +207,10 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
 
     /**
      * @param LoggerInterface $logger
+     *
+     * @return void
      */
-    public function setLogger(LoggerInterface $logger)
+    public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
         $this->db->setLogger($logger);

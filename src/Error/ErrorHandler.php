@@ -59,7 +59,7 @@ class ErrorHandler extends AbstractErrorHandler
      */
     public function getErrorHandler(): callable
     {
-        return function ($errno, $errstr, $errfile, $errline, $errcontext) {
+        return function ($errno, $errstr, $errfile = "", $errline = -1, $errcontext = null) {
             return !in_array($errno, static::$shutdownHandleErrors, true);
         };
     }

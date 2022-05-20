@@ -14,7 +14,7 @@
     "require": {
         "php": ">=7.2",
         "jms/serializer": "^3.3",
-        "hassankhan/config": "^2.0",
+        "hassankhan/config": "^3.0",
         "monolog/monolog": "*",
         "symfony/finder": "*",
         "symfony/event-dispatcher": "*",

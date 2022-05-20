@@ -267,11 +267,10 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
 
     /**
      * @param LoggerInterface $logger
-     * @return Sqlite3
+     * @return void
      */
-    public function setLogger(LoggerInterface $logger): Sqlite3
+    public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
-        return $this;
     }
 }
