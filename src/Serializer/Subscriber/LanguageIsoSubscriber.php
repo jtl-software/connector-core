@@ -1,7 +1,7 @@
 <?php
 namespace Jtl\Connector\Core\Serializer\Subscriber;
 
-use Gmo\Iso639\Languages;
+use WhiteCube\Lingua\Service as Lingua;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\EventDispatcher\PreDeserializeEvent;
@@ -11,7 +11,7 @@ use Jtl\Connector\Core\Model\AbstractI18n;
 class LanguageIsoSubscriber implements EventSubscriberInterface
 {
     /**
-     * @var Languages
+     * @var Lingua
      */
     protected $languages;
 
@@ -20,7 +20,7 @@ class LanguageIsoSubscriber implements EventSubscriberInterface
      */
     public function __construct()
     {
-        $this->languages = new Languages();
+        $this->languages = new Lingua();
     }
 
     /**
@@ -51,7 +51,7 @@ class LanguageIsoSubscriber implements EventSubscriberInterface
         if ($model instanceof AbstractI18n) {
             $languageIso = $model->getLanguageIso();
             if (strlen($languageIso) === 2) {
-                $languageIso = $this->languages->findByCode1($languageIso)->code2b() ?? $languageIso;
+                $languageIso = $this->languages->fromISO_639_1($languageIso)->toISO_639_2b() ?? $languageIso;
             }
 
             $event->getVisitor()->visitProperty(new StaticPropertyMetadata('', 'languageISO', $languageIso), $languageIso);
@@ -65,8 +65,8 @@ class LanguageIsoSubscriber implements EventSubscriberInterface
     {
         $data = $event->getData();
         if (is_array($data) && isset($data['languageISO']) && !isset($data['languageIso'])) {
-            $language = $this->languages->findByCode2b($data['languageISO']);
-            $data['languageIso'] = $language->code1() ?? $data['languageISO'];
+            $language = $this->languages->fromISO_639_2b($data['languageISO']);
+            $data['languageIso'] = $language->toISO_639_1() ?? $data['languageISO'];
             $event->setData($data);
         }
     }
