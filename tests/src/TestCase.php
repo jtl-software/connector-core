@@ -49,7 +49,7 @@ class TestCase extends \Jtl\UnitTest\TestCase
         ];
 
         foreach ($files as $file) {
-            if (is_file($file)) {
+            if (!is_null($file) && is_file($file)) {
                 unlink($file);
             }
         }
