@@ -204,8 +204,8 @@ class ConnectorController implements LoggerAwareInterface
         $returnBytes = function ($data): int {
             $data = trim($data);
             $len = strlen($data);
-            if ($data == '-1'){
-                return (int)$data;
+            if ($data === '-1'){
+                return -1;
             }
             $value = substr($data, 0, $len - 1);
             $unit = strtolower(substr($data, $len - 1));
