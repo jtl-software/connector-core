@@ -208,7 +208,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
     /**
      * @param LoggerInterface $logger
      */
-    public function setLogger(LoggerInterface $logger)
+    public function setLogger(LoggerInterface $logger):void
     {
         $this->logger = $logger;
         $this->db->setLogger($logger);
