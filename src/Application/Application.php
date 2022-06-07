@@ -133,6 +133,10 @@ class Application extends CoreApplication
      */
     public function run()
     {
+        if(!version_compare(phpversion(),'8.1','<')) {
+            throw new ApplicationException('PHP Version 8.1 or higher not supported!');
+        }
+
         AnnotationRegistry::registerLoader('class_exists');
 
         if ($this->connector === null) {
