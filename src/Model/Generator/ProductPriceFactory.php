@@ -27,6 +27,7 @@ class ProductPriceFactory extends AbstractModelFactory
     /**
      * @param bool $withBulkPrices
      * @return array
+     * @throws \Exception
      */
     public function makeItemsArray(bool $withBulkPrices = false): array
     {
@@ -35,8 +36,8 @@ class ProductPriceFactory extends AbstractModelFactory
         ];
 
         if ($withBulkPrices === true) {
-            $pricesCount = mt_rand(1, mt_rand(1, 30));
-            $maxQuantity = mt_rand($pricesCount, mt_rand($pricesCount, 500));
+            $pricesCount = random_int(1, random_int(1, 30));
+            $maxQuantity = random_int($pricesCount, random_int($pricesCount, 500));
             $step = (int)floor($maxQuantity / $pricesCount);
             $priceStep = floor($items[0]['netPrice'] / $pricesCount);
 
@@ -47,7 +48,7 @@ class ProductPriceFactory extends AbstractModelFactory
                 if ($minPrice > $items[$i]['netPrice'] || $minPrice < 0) {
                     $minPrice = (($items[$i]['netPrice'] - 0.1) / 2);
                 }
-                $price = mt_rand($minPrice, $items[$i]['netPrice']);
+                $price = $this->faker->randomFloat(4, $minPrice, $items[$i]['netPrice']);
                 $items[] = $this->makeItemArray(['quantity' => $quantity, 'netPrice' => $price]);
             }
         }
