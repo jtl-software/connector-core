@@ -39,7 +39,7 @@ class ChecksumLinker implements LoggerAwareInterface
      * @param AbstractModel $model
      * @param int $type
      */
-    public function link(AbstractModel &$model, $type = null): void
+    public function link(AbstractModel $model, $type = null): void
     {
         if (!is_null($this->loader) && method_exists($model, 'getChecksums')) {
             $checksums = $model->getChecksums();
@@ -103,7 +103,7 @@ class ChecksumLinker implements LoggerAwareInterface
     /**
      * @param AbstractModel $model
      * @param int $type
-     * @return ChecksumInterface
+     * @return ChecksumInterface|null
      */
     public static function find(AbstractModel $model, $type): ?ChecksumInterface
     {
@@ -122,7 +122,7 @@ class ChecksumLinker implements LoggerAwareInterface
      * @param AbstractModel $model
      * @param string $endpoint
      * @param int $type
-     * @return ChecksumInterface
+     * @return ChecksumInterface|null
      */
     public static function findByEndpoint(AbstractModel $model, $endpoint, $type): ?ChecksumInterface
     {
@@ -141,7 +141,7 @@ class ChecksumLinker implements LoggerAwareInterface
      * @param AbstractModel $model
      * @param int $host
      * @param int $type
-     * @return ChecksumInterface
+     * @return ChecksumInterface|null
      */
     public static function findByHost(AbstractModel $model, $host, $type): ?ChecksumInterface
     {
