@@ -39,7 +39,7 @@ class ConfigGroupI18n extends AbstractI18n
      * @param string $description Optional description (HTML)
      * @return ConfigGroupI18n
      */
-    public function setDescription(string $description): string
+    public function setDescription(string $description): self
     {
         $this->description = $description;
         
@@ -58,7 +58,7 @@ class ConfigGroupI18n extends AbstractI18n
      * @param string $name Config group name
      * @return ConfigGroupI18n
      */
-    public function setName(string $name): string
+    public function setName(string $name): self
     {
         $this->name = $name;
         
