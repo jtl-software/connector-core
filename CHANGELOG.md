@@ -1,3 +1,15 @@
+5.1.2
+-----
+- CO-2035 Github PR-13
+
+5.1.1
+-----
+- Fix PHP 8.1 implicit casting
+
+5.1.0
+-----
+- Fix PHP 8.1 compatibility
+
 5.0.6
 -----
 - Added Mollie payment type
