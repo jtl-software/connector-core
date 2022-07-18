@@ -324,10 +324,10 @@ class CustomerOrderItem extends AbstractIdentity
     }
     
     /**
-     * @param string $unique Optional unique Hashsum (if item is part of configurable item
+     * @param string|null $unique Optional unique Hashsum (if item is part of configurable item
      * @return CustomerOrderItem
      */
-    public function setUnique(string $unique): CustomerOrderItem
+    public function setUnique(?string $unique): CustomerOrderItem
     {
         $this->unique = $unique;
         
@@ -335,9 +335,9 @@ class CustomerOrderItem extends AbstractIdentity
     }
     
     /**
-     * @return string Optional unique Hashsum (if item is part of configurable item
+     * @return string|null Optional unique Hashsum (if item is part of configurable item
      */
-    public function getUnique(): string
+    public function getUnique(): ?string
     {
         return $this->unique;
     }
