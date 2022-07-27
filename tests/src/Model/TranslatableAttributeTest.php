@@ -188,7 +188,7 @@ class TranslatableAttributeTest extends TestCase
     public function setTypeProvider(): array
     {
         $data = [];
-        foreach (TranslatableAttribute::getKnownTypes() as $type) {
+        foreach (TranslatableAttribute::getAllTypes() as $type) {
             $data[] = [$type, $type];
         }
 
