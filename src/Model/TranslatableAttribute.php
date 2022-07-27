@@ -242,7 +242,7 @@ class TranslatableAttribute extends AbstractIdentity
     /**
      * @return string[]
      */
-    public static function getAllTypes(): array
+    public static function getTypes(): array
     {
         return self::$types;
     }
