@@ -1,3 +1,7 @@
+Unreleased
+-----
+- CO-2056 add fallback for unknown attribute types
+
 5.1.2
 -----
 - CO-2035 Github PR-13

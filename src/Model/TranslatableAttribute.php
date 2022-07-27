@@ -118,12 +118,12 @@ class TranslatableAttribute extends AbstractIdentity
     /**
      * @param string $type
      * @return $this
-     * @throws TranslatableAttributeException
      */
     public function setType(string $type): self
     {
         if (!self::isType($type)) {
-            throw TranslatableAttributeException::typeUnknown($type);
+            //Fallback to string if type is not known
+            $type = self::TYPE_STRING;
         }
 
         $this->type = $type;
@@ -237,5 +237,13 @@ class TranslatableAttribute extends AbstractIdentity
     public static function isType(string $type): bool
     {
         return in_array($type, self::$types, true);
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function getKnownTypes(): array
+    {
+        return self::$types;
     }
 }

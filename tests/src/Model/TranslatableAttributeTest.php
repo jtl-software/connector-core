@@ -4,6 +4,7 @@ namespace src\Model;
 
 use Jtl\Connector\Core\Exception\TranslatableAttributeException;
 use Jtl\Connector\Core\Model\Generator\AbstractModelFactory;
+use Jtl\Connector\Core\Model\Generator\TranslatableAttributeFactory;
 use Jtl\Connector\Core\Model\Generator\TranslatableAttributeI18nFactory;
 use Jtl\Connector\Core\Model\TranslatableAttribute;
 use Jtl\Connector\Core\Model\TranslatableAttributeI18n;
@@ -53,6 +54,7 @@ class TranslatableAttributeTest extends TestCase
      * @param string $type
      * @param TranslatableAttributeI18n|null $translation
      * @param $expectedValue
+     * @depends      testSetType
      * @throws TranslatableAttributeException
      */
     public function testFindValue(string $type, ?TranslatableAttributeI18n $translation, $expectedValue)
@@ -168,5 +170,34 @@ class TranslatableAttributeTest extends TestCase
         }
 
         return $data;
+    }
+
+    /**
+     * @param $actualType
+     * @param $expectedType
+     * @dataProvider setTypeProvider
+     * @return void
+     */
+    public function testSetType($actualType, $expectedType)
+    {
+        $attribute = new TranslatableAttribute();
+        $attribute->setType($actualType);
+
+        $this->assertEquals($expectedType, $attribute->getType());
+    }
+
+    public function setTypeProvider(): array
+    {
+        $data = [];
+        foreach (TranslatableAttribute::getKnownTypes() as $type) {
+            $data[] = [$type, $type];
+        }
+
+        return array_merge($data,[
+            //invalid types, should fall back to string
+            ['something invalid', TranslatableAttribute::TYPE_STRING],
+            ['', TranslatableAttribute::TYPE_STRING],
+            [false, TranslatableAttribute::TYPE_STRING],
+        ]);
     }
 }
