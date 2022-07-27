@@ -4,7 +4,6 @@ namespace src\Model;
 
 use Jtl\Connector\Core\Exception\TranslatableAttributeException;
 use Jtl\Connector\Core\Model\Generator\AbstractModelFactory;
-use Jtl\Connector\Core\Model\Generator\TranslatableAttributeFactory;
 use Jtl\Connector\Core\Model\Generator\TranslatableAttributeI18nFactory;
 use Jtl\Connector\Core\Model\TranslatableAttribute;
 use Jtl\Connector\Core\Model\TranslatableAttributeI18n;
