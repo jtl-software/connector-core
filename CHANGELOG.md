@@ -1,4 +1,4 @@
-Unreleased
+5.1.3
 -----
 - CO-2056 add fallback for unknown attribute types
 
