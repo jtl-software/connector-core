@@ -35,7 +35,7 @@ test:unit:
   image: gitlab.jtl-software.com:4567/connector/connector-utils/ci-docker/php/cli:${VERSION}
   stage: test
   script:
-    - vendor/bin/phpunit --configuration phpunit.xml.dist --bootstrap vendor/autoload.php --log-junit junit.xml
+    - vendor/bin/phpunit --configuration phpunit.xml.dist --log-junit junit.xml
   artifacts:
     reports:
       junit: junit.xml
