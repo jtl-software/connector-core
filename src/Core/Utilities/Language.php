@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package jtl\Connector\Core\Utilities
@@ -10,46 +10,15 @@ use \jtl\Connector\Core\Exception\LanguageException;
 
 class Language
 {
-    const CACHE_KEY_CONVERT = 'c';
-    const CACHE_KEY_MAP = 'm';
+    /** @var string */
+    public const CACHE_KEY_CONVERT = 'c';
+    /** @var string  */
+    public const CACHE_KEY_MAP = 'm';
 
+    /** @var array<mixed>  */
     protected static $cache = [];
 
-    protected static $locales = [
-        'ar_DZ' => 'ar', 'ar_EG' => 'ar', 'ar_KW' => 'ar',
-        'ar_MA' => 'ar', 'ar_SA' => 'ar', 'az_AZ' => 'az',
-        'be_BY' => 'be', 'bg_BG' => 'bg', 'bn_BD' => 'bn',
-        'bs_BA' => 'bs', 'ca_ES' => 'ca', 'cs_CZ' => 'cs',
-        'cy_GB' => 'cy', 'da_DK' => 'da', 'de_DE' => 'de',
-        'de_CH' => 'de', 'de_AT' => 'de', 'el_GR' => 'el',
-        'en_GB' => 'en', 'en_AU' => 'en', 'en_CA' => 'en',
-        'en_NZ' => 'en', 'en_US' => 'en', 'es_ES' => 'es',
-        'es_CO' => 'es', 'es_PA' => 'es', 'gl_ES' => 'gl',
-        'es_CR' => 'es', 'es_AR' => 'es', 'es_MX' => 'es',
-        'es_EU' => 'es', 'es_PE' => 'es', 'et_EE' => 'et',
-        'fa_IR' => 'fa', 'fi_FI' => 'fi', 'fil_PH' => 'fil',
-        'fr_FR' => 'fr', 'fr_CA' => 'fr', 'gu_IN' => 'gu',
-        'he_IL' => 'he', 'hi_IN' => 'hi', 'hr_HR' => 'hr',
-        'hu_HU' => 'hu', 'id_ID' => 'id', 'is_IS' => 'is',
-        'it_IT' => 'it', 'it_CH' => 'it', 'ja_JP' => 'ja',
-        'ka_GE' => 'ka', 'km_KH' => 'km', 'ko_KR' => 'ko',
-        'lo_LA' => 'lo', 'lt_LT' => 'lt', 'lv_LV' => 'lv',
-        'mk_MK' => 'mk', 'mn_MN' => 'mn', 'ms_MY' => 'ms',
-        'nl_NL' => 'nl', 'nb_NO' => 'nb', 'nn_NO' => 'nn',
-        'pl_PL' => 'pl', 'pt_BR' => 'pt', 'pt_PT' => 'pt',
-        'ro_RO' => 'ro', 'ru_RU' => 'ru', 'sk_SK' => 'sk',
-        'sl_SI' => 'sl', 'sq_AL' => 'sq', 'sr_RS' => 'sr',
-        'sv_SE' => 'sv', 'sw_KE' => 'sw', 'th_TH' => 'th',
-        'tr_TR' => 'tr', 'uk_UA' => 'uk', 'vi_VN' => 'vi',
-        'zh_CN' => 'zh', 'zh_HK' => 'zh', 'zh_TW' => 'zh',
-        'es_CL' => 'es', 'es_VE' => 'es', 'de_LU' => 'de',
-        'en_IE' => 'en', 'af_ZA' => 'af', 'de_LI' => 'de',
-        'en_BZ' => 'en', 'en_CG' => 'en', 'en_IN' => 'en',
-        'en_JM' => 'en', 'en_PH' => 'en', 'en_ZA' => 'en',
-        'en_TT' => 'en',
-        'ga_IE' => 'ga'
-    ];
-
+    /** @var array<string, string> */
     protected static $languages = [
         'ab' => 'abk', 'aa' => 'aar', 'af' => 'afr',
         'ak' => 'aka', 'sq' => 'alb', 'am' => 'amh',
@@ -115,49 +84,84 @@ class Language
         'zu' => 'zul'
     ];
 
-    public static function convert($short = null, $long = null)
+    /**
+     * @param string|null $short
+     * @param string|null $long
+     *
+     * @return string|null
+     * @throws LanguageException
+     */
+    public static function convert(?string $short = null, ?string $long = null): ?string
     {
-        if (is_null($short) && is_null($long)) {
+        if (\is_null($short) && \is_null($long)) {
             throw new LanguageException('Short and Long cannot be null');
         }
 
-        if (!is_null($short) && !empty($short) && isset(self::$languages[$short])) {
+        if (!empty($short) && isset(self::$languages[$short])) {
             return self::$languages[$short];
         }
 
-        if (!is_null($long) && !empty($long)) {
-            $long = strtolower($long);
+        if (!empty($long)) {
+            $long = \strtolower($long);
 
-            if (($short = array_search($long, self::$languages)) !== false) {
-                return $short;
+            if (($shortSearch = \array_search($long, self::$languages)) !== false && \is_string($shortSearch)) {
+                return $shortSearch;
             }
         }
 
         return null;
     }
 
-    public static function map($locale = null, $country = null, $lang = null, $useLong = true)
+    /**
+     * @param string|null $locale
+     * @param string|null $country
+     * @param string|null $lang
+     * @param bool        $useLong
+     *
+     * @return string|null
+     * @throws LanguageException|\InvalidArgumentException
+     */
+    public static function map(
+        ?string $locale  = null,
+        ?string $country = null,
+        ?string $lang    = null,
+        bool    $useLong = true
+    ): ?string
     {
-        if (is_null($locale) && is_null($country) && is_null($lang)) {
+        if (\is_null($locale) && \is_null($country) && \is_null($lang)) {
             throw new LanguageException('Locale, Country and Language cannot be null');
         }
-
-        if (!is_null($locale) && !empty($locale) && isset(self::$locales[$locale])) {
-            return $useLong ? self::convert(self::$locales[$locale]) : self::$locales[$locale];
+        if (!empty($locale)) {
+            $locale = self::getLocaleString($locale);
+            return $useLong ? self::convert($locale) : $locale;
         }
 
-        if (!is_null($lang)) {
+        if (!\is_null($lang)) {
             $country = self::convert(null, $lang);
         }
 
-        if (!is_null($country) && !empty($country)) {
-            $country = strtolower($country);
-
-            if (($locale = array_search($country, self::$locales)) !== false) {
-                return $locale;
-            }
+        if (!empty($country)) {
+            return self::getLocaleString(\strtolower($country));
         }
 
         return null;
+    }
+
+    /**
+     * cuts of everything after '_'. ex: de_AT -> de
+     * @param string $localeStr
+     *
+     * @return string
+     * @throws \InvalidArgumentException
+     */
+    private static function getLocaleString(string $localeStr): string
+    {
+        $localeStr = \substr($localeStr, 0, \strpos($localeStr, '_'));
+
+        if ($localeStr === false) {
+            throw new \InvalidArgumentException('locale string must have the format: \'xx_xx\'');
+        }
+
+        return $localeStr;
     }
 }
