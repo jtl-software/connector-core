@@ -7,7 +7,7 @@ namespace Jtl\Connector\Core\Exception;
  */
 class SubscriberException extends \Exception
 {
-    const INVALID_MODEL_TYPE = 10;
+    public const INVALID_MODEL_TYPE = 10;
 
     /**
      * @param string $expectedModelClass
@@ -18,7 +18,7 @@ class SubscriberException extends \Exception
         string $expectedModelClass,
         string $givenModelClass
     ): SubscriberException {
-        return new self(sprintf(
+        return new self(\sprintf(
             "Invalid model type in array. Expected %s object but %s given",
             $expectedModelClass,
             $givenModelClass
