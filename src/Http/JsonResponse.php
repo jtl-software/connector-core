@@ -17,20 +17,9 @@ use Symfony\Component\HttpFoundation\JsonResponse as SymfonyJsonResponse;
 
 class JsonResponse extends SymfonyJsonResponse implements LoggerAwareInterface
 {
-    /**
-     * @var LoggerInterface
-     */
-    protected $logger;
-
-    /**
-     * @var EventDispatcher
-     */
-    protected $eventDispatcher;
-
-    /**
-     * @var Serializer
-     */
-    protected $serializer;
+    protected LoggerInterface $logger;
+    protected EventDispatcher $eventDispatcher;
+    protected Serializer $serializer;
 
     /**
      * JsonResponse constructor.
@@ -41,11 +30,17 @@ class JsonResponse extends SymfonyJsonResponse implements LoggerAwareInterface
      * @param array $headers
      * @param bool $json
      */
-    public function __construct(EventDispatcher $eventDispatcher, Serializer $serializer, $data = null, int $status = 200, array $headers = [], bool $json = false)
-    {
-        $this->logger = new NullLogger();
+    public function __construct(
+        EventDispatcher $eventDispatcher,
+        Serializer $serializer,
+        $data = null,
+        int $status = 200,
+        array $headers = [],
+        bool $json = false
+    ) {
+        $this->logger          = new NullLogger();
         $this->eventDispatcher = $eventDispatcher;
-        $this->serializer = $serializer;
+        $this->serializer      = $serializer;
         parent::__construct($data, $status, $headers, $json);
     }
 
@@ -58,10 +53,10 @@ class JsonResponse extends SymfonyJsonResponse implements LoggerAwareInterface
      */
     public function prepareAndSend(RequestPacket $requestPacket, ResponsePacket $responsePacket)
     {
-        $method = Method::createFromRpcMethod($requestPacket->getMethod());
+        $method       = Method::createFromRpcMethod($requestPacket->getMethod());
         $responseData = $responsePacket->toArray($this->serializer);
-        $dataIndex = $responsePacket->getError() !== null ? 'error' : 'result';
-        $event = new RpcEvent($responseData[$dataIndex] ?? [], $method->getController(), $method->getAction());
+        $dataIndex    = $responsePacket->getError() !== null ? 'error' : 'result';
+        $event        = new RpcEvent($responseData[$dataIndex] ?? [], $method->getController(), $method->getAction());
         $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::AFTER));
         $responseData[$dataIndex] = $event->getData();
         $this->setData($responseData);
