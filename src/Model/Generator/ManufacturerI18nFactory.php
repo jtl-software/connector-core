@@ -16,12 +16,12 @@ class ManufacturerI18nFactory extends AbstractModelFactory
      */
     public function makeFakeArray(array $override = []): array
     {
-        return array_merge([
-            'description' => $this->faker->text(),
+        return \array_merge([
+            'description'     => $this->faker->text(),
             'metaDescription' => $this->faker->text(),
-            'metaKeywords' => $this->faker->text(),
-            'titleTag' => $this->faker->text(),
-            'languageIso' => $this->faker->languageCode
+            'metaKeywords'    => $this->faker->text(),
+            'titleTag'        => $this->faker->text(),
+            'languageIso'     => $this->faker->languageCode
         ], $override);
     }
 
