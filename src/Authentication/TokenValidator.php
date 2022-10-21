@@ -10,10 +10,7 @@ use Jtl\Connector\Core\Exception\TokenValidatorException;
  */
 class TokenValidator implements TokenValidatorInterface
 {
-    /**
-     * @var string
-     */
-    protected $token;
+    protected string $token;
 
     /**
      * TokenValidator constructor.
@@ -22,7 +19,7 @@ class TokenValidator implements TokenValidatorInterface
      */
     public function __construct(string $token)
     {
-        if ($token == '') {
+        if ($token === '') {
             throw TokenValidatorException::emptyToken();
         }
         $this->token = $token;
