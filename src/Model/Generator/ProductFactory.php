@@ -8,7 +8,7 @@ use Jtl\Connector\Core\Model\Product;
 
 class ProductFactory extends AbstractModelFactory
 {
-    protected $withBasePrice = false;
+    protected bool $withBasePrice = false;
 
     /**
      * @return array
@@ -23,7 +23,7 @@ class ProductFactory extends AbstractModelFactory
 
         /** @var TaxRateFactory $taxRateFactory */
         $taxRateFactory = $this->getFactory('TaxRate');
-        $taxRates = $taxRateFactory->makeArray(mt_rand(1, 30));
+        $taxRates       = $taxRateFactory->makeArray(\random_int(1, 30));
         $taxRateFactory->clearUsedCountries();
 
         return [
@@ -35,7 +35,7 @@ class ProductFactory extends AbstractModelFactory
             'shippingClassId' => $identityFactory->makeOneArray(),
             'unitId' => $identityFactory->makeOneArray(),
             'asin' => $this->faker->word,
-            'availableFrom' => mt_rand(0, 1) === 1 ? $this->faker->iso8601 : null,
+            'availableFrom' => \random_int(0, 1) === 1 ? $this->faker->iso8601 : null,
             'measurementQuantity' => $this->faker->randomFloat(2, 1),
             'measurementUnitCode' => $this->faker->randomElement($units),
             'basePriceDivisor' => 0.0,
@@ -46,7 +46,13 @@ class ProductFactory extends AbstractModelFactory
             'considerBasePrice' => false,
             'considerStock' => $this->faker->boolean,
             'considerVariationStock' => $this->faker->boolean,
-            'creationDate' => $this->dateBetween(sprintf('-%d %s', mt_rand(1, 60), $this->faker->randomKey(['days', 'years', 'hours', 'minutes', 'seconds']))),
+            'creationDate' => $this->dateBetween(
+                \sprintf(
+                    '-%d %s',
+                    \random_int(1, 60),
+                    $this->faker->randomKey(['days', 'years', 'hours', 'minutes', 'seconds'])
+                )
+            ),
             'ean' => $this->faker->ean8,
             'epid' => $this->faker->uuid,
             'hazardIdNumber' => $this->faker->sha1,
@@ -60,11 +66,17 @@ class ProductFactory extends AbstractModelFactory
             'isNewProduct' => $this->faker->boolean,
             'isSerialNumber' => $this->faker->boolean,
             'isTopProduct' => $this->faker->boolean,
-            'keywords' => $this->faker->words(mt_rand(0, 10), true),
+            'keywords' => $this->faker->words(\random_int(0, 10), true),
             'length' => $this->faker->randomFloat(),
             'manufacturerNumber' => $this->faker->word(),
             //'manufacturer' => null,
-            'minBestBeforeDate' => $this->dateBetween(sprintf('+%d %s', mt_rand(0, 60), $this->faker->randomKey(['days', 'years', 'hours', 'minutes', 'seconds']))),
+            'minBestBeforeDate' => $this->dateBetween(
+                \sprintf(
+                    '+%d %s',
+                    \random_int(0, 60),
+                    $this->faker->randomKey(['days', 'years', 'hours', 'minutes', 'seconds'])
+                )
+            ),
             'minimumOrderQuantity' => $this->faker->randomFloat(2),
             'minimumQuantity' => $this->faker->randomFloat(2),
             'modified' => $this->faker->iso8601,
@@ -89,10 +101,10 @@ class ProductFactory extends AbstractModelFactory
             'taxClassId' => $this->makeIdentityArray(IdentityType::TAX_CLASS),
             'unNumber' => $this->faker->word,
             'upc' => $this->faker->uuid,
-            'vat' => $taxRates[mt_rand(0, count($taxRates) - 1)]['rate'],
+            'vat' => $taxRates[\random_int(0, \count($taxRates) - 1)]['rate'],
             'width' => $this->faker->randomFloat(2),
             'attributes' => [],
-            'categories' => $this->getFactory('Product2Category')->makeArray(mt_rand(1, 3)),
+            'categories' => $this->getFactory('Product2Category')->makeArray(\random_int(1, 3)),
             'checksums' => [],
             //'configGroups' => [],
             //'customerGroupPackagingQuantities' => [],
@@ -103,7 +115,7 @@ class ProductFactory extends AbstractModelFactory
             'partsLists' => [],
             'prices' => [
                 $this->getFactory('ProductPrice')
-                    ->setWithBulkPrices(mt_rand(0, 1) === 1)
+                    ->setWithBulkPrices(\random_int(0, 1) === 1)
                     ->makeOneArray(['customerGroupId' => $identityFactory->makeOneArray([1 => 0])])
             ],
             'specialPrices' => [],
@@ -114,24 +126,27 @@ class ProductFactory extends AbstractModelFactory
         ];
     }
 
+    /**
+     * @throws \Exception
+     */
     public function makeOneProductVariantArray(array $i18ns = null)
     {
         $variationsQuantity = 2;
-        if (is_null($i18ns)) {
-            $i18ns = $this->getFactory('I18n')->makeArray(mt_rand(1, 3));
+        if (\is_null($i18ns)) {
+            $i18ns = $this->getFactory('I18n')->makeArray(\random_int(1, 3));
         }
 
-        $productI18ns = $this->getFactory('ProductI18n')->makeArray(count($i18ns), $i18ns);
+        $productI18ns = $this->getFactory('ProductI18n')->makeArray(\count($i18ns), $i18ns);
 
         $variantsQuantity = 1;
-        $variations = [];
+        $variations       = [];
         for ($i = 0; $i < $variationsQuantity; $i++) {
-            $variationI18ns = array_map(function (array $i18n) {
+            $variationI18ns = \array_map(function (array $i18n) {
                 return $this->getFactory('ProductVariationI18n')->makeOneArray($i18n);
             }, $i18ns);
 
-            $values = [];
-            $valuesQuantity = mt_rand(1, 10);
+            $values            = [];
+            $valuesQuantity    = \random_int(1, 10);
             $variantsQuantity *= $valuesQuantity;
             for ($j = 0; $j < $valuesQuantity; $j++) {
                 $valueI18ns = [];
@@ -153,7 +168,17 @@ class ProductFactory extends AbstractModelFactory
         }
 
         $parentId = $this->getFactory('Identity')->makeOneArray();
-        $variants = [$this->makeOneArray(['id' => $parentId, 'isMasterProduct' => true, 'variations' => $variations, 'sort' => 0, 'i18ns' => $productI18ns])];
+        $variants = [
+            $this->makeOneArray(
+                [
+                    'id' => $parentId,
+                    'isMasterProduct' => true,
+                    'variations' => $variations,
+                    'sort' => 0,
+                    'i18ns' => $productI18ns
+                ]
+            )
+        ];
 
         $i = 0;
         foreach ($variations[0]['values'] as $firstValue) {
@@ -161,7 +186,10 @@ class ProductFactory extends AbstractModelFactory
                 $variants[] = $this->makeOneArray([
                     'masterProductId' => $parentId,
                     'isMasterProduct' => false,
-                    'variations' => [array_merge($variations[0], ['values' => [$firstValue]]), array_merge($variations[1], ['values' => [$secondValue]])],
+                    'variations' => [
+                        \array_merge($variations[0], ['values' => [$firstValue]]),
+                        \array_merge($variations[1], ['values' => [$secondValue]])
+                    ],
                     'sort' => ++$i,
                     'prices' => $variants[0]['prices'],
                     'i18ns' => $productI18ns
@@ -180,7 +208,7 @@ class ProductFactory extends AbstractModelFactory
     public function makeOneProductVariant(array $i18ns = null)
     {
         $data = $this->makeOneProductVariantArray($i18ns);
-        return $this->make(count($data), $data);
+        return $this->make(\count($data), $data);
     }
 
     /**

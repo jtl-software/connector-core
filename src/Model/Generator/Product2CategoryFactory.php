@@ -14,7 +14,7 @@ class Product2CategoryFactory extends AbstractModelFactory
     protected function makeFakeArray(): array
     {
         return [
-            'id' => $this->makeIdentityArray(IdentityType::PRODUCT_TO_CATEGORY),
+            'id'         => $this->makeIdentityArray(IdentityType::PRODUCT_TO_CATEGORY),
             'categoryId' => $this->makeIdentityArray(IdentityType::CATEGORY)
         ];
     }
