@@ -12,8 +12,8 @@ use Jtl\Connector\Core\Utilities\Str;
 final class Event
 {
     public const
-        BEFORE = 'before',
-        AFTER = 'after';
+    BEFORE = 'before',
+    AFTER  = 'after';
 
     /**
      * @param string $controllerName
@@ -21,7 +21,6 @@ final class Event
      * @param string $moment
      * @return string
      * @throws DefinitionException
-     * @throws \ReflectionException
      */
     public static function createEventName(string $controllerName, string $actionName, string $moment): string
     {
@@ -37,7 +36,7 @@ final class Event
             throw DefinitionException::unknownMoment($moment);
         }
 
-        return sprintf("%s.%s.%s", Str::toSnakeCase($controllerName), $moment, $actionName);
+        return \sprintf("%s.%s.%s", Str::toSnakeCase($controllerName), $moment, $actionName);
     }
 
     /**
@@ -46,7 +45,6 @@ final class Event
      * @param string $moment
      * @return string
      * @throws DefinitionException
-     * @throws \ReflectionException
      */
     public static function createCoreEventName(string $controllerName, string $actionName, string $moment): string
     {
@@ -59,7 +57,6 @@ final class Event
      * @param string $moment
      * @return string
      * @throws DefinitionException
-     * @throws \ReflectionException
      */
     public static function createHandleEventName(string $controllerName, string $actionName, string $moment): string
     {
@@ -77,7 +74,7 @@ final class Event
             throw DefinitionException::unknownMoment($moment);
         }
 
-        return strtolower(sprintf("rpc.%s", $moment));
+        return \strtolower(\sprintf("rpc.%s", $moment));
     }
 
     /**
@@ -86,6 +83,6 @@ final class Event
      */
     public static function isMoment(string $moment): bool
     {
-        return in_array($moment, [self::BEFORE, self::AFTER], true);
+        return \in_array($moment, [self::BEFORE, self::AFTER], true);
     }
 }
