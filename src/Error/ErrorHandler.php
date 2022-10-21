@@ -60,7 +60,7 @@ class ErrorHandler extends AbstractErrorHandler
     public function getErrorHandler(): callable
     {
         return function ($errno, $errstr, $errfile = "", $errline = -1, $errcontext = null) {
-            return !in_array($errno, static::$shutdownHandleErrors, true);
+            return !\in_array($errno, static::$shutdownHandleErrors, true);
         };
     }
 
@@ -70,11 +70,11 @@ class ErrorHandler extends AbstractErrorHandler
     public function getShutdownHandler(): callable
     {
         return function () {
-            if (($err = error_get_last())) {
-                if (in_array($err['type'], static::$shutdownHandleErrors, true)) {
-                    ob_clean();
+            if (($err = \error_get_last())) {
+                if (\in_array($err['type'], static::$shutdownHandleErrors, true)) {
+                    \ob_clean();
 
-                    $file = sprintf('...%s', substr($err['file'], strrpos($err['file'], '/')));
+                    $file = \sprintf('...%s', \substr($err['file'], \strrpos($err['file'], '/')));
 
                     $error = new Error();
                     $error->setCode($err['type'])
@@ -82,7 +82,7 @@ class ErrorHandler extends AbstractErrorHandler
                         ->setMessage($err['message']);
 
                     $requestPacket = RequestPacket::create('unknown')->setMethod('unknown.unknown');
-                    if (!is_null($this->requestPacket)) {
+                    if (!\is_null($this->requestPacket)) {
                         $requestPacket = $this->requestPacket;
                     }
 
