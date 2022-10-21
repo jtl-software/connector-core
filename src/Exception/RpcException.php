@@ -39,7 +39,7 @@ class RpcException extends \Exception
      */
     public static function invalidMethod(string $method): self
     {
-        return new self(sprintf('Invalid method (%s)', $method), ErrorCode::INVALID_METHOD);
+        return new self(\sprintf('Invalid method (%s)', $method), ErrorCode::INVALID_METHOD);
     }
 
     /**
