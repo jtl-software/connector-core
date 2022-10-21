@@ -3,9 +3,7 @@ namespace Jtl\Connector\Core\Application;
 
 class Response
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $result;
 
     /**
