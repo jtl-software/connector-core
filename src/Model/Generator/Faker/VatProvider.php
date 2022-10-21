@@ -17,6 +17,6 @@ class VatProvider extends Base
     {
         $prefix = $spacedNationalPrefix ? "DE " : "DE";
 
-        return sprintf("%s%d", $prefix, self::randomNumber(9, true));
+        return \sprintf("%s%d", $prefix, self::randomNumber(9, true));
     }
 }

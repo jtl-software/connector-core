@@ -38,9 +38,10 @@ interface PrimaryKeyMapperInterface
     /**
      * Delete link from database
      *
-     * @param integer $type
-     * @param string $endpointId
-     * @param integer $hostId
+     * @param integer     $type
+     * @param string|null $endpointId
+     * @param int|null    $hostId
+     *
      * @return boolean
      */
     public function delete(int $type, string $endpointId = null, int $hostId = null): bool;
