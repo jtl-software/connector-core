@@ -107,28 +107,28 @@ class Application
 
     /** @var array<string, string> */
     protected static array $mimeTypeToExtensionMappings = [
-        'image/bmp' => 'bmp',
-        'image/x-bmp' => 'bmp',
-        'image/x-bitmap' => 'bmp',
-        'image/x-xbitmap' => 'bmp',
-        'image/x-win-bitmap' => 'bmp',
-        'image/x-windows-bmp' => 'bmp',
-        'image/ms-bmp' => 'bmp',
-        'image/x-ms-bmp' => 'bmp',
-        'application/bmp' => 'bmp',
-        'application/x-bmp' => 'bmp',
+        'image/bmp'                => 'bmp',
+        'image/x-bmp'              => 'bmp',
+        'image/x-bitmap'           => 'bmp',
+        'image/x-xbitmap'          => 'bmp',
+        'image/x-win-bitmap'       => 'bmp',
+        'image/x-windows-bmp'      => 'bmp',
+        'image/ms-bmp'             => 'bmp',
+        'image/x-ms-bmp'           => 'bmp',
+        'application/bmp'          => 'bmp',
+        'application/x-bmp'        => 'bmp',
         'application/x-win-bitmap' => 'bmp',
-        'image/gif' => 'gif',
-        'image/x-icon' => 'ico',
-        'image/x-ico' => 'ico',
+        'image/gif'                => 'gif',
+        'image/x-icon'             => 'ico',
+        'image/x-ico'              => 'ico',
         'image/vnd.microsoft.icon' => 'ico',
-        'image/jpeg' => 'jpg',
-        'image/pjpeg' => 'jpg',
-        'image/svg+xml' => 'svg',
-        'image/png' => 'png',
-        'image/x-png' => 'png',
-        'image/tiff' => 'tif',
-        'image/x-tiff' => 'tif',
+        'image/jpeg'               => 'jpg',
+        'image/pjpeg'              => 'jpg',
+        'image/svg+xml'            => 'svg',
+        'image/png'                => 'png',
+        'image/x-png'              => 'png',
+        'image/tiff'               => 'tif',
+        'image/x-tiff'             => 'tif',
     ];
 
     /**
@@ -413,8 +413,11 @@ class Application
      * @throws NotFoundException
      * @throws \ReflectionException
      */
-    protected function createHandleRequest(RequestPacket $requestPacket, Method $method, string $modelNamespace): Request
-    {
+    protected function createHandleRequest(
+        RequestPacket $requestPacket,
+        Method $method,
+        string $modelNamespace
+    ): Request {
         $controller = $method->getController();
         $action     = $method->getAction();
 
@@ -474,7 +477,9 @@ class Application
                 case Action::CLEAR:
                     foreach ($param->getIdentities() as $relationType => $identities) {
                         foreach ($identities as $identity) {
-                            $this->container->get(IdentityLinker::class)->linkIdentity($identity, RelationType::getModelName($relationType), 'id');
+                            $this->container
+                                ->get(IdentityLinker::class)
+                                ->linkIdentity($identity, RelationType::getModelName($relationType), 'id');
                         }
                     }
                     break;
@@ -525,8 +530,11 @@ class Application
      * @throws \ReflectionException
      * @throws \Throwable
      */
-    protected function execute(ConnectorInterface $connector, RequestPacket $requestPacket, Method $method): ResponsePacket
-    {
+    protected function execute(
+        ConnectorInterface $connector,
+        RequestPacket $requestPacket,
+        Method $method
+    ): ResponsePacket {
         $modelNamespace = Model::MODEL_NAMESPACE;
         if ($connector instanceof ModelInterface) {
             $modelNamespace = $connector->getModelNamespace();
@@ -542,7 +550,7 @@ class Application
             Event::createHandleEventName($request->getController(), $request->getAction(), Event::BEFORE)
         );
 
-        if (!$method->isCore() && $connector instanceof HandleRequestInterface) {
+        if ($connector instanceof HandleRequestInterface && !$method->isCore()) {
             $response = $connector->handle($this, $request);
         } else {
             $response = $this->handleRequest($connector, $request);
@@ -566,7 +574,9 @@ class Application
             if ($connector instanceof HandleRequestInterface ||
                 \in_array($request->getAction(), [Action::PUSH, Action::DELETE], true) === false) {
                 if ($result instanceof AbstractModel) {
-                    $this->container->get(IdentityLinker::class)->linkModel($result, ($request->getAction() === Action::DELETE));
+                    $this->container
+                        ->get(IdentityLinker::class)
+                        ->linkModel($result, ($request->getAction() === Action::DELETE));
                     $this->container->get(ChecksumLinker::class)->link($result);
                 }
             }
@@ -611,8 +621,12 @@ class Application
      * @param string $action
      * @throws \ReflectionException
      */
-    protected function extendExceptionMessageWithIdentifiers(\Throwable $ex, ?object $model, string $controller, string $action): void
-    {
+    protected function extendExceptionMessageWithIdentifiers(
+        \Throwable $ex,
+        ?object $model,
+        string $controller,
+        string $action
+    ): void {
         $messages = [
             \sprintf('Controller = %s', $controller),
             \sprintf('Action = %s', $action),
@@ -636,15 +650,21 @@ class Application
 
     /**
      * @param AbstractImage ...$images
+     *
      * @throws ApplicationException
      * @throws CompressionException
      * @throws DefinitionException
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException*@throws \Exception
+     * @throws \Exception
      */
     protected function handleImagePush(AbstractImage ...$images): void
     {
         $imagePaths = [];
-        $tempDir    = $this->deleteFromFileSystem[] = \sprintf('%s/%s', $this->config->get(ConfigSchema::CACHE_DIR), \uniqid('images-'));
+        $tempDir    = $this->deleteFromFileSystem[] = \sprintf(
+            '%s/%s',
+            $this->config->get(ConfigSchema::CACHE_DIR),
+            \uniqid('images-', true)
+        );
         $this->fileSystem->mkdir($tempDir);
 
         if ($this->httpRequest->files->has('file')) {
@@ -669,7 +689,7 @@ class Application
                 }
                 $path      = \parse_url($image->getRemoteUrl(), PHP_URL_PATH);
                 $fileName  = \pathinfo($path, PATHINFO_BASENAME);
-                $imagePath = \sprintf('%s/%s_%s', $tempDir, \uniqid(), $fileName);
+                $imagePath = \sprintf('%s/%s_%s', $tempDir, \uniqid('', true), $fileName);
                 if (\file_put_contents($imagePath, $imageData) === false) {
                     throw ApplicationException::fileCouldNotGetCreated($imagePath);
                 }
@@ -764,7 +784,9 @@ class Application
 
                         $dataModel = $controller->$action($model);
                         if ($dataModel instanceof AbstractModel) {
-                            $this->container->get(IdentityLinker::class)->linkModel($dataModel, ($request->getAction() === Action::DELETE));
+                            $this->container
+                                ->get(IdentityLinker::class)
+                                ->linkModel($dataModel, ($request->getAction() === Action::DELETE));
                             $this->container->get(ChecksumLinker::class)->link($dataModel);
                         }
                         $result[] = $dataModel;
@@ -811,8 +833,12 @@ class Application
      * @param EventDispatcher $eventDispatcher
      * @param string $pluginsDir
      */
-    protected function loadPlugins(ConfigInterface $config, Container $container, EventDispatcher $eventDispatcher, string $pluginsDir): void
-    {
+    protected function loadPlugins(
+        ConfigInterface $config,
+        Container $container,
+        EventDispatcher $eventDispatcher,
+        string $pluginsDir
+    ): void {
         $loader = new ClassLoader();
         $loader->add('', $pluginsDir);
         $loader->register();
@@ -871,7 +897,9 @@ class Application
         }
 
         $this->container->set(ChecksumLinker::class, function (ContainerInterface $container) {
-            $loader = $container->has(ChecksumLoaderInterface::class) ? $container->get(ChecksumLoaderInterface::class) : null;
+            $loader = $container->has(ChecksumLoaderInterface::class)
+                ? $container->get(ChecksumLoaderInterface::class)
+                : null;
             $linker = new ChecksumLinker($loader);
             $linker->setLogger($this->loggerService->get(LoggerService::CHANNEL_CHECKSUM));
 
@@ -919,7 +947,9 @@ class Application
         \session_set_save_handler($sessionHandler, true);
 
         \session_start();
-        $this->loggerService->get(LoggerService::CHANNEL_SESSION)->debug('Session started with id ({sessionId})', ['sessionId' => \session_id()]);
+        $this->loggerService
+            ->get(LoggerService::CHANNEL_SESSION)
+            ->debug('Session started with id ({sessionId})', ['sessionId' => \session_id()]);
     }
 
     /**
