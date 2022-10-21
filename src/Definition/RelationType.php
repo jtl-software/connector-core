@@ -14,7 +14,6 @@ final class RelationType
      * @param string $relationType
      * @return int
      * @throws DefinitionException
-     * @throws \ReflectionException
      */
     public static function getIdentityType(string $relationType): int
     {
@@ -31,14 +30,13 @@ final class RelationType
      */
     public static function hasIdentityType(string $relationType): bool
     {
-        return Model::hasIdentityType(ucfirst($relationType));
+        return Model::hasIdentityType(\ucfirst($relationType));
     }
 
     /**
      * @param string $relationType
      * @return integer
      * @throws DefinitionException
-     * @throws \ReflectionException
      */
     public static function getRelatedImageIdentityType(string $relationType): int
     {
@@ -66,7 +64,7 @@ final class RelationType
      */
     public static function getRelatedImageModelName(string $relationType): string
     {
-        return sprintf('%sImage', self::getModelName($relationType));
+        return \sprintf('%sImage', self::getModelName($relationType));
     }
 
     /**
@@ -80,7 +78,7 @@ final class RelationType
             throw DefinitionException::unknownRelationType($relationType);
         }
 
-        return ucfirst($relationType);
+        return \ucfirst($relationType);
     }
 
     /**
