@@ -32,9 +32,9 @@ class RpcEvent extends Event
      */
     public function __construct($data, string $controller, string $action)
     {
-        $this->data = $data;
+        $this->data       = $data;
         $this->controller = $controller;
-        $this->action = $action;
+        $this->action     = $action;
     }
 
     /**
