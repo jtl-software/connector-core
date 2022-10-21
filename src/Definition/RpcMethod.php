@@ -16,18 +16,18 @@ use Jtl\Connector\Core\Rpc\Method;
 final class RpcMethod
 {
     public const
-        ACK = 'core.connector.ack',
-        AUTH = 'core.connector.auth',
-        CLEAR = 'core.linker.clear',
-        INIT = 'core.connector.init',
-        FEATURES = 'core.connector.features',
-        IDENTIFY = 'connector.identify',
-        FINISH = 'connector.finish';
+    ACK      = 'core.connector.ack',
+    AUTH     = 'core.connector.auth',
+    CLEAR    = 'core.linker.clear',
+    INIT     = 'core.connector.init',
+    FEATURES = 'core.connector.features',
+    IDENTIFY = 'connector.identify',
+    FINISH   = 'connector.finish';
 
-    protected static $mappedMethods = [
-        self::IDENTIFY => 'core.connector.identify',
-        self::FINISH => 'core.connector.finish',
-        self::CLEAR => 'core.connector.clear',
+    protected static array $mappedMethods = [
+        self::IDENTIFY            => 'core.connector.identify',
+        self::FINISH              => 'core.connector.finish',
+        self::CLEAR               => 'core.connector.clear',
         'CustomerOrder.statistic' => 'customer_order.statistic',
     ];
 
@@ -38,15 +38,11 @@ final class RpcMethod
     public static function isMethod(string $methodName): bool
     {
         $pregcore = "";
-        if (strpos($methodName, "core.") !== false) {
+        if (\strpos($methodName, "core.") !== false) {
             $pregcore = "core.";
         }
-        
-        if (preg_match("/{$pregcore}[a-z0-9]{3,}[.]{1}[a-z0-9]{3,}/", $methodName) === 1) {
-            return true;
-        }
-        
-        return false;
+
+        return \preg_match("/{$pregcore}[a-z0-9]{3,}[.]{1}[a-z0-9]{3,}/", $methodName) === 1;
     }
 
     /**
