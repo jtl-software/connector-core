@@ -12,6 +12,7 @@ class CategoryFactory extends AbstractModelFactory
 {
     /**
      * @return array
+     * @throws \Exception
      */
     protected function makeFakeArray() : array
     {
@@ -26,7 +27,7 @@ class CategoryFactory extends AbstractModelFactory
             'attributes' => [],
             'customerGroups' => [],
             'invisibilities' => [],
-            'i18ns' => $this->getFactory('CategoryI18n')->makeArray(mt_rand(1, 3))
+            'i18ns' => $this->getFactory('CategoryI18n')->makeArray(\random_int(1, 3))
         ];
     }
 

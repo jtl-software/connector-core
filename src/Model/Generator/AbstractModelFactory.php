@@ -15,30 +15,15 @@ use Jtl\Connector\Core\Serializer\SerializerBuilder;
  */
 abstract class AbstractModelFactory
 {
-    /**
-     * @var string
-     */
-    protected $defaultLocale;
+    protected string $defaultLocale;
+    protected ?Generator $faker;
+    protected ?Serializer $serializer;
 
-    /**
-     * @var Generator
-     */
-    protected $faker;
+    /** @var array */
+    protected static array $identities = [];
 
-    /**
-     * @var Serializer
-     */
-    protected $serializer;
-
-    /**
-     * @var array
-     */
-    protected static $identities = [];
-
-    /**
-     * @var AbstractModelFactory[]
-     */
-    protected static $factories = [];
+    /** @var AbstractModelFactory[] */
+    protected static array $factories = [];
 
     /**
      * @return array
@@ -60,12 +45,12 @@ abstract class AbstractModelFactory
     {
         $this->defaultLocale = $defaultLocale;
 
-        if (is_null($faker)) {
+        if (\is_null($faker)) {
             $faker = Factory::create($defaultLocale);
         }
         $this->faker = $faker;
 
-        if (is_null($serializer)) {
+        if (\is_null($serializer)) {
             $serializer = SerializerBuilder::create()->build();
         }
         $this->serializer = $serializer;
@@ -81,7 +66,10 @@ abstract class AbstractModelFactory
     {
         $models = [];
         for ($i = 0; $i < $quantity; $i++) {
-            $model = $this->serializer->fromArray($this->makeOneArray(array_merge($globalOverrides, $specificOverrides[$i] ?? [])), $this->getModelClass());
+            $model    = $this->serializer->fromArray(
+                $this->makeOneArray(\array_merge($globalOverrides, $specificOverrides[$i] ?? [])),
+                $this->getModelClass()
+            );
             $models[] = $model;
         }
 
@@ -98,7 +86,7 @@ abstract class AbstractModelFactory
     {
         $models = [];
         for ($i = 0; $i < $quantity; $i++) {
-            $models[] = $this->makeOneArray(array_merge($globalOverrides, $specificOverrides[$i] ?? []));
+            $models[] = $this->makeOneArray(\array_merge($globalOverrides, $specificOverrides[$i] ?? []));
         }
         return $models;
     }
@@ -130,7 +118,7 @@ abstract class AbstractModelFactory
     public function makeIdentityArray(int $identityType): array
     {
         do {
-            list($endpoint, $host) = $this->getFactory('Identity')->makeOneArray();
+            [$endpoint, $host] = $this->getFactory('Identity')->makeOneArray();
             if (!isset(self::$identities[$identityType][$endpoint])) {
                 break;
             }
@@ -185,7 +173,7 @@ abstract class AbstractModelFactory
      */
     public static function hasIdentityByHost(int $identityType, int $host): bool
     {
-        return isset(self::$identities[$identityType]) && in_array($host, self::$identities[$identityType], true);
+        return isset(self::$identities[$identityType]) && \in_array($host, self::$identities[$identityType], true);
     }
 
     /**
@@ -196,7 +184,7 @@ abstract class AbstractModelFactory
     public static function getIdentityByHost(int $identityType, int $host): ?array
     {
         if (self::hasIdentityByHost($identityType, $host)) {
-            return self::getIdentity($identityType, array_search($host, self::$identities[$identityType], true));
+            return self::getIdentity($identityType, \array_search($host, self::$identities[$identityType], true));
         }
         return null;
     }
@@ -240,15 +228,19 @@ abstract class AbstractModelFactory
      * @param Serializer|null $serializer
      * @return AbstractModelFactory
      */
-    public static function createFactory(string $name, string $locale = 'de_DE', Generator $faker = null, Serializer $serializer = null)
-    {
-        $className = sprintf('%s\\%sFactory', __NAMESPACE__, ucfirst($name));
-        if (!class_exists($className)) {
-            throw new \RuntimeException(sprintf('Class %s not found', $className));
+    public static function createFactory(
+        string $name,
+        string $locale = 'de_DE',
+        Generator $faker = null,
+        Serializer $serializer = null
+    ) {
+        $className = \sprintf('%s\\%sFactory', __NAMESPACE__, \ucfirst($name));
+        if (!\class_exists($className)) {
+            throw new \RuntimeException(\sprintf('Class %s not found', $className));
         }
 
-        $locale = str_replace('-', '_', $locale);
-        $factoriesIndex = md5(sprintf('%s%s', $className, $locale));
+        $locale         = \str_replace('-', '_', $locale);
+        $factoriesIndex = \md5(\sprintf('%s%s', $className, $locale));
         if (!isset(self::$factories[$factoriesIndex])) {
             self::$factories[$factoriesIndex] = new $className($locale, $faker, $serializer);
         }
