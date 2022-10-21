@@ -86,79 +86,27 @@ use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
 class Application
 {
-    public const
-        PROTOCOL_VERSION = 7,
-        MIN_PHP_VERSION = '7.2';
+    public const PROTOCOL_VERSION = 7;
+    public const MIN_PHP_VERSION  = '7.4';
 
-    /**
-     * @var ConfigInterface;
-     */
-    protected $config;
+    protected ConfigInterface $config;
+    protected ConfigSchema $configSchema;
+    protected string $connectorDir;
+    protected Container $container;
 
-    /**
-     * @var ConfigSchema
-     */
-    protected $configSchema;
+    /** @var string[] */
+    protected array $deleteFromFileSystem = [];
+    protected AbstractErrorHandler$errorHandler;
+    protected EventDispatcher $eventDispatcher;
+    protected Filesystem $fileSystem;
+    protected LoggerService $loggerService;
+    protected HttpRequest $httpRequest;
+    protected HttpResponse $httpResponse;
+    protected SessionHandlerInterface $sessionHandler;
+    protected Serializer $serializer;
 
-    /**
-     * @var string
-     */
-    protected $connectorDir;
-
-    /**
-     * @var Container
-     */
-    protected $container;
-
-    /**
-     * @var string[]
-     */
-    protected $deleteFromFileSystem = [];
-
-    /**
-     * @var AbstractErrorHandler
-     */
-    protected $errorHandler;
-
-    /**
-     * @var EventDispatcher
-     */
-    protected $eventDispatcher;
-
-    /**
-     * @var Filesystem
-     */
-    protected $fileSystem;
-
-    /**
-     * @var LoggerService
-     */
-    protected $loggerService;
-
-    /**
-     * @var HttpRequest
-     */
-    protected $httpRequest;
-
-    /**
-     * @var HttpResponse
-     */
-    protected $httpResponse;
-
-    /**
-     * @var SessionHandlerInterface
-     */
-    protected $sessionHandler;
-
-    /**
-     * @var Serializer
-     */
-    protected $serializer;
-
-    /**
-     * @var array<string, string>
-     */
-    protected static $mimeTypeToExtensionMappings = [
+    /** @var array<string, string> */
+    protected static array $mimeTypeToExtensionMappings = [
         'image/bmp' => 'bmp',
         'image/x-bmp' => 'bmp',
         'image/x-bitmap' => 'bmp',
@@ -185,55 +133,64 @@ class Application
 
     /**
      * Application constructor.
-     * @param string $connectorDir
+     *
+     * @param string               $connectorDir
      * @param ConfigInterface|null $config
-     * @param ConfigSchema|null $configSchema
+     * @param ConfigSchema|null    $configSchema
+     *
      * @throws ApplicationException
      * @throws ConfigException
      * @throws LoggerException
      * @throws \ReflectionException
+     * @throws \Exception
      */
-    public function __construct(string $connectorDir, ConfigInterface $config = null, ConfigSchema $configSchema = null)
-    {
-        if (!is_dir($connectorDir)) {
+    public function __construct(
+        string $connectorDir,
+        ?ConfigInterface $config = null,
+        ?ConfigSchema $configSchema = null
+    ) {
+        if (!\is_dir($connectorDir)) {
             throw ApplicationException::connectorDirNotExists($connectorDir);
         }
         AnnotationRegistry::registerLoader('class_exists');
 
-        if (is_null($config)) {
-            $config = new FileConfig(sprintf('%s/config/config.json', $connectorDir));
+        if (\is_null($config)) {
+            $config = new FileConfig(\sprintf('%s/config/config.json', $connectorDir));
         }
 
-        if (is_null($configSchema)) {
+        if (\is_null($configSchema)) {
             $configSchema = new ConfigSchema();
         }
 
         $this->prepareConfig($connectorDir, $config, $configSchema);
 
         $serializerCacheDir = null;
-        if ($config->get(ConfigSchema::DEBUG, false) === false && $config->get(ConfigSchema::SERIALIZER_ENABLE_CACHE, true) === true) {
+        if ($config->get(ConfigSchema::DEBUG, false) === false
+            && $config->get(ConfigSchema::SERIALIZER_ENABLE_CACHE, true) === true
+        ) {
             $serializerCacheDir = $config->get(ConfigSchema::CACHE_DIR);
         }
 
         $this->connectorDir = $connectorDir;
-        $this->config = $config;
+        $this->config       = $config;
         $this->configSchema = $configSchema;
-        $this->container = (new ContainerBuilder())
+        $this->container    = (new ContainerBuilder())
             ->useAnnotations(true)
             ->useAutowiring(true)
             ->build();
 
-        $this->container->set(Application::class, $this);
+        $this->container->set(__CLASS__, $this);
         $this->eventDispatcher = new EventDispatcher();
-        $this->fileSystem = new Filesystem();
-        $this->loggerService = (new LoggerService($this->config->get(ConfigSchema::LOG_DIR), $this->config->get(ConfigSchema::LOG_LEVEL)))
+        $this->fileSystem      = new Filesystem();
+        $this->loggerService   =
+            (new LoggerService($this->config->get(ConfigSchema::LOG_DIR), $this->config->get(ConfigSchema::LOG_LEVEL)))
             ->setFormat($this->config->get(ConfigSchema::LOG_FORMAT));
 
         $this->container->set(LoggerService::class, $this->loggerService);
         $this->container->set(LoggerInterface::class, $this->loggerService->get(LoggerService::CHANNEL_GLOBAL));
 
-        $this->serializer = SerializerBuilder::create($serializerCacheDir)->build();
-        $this->httpRequest = HttpRequest::createFromGlobals();
+        $this->serializer   = SerializerBuilder::create($serializerCacheDir)->build();
+        $this->httpRequest  = HttpRequest::createFromGlobals();
         $this->httpResponse = new HttpResponse($this->eventDispatcher, $this->serializer);
         $this->errorHandler = new ErrorHandler($this->httpResponse);
     }
@@ -252,6 +209,7 @@ class Application
         }
 
         $this->container->set($controllerName, $instance);
+
         return $this;
     }
 
@@ -288,14 +246,19 @@ class Application
             $this->startSession($requestPacket->getMethod());
             $connector->initialize($this->config, $this->container, $this->eventDispatcher);
             $this->prepareContainer($connector);
-            $this->loadPlugins($this->config, $this->container, $this->eventDispatcher, $this->config->get(ConfigSchema::PLUGINS_DIR));
+            $this->loadPlugins(
+                $this->config,
+                $this->container,
+                $this->eventDispatcher,
+                $this->config->get(ConfigSchema::PLUGINS_DIR)
+            );
             $this->configSchema->validateConfig($this->config);
 
             $logJtlrpc = $jtlrpc;
             if ($requestPacket->getMethod() === RpcMethod::AUTH) {
-                $pattern = '/\"token\":\s?\"(.*)\"/';
+                $pattern     = '/\"token\":\s?\"(.*)\"/';
                 $replacement = '"token": "******************"';
-                $logJtlrpc = preg_replace($pattern, $replacement, $logJtlrpc);
+                $logJtlrpc   = \preg_replace($pattern, $replacement, $logJtlrpc);
             }
 
             // Log incoming request packet (debug only and configuration must be initialized)
@@ -306,15 +269,16 @@ class Application
             $requestPacket->setParams($event->getData());
 
             $responsePacket = $this->execute($connector, $requestPacket, $method);
-            session_write_close();
+            \session_write_close();
         } catch (\Throwable $ex) {
             $error = (new Error())
                 ->setCode($ex->getCode())
                 ->setMessage($ex->getMessage())
                 ->setData(Error::createDataFromException($ex));
 
-            $responsePacket = ResponsePacket::create($requestPacket->getId())
-                ->setError($error);
+            /** @var ResponsePacket $responsePacket */
+            $responsePacket = ResponsePacket::create($requestPacket->getId());
+            $responsePacket->setError($error);
 
             $this->loggerService->get(LoggerService::CHANNEL_ERROR)->error($ex->getTraceAsString());
 
@@ -323,8 +287,8 @@ class Application
             $this->fileSystem->remove($this->deleteFromFileSystem);
             $this->httpResponse->prepareAndSend($requestPacket, $responsePacket);
 
-            if (mt_rand(0, 99) === 0) {
-                $this->getSessionHandler()->gc((int)ini_get('session.gc_maxlifetime'));
+            if (\random_int(0, 99) === 0) {
+                $this->getSessionHandler()->gc((int)\ini_get('session.gc_maxlifetime'));
             }
         }
     }
@@ -404,8 +368,8 @@ class Application
      */
     public function getSessionHandler(): SessionHandlerInterface
     {
-        if (is_null($this->sessionHandler)) {
-            $this->sessionHandler = new SqliteSessionHandler(sprintf('%s/var', $this->connectorDir));
+        if (\is_null($this->sessionHandler)) {
+            $this->sessionHandler = new SqliteSessionHandler(\sprintf('%s/var', $this->connectorDir));
             $this->sessionHandler->setLogger($this->loggerService->get(LoggerService::CHANNEL_SESSION));
         }
         return $this->sessionHandler;
@@ -452,7 +416,7 @@ class Application
     protected function createHandleRequest(RequestPacket $requestPacket, Method $method, string $modelNamespace): Request
     {
         $controller = $method->getController();
-        $action = $method->getAction();
+        $action     = $method->getAction();
 
         switch ($action) {
             case Action::AUTH:
@@ -466,7 +430,7 @@ class Application
                 break;
             case Action::PUSH:
             case Action::DELETE:
-                $className = sprintf('%s\%s', $modelNamespace, $controller);
+                $className = \sprintf('%s\%s', $modelNamespace, $controller);
                 switch ($controller) {
                     case Controller::IMAGE:
                         $className = AbstractImage::class;
@@ -476,7 +440,7 @@ class Application
                         $className = Product::class;
                         break;
                 }
-                $type = sprintf("array<%s>", $className);
+                $type = \sprintf("array<%s>", $className);
                 break;
             default:
                 $type = QueryFilter::class;
@@ -484,7 +448,7 @@ class Application
 
         $params = $this->serializer->fromArray($requestPacket->getParams(), $type);
 
-        if (!is_array($params)) {
+        if (!\is_array($params)) {
             $params = [$params];
         }
 
@@ -516,7 +480,7 @@ class Application
                     break;
             }
 
-            if (!is_null($eventArg)) {
+            if (!\is_null($eventArg)) {
                 $eventName = Action::isCoreAction($action)
                     ? Event::createCoreEventName($controller, $action, Event::BEFORE)
                     : Event::createEventName($controller, $action, Event::BEFORE);
@@ -534,12 +498,12 @@ class Application
      */
     protected function createModelEventClassName(string $controllerName): string
     {
-        if (in_array($controllerName, [Controller::PRODUCT_PRICE, Controller::PRODUCT_STOCK_LEVEL], true)) {
+        if (\in_array($controllerName, [Controller::PRODUCT_PRICE, Controller::PRODUCT_STOCK_LEVEL], true)) {
             $controllerName = Controller::PRODUCT;
         }
 
-        $eventArgClass = sprintf('Jtl\\Connector\\Core\\Event\\%sEvent', $controllerName);
-        if (!class_exists($eventArgClass)) {
+        $eventArgClass = \sprintf('Jtl\\Connector\\Core\\Event\\%sEvent', $controllerName);
+        if (!\class_exists($eventArgClass)) {
             $eventArgClass = ModelEvent::class;
         }
 
@@ -597,10 +561,10 @@ class Application
         }
 
         // Identity mapping
-        $resultData = is_array($response->getResult()) ? $response->getResult() : [$response->getResult()];
+        $resultData = \is_array($response->getResult()) ? $response->getResult() : [$response->getResult()];
         foreach ($resultData as $result) {
             if ($connector instanceof HandleRequestInterface ||
-                in_array($request->getAction(), [Action::PUSH, Action::DELETE], true) === false) {
+                \in_array($request->getAction(), [Action::PUSH, Action::DELETE], true) === false) {
                 if ($result instanceof AbstractModel) {
                     $this->container->get(IdentityLinker::class)->linkModel($result, ($request->getAction() === Action::DELETE));
                     $this->container->get(ChecksumLinker::class)->link($result);
@@ -613,7 +577,7 @@ class Application
                 case Action::PULL:
                 case Action::DELETE:
                     $eventArgClass = $this->createModelEventClassName($request->getController());
-                    $eventArg = new $eventArgClass($result);
+                    $eventArg      = new $eventArgClass($result);
                     break;
                 case Action::STATISTIC:
                     $eventArg = new StatisticEvent($result);
@@ -632,7 +596,7 @@ class Application
                     break;
             }
 
-            if (!is_null($eventName) && !is_null($eventArg)) {
+            if (!\is_null($eventName) && !\is_null($eventArg)) {
                 $this->eventDispatcher->dispatch($eventArg, $eventName);
             }
         }
@@ -650,23 +614,23 @@ class Application
     protected function extendExceptionMessageWithIdentifiers(\Throwable $ex, ?object $model, string $controller, string $action): void
     {
         $messages = [
-            sprintf('Controller = %s', $controller),
-            sprintf('Action = %s', $action),
+            \sprintf('Controller = %s', $controller),
+            \sprintf('Action = %s', $action),
         ];
 
         if ($model instanceof IdentityInterface && $model->getId()->getHost() > 0) {
-            $messages[] = sprintf('JTL-Wawi PK = %d', $model->getId()->getHost());
+            $messages[] = \sprintf('JTL-Wawi PK = %d', $model->getId()->getHost());
         }
 
         if ($model instanceof AbstractModel) {
-            $messages = array_merge($messages, $model->getIdentificationStrings());
+            $messages = \array_merge($messages, $model->getIdentificationStrings());
         }
 
-        $messages[] = $ex->getMessage();
-        $reflectionClass = new \ReflectionClass($ex);
+        $messages[]         = $ex->getMessage();
+        $reflectionClass    = new \ReflectionClass($ex);
         $reflectionProperty = $reflectionClass->getProperty('message');
         $reflectionProperty->setAccessible(true);
-        $reflectionProperty->setValue($ex, implode(' | ', $messages));
+        $reflectionProperty->setValue($ex, \implode(' | ', $messages));
         $reflectionProperty->setAccessible(false);
     }
 
@@ -680,7 +644,7 @@ class Application
     protected function handleImagePush(AbstractImage ...$images): void
     {
         $imagePaths = [];
-        $tempDir = $this->deleteFromFileSystem[] = sprintf('%s/%s', $this->config->get(ConfigSchema::CACHE_DIR), uniqid('images-'));
+        $tempDir    = $this->deleteFromFileSystem[] = \sprintf('%s/%s', $this->config->get(ConfigSchema::CACHE_DIR), \uniqid('images-'));
         $this->fileSystem->mkdir($tempDir);
 
         if ($this->httpRequest->files->has('file')) {
@@ -699,14 +663,14 @@ class Application
 
         foreach ($images as $image) {
             if (!empty($image->getRemoteUrl())) {
-                $imageData = file_get_contents($image->getRemoteUrl());
+                $imageData = \file_get_contents($image->getRemoteUrl());
                 if ($imageData === false) {
                     throw ApplicationException::remoteImageNotFound($image);
                 }
-                $path = parse_url($image->getRemoteUrl(), PHP_URL_PATH);
-                $fileName = pathinfo($path, PATHINFO_BASENAME);
-                $imagePath = sprintf('%s/%s_%s', $tempDir, uniqid(), $fileName);
-                if (file_put_contents($imagePath, $imageData) === false) {
+                $path      = \parse_url($image->getRemoteUrl(), PHP_URL_PATH);
+                $fileName  = \pathinfo($path, PATHINFO_BASENAME);
+                $imagePath = \sprintf('%s/%s_%s', $tempDir, \uniqid(), $fileName);
+                if (\file_put_contents($imagePath, $imageData) === false) {
                     throw ApplicationException::fileCouldNotGetCreated($imagePath);
                 }
                 $image->setFilename($imagePath);
@@ -717,16 +681,16 @@ class Application
 
                 $imageFound = false;
                 foreach ($imagePaths as $imagePath) {
-                    $imageFound = false;
-                    $fileInfo = pathinfo($imagePath);
-                    list($hostId, $relationType) = explode('_', $fileInfo['filename']);
+                    $imageFound                  = false;
+                    $fileInfo                    = \pathinfo($imagePath);
+                    list($hostId, $relationType) = \explode('_', $fileInfo['filename']);
                     if ((int)$hostId == $image->getId()->getHost()
-                        && strtolower($relationType) === strtolower($image->getRelationType())
+                        && \strtolower($relationType) === \strtolower($image->getRelationType())
                     ) {
-                        $extension = self::determineExtensionByMimeType(mime_content_type($imagePath));
+                        $extension = self::determineExtensionByMimeType(\mime_content_type($imagePath));
                         if ($extension !== null && $fileInfo['extension'] !== $extension) {
-                            $newImagePath = sprintf('%s/%s.%s', $tempDir, $fileInfo['filename'], $extension);
-                            rename($imagePath, $newImagePath);
+                            $newImagePath = \sprintf('%s/%s.%s', $tempDir, $fileInfo['filename'], $extension);
+                            \rename($imagePath, $newImagePath);
                             $imagePath = $newImagePath;
                         }
 
@@ -756,8 +720,8 @@ class Application
     public function handleRequest(ConnectorInterface $connector, Request $request): Response
     {
         $controllerName = $request->getController();
-        $action = $request->getAction();
-        $params = $request->getParams();
+        $action         = $request->getAction();
+        $params         = $request->getParams();
 
         if (Action::isCoreAction($action)) {
             $this->container->set($controllerName, function (ContainerInterface $container) {
@@ -774,9 +738,9 @@ class Application
                 return $controller;
             });
         } elseif (!$this->container->has($controllerName)) {
-            $controllerClass = sprintf("%s\\%sController", $connector->getControllerNamespace(), $controllerName);
-            if (!class_exists($controllerClass)) {
-                throw new ApplicationException(sprintf('Controller class %s does not exist!', $controllerClass));
+            $controllerClass = \sprintf("%s\\%sController", $connector->getControllerNamespace(), $controllerName);
+            if (!\class_exists($controllerClass)) {
+                throw new ApplicationException(\sprintf('Controller class %s does not exist!', $controllerClass));
             }
 
             $this->container->set($controllerName, $this->container->get($controllerClass));
@@ -823,7 +787,7 @@ class Application
                 $result = $controller->$action($connector);
                 break;
             default:
-                $param = count($params) > 0 ? reset($params) : null;
+                $param  = \count($params) > 0 ? \reset($params) : null;
                 $result = $controller->$action($param);
                 break;
         }
@@ -853,11 +817,11 @@ class Application
         $loader->add('', $pluginsDir);
         $loader->register();
 
-        if (is_dir($pluginsDir)) {
+        if (\is_dir($pluginsDir)) {
             $finder = (new Finder())->files()->name('/Bootstrap.php/')->in($pluginsDir);
             foreach ($finder as $file) {
-                $class = sprintf('\\%s\\Bootstrap', str_replace(DIRECTORY_SEPARATOR, '\\', $file->getRelativePath()));
-                if (class_exists($class)) {
+                $class = \sprintf('\\%s\\Bootstrap', \str_replace(DIRECTORY_SEPARATOR, '\\', $file->getRelativePath()));
+                if (\class_exists($class)) {
                     $plugin = new $class();
                     if ($plugin instanceof PluginInterface) {
                         $plugin->registerListener($config, $container, $eventDispatcher);
@@ -930,7 +894,7 @@ class Application
      */
     protected function startSession(string $rpcMethod): void
     {
-        $sessionId = $this->httpRequest->get('jtlauth');
+        $sessionId   = $this->httpRequest->get('jtlauth');
         $sessionName = 'JtlConnector';
 
         if ($sessionId === null && $rpcMethod !== RpcMethod::AUTH) {
@@ -943,19 +907,19 @@ class Application
             $sessionHandler->setLogger($this->loggerService->get(LoggerService::CHANNEL_SESSION));
         }
 
-        session_name($sessionName);
+        \session_name($sessionName);
         if ($sessionId !== null) {
             if ($sessionHandler->validateId($sessionId)) {
-                session_id($sessionId);
+                \session_id($sessionId);
             } else {
                 throw new SessionException("Session is invalid", ErrorCode::INVALID_SESSION);
             }
         }
 
-        session_set_save_handler($sessionHandler, true);
+        \session_set_save_handler($sessionHandler, true);
 
-        session_start();
-        $this->loggerService->get(LoggerService::CHANNEL_SESSION)->debug('Session started with id ({sessionId})', ['sessionId' => session_id()]);
+        \session_start();
+        $this->loggerService->get(LoggerService::CHANNEL_SESSION)->debug('Session started with id ({sessionId})', ['sessionId' => \session_id()]);
     }
 
     /**
