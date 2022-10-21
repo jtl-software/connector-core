@@ -26,7 +26,7 @@ interface DatabaseInterface
     /**
      * Database Query
      *
-     * @var string $query
+     * @param string $query
      */
     public function query($query);
 
