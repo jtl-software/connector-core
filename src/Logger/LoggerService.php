@@ -14,42 +14,24 @@ use Monolog\Processor\PsrLogMessageProcessor;
 class LoggerService
 {
     public const
-        CHANNEL_CHECKSUM = 'checksum',
-        CHANNEL_ERROR = 'error',
-        CHANNEL_GLOBAL = 'global',
-        CHANNEL_LINKER = 'linker',
-        CHANNEL_RPC = 'rpc',
-        CHANNEL_SESSION = 'session';
+    CHANNEL_CHECKSUM = 'checksum',
+    CHANNEL_ERROR    = 'error',
+    CHANNEL_GLOBAL   = 'global',
+    CHANNEL_LINKER   = 'linker',
+    CHANNEL_RPC      = 'rpc',
+    CHANNEL_SESSION  = 'session';
 
-    /**
-     * @var MonoLogger[]
-     */
-    protected $channels = [];
+    /** @var MonoLogger[] */
+    protected array $channels = [];
 
-    /**
-     * @var FormatterInterface
-     */
-    protected $formatter;
+    /** @var ProcessorInterface[] */
+    protected array $processors = [];
 
-    /**
-     * @var string
-     */
-    protected $logDir;
+    protected FormatterInterface $formatter;
+    protected string $logDir;
+    protected string $logLevel;
+    protected int $maxFiles = 7;
 
-    /**
-     * @var string
-     */
-    protected $logLevel;
-
-    /**
-     * @var integer
-     */
-    protected $maxFiles = 7;
-
-    /**
-     * @var ProcessorInterface
-     */
-    protected $processors = [];
 
     /**
      * LoggerFactory constructor.
@@ -59,7 +41,7 @@ class LoggerService
      */
     public function __construct(string $logDir, string $logLevel, int $maxFiles = 7)
     {
-        $this->logDir = $logDir;
+        $this->logDir   = $logDir;
         $this->logLevel = $logLevel;
         $this->maxFiles = $maxFiles;
         $this
@@ -73,7 +55,7 @@ class LoggerService
      */
     public function has(string $channel): bool
     {
-        return isset($this->channels[lcfirst($channel)]);
+        return isset($this->channels[\lcfirst($channel)]);
     }
 
     /**
@@ -82,16 +64,16 @@ class LoggerService
      */
     public function get(string $channel): MonoLogger
     {
-        $channel = lcfirst($channel);
+        $channel = \lcfirst($channel);
         if (!$this->has($channel)) {
             $this->channels[$channel] = new MonoLogger($channel);
         }
 
         $logLevel = MonoLogger::toMonologLevel($this->logLevel);
         if (!$this->channels[$channel]->isHandling($logLevel)) {
-            $fileName = sprintf('%s/%s.log', $this->logDir, $channel);
-            $handler = new RotatingFileHandler($fileName, $this->maxFiles, $logLevel);
-            if (!is_null($this->formatter)) {
+            $fileName = \sprintf('%s/%s.log', $this->logDir, $channel);
+            $handler  = new RotatingFileHandler($fileName, $this->maxFiles, $logLevel);
+            if (isset($this->formatter)) {
                 $handler->setFormatter($this->formatter);
             }
             $this->channels[$channel]->pushHandler($handler);
@@ -111,8 +93,8 @@ class LoggerService
      */
     public function setFormat(string $format, array $arguments = []): self
     {
-        $formatterClass = sprintf('Monolog\Formatter\%sFormatter', ucfirst($format));
-        if (!class_exists($formatterClass)) {
+        $formatterClass = \sprintf('Monolog\Formatter\%sFormatter', \ucfirst($format));
+        if (!\class_exists($formatterClass)) {
             throw LoggerException::formatterNotExists($formatterClass);
         }
         $formatter = (new \ReflectionClass($formatterClass))->newInstanceArgs($arguments);
@@ -145,10 +127,8 @@ class LoggerService
      */
     public function pushProcessor(ProcessorInterface $processor): self
     {
-        foreach ($this->processors as $tProcessor) {
-            if ($processor === $tProcessor) {
-                return $this;
-            }
+        if (\in_array($processor, $this->processors, true)) {
+            return $this;
         }
 
         foreach ($this->channels as $channel) {
