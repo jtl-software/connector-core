@@ -9,16 +9,16 @@ use Psr\Log\LogLevel;
 class ConfigSchema
 {
     public const
-        LOG_LEVEL = 'log.level',
-        LOG_FORMAT = 'log.format',
-        MAIN_LANGUAGE = 'main_language',
-        CONNECTOR_DIR = 'connector_dir',
-        LOG_DIR = 'log_dir',
-        CACHE_DIR = 'cache_dir',
-        PLUGINS_DIR = 'plugins_dir',
-        FEATURES_PATH = 'features_path',
-        DEBUG = 'debug',
-        SERIALIZER_ENABLE_CACHE = 'serializer.enable_cache';
+    LOG_LEVEL               = 'log.level',
+    LOG_FORMAT              = 'log.format',
+    MAIN_LANGUAGE           = 'main_language',
+    CONNECTOR_DIR           = 'connector_dir',
+    LOG_DIR                 = 'log_dir',
+    CACHE_DIR               = 'cache_dir',
+    PLUGINS_DIR             = 'plugins_dir',
+    FEATURES_PATH           = 'features_path',
+    DEBUG                   = 'debug',
+    SERIALIZER_ENABLE_CACHE = 'serializer.enable_cache';
 
     /**
      * @var ConfigParameter[]
@@ -62,7 +62,7 @@ class ConfigSchema
      */
     public function getParameters(): array
     {
-        return array_values($this->parameters);
+        return \array_values($this->parameters);
     }
 
     /**
@@ -83,9 +83,9 @@ class ConfigSchema
      */
     public function getDefaultValues(): array
     {
-        return array_map(function (ConfigParameter $option) {
+        return \array_map(function (ConfigParameter $option) {
             return $option->getDefaultValue();
-        }, array_filter($this->parameters, function (ConfigParameter $option) {
+        }, \array_filter($this->parameters, function (ConfigParameter $option) {
             return $option->hasDefaultValue();
         }));
     }
@@ -96,18 +96,18 @@ class ConfigSchema
      */
     public function validateConfig(ConfigInterface $config): void
     {
-        $invalidValues = [];
+        $invalidValues     = [];
         $missingProperties = [];
         foreach ($this->parameters as $parameter) {
             $configValue = $config->get($parameter->getKey());
-            if (!is_null($configValue) && !$parameter->isValidValue($configValue)) {
+            if (!\is_null($configValue) && !$parameter->isValidValue($configValue)) {
                 $invalidValues[] = $parameter->getKey();
-            } elseif (is_null($configValue) && $parameter->isRequired()) {
+            } elseif (\is_null($configValue) && $parameter->isRequired()) {
                 $missingProperties[] = $parameter->getKey();
             }
         }
 
-        if (count($invalidValues) > 0 || count($missingProperties) > 0) {
+        if (\count($invalidValues) > 0 || \count($missingProperties) > 0) {
             throw ConfigException::configValidationErrors($invalidValues, $missingProperties);
         }
     }
@@ -124,10 +124,34 @@ class ConfigSchema
             ConfigParameter::create(self::LOG_FORMAT, ConfigParameter::TYPE_STRING, true, true, 'line'),
             ConfigParameter::create(self::MAIN_LANGUAGE, ConfigParameter::TYPE_STRING, true, true, 'de'),
             ConfigParameter::create(self::CONNECTOR_DIR, ConfigParameter::TYPE_STRING, true, true, $connectorDir),
-            ConfigParameter::create(self::LOG_DIR, ConfigParameter::TYPE_STRING, true, true, sprintf('%s/var/log', $connectorDir)),
-            ConfigParameter::create(self::CACHE_DIR, ConfigParameter::TYPE_STRING, true, false, sprintf('%s/var/cache', $connectorDir)),
-            ConfigParameter::create(self::PLUGINS_DIR, ConfigParameter::TYPE_STRING, true, false, sprintf('%s/plugins', $connectorDir)),
-            ConfigParameter::create(self::FEATURES_PATH, ConfigParameter::TYPE_STRING, true, false, sprintf('%s/config/features.json', $connectorDir)),
+            ConfigParameter::create(
+                self::LOG_DIR,
+                ConfigParameter::TYPE_STRING,
+                true,
+                true,
+                \sprintf('%s/var/log', $connectorDir)
+            ),
+            ConfigParameter::create(
+                self::CACHE_DIR,
+                ConfigParameter::TYPE_STRING,
+                true,
+                false,
+                \sprintf('%s/var/cache', $connectorDir)
+            ),
+            ConfigParameter::create(
+                self::PLUGINS_DIR,
+                ConfigParameter::TYPE_STRING,
+                true,
+                false,
+                \sprintf('%s/plugins', $connectorDir)
+            ),
+            ConfigParameter::create(
+                self::FEATURES_PATH,
+                ConfigParameter::TYPE_STRING,
+                true,
+                false,
+                \sprintf('%s/config/features.json', $connectorDir)
+            ),
             ConfigParameter::create(self::DEBUG, ConfigParameter::TYPE_BOOLEAN, true, true, false),
             ConfigParameter::create(self::SERIALIZER_ENABLE_CACHE, ConfigParameter::TYPE_BOOLEAN, true, true, true),
         ];
@@ -139,7 +163,7 @@ class ConfigSchema
      */
     public function createConfigWithDefaultValues(ConfigInterface $config = null): ConfigInterface
     {
-        if (is_null($config)) {
+        if (\is_null($config)) {
             $config = new ArrayConfig([]);
         }
 
