@@ -69,7 +69,7 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
     public function connect(array $options = null)
     {
         $this->setOptions($options);
-        if (!is_string($this->location) || strlen($this->location) === 0) {
+        if (!\is_string($this->location) || $this->location === '') {
             throw new DatabaseException('Wrong type or empty location');
         }
 
@@ -118,9 +118,9 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
      */
     public function query($query)
     {
-        $command = substr($query, 0, strpos($query, ' '));
+        $command = \substr($query, 0, \strpos($query, ' '));
 
-        switch (strtoupper($command)) {
+        switch (\strtoupper($command)) {
             case "SELECT":
                 return $this->fetch($query);
             case "UPDATE":
@@ -227,14 +227,14 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
      */
     public function setOptions(array $options = null)
     {
-        if ($options !== null && is_array($options)) {
+        if (\is_array($options)) {
             // Location
-            if (isset($options["location"]) && is_string($options["location"]) && strlen($options["location"]) > 0) {
+            if (isset($options["location"]) && \is_string($options["location"]) && \strlen($options["location"]) > 0) {
                 $this->location = $options["location"];
             }
 
             // Mode
-            if (isset($options["mode"]) && is_int($options["mode"])) {
+            if (isset($options["mode"]) && \is_int($options["mode"])) {
                 $this->mode = $options["mode"];
             }
         }
