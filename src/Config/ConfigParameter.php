@@ -6,11 +6,10 @@ use Jtl\Connector\Core\Exception\ConfigException;
 
 class ConfigParameter
 {
-    public const
-        TYPE_BOOLEAN = 'boolean',
-        TYPE_DOUBLE = 'double',
-        TYPE_INTEGER = 'integer',
-        TYPE_STRING = 'string';
+    public const TYPE_BOOLEAN = 'boolean';
+    public const TYPE_DOUBLE  = 'double';
+    public const TYPE_INTEGER = 'integer';
+    public const TYPE_STRING  = 'string';
 
     /**
      * @var string[]
@@ -60,7 +59,7 @@ class ConfigParameter
         $this->setKey($key);
         $this->setType($type);
         $this->required = $required;
-        $this->global = $global;
+        $this->global   = $global;
     }
 
     /**
@@ -130,7 +129,7 @@ class ConfigParameter
      */
     public function hasDefaultValue(): bool
     {
-        return !is_null($this->defaultValue);
+        return !\is_null($this->defaultValue);
     }
 
     /**
@@ -148,8 +147,8 @@ class ConfigParameter
      */
     public function setDefaultValue($defaultValue): ConfigParameter
     {
-        if (!is_null($defaultValue) && !$this->isValidValue($defaultValue)) {
-            throw ConfigException::wrongType($this->getType(), gettype($defaultValue));
+        if (!\is_null($defaultValue) && !$this->isValidValue($defaultValue)) {
+            throw ConfigException::wrongType($this->getType(), \gettype($defaultValue));
         }
         $this->defaultValue = $defaultValue;
         return $this;
@@ -161,7 +160,7 @@ class ConfigParameter
      */
     public function isValidValue($value): bool
     {
-        return gettype($value) === $this->getType();
+        return \gettype($value) === $this->getType();
     }
 
     /**
@@ -170,7 +169,7 @@ class ConfigParameter
      */
     public static function isType(string $type): bool
     {
-        return in_array($type, self::$types, true);
+        return \in_array($type, self::$types, true);
     }
 
     /**
@@ -182,8 +181,13 @@ class ConfigParameter
      * @return ConfigParameter
      * @throws ConfigException
      */
-    public static function create(string $key, string $type = self::TYPE_STRING, bool $required = true, $global = false, $defaultValue = null): ConfigParameter
-    {
+    public static function create(
+        string $key,
+        string $type   = self::TYPE_STRING,
+        bool $required = true,
+        $global        = false,
+        $defaultValue  = null
+    ): ConfigParameter {
         return (new self($key, $type, $required, $global))->setDefaultValue($defaultValue);
     }
 }
