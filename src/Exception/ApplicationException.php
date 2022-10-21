@@ -17,8 +17,8 @@ use Jtl\Connector\Core\Utilities\Str;
 class ApplicationException extends \Exception
 {
     public const
-        CONNECTOR_DIR_NOT_EXISTS = 10,
-        IMAGE_NOT_FOUND = 20;
+    CONNECTOR_DIR_NOT_EXISTS = 10,
+    IMAGE_NOT_FOUND          = 20;
 
 
     /**
@@ -35,7 +35,10 @@ class ApplicationException extends \Exception
      */
     public static function connectorDirNotExists(string $connectorDir): self
     {
-        return new self(sprintf('Connector directory "%s" does not exist', $connectorDir), self::CONNECTOR_DIR_NOT_EXISTS);
+        return new self(
+            \sprintf('Connector directory "%s" does not exist', $connectorDir),
+            self::CONNECTOR_DIR_NOT_EXISTS
+        );
     }
 
     /**
@@ -43,7 +46,11 @@ class ApplicationException extends \Exception
      */
     public static function uploadedFileNotFound(): self
     {
-        return new self('Uploaded file could not get found. Please check the upload_max_filesize and post_max_size in your php settings', ErrorCode::REQUEST_ERROR);
+        return new self(
+            'Uploaded file could not get found. 
+            Please check the upload_max_filesize and post_max_size in your php settings',
+            ErrorCode::REQUEST_ERROR
+        );
     }
 
     /**
@@ -53,7 +60,14 @@ class ApplicationException extends \Exception
      */
     public static function imageNotFound(AbstractImage $image): self
     {
-        return new self(sprintf('Image could not get found for %s (hostId = %d)', Str::toPascalCase($image->getRelationType()), $image->getForeignKey()->getHost()), self::IMAGE_NOT_FOUND);
+        return new self(
+            \sprintf(
+                'Image could not get found for %s (hostId = %d)',
+                Str::toPascalCase($image->getRelationType()),
+                $image->getForeignKey()->getHost()
+            ),
+            self::IMAGE_NOT_FOUND
+        );
     }
 
     /**
@@ -63,7 +77,15 @@ class ApplicationException extends \Exception
      */
     public static function remoteImageNotFound(AbstractImage $image): self
     {
-        return new self(sprintf('Remote image (%s) could not get found for %s (hostId = %d', $image->getRemoteUrl(), Str::toPascalCase($image->getRelationType()), $image->getForeignKey()->getHost()), self::IMAGE_NOT_FOUND);
+        return new self(
+            \sprintf(
+                'Remote image (%s) could not get found for %s (hostId = %d',
+                $image->getRemoteUrl(),
+                Str::toPascalCase($image->getRelationType()),
+                $image->getForeignKey()->getHost()
+            ),
+            self::IMAGE_NOT_FOUND
+        );
     }
 
     /**
@@ -72,7 +94,10 @@ class ApplicationException extends \Exception
      */
     public static function fileCouldNotGetCreated(string $fileName): self
     {
-        return new self(sprintf('File (%s) could not get created. Directory permissions should get checked', $fileName), ErrorCode::SERVER_ERROR);
+        return new self(
+            \sprintf('File (%s) could not get created. Directory permissions should get checked', $fileName),
+            ErrorCode::SERVER_ERROR
+        );
     }
 
     /**
