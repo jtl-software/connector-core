@@ -10,7 +10,7 @@ use Jtl\Connector\Core\Model\Manufacturer;
  */
 class ManufacturerFactory extends AbstractModelFactory
 {
-    protected $sort = 1;
+    protected int $sort = 1;
 
     /**
      * @param array $override
@@ -19,10 +19,10 @@ class ManufacturerFactory extends AbstractModelFactory
      */
     public function makeFakeArray(array $override = []): array
     {
-        return array_merge([
-            'id' => $this->getFactory('Identity')->makeOneArray(),
-            'name' => $this->faker->text(40),
-            'sort' => $this->sort++,
+        return \array_merge([
+            'id'    => $this->getFactory('Identity')->makeOneArray(),
+            'name'  => $this->faker->text(40),
+            'sort'  => $this->sort++,
             'i18ns' => $this->getFactory('ManufacturerI18n')->makeArray(3)
         ], $override);
     }
