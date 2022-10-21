@@ -22,18 +22,18 @@ class Gzip
      */
     public function read(string $file): string
     {
-        if (file_exists($file)) {
-            $fp = fopen($file, "rb");
+        if (\file_exists($file)) {
+            $fp = \fopen($file, "rb");
             
             if ($fp) {
-                fseek($fp, -4, SEEK_END);
-                $buf = fread($fp, 4);
-                $arr = unpack("V", $buf);
-                $gzsize = end($arr);
-                fclose($fp);
-                $gz = gzopen($file, "rb");
-                $content = gzread($gz, $gzsize);
-                gzclose($gz);
+                \fseek($fp, -4, SEEK_END);
+                $buf    = \fread($fp, 4);
+                $arr    = \unpack("V", $buf);
+                $gzsize = \end($arr);
+                \fclose($fp);
+                $gz      = \gzopen($file, "rb");
+                $content = \gzread($gz, $gzsize);
+                \gzclose($gz);
                 
                 return $content;
             } else {
