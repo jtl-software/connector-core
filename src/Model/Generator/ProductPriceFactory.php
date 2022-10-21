@@ -7,7 +7,7 @@ use Jtl\Connector\Core\Model\ProductPrice;
 
 class ProductPriceFactory extends AbstractModelFactory
 {
-    protected $withBulkPrices = false;
+    protected bool $withBulkPrices = false;
 
     /**
      * @return mixed[]
@@ -16,11 +16,11 @@ class ProductPriceFactory extends AbstractModelFactory
     protected function makeFakeArray(): array
     {
         return [
-            'id' => $this->makeIdentityArray(IdentityType::PRODUCT_PRICE),
+            'id'              => $this->makeIdentityArray(IdentityType::PRODUCT_PRICE),
             'customerGroupId' => $this->makeIdentityArray(IdentityType::CUSTOMER_GROUP),
             //'customerId' => null,
-            'productId' => $this->makeIdentityArray(IdentityType::PRODUCT),
-            'items' => $this->makeItemsArray($this->withBulkPrices),
+            'productId'       => $this->makeIdentityArray(IdentityType::PRODUCT),
+            'items'           => $this->makeItemsArray($this->withBulkPrices),
         ];
     }
 
@@ -36,19 +36,19 @@ class ProductPriceFactory extends AbstractModelFactory
         ];
 
         if ($withBulkPrices === true) {
-            $pricesCount = random_int(1, random_int(1, 30));
-            $maxQuantity = random_int($pricesCount, random_int($pricesCount, 500));
-            $step = (int)floor($maxQuantity / $pricesCount);
-            $priceStep = floor($items[0]['netPrice'] / $pricesCount);
+            $pricesCount = \random_int(1, \random_int(1, 30));
+            $maxQuantity = \random_int($pricesCount, \random_int($pricesCount, 500));
+            $step        = (int)\floor($maxQuantity / $pricesCount);
+            $priceStep   = \floor($items[0]['netPrice'] / $pricesCount);
 
             $quantity = 0;
             for ($i = 0; $i < $pricesCount; $i++) {
                 $quantity += $step;
-                $minPrice = $items[$i]['netPrice'] - $priceStep;
+                $minPrice  = $items[$i]['netPrice'] - $priceStep;
                 if ($minPrice > $items[$i]['netPrice'] || $minPrice < 0) {
                     $minPrice = (($items[$i]['netPrice'] - 0.1) / 2);
                 }
-                $price = $this->faker->randomFloat(4, $minPrice, $items[$i]['netPrice']);
+                $price   = $this->faker->randomFloat(4, $minPrice, $items[$i]['netPrice']);
                 $items[] = $this->makeItemArray(['quantity' => $quantity, 'netPrice' => $price]);
             }
         }
@@ -62,7 +62,7 @@ class ProductPriceFactory extends AbstractModelFactory
      */
     public function makeItemArray(array $override = []): array
     {
-        return array_merge([
+        return \array_merge([
             'quantity' => $this->faker->numberBetween(),
             'netPrice' => $this->faker->randomFloat(4, 1),
         ], $override);
