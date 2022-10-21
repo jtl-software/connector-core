@@ -3,20 +3,10 @@ namespace Jtl\Connector\Core\Application;
 
 class Request
 {
-    /**
-     * @var string
-     */
-    protected $controller;
-
-    /**
-     * @var string
-     */
-    protected $action;
-
-    /**
-     * @var mixed[]
-     */
-    protected $params = [];
+    protected string $controller;
+    protected string $action;
+    /** @var mixed[]  */
+    protected array $params = [];
 
     /**
      * Request constructor.
@@ -27,8 +17,8 @@ class Request
     public function __construct(string $controller, string $action, array $params)
     {
         $this->controller = $controller;
-        $this->action = $action;
-        $this->params = $params;
+        $this->action     = $action;
+        $this->params     = $params;
     }
 
     /**
