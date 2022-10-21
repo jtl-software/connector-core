@@ -29,7 +29,7 @@ class FileConfig extends Config
      */
     public function __construct(string $filePath)
     {
-        if (!is_file($filePath) && is_dir(dirname($filePath))) {
+        if (!\is_file($filePath) && \is_dir(\dirname($filePath))) {
             parent::__construct('{}', new Json(), true);
         } else {
             parent::__construct($filePath);
