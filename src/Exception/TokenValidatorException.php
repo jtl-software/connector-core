@@ -8,10 +8,10 @@ namespace Jtl\Connector\Core\Exception;
  */
 class TokenValidatorException extends \Exception
 {
-    const EMPTY_TOKEN = 10;
+    public const EMPTY_TOKEN = 10;
 
     /**
-     * @return static
+     * @return TokenValidatorException
      */
     public static function emptyToken(): TokenValidatorException
     {
