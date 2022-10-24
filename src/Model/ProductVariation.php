@@ -11,7 +11,8 @@ namespace Jtl\Connector\Core\Model;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * ProductVariation Model. Each product defines its own variations, that means  variations are not global  in contrast to specifics.
+ * ProductVariation Model. Each product defines its own variations,
+ * that means  variations are not global  in contrast to specifics.
  *
  * @access public
  * @package Jtl\Connector\Core\Model
@@ -23,27 +24,27 @@ class ProductVariation extends AbstractIdentity
     /**
      * @var string - Multiple values displayed as radio buttons.
      */
-    const TYPE_RADIO = 'radio';
+    public const TYPE_RADIO = 'radio';
     /**
      * @var string - Multiple values displayed as drop down.
      */
-    const TYPE_SELECT = 'select';
+    public const TYPE_SELECT = 'select';
     /**
      * @var string - boxes showing a text
      */
-    const TYPE_TEXTBOX = 'textbox';
+    public const TYPE_TEXTBOX = 'textbox';
     /**
      * @var string - Optional text input (no values)
      */
-    const TYPE_FREE_TEXT = 'freetext';
+    public const TYPE_FREE_TEXT = 'freetext';
     /**
      * @var string - Required text input (no values)
      */
-    const TYPE_FREE_TEXT_OBLIGATORY = 'obligatory_freetext';
+    public const TYPE_FREE_TEXT_OBLIGATORY = 'obligatory_freetext';
     /**
      * @var string - boxes showing a color
      */
-    const TYPE_IMAGE_SWATCHES = 'image_swatches';
+    public const TYPE_IMAGE_SWATCHES = 'image_swatches';
 
     /**
      * @var integer Optional sort number

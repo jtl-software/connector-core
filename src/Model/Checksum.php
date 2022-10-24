@@ -22,7 +22,7 @@ class Checksum extends AbstractModel implements ChecksumInterface
     /**
      * @var int - Checksum used to check variations for change
      */
-    const TYPE_VARIATION = 1;
+    public const TYPE_VARIATION = 1;
 
     /**
      * @var Identity

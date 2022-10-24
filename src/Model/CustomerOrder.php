@@ -23,37 +23,37 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @var string - Status when payment is completed
      */
-    const PAYMENT_STATUS_COMPLETED = 'completed';
+    public const PAYMENT_STATUS_COMPLETED = 'completed';
 
     /**
      * @var string - Status when order is partially paid
      */
-    const PAYMENT_STATUS_PARTIALLY = 'partially_paid';
+    public const PAYMENT_STATUS_PARTIALLY = 'partially_paid';
 
     /**
      * @var string - Status when order is unpaid
      */
-    const PAYMENT_STATUS_UNPAID = 'unpaid';
+    public const PAYMENT_STATUS_UNPAID = 'unpaid';
 
     /**
      * @var string - New order
      */
-    const STATUS_NEW = 'new';
+    public const STATUS_NEW = 'new';
 
     /**
      * @var string - Cancelled by merchant or customer
      */
-    const STATUS_CANCELLED = 'cancelled';
+    public const STATUS_CANCELLED = 'cancelled';
 
     /**
      * @var string - Order has been shipped partially
      */
-    const STATUS_PARTIALLY_SHIPPED = 'partially_shipped';
+    public const STATUS_PARTIALLY_SHIPPED = 'partially_shipped';
 
     /**
      * @var string - Order has been shipped
      */
-    const STATUS_SHIPPED = 'shipped';
+    public const STATUS_SHIPPED = 'shipped';
 
     /**
      * @var Identity Optional reference to customer.

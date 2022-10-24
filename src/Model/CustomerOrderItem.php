@@ -23,27 +23,27 @@ class CustomerOrderItem extends AbstractIdentity
     /**
      * @var string - Discount
      */
-    const TYPE_DISCOUNT = 'discount';
+    public const TYPE_DISCOUNT = 'discount';
 
     /**
      * @var string - Product
      */
-    const TYPE_PRODUCT = 'product';
+    public const TYPE_PRODUCT = 'product';
 
     /**
      * @var string - Shipping
      */
-    const TYPE_SHIPPING = 'shipping';
+    public const TYPE_SHIPPING = 'shipping';
 
     /**
      * @var string - Surcharge
      */
-    const TYPE_SURCHARGE = 'surcharge';
+    public const TYPE_SURCHARGE = 'surcharge';
 
     /**
      * @var string - Coupon
      */
-    const TYPE_COUPON = 'coupon';
+    public const TYPE_COUPON = 'coupon';
 
     /**
      * @var Identity Optional reference to configItemId (if item is part of a configurable item)
