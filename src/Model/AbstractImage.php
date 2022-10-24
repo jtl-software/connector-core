@@ -27,7 +27,6 @@ use Jtl\Connector\Core\Exception\DefinitionException;
  */
 abstract class AbstractImage extends AbstractIdentity
 {
-
     /**
      * @var string
      * @Serializer\Type("string")
@@ -100,9 +99,9 @@ abstract class AbstractImage extends AbstractIdentity
      */
     public function getExtension(): string
     {
-        $dotPos = strrpos($this->filename, '.');
+        $dotPos = \strrpos($this->filename, '.');
         if ($dotPos !== false) {
-            return substr($this->filename, $dotPos + 1);
+            return \substr($this->filename, $dotPos + 1);
         }
 
         return '';
@@ -137,7 +136,6 @@ abstract class AbstractImage extends AbstractIdentity
     /**
      * @param Identity $foreignKey
      * @return $this
-     * @throws DefinitionException
      */
     public function setForeignKey(Identity $foreignKey): AbstractImage
     {
@@ -211,8 +209,8 @@ abstract class AbstractImage extends AbstractIdentity
     public function getRelationType(): string
     {
         $modelName = $this->reflectionClass->getShortName();
-        $imagePos = strpos($modelName, 'Image');
-        return Model::getRelationType(substr($modelName, 0, $imagePos));
+        $imagePos  = \strpos($modelName, 'Image');
+        return Model::getRelationType(\substr($modelName, 0, $imagePos));
     }
 
     /**
@@ -257,7 +255,14 @@ abstract class AbstractImage extends AbstractIdentity
      */
     public function getIdentificationStrings(): array
     {
-        $this->setIdentificationStringBySubject('foreignKey', sprintf('Related type %s (JTL-Wawi PK = %d)', ucfirst($this->getRelationType()), $this->foreignKey->getHost()));
+        $this->setIdentificationStringBySubject(
+            'foreignKey',
+            \sprintf(
+                'Related type %s (JTL-Wawi PK = %d)',
+                \ucfirst($this->getRelationType()),
+                $this->foreignKey->getHost()
+            )
+        );
 
         return parent::getIdentificationStrings();
     }
