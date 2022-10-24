@@ -7,6 +7,9 @@ use Jtl\Connector\Core\Model\SpecificValue;
 
 class SpecificValueFactory extends AbstractModelFactory
 {
+    /**
+     * @return array<string, mixed>
+     */
     protected function makeFakeArray(): array
     {
         return [

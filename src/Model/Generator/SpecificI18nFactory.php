@@ -8,7 +8,7 @@ use Jtl\Connector\Core\Model\SpecificI18n;
 class SpecificI18nFactory extends AbstractI18nFactory
 {
     /**
-     * @return mixed[]
+     * @return array<string, string>
      */
     protected function makeFakeArray(): array
     {

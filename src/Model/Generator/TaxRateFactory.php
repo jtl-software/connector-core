@@ -7,10 +7,7 @@ use Jtl\Connector\Core\Model\TaxRate;
 
 class TaxRateFactory extends AbstractModelFactory
 {
-    /**
-     * @var array
-     */
-    protected $usedCountries = [];
+    protected array $usedCountries = [];
 
     public function clearUsedCountries(): void
     {
@@ -18,7 +15,7 @@ class TaxRateFactory extends AbstractModelFactory
     }
 
     /**
-     * @return string[]
+     * @return array<string, string|float>
      */
     protected function makeFakeArray(): array
     {
@@ -41,13 +38,14 @@ class TaxRateFactory extends AbstractModelFactory
      */
     protected function getUnusedCountryIso(): string
     {
-        if (count($this->usedCountries) >= 247) {
+        if (\count($this->usedCountries) >= 247) {
             $this->clearUsedCountries();
         }
 
+        //TODO: discuss prevent continuous loop here
         while (true) {
             $countryIso = $this->faker->countryCode;
-            if (!in_array($countryIso, $this->usedCountries, true)) {
+            if (!\in_array($countryIso, $this->usedCountries, true)) {
                 $this->usedCountries[] = $countryIso;
                 return $countryIso;
             }

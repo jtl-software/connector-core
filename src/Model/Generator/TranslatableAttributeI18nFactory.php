@@ -11,7 +11,7 @@ use Jtl\Connector\Core\Model\TranslatableAttributeI18n;
 class TranslatableAttributeI18nFactory extends AbstractModelFactory
 {
     /**
-     * @return array
+     * @return array<string, string|bool>
      */
     protected function makeFakeArray(): array
     {
