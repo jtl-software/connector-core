@@ -96,7 +96,7 @@ class Application
 
     /** @var string[] */
     protected array $deleteFromFileSystem = [];
-    protected AbstractErrorHandler$errorHandler;
+    protected AbstractErrorHandler $errorHandler;
     protected EventDispatcher $eventDispatcher;
     protected Filesystem $fileSystem;
     protected LoggerService $loggerService;
@@ -165,7 +165,8 @@ class Application
         $this->prepareConfig($connectorDir, $config, $configSchema);
 
         $serializerCacheDir = null;
-        if ($config->get(ConfigSchema::DEBUG, false) === false
+        if (
+            $config->get(ConfigSchema::DEBUG, false) === false
             && $config->get(ConfigSchema::SERIALIZER_ENABLE_CACHE, true) === true
         ) {
             $serializerCacheDir = $config->get(ConfigSchema::CACHE_DIR);
@@ -571,8 +572,10 @@ class Application
         // Identity mapping
         $resultData = \is_array($response->getResult()) ? $response->getResult() : [$response->getResult()];
         foreach ($resultData as $result) {
-            if ($connector instanceof HandleRequestInterface ||
-                \in_array($request->getAction(), [Action::PUSH, Action::DELETE], true) === false) {
+            if (
+                $connector instanceof HandleRequestInterface
+                || \in_array($request->getAction(), [Action::PUSH, Action::DELETE], true) === false
+            ) {
                 if ($result instanceof AbstractModel) {
                     $this->container
                         ->get(IdentityLinker::class)
@@ -687,8 +690,8 @@ class Application
                 if ($imageData === false) {
                     throw ApplicationException::remoteImageNotFound($image);
                 }
-                $path      = \parse_url($image->getRemoteUrl(), PHP_URL_PATH);
-                $fileName  = \pathinfo($path, PATHINFO_BASENAME);
+                $path      = \parse_url($image->getRemoteUrl(), \PHP_URL_PATH);
+                $fileName  = \pathinfo($path, \PATHINFO_BASENAME);
                 $imagePath = \sprintf('%s/%s_%s', $tempDir, \uniqid('', true), $fileName);
                 if (\file_put_contents($imagePath, $imageData) === false) {
                     throw ApplicationException::fileCouldNotGetCreated($imagePath);
@@ -704,7 +707,8 @@ class Application
                     $imageFound                  = false;
                     $fileInfo                    = \pathinfo($imagePath);
                     list($hostId, $relationType) = \explode('_', $fileInfo['filename']);
-                    if ((int)$hostId == $image->getId()->getHost()
+                    if (
+                        (int)$hostId == $image->getId()->getHost()
                         && \strtolower($relationType) === \strtolower($image->getRelationType())
                     ) {
                         $extension = self::determineExtensionByMimeType(\mime_content_type($imagePath));
@@ -846,7 +850,7 @@ class Application
         if (\is_dir($pluginsDir)) {
             $finder = (new Finder())->files()->name('/Bootstrap.php/')->in($pluginsDir);
             foreach ($finder as $file) {
-                $class = \sprintf('\\%s\\Bootstrap', \str_replace(DIRECTORY_SEPARATOR, '\\', $file->getRelativePath()));
+                $class = \sprintf('\\%s\\Bootstrap', \str_replace(\DIRECTORY_SEPARATOR, '\\', $file->getRelativePath()));
                 if (\class_exists($class)) {
                     $plugin = new $class();
                     if ($plugin instanceof PluginInterface) {
