@@ -126,7 +126,9 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
         $success = false;
 
         try {
-            $stmt = $db->prepare('INSERT INTO session (sessionId, sessionExpires, sessionData) VALUES(:session_id, :expire, :data)');
+            $stmt = $db->prepare(
+                'INSERT INTO session (sessionId, sessionExpires, sessionData) VALUES(:session_id, :expire, :data)'
+            );
             $stmt->bindValue(':session_id', $sessionId, \SQLITE3_TEXT);
             $stmt->bindValue(':expire', $expire, \SQLITE3_INTEGER);
             $stmt->bindValue(':data', $sessionData, \SQLITE3_TEXT);
@@ -137,7 +139,10 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
         } catch (\Throwable $ex) {
             if ($db->lastErrorCode() === 19) {
                 /** @var \SQLite3Stmt $stmt */
-                $stmt = $db->prepare('UPDATE session SET sessionData = :data, sessionExpires = :expire WHERE sessionId = :session_id');
+                $stmt = $db->prepare(
+                    'UPDATE session SET sessionData = :data,
+                   sessionExpires = :expire WHERE sessionId = :session_id'
+                );
                 $stmt->bindValue(':data', $sessionData, \SQLITE3_TEXT);
                 $stmt->bindValue(':expire', $expire, \SQLITE3_INTEGER);
                 $stmt->bindValue(':session_id', $sessionId, \SQLITE3_TEXT);
@@ -169,7 +174,10 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
     #[ReturnTypeWillChange]
     public function gc($maxLifetime): bool
     {
-        $this->logger->debug('Garbage collection for session with maximum lifetime ({maxLifetime})', ['maxLifetime' => $maxLifetime]);
+        $this->logger->debug(
+            'Garbage collection for session with maximum lifetime ({maxLifetime})',
+            ['maxLifetime' => $maxLifetime]
+        );
         $this->db->query(\sprintf('DELETE FROM session WHERE sessionExpires < %d', \time()));
 
         return true;
@@ -184,7 +192,10 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
     public function validateId($sessionId): bool
     {
         $sessionId = $this->db->escapeString($sessionId);
-        $this->logger->debug('Check session with id ({id}) and time ({time}) ...', ['id' => $sessionId, 'time' => \time()]);
+        $this->logger->debug(
+            'Check session with id ({id}) and time ({time}) ...',
+            ['id' => $sessionId, 'time' => \time()]
+        );
         $rows = $this->db->query($this->createReadQuery($sessionId, \time()));
         if ($rows !== null && isset($rows[0]['sessionId']) && $rows[0]['sessionId'] === $sessionId) {
             return true;
@@ -236,12 +247,16 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      */
     protected function createReadQuery(string $sessionId, int $expiresAt): string
     {
-        return \sprintf('SELECT sessionId, sessionData FROM session WHERE sessionId = \'%s\' AND sessionExpires >= %d', $this->db->escapeString($sessionId), $expiresAt);
+        return \sprintf(
+            'SELECT sessionId, sessionData FROM session WHERE sessionId = \'%s\' AND sessionExpires >= %d',
+            $this->db->escapeString($sessionId),
+            $expiresAt
+        );
     }
 
     /**
      * @return void
-     * @throws \Exception
+     * @throws \RuntimeException
      */
     protected function initializeTables(): void
     {
@@ -261,8 +276,10 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
         $checkQuery  = 'SELECT name FROM sqlite_master WHERE type = \'table\' AND name = \'session\'';
         $checkResult = $this->db->fetchSingle($checkQuery);
         if ($checkResult === false) {
-            throw new \Exception('Something went wrong while checking existence of session schema');
-        } elseif ($checkResult === null) {
+            throw new \RuntimeException('Something went wrong while checking existence of session schema');
+        }
+
+        if ($checkResult === null) {
             foreach ($schemaQueries as $query) {
                 $this->db->exec($query);
             }
