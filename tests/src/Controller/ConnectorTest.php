@@ -102,14 +102,12 @@ class ConnectorTest extends TestCase
         $connector = $this->createConnectorController($linker);
         $ack       = new Ack();
         $ack->setIdentities([
-            "Foo" => [
-                $this->createIdentity()
-            ],
+            "Foo"      => [$this->createIdentity()],
             "Category" => [
                 $this->createIdentity(),
                 $this->createIdentity(),
-                $this->createIdentity()
-            ]
+                $this->createIdentity(),
+            ],
         ]);
 
         $this->assertTrue($connector->ack($ack));

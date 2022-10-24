@@ -24,9 +24,7 @@ class ModelTest extends TestCase
         $propertyMappings     = $definitionReflection->getProperty('propertyMappings');
         $propertyMappings->setAccessible(true);
 
-        $exceptions = [
-            Model::PRODUCT_ATTRIBUTE
-        ];
+        $exceptions = [Model::PRODUCT_ATTRIBUTE];
 
         $mappings = $propertyMappings->getValue($definition);
 
@@ -87,10 +85,24 @@ class ModelTest extends TestCase
     public function getModelByTypeProvider(): array
     {
         return [
-            [IdentityType::CATEGORY, Model::CATEGORY],
-            [0, DefinitionException::unknownIdentityType(0), true],
-            [-999999999999999999, DefinitionException::unknownIdentityType(-999999999999999999), true],
-            [IdentityType::SPECIFIC_VALUE_IMAGE, Model::SPECIFIC_VALUE_IMAGE],
+            [
+                IdentityType::CATEGORY,
+                Model::CATEGORY,
+            ],
+            [
+                0,
+                DefinitionException::unknownIdentityType(0),
+                true,
+            ],
+            [
+                -999999999999999999,
+                DefinitionException::unknownIdentityType(-999999999999999999),
+                true,
+            ],
+            [
+                IdentityType::SPECIFIC_VALUE_IMAGE,
+                Model::SPECIFIC_VALUE_IMAGE,
+            ],
         ];
     }
 
@@ -129,13 +141,41 @@ class ModelTest extends TestCase
     public function isIdentityPropertyProvider(): array
     {
         return [
-            [Model::SHIPMENT, 'id', false],
-            [Model::PRODUCT, 'id', true],
-            [Model::PRODUCT, 'id ', false],
-            [Model::PRODUCT, ' ', false],
-            [Model::PRODUCT, 'ID', false],
-            [Model::CATEGORY, 'ID', false],
-            [Model::CATEGORY, 'id', true],
+            [
+                Model::SHIPMENT,
+                'id',
+                false,
+            ],
+            [
+                Model::PRODUCT,
+                'id',
+                true,
+            ],
+            [
+                Model::PRODUCT,
+                'id ',
+                false,
+            ],
+            [
+                Model::PRODUCT,
+                ' ',
+                false,
+            ],
+            [
+                Model::PRODUCT,
+                'ID',
+                false,
+            ],
+            [
+                Model::CATEGORY,
+                'ID',
+                false,
+            ],
+            [
+                Model::CATEGORY,
+                'id',
+                true,
+            ],
         ];
     }
 
@@ -172,16 +212,46 @@ class ModelTest extends TestCase
     public function modelNameProvider(): array
     {
         return [
-            [Model::PRODUCT, true],
-            [Model::CATEGORY, true],
-            [Model::PRODUCT_TO_CATEGORY, true],
-            [Model::UNIT, true],
-            [Model::MANUFACTURER, true],
-            [Model::MANUFACTURER_IMAGE, true],
-            ['Product2Categoryy', false],
-            [' Product2Category', false],
-            ['PRODUCT2CATEGORY', false],
-            [Model::SHIPMENT, true]
+            [
+                Model::PRODUCT,
+                true,
+            ],
+            [
+                Model::CATEGORY,
+                true,
+            ],
+            [
+                Model::PRODUCT_TO_CATEGORY,
+                true,
+            ],
+            [
+                Model::UNIT,
+                true,
+            ],
+            [
+                Model::MANUFACTURER,
+                true,
+            ],
+            [
+                Model::MANUFACTURER_IMAGE,
+                true,
+            ],
+            [
+                'Product2Categoryy',
+                false,
+            ],
+            [
+                ' Product2Category',
+                false,
+            ],
+            [
+                'PRODUCT2CATEGORY',
+                false,
+            ],
+            [
+                Model::SHIPMENT,
+                true,
+            ],
         ];
     }
 }

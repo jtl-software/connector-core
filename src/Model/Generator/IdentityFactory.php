@@ -11,7 +11,10 @@ class IdentityFactory extends AbstractModelFactory
      */
     protected function makeFakeArray(): array
     {
-        return [$this->faker->uuid, $this->faker->numberBetween(1)];
+        return [
+            $this->faker->uuid,
+            $this->faker->numberBetween(1),
+        ];
     }
 
     /**

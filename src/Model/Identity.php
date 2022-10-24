@@ -101,7 +101,10 @@ class Identity extends AbstractModel
      */
     public function toArray(): array
     {
-        return [$this->endpoint, $this->host];
+        return [
+            $this->endpoint,
+            $this->host,
+        ];
     }
 
     /**

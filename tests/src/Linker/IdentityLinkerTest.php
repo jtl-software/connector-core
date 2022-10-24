@@ -69,9 +69,18 @@ class IdentityLinkerTest extends TestCase
     public function hostIdDataProvider()
     {
         return [
-            [0, false],
-            [null, false],
-            [$this->createHostId(), true]
+            [
+                0,
+                false,
+            ],
+            [
+                null,
+                false,
+            ],
+            [
+                $this->createHostId(),
+                true,
+            ],
         ];
     }
 
@@ -94,9 +103,18 @@ class IdentityLinkerTest extends TestCase
     public function endpointIdDataProvider()
     {
         return [
-            [0, true],
-            [null, false],
-            [$this->createEndpointId(), true]
+            [
+                0,
+                true,
+            ],
+            [
+                null,
+                false,
+            ],
+            [
+                $this->createEndpointId(),
+                true,
+            ],
         ];
     }
 

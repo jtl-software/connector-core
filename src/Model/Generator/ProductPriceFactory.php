@@ -31,9 +31,7 @@ class ProductPriceFactory extends AbstractModelFactory
      */
     public function makeItemsArray(bool $withBulkPrices = false): array
     {
-        $items = [
-            $this->makeItemArray(['quantity' => 0, 'netPrice' => $this->faker->randomFloat(4, 1)])
-        ];
+        $items = [$this->makeItemArray(['quantity' => 0, 'netPrice' => $this->faker->randomFloat(4, 1)])];
 
         if ($withBulkPrices === true) {
             $pricesCount = \random_int(1, \random_int(1, 30));

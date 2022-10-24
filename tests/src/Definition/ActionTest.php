@@ -28,7 +28,7 @@ class ActionTest extends TestCase
             Action::FEATURES,
             Action::FINISH,
             Action::IDENTIFY,
-            Action::INIT
+            Action::INIT,
         ], \array_values($actions));
     }
 
@@ -50,14 +50,38 @@ class ActionTest extends TestCase
     public function actionDataProvider(): array
     {
         return [
-            [Action::PULL, true],
-            [Action::CLEAR, true],
-            ['push ', false],
-            [' push ', false],
-            ['PusH', false],
-            ['Clear', false],
-            [Action::CLEAR, true],
-            [false, false],
+            [
+                Action::PULL,
+                true,
+            ],
+            [
+                Action::CLEAR,
+                true,
+            ],
+            [
+                'push ',
+                false,
+            ],
+            [
+                ' push ',
+                false,
+            ],
+            [
+                'PusH',
+                false,
+            ],
+            [
+                'Clear',
+                false,
+            ],
+            [
+                Action::CLEAR,
+                true,
+            ],
+            [
+                false,
+                false,
+            ],
         ];
     }
 
@@ -78,12 +102,30 @@ class ActionTest extends TestCase
     public function coreActionDataProvider()
     {
         return [
-            [Action::AUTH, true],
-            [Action::ACK, true],
-            [Action::PULL, false],
-            [false, false],
-            ['autH', false],
-            [\rand(-9999, 9999), false],
+            [
+                Action::AUTH,
+                true,
+            ],
+            [
+                Action::ACK,
+                true,
+            ],
+            [
+                Action::PULL,
+                false,
+            ],
+            [
+                false,
+                false,
+            ],
+            [
+                'autH',
+                false,
+            ],
+            [
+                \rand(-9999, 9999),
+                false,
+            ],
         ];
     }
 }

@@ -41,9 +41,20 @@ class TranslatableAttributeTest extends TestCase
         $translationsCount = \count($translations);
 
         return [
-            ['es', $translations[\mt_rand(0, $translationsCount - 1)]->setLanguageIso('es'), $translations],
-            ['notFound', $translations[0], $translations],
-            ['foo', null],
+            [
+                'es',
+                $translations[\mt_rand(0, $translationsCount - 1)]->setLanguageIso('es'),
+                $translations,
+            ],
+            [
+                'notFound',
+                $translations[0],
+                $translations,
+            ],
+            [
+                'foo',
+                null,
+            ],
         ];
     }
 
@@ -85,8 +96,16 @@ class TranslatableAttributeTest extends TestCase
         $translationsFactory = AbstractModelFactory::createFactory('TranslatableAttributeI18n');
 
         return [
-            ['int', $translationsFactory->makeOne(['value' => '123']), 123],
-            ['string', null, null],
+            [
+                'int',
+                $translationsFactory->makeOne(['value' => '123']),
+                123,
+            ],
+            [
+                'string',
+                null,
+                null,
+            ],
         ];
     }
 
@@ -122,10 +141,18 @@ class TranslatableAttributeTest extends TestCase
             /** @var TranslatableAttributeI18n[] $translations */
             $translations = $translationsFactory->make(\mt_rand(1, 5));
             $selected     = \mt_rand(0, \count($translations) - 1);
-            $data[]       = [$translations, $translations[$selected]->getName(), $translations[$selected]->getLanguageIso()];
+            $data[]       = [
+                $translations,
+                $translations[$selected]->getName(),
+                $translations[$selected]->getLanguageIso(),
+            ];
         }
 
-        $data[] = [$translations, $translations[0]->getName(), ''];
+        $data[] = [
+            $translations,
+            $translations[0]->getName(),
+            '',
+        ];
 
         return $data;
     }
@@ -165,7 +192,10 @@ class TranslatableAttributeTest extends TestCase
                 $expectedValues[$translation->getLanguageIso()] = $translation->getValue();
             }
 
-            $data[] = [$translations, $expectedValues];
+            $data[] = [
+                $translations,
+                $expectedValues,
+            ];
         }
 
         return $data;
@@ -189,14 +219,26 @@ class TranslatableAttributeTest extends TestCase
     {
         $data = [];
         foreach (TranslatableAttribute::getTypes() as $type) {
-            $data[] = [$type, $type];
+            $data[] = [
+                $type,
+                $type,
+            ];
         }
 
         return \array_merge($data,[
             //invalid types, should fall back to string
-            ['something invalid', TranslatableAttribute::TYPE_STRING],
-            ['', TranslatableAttribute::TYPE_STRING],
-            [false, TranslatableAttribute::TYPE_STRING],
+            [
+                'something invalid',
+                TranslatableAttribute::TYPE_STRING,
+            ],
+            [
+                '',
+                TranslatableAttribute::TYPE_STRING,
+            ],
+            [
+                false,
+                TranslatableAttribute::TYPE_STRING,
+            ],
         ]);
     }
 }

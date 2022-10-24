@@ -53,7 +53,10 @@ class IdentityHandlerTest extends TestCase
 
         $result = $identityHandler->deserializeIdentity(
             $visitor,
-            [$endpointId, $hostId],
+            [
+                $endpointId,
+                $hostId,
+            ],
             [],
             new DeserializationContext()
         );
@@ -92,10 +95,36 @@ class IdentityHandlerTest extends TestCase
         $identityHandler = new IdentityHandler();
 
         return [
-            [$identityHandler, ["1", 1]],
-            [$identityHandler, ["2", 1]],
-            [$identityHandler, ["3", 2]],
-            [$identityHandler, ["1", 2]]
+            [
+                $identityHandler,
+                [
+                    "1",
+                    1,
+                ],
+            ],
+            [
+                $identityHandler,
+                [
+                    "2",
+                    1,
+                ],
+            ],
+            [
+                $identityHandler,
+                [
+                    "3",
+                    2,
+                ],
+            ],
+            [
+
+                $identityHandler,
+                [
+                    "1",
+                    2,
+                ],
+
+            ],
         ];
     }
 }

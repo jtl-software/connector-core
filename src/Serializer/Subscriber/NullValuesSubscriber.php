@@ -24,8 +24,8 @@ class NullValuesSubscriber implements EventSubscriberInterface
             [
                 'event'  => 'serializer.pre_deserialize',
                 'method' => 'onPreDeserialize',
-                'format' => 'json'
-            ]
+                'format' => 'json',
+            ],
         ];
     }
 

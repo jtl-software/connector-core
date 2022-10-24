@@ -30,15 +30,15 @@ class LanguageIsoSubscriber implements EventSubscriberInterface
     {
         return [
             [
-                'event' => 'serializer.post_serialize',
+                'event'  => 'serializer.post_serialize',
                 'method' => 'onPostSerialize',
-                'format' => 'json'
+                'format' => 'json',
             ],
             [
-                'event' => 'serializer.pre_deserialize',
+                'event'  => 'serializer.pre_deserialize',
                 'method' => 'onPreDeserialize',
-                'format' => 'json'
-            ]
+                'format' => 'json',
+            ],
         ];
     }
 

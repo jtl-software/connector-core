@@ -21,7 +21,7 @@ class TaxRateFactory extends AbstractModelFactory
     {
         return [
             'countryIso' => $this->getUnusedCountryIso(),
-            'rate' => $this->faker->randomFloat(2, 0, 30)
+            'rate'       => $this->faker->randomFloat(2, 0, 30),
         ];
     }
 
@@ -35,6 +35,7 @@ class TaxRateFactory extends AbstractModelFactory
 
     /**
      * @return string
+     * @throws \RuntimeException
      */
     protected function getUnusedCountryIso(): string
     {
@@ -42,13 +43,14 @@ class TaxRateFactory extends AbstractModelFactory
             $this->clearUsedCountries();
         }
 
-        //TODO: discuss prevent continuous loop here
-        while (true) {
+        for ($count = 0; $count <= 1000; $count++) {
             $countryIso = $this->faker->countryCode;
             if (!\in_array($countryIso, $this->usedCountries, true)) {
                 $this->usedCountries[] = $countryIso;
                 return $countryIso;
             }
         }
+
+        throw new \RuntimeException('loop-limit exceeded.');
     }
 }

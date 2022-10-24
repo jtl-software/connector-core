@@ -10,7 +10,7 @@ class ProductVariationI18nFactory extends AbstractModelFactory
     {
         return [
             'name'        => $this->faker->text,
-            'languageIso' => $this->faker->languageCode
+            'languageIso' => $this->faker->languageCode,
         ];
     }
 

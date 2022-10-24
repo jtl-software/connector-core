@@ -18,8 +18,8 @@ class CrossSellingSubscriber implements EventSubscriberInterface
             [
                 'event'  => 'serializer.pre_deserialize',
                 'method' => 'onPreDeserialize',
-                'format' => 'json'
-            ]
+                'format' => 'json',
+            ],
         ];
     }
 
@@ -38,7 +38,10 @@ class CrossSellingSubscriber implements EventSubscriberInterface
                         $crossSellingGroupId = $item['crossSellingGroupId'][1] ?? 0;
                         $itemId              = self::cantorPairingFunction($productId, $crossSellingGroupId);
                         if ($productId !== 0 && $crossSellingGroupId !== 0 && $itemId < PHP_INT_MAX) {
-                            $data['items'][$i]['id'] = ['', $itemId];
+                            $data['items'][$i]['id'] = [
+                                '',
+                                $itemId,
+                            ];
                         }
                     }
                 }

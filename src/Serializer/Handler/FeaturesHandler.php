@@ -15,10 +15,10 @@ class FeaturesHandler implements SubscribingHandlerInterface
         return [
             [
                 'direction' => GraphNavigatorInterface::DIRECTION_SERIALIZATION,
-                'format' => 'json',
-                'type' => Features::class,
-                'method' => 'serializeFeaturesToJson',
-            ]
+                'format'    => 'json',
+                'type'      => Features::class,
+                'method'    => 'serializeFeaturesToJson',
+            ],
         ];
     }
 

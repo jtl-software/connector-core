@@ -112,102 +112,102 @@ final class Model
     ];
 
     protected static array $propertyMappings = [
-        self::CATEGORY => [
+        self::CATEGORY                             => [
             'id'               => IdentityType::CATEGORY,
-            'parentCategoryId' => IdentityType::CATEGORY
+            'parentCategoryId' => IdentityType::CATEGORY,
         ],
-        self::CATEGORY_ATTRIBUTE => [
-            'id' => IdentityType::CATEGORY_ATTRIBUTE
+        self::CATEGORY_ATTRIBUTE                   => [
+            'id' => IdentityType::CATEGORY_ATTRIBUTE,
         ],
-        self::CONFIG_GROUP => [
-            'id' => IdentityType::CONFIG_GROUP
+        self::CONFIG_GROUP                         => [
+            'id' => IdentityType::CONFIG_GROUP,
         ],
-        self::CONFIG_ITEM => [
+        self::CONFIG_ITEM                          => [
             'id'        => IdentityType::CONFIG_ITEM,
             'productId' => IdentityType::PRODUCT,
         ],
-        self::CROSS_SELLING => [
+        self::CROSS_SELLING                        => [
             'id'        => IdentityType::CROSS_SELLING,
-            'productId' => IdentityType::PRODUCT
+            'productId' => IdentityType::PRODUCT,
         ],
-        self::CROSS_SELLING_ITEM => [
+        self::CROSS_SELLING_ITEM                   => [
             'id'                  => IdentityType::CROSS_SELLING_ITEM,
             'crossSellingGroupId' => IdentityType::CROSS_SELLING_GROUP,
-            'productIds'          => IdentityType::PRODUCT  // List of Product identities
+            'productIds'          => IdentityType::PRODUCT,// List of Product identities
         ],
-        self::CROSS_SELLING_GROUP => [
-            'id' => IdentityType::CROSS_SELLING_GROUP
+        self::CROSS_SELLING_GROUP                  => [
+            'id' => IdentityType::CROSS_SELLING_GROUP,
         ],
-        self::CURRENCY => [
+        self::CURRENCY                             => [
             'id' => IdentityType::CURRENCY,
         ],
-        self::CUSTOMER => [
+        self::CUSTOMER                             => [
             'id'              => IdentityType::CUSTOMER,
-            'customerGroupId' => IdentityType::CUSTOMER_GROUP
+            'customerGroupId' => IdentityType::CUSTOMER_GROUP,
         ],
-        self::CUSTOMER_GROUP => [
+        self::CUSTOMER_GROUP                       => [
             'id' => IdentityType::CUSTOMER_GROUP,
         ],
-        self::CUSTOMER_ORDER => [
+        self::CUSTOMER_ORDER                       => [
             'id'               => IdentityType::CUSTOMER_ORDER,
             'customerId'       => IdentityType::CUSTOMER,
-            'shippingMethodId' => IdentityType::SHIPPING_METHOD
+            'shippingMethodId' => IdentityType::SHIPPING_METHOD,
         ],
-        self::CUSTOMER_ORDER_ITEM => [
-            'productId' => IdentityType::PRODUCT
+        self::CUSTOMER_ORDER_ITEM                  => [
+            'productId' => IdentityType::PRODUCT,
         ],
-        self::DELIVERY_NOTE => [
-            'id' => IdentityType::DELIVERY_NOTE,
-            'customerOrderId' => IdentityType::CUSTOMER_ORDER
+        self::DELIVERY_NOTE                        => [
+            'id'              => IdentityType::DELIVERY_NOTE,
+            'customerOrderId' => IdentityType::CUSTOMER_ORDER,
         ],
-        self::DELIVERY_NOTE_ITEM => [
-            'productId' => IdentityType::PRODUCT
+        self::DELIVERY_NOTE_ITEM                   => [
+            'productId' => IdentityType::PRODUCT,
         ],
-        self::FILE_UPLOAD => [
-            'productId' => IdentityType::PRODUCT
+        self::FILE_UPLOAD                          => [
+            'productId' => IdentityType::PRODUCT,
         ],
-        self::PRODUCT_IMAGE => [
+        self::PRODUCT_IMAGE                        => [
             'id'         => IdentityType::PRODUCT_IMAGE,
-            'foreignKey' => IdentityType::PRODUCT
+            'foreignKey' => IdentityType::PRODUCT,
         ],
-        self::CATEGORY_IMAGE => [
+        self::CATEGORY_IMAGE                       => [
             'id'         => IdentityType::CATEGORY_IMAGE,
-            'foreignKey' => IdentityType::CATEGORY
+            'foreignKey' => IdentityType::CATEGORY,
         ],
-        self::PRODUCT_VARIATION_VALUE_IMAGE => [
+        self::PRODUCT_VARIATION_VALUE_IMAGE        => [
             'id'         => IdentityType::PRODUCT_VARIATION_VALUE_IMAGE,
-            'foreignKey' => IdentityType::PRODUCT_VARIATION_VALUE
+            'foreignKey' => IdentityType::PRODUCT_VARIATION_VALUE,
         ],
-        self::SPECIFIC_IMAGE => [
+        self::SPECIFIC_IMAGE                       => [
             'id'         => IdentityType::SPECIFIC_IMAGE,
-            'foreignKey' => IdentityType::SPECIFIC
+            'foreignKey' => IdentityType::SPECIFIC,
         ],
-        self::SPECIFIC_VALUE_IMAGE => [
+        self::SPECIFIC_VALUE_IMAGE                 => [
             'id'         => IdentityType::SPECIFIC_VALUE_IMAGE,
-            'foreignKey' => IdentityType::SPECIFIC_VALUE
+            'foreignKey' => IdentityType::SPECIFIC_VALUE,
         ],
-        self::MANUFACTURER_IMAGE => [
+        self::MANUFACTURER_IMAGE                   => [
             'id'         => IdentityType::MANUFACTURER_IMAGE,
-            'foreignKey' => IdentityType::MANUFACTURER
+            'foreignKey' => IdentityType::MANUFACTURER,
         ],
-        self::CONFIG_GROUP_IMAGE => [
+        self::CONFIG_GROUP_IMAGE                   => [
             'id'         => IdentityType::CONFIG_GROUP_IMAGE,
-            'foreignKey' => IdentityType::CONFIG_GROUP
+            'foreignKey' => IdentityType::CONFIG_GROUP,
         ],
-        self::LANGUAGE => [
-            'id' => IdentityType::LANGUAGE
+        self::LANGUAGE                             => [
+            'id' => IdentityType::LANGUAGE,
         ],
-        self::MANUFACTURER => [
-            'id' => IdentityType::MANUFACTURER
+        self::MANUFACTURER                         => [
+            'id' => IdentityType::MANUFACTURER,
         ],
-        self::MEASUREMENT_UNIT => [
-            'id' => IdentityType::MEASUREMENT_UNIT
+        self::MEASUREMENT_UNIT                     => [
+            'id' => IdentityType::MEASUREMENT_UNIT,
         ],
-        self::PAYMENT => [
+        self::PAYMENT                              => [
             'id'              => IdentityType::PAYMENT,
-            'customerOrderId' => IdentityType::CUSTOMER_ORDER
+            'customerOrderId' => IdentityType::CUSTOMER_ORDER,
         ],
-        self::PRODUCT => [
+        self::PRODUCT                              => [
             'id'                => IdentityType::PRODUCT,
             'masterProductId'   => IdentityType::PRODUCT,
             'manufacturerId'    => IdentityType::MANUFACTURER,
@@ -217,70 +217,70 @@ final class Model
             'taxClassId'        => IdentityType::TAX_CLASS,
             'unitId'            => IdentityType::UNIT,
         ],
-        self::PRODUCT_ATTRIBUTE => [
-            'id' => IdentityType::PRODUCT_ATTRIBUTE
+        self::PRODUCT_ATTRIBUTE                    => [
+            'id' => IdentityType::PRODUCT_ATTRIBUTE,
         ],
-        self::PRODUCT_PRICE => [
+        self::PRODUCT_PRICE                        => [
             'customerId'      => IdentityType::CUSTOMER,
             'productId'       => IdentityType::PRODUCT,
             'customerGroupId' => IdentityType::CUSTOMER_GROUP,
         ],
-        self::PRODUCT_STOCK_LEVEL => [
-            'productId' => IdentityType::PRODUCT
+        self::PRODUCT_STOCK_LEVEL                  => [
+            'productId' => IdentityType::PRODUCT,
         ],
-        self::PRODUCT_TO_CATEGORY => [
-            'categoryId' => IdentityType::CATEGORY
+        self::PRODUCT_TO_CATEGORY                  => [
+            'categoryId' => IdentityType::CATEGORY,
         ],
-        self::PRODUCT_CONFIG_GROUP => [
-            'configGroupId' => IdentityType::CONFIG_GROUP
+        self::PRODUCT_CONFIG_GROUP                 => [
+            'configGroupId' => IdentityType::CONFIG_GROUP,
         ],
-        self::PRODUCT_SPECIFIC => [
+        self::PRODUCT_SPECIFIC                     => [
             'id'              => IdentityType::SPECIFIC,
-            'specificValueId' => IdentityType::SPECIFIC_VALUE
+            'specificValueId' => IdentityType::SPECIFIC_VALUE,
         ],
-        self::PRODUCT_TYPE => [
-            'id' => IdentityType::PRODUCT_TYPE
+        self::PRODUCT_TYPE                         => [
+            'id' => IdentityType::PRODUCT_TYPE,
         ],
-        self::PRODUCT_VARIATION => [
-            'id' => IdentityType::PRODUCT_VARIATION
+        self::PRODUCT_VARIATION                    => [
+            'id' => IdentityType::PRODUCT_VARIATION,
         ],
-        self::PRODUCT_VARIATION_VALUE => [
-            'id' => IdentityType::PRODUCT_VARIATION_VALUE
+        self::PRODUCT_VARIATION_VALUE              => [
+            'id' => IdentityType::PRODUCT_VARIATION_VALUE,
         ],
         self::PRODUCT_VARIATION_VALUE_EXTRA_CHARGE => [
-            'customerGroupId' => IdentityType::CUSTOMER_GROUP
+            'customerGroupId' => IdentityType::CUSTOMER_GROUP,
         ],
         self::PRODUCT_VARIATION_VALUE_INVISIBILITY => [
-            'customerGroupId' => IdentityType::CUSTOMER_GROUP
+            'customerGroupId' => IdentityType::CUSTOMER_GROUP,
         ],
-        self::PRODUCT_WAREHOUSE_INFO => [
+        self::PRODUCT_WAREHOUSE_INFO               => [
             'warehouseId' => IdentityType::WAREHOUSE,
         ],
-        self::SHIPPING_CLASS => [
+        self::SHIPPING_CLASS                       => [
             'id' => IdentityType::SHIPPING_CLASS,
         ],
-        self::SHIPPING_METHOD => [
+        self::SHIPPING_METHOD                      => [
             'id' => IdentityType::SHIPPING_METHOD,
         ],
-        self::SHIPMENT => [
-            'deliveryNoteId' => IdentityType::DELIVERY_NOTE
+        self::SHIPMENT                             => [
+            'deliveryNoteId' => IdentityType::DELIVERY_NOTE,
         ],
-        self::SPECIFIC => [
-            'id' => IdentityType::SPECIFIC
+        self::SPECIFIC                             => [
+            'id' => IdentityType::SPECIFIC,
         ],
-        self::SPECIFIC_VALUE => [
-            'id' => IdentityType::SPECIFIC_VALUE
+        self::SPECIFIC_VALUE                       => [
+            'id' => IdentityType::SPECIFIC_VALUE,
         ],
-        self::STATUS_CHANGE => [
-            'customerOrderId' => IdentityType::CUSTOMER_ORDER
+        self::STATUS_CHANGE                        => [
+            'customerOrderId' => IdentityType::CUSTOMER_ORDER,
         ],
-        self::TAX_RATE => [
+        self::TAX_RATE                             => [
             'id' => IdentityType::TAX_RATE,
         ],
-        self::UNIT => [
+        self::UNIT                                 => [
             'id' => IdentityType::UNIT,
         ],
-        self::WAREHOUSE => [
+        self::WAREHOUSE                            => [
             'id' => IdentityType::WAREHOUSE,
         ],
     ];

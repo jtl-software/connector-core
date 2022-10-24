@@ -29,10 +29,16 @@ class ImageSubscriberTest extends TestCase
         $data = [
             'identities' => [
                 'image' => [
-                    ['category#=#yolo123', 42],
-                    ['manufacturer#=#yummy', 23]
-                ]
-            ]
+                    [
+                        'category#=#yolo123',
+                        42,
+                    ],
+                    [
+                        'manufacturer#=#yummy',
+                        23,
+                    ],
+                ],
+            ],
         ];
         /** @var Serializer $serializer */
         $serializer = SerializerBuilder::create()->build();

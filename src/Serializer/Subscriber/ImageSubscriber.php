@@ -25,13 +25,13 @@ class ImageSubscriber implements EventSubscriberInterface
             [
                 'event'  => 'serializer.post_serialize',
                 'method' => 'onPostSerialize',
-                'format' => 'json'
+                'format' => 'json',
             ],
             [
                 'event'  => 'serializer.post_deserialize',
                 'method' => 'onPostDeserialize',
-                'format' => 'json'
-            ]
+                'format' => 'json',
+            ],
         ];
     }
 

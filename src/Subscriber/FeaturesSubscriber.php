@@ -15,8 +15,11 @@ class FeaturesSubscriber implements EventSubscriberInterface
     {
         return [
             Event::createCoreEventName(Controller::CONNECTOR, Action::FEATURES, Event::AFTER) => [
-                ['setNeedsFinishCallActive', -10000]
-            ]
+                [
+                    'setNeedsFinishCallActive',
+                    -10000,
+                ],
+            ],
         ];
     }
 

@@ -27,101 +27,101 @@ class ProductFactory extends AbstractModelFactory
         $taxRateFactory->clearUsedCountries();
 
         return [
-            'basePriceUnitId' => $identityFactory->makeOneArray(),
-            'manufacturerId' => $this->makeIdentityArray(IdentityType::MANUFACTURER),
-            'measurementUnitId' => $identityFactory->makeOneArray(),
-            'partsListId' => $identityFactory->makeOneArray(),
-            'productTypeId' => $identityFactory->makeOneArray(),
-            'shippingClassId' => $identityFactory->makeOneArray(),
-            'unitId' => $identityFactory->makeOneArray(),
-            'asin' => $this->faker->word,
-            'availableFrom' => \random_int(0, 1) === 1 ? $this->faker->iso8601 : null,
-            'measurementQuantity' => $this->faker->randomFloat(2, 1),
-            'measurementUnitCode' => $this->faker->randomElement($units),
-            'basePriceDivisor' => 0.0,
-            'basePriceFactor' => 0.0,
-            'basePriceQuantity' => $this->faker->randomFloat(3, 1),
-            'basePriceUnitCode' => $this->faker->randomElement($units),
-            'basePriceUnitName' => $this->faker->word,
-            'considerBasePrice' => false,
-            'considerStock' => $this->faker->boolean,
-            'considerVariationStock' => $this->faker->boolean,
-            'creationDate' => $this->dateBetween(
+            'basePriceUnitId'             => $identityFactory->makeOneArray(),
+            'manufacturerId'              => $this->makeIdentityArray(IdentityType::MANUFACTURER),
+            'measurementUnitId'           => $identityFactory->makeOneArray(),
+            'partsListId'                 => $identityFactory->makeOneArray(),
+            'productTypeId'               => $identityFactory->makeOneArray(),
+            'shippingClassId'             => $identityFactory->makeOneArray(),
+            'unitId'                      => $identityFactory->makeOneArray(),
+            'asin'                        => $this->faker->word,
+            'availableFrom'               => \random_int(0, 1) === 1 ? $this->faker->iso8601 : null,
+            'measurementQuantity'         => $this->faker->randomFloat(2, 1),
+            'measurementUnitCode'         => $this->faker->randomElement($units),
+            'basePriceDivisor'            => 0.0,
+            'basePriceFactor'             => 0.0,
+            'basePriceQuantity'           => $this->faker->randomFloat(3, 1),
+            'basePriceUnitCode'           => $this->faker->randomElement($units),
+            'basePriceUnitName'           => $this->faker->word,
+            'considerBasePrice'           => false,
+            'considerStock'               => $this->faker->boolean,
+            'considerVariationStock'      => $this->faker->boolean,
+            'creationDate'                => $this->dateBetween(
                 \sprintf(
                     '-%d %s',
                     \random_int(1, 60),
                     $this->faker->randomKey(['days', 'years', 'hours', 'minutes', 'seconds'])
                 )
             ),
-            'ean' => $this->faker->ean8,
-            'epid' => $this->faker->uuid,
-            'hazardIdNumber' => $this->faker->sha1,
-            'height' => $this->faker->randomFloat(),
-            'isActive' => $this->faker->boolean,
-            'isBatch' => $this->faker->boolean,
-            'isBestBefore' => $this->faker->boolean,
-            'isbn' => $this->faker->isbn13,
-            'isDivisible' => $this->faker->boolean,
+            'ean'                         => $this->faker->ean8,
+            'epid'                        => $this->faker->uuid,
+            'hazardIdNumber'              => $this->faker->sha1,
+            'height'                      => $this->faker->randomFloat(),
+            'isActive'                    => $this->faker->boolean,
+            'isBatch'                     => $this->faker->boolean,
+            'isBestBefore'                => $this->faker->boolean,
+            'isbn'                        => $this->faker->isbn13,
+            'isDivisible'                 => $this->faker->boolean,
             //'isMasterProduct' => false,
-            'isNewProduct' => $this->faker->boolean,
-            'isSerialNumber' => $this->faker->boolean,
-            'isTopProduct' => $this->faker->boolean,
-            'keywords' => $this->faker->words(\random_int(0, 10), true),
-            'length' => $this->faker->randomFloat(),
-            'manufacturerNumber' => $this->faker->word(),
+            'isNewProduct'                => $this->faker->boolean,
+            'isSerialNumber'              => $this->faker->boolean,
+            'isTopProduct'                => $this->faker->boolean,
+            'keywords'                    => $this->faker->words(\random_int(0, 10), true),
+            'length'                      => $this->faker->randomFloat(),
+            'manufacturerNumber'          => $this->faker->word(),
             //'manufacturer' => null,
-            'minBestBeforeDate' => $this->dateBetween(
+            'minBestBeforeDate'           => $this->dateBetween(
                 \sprintf(
                     '+%d %s',
                     \random_int(0, 60),
                     $this->faker->randomKey(['days', 'years', 'hours', 'minutes', 'seconds'])
                 )
             ),
-            'minimumOrderQuantity' => $this->faker->randomFloat(2),
-            'minimumQuantity' => $this->faker->randomFloat(2),
-            'modified' => $this->faker->iso8601,
-            'newReleaseDate' => $this->faker->iso8601,
-            'nextAvailableInflowDate' => $this->faker->iso8601,
+            'minimumOrderQuantity'        => $this->faker->randomFloat(2),
+            'minimumQuantity'             => $this->faker->randomFloat(2),
+            'modified'                    => $this->faker->iso8601,
+            'newReleaseDate'              => $this->faker->iso8601,
+            'nextAvailableInflowDate'     => $this->faker->iso8601,
             'nextAvailableInflowQuantity' => $this->faker->randomFloat(3),
-            'note' => $this->faker->sentence,
-            'originCountry' => $this->faker->languageCode,
-            'packagingQuantity' => $this->faker->randomFloat(2),
-            'permitNegativeStock' => $this->faker->boolean,
-            'productWeight' => $this->faker->randomFloat(4),
-            'purchasePrice' => $this->faker->randomFloat(4),
-            'recommendedRetailPrice' => $this->faker->randomFloat(),
-            'serialNumber' => $this->faker->uuid,
-            'shippingWeight' => $this->faker->randomFloat(3),
-            'sku' => $this->faker->uuid,
+            'note'                        => $this->faker->sentence,
+            'originCountry'               => $this->faker->languageCode,
+            'packagingQuantity'           => $this->faker->randomFloat(2),
+            'permitNegativeStock'         => $this->faker->boolean,
+            'productWeight'               => $this->faker->randomFloat(4),
+            'purchasePrice'               => $this->faker->randomFloat(4),
+            'recommendedRetailPrice'      => $this->faker->randomFloat(),
+            'serialNumber'                => $this->faker->uuid,
+            'shippingWeight'              => $this->faker->randomFloat(3),
+            'sku'                         => $this->faker->uuid,
             //'sort' => 0,
-            'stockLevel' => null,
-            'supplierDeliveryTime' => $this->faker->numberBetween(0, 366),
-            'supplierStockLevel' => $this->faker->randomFloat(),
-            'taric' => $this->faker->word,
-            'taxClassId' => $this->makeIdentityArray(IdentityType::TAX_CLASS),
-            'unNumber' => $this->faker->word,
-            'upc' => $this->faker->uuid,
-            'vat' => $taxRates[\random_int(0, \count($taxRates) - 1)]['rate'],
-            'width' => $this->faker->randomFloat(2),
-            'attributes' => [],
-            'categories' => $this->getFactory('Product2Category')->makeArray(\random_int(1, 3)),
-            'checksums' => [],
+            'stockLevel'                  => null,
+            'supplierDeliveryTime'        => $this->faker->numberBetween(0, 366),
+            'supplierStockLevel'          => $this->faker->randomFloat(),
+            'taric'                       => $this->faker->word,
+            'taxClassId'                  => $this->makeIdentityArray(IdentityType::TAX_CLASS),
+            'unNumber'                    => $this->faker->word,
+            'upc'                         => $this->faker->uuid,
+            'vat'                         => $taxRates[\random_int(0, \count($taxRates) - 1)]['rate'],
+            'width'                       => $this->faker->randomFloat(2),
+            'attributes'                  => [],
+            'categories'                  => $this->getFactory('Product2Category')->makeArray(\random_int(1, 3)),
+            'checksums'                   => [],
             //'configGroups' => [],
             //'customerGroupPackagingQuantities' => [],
             //'fileDownloads' => [],
-            'i18ns' => [$this->getFactory('ProductI18n')->makeOneArray()],
-            'invisibilities' => [],
-            'mediaFiles' => [],
-            'partsLists' => [],
-            'prices' => [
+            'i18ns'                       => [$this->getFactory('ProductI18n')->makeOneArray()],
+            'invisibilities'              => [],
+            'mediaFiles'                  => [],
+            'partsLists'                  => [],
+            'prices'                      => [
                 $this->getFactory('ProductPrice')
                     ->setWithBulkPrices(\random_int(0, 1) === 1)
                     ->makeOneArray(['customerGroupId' => $identityFactory->makeOneArray([1 => 0])])
             ],
-            'specialPrices' => [],
-            'specifics' => [],
-            'taxRates' => $taxRates,
-            'variations' => [],
+            'specialPrices'               => [],
+            'specifics'                   => [],
+            'taxRates'                    => $taxRates,
+            'variations'                  => [],
             //'warehouseInfo' => [],
         ];
     }
@@ -156,14 +156,14 @@ class ProductFactory extends AbstractModelFactory
 
                 $values[] = $this->getFactory('ProductVariationValue')->makeOneArray([
                     'i18ns' => $valueI18ns,
-                    'sort' => $j
+                    'sort'  => $j,
                 ]);
             }
 
             $variations[] = $this->getFactory('ProductVariation')->makeOneArray([
-                'i18ns' => $variationI18ns,
+                'i18ns'  => $variationI18ns,
                 'values' => $values,
-                'sort' => $i
+                'sort'   => $i,
             ]);
         }
 
@@ -171,13 +171,14 @@ class ProductFactory extends AbstractModelFactory
         $variants = [
             $this->makeOneArray(
                 [
-                    'id' => $parentId,
+                    'id'              => $parentId,
                     'isMasterProduct' => true,
-                    'variations' => $variations,
-                    'sort' => 0,
-                    'i18ns' => $productI18ns
+                    'variations'      => $variations,
+                    'sort'            => 0,
+                    'i18ns'           => $productI18ns,
                 ]
             )
+
         ];
 
         $i = 0;
@@ -186,13 +187,13 @@ class ProductFactory extends AbstractModelFactory
                 $variants[] = $this->makeOneArray([
                     'masterProductId' => $parentId,
                     'isMasterProduct' => false,
-                    'variations' => [
+                    'variations'      => [
                         \array_merge($variations[0], ['values' => [$firstValue]]),
-                        \array_merge($variations[1], ['values' => [$secondValue]])
+                        \array_merge($variations[1], ['values' => [$secondValue]]),
                     ],
-                    'sort' => ++$i,
-                    'prices' => $variants[0]['prices'],
-                    'i18ns' => $productI18ns
+                    'sort'            => ++$i,
+                    'prices'          => $variants[0]['prices'],
+                    'i18ns'           => $productI18ns,
                 ]);
             }
         }

@@ -30,10 +30,22 @@ class AbstractImageTest extends TestCase
     public function relationTypeProvider(): array
     {
         return [
-            [new CategoryImage(), 'category'],
-            [new ProductImage(), 'product'],
-            [new ProductVariationValueImage(), 'productVariationValue'],
-            [new ManufacturerImage(), 'manufacturer'],
+            [
+                new CategoryImage(),
+                'category',
+            ],
+            [
+                new ProductImage(),
+                'product',
+            ],
+            [
+                new ProductVariationValueImage(),
+                'productVariationValue',
+            ],
+            [
+                new ManufacturerImage(),
+                'manufacturer',
+            ],
         ];
     }
 
@@ -56,10 +68,22 @@ class AbstractImageTest extends TestCase
     public function extensionProvider(): array
     {
         return [
-            ['file.name', 'name'],
-            ['some.file.name', 'name'],
-            ['filename', ''],
-            ['', ''],
+            [
+                'file.name',
+                'name',
+            ],
+            [
+                'some.file.name',
+                'name',
+            ],
+            [
+                'filename',
+                '',
+            ],
+            [
+                '',
+                '',
+            ],
         ];
     }
 }

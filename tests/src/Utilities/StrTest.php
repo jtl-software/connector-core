@@ -29,16 +29,46 @@ class StrTest extends TestCase
     public function toCamelCaseDataProvider(): array
     {
         return [
-            ['snake_case', 'snakeCase'],
-            ['PascalCase', 'pascalCase'],
-            ['camelCase', 'camelCase'],
-            [false, ''],
-            ['', ''],
-            ['_snake_case_', 'snakeCase'],
-            ['snake__case', 'snakeCase'],
-            [12345, '12345'],
-            ['    ', ''],
-            ['sna\\ke', 'sna\\ke']
+            [
+                'snake_case',
+                'snakeCase',
+            ],
+            [
+                'PascalCase',
+                'pascalCase',
+            ],
+            [
+                'camelCase',
+                'camelCase',
+            ],
+            [
+                false,
+                '',
+            ],
+            [
+                '',
+                '',
+            ],
+            [
+                '_snake_case_',
+                'snakeCase',
+            ],
+            [
+                'snake__case',
+                'snakeCase',
+            ],
+            [
+                12345,
+                '12345',
+            ],
+            [
+                '    ',
+                '',
+            ],
+            [
+                'sna\\ke',
+                'sna\\ke',
+            ],
         ];
     }
 
@@ -60,16 +90,46 @@ class StrTest extends TestCase
     public function toPascalCaseDataProvider(): array
     {
         return [
-            ['snake_case', 'SnakeCase'],
-            ['camelCase', 'CamelCase'],
-            ['PascalCase', 'PascalCase'],
-            [false, ''],
-            ['', ''],
-            ['_snake_case_', 'SnakeCase'],
-            ['snake__case', 'SnakeCase'],
-            [12345, '12345'],
-            ['    ', ''],
-            ['sna\\ke', 'Sna\\Ke']
+            [
+                'snake_case',
+                'SnakeCase',
+            ],
+            [
+                'camelCase',
+                'CamelCase',
+            ],
+            [
+                'PascalCase',
+                'PascalCase',
+            ],
+            [
+                false,
+                '',
+            ],
+            [
+                '',
+                '',
+            ],
+            [
+                '_snake_case_',
+                'SnakeCase',
+            ],
+            [
+                'snake__case',
+                'SnakeCase',
+            ],
+            [
+                12345,
+                '12345',
+            ],
+            [
+                '    ',
+                '',
+            ],
+            [
+                'sna\\ke',
+                'Sna\\Ke',
+            ],
         ];
     }
 
@@ -91,16 +151,46 @@ class StrTest extends TestCase
     public function toSnakeCaseDataProvider(): array
     {
         return [
-            ['snake_case', 'snake_case'],
-            ['camelCase', 'camel_case'],
-            ['PascalCase', 'pascal_case'],
-            [false, ''],
-            ['', ''],
-            ['_snake_case_', 'snake_case'],
-            ['snake__case', 'snake_case'],
-            [12345, '12345'],
-            ['    ', ''],
-            ['sna\\ke', 'sna\\ke']
+            [
+                'snake_case',
+                'snake_case',
+            ],
+            [
+                'camelCase',
+                'camel_case',
+            ],
+            [
+                'PascalCase',
+                'pascal_case',
+            ],
+            [
+                false,
+                '',
+            ],
+            [
+                '',
+                '',
+            ],
+            [
+                '_snake_case_',
+                'snake_case',
+            ],
+            [
+                'snake__case',
+                'snake_case',
+            ],
+            [
+                12345,
+                '12345',
+            ],
+            [
+                '    ',
+                '',
+            ],
+            [
+                'sna\\ke',
+                'sna\\ke',
+            ],
         ];
     }
 }

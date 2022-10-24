@@ -104,12 +104,30 @@ class RelationTypeTest extends TestCase
      */
     public function relationTypeProvider(): array
     {
-        $testCases[] = [' ', false];
-        $testCases[] = ['Category', true];
-        $testCases[] = ['category', true];
-        $testCases[] = [' category', false];
-        $testCases[] = ['Yolo', false];
-        $testCases[] = ['CrossSelling', true];
+        $testCases[] = [
+            ' ',
+            false,
+        ];
+        $testCases[] = [
+            'Category',
+            true,
+        ];
+        $testCases[] = [
+            'category',
+            true,
+        ];
+        $testCases[] = [
+            ' category',
+            false,
+        ];
+        $testCases[] = [
+            'Yolo',
+            false,
+        ];
+        $testCases[] = [
+            'CrossSelling',
+            true,
+        ];
 
         return $testCases;
     }
@@ -120,11 +138,26 @@ class RelationTypeTest extends TestCase
     public function relatedImageIdentityProvider(): array
     {
         return [
-            ['productStockLevel', false],
-            ['ProductStockLevel', false],
-            ['CrossSelling', false],
-            ['manufacturer', true],
-            ['Manufacturer', true],
+            [
+                'productStockLevel',
+                false,
+            ],
+            [
+                'ProductStockLevel',
+                false,
+            ],
+            [
+                'CrossSelling',
+                false,
+            ],
+            [
+                'manufacturer',
+                true,
+            ],
+            [
+                'Manufacturer',
+                true,
+            ],
         ];
     }
 
@@ -134,11 +167,26 @@ class RelationTypeTest extends TestCase
     public function relatedImageIdentityTypeProvider(): array
     {
         return [
-            ['product', IdentityType::PRODUCT_IMAGE],
-            ['Product', IdentityType::PRODUCT_IMAGE],
-            ['manufacturer', IdentityType::MANUFACTURER_IMAGE],
-            ['productAttr', null],
-            ['whateverYouWant', null],
+            [
+                'product',
+                IdentityType::PRODUCT_IMAGE,
+            ],
+            [
+                'Product',
+                IdentityType::PRODUCT_IMAGE,
+            ],
+            [
+                'manufacturer',
+                IdentityType::MANUFACTURER_IMAGE,
+            ],
+            [
+                'productAttr',
+                null,
+            ],
+            [
+                'whateverYouWant',
+                null,
+            ],
         ];
     }
 
@@ -169,9 +217,18 @@ class RelationTypeTest extends TestCase
     public function getIdentityTypeDataProvider(): array
     {
         return [
-            ['category', IdentityType::CATEGORY],
-            ['ProductVariationValue', IdentityType::PRODUCT_VARIATION_VALUE],
-            ['foo', DefinitionException::unknownRelationType('foo')],
+            [
+                'category',
+                IdentityType::CATEGORY,
+            ],
+            [
+                'ProductVariationValue',
+                IdentityType::PRODUCT_VARIATION_VALUE,
+            ],
+            [
+                'foo',
+                DefinitionException::unknownRelationType('foo'),
+            ],
         ];
     }
 }

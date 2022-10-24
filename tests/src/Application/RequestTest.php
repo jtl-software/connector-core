@@ -19,7 +19,7 @@ class RequestTest extends TestCase
         $action     = "pull";
         $params     = [
             1,
-            2
+            2,
         ];
 
         $request = Request::create($controller, $action, $params);

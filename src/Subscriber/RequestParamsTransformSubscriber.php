@@ -22,8 +22,11 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
     {
         return [
             Event::createRpcEventName(Event::BEFORE) => [
-                ['transformRequestParams', 10000]
-            ]
+                [
+                    'transformRequestParams',
+                    10000,
+                ],
+            ],
         ];
     }
 
@@ -85,9 +88,9 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
 
             if (!isset($products[$hostId])) {
                 $product = [
-                    'id' => $productPrice['productId'] ?? null,
-                    'sku' => $productPrice['sku'] ?? '',
-                    'vat' => $productPrice['vat'] ?? 0.,
+                    'id'         => $productPrice['productId'] ?? null,
+                    'sku'        => $productPrice['sku'] ?? '',
+                    'vat'        => $productPrice['vat'] ?? 0.,
                     'taxClassId' => $productPrice['taxClassId'] ?? null,
                 ];
 
@@ -109,9 +112,9 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
         $products = [];
         foreach ($productStockLevel as $stockLevel) {
             $product    = [
-                'id' => $stockLevel['productId'] ?? null,
-                'sku' => $stockLevel['sku'] ?? '',
-                'stockLevel' => $stockLevel['stockLevel'] ?? 0.
+                'id'         => $stockLevel['productId'] ?? null,
+                'sku'        => $stockLevel['sku'] ?? '',
+                'stockLevel' => $stockLevel['stockLevel'] ?? 0.,
             ];
             $products[] = $product;
         }

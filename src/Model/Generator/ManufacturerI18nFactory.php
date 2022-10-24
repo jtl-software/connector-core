@@ -21,7 +21,7 @@ class ManufacturerI18nFactory extends AbstractModelFactory
             'metaDescription' => $this->faker->text(),
             'metaKeywords'    => $this->faker->text(),
             'titleTag'        => $this->faker->text(),
-            'languageIso'     => $this->faker->languageCode
+            'languageIso'     => $this->faker->languageCode,
         ], $override);
     }
 

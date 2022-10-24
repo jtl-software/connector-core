@@ -106,10 +106,22 @@ class ApplicationTest extends TestCase
     public function controllerActionsDataProvider()
     {
         return [
-            [Action::STATISTIC, new QueryFilter()],
-            [Action::DELETE, new Product()],
-            [Action::PULL, new QueryFilter()],
-            [Action::PUSH, new Product()],
+            [
+                Action::STATISTIC,
+                new QueryFilter(),
+            ],
+            [
+                Action::DELETE,
+                new Product(),
+            ],
+            [
+                Action::PULL,
+                new QueryFilter(),
+            ],
+            [
+                Action::PUSH,
+                new Product(),
+            ],
         ];
     }
 

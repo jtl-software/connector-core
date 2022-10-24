@@ -23,7 +23,7 @@ class CategoryI18nFactory extends AbstractModelFactory
             'name'            => $this->faker->word,
             'titleTag'        => $this->faker->word,
             'urlPath'         => $this->faker->url,
-            'languageIso'     => $this->faker->languageCode
+            'languageIso'     => $this->faker->languageCode,
         ];
     }
 

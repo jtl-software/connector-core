@@ -13,7 +13,7 @@ class SpecificValueFactory extends AbstractModelFactory
     protected function makeFakeArray(): array
     {
         return [
-            'sort' => 1,
+            'sort'  => 1,
             'i18ns' => [$this->getFactory('SpecificValueI18n')->makeOneArray()],
         ];
     }

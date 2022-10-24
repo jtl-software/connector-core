@@ -15,7 +15,7 @@ class Product2CategoryFactory extends AbstractModelFactory
     {
         return [
             'id'         => $this->makeIdentityArray(IdentityType::PRODUCT_TO_CATEGORY),
-            'categoryId' => $this->makeIdentityArray(IdentityType::CATEGORY)
+            'categoryId' => $this->makeIdentityArray(IdentityType::CATEGORY),
         ];
     }
 

@@ -255,7 +255,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
             'CREATE INDEX [sessionIndex] ON [session](' . "\n" .
             '  [sessionId]  ASC,' . "\n" .
             '  [sessionExpires]  ASC' . "\n" .
-            ')'
+            ')',
         ];
 
         $checkQuery  = 'SELECT name FROM sqlite_master WHERE type = \'table\' AND name = \'session\'';

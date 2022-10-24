@@ -53,7 +53,11 @@ class TransactionalControllerStub implements DeleteInterface, StatisticInterface
      */
     public function pull(QueryFilter $queryFilter): array
     {
-        return [1, 2, 3];
+        return [
+            1,
+            2,
+            3,
+        ];
     }
 
     /**

@@ -17,7 +17,7 @@ class ProductVariationFactory extends AbstractModelFactory
             //'type' => '',
             'i18ns'  => $this->getFactory('ProductVariationI18n')->makeArray(\random_int(1, 5)),
             //'inivisibilities' => [],
-            'values' => []
+            'values' => [],
         ];
     }
 

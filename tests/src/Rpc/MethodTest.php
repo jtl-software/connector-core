@@ -52,13 +52,48 @@ class MethodTest extends TestCase
     public function createFromRpcMethodDataProvider(): array
     {
         return [
-            ['product.pull', 'Product', 'pull', false],
-            ['core.connector.auth', 'Connector', 'auth', true],
-            [' category. pull', 'Category', 'pull', false],
-            ['.', '', '', false],
-            ['..', '', '', false],
-            ['some', 'Invalid', 'invalid', false],
-            ['yo.lo.mio.rio', 'Invalid', 'invalid', false],
+            [
+                'product.pull',
+                'Product',
+                'pull',
+                false,
+            ],
+            [
+                'core.connector.auth',
+                'Connector',
+                'auth',
+                true,
+            ],
+            [
+                ' category. pull',
+                'Category',
+                'pull',
+                false,
+            ],
+            [
+                '.',
+                '',
+                '',
+                false,
+            ],
+            [
+                '..',
+                '',
+                '',
+                false,
+            ],
+            [
+                'some',
+                'Invalid',
+                'invalid',
+                false,
+            ],
+            [
+                'yo.lo.mio.rio',
+                'Invalid',
+                'invalid',
+                false,
+            ],
         ];
     }
 }

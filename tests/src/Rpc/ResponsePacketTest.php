@@ -43,13 +43,55 @@ class ResponsePacketTest extends TestCase
     public function isValidDataProvider(): array
     {
         return [
-            ['', null, null, '', false],
-            ['123', (new Error())->setMessage("Error message"), null, '2.0', true],
-            ['123', null, ['Products' => [new Product()]], '2.0', true],
-            ['123', null, null, '2.0', true],
-            ['123', null, null, '2.1', false],
-            ['0', null, ['Products' => [new Product()]], '2.0', true],
-            [' ', null, [], '2.0', true]
+            [
+                '',
+                null,
+                null,
+                '',
+                false,
+            ],
+            [
+                '123',
+                (new Error())->setMessage("Error message"),
+                null,
+                '2.0',
+                true,
+            ],
+            [
+                '123',
+                null,
+                ['Products' => [new Product()]],
+                '2.0',
+                true,
+            ],
+            [
+                '123',
+                null,
+                null,
+                '2.0',
+                true,
+            ],
+            [
+                '123',
+                null,
+                null,
+                '2.1',
+                false,
+            ],
+            [
+                '0',
+                null,
+                ['Products' => [new Product()]],
+                '2.0',
+                true,
+            ],
+            [
+                ' ',
+                null,
+                [],
+                '2.0',
+                true,
+            ],
         ];
     }
 }

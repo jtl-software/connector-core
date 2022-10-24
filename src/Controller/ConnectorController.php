@@ -134,8 +134,8 @@ class ConnectorController implements LoggerAwareInterface
             if (($checksum instanceof ChecksumInterface) && !$this->checksumLinker->save($checksum)) {
                 $context = [
                     'endpoint' => $checksum->getForeignKey()->getEndpoint(),
-                    'host' => $checksum->getForeignKey()->getHost(),
-                    'type' => $checksum->getType(),
+                    'host'     => $checksum->getForeignKey()->getHost(),
+                    'type'     => $checksum->getType(),
                 ];
 
                 $this->logger->warning(
@@ -161,7 +161,10 @@ class ConnectorController implements LoggerAwareInterface
         }
 
         if ($this->tokenValidator->validate($auth->getToken()) === false) {
-            $context = ['token' => $auth->getToken(), 'ip' => $_SERVER['REMOTE_ADDR']];
+            $context = [
+                'token' => $auth->getToken(),
+                'ip'    => $_SERVER['REMOTE_ADDR'],
+            ];
             $this->logger->warning('Unauthorized access with token ({token}) from ip ({ip})', $context);
             throw AuthenticationException::failed();
         }

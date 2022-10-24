@@ -16,7 +16,12 @@ class SpecificFactory extends AbstractModelFactory
             'sort'     => 1,
             'isGlobal' => $this->faker->boolean,
             'type'     => $this->faker->randomElement(
-                [Specific::TYPE_IMAGE, Specific::TYPE_IMAGE_TEXT, Specific::TYPE_SELECT, Specific::TYPE_TEXT]
+                [
+                    Specific::TYPE_IMAGE,
+                    Specific::TYPE_IMAGE_TEXT,
+                    Specific::TYPE_SELECT,
+                    Specific::TYPE_TEXT,
+                ]
             ),
             'i18ns'    => [$this->getFactory('SpecificI18n')->makeOneArray()],
             'values'   => [$this->getFactory('SpecificValue')->makeOneArray()],

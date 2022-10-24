@@ -156,7 +156,7 @@ class Features extends AbstractModel
     {
         $data = [
             'entities' => [],
-            'flags' => [],
+            'flags'    => [],
         ];
 
         foreach ($this->entities as $entity) {

@@ -49,7 +49,10 @@ class ChecksumLinker implements LoggerAwareInterface
                             if (($checksum->getEndpoint() !== $checksum->getHost())) {
                                 $this->logger->debug(
                                     'Changed checksum for endpoint ({endpoint}) type ({type})',
-                                    ['endpoint' => $model->getId()->getEndpoint(), 'type' => $type]
+                                    [
+                                        'endpoint' => $model->getId()->getEndpoint(),
+                                        'type'     => $type,
+                                    ]
                                 );
                                 $checksum->setHasChanged(true);
                                 $this->loader->delete($model->getId()->getEndpoint(), $checksum->getType());
@@ -62,7 +65,10 @@ class ChecksumLinker implements LoggerAwareInterface
                         } else {
                             $this->logger->debug(
                                 'Write new checksum for endpoint ({endpoint}) type ({type})',
-                                ['endpoint' => $model->getId()->getEndpoint(), 'type' => $type]
+                                [
+                                    'endpoint' => $model->getId()->getEndpoint(),
+                                    'type'     => $type,
+                                ]
                             );
                             $checksum->setHasChanged(true);
                             $this->loader->write(

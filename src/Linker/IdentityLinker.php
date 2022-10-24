@@ -397,10 +397,10 @@ class IdentityLinker implements LoggerAwareInterface
         $result = $this->useCache && \array_key_exists($this->buildKey($id, $identityType, $cacheType), $this->cache);
 
         $context = [
-            'id' => $id,
+            'id'           => $id,
             'identityType' => $identityType,
-            'cacheType' => $cacheType,
-            'result' => $result ? 'true' : 'false',
+            'cacheType'    => $cacheType,
+            'result'       => $result ? 'true' : 'false',
         ];
 
         $this->logger->debug(
@@ -424,10 +424,10 @@ class IdentityLinker implements LoggerAwareInterface
             : null;
 
         $context = [
-            'id' => $id,
+            'id'           => $id,
             'identityType' => $identityType,
-            'cacheType' => $cacheType,
-            'result' => $result ? 'true' : 'false',
+            'cacheType'    => $cacheType,
+            'result'       => $result ? 'true' : 'false',
         ];
 
         $this->logger->debug(
@@ -447,10 +447,10 @@ class IdentityLinker implements LoggerAwareInterface
     protected function saveCache(string $endpointId, int $hostId, int $identityType, string $cacheType): void
     {
         $context = [
-            'endpoint' => $endpointId,
-            'host' => $hostId,
+            'endpoint'     => $endpointId,
+            'host'         => $hostId,
             'identityType' => $identityType,
-            'cacheType' => $cacheType
+            'cacheType'    => $cacheType,
         ];
 
         $this->logger->debug(
@@ -483,10 +483,10 @@ class IdentityLinker implements LoggerAwareInterface
         int $hostId = null
     ): void {
         $context = [
-            'endpoint' => $endpointId,
-            'host' => $hostId,
+            'endpoint'     => $endpointId,
+            'host'         => $hostId,
             'identityType' => $identityType,
-            'cacheType' => $cacheType
+            'cacheType'    => $cacheType,
         ];
 
         $this->logger->debug(

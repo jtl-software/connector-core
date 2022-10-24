@@ -107,10 +107,86 @@ class RequestParamsTransformSubscriberTest extends TestCase
     public function transformProductProvider(): array
     {
         return [
-            [[['some' => 'thing'], ['foo' => 'bar', 'stockLevel' => ['stockLevel' => 3.]]], [['some' => 'thing'], ['foo' => 'bar', 'stockLevel' => 3.]]],
-            [[['yo' => 'lo']], [['yo' => 'lo']]],
-            [[['stockLevel' => ['stockLevel' => 42.]]], [['stockLevel' => 42.]]],
-            [[['prices' => [['items' => [['productPriceId' => ['', 1], 'quantity' => 10, 'netPrice' => 42.334], ['productPriceId' => ['', 1], 'quantity' => 0, 'netPrice' => 24.3697]]]]]], [['prices' => [['items' => [['productPriceId' => ['', 1], 'quantity' => 0, 'netPrice' => 24.3697,], ['productPriceId' => ['', 1], 'quantity' => 10, 'netPrice' => 42.334]]]]]]]
+            [
+                [
+                    ['some' => 'thing'],
+                    [
+                        'foo'        => 'bar',
+                        'stockLevel' => ['stockLevel' => 3.],
+                    ],
+                ],
+                [
+                    ['some' => 'thing'],
+                    [
+                        'foo'        => 'bar',
+                        'stockLevel' => 3.,
+                    ],
+                ],
+            ],
+            [
+                [['yo' => 'lo']],
+                [['yo' => 'lo']],
+            ],
+            [
+                [['stockLevel' => ['stockLevel' => 42.]]],
+                [['stockLevel' => 42.]],
+            ],
+            [
+
+                [
+                    [
+                        'prices' => [
+                            [
+                                'items' => [
+                                    [
+                                        'productPriceId' => [
+                                            '',
+                                            1,
+                                        ],
+                                        'quantity'       => 10,
+                                        'netPrice'       => 42.334,
+                                    ],
+                                    [
+                                        'productPriceId' => [
+                                            '',
+                                            1,
+                                        ],
+                                        'quantity'       => 0,
+                                        'netPrice'       => 24.3697,
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+                [
+                    [
+                        'prices' => [
+                            [
+                                'items' => [
+                                    [
+                                        'productPriceId' => [
+                                            '',
+                                            1,
+                                        ],
+                                        'quantity'       => 0,
+                                        'netPrice'       => 24.3697,
+                                    ],
+                                    [
+                                        'productPriceId' => [
+                                            '',
+                                            1,
+                                        ],
+                                        'quantity'       => 10,
+                                        'netPrice'       => 42.334,
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+
+            ],
         ];
     }
 
@@ -118,8 +194,244 @@ class RequestParamsTransformSubscriberTest extends TestCase
     {
         return [
             [
-                [['customerId' => ['', 0], 'items' => [['productPriceId' => ['', 1], 'quantity' => 10, 'netPrice' => 42.334], ['productPriceId' => ['', 1], 'quantity' => 0, 'netPrice' => 24.3697]], 'customerGroupId' => ['cfbd5018d38d41d8adca10d94fc8bdd6', 1], 'sku' => 'foo', 'vat' => 19.0, 'taxClassId' => ['', 42], 'id' => ['', 1], 'productId' => ['', 1]], ['customerId' => ['', 0], 'items' => [['productPriceId' => ['', 2], 'quantity' => 0, 'netPrice' => 24.3697,]], 'customerGroupId' => ['2fa802a6db864bd49fe41f5f3ed6d8e7', 2], 'sku' => 'foo', 'vat' => 19.0, 'taxClassId' => ['', 42], 'id' => ['', 2], 'productId' => ['', 1]], 2 => ['customerId' => ['', 0], 'items' => [['productPriceId' => ['', 0], 'quantity' => 0, 'netPrice' => 24.3697,]], 'customerGroupId' => ['', 0], 'sku' => 'foo', 'vat' => 19.0, 'taxClassId' => ['', 42], 'id' => ['', 0], 'productId' => ['', 1]]],
-                [['id' => ["", 1], 'sku' => 'foo', 'vat' => 19., 'taxClassId' => ["", 42], 'prices' => [['customerId' => ['', 0], 'items' => [['productPriceId' => ['', 1], 'quantity' => 0, 'netPrice' => 24.3697,], ['productPriceId' => ['', 1], 'quantity' => 10, 'netPrice' => 42.334]], 'customerGroupId' => ['cfbd5018d38d41d8adca10d94fc8bdd6', 1], 'sku' => 'foo', 'vat' => 19.0, 'taxClassId' => ['', 42], 'id' => ['', 1], 'productId' => ['', 1]], ['customerId' => ['', 0], 'items' => [['productPriceId' => ['', 2], 'quantity' => 0, 'netPrice' => 24.3697,]], 'customerGroupId' => ['2fa802a6db864bd49fe41f5f3ed6d8e7', 2], 'sku' => 'foo', 'vat' => 19.0, 'taxClassId' => ['', 42], 'id' => ['', 2], 'productId' => ['', 1]], 2 => ['customerId' => ['', 0], 'items' => [['productPriceId' => ['', 0], 'quantity' => 0, 'netPrice' => 24.3697,]], 'customerGroupId' => ['', 0], 'sku' => 'foo', 'vat' => 19.0, 'taxClassId' => ['', 42], 'id' => ['', 0], 'productId' => ['', 1]]]]]
+                [
+                    [
+                        'customerId'      => [
+                            '',
+                            0,
+                        ],
+                        'items'           => [
+                            [
+                                'productPriceId' => [
+                                    '',
+                                    1,
+                                ],
+                                'quantity'       => 10,
+                                'netPrice'       => 42.334,
+                            ],
+                            [
+                                'productPriceId' => [
+                                    '',
+                                    1,
+                                ],
+                                'quantity'       => 0,
+                                'netPrice'       => 24.3697,
+                            ],
+                        ],
+                        'customerGroupId' => [
+                            'cfbd5018d38d41d8adca10d94fc8bdd6',
+                            1,
+                        ],
+                        'sku'             => 'foo',
+                        'vat'             => 19.0,
+                        'taxClassId'      => [
+                            '',
+                            42,
+                        ],
+                        'id'              => [
+                            '',
+                            1,
+                        ],
+                        'productId'       => [
+                            '',
+                            1,
+                        ],
+                    ], [
+                        'customerId'      => [
+                            '',
+                            0,
+                        ],
+                        'items'           => [
+                            [
+                                'productPriceId' => [
+                                    '',
+                                    2,
+                                ],
+                                'quantity'       => 0,
+                                'netPrice'       => 24.3697,
+                            ],
+                        ],
+                        'customerGroupId' => [
+                            '2fa802a6db864bd49fe41f5f3ed6d8e7',
+                            2,
+                        ],
+                        'sku'             => 'foo',
+                        'vat'             => 19.0,
+                        'taxClassId'      => [
+                            '',
+                            42,
+                        ],
+                        'id'              => [
+                            '',
+                            2,
+                        ],
+                        'productId'       => [
+                            '',
+                            1,
+                        ],
+                    ],
+                    2 => [
+                        'customerId'      => [
+                            '',
+                            0,
+                        ],
+                        'items'           => [
+                            [
+                                'productPriceId' => [
+                                    '',
+                                    0,
+                                ],
+                                'quantity'       => 0,
+                                'netPrice'       => 24.3697,
+                            ],
+                        ],
+                        'customerGroupId' => [
+                            '',
+                            0,
+                        ],
+                        'sku'             => 'foo',
+                        'vat'             => 19.0,
+                        'taxClassId'      => [
+                            '',
+                            42,
+                        ],
+                        'id'              => [
+                            '',
+                            0,
+                        ],
+                        'productId'       => [
+                            '',
+                            1,
+                        ],
+                    ],
+                ],
+                [
+
+                    [
+                        'id'         => [
+                            "",
+                            1,
+                        ],
+                        'sku'        => 'foo',
+                        'vat'        => 19.,
+                        'taxClassId' => [
+                            "",
+                            42,
+                        ],
+                        'prices'     => [
+                            [
+                                'customerId'      => [
+                                    '',
+                                    0,
+                                ],
+                                'items'           => [
+                                    [
+                                        'productPriceId' => [
+                                            '',
+                                            1,
+                                        ],
+                                        'quantity'       => 0,
+                                        'netPrice'       => 24.3697,
+                                    ],
+                                    [
+                                        'productPriceId' => [
+                                            '',
+                                            1,
+                                        ],
+                                        'quantity'       => 10,
+                                        'netPrice'       => 42.334,
+                                    ],
+                                ],
+                                'customerGroupId' => [
+                                    'cfbd5018d38d41d8adca10d94fc8bdd6',
+                                    1,
+                                ],
+                                'sku'             => 'foo',
+                                'vat'             => 19.0,
+                                'taxClassId'      => [
+                                    '',
+                                    42,
+                                ],
+                                'id'              => [
+                                    '',
+                                    1,
+                                ],
+                                'productId'       => [
+                                    '',
+                                    1,
+                                ],
+                            ], [
+                                'customerId'      => [
+                                    '',
+                                    0,
+                                ],
+                                'items'           => [
+                                    [
+                                        'productPriceId' => [
+                                            '',
+                                            2,
+                                        ],
+                                        'quantity'       => 0,
+                                        'netPrice'       => 24.3697,
+                                    ],
+                                ],
+                                'customerGroupId' => [
+                                    '2fa802a6db864bd49fe41f5f3ed6d8e7',
+                                    2,
+                                ],
+                                'sku'             => 'foo',
+                                'vat'             => 19.0,
+                                'taxClassId'      => [
+                                    '',
+                                    42,
+                                ],
+                                'id'              => [
+                                    '',
+                                    2,
+                                ],
+                                'productId'       => [
+                                    '',
+                                    1,
+                                ],
+                            ],
+                            2 => [
+                                'customerId'      => [
+                                    '',
+                                    0,
+                                ],
+                                'items'           => [
+                                    [
+                                        'productPriceId' => [
+                                            '',
+                                            0,
+                                        ],
+                                        'quantity'       => 0,
+                                        'netPrice'       => 24.3697,
+                                    ],
+                                ],
+                                'customerGroupId' => [
+                                    '',
+                                    0,
+                                ],
+                                'sku'             => 'foo',
+                                'vat'             => 19.0,
+                                'taxClassId'      => [
+                                    '',
+                                    42,
+                                ],
+                                'id'              => [
+                                    '',
+                                    0,
+                                ],
+                                'productId'       => [
+                                    '',
+                                    1,
+                                ],
+                            ],
+                        ],
+                    ],
+
+                ],
             ],
         ];
     }
@@ -127,7 +439,44 @@ class RequestParamsTransformSubscriberTest extends TestCase
     public function transformProductStockLevelProvider(): array
     {
         return [
-            [[['productId' => ['', 151], 'stockLevel' => 37.0, 'sku' => 'abcde'], ['productId' => ['', 159], 'stockLevel' => 22.0, 'sku' => '4u']], [['id' => ['', 151], 'stockLevel' => 37.0, 'sku' => 'abcde'], ['id' => ['', 159], 'stockLevel' => 22.0, 'sku' => '4u']]],
+            [
+                [
+                    [
+                        'productId'  => [
+                            '',
+                            151,
+                        ],
+                        'stockLevel' => 37.0,
+                        'sku'        => 'abcde',
+                    ],
+                    [
+                        'productId'  => [
+                            '',
+                            159,
+                        ],
+                        'stockLevel' => 22.0,
+                        'sku'        => '4u',
+                    ],
+                ],
+                [
+                    [
+                        'id'         => [
+                            '',
+                            151,
+                        ],
+                        'stockLevel' => 37.0,
+                        'sku'        => 'abcde',
+                    ],
+                    [
+                        'id'         => [
+                            '',
+                            159,
+                        ],
+                        'stockLevel' => 22.0,
+                        'sku'        => '4u',
+                    ],
+                ],
+            ],
         ];
     }
 }

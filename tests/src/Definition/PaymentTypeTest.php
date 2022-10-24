@@ -30,10 +30,22 @@ class PaymentTypeTest extends TestCase
     public function isTypeDataProvider(): array
     {
         $testCases   = $this->getCorrectConstantsTestCases(PaymentType::class);
-        $testCases[] = [false, false];
-        $testCases[] = ['', false];
-        $testCases[] = ['pm worldpay', false];
-        $testCases[] = ['PM_WORLDPAY', false];
+        $testCases[] = [
+            false,
+            false,
+        ];
+        $testCases[] = [
+            '',
+            false,
+        ];
+        $testCases[] = [
+            'pm worldpay',
+            false,
+        ];
+        $testCases[] = [
+            'PM_WORLDPAY',
+            false,
+        ];
 
         return $testCases;
     }

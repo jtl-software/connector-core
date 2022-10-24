@@ -20,8 +20,8 @@ class ProductAttributeSubscriber implements EventSubscriberInterface
             [
                 'event'  => 'serializer.post_serialize',
                 'method' => 'onPostSerialize',
-                'format' => 'json'
-            ]
+                'format' => 'json',
+            ],
         ];
     }
 

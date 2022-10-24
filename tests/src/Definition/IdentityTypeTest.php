@@ -30,9 +30,18 @@ class IdentityTypeTest extends TestCase
     public function isTypeDataProvider(): array
     {
         $testCases   = $this->getCorrectConstantsTestCases(IdentityType::class);
-        $testCases[] = [false, false];
-        $testCases[] = [-100, false];
-        $testCases[] = ['68', true];
+        $testCases[] = [
+            false,
+            false,
+        ];
+        $testCases[] = [
+            -100,
+            false,
+        ];
+        $testCases[] = [
+            '68',
+            true,
+        ];
 
         return $testCases;
     }

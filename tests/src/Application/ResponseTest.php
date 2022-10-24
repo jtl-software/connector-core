@@ -19,7 +19,13 @@ class ResponseTest extends TestCase
     {
         return [
             [new Identity("1")],
-            [[1, 2], 'ABC'],
+            [
+                [
+                    1,
+                    2,
+                ],
+                'ABC',
+            ],
             [1],
             ["FOO"],
             [1.2],

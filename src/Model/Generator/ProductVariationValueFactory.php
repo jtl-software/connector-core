@@ -14,7 +14,7 @@ class ProductVariationValueFactory extends AbstractModelFactory
     {
         return [
             'sort'  => $this->faker->numberBetween(),
-            'i18ns' => $this->getFactory('ProductVariationValueI18n')->makeArray(\random_int(1, 5))
+            'i18ns' => $this->getFactory('ProductVariationValueI18n')->makeArray(\random_int(1, 5)),
         ];
     }
 

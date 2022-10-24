@@ -144,8 +144,16 @@ class ModelTest extends TestCase
     public function unsetIdentificationStringProvider(): array
     {
         return [
-            [\uniqid('foo-'), 'hola', true],
-            [\uniqid('bar-'), 'hallo', false],
+            [
+                \uniqid('foo-'),
+                'hola',
+                true,
+            ],
+            [
+                \uniqid('bar-'),
+                'hallo',
+                false,
+            ],
         ];
     }
 }

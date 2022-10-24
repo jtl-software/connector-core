@@ -13,7 +13,7 @@ class SpecificI18nFactory extends AbstractI18nFactory
     protected function makeFakeArray(): array
     {
         return [
-            'name' => $this->faker->word
+            'name' => $this->faker->word,
         ];
     }
 

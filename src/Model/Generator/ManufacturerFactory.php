@@ -23,7 +23,7 @@ class ManufacturerFactory extends AbstractModelFactory
             'id'    => $this->getFactory('Identity')->makeOneArray(),
             'name'  => $this->faker->text(40),
             'sort'  => $this->sort++,
-            'i18ns' => $this->getFactory('ManufacturerI18n')->makeArray(3)
+            'i18ns' => $this->getFactory('ManufacturerI18n')->makeArray(3),
         ], $override);
     }
 

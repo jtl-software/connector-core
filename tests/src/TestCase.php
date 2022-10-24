@@ -119,7 +119,10 @@ class TestCase extends \Jtl\UnitTest\TestCase
 
         $testCases = [];
         foreach ($constants as $constant) {
-            $testCases[] = [$constant, true];
+            $testCases[] = [
+                $constant,
+                true,
+            ];
         }
 
         return $testCases;

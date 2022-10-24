@@ -19,7 +19,10 @@ class CrossSellingSubscriberTest extends TestCase
     public function testOnPreDeserialize(array $data, int ...$expectedItemIds)
     {
         $context    = $this->createMock(DeserializationContext::class);
-        $type       = ['name' => CrossSelling::class, 'params' => []];
+        $type       = [
+            'name'   => CrossSelling::class,
+            'params' => [],
+        ];
         $event      = new PreDeserializeEvent($context, $data, $type);
         $subscriber = new CrossSellingSubscriber();
         $subscriber->onPreDeserialize($event);
@@ -39,16 +42,49 @@ class CrossSellingSubscriberTest extends TestCase
     {
         $items = [
             [
-                'crossSellingGroupId' => ["", 21],
-                'productIds' => [["", 1]]
+                'crossSellingGroupId' => [
+                    "",
+                    21,
+                ],
+                'productIds'          => [
+                    [
+                        "",
+                        1,
+                    ],
+                ],
             ],
             [
-                'crossSellingGroupId' => ["", 42],
-                'productIds' => [["", 1]]
+                'crossSellingGroupId' => [
+                    "",
+                    42,
+                ],
+                'productIds'          => [
+                    [
+                        "",
+                        1,
+                    ],
+                ],
             ],
         ];
 
         return [
-            [['id' => ["", 100], 'productId' => ["", 32], 'items' => $items], 1452, 2817]];
+            [
+
+                [
+                    'id'        => [
+                        "",
+                        100,
+                    ],
+                    'productId' => [
+                        "",
+                        32,
+                    ],
+                    'items'     => $items,
+                ],
+                1452,
+                2817,
+            ],
+
+        ];
     }
 }

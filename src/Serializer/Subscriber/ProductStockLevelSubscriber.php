@@ -14,10 +14,10 @@ class ProductStockLevelSubscriber implements EventSubscriberInterface
     {
         return [
             [
-                'event' => 'serializer.post_serialize',
+                'event'  => 'serializer.post_serialize',
                 'method' => 'onPostSerialize',
-                'format' => 'json'
-            ]
+                'format' => 'json',
+            ],
         ];
     }
 

@@ -93,7 +93,10 @@ class Method
         $parts      = \explode('.', $rpcMethod);
         $partsCount = \count($parts);
         if (!\in_array($partsCount, [2, 3], true)) {
-            $parts = ['invalid', 'invalid'];
+            $parts = [
+                'invalid',
+                'invalid',
+            ];
         }
         $offset     = $partsCount === 3 ? 1 : 0;
         $controller = Str::toPascalCase($parts[0 + $offset]);

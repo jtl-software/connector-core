@@ -16,11 +16,11 @@ class TranslatableAttributeI18nFactory extends AbstractModelFactory
     protected function makeFakeArray(): array
     {
         return [
-            'name' => $this->faker->word,
-            'value' => $this->faker->randomElement([
+            'name'        => $this->faker->word,
+            'value'       => $this->faker->randomElement([
                 true,
                 false,
-                $this->faker->words(3, true)
+                $this->faker->words(3, true),
             ]),
             'languageIso' => $this->faker->languageCode,
         ];

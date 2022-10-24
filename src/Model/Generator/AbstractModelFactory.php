@@ -118,7 +118,10 @@ abstract class AbstractModelFactory
     public function makeIdentityArray(int $identityType): array
     {
         do {
-            [$endpoint, $host] = $this->getFactory('Identity')->makeOneArray();
+            [
+                $endpoint,
+                $host,
+            ] = $this->getFactory('Identity')->makeOneArray();
             if (!isset(self::$identities[$identityType][$endpoint])) {
                 break;
             }
@@ -197,7 +200,10 @@ abstract class AbstractModelFactory
     public static function getIdentity(int $identityType, string $endpoint): ?array
     {
         if (self::hasIdentity($identityType, $endpoint)) {
-            return [$endpoint, self::$identities[$identityType][$endpoint]];
+            return [
+                $endpoint,
+                self::$identities[$identityType][$endpoint],
+            ];
         }
         return null;
     }

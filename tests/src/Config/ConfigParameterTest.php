@@ -103,11 +103,52 @@ class ConfigParameterTest extends TestCase
     public function dataProvider()
     {
         return [
-            [ConfigParameter::TYPE_STRING, 'foo', [null, 5, false, true, 0.1]],
-            [ConfigParameter::TYPE_BOOLEAN, true, ['yolo', 49]],
-            [ConfigParameter::TYPE_DOUBLE, 0.2, ['1', 1, true]],
-            [ConfigParameter::TYPE_INTEGER, 22, [2.1, 'yo', false]],
-            [ConfigParameter::TYPE_INTEGER, -3, [-0.1, true, 'baz']],
+            [
+                ConfigParameter::TYPE_STRING,
+                'foo',
+                [
+                    null,
+                    5,
+                    false,
+                    true,
+                    0.1,
+                ],
+            ],
+            [
+                ConfigParameter::TYPE_BOOLEAN,
+                true,
+                [
+                    'yolo',
+                    49,
+                ],
+            ],
+            [
+                ConfigParameter::TYPE_DOUBLE,
+                0.2,
+                [
+                    '1',
+                    1,
+                    true,
+                ],
+            ],
+            [
+                ConfigParameter::TYPE_INTEGER,
+                22,
+                [
+                    2.1,
+                    'yo',
+                    false,
+                ],
+            ],
+            [
+                ConfigParameter::TYPE_INTEGER,
+                -3,
+                [
+                    -0.1,
+                    true,
+                    'baz',
+                ],
+            ],
         ];
     }
 }

@@ -21,9 +21,9 @@ class LoggerStub
     const ERROR   = 'error';
 
     protected static $logLevelMappings = [
-        self::INFO => MonoLogger::INFO,
+        self::INFO    => MonoLogger::INFO,
         self::WARNING => MonoLogger::WARNING,
-        self::ERROR => MonoLogger::ERROR,
-        self::DEBUG => MonoLogger::DEBUG,
+        self::ERROR   => MonoLogger::ERROR,
+        self::DEBUG   => MonoLogger::DEBUG,
     ];
 }

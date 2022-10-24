@@ -70,15 +70,15 @@ class ConfigSchemaTest extends TestCase
     {
         $schema   = (new ConfigSchema())->setParameters(...ConfigSchema::createDefaultParameters($this->connectorDir));
         $expected = [
-            ConfigSchema::LOG_LEVEL => 'info',
-            ConfigSchema::LOG_FORMAT => 'line',
-            ConfigSchema::MAIN_LANGUAGE => 'de',
-            ConfigSchema::CONNECTOR_DIR => $this->connectorDir,
-            ConfigSchema::LOG_DIR => \sprintf('%s/var/log', $this->connectorDir),
-            ConfigSchema::CACHE_DIR => \sprintf('%s/var/cache', $this->connectorDir),
-            ConfigSchema::PLUGINS_DIR => \sprintf('%s/plugins', $this->connectorDir),
-            ConfigSchema::FEATURES_PATH => \sprintf('%s/config/features.json', $this->connectorDir),
-            ConfigSchema::DEBUG => false,
+            ConfigSchema::LOG_LEVEL               => 'info',
+            ConfigSchema::LOG_FORMAT              => 'line',
+            ConfigSchema::MAIN_LANGUAGE           => 'de',
+            ConfigSchema::CONNECTOR_DIR           => $this->connectorDir,
+            ConfigSchema::LOG_DIR                 => \sprintf('%s/var/log', $this->connectorDir),
+            ConfigSchema::CACHE_DIR               => \sprintf('%s/var/cache', $this->connectorDir),
+            ConfigSchema::PLUGINS_DIR             => \sprintf('%s/plugins', $this->connectorDir),
+            ConfigSchema::FEATURES_PATH           => \sprintf('%s/config/features.json', $this->connectorDir),
+            ConfigSchema::DEBUG                   => false,
             ConfigSchema::SERIALIZER_ENABLE_CACHE => true,
         ];
         $actual   = $schema->getDefaultValues();
