@@ -41,7 +41,7 @@ abstract class AbstractModel
      */
     public function setIdentificationString(string $identificationString): self
     {
-        if (!in_array($identificationString, $this->identificationStrings, true)) {
+        if (!\in_array($identificationString, $this->identificationStrings, true)) {
             $this->identificationStrings[] = $identificationString;
         }
 
@@ -66,7 +66,7 @@ abstract class AbstractModel
      */
     public function unsetIdentificationString(string $identificationString): self
     {
-        $index = array_search($identificationString, $this->identificationStrings, true);
+        $index = \array_search($identificationString, $this->identificationStrings, true);
         if ($index !== false) {
             unset($this->identificationStrings[$index]);
         }
@@ -90,7 +90,7 @@ abstract class AbstractModel
      */
     public function getIdentificationStrings(): array
     {
-        return array_values($this->identificationStrings);
+        return \array_values($this->identificationStrings);
     }
 
     /**
@@ -98,6 +98,6 @@ abstract class AbstractModel
      */
     public function hasIdentificationStrings(): bool
     {
-        return count($this->identificationStrings) > 0;
+        return \count($this->identificationStrings) > 0;
     }
 }
