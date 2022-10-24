@@ -19,7 +19,7 @@ class IdentityHandler implements SubscribingHandlerInterface
     protected $identities;
 
     /**
-     * @return string[]
+     * @return array<int, array<string, string|int>>
      */
     public static function getSubscribingMethods()
     {
@@ -46,10 +46,13 @@ class IdentityHandler implements SubscribingHandlerInterface
      * @param Context $context
      * @return Identity
      * @throws DefinitionException
-     * @throws ReflectionException
      */
-    public function deserializeIdentity(JsonDeserializationVisitor $visitor, array $identity, array $type, Context $context)
-    {
+    public function deserializeIdentity(
+        JsonDeserializationVisitor $visitor,
+        array $identity,
+        array $type,
+        Context $context
+    ) {
         $identityObject = new Identity($identity[0], $identity[1]);
         $currentObject  = $visitor->getCurrentObject();
         if ($identity[1] > 0 && !\is_null($currentObject)) {
@@ -74,10 +77,14 @@ class IdentityHandler implements SubscribingHandlerInterface
      * @param Identity $identity
      * @param array $type
      * @param Context $context
-     * @return mixed[]
+     * @return array<int, string|int>
      */
-    public function serializeIdentity(JsonSerializationVisitor $visitor, Identity $identity, array $type, Context $context)
-    {
+    public function serializeIdentity(
+        JsonSerializationVisitor $visitor,
+        Identity $identity,
+        array $type,
+        Context $context
+    ) {
         return [$identity->getEndpoint(), $identity->getHost()];
     }
 }

@@ -17,18 +17,18 @@ use Jtl\Connector\Core\Utilities\Str;
 class ImageSubscriber implements EventSubscriberInterface
 {
     /**
-     * @return array
+     * @return array<int, array<string, string>>
      */
     public static function getSubscribedEvents()
     {
         return [
             [
-                'event' => 'serializer.post_serialize',
+                'event'  => 'serializer.post_serialize',
                 'method' => 'onPostSerialize',
                 'format' => 'json'
             ],
             [
-                'event' => 'serializer.post_deserialize',
+                'event'  => 'serializer.post_deserialize',
                 'method' => 'onPostDeserialize',
                 'format' => 'json'
             ]
@@ -42,7 +42,10 @@ class ImageSubscriber implements EventSubscriberInterface
     public function onPostSerialize(ObjectEvent $event)
     {
         $object = $event->getObject();
-        if ($object instanceof AbstractImage && $object->getRelationType() !== '' && $object->getId()->getEndpoint() !== '') {
+        if ($object instanceof AbstractImage
+            && $object->getRelationType() !== ''
+            && $object->getId()->getEndpoint() !== ''
+        ) {
             $id = clone $object->getId();
             $id->setEndpoint(\sprintf('%s#=#%s', $object->getRelationType(), $id->getEndpoint()));
             $serializedId = $id->toArray();

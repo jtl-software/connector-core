@@ -11,11 +11,14 @@ use Jtl\Connector\Core\Model\TranslatableAttributeI18n;
 
 class ProductAttributeSubscriber implements EventSubscriberInterface
 {
+    /**
+     * @return array<int, array<string, string>>
+     */
     public static function getSubscribedEvents()
     {
         return [
             [
-                'event' => 'serializer.post_serialize',
+                'event'  => 'serializer.post_serialize',
                 'method' => 'onPostSerialize',
                 'format' => 'json'
             ]
@@ -44,7 +47,10 @@ class ProductAttributeSubscriber implements EventSubscriberInterface
                 /** @var TranslatableAttribute $attribute */
                 $attribute     = $visitingSet->current();
                 $productAttrId = $attribute->getId()->toArray();
-                $event->getVisitor()->visitProperty(new StaticPropertyMetadata('', 'productAttrId', $productAttrId), $productAttrId);
+                $event->getVisitor()->visitProperty(
+                    new StaticPropertyMetadata('', 'productAttrId', $productAttrId),
+                    $productAttrId
+                );
             }
         }
     }

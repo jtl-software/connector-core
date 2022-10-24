@@ -10,13 +10,13 @@ use Jtl\Connector\Core\Model\CrossSelling;
 class CrossSellingSubscriber implements EventSubscriberInterface
 {
     /**
-     * @return array
+     * @return array<int, array<string, string>>
      */
     public static function getSubscribedEvents()
     {
         return [
             [
-                'event' => 'serializer.pre_deserialize',
+                'event'  => 'serializer.pre_deserialize',
                 'method' => 'onPreDeserialize',
                 'format' => 'json'
             ]
@@ -56,6 +56,8 @@ class CrossSellingSubscriber implements EventSubscriberInterface
     protected static function cantorPairingFunction(int $productId, int $crossSellingGroupId): int
     {
         //Found at https://gist.github.com/hannesl/8031402
-        return (int)(($productId + $crossSellingGroupId) * ($productId + $crossSellingGroupId + 1)) / 2 + $crossSellingGroupId;
+        return (int)(
+            ($productId + $crossSellingGroupId) * ($productId + $crossSellingGroupId + 1)
+        ) / 2 + $crossSellingGroupId;
     }
 }
