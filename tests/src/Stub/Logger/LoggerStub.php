@@ -10,15 +10,15 @@ use Monolog\Logger as MonoLogger;
 class LoggerStub
 {
     const CHANNEL_CHECKSUM = 'checksum';
-    const CHANNEL_GLOBAL = 'global';
-    const CHANNEL_LINKER = 'linker';
-    const CHANNEL_RPC = 'rpc';
-    const CHANNEL_SESSION = 'session';
+    const CHANNEL_GLOBAL   = 'global';
+    const CHANNEL_LINKER   = 'linker';
+    const CHANNEL_RPC      = 'rpc';
+    const CHANNEL_SESSION  = 'session';
 
-    const INFO = 'info';
+    const INFO    = 'info';
     const WARNING = 'warning';
-    const DEBUG = 'debug';
-    const ERROR = 'error';
+    const DEBUG   = 'debug';
+    const ERROR   = 'error';
 
     protected static $logLevelMappings = [
         self::INFO => MonoLogger::INFO,

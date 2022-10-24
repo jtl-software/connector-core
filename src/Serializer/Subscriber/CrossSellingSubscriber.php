@@ -30,13 +30,13 @@ class CrossSellingSubscriber implements EventSubscriberInterface
     {
         $className = $event->getType()['name'] ?? '';
         if ($className === CrossSelling::class) {
-            $data = $event->getData();
+            $data      = $event->getData();
             $productId = $data['productId'][1] ?? 0;
-            if (isset($data['items']) && is_array($data['items'])) {
+            if (isset($data['items']) && \is_array($data['items'])) {
                 foreach ($data['items'] as $i => $item) {
                     if (!isset($data['items'][$i]['id'])) {
                         $crossSellingGroupId = $item['crossSellingGroupId'][1] ?? 0;
-                        $itemId = self::cantorPairingFunction($productId, $crossSellingGroupId);
+                        $itemId              = self::cantorPairingFunction($productId, $crossSellingGroupId);
                         if ($productId !== 0 && $crossSellingGroupId !== 0 && $itemId < PHP_INT_MAX) {
                             $data['items'][$i]['id'] = ['', $itemId];
                         }

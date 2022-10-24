@@ -39,7 +39,7 @@ class RequestPacketTest extends TestCase
     {
         return [
             [
-                [$id = time(), 'undefined.undefined', '2.0', []],
+                [$id = \time(), 'undefined.undefined', '2.0', []],
                 [$id, 'undefined.undefined', '2.0', []],
                 true
             ],

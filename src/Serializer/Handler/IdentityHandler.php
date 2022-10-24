@@ -51,11 +51,11 @@ class IdentityHandler implements SubscribingHandlerInterface
     public function deserializeIdentity(JsonDeserializationVisitor $visitor, array $identity, array $type, Context $context)
     {
         $identityObject = new Identity($identity[0], $identity[1]);
-        $currentObject = $visitor->getCurrentObject();
-        if ($identity[1] > 0 && !is_null($currentObject)) {
-            $modelName = (new \ReflectionClass($currentObject))->getShortName();
-            $currentPath = $context->getCurrentPath();
-            $propertyName = end($currentPath);
+        $currentObject  = $visitor->getCurrentObject();
+        if ($identity[1] > 0 && !\is_null($currentObject)) {
+            $modelName    = (new \ReflectionClass($currentObject))->getShortName();
+            $currentPath  = $context->getCurrentPath();
+            $propertyName = \end($currentPath);
             if (Model::isIdentityProperty($modelName, $propertyName)) {
                 $identityType = Model::getPropertyIdentityType($modelName, $propertyName);
                 if (!isset($this->identities[$identityType][$identity[1]])) {

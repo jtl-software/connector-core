@@ -20,9 +20,9 @@ use JMS\Serializer\Annotation as Serializer;
 class Specific extends AbstractIdentity
 {
     public const
-        TYPE_TEXT = 'TEXT',
-        TYPE_SELECT = 'SELECTBOX',
-        TYPE_IMAGE = 'BILD',
+        TYPE_TEXT       = 'TEXT',
+        TYPE_SELECT     = 'SELECTBOX',
+        TYPE_IMAGE      = 'BILD',
         TYPE_IMAGE_TEXT = 'BILD-TEXT';
 
     /**
@@ -210,7 +210,7 @@ class Specific extends AbstractIdentity
         $this->unsetIdentificationStringBySubject('name');
         foreach ($this->getI18ns() as $i18n) {
             if ($i18n->getName() !== '') {
-                $this->setIdentificationStringBySubject('name', sprintf('Name = %s', $i18n->getName()));
+                $this->setIdentificationStringBySubject('name', \sprintf('Name = %s', $i18n->getName()));
                 break;
             }
         }

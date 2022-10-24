@@ -25,7 +25,7 @@ class ControllerTest extends TestCase
      */
     public function isTypeDataProvider(): array
     {
-        $testCases = $this->getCorrectConstantsTestCases(Controller::class);
+        $testCases   = $this->getCorrectConstantsTestCases(Controller::class);
         $testCases[] = [false, false];
         $testCases[] = ['', false];
         $testCases[] = ['statuschange', false];

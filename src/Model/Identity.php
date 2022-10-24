@@ -112,7 +112,7 @@ class Identity extends AbstractModel
      */
     public static function fromArray(array $data)
     {
-        if (count($data) !== 2 || !isset($data[0]) || !is_string($data[0]) || !isset($data[1]) || !is_int($data[1])) {
+        if (\count($data) !== 2 || !isset($data[0]) || !\is_string($data[0]) || !isset($data[1]) || !\is_int($data[1])) {
             throw new InvalidArgumentException('The argument is not valid. It must consist of exactly two fields. First field (0) must contain a string value and second field (1) must contain an integer value');
         }
         

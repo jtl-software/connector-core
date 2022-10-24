@@ -44,7 +44,7 @@ class ImageSubscriber implements EventSubscriberInterface
         $object = $event->getObject();
         if ($object instanceof AbstractImage && $object->getRelationType() !== '' && $object->getId()->getEndpoint() !== '') {
             $id = clone $object->getId();
-            $id->setEndpoint(sprintf('%s#=#%s', $object->getRelationType(), $id->getEndpoint()));
+            $id->setEndpoint(\sprintf('%s#=#%s', $object->getRelationType(), $id->getEndpoint()));
             $serializedId = $id->toArray();
             $event->getVisitor()->visitProperty(new StaticPropertyMetadata('', 'id', $serializedId), $serializedId);
         }
@@ -65,8 +65,8 @@ class ImageSubscriber implements EventSubscriberInterface
                 $resortedIdentities = [];
                 /** @var Identity $identity */
                 foreach ($identities[$imageIndex] as $identity) {
-                    $splittedEndpoint = explode('#=#', $identity->getEndpoint());
-                    if (count($splittedEndpoint) !== 2) {
+                    $splittedEndpoint = \explode('#=#', $identity->getEndpoint());
+                    if (\count($splittedEndpoint) !== 2) {
                         throw SerializerException::wrongEndpointFormat($identity->getEndpoint());
                     }
                     $newIndex = Str::toCamelCase($splittedEndpoint[0]) . 'Image';

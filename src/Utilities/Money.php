@@ -14,7 +14,7 @@ class Money
 
     public static function AsGross($net, $vat)
     {
-        $vat = doubleval($vat);
+        $vat = \doubleval($vat);
         if ($vat <= 0) {
             return $net;
         }
@@ -24,7 +24,7 @@ class Money
 
     public static function AsNet($gross, $vat)
     {
-        $vat = doubleval($vat);
+        $vat = \doubleval($vat);
         if ($vat <= 0) {
             return $gross;
         }

@@ -16,8 +16,8 @@ class PacketTest extends TestCase
      */
     public function testToArray()
     {
-        $jtlRpc = mt_rand(0, 1) === 1 ? Uuid::uuid() : '';
-        $id = mt_rand(0, 1) === 1 ? Uuid::uuid() : '';
+        $jtlRpc = \mt_rand(0, 1) === 1 ? Uuid::uuid() : '';
+        $id     = \mt_rand(0, 1) === 1 ? Uuid::uuid() : '';
         $packet = $this->stubPacket()->setJtlrpc($jtlRpc)->setId($id);
         $result = $this->invokeMethodFromObject($packet, 'toArray');
         $this->assertSame(['jtlrpc' => $jtlRpc, 'id' => $id], $result);

@@ -30,7 +30,7 @@ class RpcMethodTest extends TestCase
     {
         $definedMethods = $this->getCorrectConstantsTestCases(RpcMethod::class);
 
-        $customTests = [];
+        $customTests   = [];
         $customTests[] = ['""', false];
         $customTests[] = [' ', false];
         $customTests[] = [false, false];
@@ -42,7 +42,7 @@ class RpcMethodTest extends TestCase
         $customTests[] = ['method\.name', false];
         $customTests[] = ['very.long.method.name', true];
 
-        return array_merge_recursive($definedMethods, $customTests);
+        return \array_merge_recursive($definedMethods, $customTests);
     }
 
     /**

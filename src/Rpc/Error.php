@@ -133,7 +133,7 @@ class Error
 
         // A String providing a short description of the error. The message
         // SHOULD be limited to a concise single sentence.
-        if ($this->getMessage() === null || strlen($this->getMessage()) == 0) {
+        if ($this->getMessage() === null || \strlen($this->getMessage()) == 0) {
             $isValid = false;
         }
 
@@ -149,19 +149,19 @@ class Error
      */
     public static function createDataFromException(\Throwable $exception, string $additionalMessage = null): string
     {
-        $lastSlashPos = strrpos($exception->getFile(), '/');
-        $file = sprintf('...%s', substr($exception->getFile(), $lastSlashPos));
+        $lastSlashPos = \strrpos($exception->getFile(), '/');
+        $file         = \sprintf('...%s', \substr($exception->getFile(), $lastSlashPos));
 
-        $data = sprintf(
+        $data = \sprintf(
             "%s (Code: %s) in %s:%s",
-            get_class($exception),
+            \get_class($exception),
             $exception->getCode(),
             $file,
             $exception->getLine()
         );
 
-        if (is_string($additionalMessage)) {
-            $data .= sprintf(' - %s', $additionalMessage);
+        if (\is_string($additionalMessage)) {
+            $data .= \sprintf(' - %s', $additionalMessage);
         }
 
         return $data;

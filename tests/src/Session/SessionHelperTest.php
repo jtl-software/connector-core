@@ -15,7 +15,7 @@ class SessionHelperTest extends TestCase
 
     public function testHas()
     {
-        $helper = new SessionHelper('foo');
+        $helper                 = new SessionHelper('foo');
         $_SESSION['foo']['bar'] = 'boofar';
         $_SESSION['foo']['you'] = 'yalla';
         $this->assertTrue($helper->has('bar'));
@@ -31,7 +31,7 @@ class SessionHelperTest extends TestCase
 
     public function testGet()
     {
-        $helper = new SessionHelper('foo');
+        $helper                 = new SessionHelper('foo');
         $_SESSION['foo']['bar'] = 'vaaaaalue';
         $_SESSION['foo']['och'] = 'taataa';
         $this->assertEquals('vaaaaalue', $helper->get('bar'));
@@ -55,7 +55,7 @@ class SessionHelperTest extends TestCase
 
     public function testUnset()
     {
-        $helper = new SessionHelper('tests');
+        $helper                   = new SessionHelper('tests');
         $_SESSION['tests']['foo'] = 'bar';
         $this->assertArrayHasKey('foo', $_SESSION['tests']);
         $helper->unset('foo');
@@ -64,9 +64,9 @@ class SessionHelperTest extends TestCase
 
     public function testCreateByObjectClass()
     {
-        $expectedNamespace = \ZipArchive::class;
-        $helper = SessionHelper::createByObjectClass(new \ZipArchive());
-        $reflectionClass = new \ReflectionClass($helper);
+        $expectedNamespace           = \ZipArchive::class;
+        $helper                      = SessionHelper::createByObjectClass(new \ZipArchive());
+        $reflectionClass             = new \ReflectionClass($helper);
         $reflectionPropertyNamespace = $reflectionClass->getProperty('namespace');
         $reflectionPropertyNamespace->setAccessible(true);
         $actualNamespace = $reflectionPropertyNamespace->getValue($helper);

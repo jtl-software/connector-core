@@ -50,7 +50,7 @@ class LanguageIsoSubscriber implements EventSubscriberInterface
         $model = $event->getObject();
         if ($model instanceof AbstractI18n) {
             $languageIso = $model->getLanguageIso();
-            if (strlen($languageIso) === 2) {
+            if (\strlen($languageIso) === 2) {
                 $languageIso = $this->languages->fromISO_639_1($languageIso)->toISO_639_2b() ?? $languageIso;
             }
 
@@ -64,8 +64,8 @@ class LanguageIsoSubscriber implements EventSubscriberInterface
     public function onPreDeserialize(PreDeserializeEvent $event)
     {
         $data = $event->getData();
-        if (is_array($data) && isset($data['languageISO']) && !isset($data['languageIso'])) {
-            $language = $this->languages->fromISO_639_2b($data['languageISO']);
+        if (\is_array($data) && isset($data['languageISO']) && !isset($data['languageIso'])) {
+            $language            = $this->languages->fromISO_639_2b($data['languageISO']);
             $data['languageIso'] = $language->toISO_639_1() ?? $data['languageISO'];
             $event->setData($data);
         }

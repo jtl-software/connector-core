@@ -49,19 +49,19 @@ class TestCase extends \Jtl\UnitTest\TestCase
         ];
 
         foreach ($files as $file) {
-            if (!is_null($file) && is_file($file)) {
-                unlink($file);
+            if (!\is_null($file) && \is_file($file)) {
+                \unlink($file);
             }
         }
 
         $dirs = [
-            sprintf('%s/plugins', $this->connectorDir),
-            sprintf('%s/db', $this->connectorDir),
-            sprintf('%s/var', $this->connectorDir),
+            \sprintf('%s/plugins', $this->connectorDir),
+            \sprintf('%s/db', $this->connectorDir),
+            \sprintf('%s/var', $this->connectorDir),
         ];
 
         foreach ($dirs as $dir) {
-            if (is_dir($dir)) {
+            if (\is_dir($dir)) {
                 $this->removeDirRecursive($dir);
             }
         }
@@ -72,11 +72,11 @@ class TestCase extends \Jtl\UnitTest\TestCase
      */
     protected function removeDirRecursive(string $dirname)
     {
-        $elements = glob($dirname . '/*');
+        $elements = \glob($dirname . '/*');
         foreach ($elements as $element) {
-            is_dir($element) ? $this->removeDirRecursive($element) : unlink($element);
+            \is_dir($element) ? $this->removeDirRecursive($element) : \unlink($element);
         }
-        rmdir($dirname);
+        \rmdir($dirname);
         return;
     }
 
@@ -86,7 +86,7 @@ class TestCase extends \Jtl\UnitTest\TestCase
      */
     protected function createHostId(): int
     {
-        return random_int(1, 9999);
+        return \random_int(1, 9999);
     }
 
     /**
@@ -95,7 +95,7 @@ class TestCase extends \Jtl\UnitTest\TestCase
      */
     protected function createEndpointId(): string
     {
-        return sprintf("%s_%s", 't', $this->createHostId());
+        return \sprintf("%s_%s", 't', $this->createHostId());
     }
 
     /**
@@ -115,7 +115,7 @@ class TestCase extends \Jtl\UnitTest\TestCase
     protected function getCorrectConstantsTestCases(string $className): array
     {
         $reflection = new \ReflectionClass($className);
-        $constants = array_values($reflection->getConstants());
+        $constants  = \array_values($reflection->getConstants());
 
         $testCases = [];
         foreach ($constants as $constant) {
@@ -151,8 +151,8 @@ class TestCase extends \Jtl\UnitTest\TestCase
      */
     protected function createConfigFile(string $payload = '{}', string $extension = 'json'): string
     {
-        $this->configFile = sprintf('%s/%s.%s', sys_get_temp_dir(), uniqid('connector-config', true), $extension);
-        file_put_contents($this->configFile, $payload);
+        $this->configFile = \sprintf('%s/%s.%s', \sys_get_temp_dir(), \uniqid('connector-config', true), $extension);
+        \file_put_contents($this->configFile, $payload);
         return $this->configFile;
     }
 
@@ -161,7 +161,7 @@ class TestCase extends \Jtl\UnitTest\TestCase
      */
     protected function getRootDir(): vfsStreamDirectory
     {
-        if (is_null($this->rootDir)) {
+        if (\is_null($this->rootDir)) {
             $this->rootDir = vfsStream::setup();
         }
         return $this->rootDir;
@@ -175,8 +175,8 @@ class TestCase extends \Jtl\UnitTest\TestCase
     {
         $files = [];
 
-        for ($i=0;$i<$quantity;$i++) {
-            $file = vfsStream::newFile(time() . $i . '-file');
+        for ($i = 0;$i < $quantity;$i++) {
+            $file = vfsStream::newFile(\time() . $i . '-file');
 
             $this->getRootDir()->addChild($file);
 
@@ -199,7 +199,7 @@ class TestCase extends \Jtl\UnitTest\TestCase
      */
     protected function getFaker(): Generator
     {
-        if (is_null($this->faker)) {
+        if (\is_null($this->faker)) {
             $this->faker = Factory::create();
         }
         return $this->faker;

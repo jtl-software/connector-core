@@ -25,7 +25,7 @@ class ProductAttributeSubscriberTest extends TestCase
     protected function createProduct(): Product
     {
         $productId = new Identity($this->createEndpointId(), $this->createHostId());
-        $product = new Product();
+        $product   = new Product();
         $product->setId($productId);
 
         return $product;
@@ -42,7 +42,7 @@ class ProductAttributeSubscriberTest extends TestCase
         $setId = true
     ): TranslatableAttribute {
         $attributeId = new Identity($this->createEndpointId(), $this->createHostId());
-        $attribute = new TranslatableAttribute();
+        $attribute   = new TranslatableAttribute();
         if ($setId) {
             $attribute->setId($attributeId);
             ;
@@ -84,7 +84,7 @@ class ProductAttributeSubscriberTest extends TestCase
 
         $serializedProduct = $serializer->build()->serialize($product, 'json');
 
-        $productObj = json_decode($serializedProduct);
+        $productObj = \json_decode($serializedProduct);
 
         foreach ($productObj->attributes[0]->i18ns as $index => $i18n) {
             $attributeId = $attributes[$index]->getId();
@@ -97,7 +97,7 @@ class ProductAttributeSubscriberTest extends TestCase
      */
     public function testOnPostSerializeAppendProductAttrIdToAttributesNestedObjects()
     {
-        $product = $this->createProduct();
+        $product   = $this->createProduct();
         $attribute = $this->addTranslatableAttribute($product);
         $this->addTranslatableAttributeI18n($attribute);
 
@@ -108,7 +108,7 @@ class ProductAttributeSubscriberTest extends TestCase
 
         $serializedResponse = $serializer->build()->serialize($response, 'json');
 
-        $responseObj = json_decode($serializedResponse);
+        $responseObj = \json_decode($serializedResponse);
 
         $i18n = $responseObj->result[0]->attributes[0]->i18ns[0]->productAttrId;
 
@@ -122,7 +122,7 @@ class ProductAttributeSubscriberTest extends TestCase
      */
     public function testOnPostSerializeProductAttrIdHasDefaultValuesWhenIdIsNotSet()
     {
-        $product = $this->createProduct();
+        $product   = $this->createProduct();
         $attribute = $this->addTranslatableAttribute($product, false);
         $this->addTranslatableAttributeI18n($attribute);
 
@@ -130,7 +130,7 @@ class ProductAttributeSubscriberTest extends TestCase
 
         $serializedProduct = $serializer->build()->serialize($product, 'json');
 
-        $productObj = json_decode($serializedProduct);
+        $productObj = \json_decode($serializedProduct);
 
         $i18n = $productObj->attributes[0]->i18ns[0]->productAttrId;
 
@@ -151,7 +151,7 @@ class ProductAttributeSubscriberTest extends TestCase
 
         $serializedProduct = $serializer->build()->serialize($product, 'json');
 
-        $productObj = json_decode($serializedProduct);
+        $productObj = \json_decode($serializedProduct);
 
         $this->assertEmpty($productObj->attributes[0]->i18ns);
     }
@@ -162,7 +162,7 @@ class ProductAttributeSubscriberTest extends TestCase
     public function testOnPostSerializeProductAttrIdAttributeAppendsOnlyToProduct()
     {
         $categoryId = new Identity($this->createEndpointId(), $this->createHostId());
-        $category = new Category();
+        $category   = new Category();
         $category->setId($categoryId);
 
         $attribute = $this->addTranslatableAttribute($category, false);
@@ -172,7 +172,7 @@ class ProductAttributeSubscriberTest extends TestCase
 
         $serializedProduct = $serializer->build()->serialize($category, 'json');
 
-        $categoryObj = json_decode($serializedProduct);
+        $categoryObj = \json_decode($serializedProduct);
 
         $i18n = $categoryObj->attributes[0]->i18ns[0];
 

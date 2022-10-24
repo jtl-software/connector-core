@@ -66,9 +66,9 @@ class TranslatableAttributeI18n extends AbstractI18n
      */
     public function setValue($value): self
     {
-        $type = gettype($value);
+        $type = \gettype($value);
 
-        if (!in_array($type, ['array', 'object', 'boolean', 'integer', 'double', 'string'], true)) {
+        if (!\in_array($type, ['array', 'object', 'boolean', 'integer', 'double', 'string'], true)) {
             throw TranslatableAttributeException::valueTypeInvalid($this->name, $type);
         }
 
@@ -79,7 +79,7 @@ class TranslatableAttributeI18n extends AbstractI18n
 
             case 'array':
             case 'object':
-                $this->value = json_encode($value);
+                $this->value = \json_encode($value);
                 break;
 
             default:
@@ -100,7 +100,7 @@ class TranslatableAttributeI18n extends AbstractI18n
         $value = $this->value;
         switch ($castToType) {
             case TranslatableAttribute::TYPE_BOOL:
-                $value = !('false' === $this->value) && boolval($this->value);
+                $value = !('false' === $this->value) && \boolval($this->value);
                 break;
 
             case TranslatableAttribute::TYPE_INT:
@@ -108,9 +108,9 @@ class TranslatableAttributeI18n extends AbstractI18n
                 break;
 
             case TranslatableAttribute::TYPE_JSON:
-                $value = json_decode($value, true);
-                if (self::$strictMode && json_last_error() !== \JSON_ERROR_NONE) {
-                    throw TranslatableAttributeException::decodingValueFailed($this->name, json_last_error_msg());
+                $value = \json_decode($value, true);
+                if (self::$strictMode && \json_last_error() !== \JSON_ERROR_NONE) {
+                    throw TranslatableAttributeException::decodingValueFailed($this->name, \json_last_error_msg());
                 }
                 break;
 

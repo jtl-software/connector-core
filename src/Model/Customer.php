@@ -273,7 +273,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function __construct()
     {
         $this->customerGroupId = new Identity();
-        $this->id = new Identity();
+        $this->id              = new Identity();
     }
 
     /**
@@ -434,7 +434,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      */
     public function setCustomerNumber(string $customerNumber): self
     {
-        $this->setIdentificationStringBySubject('customerNumber', sprintf('Customer number = %s', $customerNumber));
+        $this->setIdentificationStringBySubject('customerNumber', \sprintf('Customer number = %s', $customerNumber));
         $this->customerNumber = $customerNumber;
 
         return $this;

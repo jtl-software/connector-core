@@ -156,7 +156,7 @@ class ConfigItem extends AbstractIdentity
     {
         parent::__construct($endpoint, $host);
         $this->configGroupId = new Identity();
-        $this->productId = new Identity();
+        $this->productId     = new Identity();
     }
     
     /**

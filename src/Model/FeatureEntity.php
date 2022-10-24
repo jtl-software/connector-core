@@ -37,9 +37,9 @@ class FeatureEntity
      */
     public function __construct(string $name, bool $pull = false, bool $push = false, bool $delete = false)
     {
-        $this->name = $name;
-        $this->pull = $pull;
-        $this->push = $push;
+        $this->name   = $name;
+        $this->pull   = $pull;
+        $this->push   = $push;
         $this->delete = $delete;
     }
 

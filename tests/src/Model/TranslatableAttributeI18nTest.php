@@ -35,7 +35,7 @@ class TranslatableAttributeI18nTest extends TestCase
 
         $actualValue = $i18n->getValue($type);
 
-        $this->assertTrue($expectedValue === $actualValue, sprintf('Casted value (%s) has the wrong type', json_encode($actualValue)));
+        $this->assertTrue($expectedValue === $actualValue, \sprintf('Casted value (%s) has the wrong type', \json_encode($actualValue)));
     }
 
     /**
@@ -88,7 +88,7 @@ class TranslatableAttributeI18nTest extends TestCase
     {
         $translation = (new TranslatableAttributeI18n())->setValue($value);
 
-        $this->assertTrue($translation->getValue() === $expectedValue, sprintf('Value (%s) is not equal to expected value (%s)', $translation->getValue(), $expectedValue));
+        $this->assertTrue($translation->getValue() === $expectedValue, \sprintf('Value (%s) is not equal to expected value (%s)', $translation->getValue(), $expectedValue));
     }
 
     /**
@@ -129,7 +129,7 @@ class TranslatableAttributeI18nTest extends TestCase
     {
         return [
             [null],
-            [fopen('php://temp', 'r')],
+            [\fopen('php://temp', 'r')],
         ];
     }
 }

@@ -28,7 +28,7 @@ class ResponsePacketTest extends TestCase
         $responsePacket = new ResponsePacket();
         $responsePacket->setId($id);
         $responsePacket->setResult($result);
-        if (!is_null($error)) {
+        if (!\is_null($error)) {
             $responsePacket->setError($error);
         }
         $responsePacket->setResult($responsePacket);

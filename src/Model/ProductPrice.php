@@ -60,8 +60,8 @@ class ProductPrice extends AbstractIdentity
     {
         parent::__construct($endpoint, $host);
         $this->customerGroupId = new Identity();
-        $this->productId = new Identity();
-        $this->customerId = new Identity();
+        $this->productId       = new Identity();
+        $this->customerId      = new Identity();
     }
     
     /**

@@ -29,7 +29,7 @@ class ActionTest extends TestCase
             Action::FINISH,
             Action::IDENTIFY,
             Action::INIT
-        ], array_values($actions));
+        ], \array_values($actions));
     }
 
     /**
@@ -83,7 +83,7 @@ class ActionTest extends TestCase
             [Action::PULL, false],
             [false, false],
             ['autH', false],
-            [rand(-9999, 9999), false],
+            [\rand(-9999, 9999), false],
         ];
     }
 }

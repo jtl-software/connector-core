@@ -205,7 +205,7 @@ class CustomerGroup extends AbstractIdentity
         $this->unsetIdentificationStringBySubject('name');
         foreach ($this->getI18ns() as $i18n) {
             if ($i18n->getName() !== '') {
-                $this->setIdentificationStringBySubject('name', sprintf('Name = %s', $i18n->getName()));
+                $this->setIdentificationStringBySubject('name', \sprintf('Name = %s', $i18n->getName()));
                 break;
             }
         }

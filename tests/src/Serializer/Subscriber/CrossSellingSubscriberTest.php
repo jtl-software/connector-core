@@ -18,9 +18,9 @@ class CrossSellingSubscriberTest extends TestCase
      */
     public function testOnPreDeserialize(array $data, int ...$expectedItemIds)
     {
-        $context = $this->createMock(DeserializationContext::class);
-        $type = ['name' => CrossSelling::class, 'params' => []];
-        $event = new PreDeserializeEvent($context, $data, $type);
+        $context    = $this->createMock(DeserializationContext::class);
+        $type       = ['name' => CrossSelling::class, 'params' => []];
+        $event      = new PreDeserializeEvent($context, $data, $type);
         $subscriber = new CrossSellingSubscriber();
         $subscriber->onPreDeserialize($event);
         foreach ($event->getData()['items'] as $i => $item) {

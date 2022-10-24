@@ -18,8 +18,8 @@ use JMS\Serializer\Annotation as Serializer;
 class QueryFilter
 {
     const FILTER_FETCH_CHILDREN = 'fetchChildren';
-    const FILTER_PARENT_ID = 'parentId';
-    const FILTER_RELATION_TYPE = 'relationType';
+    const FILTER_PARENT_ID      = 'parentId';
+    const FILTER_RELATION_TYPE  = 'relationType';
     
     /**
      * Query item count limitation
@@ -47,7 +47,7 @@ class QueryFilter
     public function __construct($limit = 100)
     {
         $this->filters = [];
-        $this->limit = $limit;
+        $this->limit   = $limit;
     }
     
     /**
@@ -182,7 +182,7 @@ class QueryFilter
      */
     public function set(\stdClass $obj): void
     {
-        if (!is_object($obj)) {
+        if (!\is_object($obj)) {
             return;
         }
         
@@ -190,8 +190,8 @@ class QueryFilter
             $this->setLimit($obj->limit);
         }
         
-        if (isset($obj->filters) && is_object($obj->filters)) {
-            $this->setFilters(get_object_vars($obj->filters));
+        if (isset($obj->filters) && \is_object($obj->filters)) {
+            $this->setFilters(\get_object_vars($obj->filters));
         }
     }
 }

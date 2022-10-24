@@ -43,7 +43,7 @@ class SerializerBuilder
                     $registry->registerSubscribingHandler(new FeaturesHandler());
                 });
 
-        if (!is_null($cacheDir)) {
+        if (!\is_null($cacheDir)) {
             $builder->setCacheDir($cacheDir);
         }
 

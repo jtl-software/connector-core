@@ -259,8 +259,8 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
      */
     public function __construct()
     {
-        $this->id = new Identity();
-        $this->customerId = new Identity();
+        $this->id               = new Identity();
+        $this->customerId       = new Identity();
         $this->shippingMethodId = new Identity();
     }
 
@@ -440,7 +440,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
      */
     public function setOrderNumber(string $orderNumber): self
     {
-        $this->setIdentificationStringBySubject('orderNumber', sprintf('Order number = %s', $orderNumber));
+        $this->setIdentificationStringBySubject('orderNumber', \sprintf('Order number = %s', $orderNumber));
         $this->orderNumber = $orderNumber;
         
         return $this;

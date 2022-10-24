@@ -37,11 +37,11 @@ class TranslatableAttributeTest extends TestCase
         $translationsFactory = AbstractModelFactory::createFactory('TranslatableAttributeI18n');
 
         /** @var TranslatableAttributeI18n[] $translations */
-        $translations = $translationsFactory->make(mt_rand(1, 10));
-        $translationsCount = count($translations);
+        $translations      = $translationsFactory->make(\mt_rand(1, 10));
+        $translationsCount = \count($translations);
 
         return [
-            ['es', $translations[mt_rand(0, $translationsCount - 1)]->setLanguageIso('es'), $translations],
+            ['es', $translations[\mt_rand(0, $translationsCount - 1)]->setLanguageIso('es'), $translations],
             ['notFound', $translations[0], $translations],
             ['foo', null],
         ];
@@ -114,15 +114,15 @@ class TranslatableAttributeTest extends TestCase
     {
         /** @var TranslatableAttributeI18nFactory $translationsFactory */
         $translationsFactory = AbstractModelFactory::createFactory('TranslatableAttributeI18n');
-        $rounds = mt_rand(1, 5);
-        $translations = [];
+        $rounds              = \mt_rand(1, 5);
+        $translations        = [];
 
         $data = [];
         for ($i = 0; $i < $rounds; $i++) {
             /** @var TranslatableAttributeI18n[] $translations */
-            $translations = $translationsFactory->make(mt_rand(1, 5));
-            $selected = mt_rand(0, count($translations) - 1);
-            $data[] = [$translations, $translations[$selected]->getName(), $translations[$selected]->getLanguageIso()];
+            $translations = $translationsFactory->make(\mt_rand(1, 5));
+            $selected     = \mt_rand(0, \count($translations) - 1);
+            $data[]       = [$translations, $translations[$selected]->getName(), $translations[$selected]->getLanguageIso()];
         }
 
         $data[] = [$translations, $translations[0]->getName(), ''];
@@ -154,12 +154,12 @@ class TranslatableAttributeTest extends TestCase
     {
         /** @var TranslatableAttributeI18nFactory $translationsFactory */
         $translationsFactory = AbstractModelFactory::createFactory('TranslatableAttributeI18n');
-        $rounds = mt_rand(1, 5);
+        $rounds              = \mt_rand(1, 5);
 
         $data = [];
         for ($i = 0; $i < $rounds; $i++) {
             /** @var TranslatableAttributeI18n[] $translations */
-            $translations = $translationsFactory->make(mt_rand(1, 5));
+            $translations   = $translationsFactory->make(\mt_rand(1, 5));
             $expectedValues = [];
             foreach ($translations as $translation) {
                 $expectedValues[$translation->getLanguageIso()] = $translation->getValue();
@@ -192,7 +192,7 @@ class TranslatableAttributeTest extends TestCase
             $data[] = [$type, $type];
         }
 
-        return array_merge($data,[
+        return \array_merge($data,[
             //invalid types, should fall back to string
             ['something invalid', TranslatableAttribute::TYPE_STRING],
             ['', TranslatableAttribute::TYPE_STRING],

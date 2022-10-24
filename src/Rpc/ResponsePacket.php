@@ -104,7 +104,7 @@ class ResponsePacket extends Packet
 
         // An identifier established by the Client that MUST contain a String,
         // Number, or NULL value if included
-        if ($this->getId() === null || strlen($this->getId()) == 0) {
+        if ($this->getId() === null || \strlen($this->getId()) == 0) {
             $isValid = false;
         }
 

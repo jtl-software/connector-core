@@ -19,10 +19,10 @@ use Jtl\Connector\Core\Exception\TranslatableAttributeException;
 class TranslatableAttribute extends AbstractIdentity
 {
     public const
-        TYPE_BOOL = 'bool',
-        TYPE_FLOAT = 'float',
-        TYPE_INT = 'int',
-        TYPE_JSON = 'json',
+        TYPE_BOOL   = 'bool',
+        TYPE_FLOAT  = 'float',
+        TYPE_INT    = 'int',
+        TYPE_JSON   = 'json',
         TYPE_STRING = 'string';
 
     /**
@@ -192,7 +192,7 @@ class TranslatableAttribute extends AbstractIdentity
     public function findTranslation(string $languageIso): ?TranslatableAttributeI18n
     {
         $i18n = null;
-        foreach (array_reverse($this->i18ns) as $i18n) {
+        foreach (\array_reverse($this->i18ns) as $i18n) {
             if ($i18n->getLanguageIso() === $languageIso) {
                 break;
             }
@@ -236,7 +236,7 @@ class TranslatableAttribute extends AbstractIdentity
      */
     public static function isType(string $type): bool
     {
-        return in_array($type, self::$types, true);
+        return \in_array($type, self::$types, true);
     }
 
     /**

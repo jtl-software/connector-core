@@ -76,7 +76,7 @@ class CustomerOrderItemVariation extends AbstractIdentity
     {
         parent::__construct($endpoint, $host);
         $this->productVariationValueId = new Identity();
-        $this->productVariationId = new Identity();
+        $this->productVariationId      = new Identity();
     }
 
     /**

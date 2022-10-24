@@ -66,7 +66,7 @@ class Manufacturer extends AbstractIdentity
      */
     public function setName(string $name): self
     {
-        $this->setIdentificationStringBySubject('name', sprintf('Name = %s', $name));
+        $this->setIdentificationStringBySubject('name', \sprintf('Name = %s', $name));
         $this->name = $name;
         
         return $this;

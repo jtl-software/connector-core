@@ -42,19 +42,19 @@ class ConnectorTest extends TestCase
         TokenValidatorInterface $tokenValidator = null,
         string $featuresPath = ''
     ): ConnectorController {
-        if (is_null($linker)) {
+        if (\is_null($linker)) {
             $linker = $this->createMock(IdentityLinker::class);
         }
 
-        if (is_null($checksumLinker)) {
+        if (\is_null($checksumLinker)) {
             $checksumLinker = $this->createMock(ChecksumLinker::class);
         }
 
-        if (is_null($sessionHandler)) {
+        if (\is_null($sessionHandler)) {
             $sessionHandler = $this->createMock(\SessionHandlerInterface::class);
         }
 
-        if (is_null($tokenValidator)) {
+        if (\is_null($tokenValidator)) {
             $tokenValidator = $this->createMock(TokenValidatorInterface::class);
         }
 
@@ -100,7 +100,7 @@ class ConnectorTest extends TestCase
         $linker = $this->createMock(IdentityLinker::class);
         $linker->expects($this->exactly(3))->method('save')->willReturn(true);
         $connector = $this->createConnectorController($linker);
-        $ack = new Ack();
+        $ack       = new Ack();
         $ack->setIdentities([
             "Foo" => [
                 $this->createIdentity()
@@ -147,7 +147,7 @@ class ConnectorTest extends TestCase
         $controller = $this->createConnectorController(null, null, null, $tokenValidator);
 
         $auth = (new Authentication())
-            ->setToken(md5(time()));
+            ->setToken(\md5(\time()));
 
         $controller->auth($auth);
     }
@@ -168,7 +168,7 @@ class ConnectorTest extends TestCase
         $connector = $this->createConnectorController(null, null, null, $tokenValidator);
 
         $auth = new Authentication();
-        $auth->setToken(md5(time()));
+        $auth->setToken(\md5(\time()));
 
         $session = $connector->auth($auth);
 
@@ -182,7 +182,7 @@ class ConnectorTest extends TestCase
     public function testIdentify()
     {
         $endpointVersion = "1.0";
-        $platformName = "ConnectorPlatform";
+        $platformName    = "ConnectorPlatform";
         $platformVersion = "0.1";
 
         $connector = $this->createMock(ConnectorInterface::class);
@@ -190,7 +190,7 @@ class ConnectorTest extends TestCase
         $connector->expects($this->once())->method('getPlatformVersion')->willReturn($platformVersion);
         $connector->expects($this->once())->method('getPlatformName')->willReturn($platformName);
 
-        $controller = $this->createConnectorController();
+        $controller              = $this->createConnectorController();
         $connectorIdentification = $controller->identify($connector);
 
         $this->assertSame($endpointVersion, $connectorIdentification->getEndpointVersion());

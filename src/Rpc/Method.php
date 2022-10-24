@@ -46,9 +46,9 @@ class Method
      */
     public function __construct(string $rpcMethod, string $controller, string $action)
     {
-        $this->rpcMethod = $rpcMethod;
+        $this->rpcMethod  = $rpcMethod;
         $this->controller = $controller;
-        $this->action = $action;
+        $this->action     = $action;
     }
 
     /**
@@ -80,7 +80,7 @@ class Method
      */
     public function isCore(): bool
     {
-        return strpos($this->getRpcMethod(), "core.") !== false;
+        return \strpos($this->getRpcMethod(), "core.") !== false;
     }
 
     /**
@@ -90,14 +90,14 @@ class Method
      */
     public static function createFromRpcMethod(string $rpcMethod): Method
     {
-        $parts = explode('.', $rpcMethod);
-        $partsCount = count($parts);
-        if (!in_array($partsCount, [2,3], true)) {
+        $parts      = \explode('.', $rpcMethod);
+        $partsCount = \count($parts);
+        if (!\in_array($partsCount, [2, 3], true)) {
             $parts = ['invalid', 'invalid'];
         }
-        $offset = $partsCount === 3 ? 1 : 0;
+        $offset     = $partsCount === 3 ? 1 : 0;
         $controller = Str::toPascalCase($parts[0 + $offset]);
-        $action = Str::toCamelCase($parts[1 + $offset]);
+        $action     = Str::toCamelCase($parts[1 + $offset]);
         return new self($rpcMethod, $controller, $action);
     }
 

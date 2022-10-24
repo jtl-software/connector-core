@@ -43,14 +43,14 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      */
     public function __construct(string $databaseDir)
     {
-        if (!is_dir($databaseDir) && !mkdir($databaseDir)) {
+        if (!\is_dir($databaseDir) && !\mkdir($databaseDir)) {
             throw new SessionException('Could not create sqlite database directory');
         }
-        $this->logger = new NullLogger();
-        $this->lifetime = (int)ini_get('session.gc_maxlifetime');
+        $this->logger   = new NullLogger();
+        $this->lifetime = (int)\ini_get('session.gc_maxlifetime');
 
-        $dbLocation = sprintf('%s/connector.s3db', $databaseDir);
-        $isNew = !file_exists($dbLocation);
+        $dbLocation = \sprintf('%s/connector.s3db', $databaseDir);
+        $isNew      = !\file_exists($dbLocation);
 
         $sqlite3 = new Sqlite3();
         $sqlite3->connect(['location' => $dbLocation]);
@@ -98,11 +98,11 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
         $sessionId = $this->db->escapeString($sessionId);
         $this->logger->debug('Read session with id ({id})', ['id' => $sessionId]);
 
-        $rows = $this->db->query($this->createReadQuery($sessionId, time()));
+        $rows = $this->db->query($this->createReadQuery($sessionId, \time()));
         if ($rows !== null && isset($rows[0])) {
             $row = $rows[0];
-            if (isset($row['sessionData']) && strlen($row['sessionData']) > 0) {
-                return base64_decode($row['sessionData'], true);
+            if (isset($row['sessionData']) && \strlen($row['sessionData']) > 0) {
+                return \base64_decode($row['sessionData'], true);
             }
         }
 
@@ -117,12 +117,12 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
     #[ReturnTypeWillChange]
     public function write($sessionId, $sessionData)
     {
-        $sessionId = $this->db->escapeString($sessionId);
-        $sessionData = base64_encode($sessionData);
-        $expire = $this->calculateExpiryTime();
+        $sessionId   = $this->db->escapeString($sessionId);
+        $sessionData = \base64_encode($sessionData);
+        $expire      = $this->calculateExpiryTime();
         $this->logger->debug('Write session with id ({id})', ['id' => $sessionId]);
 
-        $db = $this->db->getDb();
+        $db      = $this->db->getDb();
         $success = false;
 
         try {
@@ -157,7 +157,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
     {
         $sessionId = $this->db->escapeString($sessionId);
         $this->logger->debug('Destroy session with id ({id})', ['id' => $sessionId]);
-        $this->db->query(sprintf('DELETE FROM session WHERE sessionId = \'%s\'', $sessionId));
+        $this->db->query(\sprintf('DELETE FROM session WHERE sessionId = \'%s\'', $sessionId));
 
         return true;
     }
@@ -170,7 +170,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
     public function gc($maxLifetime): bool
     {
         $this->logger->debug('Garbage collection for session with maximum lifetime ({maxLifetime})', ['maxLifetime' => $maxLifetime]);
-        $this->db->query(sprintf('DELETE FROM session WHERE sessionExpires < %d', time()));
+        $this->db->query(\sprintf('DELETE FROM session WHERE sessionExpires < %d', \time()));
 
         return true;
     }
@@ -184,8 +184,8 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
     public function validateId($sessionId): bool
     {
         $sessionId = $this->db->escapeString($sessionId);
-        $this->logger->debug('Check session with id ({id}) and time ({time}) ...', ['id' => $sessionId, 'time' => time()]);
-        $rows = $this->db->query($this->createReadQuery($sessionId, time()));
+        $this->logger->debug('Check session with id ({id}) and time ({time}) ...', ['id' => $sessionId, 'time' => \time()]);
+        $rows = $this->db->query($this->createReadQuery($sessionId, \time()));
         if ($rows !== null && isset($rows[0]['sessionId']) && $rows[0]['sessionId'] === $sessionId) {
             return true;
         }
@@ -200,7 +200,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      */
     public function updateTimestamp($sessionId, $sessionData): bool
     {
-        $sql = 'UPDATE session SET sessionExpires = :sessionExpires WHERE sessionId = :sessionId';
+        $sql  = 'UPDATE session SET sessionExpires = :sessionExpires WHERE sessionId = :sessionId';
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':sessionExpires', $this->calculateExpiryTime(), \SQLITE3_INTEGER);
         $stmt->bindValue(':sessionId', $sessionId, \SQLITE3_TEXT);
@@ -225,7 +225,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      */
     protected function calculateExpiryTime(): int
     {
-        return time() + $this->lifetime;
+        return \time() + $this->lifetime;
     }
 
 
@@ -236,7 +236,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      */
     protected function createReadQuery(string $sessionId, int $expiresAt): string
     {
-        return sprintf('SELECT sessionId, sessionData FROM session WHERE sessionId = \'%s\' AND sessionExpires >= %d', $this->db->escapeString($sessionId), $expiresAt);
+        return \sprintf('SELECT sessionId, sessionData FROM session WHERE sessionId = \'%s\' AND sessionExpires >= %d', $this->db->escapeString($sessionId), $expiresAt);
     }
 
     /**
@@ -258,7 +258,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
             ')'
         ];
 
-        $checkQuery = 'SELECT name FROM sqlite_master WHERE type = \'table\' AND name = \'session\'';
+        $checkQuery  = 'SELECT name FROM sqlite_master WHERE type = \'table\' AND name = \'session\'';
         $checkResult = $this->db->fetchSingle($checkQuery);
         if ($checkResult === false) {
             throw new \Exception('Something went wrong while checking existence of session schema');

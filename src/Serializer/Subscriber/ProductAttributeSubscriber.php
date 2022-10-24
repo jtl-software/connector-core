@@ -38,11 +38,11 @@ class ProductAttributeSubscriber implements EventSubscriberInterface
                 }
             }
 
-            if (!is_null($product)) {
+            if (!\is_null($product)) {
                 $visitingSet->offsetSet($product);
                 $visitingSet->next();
                 /** @var TranslatableAttribute $attribute */
-                $attribute = $visitingSet->current();
+                $attribute     = $visitingSet->current();
                 $productAttrId = $attribute->getId()->toArray();
                 $event->getVisitor()->visitProperty(new StaticPropertyMetadata('', 'productAttrId', $productAttrId), $productAttrId);
             }

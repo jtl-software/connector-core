@@ -133,6 +133,6 @@ class SessionHelper
      */
     public static function createByObjectClass(object $object): self
     {
-        return new self(get_class($object));
+        return new self(\get_class($object));
     }
 }

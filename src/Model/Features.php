@@ -179,9 +179,9 @@ class Features extends AbstractModel
     {
         $featureEntities = [];
         foreach ($entities as $name => $methods) {
-            $pull = $methods['pull'] ?? false;
-            $push = $methods['push'] ?? false;
-            $delete = $methods['delete'] ?? false;
+            $pull              = $methods['pull'] ?? false;
+            $push              = $methods['push'] ?? false;
+            $delete            = $methods['delete'] ?? false;
             $featureEntities[] = new FeatureEntity($name, $pull, $push, $delete);
         }
 

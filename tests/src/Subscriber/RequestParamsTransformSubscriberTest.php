@@ -19,8 +19,8 @@ class RequestParamsTransformSubscriberTest extends TestCase
         $subscriber = $this->createPartialMock(RequestParamsTransformSubscriber::class, ['transformProductData', 'transformProductPriceData', 'transformProductStockLevelData']);
 
         $controller = $event->getController();
-        $action = $event->getAction();
-        $data = $event->getData();
+        $action     = $event->getAction();
+        $data       = $event->getData();
 
         $subscriber
             ->expects($this->exactly($controller === 'Product' && $action === 'push' ? 1 : 0))
@@ -48,7 +48,7 @@ class RequestParamsTransformSubscriberTest extends TestCase
      */
     public function testTransformProductData(array $products, array $expectedResult)
     {
-        $subscriber = new RequestParamsTransformSubscriber();
+        $subscriber   = new RequestParamsTransformSubscriber();
         $actualResult = $subscriber->transformProductData($products);
         $this->assertEquals($expectedResult, $actualResult);
     }
@@ -61,7 +61,7 @@ class RequestParamsTransformSubscriberTest extends TestCase
      */
     public function testTransformProductPriceData(array $productPrices, array $expectedResult)
     {
-        $subscriber = new RequestParamsTransformSubscriber();
+        $subscriber   = new RequestParamsTransformSubscriber();
         $actualResult = $subscriber->transformProductPriceData($productPrices);
         $this->assertEquals($expectedResult, $actualResult);
     }
@@ -74,7 +74,7 @@ class RequestParamsTransformSubscriberTest extends TestCase
      */
     public function testTransformStockLevelData(array $productStock, array $expectedResult)
     {
-        $subscriber = new RequestParamsTransformSubscriber();
+        $subscriber   = new RequestParamsTransformSubscriber();
         $actualResult = $subscriber->transformProductStockLevelData($productStock);
         $this->assertEquals($expectedResult, $actualResult);
     }
@@ -127,7 +127,7 @@ class RequestParamsTransformSubscriberTest extends TestCase
     public function transformProductStockLevelProvider(): array
     {
         return [
-            [[['productId'=> ['', 151], 'stockLevel' => 37.0, 'sku' => 'abcde'], ['productId'=> ['', 159], 'stockLevel' => 22.0, 'sku' => '4u']], [['id' => ['', 151], 'stockLevel' => 37.0, 'sku' => 'abcde'], ['id'=> ['', 159], 'stockLevel' => 22.0, 'sku' => '4u']]],
+            [[['productId' => ['', 151], 'stockLevel' => 37.0, 'sku' => 'abcde'], ['productId' => ['', 159], 'stockLevel' => 22.0, 'sku' => '4u']], [['id' => ['', 151], 'stockLevel' => 37.0, 'sku' => 'abcde'], ['id' => ['', 159], 'stockLevel' => 22.0, 'sku' => '4u']]],
         ];
     }
 }

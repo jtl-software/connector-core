@@ -62,7 +62,7 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
                 $products[$i]['stockLevel'] = $product['stockLevel']['stockLevel'];
             }
 
-            if (isset($product['prices']) && is_array($product['prices'])) {
+            if (isset($product['prices']) && \is_array($product['prices'])) {
                 foreach ($products[$i]['prices'] as $j => $productPrice) {
                     $products[$i]['prices'][$j] = self::sortProductPriceItems($productPrice);
                 }
@@ -97,7 +97,7 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
             $products[$hostId]['prices'][] = self::sortProductPriceItems($productPrice);
         }
 
-        return array_values($products);
+        return \array_values($products);
     }
 
     /**
@@ -108,7 +108,7 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
     {
         $products = [];
         foreach ($productStockLevel as $stockLevel) {
-            $product = [
+            $product    = [
                 'id' => $stockLevel['productId'] ?? null,
                 'sku' => $stockLevel['sku'] ?? '',
                 'stockLevel' => $stockLevel['stockLevel'] ?? 0.
@@ -136,7 +136,7 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
     protected static function sortProductPriceItems(array $productPrice): array
     {
         if (isset($productPrice['items'])) {
-            usort($productPrice['items'], function ($a, $b) {
+            \usort($productPrice['items'], function ($a, $b) {
                 return ($a['quantity'] ?? 0) - ($b['quantity'] ?? 0);
             });
         }

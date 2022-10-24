@@ -19,9 +19,9 @@ class ModelTest extends TestCase
     {
         $modelNamespace = 'Jtl\\Connector\\Core\\Model';
 
-        $definition = new Model();
+        $definition           = new Model();
         $definitionReflection = new \ReflectionClass($definition);
-        $propertyMappings = $definitionReflection->getProperty('propertyMappings');
+        $propertyMappings     = $definitionReflection->getProperty('propertyMappings');
         $propertyMappings->setAccessible(true);
 
         $exceptions = [
@@ -31,12 +31,12 @@ class ModelTest extends TestCase
         $mappings = $propertyMappings->getValue($definition);
 
         foreach ($mappings as $modelName => $identityMappings) {
-            if (in_array($modelName, $exceptions, true)) {
+            if (\in_array($modelName, $exceptions, true)) {
                 continue;
             }
 
-            $modelClass = sprintf("%s\\%s", $modelNamespace, $modelName);
-            $model = new $modelClass;
+            $modelClass = \sprintf("%s\\%s", $modelNamespace, $modelName);
+            $model      = new $modelClass;
 
             foreach ($identityMappings as $propertyName => $identityType) {
                 $this->assertObjectHasAttribute($propertyName, $model);
@@ -49,9 +49,9 @@ class ModelTest extends TestCase
      */
     public function testMappingsMatchIdentityType()
     {
-        $definition = new Model();
+        $definition           = new Model();
         $definitionReflection = new \ReflectionClass($definition);
-        $propertyMappings = $definitionReflection->getProperty('mappings');
+        $propertyMappings     = $definitionReflection->getProperty('mappings');
         $propertyMappings->setAccessible(true);
 
         foreach ($propertyMappings->getValue($definition) as $mapping) {
@@ -163,7 +163,7 @@ class ModelTest extends TestCase
             $this->expectExceptionObject(DefinitionException::unknownModel($modelName));
         }
 
-        $this->assertEquals(lcfirst($modelName), Model::getRelationType($modelName));
+        $this->assertEquals(\lcfirst($modelName), Model::getRelationType($modelName));
     }
 
     /**

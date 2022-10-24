@@ -21,12 +21,12 @@ class IdentityHandlerTest extends TestCase
     public function testSerializeEntityMethod()
     {
         $endpointId = $this->createEndpointId();
-        $hostId = $this->createHostId();
+        $hostId     = $this->createHostId();
 
         $identity = new Identity($endpointId, $hostId);
 
         $identityHandler = new IdentityHandler();
-        $result = $identityHandler->serializeIdentity(
+        $result          = $identityHandler->serializeIdentity(
             new JsonSerializationVisitor(),
             $identity,
             [],
@@ -42,7 +42,7 @@ class IdentityHandlerTest extends TestCase
     public function testDeserializeEntityMethod()
     {
         $endpointId = $this->createEndpointId();
-        $hostId = $this->createHostId();
+        $hostId     = $this->createHostId();
 
         $identityHandler = new IdentityHandler();
 

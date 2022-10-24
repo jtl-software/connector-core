@@ -53,9 +53,9 @@ class ConfigParameterTest extends TestCase
     {
         $this->expectException(ConfigException::class);
         $this->expectExceptionCode(ConfigException::WRONG_TYPE);
-        $option = new ConfigParameter('foo', $type);
-        $invalidValuesCount = count($invalidValues);
-        $invalidValuesIndex = mt_rand(1, $invalidValuesCount - 1);
+        $option             = new ConfigParameter('foo', $type);
+        $invalidValuesCount = \count($invalidValues);
+        $invalidValuesIndex = \mt_rand(1, $invalidValuesCount - 1);
         $option->setDefaultValue($invalidValues[$invalidValuesIndex]);
     }
 
@@ -63,8 +63,8 @@ class ConfigParameterTest extends TestCase
     {
         $this->expectException(ConfigException::class);
         $this->expectExceptionCode(ConfigException::UNKNOWN_TYPE);
-        $option = new ConfigParameter('foo', ConfigParameter::TYPE_BOOLEAN);
-        $reflectionClass = new \ReflectionClass($option);
+        $option           = new ConfigParameter('foo', ConfigParameter::TYPE_BOOLEAN);
+        $reflectionClass  = new \ReflectionClass($option);
         $reflectionMethod = $reflectionClass->getMethod('setType');
         $reflectionMethod->setAccessible(true);
         $reflectionMethod->invoke($option, 'yolo');
@@ -74,8 +74,8 @@ class ConfigParameterTest extends TestCase
     {
         $this->expectException(ConfigException::class);
         $this->expectExceptionCode(ConfigException::EMPTY_KEY);
-        $option = new ConfigParameter('foo', ConfigParameter::TYPE_INTEGER);
-        $reflectionClass = new \ReflectionClass($option);
+        $option           = new ConfigParameter('foo', ConfigParameter::TYPE_INTEGER);
+        $reflectionClass  = new \ReflectionClass($option);
         $reflectionMethod = $reflectionClass->getMethod('setKey');
         $reflectionMethod->setAccessible(true);
         $reflectionMethod->invoke($option, '');

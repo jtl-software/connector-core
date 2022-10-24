@@ -693,15 +693,15 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     public function __construct(string $endpoint = '', int $host = 0)
     {
         parent::__construct($endpoint, $host);
-        $this->basePriceUnitId = new Identity();
-        $this->manufacturerId = new Identity();
-        $this->masterProductId = new Identity();
+        $this->basePriceUnitId   = new Identity();
+        $this->manufacturerId    = new Identity();
+        $this->masterProductId   = new Identity();
         $this->measurementUnitId = new Identity();
-        $this->partsListId = new Identity();
-        $this->productTypeId = new Identity();
-        $this->shippingClassId = new Identity();
-        $this->taxClassId = new Identity();
-        $this->unitId = new Identity();
+        $this->partsListId       = new Identity();
+        $this->productTypeId     = new Identity();
+        $this->shippingClassId   = new Identity();
+        $this->taxClassId        = new Identity();
+        $this->unitId            = new Identity();
     }
 
     /**
@@ -1799,7 +1799,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      */
     public function setSku(string $sku): self
     {
-        $this->setIdentificationStringBySubject('sku', sprintf('SKU = %s', $sku));
+        $this->setIdentificationStringBySubject('sku', \sprintf('SKU = %s', $sku));
         $this->sku = $sku;
 
         return $this;
@@ -2639,7 +2639,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
         $this->unsetIdentificationStringBySubject('name');
         foreach ($this->getI18ns() as $i18n) {
             if ($i18n->getName() !== '') {
-                $this->setIdentificationStringBySubject('name', sprintf('Name = %s', $i18n->getName()));
+                $this->setIdentificationStringBySubject('name', \sprintf('Name = %s', $i18n->getName()));
                 break;
             }
         }

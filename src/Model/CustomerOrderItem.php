@@ -148,7 +148,7 @@ class CustomerOrderItem extends AbstractIdentity
     public function __construct(string $endpoint = '', int $host = 0)
     {
         parent::__construct($endpoint, $host);
-        $this->productId = new Identity();
+        $this->productId    = new Identity();
         $this->configItemId = new Identity();
     }
     
