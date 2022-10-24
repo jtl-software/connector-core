@@ -350,7 +350,7 @@ final class Model
                 function (string $constantValue, $constantName) {
                     return $constantValue !== self::MODEL_NAMESPACE;
                 },
-                ARRAY_FILTER_USE_BOTH
+                \ARRAY_FILTER_USE_BOTH
             );
         }
 

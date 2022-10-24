@@ -434,12 +434,12 @@ class ApplicationTest extends TestCase
     public function testHandleImagePushWithFilesSentByWawi()
     {
         $serializer = SerializerBuilder::create()->build();
-        $data       = \file_get_contents(\sprintf('%s/fixtures/images_push.json', TEST_DIR));
+        $data       = \file_get_contents(\sprintf('%s/fixtures/images_push.json', \TEST_DIR));
         $type       = \sprintf('array<%s>', AbstractImage::class);
         /** @var ProductImage[] $images */
         $images           = $serializer->deserialize($data, $type, 'json');
-        $uploadedFilePath = \sprintf('%s/fixtures/images_push.zip', TEST_DIR);
-        $file             = new UploadedFile($uploadedFilePath, 'images.zip', 'application/octet-stream', UPLOAD_ERR_OK, true);
+        $uploadedFilePath = \sprintf('%s/fixtures/images_push.zip', \TEST_DIR);
+        $file             = new UploadedFile($uploadedFilePath, 'images.zip', 'application/octet-stream', \UPLOAD_ERR_OK, true);
         $filebag          = new FileBag(['file' => $file]);
 
         $request = $this->getMockBuilder(HttpRequest::class)
@@ -465,7 +465,7 @@ class ApplicationTest extends TestCase
         $this->expectException(ApplicationException::class);
         $this->expectExceptionCode(ErrorCode::REQUEST_ERROR);
         $serializer = SerializerBuilder::create()->build();
-        $data       = \file_get_contents(\sprintf('%s/fixtures/images_push.json', TEST_DIR));
+        $data       = \file_get_contents(\sprintf('%s/fixtures/images_push.json', \TEST_DIR));
         $type       = \sprintf('array<%s>', AbstractImage::class);
         /** @var ProductImage[] $images */
         $images = $serializer->deserialize($data, $type, 'json');
@@ -478,12 +478,12 @@ class ApplicationTest extends TestCase
         $this->expectException(ApplicationException::class);
         $this->expectExceptionCode(ErrorCode::SERVER_ERROR);
         $serializer = SerializerBuilder::create()->build();
-        $data       = \file_get_contents(\sprintf('%s/fixtures/images_push.json', TEST_DIR));
+        $data       = \file_get_contents(\sprintf('%s/fixtures/images_push.json', \TEST_DIR));
         $type       = \sprintf('array<%s>', AbstractImage::class);
         /** @var ProductImage[] $images */
         $images           = $serializer->deserialize($data, $type, 'json');
-        $uploadedFilePath = \sprintf('%s/fixtures/images_push.json', TEST_DIR);
-        $file             = new UploadedFile($uploadedFilePath, 'images.zip', 'application/octet-stream', UPLOAD_ERR_OK, true);
+        $uploadedFilePath = \sprintf('%s/fixtures/images_push.json', \TEST_DIR);
+        $file             = new UploadedFile($uploadedFilePath, 'images.zip', 'application/octet-stream', \UPLOAD_ERR_OK, true);
         $filebag          = new FileBag(['file' => $file]);
         $request          = $this->getMockBuilder(HttpRequest::class)
             ->disableOriginalConstructor()

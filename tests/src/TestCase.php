@@ -17,7 +17,7 @@ use org\bovigo\vfs\vfsStreamDirectory;
  */
 class TestCase extends \Jtl\UnitTest\TestCase
 {
-    protected $connectorDir = TEST_DIR;
+    protected $connectorDir = \TEST_DIR;
 
     /**
      * @var string

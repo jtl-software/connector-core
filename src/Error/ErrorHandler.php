@@ -29,12 +29,12 @@ class ErrorHandler extends AbstractErrorHandler
      * @var integer[]
      */
     protected static $shutdownHandleErrors = [
-        E_ERROR,
-        E_CORE_ERROR,
-        E_USER_ERROR,
-        E_RECOVERABLE_ERROR,
-        E_COMPILE_ERROR,
-        E_PARSE,
+        \E_ERROR,
+        \E_CORE_ERROR,
+        \E_USER_ERROR,
+        \E_RECOVERABLE_ERROR,
+        \E_COMPILE_ERROR,
+        \E_PARSE,
     ];
 
     /**

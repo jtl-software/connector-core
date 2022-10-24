@@ -36,7 +36,7 @@ class CrossSellingSubscriber implements EventSubscriberInterface
                     if (!isset($data['items'][$i]['id'])) {
                         $crossSellingGroupId = $item['crossSellingGroupId'][1] ?? 0;
                         $itemId              = self::cantorPairingFunction($productId, $crossSellingGroupId);
-                        if ($productId !== 0 && $crossSellingGroupId !== 0 && $itemId < PHP_INT_MAX) {
+                        if ($productId !== 0 && $crossSellingGroupId !== 0 && $itemId < \PHP_INT_MAX) {
                             $data['items'][$i]['id'] = [
                                 '',
                                 $itemId,

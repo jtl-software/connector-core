@@ -54,7 +54,7 @@ class ModelTest extends TestCase
     public function modelsDataProvider(): array
     {
         $ignoredModels = self::getIgnoredModels();
-        $modelsPattern = \dirname(TEST_DIR) . '/src/Model/*.php';
+        $modelsPattern = \dirname(\TEST_DIR) . '/src/Model/*.php';
         return \array_filter(\array_map(function ($modelPath) {
             $fileInfo  = new \SplFileInfo($modelPath);
             $modelName = $fileInfo->getBasename('.php');

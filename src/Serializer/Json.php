@@ -21,12 +21,12 @@ class Json
     {
         $options = 0;
         if ($pretty) {
-            $options = JSON_PRETTY_PRINT;
+            $options = \JSON_PRETTY_PRINT;
         }
 
         $json = \json_encode($object, $options);
 
-        if (\json_last_error() !== JSON_ERROR_NONE) {
+        if (\json_last_error() !== \JSON_ERROR_NONE) {
             throw JsonException::encoding(\json_last_error_msg());
         }
 
@@ -40,7 +40,7 @@ class Json
         }
 
         $object = \json_decode($string, $assoc);
-        if (\json_last_error() !== JSON_ERROR_NONE) {
+        if (\json_last_error() !== \JSON_ERROR_NONE) {
             throw JsonException::decoding(\json_last_error_msg(), $string);
         }
 
