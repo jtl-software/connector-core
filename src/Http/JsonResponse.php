@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Http;
 
 use Jawira\CaseConverter\CaseConverterException;

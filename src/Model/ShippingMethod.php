@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -32,10 +33,10 @@ class ShippingMethod extends AbstractIdentity
     public function setName(string $name): ShippingMethod
     {
         $this->name = $name;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */

@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Stub\Controller;
 
 use Jtl\Connector\Core\Controller\DeleteInterface;

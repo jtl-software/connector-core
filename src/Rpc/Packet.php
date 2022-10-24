@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Rpc;
 
 use JMS\Serializer\Annotation as Serializer;
@@ -23,7 +24,7 @@ abstract class Packet extends AbstractModel
      * @Serializer\Type("string")
      */
     protected $jtlrpc = '';
-    
+
     /**
      * @var string
      * @Serializer\Type("string")

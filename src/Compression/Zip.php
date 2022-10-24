@@ -1,8 +1,10 @@
 <?php
+
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Compression
  */
+
 namespace Jtl\Connector\Core\Compression;
 
 use Jtl\Connector\Core\Exception\CompressionException;

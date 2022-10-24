@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -34,7 +35,7 @@ class ProductVariationInvisibility extends AbstractModel
     {
         $this->customerGroupId = new Identity();
     }
-    
+
     /**
      * @param Identity $customerGroupId Reference to customerGroup
      * @return ProductVariationInvisibility
@@ -42,10 +43,10 @@ class ProductVariationInvisibility extends AbstractModel
     public function setCustomerGroupId(Identity $customerGroupId): ProductVariationInvisibility
     {
         $this->customerGroupId = $customerGroupId;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity Reference to customerGroup
      */

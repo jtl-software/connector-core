@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Rpc;
 
 use Jtl\Connector\Core\Exception\RpcException;

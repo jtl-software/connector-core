@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -34,7 +35,7 @@ class CategoryI18n extends AbstractI18n
      * @Serializer\Accessor(getter="getMetaDescription",setter="setMetaDescription")
      */
     protected $metaDescription = '';
-    
+
     /**
      * @var string Optional localized meta tag keywords value
      * @Serializer\Type("string")
@@ -42,7 +43,7 @@ class CategoryI18n extends AbstractI18n
      * @Serializer\Accessor(getter="getMetaKeywords",setter="setMetaKeywords")
      */
     protected $metaKeywords = '';
-    
+
     /**
      * @var string Localized category name
      * @Serializer\Type("string")
@@ -50,7 +51,7 @@ class CategoryI18n extends AbstractI18n
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-    
+
     /**
      * @var string Optional localized title tag value
      * @Serializer\Type("string")
@@ -58,7 +59,7 @@ class CategoryI18n extends AbstractI18n
      * @Serializer\Accessor(getter="getTitleTag",setter="setTitleTag")
      */
     protected $titleTag = '';
-    
+
     /**
      * @var string Optional localized category URL
      * @Serializer\Type("string")
@@ -74,10 +75,10 @@ class CategoryI18n extends AbstractI18n
     public function setDescription(string $description): CategoryI18n
     {
         $this->description = $description;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Optional localized Long Description
      */
@@ -85,7 +86,7 @@ class CategoryI18n extends AbstractI18n
     {
         return $this->description;
     }
-    
+
     /**
      * @param string $metaDescription Optional localized  short description used for meta tag description
      * @return CategoryI18n
@@ -93,10 +94,10 @@ class CategoryI18n extends AbstractI18n
     public function setMetaDescription(string $metaDescription): CategoryI18n
     {
         $this->metaDescription = $metaDescription;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Optional localized  short description used for meta tag description
      */
@@ -104,7 +105,7 @@ class CategoryI18n extends AbstractI18n
     {
         return $this->metaDescription;
     }
-    
+
     /**
      * @param string $metaKeywords Optional localized meta tag keywords value
      * @return CategoryI18n
@@ -112,10 +113,10 @@ class CategoryI18n extends AbstractI18n
     public function setMetaKeywords(string $metaKeywords): CategoryI18n
     {
         $this->metaKeywords = $metaKeywords;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Optional localized meta tag keywords value
      */
@@ -123,7 +124,7 @@ class CategoryI18n extends AbstractI18n
     {
         return $this->metaKeywords;
     }
-    
+
     /**
      * @param string $name Localized category name
      * @return CategoryI18n
@@ -131,10 +132,10 @@ class CategoryI18n extends AbstractI18n
     public function setName(string $name): CategoryI18n
     {
         $this->name = $name;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Localized category name
      */
@@ -142,7 +143,7 @@ class CategoryI18n extends AbstractI18n
     {
         return $this->name;
     }
-    
+
     /**
      * @param string $titleTag Optional localized title tag value
      * @return CategoryI18n
@@ -150,10 +151,10 @@ class CategoryI18n extends AbstractI18n
     public function setTitleTag(string $titleTag): CategoryI18n
     {
         $this->titleTag = $titleTag;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Optional localized title tag value
      */
@@ -161,7 +162,7 @@ class CategoryI18n extends AbstractI18n
     {
         return $this->titleTag;
     }
-    
+
     /**
      * @param string $urlPath Optional localized category URL
      * @return CategoryI18n
@@ -169,10 +170,10 @@ class CategoryI18n extends AbstractI18n
     public function setUrlPath(string $urlPath): CategoryI18n
     {
         $this->urlPath = $urlPath;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Optional localized category URL
      */

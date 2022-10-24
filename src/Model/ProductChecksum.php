@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -21,7 +22,7 @@ class ProductChecksum extends Checksum
      * @var int - Checksum used to check variations for change
      */
     const TYPE_VARIATION = 1;
-    
+
     /**
      * @var Identity
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
@@ -29,7 +30,7 @@ class ProductChecksum extends Checksum
      * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
      */
     protected $foreignKey = null;
-    
+
     /**
      * @var string
      * @Serializer\Type("string")
@@ -37,7 +38,7 @@ class ProductChecksum extends Checksum
      * @Serializer\Accessor(getter="getEndpoint",setter="setEndpoint")
      */
     protected $endpoint = '';
-    
+
     /**
      * @var boolean
      * @Serializer\Type("boolean")
@@ -45,7 +46,7 @@ class ProductChecksum extends Checksum
      * @Serializer\Accessor(getter="hasChanged",setter="setHasChanged")
      */
     protected $hasChanged = false;
-    
+
     /**
      * @var string
      * @Serializer\Type("string")
@@ -53,7 +54,7 @@ class ProductChecksum extends Checksum
      * @Serializer\Accessor(getter="getHost",setter="setHost")
      */
     protected $host = '';
-    
+
     /**
      * @var integer
      * @Serializer\Type("integer")
@@ -61,7 +62,7 @@ class ProductChecksum extends Checksum
      * @Serializer\Accessor(getter="getType",setter="setType")
      */
     protected $type = self::TYPE_VARIATION;
-    
+
     /**
      * @param Identity $foreignKey
      * @return ProductChecksum
@@ -69,10 +70,10 @@ class ProductChecksum extends Checksum
     public function setForeignKey(Identity $foreignKey): ProductChecksum
     {
         $this->foreignKey = $foreignKey;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity
      */
@@ -80,7 +81,7 @@ class ProductChecksum extends Checksum
     {
         return $this->foreignKey;
     }
-    
+
     /**
      * @param string $endpoint
      * @return ProductChecksum
@@ -88,10 +89,10 @@ class ProductChecksum extends Checksum
     public function setEndpoint(string $endpoint): ProductChecksum
     {
         $this->endpoint = $endpoint;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -99,7 +100,7 @@ class ProductChecksum extends Checksum
     {
         return $this->endpoint;
     }
-    
+
     /**
      * @param boolean $hasChanged
      * @return ProductChecksum
@@ -107,10 +108,10 @@ class ProductChecksum extends Checksum
     public function setHasChanged(bool $hasChanged): ProductChecksum
     {
         $this->hasChanged = $hasChanged;
-        
+
         return $this;
     }
-    
+
     /**
      * @return boolean
      */
@@ -118,7 +119,7 @@ class ProductChecksum extends Checksum
     {
         return $this->hasChanged;
     }
-    
+
     /**
      * @return boolean
      */
@@ -126,7 +127,7 @@ class ProductChecksum extends Checksum
     {
         return $this->hasChanged;
     }
-    
+
     /**
      * @param string $host
      * @return ProductChecksum
@@ -134,10 +135,10 @@ class ProductChecksum extends Checksum
     public function setHost(string $host): ProductChecksum
     {
         $this->host = $host;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -145,7 +146,7 @@ class ProductChecksum extends Checksum
     {
         return $this->host;
     }
-    
+
     /**
      * @param integer $type
      * @return ProductChecksum
@@ -153,10 +154,10 @@ class ProductChecksum extends Checksum
     public function setType(int $type): ProductChecksum
     {
         $this->type = $type;
-        
+
         return $this;
     }
-    
+
     /**
      * @return integer
      */

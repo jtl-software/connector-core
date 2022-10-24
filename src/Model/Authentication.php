@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
@@ -15,7 +16,7 @@ class Authentication extends AbstractModel
      * @Serializer\Accessor(getter="getToken",setter="setToken")
      */
     protected $token = '';
-    
+
     /**
      * @return string
      */

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -34,7 +35,7 @@ class SpecificValueI18n extends AbstractI18n
      * @Serializer\Accessor(getter="getMetaDescription",setter="setMetaDescription")
      */
     protected $metaDescription = '';
-    
+
     /**
      * @var string Optional localized meta keywords value
      * @Serializer\Type("string")
@@ -42,7 +43,7 @@ class SpecificValueI18n extends AbstractI18n
      * @Serializer\Accessor(getter="getMetaKeywords",setter="setMetaKeywords")
      */
     protected $metaKeywords = '';
-    
+
     /**
      * @var string Optional localized title tag value
      * @Serializer\Type("string")
@@ -50,7 +51,7 @@ class SpecificValueI18n extends AbstractI18n
      * @Serializer\Accessor(getter="getTitleTag",setter="setTitleTag")
      */
     protected $titleTag = '';
-    
+
     /**
      * @var string Optional localized URL path
      * @Serializer\Type("string")
@@ -58,7 +59,7 @@ class SpecificValueI18n extends AbstractI18n
      * @Serializer\Accessor(getter="getUrlPath",setter="setUrlPath")
      */
     protected $urlPath = '';
-    
+
     /**
      * @var string Localized value
      * @Serializer\Type("string")
@@ -74,10 +75,10 @@ class SpecificValueI18n extends AbstractI18n
     public function setDescription(string $description): SpecificValueI18n
     {
         $this->description = $description;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Optional localized description
      */
@@ -93,10 +94,10 @@ class SpecificValueI18n extends AbstractI18n
     public function setMetaDescription(string $metaDescription): SpecificValueI18n
     {
         $this->metaDescription = $metaDescription;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Optional localized meta description value
      */
@@ -104,7 +105,7 @@ class SpecificValueI18n extends AbstractI18n
     {
         return $this->metaDescription;
     }
-    
+
     /**
      * @param string $metaKeywords Optional localized meta keywords value
      * @return SpecificValueI18n
@@ -112,10 +113,10 @@ class SpecificValueI18n extends AbstractI18n
     public function setMetaKeywords(string $metaKeywords): SpecificValueI18n
     {
         $this->metaKeywords = $metaKeywords;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Optional localized meta keywords value
      */
@@ -123,7 +124,7 @@ class SpecificValueI18n extends AbstractI18n
     {
         return $this->metaKeywords;
     }
-    
+
     /**
      * @param string $titleTag Optional localized title tag value
      * @return SpecificValueI18n
@@ -131,10 +132,10 @@ class SpecificValueI18n extends AbstractI18n
     public function setTitleTag(string $titleTag): SpecificValueI18n
     {
         $this->titleTag = $titleTag;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Optional localized title tag value
      */
@@ -142,7 +143,7 @@ class SpecificValueI18n extends AbstractI18n
     {
         return $this->titleTag;
     }
-    
+
     /**
      * @param string $urlPath Optional localized URL path
      * @return SpecificValueI18n
@@ -150,10 +151,10 @@ class SpecificValueI18n extends AbstractI18n
     public function setUrlPath(string $urlPath): SpecificValueI18n
     {
         $this->urlPath = $urlPath;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Optional localized URL path
      */
@@ -161,7 +162,7 @@ class SpecificValueI18n extends AbstractI18n
     {
         return $this->urlPath;
     }
-    
+
     /**
      * @param string $value Localized value
      * @return SpecificValueI18n
@@ -169,10 +170,10 @@ class SpecificValueI18n extends AbstractI18n
     public function setValue(string $value): SpecificValueI18n
     {
         $this->value = $value;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Localized value
      */

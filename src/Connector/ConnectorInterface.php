@@ -1,8 +1,10 @@
 <?php
+
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Application
  */
+
 namespace Jtl\Connector\Core\Connector;
 
 use DI\Container;
@@ -19,7 +21,7 @@ interface ConnectorInterface
      * @param EventDispatcher $dispatcher
      */
     public function initialize(ConfigInterface $config, Container $container, EventDispatcher $dispatcher): void;
-    
+
     /**
      * @return PrimaryKeyMapperInterface
      */

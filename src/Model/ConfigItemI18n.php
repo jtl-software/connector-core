@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -42,10 +43,10 @@ class ConfigItemI18n extends AbstractI18n
     public function setDescription(string $description): ConfigItemI18n
     {
         $this->description = $description;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Description (html). Will be ignored, if inheritProductName==true
      */
@@ -61,10 +62,10 @@ class ConfigItemI18n extends AbstractI18n
     public function setName(string $name): ConfigItemI18n
     {
         $this->name = $name;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Config item name. Will be ignored if inheritProductName==true
      */

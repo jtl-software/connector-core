@@ -14,10 +14,10 @@ class CategoryFactory extends AbstractModelFactory
      * @return array
      * @throws \Exception
      */
-    protected function makeFakeArray() : array
+    protected function makeFakeArray(): array
     {
         $identityFactory = $this->getFactory('Identity');
-        
+
         return [
             'level'            => $this->faker->numberBetween(0, 10),
             'parentCategoryId' => $identityFactory->makeOneArray(),
@@ -34,7 +34,7 @@ class CategoryFactory extends AbstractModelFactory
     /**
      * @return string
      */
-    protected function getModelClass() : string
+    protected function getModelClass(): string
     {
         return Category::class;
     }

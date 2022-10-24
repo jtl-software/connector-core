@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Jtl\Connector\Core\Exception;
 
 class FeaturesException extends \Exception

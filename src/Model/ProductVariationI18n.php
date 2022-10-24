@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -34,10 +35,10 @@ class ProductVariationI18n extends AbstractI18n
     public function setName(string $name): ProductVariationI18n
     {
         $this->name = $name;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Locale specific variation name
      */

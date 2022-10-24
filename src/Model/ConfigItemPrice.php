@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -26,7 +27,7 @@ class ConfigItemPrice extends AbstractModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-    
+
     /**
      * @var double Net price or percental value to add/deduct to/from product price (depending on type). Positive value means surcharge, negative value means discount. Also see configItem.vat for value added tax.
      * @Serializer\Type("double")
@@ -34,7 +35,7 @@ class ConfigItemPrice extends AbstractModel
      * @Serializer\Accessor(getter="getPrice",setter="setPrice")
      */
     protected $price = 0.0;
-    
+
     /**
      * @var integer Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
      * @Serializer\Type("integer")
@@ -42,7 +43,7 @@ class ConfigItemPrice extends AbstractModel
      * @Serializer\Accessor(getter="getType",setter="setType")
      */
     protected $type = 0;
-    
+
     /**
      * Constructor
      */
@@ -58,10 +59,10 @@ class ConfigItemPrice extends AbstractModel
     public function setCustomerGroupId(Identity $customerGroupId): ConfigItemPrice
     {
         $this->customerGroupId = $customerGroupId;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity Reference to customerGroup
      */
@@ -69,7 +70,7 @@ class ConfigItemPrice extends AbstractModel
     {
         return $this->customerGroupId;
     }
-    
+
     /**
      * @param double $price Net price or percental value to add/deduct to/from product price (depending on type). Positive value means surcharge, negative value means discount. Also see configItem.vat for value added tax.
      * @return ConfigItemPrice
@@ -77,10 +78,10 @@ class ConfigItemPrice extends AbstractModel
     public function setPrice(float $price): ConfigItemPrice
     {
         $this->price = $price;
-        
+
         return $this;
     }
-    
+
     /**
      * @return double Net price or percental value to add/deduct to/from product price (depending on type). Positive value means surcharge, negative value means discount. Also see configItem.vat for value added tax.
      */
@@ -88,7 +89,7 @@ class ConfigItemPrice extends AbstractModel
     {
         return $this->price;
     }
-    
+
     /**
      * @param integer $type Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
      * @return ConfigItemPrice
@@ -96,10 +97,10 @@ class ConfigItemPrice extends AbstractModel
     public function setType(int $type): ConfigItemPrice
     {
         $this->type = $type;
-        
+
         return $this;
     }
-    
+
     /**
      * @return integer Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
      */

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -26,7 +27,7 @@ class Currency extends AbstractIdentity
      * @Serializer\Accessor(getter="getDelimiterCent",setter="setDelimiterCent")
      */
     protected $delimiterCent = '';
-    
+
     /**
      * @var string Optional delimiter char for thousand. Default=".". Ignore this flag if you have the correct user locale preference.
      * @Serializer\Type("string")
@@ -34,7 +35,7 @@ class Currency extends AbstractIdentity
      * @Serializer\Accessor(getter="getDelimiterThousand",setter="setDelimiterThousand")
      */
     protected $delimiterThousand = '';
-    
+
     /**
      * @var double Optional conversion factor to default currency. Default is 1 (equals default currency)
      * @Serializer\Type("double")
@@ -42,7 +43,7 @@ class Currency extends AbstractIdentity
      * @Serializer\Accessor(getter="getFactor",setter="setFactor")
      */
     protected $factor = 0.0;
-    
+
     /**
      * @var boolean Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference.
      * @Serializer\Type("boolean")
@@ -50,7 +51,7 @@ class Currency extends AbstractIdentity
      * @Serializer\Accessor(getter="getHasCurrencySignBeforeValue",setter="setHasCurrencySignBeforeValue")
      */
     protected $hasCurrencySignBeforeValue = false;
-    
+
     /**
      * @var boolean Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default.
      * @Serializer\Type("boolean")
@@ -58,7 +59,7 @@ class Currency extends AbstractIdentity
      * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
      */
     protected $isDefault = false;
-    
+
     /**
      * @var string
      * @Serializer\Type("string")
@@ -66,7 +67,7 @@ class Currency extends AbstractIdentity
      * @Serializer\Accessor(getter="getIso",setter="setIso")
      */
     protected $iso = '';
-    
+
     /**
      * @var string Currency name
      * @Serializer\Type("string")
@@ -74,7 +75,7 @@ class Currency extends AbstractIdentity
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-    
+
     /**
      * @var string Optional HTML name e.g. "&euro;"
      * @Serializer\Type("string")
@@ -90,10 +91,10 @@ class Currency extends AbstractIdentity
     public function setDelimiterCent(string $delimiterCent): Currency
     {
         $this->delimiterCent = $delimiterCent;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Optional delimiter char for cent, default=",". Ignore this flag if you have the correct user locale preference.
      */
@@ -101,7 +102,7 @@ class Currency extends AbstractIdentity
     {
         return $this->delimiterCent;
     }
-    
+
     /**
      * @param string $delimiterThousand Optional delimiter char for thousand. Default=".". Ignore this flag if you have the correct user locale preference.
      * @return Currency
@@ -109,10 +110,10 @@ class Currency extends AbstractIdentity
     public function setDelimiterThousand(string $delimiterThousand): Currency
     {
         $this->delimiterThousand = $delimiterThousand;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Optional delimiter char for thousand. Default=".". Ignore this flag if you have the correct user locale preference.
      */
@@ -120,7 +121,7 @@ class Currency extends AbstractIdentity
     {
         return $this->delimiterThousand;
     }
-    
+
     /**
      * @param double $factor Optional conversion factor to default currency. Default is 1 (equals default currency)
      * @return Currency
@@ -128,10 +129,10 @@ class Currency extends AbstractIdentity
     public function setFactor(float $factor): Currency
     {
         $this->factor = $factor;
-        
+
         return $this;
     }
-    
+
     /**
      * @return double Optional conversion factor to default currency. Default is 1 (equals default currency)
      */
@@ -139,7 +140,7 @@ class Currency extends AbstractIdentity
     {
         return $this->factor;
     }
-    
+
     /**
      * @param boolean $hasCurrencySignBeforeValue Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference.
      * @return Currency
@@ -147,10 +148,10 @@ class Currency extends AbstractIdentity
     public function setHasCurrencySignBeforeValue(bool $hasCurrencySignBeforeValue): Currency
     {
         $this->hasCurrencySignBeforeValue = $hasCurrencySignBeforeValue;
-        
+
         return $this;
     }
-    
+
     /**
      * @return boolean Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference.
      */
@@ -158,7 +159,7 @@ class Currency extends AbstractIdentity
     {
         return $this->hasCurrencySignBeforeValue;
     }
-    
+
     /**
      * @param boolean $isDefault Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default.
      * @return Currency
@@ -166,10 +167,10 @@ class Currency extends AbstractIdentity
     public function setIsDefault(bool $isDefault): Currency
     {
         $this->isDefault = $isDefault;
-        
+
         return $this;
     }
-    
+
     /**
      * @return boolean Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default.
      */
@@ -177,7 +178,7 @@ class Currency extends AbstractIdentity
     {
         return $this->isDefault;
     }
-    
+
     /**
      * @param string $iso
      * @return Currency
@@ -185,10 +186,10 @@ class Currency extends AbstractIdentity
     public function setIso(string $iso): Currency
     {
         $this->iso = $iso;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -196,7 +197,7 @@ class Currency extends AbstractIdentity
     {
         return $this->iso;
     }
-    
+
     /**
      * @param string $name Currency name
      * @return Currency
@@ -204,10 +205,10 @@ class Currency extends AbstractIdentity
     public function setName(string $name): Currency
     {
         $this->name = $name;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Currency name
      */
@@ -215,7 +216,7 @@ class Currency extends AbstractIdentity
     {
         return $this->name;
     }
-    
+
     /**
      * @param string $nameHtml Optional HTML name e.g. "&euro;"
      * @return Currency
@@ -223,10 +224,10 @@ class Currency extends AbstractIdentity
     public function setNameHtml(string $nameHtml): Currency
     {
         $this->nameHtml = $nameHtml;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Optional HTML name e.g. "&euro;"
      */

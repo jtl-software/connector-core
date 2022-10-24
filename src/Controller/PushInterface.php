@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2019 JTL-Software GmbH
  * @package Jtl\Connector\Core\Application
@@ -16,5 +17,5 @@ interface PushInterface
      * @param AbstractModel $model
      * @return AbstractModel
      */
-    public function push(AbstractModel $model) : AbstractModel;
+    public function push(AbstractModel $model): AbstractModel;
 }

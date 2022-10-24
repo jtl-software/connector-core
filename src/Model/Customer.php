@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -26,7 +27,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-    
+
     /**
      * @var Identity Unique customer id
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
@@ -34,7 +35,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-    
+
     /**
      * @var double
      * @Serializer\Type("double")
@@ -42,7 +43,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getAccountCredit",setter="setAccountCredit")
      */
     protected $accountCredit = 0.0;
-    
+
     /**
      * @var \DateTimeInterface Date of birth
      * @Serializer\Type("DateTimeInterface")
@@ -50,7 +51,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getBirthday",setter="setBirthday")
      */
     protected $birthday = null;
-    
+
     /**
      * @var string City
      * @Serializer\Type("string")
@@ -58,7 +59,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getCity",setter="setCity")
      */
     protected $city = '';
-    
+
     /**
      * @var string Company name
      * @Serializer\Type("string")
@@ -66,7 +67,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getCompany",setter="setCompany")
      */
     protected $company = '';
-    
+
     /**
      * @var string Country ISO 3166-2 (2 letter Uppercase)
      * @Serializer\Type("string")
@@ -74,7 +75,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getCountryIso",setter="setCountryIso")
      */
     protected $countryIso = '';
-    
+
     /**
      * @var \DateTimeInterface
      * @Serializer\Type("DateTimeInterface")
@@ -82,7 +83,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
     protected $creationDate = null;
-    
+
     /**
      * @var string Optional customer number set by JTL-Wawi ERP software
      * @Serializer\Type("string")
@@ -90,7 +91,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getCustomerNumber",setter="setCustomerNumber")
      */
     protected $customerNumber = '';
-    
+
     /**
      * @var string Delivery instruction e.g. "c/o John Doe"
      * @Serializer\Type("string")
@@ -98,7 +99,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getDeliveryInstruction",setter="setDeliveryInstruction")
      */
     protected $deliveryInstruction = '';
-    
+
     /**
      * @var double Percentage discount for customer on all prices
      * @Serializer\Type("double")
@@ -106,7 +107,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getDiscount",setter="setDiscount")
      */
     protected $discount = 0.0;
-    
+
     /**
      * @var string E-Mail address
      * @Serializer\Type("string")
@@ -114,7 +115,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getEMail",setter="setEMail")
      */
     protected $eMail = '';
-    
+
     /**
      * @var string Extra address line e.g. "Apartment 2.5"
      * @Serializer\Type("string")
@@ -122,7 +123,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getExtraAddressLine",setter="setExtraAddressLine")
      */
     protected $extraAddressLine = '';
-    
+
     /**
      * @var string Fax number
      * @Serializer\Type("string")
@@ -130,7 +131,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getFax",setter="setFax")
      */
     protected $fax = '';
-    
+
     /**
      * @var string First name
      * @Serializer\Type("string")
@@ -138,7 +139,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getFirstName",setter="setFirstName")
      */
     protected $firstName = '';
-    
+
     /**
      * @var boolean
      * @Serializer\Type("boolean")
@@ -146,7 +147,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getHasCustomerAccount",setter="setHasCustomerAccount")
      */
     protected $hasCustomerAccount = false;
-    
+
     /**
      * @var boolean Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
      * @Serializer\Type("boolean")
@@ -154,7 +155,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getHasNewsletterSubscription",setter="setHasNewsletterSubscription")
      */
     protected $hasNewsletterSubscription = false;
-    
+
     /**
      * @var boolean Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password.
      * @Serializer\Type("boolean")
@@ -170,7 +171,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getLastName",setter="setLastName")
      */
     protected $lastName = '';
-    
+
     /**
      * @var string Mobile phone number
      * @Serializer\Type("string")
@@ -178,7 +179,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getMobile",setter="setMobile")
      */
     protected $mobile = '';
-    
+
     /**
      * @var string customer note
      * @Serializer\Type("string")
@@ -186,7 +187,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getNote",setter="setNote")
      */
     protected $note = '';
-    
+
     /**
      * @var string Customer origin
      * @Serializer\Type("string")
@@ -194,7 +195,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getOrigin",setter="setOrigin")
      */
     protected $origin = '';
-    
+
     /**
      * @var string Phone number
      * @Serializer\Type("string")
@@ -202,7 +203,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getPhone",setter="setPhone")
      */
     protected $phone = '';
-    
+
     /**
      * @var string Salutation (german: "Anrede")
      * @Serializer\Type("string")
@@ -210,7 +211,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getSalutation",setter="setSalutation")
      */
     protected $salutation = '';
-    
+
     /**
      * @var string State
      * @Serializer\Type("string")
@@ -218,7 +219,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getState",setter="setState")
      */
     protected $state = '';
-    
+
     /**
      * @var string Street name
      * @Serializer\Type("string")
@@ -226,7 +227,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getStreet",setter="setStreet")
      */
     protected $street = '';
-    
+
     /**
      * @var string Title, e.g. "Prof. Dr."
      * @Serializer\Type("string")
@@ -234,7 +235,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getTitle",setter="setTitle")
      */
     protected $title = '';
-    
+
     /**
      * @var string VAT number (german "USt-ID")
      * @Serializer\Type("string")
@@ -242,7 +243,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getVatNumber",setter="setVatNumber")
      */
     protected $vatNumber = '';
-    
+
     /**
      * @var string WWW address
      * @Serializer\Type("string")
@@ -250,7 +251,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getWebsiteUrl",setter="setWebsiteUrl")
      */
     protected $websiteUrl = '';
-    
+
     /**
      * @var string ZIP / postal code
      * @Serializer\Type("string")
@@ -258,7 +259,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getZipCode",setter="setZipCode")
      */
     protected $zipCode = '';
-    
+
     /**
      * @var KeyValueAttribute[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\KeyValueAttribute>")
@@ -266,7 +267,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\AccessType("reflection")
      */
     protected $attributes = [];
-    
+
     /**
      * Constructor
      */
@@ -283,10 +284,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setCustomerGroupId(Identity $customerGroupId): self
     {
         $this->customerGroupId = $customerGroupId;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity References a customer group
      */
@@ -294,7 +295,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->customerGroupId;
     }
-    
+
     /**
      * @param Identity $id Unique customer id
      * @return Customer
@@ -302,10 +303,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setId(Identity $id): self
     {
         $this->id = $id;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity Unique customer id
      */
@@ -313,7 +314,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->id;
     }
-    
+
     /**
      * @param double $accountCredit
      * @return Customer
@@ -321,10 +322,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setAccountCredit(float $accountCredit): self
     {
         $this->accountCredit = $accountCredit;
-        
+
         return $this;
     }
-    
+
     /**
      * @return double
      */
@@ -332,7 +333,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->accountCredit;
     }
-    
+
     /**
      * @param \DateTimeInterface $birthday Date of birth
      * @return Customer
@@ -340,10 +341,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setBirthday(\DateTimeInterface $birthday = null): self
     {
         $this->birthday = $birthday;
-        
+
         return $this;
     }
-    
+
     /**
      * @return \DateTimeInterface Date of birth
      */
@@ -351,7 +352,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->birthday;
     }
-    
+
     /**
      * @param string $city City
      * @return Customer
@@ -359,10 +360,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setCity(string $city): self
     {
         $this->city = $city;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string City
      */
@@ -370,7 +371,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->city;
     }
-    
+
     /**
      * @param string $company Company name
      * @return Customer
@@ -378,10 +379,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setCompany(string $company): self
     {
         $this->company = $company;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Company name
      */
@@ -389,7 +390,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->company;
     }
-    
+
     /**
      * @param string $countryIso Country ISO 3166-2 (2 letter Uppercase)
      * @return Customer
@@ -397,10 +398,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setCountryIso(string $countryIso): self
     {
         $this->countryIso = $countryIso;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Country ISO 3166-2 (2 letter Uppercase)
      */
@@ -408,7 +409,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->countryIso;
     }
-    
+
     /**
      * @param \DateTimeInterface $creationDate
      * @return Customer
@@ -416,10 +417,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setCreationDate(\DateTimeInterface $creationDate = null): self
     {
         $this->creationDate = $creationDate;
-        
+
         return $this;
     }
-    
+
     /**
      * @return \DateTimeInterface
      */
@@ -427,7 +428,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->creationDate;
     }
-    
+
     /**
      * @param string $customerNumber Optional customer number set by JTL-Wawi ERP software
      * @return Customer
@@ -439,7 +440,7 @@ class Customer extends AbstractI18n implements IdentityInterface
 
         return $this;
     }
-    
+
     /**
      * @return string Optional customer number set by JTL-Wawi ERP software
      */
@@ -447,7 +448,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->customerNumber;
     }
-    
+
     /**
      * @param string $deliveryInstruction Delivery instruction e.g. "c/o John Doe"
      * @return Customer
@@ -455,10 +456,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setDeliveryInstruction(string $deliveryInstruction): self
     {
         $this->deliveryInstruction = $deliveryInstruction;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Delivery instruction e.g. "c/o John Doe"
      */
@@ -466,7 +467,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->deliveryInstruction;
     }
-    
+
     /**
      * @param double $discount Percentage discount for customer on all prices
      * @return Customer
@@ -474,10 +475,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setDiscount(float $discount): self
     {
         $this->discount = $discount;
-        
+
         return $this;
     }
-    
+
     /**
      * @return double Percentage discount for customer on all prices
      */
@@ -485,7 +486,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->discount;
     }
-    
+
     /**
      * @param string $eMail E-Mail address
      * @return Customer
@@ -493,10 +494,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setEMail(string $eMail): self
     {
         $this->eMail = $eMail;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string E-Mail address
      */
@@ -504,7 +505,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->eMail;
     }
-    
+
     /**
      * @param string $extraAddressLine Extra address line e.g. "Apartment 2.5"
      * @return Customer
@@ -512,10 +513,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setExtraAddressLine(string $extraAddressLine): self
     {
         $this->extraAddressLine = $extraAddressLine;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Extra address line e.g. "Apartment 2.5"
      */
@@ -523,7 +524,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->extraAddressLine;
     }
-    
+
     /**
      * @param string $fax Fax number
      * @return Customer
@@ -531,10 +532,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setFax(string $fax): self
     {
         $this->fax = $fax;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Fax number
      */
@@ -542,7 +543,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->fax;
     }
-    
+
     /**
      * @param string $firstName First name
      * @return Customer
@@ -550,10 +551,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setFirstName(string $firstName): self
     {
         $this->firstName = $firstName;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string First name
      */
@@ -561,7 +562,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->firstName;
     }
-    
+
     /**
      * @param boolean $hasCustomerAccount
      * @return Customer
@@ -569,10 +570,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setHasCustomerAccount(bool $hasCustomerAccount): self
     {
         $this->hasCustomerAccount = $hasCustomerAccount;
-        
+
         return $this;
     }
-    
+
     /**
      * @return boolean
      */
@@ -580,7 +581,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->hasCustomerAccount;
     }
-    
+
     /**
      * @param boolean $hasNewsletterSubscription Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
      * @return Customer
@@ -588,10 +589,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setHasNewsletterSubscription(bool $hasNewsletterSubscription): self
     {
         $this->hasNewsletterSubscription = $hasNewsletterSubscription;
-        
+
         return $this;
     }
-    
+
     /**
      * @return boolean Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
      */
@@ -599,7 +600,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->hasNewsletterSubscription;
     }
-    
+
     /**
      * @param boolean $isActive Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password.
      * @return Customer
@@ -607,10 +608,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setIsActive(bool $isActive): self
     {
         $this->isActive = $isActive;
-        
+
         return $this;
     }
-    
+
     /**
      * @return boolean Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password.
      */
@@ -626,10 +627,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Last name
      */
@@ -637,7 +638,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->lastName;
     }
-    
+
     /**
      * @param string $mobile Mobile phone number
      * @return Customer
@@ -645,10 +646,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setMobile(string $mobile): self
     {
         $this->mobile = $mobile;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Mobile phone number
      */
@@ -656,7 +657,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->mobile;
     }
-    
+
     /**
      * @param string $note customer note
      * @return Customer
@@ -664,10 +665,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setNote(string $note): self
     {
         $this->note = $note;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string customer note
      */
@@ -675,7 +676,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->note;
     }
-    
+
     /**
      * @param string $origin Customer origin
      * @return Customer
@@ -683,10 +684,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setOrigin(string $origin): self
     {
         $this->origin = $origin;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Customer origin
      */
@@ -694,7 +695,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->origin;
     }
-    
+
     /**
      * @param string $phone Phone number
      * @return Customer
@@ -702,10 +703,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setPhone(string $phone): self
     {
         $this->phone = $phone;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Phone number
      */
@@ -713,7 +714,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->phone;
     }
-    
+
     /**
      * @param string $salutation Salutation (german: "Anrede")
      * @return Customer
@@ -721,10 +722,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setSalutation(string $salutation): self
     {
         $this->salutation = $salutation;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Salutation (german: "Anrede")
      */
@@ -732,7 +733,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->salutation;
     }
-    
+
     /**
      * @param string $state State
      * @return Customer
@@ -740,10 +741,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setState(string $state): self
     {
         $this->state = $state;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string State
      */
@@ -751,7 +752,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->state;
     }
-    
+
     /**
      * @param string $street Street name
      * @return Customer
@@ -759,10 +760,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setStreet(string $street): self
     {
         $this->street = $street;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Street name
      */
@@ -770,7 +771,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->street;
     }
-    
+
     /**
      * @param string $title Title, e.g. "Prof. Dr."
      * @return Customer
@@ -778,10 +779,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setTitle(string $title): self
     {
         $this->title = $title;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Title, e.g. "Prof. Dr."
      */
@@ -789,7 +790,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->title;
     }
-    
+
     /**
      * @param string $vatNumber VAT number (german "USt-ID")
      * @return Customer
@@ -797,10 +798,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setVatNumber(string $vatNumber): self
     {
         $this->vatNumber = $vatNumber;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string VAT number (german "USt-ID")
      */
@@ -808,7 +809,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->vatNumber;
     }
-    
+
     /**
      * @param string $websiteUrl WWW address
      * @return Customer
@@ -816,10 +817,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setWebsiteUrl(string $websiteUrl): self
     {
         $this->websiteUrl = $websiteUrl;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string WWW address
      */
@@ -827,7 +828,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->websiteUrl;
     }
-    
+
     /**
      * @param string $zipCode ZIP / postal code
      * @return Customer
@@ -835,10 +836,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setZipCode(string $zipCode): self
     {
         $this->zipCode = $zipCode;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string ZIP / postal code
      */
@@ -846,7 +847,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->zipCode;
     }
-    
+
     /**
      * @param KeyValueAttribute $attribute
      * @return Customer
@@ -854,7 +855,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function addAttribute(KeyValueAttribute $attribute): self
     {
         $this->attributes[] = $attribute;
-        
+
         return $this;
     }
 
@@ -865,10 +866,10 @@ class Customer extends AbstractI18n implements IdentityInterface
     public function setAttributes(KeyValueAttribute ...$attributes): self
     {
         $this->attributes = $attributes;
-        
+
         return $this;
     }
-    
+
     /**
      * @return KeyValueAttribute[]
      */
@@ -876,14 +877,14 @@ class Customer extends AbstractI18n implements IdentityInterface
     {
         return $this->attributes;
     }
-    
+
     /**
      * @return Customer
      */
     public function clearAttributes(): self
     {
         $this->attributes = [];
-        
+
         return $this;
     }
 }

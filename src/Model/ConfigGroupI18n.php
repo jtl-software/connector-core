@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -42,10 +43,10 @@ class ConfigGroupI18n extends AbstractI18n
     public function setDescription(string $description): self
     {
         $this->description = $description;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Optional description (HTML)
      */
@@ -61,10 +62,10 @@ class ConfigGroupI18n extends AbstractI18n
     public function setName(string $name): self
     {
         $this->name = $name;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Config group name
      */

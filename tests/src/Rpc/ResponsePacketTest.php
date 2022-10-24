@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Rpc;
 
 use Jtl\Connector\Core\Model\Product;
@@ -12,7 +13,6 @@ use Jtl\Connector\Core\Test\TestCase;
  */
 class ResponsePacketTest extends TestCase
 {
-
     /**
      * @dataProvider isValidDataProvider
      *

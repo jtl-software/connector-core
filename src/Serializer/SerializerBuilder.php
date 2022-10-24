@@ -1,8 +1,10 @@
 <?php
+
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Serializer\Handler
  */
+
 namespace Jtl\Connector\Core\Serializer;
 
 use JMS\Serializer\EventDispatcher\EventDispatcher;
@@ -20,7 +22,6 @@ use Jtl\Connector\Core\Serializer\Subscriber\ProductStockLevelSubscriber;
 
 class SerializerBuilder
 {
-
     /**
      * @param string|null $cacheDir
      * @return JmsBuilder

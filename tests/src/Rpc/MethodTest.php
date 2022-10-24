@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Rpc;
 
 use Jtl\Connector\Core\Definition\Action;
@@ -14,7 +15,6 @@ use Jtl\Connector\Core\Test\TestCase;
  */
 class MethodTest extends TestCase
 {
-
     /**
      *
      */

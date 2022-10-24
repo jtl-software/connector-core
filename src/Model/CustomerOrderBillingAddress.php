@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -34,10 +35,10 @@ class CustomerOrderBillingAddress extends AbstractOrderAddress
     public function setVatNumber(string $vatNumber): CustomerOrderBillingAddress
     {
         $this->vatNumber = $vatNumber;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string VAT number (german "USt-ID")
      */

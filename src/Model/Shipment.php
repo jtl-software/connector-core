@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -34,7 +35,7 @@ class Shipment extends AbstractIdentity
      * @Serializer\Accessor(getter="getCarrierName",setter="setCarrierName")
      */
     protected $carrierName = '';
-    
+
     /**
      * @var \DateTimeInterface Creation date
      * @Serializer\Type("DateTimeInterface")
@@ -42,7 +43,7 @@ class Shipment extends AbstractIdentity
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
     protected $creationDate = null;
-    
+
     /**
      * @var string Optional Identcode
      * @Serializer\Type("string")
@@ -50,7 +51,7 @@ class Shipment extends AbstractIdentity
      * @Serializer\Accessor(getter="getIdentCode",setter="setIdentCode")
      */
     protected $identCode = '';
-    
+
     /**
      * @var string Optional shipment note
      * @Serializer\Type("string")
@@ -58,7 +59,7 @@ class Shipment extends AbstractIdentity
      * @Serializer\Accessor(getter="getNote",setter="setNote")
      */
     protected $note = '';
-    
+
     /**
      * @var string
      * @Serializer\Type("string")
@@ -77,7 +78,7 @@ class Shipment extends AbstractIdentity
         parent::__construct($endpoint, $host);
         $this->deliveryNoteId = new Identity();
     }
-    
+
     /**
      * @param Identity $deliveryNoteId Reference to deliveryNote
      * @return Shipment
@@ -85,10 +86,10 @@ class Shipment extends AbstractIdentity
     public function setDeliveryNoteId(Identity $deliveryNoteId): Shipment
     {
         $this->deliveryNoteId = $deliveryNoteId;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity Reference to deliveryNote
      */
@@ -104,10 +105,10 @@ class Shipment extends AbstractIdentity
     public function setCarrierName(string $carrierName): Shipment
     {
         $this->carrierName = $carrierName;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Carrier name
      */
@@ -115,7 +116,7 @@ class Shipment extends AbstractIdentity
     {
         return $this->carrierName;
     }
-    
+
     /**
      * @param \DateTimeInterface $creationDate Creation date
      * @return Shipment
@@ -123,10 +124,10 @@ class Shipment extends AbstractIdentity
     public function setCreationDate(\DateTimeInterface $creationDate = null): Shipment
     {
         $this->creationDate = $creationDate;
-        
+
         return $this;
     }
-    
+
     /**
      * @return \DateTimeInterface Creation date
      */
@@ -134,7 +135,7 @@ class Shipment extends AbstractIdentity
     {
         return $this->creationDate;
     }
-    
+
     /**
      * @param string $identCode Optional Identcode
      * @return Shipment
@@ -142,10 +143,10 @@ class Shipment extends AbstractIdentity
     public function setIdentCode(string $identCode): Shipment
     {
         $this->identCode = $identCode;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Optional Identcode
      */
@@ -153,7 +154,7 @@ class Shipment extends AbstractIdentity
     {
         return $this->identCode;
     }
-    
+
     /**
      * @param string $note Optional shipment note
      * @return Shipment
@@ -161,10 +162,10 @@ class Shipment extends AbstractIdentity
     public function setNote(string $note): Shipment
     {
         $this->note = $note;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Optional shipment note
      */
@@ -172,7 +173,7 @@ class Shipment extends AbstractIdentity
     {
         return $this->note;
     }
-    
+
     /**
      * @param string $trackingUrl
      * @return Shipment
@@ -180,10 +181,10 @@ class Shipment extends AbstractIdentity
     public function setTrackingUrl(string $trackingUrl): Shipment
     {
         $this->trackingUrl = $trackingUrl;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */

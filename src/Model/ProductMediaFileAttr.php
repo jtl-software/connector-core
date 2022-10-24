@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -34,7 +35,7 @@ class ProductMediaFileAttr extends AbstractModel
     public function addI18n(ProductMediaFileAttrI18n $i18n): ProductMediaFileAttr
     {
         $this->i18ns[] = $i18n;
-        
+
         return $this;
     }
 
@@ -45,10 +46,10 @@ class ProductMediaFileAttr extends AbstractModel
     public function setI18ns(ProductMediaFileAttrI18n ...$i18ns): ProductMediaFileAttr
     {
         $this->i18ns = $i18ns;
-        
+
         return $this;
     }
-    
+
     /**
      * @return ProductMediaFileAttrI18n[]
      */
@@ -56,14 +57,14 @@ class ProductMediaFileAttr extends AbstractModel
     {
         return $this->i18ns;
     }
-    
+
     /**
      * @return ProductMediaFileAttr
      */
     public function clearI18ns(): ProductMediaFileAttr
     {
         $this->i18ns = [];
-        
+
         return $this;
     }
 }

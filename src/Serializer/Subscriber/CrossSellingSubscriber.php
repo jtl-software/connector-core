@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Jtl\Connector\Core\Serializer\Subscriber;
 
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;

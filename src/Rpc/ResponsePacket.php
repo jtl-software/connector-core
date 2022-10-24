@@ -1,9 +1,11 @@
 <?php
+
 /**
  *
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Rpc
  */
+
 namespace Jtl\Connector\Core\Rpc;
 
 use Jtl\Connector\Core\Exception\RpcException;

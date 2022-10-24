@@ -8,7 +8,6 @@ use PHPUnit\Framework\TestCase;
 
 class ConfigParameterTest extends TestCase
 {
-
     /**
      * @dataProvider dataProvider
      *

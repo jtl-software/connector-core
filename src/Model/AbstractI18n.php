@@ -1,8 +1,10 @@
 <?php
+
 /**
  * @author    Patryk Gorol <patryk.gorol@jtl-software.com>
  * @copyright 2010-2019 JTL-Software GmbH
  */
+
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -19,7 +20,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class CustomerGroup extends AbstractIdentity
 {
-
     /**
      * @var boolean Optional: Show net prices default instead of gross prices
      * @Serializer\Type("boolean")
@@ -27,7 +27,7 @@ class CustomerGroup extends AbstractIdentity
      * @Serializer\Accessor(getter="getApplyNetPrice",setter="setApplyNetPrice")
      */
     protected $applyNetPrice = false;
-    
+
     /**
      * @var double Optional percentual discount on all products. Negative Value means surcharge.
      * @Serializer\Type("double")
@@ -35,7 +35,7 @@ class CustomerGroup extends AbstractIdentity
      * @Serializer\Accessor(getter="getDiscount",setter="setDiscount")
      */
     protected $discount = 0.0;
-    
+
     /**
      * @var boolean Optional: Flag default customer group
      * @Serializer\Type("boolean")
@@ -43,7 +43,7 @@ class CustomerGroup extends AbstractIdentity
      * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
      */
     protected $isDefault = false;
-    
+
     /**
      * @var CustomerGroupAttr[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\CustomerGroupAttr>")
@@ -51,7 +51,7 @@ class CustomerGroup extends AbstractIdentity
      * @Serializer\AccessType("reflection")
      */
     protected $attributes = [];
-    
+
     /**
      * @var CustomerGroupI18n[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\CustomerGroupI18n>")
@@ -67,10 +67,10 @@ class CustomerGroup extends AbstractIdentity
     public function setApplyNetPrice(bool $applyNetPrice): self
     {
         $this->applyNetPrice = $applyNetPrice;
-        
+
         return $this;
     }
-    
+
     /**
      * @return boolean Optional: Show net prices default instead of gross prices
      */
@@ -78,7 +78,7 @@ class CustomerGroup extends AbstractIdentity
     {
         return $this->applyNetPrice;
     }
-    
+
     /**
      * @param double $discount Optional percentual discount on all products. Negative Value means surcharge.
      * @return CustomerGroup
@@ -86,10 +86,10 @@ class CustomerGroup extends AbstractIdentity
     public function setDiscount(float $discount): self
     {
         $this->discount = $discount;
-        
+
         return $this;
     }
-    
+
     /**
      * @return double Optional percentual discount on all products. Negative Value means surcharge.
      */
@@ -97,7 +97,7 @@ class CustomerGroup extends AbstractIdentity
     {
         return $this->discount;
     }
-    
+
     /**
      * @param boolean $isDefault Optional: Flag default customer group
      * @return CustomerGroup
@@ -105,10 +105,10 @@ class CustomerGroup extends AbstractIdentity
     public function setIsDefault(bool $isDefault): self
     {
         $this->isDefault = $isDefault;
-        
+
         return $this;
     }
-    
+
     /**
      * @return boolean Optional: Flag default customer group
      */
@@ -116,7 +116,7 @@ class CustomerGroup extends AbstractIdentity
     {
         return $this->isDefault;
     }
-    
+
     /**
      * @param CustomerGroupAttr $attribute
      * @return CustomerGroup
@@ -124,7 +124,7 @@ class CustomerGroup extends AbstractIdentity
     public function addAttribute(CustomerGroupAttr $attribute): self
     {
         $this->attributes[] = $attribute;
-        
+
         return $this;
     }
 
@@ -135,10 +135,10 @@ class CustomerGroup extends AbstractIdentity
     public function setAttributes(CustomerGroupAttr ...$attributes): self
     {
         $this->attributes = $attributes;
-        
+
         return $this;
     }
-    
+
     /**
      * @return CustomerGroupAttr[]
      */
@@ -146,17 +146,17 @@ class CustomerGroup extends AbstractIdentity
     {
         return $this->attributes;
     }
-    
+
     /**
      * @return CustomerGroup
      */
     public function clearAttributes(): self
     {
         $this->attributes = [];
-        
+
         return $this;
     }
-    
+
     /**
      * @param CustomerGroupI18n $i18n
      * @return CustomerGroup
@@ -164,7 +164,7 @@ class CustomerGroup extends AbstractIdentity
     public function addI18n(CustomerGroupI18n $i18n): self
     {
         $this->i18ns[] = $i18n;
-        
+
         return $this;
     }
 
@@ -175,10 +175,10 @@ class CustomerGroup extends AbstractIdentity
     public function setI18ns(CustomerGroupI18n ...$i18ns): self
     {
         $this->i18ns = $i18ns;
-        
+
         return $this;
     }
-    
+
     /**
      * @return CustomerGroupI18n[]
      */
@@ -186,14 +186,14 @@ class CustomerGroup extends AbstractIdentity
     {
         return $this->i18ns;
     }
-    
+
     /**
      * @return CustomerGroup
      */
     public function clearI18ns(): self
     {
         $this->i18ns = [];
-        
+
         return $this;
     }
 

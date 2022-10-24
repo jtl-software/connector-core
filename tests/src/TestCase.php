@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test;
 
 use Faker\Factory;
@@ -178,7 +179,7 @@ class TestCase extends \Jtl\UnitTest\TestCase
     {
         $files = [];
 
-        for ($i = 0;$i < $quantity;$i++) {
+        for ($i = 0; $i < $quantity; $i++) {
             $file = vfsStream::newFile(\time() . $i . '-file');
 
             $this->getRootDir()->addChild($file);

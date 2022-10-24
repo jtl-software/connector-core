@@ -42,7 +42,8 @@ class ImageSubscriber implements EventSubscriberInterface
     public function onPostSerialize(ObjectEvent $event)
     {
         $object = $event->getObject();
-        if ($object instanceof AbstractImage
+        if (
+            $object instanceof AbstractImage
             && $object->getRelationType() !== ''
             && $object->getId()->getEndpoint() !== ''
         ) {

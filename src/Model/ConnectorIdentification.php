@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -24,7 +25,7 @@ class ConnectorIdentification extends AbstractModel
      * @Serializer\Accessor(getter="getEndpointVersion",setter="setEndpointVersion")
      */
     protected $endpointVersion = '';
-    
+
     /**
      * @var string
      * @Serializer\Type("string")
@@ -32,7 +33,7 @@ class ConnectorIdentification extends AbstractModel
      * @Serializer\Accessor(getter="getPlatformName",setter="setPlatformName")
      */
     protected $platformName = '';
-    
+
     /**
      * @var string
      * @Serializer\Type("string")
@@ -40,7 +41,7 @@ class ConnectorIdentification extends AbstractModel
      * @Serializer\Accessor(getter="getPlatformVersion",setter="setPlatformVersion")
      */
     protected $platformVersion = '';
-    
+
     /**
      * @var integer
      * @Serializer\Type("integer")
@@ -48,7 +49,7 @@ class ConnectorIdentification extends AbstractModel
      * @Serializer\Accessor(getter="getProtocolVersion",setter="setProtocolVersion")
      */
     protected $protocolVersion = 0;
-    
+
     /**
      * @var ConnectorServerInfo
      * @Serializer\Type("Jtl\Connector\Core\Model\ConnectorServerInfo")
@@ -56,7 +57,7 @@ class ConnectorIdentification extends AbstractModel
      * @Serializer\Accessor(getter="getServerInfo",setter="setServerInfo")
      */
     protected $serverInfo = null;
-    
+
     /**
      * @param string $endpointVersion
      * @return ConnectorIdentification
@@ -64,10 +65,10 @@ class ConnectorIdentification extends AbstractModel
     public function setEndpointVersion(string $endpointVersion): ConnectorIdentification
     {
         $this->endpointVersion = $endpointVersion;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -75,7 +76,7 @@ class ConnectorIdentification extends AbstractModel
     {
         return $this->endpointVersion;
     }
-    
+
     /**
      * @param string $platformName
      * @return ConnectorIdentification
@@ -83,10 +84,10 @@ class ConnectorIdentification extends AbstractModel
     public function setPlatformName(string $platformName): ConnectorIdentification
     {
         $this->platformName = $platformName;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -94,7 +95,7 @@ class ConnectorIdentification extends AbstractModel
     {
         return $this->platformName;
     }
-    
+
     /**
      * @param string $platformVersion
      * @return ConnectorIdentification
@@ -102,10 +103,10 @@ class ConnectorIdentification extends AbstractModel
     public function setPlatformVersion(string $platformVersion): ConnectorIdentification
     {
         $this->platformVersion = $platformVersion;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -113,7 +114,7 @@ class ConnectorIdentification extends AbstractModel
     {
         return $this->platformVersion;
     }
-    
+
     /**
      * @param integer $protocolVersion
      * @return ConnectorIdentification
@@ -121,10 +122,10 @@ class ConnectorIdentification extends AbstractModel
     public function setProtocolVersion(int $protocolVersion): ConnectorIdentification
     {
         $this->protocolVersion = $protocolVersion;
-        
+
         return $this;
     }
-    
+
     /**
      * @return integer
      */
@@ -132,7 +133,7 @@ class ConnectorIdentification extends AbstractModel
     {
         return $this->protocolVersion;
     }
-    
+
     /**
      * @param ConnectorServerInfo $connectorServerInfo
      * @return ConnectorIdentification
@@ -140,10 +141,10 @@ class ConnectorIdentification extends AbstractModel
     public function setServerInfo(ConnectorServerInfo $connectorServerInfo): ConnectorIdentification
     {
         $this->serverInfo = $connectorServerInfo;
-        
+
         return $this;
     }
-    
+
     /**
      * @return ConnectorServerInfo
      */

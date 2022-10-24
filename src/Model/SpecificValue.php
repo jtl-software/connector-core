@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -26,7 +27,7 @@ class SpecificValue extends AbstractIdentity
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 1;
-    
+
     /**
      * @var SpecificValueI18n[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\SpecificValueI18n>")
@@ -42,10 +43,10 @@ class SpecificValue extends AbstractIdentity
     public function setSort(int $sort): SpecificValue
     {
         $this->sort = $sort;
-        
+
         return $this;
     }
-    
+
     /**
      * @return integer Optional sort number
      */
@@ -53,7 +54,7 @@ class SpecificValue extends AbstractIdentity
     {
         return $this->sort;
     }
-    
+
     /**
      * @param SpecificValueI18n $i18n
      * @return SpecificValue
@@ -61,7 +62,7 @@ class SpecificValue extends AbstractIdentity
     public function addI18n(SpecificValueI18n $i18n): SpecificValue
     {
         $this->i18ns[] = $i18n;
-        
+
         return $this;
     }
 
@@ -72,10 +73,10 @@ class SpecificValue extends AbstractIdentity
     public function setI18ns(SpecificValueI18n ...$i18ns): SpecificValue
     {
         $this->i18ns = $i18ns;
-        
+
         return $this;
     }
-    
+
     /**
      * @return SpecificValueI18n[]
      */
@@ -83,14 +84,14 @@ class SpecificValue extends AbstractIdentity
     {
         return $this->i18ns;
     }
-    
+
     /**
      * @return SpecificValue
      */
     public function clearI18ns(): SpecificValue
     {
         $this->i18ns = [];
-        
+
         return $this;
     }
 }

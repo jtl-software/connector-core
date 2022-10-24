@@ -1,9 +1,11 @@
 <?php
+
 /**
  *
  * @copyright 2010-2012 JTL-Software GmbH
  * @package Jtl\Connector\Core\Database
  */
+
 namespace Jtl\Connector\Core\Database;
 
 /**
@@ -36,7 +38,7 @@ interface DatabaseInterface
      * @return bool $this->_isConnected
      */
     public function isConnected();
-    
+
     /**
      * Returns a string that has been properly escaped
      *

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Jtl\Connector\Core\Model\Generator;
 
 use Jtl\Connector\Core\Model\SpecificValue;

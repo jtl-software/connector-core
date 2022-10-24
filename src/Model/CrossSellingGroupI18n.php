@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -24,7 +25,7 @@ class CrossSellingGroupI18n extends AbstractI18n
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
     protected $description = '';
-    
+
     /**
      * @var string Localized name
      * @Serializer\Type("string")
@@ -40,10 +41,10 @@ class CrossSellingGroupI18n extends AbstractI18n
     public function setDescription(string $description): CrossSellingGroupI18n
     {
         $this->description = $description;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Optional localized description
      */
@@ -59,10 +60,10 @@ class CrossSellingGroupI18n extends AbstractI18n
     public function setName(string $name): CrossSellingGroupI18n
     {
         $this->name = $name;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Localized name
      */

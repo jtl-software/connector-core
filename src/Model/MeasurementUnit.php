@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -26,7 +27,7 @@ class MeasurementUnit extends AbstractIdentity
      * @Serializer\Accessor(getter="getCode",setter="setCode")
      */
     protected $code = '';
-    
+
     /**
      * @var string Synonym e.g. 'ml'
      * @Serializer\Type("string")
@@ -34,7 +35,7 @@ class MeasurementUnit extends AbstractIdentity
      * @Serializer\Accessor(getter="getDisplayCode",setter="setDisplayCode")
      */
     protected $displayCode = '';
-    
+
     /**
      * @var MeasurementUnitI18n[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\MeasurementUnitI18n>")
@@ -50,10 +51,10 @@ class MeasurementUnit extends AbstractIdentity
     public function setCode(string $code): MeasurementUnit
     {
         $this->code = $code;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Optional UCUM-Code, see  http://unitsofmeasure.org/
      */
@@ -61,7 +62,7 @@ class MeasurementUnit extends AbstractIdentity
     {
         return $this->code;
     }
-    
+
     /**
      * @param string $displayCode Synonym e.g. 'ml'
      * @return MeasurementUnit
@@ -69,10 +70,10 @@ class MeasurementUnit extends AbstractIdentity
     public function setDisplayCode(string $displayCode): MeasurementUnit
     {
         $this->displayCode = $displayCode;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Synonym e.g. 'ml'
      */
@@ -80,7 +81,7 @@ class MeasurementUnit extends AbstractIdentity
     {
         return $this->displayCode;
     }
-    
+
     /**
      * @param MeasurementUnitI18n $i18n
      * @return MeasurementUnit
@@ -88,7 +89,7 @@ class MeasurementUnit extends AbstractIdentity
     public function addI18n(MeasurementUnitI18n $i18n): MeasurementUnit
     {
         $this->i18ns[] = $i18n;
-        
+
         return $this;
     }
 
@@ -99,10 +100,10 @@ class MeasurementUnit extends AbstractIdentity
     public function setI18ns(MeasurementUnitI18n ...$i18ns): MeasurementUnit
     {
         $this->i18ns = $i18ns;
-        
+
         return $this;
     }
-    
+
     /**
      * @return MeasurementUnitI18n[]
      */
@@ -110,14 +111,14 @@ class MeasurementUnit extends AbstractIdentity
     {
         return $this->i18ns;
     }
-    
+
     /**
      * @return MeasurementUnit
      */
     public function clearI18ns(): MeasurementUnit
     {
         $this->i18ns = [];
-        
+
         return $this;
     }
 }

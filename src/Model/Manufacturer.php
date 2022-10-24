@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -19,7 +20,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class Manufacturer extends AbstractIdentity
 {
-
     /**
      * @var string Manufacturer (brand) name
      * @Serializer\Type("string")
@@ -27,7 +27,7 @@ class Manufacturer extends AbstractIdentity
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-    
+
     /**
      * @var integer Optional sort number
      * @Serializer\Type("integer")
@@ -35,7 +35,7 @@ class Manufacturer extends AbstractIdentity
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
-    
+
     /**
      * @var string Optional url path e.g. 'Products-manufactured-by-X'
      * @Serializer\Type("string")
@@ -43,7 +43,7 @@ class Manufacturer extends AbstractIdentity
      * @Serializer\Accessor(getter="getUrlPath",setter="setUrlPath")
      */
     protected $urlPath = '';
-    
+
     /**
      * @var string Optional manufacturer website URL
      * @Serializer\Type("string")
@@ -51,7 +51,7 @@ class Manufacturer extends AbstractIdentity
      * @Serializer\Accessor(getter="getWebsiteUrl",setter="setWebsiteUrl")
      */
     protected $websiteUrl = '';
-    
+
     /**
      * @var ManufacturerI18n[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\ManufacturerI18n>")
@@ -68,10 +68,10 @@ class Manufacturer extends AbstractIdentity
     {
         $this->setIdentificationStringBySubject('name', \sprintf('Name = %s', $name));
         $this->name = $name;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Manufacturer (brand) name
      */
@@ -79,7 +79,7 @@ class Manufacturer extends AbstractIdentity
     {
         return $this->name;
     }
-    
+
     /**
      * @param integer $sort Optional sort number
      * @return Manufacturer
@@ -87,10 +87,10 @@ class Manufacturer extends AbstractIdentity
     public function setSort(int $sort): self
     {
         $this->sort = $sort;
-        
+
         return $this;
     }
-    
+
     /**
      * @return integer Optional sort number
      */
@@ -98,7 +98,7 @@ class Manufacturer extends AbstractIdentity
     {
         return $this->sort;
     }
-    
+
     /**
      * @param string $urlPath Optional url path e.g. 'Products-manufactured-by-X'
      * @return Manufacturer
@@ -106,10 +106,10 @@ class Manufacturer extends AbstractIdentity
     public function setUrlPath(string $urlPath): self
     {
         $this->urlPath = $urlPath;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Optional url path e.g. 'Products-manufactured-by-X'
      */
@@ -117,7 +117,7 @@ class Manufacturer extends AbstractIdentity
     {
         return $this->urlPath;
     }
-    
+
     /**
      * @param string $websiteUrl Optional manufacturer website URL
      * @return Manufacturer
@@ -125,10 +125,10 @@ class Manufacturer extends AbstractIdentity
     public function setWebsiteUrl(string $websiteUrl): self
     {
         $this->websiteUrl = $websiteUrl;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Optional manufacturer website URL
      */
@@ -136,7 +136,7 @@ class Manufacturer extends AbstractIdentity
     {
         return $this->websiteUrl;
     }
-    
+
     /**
      * @param ManufacturerI18n $i18n
      * @return Manufacturer
@@ -144,7 +144,7 @@ class Manufacturer extends AbstractIdentity
     public function addI18n(ManufacturerI18n $i18n): self
     {
         $this->i18ns[] = $i18n;
-        
+
         return $this;
     }
 
@@ -155,10 +155,10 @@ class Manufacturer extends AbstractIdentity
     public function setI18ns(ManufacturerI18n ...$i18ns): self
     {
         $this->i18ns = $i18ns;
-        
+
         return $this;
     }
-    
+
     /**
      * @return ManufacturerI18n[]
      */
@@ -166,14 +166,14 @@ class Manufacturer extends AbstractIdentity
     {
         return $this->i18ns;
     }
-    
+
     /**
      * @return Manufacturer
      */
     public function clearI18ns(): self
     {
         $this->i18ns = [];
-        
+
         return $this;
     }
 }

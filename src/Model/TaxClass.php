@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -26,7 +27,7 @@ class TaxClass extends AbstractIdentity
      * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
      */
     protected $isDefault = false;
-    
+
     /**
      * @var string Optional tax class name
      * @Serializer\Type("string")
@@ -42,10 +43,10 @@ class TaxClass extends AbstractIdentity
     public function setIsDefault(bool $isDefault): TaxClass
     {
         $this->isDefault = $isDefault;
-        
+
         return $this;
     }
-    
+
     /**
      * @return boolean Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default.
      */
@@ -53,7 +54,7 @@ class TaxClass extends AbstractIdentity
     {
         return $this->isDefault;
     }
-    
+
     /**
      * @param string $name Optional tax class name
      * @return TaxClass
@@ -61,10 +62,10 @@ class TaxClass extends AbstractIdentity
     public function setName(string $name): TaxClass
     {
         $this->name = $name;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Optional tax class name
      */

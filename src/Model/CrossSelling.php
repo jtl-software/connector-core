@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -26,7 +27,7 @@ class CrossSelling extends AbstractIdentity
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-    
+
     /**
      * @var CrossSellingItem[] Referenced cross-sold products grouped by their crossSellingGroup
      * @Serializer\Type("array<Jtl\Connector\Core\Model\CrossSellingItem>")
@@ -53,10 +54,10 @@ class CrossSelling extends AbstractIdentity
     public function setProductId(Identity $productId): CrossSelling
     {
         $this->productId = $productId;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity Source product
      */
@@ -64,7 +65,7 @@ class CrossSelling extends AbstractIdentity
     {
         return $this->productId;
     }
-    
+
     /**
      * @param CrossSellingItem $item
      * @return CrossSelling
@@ -72,10 +73,10 @@ class CrossSelling extends AbstractIdentity
     public function addItem(CrossSellingItem $item): CrossSelling
     {
         $this->items[] = $item;
-        
+
         return $this;
     }
-    
+
     /**
      * @param CrossSellingItem ...$items
      * @return CrossSelling
@@ -83,10 +84,10 @@ class CrossSelling extends AbstractIdentity
     public function setItems(CrossSellingItem ...$items): CrossSelling
     {
         $this->items = $items;
-        
+
         return $this;
     }
-    
+
     /**
      * @return CrossSellingItem[]
      */
@@ -94,14 +95,14 @@ class CrossSelling extends AbstractIdentity
     {
         return $this->items;
     }
-    
+
     /**
      * @return CrossSelling
      */
     public function clearItems(): CrossSelling
     {
         $this->items = [];
-        
+
         return $this;
     }
 }

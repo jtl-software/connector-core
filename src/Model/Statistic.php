@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -41,7 +42,7 @@ class Statistic extends AbstractModel
     {
         return $this->available;
     }
-    
+
     /**
      * @param integer $available
      * @return Statistic
@@ -49,10 +50,10 @@ class Statistic extends AbstractModel
     public function setAvailable(int $available): Statistic
     {
         $this->available = $available;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -60,7 +61,7 @@ class Statistic extends AbstractModel
     {
         return $this->controllerName;
     }
-    
+
     /**
      * @param string $controllerName
      * @return Statistic

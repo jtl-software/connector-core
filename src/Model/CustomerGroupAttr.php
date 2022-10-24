@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -42,10 +43,10 @@ class CustomerGroupAttr extends KeyValueAttribute implements IdentityInterface
     public function setId(Identity $id): CustomerGroupAttr
     {
         $this->id = $id;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity Unique customerGroupAttr id
      */

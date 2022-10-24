@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -24,7 +25,7 @@ class DeliveryNoteItemInfo extends AbstractModel
      * @Serializer\Accessor(getter="getBatch",setter="setBatch")
      */
     protected $batch = '';
-    
+
     /**
      * @var \DateTimeInterface
      * @Serializer\Type("DateTimeInterface")
@@ -32,7 +33,7 @@ class DeliveryNoteItemInfo extends AbstractModel
      * @Serializer\Accessor(getter="getBestBefore",setter="setBestBefore")
      */
     protected $bestBefore = null;
-    
+
     /**
      * @var double
      * @Serializer\Type("double")
@@ -40,7 +41,7 @@ class DeliveryNoteItemInfo extends AbstractModel
      * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
      */
     protected $quantity = 0.0;
-    
+
     /**
      * @var integer
      * @Serializer\Type("integer")
@@ -48,8 +49,8 @@ class DeliveryNoteItemInfo extends AbstractModel
      * @Serializer\Accessor(getter="getWarehouseId",setter="setWarehouseId")
      */
     protected $warehouseId = 0;
-    
-    
+
+
     /**
      * @param string $batch
      * @return DeliveryNoteItemInfo
@@ -57,10 +58,10 @@ class DeliveryNoteItemInfo extends AbstractModel
     public function setBatch(string $batch): DeliveryNoteItemInfo
     {
         $this->batch = $batch;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -68,7 +69,7 @@ class DeliveryNoteItemInfo extends AbstractModel
     {
         return $this->batch;
     }
-    
+
     /**
      * @param \DateTimeInterface $bestBefore
      * @return DeliveryNoteItemInfo
@@ -76,10 +77,10 @@ class DeliveryNoteItemInfo extends AbstractModel
     public function setBestBefore(\DateTimeInterface $bestBefore = null): DeliveryNoteItemInfo
     {
         $this->bestBefore = $bestBefore;
-        
+
         return $this;
     }
-    
+
     /**
      * @return \DateTimeInterface
      */
@@ -87,7 +88,7 @@ class DeliveryNoteItemInfo extends AbstractModel
     {
         return $this->bestBefore;
     }
-    
+
     /**
      * @param double $quantity
      * @return DeliveryNoteItemInfo
@@ -95,10 +96,10 @@ class DeliveryNoteItemInfo extends AbstractModel
     public function setQuantity(float $quantity): DeliveryNoteItemInfo
     {
         $this->quantity = $quantity;
-        
+
         return $this;
     }
-    
+
     /**
      * @return double
      */
@@ -106,7 +107,7 @@ class DeliveryNoteItemInfo extends AbstractModel
     {
         return $this->quantity;
     }
-    
+
     /**
      * @param integer $warehouseId
      * @return DeliveryNoteItemInfo
@@ -114,10 +115,10 @@ class DeliveryNoteItemInfo extends AbstractModel
     public function setWarehouseId(int $warehouseId): DeliveryNoteItemInfo
     {
         $this->warehouseId = $warehouseId;
-        
+
         return $this;
     }
-    
+
     /**
      * @return int
      */

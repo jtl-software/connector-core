@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -40,7 +41,7 @@ class DeliveryNoteItem extends AbstractIdentity
      * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
      */
     protected $quantity = 0.0;
-    
+
     /**
      * @var DeliveryNoteItemInfo[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\DeliveryNoteItemInfo>")
@@ -60,7 +61,7 @@ class DeliveryNoteItem extends AbstractIdentity
         $this->productId           = new Identity();
         $this->customerOrderItemId = new Identity();
     }
-    
+
     /**
      * @param Identity $customerOrderItemId
      * @return DeliveryNoteItem
@@ -68,10 +69,10 @@ class DeliveryNoteItem extends AbstractIdentity
     public function setCustomerOrderItemId(Identity $customerOrderItemId): DeliveryNoteItem
     {
         $this->customerOrderItemId = $customerOrderItemId;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity
      */
@@ -87,10 +88,10 @@ class DeliveryNoteItem extends AbstractIdentity
     public function setProductId(Identity $productId): DeliveryNoteItem
     {
         $this->productId = $productId;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity Reference to product
      */
@@ -106,10 +107,10 @@ class DeliveryNoteItem extends AbstractIdentity
     public function setQuantity(float $quantity): DeliveryNoteItem
     {
         $this->quantity = $quantity;
-        
+
         return $this;
     }
-    
+
     /**
      * @return double
      */
@@ -117,7 +118,7 @@ class DeliveryNoteItem extends AbstractIdentity
     {
         return $this->quantity;
     }
-    
+
     /**
      * @param DeliveryNoteItemInfo $info
      * @return DeliveryNoteItem
@@ -125,7 +126,7 @@ class DeliveryNoteItem extends AbstractIdentity
     public function addInfo(DeliveryNoteItemInfo $info): DeliveryNoteItem
     {
         $this->info[] = $info;
-        
+
         return $this;
     }
 
@@ -136,10 +137,10 @@ class DeliveryNoteItem extends AbstractIdentity
     public function setInfo(DeliveryNoteItemInfo ...$info): DeliveryNoteItem
     {
         $this->info = $info;
-        
+
         return $this;
     }
-    
+
     /**
      * @return DeliveryNoteItemInfo[]
      */
@@ -147,14 +148,14 @@ class DeliveryNoteItem extends AbstractIdentity
     {
         return $this->info;
     }
-    
+
     /**
      * @return DeliveryNoteItem
      */
     public function clearInfo(): DeliveryNoteItem
     {
         $this->info = [];
-        
+
         return $this;
     }
 }

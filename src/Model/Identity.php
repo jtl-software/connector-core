@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -27,7 +28,7 @@ class Identity extends AbstractModel
      * @Serializer\Accessor(getter="getEndpoint",setter="setEndpoint")
      */
     protected $endpoint = '';
-    
+
     /**
      * @var int
      * @Serializer\Type("integer")
@@ -35,7 +36,7 @@ class Identity extends AbstractModel
      * @Serializer\Accessor(getter="getHost",setter="setHost")
      */
     protected $host = 0;
-    
+
     /**
      * Constructor
      *
@@ -47,7 +48,7 @@ class Identity extends AbstractModel
         $this->endpoint = $endpoint;
         $this->host     = $host;
     }
-    
+
     /**
      * Gets the value of endpoint.
      *
@@ -57,7 +58,7 @@ class Identity extends AbstractModel
     {
         return $this->endpoint;
     }
-    
+
     /**
      * Sets the value of endpoint.
      *
@@ -67,10 +68,10 @@ class Identity extends AbstractModel
     public function setEndpoint(string $endpoint): Identity
     {
         $this->endpoint = $endpoint;
-        
+
         return $this;
     }
-    
+
     /**
      * Gets the value of host.
      *
@@ -80,7 +81,7 @@ class Identity extends AbstractModel
     {
         return $this->host;
     }
-    
+
     /**
      * Sets the value of host.
      *
@@ -90,10 +91,10 @@ class Identity extends AbstractModel
     public function setHost(int $host): Identity
     {
         $this->host = $host;
-        
+
         return $this;
     }
-    
+
     /**
      * Convert to Array
      *
@@ -118,7 +119,7 @@ class Identity extends AbstractModel
         if (\count($data) !== 2 || !isset($data[0]) || !\is_string($data[0]) || !isset($data[1]) || !\is_int($data[1])) {
             throw new InvalidArgumentException('The argument is not valid. It must consist of exactly two fields. First field (0) must contain a string value and second field (1) must contain an integer value');
         }
-        
+
         return new self($data[0], $data[1]);
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -34,10 +35,10 @@ class TaxZoneCountry extends AbstractModel
     public function setCountryIso(string $countryIso): TaxZoneCountry
     {
         $this->countryIso = $countryIso;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Country ISO 3166-2 (2 letter Uppercase)
      */

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -66,10 +67,10 @@ class ProductStockLevel extends AbstractModel
     public function setStockLevel(float $stockLevel): ProductStockLevel
     {
         $this->stockLevel = $stockLevel;
-        
+
         return $this;
     }
-    
+
     /**
      * @return double
      */

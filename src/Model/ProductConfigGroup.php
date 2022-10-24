@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -34,7 +35,7 @@ class ProductConfigGroup extends AbstractModel
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
-    
+
     /**
      * Constructor
      */
@@ -69,10 +70,10 @@ class ProductConfigGroup extends AbstractModel
     public function setSort(int $sort): ProductConfigGroup
     {
         $this->sort = $sort;
-        
+
         return $this;
     }
-    
+
     /**
      * @return integer Optional sort number
      */

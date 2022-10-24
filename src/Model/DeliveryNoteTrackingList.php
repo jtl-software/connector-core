@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -24,7 +25,7 @@ class DeliveryNoteTrackingList extends AbstractModel
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-    
+
     /**
      * @var string[]
      * @Serializer\Type("array<string>")
@@ -32,8 +33,8 @@ class DeliveryNoteTrackingList extends AbstractModel
      * @Serializer\AccessType("reflection")
      */
     protected $codes = [];
-    
-    
+
+
     /**
      * @param string $name
      * @return DeliveryNoteTrackingList
@@ -41,10 +42,10 @@ class DeliveryNoteTrackingList extends AbstractModel
     public function setName(string $name): DeliveryNoteTrackingList
     {
         $this->name = $name;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -52,7 +53,7 @@ class DeliveryNoteTrackingList extends AbstractModel
     {
         return $this->name;
     }
-    
+
     /**
      * @param string $code
      * @return DeliveryNoteTrackingList
@@ -60,7 +61,7 @@ class DeliveryNoteTrackingList extends AbstractModel
     public function addCode(string $code): DeliveryNoteTrackingList
     {
         $this->codes[] = $code;
-        
+
         return $this;
     }
 
@@ -71,10 +72,10 @@ class DeliveryNoteTrackingList extends AbstractModel
     public function setCodes(string ...$codes): DeliveryNoteTrackingList
     {
         $this->codes = $codes;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string[]
      */
@@ -82,14 +83,14 @@ class DeliveryNoteTrackingList extends AbstractModel
     {
         return $this->codes;
     }
-    
+
     /**
      * @return DeliveryNoteTrackingList
      */
     public function clearCodes(): DeliveryNoteTrackingList
     {
         $this->codes = [];
-        
+
         return $this;
     }
 }

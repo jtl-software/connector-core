@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -20,7 +21,7 @@ class QueryFilter
     const FILTER_FETCH_CHILDREN = 'fetchChildren';
     const FILTER_PARENT_ID      = 'parentId';
     const FILTER_RELATION_TYPE  = 'relationType';
-    
+
     /**
      * Query item count limitation
      *
@@ -29,7 +30,7 @@ class QueryFilter
      * @Serializer\SerializedName("limit")
      */
     protected $limit = 100;
-    
+
     /**
      * Query item filter (where)
      *
@@ -38,7 +39,7 @@ class QueryFilter
      * @Serializer\SerializedName("filters")
      */
     protected $filters = [];
-    
+
     /**
      * Constructor
      *
@@ -49,7 +50,7 @@ class QueryFilter
         $this->filters = [];
         $this->limit   = $limit;
     }
-    
+
     /**
      * Limit Setter
      *
@@ -59,10 +60,10 @@ class QueryFilter
     public function setLimit(int $limit): QueryFilter
     {
         $this->limit = $limit;
-        
+
         return $this;
     }
-    
+
     /**
      * Limit Getter
      *
@@ -82,10 +83,10 @@ class QueryFilter
     public function setFilters(array $filters): QueryFilter
     {
         $this->filters = $filters;
-        
+
         return $this;
     }
-    
+
     /**
      * Filters Getter
      *
@@ -95,7 +96,7 @@ class QueryFilter
     {
         return $this->filters;
     }
-    
+
     /**
      * Add one Filter
      *
@@ -108,7 +109,7 @@ class QueryFilter
         $this->filters[$key] = $value;
         return $this;
     }
-    
+
     /**
      * Delete one Filter
      *
@@ -119,13 +120,13 @@ class QueryFilter
     {
         if ($this->isFilter($key)) {
             unset($this->filters[$key]);
-            
+
             return true;
         }
-        
+
         return false;
     }
-    
+
     /**
      * @param string $key
      * @return boolean
@@ -134,7 +135,7 @@ class QueryFilter
     {
         return isset($this->filters[$key]);
     }
-    
+
     /**
      * @param string $key
      * @return mixed|NULL
@@ -144,7 +145,7 @@ class QueryFilter
         if ($this->isFilter($key)) {
             return $this->filters[$key];
         }
-        
+
         return null;
     }
 
@@ -152,7 +153,7 @@ class QueryFilter
     {
         $this->filters = [];
     }
-    
+
     /**
      * @param string $oldKey
      * @param string $newKey
@@ -165,16 +166,16 @@ class QueryFilter
             if ($value === null) {
                 $value = $this->filters[$oldKey];
             }
-            
+
             unset($this->filters[$oldKey]);
             $this->filters[$newKey] = $value;
-            
+
             return true;
         }
-        
+
         return false;
     }
-    
+
     /**
      * Setter
      *
@@ -185,11 +186,11 @@ class QueryFilter
         if (!\is_object($obj)) {
             return;
         }
-        
+
         if (isset($obj->limit)) {
             $this->setLimit($obj->limit);
         }
-        
+
         if (isset($obj->filters) && \is_object($obj->filters)) {
             $this->setFilters(\get_object_vars($obj->filters));
         }

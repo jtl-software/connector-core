@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Serializer\Handler;
 
 use JMS\Serializer\Context;

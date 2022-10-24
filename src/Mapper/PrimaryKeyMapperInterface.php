@@ -1,8 +1,10 @@
 <?php
+
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Mapper
  */
+
 namespace Jtl\Connector\Core\Mapper;
 
 interface PrimaryKeyMapperInterface

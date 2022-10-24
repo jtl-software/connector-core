@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -22,7 +23,7 @@ class Checksum extends AbstractModel implements ChecksumInterface
      * @var int - Checksum used to check variations for change
      */
     const TYPE_VARIATION = 1;
-    
+
     /**
      * @var Identity
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
@@ -30,7 +31,7 @@ class Checksum extends AbstractModel implements ChecksumInterface
      * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
      */
     protected $foreignKey = null;
-    
+
     /**
      * @var string
      * @Serializer\Type("string")
@@ -38,7 +39,7 @@ class Checksum extends AbstractModel implements ChecksumInterface
      * @Serializer\Accessor(getter="getEndpoint",setter="setEndpoint")
      */
     protected $endpoint = '';
-    
+
     /**
      * @var boolean
      * @Serializer\Type("boolean")
@@ -46,7 +47,7 @@ class Checksum extends AbstractModel implements ChecksumInterface
      * @Serializer\Accessor(getter="getHasChanged",setter="setHasChanged")
      */
     protected $hasChanged = false;
-    
+
     /**
      * @var string
      * @Serializer\Type("string")
@@ -54,7 +55,7 @@ class Checksum extends AbstractModel implements ChecksumInterface
      * @Serializer\Accessor(getter="getHost",setter="setHost")
      */
     protected $host = '';
-    
+
     /**
      * @var integer
      * @Serializer\Type("integer")
@@ -62,7 +63,7 @@ class Checksum extends AbstractModel implements ChecksumInterface
      * @Serializer\Accessor(getter="getType",setter="setType")
      */
     protected $type = 0;
-    
+
     /**
      * Constructor
      */
@@ -70,7 +71,7 @@ class Checksum extends AbstractModel implements ChecksumInterface
     {
         $this->foreignKey = new Identity();
     }
-    
+
     /**
      * @param Identity $foreignKey
      * @return Checksum
@@ -78,10 +79,10 @@ class Checksum extends AbstractModel implements ChecksumInterface
     public function setForeignKey(Identity $foreignKey)
     {
         $this->foreignKey = $foreignKey;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity
      */
@@ -89,7 +90,7 @@ class Checksum extends AbstractModel implements ChecksumInterface
     {
         return $this->foreignKey;
     }
-    
+
     /**
      * @param string $endpoint
      * @return Checksum
@@ -97,10 +98,10 @@ class Checksum extends AbstractModel implements ChecksumInterface
     public function setEndpoint(string $endpoint)
     {
         $this->endpoint = $endpoint;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -108,7 +109,7 @@ class Checksum extends AbstractModel implements ChecksumInterface
     {
         return $this->endpoint;
     }
-    
+
     /**
      * @param boolean $hasChanged
      * @return Checksum
@@ -116,10 +117,10 @@ class Checksum extends AbstractModel implements ChecksumInterface
     public function setHasChanged(bool $hasChanged)
     {
         $this->hasChanged = $hasChanged;
-        
+
         return $this;
     }
-    
+
     /**
      * @return boolean
      */
@@ -127,7 +128,7 @@ class Checksum extends AbstractModel implements ChecksumInterface
     {
         return $this->hasChanged;
     }
-    
+
     /**
      * @return boolean
      */
@@ -135,7 +136,7 @@ class Checksum extends AbstractModel implements ChecksumInterface
     {
         return $this->hasChanged;
     }
-    
+
     /**
      * @param string $host
      * @return Checksum
@@ -143,10 +144,10 @@ class Checksum extends AbstractModel implements ChecksumInterface
     public function setHost(string $host)
     {
         $this->host = $host;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -154,7 +155,7 @@ class Checksum extends AbstractModel implements ChecksumInterface
     {
         return $this->host;
     }
-    
+
     /**
      * @param integer $type
      * @return Checksum
@@ -162,10 +163,10 @@ class Checksum extends AbstractModel implements ChecksumInterface
     public function setType(int $type)
     {
         $this->type = $type;
-        
+
         return $this;
     }
-    
+
     /**
      * @return integer
      */

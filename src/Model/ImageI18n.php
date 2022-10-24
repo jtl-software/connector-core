@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -40,7 +41,7 @@ class ImageI18n extends AbstractI18n implements IdentityInterface
     {
         $this->id = new Identity();
     }
-    
+
     /**
      * @param Identity $id
      * @return ImageI18n
@@ -48,10 +49,10 @@ class ImageI18n extends AbstractI18n implements IdentityInterface
     public function setId(Identity $id): ImageI18n
     {
         $this->id = $id;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity
      */
@@ -67,10 +68,10 @@ class ImageI18n extends AbstractI18n implements IdentityInterface
     public function setAltText(string $altText): ImageI18n
     {
         $this->altText = $altText;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */

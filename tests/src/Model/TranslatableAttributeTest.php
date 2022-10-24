@@ -225,7 +225,7 @@ class TranslatableAttributeTest extends TestCase
             ];
         }
 
-        return \array_merge($data,[
+        return \array_merge($data, [
             //invalid types, should fall back to string
             [
                 'something invalid',

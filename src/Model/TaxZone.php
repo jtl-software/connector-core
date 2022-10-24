@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -26,7 +27,7 @@ class TaxZone extends AbstractIdentity
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-    
+
     /**
      * @var TaxZoneCountry[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\TaxZoneCountry>")
@@ -42,10 +43,10 @@ class TaxZone extends AbstractIdentity
     public function setName(string $name): TaxZone
     {
         $this->name = $name;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Optional tax zone name e.g. "EU Zone"
      */
@@ -53,7 +54,7 @@ class TaxZone extends AbstractIdentity
     {
         return $this->name;
     }
-    
+
     /**
      * @param TaxZoneCountry $country
      * @return TaxZone
@@ -61,10 +62,10 @@ class TaxZone extends AbstractIdentity
     public function addCountry(TaxZoneCountry $country): TaxZone
     {
         $this->countries[] = $country;
-        
+
         return $this;
     }
-    
+
     /**
      * @return TaxZoneCountry[]
      */
@@ -72,14 +73,14 @@ class TaxZone extends AbstractIdentity
     {
         return $this->countries;
     }
-    
+
     /**
      * @return TaxZone
      */
     public function clearCountries(): TaxZone
     {
         $this->countries = [];
-        
+
         return $this;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Serializer\Subscriber;
 
 use WhiteCube\Lingua\Service as Lingua;

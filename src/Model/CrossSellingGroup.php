@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -34,10 +35,10 @@ class CrossSellingGroup extends AbstractIdentity
     public function addI18n(CrossSellingGroupI18n $i18n): CrossSellingGroup
     {
         $this->i18ns[] = $i18n;
-        
+
         return $this;
     }
-    
+
     /**
      * @param CrossSellingGroupI18n ...$i18ns
      * @return CrossSellingGroup
@@ -45,10 +46,10 @@ class CrossSellingGroup extends AbstractIdentity
     public function setI18ns(CrossSellingGroupI18n ...$i18ns): CrossSellingGroup
     {
         $this->i18ns = $i18ns;
-        
+
         return $this;
     }
-    
+
     /**
      * @return CrossSellingGroupI18n[]
      */
@@ -56,14 +57,14 @@ class CrossSellingGroup extends AbstractIdentity
     {
         return $this->i18ns;
     }
-    
+
     /**
      * @return CrossSellingGroup
      */
     public function clearI18ns(): CrossSellingGroup
     {
         $this->i18ns = [];
-        
+
         return $this;
     }
 }

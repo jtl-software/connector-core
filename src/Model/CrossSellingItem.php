@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -35,7 +36,7 @@ class CrossSellingItem extends AbstractIdentity
      * @Serializer\Accessor(getter="getCrossSellingGroup",setter="setCrossSellingGroup")
      */
     protected $crossSellingGroup = null;
-    
+
     /**
      * @var Identity[] Referenced target product ID
      * @Serializer\Type("array<Jtl\Connector\Core\Model\Identity>")
@@ -43,7 +44,7 @@ class CrossSellingItem extends AbstractIdentity
      * @Serializer\AccessType("reflection")
      */
     protected $productIds = [];
-    
+
     /**
      * Constructor
      */
@@ -52,7 +53,7 @@ class CrossSellingItem extends AbstractIdentity
         parent::__construct($endpoint, $host);
         $this->crossSellingGroupId = new Identity();
     }
-    
+
     /**
      * @param Identity $crossSellingGroupId Reference to crossSellingGroup
      * @return CrossSellingItem
@@ -60,10 +61,10 @@ class CrossSellingItem extends AbstractIdentity
     public function setCrossSellingGroupId(Identity $crossSellingGroupId): CrossSellingItem
     {
         $this->crossSellingGroupId = $crossSellingGroupId;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity Reference to crossSellingGroup
      */
@@ -89,7 +90,7 @@ class CrossSellingItem extends AbstractIdentity
         $this->crossSellingGroup = $crossSellingGroup;
         return $this;
     }
-    
+
     /**
      * @param Identity $productId
      * @return CrossSellingItem
@@ -97,7 +98,7 @@ class CrossSellingItem extends AbstractIdentity
     public function addProductId(Identity $productId): CrossSellingItem
     {
         $this->productIds[] = $productId;
-        
+
         return $this;
     }
 
@@ -108,10 +109,10 @@ class CrossSellingItem extends AbstractIdentity
     public function setProductIds(Identity ...$productIds): CrossSellingItem
     {
         $this->productIds = $productIds;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity[]
      */
@@ -119,14 +120,14 @@ class CrossSellingItem extends AbstractIdentity
     {
         return $this->productIds;
     }
-    
+
     /**
      * @return CrossSellingItem
      */
     public function clearProductIds(): CrossSellingItem
     {
         $this->productIds = [];
-        
+
         return $this;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Rpc;
 
 use JMS\Serializer\Annotation as Serializer;

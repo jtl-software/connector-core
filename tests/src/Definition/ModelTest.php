@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Definition;
 
 use Jtl\Connector\Core\Definition\IdentityType;
@@ -34,7 +35,7 @@ class ModelTest extends TestCase
             }
 
             $modelClass = \sprintf("%s\\%s", $modelNamespace, $modelName);
-            $model      = new $modelClass;
+            $model      = new $modelClass();
 
             foreach ($identityMappings as $propertyName => $identityType) {
                 $this->assertObjectHasAttribute($propertyName, $model);

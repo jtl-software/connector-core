@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Stub\Logger;
 
 use Monolog\Logger as MonoLogger;

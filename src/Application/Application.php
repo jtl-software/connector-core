@@ -146,7 +146,7 @@ class Application
      */
     public function __construct(
         string $connectorDir,
-        ?ConfigInterface $config = null,
+        ?ConfigInterface $config    = null,
         ?ConfigSchema $configSchema = null
     ) {
         if (!\is_dir($connectorDir)) {
@@ -913,7 +913,7 @@ class Application
         $this->container->set(IdentityLinker::class, function (ContainerInterface $container) {
             $linker = new IdentityLinker($container->get(PrimaryKeyMapperInterface::class));
             $linker->setLogger($this->loggerService->get(LoggerService::CHANNEL_LINKER));
-            
+
             return $linker;
         });
     }

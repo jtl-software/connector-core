@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Serializer\Handler;
 
 use JMS\Serializer\DeserializationContext;

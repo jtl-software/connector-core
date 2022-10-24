@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -41,10 +42,10 @@ class CustomerOrderShippingAddress extends AbstractOrderAddress
     public function setCustomerId(Identity $customerId): CustomerOrderShippingAddress
     {
         $this->customerId = $customerId;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity Reference to customer
      */

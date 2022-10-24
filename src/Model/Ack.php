@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2014 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -8,7 +9,7 @@
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
-use \Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Jtl\Connector\Core\Checksum\ChecksumInterface;
 
 /**
@@ -36,10 +37,10 @@ class Ack extends Identities
     public function addChecksum(ChecksumInterface $checksum): Ack
     {
         $this->checksums[] = $checksum;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Checksum[]
      */
@@ -47,14 +48,14 @@ class Ack extends Identities
     {
         return $this->checksums;
     }
-    
+
     /**
      * @return Ack
      */
     public function clearChecksums(): Ack
     {
         $this->checksums = [];
-        
+
         return $this;
     }
 }

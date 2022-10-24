@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Connector;
 
 use Jtl\Connector\Core\Application\Application;

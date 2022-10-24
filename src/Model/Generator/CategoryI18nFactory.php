@@ -14,7 +14,7 @@ class CategoryI18nFactory extends AbstractModelFactory
      * @return array
      * @throws \Exception
      */
-    protected function makeFakeArray() : array
+    protected function makeFakeArray(): array
     {
         return [
             'description'     => $this->faker->sentence,
@@ -30,7 +30,7 @@ class CategoryI18nFactory extends AbstractModelFactory
     /**
      * @return string
      */
-    protected function getModelClass() : string
+    protected function getModelClass(): string
     {
         return CategoryI18n::class;
     }

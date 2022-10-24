@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -26,7 +27,7 @@ class ProductWarehouseInfo extends AbstractModel
      * @Serializer\Accessor(getter="getwarehouseId",setter="setwarehouseId")
      */
     protected $warehouseId = null;
-    
+
     /**
      * @var double Optional product inflow quantity for specified warehouse
      * @Serializer\Type("double")
@@ -34,7 +35,7 @@ class ProductWarehouseInfo extends AbstractModel
      * @Serializer\Accessor(getter="getInflowQuantity",setter="setInflowQuantity")
      */
     protected $inflowQuantity = 0.0;
-    
+
     /**
      * @var double
      * @Serializer\Type("double")
@@ -42,7 +43,7 @@ class ProductWarehouseInfo extends AbstractModel
      * @Serializer\Accessor(getter="getstockLevel",setter="setstockLevel")
      */
     protected $stockLevel = 0.0;
-    
+
     /**
      * Constructor
      */
@@ -58,10 +59,10 @@ class ProductWarehouseInfo extends AbstractModel
     public function setWarehouseId(Identity $warehouseId): ProductWarehouseInfo
     {
         $this->warehouseId = $warehouseId;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity
      */
@@ -69,7 +70,7 @@ class ProductWarehouseInfo extends AbstractModel
     {
         return $this->warehouseId;
     }
-    
+
     /**
      * @param double $inflowQuantity Optional product inflow quantity for specified warehouse
      * @return ProductWarehouseInfo
@@ -77,10 +78,10 @@ class ProductWarehouseInfo extends AbstractModel
     public function setInflowQuantity(float $inflowQuantity): ProductWarehouseInfo
     {
         $this->inflowQuantity = $inflowQuantity;
-        
+
         return $this;
     }
-    
+
     /**
      * @return double Optional product inflow quantity for specified warehouse
      */
@@ -88,7 +89,7 @@ class ProductWarehouseInfo extends AbstractModel
     {
         return $this->inflowQuantity;
     }
-    
+
     /**
      * @param double $stockLevel
      * @return ProductWarehouseInfo
@@ -96,10 +97,10 @@ class ProductWarehouseInfo extends AbstractModel
     public function setStockLevel(float $stockLevel): ProductWarehouseInfo
     {
         $this->stockLevel = $stockLevel;
-        
+
         return $this;
     }
-    
+
     /**
      * @return double
      */

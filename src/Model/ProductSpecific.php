@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -45,10 +46,10 @@ class ProductSpecific extends AbstractIdentity
     public function setSpecificValueId(Identity $specificValueId): ProductSpecific
     {
         $this->specificValueId = $specificValueId;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity Reference to specificValue
      */

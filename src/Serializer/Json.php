@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright JTL-Software GmbH
  * @package Jtl\Connector\Core\Serializer

@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Definition;
 
 final class Action

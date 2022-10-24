@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -17,7 +18,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class StatusChange extends AbstractModel
 {
-
     /**
      * @var Identity
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
@@ -25,7 +25,7 @@ class StatusChange extends AbstractModel
      * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
      */
     protected $customerOrderId = null;
-    
+
     /**
      * @var string
      * @Serializer\Type("string")
@@ -33,7 +33,7 @@ class StatusChange extends AbstractModel
      * @Serializer\Accessor(getter="getOrderStatus",setter="setOrderStatus")
      */
     protected $orderStatus = '';
-    
+
     /**
      * @var string
      * @Serializer\Type("string")
@@ -41,7 +41,7 @@ class StatusChange extends AbstractModel
      * @Serializer\Accessor(getter="getPaymentStatus",setter="setPaymentStatus")
      */
     protected $paymentStatus = '';
-    
+
     /**
      * Constructor
      */
@@ -49,7 +49,7 @@ class StatusChange extends AbstractModel
     {
         $this->customerOrderId = new Identity();
     }
-    
+
     /**
      * @param Identity $customerOrderId
      * @return StatusChange
@@ -57,10 +57,10 @@ class StatusChange extends AbstractModel
     public function setCustomerOrderId(Identity $customerOrderId): self
     {
         $this->customerOrderId = $customerOrderId;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity
      */
@@ -76,10 +76,10 @@ class StatusChange extends AbstractModel
     public function setOrderStatus(string $orderStatus): self
     {
         $this->orderStatus = $orderStatus;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -87,7 +87,7 @@ class StatusChange extends AbstractModel
     {
         return $this->orderStatus;
     }
-    
+
     /**
      * @param string $paymentStatus
      * @return StatusChange
@@ -95,10 +95,10 @@ class StatusChange extends AbstractModel
     public function setPaymentStatus(string $paymentStatus): self
     {
         $this->paymentStatus = $paymentStatus;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */

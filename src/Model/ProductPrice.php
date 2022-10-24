@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -26,7 +27,7 @@ class ProductPrice extends AbstractIdentity
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-    
+
     /**
      * @var Identity Reference to customer
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
@@ -63,7 +64,7 @@ class ProductPrice extends AbstractIdentity
         $this->productId       = new Identity();
         $this->customerId      = new Identity();
     }
-    
+
     /**
      * @param Identity $customerGroupId Reference to customerGroup
      * @return ProductPrice
@@ -73,7 +74,7 @@ class ProductPrice extends AbstractIdentity
         $this->customerGroupId = $customerGroupId;
         return $this;
     }
-    
+
     /**
      * @return Identity Reference to customerGroup
      */
@@ -81,7 +82,7 @@ class ProductPrice extends AbstractIdentity
     {
         return $this->customerGroupId;
     }
-    
+
     /**
      * @param Identity $customerId Reference to customer
      * @return ProductPrice
@@ -91,7 +92,7 @@ class ProductPrice extends AbstractIdentity
         $this->customerId = $customerId;
         return $this;
     }
-    
+
     /**
      * @return Identity Reference to customer
      */
@@ -124,7 +125,7 @@ class ProductPrice extends AbstractIdentity
     public function addItem(ProductPriceItem $item): ProductPrice
     {
         $this->items[] = $item;
-        
+
         return $this;
     }
 
@@ -135,10 +136,10 @@ class ProductPrice extends AbstractIdentity
     public function setItems(ProductPriceItem ...$items): ProductPrice
     {
         $this->items = $items;
-        
+
         return $this;
     }
-    
+
     /**
      * @return ProductPriceItem[]
      */
@@ -146,14 +147,14 @@ class ProductPrice extends AbstractIdentity
     {
         return $this->items;
     }
-    
+
     /**
      * @return ProductPrice
      */
     public function clearItems(): ProductPrice
     {
         $this->items = [];
-        
+
         return $this;
     }
 }

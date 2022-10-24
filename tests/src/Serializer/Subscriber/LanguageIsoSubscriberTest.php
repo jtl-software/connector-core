@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Serializer\Subscriber;
 
 use Jtl\Connector\Core\Model\AbstractI18n;
@@ -36,7 +37,7 @@ class LanguageIsoSubscriberTest extends TestCase
      */
     public function testOnPostSerializeWithInvalidValue(string $model)
     {
-        $i18nModel = new $model;
+        $i18nModel = new $model();
         $i18nModel->setLanguageIso('___');
 
         $serializedData = $this->serializeModel($i18nModel);
@@ -53,7 +54,7 @@ class LanguageIsoSubscriberTest extends TestCase
      */
     public function testOnPostSerializeWithEmptyValue(string $model)
     {
-        $i18nModel = new $model;
+        $i18nModel = new $model();
         $i18nModel->setLanguageIso("");
 
         $serializedData = $this->serializeModel($i18nModel);
@@ -70,7 +71,7 @@ class LanguageIsoSubscriberTest extends TestCase
      */
     public function testOnPostSerializeWithValidValue(string $model)
     {
-        $i18nModel = new $model;
+        $i18nModel = new $model();
         $i18nModel->setLanguageIso('de');
 
         $serializedData = $this->serializeModel($i18nModel);
@@ -87,7 +88,7 @@ class LanguageIsoSubscriberTest extends TestCase
      */
     public function testOnPostSerializeWithNoValue(string $model)
     {
-        $i18nModel = new $model;
+        $i18nModel = new $model();
 
         $serializedData = $this->serializeModel($i18nModel);
 
@@ -103,7 +104,7 @@ class LanguageIsoSubscriberTest extends TestCase
      */
     public function testOnPreDeserializeWithValidValue(string $model)
     {
-        $i18nModel = new $model;
+        $i18nModel = new $model();
         $i18nModel->setLanguageIso('de');
 
         /** @var $deserializeData ProductI18n */
@@ -121,7 +122,7 @@ class LanguageIsoSubscriberTest extends TestCase
     {
         $value = '_____';
 
-        $i18nModel = new $model;
+        $i18nModel = new $model();
         $i18nModel->setLanguageIso($value);
 
         /** @var $deserializeData ProductI18n */

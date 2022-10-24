@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Linker;
 
 use Jtl\Connector\Core\Definition\IdentityType;

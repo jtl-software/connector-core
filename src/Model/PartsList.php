@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -26,7 +27,7 @@ class PartsList extends AbstractIdentity
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-    
+
     /**
      * @var double Component quantity
      * @Serializer\Type("double")
@@ -53,10 +54,10 @@ class PartsList extends AbstractIdentity
     public function setProductId(Identity $productId): PartsList
     {
         $this->productId = $productId;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity Reference to a component / product
      */
@@ -64,7 +65,7 @@ class PartsList extends AbstractIdentity
     {
         return $this->productId;
     }
-    
+
     /**
      * @param double $quantity Component quantity
      * @return PartsList
@@ -72,10 +73,10 @@ class PartsList extends AbstractIdentity
     public function setQuantity(float $quantity): PartsList
     {
         $this->quantity = $quantity;
-        
+
         return $this;
     }
-    
+
     /**
      * @return double Component quantity
      */

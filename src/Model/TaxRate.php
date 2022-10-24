@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -40,10 +41,10 @@ class TaxRate extends AbstractIdentity
     public function setRate(float $rate): TaxRate
     {
         $this->rate = $rate;
-        
+
         return $this;
     }
-    
+
     /**
      * @return double
      */
@@ -67,7 +68,7 @@ class TaxRate extends AbstractIdentity
     public function setCountryIso(string $countryIso): self
     {
         $this->countryIso = $countryIso;
-        
+
         return $this;
     }
 }

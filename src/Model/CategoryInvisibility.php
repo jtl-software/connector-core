@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -26,7 +27,7 @@ class CategoryInvisibility extends AbstractModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-    
+
     /**
      * Constructor
      */
@@ -42,10 +43,10 @@ class CategoryInvisibility extends AbstractModel
     public function setCustomerGroupId(Identity $customerGroupId): CategoryInvisibility
     {
         $this->customerGroupId = $customerGroupId;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity Reference to customerGroup that is not allowed to view categoryId
      */

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -37,7 +38,7 @@ class Product2Category extends AbstractIdentity
         parent::__construct($endpoint, $host);
         $this->categoryId = new Identity();
     }
-    
+
     /**
      * @param Identity $categoryId Reference to category
      * @return Product2Category
@@ -45,10 +46,10 @@ class Product2Category extends AbstractIdentity
     public function setCategoryId(Identity $categoryId): Product2Category
     {
         $this->categoryId = $categoryId;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity Reference to category
      */

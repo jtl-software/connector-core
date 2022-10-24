@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Utilities;
 
 use Jtl\Connector\Core\Utilities\Str;
@@ -10,7 +11,6 @@ use PHPUnit\Framework\TestCase;
  */
 class StrTest extends TestCase
 {
-
     /**
      * @dataProvider toCamelCaseDataProvider
      *

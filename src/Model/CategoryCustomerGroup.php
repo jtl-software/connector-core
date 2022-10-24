@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -26,7 +27,7 @@ class CategoryCustomerGroup extends AbstractModel
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-    
+
     /**
      * @var double Optional discount on products in specified categoryId for  customerGroupId
      * @Serializer\Type("double")
@@ -34,7 +35,7 @@ class CategoryCustomerGroup extends AbstractModel
      * @Serializer\Accessor(getter="getDiscount",setter="setDiscount")
      */
     protected $discount = 0.0;
-    
+
     /**
      * Constructor
      */
@@ -50,10 +51,10 @@ class CategoryCustomerGroup extends AbstractModel
     public function setCustomerGroupId(Identity $customerGroupId): CategoryCustomerGroup
     {
         $this->customerGroupId = $customerGroupId;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity Reference to customerGroup
      */
@@ -61,7 +62,7 @@ class CategoryCustomerGroup extends AbstractModel
     {
         return $this->customerGroupId;
     }
-    
+
     /**
      * @param double $discount Optional discount on products in specified categoryId for  customerGroupId
      * @return CategoryCustomerGroup
@@ -69,10 +70,10 @@ class CategoryCustomerGroup extends AbstractModel
     public function setDiscount(float $discount): CategoryCustomerGroup
     {
         $this->discount = $discount;
-        
+
         return $this;
     }
-    
+
     /**
      * @return double Optional discount on products in specified categoryId for  customerGroupId
      */

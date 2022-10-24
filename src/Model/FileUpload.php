@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -26,7 +27,7 @@ class FileUpload extends AbstractIdentity
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-    
+
     /**
      * @var string
      * @Serializer\Type("string")
@@ -34,7 +35,7 @@ class FileUpload extends AbstractIdentity
      * @Serializer\Accessor(getter="getFileType",setter="setFileType")
      */
     protected $fileType = '';
-    
+
     /**
      * @var boolean
      * @Serializer\Type("boolean")
@@ -42,7 +43,7 @@ class FileUpload extends AbstractIdentity
      * @Serializer\Accessor(getter="getIsRequired",setter="setIsRequired")
      */
     protected $isRequired = false;
-    
+
     /**
      * @var FileUploadI18n[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\FileUploadI18n>")
@@ -69,10 +70,10 @@ class FileUpload extends AbstractIdentity
     public function setProductId(Identity $productId): FileUpload
     {
         $this->productId = $productId;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity Reference to product
      */
@@ -80,7 +81,7 @@ class FileUpload extends AbstractIdentity
     {
         return $this->productId;
     }
-    
+
     /**
      * @param string $fileType
      * @return FileUpload
@@ -88,10 +89,10 @@ class FileUpload extends AbstractIdentity
     public function setFileType(string $fileType): FileUpload
     {
         $this->fileType = $fileType;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -99,7 +100,7 @@ class FileUpload extends AbstractIdentity
     {
         return $this->fileType;
     }
-    
+
     /**
      * @param boolean $isRequired
      * @return FileUpload
@@ -107,10 +108,10 @@ class FileUpload extends AbstractIdentity
     public function setIsRequired(bool $isRequired): FileUpload
     {
         $this->isRequired = $isRequired;
-        
+
         return $this;
     }
-    
+
     /**
      * @return boolean
      */
@@ -118,7 +119,7 @@ class FileUpload extends AbstractIdentity
     {
         return $this->isRequired;
     }
-    
+
     /**
      * @param FileUploadI18n $i18n
      * @return FileUpload
@@ -126,7 +127,7 @@ class FileUpload extends AbstractIdentity
     public function addI18n(FileUploadI18n $i18n): FileUpload
     {
         $this->i18ns[] = $i18n;
-        
+
         return $this;
     }
 
@@ -137,10 +138,10 @@ class FileUpload extends AbstractIdentity
     public function setI18ns(FileUploadI18n ...$i18ns): FileUpload
     {
         $this->i18ns = $i18ns;
-        
+
         return $this;
     }
-    
+
     /**
      * @return FileUploadI18n[]
      */
@@ -148,14 +149,14 @@ class FileUpload extends AbstractIdentity
     {
         return $this->i18ns;
     }
-    
+
     /**
      * @return FileUpload
      */
     public function clearI18ns(): FileUpload
     {
         $this->i18ns = [];
-        
+
         return $this;
     }
 }

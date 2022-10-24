@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -19,7 +20,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class DeliveryNote extends AbstractIdentity
 {
-
     /**
      * @var Identity Reference to customerOrder
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
@@ -35,7 +35,7 @@ class DeliveryNote extends AbstractIdentity
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
     protected $creationDate = null;
-    
+
     /**
      * @var boolean Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
      * @Serializer\Type("boolean")
@@ -43,7 +43,7 @@ class DeliveryNote extends AbstractIdentity
      * @Serializer\Accessor(getter="getIsFulfillment",setter="setIsFulfillment")
      */
     protected $isFulfillment = false;
-    
+
     /**
      * @var string Optional text note
      * @Serializer\Type("string")
@@ -51,7 +51,7 @@ class DeliveryNote extends AbstractIdentity
      * @Serializer\Accessor(getter="getNote",setter="setNote")
      */
     protected $note = '';
-    
+
     /**
      * @var DeliveryNoteItem[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\DeliveryNoteItem>")
@@ -59,7 +59,7 @@ class DeliveryNote extends AbstractIdentity
      * @Serializer\AccessType("reflection")
      */
     protected $items = [];
-    
+
     /**
      * @var DeliveryNoteTrackingList[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\DeliveryNoteTrackingList>")
@@ -78,7 +78,7 @@ class DeliveryNote extends AbstractIdentity
         parent::__construct($endpoint, $host);
         $this->customerOrderId = new Identity();
     }
-    
+
     /**
      * @param Identity $customerOrderId Reference to customerOrder
      * @return DeliveryNote
@@ -86,10 +86,10 @@ class DeliveryNote extends AbstractIdentity
     public function setCustomerOrderId(Identity $customerOrderId): DeliveryNote
     {
         $this->customerOrderId = $customerOrderId;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity Reference to customerOrder
      */
@@ -105,10 +105,10 @@ class DeliveryNote extends AbstractIdentity
     public function setCreationDate(\DateTimeInterface $creationDate = null): DeliveryNote
     {
         $this->creationDate = $creationDate;
-        
+
         return $this;
     }
-    
+
     /**
      * @return \DateTimeInterface Creation date
      */
@@ -124,10 +124,10 @@ class DeliveryNote extends AbstractIdentity
     public function setIsFulfillment(bool $isFulfillment): DeliveryNote
     {
         $this->isFulfillment = $isFulfillment;
-        
+
         return $this;
     }
-    
+
     /**
      * @return boolean Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
      */
@@ -135,7 +135,7 @@ class DeliveryNote extends AbstractIdentity
     {
         return $this->isFulfillment;
     }
-    
+
     /**
      * @param string $note Optional text note
      * @return DeliveryNote
@@ -143,10 +143,10 @@ class DeliveryNote extends AbstractIdentity
     public function setNote(string $note): DeliveryNote
     {
         $this->note = $note;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Optional text note
      */
@@ -154,7 +154,7 @@ class DeliveryNote extends AbstractIdentity
     {
         return $this->note;
     }
-    
+
     /**
      * @param DeliveryNoteItem $item
      * @return DeliveryNote
@@ -162,7 +162,7 @@ class DeliveryNote extends AbstractIdentity
     public function addItem(DeliveryNoteItem $item): DeliveryNote
     {
         $this->items[] = $item;
-        
+
         return $this;
     }
 
@@ -173,10 +173,10 @@ class DeliveryNote extends AbstractIdentity
     public function setItems(DeliveryNoteItem ...$items): DeliveryNote
     {
         $this->items = $items;
-        
+
         return $this;
     }
-    
+
     /**
      * @return DeliveryNoteItem[]
      */
@@ -184,17 +184,17 @@ class DeliveryNote extends AbstractIdentity
     {
         return $this->items;
     }
-    
+
     /**
      * @return DeliveryNote
      */
     public function clearItems(): DeliveryNote
     {
         $this->items = [];
-        
+
         return $this;
     }
-    
+
     /**
      * @param DeliveryNoteTrackingList $trackingList
      * @return DeliveryNote
@@ -202,7 +202,7 @@ class DeliveryNote extends AbstractIdentity
     public function addTrackingList(DeliveryNoteTrackingList $trackingList): DeliveryNote
     {
         $this->trackingLists[] = $trackingList;
-        
+
         return $this;
     }
 
@@ -213,10 +213,10 @@ class DeliveryNote extends AbstractIdentity
     public function setTrackingLists(DeliveryNoteTrackingList ...$trackingLists): DeliveryNote
     {
         $this->trackingLists = $trackingLists;
-        
+
         return $this;
     }
-    
+
     /**
      * @return DeliveryNoteTrackingList[]
      */
@@ -224,14 +224,14 @@ class DeliveryNote extends AbstractIdentity
     {
         return $this->trackingLists;
     }
-    
+
     /**
      * @return DeliveryNote
      */
     public function clearTrackingLists(): DeliveryNote
     {
         $this->trackingLists = [];
-        
+
         return $this;
     }
 

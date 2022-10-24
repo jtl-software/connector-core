@@ -1,10 +1,12 @@
 <?php
+
 /**
  * @author Immanuel Klinkenberg <immanuel.klinkenberg@jtl-software.com>
  * @copyright 2010-2019 JTL-Software GmbH
  *
  * Created at 15.05.2019 09:06
  */
+
 namespace Jtl\Connector\Core\Exception;
 
 class JsonException extends \RuntimeException

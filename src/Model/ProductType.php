@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -34,10 +35,10 @@ class ProductType extends AbstractIdentity
     public function setName(string $name): ProductType
     {
         $this->name = $name;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Optional (internal) product type name
      */

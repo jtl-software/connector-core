@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -32,7 +33,7 @@ class Specific extends AbstractIdentity
      * @Serializer\Accessor(getter="getIsGlobal",setter="setIsGlobal")
      */
     protected $isGlobal = false;
-    
+
     /**
      * @var integer Optional sort number
      * @Serializer\Type("integer")
@@ -40,7 +41,7 @@ class Specific extends AbstractIdentity
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 1;
-    
+
     /**
      * @var string Specific type (radio, dropdown, image...)
      * @Serializer\Type("string")
@@ -48,7 +49,7 @@ class Specific extends AbstractIdentity
      * @Serializer\Accessor(getter="getType",setter="setType")
      */
     protected $type = '';
-    
+
     /**
      * @var SpecificI18n[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\SpecificI18n>")
@@ -56,7 +57,7 @@ class Specific extends AbstractIdentity
      * @Serializer\AccessType("reflection")
      */
     protected $i18ns = [];
-    
+
     /**
      * @var SpecificValue[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\SpecificValue>")
@@ -72,10 +73,10 @@ class Specific extends AbstractIdentity
     public function setIsGlobal(bool $isGlobal): self
     {
         $this->isGlobal = $isGlobal;
-        
+
         return $this;
     }
-    
+
     /**
      * @return boolean Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
      */
@@ -83,7 +84,7 @@ class Specific extends AbstractIdentity
     {
         return $this->isGlobal;
     }
-    
+
     /**
      * @param integer $sort Optional sort number
      * @return Specific
@@ -91,10 +92,10 @@ class Specific extends AbstractIdentity
     public function setSort(int $sort): self
     {
         $this->sort = $sort;
-        
+
         return $this;
     }
-    
+
     /**
      * @return integer Optional sort number
      */
@@ -102,7 +103,7 @@ class Specific extends AbstractIdentity
     {
         return $this->sort;
     }
-    
+
     /**
      * @param string $type Specific type (radio, dropdown, image...)
      * @return Specific
@@ -110,10 +111,10 @@ class Specific extends AbstractIdentity
     public function setType(string $type): self
     {
         $this->type = $type;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string Specific type (radio, dropdown, image...)
      */
@@ -121,7 +122,7 @@ class Specific extends AbstractIdentity
     {
         return $this->type;
     }
-    
+
     /**
      * @param SpecificI18n $i18n
      * @return Specific
@@ -129,7 +130,7 @@ class Specific extends AbstractIdentity
     public function addI18n(SpecificI18n $i18n): self
     {
         $this->i18ns[] = $i18n;
-        
+
         return $this;
     }
 
@@ -140,10 +141,10 @@ class Specific extends AbstractIdentity
     public function setI18ns(SpecificI18n ...$i18ns): self
     {
         $this->i18ns = $i18ns;
-        
+
         return $this;
     }
-    
+
     /**
      * @return SpecificI18n[]
      */
@@ -151,17 +152,17 @@ class Specific extends AbstractIdentity
     {
         return $this->i18ns;
     }
-    
+
     /**
      * @return Specific
      */
     public function clearI18ns(): self
     {
         $this->i18ns = [];
-        
+
         return $this;
     }
-    
+
     /**
      * @param SpecificValue $value
      * @return Specific
@@ -169,7 +170,7 @@ class Specific extends AbstractIdentity
     public function addValue(SpecificValue $value): self
     {
         $this->values[] = $value;
-        
+
         return $this;
     }
 
@@ -180,10 +181,10 @@ class Specific extends AbstractIdentity
     public function setValues(SpecificValue ...$values): self
     {
         $this->values = $values;
-        
+
         return $this;
     }
-    
+
     /**
      * @return SpecificValue[]
      */
@@ -191,14 +192,14 @@ class Specific extends AbstractIdentity
     {
         return $this->values;
     }
-    
+
     /**
      * @return Specific
      */
     public function clearValues(): self
     {
         $this->values = [];
-        
+
         return $this;
     }
 

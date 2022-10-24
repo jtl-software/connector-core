@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -34,7 +35,7 @@ class ProductSpecialPriceItem extends AbstractModel
      * @Serializer\Accessor(getter="getPriceNet",setter="setPriceNet")
      */
     protected $priceNet = 0.0;
-    
+
     /**
      * Constructor
      */
@@ -42,7 +43,7 @@ class ProductSpecialPriceItem extends AbstractModel
     {
         $this->customerGroupId = new Identity();
     }
-    
+
     /**
      * @param Identity $customerGroupId Reference to customerGroup
      * @return ProductSpecialPriceItem
@@ -50,10 +51,10 @@ class ProductSpecialPriceItem extends AbstractModel
     public function setCustomerGroupId(Identity $customerGroupId): ProductSpecialPriceItem
     {
         $this->customerGroupId = $customerGroupId;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity Reference to customerGroup
      */
@@ -69,10 +70,10 @@ class ProductSpecialPriceItem extends AbstractModel
     public function setPriceNet(float $priceNet): ProductSpecialPriceItem
     {
         $this->priceNet = $priceNet;
-        
+
         return $this;
     }
-    
+
     /**
      * @return double net price value
      */

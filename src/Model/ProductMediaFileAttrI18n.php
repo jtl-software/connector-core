@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -24,7 +25,7 @@ class ProductMediaFileAttrI18n extends AbstractI18n
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-    
+
     /**
      * @var string
      * @Serializer\Type("string")
@@ -40,10 +41,10 @@ class ProductMediaFileAttrI18n extends AbstractI18n
     public function setName(string $name): ProductMediaFileAttrI18n
     {
         $this->name = $name;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -51,7 +52,7 @@ class ProductMediaFileAttrI18n extends AbstractI18n
     {
         return $this->name;
     }
-    
+
     /**
      * @param string $value
      * @return ProductMediaFileAttrI18n
@@ -59,10 +60,10 @@ class ProductMediaFileAttrI18n extends AbstractI18n
     public function setValue(string $value): ProductMediaFileAttrI18n
     {
         $this->value = $value;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -34,7 +35,7 @@ class CustomerGroupPackagingQuantity extends AbstractModel
      * @Serializer\Accessor(getter="getMinimumOrderQuantity",setter="setMinimumOrderQuantity")
      */
     protected $minimumOrderQuantity = 0.0;
-    
+
     /**
      * @var double Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
      * @Serializer\Type("double")
@@ -42,7 +43,7 @@ class CustomerGroupPackagingQuantity extends AbstractModel
      * @Serializer\Accessor(getter="getPackagingQuantity",setter="setPackagingQuantity")
      */
     protected $packagingQuantity = 0.0;
-    
+
     /**
      * Constructor
      */
@@ -50,7 +51,7 @@ class CustomerGroupPackagingQuantity extends AbstractModel
     {
         $this->customerGroupId = new Identity();
     }
-    
+
     /**
      * @param Identity $customerGroupId Reference to customer group.
      * @return CustomerGroupPackagingQuantity
@@ -58,10 +59,10 @@ class CustomerGroupPackagingQuantity extends AbstractModel
     public function setCustomerGroupId(Identity $customerGroupId): CustomerGroupPackagingQuantity
     {
         $this->customerGroupId = $customerGroupId;
-        
+
         return $this;
     }
-    
+
     /**
      * @return Identity Reference to customergroup.
      */
@@ -77,10 +78,10 @@ class CustomerGroupPackagingQuantity extends AbstractModel
     public function setMinimumOrderQuantity(float $minimumOrderQuantity): CustomerGroupPackagingQuantity
     {
         $this->minimumOrderQuantity = $minimumOrderQuantity;
-        
+
         return $this;
     }
-    
+
     /**
      * @return double Contains the minimum quantity for a customergroup.
      */
@@ -88,7 +89,7 @@ class CustomerGroupPackagingQuantity extends AbstractModel
     {
         return $this->minimumOrderQuantity;
     }
-    
+
     /**
      * @param double $packagingQuantity Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
      * @return CustomerGroupPackagingQuantity
@@ -96,10 +97,10 @@ class CustomerGroupPackagingQuantity extends AbstractModel
     public function setPackagingQuantity(float $packagingQuantity): CustomerGroupPackagingQuantity
     {
         $this->packagingQuantity = $packagingQuantity;
-        
+
         return $this;
     }
-    
+
     /**
      * @return double Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
      */

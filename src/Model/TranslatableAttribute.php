@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author    Patryk Gorol <patryk.gorol@jtl-software.com>
  * @copyright 2010-2019 JTL-Software GmbH

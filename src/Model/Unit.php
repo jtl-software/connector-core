@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -34,7 +35,7 @@ class Unit extends AbstractIdentity
     public function addI18n(UnitI18n $i18n): Unit
     {
         $this->i18ns[] = $i18n;
-        
+
         return $this;
     }
 
@@ -45,10 +46,10 @@ class Unit extends AbstractIdentity
     public function setI18ns(UnitI18n ...$i18ns): Unit
     {
         $this->i18ns = $i18ns;
-        
+
         return $this;
     }
-    
+
     /**
      * @return UnitI18n[]
      */
@@ -56,14 +57,14 @@ class Unit extends AbstractIdentity
     {
         return $this->i18ns;
     }
-    
+
     /**
      * @return Unit
      */
     public function clearI18ns(): Unit
     {
         $this->i18ns = [];
-        
+
         return $this;
     }
 }

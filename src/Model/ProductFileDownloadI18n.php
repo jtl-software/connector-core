@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2015 JTL-Software GmbH
  * @package Jtl\Connector\Core\Model
@@ -32,8 +33,8 @@ class ProductFileDownloadI18n extends AbstractI18n
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-    
-    
+
+
     /**
      * @param string $description
      * @return ProductFileDownloadI18n
@@ -41,10 +42,10 @@ class ProductFileDownloadI18n extends AbstractI18n
     public function setDescription(string $description): ProductFileDownloadI18n
     {
         $this->description = $description;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -60,10 +61,10 @@ class ProductFileDownloadI18n extends AbstractI18n
     public function setName(string $name): ProductFileDownloadI18n
     {
         $this->name = $name;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */

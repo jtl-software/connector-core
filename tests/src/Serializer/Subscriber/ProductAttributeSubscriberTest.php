@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Serializer\Subscriber;
 
 use Jtl\Connector\Core\Model\AbstractModel;
@@ -17,7 +18,6 @@ use Jtl\Connector\Core\Test\TestCase;
  */
 class ProductAttributeSubscriberTest extends TestCase
 {
-
     /**
      * @return Product
      * @throws \Exception

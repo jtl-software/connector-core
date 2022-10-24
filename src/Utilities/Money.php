@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright 2010-2013 JTL-Software GmbH
  * @package Jtl\Connector\Core\Utilities
@@ -18,7 +19,7 @@ class Money
         if ($vat <= 0) {
             return $net;
         }
-        
+
         return $net * ($vat / 100 + 1);
     }
 
