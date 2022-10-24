@@ -26,7 +26,7 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
      *
      * @var integer
      */
-    const SQLITE3_OPEN_SHAREDCACHE = 0x00020000;
+    public const SQLITE3_OPEN_SHAREDCACHE = 0x00020000;
 
     /**
      * Database connection state
@@ -115,6 +115,7 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
     /**
      * (non-PHPdoc)
      *
+     * @throws \Throwable
      * @see Jtl\Connector\Core\Database\DatabaseInterface::query()
      */
     public function query($query)
@@ -179,7 +180,9 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
                 }
 
                 return $rows;
-            } elseif ($this->db->lastErrorCode() !== 5) {
+            }
+
+            if ($this->db->lastErrorCode() !== 5) {
                 $this->logger->warning($this->db->lastErrorMsg());
 
                 return null;
@@ -191,7 +194,7 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
      * Sqlite Insert
      *
      * @param string $query
-     * @return boolean
+     * @return boolean|int
      */
     public function insert(string $query)
     {
