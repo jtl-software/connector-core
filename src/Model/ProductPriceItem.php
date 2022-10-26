@@ -29,7 +29,9 @@ class ProductPriceItem extends AbstractModel
     protected $netPrice = 0.0;
 
     /**
-     * @var integer Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items.
+     * @var integer Optional quantity to apply netPrice for. Default 1 for default price.
+     *              A quantity value of 3 means that the given product price
+     *              will be applied when a customer buys 3 or more items.
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("quantity")
      * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
@@ -56,7 +58,11 @@ class ProductPriceItem extends AbstractModel
     }
 
     /**
-     * @param integer $quantity Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items.
+     * @param integer $quantity Optional quantity to apply netPrice for.
+     *                          Default 1 for default price.
+     *                          A quantity value of 3 means that the given product price will be applied
+     *                          when a customer buys 3 or more items.
+     *
      * @return ProductPriceItem
      */
     public function setQuantity(int $quantity): ProductPriceItem
@@ -67,7 +73,9 @@ class ProductPriceItem extends AbstractModel
     }
 
     /**
-     * @return float Optional quantity to apply netPrice for. Default 1 for default price. A quantity value of 3 means that the given product price will be applied when a customer buys 3 or more items.
+     * @return float Optional quantity to apply netPrice for.
+     *                  Default 1 for default price. A quantity value of 3 means that the given product price
+     *                  will be applied when a customer buys 3 or more items.
      */
     public function getQuantity(): float
     {

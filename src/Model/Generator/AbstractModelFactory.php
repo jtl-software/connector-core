@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Model\Generator;
 
 use Faker\Factory;
@@ -15,30 +17,19 @@ use Jtl\Connector\Core\Serializer\SerializerBuilder;
  */
 abstract class AbstractModelFactory
 {
+    /** @var array */
+    protected static array $identities = [];
+    /** @var AbstractModelFactory[] */
+    protected static array $factories = [];
     protected string $defaultLocale;
     protected ?Generator $faker;
     protected ?Serializer $serializer;
 
-    /** @var array */
-    protected static array $identities = [];
-
-    /** @var AbstractModelFactory[] */
-    protected static array $factories = [];
-
-    /**
-     * @return array
-     */
-    abstract protected function makeFakeArray(): array;
-
-    /**
-     * @return string
-     */
-    abstract protected function getModelClass(): string;
-
     /**
      * AbstractModelFactory constructor.
-     * @param string $defaultLocale
-     * @param Generator|null $faker
+     *
+     * @param string          $defaultLocale
+     * @param Generator|null  $faker
      * @param Serializer|null $serializer
      */
     public function __construct(string $defaultLocale = 'de_DE', Generator $faker = null, Serializer $serializer = null)
@@ -57,9 +48,105 @@ abstract class AbstractModelFactory
     }
 
     /**
-     * @param int $quantity
+     * @param int $identityType
+     * @param int $host
+     *
+     * @return array|null
+     */
+    public static function getIdentityByHost(int $identityType, int $host): ?array
+    {
+        if (self::hasIdentityByHost($identityType, $host)) {
+            return self::getIdentity($identityType, \array_search($host, self::$identities[$identityType], true));
+        }
+        return null;
+    }
+
+    /**
+     * @param integer $identityType
+     * @param integer $host
+     *
+     * @return boolean
+     */
+    public static function hasIdentityByHost(int $identityType, int $host): bool
+    {
+        return isset(self::$identities[$identityType]) && \in_array($host, self::$identities[$identityType], true);
+    }
+
+    /**
+     * @param integer $identityType
+     * @param string  $endpoint
+     *
+     * @return array|null
+     */
+    public static function getIdentity(int $identityType, string $endpoint): ?array
+    {
+        if (self::hasIdentity($identityType, $endpoint)) {
+            return [
+                $endpoint,
+                self::$identities[$identityType][$endpoint],
+            ];
+        }
+        return null;
+    }
+
+    /**
+     * @param integer $identityType
+     * @param string  $endpoint
+     *
+     * @return boolean
+     */
+    public static function hasIdentity(int $identityType, string $endpoint): bool
+    {
+        return isset(self::$identities[$identityType][$endpoint]);
+    }
+
+    /**
+     * @param int   $quantity
      * @param array $specificOverrides
      * @param array $globalOverrides
+     *
+     * @return array
+     */
+    public function makeArray(int $quantity, array $specificOverrides = [], array $globalOverrides = []): array
+    {
+        $models = [];
+        for ($i = 0; $i < $quantity; $i++) {
+            $models[] = $this->makeOneArray(\array_merge($globalOverrides, $specificOverrides[$i] ?? []));
+        }
+        return $models;
+    }
+
+    /**
+     * @param array $override
+     *
+     * @return array
+     */
+    public function makeOneArray(array $override = []): array
+    {
+        return $override + $this->makeFakeArray();
+    }
+
+    /**
+     * @return array
+     */
+    abstract protected function makeFakeArray(): array;
+
+    /**
+     * @param array $override
+     *
+     * @return object
+     * @throws \Exception
+     */
+    public function makeOne(array $override = [])
+    {
+        return $this->make(1, [$override])[0];
+    }
+
+    /**
+     * @param int   $quantity
+     * @param array $specificOverrides
+     * @param array $globalOverrides
+     *
      * @return array<object>
      */
     public function make(int $quantity, array $specificOverrides = [], array $globalOverrides = []): array
@@ -77,41 +164,24 @@ abstract class AbstractModelFactory
     }
 
     /**
-     * @param int $quantity
-     * @param array $specificOverrides
-     * @param array $globalOverrides
-     * @return array
+     * @return string
      */
-    public function makeArray(int $quantity, array $specificOverrides = [], array $globalOverrides = []): array
-    {
-        $models = [];
-        for ($i = 0; $i < $quantity; $i++) {
-            $models[] = $this->makeOneArray(\array_merge($globalOverrides, $specificOverrides[$i] ?? []));
-        }
-        return $models;
-    }
+    abstract protected function getModelClass(): string;
 
     /**
-     * @param array $override
-     * @return object
+     * @param integer $identityType
+     *
+     * @return mixed
      * @throws \Exception
      */
-    public function makeOne(array $override = [])
+    public function makeIdentity(int $identityType)
     {
-        return $this->make(1, [$override])[0];
-    }
-
-    /**
-     * @param array $override
-     * @return array
-     */
-    public function makeOneArray(array $override = []): array
-    {
-        return $override + $this->makeFakeArray();
+        return $this->serializer->fromArray($this->makeIdentityArray($identityType), Identity::class);
     }
 
     /**
      * @param integer $identityType
+     *
      * @return array
      * @throws \Exception
      */
@@ -132,94 +202,8 @@ abstract class AbstractModelFactory
     }
 
     /**
-     * @param integer $identityType
-     * @return mixed
-     * @throws \Exception
-     */
-    public function makeIdentity(int $identityType)
-    {
-        return $this->serializer->fromArray($this->makeIdentityArray($identityType), Identity::class);
-    }
-
-    /**
-     * @return Generator
-     */
-    public function getFaker(): Generator
-    {
-        return $this->faker;
-    }
-
-    /**
-     * @param integer $identityType
-     * @param string $endpoint
-     * @param integer $host
-     */
-    public static function setIdentity(int $identityType, string $endpoint, int $host): void
-    {
-        self::$identities[$identityType][$endpoint] = $host;
-    }
-
-    /**
-     * @param integer $identityType
-     * @param string $endpoint
-     * @return boolean
-     */
-    public static function hasIdentity(int $identityType, string $endpoint): bool
-    {
-        return isset(self::$identities[$identityType][$endpoint]);
-    }
-
-    /**
-     * @param integer $identityType
-     * @param integer $host
-     * @return boolean
-     */
-    public static function hasIdentityByHost(int $identityType, int $host): bool
-    {
-        return isset(self::$identities[$identityType]) && \in_array($host, self::$identities[$identityType], true);
-    }
-
-    /**
-     * @param int $identityType
-     * @param int $host
-     * @return array|null
-     */
-    public static function getIdentityByHost(int $identityType, int $host): ?array
-    {
-        if (self::hasIdentityByHost($identityType, $host)) {
-            return self::getIdentity($identityType, \array_search($host, self::$identities[$identityType], true));
-        }
-        return null;
-    }
-
-    /**
-     * @param integer $identityType
-     * @param string $endpoint
-     * @return array|null
-     */
-    public static function getIdentity(int $identityType, string $endpoint): ?array
-    {
-        if (self::hasIdentity($identityType, $endpoint)) {
-            return [
-                $endpoint,
-                self::$identities[$identityType][$endpoint],
-            ];
-        }
-        return null;
-    }
-
-    /**
-     * @param string $from
-     * @param string $to
-     * @return string
-     */
-    protected function dateBetween(string $from, string $to = 'now'): string
-    {
-        return $this->faker->dateTimeBetween($from, $to)->format(\DateTime::ATOM);
-    }
-
-    /**
      * @param string $name
+     *
      * @return AbstractModelFactory
      */
     public function getFactory(string $name): self
@@ -228,16 +212,17 @@ abstract class AbstractModelFactory
     }
 
     /**
-     * @param string $name
-     * @param string $locale
-     * @param Generator|null $faker
+     * @param string          $name
+     * @param string          $locale
+     * @param Generator|null  $faker
      * @param Serializer|null $serializer
+     *
      * @return AbstractModelFactory
      */
     public static function createFactory(
-        string $name,
-        string $locale = 'de_DE',
-        Generator $faker = null,
+        string     $name,
+        string     $locale = 'de_DE',
+        Generator  $faker = null,
         Serializer $serializer = null
     ) {
         $className = \sprintf('%s\\%sFactory', __NAMESPACE__, \ucfirst($name));
@@ -252,5 +237,34 @@ abstract class AbstractModelFactory
         }
 
         return self::$factories[$factoriesIndex];
+    }
+
+    /**
+     * @param integer $identityType
+     * @param string  $endpoint
+     * @param integer $host
+     */
+    public static function setIdentity(int $identityType, string $endpoint, int $host): void
+    {
+        self::$identities[$identityType][$endpoint] = $host;
+    }
+
+    /**
+     * @return Generator
+     */
+    public function getFaker(): Generator
+    {
+        return $this->faker;
+    }
+
+    /**
+     * @param string $from
+     * @param string $to
+     *
+     * @return string
+     */
+    protected function dateBetween(string $from, string $to = 'now'): string
+    {
+        return $this->faker->dateTimeBetween($from, $to)->format(\DateTime::ATOM);
     }
 }

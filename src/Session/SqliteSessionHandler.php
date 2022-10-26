@@ -72,7 +72,10 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
     #[ReturnTypeWillChange]
     public function open($savePath, $sessionName)
     {
-        $this->logger->debug('Open session with save path ({path}) and session name ({name})', ['path' => $savePath, 'name' => $sessionName]);
+        $this->logger->debug(
+            'Open session with save path ({path}) and session name ({name})',
+            ['path' => $savePath, 'name' => $sessionName]
+        );
 
         return true;
     }

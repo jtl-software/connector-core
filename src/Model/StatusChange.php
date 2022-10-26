@@ -112,7 +112,10 @@ class StatusChange extends AbstractModel
      */
     public function getIdentificationStrings(): array
     {
-        $this->setIdentificationStringBySubject('customerOrderId', \sprintf('JTL-Wawi PK = %d', $this->customerOrderId->getHost()));
+        $this->setIdentificationStringBySubject(
+            'customerOrderId',
+            \sprintf('JTL-Wawi PK = %d', $this->customerOrderId->getHost())
+        );
 
         return parent::getIdentificationStrings();
     }

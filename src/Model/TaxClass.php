@@ -37,7 +37,9 @@ class TaxClass extends AbstractIdentity
     protected $name = '';
 
     /**
-     * @param boolean $isDefault Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default.
+     * @param boolean $isDefault Optional:
+     *                           Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default.
+     *
      * @return TaxClass
      */
     public function setIsDefault(bool $isDefault): TaxClass

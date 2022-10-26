@@ -340,7 +340,10 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     {
         $this->unsetIdentificationStringBySubject('parentCategoryId');
         if ($this->parentCategoryId->getHost() > 0) {
-            $this->setIdentificationStringBySubject('parentCategoryId', \sprintf('Parent JTL-Wawi PK = %s', $this->parentCategoryId->getHost()));
+            $this->setIdentificationStringBySubject(
+                'parentCategoryId',
+                \sprintf('Parent JTL-Wawi PK = %s', $this->parentCategoryId->getHost())
+            );
         }
 
         $this->unsetIdentificationStringBySubject('name');

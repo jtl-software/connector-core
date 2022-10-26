@@ -21,7 +21,8 @@ use JMS\Serializer\Annotation as Serializer;
 class Currency extends AbstractIdentity
 {
     /**
-     * @var string Optional delimiter char for cent, default=",". Ignore this flag if you have the correct user locale preference.
+     * @var string Optional delimiter char for cent, default=",".
+     *              Ignore this flag if you have the correct user locale preference.
      * @Serializer\Type("string")
      * @Serializer\SerializedName("delimiterCent")
      * @Serializer\Accessor(getter="getDelimiterCent",setter="setDelimiterCent")
@@ -29,7 +30,8 @@ class Currency extends AbstractIdentity
     protected $delimiterCent = '';
 
     /**
-     * @var string Optional delimiter char for thousand. Default=".". Ignore this flag if you have the correct user locale preference.
+     * @var string Optional delimiter char for thousand. Default=".".
+     *              Ignore this flag if you have the correct user locale preference.
      * @Serializer\Type("string")
      * @Serializer\SerializedName("delimiterThousand")
      * @Serializer\Accessor(getter="getDelimiterThousand",setter="setDelimiterThousand")
@@ -45,7 +47,8 @@ class Currency extends AbstractIdentity
     protected $factor = 0.0;
 
     /**
-     * @var boolean Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference.
+     * @var boolean Optional: Display currency before or after value.
+     *                  Ignore this flag if you have the correct user locale preference.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("hasCurrencySignBeforeValue")
      * @Serializer\Accessor(getter="getHasCurrencySignBeforeValue",setter="setHasCurrencySignBeforeValue")
@@ -53,7 +56,8 @@ class Currency extends AbstractIdentity
     protected $hasCurrencySignBeforeValue = false;
 
     /**
-     * @var boolean Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default.
+     * @var boolean Optional: Flag default currency. True, if this is the default currency.
+     *                  Exact one currency must be marked as default.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isDefault")
      * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
@@ -85,7 +89,9 @@ class Currency extends AbstractIdentity
     protected $nameHtml = '';
 
     /**
-     * @param string $delimiterCent Optional delimiter char for cent, default=",". Ignore this flag if you have the correct user locale preference.
+     * @param string $delimiterCent Optional delimiter char for cent, default=",".
+     *                              Ignore this flag if you have the correct user locale preference.
+     *
      * @return Currency
      */
     public function setDelimiterCent(string $delimiterCent): Currency
@@ -96,7 +102,8 @@ class Currency extends AbstractIdentity
     }
 
     /**
-     * @return string Optional delimiter char for cent, default=",". Ignore this flag if you have the correct user locale preference.
+     * @return string Optional delimiter char for cent, default=",".
+     *                  Ignore this flag if you have the correct user locale preference.
      */
     public function getDelimiterCent(): string
     {
@@ -104,7 +111,9 @@ class Currency extends AbstractIdentity
     }
 
     /**
-     * @param string $delimiterThousand Optional delimiter char for thousand. Default=".". Ignore this flag if you have the correct user locale preference.
+     * @param string $delimiterThousand Optional delimiter char for thousand. Default=".".
+     *                                  Ignore this flag if you have the correct user locale preference.
+     *
      * @return Currency
      */
     public function setDelimiterThousand(string $delimiterThousand): Currency
@@ -115,7 +124,8 @@ class Currency extends AbstractIdentity
     }
 
     /**
-     * @return string Optional delimiter char for thousand. Default=".". Ignore this flag if you have the correct user locale preference.
+     * @return string Optional delimiter char for thousand. Default=".".
+     *                  Ignore this flag if you have the correct user locale preference.
      */
     public function getDelimiterThousand(): string
     {
@@ -142,7 +152,9 @@ class Currency extends AbstractIdentity
     }
 
     /**
-     * @param boolean $hasCurrencySignBeforeValue Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference.
+     * @param boolean $hasCurrencySignBeforeValue Optional: Display currency before or after value.
+     *                                            Ignore this flag if you have the correct user locale preference.
+     *
      * @return Currency
      */
     public function setHasCurrencySignBeforeValue(bool $hasCurrencySignBeforeValue): Currency
@@ -153,7 +165,8 @@ class Currency extends AbstractIdentity
     }
 
     /**
-     * @return boolean Optional: Display currency before or after value. Ignore this flag if you have the correct user locale preference.
+     * @return boolean Optional: Display currency before or after value.
+     *                  Ignore this flag if you have the correct user locale preference.
      */
     public function getHasCurrencySignBeforeValue(): bool
     {
@@ -161,7 +174,9 @@ class Currency extends AbstractIdentity
     }
 
     /**
-     * @param boolean $isDefault Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default.
+     * @param boolean $isDefault Optional: Flag default currency. True, if this is the default currency.
+     *                           Exact one currency must be marked as default.
+     *
      * @return Currency
      */
     public function setIsDefault(bool $isDefault): Currency
@@ -172,7 +187,8 @@ class Currency extends AbstractIdentity
     }
 
     /**
-     * @return boolean Optional: Flag default currency. True, if this is the default currency. Exact one currency must be marked as default.
+     * @return boolean Optional: Flag default currency. True, if this is the default currency.
+     *                  Exact one currency must be marked as default.
      */
     public function getIsDefault(): bool
     {

@@ -119,7 +119,9 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     protected $availableFrom = null;
 
     /**
-     * @var double Optional base price divisor. Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure. E.g. 75ml / 100ml = 0.75
+     * @var double Optional base price divisor.
+     * Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure.
+     * E.g. 75ml / 100ml = 0.75
      * @Serializer\Type("double")
      * @Serializer\SerializedName("basePriceDivisor")
      * @Serializer\Accessor(getter="getBasePriceDivisor",setter="setBasePriceDivisor")
@@ -167,7 +169,8 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     protected $considerBasePrice = false;
 
     /**
-     * @var boolean Consider stock level? If true, product can only be purchased with a positive stockLevel or when permitNegativeStock is set to true
+     * @var boolean Consider stock level?
+     * If true, product can only be purchased with a positive stockLevel or when permitNegativeStock is set to true
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("considerStock")
      * @Serializer\Accessor(getter="getConsiderStock",setter="setConsiderStock")
@@ -279,7 +282,8 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     protected $isMasterProduct = false;
 
     /**
-     * @var boolean Optional flag new product. If true, product will be highlighted as new (creation date may also be considered)
+     * @var boolean Optional flag new product.
+     * If true, product will be highlighted as new (creation date may also be considered)
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isNewProduct")
      * @Serializer\Accessor(getter="getIsNewProduct",setter="setIsNewProduct")
@@ -295,7 +299,8 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     protected $isSerialNumber = false;
 
     /**
-     * @var boolean Optional flag top product. If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
+     * @var boolean Optional flag top product.
+     * If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isTopProduct")
      * @Serializer\Accessor(getter="getIsTopProduct",setter="setIsTopProduct")
@@ -431,7 +436,8 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     protected $packagingQuantity = 0.0;
 
     /**
-     * @var boolean Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true.
+     * @var boolean Optional Permit negative stock / allow overselling.
+     * If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("permitNegativeStock")
      * @Serializer\Accessor(getter="getPermitNegativeStock",setter="setPermitNegativeStock")
@@ -922,7 +928,9 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param \DateTimeInterface|null $availableFrom Optional available from date. Specify a date, upon when product can be purchased.
+     * @param \DateTimeInterface|null $availableFrom Optional available from date.
+     *                                               Specify a date, upon when product can be purchased.
+     *
      * @return Product
      */
     public function setAvailableFrom(\DateTimeInterface $availableFrom = null): self
@@ -941,7 +949,10 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param double $basePriceDivisor Optional base price divisor. Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure. E.g. 75ml / 100ml = 0.75
+     * @param double $basePriceDivisor Optional base price divisor.
+     *                                 Calculate basePriceDivisor by dividing product filling quantity through
+     *                                 unit pricing base measure. E.g. 75ml / 100ml = 0.75
+     *
      * @return Product
      */
     public function setBasePriceDivisor(float $basePriceDivisor): self
@@ -952,7 +963,9 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return double Optional base price divisor. Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure. E.g. 75ml / 100ml = 0.75
+     * @return double Optional base price divisor.
+     *                Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure.
+     *                E.g. 75ml / 100ml = 0.75
      */
     public function getBasePriceDivisor(): float
     {
@@ -1055,7 +1068,10 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param boolean $considerStock Consider stock level? If true, product can only be purchased with a positive stockLevel or when permitNegativeStock is set to true
+     * @param boolean $considerStock Consider stock level?
+     *                               If true, product can only be purchased with a positive stockLevel or when
+     *                               permitNegativeStock is set to true
+     *
      * @return Product
      */
     public function setConsiderStock(bool $considerStock): self
@@ -1066,7 +1082,9 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return boolean Consider stock level? If true, product can only be purchased with a positive stockLevel or when permitNegativeStock is set to true
+     * @return boolean Consider stock level?
+     *                  If true, product can only be purchased with a positive stockLevel or when permitNegativeStock
+     *                  is set to true
      */
     public function getConsiderStock(): bool
     {
@@ -1074,7 +1092,9 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param boolean $considerVariationStock Optional: Consider stock levels of productVariations. Same as considerStock but for variations.
+     * @param boolean $considerVariationStock Optional: Consider stock levels of productVariations.
+     *                                        Same as considerStock but for variations.
+     *
      * @return Product
      */
     public function setConsiderVariationStock(bool $considerVariationStock): self
@@ -1320,7 +1340,9 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param boolean $isNewProduct Optional flag new product. If true, product will be highlighted as new (creation date may also be considered)
+     * @param boolean $isNewProduct Optional flag new product.
+     *                              If true, product will be highlighted as new (creation date may also be considered)
+     *
      * @return Product
      */
     public function setIsNewProduct(bool $isNewProduct): self
@@ -1331,7 +1353,8 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return boolean Optional flag new product. If true, product will be highlighted as new (creation date may also be considered)
+     * @return boolean Optional flag new product.
+     *                  If true, product will be highlighted as new (creation date may also be considered)
      */
     public function getIsNewProduct(): bool
     {
@@ -1358,7 +1381,10 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param boolean $isTopProduct Optional flag top product. If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
+     * @param boolean $isTopProduct Optional flag top product.
+     *                              If true, product will be highlighted as top product
+     *                              (e.g. in product lists or in special boxes)
+     *
      * @return Product
      */
     public function setIsTopProduct(bool $isTopProduct): self
@@ -1369,7 +1395,8 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return boolean Optional flag top product. If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
+     * @return boolean Optional flag top product.
+     *                  If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
      */
     public function getIsTopProduct(): bool
     {
@@ -1662,7 +1689,9 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param double $packagingQuantity Optional: self can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
+     * @param double $packagingQuantity Optional:
+     *                                  self can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
+     *
      * @return Product
      */
     public function setPackagingQuantity(float $packagingQuantity): self
@@ -1681,7 +1710,10 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param boolean $permitNegativeStock Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true.
+     * @param boolean $permitNegativeStock Optional Permit negative stock / allow overselling.
+     *                                     If true, product can be purchased even if stockLevel is less or equal 0
+     *                                     and considerStock is true.
+     *
      * @return Product
      */
     public function setPermitNegativeStock(bool $permitNegativeStock): self
@@ -1692,7 +1724,9 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return boolean Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true.
+     * @return boolean Optional Permit negative stock / allow overselling.
+     *                  If true, product can be purchased even
+     *                  if stockLevel is less or equal 0 and considerStock is true.
      */
     public function getPermitNegativeStock(): bool
     {
@@ -2149,8 +2183,9 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @param CustomerGroupPackagingQuantity $customerGroupPackagingQuantity
      * @return Product
      */
-    public function addCustomerGroupPackagingQuantity(CustomerGroupPackagingQuantity $customerGroupPackagingQuantity): self
-    {
+    public function addCustomerGroupPackagingQuantity(
+        CustomerGroupPackagingQuantity $customerGroupPackagingQuantity
+    ): self {
         $this->customerGroupPackagingQuantities[] = $customerGroupPackagingQuantity;
 
         return $this;
@@ -2160,8 +2195,9 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @param array $customerGroupPackagingQuantities
      * @return Product
      */
-    public function setCustomerGroupPackagingQuantities(CustomerGroupPackagingQuantity ...$customerGroupPackagingQuantities): self
-    {
+    public function setCustomerGroupPackagingQuantities(
+        CustomerGroupPackagingQuantity ...$customerGroupPackagingQuantities
+    ): self {
         $this->customerGroupPackagingQuantities = $customerGroupPackagingQuantities;
 
         return $this;

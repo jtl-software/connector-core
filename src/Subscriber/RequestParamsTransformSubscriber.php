@@ -56,6 +56,7 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
 
     /**
      * @param array $products
+     *
      * @return array
      */
     public function transformProductData(array $products): array
@@ -76,7 +77,24 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
     }
 
     /**
+     * @param array $productPrice
+     *
+     * @return array
+     */
+    protected static function sortProductPriceItems(array $productPrice): array
+    {
+        if (isset($productPrice['items'])) {
+            \usort($productPrice['items'], function ($a, $b) {
+                return ($a['quantity'] ?? 0) - ($b['quantity'] ?? 0);
+            });
+        }
+
+        return $productPrice;
+    }
+
+    /**
      * @param array $productPrices
+     *
      * @return array
      */
     public function transformProductPriceData(array $productPrices): array
@@ -104,7 +122,19 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
     }
 
     /**
+     * @param array $identity
+     *
+     * @return int
+     */
+    protected static function extractHostId(array $identity): int
+    {
+        [$endpointId, $hostId] = $identity;
+        return $hostId;
+    }
+
+    /**
      * @param array $productStockLevel
+     *
      * @return array
      */
     public function transformProductStockLevelData(array $productStockLevel): array
@@ -120,30 +150,5 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
         }
 
         return $products;
-    }
-
-    /**
-     * @param array $identity
-     * @return int
-     */
-    protected static function extractHostId(array $identity): int
-    {
-        list($endpointId, $hostId) = $identity;
-        return $hostId;
-    }
-
-    /**
-     * @param array $productPrice
-     * @return array
-     */
-    protected static function sortProductPriceItems(array $productPrice): array
-    {
-        if (isset($productPrice['items'])) {
-            \usort($productPrice['items'], function ($a, $b) {
-                return ($a['quantity'] ?? 0) - ($b['quantity'] ?? 0);
-            });
-        }
-
-        return $productPrice;
     }
 }

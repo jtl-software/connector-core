@@ -10,20 +10,14 @@ use stdClass;
 
 class TranslatableAttributeI18nTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-        TranslatableAttributeI18n::setStrictMode(false);
-    }
-
-
     /**
      * @dataProvider getValueProvider
      *
      * @param string $type
-     * @param $originalValue
-     * @param $expectedValue
-     * @param bool $strictMode
+     * @param        $originalValue
+     * @param        $expectedValue
+     * @param bool   $strictMode
+     *
      * @throws TranslatableAttributeException
      */
     public function testGetValue(string $type, $originalValue, $expectedValue, bool $strictMode = false)
@@ -35,7 +29,10 @@ class TranslatableAttributeI18nTest extends TestCase
 
         $actualValue = $i18n->getValue($type);
 
-        $this->assertTrue($expectedValue === $actualValue, \sprintf('Casted value (%s) has the wrong type', \json_encode($actualValue)));
+        $this->assertTrue(
+            $expectedValue === $actualValue,
+            \sprintf('Casted value (%s) has the wrong type', \json_encode($actualValue))
+        );
     }
 
     /**
@@ -155,15 +152,23 @@ class TranslatableAttributeI18nTest extends TestCase
     /**
      * @dataProvider setValueProvider
      *
-     * @param $value
+     * @param        $value
      * @param string $expectedValue
+     *
      * @throws TranslatableAttributeException
      */
     public function testSetValue($value, string $expectedValue)
     {
         $translation = (new TranslatableAttributeI18n())->setValue($value);
 
-        $this->assertTrue($translation->getValue() === $expectedValue, \sprintf('Value (%s) is not equal to expected value (%s)', $translation->getValue(), $expectedValue));
+        $this->assertTrue(
+            $translation->getValue() === $expectedValue,
+            \sprintf(
+                'Value (%s) is not equal to expected value (%s)',
+                $translation->getValue(),
+                $expectedValue
+            )
+        );
     }
 
     /**
@@ -213,7 +218,8 @@ class TranslatableAttributeI18nTest extends TestCase
             ],
             [
                 [
-                    'foo' => 'bar', 'baz'
+                    'foo' => 'bar',
+                    'baz'
                 ],
                 '{"foo":"bar","0":"baz"}',
             ],
@@ -241,5 +247,11 @@ class TranslatableAttributeI18nTest extends TestCase
             [null],
             [\fopen('php://temp', 'r')],
         ];
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        TranslatableAttributeI18n::setStrictMode(false);
     }
 }

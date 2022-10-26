@@ -134,7 +134,9 @@ class ConfigGroup extends AbstractIdentity
     }
 
     /**
-     * @param integer $minimumSelection Optional minimum number required selections. Default 0 for no minimum requirement.
+     * @param integer $minimumSelection Optional minimum number required selections.
+     *                                  Default 0 for no minimum requirement.
+     *
      * @return ConfigGroup
      */
     public function setMinimumSelection(int $minimumSelection): ConfigGroup

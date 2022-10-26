@@ -22,7 +22,21 @@ use Jtl\Connector\Core\Test\TestCase;
 class IdentityLinkerTest extends TestCase
 {
     /**
+     * @dataProvider hostIdDataProvider
+     *
+     * @param $hostId
+     * @param $shouldBeValid
+     */
+    public function testHostIdValidator($hostId, $shouldBeValid)
+    {
+        $isValid = $this->createLinker()->isValidHostId($hostId);
+
+        $this->assertEquals($shouldBeValid, $isValid);
+    }
+
+    /**
      * @param $mockedPrimaryKeyMapper
+     *
      * @return IdentityLinker
      */
     protected function createLinker($mockedPrimaryKeyMapper = null)
@@ -36,6 +50,7 @@ class IdentityLinkerTest extends TestCase
     /**
      * @param array $hostId
      * @param array $endpointId
+     *
      * @return PrimaryKeyMapperInterface|\Mockery\LegacyMockInterface|\Mockery\MockInterface
      */
     public function createPrimaryKeyMapperMock($hostId = [1], $endpointId = ["1"])
@@ -48,19 +63,6 @@ class IdentityLinkerTest extends TestCase
         $primaryKeyMapper->shouldReceive('getEndpointId')->andReturn(...$endpointId);
 
         return $primaryKeyMapper;
-    }
-
-    /**
-     * @dataProvider hostIdDataProvider
-     *
-     * @param $hostId
-     * @param $shouldBeValid
-     */
-    public function testHostIdValidator($hostId, $shouldBeValid)
-    {
-        $isValid = $this->createLinker()->isValidHostId($hostId);
-
-        $this->assertEquals($shouldBeValid, $isValid);
     }
 
     /**
@@ -275,7 +277,10 @@ class IdentityLinkerTest extends TestCase
         $shippingClassHostId     = $this->createHostId();
         $shippingClassEndpointId = $this->createEndpointId();
 
-        $primaryKeyMapper = $this->createPrimaryKeyMapperMock([$productHostId, $shippingClassHostId], [$productEndpointId, $shippingClassEndpointId]);
+        $primaryKeyMapper = $this->createPrimaryKeyMapperMock(
+            [$productHostId, $shippingClassHostId],
+            [$productEndpointId, $shippingClassEndpointId]
+        );
         $linker           = $this->createLinker($primaryKeyMapper);
 
         $product = new Product();

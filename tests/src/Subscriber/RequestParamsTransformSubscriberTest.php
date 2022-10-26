@@ -15,7 +15,14 @@ class RequestParamsTransformSubscriberTest extends TestCase
      */
     public function testTransformRequestParams(RpcEvent $event)
     {
-        $subscriber = $this->createPartialMock(RequestParamsTransformSubscriber::class, ['transformProductData', 'transformProductPriceData', 'transformProductStockLevelData']);
+        $subscriber = $this->createPartialMock(
+            RequestParamsTransformSubscriber::class,
+            [
+                'transformProductData',
+                'transformProductPriceData',
+                'transformProductStockLevelData'
+            ]
+        );
 
         $controller = $event->getController();
         $action     = $event->getAction();
@@ -235,7 +242,8 @@ class RequestParamsTransformSubscriberTest extends TestCase
                             '',
                             1,
                         ],
-                    ], [
+                    ],
+                    [
                         'customerId'      => [
                             '',
                             0,
@@ -359,7 +367,8 @@ class RequestParamsTransformSubscriberTest extends TestCase
                                     '',
                                     1,
                                 ],
-                            ], [
+                            ],
+                            [
                                 'customerId'      => [
                                     '',
                                     0,

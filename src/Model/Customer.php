@@ -157,7 +157,8 @@ class Customer extends AbstractI18n implements IdentityInterface
     protected $hasNewsletterSubscription = false;
 
     /**
-     * @var boolean Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password.
+     * @var boolean Flag if customer is active (login allowed).
+     *              True, if customer is allowed to login with his E-Mail address and password.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isActive")
      * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
@@ -583,7 +584,9 @@ class Customer extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @param boolean $hasNewsletterSubscription Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
+     * @param boolean $hasNewsletterSubscription Optional flag if customer receives newsletter.
+     *                                           If true, customer wants to receive newsletter.
+     *
      * @return Customer
      */
     public function setHasNewsletterSubscription(bool $hasNewsletterSubscription): self
@@ -602,7 +605,9 @@ class Customer extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @param boolean $isActive Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password.
+     * @param boolean $isActive Flag if customer is active (login allowed).
+     *                          True, if customer is allowed to login with his E-Mail address and password.
+     *
      * @return Customer
      */
     public function setIsActive(bool $isActive): self
@@ -613,7 +618,8 @@ class Customer extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @return boolean Flag if customer is active (login allowed). True, if customer is allowed to login with his E-Mail address and password.
+     * @return boolean Flag if customer is active (login allowed).
+     *                  True, if customer is allowed to login with his E-Mail address and password.
      */
     public function getIsActive(): bool
     {

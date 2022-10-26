@@ -27,6 +27,25 @@ class ModelTest extends TestCase
     }
 
     /**
+     * @return array
+     */
+    public function modelsDataProvider(): array
+    {
+        $ignoredModels = self::getIgnoredModels();
+        $modelsPattern = \dirname(\TEST_DIR) . '/src/Model/*.php';
+        return \array_filter(
+            \array_map(function ($modelPath) {
+                $fileInfo  = new \SplFileInfo($modelPath);
+                $modelName = $fileInfo->getBasename('.php');
+                return [$modelName];
+            }, \glob($modelsPattern)),
+            function ($value) use ($ignoredModels) {
+                return !\in_array($value[0], $ignoredModels, true);
+            }
+        );
+    }
+
+    /**
      * @return string[]
      */
     public static function getIgnoredModels(): array
@@ -49,27 +68,11 @@ class ModelTest extends TestCase
     }
 
     /**
-     * @return array
-     */
-    public function modelsDataProvider(): array
-    {
-        $ignoredModels = self::getIgnoredModels();
-        $modelsPattern = \dirname(\TEST_DIR) . '/src/Model/*.php';
-        return \array_filter(\array_map(function ($modelPath) {
-            $fileInfo  = new \SplFileInfo($modelPath);
-            $modelName = $fileInfo->getBasename('.php');
-            return [$modelName];
-        }, \glob($modelsPattern)), function ($value) use ($ignoredModels) {
-            return !\in_array($value[0], $ignoredModels, true);
-        });
-    }
-
-    /**
      * @dataProvider unsetIdentificationStringProvider
      *
      * @param string $identificationString
      * @param string $subject
-     * @param bool $setString
+     * @param bool   $setString
      */
     public function testUnsetIdentificationString(string $identificationString, string $subject, bool $setString)
     {
@@ -100,10 +103,13 @@ class ModelTest extends TestCase
      *
      * @param string $identificationString
      * @param string $subject
-     * @param bool $setString
+     * @param bool   $setString
      */
-    public function testUnsetIdentificationStringBySubject(string $identificationString, string $subject, bool $setString)
-    {
+    public function testUnsetIdentificationStringBySubject(
+        string $identificationString,
+        string $subject,
+        bool   $setString
+    ) {
         $model       = $this->getMockForAbstractClass(AbstractModel::class);
         $stringCount = \mt_rand(0, 10);
 

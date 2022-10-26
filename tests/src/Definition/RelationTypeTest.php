@@ -16,8 +16,9 @@ class RelationTypeTest extends TestCase
     /**
      * @dataProvider relatedImageIdentityTypeProvider
      *
-     * @param string $relationType
+     * @param string   $relationType
      * @param int|null $relatedImageIdentityType
+     *
      * @throws DefinitionException|\ReflectionException
      */
     public function testGetRelatedImageIdentityType(string $relationType, ?int $relatedImageIdentityType)
@@ -35,7 +36,8 @@ class RelationTypeTest extends TestCase
      * @dataProvider relatedImageIdentityProvider
      *
      * @param string $relationType
-     * @param bool $hasRelatedImageIdentityType
+     * @param bool   $hasRelatedImageIdentityType
+     *
      * @throws DefinitionException
      */
     public function testHasRelatedImageIdentityType(string $relationType, bool $hasRelatedImageIdentityType)
@@ -47,7 +49,8 @@ class RelationTypeTest extends TestCase
      * @dataProvider relationTypeProvider
      *
      * @param string $relationType
-     * @param bool $isRelationType
+     * @param bool   $isRelationType
+     *
      * @throws DefinitionException
      */
     public function testGetRelatedImageModelName(string $relationType, bool $isRelationType)
@@ -56,14 +59,18 @@ class RelationTypeTest extends TestCase
             $this->expectExceptionObject(DefinitionException::unknownRelationType($relationType));
         }
 
-        $this->assertEquals(\sprintf('%sImage', \ucfirst($relationType)), RelationType::getRelatedImageModelName($relationType));
+        $this->assertEquals(
+            \sprintf('%sImage', \ucfirst($relationType)),
+            RelationType::getRelatedImageModelName($relationType)
+        );
     }
 
     /**
      * @dataProvider relationTypeProvider
      *
      * @param string $relationType
-     * @param bool $isRelationType
+     * @param bool   $isRelationType
+     *
      * @throws DefinitionException
      */
     public function testGetModelName(string $relationType, bool $isRelationType)
@@ -90,7 +97,7 @@ class RelationTypeTest extends TestCase
     /**
      * @dataProvider relationTypeProvider
      *
-     * @param $relationType
+     * @param      $relationType
      * @param bool $isRelationType
      */
     public function testIsRelationType($relationType, bool $isRelationType)
@@ -195,6 +202,7 @@ class RelationTypeTest extends TestCase
      *
      * @param $relationType
      * @param $expectedValue
+     *
      * @throws DefinitionException
      * @throws \ReflectionException
      */

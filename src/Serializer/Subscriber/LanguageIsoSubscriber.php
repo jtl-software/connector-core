@@ -55,7 +55,10 @@ class LanguageIsoSubscriber implements EventSubscriberInterface
                 $languageIso = $this->languages->fromISO_639_1($languageIso)->toISO_639_2b() ?? $languageIso;
             }
 
-            $event->getVisitor()->visitProperty(new StaticPropertyMetadata('', 'languageISO', $languageIso), $languageIso);
+            $event->getVisitor()->visitProperty(
+                new StaticPropertyMetadata('', 'languageISO', $languageIso),
+                $languageIso
+            );
         }
     }
 

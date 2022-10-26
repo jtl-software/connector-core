@@ -240,7 +240,10 @@ class DeliveryNote extends AbstractIdentity
      */
     public function getIdentificationStrings(): array
     {
-        $this->setIdentificationStringBySubject('customerOrderId', \sprintf('Related type CustomerOrder (JTL-Wawi PK = %d)', $this->customerOrderId->getHost()));
+        $this->setIdentificationStringBySubject(
+            'customerOrderId',
+            \sprintf('Related type CustomerOrder (JTL-Wawi PK = %d)', $this->customerOrderId->getHost())
+        );
 
         return parent::getIdentificationStrings();
     }

@@ -11,7 +11,8 @@ namespace Jtl\Connector\Core\Model;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * A config Item that is displayed in a config Group. Config item can reference to a specific productId to inherit price, name and description.
+ * A config Item that is displayed in a config Group.
+ * Config item can reference to a specific productId to inherit price, name and description.
  *
  * @access public
  * @package Jtl\Connector\Core\Model
@@ -37,7 +38,8 @@ class ConfigItem extends AbstractIdentity
     protected $productId = null;
 
     /**
-     * @var integer Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
+     * @var integer     Optional:Ignore multiplier.
+     *                  If true, quantity of config item will not be increased if product quantity is increased
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("ignoreMultiplier")
      * @Serializer\Accessor(getter="getIgnoreMultiplier",setter="setIgnoreMultiplier")
@@ -45,7 +47,9 @@ class ConfigItem extends AbstractIdentity
     protected $ignoreMultiplier = 0;
 
     /**
-     * @var boolean Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored.
+     * @var boolean Optional: Inherit product name and description  if productId is set.
+     *              If true, configItem name will be received from referenced
+ *                  product and configItemI18n name will be ignored.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("inheritProductName")
      * @Serializer\Accessor(getter="getInheritProductName",setter="setInheritProductName")
@@ -53,7 +57,8 @@ class ConfigItem extends AbstractIdentity
     protected $inheritProductName = false;
 
     /**
-     * @var boolean Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price.
+     * @var boolean Optional: Inherit product price of referenced productId.
+     *              If true, configItem price will be the same as referenced product price.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("inheritProductPrice")
      * @Serializer\Accessor(getter="getInheritProductPrice",setter="setInheritProductPrice")
@@ -101,7 +106,8 @@ class ConfigItem extends AbstractIdentity
     protected $minQuantity = 0.0;
 
     /**
-     * @var boolean Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
+     * @var boolean Optional: Show discount compared to productId price.
+     *              If true, the discount compared to referenct product price will be shown.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("showDiscount")
      * @Serializer\Accessor(getter="getShowDiscount",setter="setShowDiscount")
@@ -199,7 +205,10 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
-     * @param integer $ignoreMultiplier Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
+     * @param integer $ignoreMultiplier Optional:Ignore multiplier.
+     *                                  If true, quantity of config item will not be increased
+     *                                  if product quantity is increased
+     *
      * @return ConfigItem
      */
     public function setIgnoreMultiplier(int $ignoreMultiplier): ConfigItem
@@ -210,7 +219,8 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
-     * @return integer Optional:Ignore multiplier. If true, quantity of config item will not be increased if product quantity is increased
+     * @return integer Optional:Ignore multiplier.
+     *                  If true, quantity of config item will not be increased if product quantity is increased
      */
     public function getIgnoreMultiplier(): int
     {
@@ -218,7 +228,10 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
-     * @param boolean $inheritProductName Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored.
+     * @param boolean $inheritProductName Optional: Inherit product name and description  if productId is set.
+     *                                    If true, configItem name will be received from referenced product and
+     *                                    configItemI18n name will be ignored.
+     *
      * @return ConfigItem
      */
     public function setInheritProductName(bool $inheritProductName): ConfigItem
@@ -229,7 +242,9 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
-     * @return boolean Optional: Inherit product name and description  if productId is set. If true, configItem name will be received from referenced product and configItemI18n name will be ignored.
+     * @return boolean Optional: Inherit product name and description  if productId is set.
+     *                  If true, configItem name will be received from referenced product
+     *                  and configItemI18n name will be ignored.
      */
     public function getInheritProductName(): bool
     {
@@ -237,7 +252,9 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
-     * @param boolean $inheritProductPrice Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price.
+     * @param boolean $inheritProductPrice Optional: Inherit product price of referenced productId.
+     *                                     If true, configItem price will be the same as referenced product price.
+     *
      * @return ConfigItem
      */
     public function setInheritProductPrice(bool $inheritProductPrice): ConfigItem
@@ -248,7 +265,8 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
-     * @return boolean Optional: Inherit product price of referenced productId. If true, configItem price will be the same as referenced product price.
+     * @return boolean Optional: Inherit product price of referenced productId.
+     *                  If true, configItem price will be the same as referenced product price.
      */
     public function getInheritProductPrice(): bool
     {
@@ -275,7 +293,9 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
-     * @param boolean $isPreSelected Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
+     * @param boolean $isPreSelected Optional: Preselect configItem.
+ *                                   If true, configItem will be preselected or prechecked.
+     *
      * @return ConfigItem
      */
     public function setIsPreSelected(bool $isPreSelected): ConfigItem
@@ -294,7 +314,9 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
-     * @param boolean $isRecommended Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted.
+     * @param boolean $isRecommended Optional: Highlight or recommend config item.
+     *                               If true, configItem will be recommended/highlighted.
+     *
      * @return ConfigItem
      */
     public function setIsRecommended(bool $isRecommended): ConfigItem
@@ -305,7 +327,8 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
-     * @return boolean Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted.
+     * @return boolean Optional: Highlight or recommend config item.
+     *                  If true, configItem will be recommended/highlighted.
      */
     public function getIsRecommended(): bool
     {
@@ -332,7 +355,9 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
-     * @param double $minQuantity Optional minimum quantity required to add configItem. Default 0 for no minimum quantity.
+     * @param double $minQuantity Optional minimum quantity required to add configItem.
+     *                            Default 0 for no minimum quantity.
+     *
      * @return ConfigItem
      */
     public function setMinQuantity(float $minQuantity): ConfigItem
@@ -351,7 +376,9 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
-     * @param boolean $showDiscount Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
+     * @param boolean $showDiscount Optional: Show discount compared to productId price.
+     *                              If true, the discount compared to referenct product price will be shown.
+     *
      * @return ConfigItem
      */
     public function setShowDiscount(bool $showDiscount): ConfigItem
@@ -362,7 +389,8 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
-     * @return boolean Optional: Show discount compared to productId price. If true, the discount compared to referenct product price will be shown.
+     * @return boolean Optional: Show discount compared to productId price.
+     *                  If true, the discount compared to referenct product price will be shown.
      */
     public function getShowDiscount(): bool
     {

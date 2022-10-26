@@ -11,7 +11,8 @@ namespace Jtl\Connector\Core\Model;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Specific is defined as a characteristic product attribute Like "color". Specifics can be used for after-search-filtering.
+ * Specific is defined as a characteristic product attribute Like "color".
+ * Specifics can be used for after-search-filtering.
  *
  * @access public
  * @package Jtl\Connector\Core\Model
@@ -27,7 +28,8 @@ class Specific extends AbstractIdentity
         TYPE_IMAGE_TEXT = 'BILD-TEXT';
 
     /**
-     * @var boolean Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
+     * @var boolean Optional: Global specific means the specific can be used like a category
+     *              (e.g. show all red products in shop)
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isGlobal")
      * @Serializer\Accessor(getter="getIsGlobal",setter="setIsGlobal")
@@ -67,7 +69,9 @@ class Specific extends AbstractIdentity
     protected $values = [];
 
     /**
-     * @param boolean $isGlobal Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
+     * @param boolean $isGlobal Optional: Global specific means the specific can be used like a category
+ *                              (e.g. show all red products in shop)
+     *
      * @return Specific
      */
     public function setIsGlobal(bool $isGlobal): self
@@ -78,7 +82,8 @@ class Specific extends AbstractIdentity
     }
 
     /**
-     * @return boolean Optional: Global specific means the specific can be used like a category (e.g. show all red products in shop)
+     * @return boolean Optional: Global specific means the specific can be used like a category
+     *                  (e.g. show all red products in shop)
      */
     public function getIsGlobal(): bool
     {

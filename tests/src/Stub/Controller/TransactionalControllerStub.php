@@ -14,7 +14,12 @@ use Jtl\Connector\Core\Model\QueryFilter;
  * Class TransactionalController
  * @package Jtl\Connector\Core\Test\Stub\Controller
  */
-class TransactionalControllerStub implements DeleteInterface, StatisticInterface, PullInterface, PushInterface, TransactionalInterface
+class TransactionalControllerStub implements
+    DeleteInterface,
+    StatisticInterface,
+    PullInterface,
+    PushInterface,
+    TransactionalInterface
 {
     /**
      * @var bool

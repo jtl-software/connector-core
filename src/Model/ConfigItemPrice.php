@@ -29,7 +29,9 @@ class ConfigItemPrice extends AbstractModel
     protected $customerGroupId = null;
 
     /**
-     * @var double Net price or percental value to add/deduct to/from product price (depending on type). Positive value means surcharge, negative value means discount. Also see configItem.vat for value added tax.
+     * @var double  Net price or percental value to add/deduct to/from product price (depending on type).
+     *              Positive value means surcharge, negative value means discount.
+     *              Also see configItem.vat for value added tax.
      * @Serializer\Type("double")
      * @Serializer\SerializedName("price")
      * @Serializer\Accessor(getter="getPrice",setter="setPrice")
@@ -72,7 +74,10 @@ class ConfigItemPrice extends AbstractModel
     }
 
     /**
-     * @param double $price Net price or percental value to add/deduct to/from product price (depending on type). Positive value means surcharge, negative value means discount. Also see configItem.vat for value added tax.
+     * @param double $price Net price or percental value to add/deduct to/from product price (depending on type).
+     *                      Positive value means surcharge, negative value means discount.
+     *                      Also see configItem.vat for value added tax.
+     *
      * @return ConfigItemPrice
      */
     public function setPrice(float $price): ConfigItemPrice
@@ -83,7 +88,9 @@ class ConfigItemPrice extends AbstractModel
     }
 
     /**
-     * @return double Net price or percental value to add/deduct to/from product price (depending on type). Positive value means surcharge, negative value means discount. Also see configItem.vat for value added tax.
+     * @return double   Net price or percental value to add/deduct to/from product price (depending on type).
+     *                  Positive value means surcharge, negative value means discount.
+     *                  Also see configItem.vat for value added tax.
      */
     public function getPrice(): float
     {
