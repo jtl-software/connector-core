@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Customer group model.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -61,17 +61,6 @@ class CustomerGroup extends AbstractIdentity
     protected $i18ns = [];
 
     /**
-     * @param boolean $applyNetPrice Optional: Show net prices default instead of gross prices
-     * @return CustomerGroup
-     */
-    public function setApplyNetPrice(bool $applyNetPrice): self
-    {
-        $this->applyNetPrice = $applyNetPrice;
-
-        return $this;
-    }
-
-    /**
      * @return boolean Optional: Show net prices default instead of gross prices
      */
     public function getApplyNetPrice(): bool
@@ -80,12 +69,13 @@ class CustomerGroup extends AbstractIdentity
     }
 
     /**
-     * @param double $discount Optional percentual discount on all products. Negative Value means surcharge.
+     * @param boolean $applyNetPrice Optional: Show net prices default instead of gross prices
+     *
      * @return CustomerGroup
      */
-    public function setDiscount(float $discount): self
+    public function setApplyNetPrice(bool $applyNetPrice): self
     {
-        $this->discount = $discount;
+        $this->applyNetPrice = $applyNetPrice;
 
         return $this;
     }
@@ -99,12 +89,13 @@ class CustomerGroup extends AbstractIdentity
     }
 
     /**
-     * @param boolean $isDefault Optional: Flag default customer group
+     * @param double $discount Optional percentual discount on all products. Negative Value means surcharge.
+     *
      * @return CustomerGroup
      */
-    public function setIsDefault(bool $isDefault): self
+    public function setDiscount(float $discount): self
     {
-        $this->isDefault = $isDefault;
+        $this->discount = $discount;
 
         return $this;
     }
@@ -118,7 +109,20 @@ class CustomerGroup extends AbstractIdentity
     }
 
     /**
+     * @param boolean $isDefault Optional: Flag default customer group
+     *
+     * @return CustomerGroup
+     */
+    public function setIsDefault(bool $isDefault): self
+    {
+        $this->isDefault = $isDefault;
+
+        return $this;
+    }
+
+    /**
      * @param CustomerGroupAttr $attribute
+     *
      * @return CustomerGroup
      */
     public function addAttribute(CustomerGroupAttr $attribute): self
@@ -129,7 +133,16 @@ class CustomerGroup extends AbstractIdentity
     }
 
     /**
+     * @return CustomerGroupAttr[]
+     */
+    public function getAttributes(): array
+    {
+        return $this->attributes;
+    }
+
+    /**
      * @param CustomerGroupAttr ...$attributes
+     *
      * @return CustomerGroup
      */
     public function setAttributes(CustomerGroupAttr ...$attributes): self
@@ -137,14 +150,6 @@ class CustomerGroup extends AbstractIdentity
         $this->attributes = $attributes;
 
         return $this;
-    }
-
-    /**
-     * @return CustomerGroupAttr[]
-     */
-    public function getAttributes(): array
-    {
-        return $this->attributes;
     }
 
     /**
@@ -159,6 +164,7 @@ class CustomerGroup extends AbstractIdentity
 
     /**
      * @param CustomerGroupI18n $i18n
+     *
      * @return CustomerGroup
      */
     public function addI18n(CustomerGroupI18n $i18n): self
@@ -166,25 +172,6 @@ class CustomerGroup extends AbstractIdentity
         $this->i18ns[] = $i18n;
 
         return $this;
-    }
-
-    /**
-     * @param CustomerGroupI18n ...$i18ns
-     * @return CustomerGroup
-     */
-    public function setI18ns(CustomerGroupI18n ...$i18ns): self
-    {
-        $this->i18ns = $i18ns;
-
-        return $this;
-    }
-
-    /**
-     * @return CustomerGroupI18n[]
-     */
-    public function getI18ns(): array
-    {
-        return $this->i18ns;
     }
 
     /**
@@ -211,5 +198,25 @@ class CustomerGroup extends AbstractIdentity
         }
 
         return parent::getIdentificationStrings();
+    }
+
+    /**
+     * @return CustomerGroupI18n[]
+     */
+    public function getI18ns(): array
+    {
+        return $this->i18ns;
+    }
+
+    /**
+     * @param CustomerGroupI18n ...$i18ns
+     *
+     * @return CustomerGroup
+     */
+    public function setI18ns(CustomerGroupI18n ...$i18ns): self
+    {
+        $this->i18ns = $i18ns;
+
+        return $this;
     }
 }

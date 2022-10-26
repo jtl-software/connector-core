@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Localized config item name and description.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -37,7 +37,16 @@ class ConfigItemI18n extends AbstractI18n
     protected $name = '';
 
     /**
+     * @return string Description (html). Will be ignored, if inheritProductName==true
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
      * @param string $description Description (html). Will be ignored, if inheritProductName==true
+     *
      * @return ConfigItemI18n
      */
     public function setDescription(string $description): ConfigItemI18n
@@ -48,15 +57,16 @@ class ConfigItemI18n extends AbstractI18n
     }
 
     /**
-     * @return string Description (html). Will be ignored, if inheritProductName==true
+     * @return string Config item name. Will be ignored if inheritProductName==true
      */
-    public function getDescription(): string
+    public function getName(): string
     {
-        return $this->description;
+        return $this->name;
     }
 
     /**
      * @param string $name Config item name. Will be ignored if inheritProductName==true
+     *
      * @return ConfigItemI18n
      */
     public function setName(string $name): ConfigItemI18n
@@ -64,13 +74,5 @@ class ConfigItemI18n extends AbstractI18n
         $this->name = $name;
 
         return $this;
-    }
-
-    /**
-     * @return string Config item name. Will be ignored if inheritProductName==true
-     */
-    public function getName(): string
-    {
-        return $this->name;
     }
 }

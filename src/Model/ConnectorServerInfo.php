@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -11,8 +11,8 @@ namespace Jtl\Connector\Core\Model;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -60,6 +60,7 @@ class ConnectorServerInfo extends AbstractModel
 
     /**
      * @param integer $memoryLimit
+     *
      * @return ConnectorServerInfo
      */
     public function setMemoryLimit(int $memoryLimit): ConnectorServerInfo
@@ -79,6 +80,7 @@ class ConnectorServerInfo extends AbstractModel
 
     /**
      * @param integer $executionTime
+     *
      * @return ConnectorServerInfo
      */
     public function setExecutionTime(int $executionTime): ConnectorServerInfo
@@ -98,6 +100,7 @@ class ConnectorServerInfo extends AbstractModel
 
     /**
      * @param integer $postMaxSize
+     *
      * @return ConnectorServerInfo
      */
     public function setPostMaxSize(int $postMaxSize): ConnectorServerInfo
@@ -117,6 +120,7 @@ class ConnectorServerInfo extends AbstractModel
 
     /**
      * @param integer $uploadMaxFilesize
+     *
      * @return ConnectorServerInfo
      */
     public function setUploadMaxFilesize(int $uploadMaxFilesize): ConnectorServerInfo

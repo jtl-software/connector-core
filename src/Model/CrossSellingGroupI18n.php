@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -11,8 +11,8 @@ namespace Jtl\Connector\Core\Model;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -35,7 +35,16 @@ class CrossSellingGroupI18n extends AbstractI18n
     protected $name = '';
 
     /**
+     * @return string Optional localized description
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
      * @param string $description Optional localized description
+     *
      * @return CrossSellingGroupI18n
      */
     public function setDescription(string $description): CrossSellingGroupI18n
@@ -46,15 +55,16 @@ class CrossSellingGroupI18n extends AbstractI18n
     }
 
     /**
-     * @return string Optional localized description
+     * @return string Localized name
      */
-    public function getDescription(): string
+    public function getName(): string
     {
-        return $this->description;
+        return $this->name;
     }
 
     /**
      * @param string $name Localized name
+     *
      * @return CrossSellingGroupI18n
      */
     public function setName(string $name): CrossSellingGroupI18n
@@ -62,13 +72,5 @@ class CrossSellingGroupI18n extends AbstractI18n
         $this->name = $name;
 
         return $this;
-    }
-
-    /**
-     * @return string Localized name
-     */
-    public function getName(): string
-    {
-        return $this->name;
     }
 }

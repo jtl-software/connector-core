@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Monolingual mediafile attribute.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -30,6 +30,7 @@ class ProductMediaFileAttr extends AbstractModel
 
     /**
      * @param ProductMediaFileAttrI18n $i18n
+     *
      * @return ProductMediaFileAttr
      */
     public function addI18n(ProductMediaFileAttrI18n $i18n): ProductMediaFileAttr
@@ -40,7 +41,16 @@ class ProductMediaFileAttr extends AbstractModel
     }
 
     /**
+     * @return ProductMediaFileAttrI18n[]
+     */
+    public function getI18ns(): array
+    {
+        return $this->i18ns;
+    }
+
+    /**
      * @param ProductMediaFileAttrI18n ...$i18ns
+     *
      * @return ProductMediaFileAttr
      */
     public function setI18ns(ProductMediaFileAttrI18n ...$i18ns): ProductMediaFileAttr
@@ -48,14 +58,6 @@ class ProductMediaFileAttr extends AbstractModel
         $this->i18ns = $i18ns;
 
         return $this;
-    }
-
-    /**
-     * @return ProductMediaFileAttrI18n[]
-     */
-    public function getI18ns(): array
-    {
-        return $this->i18ns;
     }
 
     /**

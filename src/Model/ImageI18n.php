@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -11,8 +11,8 @@ namespace Jtl\Connector\Core\Model;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -43,7 +43,16 @@ class ImageI18n extends AbstractI18n implements IdentityInterface
     }
 
     /**
+     * @return Identity
+     */
+    public function getId(): Identity
+    {
+        return $this->id;
+    }
+
+    /**
      * @param Identity $id
+     *
      * @return ImageI18n
      */
     public function setId(Identity $id): ImageI18n
@@ -54,15 +63,16 @@ class ImageI18n extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @return Identity
+     * @return string
      */
-    public function getId(): Identity
+    public function getAltText(): string
     {
-        return $this->id;
+        return $this->altText;
     }
 
     /**
      * @param string $altText
+     *
      * @return ImageI18n
      */
     public function setAltText(string $altText): ImageI18n
@@ -70,13 +80,5 @@ class ImageI18n extends AbstractI18n implements IdentityInterface
         $this->altText = $altText;
 
         return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAltText(): string
-    {
-        return $this->altText;
     }
 }

@@ -76,6 +76,7 @@ class EventTest extends TestCase
      * @param $action
      * @param $moment
      * @param $expectedException
+     *
      * @throws DefinitionException
      * @throws \ReflectionException
      */
@@ -92,24 +93,9 @@ class EventTest extends TestCase
     public function createEventNameInvalidParamsDataProvider(): array
     {
         return [
-            [
-                'foo',
-                '',
-                '',
-                DefinitionException::unknownController('foo'),
-            ],
-            [
-                Controller::PRODUCT,
-                'foo',
-                '',
-                DefinitionException::unknownAction('foo'),
-            ],
-            [
-                Controller::PRODUCT,
-                Action::PUSH,
-                'foo',
-                DefinitionException::unknownMoment('foo'),
-            ],
+            ['foo', '', '', DefinitionException::unknownController('foo')],
+            [Controller::PRODUCT, 'foo', '', DefinitionException::unknownAction('foo')],
+            [Controller::PRODUCT, Action::PUSH, 'foo', DefinitionException::unknownMoment('foo')]
         ];
     }
 

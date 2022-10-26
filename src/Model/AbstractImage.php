@@ -7,8 +7,8 @@ use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Exception\DefinitionException;
 
 /**
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  * @Serializer\Discriminator(
@@ -84,8 +84,9 @@ abstract class AbstractImage extends AbstractIdentity
 
     /**
      * AbstractImage constructor.
+     *
      * @param string $endpoint
-     * @param int $host
+     * @param int    $host
      */
     public function __construct(string $endpoint = '', int $host = 0)
     {
@@ -117,6 +118,7 @@ abstract class AbstractImage extends AbstractIdentity
 
     /**
      * @param string $filename
+     *
      * @return AbstractImage
      */
     public function setFilename(string $filename): AbstractImage
@@ -135,6 +137,7 @@ abstract class AbstractImage extends AbstractIdentity
 
     /**
      * @param Identity $foreignKey
+     *
      * @return $this
      */
     public function setForeignKey(Identity $foreignKey): AbstractImage
@@ -146,6 +149,7 @@ abstract class AbstractImage extends AbstractIdentity
 
     /**
      * @param ImageI18n $i18n
+     *
      * @return $this
      */
     public function addI18n(ImageI18n $i18n): self
@@ -175,6 +179,7 @@ abstract class AbstractImage extends AbstractIdentity
 
     /**
      * @param ImageI18n ...$i18ns
+     *
      * @return $this
      */
     public function setI18ns(ImageI18n ...$i18ns): self
@@ -194,23 +199,13 @@ abstract class AbstractImage extends AbstractIdentity
 
     /**
      * @param string $name
+     *
      * @return AbstractImage
      */
     public function setName(string $name): self
     {
         $this->name = $name;
         return $this;
-    }
-
-    /**
-     * @return string
-     * @throws DefinitionException
-     */
-    public function getRelationType(): string
-    {
-        $modelName = $this->reflectionClass->getShortName();
-        $imagePos  = \strpos($modelName, 'Image');
-        return Model::getRelationType(\substr($modelName, 0, $imagePos));
     }
 
     /**
@@ -223,6 +218,7 @@ abstract class AbstractImage extends AbstractIdentity
 
     /**
      * @param string $remoteUrl
+     *
      * @return AbstractImage
      */
     public function setRemoteUrl(string $remoteUrl): self
@@ -241,6 +237,7 @@ abstract class AbstractImage extends AbstractIdentity
 
     /**
      * @param int $sort
+     *
      * @return AbstractImage
      */
     public function setSort(int $sort): self
@@ -265,5 +262,16 @@ abstract class AbstractImage extends AbstractIdentity
         );
 
         return parent::getIdentificationStrings();
+    }
+
+    /**
+     * @return string
+     * @throws DefinitionException
+     */
+    public function getRelationType(): string
+    {
+        $modelName = $this->reflectionClass->getShortName();
+        $imagePos  = \strpos($modelName, 'Image');
+        return Model::getRelationType(\substr($modelName, 0, $imagePos));
     }
 }

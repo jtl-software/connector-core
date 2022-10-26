@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Locale specific texts for product
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -101,17 +101,6 @@ class ProductI18n extends AbstractI18n
     protected $urlPath = '';
 
     /**
-     * @param string $deliveryStatus
-     * @return ProductI18n
-     */
-    public function setDeliveryStatus(string $deliveryStatus): ProductI18n
-    {
-        $this->deliveryStatus = $deliveryStatus;
-
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getDeliveryStatus(): string
@@ -120,12 +109,13 @@ class ProductI18n extends AbstractI18n
     }
 
     /**
-     * @param string $description Optional product description
+     * @param string $deliveryStatus
+     *
      * @return ProductI18n
      */
-    public function setDescription(string $description): ProductI18n
+    public function setDeliveryStatus(string $deliveryStatus): ProductI18n
     {
-        $this->description = $description;
+        $this->deliveryStatus = $deliveryStatus;
 
         return $this;
     }
@@ -139,12 +129,13 @@ class ProductI18n extends AbstractI18n
     }
 
     /**
-     * @param string $measurementUnitName
+     * @param string $description Optional product description
+     *
      * @return ProductI18n
      */
-    public function setMeasurementUnitName(string $measurementUnitName): ProductI18n
+    public function setDescription(string $description): ProductI18n
     {
-        $this->measurementUnitName = $measurementUnitName;
+        $this->description = $description;
 
         return $this;
     }
@@ -158,12 +149,13 @@ class ProductI18n extends AbstractI18n
     }
 
     /**
-     * @param string $metaDescription
+     * @param string $measurementUnitName
+     *
      * @return ProductI18n
      */
-    public function setMetaDescription(string $metaDescription): ProductI18n
+    public function setMeasurementUnitName(string $measurementUnitName): ProductI18n
     {
-        $this->metaDescription = $metaDescription;
+        $this->measurementUnitName = $measurementUnitName;
 
         return $this;
     }
@@ -177,12 +169,13 @@ class ProductI18n extends AbstractI18n
     }
 
     /**
-     * @param string $metaKeywords
+     * @param string $metaDescription
+     *
      * @return ProductI18n
      */
-    public function setMetaKeywords(string $metaKeywords): ProductI18n
+    public function setMetaDescription(string $metaDescription): ProductI18n
     {
-        $this->metaKeywords = $metaKeywords;
+        $this->metaDescription = $metaDescription;
 
         return $this;
     }
@@ -196,12 +189,13 @@ class ProductI18n extends AbstractI18n
     }
 
     /**
-     * @param string $name Product name / title
+     * @param string $metaKeywords
+     *
      * @return ProductI18n
      */
-    public function setName(string $name): ProductI18n
+    public function setMetaKeywords(string $metaKeywords): ProductI18n
     {
-        $this->name = $name;
+        $this->metaKeywords = $metaKeywords;
 
         return $this;
     }
@@ -215,12 +209,13 @@ class ProductI18n extends AbstractI18n
     }
 
     /**
-     * @param string $shortDescription Optional product shortdescription
+     * @param string $name Product name / title
+     *
      * @return ProductI18n
      */
-    public function setShortDescription(string $shortDescription): ProductI18n
+    public function setName(string $name): ProductI18n
     {
-        $this->shortDescription = $shortDescription;
+        $this->name = $name;
 
         return $this;
     }
@@ -234,12 +229,13 @@ class ProductI18n extends AbstractI18n
     }
 
     /**
-     * @param string $titleTag
+     * @param string $shortDescription Optional product shortdescription
+     *
      * @return ProductI18n
      */
-    public function setTitleTag(string $titleTag): ProductI18n
+    public function setShortDescription(string $shortDescription): ProductI18n
     {
-        $this->titleTag = $titleTag;
+        $this->shortDescription = $shortDescription;
 
         return $this;
     }
@@ -253,12 +249,13 @@ class ProductI18n extends AbstractI18n
     }
 
     /**
-     * @param string $unitName
+     * @param string $titleTag
+     *
      * @return ProductI18n
      */
-    public function setUnitName(string $unitName): ProductI18n
+    public function setTitleTag(string $titleTag): ProductI18n
     {
-        $this->unitName = $unitName;
+        $this->titleTag = $titleTag;
 
         return $this;
     }
@@ -272,12 +269,13 @@ class ProductI18n extends AbstractI18n
     }
 
     /**
-     * @param string $urlPath Optional path of product URL
+     * @param string $unitName
+     *
      * @return ProductI18n
      */
-    public function setUrlPath(string $urlPath): ProductI18n
+    public function setUnitName(string $unitName): ProductI18n
     {
-        $this->urlPath = $urlPath;
+        $this->unitName = $unitName;
 
         return $this;
     }
@@ -288,5 +286,17 @@ class ProductI18n extends AbstractI18n
     public function getUrlPath(): string
     {
         return $this->urlPath;
+    }
+
+    /**
+     * @param string $urlPath Optional path of product URL
+     *
+     * @return ProductI18n
+     */
+    public function setUrlPath(string $urlPath): ProductI18n
+    {
+        $this->urlPath = $urlPath;
+
+        return $this;
     }
 }

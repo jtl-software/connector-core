@@ -7,7 +7,6 @@ use Faker\Generator;
 use Jtl\Connector\Core\Config\ArrayConfig;
 use Jtl\Connector\Core\Config\FileConfig;
 use Jtl\Connector\Core\Model\Identity;
-use Noodlehaus\AbstractConfig;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 
@@ -33,14 +32,6 @@ class TestCase extends \Jtl\UnitTest\TestCase
      * @var vfsStreamDirectory
      */
     private $rootDir;
-
-    /**
-     *
-     */
-    protected function setUp(): void
-    {
-        $_POST = [];
-    }
 
     protected function tearDown(): void
     {
@@ -82,24 +73,6 @@ class TestCase extends \Jtl\UnitTest\TestCase
     }
 
     /**
-     * @return int
-     * @throws \Exception
-     */
-    protected function createHostId(): int
-    {
-        return \random_int(1, 9999);
-    }
-
-    /**
-     * @return string
-     * @throws \Exception
-     */
-    protected function createEndpointId(): string
-    {
-        return \sprintf("%s_%s", 't', $this->createHostId());
-    }
-
-    /**
      * @return Identity
      * @throws \Exception
      */
@@ -109,7 +82,26 @@ class TestCase extends \Jtl\UnitTest\TestCase
     }
 
     /**
+     * @return string
+     * @throws \Exception
+     */
+    protected function createEndpointId(): string
+    {
+        return \sprintf('%s_%s', 't', $this->createHostId());
+    }
+
+    /**
+     * @return int
+     * @throws \Exception
+     */
+    protected function createHostId(): int
+    {
+        return \random_int(1, 9999);
+    }
+
+    /**
      * @param string $className
+     *
      * @return array
      * @throws \ReflectionException
      */
@@ -131,6 +123,7 @@ class TestCase extends \Jtl\UnitTest\TestCase
 
     /**
      * @param array $data
+     *
      * @return ArrayConfig
      */
     protected function createConfig(array $data = [])
@@ -141,9 +134,10 @@ class TestCase extends \Jtl\UnitTest\TestCase
     /**
      * @param string $payload
      * @param string $extension
+     *
      * @return FileConfig
      */
-    protected function createFileConfig(string $payload = "{}", string $extension = 'json'): FileConfig
+    protected function createFileConfig(string $payload = '{}', string $extension = 'json'): FileConfig
     {
         return new FileConfig($this->createConfigFile($payload, $extension));
     }
@@ -151,6 +145,7 @@ class TestCase extends \Jtl\UnitTest\TestCase
     /**
      * @param string $payload
      * @param string $extension
+     *
      * @return string
      */
     protected function createConfigFile(string $payload = '{}', string $extension = 'json'): string
@@ -161,21 +156,19 @@ class TestCase extends \Jtl\UnitTest\TestCase
     }
 
     /**
-     * @return vfsStreamDirectory
+     * @return string
      */
-    protected function getRootDir(): vfsStreamDirectory
+    protected function createFile(): string
     {
-        if (\is_null($this->rootDir)) {
-            $this->rootDir = vfsStream::setup();
-        }
-        return $this->rootDir;
+        return $this->createFiles(1)[0];
     }
 
     /**
      * @param int $quantity
+     *
      * @return string[]
      */
-    protected function createFiles($quantity = 2): array
+    protected function createFiles(int $quantity = 2): array
     {
         $files = [];
 
@@ -191,11 +184,22 @@ class TestCase extends \Jtl\UnitTest\TestCase
     }
 
     /**
-     * @return mixed
+     * @return vfsStreamDirectory
      */
-    protected function createFile(): string
+    protected function getRootDir(): vfsStreamDirectory
     {
-        return $this->createFiles(1)[0];
+        if (\is_null($this->rootDir)) {
+            $this->rootDir = vfsStream::setup();
+        }
+        return $this->rootDir;
+    }
+
+    /**
+     *
+     */
+    protected function setUp(): void
+    {
+        $_POST = [];
     }
 
     /**

@@ -2,7 +2,7 @@
 
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @package   Jtl\Connector\Core\Model
  */
 
 namespace Jtl\Connector\Core\Model;
@@ -12,15 +12,16 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Database Query Filter
  *
- * @access public
+ * @access  public
  * @package Jtl\Connector\Core\Model
  * @Serializer\AccessType("public_method")
  */
 class QueryFilter
 {
-    public const FILTER_FETCH_CHILDREN = 'fetchChildren';
-    public const FILTER_PARENT_ID      = 'parentId';
-    public const FILTER_RELATION_TYPE  = 'relationType';
+    public const
+        FILTER_FETCH_CHILDREN = 'fetchChildren',
+        FILTER_PARENT_ID      = 'parentId',
+        FILTER_RELATION_TYPE  = 'relationType';
 
     /**
      * Query item count limitation
@@ -52,19 +53,6 @@ class QueryFilter
     }
 
     /**
-     * Limit Setter
-     *
-     * @param integer $limit
-     * @return QueryFilter
-     */
-    public function setLimit(int $limit): QueryFilter
-    {
-        $this->limit = $limit;
-
-        return $this;
-    }
-
-    /**
      * Limit Getter
      *
      * @return integer
@@ -75,14 +63,15 @@ class QueryFilter
     }
 
     /**
-     * Filters Setter
+     * Limit Setter
      *
-     * @param array $filters
+     * @param integer $limit
+     *
      * @return QueryFilter
      */
-    public function setFilters(array $filters): QueryFilter
+    public function setLimit(int $limit): QueryFilter
     {
-        $this->filters = $filters;
+        $this->limit = $limit;
 
         return $this;
     }
@@ -98,10 +87,25 @@ class QueryFilter
     }
 
     /**
+     * Filters Setter
+     *
+     * @param array $filters
+     *
+     * @return QueryFilter
+     */
+    public function setFilters(array $filters): QueryFilter
+    {
+        $this->filters = $filters;
+
+        return $this;
+    }
+
+    /**
      * Add one Filter
      *
-     * @param string $key Filter key
+     * @param string $key   Filter key
      * @param string $value Filter value
+     *
      * @return Jtl\Connector\Core\Model\QueryFilter
      */
     public function addFilter(string $key, $value): QueryFilter
@@ -114,6 +118,7 @@ class QueryFilter
      * Delete one Filter
      *
      * @param string $key
+     *
      * @return boolean
      */
     public function deleteFilter(string $key): bool
@@ -129,6 +134,7 @@ class QueryFilter
 
     /**
      * @param string $key
+     *
      * @return boolean
      */
     public function isFilter(string $key): bool
@@ -138,6 +144,7 @@ class QueryFilter
 
     /**
      * @param string $key
+     *
      * @return mixed|NULL
      */
     public function getFilter(string $key)
@@ -157,7 +164,8 @@ class QueryFilter
     /**
      * @param string $oldKey
      * @param string $newKey
-     * @param mixed $value
+     * @param mixed  $value
+     *
      * @return boolean
      */
     public function overrideFilter(string $oldKey, string $newKey, $value = null): bool

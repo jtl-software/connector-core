@@ -14,6 +14,7 @@ class StatusChangeEvent extends Event
 
     /**
      * StatusChangeEvent constructor.
+     *
      * @param StatusChange $statusChange
      */
     public function __construct(StatusChange $statusChange)

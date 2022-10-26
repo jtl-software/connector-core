@@ -9,16 +9,16 @@ use Psr\Log\LogLevel;
 class ConfigSchema
 {
     public const
-    LOG_LEVEL               = 'log.level',
-    LOG_FORMAT              = 'log.format',
-    MAIN_LANGUAGE           = 'main_language',
-    CONNECTOR_DIR           = 'connector_dir',
-    LOG_DIR                 = 'log_dir',
-    CACHE_DIR               = 'cache_dir',
-    PLUGINS_DIR             = 'plugins_dir',
-    FEATURES_PATH           = 'features_path',
-    DEBUG                   = 'debug',
-    SERIALIZER_ENABLE_CACHE = 'serializer.enable_cache';
+        LOG_LEVEL               = 'log.level',
+        LOG_FORMAT              = 'log.format',
+        MAIN_LANGUAGE           = 'main_language',
+        CONNECTOR_DIR           = 'connector_dir',
+        LOG_DIR                 = 'log_dir',
+        CACHE_DIR               = 'cache_dir',
+        PLUGINS_DIR             = 'plugins_dir',
+        FEATURES_PATH           = 'features_path',
+        DEBUG                   = 'debug',
+        SERIALIZER_ENABLE_CACHE = 'serializer.enable_cache';
 
     /**
      * @var ConfigParameter[]
@@ -26,94 +26,8 @@ class ConfigSchema
     protected $parameters = [];
 
     /**
-     * @param string $key
-     * @return boolean
-     */
-    public function hasParameter(string $key): bool
-    {
-        return isset($this->parameters[$key]);
-    }
-
-    /**
-     * @param string $key
-     * @return ConfigParameter
-     * @throws ConfigException
-     */
-    public function getParameter(string $key): ConfigParameter
-    {
-        if (!$this->hasParameter($key)) {
-            throw ConfigException::unknownParameter($key);
-        }
-        return $this->parameters[$key];
-    }
-
-    /**
-     * @param ConfigParameter $parameter
-     * @return ConfigSchema
-     */
-    public function setParameter(ConfigParameter $parameter): self
-    {
-        $this->parameters[$parameter->getKey()] = $parameter;
-        return $this;
-    }
-
-    /**
-     * @return ConfigParameter[]
-     */
-    public function getParameters(): array
-    {
-        return \array_values($this->parameters);
-    }
-
-    /**
-     * @param ConfigParameter ...$parameters
-     * @return ConfigSchema
-     */
-    public function setParameters(ConfigParameter ...$parameters): self
-    {
-        foreach ($parameters as $parameter) {
-            $this->setParameter($parameter);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function getDefaultValues(): array
-    {
-        return \array_map(function (ConfigParameter $option) {
-            return $option->getDefaultValue();
-        }, \array_filter($this->parameters, function (ConfigParameter $option) {
-            return $option->hasDefaultValue();
-        }));
-    }
-
-    /**
-     * @param ConfigInterface $config
-     * @throws ConfigException
-     */
-    public function validateConfig(ConfigInterface $config): void
-    {
-        $invalidValues     = [];
-        $missingProperties = [];
-        foreach ($this->parameters as $parameter) {
-            $configValue = $config->get($parameter->getKey());
-            if (!\is_null($configValue) && !$parameter->isValidValue($configValue)) {
-                $invalidValues[] = $parameter->getKey();
-            } elseif (\is_null($configValue) && $parameter->isRequired()) {
-                $missingProperties[] = $parameter->getKey();
-            }
-        }
-
-        if (\count($invalidValues) > 0 || \count($missingProperties) > 0) {
-            throw ConfigException::configValidationErrors($invalidValues, $missingProperties);
-        }
-    }
-
-    /**
      * @param string $connectorDir
+     *
      * @return ConfigParameter[]
      * @throws ConfigException
      */
@@ -158,7 +72,101 @@ class ConfigSchema
     }
 
     /**
+     * @param string $key
+     *
+     * @return ConfigParameter
+     * @throws ConfigException
+     */
+    public function getParameter(string $key): ConfigParameter
+    {
+        if (!$this->hasParameter($key)) {
+            throw ConfigException::unknownParameter($key);
+        }
+        return $this->parameters[$key];
+    }
+
+    /**
+     * @param string $key
+     *
+     * @return boolean
+     */
+    public function hasParameter(string $key): bool
+    {
+        return isset($this->parameters[$key]);
+    }
+
+    /**
+     * @return ConfigParameter[]
+     */
+    public function getParameters(): array
+    {
+        return \array_values($this->parameters);
+    }
+
+    /**
+     * @param ConfigParameter ...$parameters
+     *
+     * @return ConfigSchema
+     */
+    public function setParameters(ConfigParameter ...$parameters): self
+    {
+        foreach ($parameters as $parameter) {
+            $this->setParameter($parameter);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param ConfigParameter $parameter
+     *
+     * @return ConfigSchema
+     */
+    public function setParameter(ConfigParameter $parameter): self
+    {
+        $this->parameters[$parameter->getKey()] = $parameter;
+        return $this;
+    }
+
+    /**
+     * @return mixed[]
+     */
+    public function getDefaultValues(): array
+    {
+        return \array_map(function (ConfigParameter $option) {
+            return $option->getDefaultValue();
+        },
+            \array_filter($this->parameters, function (ConfigParameter $option) {
+                return $option->hasDefaultValue();
+            }));
+    }
+
+    /**
+     * @param ConfigInterface $config
+     *
+     * @throws ConfigException
+     */
+    public function validateConfig(ConfigInterface $config): void
+    {
+        $invalidValues     = [];
+        $missingProperties = [];
+        foreach ($this->parameters as $parameter) {
+            $configValue = $config->get($parameter->getKey());
+            if (!\is_null($configValue) && !$parameter->isValidValue($configValue)) {
+                $invalidValues[] = $parameter->getKey();
+            } elseif (\is_null($configValue) && $parameter->isRequired()) {
+                $missingProperties[] = $parameter->getKey();
+            }
+        }
+
+        if (\count($invalidValues) > 0 || \count($missingProperties) > 0) {
+            throw ConfigException::configValidationErrors($invalidValues, $missingProperties);
+        }
+    }
+
+    /**
      * @param ConfigInterface|null $config
+     *
      * @return ConfigInterface
      */
     public function createConfigWithDefaultValues(ConfigInterface $config = null): ConfigInterface

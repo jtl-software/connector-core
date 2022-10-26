@@ -14,7 +14,7 @@ class RpcMethodTest extends TestCase
     /**
      * @dataProvider isMethodDataProvider
      *
-     * @param $methodName
+     * @param      $methodName
      * @param bool $shouldBeMethod
      */
     public function testIsMethod($methodName, bool $shouldBeMethod)
@@ -32,46 +32,16 @@ class RpcMethodTest extends TestCase
         $definedMethods = $this->getCorrectConstantsTestCases(RpcMethod::class);
 
         $customTests   = [];
-        $customTests[] = [
-            '""',
-            false,
-        ];
-        $customTests[] = [
-            ' ',
-            false,
-        ];
-        $customTests[] = [
-            false,
-            false,
-        ];
-        $customTests[] = [
-            true,
-            false,
-        ];
-        $customTests[] = [
-            '.',
-            false,
-        ];
-        $customTests[] = [
-            ' connector.pull    ',
-            true,
-        ];
-        $customTests[] = [
-            '...',
-            false,
-        ];
-        $customTests[] = [
-            '.1.1.',
-            false,
-        ];
-        $customTests[] = [
-            'method\.name',
-            false,
-        ];
-        $customTests[] = [
-            'very.long.method.name',
-            true,
-        ];
+        $customTests[] = ['""', false];
+        $customTests[] = [' ', false];
+        $customTests[] = [false, false];
+        $customTests[] = [true, false];
+        $customTests[] = ['.', false];
+        $customTests[] = [' connector.pull    ', true];
+        $customTests[] = ['...', false];
+        $customTests[] = ['.1.1.', false];
+        $customTests[] = ['method\.name', false];
+        $customTests[] = ['very.long.method.name', true];
 
         return \array_merge_recursive($definedMethods, $customTests);
     }
@@ -94,30 +64,12 @@ class RpcMethodTest extends TestCase
     public function mapMethodDataProvider()
     {
         return [
-            [
-                RpcMethod::CLEAR,
-                'core.connector.clear',
-            ],
-            [
-                RpcMethod::IDENTIFY,
-                'core.connector.identify',
-            ],
-            [
-                RpcMethod::FINISH,
-                'core.connector.finish',
-            ],
-            [
-                RpcMethod::AUTH,
-                RpcMethod::AUTH,
-            ],
-            [
-                '',
-                '',
-            ],
-            [
-                'foo',
-                'foo',
-            ],
+            [RpcMethod::CLEAR, 'core.connector.clear'],
+            [RpcMethod::IDENTIFY, 'core.connector.identify'],
+            [RpcMethod::FINISH, 'core.connector.finish'],
+            [RpcMethod::AUTH, RpcMethod::AUTH],
+            ['', ''],
+            ['foo', 'foo']
         ];
     }
 }

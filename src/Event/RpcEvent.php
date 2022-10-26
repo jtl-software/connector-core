@@ -27,7 +27,8 @@ class RpcEvent extends Event
 
     /**
      * RpcEvent constructor.
-     * @param mixed $data
+     *
+     * @param mixed  $data
      * @param string $controller
      * @param string $action
      */
@@ -48,6 +49,7 @@ class RpcEvent extends Event
 
     /**
      * @param mixed $data
+     *
      * @return RpcEvent
      */
     public function setData($data): self

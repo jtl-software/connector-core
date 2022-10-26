@@ -14,6 +14,7 @@ class ResponseEvent extends Event
 
     /**
      * ResponseEvent constructor.
+     *
      * @param Response $response
      */
     public function __construct(Response $response)

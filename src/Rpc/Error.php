@@ -3,14 +3,13 @@
 /**
  *
  * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Rpc
+ * @package   Jtl\Connector\Core\Rpc
  */
 
 namespace Jtl\Connector\Core\Rpc;
 
-use Jtl\Connector\Core\Model\AbstractModel;
-use Jtl\Connector\Core\Exception\RpcException;
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\RpcException;
 
 /**
  * Rpc Error
@@ -52,47 +51,29 @@ class Error
     public $data = null;
 
     /**
-     * Getter for $code
-     *
-     * @return integer
-     */
-    public function getCode(): int
-    {
-        return $this->code;
-    }
-
-    /**
-     * Setter for $code
-     *
-     * @param int $code
-     * @return Error
-     */
-    public function setCode(int $code): Error
-    {
-        $this->code = $code;
-        return $this;
-    }
-
-    /**
-     * Getter for $message
+     * @param \Throwable  $exception
+     * @param string|null $additionalMessage
      *
      * @return string
      */
-    public function getMessage(): string
+    public static function createDataFromException(\Throwable $exception, string $additionalMessage = null): string
     {
-        return $this->message;
-    }
+        $lastSlashPos = \strrpos($exception->getFile(), '/');
+        $file         = \sprintf('...%s', \substr($exception->getFile(), $lastSlashPos));
 
-    /**
-     * Setter for $message
-     *
-     * @param string $message
-     * @return Error
-     */
-    public function setMessage($message): Error
-    {
-        $this->message = $message;
-        return $this;
+        $data = \sprintf(
+            '%s (Code: %s) in %s:%s',
+            \get_class($exception),
+            $exception->getCode(),
+            $file,
+            $exception->getLine()
+        );
+
+        if (\is_string($additionalMessage)) {
+            $data .= \sprintf(' - %s', $additionalMessage);
+        }
+
+        return $data;
     }
 
     /**
@@ -109,6 +90,7 @@ class Error
      * Setter for $data
      *
      * @param mixed $data
+     *
      * @return Error
      */
     public function setData($data): Error
@@ -144,27 +126,48 @@ class Error
     }
 
     /**
-     * @param \Throwable $exception
-     * @param string|null $additionalMessage
+     * Getter for $code
+     *
+     * @return integer
+     */
+    public function getCode(): int
+    {
+        return $this->code;
+    }
+
+    /**
+     * Setter for $code
+     *
+     * @param int $code
+     *
+     * @return Error
+     */
+    public function setCode(int $code): Error
+    {
+        $this->code = $code;
+        return $this;
+    }
+
+    /**
+     * Getter for $message
+     *
      * @return string
      */
-    public static function createDataFromException(\Throwable $exception, string $additionalMessage = null): string
+    public function getMessage(): string
     {
-        $lastSlashPos = \strrpos($exception->getFile(), '/');
-        $file         = \sprintf('...%s', \substr($exception->getFile(), $lastSlashPos));
+        return $this->message;
+    }
 
-        $data = \sprintf(
-            "%s (Code: %s) in %s:%s",
-            \get_class($exception),
-            $exception->getCode(),
-            $file,
-            $exception->getLine()
-        );
-
-        if (\is_string($additionalMessage)) {
-            $data .= \sprintf(' - %s', $additionalMessage);
-        }
-
-        return $data;
+    /**
+     * Setter for $message
+     *
+     * @param string $message
+     *
+     * @return Error
+     */
+    public function setMessage($message): Error
+    {
+        $this->message = $message;
+        return $this;
     }
 }

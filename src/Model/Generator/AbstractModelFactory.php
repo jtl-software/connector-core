@@ -7,7 +7,6 @@ namespace Jtl\Connector\Core\Model\Generator;
 use Faker\Factory;
 use Faker\Generator;
 use JMS\Serializer\Serializer;
-use Jtl\Connector\Core\Model\AbstractModel;
 use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 
@@ -21,9 +20,9 @@ abstract class AbstractModelFactory
     protected static array $identities = [];
     /** @var AbstractModelFactory[] */
     protected static array $factories = [];
-    protected string $defaultLocale;
-    protected ?Generator $faker;
-    protected ?Serializer $serializer;
+    protected string       $defaultLocale;
+    protected ?Generator   $faker;
+    protected ?Serializer  $serializer;
 
     /**
      * AbstractModelFactory constructor.

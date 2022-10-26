@@ -9,6 +9,7 @@ class Str
 {
     /**
      * @param string $string
+     *
      * @return string
      * @throws CaseConverterException
      */
@@ -19,6 +20,7 @@ class Str
 
     /**
      * @param string $string
+     *
      * @return string
      * @throws CaseConverterException
      */
@@ -29,6 +31,7 @@ class Str
 
     /**
      * @param string $string
+     *
      * @return string
      * @throws CaseConverterException
      */

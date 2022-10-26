@@ -3,15 +3,15 @@
 /**
  *
  * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Application
+ * @package   Jtl\Connector\Core\Application
  */
 
 namespace Jtl\Connector\Core\Controller;
 
 use Jawira\CaseConverter\CaseConverterException;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
+use Jtl\Connector\Core\Checksum\ChecksumInterface;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Definition\RelationType;
@@ -19,6 +19,7 @@ use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\AuthenticationException;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\MissingRequirementException;
+use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Linker\IdentityLinker;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
@@ -29,8 +30,6 @@ use Jtl\Connector\Core\Model\Identities;
 use Jtl\Connector\Core\Model\Session;
 use Jtl\Connector\Core\Serializer\Json;
 use Jtl\Connector\Core\System\Check;
-use Jtl\Connector\Core\Linker\ChecksumLinker;
-use Jtl\Connector\Core\Checksum\ChecksumInterface;
 use Jtl\Connector\Core\Utilities\Str;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
@@ -43,27 +42,28 @@ use Psr\Log\NullLogger;
  */
 class ConnectorController implements LoggerAwareInterface
 {
-    protected string $featuresPath;
-    protected ChecksumLinker $checksumLinker;
-    protected IdentityLinker $linker;
-    protected LoggerInterface $logger;
+    protected string                   $featuresPath;
+    protected ChecksumLinker           $checksumLinker;
+    protected IdentityLinker           $linker;
+    protected LoggerInterface          $logger;
     protected \SessionHandlerInterface $sessionHandler;
-    protected TokenValidatorInterface $tokenValidator;
+    protected TokenValidatorInterface  $tokenValidator;
 
     /**
      * ConnectorController constructor.
-     * @param string $featuresPath
-     * @param ChecksumLinker $checksumLinker
-     * @param IdentityLinker $linker
+     *
+     * @param string                   $featuresPath
+     * @param ChecksumLinker           $checksumLinker
+     * @param IdentityLinker           $linker
      * @param \SessionHandlerInterface $sessionHandler
-     * @param TokenValidatorInterface $tokenValidator
+     * @param TokenValidatorInterface  $tokenValidator
      */
     public function __construct(
-        string $featuresPath,
-        ChecksumLinker $checksumLinker,
-        IdentityLinker $linker,
+        string                   $featuresPath,
+        ChecksumLinker           $checksumLinker,
+        IdentityLinker           $linker,
         \SessionHandlerInterface $sessionHandler,
-        TokenValidatorInterface $tokenValidator
+        TokenValidatorInterface  $tokenValidator
     ) {
         $this->featuresPath   = $featuresPath;
         $this->checksumLinker = $checksumLinker;
@@ -76,6 +76,7 @@ class ConnectorController implements LoggerAwareInterface
 
     /**
      * @param null $params
+     *
      * @return bool
      * @throws MissingRequirementException
      */
@@ -87,6 +88,7 @@ class ConnectorController implements LoggerAwareInterface
 
     /**
      * @param null $params
+     *
      * @return Features
      */
     public function features($params = null)
@@ -107,7 +109,16 @@ class ConnectorController implements LoggerAwareInterface
     }
 
     /**
+     * @return array
+     */
+    protected function fetchFeaturesData(): array
+    {
+        return Json::decode(\file_get_contents($this->featuresPath), true);
+    }
+
+    /**
      * @param Ack $ack
+     *
      * @return bool
      * @throws DefinitionException
      * @throws CaseConverterException
@@ -151,6 +162,7 @@ class ConnectorController implements LoggerAwareInterface
 
     /**
      * @param Authentication $auth
+     *
      * @return Session
      * @throws ApplicationException
      * @throws AuthenticationException
@@ -182,6 +194,7 @@ class ConnectorController implements LoggerAwareInterface
 
     /**
      * @param ConnectorInterface $endpointConnector
+     *
      * @return ConnectorIdentification
      */
     public function identify(ConnectorInterface $endpointConnector): ConnectorIdentification
@@ -232,6 +245,7 @@ class ConnectorController implements LoggerAwareInterface
 
     /**
      * @param Identities|null $identities
+     *
      * @return bool
      * @throws DefinitionException
      * @throws \ReflectionException
@@ -269,13 +283,5 @@ class ConnectorController implements LoggerAwareInterface
     public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
-    }
-
-    /**
-     * @return array
-     */
-    protected function fetchFeaturesData(): array
-    {
-        return Json::decode(\file_get_contents($this->featuresPath), true);
     }
 }

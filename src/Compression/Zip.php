@@ -2,15 +2,13 @@
 
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Compression
+ * @package   Jtl\Connector\Core\Compression
  */
 
 namespace Jtl\Connector\Core\Compression;
 
 use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\FileNotFoundException;
-use Jtl\Connector\Core\Exception\NotImplementedException;
-use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 /**
  * Zip
@@ -23,6 +21,7 @@ class Zip
     /**
      * @param string $sourceFile
      * @param string $targetFolder
+     *
      * @return bool
      * @throws CompressionException
      * @throws FileNotFoundException

@@ -4,9 +4,9 @@ use Sami\Sami;
 use Symfony\Component\Finder\Finder;
 
 $iterator = Finder::create()
-    ->files()
-    ->name('*.php')
-    ->in($dir = __DIR__ . '/src');
+                  ->files()
+                  ->name('*.php')
+                  ->in($dir = __DIR__ . '/src');
 
 return new Sami($iterator, [
     'title'     => 'JTL-Connector documentation',

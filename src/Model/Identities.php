@@ -34,6 +34,7 @@ class Identities extends AbstractModel
      * Identities getter
      *
      * @param Identity[] $identities
+     *
      * @return Ack
      */
     public function setIdentities(array $identities): self

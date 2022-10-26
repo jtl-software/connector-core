@@ -48,10 +48,12 @@ class ConfigParameter
 
     /**
      * ConfigParameter constructor.
+     *
      * @param string $key
      * @param string $type
-     * @param bool $required
-     * @param bool $global
+     * @param bool   $required
+     * @param bool   $global
+     *
      * @throws ConfigException
      */
     public function __construct(string $key, string $type, bool $required = true, bool $global = false)
@@ -60,6 +62,36 @@ class ConfigParameter
         $this->setType($type);
         $this->required = $required;
         $this->global   = $global;
+    }
+
+    /**
+     * @param string $type
+     *
+     * @return boolean
+     */
+    public static function isType(string $type): bool
+    {
+        return \in_array($type, self::$types, true);
+    }
+
+    /**
+     * @param string $key
+     * @param string $type
+     * @param bool   $required
+     * @param bool   $global
+     * @param null   $defaultValue
+     *
+     * @return ConfigParameter
+     * @throws ConfigException
+     */
+    public static function create(
+        string $key,
+        string $type = self::TYPE_STRING,
+        bool   $required = true,
+        $global = false,
+        $defaultValue = null
+    ): ConfigParameter {
+        return (new self($key, $type, $required, $global))->setDefaultValue($defaultValue);
     }
 
     /**
@@ -72,6 +104,7 @@ class ConfigParameter
 
     /**
      * @param string $key
+     *
      * @return $this
      * @throws ConfigException
      */
@@ -95,6 +128,7 @@ class ConfigParameter
 
     /**
      * @param string $type
+     *
      * @return $this
      * @throws ConfigException
      */
@@ -123,7 +157,6 @@ class ConfigParameter
         return $this->global;
     }
 
-
     /**
      * @return boolean
      */
@@ -142,6 +175,7 @@ class ConfigParameter
 
     /**
      * @param $defaultValue
+     *
      * @return $this
      * @throws ConfigException
      */
@@ -156,38 +190,11 @@ class ConfigParameter
 
     /**
      * @param string $value
+     *
      * @return boolean
      */
     public function isValidValue($value): bool
     {
         return \gettype($value) === $this->getType();
-    }
-
-    /**
-     * @param string $type
-     * @return boolean
-     */
-    public static function isType(string $type): bool
-    {
-        return \in_array($type, self::$types, true);
-    }
-
-    /**
-     * @param string $key
-     * @param string $type
-     * @param bool $required
-     * @param bool $global
-     * @param null $defaultValue
-     * @return ConfigParameter
-     * @throws ConfigException
-     */
-    public static function create(
-        string $key,
-        string $type   = self::TYPE_STRING,
-        bool $required = true,
-        $global        = false,
-        $defaultValue  = null
-    ): ConfigParameter {
-        return (new self($key, $type, $required, $global))->setDefaultValue($defaultValue);
     }
 }

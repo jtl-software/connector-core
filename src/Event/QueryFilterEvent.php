@@ -18,6 +18,7 @@ class QueryFilterEvent extends Event
 
     /**
      * ModelBeforeQueryFilterEvent constructor.
+     *
      * @param QueryFilter $queryFilter
      */
     public function __construct(QueryFilter $queryFilter)

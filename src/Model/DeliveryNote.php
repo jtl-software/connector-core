@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * A delivery note created for shipment.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -70,24 +70,14 @@ class DeliveryNote extends AbstractIdentity
 
     /**
      * Constructor.
+     *
      * @param string $endpoint
-     * @param int $host
+     * @param int    $host
      */
     public function __construct(string $endpoint = '', int $host = 0)
     {
         parent::__construct($endpoint, $host);
         $this->customerOrderId = new Identity();
-    }
-
-    /**
-     * @param Identity $customerOrderId Reference to customerOrder
-     * @return DeliveryNote
-     */
-    public function setCustomerOrderId(Identity $customerOrderId): DeliveryNote
-    {
-        $this->customerOrderId = $customerOrderId;
-
-        return $this;
     }
 
     /**
@@ -99,12 +89,13 @@ class DeliveryNote extends AbstractIdentity
     }
 
     /**
-     * @param \DateTimeInterface|null $creationDate Creation date
+     * @param Identity $customerOrderId Reference to customerOrder
+     *
      * @return DeliveryNote
      */
-    public function setCreationDate(\DateTimeInterface $creationDate = null): DeliveryNote
+    public function setCustomerOrderId(Identity $customerOrderId): DeliveryNote
     {
-        $this->creationDate = $creationDate;
+        $this->customerOrderId = $customerOrderId;
 
         return $this;
     }
@@ -118,12 +109,13 @@ class DeliveryNote extends AbstractIdentity
     }
 
     /**
-     * @param boolean $isFulfillment Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
+     * @param \DateTimeInterface|null $creationDate Creation date
+     *
      * @return DeliveryNote
      */
-    public function setIsFulfillment(bool $isFulfillment): DeliveryNote
+    public function setCreationDate(\DateTimeInterface $creationDate = null): DeliveryNote
     {
-        $this->isFulfillment = $isFulfillment;
+        $this->creationDate = $creationDate;
 
         return $this;
     }
@@ -137,12 +129,13 @@ class DeliveryNote extends AbstractIdentity
     }
 
     /**
-     * @param string $note Optional text note
+     * @param boolean $isFulfillment Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
+     *
      * @return DeliveryNote
      */
-    public function setNote(string $note): DeliveryNote
+    public function setIsFulfillment(bool $isFulfillment): DeliveryNote
     {
-        $this->note = $note;
+        $this->isFulfillment = $isFulfillment;
 
         return $this;
     }
@@ -156,7 +149,20 @@ class DeliveryNote extends AbstractIdentity
     }
 
     /**
+     * @param string $note Optional text note
+     *
+     * @return DeliveryNote
+     */
+    public function setNote(string $note): DeliveryNote
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+
+    /**
      * @param DeliveryNoteItem $item
+     *
      * @return DeliveryNote
      */
     public function addItem(DeliveryNoteItem $item): DeliveryNote
@@ -167,7 +173,16 @@ class DeliveryNote extends AbstractIdentity
     }
 
     /**
+     * @return DeliveryNoteItem[]
+     */
+    public function getItems(): array
+    {
+        return $this->items;
+    }
+
+    /**
      * @param DeliveryNoteItem ...$items
+     *
      * @return DeliveryNote
      */
     public function setItems(DeliveryNoteItem ...$items): DeliveryNote
@@ -175,14 +190,6 @@ class DeliveryNote extends AbstractIdentity
         $this->items = $items;
 
         return $this;
-    }
-
-    /**
-     * @return DeliveryNoteItem[]
-     */
-    public function getItems(): array
-    {
-        return $this->items;
     }
 
     /**
@@ -197,6 +204,7 @@ class DeliveryNote extends AbstractIdentity
 
     /**
      * @param DeliveryNoteTrackingList $trackingList
+     *
      * @return DeliveryNote
      */
     public function addTrackingList(DeliveryNoteTrackingList $trackingList): DeliveryNote
@@ -207,7 +215,16 @@ class DeliveryNote extends AbstractIdentity
     }
 
     /**
+     * @return DeliveryNoteTrackingList[]
+     */
+    public function getTrackingLists(): array
+    {
+        return $this->trackingLists;
+    }
+
+    /**
      * @param DeliveryNoteTrackingList ...$trackingLists
+     *
      * @return DeliveryNote
      */
     public function setTrackingLists(DeliveryNoteTrackingList ...$trackingLists): DeliveryNote
@@ -215,14 +232,6 @@ class DeliveryNote extends AbstractIdentity
         $this->trackingLists = $trackingLists;
 
         return $this;
-    }
-
-    /**
-     * @return DeliveryNoteTrackingList[]
-     */
-    public function getTrackingLists(): array
-    {
-        return $this->trackingLists;
     }
 
     /**

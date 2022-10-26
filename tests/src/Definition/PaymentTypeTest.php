@@ -14,8 +14,9 @@ class PaymentTypeTest extends TestCase
     /**
      * @dataProvider isTypeDataProvider
      *
-     * @param $type
+     * @param      $type
      * @param bool $shouldBePaymentType
+     *
      * @throws \ReflectionException
      */
     public function testIsType($type, bool $shouldBePaymentType)
@@ -31,22 +32,10 @@ class PaymentTypeTest extends TestCase
     public function isTypeDataProvider(): array
     {
         $testCases   = $this->getCorrectConstantsTestCases(PaymentType::class);
-        $testCases[] = [
-            false,
-            false,
-        ];
-        $testCases[] = [
-            '',
-            false,
-        ];
-        $testCases[] = [
-            'pm worldpay',
-            false,
-        ];
-        $testCases[] = [
-            'PM_WORLDPAY',
-            false,
-        ];
+        $testCases[] = [false, false];
+        $testCases[] = ['', false];
+        $testCases[] = ['pm worldpay', false];
+        $testCases[] = ['PM_WORLDPAY', false];
 
         return $testCases;
     }

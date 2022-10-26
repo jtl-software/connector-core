@@ -18,26 +18,30 @@ class ActionTest extends TestCase
     {
         $actions = Action::getActions();
 
-        $this->assertSame([
-            Action::PULL,
-            Action::PUSH,
-            Action::DELETE,
-            Action::STATISTIC,
-            Action::AUTH,
-            Action::ACK,
-            Action::CLEAR,
-            Action::FEATURES,
-            Action::FINISH,
-            Action::IDENTIFY,
-            Action::INIT,
-        ], \array_values($actions));
+        $this->assertSame(
+            [
+                Action::PULL,
+                Action::PUSH,
+                Action::DELETE,
+                Action::STATISTIC,
+                Action::AUTH,
+                Action::ACK,
+                Action::CLEAR,
+                Action::FEATURES,
+                Action::FINISH,
+                Action::IDENTIFY,
+                Action::INIT,
+            ],
+            \array_values($actions)
+        );
     }
 
     /**
      * @dataProvider actionDataProvider
      *
      * @param mixed $actionName
-     * @param bool $expectedResult
+     * @param bool  $expectedResult
+     *
      * @throws \ReflectionException
      */
     public function testIsAction($actionName, bool $expectedResult)
@@ -51,38 +55,14 @@ class ActionTest extends TestCase
     public function actionDataProvider(): array
     {
         return [
-            [
-                Action::PULL,
-                true,
-            ],
-            [
-                Action::CLEAR,
-                true,
-            ],
-            [
-                'push ',
-                false,
-            ],
-            [
-                ' push ',
-                false,
-            ],
-            [
-                'PusH',
-                false,
-            ],
-            [
-                'Clear',
-                false,
-            ],
-            [
-                Action::CLEAR,
-                true,
-            ],
-            [
-                false,
-                false,
-            ],
+            [Action::PULL, true],
+            [Action::CLEAR, true],
+            ['push ', false],
+            [' push ', false],
+            ['PusH', false],
+            ['Clear', false],
+            [Action::CLEAR, true],
+            [false, false]
         ];
     }
 
@@ -90,7 +70,7 @@ class ActionTest extends TestCase
      * @dataProvider coreActionDataProvider
      *
      * @param mixed $actionName
-     * @param bool $expectedResult
+     * @param bool  $expectedResult
      */
     public function testIsCoreAction($actionName, bool $expectedResult)
     {
@@ -99,34 +79,17 @@ class ActionTest extends TestCase
 
     /**
      * @return array
+     * @throws \Exception
      */
     public function coreActionDataProvider()
     {
         return [
-            [
-                Action::AUTH,
-                true,
-            ],
-            [
-                Action::ACK,
-                true,
-            ],
-            [
-                Action::PULL,
-                false,
-            ],
-            [
-                false,
-                false,
-            ],
-            [
-                'autH',
-                false,
-            ],
-            [
-                \rand(-9999, 9999),
-                false,
-            ],
+            [Action::AUTH, true],
+            [Action::ACK, true],
+            [Action::PULL, false],
+            [false, false],
+            ['autH', false],
+            [\random_int(-9999, 9999), false,]
         ];
     }
 }

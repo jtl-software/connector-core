@@ -2,7 +2,7 @@
 
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Application
+ * @package   Jtl\Connector\Core\Application
  */
 
 namespace Jtl\Connector\Core\Connector;
@@ -17,7 +17,7 @@ interface ConnectorInterface
 {
     /**
      * @param ConfigInterface $config
-     * @param Container $container
+     * @param Container       $container
      * @param EventDispatcher $dispatcher
      */
     public function initialize(ConfigInterface $config, Container $container, EventDispatcher $dispatcher): void;

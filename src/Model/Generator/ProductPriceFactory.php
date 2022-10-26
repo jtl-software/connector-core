@@ -10,6 +10,17 @@ class ProductPriceFactory extends AbstractModelFactory
     protected bool $withBulkPrices = false;
 
     /**
+     * @param bool $withBulkPrices
+     *
+     * @return ProductPriceFactory
+     */
+    public function setWithBulkPrices(bool $withBulkPrices): ProductPriceFactory
+    {
+        $this->withBulkPrices = $withBulkPrices;
+        return $this;
+    }
+
+    /**
      * @return mixed[]
      * @throws \Exception
      */
@@ -26,6 +37,7 @@ class ProductPriceFactory extends AbstractModelFactory
 
     /**
      * @param bool $withBulkPrices
+     *
      * @return array
      * @throws \Exception
      */
@@ -56,24 +68,15 @@ class ProductPriceFactory extends AbstractModelFactory
 
     /**
      * @param mixe[] $override
+     *
      * @return mixed[]
      */
     public function makeItemArray(array $override = []): array
     {
         return \array_merge([
-            'quantity' => $this->faker->numberBetween(),
-            'netPrice' => $this->faker->randomFloat(4, 1),
-        ], $override);
-    }
-
-    /**
-     * @param bool $withBulkPrices
-     * @return ProductPriceFactory
-     */
-    public function setWithBulkPrices(bool $withBulkPrices): ProductPriceFactory
-    {
-        $this->withBulkPrices = $withBulkPrices;
-        return $this;
+                                'quantity' => $this->faker->numberBetween(),
+                                'netPrice' => $this->faker->randomFloat(4, 1),
+                            ], $override);
     }
 
     /**

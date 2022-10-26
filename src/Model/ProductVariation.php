@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -14,8 +14,8 @@ use JMS\Serializer\Annotation as Serializer;
  * ProductVariation Model. Each product defines its own variations,
  * that means  variations are not global  in contrast to specifics.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -87,17 +87,6 @@ class ProductVariation extends AbstractIdentity
     protected $values = [];
 
     /**
-     * @param integer $sort Optional sort number
-     * @return ProductVariation
-     */
-    public function setSort(int $sort): ProductVariation
-    {
-        $this->sort = $sort;
-
-        return $this;
-    }
-
-    /**
      * @return integer Optional sort number
      */
     public function getSort(): int
@@ -106,12 +95,13 @@ class ProductVariation extends AbstractIdentity
     }
 
     /**
-     * @param string $type
+     * @param integer $sort Optional sort number
+     *
      * @return ProductVariation
      */
-    public function setType(string $type): ProductVariation
+    public function setSort(int $sort): ProductVariation
     {
-        $this->type = $type;
+        $this->sort = $sort;
 
         return $this;
     }
@@ -125,7 +115,20 @@ class ProductVariation extends AbstractIdentity
     }
 
     /**
+     * @param string $type
+     *
+     * @return ProductVariation
+     */
+    public function setType(string $type): ProductVariation
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
      * @param ProductVariationI18n $i18n
+     *
      * @return ProductVariation
      */
     public function addI18n(ProductVariationI18n $i18n): ProductVariation
@@ -136,7 +139,16 @@ class ProductVariation extends AbstractIdentity
     }
 
     /**
+     * @return ProductVariationI18n[]
+     */
+    public function getI18ns(): array
+    {
+        return $this->i18ns;
+    }
+
+    /**
      * @param ProductVariationI18n ...$i18ns
+     *
      * @return ProductVariation
      */
     public function setI18ns(ProductVariationI18n ...$i18ns): ProductVariation
@@ -144,14 +156,6 @@ class ProductVariation extends AbstractIdentity
         $this->i18ns = $i18ns;
 
         return $this;
-    }
-
-    /**
-     * @return ProductVariationI18n[]
-     */
-    public function getI18ns(): array
-    {
-        return $this->i18ns;
     }
 
     /**
@@ -166,6 +170,7 @@ class ProductVariation extends AbstractIdentity
 
     /**
      * @param ProductVariationInvisibility $invisibility
+     *
      * @return ProductVariation
      */
     public function addInvisibility(ProductVariationInvisibility $invisibility): ProductVariation
@@ -176,7 +181,16 @@ class ProductVariation extends AbstractIdentity
     }
 
     /**
+     * @return ProductVariationInvisibility[]
+     */
+    public function getInvisibilities(): array
+    {
+        return $this->invisibilities;
+    }
+
+    /**
      * @param ProductVariationInvisibility ...$invisibilities
+     *
      * @return ProductVariation
      */
     public function setInvisibilities(ProductVariationInvisibility ...$invisibilities): ProductVariation
@@ -184,14 +198,6 @@ class ProductVariation extends AbstractIdentity
         $this->invisibilities = $invisibilities;
 
         return $this;
-    }
-
-    /**
-     * @return ProductVariationInvisibility[]
-     */
-    public function getInvisibilities(): array
-    {
-        return $this->invisibilities;
     }
 
     /**
@@ -206,6 +212,7 @@ class ProductVariation extends AbstractIdentity
 
     /**
      * @param ProductVariationValue $value
+     *
      * @return ProductVariation
      */
     public function addValue(ProductVariationValue $value): ProductVariation
@@ -216,7 +223,16 @@ class ProductVariation extends AbstractIdentity
     }
 
     /**
+     * @return ProductVariationValue[]
+     */
+    public function getValues(): array
+    {
+        return $this->values;
+    }
+
+    /**
      * @param ProductVariationValue ...$values
+     *
      * @return ProductVariation
      */
     public function setValues(ProductVariationValue ...$values): ProductVariation
@@ -224,14 +240,6 @@ class ProductVariation extends AbstractIdentity
         $this->values = $values;
 
         return $this;
-    }
-
-    /**
-     * @return ProductVariationValue[]
-     */
-    public function getValues(): array
-    {
-        return $this->values;
     }
 
     /**

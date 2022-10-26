@@ -16,8 +16,8 @@ class RequestTest extends TestCase
      */
     public function testCreateFromStatic()
     {
-        $controller = "FooBarController";
-        $action     = "pull";
+        $controller = 'FooBarController';
+        $action     = 'pull';
         $params     = [
             1,
             2,

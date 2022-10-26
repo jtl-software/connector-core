@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Media file model.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -77,17 +77,6 @@ class ProductMediaFile extends AbstractIdentity
     protected $i18ns = [];
 
     /**
-     * @param string $mediaFileCategory Optional media file category name
-     * @return ProductMediaFile
-     */
-    public function setMediaFileCategory(string $mediaFileCategory): ProductMediaFile
-    {
-        $this->mediaFileCategory = $mediaFileCategory;
-
-        return $this;
-    }
-
-    /**
      * @return string Optional media file category name
      */
     public function getMediaFileCategory(): string
@@ -96,12 +85,13 @@ class ProductMediaFile extends AbstractIdentity
     }
 
     /**
-     * @param string $path File path
+     * @param string $mediaFileCategory Optional media file category name
+     *
      * @return ProductMediaFile
      */
-    public function setPath(string $path): ProductMediaFile
+    public function setMediaFileCategory(string $mediaFileCategory): ProductMediaFile
     {
-        $this->path = $path;
+        $this->mediaFileCategory = $mediaFileCategory;
 
         return $this;
     }
@@ -115,12 +105,13 @@ class ProductMediaFile extends AbstractIdentity
     }
 
     /**
-     * @param integer $sort Optional sort number
+     * @param string $path File path
+     *
      * @return ProductMediaFile
      */
-    public function setSort(int $sort): ProductMediaFile
+    public function setPath(string $path): ProductMediaFile
     {
-        $this->sort = $sort;
+        $this->path = $path;
 
         return $this;
     }
@@ -134,12 +125,13 @@ class ProductMediaFile extends AbstractIdentity
     }
 
     /**
-     * @param string $type Media file type e.g. 'pdf'
+     * @param integer $sort Optional sort number
+     *
      * @return ProductMediaFile
      */
-    public function setType(string $type): ProductMediaFile
+    public function setSort(int $sort): ProductMediaFile
     {
-        $this->type = $type;
+        $this->sort = $sort;
 
         return $this;
     }
@@ -153,12 +145,13 @@ class ProductMediaFile extends AbstractIdentity
     }
 
     /**
-     * @param string $url Complete URL
+     * @param string $type Media file type e.g. 'pdf'
+     *
      * @return ProductMediaFile
      */
-    public function setUrl(string $url): ProductMediaFile
+    public function setType(string $type): ProductMediaFile
     {
-        $this->url = $url;
+        $this->type = $type;
 
         return $this;
     }
@@ -172,7 +165,20 @@ class ProductMediaFile extends AbstractIdentity
     }
 
     /**
+     * @param string $url Complete URL
+     *
+     * @return ProductMediaFile
+     */
+    public function setUrl(string $url): ProductMediaFile
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
      * @param ProductMediaFileAttr $attribute
+     *
      * @return ProductMediaFile
      */
     public function addAttribute(ProductMediaFileAttr $attribute): ProductMediaFile
@@ -183,7 +189,16 @@ class ProductMediaFile extends AbstractIdentity
     }
 
     /**
+     * @return ProductMediaFileAttr[]
+     */
+    public function getAttributes(): array
+    {
+        return $this->attributes;
+    }
+
+    /**
      * @param ProductMediaFileAttr ...$attributes
+     *
      * @return ProductMediaFile
      */
     public function setAttributes(ProductMediaFileAttr ...$attributes): ProductMediaFile
@@ -191,14 +206,6 @@ class ProductMediaFile extends AbstractIdentity
         $this->attributes = $attributes;
 
         return $this;
-    }
-
-    /**
-     * @return ProductMediaFileAttr[]
-     */
-    public function getAttributes(): array
-    {
-        return $this->attributes;
     }
 
     /**
@@ -213,6 +220,7 @@ class ProductMediaFile extends AbstractIdentity
 
     /**
      * @param ProductMediaFileI18n $i18n
+     *
      * @return ProductMediaFile
      */
     public function addI18n(ProductMediaFileI18n $i18n): ProductMediaFile
@@ -223,7 +231,16 @@ class ProductMediaFile extends AbstractIdentity
     }
 
     /**
+     * @return ProductMediaFileI18n[]
+     */
+    public function getI18ns(): array
+    {
+        return $this->i18ns;
+    }
+
+    /**
      * @param ProductMediaFileI18n ...$i18ns
+     *
      * @return ProductMediaFile
      */
     public function setI18ns(ProductMediaFileI18n ...$i18ns): ProductMediaFile
@@ -231,14 +248,6 @@ class ProductMediaFile extends AbstractIdentity
         $this->i18ns = $i18ns;
 
         return $this;
-    }
-
-    /**
-     * @return ProductMediaFileI18n[]
-     */
-    public function getI18ns(): array
-    {
-        return $this->i18ns;
     }
 
     /**

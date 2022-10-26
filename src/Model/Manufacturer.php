@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Manufacturer / brand properties.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -61,18 +61,6 @@ class Manufacturer extends AbstractIdentity
     protected $i18ns = [];
 
     /**
-     * @param string $name Manufacturer (brand) name
-     * @return Manufacturer
-     */
-    public function setName(string $name): self
-    {
-        $this->setIdentificationStringBySubject('name', \sprintf('Name = %s', $name));
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
      * @return string Manufacturer (brand) name
      */
     public function getName(): string
@@ -81,12 +69,14 @@ class Manufacturer extends AbstractIdentity
     }
 
     /**
-     * @param integer $sort Optional sort number
+     * @param string $name Manufacturer (brand) name
+     *
      * @return Manufacturer
      */
-    public function setSort(int $sort): self
+    public function setName(string $name): self
     {
-        $this->sort = $sort;
+        $this->setIdentificationStringBySubject('name', \sprintf('Name = %s', $name));
+        $this->name = $name;
 
         return $this;
     }
@@ -100,12 +90,13 @@ class Manufacturer extends AbstractIdentity
     }
 
     /**
-     * @param string $urlPath Optional url path e.g. 'Products-manufactured-by-X'
+     * @param integer $sort Optional sort number
+     *
      * @return Manufacturer
      */
-    public function setUrlPath(string $urlPath): self
+    public function setSort(int $sort): self
     {
-        $this->urlPath = $urlPath;
+        $this->sort = $sort;
 
         return $this;
     }
@@ -119,12 +110,13 @@ class Manufacturer extends AbstractIdentity
     }
 
     /**
-     * @param string $websiteUrl Optional manufacturer website URL
+     * @param string $urlPath Optional url path e.g. 'Products-manufactured-by-X'
+     *
      * @return Manufacturer
      */
-    public function setWebsiteUrl(string $websiteUrl): self
+    public function setUrlPath(string $urlPath): self
     {
-        $this->websiteUrl = $websiteUrl;
+        $this->urlPath = $urlPath;
 
         return $this;
     }
@@ -138,7 +130,20 @@ class Manufacturer extends AbstractIdentity
     }
 
     /**
+     * @param string $websiteUrl Optional manufacturer website URL
+     *
+     * @return Manufacturer
+     */
+    public function setWebsiteUrl(string $websiteUrl): self
+    {
+        $this->websiteUrl = $websiteUrl;
+
+        return $this;
+    }
+
+    /**
      * @param ManufacturerI18n $i18n
+     *
      * @return Manufacturer
      */
     public function addI18n(ManufacturerI18n $i18n): self
@@ -149,7 +154,16 @@ class Manufacturer extends AbstractIdentity
     }
 
     /**
+     * @return ManufacturerI18n[]
+     */
+    public function getI18ns(): array
+    {
+        return $this->i18ns;
+    }
+
+    /**
      * @param ManufacturerI18n ...$i18ns
+     *
      * @return Manufacturer
      */
     public function setI18ns(ManufacturerI18n ...$i18ns): self
@@ -157,14 +171,6 @@ class Manufacturer extends AbstractIdentity
         $this->i18ns = $i18ns;
 
         return $this;
-    }
-
-    /**
-     * @return ManufacturerI18n[]
-     */
-    public function getI18ns(): array
-    {
-        return $this->i18ns;
     }
 
     /**

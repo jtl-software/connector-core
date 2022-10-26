@@ -2,7 +2,7 @@
 
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Mapper
+ * @package   Jtl\Connector\Core\Mapper
  */
 
 namespace Jtl\Connector\Core\Mapper;
@@ -13,7 +13,8 @@ interface PrimaryKeyMapperInterface
      * Host ID getter
      *
      * @param integer $type
-     * @param string $endpointId
+     * @param string  $endpointId
+     *
      * @return integer|null
      */
     public function getHostId(int $type, string $endpointId): ?int;
@@ -23,6 +24,7 @@ interface PrimaryKeyMapperInterface
      *
      * @param integer $type
      * @param integer $hostId
+     *
      * @return string|null
      */
     public function getEndpointId(int $type, int $hostId): ?string;
@@ -31,8 +33,9 @@ interface PrimaryKeyMapperInterface
      * Save link to database
      *
      * @param integer $type
-     * @param string $endpointId
+     * @param string  $endpointId
      * @param integer $hostId
+     *
      * @return boolean
      */
     public function save(int $type, string $endpointId, int $hostId): bool;
@@ -52,6 +55,7 @@ interface PrimaryKeyMapperInterface
      * Clears the entire link table
      *
      * @param integer|null $type
+     *
      * @return boolean
      */
     public function clear(int $type = null): bool;

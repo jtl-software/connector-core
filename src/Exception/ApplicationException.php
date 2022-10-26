@@ -3,7 +3,7 @@
 /**
  *
  * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Exception
+ * @package   Jtl\Connector\Core\Exception
  */
 
 namespace Jtl\Connector\Core\Exception;
@@ -19,8 +19,8 @@ use Jtl\Connector\Core\Utilities\Str;
 class ApplicationException extends \Exception
 {
     public const
-    CONNECTOR_DIR_NOT_EXISTS = 10,
-    IMAGE_NOT_FOUND          = 20;
+        CONNECTOR_DIR_NOT_EXISTS = 10,
+        IMAGE_NOT_FOUND          = 20;
 
 
     /**
@@ -33,6 +33,7 @@ class ApplicationException extends \Exception
 
     /**
      * @param string $connectorDir
+     *
      * @return ApplicationException
      */
     public static function connectorDirNotExists(string $connectorDir): self
@@ -57,6 +58,7 @@ class ApplicationException extends \Exception
 
     /**
      * @param AbstractImage $image
+     *
      * @return ApplicationException
      * @throws \Exception
      */
@@ -74,6 +76,7 @@ class ApplicationException extends \Exception
 
     /**
      * @param AbstractImage $image
+     *
      * @return ApplicationException
      * @throws \Exception
      */
@@ -92,6 +95,7 @@ class ApplicationException extends \Exception
 
     /**
      * @param string $fileName
+     *
      * @return ApplicationException
      */
     public static function fileCouldNotGetCreated(string $fileName): self

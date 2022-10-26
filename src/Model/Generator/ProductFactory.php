@@ -2,13 +2,101 @@
 
 namespace Jtl\Connector\Core\Model\Generator;
 
-use Jawira\CaseConverter\CaseConverterException;
 use Jtl\Connector\Core\Definition\IdentityType;
 use Jtl\Connector\Core\Model\Product;
 
 class ProductFactory extends AbstractModelFactory
 {
     protected bool $withBasePrice = false;
+
+    /**
+     * @param array|null $i18ns
+     *
+     * @return array
+     * @throws \Exception
+     */
+    public function makeOneProductVariant(array $i18ns = null)
+    {
+        $data = $this->makeOneProductVariantArray($i18ns);
+        return $this->make(\count($data), $data);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function makeOneProductVariantArray(array $i18ns = null)
+    {
+        $variationsQuantity = 2;
+        if (\is_null($i18ns)) {
+            $i18ns = $this->getFactory('I18n')->makeArray(\random_int(1, 3));
+        }
+
+        $productI18ns = $this->getFactory('ProductI18n')->makeArray(\count($i18ns), $i18ns);
+
+        $variantsQuantity = 1;
+        $variations       = [];
+        for ($i = 0; $i < $variationsQuantity; $i++) {
+            $variationI18ns = \array_map(function (array $i18n) {
+                return $this->getFactory('ProductVariationI18n')->makeOneArray($i18n);
+            }, $i18ns);
+
+            $values            = [];
+            $valuesQuantity    = \random_int(1, 10);
+            $variantsQuantity *= $valuesQuantity;
+            for ($j = 0; $j < $valuesQuantity; $j++) {
+                $valueI18ns = [];
+                foreach ($i18ns as $i18n) {
+                    $valueI18ns[] = $this->getFactory('ProductVariationValueI18n')->makeOneArray($i18n);
+                }
+
+                $values[] = $this->getFactory('ProductVariationValue')
+                                 ->makeOneArray([
+                                                    'i18ns' => $valueI18ns,
+                                                    'sort'  => $j,
+                                                ]);
+            }
+
+            $variations[] = $this->getFactory('ProductVariation')
+                                 ->makeOneArray([
+                                                    'i18ns'  => $variationI18ns,
+                                                    'values' => $values,
+                                                    'sort'   => $i,
+                                                ]);
+        }
+
+        $parentId = $this->getFactory('Identity')->makeOneArray();
+        $variants = [
+            $this->makeOneArray(
+                [
+                    'id'              => $parentId,
+                    'isMasterProduct' => true,
+                    'variations'      => $variations,
+                    'sort'            => 0,
+                    'i18ns'           => $productI18ns,
+                ]
+            )
+
+        ];
+
+        $i = 0;
+        foreach ($variations[0]['values'] as $firstValue) {
+            foreach ($variations[1]['values'] as $secondValue) {
+                $variants[] = $this->makeOneArray([
+                                                      'masterProductId' => $parentId,
+                                                      'isMasterProduct' => false,
+                                                      'variations'      => [
+                                                          \array_merge($variations[0], ['values' => [$firstValue]]),
+                                                          \array_merge($variations[1], ['values' => [$secondValue]]),
+                                                      ],
+                                                      'sort'            => ++$i,
+                                                      'prices'          => $variants[0]['prices'],
+                                                      'i18ns'           => $productI18ns,
+                                                  ]);
+            }
+        }
+
+        return $variants;
+    }
 
     /**
      * @return array
@@ -115,8 +203,8 @@ class ProductFactory extends AbstractModelFactory
             'partsLists'                  => [],
             'prices'                      => [
                 $this->getFactory('ProductPrice')
-                    ->setWithBulkPrices(\random_int(0, 1) === 1)
-                    ->makeOneArray(['customerGroupId' => $identityFactory->makeOneArray([1 => 0])])
+                     ->setWithBulkPrices(\random_int(0, 1) === 1)
+                     ->makeOneArray(['customerGroupId' => $identityFactory->makeOneArray([1 => 0])])
             ],
             'specialPrices'               => [],
             'specifics'                   => [],
@@ -124,92 +212,6 @@ class ProductFactory extends AbstractModelFactory
             'variations'                  => [],
             //'warehouseInfo' => [],
         ];
-    }
-
-    /**
-     * @throws \Exception
-     */
-    public function makeOneProductVariantArray(array $i18ns = null)
-    {
-        $variationsQuantity = 2;
-        if (\is_null($i18ns)) {
-            $i18ns = $this->getFactory('I18n')->makeArray(\random_int(1, 3));
-        }
-
-        $productI18ns = $this->getFactory('ProductI18n')->makeArray(\count($i18ns), $i18ns);
-
-        $variantsQuantity = 1;
-        $variations       = [];
-        for ($i = 0; $i < $variationsQuantity; $i++) {
-            $variationI18ns = \array_map(function (array $i18n) {
-                return $this->getFactory('ProductVariationI18n')->makeOneArray($i18n);
-            }, $i18ns);
-
-            $values            = [];
-            $valuesQuantity    = \random_int(1, 10);
-            $variantsQuantity *= $valuesQuantity;
-            for ($j = 0; $j < $valuesQuantity; $j++) {
-                $valueI18ns = [];
-                foreach ($i18ns as $i18n) {
-                    $valueI18ns[] = $this->getFactory('ProductVariationValueI18n')->makeOneArray($i18n);
-                }
-
-                $values[] = $this->getFactory('ProductVariationValue')->makeOneArray([
-                    'i18ns' => $valueI18ns,
-                    'sort'  => $j,
-                ]);
-            }
-
-            $variations[] = $this->getFactory('ProductVariation')->makeOneArray([
-                'i18ns'  => $variationI18ns,
-                'values' => $values,
-                'sort'   => $i,
-            ]);
-        }
-
-        $parentId = $this->getFactory('Identity')->makeOneArray();
-        $variants = [
-            $this->makeOneArray(
-                [
-                    'id'              => $parentId,
-                    'isMasterProduct' => true,
-                    'variations'      => $variations,
-                    'sort'            => 0,
-                    'i18ns'           => $productI18ns,
-                ]
-            )
-
-        ];
-
-        $i = 0;
-        foreach ($variations[0]['values'] as $firstValue) {
-            foreach ($variations[1]['values'] as $secondValue) {
-                $variants[] = $this->makeOneArray([
-                    'masterProductId' => $parentId,
-                    'isMasterProduct' => false,
-                    'variations'      => [
-                        \array_merge($variations[0], ['values' => [$firstValue]]),
-                        \array_merge($variations[1], ['values' => [$secondValue]]),
-                    ],
-                    'sort'            => ++$i,
-                    'prices'          => $variants[0]['prices'],
-                    'i18ns'           => $productI18ns,
-                ]);
-            }
-        }
-
-        return $variants;
-    }
-
-    /**
-     * @param array|null $i18ns
-     * @return array
-     * @throws \Exception
-     */
-    public function makeOneProductVariant(array $i18ns = null)
-    {
-        $data = $this->makeOneProductVariantArray($i18ns);
-        return $this->make(\count($data), $data);
     }
 
     /**

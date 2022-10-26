@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Localized configGroup
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -37,7 +37,16 @@ class ConfigGroupI18n extends AbstractI18n
     protected $name = '';
 
     /**
+     * @return string Optional description (HTML)
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
      * @param string $description Optional description (HTML)
+     *
      * @return ConfigGroupI18n
      */
     public function setDescription(string $description): self
@@ -48,15 +57,16 @@ class ConfigGroupI18n extends AbstractI18n
     }
 
     /**
-     * @return string Optional description (HTML)
+     * @return string Config group name
      */
-    public function getDescription(): string
+    public function getName(): string
     {
-        return $this->description;
+        return $this->name;
     }
 
     /**
      * @param string $name Config group name
+     *
      * @return ConfigGroupI18n
      */
     public function setName(string $name): self
@@ -64,13 +74,5 @@ class ConfigGroupI18n extends AbstractI18n
         $this->name = $name;
 
         return $this;
-    }
-
-    /**
-     * @return string Config group name
-     */
-    public function getName(): string
-    {
-        return $this->name;
     }
 }

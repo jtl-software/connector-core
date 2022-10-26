@@ -10,56 +10,56 @@ final class Model
         MODEL_NAMESPACE = 'Jtl\\Connector\\Core\\Model';
 
     public const
-    CATEGORY                             = 'Category',
-    CATEGORY_ATTRIBUTE                   = 'CategoryAttribute',
-    CATEGORY_IMAGE                       = 'CategoryImage',
-    CONFIG_GROUP                         = 'ConfigGroup',
-    CONFIG_GROUP_IMAGE                   = 'ConfigGroupImage',
-    CONFIG_ITEM                          = 'ConfigItem',
-    CROSS_SELLING                        = 'CrossSelling',
-    CROSS_SELLING_GROUP                  = 'CrossSellingGroup',
-    CROSS_SELLING_ITEM                   = 'CrossSellingItem',
-    CURRENCY                             = 'Currency',
-    CUSTOMER                             = 'Customer',
-    CUSTOMER_GROUP                       = 'CustomerGroup',
-    CUSTOMER_ORDER                       = 'CustomerOrder',
-    CUSTOMER_ORDER_ITEM                  = 'CustomerOrderItem',
-    DELIVERY_NOTE                        = 'DeliveryNote',
-    DELIVERY_NOTE_ITEM                   = 'DeliveryNoteItem',
-    FILE_UPLOAD                          = 'FileUpload',
-    GLOBAL_DATA                          = 'GlobalData',
-    LANGUAGE                             = 'Language',
-    MANUFACTURER                         = 'Manufacturer',
-    MANUFACTURER_IMAGE                   = 'ManufacturerImage',
-    MEASUREMENT_UNIT                     = 'MeasurementUnit',
-    PAYMENT                              = 'Payment',
-    PRODUCT                              = 'Product',
-    PRODUCT_ATTRIBUTE                    = 'ProductAttribute',
-    PRODUCT_CONFIG_GROUP                 = 'ProductConfigGroup',
-    PRODUCT_IMAGE                        = 'ProductImage',
-    PRODUCT_PRICE                        = 'ProductPrice',
-    PRODUCT_SPECIFIC                     = 'ProductSpecific',
-    PRODUCT_STOCK_LEVEL                  = 'ProductStockLevel',
-    PRODUCT_TO_CATEGORY                  = 'Product2Category',
-    PRODUCT_TYPE                         = 'ProductType',
-    PRODUCT_VARIATION                    = 'ProductVariation',
-    PRODUCT_VARIATION_VALUE              = 'ProductVariationValue',
-    PRODUCT_VARIATION_VALUE_EXTRA_CHARGE = 'ProductVariationValueExtraCharge',
-    PRODUCT_VARIATION_VALUE_IMAGE        = 'ProductVariationValueImage',
-    PRODUCT_VARIATION_VALUE_INVISIBILITY = 'ProductVariationValueInvisibility',
-    PRODUCT_WAREHOUSE_INFO               = 'ProductWarehouseInfo',
-    SHIPPING_CLASS                       = 'ShippingClass',
-    SHIPPING_METHOD                      = 'ShippingMethod',
-    SHIPMENT                             = 'Shipment',
-    SPECIFIC                             = 'Specific',
-    SPECIFIC_IMAGE                       = 'SpecificImage',
-    SPECIFIC_VALUE                       = 'SpecificValue',
-    SPECIFIC_VALUE_IMAGE                 = 'SpecificValueImage',
-    STATUS_CHANGE                        = 'StatusChange',
-    TAX_CLASS                            = 'TaxClass',
-    TAX_RATE                             = 'TaxRate',
-    UNIT                                 = 'Unit',
-    WAREHOUSE                            = 'Warehouse';
+        CATEGORY                             = 'Category',
+        CATEGORY_ATTRIBUTE                   = 'CategoryAttribute',
+        CATEGORY_IMAGE                       = 'CategoryImage',
+        CONFIG_GROUP                         = 'ConfigGroup',
+        CONFIG_GROUP_IMAGE                   = 'ConfigGroupImage',
+        CONFIG_ITEM                          = 'ConfigItem',
+        CROSS_SELLING                        = 'CrossSelling',
+        CROSS_SELLING_GROUP                  = 'CrossSellingGroup',
+        CROSS_SELLING_ITEM                   = 'CrossSellingItem',
+        CURRENCY                             = 'Currency',
+        CUSTOMER                             = 'Customer',
+        CUSTOMER_GROUP                       = 'CustomerGroup',
+        CUSTOMER_ORDER                       = 'CustomerOrder',
+        CUSTOMER_ORDER_ITEM                  = 'CustomerOrderItem',
+        DELIVERY_NOTE                        = 'DeliveryNote',
+        DELIVERY_NOTE_ITEM                   = 'DeliveryNoteItem',
+        FILE_UPLOAD                          = 'FileUpload',
+        GLOBAL_DATA                          = 'GlobalData',
+        LANGUAGE                             = 'Language',
+        MANUFACTURER                         = 'Manufacturer',
+        MANUFACTURER_IMAGE                   = 'ManufacturerImage',
+        MEASUREMENT_UNIT                     = 'MeasurementUnit',
+        PAYMENT                              = 'Payment',
+        PRODUCT                              = 'Product',
+        PRODUCT_ATTRIBUTE                    = 'ProductAttribute',
+        PRODUCT_CONFIG_GROUP                 = 'ProductConfigGroup',
+        PRODUCT_IMAGE                        = 'ProductImage',
+        PRODUCT_PRICE                        = 'ProductPrice',
+        PRODUCT_SPECIFIC                     = 'ProductSpecific',
+        PRODUCT_STOCK_LEVEL                  = 'ProductStockLevel',
+        PRODUCT_TO_CATEGORY                  = 'Product2Category',
+        PRODUCT_TYPE                         = 'ProductType',
+        PRODUCT_VARIATION                    = 'ProductVariation',
+        PRODUCT_VARIATION_VALUE              = 'ProductVariationValue',
+        PRODUCT_VARIATION_VALUE_EXTRA_CHARGE = 'ProductVariationValueExtraCharge',
+        PRODUCT_VARIATION_VALUE_IMAGE        = 'ProductVariationValueImage',
+        PRODUCT_VARIATION_VALUE_INVISIBILITY = 'ProductVariationValueInvisibility',
+        PRODUCT_WAREHOUSE_INFO               = 'ProductWarehouseInfo',
+        SHIPPING_CLASS                       = 'ShippingClass',
+        SHIPPING_METHOD                      = 'ShippingMethod',
+        SHIPMENT                             = 'Shipment',
+        SPECIFIC                             = 'Specific',
+        SPECIFIC_IMAGE                       = 'SpecificImage',
+        SPECIFIC_VALUE                       = 'SpecificValue',
+        SPECIFIC_VALUE_IMAGE                 = 'SpecificValueImage',
+        STATUS_CHANGE                        = 'StatusChange',
+        TAX_CLASS                            = 'TaxClass',
+        TAX_RATE                             = 'TaxRate',
+        UNIT                                 = 'Unit',
+        WAREHOUSE                            = 'Warehouse';
 
     /**
      * @var null|string[]
@@ -287,15 +287,7 @@ final class Model
 
     /**
      * @param string $modelName
-     * @return boolean
-     */
-    public static function hasIdentityType(string $modelName): bool
-    {
-        return isset(self::$mappings[$modelName]);
-    }
-
-    /**
-     * @param string $modelName
+     *
      * @return integer
      * @throws DefinitionException
      */
@@ -313,30 +305,12 @@ final class Model
 
     /**
      * @param string $modelName
-     * @param string $propertyName
+     *
      * @return boolean
      */
-    public static function isIdentityProperty(string $modelName, string $propertyName): bool
+    public static function isModel(string $modelName): bool
     {
-        return isset(self::$propertyMappings[$modelName][$propertyName]);
-    }
-
-    /**
-     * @param integer $type
-     * @return string
-     * @throws DefinitionException
-     */
-    public static function getModelByType(int $type): string
-    {
-        if (!IdentityType::isType($type)) {
-            throw DefinitionException::unknownIdentityType($type);
-        }
-
-        $type = \array_search($type, self::$mappings, true);
-        if ($type === false) {
-            throw DefinitionException::identityTypeMappingNotExists($type);
-        }
-        return $type;
+        return \in_array($modelName, self::getModels(), true);
     }
 
     /**
@@ -359,16 +333,37 @@ final class Model
 
     /**
      * @param string $modelName
+     *
      * @return boolean
      */
-    public static function isModel(string $modelName): bool
+    public static function hasIdentityType(string $modelName): bool
     {
-        return \in_array($modelName, self::getModels(), true);
+        return isset(self::$mappings[$modelName]);
+    }
+
+    /**
+     * @param integer $type
+     *
+     * @return string
+     * @throws DefinitionException
+     */
+    public static function getModelByType(int $type): string
+    {
+        if (!IdentityType::isType($type)) {
+            throw DefinitionException::unknownIdentityType($type);
+        }
+
+        $type = \array_search($type, self::$mappings, true);
+        if ($type === false) {
+            throw DefinitionException::identityTypeMappingNotExists($type);
+        }
+        return $type;
     }
 
     /**
      * @param string $modelName
      * @param string $propertyName
+     *
      * @return integer
      * @throws DefinitionException
      */
@@ -386,6 +381,18 @@ final class Model
 
     /**
      * @param string $modelName
+     * @param string $propertyName
+     *
+     * @return boolean
+     */
+    public static function isIdentityProperty(string $modelName, string $propertyName): bool
+    {
+        return isset(self::$propertyMappings[$modelName][$propertyName]);
+    }
+
+    /**
+     * @param string $modelName
+     *
      * @return string
      * @throws DefinitionException
      */

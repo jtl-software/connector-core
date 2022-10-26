@@ -14,6 +14,7 @@ class StatisticEvent extends Event
 
     /**
      * StatisticEvent constructor.
+     *
      * @param Statistic $statistic
      */
     public function __construct(Statistic $statistic)

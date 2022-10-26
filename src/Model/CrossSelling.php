@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Group cross-sold products belonging to different crossSellingGroups together.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -38,24 +38,14 @@ class CrossSelling extends AbstractIdentity
 
     /**
      * Constructor.
+     *
      * @param string $endpoint
-     * @param int $host
+     * @param int    $host
      */
     public function __construct(string $endpoint = '', int $host = 0)
     {
         parent::__construct($endpoint, $host);
         $this->productId = new Identity();
-    }
-
-    /**
-     * @param Identity $productId Source product
-     * @return CrossSelling
-     */
-    public function setProductId(Identity $productId): CrossSelling
-    {
-        $this->productId = $productId;
-
-        return $this;
     }
 
     /**
@@ -67,7 +57,20 @@ class CrossSelling extends AbstractIdentity
     }
 
     /**
+     * @param Identity $productId Source product
+     *
+     * @return CrossSelling
+     */
+    public function setProductId(Identity $productId): CrossSelling
+    {
+        $this->productId = $productId;
+
+        return $this;
+    }
+
+    /**
      * @param CrossSellingItem $item
+     *
      * @return CrossSelling
      */
     public function addItem(CrossSellingItem $item): CrossSelling
@@ -78,7 +81,16 @@ class CrossSelling extends AbstractIdentity
     }
 
     /**
+     * @return CrossSellingItem[]
+     */
+    public function getItems(): array
+    {
+        return $this->items;
+    }
+
+    /**
      * @param CrossSellingItem ...$items
+     *
      * @return CrossSelling
      */
     public function setItems(CrossSellingItem ...$items): CrossSelling
@@ -86,14 +98,6 @@ class CrossSelling extends AbstractIdentity
         $this->items = $items;
 
         return $this;
-    }
-
-    /**
-     * @return CrossSellingItem[]
-     */
-    public function getItems(): array
-    {
-        return $this->items;
     }
 
     /**

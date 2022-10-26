@@ -38,7 +38,7 @@ class FileConfigTest extends TestCase
 
         $fileConfig = $this->createFileConfig();
 
-        $fileConfig->set("", "");
+        $fileConfig->set('', '');
     }
 
     public function testSave()

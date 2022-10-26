@@ -14,6 +14,7 @@ class RequestEvent extends Event
 
     /**
      * RequestBeforeHandleEvent constructor.
+     *
      * @param Request $request
      */
     public function __construct(Request $request)

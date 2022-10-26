@@ -8,11 +8,6 @@ class TaxRateFactory extends AbstractModelFactory
 {
     protected array $usedCountries = [];
 
-    public function clearUsedCountries(): void
-    {
-        $this->usedCountries = [];
-    }
-
     /**
      * @return array<string, string|float>
      */
@@ -22,14 +17,6 @@ class TaxRateFactory extends AbstractModelFactory
             'countryIso' => $this->getUnusedCountryIso(),
             'rate'       => $this->faker->randomFloat(2, 0, 30),
         ];
-    }
-
-    /**
-     * @return string
-     */
-    protected function getModelClass(): string
-    {
-        return TaxRate::class;
     }
 
     /**
@@ -51,5 +38,18 @@ class TaxRateFactory extends AbstractModelFactory
         }
 
         throw new \RuntimeException('loop-limit exceeded.');
+    }
+
+    public function clearUsedCountries(): void
+    {
+        $this->usedCountries = [];
+    }
+
+    /**
+     * @return string
+     */
+    protected function getModelClass(): string
+    {
+        return TaxRate::class;
     }
 }

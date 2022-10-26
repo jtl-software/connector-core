@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @author Immanuel Klinkenberg <immanuel.klinkenberg@jtl-software.com>
+ * @author    Immanuel Klinkenberg <immanuel.klinkenberg@jtl-software.com>
  * @copyright 2010-2019 JTL-Software GmbH
  *
  * Created at 15.05.2019 09:06
@@ -16,23 +16,25 @@ class JsonException extends \RuntimeException
 
     /**
      * @param string $lastErrorMessage
+     *
      * @return JsonException
      */
     public static function encoding($lastErrorMessage)
     {
-        return new self(\sprintf("Error while encoding into JSON: %s", $lastErrorMessage), static::ENCODING_ERROR);
+        return new self(\sprintf('Error while encoding into JSON: %s', $lastErrorMessage), static::ENCODING_ERROR);
     }
 
     /**
      * @param string $lastErrorMessage
-     * @param string $jsonString|null
+     * @param string $jsonString |null
+     *
      * @return JsonException
      */
     public static function decoding($lastErrorMessage, $jsonString = null)
     {
-        $msg = \sprintf("Error while decoding JSON: %s", $lastErrorMessage);
+        $msg = \sprintf('Error while decoding JSON: %s', $lastErrorMessage);
         if (!\is_null($jsonString)) {
-            $msg = \sprintf("Error while decoding JSON: %s" . \PHP_EOL . "String: %s", $lastErrorMessage, $jsonString);
+            $msg = \sprintf('Error while decoding JSON: %s' . \PHP_EOL . 'String: %s', $lastErrorMessage, $jsonString);
         }
         return new self($msg, static::DECODING_ERROR);
     }

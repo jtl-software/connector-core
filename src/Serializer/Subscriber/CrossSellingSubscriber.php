@@ -53,13 +53,14 @@ class CrossSellingSubscriber implements EventSubscriberInterface
     /**
      * @param integer $productId
      * @param integer $crossSellingGroupId
+     *
      * @return integer
      */
     protected static function cantorPairingFunction(int $productId, int $crossSellingGroupId): int
     {
         //Found at https://gist.github.com/hannesl/8031402
         return (int)(
-            ($productId + $crossSellingGroupId) * ($productId + $crossSellingGroupId + 1)
-        ) / 2 + $crossSellingGroupId;
+                ($productId + $crossSellingGroupId) * ($productId + $crossSellingGroupId + 1)
+            ) / 2 + $crossSellingGroupId;
     }
 }

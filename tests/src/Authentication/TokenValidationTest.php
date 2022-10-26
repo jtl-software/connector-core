@@ -17,7 +17,8 @@ class TokenValidationTest extends TestCase
      *
      * @param string $connectorToken
      * @param string $token
-     * @param bool $result
+     * @param bool   $result
+     *
      * @throws TokenValidatorException
      */
     public function testValidateToken(string $connectorToken, string $token, bool $result)
@@ -42,41 +43,13 @@ class TokenValidationTest extends TestCase
     public function tokenDataProvider(): array
     {
         return [
-            [
-                'foo',
-                'foo',
-                true,
-            ],
-            [
-                'foo',
-                'bar',
-                false,
-            ],
-            [
-                'man',
-                'dan',
-                false,
-            ],
-            [
-                ' ',
-                ' ',
-                true,
-            ],
-            [
-                'waaahu',
-                'wuuuhaaa',
-                false,
-            ],
-            [
-                '1',
-                '1',
-                true,
-            ],
-            [
-                '0',
-                '1',
-                false,
-            ],
+            ['foo', 'foo', true],
+            ['foo', 'bar', false],
+            ['man', 'dan', false],
+            [' ', ' ', true],
+            ['waaahu', 'wuuuhaaa', false],
+            ['1', '1', true],
+            ['0', '1', false],
         ];
     }
 }

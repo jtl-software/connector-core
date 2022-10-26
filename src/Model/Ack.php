@@ -1,22 +1,21 @@
 <?php
 
 /**
- * @copyright 2010-2014 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2014 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Ack
  */
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
-use Doctrine\Common\Collections\ArrayCollection;
 use Jtl\Connector\Core\Checksum\ChecksumInterface;
 
 /**
  * Ack
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Internal
  * @Serializer\AccessType("public_method")
  */
@@ -32,6 +31,7 @@ class Ack extends Identities
 
     /**
      * @param ChecksumInterface $checksum
+     *
      * @return Ack
      */
     public function addChecksum(ChecksumInterface $checksum): Ack

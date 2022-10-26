@@ -37,6 +37,7 @@ class ImageSubscriber implements EventSubscriberInterface
 
     /**
      * @param ObjectEvent $event
+     *
      * @throws DefinitionException
      */
     public function onPostSerialize(ObjectEvent $event)
@@ -56,6 +57,7 @@ class ImageSubscriber implements EventSubscriberInterface
 
     /**
      * @param ObjectEvent $event
+     *
      * @throws SerializerException
      * @throws CaseConverterException
      */

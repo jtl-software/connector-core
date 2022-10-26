@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -11,8 +11,8 @@ namespace Jtl\Connector\Core\Model;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -51,17 +51,6 @@ class StatusChange extends AbstractModel
     }
 
     /**
-     * @param Identity $customerOrderId
-     * @return StatusChange
-     */
-    public function setCustomerOrderId(Identity $customerOrderId): self
-    {
-        $this->customerOrderId = $customerOrderId;
-
-        return $this;
-    }
-
-    /**
      * @return Identity
      */
     public function getCustomerOrderId(): Identity
@@ -70,12 +59,13 @@ class StatusChange extends AbstractModel
     }
 
     /**
-     * @param string $orderStatus
+     * @param Identity $customerOrderId
+     *
      * @return StatusChange
      */
-    public function setOrderStatus(string $orderStatus): self
+    public function setCustomerOrderId(Identity $customerOrderId): self
     {
-        $this->orderStatus = $orderStatus;
+        $this->customerOrderId = $customerOrderId;
 
         return $this;
     }
@@ -89,12 +79,13 @@ class StatusChange extends AbstractModel
     }
 
     /**
-     * @param string $paymentStatus
+     * @param string $orderStatus
+     *
      * @return StatusChange
      */
-    public function setPaymentStatus(string $paymentStatus): self
+    public function setOrderStatus(string $orderStatus): self
     {
-        $this->paymentStatus = $paymentStatus;
+        $this->orderStatus = $orderStatus;
 
         return $this;
     }
@@ -105,6 +96,18 @@ class StatusChange extends AbstractModel
     public function getPaymentStatus(): string
     {
         return $this->paymentStatus;
+    }
+
+    /**
+     * @param string $paymentStatus
+     *
+     * @return StatusChange
+     */
+    public function setPaymentStatus(string $paymentStatus): self
+    {
+        $this->paymentStatus = $paymentStatus;
+
+        return $this;
     }
 
     /**

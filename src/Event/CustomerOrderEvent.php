@@ -14,6 +14,7 @@ class CustomerOrderEvent extends Event
 
     /**
      * CustomerOrderEvent constructor.
+     *
      * @param CustomerOrder $order
      */
     public function __construct(CustomerOrder $order)

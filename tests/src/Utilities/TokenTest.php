@@ -14,7 +14,7 @@ class TokenTest extends TestCase
     /**
      * @throws \Exception
      */
-    public function testGenerateToken()
+    public function testGenerateToken(): void
     {
         $token = Token::generate();
         $this->assertEquals(36, \strlen($token));

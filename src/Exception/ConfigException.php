@@ -5,11 +5,11 @@ namespace Jtl\Connector\Core\Exception;
 class ConfigException extends \Exception
 {
     public const
-    EMPTY_KEY                = 10,
-    UNKNOWN_TYPE             = 20,
-    WRONG_TYPE               = 30,
-    UNKNOWN_PARAMETER        = 40,
-    SCHEMA_VALIDATION_ERRORS = 50;
+        EMPTY_KEY                = 10,
+        UNKNOWN_TYPE             = 20,
+        WRONG_TYPE               = 30,
+        UNKNOWN_PARAMETER        = 40,
+        SCHEMA_VALIDATION_ERRORS = 50;
 
     /**
      * @return ConfigException
@@ -21,6 +21,7 @@ class ConfigException extends \Exception
 
     /**
      * @param string $type
+     *
      * @return ConfigException
      */
     public static function unknownType(string $type): self
@@ -31,6 +32,7 @@ class ConfigException extends \Exception
     /**
      * @param string $expectedType
      * @param string $givenType
+     *
      * @return ConfigException
      */
     public static function wrongType(string $expectedType, string $givenType): self
@@ -47,6 +49,7 @@ class ConfigException extends \Exception
 
     /**
      * @param string $key
+     *
      * @return ConfigException
      */
     public static function unknownParameter(string $key): self
@@ -57,6 +60,7 @@ class ConfigException extends \Exception
     /**
      * @param array $invalidProperties
      * @param array $missingProperties
+     *
      * @return ConfigException
      */
     public static function configValidationErrors(array $invalidProperties, array $missingProperties): self

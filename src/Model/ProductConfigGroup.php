@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Product-ConfigGroup Assignment.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -45,7 +45,16 @@ class ProductConfigGroup extends AbstractModel
     }
 
     /**
+     * @return Identity Reference to configGroup
+     */
+    public function getConfigGroupId(): Identity
+    {
+        return $this->configGroupId;
+    }
+
+    /**
      * @param Identity $configGroupId Reference to configGroup
+     *
      * @return ProductConfigGroup
      */
     public function setConfigGroupId(Identity $configGroupId): ProductConfigGroup
@@ -56,15 +65,16 @@ class ProductConfigGroup extends AbstractModel
     }
 
     /**
-     * @return Identity Reference to configGroup
+     * @return integer Optional sort number
      */
-    public function getConfigGroupId(): Identity
+    public function getSort(): int
     {
-        return $this->configGroupId;
+        return $this->sort;
     }
 
     /**
      * @param integer $sort Optional sort number
+     *
      * @return ProductConfigGroup
      */
     public function setSort(int $sort): ProductConfigGroup
@@ -72,13 +82,5 @@ class ProductConfigGroup extends AbstractModel
         $this->sort = $sort;
 
         return $this;
-    }
-
-    /**
-     * @return integer Optional sort number
-     */
-    public function getSort(): int
-    {
-        return $this->sort;
     }
 }

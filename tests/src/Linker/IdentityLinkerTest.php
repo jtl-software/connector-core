@@ -53,7 +53,7 @@ class IdentityLinkerTest extends TestCase
      *
      * @return PrimaryKeyMapperInterface|\Mockery\LegacyMockInterface|\Mockery\MockInterface
      */
-    public function createPrimaryKeyMapperMock($hostId = [1], $endpointId = ["1"])
+    public function createPrimaryKeyMapperMock($hostId = [1], $endpointId = ['1'])
     {
         $primaryKeyMapper = \Mockery::mock(PrimaryKeyMapperInterface::class);
         $primaryKeyMapper->shouldReceive('save')->andReturnTrue();
@@ -72,18 +72,9 @@ class IdentityLinkerTest extends TestCase
     public function hostIdDataProvider()
     {
         return [
-            [
-                0,
-                false,
-            ],
-            [
-                null,
-                false,
-            ],
-            [
-                $this->createHostId(),
-                true,
-            ],
+            [0, false],
+            [null, false],
+            [$this->createHostId(), true]
         ];
     }
 
@@ -106,18 +97,9 @@ class IdentityLinkerTest extends TestCase
     public function endpointIdDataProvider()
     {
         return [
-            [
-                0,
-                true,
-            ],
-            [
-                null,
-                false,
-            ],
-            [
-                $this->createEndpointId(),
-                true,
-            ],
+            [0, true],
+            [null, false],
+            [$this->createEndpointId(), true]
         ];
     }
 
@@ -192,7 +174,7 @@ class IdentityLinkerTest extends TestCase
 
         $endpointId = $linker->getEndpointId(Model::CATEGORY, 'id', 1);
 
-        $this->assertSame("1", $endpointId);
+        $this->assertSame('1', $endpointId);
 
         $modelName = Model::CATEGORY;
         $property  = 'property_doesnt_exists';

@@ -5,11 +5,12 @@ namespace Jtl\Connector\Core\Exception;
 class FeaturesException extends \Exception
 {
     public const
-    ENTITY_NOT_FOUND = 10,
-    FLAG_NOT_FOUND   = 20;
+        ENTITY_NOT_FOUND = 10,
+        FLAG_NOT_FOUND   = 20;
 
     /**
      * @param string $entityName
+     *
      * @return FeaturesException
      */
     public static function entityNotFound(string $entityName): self
@@ -19,6 +20,7 @@ class FeaturesException extends \Exception
 
     /**
      * @param string $flagName
+     *
      * @return FeaturesException
      */
     public static function flagNotFound(string $flagName): self

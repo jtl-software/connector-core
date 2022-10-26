@@ -2,18 +2,16 @@
 
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Linker
+ * @package   Jtl\Connector\Core\Linker
  */
 
 namespace Jtl\Connector\Core\Linker;
 
-use Doctrine\Common\Annotations\AnnotationReader;
-use JMS\Serializer\Annotation\Exclude;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Exception\DefinitionException;
+use Jtl\Connector\Core\Exception\LinkerException;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Jtl\Connector\Core\Model\AbstractModel;
-use Jtl\Connector\Core\Exception\LinkerException;
 use Jtl\Connector\Core\Model\Identity;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
@@ -28,8 +26,8 @@ use Psr\Log\NullLogger;
 class IdentityLinker implements LoggerAwareInterface
 {
     public const
-    CACHE_TYPE_HOST     = 'h',
-    CACHE_TYPE_ENDPOINT = 'e';
+        CACHE_TYPE_HOST     = 'h',
+        CACHE_TYPE_ENDPOINT = 'e';
 
     protected LoggerInterface $logger;
 
@@ -37,11 +35,12 @@ class IdentityLinker implements LoggerAwareInterface
      * Session Database Mapper
      */
     protected PrimaryKeyMapperInterface $mapper;
-    protected bool $useCache = true;
-    protected array $cache   = [];
+    protected bool                      $useCache = true;
+    protected array                     $cache    = [];
 
     /**
      * IdentityLinker constructor.
+     *
      * @param PrimaryKeyMapperInterface $mapper
      */
     public function __construct(PrimaryKeyMapperInterface $mapper)
@@ -54,6 +53,7 @@ class IdentityLinker implements LoggerAwareInterface
      * Constructor
      *
      * @param boolean $useCache
+     *
      * @return IdentityLinker
      */
     public function setUseCache(bool $useCache): IdentityLinker
@@ -64,7 +64,8 @@ class IdentityLinker implements LoggerAwareInterface
 
     /**
      * @param AbstractModel $model
-     * @param boolean $isDeleted
+     * @param boolean       $isDeleted
+     *
      * @throws DefinitionException
      * @throws LinkerException
      * @throws \ReflectionException
@@ -97,18 +98,19 @@ class IdentityLinker implements LoggerAwareInterface
 
     /**
      * @param Identity $identity
-     * @param string $modelName
-     * @param string $propertyName
-     * @param bool $isDeleted
+     * @param string   $modelName
+     * @param string   $propertyName
+     * @param bool     $isDeleted
+     *
      * @throws DefinitionException
      * @throws LinkerException
      * @throws \ReflectionException
      */
     public function linkIdentity(
         Identity $identity,
-        string $modelName,
-        string $propertyName,
-        bool $isDeleted = false
+        string   $modelName,
+        string   $propertyName,
+        bool     $isDeleted = false
     ): void {
         $endpoint     = $identity->getEndpoint();
         $host         = $identity->getHost();
@@ -139,143 +141,10 @@ class IdentityLinker implements LoggerAwareInterface
     }
 
     /**
-     * @param string $modelName
-     * @param string $property
-     * @param int $hostId
-     * @return bool
-     * @throws DefinitionException
-     * @throws LinkerException
-     */
-    public function propertyHostIdExists(string $modelName, string $property, int $hostId): bool
-    {
-        if (!$this->isValidHostId($hostId)) {
-            throw new LinkerException(\sprintf(
-                'HostId (%s) => (modelName: %s, property: %s) is invalid.',
-                $hostId,
-                $modelName,
-                $property
-            ));
-        }
-
-        $identityType = Model::getPropertyIdentityType($modelName, $property);
-        $modelName    = Model::getModelByType($identityType);
-        return $this->hostIdExists($modelName, $hostId);
-    }
-
-    /**
-     * @param string $modelName
-     * @param integer $hostId
-     * @return boolean
-     * @throws DefinitionException
-     * @throws LinkerException
-     */
-    public function hostIdExists(string $modelName, int $hostId): bool
-    {
-        if (!$this->isValidHostId($hostId)) {
-            throw new LinkerException(\sprintf(
-                'HostId (%s) => (modelName: %s) is invalid.',
-                $hostId,
-                $modelName
-            ));
-        }
-
-        $identityType = Model::getIdentityType($modelName);
-        if (!$this->checkCache($hostId, $identityType, self::CACHE_TYPE_HOST)) {
-            $endpointId = $this->mapper->getEndpointId($identityType, $hostId);
-            if (!$this->isValidEndpointId($endpointId)) {
-                return false;
-            }
-            $this->saveCache($endpointId, $hostId, $identityType, self::CACHE_TYPE_HOST);
-        }
-
-        return true;
-    }
-
-    /**
-     * @param string $modelName
-     * @param string $property
-     * @param string $endpointId
-     * @return bool
-     * @throws DefinitionException
-     * @throws LinkerException
-     */
-    public function propertyEndpointIdExists(string $modelName, string $property, string $endpointId): bool
-    {
-        if (!$this->isValidEndpointId($endpointId)) {
-            throw new LinkerException(\sprintf(
-                'EndpointId (%s) => (modelName: %s, property: %s) is invalid.',
-                $endpointId,
-                $modelName,
-                $property
-            ));
-        }
-
-        $identityType = Model::getPropertyIdentityType($modelName, $property);
-        $modelName    = Model::getModelByType($identityType);
-        return $this->endpointIdExists($modelName, $endpointId);
-    }
-
-    /**
-     * @param string $modelName
-     * @param string $endpointId
-     * @return boolean
-     * @throws LinkerException
-     * @throws DefinitionException
-     */
-    public function endpointIdExists(string $modelName, string $endpointId): bool
-    {
-        if (!$this->isValidEndpointId($endpointId)) {
-            throw new LinkerException(\sprintf(
-                'EndpointId (%s) => (modelName: %s) is invalid.',
-                $endpointId,
-                $modelName
-            ));
-        }
-
-        $identityType = Model::getIdentityType($modelName);
-        if (!$this->checkCache($endpointId, $identityType, self::CACHE_TYPE_ENDPOINT)) {
-            $hostId = $this->mapper->getHostId($identityType, $endpointId);
-            if (!$this->isValidHostId($hostId)) {
-                return false;
-            }
-            $this->saveCache($endpointId, $hostId, $identityType, self::CACHE_TYPE_ENDPOINT);
-        }
-
-        return true;
-    }
-
-    /**
-     * @param string $endpointId
-     * @param int $hostId
-     * @param string $modelName
-     * @param string|null $property
-     * @return bool
-     * @throws DefinitionException
-     * @throws \ReflectionException
-     */
-    public function save(string $endpointId, int $hostId, string $modelName, string $property = null): bool
-    {
-        $identityType = \is_null($property)
-            ? Model::getIdentityType($modelName)
-            : Model::getPropertyIdentityType($modelName, $property);
-        $relatedModel = Model::getModelByType($identityType);
-        $this->delete($relatedModel, $endpointId, $hostId);
-
-        $result = $this->mapper->save($identityType, $endpointId, $hostId);
-        if ($result) {
-            $this->saveCache($endpointId, $hostId, $identityType, self::CACHE_TYPE_ENDPOINT);
-            $this->saveCache($endpointId, $hostId, $identityType, self::CACHE_TYPE_HOST);
-
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * @param string $modelName
-     * @param string|null $endpointId
+     * @param string       $modelName
+     * @param string|null  $endpointId
      * @param integer|null $hostId
+     *
      * @return boolean
      * @throws DefinitionException
      */
@@ -295,73 +164,84 @@ class IdentityLinker implements LoggerAwareInterface
     }
 
     /**
-     * Clears the entire link table
-     * @param int|null $identityType
-     * @return boolean
+     * @param int         $identityType
+     * @param string      $cacheType
+     * @param string|null $endpointId
+     * @param int|null    $hostId
      */
-    public function clear(int $identityType = null): bool
-    {
-        return $this->mapper->clear($identityType);
+    protected function deleteCache(
+        int    $identityType,
+        string $cacheType,
+        string $endpointId = null,
+        int    $hostId = null
+    ): void {
+        $context = [
+            'endpoint'     => $endpointId,
+            'host'         => $hostId,
+            'identityType' => $identityType,
+            'cacheType'    => $cacheType,
+        ];
+
+        $this->logger->debug(
+            'DeleteCache 
+            (endpointId: {endpoint}, hostId: {host}, identityType: {identityType}, cacheType: {cacheType})',
+            $context
+        );
+
+        if ($this->useCache) {
+            switch ($cacheType) {
+                case self::CACHE_TYPE_ENDPOINT:
+                    unset($this->cache[$this->buildKey($endpointId, $identityType, $cacheType)]);
+                    break;
+                case self::CACHE_TYPE_HOST:
+                    unset($this->cache[$this->buildKey($hostId, $identityType, $cacheType)]);
+                    break;
+            }
+        }
     }
 
     /**
-     * @param string $modelName
-     * @param string $property
-     * @param integer $hostId
+     * @param mixed  $id
+     * @param int    $identityType
+     * @param string $cacheType
+     *
      * @return string
-     * @throws DefinitionException
      */
-    public function getEndpointId(string $modelName, string $property, int $hostId): string
+    protected function buildKey($id, int $identityType, string $cacheType): string
     {
-        $identityType = Model::getPropertyIdentityType($modelName, $property);
-        if (($endpointId = $this->loadCache($hostId, $identityType, self::CACHE_TYPE_HOST)) !== null) {
-            return $endpointId;
-        }
-
-        $endpointId = (string)$this->mapper->getEndpointId($identityType, $hostId);
-
-        if (\trim($endpointId) !== '') {
-            $this->saveCache($endpointId, $hostId, $identityType, self::CACHE_TYPE_HOST);
-        }
-
-        return $endpointId;
+        return \sprintf('%s_%s_%s', $cacheType, $id, $identityType);
     }
 
     /**
      * @param string $modelName
      * @param string $property
-     * @param string $endpointId
-     * @return integer
+     * @param int    $hostId
+     *
+     * @return bool
      * @throws DefinitionException
+     * @throws LinkerException
      */
-    public function getHostId(string $modelName, string $property, string $endpointId): int
+    public function propertyHostIdExists(string $modelName, string $property, int $hostId): bool
     {
+        if (!$this->isValidHostId($hostId)) {
+            throw new LinkerException(
+                \sprintf(
+                    'HostId (%s) => (modelName: %s, property: %s) is invalid.',
+                    $hostId,
+                    $modelName,
+                    $property
+                )
+            );
+        }
+
         $identityType = Model::getPropertyIdentityType($modelName, $property);
-
-        if (($hostId = $this->loadCache($endpointId, $identityType, self::CACHE_TYPE_ENDPOINT)) !== null) {
-            return $hostId;
-        }
-
-        $hostId = (int)$this->mapper->getHostId($identityType, $endpointId);
-
-        if ($hostId > 0) {
-            $this->saveCache($endpointId, $hostId, $identityType, self::CACHE_TYPE_ENDPOINT);
-        }
-
-        return $hostId;
-    }
-
-    /**
-     * @param mixed $endpointId
-     * @return boolean
-     */
-    public function isValidEndpointId(?string $endpointId): bool
-    {
-        return !\is_null($endpointId) && \trim($endpointId) !== '';
+        $modelName    = Model::getModelByType($identityType);
+        return $this->hostIdExists($modelName, $hostId);
     }
 
     /**
      * @param int|null $hostId
+     *
      * @return boolean
      */
     public function isValidHostId(?int $hostId): bool
@@ -370,27 +250,42 @@ class IdentityLinker implements LoggerAwareInterface
     }
 
     /**
-     * @return array
-     */
-    public function getCache(): array
-    {
-        return $this->cache;
-    }
-
-    /**
-     * @param LoggerInterface $logger
+     * @param string  $modelName
+     * @param integer $hostId
      *
-     * @retrun void
+     * @return boolean
+     * @throws DefinitionException
+     * @throws LinkerException
      */
-    public function setLogger(LoggerInterface $logger): void
+    public function hostIdExists(string $modelName, int $hostId): bool
     {
-        $this->logger = $logger;
+        if (!$this->isValidHostId($hostId)) {
+            throw new LinkerException(
+                \sprintf(
+                    'HostId (%s) => (modelName: %s) is invalid.',
+                    $hostId,
+                    $modelName
+                )
+            );
+        }
+
+        $identityType = Model::getIdentityType($modelName);
+        if (!$this->checkCache($hostId, $identityType, self::CACHE_TYPE_HOST)) {
+            $endpointId = $this->mapper->getEndpointId($identityType, $hostId);
+            if (!$this->isValidEndpointId($endpointId)) {
+                return false;
+            }
+            $this->saveCache($endpointId, $hostId, $identityType, self::CACHE_TYPE_HOST);
+        }
+
+        return true;
     }
 
     /**
-     * @param mixed $id
+     * @param mixed   $id
      * @param integer $identityType
-     * @param string $cacheType
+     * @param string  $cacheType
+     *
      * @return boolean
      */
     protected function checkCache($id, int $identityType, string $cacheType): bool
@@ -413,9 +308,34 @@ class IdentityLinker implements LoggerAwareInterface
     }
 
     /**
-     * @param mixed $id
-     * @param int $identityType
+     * @param string  $modelName
+     * @param string  $property
+     * @param integer $hostId
+     *
+     * @return string
+     * @throws DefinitionException
+     */
+    public function getEndpointId(string $modelName, string $property, int $hostId): string
+    {
+        $identityType = Model::getPropertyIdentityType($modelName, $property);
+        if (($endpointId = $this->loadCache($hostId, $identityType, self::CACHE_TYPE_HOST)) !== null) {
+            return $endpointId;
+        }
+
+        $endpointId = (string)$this->mapper->getEndpointId($identityType, $hostId);
+
+        if (\trim($endpointId) !== '') {
+            $this->saveCache($endpointId, $hostId, $identityType, self::CACHE_TYPE_HOST);
+        }
+
+        return $endpointId;
+    }
+
+    /**
+     * @param mixed  $id
+     * @param int    $identityType
      * @param string $cacheType
+     *
      * @return mixed
      */
     protected function loadCache($id, int $identityType, string $cacheType)
@@ -441,8 +361,8 @@ class IdentityLinker implements LoggerAwareInterface
 
     /**
      * @param string $endpointId
-     * @param int $hostId
-     * @param int $identityType
+     * @param int    $hostId
+     * @param int    $identityType
      * @param string $cacheType
      */
     protected function saveCache(string $endpointId, int $hostId, int $identityType, string $cacheType): void
@@ -472,50 +392,155 @@ class IdentityLinker implements LoggerAwareInterface
     }
 
     /**
-     * @param int $identityType
-     * @param string $cacheType
-     * @param string|null $endpointId
-     * @param int|null $hostId
+     * @param mixed $endpointId
+     *
+     * @return boolean
      */
-    protected function deleteCache(
-        int $identityType,
-        string $cacheType,
-        string $endpointId = null,
-        int $hostId = null
-    ): void {
-        $context = [
-            'endpoint'     => $endpointId,
-            'host'         => $hostId,
-            'identityType' => $identityType,
-            'cacheType'    => $cacheType,
-        ];
-
-        $this->logger->debug(
-            'DeleteCache 
-            (endpointId: {endpoint}, hostId: {host}, identityType: {identityType}, cacheType: {cacheType})',
-            $context
-        );
-
-        if ($this->useCache) {
-            switch ($cacheType) {
-                case self::CACHE_TYPE_ENDPOINT:
-                    unset($this->cache[$this->buildKey($endpointId, $identityType, $cacheType)]);
-                    break;
-                case self::CACHE_TYPE_HOST:
-                    unset($this->cache[$this->buildKey($hostId, $identityType, $cacheType)]);
-                    break;
-            }
-        }
+    public function isValidEndpointId(?string $endpointId): bool
+    {
+        return !\is_null($endpointId) && \trim($endpointId) !== '';
     }
 
     /**
-     * @param mixed $id
-     * @param int $identityType
-     * @param string $cacheType
-     * @return string
+     * @param string      $endpointId
+     * @param int         $hostId
+     * @param string      $modelName
+     * @param string|null $property
+     *
+     * @return bool
+     * @throws DefinitionException
+     * @throws \ReflectionException
      */
-    protected function buildKey($id, int $identityType, string $cacheType): string
+    public function save(string $endpointId, int $hostId, string $modelName, string $property = null): bool
     {
-        return \sprintf('%s_%s_%s', $cacheType, $id, $identityType);
+        $identityType = \is_null($property)
+            ? Model::getIdentityType($modelName)
+            : Model::getPropertyIdentityType($modelName, $property);
+        $relatedModel = Model::getModelByType($identityType);
+        $this->delete($relatedModel, $endpointId, $hostId);
+
+        $result = $this->mapper->save($identityType, $endpointId, $hostId);
+        if ($result) {
+            $this->saveCache($endpointId, $hostId, $identityType, self::CACHE_TYPE_ENDPOINT);
+            $this->saveCache($endpointId, $hostId, $identityType, self::CACHE_TYPE_HOST);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param string $modelName
+     * @param string $property
+     * @param string $endpointId
+     *
+     * @return bool
+     * @throws DefinitionException
+     * @throws LinkerException
+     */
+    public function propertyEndpointIdExists(string $modelName, string $property, string $endpointId): bool
+    {
+        if (!$this->isValidEndpointId($endpointId)) {
+            throw new LinkerException(
+                \sprintf(
+                    'EndpointId (%s) => (modelName: %s, property: %s) is invalid.',
+                    $endpointId,
+                    $modelName,
+                    $property
+                )
+            );
+        }
+
+        $identityType = Model::getPropertyIdentityType($modelName, $property);
+        $modelName    = Model::getModelByType($identityType);
+        return $this->endpointIdExists($modelName, $endpointId);
+    }
+
+    /**
+     * @param string $modelName
+     * @param string $endpointId
+     *
+     * @return boolean
+     * @throws LinkerException
+     * @throws DefinitionException
+     */
+    public function endpointIdExists(string $modelName, string $endpointId): bool
+    {
+        if (!$this->isValidEndpointId($endpointId)) {
+            throw new LinkerException(
+                \sprintf(
+                    'EndpointId (%s) => (modelName: %s) is invalid.',
+                    $endpointId,
+                    $modelName
+                )
+            );
+        }
+
+        $identityType = Model::getIdentityType($modelName);
+        if (!$this->checkCache($endpointId, $identityType, self::CACHE_TYPE_ENDPOINT)) {
+            $hostId = $this->mapper->getHostId($identityType, $endpointId);
+            if (!$this->isValidHostId($hostId)) {
+                return false;
+            }
+            $this->saveCache($endpointId, $hostId, $identityType, self::CACHE_TYPE_ENDPOINT);
+        }
+
+        return true;
+    }
+
+    /**
+     * @param string $modelName
+     * @param string $property
+     * @param string $endpointId
+     *
+     * @return integer
+     * @throws DefinitionException
+     */
+    public function getHostId(string $modelName, string $property, string $endpointId): int
+    {
+        $identityType = Model::getPropertyIdentityType($modelName, $property);
+
+        if (($hostId = $this->loadCache($endpointId, $identityType, self::CACHE_TYPE_ENDPOINT)) !== null) {
+            return $hostId;
+        }
+
+        $hostId = (int)$this->mapper->getHostId($identityType, $endpointId);
+
+        if ($hostId > 0) {
+            $this->saveCache($endpointId, $hostId, $identityType, self::CACHE_TYPE_ENDPOINT);
+        }
+
+        return $hostId;
+    }
+
+    /**
+     * Clears the entire link table
+     *
+     * @param int|null $identityType
+     *
+     * @return boolean
+     */
+    public function clear(int $identityType = null): bool
+    {
+        return $this->mapper->clear($identityType);
+    }
+
+    /**
+     * @return array
+     */
+    public function getCache(): array
+    {
+        return $this->cache;
+    }
+
+    /**
+     * @param LoggerInterface $logger
+     *
+     * @retrun void
+     */
+    public function setLogger(LoggerInterface $logger): void
+    {
+        $this->logger = $logger;
     }
 }

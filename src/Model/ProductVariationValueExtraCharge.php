@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Extra charge for productVariationValue per customerGroup.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -45,7 +45,16 @@ class ProductVariationValueExtraCharge extends AbstractModel
     }
 
     /**
+     * @return Identity Reference to customerGroup
+     */
+    public function getCustomerGroupId(): Identity
+    {
+        return $this->customerGroupId;
+    }
+
+    /**
      * @param Identity $customerGroupId Reference to customerGroup
+     *
      * @return ProductVariationValueExtraCharge
      */
     public function setCustomerGroupId(Identity $customerGroupId): ProductVariationValueExtraCharge
@@ -56,15 +65,16 @@ class ProductVariationValueExtraCharge extends AbstractModel
     }
 
     /**
-     * @return Identity Reference to customerGroup
+     * @return double Extra charge (net)
      */
-    public function getCustomerGroupId(): Identity
+    public function getExtraChargeNet(): float
     {
-        return $this->customerGroupId;
+        return $this->extraChargeNet;
     }
 
     /**
      * @param double $extraChargeNet Extra charge (net)
+     *
      * @return ProductVariationValueExtraCharge
      */
     public function setExtraChargeNet(float $extraChargeNet): ProductVariationValueExtraCharge
@@ -72,13 +82,5 @@ class ProductVariationValueExtraCharge extends AbstractModel
         $this->extraChargeNet = $extraChargeNet;
 
         return $this;
-    }
-
-    /**
-     * @return double Extra charge (net)
-     */
-    public function getExtraChargeNet(): float
-    {
-        return $this->extraChargeNet;
     }
 }

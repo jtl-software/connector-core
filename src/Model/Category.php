@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * A category with sort number, link to parent category and level
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -88,24 +88,14 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
 
     /**
      * Constructor.
+     *
      * @param string $endpoint
-     * @param int $host
+     * @param int    $host
      */
     public function __construct(string $endpoint = '', int $host = 0)
     {
         parent::__construct($endpoint, $host);
         $this->parentCategoryId = new Identity();
-    }
-
-    /**
-     * @param Identity $parentCategoryId Optional reference to parent category id
-     * @return Category
-     */
-    public function setParentCategoryId(Identity $parentCategoryId): self
-    {
-        $this->parentCategoryId = $parentCategoryId;
-
-        return $this;
     }
 
     /**
@@ -117,12 +107,13 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     }
 
     /**
-     * @param boolean $isActive
+     * @param Identity $parentCategoryId Optional reference to parent category id
+     *
      * @return Category
      */
-    public function setIsActive(bool $isActive): self
+    public function setParentCategoryId(Identity $parentCategoryId): self
     {
-        $this->isActive = $isActive;
+        $this->parentCategoryId = $parentCategoryId;
 
         return $this;
     }
@@ -136,12 +127,13 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     }
 
     /**
-     * @param integer $level
+     * @param boolean $isActive
+     *
      * @return Category
      */
-    public function setLevel(int $level): self
+    public function setIsActive(bool $isActive): self
     {
-        $this->level = $level;
+        $this->isActive = $isActive;
 
         return $this;
     }
@@ -155,12 +147,13 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     }
 
     /**
-     * @param integer $sort Optional sort order number
+     * @param integer $level
+     *
      * @return Category
      */
-    public function setSort(int $sort): self
+    public function setLevel(int $level): self
     {
-        $this->sort = $sort;
+        $this->level = $level;
 
         return $this;
     }
@@ -174,7 +167,20 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     }
 
     /**
+     * @param integer $sort Optional sort order number
+     *
+     * @return Category
+     */
+    public function setSort(int $sort): self
+    {
+        $this->sort = $sort;
+
+        return $this;
+    }
+
+    /**
      * @param TranslatableAttribute|CategoryAttribute $attribute
+     *
      * @return Category
      */
     public function addAttribute(TranslatableAttribute $attribute): self
@@ -185,7 +191,16 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     }
 
     /**
+     * @return TranslatableAttribute|CategoryAttribute[]
+     */
+    public function getAttributes(): array
+    {
+        return $this->attributes;
+    }
+
+    /**
      * @param TranslatableAttribute|CategoryAttribute ...$attributes
+     *
      * @return Category
      */
     public function setAttributes(TranslatableAttribute ...$attributes): TranslatableAttributesInterface
@@ -193,14 +208,6 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
         $this->attributes = $attributes;
 
         return $this;
-    }
-
-    /**
-     * @return TranslatableAttribute|CategoryAttribute[]
-     */
-    public function getAttributes(): array
-    {
-        return $this->attributes;
     }
 
     /**
@@ -215,6 +222,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
 
     /**
      * @param CategoryCustomerGroup $customerGroup
+     *
      * @return Category
      */
     public function addCustomerGroup(CategoryCustomerGroup $customerGroup): self
@@ -225,7 +233,16 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     }
 
     /**
+     * @return CategoryCustomerGroup[]
+     */
+    public function getCustomerGroups(): array
+    {
+        return $this->customerGroups;
+    }
+
+    /**
      * @param CategoryCustomerGroup ...$customerGroups
+     *
      * @return Category
      */
     public function setCustomerGroups(CategoryCustomerGroup ...$customerGroups): self
@@ -233,14 +250,6 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
         $this->customerGroups = $customerGroups;
 
         return $this;
-    }
-
-    /**
-     * @return CategoryCustomerGroup[]
-     */
-    public function getCustomerGroups(): array
-    {
-        return $this->customerGroups;
     }
 
     /**
@@ -255,6 +264,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
 
     /**
      * @param CategoryI18n $i18n
+     *
      * @return Category
      */
     public function addI18n(CategoryI18n $i18n): self
@@ -262,25 +272,6 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
         $this->i18ns[] = $i18n;
 
         return $this;
-    }
-
-    /**
-     * @param CategoryI18n ...$i18ns
-     * @return Category
-     */
-    public function setI18ns(CategoryI18n ...$i18ns): self
-    {
-        $this->i18ns = $i18ns;
-
-        return $this;
-    }
-
-    /**
-     * @return CategoryI18n[]
-     */
-    public function getI18ns(): array
-    {
-        return $this->i18ns;
     }
 
     /**
@@ -295,6 +286,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
 
     /**
      * @param CategoryInvisibility $invisibility
+     *
      * @return Category
      */
     public function addInvisibility(CategoryInvisibility $invisibility): self
@@ -305,7 +297,16 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     }
 
     /**
+     * @return CategoryInvisibility[]
+     */
+    public function getInvisibilities(): array
+    {
+        return $this->invisibilities;
+    }
+
+    /**
      * @param CategoryInvisibility ...$invisibilities
+     *
      * @return Category
      */
     public function setInvisibilities(CategoryInvisibility ...$invisibilities): self
@@ -313,14 +314,6 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
         $this->invisibilities = $invisibilities;
 
         return $this;
-    }
-
-    /**
-     * @return CategoryInvisibility[]
-     */
-    public function getInvisibilities(): array
-    {
-        return $this->invisibilities;
     }
 
     /**
@@ -355,5 +348,25 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
         }
 
         return parent::getIdentificationStrings();
+    }
+
+    /**
+     * @return CategoryI18n[]
+     */
+    public function getI18ns(): array
+    {
+        return $this->i18ns;
+    }
+
+    /**
+     * @param CategoryI18n ...$i18ns
+     *
+     * @return Category
+     */
+    public function setI18ns(CategoryI18n ...$i18ns): self
+    {
+        $this->i18ns = $i18ns;
+
+        return $this;
     }
 }

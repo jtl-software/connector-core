@@ -14,6 +14,7 @@ class SpecificEvent extends Event
 
     /**
      * SpecificEvent constructor.
+     *
      * @param Specific $specific
      */
     public function __construct(Specific $specific)

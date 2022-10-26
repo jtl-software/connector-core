@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Localized specific value text.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -69,17 +69,6 @@ class SpecificValueI18n extends AbstractI18n
     protected $value = '';
 
     /**
-     * @param string $description Optional localized description
-     * @return SpecificValueI18n
-     */
-    public function setDescription(string $description): SpecificValueI18n
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
      * @return string Optional localized description
      */
     public function getDescription(): string
@@ -88,12 +77,13 @@ class SpecificValueI18n extends AbstractI18n
     }
 
     /**
-     * @param string $metaDescription Optional localized meta description value
+     * @param string $description Optional localized description
+     *
      * @return SpecificValueI18n
      */
-    public function setMetaDescription(string $metaDescription): SpecificValueI18n
+    public function setDescription(string $description): SpecificValueI18n
     {
-        $this->metaDescription = $metaDescription;
+        $this->description = $description;
 
         return $this;
     }
@@ -107,12 +97,13 @@ class SpecificValueI18n extends AbstractI18n
     }
 
     /**
-     * @param string $metaKeywords Optional localized meta keywords value
+     * @param string $metaDescription Optional localized meta description value
+     *
      * @return SpecificValueI18n
      */
-    public function setMetaKeywords(string $metaKeywords): SpecificValueI18n
+    public function setMetaDescription(string $metaDescription): SpecificValueI18n
     {
-        $this->metaKeywords = $metaKeywords;
+        $this->metaDescription = $metaDescription;
 
         return $this;
     }
@@ -126,12 +117,13 @@ class SpecificValueI18n extends AbstractI18n
     }
 
     /**
-     * @param string $titleTag Optional localized title tag value
+     * @param string $metaKeywords Optional localized meta keywords value
+     *
      * @return SpecificValueI18n
      */
-    public function setTitleTag(string $titleTag): SpecificValueI18n
+    public function setMetaKeywords(string $metaKeywords): SpecificValueI18n
     {
-        $this->titleTag = $titleTag;
+        $this->metaKeywords = $metaKeywords;
 
         return $this;
     }
@@ -145,12 +137,13 @@ class SpecificValueI18n extends AbstractI18n
     }
 
     /**
-     * @param string $urlPath Optional localized URL path
+     * @param string $titleTag Optional localized title tag value
+     *
      * @return SpecificValueI18n
      */
-    public function setUrlPath(string $urlPath): SpecificValueI18n
+    public function setTitleTag(string $titleTag): SpecificValueI18n
     {
-        $this->urlPath = $urlPath;
+        $this->titleTag = $titleTag;
 
         return $this;
     }
@@ -164,12 +157,13 @@ class SpecificValueI18n extends AbstractI18n
     }
 
     /**
-     * @param string $value Localized value
+     * @param string $urlPath Optional localized URL path
+     *
      * @return SpecificValueI18n
      */
-    public function setValue(string $value): SpecificValueI18n
+    public function setUrlPath(string $urlPath): SpecificValueI18n
     {
-        $this->value = $value;
+        $this->urlPath = $urlPath;
 
         return $this;
     }
@@ -180,5 +174,17 @@ class SpecificValueI18n extends AbstractI18n
     public function getValue(): string
     {
         return $this->value;
+    }
+
+    /**
+     * @param string $value Localized value
+     *
+     * @return SpecificValueI18n
+     */
+    public function setValue(string $value): SpecificValueI18n
+    {
+        $this->value = $value;
+
+        return $this;
     }
 }

@@ -14,9 +14,9 @@ class CrossSellingSubscriberTest extends TestCase
      * @dataProvider crossSellingDataProvider
      *
      * @param array $data
-     * @param int ...$expectedItemIds
+     * @param int   ...$expectedItemIds
      */
-    public function testOnPreDeserialize(array $data, int ...$expectedItemIds)
+    public function testOnPreDeserialize(array $data, int ...$expectedItemIds): void
     {
         $context    = $this->createMock(DeserializationContext::class);
         $type       = [
@@ -36,55 +36,32 @@ class CrossSellingSubscriberTest extends TestCase
     }
 
     /**
-     * @return array
+     * //phpcs:ignore Generic.Files.LineLength.TooLong
+     * @return array<int, array<int, array<string, array<int, array<string, array<int, array<int, int|string>|int|string>>|int|string>>|int>>
      */
     public function crossSellingDataProvider(): array
     {
         $items = [
             [
-                'crossSellingGroupId' => [
-                    "",
-                    21,
-                ],
-                'productIds'          => [
-                    [
-                        "",
-                        1,
-                    ],
-                ],
+                'crossSellingGroupId' => ['', 21,],
+                'productIds'          => [['', 1,],],
             ],
             [
-                'crossSellingGroupId' => [
-                    "",
-                    42,
-                ],
-                'productIds'          => [
-                    [
-                        "",
-                        1,
-                    ],
-                ],
+                'crossSellingGroupId' => ['', 42,],
+                'productIds'          => [['', 1,],],
             ],
         ];
 
         return [
             [
-
                 [
-                    'id'        => [
-                        "",
-                        100,
-                    ],
-                    'productId' => [
-                        "",
-                        32,
-                    ],
+                    'id'        => ['', 100,],
+                    'productId' => ['', 32,],
                     'items'     => $items,
                 ],
                 1452,
                 2817,
             ],
-
         ];
     }
 }

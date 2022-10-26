@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -14,8 +14,8 @@ use JMS\Serializer\Annotation as Serializer;
  * A config Item that is displayed in a config Group.
  * Config item can reference to a specific productId to inherit price, name and description.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -48,8 +48,8 @@ class ConfigItem extends AbstractIdentity
 
     /**
      * @var boolean Optional: Inherit product name and description  if productId is set.
-     *              If true, configItem name will be received from referenced
- *                  product and configItemI18n name will be ignored.
+     *                  If true, configItem name will be received from referenced
+     *                  product and configItemI18n name will be ignored.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("inheritProductName")
      * @Serializer\Accessor(getter="getInheritProductName",setter="setInheritProductName")
@@ -156,25 +156,15 @@ class ConfigItem extends AbstractIdentity
 
     /**
      * Constructor.
+     *
      * @param string $endpoint
-     * @param int $host
+     * @param int    $host
      */
     public function __construct(string $endpoint = '', int $host = 0)
     {
         parent::__construct($endpoint, $host);
         $this->configGroupId = new Identity();
         $this->productId     = new Identity();
-    }
-
-    /**
-     * @param Identity $configGroupId Reference to configGroup
-     * @return ConfigItem
-     */
-    public function setConfigGroupId(Identity $configGroupId): ConfigItem
-    {
-        $this->configGroupId = $configGroupId;
-
-        return $this;
     }
 
     /**
@@ -186,12 +176,13 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
-     * @param Identity $productId Optional reference to product
+     * @param Identity $configGroupId Reference to configGroup
+     *
      * @return ConfigItem
      */
-    public function setProductId(Identity $productId): ConfigItem
+    public function setConfigGroupId(Identity $configGroupId): ConfigItem
     {
-        $this->productId = $productId;
+        $this->configGroupId = $configGroupId;
 
         return $this;
     }
@@ -202,6 +193,27 @@ class ConfigItem extends AbstractIdentity
     public function getProductId(): Identity
     {
         return $this->productId;
+    }
+
+    /**
+     * @param Identity $productId Optional reference to product
+     *
+     * @return ConfigItem
+     */
+    public function setProductId(Identity $productId): ConfigItem
+    {
+        $this->productId = $productId;
+
+        return $this;
+    }
+
+    /**
+     * @return integer Optional:Ignore multiplier.
+     *                  If true, quantity of config item will not be increased if product quantity is increased
+     */
+    public function getIgnoreMultiplier(): int
+    {
+        return $this->ignoreMultiplier;
     }
 
     /**
@@ -219,12 +231,13 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
-     * @return integer Optional:Ignore multiplier.
-     *                  If true, quantity of config item will not be increased if product quantity is increased
+     * @return boolean Optional: Inherit product name and description  if productId is set.
+     *                  If true, configItem name will be received from referenced product
+     *                  and configItemI18n name will be ignored.
      */
-    public function getIgnoreMultiplier(): int
+    public function getInheritProductName(): bool
     {
-        return $this->ignoreMultiplier;
+        return $this->inheritProductName;
     }
 
     /**
@@ -242,13 +255,12 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
-     * @return boolean Optional: Inherit product name and description  if productId is set.
-     *                  If true, configItem name will be received from referenced product
-     *                  and configItemI18n name will be ignored.
+     * @return boolean Optional: Inherit product price of referenced productId.
+     *                  If true, configItem price will be the same as referenced product price.
      */
-    public function getInheritProductName(): bool
+    public function getInheritProductPrice(): bool
     {
-        return $this->inheritProductName;
+        return $this->inheritProductPrice;
     }
 
     /**
@@ -265,16 +277,16 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
-     * @return boolean Optional: Inherit product price of referenced productId.
-     *                  If true, configItem price will be the same as referenced product price.
+     * @return double Optional initial / predefined quantity. Default is one (1) quantity piece.
      */
-    public function getInheritProductPrice(): bool
+    public function getInitialQuantity(): float
     {
-        return $this->inheritProductPrice;
+        return $this->initialQuantity;
     }
 
     /**
      * @param double $initialQuantity Optional initial / predefined quantity. Default is one (1) quantity piece.
+     *
      * @return ConfigItem
      */
     public function setInitialQuantity(float $initialQuantity): ConfigItem
@@ -285,16 +297,16 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
-     * @return double Optional initial / predefined quantity. Default is one (1) quantity piece.
+     * @return boolean Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
      */
-    public function getInitialQuantity(): float
+    public function getIsPreSelected(): bool
     {
-        return $this->initialQuantity;
+        return $this->isPreSelected;
     }
 
     /**
-     * @param boolean $isPreSelected Optional: Preselect configItem.
- *                                   If true, configItem will be preselected or prechecked.
+     * @param boolean $isPreSelected     Optional: Preselect configItem.
+     *                                   If true, configItem will be preselected or prechecked.
      *
      * @return ConfigItem
      */
@@ -306,11 +318,12 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
-     * @return boolean Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
+     * @return boolean Optional: Highlight or recommend config item.
+     *                  If true, configItem will be recommended/highlighted.
      */
-    public function getIsPreSelected(): bool
+    public function getIsRecommended(): bool
     {
-        return $this->isPreSelected;
+        return $this->isRecommended;
     }
 
     /**
@@ -327,16 +340,16 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
-     * @return boolean Optional: Highlight or recommend config item.
-     *                  If true, configItem will be recommended/highlighted.
+     * @return double Maximum allowed quantity. Default 0 for no maximum limit.
      */
-    public function getIsRecommended(): bool
+    public function getMaxQuantity(): float
     {
-        return $this->isRecommended;
+        return $this->maxQuantity;
     }
 
     /**
      * @param double $maxQuantity Maximum allowed quantity. Default 0 for no maximum limit.
+     *
      * @return ConfigItem
      */
     public function setMaxQuantity(float $maxQuantity): ConfigItem
@@ -347,11 +360,11 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
-     * @return double Maximum allowed quantity. Default 0 for no maximum limit.
+     * @return double Optional minimum quantity required to add configItem. Default 0 for no minimum quantity.
      */
-    public function getMaxQuantity(): float
+    public function getMinQuantity(): float
     {
-        return $this->maxQuantity;
+        return $this->minQuantity;
     }
 
     /**
@@ -368,11 +381,12 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
-     * @return double Optional minimum quantity required to add configItem. Default 0 for no minimum quantity.
+     * @return boolean Optional: Show discount compared to productId price.
+     *                  If true, the discount compared to referenct product price will be shown.
      */
-    public function getMinQuantity(): float
+    public function getShowDiscount(): bool
     {
-        return $this->minQuantity;
+        return $this->showDiscount;
     }
 
     /**
@@ -389,26 +403,6 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
-     * @return boolean Optional: Show discount compared to productId price.
-     *                  If true, the discount compared to referenct product price will be shown.
-     */
-    public function getShowDiscount(): bool
-    {
-        return $this->showDiscount;
-    }
-
-    /**
-     * @param boolean $showSurcharge Optional: Show surcharge compared to productId price.
-     * @return ConfigItem
-     */
-    public function setShowSurcharge(bool $showSurcharge): ConfigItem
-    {
-        $this->showSurcharge = $showSurcharge;
-
-        return $this;
-    }
-
-    /**
      * @return boolean Optional: Show surcharge compared to productId price.
      */
     public function getShowSurcharge(): bool
@@ -417,12 +411,13 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
-     * @param integer $sort Optional sort order number
+     * @param boolean $showSurcharge Optional: Show surcharge compared to productId price.
+     *
      * @return ConfigItem
      */
-    public function setSort(int $sort): ConfigItem
+    public function setShowSurcharge(bool $showSurcharge): ConfigItem
     {
-        $this->sort = $sort;
+        $this->showSurcharge = $showSurcharge;
 
         return $this;
     }
@@ -436,12 +431,13 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
-     * @param integer $type Config item type. 0: Product, 1: Special
+     * @param integer $sort Optional sort order number
+     *
      * @return ConfigItem
      */
-    public function setType(int $type): ConfigItem
+    public function setSort(int $sort): ConfigItem
     {
-        $this->type = $type;
+        $this->sort = $sort;
 
         return $this;
     }
@@ -455,7 +451,20 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
+     * @param integer $type Config item type. 0: Product, 1: Special
+     *
+     * @return ConfigItem
+     */
+    public function setType(int $type): ConfigItem
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
      * @param ConfigItemI18n $i18n
+     *
      * @return ConfigItem
      */
     public function addI18n(ConfigItemI18n $i18n): ConfigItem
@@ -466,7 +475,16 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
+     * @return ConfigItemI18n[]
+     */
+    public function getI18ns(): array
+    {
+        return $this->i18ns;
+    }
+
+    /**
      * @param ConfigItemI18n ...$i18ns
+     *
      * @return ConfigItem
      */
     public function setI18ns(ConfigItemI18n ...$i18ns): ConfigItem
@@ -474,14 +492,6 @@ class ConfigItem extends AbstractIdentity
         $this->i18ns = $i18ns;
 
         return $this;
-    }
-
-    /**
-     * @return ConfigItemI18n[]
-     */
-    public function getI18ns(): array
-    {
-        return $this->i18ns;
     }
 
     /**
@@ -496,6 +506,7 @@ class ConfigItem extends AbstractIdentity
 
     /**
      * @param ConfigItemPrice $price
+     *
      * @return ConfigItem
      */
     public function addPrice(ConfigItemPrice $price): ConfigItem
@@ -506,7 +517,16 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
+     * @return ConfigItemPrice[]
+     */
+    public function getPrices(): array
+    {
+        return $this->prices;
+    }
+
+    /**
      * @param ConfigItemPrice ...$prices
+     *
      * @return ConfigItem
      */
     public function setPrices(ConfigItemPrice ...$prices): ConfigItem
@@ -514,14 +534,6 @@ class ConfigItem extends AbstractIdentity
         $this->prices = $prices;
 
         return $this;
-    }
-
-    /**
-     * @return ConfigItemPrice[]
-     */
-    public function getPrices(): array
-    {
-        return $this->prices;
     }
 
     /**

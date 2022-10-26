@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -14,8 +14,8 @@ use JMS\Serializer\Annotation as Serializer;
  * Specific is defined as a characteristic product attribute Like "color".
  * Specifics can be used for after-search-filtering.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -69,19 +69,6 @@ class Specific extends AbstractIdentity
     protected $values = [];
 
     /**
-     * @param boolean $isGlobal Optional: Global specific means the specific can be used like a category
- *                              (e.g. show all red products in shop)
-     *
-     * @return Specific
-     */
-    public function setIsGlobal(bool $isGlobal): self
-    {
-        $this->isGlobal = $isGlobal;
-
-        return $this;
-    }
-
-    /**
      * @return boolean Optional: Global specific means the specific can be used like a category
      *                  (e.g. show all red products in shop)
      */
@@ -91,12 +78,14 @@ class Specific extends AbstractIdentity
     }
 
     /**
-     * @param integer $sort Optional sort number
+     * @param boolean $isGlobal     Optional: Global specific means the specific can be used like a category
+     *                              (e.g. show all red products in shop)
+     *
      * @return Specific
      */
-    public function setSort(int $sort): self
+    public function setIsGlobal(bool $isGlobal): self
     {
-        $this->sort = $sort;
+        $this->isGlobal = $isGlobal;
 
         return $this;
     }
@@ -110,12 +99,13 @@ class Specific extends AbstractIdentity
     }
 
     /**
-     * @param string $type Specific type (radio, dropdown, image...)
+     * @param integer $sort Optional sort number
+     *
      * @return Specific
      */
-    public function setType(string $type): self
+    public function setSort(int $sort): self
     {
-        $this->type = $type;
+        $this->sort = $sort;
 
         return $this;
     }
@@ -129,7 +119,20 @@ class Specific extends AbstractIdentity
     }
 
     /**
+     * @param string $type Specific type (radio, dropdown, image...)
+     *
+     * @return Specific
+     */
+    public function setType(string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
      * @param SpecificI18n $i18n
+     *
      * @return Specific
      */
     public function addI18n(SpecificI18n $i18n): self
@@ -137,25 +140,6 @@ class Specific extends AbstractIdentity
         $this->i18ns[] = $i18n;
 
         return $this;
-    }
-
-    /**
-     * @param SpecificI18n ...$i18ns
-     * @return Specific
-     */
-    public function setI18ns(SpecificI18n ...$i18ns): self
-    {
-        $this->i18ns = $i18ns;
-
-        return $this;
-    }
-
-    /**
-     * @return SpecificI18n[]
-     */
-    public function getI18ns(): array
-    {
-        return $this->i18ns;
     }
 
     /**
@@ -170,6 +154,7 @@ class Specific extends AbstractIdentity
 
     /**
      * @param SpecificValue $value
+     *
      * @return Specific
      */
     public function addValue(SpecificValue $value): self
@@ -180,7 +165,16 @@ class Specific extends AbstractIdentity
     }
 
     /**
+     * @return SpecificValue[]
+     */
+    public function getValues(): array
+    {
+        return $this->values;
+    }
+
+    /**
      * @param SpecificValue ...$values
+     *
      * @return Specific
      */
     public function setValues(SpecificValue ...$values): self
@@ -188,14 +182,6 @@ class Specific extends AbstractIdentity
         $this->values = $values;
 
         return $this;
-    }
-
-    /**
-     * @return SpecificValue[]
-     */
-    public function getValues(): array
-    {
-        return $this->values;
     }
 
     /**
@@ -222,5 +208,25 @@ class Specific extends AbstractIdentity
         }
 
         return parent::getIdentificationStrings();
+    }
+
+    /**
+     * @return SpecificI18n[]
+     */
+    public function getI18ns(): array
+    {
+        return $this->i18ns;
+    }
+
+    /**
+     * @param SpecificI18n ...$i18ns
+     *
+     * @return Specific
+     */
+    public function setI18ns(SpecificI18n ...$i18ns): self
+    {
+        $this->i18ns = $i18ns;
+
+        return $this;
     }
 }

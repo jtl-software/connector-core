@@ -2,7 +2,7 @@
 
 /**
  * @copyright 2010-2019 JTL-Software GmbH
- * @package Jtl\Connector\Core\Application
+ * @package   Jtl\Connector\Core\Application
  */
 
 namespace Jtl\Connector\Core\Serializer\Subscriber;
@@ -32,14 +32,17 @@ class NullValuesSubscriber implements EventSubscriberInterface
 
     /**
      * Remove null values
+     *
      * @param PreDeserializeEvent $event
      */
     public function onPreDeserialize(PreDeserializeEvent $event)
     {
         if (\is_array($eventData = $event->getData())) {
-            $event->setData(\array_filter($eventData, function ($value) {
-                return $value !== null;
-            }));
+            $event->setData(
+                \array_filter($eventData, function ($value) {
+                    return $value !== null;
+                })
+            );
         }
     }
 }

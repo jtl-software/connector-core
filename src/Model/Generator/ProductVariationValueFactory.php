@@ -2,7 +2,6 @@
 
 namespace Jtl\Connector\Core\Model\Generator;
 
-use Jawira\CaseConverter\CaseConverterException;
 use Jtl\Connector\Core\Model\ProductVariationValue;
 
 class ProductVariationValueFactory extends AbstractModelFactory

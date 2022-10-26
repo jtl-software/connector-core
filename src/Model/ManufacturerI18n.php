@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Locale specific text and meta-information for manufacturer.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -53,17 +53,6 @@ class ManufacturerI18n extends AbstractI18n
     protected $titleTag = '';
 
     /**
-     * @param string $description Optional manufacturer description (HTML)
-     * @return ManufacturerI18n
-     */
-    public function setDescription(string $description): ManufacturerI18n
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
      * @return string Optional manufacturer description (HTML)
      */
     public function getDescription(): string
@@ -72,12 +61,13 @@ class ManufacturerI18n extends AbstractI18n
     }
 
     /**
-     * @param string $metaDescription Optional meta description tag value
+     * @param string $description Optional manufacturer description (HTML)
+     *
      * @return ManufacturerI18n
      */
-    public function setMetaDescription(string $metaDescription): ManufacturerI18n
+    public function setDescription(string $description): ManufacturerI18n
     {
-        $this->metaDescription = $metaDescription;
+        $this->description = $description;
 
         return $this;
     }
@@ -91,12 +81,13 @@ class ManufacturerI18n extends AbstractI18n
     }
 
     /**
-     * @param string $metaKeywords Optional meta keywords tag value
+     * @param string $metaDescription Optional meta description tag value
+     *
      * @return ManufacturerI18n
      */
-    public function setMetaKeywords(string $metaKeywords): ManufacturerI18n
+    public function setMetaDescription(string $metaDescription): ManufacturerI18n
     {
-        $this->metaKeywords = $metaKeywords;
+        $this->metaDescription = $metaDescription;
 
         return $this;
     }
@@ -110,12 +101,13 @@ class ManufacturerI18n extends AbstractI18n
     }
 
     /**
-     * @param string $titleTag Optional title tag value
+     * @param string $metaKeywords Optional meta keywords tag value
+     *
      * @return ManufacturerI18n
      */
-    public function setTitleTag(string $titleTag): ManufacturerI18n
+    public function setMetaKeywords(string $metaKeywords): ManufacturerI18n
     {
-        $this->titleTag = $titleTag;
+        $this->metaKeywords = $metaKeywords;
 
         return $this;
     }
@@ -126,5 +118,17 @@ class ManufacturerI18n extends AbstractI18n
     public function getTitleTag(): string
     {
         return $this->titleTag;
+    }
+
+    /**
+     * @param string $titleTag Optional title tag value
+     *
+     * @return ManufacturerI18n
+     */
+    public function setTitleTag(string $titleTag): ManufacturerI18n
+    {
+        $this->titleTag = $titleTag;
+
+        return $this;
     }
 }

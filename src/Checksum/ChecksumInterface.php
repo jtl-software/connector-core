@@ -2,7 +2,7 @@
 
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Application
+ * @package   Jtl\Connector\Core\Application
  */
 
 namespace Jtl\Connector\Core\Checksum;
@@ -13,6 +13,7 @@ interface ChecksumInterface
 {
     /**
      * @param Identity $foreignKey
+     *
      * @return self
      */
     public function setForeignKey(Identity $foreignKey);
@@ -24,6 +25,7 @@ interface ChecksumInterface
 
     /**
      * @param string $endpoint
+     *
      * @return self
      */
     public function setEndpoint(string $endpoint);
@@ -35,6 +37,7 @@ interface ChecksumInterface
 
     /**
      * @param string $host
+     *
      * @return self
      */
     public function setHost(string $host);
@@ -46,6 +49,7 @@ interface ChecksumInterface
 
     /**
      * @param int $type
+     *
      * @return self
      */
     public function setType(int $type);
@@ -57,6 +61,7 @@ interface ChecksumInterface
 
     /**
      * @param boolean $hasChanged
+     *
      * @return self
      */
     public function setHasChanged(bool $hasChanged);

@@ -2,6 +2,7 @@
 
 namespace Jtl\Connector\Core\Test\Application;
 
+use DI\Container;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Jtl\Connector\Core\Application\Application;
@@ -122,7 +123,7 @@ class ApplicationTest extends TestCase
     protected function createApplication(
         ConfigSchema    $configSchema = null,
         string          $connectorDir = null,
-        ConfigInterface $config       = null
+        ConfigInterface $config = null
     ): Application {
         if (\is_null($configSchema)) {
             $configSchema = new ConfigSchema();
@@ -145,7 +146,7 @@ class ApplicationTest extends TestCase
      *
      * @return ConnectorInterface|MockObject
      */
-    public function createConnector($controllerNamespace = "", bool $tokenValidatorValidateValue = true)
+    public function createConnector($controllerNamespace = '', bool $tokenValidatorValidateValue = true)
     {
         $tokenValidator = $this->createMock(TokenValidatorInterface::class);
         $tokenValidator->expects($this->any())->method('validate')->willReturn($tokenValidatorValidateValue);
@@ -375,7 +376,7 @@ class ApplicationTest extends TestCase
     public function testLoadPlugins()
     {
         $config          = $this->createMock(ConfigInterface::class);
-        $container       = $this->createMock(\DI\Container::class);
+        $container       = $this->createMock(Container::class);
         $eventDispatcher = $this->createMock(EventDispatcher::class);
         $app             = $this->getMockBuilder(Application::class)->disableOriginalConstructor()->getMock();
         $myPluginDirSrc  = \sprintf('%s/fixtures/MyPlugin', $this->connectorDir);
@@ -402,12 +403,12 @@ class ApplicationTest extends TestCase
         /** @var Manufacturer $manufacturer */
         $manufacturer      = $factory->makeOne();
         $manufacturerArray = $serializer->toArray($manufacturer);
-        $requestPacket     = (new RequestPacket())->setJtlrpc("2.0")
+        $requestPacket     = (new RequestPacket())->setJtlrpc('2.0')
                                                   ->setMethod('manufacturer.push')
                                                   ->setParams([$manufacturerArray])
                                                   ->setId($id)
                                                   ->toArray();
-        $responsePacket    = (new ResponsePacket())->setJtlrpc("2.0")->setId($id)->setResult([$manufacturer]);
+        $responsePacket    = (new ResponsePacket())->setJtlrpc('2.0')->setId($id)->setResult([$manufacturer]);
         $_POST['jtlrpc']   = \json_encode($requestPacket);
 
         $connector    = $this->createConnector('Jtl\Connector\Core\Test\Stub\Controller');
@@ -485,7 +486,7 @@ class ApplicationTest extends TestCase
         $serializer      = SerializerBuilder::create()->build();
         $factory         = AbstractModelFactory::createFactory(Model::MANUFACTURER);
         $id              = $factory->getFaker()->uuid;
-        $requestPacket   = (new RequestPacket())->setJtlrpc("2.0")
+        $requestPacket   = (new RequestPacket())->setJtlrpc('2.0')
                                                 ->setMethod('yoo')
                                                 ->setParams([])
                                                 ->setId($id)
@@ -493,9 +494,9 @@ class ApplicationTest extends TestCase
         $_POST['jtlrpc'] = \json_encode($requestPacket);
         $ex              = RpcException::invalidRequest();
         $error           = (new Error())->setCode(ErrorCode::INVALID_REQUEST)
-                                        ->setMessage("Invalid request")
+                                        ->setMessage('Invalid request')
                                         ->setData(Error::createDataFromException($ex));
-        $responsePacket  = (new ResponsePacket())->setJtlrpc("2.0")->setId($id)->setError($error);
+        $responsePacket  = (new ResponsePacket())->setJtlrpc('2.0')->setId($id)->setError($error);
         $this->expectOutputString(\json_encode($responsePacket->toArray($serializer), \JSON_THROW_ON_ERROR));
         $this->createApplication()->run($this->createConnector());
     }
@@ -512,7 +513,7 @@ class ApplicationTest extends TestCase
         $serializer      = SerializerBuilder::create()->build();
         $factory         = AbstractModelFactory::createFactory(Model::MANUFACTURER);
         $id              = $factory->getFaker()->uuid;
-        $requestPacket   = (new RequestPacket())->setJtlrpc("2.0")
+        $requestPacket   = (new RequestPacket())->setJtlrpc('2.0')
                                                 ->setMethod('foo.bar')
                                                 ->setParams([])
                                                 ->setId($id)
@@ -521,11 +522,11 @@ class ApplicationTest extends TestCase
         $ex              = DefinitionException::unknownController('foo');
         $error           = (new Error())
             ->setCode(ErrorCode::UNKNOWN_CONTROLLER)
-            ->setMessage("Unknown controller (Foo)")
+            ->setMessage('Unknown controller (Foo)')
             ->setData(Error::createDataFromException($ex));
 
         $responsePacket = (new ResponsePacket())
-            ->setJtlrpc("2.0")
+            ->setJtlrpc('2.0')
             ->setId($id)
             ->setError($error);
 
@@ -547,7 +548,7 @@ class ApplicationTest extends TestCase
         $serializer      = SerializerBuilder::create()->build();
         $factory         = AbstractModelFactory::createFactory(Model::MANUFACTURER);
         $id              = $factory->getFaker()->uuid;
-        $requestPacket   = (new RequestPacket())->setJtlrpc("2.0")
+        $requestPacket   = (new RequestPacket())->setJtlrpc('2.0')
                                                 ->setMethod('category.bar')
                                                 ->setParams([])
                                                 ->setId($id)
@@ -555,9 +556,9 @@ class ApplicationTest extends TestCase
         $_POST['jtlrpc'] = \json_encode($requestPacket);
         $ex              = DefinitionException::unknownAction('bar');
         $error           = (new Error())->setCode(ErrorCode::UNKNOWN_ACTION)
-                                        ->setMessage("Unknown action (bar)")
+                                        ->setMessage('Unknown action (bar)')
                                         ->setData(Error::createDataFromException($ex));
-        $responsePacket  = (new ResponsePacket())->setJtlrpc("2.0")->setId($id)->setError($error);
+        $responsePacket  = (new ResponsePacket())->setJtlrpc('2.0')->setId($id)->setError($error);
         $this->expectOutputString(\json_encode($responsePacket->toArray($serializer), \JSON_THROW_ON_ERROR));
 
         $this->createApplication()

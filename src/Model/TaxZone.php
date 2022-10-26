@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Tax zone model (set in JTL-Wawi ERP).
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -37,7 +37,16 @@ class TaxZone extends AbstractIdentity
     protected $countries = [];
 
     /**
+     * @return string Optional tax zone name e.g. "EU Zone"
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
      * @param string $name Optional tax zone name e.g. "EU Zone"
+     *
      * @return TaxZone
      */
     public function setName(string $name): TaxZone
@@ -48,15 +57,8 @@ class TaxZone extends AbstractIdentity
     }
 
     /**
-     * @return string Optional tax zone name e.g. "EU Zone"
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
      * @param TaxZoneCountry $country
+     *
      * @return TaxZone
      */
     public function addCountry(TaxZoneCountry $country): TaxZone

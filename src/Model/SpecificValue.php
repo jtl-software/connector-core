@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Specific value properties to define a new specificValue with a sort number.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -37,7 +37,16 @@ class SpecificValue extends AbstractIdentity
     protected $i18ns = [];
 
     /**
+     * @return integer Optional sort number
+     */
+    public function getSort(): int
+    {
+        return $this->sort;
+    }
+
+    /**
      * @param integer $sort Optional sort number
+     *
      * @return SpecificValue
      */
     public function setSort(int $sort): SpecificValue
@@ -48,15 +57,8 @@ class SpecificValue extends AbstractIdentity
     }
 
     /**
-     * @return integer Optional sort number
-     */
-    public function getSort(): int
-    {
-        return $this->sort;
-    }
-
-    /**
      * @param SpecificValueI18n $i18n
+     *
      * @return SpecificValue
      */
     public function addI18n(SpecificValueI18n $i18n): SpecificValue
@@ -67,7 +69,16 @@ class SpecificValue extends AbstractIdentity
     }
 
     /**
+     * @return SpecificValueI18n[]
+     */
+    public function getI18ns(): array
+    {
+        return $this->i18ns;
+    }
+
+    /**
      * @param SpecificValueI18n ...$i18ns
+     *
      * @return SpecificValue
      */
     public function setI18ns(SpecificValueI18n ...$i18ns): SpecificValue
@@ -75,14 +86,6 @@ class SpecificValue extends AbstractIdentity
         $this->i18ns = $i18ns;
 
         return $this;
-    }
-
-    /**
-     * @return SpecificValueI18n[]
-     */
-    public function getI18ns(): array
-    {
-        return $this->i18ns;
     }
 
     /**

@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -11,8 +11,8 @@ namespace Jtl\Connector\Core\Model;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -34,9 +34,17 @@ class ProductFileDownloadI18n extends AbstractI18n
      */
     protected $name = '';
 
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
 
     /**
      * @param string $description
+     *
      * @return ProductFileDownloadI18n
      */
     public function setDescription(string $description): ProductFileDownloadI18n
@@ -49,13 +57,14 @@ class ProductFileDownloadI18n extends AbstractI18n
     /**
      * @return string
      */
-    public function getDescription(): string
+    public function getName(): string
     {
-        return $this->description;
+        return $this->name;
     }
 
     /**
      * @param string $name
+     *
      * @return ProductFileDownloadI18n
      */
     public function setName(string $name): ProductFileDownloadI18n
@@ -63,13 +72,5 @@ class ProductFileDownloadI18n extends AbstractI18n
         $this->name = $name;
 
         return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
     }
 }

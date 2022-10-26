@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2013 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Internal
  */
 
@@ -26,18 +26,8 @@ abstract class AbstractModel
     private $identificationStrings = [];
 
     /**
-     * @param string ...$identificationStrings
-     * @return AbstractModel
-     */
-    public function setIdentificationStrings(string ...$identificationStrings): self
-    {
-        $this->identificationStrings = $identificationStrings;
-
-        return $this;
-    }
-
-    /**
      * @param string $identificationString
+     *
      * @return AbstractModel
      */
     public function setIdentificationString(string $identificationString): self
@@ -52,6 +42,7 @@ abstract class AbstractModel
     /**
      * @param string $subject
      * @param string $identificationString
+     *
      * @return $this
      */
     public function setIdentificationStringBySubject(string $subject, string $identificationString): self
@@ -63,6 +54,7 @@ abstract class AbstractModel
 
     /**
      * @param string $identificationString
+     *
      * @return AbstractModel
      */
     public function unsetIdentificationString(string $identificationString): self
@@ -77,6 +69,7 @@ abstract class AbstractModel
 
     /**
      * @param string $subject
+     *
      * @return AbstractModel
      */
     public function unsetIdentificationStringBySubject(string $subject): self
@@ -92,6 +85,18 @@ abstract class AbstractModel
     public function getIdentificationStrings(): array
     {
         return \array_values($this->identificationStrings);
+    }
+
+    /**
+     * @param string ...$identificationStrings
+     *
+     * @return AbstractModel
+     */
+    public function setIdentificationStrings(string ...$identificationStrings): self
+    {
+        $this->identificationStrings = $identificationStrings;
+
+        return $this;
     }
 
     /**

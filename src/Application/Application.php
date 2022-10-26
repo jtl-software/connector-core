@@ -11,42 +11,51 @@ use Doctrine\Common\Annotations\AnnotationRegistry;
 use JMS\Serializer\Serializer;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
 use Jtl\Connector\Core\Checksum\ChecksumLoaderInterface;
+use Jtl\Connector\Core\Compression\Zip;
+use Jtl\Connector\Core\Config\ConfigSchema;
+use Jtl\Connector\Core\Config\FileConfig;
+use Jtl\Connector\Core\Connector\ConnectorInterface;
+use Jtl\Connector\Core\Connector\HandleRequestInterface;
+use Jtl\Connector\Core\Connector\ModelInterface;
+use Jtl\Connector\Core\Connector\UseChecksumInterface;
 use Jtl\Connector\Core\Controller\ConnectorController;
 use Jtl\Connector\Core\Controller\StatisticInterface;
-use Jtl\Connector\Core\Config\ConfigSchema;
+use Jtl\Connector\Core\Controller\TransactionalInterface;
+use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Definition\ErrorCode;
 use Jtl\Connector\Core\Definition\Event;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Definition\RelationType;
-use Jtl\Connector\Core\Error\ErrorHandler;
+use Jtl\Connector\Core\Definition\RpcMethod;
 use Jtl\Connector\Core\Error\AbstractErrorHandler;
-use Jtl\Connector\Core\Connector\UseChecksumInterface;
-use Jtl\Connector\Core\Compression\Zip;
-use Jtl\Connector\Core\Connector\ConnectorInterface;
-use Jtl\Connector\Core\Connector\HandleRequestInterface;
-use Jtl\Connector\Core\Connector\ModelInterface;
-use Jtl\Connector\Core\Controller\TransactionalInterface;
-use Jtl\Connector\Core\Definition\Action;
+use Jtl\Connector\Core\Error\ErrorHandler;
 use Jtl\Connector\Core\Event\AckEvent;
 use Jtl\Connector\Core\Event\BoolEvent;
 use Jtl\Connector\Core\Event\ConnectorIdentificationEvent;
 use Jtl\Connector\Core\Event\FeaturesEvent;
-use Jtl\Connector\Core\Event\ResponseEvent;
-use Jtl\Connector\Core\Event\RequestEvent;
 use Jtl\Connector\Core\Event\ModelEvent;
 use Jtl\Connector\Core\Event\QueryFilterEvent;
+use Jtl\Connector\Core\Event\RequestEvent;
+use Jtl\Connector\Core\Event\ResponseEvent;
 use Jtl\Connector\Core\Event\RpcEvent;
 use Jtl\Connector\Core\Event\StatisticEvent;
+use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\ConfigException;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\FileNotFoundException;
 use Jtl\Connector\Core\Exception\HttpException;
 use Jtl\Connector\Core\Exception\LoggerException;
+use Jtl\Connector\Core\Exception\RpcException;
+use Jtl\Connector\Core\Exception\SessionException;
+use Jtl\Connector\Core\Http\JsonResponse as HttpResponse;
+use Jtl\Connector\Core\Linker\ChecksumLinker;
+use Jtl\Connector\Core\Linker\IdentityLinker;
 use Jtl\Connector\Core\Logger\LoggerService;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Jtl\Connector\Core\Model\AbstractImage;
+use Jtl\Connector\Core\Model\AbstractModel;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
 use Jtl\Connector\Core\Model\Identities;
@@ -55,41 +64,34 @@ use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Model\QueryFilter;
 use Jtl\Connector\Core\Model\Statistic;
 use Jtl\Connector\Core\Plugin\PluginInterface;
-use Jtl\Connector\Core\Exception\RpcException;
-use Jtl\Connector\Core\Exception\SessionException;
-use Jtl\Connector\Core\Exception\ApplicationException;
+use Jtl\Connector\Core\Rpc\Error;
+use Jtl\Connector\Core\Rpc\Method;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
-use Jtl\Connector\Core\Rpc\Error;
-use Jtl\Connector\Core\Http\JsonResponse as HttpResponse;
-use Jtl\Connector\Core\Config\FileConfig;
+use Jtl\Connector\Core\Serializer\SerializerBuilder;
+use Jtl\Connector\Core\Session\SessionHandlerInterface;
+use Jtl\Connector\Core\Session\SqliteSessionHandler;
 use Jtl\Connector\Core\Subscriber\FeaturesSubscriber;
 use Jtl\Connector\Core\Subscriber\RequestParamsTransformSubscriber;
-use Jtl\Connector\Core\Definition\RpcMethod;
-use Jtl\Connector\Core\Rpc\Method;
-use Jtl\Connector\Core\Linker\IdentityLinker;
-use Jtl\Connector\Core\Model\AbstractModel;
-use Jtl\Connector\Core\Serializer\SerializerBuilder;
-use Jtl\Connector\Core\Linker\ChecksumLinker;
-use Jtl\Connector\Core\Session\SqliteSessionHandler;
-use Jtl\Connector\Core\Session\SessionHandlerInterface;
 use Monolog\ErrorHandler as MonologErrorHandler;
 use Noodlehaus\ConfigInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
+use ReflectionClass;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
+use Throwable;
 
 class Application
 {
     public const PROTOCOL_VERSION = 7;
     public const MIN_PHP_VERSION  = '7.4';
     /** @var array<string, string> */
-    protected static array $mimeTypeToExtensionMappings = [
+    protected static array    $mimeTypeToExtensionMappings = [
         'image/bmp'                => 'bmp',
         'image/x-bmp'              => 'bmp',
         'image/x-bitmap'           => 'bmp',
@@ -294,7 +296,7 @@ class Application
 
             $responsePacket = $this->execute($connector, $requestPacket, $method);
             \session_write_close();
-        } catch (\Throwable $ex) {
+        } catch (Throwable $ex) {
             $error = (new Error())
                 ->setCode($ex->getCode())
                 ->setMessage($ex->getMessage())
@@ -344,7 +346,7 @@ class Application
             if ($sessionHandler->validateId($sessionId)) {
                 \session_id($sessionId);
             } else {
-                throw new SessionException("Session is invalid", ErrorCode::INVALID_SESSION);
+                throw new SessionException('Session is invalid', ErrorCode::INVALID_SESSION);
             }
         }
 
@@ -724,8 +726,8 @@ class Application
 
                 $imageFound = false;
                 foreach ($imagePaths as $imagePath) {
-                    $imageFound = false;
-                    $fileInfo   = \pathinfo($imagePath);
+                    $imageFound              = false;
+                    $fileInfo                = \pathinfo($imagePath);
                     [$hostId, $relationType] = \explode('_', $fileInfo['filename']);
                     if (
                         (int)$hostId == $image->getId()->getHost()
@@ -830,7 +832,7 @@ class Application
                             $controller->commit();
                         }
                     }
-                } catch (\Throwable $ex) {
+                } catch (Throwable $ex) {
                     if ($controller instanceof TransactionalInterface) {
                         $controller->rollback();
                     }
@@ -871,10 +873,10 @@ class Application
      * @throws \ReflectionException
      */
     protected function extendExceptionMessageWithIdentifiers(
-        \Throwable $ex,
-        ?object    $model,
-        string     $controller,
-        string     $action
+        Throwable $ex,
+        ?object   $model,
+        string    $controller,
+        string    $action
     ): void {
         $messages = [
             \sprintf('Controller = %s', $controller),
@@ -890,7 +892,7 @@ class Application
         }
 
         $messages[]         = $ex->getMessage();
-        $reflectionClass    = new \ReflectionClass($ex);
+        $reflectionClass    = new ReflectionClass($ex);
         $reflectionProperty = $reflectionClass->getProperty('message');
         $reflectionProperty->setAccessible(true);
         $reflectionProperty->setValue($ex, \implode(' | ', $messages));
@@ -910,7 +912,7 @@ class Application
                                         ->setResult($response->getResult());
 
         if (!$responsePacket->isValid()) {
-            throw new RpcException("Parse error", ErrorCode::PARSE_ERROR);
+            throw new RpcException('Parse error', ErrorCode::PARSE_ERROR);
         }
 
         return $responsePacket;

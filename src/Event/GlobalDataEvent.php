@@ -14,6 +14,7 @@ class GlobalDataEvent extends Event
 
     /**
      * GlobalDataEvent constructor.
+     *
      * @param GlobalData $globalData
      */
     public function __construct(GlobalData $globalData)

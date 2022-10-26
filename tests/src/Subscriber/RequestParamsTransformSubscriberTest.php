@@ -316,13 +316,13 @@ class RequestParamsTransformSubscriberTest extends TestCase
 
                     [
                         'id'         => [
-                            "",
+                            '',
                             1,
                         ],
                         'sku'        => 'foo',
                         'vat'        => 19.,
                         'taxClassId' => [
-                            "",
+                            '',
                             42,
                         ],
                         'prices'     => [

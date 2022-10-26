@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2013 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Internal
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Statistic Model
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Internal
  */
 class Statistic extends AbstractModel
@@ -45,6 +45,7 @@ class Statistic extends AbstractModel
 
     /**
      * @param integer $available
+     *
      * @return Statistic
      */
     public function setAvailable(int $available): Statistic
@@ -64,6 +65,7 @@ class Statistic extends AbstractModel
 
     /**
      * @param string $controllerName
+     *
      * @return Statistic
      */
     public function setControllerName(string $controllerName): Statistic

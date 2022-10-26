@@ -14,6 +14,7 @@ class PaymentEvent extends Event
 
     /**
      * PaymentEvent constructor.
+     *
      * @param Payment $payment
      */
     public function __construct(Payment $payment)

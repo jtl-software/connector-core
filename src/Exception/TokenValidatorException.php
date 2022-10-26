@@ -15,6 +15,6 @@ class TokenValidatorException extends \Exception
      */
     public static function emptyToken(): TokenValidatorException
     {
-        return new self("Connector token cannot be empty", self::EMPTY_TOKEN);
+        return new self('Connector token cannot be empty', self::EMPTY_TOKEN);
     }
 }

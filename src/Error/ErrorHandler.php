@@ -2,12 +2,11 @@
 
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Application
+ * @package   Jtl\Connector\Core\Application
  */
 
 namespace Jtl\Connector\Core\Error;
 
-use JMS\Serializer\Serializer;
 use Jtl\Connector\Core\Http\JsonResponse;
 use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Rpc\RequestPacket;
@@ -15,16 +14,6 @@ use Jtl\Connector\Core\Rpc\ResponsePacket;
 
 class ErrorHandler extends AbstractErrorHandler
 {
-    /**
-     * @var RequestPacket
-     */
-    protected $requestPacket;
-
-    /**
-     * @var JsonResponse
-     */
-    protected $response;
-
     /**
      * @var integer[]
      */
@@ -36,9 +25,18 @@ class ErrorHandler extends AbstractErrorHandler
         \E_COMPILE_ERROR,
         \E_PARSE,
     ];
+    /**
+     * @var RequestPacket
+     */
+    protected $requestPacket;
+    /**
+     * @var JsonResponse
+     */
+    protected $response;
 
     /**
      * ErrorHandler constructor.
+     *
      * @param JsonResponse $response
      */
     public function __construct(JsonResponse $response)
@@ -61,7 +59,7 @@ class ErrorHandler extends AbstractErrorHandler
      */
     public function getErrorHandler(): callable
     {
-        return function ($errno, $errstr, $errfile = "", $errline = -1, $errcontext = null) {
+        return function ($errno, $errstr, $errfile = '', $errline = -1, $errcontext = null) {
             return !\in_array($errno, static::$shutdownHandleErrors, true);
         };
     }
@@ -80,8 +78,8 @@ class ErrorHandler extends AbstractErrorHandler
 
                     $error = new Error();
                     $error->setCode($err['type'])
-                        ->setData('Shutdown! File: ' . $file . ' - Line: ' . $err['line'])
-                        ->setMessage($err['message']);
+                          ->setData('Shutdown! File: ' . $file . ' - Line: ' . $err['line'])
+                          ->setMessage($err['message']);
 
                     $requestPacket = RequestPacket::create('unknown')->setMethod('unknown.unknown');
                     if (!\is_null($this->requestPacket)) {
@@ -89,7 +87,7 @@ class ErrorHandler extends AbstractErrorHandler
                     }
 
                     $responsePacket = ResponsePacket::create($requestPacket->getId(), $requestPacket->getJtlrpc())
-                        ->setError($error);
+                                                    ->setError($error);
 
                     $this->response->prepareAndSend($requestPacket, $responsePacket);
                 }
@@ -99,6 +97,7 @@ class ErrorHandler extends AbstractErrorHandler
 
     /**
      * @param RequestPacket $requestPacket
+     *
      * @return ErrorHandler
      */
     public function setRequestPacket(RequestPacket $requestPacket): ErrorHandler

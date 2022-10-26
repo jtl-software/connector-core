@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @author Immanuel Klinkenberg <immanuel.klinkenberg@jtl-software.com>
+ * @author    Immanuel Klinkenberg <immanuel.klinkenberg@jtl-software.com>
  * @copyright 2010-2018 JTL-Software GmbH
  */
 
@@ -31,10 +31,11 @@ class FeatureEntity
 
     /**
      * FeatureEntity constructor.
+     *
      * @param string $name
-     * @param bool $pull
-     * @param bool $push
-     * @param bool $delete
+     * @param bool   $pull
+     * @param bool   $push
+     * @param bool   $delete
      */
     public function __construct(string $name, bool $pull = false, bool $push = false, bool $delete = false)
     {
@@ -54,6 +55,7 @@ class FeatureEntity
 
     /**
      * @param string $name
+     *
      * @return FeatureEntity
      */
     public function setName(string $name): FeatureEntity
@@ -63,15 +65,8 @@ class FeatureEntity
     }
 
     /**
-     * @return bool
-     */
-    public function canPull(): bool
-    {
-        return $this->pull;
-    }
-
-    /**
      * @param bool $pull
+     *
      * @return FeatureEntity
      */
     public function setPull(bool $pull): FeatureEntity
@@ -81,15 +76,8 @@ class FeatureEntity
     }
 
     /**
-     * @return bool
-     */
-    public function canPush(): bool
-    {
-        return $this->push;
-    }
-
-    /**
      * @param bool $push
+     *
      * @return FeatureEntity
      */
     public function setPush(bool $push): FeatureEntity
@@ -99,15 +87,8 @@ class FeatureEntity
     }
 
     /**
-     * @return bool
-     */
-    public function canDelete(): bool
-    {
-        return $this->delete;
-    }
-
-    /**
      * @param bool $delete
+     *
      * @return FeatureEntity
      */
     public function setDelete(bool $delete): FeatureEntity
@@ -126,5 +107,29 @@ class FeatureEntity
             'push'   => $this->canPush(),
             'delete' => $this->canDelete(),
         ];
+    }
+
+    /**
+     * @return bool
+     */
+    public function canPull(): bool
+    {
+        return $this->pull;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canPush(): bool
+    {
+        return $this->push;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canDelete(): bool
+    {
+        return $this->delete;
     }
 }

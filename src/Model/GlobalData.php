@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -11,8 +11,8 @@ namespace Jtl\Connector\Core\Model;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -125,6 +125,7 @@ class GlobalData extends AbstractModel
 
     /**
      * @param ConfigGroup $configGroup
+     *
      * @return GlobalData
      */
     public function addConfigGroup(ConfigGroup $configGroup): GlobalData
@@ -135,7 +136,16 @@ class GlobalData extends AbstractModel
     }
 
     /**
+     * @return ConfigGroup[]
+     */
+    public function getConfigGroups(): array
+    {
+        return $this->configGroups;
+    }
+
+    /**
      * @param ConfigGroup ...$configGroups
+     *
      * @return GlobalData
      */
     public function setConfigGroups(ConfigGroup ...$configGroups): GlobalData
@@ -143,14 +153,6 @@ class GlobalData extends AbstractModel
         $this->configGroups = $configGroups;
 
         return $this;
-    }
-
-    /**
-     * @return ConfigGroup[]
-     */
-    public function getConfigGroups(): array
-    {
-        return $this->configGroups;
     }
 
     /**
@@ -165,6 +167,7 @@ class GlobalData extends AbstractModel
 
     /**
      * @param ConfigItem $configItem
+     *
      * @return GlobalData
      */
     public function addConfigItem(ConfigItem $configItem): GlobalData
@@ -175,7 +178,16 @@ class GlobalData extends AbstractModel
     }
 
     /**
+     * @return ConfigItem[]
+     */
+    public function getConfigItems(): array
+    {
+        return $this->configItems;
+    }
+
+    /**
      * @param ConfigItem ...$configItems
+     *
      * @return GlobalData
      */
     public function setConfigItems(ConfigItem ...$configItems): GlobalData
@@ -183,14 +195,6 @@ class GlobalData extends AbstractModel
         $this->configItems = $configItems;
 
         return $this;
-    }
-
-    /**
-     * @return ConfigItem[]
-     */
-    public function getConfigItems(): array
-    {
-        return $this->configItems;
     }
 
     /**
@@ -205,6 +209,7 @@ class GlobalData extends AbstractModel
 
     /**
      * @param CrossSellingGroup $crossSellingGroup
+     *
      * @return GlobalData
      */
     public function addCrossSellingGroup(CrossSellingGroup $crossSellingGroup): GlobalData
@@ -215,7 +220,16 @@ class GlobalData extends AbstractModel
     }
 
     /**
+     * @return CrossSellingGroup[]
+     */
+    public function getCrossSellingGroups(): array
+    {
+        return $this->crossSellingGroups;
+    }
+
+    /**
      * @param CrossSellingGroup ...$crossSellingGroups
+     *
      * @return GlobalData
      */
     public function setCrossSellingGroups(CrossSellingGroup ...$crossSellingGroups): GlobalData
@@ -223,14 +237,6 @@ class GlobalData extends AbstractModel
         $this->crossSellingGroups = $crossSellingGroups;
 
         return $this;
-    }
-
-    /**
-     * @return CrossSellingGroup[]
-     */
-    public function getCrossSellingGroups(): array
-    {
-        return $this->crossSellingGroups;
     }
 
     /**
@@ -245,6 +251,7 @@ class GlobalData extends AbstractModel
 
     /**
      * @param Currency $currency
+     *
      * @return GlobalData
      */
     public function addCurrency(Currency $currency): GlobalData
@@ -255,7 +262,16 @@ class GlobalData extends AbstractModel
     }
 
     /**
+     * @return Currency[]
+     */
+    public function getCurrencies(): array
+    {
+        return $this->currencies;
+    }
+
+    /**
      * @param Currency ...$currencies
+     *
      * @return GlobalData
      */
     public function setCurrencies(Currency ...$currencies): GlobalData
@@ -263,14 +279,6 @@ class GlobalData extends AbstractModel
         $this->currencies = $currencies;
 
         return $this;
-    }
-
-    /**
-     * @return Currency[]
-     */
-    public function getCurrencies(): array
-    {
-        return $this->currencies;
     }
 
     /**
@@ -285,6 +293,7 @@ class GlobalData extends AbstractModel
 
     /**
      * @param CustomerGroup $customerGroup
+     *
      * @return GlobalData
      */
     public function addCustomerGroup(CustomerGroup $customerGroup): GlobalData
@@ -295,7 +304,16 @@ class GlobalData extends AbstractModel
     }
 
     /**
+     * @return CustomerGroup[]
+     */
+    public function getCustomerGroups(): array
+    {
+        return $this->customerGroups;
+    }
+
+    /**
      * @param CustomerGroup ...$customerGroups
+     *
      * @return GlobalData
      */
     public function setCustomerGroups(CustomerGroup ...$customerGroups): GlobalData
@@ -303,14 +321,6 @@ class GlobalData extends AbstractModel
         $this->customerGroups = $customerGroups;
 
         return $this;
-    }
-
-    /**
-     * @return CustomerGroup[]
-     */
-    public function getCustomerGroups(): array
-    {
-        return $this->customerGroups;
     }
 
     /**
@@ -325,6 +335,7 @@ class GlobalData extends AbstractModel
 
     /**
      * @param Language $language
+     *
      * @return GlobalData
      */
     public function addLanguage(Language $language): GlobalData
@@ -335,7 +346,16 @@ class GlobalData extends AbstractModel
     }
 
     /**
+     * @return Language[]
+     */
+    public function getLanguages(): array
+    {
+        return $this->languages;
+    }
+
+    /**
      * @param Language ...$languages
+     *
      * @return GlobalData
      */
     public function setLanguages(Language ...$languages): GlobalData
@@ -343,14 +363,6 @@ class GlobalData extends AbstractModel
         $this->languages = $languages;
 
         return $this;
-    }
-
-    /**
-     * @return Language[]
-     */
-    public function getLanguages(): array
-    {
-        return $this->languages;
     }
 
     /**
@@ -365,6 +377,7 @@ class GlobalData extends AbstractModel
 
     /**
      * @param MeasurementUnit $measurementUnit
+     *
      * @return GlobalData
      */
     public function addMeasurementUnit(MeasurementUnit $measurementUnit): GlobalData
@@ -375,7 +388,16 @@ class GlobalData extends AbstractModel
     }
 
     /**
+     * @return MeasurementUnit[]
+     */
+    public function getMeasurementUnits(): array
+    {
+        return $this->measurementUnits;
+    }
+
+    /**
      * @param MeasurementUnit ...$measurementUnits
+     *
      * @return GlobalData
      */
     public function setMeasurementUnits(MeasurementUnit ...$measurementUnits): GlobalData
@@ -383,14 +405,6 @@ class GlobalData extends AbstractModel
         $this->measurementUnits = $measurementUnits;
 
         return $this;
-    }
-
-    /**
-     * @return MeasurementUnit[]
-     */
-    public function getMeasurementUnits(): array
-    {
-        return $this->measurementUnits;
     }
 
     /**
@@ -405,6 +419,7 @@ class GlobalData extends AbstractModel
 
     /**
      * @param ProductType $productType
+     *
      * @return GlobalData
      */
     public function addProductType(ProductType $productType): GlobalData
@@ -415,7 +430,16 @@ class GlobalData extends AbstractModel
     }
 
     /**
+     * @return ProductType[]
+     */
+    public function getProductTypes(): array
+    {
+        return $this->productTypes;
+    }
+
+    /**
      * @param ProductType ...$productTypes
+     *
      * @return GlobalData
      */
     public function setProductTypes(ProductType ...$productTypes): GlobalData
@@ -423,14 +447,6 @@ class GlobalData extends AbstractModel
         $this->productTypes = $productTypes;
 
         return $this;
-    }
-
-    /**
-     * @return ProductType[]
-     */
-    public function getProductTypes(): array
-    {
-        return $this->productTypes;
     }
 
     /**
@@ -445,6 +461,7 @@ class GlobalData extends AbstractModel
 
     /**
      * @param ShippingClass $shippingClass
+     *
      * @return GlobalData
      */
     public function addShippingClass(ShippingClass $shippingClass): GlobalData
@@ -455,7 +472,16 @@ class GlobalData extends AbstractModel
     }
 
     /**
+     * @return ShippingClass[]
+     */
+    public function getShippingClasses(): array
+    {
+        return $this->shippingClasses;
+    }
+
+    /**
      * @param ShippingClass ...$shippingClasses
+     *
      * @return GlobalData
      */
     public function setShippingClasses(ShippingClass ...$shippingClasses): GlobalData
@@ -463,14 +489,6 @@ class GlobalData extends AbstractModel
         $this->shippingClasses = $shippingClasses;
 
         return $this;
-    }
-
-    /**
-     * @return ShippingClass[]
-     */
-    public function getShippingClasses(): array
-    {
-        return $this->shippingClasses;
     }
 
     /**
@@ -485,6 +503,7 @@ class GlobalData extends AbstractModel
 
     /**
      * @param ShippingMethod $shippingMethod
+     *
      * @return GlobalData
      */
     public function addShippingMethod(ShippingMethod $shippingMethod): GlobalData
@@ -495,7 +514,16 @@ class GlobalData extends AbstractModel
     }
 
     /**
+     * @return ShippingMethod[]
+     */
+    public function getShippingMethods(): array
+    {
+        return $this->shippingMethods;
+    }
+
+    /**
      * @param ShippingMethod ...$shippingMethods
+     *
      * @return GlobalData
      */
     public function setShippingMethods(ShippingMethod ...$shippingMethods): GlobalData
@@ -503,14 +531,6 @@ class GlobalData extends AbstractModel
         $this->shippingMethods = $shippingMethods;
 
         return $this;
-    }
-
-    /**
-     * @return ShippingMethod[]
-     */
-    public function getShippingMethods(): array
-    {
-        return $this->shippingMethods;
     }
 
     /**
@@ -525,6 +545,7 @@ class GlobalData extends AbstractModel
 
     /**
      * @param TaxRate $taxRate
+     *
      * @return GlobalData
      */
     public function addTaxRate(TaxRate $taxRate): GlobalData
@@ -535,7 +556,16 @@ class GlobalData extends AbstractModel
     }
 
     /**
+     * @return TaxRate[]
+     */
+    public function getTaxRates(): array
+    {
+        return $this->taxRates;
+    }
+
+    /**
      * @param TaxRate ...$taxRates
+     *
      * @return GlobalData
      */
     public function setTaxRates(TaxRate ...$taxRates): GlobalData
@@ -543,14 +573,6 @@ class GlobalData extends AbstractModel
         $this->taxRates = $taxRates;
 
         return $this;
-    }
-
-    /**
-     * @return TaxRate[]
-     */
-    public function getTaxRates(): array
-    {
-        return $this->taxRates;
     }
 
     /**
@@ -565,6 +587,7 @@ class GlobalData extends AbstractModel
 
     /**
      * @param Unit $unit
+     *
      * @return GlobalData
      */
     public function addUnit(Unit $unit): GlobalData
@@ -575,7 +598,16 @@ class GlobalData extends AbstractModel
     }
 
     /**
+     * @return Unit[]
+     */
+    public function getUnits(): array
+    {
+        return $this->units;
+    }
+
+    /**
      * @param Unit ...$units
+     *
      * @return GlobalData
      */
     public function setUnits(Unit ...$units): GlobalData
@@ -583,14 +615,6 @@ class GlobalData extends AbstractModel
         $this->units = $units;
 
         return $this;
-    }
-
-    /**
-     * @return Unit[]
-     */
-    public function getUnits(): array
-    {
-        return $this->units;
     }
 
     /**
@@ -605,6 +629,7 @@ class GlobalData extends AbstractModel
 
     /**
      * @param Warehouse $warehouse
+     *
      * @return GlobalData
      */
     public function addWarehouse(Warehouse $warehouse): GlobalData
@@ -615,7 +640,16 @@ class GlobalData extends AbstractModel
     }
 
     /**
+     * @return Warehouse[]
+     */
+    public function getWarehouses(): array
+    {
+        return $this->warehouses;
+    }
+
+    /**
      * @param Warehouse ...$warehouses
+     *
      * @return GlobalData
      */
     public function setWarehouses(Warehouse ...$warehouses): GlobalData
@@ -623,14 +657,6 @@ class GlobalData extends AbstractModel
         $this->warehouses = $warehouses;
 
         return $this;
-    }
-
-    /**
-     * @return Warehouse[]
-     */
-    public function getWarehouses(): array
-    {
-        return $this->warehouses;
     }
 
     /**

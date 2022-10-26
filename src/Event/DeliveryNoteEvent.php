@@ -14,6 +14,7 @@ class DeliveryNoteEvent extends Event
 
     /**
      * DeliveryNoteEvent constructor.
+     *
      * @param DeliveryNote $deliveryNote
      */
     public function __construct(DeliveryNote $deliveryNote)

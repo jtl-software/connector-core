@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @author Immanuel Klinkenberg <immanuel.klinkenberg@jtl-software.com>
+ * @author    Immanuel Klinkenberg <immanuel.klinkenberg@jtl-software.com>
  * @copyright 2010-2018 JTL-Software GmbH
  */
 
@@ -39,7 +39,8 @@ class FeatureFlag
 
     /**
      * FeatureFlag constructor.
-     * @param string $name
+     *
+     * @param string  $name
      * @param boolean $active
      */
     public function __construct(string $name, bool $active = false)
@@ -58,6 +59,7 @@ class FeatureFlag
 
     /**
      * @param string $name
+     *
      * @return FeatureFlag
      */
     public function setName(string $name): FeatureFlag
@@ -76,6 +78,7 @@ class FeatureFlag
 
     /**
      * @param bool $active
+     *
      * @return FeatureFlag
      */
     public function setActive(bool $active): FeatureFlag

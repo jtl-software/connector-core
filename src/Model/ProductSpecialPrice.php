@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Special product price properties to specify date and stock limits.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -80,7 +80,16 @@ class ProductSpecialPrice extends AbstractIdentity
     protected $items = [];
 
     /**
+     * @return \DateTimeInterface Optional: Activate special price from date
+     */
+    public function getActiveFromDate(): ?\DateTimeInterface
+    {
+        return $this->activeFromDate;
+    }
+
+    /**
      * @param \DateTimeInterface|null $activeFromDate Optional: Activate special price from date
+     *
      * @return ProductSpecialPrice
      */
     public function setActiveFromDate(?\DateTimeInterface $activeFromDate = null): ProductSpecialPrice
@@ -91,15 +100,16 @@ class ProductSpecialPrice extends AbstractIdentity
     }
 
     /**
-     * @return \DateTimeInterface Optional: Activate special price from date
+     * @return \DateTimeInterface Optional: Special price active until date
      */
-    public function getActiveFromDate(): ?\DateTimeInterface
+    public function getActiveUntilDate(): ?\DateTimeInterface
     {
-        return $this->activeFromDate;
+        return $this->activeUntilDate;
     }
 
     /**
      * @param \DateTimeInterface|null $activeUntilDate Optional: Special price active until date
+     *
      * @return ProductSpecialPrice
      */
     public function setActiveUntilDate(?\DateTimeInterface $activeUntilDate = null): ProductSpecialPrice
@@ -110,11 +120,12 @@ class ProductSpecialPrice extends AbstractIdentity
     }
 
     /**
-     * @return \DateTimeInterface Optional: Special price active until date
+     * @return boolean Optional: Consider activeFrom/activeUntil date range.
+     *                  If true, specialPrice will get active from activeFrom-date and will stop after activeUntil-date.
      */
-    public function getActiveUntilDate(): ?\DateTimeInterface
+    public function getConsiderDateLimit(): bool
     {
-        return $this->activeUntilDate;
+        return $this->considerDateLimit;
     }
 
     /**
@@ -132,12 +143,13 @@ class ProductSpecialPrice extends AbstractIdentity
     }
 
     /**
-     * @return boolean Optional: Consider activeFrom/activeUntil date range.
-     *                  If true, specialPrice will get active from activeFrom-date and will stop after activeUntil-date.
+     * @return boolean Optional: Consider stockLimit value.
+     *                  If true, specialPrice will be only active until product
+     *                  stockLevel is greater or equal stockLimit.
      */
-    public function getConsiderDateLimit(): bool
+    public function getConsiderStockLimit(): bool
     {
-        return $this->considerDateLimit;
+        return $this->considerStockLimit;
     }
 
     /**
@@ -155,29 +167,6 @@ class ProductSpecialPrice extends AbstractIdentity
     }
 
     /**
-     * @return boolean Optional: Consider stockLimit value.
-     *                  If true, specialPrice will be only active until product
-     *                  stockLevel is greater or equal stockLimit.
-     */
-    public function getConsiderStockLimit(): bool
-    {
-        return $this->considerStockLimit;
-    }
-
-    /**
-     * @param boolean $isActive Special price is active? Default true, to activate specialPrice.
-*                                  Special price can still be inactivated, if date or stock Limitations do not match.
-     *
-     * @return ProductSpecialPrice
-     */
-    public function setIsActive(bool $isActive): ProductSpecialPrice
-    {
-        $this->isActive = $isActive;
-
-        return $this;
-    }
-
-    /**
      * @return boolean Special price is active? Default true, to activate specialPrice.
      *                  Special price can still be inactivated, if date or stock Limitations do not match.
      */
@@ -187,12 +176,15 @@ class ProductSpecialPrice extends AbstractIdentity
     }
 
     /**
-     * @param integer $stockLimit Optional: SpecialPrice active until stock level quantity
+     * @param boolean $isActive         Special price is active? Default true, to activate specialPrice.
+     *                                  Special price can still be inactivated, if date or stock Limitations do not
+     *                                  match.
+     *
      * @return ProductSpecialPrice
      */
-    public function setStockLimit(int $stockLimit): ProductSpecialPrice
+    public function setIsActive(bool $isActive): ProductSpecialPrice
     {
-        $this->stockLimit = $stockLimit;
+        $this->isActive = $isActive;
 
         return $this;
     }
@@ -206,7 +198,20 @@ class ProductSpecialPrice extends AbstractIdentity
     }
 
     /**
+     * @param integer $stockLimit Optional: SpecialPrice active until stock level quantity
+     *
+     * @return ProductSpecialPrice
+     */
+    public function setStockLimit(int $stockLimit): ProductSpecialPrice
+    {
+        $this->stockLimit = $stockLimit;
+
+        return $this;
+    }
+
+    /**
      * @param ProductSpecialPriceItem $item
+     *
      * @return ProductSpecialPrice
      */
     public function addItem(ProductSpecialPriceItem $item): ProductSpecialPrice
@@ -217,7 +222,16 @@ class ProductSpecialPrice extends AbstractIdentity
     }
 
     /**
+     * @return ProductSpecialPriceItem[]
+     */
+    public function getItems(): array
+    {
+        return $this->items;
+    }
+
+    /**
      * @param ProductSpecialPriceItem ...$items
+     *
      * @return ProductSpecialPrice
      */
     public function setItems(ProductSpecialPriceItem ...$items): ProductSpecialPrice
@@ -225,14 +239,6 @@ class ProductSpecialPrice extends AbstractIdentity
         $this->items = $items;
 
         return $this;
-    }
-
-    /**
-     * @return ProductSpecialPriceItem[]
-     */
-    public function getItems(): array
-    {
-        return $this->items;
     }
 
     /**

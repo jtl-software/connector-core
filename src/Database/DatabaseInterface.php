@@ -3,7 +3,7 @@
 /**
  *
  * @copyright 2010-2012 JTL-Software GmbH
- * @package Jtl\Connector\Core\Database
+ * @package   Jtl\Connector\Core\Database
  */
 
 namespace Jtl\Connector\Core\Database;

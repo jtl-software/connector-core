@@ -2,7 +2,7 @@
 
 /**
  * @copyright JTL-Software GmbH
- * @package Jtl\Connector\Core\Serializer
+ * @package   Jtl\Connector\Core\Serializer
  */
 
 namespace Jtl\Connector\Core\Serializer;

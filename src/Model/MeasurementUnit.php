@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Specifies product units like "ml", "l", " cm".
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -45,17 +45,6 @@ class MeasurementUnit extends AbstractIdentity
     protected $i18ns = [];
 
     /**
-     * @param string $code Optional UCUM-Code, see  http://unitsofmeasure.org/
-     * @return MeasurementUnit
-     */
-    public function setCode(string $code): MeasurementUnit
-    {
-        $this->code = $code;
-
-        return $this;
-    }
-
-    /**
      * @return string Optional UCUM-Code, see  http://unitsofmeasure.org/
      */
     public function getCode(): string
@@ -64,12 +53,13 @@ class MeasurementUnit extends AbstractIdentity
     }
 
     /**
-     * @param string $displayCode Synonym e.g. 'ml'
+     * @param string $code Optional UCUM-Code, see  http://unitsofmeasure.org/
+     *
      * @return MeasurementUnit
      */
-    public function setDisplayCode(string $displayCode): MeasurementUnit
+    public function setCode(string $code): MeasurementUnit
     {
-        $this->displayCode = $displayCode;
+        $this->code = $code;
 
         return $this;
     }
@@ -83,7 +73,20 @@ class MeasurementUnit extends AbstractIdentity
     }
 
     /**
+     * @param string $displayCode Synonym e.g. 'ml'
+     *
+     * @return MeasurementUnit
+     */
+    public function setDisplayCode(string $displayCode): MeasurementUnit
+    {
+        $this->displayCode = $displayCode;
+
+        return $this;
+    }
+
+    /**
      * @param MeasurementUnitI18n $i18n
+     *
      * @return MeasurementUnit
      */
     public function addI18n(MeasurementUnitI18n $i18n): MeasurementUnit
@@ -94,7 +97,16 @@ class MeasurementUnit extends AbstractIdentity
     }
 
     /**
+     * @return MeasurementUnitI18n[]
+     */
+    public function getI18ns(): array
+    {
+        return $this->i18ns;
+    }
+
+    /**
      * @param MeasurementUnitI18n ...$i18ns
+     *
      * @return MeasurementUnit
      */
     public function setI18ns(MeasurementUnitI18n ...$i18ns): MeasurementUnit
@@ -102,14 +114,6 @@ class MeasurementUnit extends AbstractIdentity
         $this->i18ns = $i18ns;
 
         return $this;
-    }
-
-    /**
-     * @return MeasurementUnitI18n[]
-     */
-    public function getI18ns(): array
-    {
-        return $this->i18ns;
     }
 
     /**

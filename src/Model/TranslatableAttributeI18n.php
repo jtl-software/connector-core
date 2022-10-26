@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -12,13 +12,18 @@ use JMS\Serializer\Annotation as Serializer;
 use Jtl\Connector\Core\Exception\TranslatableAttributeException;
 
 /**
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
 class TranslatableAttributeI18n extends AbstractI18n
 {
+    /**
+     * @var bool
+     * @Serializer\Exclude
+     */
+    protected static $strictMode = false;
     /**
      * @var string
      * @Serializer\Type("string")
@@ -26,7 +31,6 @@ class TranslatableAttributeI18n extends AbstractI18n
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
     protected $name = '';
-
     /**
      * @var string
      * @Serializer\Type("string")
@@ -36,20 +40,19 @@ class TranslatableAttributeI18n extends AbstractI18n
     protected $value = '';
 
     /**
-     * @var bool
-     * @Serializer\Exclude
+     * @return bool
      */
-    protected static $strictMode = false;
+    public static function isStrictMode(): bool
+    {
+        return self::$strictMode;
+    }
 
     /**
-     * @param string $name
-     * @return TranslatableAttributeI18n
+     * @param bool $strictMode
      */
-    public function setName(string $name): self
+    public static function setStrictMode(bool $strictMode): void
     {
-        $this->name = $name;
-
-        return $this;
+        self::$strictMode = $strictMode;
     }
 
     /**
@@ -61,38 +64,20 @@ class TranslatableAttributeI18n extends AbstractI18n
     }
 
     /**
-     * @param mixed $value
+     * @param string $name
+     *
      * @return TranslatableAttributeI18n
-     * @throws TranslatableAttributeException
      */
-    public function setValue($value): self
+    public function setName(string $name): self
     {
-        $type = \gettype($value);
-
-        if (!\in_array($type, ['array', 'object', 'boolean', 'integer', 'double', 'string'], true)) {
-            throw TranslatableAttributeException::valueTypeInvalid($this->name, $type);
-        }
-
-        switch ($type) {
-            case 'boolean':
-                $this->value = $value === true ? '1' : '0';
-                break;
-
-            case 'array':
-            case 'object':
-                $this->value = \json_encode($value);
-                break;
-
-            default:
-                $this->value = (string)$value;
-                break;
-        }
+        $this->name = $name;
 
         return $this;
     }
 
     /**
      * @param string $castToType
+     *
      * @return bool|float|int|string
      * @throws TranslatableAttributeException
      */
@@ -124,18 +109,34 @@ class TranslatableAttributeI18n extends AbstractI18n
     }
 
     /**
-     * @return bool
+     * @param mixed $value
+     *
+     * @return TranslatableAttributeI18n
+     * @throws TranslatableAttributeException
      */
-    public static function isStrictMode(): bool
+    public function setValue($value): self
     {
-        return self::$strictMode;
-    }
+        $type = \gettype($value);
 
-    /**
-     * @param bool $strictMode
-     */
-    public static function setStrictMode(bool $strictMode): void
-    {
-        self::$strictMode = $strictMode;
+        if (!\in_array($type, ['array', 'object', 'boolean', 'integer', 'double', 'string'], true)) {
+            throw TranslatableAttributeException::valueTypeInvalid($this->name, $type);
+        }
+
+        switch ($type) {
+            case 'boolean':
+                $this->value = $value === true ? '1' : '0';
+                break;
+
+            case 'array':
+            case 'object':
+                $this->value = \json_encode($value);
+                break;
+
+            default:
+                $this->value = (string)$value;
+                break;
+        }
+
+        return $this;
     }
 }

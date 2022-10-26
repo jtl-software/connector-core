@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Product price item properties.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -39,7 +39,16 @@ class ProductPriceItem extends AbstractModel
     protected $quantity = 0;
 
     /**
+     * @return double Price value (net)
+     */
+    public function getNetPrice(): float
+    {
+        return $this->netPrice;
+    }
+
+    /**
      * @param double $netPrice Price value (net)
+     *
      * @return ProductPriceItem
      */
     public function setNetPrice(float $netPrice): ProductPriceItem
@@ -50,11 +59,13 @@ class ProductPriceItem extends AbstractModel
     }
 
     /**
-     * @return double Price value (net)
+     * @return float Optional quantity to apply netPrice for.
+     *                  Default 1 for default price. A quantity value of 3 means that the given product price
+     *                  will be applied when a customer buys 3 or more items.
      */
-    public function getNetPrice(): float
+    public function getQuantity(): float
     {
-        return $this->netPrice;
+        return $this->quantity;
     }
 
     /**
@@ -70,15 +81,5 @@ class ProductPriceItem extends AbstractModel
         $this->quantity = $quantity;
 
         return $this;
-    }
-
-    /**
-     * @return float Optional quantity to apply netPrice for.
-     *                  Default 1 for default price. A quantity value of 3 means that the given product price
-     *                  will be applied when a customer buys 3 or more items.
-     */
-    public function getQuantity(): float
-    {
-        return $this->quantity;
     }
 }

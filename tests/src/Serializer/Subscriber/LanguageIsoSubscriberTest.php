@@ -33,6 +33,7 @@ class LanguageIsoSubscriberTest extends TestCase
 
     /**
      * @dataProvider i18NDataProvider
+     *
      * @param $model
      */
     public function testOnPostSerializeWithInvalidValue(string $model)
@@ -49,13 +50,24 @@ class LanguageIsoSubscriberTest extends TestCase
     }
 
     /**
-     * @dataProvider i18NDataProvider
-     * @param $model
+     * @param AbstractI18n $i18nModel
+     *
+     * @return string
      */
-    public function testOnPostSerializeWithEmptyValue(string $model)
+    protected function serializeModel(AbstractI18n $i18nModel): string
+    {
+        return SerializerBuilder::create()->build()->serialize($i18nModel, 'json');
+    }
+
+    /**
+     * @dataProvider i18NDataProvider
+     *
+     * @param string $model
+     */
+    public function testOnPostSerializeWithEmptyValue(string $model): void
     {
         $i18nModel = new $model();
-        $i18nModel->setLanguageIso("");
+        $i18nModel->setLanguageIso('');
 
         $serializedData = $this->serializeModel($i18nModel);
 
@@ -67,16 +79,19 @@ class LanguageIsoSubscriberTest extends TestCase
 
     /**
      * @dataProvider i18NDataProvider
-     * @param $model
+     *
+     * @param string $model
+     *
+     * @throws \JsonException
      */
-    public function testOnPostSerializeWithValidValue(string $model)
+    public function testOnPostSerializeWithValidValue(string $model): void
     {
         $i18nModel = new $model();
         $i18nModel->setLanguageIso('de');
 
         $serializedData = $this->serializeModel($i18nModel);
 
-        $jsonObj = \json_decode($serializedData);
+        $jsonObj = \json_decode($serializedData, false, 512, \JSON_THROW_ON_ERROR);
 
         $this->assertObjectHasAttribute('languageISO', $jsonObj);
         $this->assertEquals('ger', $jsonObj->languageISO);
@@ -84,15 +99,18 @@ class LanguageIsoSubscriberTest extends TestCase
 
     /**
      * @dataProvider i18NDataProvider
+     *
      * @param string $model
+     *
+     * @throws \JsonException
      */
-    public function testOnPostSerializeWithNoValue(string $model)
+    public function testOnPostSerializeWithNoValue(string $model): void
     {
         $i18nModel = new $model();
 
         $serializedData = $this->serializeModel($i18nModel);
 
-        $jsonObj = \json_decode($serializedData);
+        $jsonObj = \json_decode($serializedData, false, 512, \JSON_THROW_ON_ERROR);
 
         $this->assertObjectHasAttribute('languageISO', $jsonObj);
         $this->assertEquals('', $jsonObj->languageISO);
@@ -100,9 +118,10 @@ class LanguageIsoSubscriberTest extends TestCase
 
     /**
      * @dataProvider i18NDataProvider
-     * @param $model
+     *
+     * @param string $model
      */
-    public function testOnPreDeserializeWithValidValue(string $model)
+    public function testOnPreDeserializeWithValidValue(string $model): void
     {
         $i18nModel = new $model();
         $i18nModel->setLanguageIso('de');
@@ -115,10 +134,22 @@ class LanguageIsoSubscriberTest extends TestCase
     }
 
     /**
-     * @dataProvider i18NDataProvider
-     * @param $model
+     * @param AbstractI18n $i18nModel
+     *
+     * @return mixed
      */
-    public function testOnPreDeserializeWithInValidValue(string $model)
+    protected function serializeAndDeserializeModel(AbstractI18n $i18nModel)
+    {
+        $serializer = SerializerBuilder::create()->build();
+        return $serializer->deserialize($serializer->serialize($i18nModel, 'json'), ProductI18n::class, 'json');
+    }
+
+    /**
+     * @dataProvider i18NDataProvider
+     *
+     * @param string $model
+     */
+    public function testOnPreDeserializeWithInValidValue(string $model): void
     {
         $value = '_____';
 
@@ -130,25 +161,5 @@ class LanguageIsoSubscriberTest extends TestCase
 
         $this->assertObjectHasAttribute('languageIso', $deserializeData);
         $this->assertSame($deserializeData->getLanguageIso(), $value);
-    }
-
-    /**
-     * @param AbstractI18n $i18nModel
-     * @return mixed
-     */
-    protected function serializeAndDeserializeModel(AbstractI18n $i18nModel)
-    {
-        $serializer = SerializerBuilder::create()->build();
-        return $serializer->deserialize($serializer->serialize($i18nModel, 'json'), ProductI18n::class, 'json');
-    }
-
-    /**
-     * @param AbstractI18n $i18nModel
-     * @return string
-     */
-    protected function serializeModel(AbstractI18n $i18nModel): string
-    {
-        $serializer = SerializerBuilder::create()->build();
-        return $serializer->serialize($i18nModel, 'json');
     }
 }

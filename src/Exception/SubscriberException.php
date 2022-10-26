@@ -13,16 +13,20 @@ class SubscriberException extends \Exception
     /**
      * @param string $expectedModelClass
      * @param string $givenModelClass
+     *
      * @return SubscriberException
      */
     public static function invalidModelTypeInArray(
         string $expectedModelClass,
         string $givenModelClass
     ): SubscriberException {
-        return new self(\sprintf(
-            "Invalid model type in array. Expected %s object but %s given",
-            $expectedModelClass,
-            $givenModelClass
-        ), self::INVALID_MODEL_TYPE);
+        return new self(
+            \sprintf(
+                'Invalid model type in array. Expected %s object but %s given',
+                $expectedModelClass,
+                $givenModelClass
+            ),
+            self::INVALID_MODEL_TYPE
+        );
     }
 }

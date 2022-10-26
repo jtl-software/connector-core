@@ -61,9 +61,10 @@ class ModelTest extends TestCase
     /**
      * @dataProvider getModelByTypeProvider
      *
-     * @param int $identityType
-     * @param $expectedResult
+     * @param int  $identityType
+     * @param      $expectedResult
      * @param bool $shouldThrowException
+     *
      * @throws DefinitionException
      * @throws \ReflectionException
      */
@@ -86,24 +87,10 @@ class ModelTest extends TestCase
     public function getModelByTypeProvider(): array
     {
         return [
-            [
-                IdentityType::CATEGORY,
-                Model::CATEGORY,
-            ],
-            [
-                0,
-                DefinitionException::unknownIdentityType(0),
-                true,
-            ],
-            [
-                -999999999999999999,
-                DefinitionException::unknownIdentityType(-999999999999999999),
-                true,
-            ],
-            [
-                IdentityType::SPECIFIC_VALUE_IMAGE,
-                Model::SPECIFIC_VALUE_IMAGE,
-            ],
+            [IdentityType::CATEGORY, Model::CATEGORY],
+            [0, DefinitionException::unknownIdentityType(0), true],
+            [-999999999999999999, DefinitionException::unknownIdentityType(-999999999999999999), true],
+            [IdentityType::SPECIFIC_VALUE_IMAGE, Model::SPECIFIC_VALUE_IMAGE]
         ];
     }
 
@@ -113,7 +100,7 @@ class ModelTest extends TestCase
      */
     public function testGetIdentityTypeModelIsInvalid()
     {
-        $modelName = "InvalidModelName";
+        $modelName = 'InvalidModelName';
 
         $this->expectExceptionObject(DefinitionException::unknownModel($modelName));
 
@@ -125,12 +112,12 @@ class ModelTest extends TestCase
      *
      * @param string $modelName
      * @param string $propertyName
-     * @param bool $expectedResult
+     * @param bool   $expectedResult
      */
     public function testIsIdentityPropertyInvalidPropertyName(
         string $modelName,
         string $propertyName,
-        bool $expectedResult
+        bool   $expectedResult
     ) {
         $result = Model::isIdentityProperty($modelName, $propertyName);
         $this->assertSame($expectedResult, $result);
@@ -142,41 +129,13 @@ class ModelTest extends TestCase
     public function isIdentityPropertyProvider(): array
     {
         return [
-            [
-                Model::SHIPMENT,
-                'id',
-                false,
-            ],
-            [
-                Model::PRODUCT,
-                'id',
-                true,
-            ],
-            [
-                Model::PRODUCT,
-                'id ',
-                false,
-            ],
-            [
-                Model::PRODUCT,
-                ' ',
-                false,
-            ],
-            [
-                Model::PRODUCT,
-                'ID',
-                false,
-            ],
-            [
-                Model::CATEGORY,
-                'ID',
-                false,
-            ],
-            [
-                Model::CATEGORY,
-                'id',
-                true,
-            ],
+            [Model::SHIPMENT, 'id', false],
+            [Model::PRODUCT, 'id', true],
+            [Model::PRODUCT, 'id ', false],
+            [Model::PRODUCT, ' ', false],
+            [Model::PRODUCT, 'ID', false],
+            [Model::CATEGORY, 'ID', false],
+            [Model::CATEGORY, 'id', true]
         ];
     }
 
@@ -184,7 +143,7 @@ class ModelTest extends TestCase
      * @dataProvider modelNameProvider
      *
      * @param string $modelName
-     * @param bool $expectedResult
+     * @param bool   $expectedResult
      */
     public function testIsModel(string $modelName, bool $expectedResult)
     {
@@ -195,7 +154,8 @@ class ModelTest extends TestCase
      * @dataProvider modelNameProvider
      *
      * @param string $modelName
-     * @param bool $isModelName
+     * @param bool   $isModelName
+     *
      * @throws DefinitionException
      */
     public function testGetRelationType(string $modelName, bool $isModelName)
@@ -213,46 +173,16 @@ class ModelTest extends TestCase
     public function modelNameProvider(): array
     {
         return [
-            [
-                Model::PRODUCT,
-                true,
-            ],
-            [
-                Model::CATEGORY,
-                true,
-            ],
-            [
-                Model::PRODUCT_TO_CATEGORY,
-                true,
-            ],
-            [
-                Model::UNIT,
-                true,
-            ],
-            [
-                Model::MANUFACTURER,
-                true,
-            ],
-            [
-                Model::MANUFACTURER_IMAGE,
-                true,
-            ],
-            [
-                'Product2Categoryy',
-                false,
-            ],
-            [
-                ' Product2Category',
-                false,
-            ],
-            [
-                'PRODUCT2CATEGORY',
-                false,
-            ],
-            [
-                Model::SHIPMENT,
-                true,
-            ],
+            [Model::PRODUCT, true],
+            [Model::CATEGORY, true],
+            [Model::PRODUCT_TO_CATEGORY, true],
+            [Model::UNIT, true],
+            [Model::MANUFACTURER, true],
+            [Model::MANUFACTURER_IMAGE, true],
+            ['Product2Categoryy', false],
+            [' Product2Category', false],
+            ['PRODUCT2CATEGORY', false],
+            [Model::SHIPMENT, true]
         ];
     }
 }

@@ -2,13 +2,13 @@
 
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Linker
+ * @package   Jtl\Connector\Core\Linker
  */
 
 namespace Jtl\Connector\Core\Linker;
 
-use Jtl\Connector\Core\Checksum\ChecksumLoaderInterface;
 use Jtl\Connector\Core\Checksum\ChecksumInterface;
+use Jtl\Connector\Core\Checksum\ChecksumLoaderInterface;
 use Jtl\Connector\Core\Model\AbstractModel;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
@@ -21,6 +21,7 @@ class ChecksumLinker implements LoggerAwareInterface
 
     /**
      * ChecksumLinker constructor.
+     *
      * @param ChecksumLoaderInterface|null $loader
      */
     public function __construct(?ChecksumLoaderInterface $loader = null)
@@ -31,7 +32,74 @@ class ChecksumLinker implements LoggerAwareInterface
 
     /**
      * @param AbstractModel $model
-     * @param int $type
+     * @param int           $type
+     *
+     * @return ChecksumInterface|null
+     */
+    public static function find(AbstractModel $model, $type): ?ChecksumInterface
+    {
+        if (\method_exists($model, 'getChecksums')) {
+            foreach ($model->getChecksums() as $checksum) {
+                if ($checksum instanceof ChecksumInterface && $checksum->getType() == $type) {
+                    return $checksum;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param AbstractModel $model
+     * @param string        $endpoint
+     * @param int           $type
+     *
+     * @return ChecksumInterface|null
+     */
+    public static function findByEndpoint(AbstractModel $model, $endpoint, $type): ?ChecksumInterface
+    {
+        if (\method_exists($model, 'getChecksums')) {
+            foreach ($model->getChecksums() as $checksum) {
+                if (
+                    $checksum instanceof ChecksumInterface
+                    && $checksum->getType() == $type
+                    && $checksum->getForeignKey()->getEndpoint() === $endpoint
+                ) {
+                    return $checksum;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param AbstractModel $model
+     * @param int           $host
+     * @param int           $type
+     *
+     * @return ChecksumInterface|null
+     */
+    public static function findByHost(AbstractModel $model, $host, $type): ?ChecksumInterface
+    {
+        if (\method_exists($model, 'getChecksums')) {
+            foreach ($model->getChecksums() as $checksum) {
+                if (
+                    $checksum instanceof ChecksumInterface
+                    && $checksum->getType() == $type
+                    && $checksum->getForeignKey()->getHost() == $host
+                ) {
+                    return $checksum;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param AbstractModel $model
+     * @param int           $type
      */
     public function link(AbstractModel $model, $type = null): void
     {
@@ -89,6 +157,7 @@ class ChecksumLinker implements LoggerAwareInterface
 
     /**
      * @param ChecksumInterface $checksum
+     *
      * @return boolean
      */
     public function save(ChecksumInterface $checksum): bool
@@ -114,69 +183,5 @@ class ChecksumLinker implements LoggerAwareInterface
     public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
-    }
-
-    /**
-     * @param AbstractModel $model
-     * @param int $type
-     * @return ChecksumInterface|null
-     */
-    public static function find(AbstractModel $model, $type): ?ChecksumInterface
-    {
-        if (\method_exists($model, 'getChecksums')) {
-            foreach ($model->getChecksums() as $checksum) {
-                if ($checksum instanceof ChecksumInterface && $checksum->getType() == $type) {
-                    return $checksum;
-                }
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * @param AbstractModel $model
-     * @param string $endpoint
-     * @param int $type
-     * @return ChecksumInterface|null
-     */
-    public static function findByEndpoint(AbstractModel $model, $endpoint, $type): ?ChecksumInterface
-    {
-        if (\method_exists($model, 'getChecksums')) {
-            foreach ($model->getChecksums() as $checksum) {
-                if (
-                    $checksum instanceof ChecksumInterface
-                    && $checksum->getType() == $type
-                    && $checksum->getForeignKey()->getEndpoint() === $endpoint
-                ) {
-                    return $checksum;
-                }
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * @param AbstractModel $model
-     * @param int $host
-     * @param int $type
-     * @return ChecksumInterface|null
-     */
-    public static function findByHost(AbstractModel $model, $host, $type): ?ChecksumInterface
-    {
-        if (\method_exists($model, 'getChecksums')) {
-            foreach ($model->getChecksums() as $checksum) {
-                if (
-                    $checksum instanceof ChecksumInterface
-                    && $checksum->getType() == $type
-                    && $checksum->getForeignKey()->getHost() == $host
-                ) {
-                    return $checksum;
-                }
-            }
-        }
-
-        return null;
     }
 }

@@ -10,8 +10,9 @@ class ControllerTest extends TestCase
     /**
      * @dataProvider isTypeDataProvider
      *
-     * @param $controllerName
+     * @param      $controllerName
      * @param bool $shouldBeController
+     *
      * @throws \ReflectionException
      */
     public function testIsType($controllerName, bool $shouldBeController)
@@ -31,14 +32,8 @@ class ControllerTest extends TestCase
             false,
             false,
         ];
-        $testCases[] = [
-            '',
-            false,
-        ];
-        $testCases[] = [
-            'statuschange',
-            false,
-        ];
+        $testCases[] = ['', false,];
+        $testCases[] = ['statuschange', false,];
 
         return $testCases;
     }

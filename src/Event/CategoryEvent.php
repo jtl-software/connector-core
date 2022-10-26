@@ -14,6 +14,7 @@ class CategoryEvent extends Event
 
     /**
      * CategoryEvent constructor.
+     *
      * @param Category $category
      */
     public function __construct(Category $category)

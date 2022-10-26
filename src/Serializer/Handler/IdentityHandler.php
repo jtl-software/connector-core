@@ -5,12 +5,11 @@ namespace Jtl\Connector\Core\Serializer\Handler;
 use JMS\Serializer\Context;
 use JMS\Serializer\GraphNavigatorInterface;
 use JMS\Serializer\Handler\SubscribingHandlerInterface;
-use JMS\Serializer\JsonSerializationVisitor;
 use JMS\Serializer\JsonDeserializationVisitor;
+use JMS\Serializer\JsonSerializationVisitor;
 use Jtl\Connector\Core\Definition\Model;
-use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Exception\DefinitionException;
-use ReflectionException;
+use Jtl\Connector\Core\Model\Identity;
 
 class IdentityHandler implements SubscribingHandlerInterface
 {
@@ -42,17 +41,18 @@ class IdentityHandler implements SubscribingHandlerInterface
 
     /**
      * @param JsonDeserializationVisitor $visitor
-     * @param array $identity
-     * @param array $type
-     * @param Context $context
+     * @param array                      $identity
+     * @param array                      $type
+     * @param Context                    $context
+     *
      * @return Identity
      * @throws DefinitionException
      */
     public function deserializeIdentity(
         JsonDeserializationVisitor $visitor,
-        array $identity,
-        array $type,
-        Context $context
+        array                      $identity,
+        array                      $type,
+        Context                    $context
     ) {
         $identityObject = new Identity($identity[0], $identity[1]);
         $currentObject  = $visitor->getCurrentObject();
@@ -75,16 +75,17 @@ class IdentityHandler implements SubscribingHandlerInterface
 
     /**
      * @param JsonSerializationVisitor $visitor
-     * @param Identity $identity
-     * @param array $type
-     * @param Context $context
+     * @param Identity                 $identity
+     * @param array                    $type
+     * @param Context                  $context
+     *
      * @return array<int, string|int>
      */
     public function serializeIdentity(
         JsonSerializationVisitor $visitor,
-        Identity $identity,
-        array $type,
-        Context $context
+        Identity                 $identity,
+        array                    $type,
+        Context                  $context
     ) {
         return [
             $identity->getEndpoint(),

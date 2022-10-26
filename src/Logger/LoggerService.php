@@ -14,12 +14,12 @@ use Monolog\Processor\PsrLogMessageProcessor;
 class LoggerService
 {
     public const
-    CHANNEL_CHECKSUM = 'checksum',
-    CHANNEL_ERROR    = 'error',
-    CHANNEL_GLOBAL   = 'global',
-    CHANNEL_LINKER   = 'linker',
-    CHANNEL_RPC      = 'rpc',
-    CHANNEL_SESSION  = 'session';
+        CHANNEL_CHECKSUM = 'checksum',
+        CHANNEL_ERROR    = 'error',
+        CHANNEL_GLOBAL   = 'global',
+        CHANNEL_LINKER   = 'linker',
+        CHANNEL_RPC      = 'rpc',
+        CHANNEL_SESSION  = 'session';
 
     /** @var MonoLogger[] */
     protected array $channels = [];
@@ -28,16 +28,17 @@ class LoggerService
     protected array $processors = [];
 
     protected FormatterInterface $formatter;
-    protected string $logDir;
-    protected string $logLevel;
-    protected int $maxFiles = 7;
+    protected string             $logDir;
+    protected string             $logLevel;
+    protected int                $maxFiles = 7;
 
 
     /**
      * LoggerFactory constructor.
+     *
      * @param string $logDir
      * @param string $logLevel
-     * @param int $maxFiles
+     * @param int    $maxFiles
      */
     public function __construct(string $logDir, string $logLevel, int $maxFiles = 7)
     {
@@ -50,16 +51,28 @@ class LoggerService
     }
 
     /**
-     * @param string $channel
-     * @return boolean
+     * @param ProcessorInterface $processor
+     *
+     * @return LoggerService
      */
-    public function has(string $channel): bool
+    public function pushProcessor(ProcessorInterface $processor): self
     {
-        return isset($this->channels[\lcfirst($channel)]);
+        if (\in_array($processor, $this->processors, true)) {
+            return $this;
+        }
+
+        foreach ($this->channels as $channel) {
+            $channel->pushProcessor($processor);
+        }
+
+        $this->processors[] = $processor;
+
+        return $this;
     }
 
     /**
      * @param string $channel
+     *
      * @return MonoLogger
      */
     public function get(string $channel): MonoLogger
@@ -86,25 +99,18 @@ class LoggerService
     }
 
     /**
-     * @param string $format
-     * @param array $arguments
-     * @return LoggerService
-     * @throws \ReflectionException|LoggerException
+     * @param string $channel
+     *
+     * @return boolean
      */
-    public function setFormat(string $format, array $arguments = []): self
+    public function has(string $channel): bool
     {
-        $formatterClass = \sprintf('Monolog\Formatter\%sFormatter', \ucfirst($format));
-        if (!\class_exists($formatterClass)) {
-            throw LoggerException::formatterNotExists($formatterClass);
-        }
-        $formatter = (new \ReflectionClass($formatterClass))->newInstanceArgs($arguments);
-        $this->setFormatter($formatter);
-
-        return $this;
+        return isset($this->channels[\lcfirst($channel)]);
     }
 
     /**
      * @param FormatterInterface $formatter
+     *
      * @return LoggerService
      */
     public function setFormatter(FormatterInterface $formatter): self
@@ -122,20 +128,20 @@ class LoggerService
     }
 
     /**
-     * @param ProcessorInterface $processor
+     * @param string $format
+     * @param array  $arguments
+     *
      * @return LoggerService
+     * @throws \ReflectionException|LoggerException
      */
-    public function pushProcessor(ProcessorInterface $processor): self
+    public function setFormat(string $format, array $arguments = []): self
     {
-        if (\in_array($processor, $this->processors, true)) {
-            return $this;
+        $formatterClass = \sprintf('Monolog\Formatter\%sFormatter', \ucfirst($format));
+        if (!\class_exists($formatterClass)) {
+            throw LoggerException::formatterNotExists($formatterClass);
         }
-
-        foreach ($this->channels as $channel) {
-            $channel->pushProcessor($processor);
-        }
-
-        $this->processors[] = $processor;
+        $formatter = (new \ReflectionClass($formatterClass))->newInstanceArgs($arguments);
+        $this->setFormatter($formatter);
 
         return $this;
     }

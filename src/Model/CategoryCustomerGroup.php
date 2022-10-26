@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Link customergroup with category. Set optional discount on category for customergroup.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -45,7 +45,16 @@ class CategoryCustomerGroup extends AbstractModel
     }
 
     /**
+     * @return Identity Reference to customerGroup
+     */
+    public function getCustomerGroupId(): Identity
+    {
+        return $this->customerGroupId;
+    }
+
+    /**
      * @param Identity $customerGroupId Reference to customerGroup
+     *
      * @return CategoryCustomerGroup
      */
     public function setCustomerGroupId(Identity $customerGroupId): CategoryCustomerGroup
@@ -56,15 +65,16 @@ class CategoryCustomerGroup extends AbstractModel
     }
 
     /**
-     * @return Identity Reference to customerGroup
+     * @return double Optional discount on products in specified categoryId for  customerGroupId
      */
-    public function getCustomerGroupId(): Identity
+    public function getDiscount(): float
     {
-        return $this->customerGroupId;
+        return $this->discount;
     }
 
     /**
      * @param double $discount Optional discount on products in specified categoryId for  customerGroupId
+     *
      * @return CategoryCustomerGroup
      */
     public function setDiscount(float $discount): CategoryCustomerGroup
@@ -72,13 +82,5 @@ class CategoryCustomerGroup extends AbstractModel
         $this->discount = $discount;
 
         return $this;
-    }
-
-    /**
-     * @return double Optional discount on products in specified categoryId for  customerGroupId
-     */
-    public function getDiscount(): float
-    {
-        return $this->discount;
     }
 }

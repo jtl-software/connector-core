@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Currency model properties.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -89,6 +89,15 @@ class Currency extends AbstractIdentity
     protected $nameHtml = '';
 
     /**
+     * @return string Optional delimiter char for cent, default=",".
+     *                  Ignore this flag if you have the correct user locale preference.
+     */
+    public function getDelimiterCent(): string
+    {
+        return $this->delimiterCent;
+    }
+
+    /**
      * @param string $delimiterCent Optional delimiter char for cent, default=",".
      *                              Ignore this flag if you have the correct user locale preference.
      *
@@ -102,12 +111,12 @@ class Currency extends AbstractIdentity
     }
 
     /**
-     * @return string Optional delimiter char for cent, default=",".
+     * @return string Optional delimiter char for thousand. Default=".".
      *                  Ignore this flag if you have the correct user locale preference.
      */
-    public function getDelimiterCent(): string
+    public function getDelimiterThousand(): string
     {
-        return $this->delimiterCent;
+        return $this->delimiterThousand;
     }
 
     /**
@@ -124,16 +133,16 @@ class Currency extends AbstractIdentity
     }
 
     /**
-     * @return string Optional delimiter char for thousand. Default=".".
-     *                  Ignore this flag if you have the correct user locale preference.
+     * @return double Optional conversion factor to default currency. Default is 1 (equals default currency)
      */
-    public function getDelimiterThousand(): string
+    public function getFactor(): float
     {
-        return $this->delimiterThousand;
+        return $this->factor;
     }
 
     /**
      * @param double $factor Optional conversion factor to default currency. Default is 1 (equals default currency)
+     *
      * @return Currency
      */
     public function setFactor(float $factor): Currency
@@ -144,11 +153,12 @@ class Currency extends AbstractIdentity
     }
 
     /**
-     * @return double Optional conversion factor to default currency. Default is 1 (equals default currency)
+     * @return boolean Optional: Display currency before or after value.
+     *                  Ignore this flag if you have the correct user locale preference.
      */
-    public function getFactor(): float
+    public function getHasCurrencySignBeforeValue(): bool
     {
-        return $this->factor;
+        return $this->hasCurrencySignBeforeValue;
     }
 
     /**
@@ -165,12 +175,12 @@ class Currency extends AbstractIdentity
     }
 
     /**
-     * @return boolean Optional: Display currency before or after value.
-     *                  Ignore this flag if you have the correct user locale preference.
+     * @return boolean Optional: Flag default currency. True, if this is the default currency.
+     *                  Exact one currency must be marked as default.
      */
-    public function getHasCurrencySignBeforeValue(): bool
+    public function getIsDefault(): bool
     {
-        return $this->hasCurrencySignBeforeValue;
+        return $this->isDefault;
     }
 
     /**
@@ -187,26 +197,6 @@ class Currency extends AbstractIdentity
     }
 
     /**
-     * @return boolean Optional: Flag default currency. True, if this is the default currency.
-     *                  Exact one currency must be marked as default.
-     */
-    public function getIsDefault(): bool
-    {
-        return $this->isDefault;
-    }
-
-    /**
-     * @param string $iso
-     * @return Currency
-     */
-    public function setIso(string $iso): Currency
-    {
-        $this->iso = $iso;
-
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getIso(): string
@@ -215,12 +205,13 @@ class Currency extends AbstractIdentity
     }
 
     /**
-     * @param string $name Currency name
+     * @param string $iso
+     *
      * @return Currency
      */
-    public function setName(string $name): Currency
+    public function setIso(string $iso): Currency
     {
-        $this->name = $name;
+        $this->iso = $iso;
 
         return $this;
     }
@@ -234,12 +225,13 @@ class Currency extends AbstractIdentity
     }
 
     /**
-     * @param string $nameHtml Optional HTML name e.g. "&euro;"
+     * @param string $name Currency name
+     *
      * @return Currency
      */
-    public function setNameHtml(string $nameHtml): Currency
+    public function setName(string $name): Currency
     {
-        $this->nameHtml = $nameHtml;
+        $this->name = $name;
 
         return $this;
     }
@@ -250,5 +242,17 @@ class Currency extends AbstractIdentity
     public function getNameHtml(): string
     {
         return $this->nameHtml;
+    }
+
+    /**
+     * @param string $nameHtml Optional HTML name e.g. "&euro;"
+     *
+     * @return Currency
+     */
+    public function setNameHtml(string $nameHtml): Currency
+    {
+        $this->nameHtml = $nameHtml;
+
+        return $this;
     }
 }

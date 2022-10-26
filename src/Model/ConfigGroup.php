@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Config group holds several configItems and settings
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -77,17 +77,6 @@ class ConfigGroup extends AbstractIdentity
     protected $i18ns = [];
 
     /**
-     * @param string $comment Optional internal comment to differantiate config groups by comment name
-     * @return ConfigGroup
-     */
-    public function setComment(string $comment): ConfigGroup
-    {
-        $this->comment = $comment;
-
-        return $this;
-    }
-
-    /**
      * @return string Optional internal comment to differantiate config groups by comment name
      */
     public function getComment(): string
@@ -96,12 +85,13 @@ class ConfigGroup extends AbstractIdentity
     }
 
     /**
-     * @param string $imagePath
+     * @param string $comment Optional internal comment to differantiate config groups by comment name
+     *
      * @return ConfigGroup
      */
-    public function setImagePath(string $imagePath): ConfigGroup
+    public function setComment(string $comment): ConfigGroup
     {
-        $this->imagePath = $imagePath;
+        $this->comment = $comment;
 
         return $this;
     }
@@ -115,12 +105,13 @@ class ConfigGroup extends AbstractIdentity
     }
 
     /**
-     * @param integer $maximumSelection Optional maximum number allowed selections. Default 0 for no maximum limitation.
+     * @param string $imagePath
+     *
      * @return ConfigGroup
      */
-    public function setMaximumSelection(int $maximumSelection): ConfigGroup
+    public function setImagePath(string $imagePath): ConfigGroup
     {
-        $this->maximumSelection = $maximumSelection;
+        $this->imagePath = $imagePath;
 
         return $this;
     }
@@ -131,6 +122,26 @@ class ConfigGroup extends AbstractIdentity
     public function getMaximumSelection(): int
     {
         return $this->maximumSelection;
+    }
+
+    /**
+     * @param integer $maximumSelection Optional maximum number allowed selections. Default 0 for no maximum limitation.
+     *
+     * @return ConfigGroup
+     */
+    public function setMaximumSelection(int $maximumSelection): ConfigGroup
+    {
+        $this->maximumSelection = $maximumSelection;
+
+        return $this;
+    }
+
+    /**
+     * @return integer Optional minimum number required selections. Default 0 for no minimum requirement.
+     */
+    public function getMinimumSelection(): int
+    {
+        return $this->minimumSelection;
     }
 
     /**
@@ -147,25 +158,6 @@ class ConfigGroup extends AbstractIdentity
     }
 
     /**
-     * @return integer Optional minimum number required selections. Default 0 for no minimum requirement.
-     */
-    public function getMinimumSelection(): int
-    {
-        return $this->minimumSelection;
-    }
-
-    /**
-     * @param integer $sort Optional sort order number
-     * @return ConfigGroup
-     */
-    public function setSort(int $sort): ConfigGroup
-    {
-        $this->sort = $sort;
-
-        return $this;
-    }
-
-    /**
      * @return integer Optional sort order number
      */
     public function getSort(): int
@@ -174,12 +166,13 @@ class ConfigGroup extends AbstractIdentity
     }
 
     /**
-     * @param integer $type Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
+     * @param integer $sort Optional sort order number
+     *
      * @return ConfigGroup
      */
-    public function setType(int $type): ConfigGroup
+    public function setSort(int $sort): ConfigGroup
     {
-        $this->type = $type;
+        $this->sort = $sort;
 
         return $this;
     }
@@ -193,7 +186,20 @@ class ConfigGroup extends AbstractIdentity
     }
 
     /**
+     * @param integer $type Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
+     *
+     * @return ConfigGroup
+     */
+    public function setType(int $type): ConfigGroup
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
      * @param ConfigGroupI18n $i18n
+     *
      * @return ConfigGroup
      */
     public function addI18n(ConfigGroupI18n $i18n): ConfigGroup
@@ -204,7 +210,16 @@ class ConfigGroup extends AbstractIdentity
     }
 
     /**
+     * @return ConfigGroupI18n[]
+     */
+    public function getI18ns(): array
+    {
+        return $this->i18ns;
+    }
+
+    /**
      * @param ConfigGroupI18n ...$i18ns
+     *
      * @return ConfigGroup
      */
     public function setI18ns(ConfigGroupI18n ...$i18ns): ConfigGroup
@@ -212,14 +227,6 @@ class ConfigGroup extends AbstractIdentity
         $this->i18ns = $i18ns;
 
         return $this;
-    }
-
-    /**
-     * @return ConfigGroupI18n[]
-     */
-    public function getI18ns(): array
-    {
-        return $this->i18ns;
     }
 
     /**

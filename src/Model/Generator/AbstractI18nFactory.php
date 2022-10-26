@@ -9,6 +9,7 @@ abstract class AbstractI18nFactory extends AbstractModelFactory
 
     /**
      * @param array $override
+     *
      * @return array
      */
     public function makeOneArray(array $override = []): array
@@ -33,9 +34,18 @@ abstract class AbstractI18nFactory extends AbstractModelFactory
     }
 
     /**
-     * @param int $quantity
+     * @return void
+     */
+    public function clearUsedLanguages(): void
+    {
+        $this->usedLanguages = [];
+    }
+
+    /**
+     * @param int   $quantity
      * @param array $specificOverrides
      * @param array $globalOverrides
+     *
      * @return array
      */
     public function makeArray(int $quantity, array $specificOverrides = [], array $globalOverrides = []): array
@@ -46,13 +56,5 @@ abstract class AbstractI18nFactory extends AbstractModelFactory
         }
 
         return parent::makeArray($quantity, $specificOverrides, $globalOverrides);
-    }
-
-    /**
-     * @return void
-     */
-    public function clearUsedLanguages(): void
-    {
-        $this->usedLanguages = [];
     }
 }

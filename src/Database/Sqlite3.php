@@ -3,7 +3,7 @@
 /**
  *
  * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Database
+ * @package   Jtl\Connector\Core\Database
  */
 
 namespace Jtl\Connector\Core\Database;
@@ -27,39 +27,34 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
      * @var integer
      */
     public const SQLITE3_OPEN_SHAREDCACHE = 0x00020000;
-
-    /**
-     * Database connection state
-     *
-     * @var bool
-     */
-    protected $isConnected = false;
-
-    /**
-     * Sqlite 3 Database object
-     *
-     * @var \SQLite3
-     */
-    protected $db;
-
-    /**
-     * @var LoggerInterface
-     */
-    protected $logger;
-
     /**
      * Path to the SQLite database, or :memory: to use in-memory database.
      *
      * @var string
      */
     public $location;
-
     /**
      * Optional flags used to determine how to open the SQLite database.
      *
      * @var integer
      */
     public $mode;
+    /**
+     * Database connection state
+     *
+     * @var bool
+     */
+    protected $isConnected = false;
+    /**
+     * Sqlite 3 Database object
+     *
+     * @var \SQLite3
+     */
+    protected $db;
+    /**
+     * @var LoggerInterface
+     */
+    protected $logger;
 
     /**
      * (non-PHPdoc)
@@ -89,6 +84,26 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
             $this->isConnected = true;
         } catch (\Throwable $exc) {
             throw new DatabaseException($exc->getMessage() . ' "' . $this->location . '"');
+        }
+    }
+
+    /**
+     * Set Options
+     *
+     * @param array|null $options
+     */
+    public function setOptions(array $options = null)
+    {
+        if (\is_array($options)) {
+            // Location
+            if (isset($options['location']) && \is_string($options['location']) && \strlen($options['location']) > 0) {
+                $this->location = $options['location'];
+            }
+
+            // Mode
+            if (isset($options['mode']) && \is_int($options['mode'])) {
+                $this->mode = $options['mode'];
+            }
         }
     }
 
@@ -123,12 +138,12 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
         $command = \substr($query, 0, \strpos($query, ' '));
 
         switch (\strtoupper($command)) {
-            case "SELECT":
+            case 'SELECT':
                 return $this->fetch($query);
-            case "UPDATE":
-            case "DELETE":
+            case 'UPDATE':
+            case 'DELETE':
                 return $this->exec($query);
-            case "INSERT":
+            case 'INSERT':
                 return $this->insert($query);
         }
 
@@ -137,26 +152,7 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
 
     /**
      * @param string $query
-     * @return mixed
-     */
-    public function fetchSingle(string $query)
-    {
-        return $this->db->querySingle($query);
-    }
-
-    /**
-     * Prepares an SQL statement for execution
      *
-     * @param string $query
-     * @return \SQLite3Stmt|boolean Returns an SQLite3Stmt object on success or FALSE on failure.
-     */
-    public function prepare(string $query)
-    {
-        return $this->db->prepare($query);
-    }
-
-    /**
-     * @param string $query
      * @return array|null
      * @throws \Throwable
      */
@@ -191,9 +187,22 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
     }
 
     /**
+     * Executes a result-less query against a given database
+     *
+     * @param string $query
+     *
+     * @return bool
+     */
+    public function exec(string $query): bool
+    {
+        return $this->db->exec($query);
+    }
+
+    /**
      * Sqlite Insert
      *
      * @param string $query
+     *
      * @return boolean|int
      */
     public function insert(string $query)
@@ -206,14 +215,25 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
     }
 
     /**
-     * Executes a result-less query against a given database
+     * @param string $query
+     *
+     * @return mixed
+     */
+    public function fetchSingle(string $query)
+    {
+        return $this->db->querySingle($query);
+    }
+
+    /**
+     * Prepares an SQL statement for execution
      *
      * @param string $query
-     * @return bool
+     *
+     * @return \SQLite3Stmt|boolean Returns an SQLite3Stmt object on success or FALSE on failure.
      */
-    public function exec(string $query): bool
+    public function prepare(string $query)
     {
-        return $this->db->exec($query);
+        return $this->db->prepare($query);
     }
 
     /**
@@ -222,26 +242,6 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
     public function isConnected()
     {
         return $this->isConnected;
-    }
-
-    /**
-     * Set Options
-     *
-     * @param array|null $options
-     */
-    public function setOptions(array $options = null)
-    {
-        if (\is_array($options)) {
-            // Location
-            if (isset($options["location"]) && \is_string($options["location"]) && \strlen($options["location"]) > 0) {
-                $this->location = $options["location"];
-            }
-
-            // Mode
-            if (isset($options["mode"]) && \is_int($options["mode"])) {
-                $this->mode = $options["mode"];
-            }
-        }
     }
 
     /**
@@ -271,6 +271,7 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
 
     /**
      * @param LoggerInterface $logger
+     *
      * @return void
      */
     public function setLogger(LoggerInterface $logger): void

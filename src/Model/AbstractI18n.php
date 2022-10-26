@@ -11,7 +11,7 @@ use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Class AbstractI18n
- * @access public
+ * @access  public
  * @package Jtl\Connector\Core\Model\Common
  * @Serializer\AccessType("public_method")
  */
@@ -35,6 +35,7 @@ abstract class AbstractI18n extends AbstractModel implements I18nInterface
 
     /**
      * @param string $languageIso
+     *
      * @return $this
      */
     public function setLanguageIso(string $languageIso): self

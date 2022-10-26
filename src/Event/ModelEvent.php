@@ -18,6 +18,7 @@ class ModelEvent extends Event
 
     /**
      * ModelAfterActionEvent constructor.
+     *
      * @param AbstractModel $model
      */
     public function __construct(AbstractModel $model)

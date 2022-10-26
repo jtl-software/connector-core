@@ -6,7 +6,6 @@ use Jtl\Connector\Core\Exception\TranslatableAttributeException;
 use Jtl\Connector\Core\Model\TranslatableAttribute;
 use Jtl\Connector\Core\Model\TranslatableAttributeI18n;
 use Jtl\Connector\Core\Test\TestCase;
-use stdClass;
 
 class TranslatableAttributeI18nTest extends TestCase
 {
@@ -41,98 +40,23 @@ class TranslatableAttributeI18nTest extends TestCase
     public function getValueProvider(): array
     {
         return [
-            [
-                'int',
-                '2',
-                2,
-            ],
-            [
-                'int',
-                '2.1',
-                2,
-            ],
-            [
-                'float',
-                '2',
-                2.,
-            ],
-            [
-                'float',
-                '0',
-                0.,
-            ],
-            [
-                'float',
-                '0.32',
-                0.32,
-            ],
-            [
-                'bool',
-                'true',
-                true,
-            ],
-            [
-                'bool',
-                'false',
-                false,
-            ],
-            [
-                'bool',
-                '0',
-                false,
-            ],
-            [
-                'bool',
-                '1',
-                true,
-            ],
-            [
-                'bool',
-                '',
-                false,
-            ],
-            [
-                'bool',
-                'wat',
-                true,
-            ],
-            [
-                'string',
-                'foo',
-                'foo',
-            ],
-            [
-                'string',
-                '',
-                '',
-            ],
-            [
-                'foo',
-                'bar',
-                'bar',
-            ],
-            [
-                'json',
-                '["a", "b"]',
-                [
-                    'a',
-                    'b',
-                ],
-            ],
-            [
-                'json',
-                '{"key1":"value1", "key2":"value2"}',
-                [
-                    'key1' => 'value1',
-                    'key2' => 'value2',
-                ],
-            ],
-            [
-                'json',
-                '...asdas',
-                null,
-                false,
-            ],
+            ['int', '2', 2],
+            ['int', '2.1', 2],
+            ['float', '2', 2.],
+            ['float', '0', 0.],
+            ['float', '0.32', 0.32],
+            ['bool', 'true', true],
+            ['bool', 'false', false],
+            ['bool', '0', false],
+            ['bool', '1', true],
+            ['bool', '', false],
+            ['bool', 'wat', true],
+            ['string', 'foo', 'foo'],
+            ['string', '', ''],
+            ['foo', 'bar', 'bar'],
+            ['json', '["a", "b"]', ['a', 'b',]],
+            ['json', '{"key1":"value1", "key2":"value2"}', ['key1' => 'value1', 'key2' => 'value2']],
+            ['json', '...asdas', null, false]
         ];
     }
 
@@ -177,52 +101,16 @@ class TranslatableAttributeI18nTest extends TestCase
     public function setValueProvider(): array
     {
         return [
-            [
-                true,
-                '1',
-            ],
-            [
-                false,
-                '0',
-            ],
-            [
-                0.1,
-                '0.1',
-            ],
-            [
-                1.342342342,
-                '1.342342342',
-            ],
-            [
-                0.0,
-                '0',
-            ],
-            [
-                0,
-                '0',
-            ],
-            [
-                1,
-                '1',
-            ],
-            [
-                'foo',
-                'foo',
-            ],
-            [
-                [
-                    'a',
-                    'c',
-                ],
-                '["a","c"]',
-            ],
-            [
-                [
-                    'foo' => 'bar',
-                    'baz'
-                ],
-                '{"foo":"bar","0":"baz"}',
-            ],
+            [true, '1'],
+            [false, '0'],
+            [0.1, '0.1'],
+            [1.342342342, '1.342342342'],
+            [0.0, '0'],
+            [0, '0'],
+            [1, '1'],
+            ['foo', 'foo'],
+            [['a', 'c'], '["a","c"]'],
+            [['foo' => 'bar', 'baz'], '{"foo":"bar","0":"baz"}'],
         ];
     }
 

@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Additional payment info for direct debit / banktransfer or payment by credit card.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -109,17 +109,6 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
     protected $iban = '';
 
     /**
-     * @param string $accountHolder Bank account holder name
-     * @return CustomerOrderPaymentInfo
-     */
-    public function setAccountHolder(string $accountHolder): CustomerOrderPaymentInfo
-    {
-        $this->accountHolder = $accountHolder;
-
-        return $this;
-    }
-
-    /**
      * @return string Bank account holder name
      */
     public function getAccountHolder(): string
@@ -128,12 +117,13 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
     }
 
     /**
-     * @param string $accountNumber Bank account number (deprecated in DE since SEPA)
+     * @param string $accountHolder Bank account holder name
+     *
      * @return CustomerOrderPaymentInfo
      */
-    public function setAccountNumber(string $accountNumber): CustomerOrderPaymentInfo
+    public function setAccountHolder(string $accountHolder): CustomerOrderPaymentInfo
     {
-        $this->accountNumber = $accountNumber;
+        $this->accountHolder = $accountHolder;
 
         return $this;
     }
@@ -147,12 +137,13 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
     }
 
     /**
-     * @param string $bankCode Bank code (deprecated in DE since SEPA)
+     * @param string $accountNumber Bank account number (deprecated in DE since SEPA)
+     *
      * @return CustomerOrderPaymentInfo
      */
-    public function setBankCode(string $bankCode): CustomerOrderPaymentInfo
+    public function setAccountNumber(string $accountNumber): CustomerOrderPaymentInfo
     {
-        $this->bankCode = $bankCode;
+        $this->accountNumber = $accountNumber;
 
         return $this;
     }
@@ -166,12 +157,13 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
     }
 
     /**
-     * @param string $bankName Bank name
+     * @param string $bankCode Bank code (deprecated in DE since SEPA)
+     *
      * @return CustomerOrderPaymentInfo
      */
-    public function setBankName(string $bankName): CustomerOrderPaymentInfo
+    public function setBankCode(string $bankCode): CustomerOrderPaymentInfo
     {
-        $this->bankName = $bankName;
+        $this->bankCode = $bankCode;
 
         return $this;
     }
@@ -185,12 +177,13 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
     }
 
     /**
-     * @param string $bic Bank Identifier Code (BIC)
+     * @param string $bankName Bank name
+     *
      * @return CustomerOrderPaymentInfo
      */
-    public function setBic(string $bic): CustomerOrderPaymentInfo
+    public function setBankName(string $bankName): CustomerOrderPaymentInfo
     {
-        $this->bic = $bic;
+        $this->bankName = $bankName;
 
         return $this;
     }
@@ -204,12 +197,13 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
     }
 
     /**
-     * @param string $creditCardExpiration Credit card expiration date
+     * @param string $bic Bank Identifier Code (BIC)
+     *
      * @return CustomerOrderPaymentInfo
      */
-    public function setCreditCardExpiration(string $creditCardExpiration): CustomerOrderPaymentInfo
+    public function setBic(string $bic): CustomerOrderPaymentInfo
     {
-        $this->creditCardExpiration = $creditCardExpiration;
+        $this->bic = $bic;
 
         return $this;
     }
@@ -223,12 +217,13 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
     }
 
     /**
-     * @param string $creditCardHolder
+     * @param string $creditCardExpiration Credit card expiration date
+     *
      * @return CustomerOrderPaymentInfo
      */
-    public function setCreditCardHolder(string $creditCardHolder): CustomerOrderPaymentInfo
+    public function setCreditCardExpiration(string $creditCardExpiration): CustomerOrderPaymentInfo
     {
-        $this->creditCardHolder = $creditCardHolder;
+        $this->creditCardExpiration = $creditCardExpiration;
 
         return $this;
     }
@@ -242,12 +237,13 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
     }
 
     /**
-     * @param string $creditCardNumber Credit card number
+     * @param string $creditCardHolder
+     *
      * @return CustomerOrderPaymentInfo
      */
-    public function setCreditCardNumber(string $creditCardNumber): CustomerOrderPaymentInfo
+    public function setCreditCardHolder(string $creditCardHolder): CustomerOrderPaymentInfo
     {
-        $this->creditCardNumber = $creditCardNumber;
+        $this->creditCardHolder = $creditCardHolder;
 
         return $this;
     }
@@ -261,12 +257,13 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
     }
 
     /**
-     * @param string $creditCardType Credit card type (e.g. "visa")
+     * @param string $creditCardNumber Credit card number
+     *
      * @return CustomerOrderPaymentInfo
      */
-    public function setCreditCardType(string $creditCardType): CustomerOrderPaymentInfo
+    public function setCreditCardNumber(string $creditCardNumber): CustomerOrderPaymentInfo
     {
-        $this->creditCardType = $creditCardType;
+        $this->creditCardNumber = $creditCardNumber;
 
         return $this;
     }
@@ -280,12 +277,13 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
     }
 
     /**
-     * @param string $creditCardVerificationNumber Credit card verification number
+     * @param string $creditCardType Credit card type (e.g. "visa")
+     *
      * @return CustomerOrderPaymentInfo
      */
-    public function setCreditCardVerificationNumber(string $creditCardVerificationNumber): CustomerOrderPaymentInfo
+    public function setCreditCardType(string $creditCardType): CustomerOrderPaymentInfo
     {
-        $this->creditCardVerificationNumber = $creditCardVerificationNumber;
+        $this->creditCardType = $creditCardType;
 
         return $this;
     }
@@ -299,12 +297,13 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
     }
 
     /**
-     * @param string $iban International Bank Account Number (IBAN)
+     * @param string $creditCardVerificationNumber Credit card verification number
+     *
      * @return CustomerOrderPaymentInfo
      */
-    public function setIban(string $iban): CustomerOrderPaymentInfo
+    public function setCreditCardVerificationNumber(string $creditCardVerificationNumber): CustomerOrderPaymentInfo
     {
-        $this->iban = $iban;
+        $this->creditCardVerificationNumber = $creditCardVerificationNumber;
 
         return $this;
     }
@@ -315,5 +314,17 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
     public function getIban(): string
     {
         return $this->iban;
+    }
+
+    /**
+     * @param string $iban International Bank Account Number (IBAN)
+     *
+     * @return CustomerOrderPaymentInfo
+     */
+    public function setIban(string $iban): CustomerOrderPaymentInfo
+    {
+        $this->iban = $iban;
+
+        return $this;
     }
 }

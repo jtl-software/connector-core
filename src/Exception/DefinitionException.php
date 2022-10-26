@@ -6,21 +6,22 @@ use Jtl\Connector\Core\Definition\ErrorCode;
 
 class DefinitionException extends \Exception
 {
-    public const MODEL_MAPPING_NOT_EXISTS            = 10;
-    public const UNKNOWN_IDENTITY_PROPERTY           = 20;
-    public const UNKNOWN_MODEL                       = 30;
-    public const IDENTITY_TYPE_MAPPING_NOT_EXISTS    = 40;
-    public const UNKNOWN_IDENTITY_TYPE               = 50;
-    public const UNKNOWN_CONFIG_OPTION               = 70;
-    public const DEFAULT_VALUE_NOT_EXISTS            = 80;
-    public const UNKNOWN_MOMENT                      = 100;
-    public const UNKNOWN_RELATION_TYPE               = 110;
-    public const UNKNOWN_IMAGE_IDENTITY_TYPE_MAPPING = 120;
-    public const UNKNOWN_RPC_METHOD                  = 130;
-    public const RELATION_TYPE_CANNOT_BE_EMPTY       = 140;
+    public const MODEL_MAPPING_NOT_EXISTS   = 10,
+        UNKNOWN_IDENTITY_PROPERTY           = 20,
+        UNKNOWN_MODEL                       = 30,
+        IDENTITY_TYPE_MAPPING_NOT_EXISTS    = 40,
+        UNKNOWN_IDENTITY_TYPE               = 50,
+        UNKNOWN_CONFIG_OPTION               = 70,
+        DEFAULT_VALUE_NOT_EXISTS            = 80,
+        UNKNOWN_MOMENT                      = 100,
+        UNKNOWN_RELATION_TYPE               = 110,
+        UNKNOWN_IMAGE_IDENTITY_TYPE_MAPPING = 120,
+        UNKNOWN_RPC_METHOD                  = 130,
+        RELATION_TYPE_CANNOT_BE_EMPTY       = 140;
 
     /**
      * @param string $modelName
+     *
      * @return DefinitionException
      */
     public static function modelMappingNotExists(string $modelName): self
@@ -31,6 +32,7 @@ class DefinitionException extends \Exception
 
     /**
      * @param int $identityType
+     *
      * @return DefinitionException
      */
     public static function identityTypeMappingNotExists(int $identityType): self
@@ -41,6 +43,7 @@ class DefinitionException extends \Exception
 
     /**
      * @param integer $identityType
+     *
      * @return DefinitionException
      */
     public static function unknownIdentityType(int $identityType): self
@@ -52,6 +55,7 @@ class DefinitionException extends \Exception
     /**
      * @param string $modelName
      * @param string $propertyName
+     *
      * @return DefinitionException
      */
     public static function unknownIdentityProperty(string $modelName, string $propertyName): self
@@ -62,6 +66,7 @@ class DefinitionException extends \Exception
 
     /**
      * @param string $modelName
+     *
      * @return DefinitionException
      */
     public static function unknownModel(string $modelName): self
@@ -72,6 +77,7 @@ class DefinitionException extends \Exception
 
     /**
      * @param string $controllerName
+     *
      * @return DefinitionException
      */
     public static function unknownController(string $controllerName): self
@@ -82,6 +88,7 @@ class DefinitionException extends \Exception
 
     /**
      * @param string $action
+     *
      * @return DefinitionException
      */
     public static function unknownAction(string $action): self
@@ -92,6 +99,7 @@ class DefinitionException extends \Exception
 
     /**
      * @param string $moment
+     *
      * @return DefinitionException
      */
     public static function unknownMoment(string $moment): self
@@ -102,6 +110,7 @@ class DefinitionException extends \Exception
 
     /**
      * @param string $relationType
+     *
      * @return DefinitionException
      */
     public static function unknownRelationType(string $relationType): self
@@ -115,11 +124,12 @@ class DefinitionException extends \Exception
      */
     public static function relationTypeCannotBeEmpty(): self
     {
-        return new self("Relation type cannot be empty.", self::RELATION_TYPE_CANNOT_BE_EMPTY);
+        return new self('Relation type cannot be empty.', self::RELATION_TYPE_CANNOT_BE_EMPTY);
     }
 
     /**
      * @param string $rpcMethod
+     *
      * @return DefinitionException
      */
     public static function unknownRpcMethod(string $rpcMethod): self

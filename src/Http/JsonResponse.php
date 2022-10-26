@@ -20,24 +20,25 @@ class JsonResponse extends SymfonyJsonResponse implements LoggerAwareInterface
 {
     protected LoggerInterface $logger;
     protected EventDispatcher $eventDispatcher;
-    protected Serializer $serializer;
+    protected Serializer      $serializer;
 
     /**
      * JsonResponse constructor.
+     *
      * @param EventDispatcher $eventDispatcher
-     * @param Serializer $serializer
-     * @param null $data
-     * @param int $status
-     * @param array $headers
-     * @param bool $json
+     * @param Serializer      $serializer
+     * @param mixed|null      $data
+     * @param int             $status
+     * @param array           $headers
+     * @param bool            $json
      */
     public function __construct(
         EventDispatcher $eventDispatcher,
-        Serializer $serializer,
+        Serializer      $serializer,
         $data = null,
-        int $status = 200,
-        array $headers = [],
-        bool $json = false
+        int             $status = 200,
+        array           $headers = [],
+        bool            $json = false
     ) {
         $this->logger          = new NullLogger();
         $this->eventDispatcher = $eventDispatcher;
@@ -46,8 +47,9 @@ class JsonResponse extends SymfonyJsonResponse implements LoggerAwareInterface
     }
 
     /**
-     * @param RequestPacket $requestPacket
+     * @param RequestPacket  $requestPacket
      * @param ResponsePacket $responsePacket
+     *
      * @return JsonResponse
      * @throws DefinitionException
      * @throws CaseConverterException

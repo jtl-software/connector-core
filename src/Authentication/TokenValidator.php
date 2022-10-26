@@ -14,7 +14,9 @@ class TokenValidator implements TokenValidatorInterface
 
     /**
      * TokenValidator constructor.
+     *
      * @param string $token
+     *
      * @throws TokenValidatorException
      */
     public function __construct(string $token)
@@ -27,6 +29,7 @@ class TokenValidator implements TokenValidatorInterface
 
     /**
      * @param string $token
+     *
      * @return bool
      */
     public function validate(string $token): bool

@@ -14,6 +14,7 @@ class ProductEvent extends Event
 
     /**
      * ProductEvent constructor.
+     *
      * @param Product $product
      */
     public function __construct(Product $product)

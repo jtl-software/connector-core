@@ -27,6 +27,7 @@ class Authentication extends AbstractModel
 
     /**
      * @param string $token
+     *
      * @return Authentication
      */
     public function setToken(string $token): Authentication

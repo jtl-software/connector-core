@@ -8,6 +8,7 @@ class SerializerException extends \Exception
 
     /**
      * @param string $endpoint
+     *
      * @return SerializerException
      */
     public static function wrongEndpointFormat(string $endpoint): SerializerException

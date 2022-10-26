@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -11,8 +11,8 @@ namespace Jtl\Connector\Core\Model;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -50,18 +50,6 @@ class DeliveryNoteItemInfo extends AbstractModel
      */
     protected $warehouseId = 0;
 
-
-    /**
-     * @param string $batch
-     * @return DeliveryNoteItemInfo
-     */
-    public function setBatch(string $batch): DeliveryNoteItemInfo
-    {
-        $this->batch = $batch;
-
-        return $this;
-    }
-
     /**
      * @return string
      */
@@ -71,12 +59,13 @@ class DeliveryNoteItemInfo extends AbstractModel
     }
 
     /**
-     * @param \DateTimeInterface $bestBefore
+     * @param string $batch
+     *
      * @return DeliveryNoteItemInfo
      */
-    public function setBestBefore(\DateTimeInterface $bestBefore = null): DeliveryNoteItemInfo
+    public function setBatch(string $batch): DeliveryNoteItemInfo
     {
-        $this->bestBefore = $bestBefore;
+        $this->batch = $batch;
 
         return $this;
     }
@@ -90,12 +79,13 @@ class DeliveryNoteItemInfo extends AbstractModel
     }
 
     /**
-     * @param double $quantity
+     * @param \DateTimeInterface $bestBefore
+     *
      * @return DeliveryNoteItemInfo
      */
-    public function setQuantity(float $quantity): DeliveryNoteItemInfo
+    public function setBestBefore(\DateTimeInterface $bestBefore = null): DeliveryNoteItemInfo
     {
-        $this->quantity = $quantity;
+        $this->bestBefore = $bestBefore;
 
         return $this;
     }
@@ -109,12 +99,13 @@ class DeliveryNoteItemInfo extends AbstractModel
     }
 
     /**
-     * @param integer $warehouseId
+     * @param double $quantity
+     *
      * @return DeliveryNoteItemInfo
      */
-    public function setWarehouseId(int $warehouseId): DeliveryNoteItemInfo
+    public function setQuantity(float $quantity): DeliveryNoteItemInfo
     {
-        $this->warehouseId = $warehouseId;
+        $this->quantity = $quantity;
 
         return $this;
     }
@@ -125,5 +116,17 @@ class DeliveryNoteItemInfo extends AbstractModel
     public function getWarehouseId(): int
     {
         return $this->warehouseId;
+    }
+
+    /**
+     * @param integer $warehouseId
+     *
+     * @return DeliveryNoteItemInfo
+     */
+    public function setWarehouseId(int $warehouseId): DeliveryNoteItemInfo
+    {
+        $this->warehouseId = $warehouseId;
+
+        return $this;
     }
 }

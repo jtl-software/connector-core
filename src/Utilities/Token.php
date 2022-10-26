@@ -25,10 +25,10 @@ class Token
         $hex = \bin2hex($bytes);
 
         $format = \substr($hex, 0, 8) . '-' .
-            \substr($hex, 8, 4) . '-' .
-            \substr($hex, 12, 4) . '-' .
-            \substr($hex, 16, 4) . '-' .
-            \substr($hex, 20);
+                  \substr($hex, 8, 4) . '-' .
+                  \substr($hex, 12, 4) . '-' .
+                  \substr($hex, 16, 4) . '-' .
+                  \substr($hex, 20);
 
         return \strtoupper($format);
     }

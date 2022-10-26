@@ -8,6 +8,7 @@ class LoggerException extends \Exception
 
     /**
      * @param string $className
+     *
      * @return LoggerException
      */
     public static function formatterNotExists(string $className): self

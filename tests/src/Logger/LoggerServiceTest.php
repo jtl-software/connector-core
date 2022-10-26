@@ -19,13 +19,6 @@ class LoggerServiceTest extends TestCase
 
     protected $logDir;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->logDir  = \sprintf('%s/var/log', $this->connectorDir);
-        $this->factory = new LoggerService($this->logDir, LogLevel::DEBUG);
-    }
-
     public function testSetFormat()
     {
         $args = [JsonFormatter::BATCH_MODE_NEWLINES];
@@ -94,7 +87,6 @@ class LoggerServiceTest extends TestCase
         $this->assertEquals($expectedLogFileName, $filenameProp->getValue($handlers[0]));
     }
 
-
     public function testHas()
     {
         $this->factory->get('foo');
@@ -104,5 +96,12 @@ class LoggerServiceTest extends TestCase
     public function testHasNot()
     {
         $this->assertFalse($this->factory->has('bar'));
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->logDir  = \sprintf('%s/var/log', $this->connectorDir);
+        $this->factory = new LoggerService($this->logDir, LogLevel::DEBUG);
     }
 }

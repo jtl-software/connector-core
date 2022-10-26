@@ -7,12 +7,6 @@ use PHPUnit\Framework\TestCase;
 
 class SessionHelperTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-        unset($_SESSION);
-    }
-
     public function testHas()
     {
         $helper                 = new SessionHelper('foo');
@@ -71,5 +65,11 @@ class SessionHelperTest extends TestCase
         $reflectionPropertyNamespace->setAccessible(true);
         $actualNamespace = $reflectionPropertyNamespace->getValue($helper);
         $this->assertEquals($expectedNamespace, $actualNamespace);
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        unset($_SESSION);
     }
 }

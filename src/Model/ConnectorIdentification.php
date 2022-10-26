@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -11,8 +11,8 @@ namespace Jtl\Connector\Core\Model;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -59,17 +59,6 @@ class ConnectorIdentification extends AbstractModel
     protected $serverInfo = null;
 
     /**
-     * @param string $endpointVersion
-     * @return ConnectorIdentification
-     */
-    public function setEndpointVersion(string $endpointVersion): ConnectorIdentification
-    {
-        $this->endpointVersion = $endpointVersion;
-
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getEndpointVersion(): string
@@ -78,12 +67,13 @@ class ConnectorIdentification extends AbstractModel
     }
 
     /**
-     * @param string $platformName
+     * @param string $endpointVersion
+     *
      * @return ConnectorIdentification
      */
-    public function setPlatformName(string $platformName): ConnectorIdentification
+    public function setEndpointVersion(string $endpointVersion): ConnectorIdentification
     {
-        $this->platformName = $platformName;
+        $this->endpointVersion = $endpointVersion;
 
         return $this;
     }
@@ -97,12 +87,13 @@ class ConnectorIdentification extends AbstractModel
     }
 
     /**
-     * @param string $platformVersion
+     * @param string $platformName
+     *
      * @return ConnectorIdentification
      */
-    public function setPlatformVersion(string $platformVersion): ConnectorIdentification
+    public function setPlatformName(string $platformName): ConnectorIdentification
     {
-        $this->platformVersion = $platformVersion;
+        $this->platformName = $platformName;
 
         return $this;
     }
@@ -116,12 +107,13 @@ class ConnectorIdentification extends AbstractModel
     }
 
     /**
-     * @param integer $protocolVersion
+     * @param string $platformVersion
+     *
      * @return ConnectorIdentification
      */
-    public function setProtocolVersion(int $protocolVersion): ConnectorIdentification
+    public function setPlatformVersion(string $platformVersion): ConnectorIdentification
     {
-        $this->protocolVersion = $protocolVersion;
+        $this->platformVersion = $platformVersion;
 
         return $this;
     }
@@ -135,12 +127,13 @@ class ConnectorIdentification extends AbstractModel
     }
 
     /**
-     * @param ConnectorServerInfo $connectorServerInfo
+     * @param integer $protocolVersion
+     *
      * @return ConnectorIdentification
      */
-    public function setServerInfo(ConnectorServerInfo $connectorServerInfo): ConnectorIdentification
+    public function setProtocolVersion(int $protocolVersion): ConnectorIdentification
     {
-        $this->serverInfo = $connectorServerInfo;
+        $this->protocolVersion = $protocolVersion;
 
         return $this;
     }
@@ -151,5 +144,17 @@ class ConnectorIdentification extends AbstractModel
     public function getServerInfo(): ?ConnectorServerInfo
     {
         return $this->serverInfo;
+    }
+
+    /**
+     * @param ConnectorServerInfo $connectorServerInfo
+     *
+     * @return ConnectorIdentification
+     */
+    public function setServerInfo(ConnectorServerInfo $connectorServerInfo): ConnectorIdentification
+    {
+        $this->serverInfo = $connectorServerInfo;
+
+        return $this;
     }
 }

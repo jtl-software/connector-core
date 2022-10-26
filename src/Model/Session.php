@@ -37,6 +37,7 @@ class Session extends AbstractModel
 
     /**
      * @param string $sessionId
+     *
      * @return Session
      */
     public function setSessionId(string $sessionId): Session
@@ -55,6 +56,7 @@ class Session extends AbstractModel
 
     /**
      * @param int $lifetime
+     *
      * @return Session
      */
     public function setLifetime(int $lifetime): Session

@@ -14,6 +14,7 @@ class CrossSellingEvent extends Event
 
     /**
      * CrossSellingEvent constructor.
+     *
      * @param CrossSelling $crossSelling
      */
     public function __construct(CrossSelling $crossSelling)

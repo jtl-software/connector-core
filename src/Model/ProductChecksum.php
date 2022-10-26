@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -11,8 +11,8 @@ namespace Jtl\Connector\Core\Model;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -64,17 +64,6 @@ class ProductChecksum extends Checksum
     protected $type = self::TYPE_VARIATION;
 
     /**
-     * @param Identity $foreignKey
-     * @return ProductChecksum
-     */
-    public function setForeignKey(Identity $foreignKey): ProductChecksum
-    {
-        $this->foreignKey = $foreignKey;
-
-        return $this;
-    }
-
-    /**
      * @return Identity
      */
     public function getForeignKey(): Identity
@@ -83,12 +72,13 @@ class ProductChecksum extends Checksum
     }
 
     /**
-     * @param string $endpoint
+     * @param Identity $foreignKey
+     *
      * @return ProductChecksum
      */
-    public function setEndpoint(string $endpoint): ProductChecksum
+    public function setForeignKey(Identity $foreignKey): ProductChecksum
     {
-        $this->endpoint = $endpoint;
+        $this->foreignKey = $foreignKey;
 
         return $this;
     }
@@ -102,12 +92,13 @@ class ProductChecksum extends Checksum
     }
 
     /**
-     * @param boolean $hasChanged
+     * @param string $endpoint
+     *
      * @return ProductChecksum
      */
-    public function setHasChanged(bool $hasChanged): ProductChecksum
+    public function setEndpoint(string $endpoint): ProductChecksum
     {
-        $this->hasChanged = $hasChanged;
+        $this->endpoint = $endpoint;
 
         return $this;
     }
@@ -129,12 +120,13 @@ class ProductChecksum extends Checksum
     }
 
     /**
-     * @param string $host
+     * @param boolean $hasChanged
+     *
      * @return ProductChecksum
      */
-    public function setHost(string $host): ProductChecksum
+    public function setHasChanged(bool $hasChanged): ProductChecksum
     {
-        $this->host = $host;
+        $this->hasChanged = $hasChanged;
 
         return $this;
     }
@@ -148,12 +140,13 @@ class ProductChecksum extends Checksum
     }
 
     /**
-     * @param integer $type
+     * @param string $host
+     *
      * @return ProductChecksum
      */
-    public function setType(int $type): ProductChecksum
+    public function setHost(string $host): ProductChecksum
     {
-        $this->type = $type;
+        $this->host = $host;
 
         return $this;
     }
@@ -164,5 +157,17 @@ class ProductChecksum extends Checksum
     public function getType(): int
     {
         return $this->type;
+    }
+
+    /**
+     * @param integer $type
+     *
+     * @return ProductChecksum
+     */
+    public function setType(int $type): ProductChecksum
+    {
+        $this->type = $type;
+
+        return $this;
     }
 }

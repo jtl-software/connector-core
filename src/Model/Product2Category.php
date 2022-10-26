@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Product-Category Allocation.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -30,8 +30,9 @@ class Product2Category extends AbstractIdentity
 
     /**
      * Constructor.
+     *
      * @param string $endpoint
-     * @param int $host
+     * @param int    $host
      */
     public function __construct(string $endpoint = '', int $host = 0)
     {
@@ -40,7 +41,16 @@ class Product2Category extends AbstractIdentity
     }
 
     /**
+     * @return Identity Reference to category
+     */
+    public function getCategoryId(): Identity
+    {
+        return $this->categoryId;
+    }
+
+    /**
      * @param Identity $categoryId Reference to category
+     *
      * @return Product2Category
      */
     public function setCategoryId(Identity $categoryId): Product2Category
@@ -48,13 +58,5 @@ class Product2Category extends AbstractIdentity
         $this->categoryId = $categoryId;
 
         return $this;
-    }
-
-    /**
-     * @return Identity Reference to category
-     */
-    public function getCategoryId(): Identity
-    {
-        return $this->categoryId;
     }
 }

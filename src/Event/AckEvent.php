@@ -14,6 +14,7 @@ class AckEvent extends Event
 
     /**
      * AckEvent constructor.
+     *
      * @param Ack $ack
      */
     public function __construct(Ack $ack)

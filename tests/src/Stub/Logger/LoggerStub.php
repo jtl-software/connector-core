@@ -10,18 +10,21 @@ use Monolog\Logger as MonoLogger;
  */
 class LoggerStub
 {
-    public const CHANNEL_CHECKSUM = 'checksum';
-    public const CHANNEL_GLOBAL   = 'global';
-    public const CHANNEL_LINKER   = 'linker';
-    public const CHANNEL_RPC      = 'rpc';
-    public const CHANNEL_SESSION  = 'session';
+    public const
+        CHANNEL_CHECKSUM = 'checksum',
+        CHANNEL_GLOBAL   = 'global',
+        CHANNEL_LINKER   = 'linker',
+        CHANNEL_RPC      = 'rpc',
+        CHANNEL_SESSION  = 'session';
 
-    public const INFO    = 'info';
-    public const WARNING = 'warning';
-    public const DEBUG   = 'debug';
-    public const ERROR   = 'error';
+    public const
+        INFO    = 'info',
+        WARNING = 'warning',
+        DEBUG   = 'debug',
+        ERROR   = 'error';
 
-    protected static $logLevelMappings = [
+    /** @var array<string, int> */
+    protected static array $logLevelMappings = [
         self::INFO    => MonoLogger::INFO,
         self::WARNING => MonoLogger::WARNING,
         self::ERROR   => MonoLogger::ERROR,

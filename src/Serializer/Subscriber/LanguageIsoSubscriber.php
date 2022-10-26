@@ -2,12 +2,12 @@
 
 namespace Jtl\Connector\Core\Serializer\Subscriber;
 
-use WhiteCube\Lingua\Service as Lingua;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\EventDispatcher\PreDeserializeEvent;
 use JMS\Serializer\Metadata\StaticPropertyMetadata;
 use Jtl\Connector\Core\Model\AbstractI18n;
+use WhiteCube\Lingua\Service as Lingua;
 
 class LanguageIsoSubscriber implements EventSubscriberInterface
 {

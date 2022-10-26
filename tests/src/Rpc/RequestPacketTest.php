@@ -17,7 +17,7 @@ class RequestPacketTest extends TestCase
      *
      * @param array $inputParams
      * @param array $expectedParams
-     * @param bool $isValid
+     * @param bool  $isValid
      */
     public function testValidPacket(array $inputParams, array $expectedParams, bool $isValid)
     {
@@ -40,12 +40,7 @@ class RequestPacketTest extends TestCase
     {
         return [
             [
-                [
-                    $id = \time(),
-                    'undefined.undefined',
-                    '2.0',
-                    [],
-                ],
+                [$id = \time(), 'undefined.undefined', '2.0', [],],
                 [
                     $id,
                     'undefined.undefined',
@@ -105,11 +100,11 @@ class RequestPacketTest extends TestCase
     /**
      * @dataProvider createFromJtlRpcDataProvider
      *
-     * @param string|null $jtlRpcInput
-     * @param array $expectedParams
-     * @param bool $isValid
+     * @param string $jtlRpcInput
+     * @param array  $expectedParams
+     * @param bool   $isValid
      */
-    public function testCreateFromJtlrpc(string $jtlRpcInput, array $expectedParams, bool $isValid)
+    public function testCreateFromJtlrpc(string $jtlRpcInput, array $expectedParams, bool $isValid): void
     {
         $requestPacket = RequestPacket::createFromJtlrpc($jtlRpcInput);
 
@@ -126,90 +121,28 @@ class RequestPacketTest extends TestCase
     public function createFromJtlRpcDataProvider(): array
     {
         return [
-            [
-                '',
-                [
-                    '',
-                    'undefined.undefined',
-                    [],
-                ],
-                false,
-            ],
-            [
-                '{"jtlrpc":"3.0","method":"jtlmethod"}',
-                [
-                    '3.0',
-                    'jtlmethod',
-                    [],
-                ],
-                false,
-            ],
-            [
-                '{}',
-                [
-                    '',
-                    'undefined.undefined',
-                    [],
-                ],
-                false,
-            ],
-            [
-                '{"id":"1"}',
-                [
-                    '',
-                    'undefined.undefined',
-                    [],
-                ],
-                false,
-            ],
-            [
-                '{"jtlrpc":"2.0","id":"1"}',
-                [
-                    '2.0',
-                    'undefined.undefined',
-                    [],
-                ],
-                true,
-            ],
-            [
-                '{"jtlrpc":"2.0","id":"1","params":["a","b"]}',
-                [
-                    '2.0',
-                    'undefined.undefined',
-                    [
-                        "a",
-                        "b",
-                    ],
-                ],
-                true,
-            ],
-            [
-
-                '{"params":[1,2,3]}',
-                [
-                    '',
-                    'undefined.undefined',
-                    [
-                        1,
-                        2,
-                        3,
-                    ],
-                ],
-                false,
-
-            ],
+            ['', ['', 'undefined.undefined', [],], false,],
+            ['{"jtlrpc":"3.0","method":"jtlmethod"}', ['3.0', 'jtlmethod', [],], false,],
+            ['{}', ['', 'undefined.undefined', [],], false,],
+            ['{"id":"1"}', ['', 'undefined.undefined', [],], false,],
+            ['{"jtlrpc":"2.0","id":"1"}', ['2.0', 'undefined.undefined', [],], true,],
+            ['{"jtlrpc":"2.0","id":"1","params":["a","b"]}', ['2.0', 'undefined.undefined', ['a', 'b',],], true,],
+            ['{"params":[1,2,3]}', ['', 'undefined.undefined', [1, 2, 3,],], false,],
         ];
     }
 
     /**
      * @dataProvider createFromJtlRpcDataProvider
      *
-     * @param string|null $jtlRpcInput
-     * @param array $expectedParams
-     * @param bool $isValid
+     * @param string $jtlRpcInput
+     * @param array  $expectedParams
+     * @param bool   $isValid
      */
-    public function testCreateFromJtlRpcUseAnotherSerializer(string $jtlRpcInput, array $expectedParams, bool $isValid)
-    {
+    public function testCreateFromJtlRpcUseAnotherSerializer(
+        string $jtlRpcInput,
+        array  $expectedParams,
+        bool   $isValid
+    ): void {
         $jmsSerializer = SerializerBuilder::create()->build();
 
         $requestPacket = RequestPacket::createFromJtlrpc($jtlRpcInput, $jmsSerializer);

@@ -17,11 +17,12 @@ class TranslatableAttributeI18nFactory extends AbstractModelFactory
     {
         return [
             'name'        => $this->faker->word,
-            'value'       => $this->faker->randomElement([
-                true,
-                false,
-                $this->faker->words(3, true),
-            ]),
+            'value'       => $this->faker
+                ->randomElement([
+                                    true,
+                                    false,
+                                    $this->faker->words(3, true),
+                                ]),
             'languageIso' => $this->faker->languageCode,
         ];
     }

@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * locale specifig productVariationValue name.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -29,7 +29,16 @@ class ProductVariationValueI18n extends AbstractI18n
     protected $name = '';
 
     /**
+     * @return string Locale specific variationValue name
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
      * @param string $name Locale specific variationValue name
+     *
      * @return ProductVariationValueI18n
      */
     public function setName(string $name): ProductVariationValueI18n
@@ -37,13 +46,5 @@ class ProductVariationValueI18n extends AbstractI18n
         $this->name = $name;
 
         return $this;
-    }
-
-    /**
-     * @return string Locale specific variationValue name
-     */
-    public function getName(): string
-    {
-        return $this->name;
     }
 }

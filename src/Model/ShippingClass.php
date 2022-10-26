@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Shipping classes are usually defined in JTL-Wawi ERP.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -29,7 +29,16 @@ class ShippingClass extends AbstractIdentity
     protected $name = '';
 
     /**
+     * @return string Optional (internal) Shipping class name
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
      * @param string $name Optional (internal) Shipping class name
+     *
      * @return ShippingClass
      */
     public function setName(string $name): ShippingClass
@@ -37,13 +46,5 @@ class ShippingClass extends AbstractIdentity
         $this->name = $name;
 
         return $this;
-    }
-
-    /**
-     * @return string Optional (internal) Shipping class name
-     */
-    public function getName(): string
-    {
-        return $this->name;
     }
 }

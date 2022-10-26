@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Tax class model (set in JTL-Wawi ERP)
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -37,6 +37,14 @@ class TaxClass extends AbstractIdentity
     protected $name = '';
 
     /**
+     * @return boolean Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default.
+     */
+    public function getIsDefault(): bool
+    {
+        return $this->isDefault;
+    }
+
+    /**
      * @param boolean $isDefault Optional:
      *                           Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default.
      *
@@ -50,15 +58,16 @@ class TaxClass extends AbstractIdentity
     }
 
     /**
-     * @return boolean Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default.
+     * @return string Optional tax class name
      */
-    public function getIsDefault(): bool
+    public function getName(): string
     {
-        return $this->isDefault;
+        return $this->name;
     }
 
     /**
      * @param string $name Optional tax class name
+     *
      * @return TaxClass
      */
     public function setName(string $name): TaxClass
@@ -66,13 +75,5 @@ class TaxClass extends AbstractIdentity
         $this->name = $name;
 
         return $this;
-    }
-
-    /**
-     * @return string Optional tax class name
-     */
-    public function getName(): string
-    {
-        return $this->name;
     }
 }

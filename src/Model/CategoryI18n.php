@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Localized category properties. localeName, categoryId and a localized name must be set.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -69,17 +69,6 @@ class CategoryI18n extends AbstractI18n
     protected $urlPath = '';
 
     /**
-     * @param string $description Optional localized Long Description
-     * @return CategoryI18n
-     */
-    public function setDescription(string $description): CategoryI18n
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
      * @return string Optional localized Long Description
      */
     public function getDescription(): string
@@ -88,12 +77,13 @@ class CategoryI18n extends AbstractI18n
     }
 
     /**
-     * @param string $metaDescription Optional localized  short description used for meta tag description
+     * @param string $description Optional localized Long Description
+     *
      * @return CategoryI18n
      */
-    public function setMetaDescription(string $metaDescription): CategoryI18n
+    public function setDescription(string $description): CategoryI18n
     {
-        $this->metaDescription = $metaDescription;
+        $this->description = $description;
 
         return $this;
     }
@@ -107,12 +97,13 @@ class CategoryI18n extends AbstractI18n
     }
 
     /**
-     * @param string $metaKeywords Optional localized meta tag keywords value
+     * @param string $metaDescription Optional localized  short description used for meta tag description
+     *
      * @return CategoryI18n
      */
-    public function setMetaKeywords(string $metaKeywords): CategoryI18n
+    public function setMetaDescription(string $metaDescription): CategoryI18n
     {
-        $this->metaKeywords = $metaKeywords;
+        $this->metaDescription = $metaDescription;
 
         return $this;
     }
@@ -126,12 +117,13 @@ class CategoryI18n extends AbstractI18n
     }
 
     /**
-     * @param string $name Localized category name
+     * @param string $metaKeywords Optional localized meta tag keywords value
+     *
      * @return CategoryI18n
      */
-    public function setName(string $name): CategoryI18n
+    public function setMetaKeywords(string $metaKeywords): CategoryI18n
     {
-        $this->name = $name;
+        $this->metaKeywords = $metaKeywords;
 
         return $this;
     }
@@ -145,12 +137,13 @@ class CategoryI18n extends AbstractI18n
     }
 
     /**
-     * @param string $titleTag Optional localized title tag value
+     * @param string $name Localized category name
+     *
      * @return CategoryI18n
      */
-    public function setTitleTag(string $titleTag): CategoryI18n
+    public function setName(string $name): CategoryI18n
     {
-        $this->titleTag = $titleTag;
+        $this->name = $name;
 
         return $this;
     }
@@ -164,12 +157,13 @@ class CategoryI18n extends AbstractI18n
     }
 
     /**
-     * @param string $urlPath Optional localized category URL
+     * @param string $titleTag Optional localized title tag value
+     *
      * @return CategoryI18n
      */
-    public function setUrlPath(string $urlPath): CategoryI18n
+    public function setTitleTag(string $titleTag): CategoryI18n
     {
-        $this->urlPath = $urlPath;
+        $this->titleTag = $titleTag;
 
         return $this;
     }
@@ -180,5 +174,17 @@ class CategoryI18n extends AbstractI18n
     public function getUrlPath(): string
     {
         return $this->urlPath;
+    }
+
+    /**
+     * @param string $urlPath Optional localized category URL
+     *
+     * @return CategoryI18n
+     */
+    public function setUrlPath(string $urlPath): CategoryI18n
+    {
+        $this->urlPath = $urlPath;
+
+        return $this;
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Specify productVariationValue to hide from specific customerGroup.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -37,7 +37,16 @@ class ProductVariationValueInvisibility extends AbstractModel
     }
 
     /**
+     * @return Identity Reference to customerGroup
+     */
+    public function getCustomerGroupId(): Identity
+    {
+        return $this->customerGroupId;
+    }
+
+    /**
      * @param Identity $customerGroupId Reference to customerGroup
+     *
      * @return ProductVariationValueInvisibility
      */
     public function setCustomerGroupId(Identity $customerGroupId): ProductVariationValueInvisibility
@@ -45,13 +54,5 @@ class ProductVariationValueInvisibility extends AbstractModel
         $this->customerGroupId = $customerGroupId;
 
         return $this;
-    }
-
-    /**
-     * @return Identity Reference to customerGroup
-     */
-    public function getCustomerGroupId(): Identity
-    {
-        return $this->customerGroupId;
     }
 }

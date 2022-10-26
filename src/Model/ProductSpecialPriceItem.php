@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * special price properties to define a net price for a customerGroup.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -45,7 +45,16 @@ class ProductSpecialPriceItem extends AbstractModel
     }
 
     /**
+     * @return Identity Reference to customerGroup
+     */
+    public function getCustomerGroupId(): Identity
+    {
+        return $this->customerGroupId;
+    }
+
+    /**
      * @param Identity $customerGroupId Reference to customerGroup
+     *
      * @return ProductSpecialPriceItem
      */
     public function setCustomerGroupId(Identity $customerGroupId): ProductSpecialPriceItem
@@ -56,15 +65,16 @@ class ProductSpecialPriceItem extends AbstractModel
     }
 
     /**
-     * @return Identity Reference to customerGroup
+     * @return double net price value
      */
-    public function getCustomerGroupId(): Identity
+    public function getPriceNet(): float
     {
-        return $this->customerGroupId;
+        return $this->priceNet;
     }
 
     /**
      * @param double $priceNet net price value
+     *
      * @return ProductSpecialPriceItem
      */
     public function setPriceNet(float $priceNet): ProductSpecialPriceItem
@@ -72,13 +82,5 @@ class ProductSpecialPriceItem extends AbstractModel
         $this->priceNet = $priceNet;
 
         return $this;
-    }
-
-    /**
-     * @return double net price value
-     */
-    public function getPriceNet(): float
-    {
-        return $this->priceNet;
     }
 }

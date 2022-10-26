@@ -2,7 +2,6 @@
 
 namespace Jtl\Connector\Core\Test\Serializer\Subscriber;
 
-use JMS\Serializer\Serializer;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Model\ManufacturerImage;
@@ -17,9 +16,8 @@ class ImageSubscriberTest extends TestCase
         $expectedEndpoint = \sprintf('manufacturer#=#%s', $endpoint);
         $expectedHost     = 123;
         $image            = (new ManufacturerImage())->setId(new Identity($endpoint, $expectedHost));
-        /** @var Serializer $serializer */
-        $serializer = SerializerBuilder::create()->build();
-        $data       = $serializer->toArray($image);
+        $serializer       = SerializerBuilder::create()->build();
+        $data             = $serializer->toArray($image);
         $this->assertEquals($expectedEndpoint, $data['id'][0]);
         $this->assertEquals($expectedHost, $data['id'][1]);
     }
@@ -29,18 +27,12 @@ class ImageSubscriberTest extends TestCase
         $data = [
             'identities' => [
                 'image' => [
-                    [
-                        'category#=#yolo123',
-                        42,
-                    ],
-                    [
-                        'manufacturer#=#yummy',
-                        23,
-                    ],
+                    ['category#=#yolo123', 42,],
+                    ['manufacturer#=#yummy', 23,],
                 ],
             ],
         ];
-        /** @var Serializer $serializer */
+
         $serializer = SerializerBuilder::create()->build();
         $ack        = $serializer->fromArray($data, Ack::class);
         $identities = $ack->getIdentities();

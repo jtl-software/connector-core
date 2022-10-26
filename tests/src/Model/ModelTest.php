@@ -5,7 +5,6 @@ namespace Jtl\Connector\Core\Tests\Model;
 use JMS\Serializer\SerializationContext;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Model\AbstractModel;
-use Jtl\Connector\Core\Model\Category;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Test\TestCase;
 
@@ -150,16 +149,8 @@ class ModelTest extends TestCase
     public function unsetIdentificationStringProvider(): array
     {
         return [
-            [
-                \uniqid('foo-'),
-                'hola',
-                true,
-            ],
-            [
-                \uniqid('bar-'),
-                'hallo',
-                false,
-            ],
+            [\uniqid('foo-'), 'hola', true],
+            [\uniqid('bar-'), 'hallo', false]
         ];
     }
 }

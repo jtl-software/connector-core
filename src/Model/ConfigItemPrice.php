@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Customer group price for config item.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -55,7 +55,16 @@ class ConfigItemPrice extends AbstractModel
     }
 
     /**
+     * @return Identity Reference to customerGroup
+     */
+    public function getCustomerGroupId(): Identity
+    {
+        return $this->customerGroupId;
+    }
+
+    /**
      * @param Identity $customerGroupId Reference to customerGroup
+     *
      * @return ConfigItemPrice
      */
     public function setCustomerGroupId(Identity $customerGroupId): ConfigItemPrice
@@ -66,11 +75,13 @@ class ConfigItemPrice extends AbstractModel
     }
 
     /**
-     * @return Identity Reference to customerGroup
+     * @return double   Net price or percental value to add/deduct to/from product price (depending on type).
+     *                  Positive value means surcharge, negative value means discount.
+     *                  Also see configItem.vat for value added tax.
      */
-    public function getCustomerGroupId(): Identity
+    public function getPrice(): float
     {
-        return $this->customerGroupId;
+        return $this->price;
     }
 
     /**
@@ -88,17 +99,16 @@ class ConfigItemPrice extends AbstractModel
     }
 
     /**
-     * @return double   Net price or percental value to add/deduct to/from product price (depending on type).
-     *                  Positive value means surcharge, negative value means discount.
-     *                  Also see configItem.vat for value added tax.
+     * @return integer Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
      */
-    public function getPrice(): float
+    public function getType(): int
     {
-        return $this->price;
+        return $this->type;
     }
 
     /**
      * @param integer $type Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
+     *
      * @return ConfigItemPrice
      */
     public function setType(int $type): ConfigItemPrice
@@ -106,13 +116,5 @@ class ConfigItemPrice extends AbstractModel
         $this->type = $type;
 
         return $this;
-    }
-
-    /**
-     * @return integer Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
-     */
-    public function getType(): int
-    {
-        return $this->type;
     }
 }
