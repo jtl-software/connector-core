@@ -33,7 +33,7 @@ class StrTest extends TestCase
             ['snake_case', 'snakeCase',],
             ['PascalCase', 'pascalCase',],
             ['camelCase', 'camelCase',],
-            [false, 0, '',],
+            [false, '',],
             ['', '',],
             ['_snake_case_', 'snakeCase',],
             ['snake__case', 'snakeCase',],
