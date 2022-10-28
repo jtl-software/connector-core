@@ -22,8 +22,11 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
     {
         return [
             Event::createRpcEventName(Event::BEFORE) => [
-                ['transformRequestParams', 10000]
-            ]
+                [
+                    'transformRequestParams',
+                    10000,
+                ],
+            ],
         ];
     }
 
@@ -53,6 +56,7 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
 
     /**
      * @param array $products
+     *
      * @return array
      */
     public function transformProductData(array $products): array
@@ -62,7 +66,7 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
                 $products[$i]['stockLevel'] = $product['stockLevel']['stockLevel'];
             }
 
-            if (isset($product['prices']) && is_array($product['prices'])) {
+            if (isset($product['prices']) && \is_array($product['prices'])) {
                 foreach ($products[$i]['prices'] as $j => $productPrice) {
                     $products[$i]['prices'][$j] = self::sortProductPriceItems($productPrice);
                 }
@@ -73,7 +77,24 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
     }
 
     /**
+     * @param array $productPrice
+     *
+     * @return array
+     */
+    protected static function sortProductPriceItems(array $productPrice): array
+    {
+        if (isset($productPrice['items'])) {
+            \usort($productPrice['items'], function ($a, $b) {
+                return ($a['quantity'] ?? 0) - ($b['quantity'] ?? 0);
+            });
+        }
+
+        return $productPrice;
+    }
+
+    /**
      * @param array $productPrices
+     *
      * @return array
      */
     public function transformProductPriceData(array $productPrices): array
@@ -85,9 +106,9 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
 
             if (!isset($products[$hostId])) {
                 $product = [
-                    'id' => $productPrice['productId'] ?? null,
-                    'sku' => $productPrice['sku'] ?? '',
-                    'vat' => $productPrice['vat'] ?? 0.,
+                    'id'         => $productPrice['productId'] ?? null,
+                    'sku'        => $productPrice['sku'] ?? '',
+                    'vat'        => $productPrice['vat'] ?? 0.,
                     'taxClassId' => $productPrice['taxClassId'] ?? null,
                 ];
 
@@ -97,50 +118,37 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
             $products[$hostId]['prices'][] = self::sortProductPriceItems($productPrice);
         }
 
-        return array_values($products);
+        return \array_values($products);
+    }
+
+    /**
+     * @param array $identity
+     *
+     * @return int
+     */
+    protected static function extractHostId(array $identity): int
+    {
+        [$endpointId, $hostId] = $identity;
+        return $hostId;
     }
 
     /**
      * @param array $productStockLevel
+     *
      * @return array
      */
     public function transformProductStockLevelData(array $productStockLevel): array
     {
         $products = [];
         foreach ($productStockLevel as $stockLevel) {
-            $product = [
-                'id' => $stockLevel['productId'] ?? null,
-                'sku' => $stockLevel['sku'] ?? '',
-                'stockLevel' => $stockLevel['stockLevel'] ?? 0.
+            $product    = [
+                'id'         => $stockLevel['productId'] ?? null,
+                'sku'        => $stockLevel['sku'] ?? '',
+                'stockLevel' => $stockLevel['stockLevel'] ?? 0.,
             ];
             $products[] = $product;
         }
 
         return $products;
-    }
-
-    /**
-     * @param array $identity
-     * @return int
-     */
-    protected static function extractHostId(array $identity): int
-    {
-        list($endpointId, $hostId) = $identity;
-        return $hostId;
-    }
-
-    /**
-     * @param array $productPrice
-     * @return array
-     */
-    protected static function sortProductPriceItems(array $productPrice): array
-    {
-        if (isset($productPrice['items'])) {
-            usort($productPrice['items'], function ($a, $b) {
-                return ($a['quantity'] ?? 0) - ($b['quantity'] ?? 0);
-            });
-        }
-
-        return $productPrice;
     }
 }

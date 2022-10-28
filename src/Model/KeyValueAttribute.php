@@ -1,15 +1,17 @@
 <?php
+
 /**
  * @author    Patryk Gorol <patryk.gorol@jtl-software.com>
  * @copyright 2010-2019 JTL-Software GmbH
  */
+
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Class KeyValueAttribute
- * @access public
+ * @access  public
  * @package Jtl\Connector\Core\Model\Customer
  * @Serializer\AccessType("public_method")
  */
@@ -41,6 +43,7 @@ class KeyValueAttribute extends AbstractModel
 
     /**
      * @param string $key Attribute key
+     *
      * @return KeyValueAttribute
      */
     public function setKey(string $key): KeyValueAttribute
@@ -60,6 +63,7 @@ class KeyValueAttribute extends AbstractModel
 
     /**
      * @param string $value Attribute value
+     *
      * @return KeyValueAttribute
      */
     public function setValue(string $value): KeyValueAttribute

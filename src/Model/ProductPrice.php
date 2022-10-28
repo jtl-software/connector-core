@@ -1,7 +1,8 @@
 <?php
+
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -12,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Product price properties.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -26,7 +27,7 @@ class ProductPrice extends AbstractIdentity
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
     protected $customerGroupId = null;
-    
+
     /**
      * @var Identity Reference to customer
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
@@ -53,27 +54,18 @@ class ProductPrice extends AbstractIdentity
 
     /**
      * Constructor.
+     *
      * @param string $endpoint
-     * @param int $host
+     * @param int    $host
      */
     public function __construct(string $endpoint = '', int $host = 0)
     {
         parent::__construct($endpoint, $host);
         $this->customerGroupId = new Identity();
-        $this->productId = new Identity();
-        $this->customerId = new Identity();
+        $this->productId       = new Identity();
+        $this->customerId      = new Identity();
     }
-    
-    /**
-     * @param Identity $customerGroupId Reference to customerGroup
-     * @return ProductPrice
-     */
-    public function setCustomerGroupId(Identity $customerGroupId): ProductPrice
-    {
-        $this->customerGroupId = $customerGroupId;
-        return $this;
-    }
-    
+
     /**
      * @return Identity Reference to customerGroup
      */
@@ -81,17 +73,18 @@ class ProductPrice extends AbstractIdentity
     {
         return $this->customerGroupId;
     }
-    
+
     /**
-     * @param Identity $customerId Reference to customer
+     * @param Identity $customerGroupId Reference to customerGroup
+     *
      * @return ProductPrice
      */
-    public function setCustomerId(Identity $customerId): ProductPrice
+    public function setCustomerGroupId(Identity $customerGroupId): ProductPrice
     {
-        $this->customerId = $customerId;
+        $this->customerGroupId = $customerGroupId;
         return $this;
     }
-    
+
     /**
      * @return Identity Reference to customer
      */
@@ -101,14 +94,16 @@ class ProductPrice extends AbstractIdentity
     }
 
     /**
-     * @param Identity $productId Reference to product
+     * @param Identity $customerId Reference to customer
+     *
      * @return ProductPrice
      */
-    public function setProductId(Identity $productId): ProductPrice
+    public function setCustomerId(Identity $customerId): ProductPrice
     {
-        $this->productId = $productId;
+        $this->customerId = $customerId;
         return $this;
     }
+
     /**
      * @return Identity Reference to product
      */
@@ -118,27 +113,28 @@ class ProductPrice extends AbstractIdentity
     }
 
     /**
+     * @param Identity $productId Reference to product
+     *
+     * @return ProductPrice
+     */
+    public function setProductId(Identity $productId): ProductPrice
+    {
+        $this->productId = $productId;
+        return $this;
+    }
+
+    /**
      * @param ProductPriceItem $item
+     *
      * @return ProductPrice
      */
     public function addItem(ProductPriceItem $item): ProductPrice
     {
         $this->items[] = $item;
-        
+
         return $this;
     }
 
-    /**
-     * @param ProductPriceItem ...$items
-     * @return ProductPrice
-     */
-    public function setItems(ProductPriceItem ...$items): ProductPrice
-    {
-        $this->items = $items;
-        
-        return $this;
-    }
-    
     /**
      * @return ProductPriceItem[]
      */
@@ -146,14 +142,26 @@ class ProductPrice extends AbstractIdentity
     {
         return $this->items;
     }
-    
+
+    /**
+     * @param ProductPriceItem ...$items
+     *
+     * @return ProductPrice
+     */
+    public function setItems(ProductPriceItem ...$items): ProductPrice
+    {
+        $this->items = $items;
+
+        return $this;
+    }
+
     /**
      * @return ProductPrice
      */
     public function clearItems(): ProductPrice
     {
         $this->items = [];
-        
+
         return $this;
     }
 }

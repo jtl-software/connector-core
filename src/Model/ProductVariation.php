@@ -1,7 +1,8 @@
 <?php
+
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -10,10 +11,11 @@ namespace Jtl\Connector\Core\Model;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * ProductVariation Model. Each product defines its own variations, that means  variations are not global  in contrast to specifics.
+ * ProductVariation Model. Each product defines its own variations,
+ * that means  variations are not global  in contrast to specifics.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -22,27 +24,27 @@ class ProductVariation extends AbstractIdentity
     /**
      * @var string - Multiple values displayed as radio buttons.
      */
-    const TYPE_RADIO = 'radio';
+    public const TYPE_RADIO = 'radio';
     /**
      * @var string - Multiple values displayed as drop down.
      */
-    const TYPE_SELECT = 'select';
+    public const TYPE_SELECT = 'select';
     /**
      * @var string - boxes showing a text
      */
-    const TYPE_TEXTBOX = 'textbox';
+    public const TYPE_TEXTBOX = 'textbox';
     /**
      * @var string - Optional text input (no values)
      */
-    const TYPE_FREE_TEXT = 'freetext';
+    public const TYPE_FREE_TEXT = 'freetext';
     /**
      * @var string - Required text input (no values)
      */
-    const TYPE_FREE_TEXT_OBLIGATORY = 'obligatory_freetext';
+    public const TYPE_FREE_TEXT_OBLIGATORY = 'obligatory_freetext';
     /**
      * @var string - boxes showing a color
      */
-    const TYPE_IMAGE_SWATCHES = 'image_swatches';
+    public const TYPE_IMAGE_SWATCHES = 'image_swatches';
 
     /**
      * @var integer Optional sort number
@@ -51,7 +53,7 @@ class ProductVariation extends AbstractIdentity
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
     protected $sort = 0;
-    
+
     /**
      * @var string
      * @Serializer\Type("string")
@@ -59,7 +61,7 @@ class ProductVariation extends AbstractIdentity
      * @Serializer\Accessor(getter="getType",setter="setType")
      */
     protected $type = '';
-    
+
     /**
      * @var ProductVariationI18n[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductVariationI18n>")
@@ -67,7 +69,7 @@ class ProductVariation extends AbstractIdentity
      * @Serializer\AccessType("reflection")
      */
     protected $i18ns = [];
-    
+
     /**
      * @var ProductVariationInvisibility[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductVariationInvisibility>")
@@ -75,7 +77,7 @@ class ProductVariation extends AbstractIdentity
      * @Serializer\AccessType("reflection")
      */
     protected $invisibilities = [];
-    
+
     /**
      * @var ProductVariationValue[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductVariationValue>")
@@ -85,35 +87,25 @@ class ProductVariation extends AbstractIdentity
     protected $values = [];
 
     /**
-     * @param integer $sort Optional sort number
-     * @return ProductVariation
-     */
-    public function setSort(int $sort): ProductVariation
-    {
-        $this->sort = $sort;
-        
-        return $this;
-    }
-    
-    /**
      * @return integer Optional sort number
      */
     public function getSort(): int
     {
         return $this->sort;
     }
-    
+
     /**
-     * @param string $type
+     * @param integer $sort Optional sort number
+     *
      * @return ProductVariation
      */
-    public function setType(string $type): ProductVariation
+    public function setSort(int $sort): ProductVariation
     {
-        $this->type = $type;
-        
+        $this->sort = $sort;
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -121,29 +113,31 @@ class ProductVariation extends AbstractIdentity
     {
         return $this->type;
     }
-    
+
+    /**
+     * @param string $type
+     *
+     * @return ProductVariation
+     */
+    public function setType(string $type): ProductVariation
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
     /**
      * @param ProductVariationI18n $i18n
+     *
      * @return ProductVariation
      */
     public function addI18n(ProductVariationI18n $i18n): ProductVariation
     {
         $this->i18ns[] = $i18n;
-        
+
         return $this;
     }
 
-    /**
-     * @param ProductVariationI18n ...$i18ns
-     * @return ProductVariation
-     */
-    public function setI18ns(ProductVariationI18n ...$i18ns): ProductVariation
-    {
-        $this->i18ns = $i18ns;
-        
-        return $this;
-    }
-    
     /**
      * @return ProductVariationI18n[]
      */
@@ -151,39 +145,41 @@ class ProductVariation extends AbstractIdentity
     {
         return $this->i18ns;
     }
-    
+
+    /**
+     * @param ProductVariationI18n ...$i18ns
+     *
+     * @return ProductVariation
+     */
+    public function setI18ns(ProductVariationI18n ...$i18ns): ProductVariation
+    {
+        $this->i18ns = $i18ns;
+
+        return $this;
+    }
+
     /**
      * @return ProductVariation
      */
     public function clearI18ns(): ProductVariation
     {
         $this->i18ns = [];
-        
+
         return $this;
     }
-    
+
     /**
      * @param ProductVariationInvisibility $invisibility
+     *
      * @return ProductVariation
      */
     public function addInvisibility(ProductVariationInvisibility $invisibility): ProductVariation
     {
         $this->invisibilities[] = $invisibility;
-        
+
         return $this;
     }
 
-    /**
-     * @param ProductVariationInvisibility ...$invisibilities
-     * @return ProductVariation
-     */
-    public function setInvisibilities(ProductVariationInvisibility ...$invisibilities): ProductVariation
-    {
-        $this->invisibilities = $invisibilities;
-        
-        return $this;
-    }
-    
     /**
      * @return ProductVariationInvisibility[]
      */
@@ -191,39 +187,41 @@ class ProductVariation extends AbstractIdentity
     {
         return $this->invisibilities;
     }
-    
+
+    /**
+     * @param ProductVariationInvisibility ...$invisibilities
+     *
+     * @return ProductVariation
+     */
+    public function setInvisibilities(ProductVariationInvisibility ...$invisibilities): ProductVariation
+    {
+        $this->invisibilities = $invisibilities;
+
+        return $this;
+    }
+
     /**
      * @return ProductVariation
      */
     public function clearInvisibilities(): ProductVariation
     {
         $this->invisibilities = [];
-        
+
         return $this;
     }
-    
+
     /**
      * @param ProductVariationValue $value
+     *
      * @return ProductVariation
      */
     public function addValue(ProductVariationValue $value): ProductVariation
     {
         $this->values[] = $value;
-        
+
         return $this;
     }
 
-    /**
-     * @param ProductVariationValue ...$values
-     * @return ProductVariation
-     */
-    public function setValues(ProductVariationValue ...$values): ProductVariation
-    {
-        $this->values = $values;
-        
-        return $this;
-    }
-    
     /**
      * @return ProductVariationValue[]
      */
@@ -231,14 +229,26 @@ class ProductVariation extends AbstractIdentity
     {
         return $this->values;
     }
-    
+
+    /**
+     * @param ProductVariationValue ...$values
+     *
+     * @return ProductVariation
+     */
+    public function setValues(ProductVariationValue ...$values): ProductVariation
+    {
+        $this->values = $values;
+
+        return $this;
+    }
+
     /**
      * @return ProductVariation
      */
     public function clearValues(): ProductVariation
     {
         $this->values = [];
-        
+
         return $this;
     }
 }

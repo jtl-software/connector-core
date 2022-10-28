@@ -1,7 +1,8 @@
 <?php
+
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -12,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * File upload properties.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -26,7 +27,7 @@ class FileUpload extends AbstractIdentity
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-    
+
     /**
      * @var string
      * @Serializer\Type("string")
@@ -34,7 +35,7 @@ class FileUpload extends AbstractIdentity
      * @Serializer\Accessor(getter="getFileType",setter="setFileType")
      */
     protected $fileType = '';
-    
+
     /**
      * @var boolean
      * @Serializer\Type("boolean")
@@ -42,7 +43,7 @@ class FileUpload extends AbstractIdentity
      * @Serializer\Accessor(getter="getIsRequired",setter="setIsRequired")
      */
     protected $isRequired = false;
-    
+
     /**
      * @var FileUploadI18n[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\FileUploadI18n>")
@@ -53,8 +54,9 @@ class FileUpload extends AbstractIdentity
 
     /**
      * Constructor.
+     *
      * @param string $endpoint
-     * @param int $host
+     * @param int    $host
      */
     public function __construct(string $endpoint = '', int $host = 0)
     {
@@ -63,35 +65,25 @@ class FileUpload extends AbstractIdentity
     }
 
     /**
-     * @param Identity $productId Reference to product
-     * @return FileUpload
-     */
-    public function setProductId(Identity $productId): FileUpload
-    {
-        $this->productId = $productId;
-        
-        return $this;
-    }
-    
-    /**
      * @return Identity Reference to product
      */
     public function getProductId(): Identity
     {
         return $this->productId;
     }
-    
+
     /**
-     * @param string $fileType
+     * @param Identity $productId Reference to product
+     *
      * @return FileUpload
      */
-    public function setFileType(string $fileType): FileUpload
+    public function setProductId(Identity $productId): FileUpload
     {
-        $this->fileType = $fileType;
-        
+        $this->productId = $productId;
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -99,18 +91,19 @@ class FileUpload extends AbstractIdentity
     {
         return $this->fileType;
     }
-    
+
     /**
-     * @param boolean $isRequired
+     * @param string $fileType
+     *
      * @return FileUpload
      */
-    public function setIsRequired(bool $isRequired): FileUpload
+    public function setFileType(string $fileType): FileUpload
     {
-        $this->isRequired = $isRequired;
-        
+        $this->fileType = $fileType;
+
         return $this;
     }
-    
+
     /**
      * @return boolean
      */
@@ -118,29 +111,31 @@ class FileUpload extends AbstractIdentity
     {
         return $this->isRequired;
     }
-    
+
+    /**
+     * @param boolean $isRequired
+     *
+     * @return FileUpload
+     */
+    public function setIsRequired(bool $isRequired): FileUpload
+    {
+        $this->isRequired = $isRequired;
+
+        return $this;
+    }
+
     /**
      * @param FileUploadI18n $i18n
+     *
      * @return FileUpload
      */
     public function addI18n(FileUploadI18n $i18n): FileUpload
     {
         $this->i18ns[] = $i18n;
-        
+
         return $this;
     }
 
-    /**
-     * @param FileUploadI18n ...$i18ns
-     * @return FileUpload
-     */
-    public function setI18ns(FileUploadI18n ...$i18ns): FileUpload
-    {
-        $this->i18ns = $i18ns;
-        
-        return $this;
-    }
-    
     /**
      * @return FileUploadI18n[]
      */
@@ -148,14 +143,26 @@ class FileUpload extends AbstractIdentity
     {
         return $this->i18ns;
     }
-    
+
+    /**
+     * @param FileUploadI18n ...$i18ns
+     *
+     * @return FileUpload
+     */
+    public function setI18ns(FileUploadI18n ...$i18ns): FileUpload
+    {
+        $this->i18ns = $i18ns;
+
+        return $this;
+    }
+
     /**
      * @return FileUpload
      */
     public function clearI18ns(): FileUpload
     {
         $this->i18ns = [];
-        
+
         return $this;
     }
 }

@@ -1,7 +1,8 @@
 <?php
+
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -12,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Localized customer group name.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -28,21 +29,22 @@ class CustomerGroupI18n extends AbstractI18n
     protected $name = '';
 
     /**
-     * @param string $name Localized customer group name
-     * @return CustomerGroupI18n
-     */
-    public function setName(string $name): CustomerGroupI18n
-    {
-        $this->name = $name;
-        
-        return $this;
-    }
-    
-    /**
      * @return string Localized customer group name
      */
     public function getName(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @param string $name Localized customer group name
+     *
+     * @return CustomerGroupI18n
+     */
+    public function setName(string $name): CustomerGroupI18n
+    {
+        $this->name = $name;
+
+        return $this;
     }
 }

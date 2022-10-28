@@ -1,21 +1,23 @@
 <?php
 
-
 namespace Jtl\Connector\Core\Model\Generator;
 
 use Jtl\Connector\Core\Model\SpecificValueI18n;
 
 class SpecificValueI18nFactory extends AbstractI18nFactory
 {
+    /**
+     * @return array<string, string>
+     */
     protected function makeFakeArray(): array
     {
         return [
-            'value' => $this->faker->word,
-            'urlPath' => $this->faker->url,
-            'titleTag' => $this->faker->word,
-            'metaKeywords' => $this->faker->word,
+            'value'           => $this->faker->word,
+            'urlPath'         => $this->faker->url,
+            'titleTag'        => $this->faker->word,
+            'metaKeywords'    => $this->faker->word,
             'metaDescription' => $this->faker->sentence,
-            'description' => $this->faker->sentence,
+            'description'     => $this->faker->sentence,
         ];
     }
 

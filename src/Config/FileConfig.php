@@ -2,8 +2,9 @@
 
 /**
  * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Config
+ * @package   Jtl\Connector\Core\Config
  */
+
 namespace Jtl\Connector\Core\Config;
 
 use Jtl\Connector\Core\Exception\ConfigException;
@@ -25,11 +26,12 @@ class FileConfig extends Config
 
     /**
      * FileConfig constructor.
+     *
      * @param string $filePath
      */
     public function __construct(string $filePath)
     {
-        if (!is_file($filePath) && is_dir(dirname($filePath))) {
+        if (!\is_file($filePath) && \is_dir(\dirname($filePath))) {
             parent::__construct('{}', new Json(), true);
         } else {
             parent::__construct($filePath);
@@ -40,7 +42,8 @@ class FileConfig extends Config
 
     /**
      * @param string $key
-     * @param mixed $value
+     * @param mixed  $value
+     *
      * @return mixed|void
      * @throws ConfigException
      */

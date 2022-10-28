@@ -1,7 +1,8 @@
 <?php
+
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -12,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * ProductType model to classify and group products.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -28,21 +29,22 @@ class ProductType extends AbstractIdentity
     protected $name = '';
 
     /**
-     * @param string $name Optional (internal) product type name
-     * @return ProductType
-     */
-    public function setName(string $name): ProductType
-    {
-        $this->name = $name;
-        
-        return $this;
-    }
-    
-    /**
      * @return string Optional (internal) product type name
      */
     public function getName(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @param string $name Optional (internal) product type name
+     *
+     * @return ProductType
+     */
+    public function setName(string $name): ProductType
+    {
+        $this->name = $name;
+
+        return $this;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace MyPlugin;
 
 use DI\Container;

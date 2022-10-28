@@ -17,7 +17,8 @@ class TokenValidationTest extends TestCase
      *
      * @param string $connectorToken
      * @param string $token
-     * @param bool $result
+     * @param bool   $result
+     *
      * @throws TokenValidatorException
      */
     public function testValidateToken(string $connectorToken, string $token, bool $result)

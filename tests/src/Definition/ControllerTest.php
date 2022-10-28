@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Definition;
 
 use Jtl\Connector\Core\Definition\Controller;
@@ -9,8 +10,9 @@ class ControllerTest extends TestCase
     /**
      * @dataProvider isTypeDataProvider
      *
-     * @param $controllerName
+     * @param      $controllerName
      * @param bool $shouldBeController
+     *
      * @throws \ReflectionException
      */
     public function testIsType($controllerName, bool $shouldBeController)
@@ -25,10 +27,13 @@ class ControllerTest extends TestCase
      */
     public function isTypeDataProvider(): array
     {
-        $testCases = $this->getCorrectConstantsTestCases(Controller::class);
-        $testCases[] = [false, false];
-        $testCases[] = ['', false];
-        $testCases[] = ['statuschange', false];
+        $testCases   = $this->getCorrectConstantsTestCases(Controller::class);
+        $testCases[] = [
+            false,
+            false,
+        ];
+        $testCases[] = ['', false,];
+        $testCases[] = ['statuschange', false,];
 
         return $testCases;
     }

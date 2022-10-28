@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Model\Payment;
@@ -13,6 +14,7 @@ class PaymentEvent extends Event
 
     /**
      * PaymentEvent constructor.
+     *
      * @param Payment $payment
      */
     public function __construct(Payment $payment)

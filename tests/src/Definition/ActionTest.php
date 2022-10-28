@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Definition;
 
 use Jtl\Connector\Core\Definition\Action;
@@ -17,26 +18,30 @@ class ActionTest extends TestCase
     {
         $actions = Action::getActions();
 
-        $this->assertSame([
-            Action::PULL,
-            Action::PUSH,
-            Action::DELETE,
-            Action::STATISTIC,
-            Action::AUTH,
-            Action::ACK,
-            Action::CLEAR,
-            Action::FEATURES,
-            Action::FINISH,
-            Action::IDENTIFY,
-            Action::INIT
-        ], array_values($actions));
+        $this->assertSame(
+            [
+                Action::PULL,
+                Action::PUSH,
+                Action::DELETE,
+                Action::STATISTIC,
+                Action::AUTH,
+                Action::ACK,
+                Action::CLEAR,
+                Action::FEATURES,
+                Action::FINISH,
+                Action::IDENTIFY,
+                Action::INIT,
+            ],
+            \array_values($actions)
+        );
     }
 
     /**
      * @dataProvider actionDataProvider
      *
      * @param mixed $actionName
-     * @param bool $expectedResult
+     * @param bool  $expectedResult
+     *
      * @throws \ReflectionException
      */
     public function testIsAction($actionName, bool $expectedResult)
@@ -57,7 +62,7 @@ class ActionTest extends TestCase
             ['PusH', false],
             ['Clear', false],
             [Action::CLEAR, true],
-            [false, false],
+            [false, false]
         ];
     }
 
@@ -65,7 +70,7 @@ class ActionTest extends TestCase
      * @dataProvider coreActionDataProvider
      *
      * @param mixed $actionName
-     * @param bool $expectedResult
+     * @param bool  $expectedResult
      */
     public function testIsCoreAction($actionName, bool $expectedResult)
     {
@@ -74,6 +79,7 @@ class ActionTest extends TestCase
 
     /**
      * @return array
+     * @throws \Exception
      */
     public function coreActionDataProvider()
     {
@@ -83,7 +89,7 @@ class ActionTest extends TestCase
             [Action::PULL, false],
             [false, false],
             ['autH', false],
-            [rand(-9999, 9999), false],
+            [\random_int(-9999, 9999), false,]
         ];
     }
 }

@@ -17,34 +17,39 @@ use Jtl\Connector\Core\Utilities\Str;
 class ImageSubscriber implements EventSubscriberInterface
 {
     /**
-     * @return array
+     * @return array<int, array<string, string>>
      */
     public static function getSubscribedEvents()
     {
         return [
             [
-                'event' => 'serializer.post_serialize',
+                'event'  => 'serializer.post_serialize',
                 'method' => 'onPostSerialize',
-                'format' => 'json'
+                'format' => 'json',
             ],
             [
-                'event' => 'serializer.post_deserialize',
+                'event'  => 'serializer.post_deserialize',
                 'method' => 'onPostDeserialize',
-                'format' => 'json'
-            ]
+                'format' => 'json',
+            ],
         ];
     }
 
     /**
      * @param ObjectEvent $event
+     *
      * @throws DefinitionException
      */
     public function onPostSerialize(ObjectEvent $event)
     {
         $object = $event->getObject();
-        if ($object instanceof AbstractImage && $object->getRelationType() !== '' && $object->getId()->getEndpoint() !== '') {
+        if (
+            $object instanceof AbstractImage
+            && $object->getRelationType() !== ''
+            && $object->getId()->getEndpoint() !== ''
+        ) {
             $id = clone $object->getId();
-            $id->setEndpoint(sprintf('%s#=#%s', $object->getRelationType(), $id->getEndpoint()));
+            $id->setEndpoint(\sprintf('%s#=#%s', $object->getRelationType(), $id->getEndpoint()));
             $serializedId = $id->toArray();
             $event->getVisitor()->visitProperty(new StaticPropertyMetadata('', 'id', $serializedId), $serializedId);
         }
@@ -52,6 +57,7 @@ class ImageSubscriber implements EventSubscriberInterface
 
     /**
      * @param ObjectEvent $event
+     *
      * @throws SerializerException
      * @throws CaseConverterException
      */
@@ -65,8 +71,8 @@ class ImageSubscriber implements EventSubscriberInterface
                 $resortedIdentities = [];
                 /** @var Identity $identity */
                 foreach ($identities[$imageIndex] as $identity) {
-                    $splittedEndpoint = explode('#=#', $identity->getEndpoint());
-                    if (count($splittedEndpoint) !== 2) {
+                    $splittedEndpoint = \explode('#=#', $identity->getEndpoint());
+                    if (\count($splittedEndpoint) !== 2) {
                         throw SerializerException::wrongEndpointFormat($identity->getEndpoint());
                     }
                     $newIndex = Str::toCamelCase($splittedEndpoint[0]) . 'Image';

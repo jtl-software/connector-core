@@ -15,22 +15,27 @@ class FeaturesHandler implements SubscribingHandlerInterface
         return [
             [
                 'direction' => GraphNavigatorInterface::DIRECTION_SERIALIZATION,
-                'format' => 'json',
-                'type' => Features::class,
-                'method' => 'serializeFeaturesToJson',
-            ]
+                'format'    => 'json',
+                'type'      => Features::class,
+                'method'    => 'serializeFeaturesToJson',
+            ],
         ];
     }
 
     /**
      * @param JsonSerializationVisitor $visitor
-     * @param Features $features
-     * @param array $type
-     * @param Context $context
+     * @param Features                 $features
+     * @param array                    $type
+     * @param Context                  $context
+     *
      * @return array
      */
-    public function serializeFeaturesToJson(JsonSerializationVisitor $visitor, Features $features, array $type, Context $context)
-    {
+    public function serializeFeaturesToJson(
+        JsonSerializationVisitor $visitor,
+        Features                 $features,
+        array                    $type,
+        Context                  $context
+    ) {
         return $features->toArray();
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Model\GlobalData;
@@ -13,6 +14,7 @@ class GlobalDataEvent extends Event
 
     /**
      * GlobalDataEvent constructor.
+     *
      * @param GlobalData $globalData
      */
     public function __construct(GlobalData $globalData)

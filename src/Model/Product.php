@@ -1,7 +1,8 @@
 <?php
+
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -12,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Product properties.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -118,7 +119,9 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     protected $availableFrom = null;
 
     /**
-     * @var double Optional base price divisor. Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure. E.g. 75ml / 100ml = 0.75
+     * @var double Optional base price divisor.
+     * Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure.
+     * E.g. 75ml / 100ml = 0.75
      * @Serializer\Type("double")
      * @Serializer\SerializedName("basePriceDivisor")
      * @Serializer\Accessor(getter="getBasePriceDivisor",setter="setBasePriceDivisor")
@@ -166,7 +169,8 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     protected $considerBasePrice = false;
 
     /**
-     * @var boolean Consider stock level? If true, product can only be purchased with a positive stockLevel or when permitNegativeStock is set to true
+     * @var boolean Consider stock level?
+     * If true, product can only be purchased with a positive stockLevel or when permitNegativeStock is set to true
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("considerStock")
      * @Serializer\Accessor(getter="getConsiderStock",setter="setConsiderStock")
@@ -278,7 +282,8 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     protected $isMasterProduct = false;
 
     /**
-     * @var boolean Optional flag new product. If true, product will be highlighted as new (creation date may also be considered)
+     * @var boolean Optional flag new product.
+     * If true, product will be highlighted as new (creation date may also be considered)
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isNewProduct")
      * @Serializer\Accessor(getter="getIsNewProduct",setter="setIsNewProduct")
@@ -294,7 +299,8 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     protected $isSerialNumber = false;
 
     /**
-     * @var boolean Optional flag top product. If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
+     * @var boolean Optional flag top product.
+     * If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isTopProduct")
      * @Serializer\Accessor(getter="getIsTopProduct",setter="setIsTopProduct")
@@ -430,7 +436,8 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     protected $packagingQuantity = 0.0;
 
     /**
-     * @var boolean Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true.
+     * @var boolean Optional Permit negative stock / allow overselling.
+     * If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("permitNegativeStock")
      * @Serializer\Accessor(getter="getPermitNegativeStock",setter="setPermitNegativeStock")
@@ -687,21 +694,22 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * Constructor.
+     *
      * @param string $endpoint
-     * @param int $host
+     * @param int    $host
      */
     public function __construct(string $endpoint = '', int $host = 0)
     {
         parent::__construct($endpoint, $host);
-        $this->basePriceUnitId = new Identity();
-        $this->manufacturerId = new Identity();
-        $this->masterProductId = new Identity();
+        $this->basePriceUnitId   = new Identity();
+        $this->manufacturerId    = new Identity();
+        $this->masterProductId   = new Identity();
         $this->measurementUnitId = new Identity();
-        $this->partsListId = new Identity();
-        $this->productTypeId = new Identity();
-        $this->shippingClassId = new Identity();
-        $this->taxClassId = new Identity();
-        $this->unitId = new Identity();
+        $this->partsListId       = new Identity();
+        $this->productTypeId     = new Identity();
+        $this->shippingClassId   = new Identity();
+        $this->taxClassId        = new Identity();
+        $this->unitId            = new Identity();
     }
 
     /**
@@ -713,17 +721,6 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param Identity $basePriceUnitId Optional reference to basePriceUnit
-     * @return Product
-     */
-    public function setBasePriceUnitId(Identity $basePriceUnitId): self
-    {
-        $this->basePriceUnitId = $basePriceUnitId;
-
-        return $this;
-    }
-
-    /**
      * @return Identity Optional reference to basePriceUnit
      */
     public function getBasePriceUnitId(): Identity
@@ -732,12 +729,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param Identity $manufacturerId Reference to manufacturer
+     * @param Identity $basePriceUnitId Optional reference to basePriceUnit
+     *
      * @return Product
      */
-    public function setManufacturerId(Identity $manufacturerId): self
+    public function setBasePriceUnitId(Identity $basePriceUnitId): self
     {
-        $this->manufacturerId = $manufacturerId;
+        $this->basePriceUnitId = $basePriceUnitId;
 
         return $this;
     }
@@ -751,12 +749,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param Identity $masterProductId Reference to master product
+     * @param Identity $manufacturerId Reference to manufacturer
+     *
      * @return Product
      */
-    public function setMasterProductId(Identity $masterProductId): self
+    public function setManufacturerId(Identity $manufacturerId): self
     {
-        $this->masterProductId = $masterProductId;
+        $this->manufacturerId = $manufacturerId;
 
         return $this;
     }
@@ -770,12 +769,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param Identity $measurementUnitId Optional reference to measurement unit id
+     * @param Identity $masterProductId Reference to master product
+     *
      * @return Product
      */
-    public function setMeasurementUnitId(Identity $measurementUnitId): self
+    public function setMasterProductId(Identity $masterProductId): self
     {
-        $this->measurementUnitId = $measurementUnitId;
+        $this->masterProductId = $masterProductId;
 
         return $this;
     }
@@ -789,12 +789,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param Identity $partsListId Optional reference to partsList
+     * @param Identity $measurementUnitId Optional reference to measurement unit id
+     *
      * @return Product
      */
-    public function setPartsListId(Identity $partsListId): self
+    public function setMeasurementUnitId(Identity $measurementUnitId): self
     {
-        $this->partsListId = $partsListId;
+        $this->measurementUnitId = $measurementUnitId;
 
         return $this;
     }
@@ -808,12 +809,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param Identity $productTypeId Optional reference to productType
+     * @param Identity $partsListId Optional reference to partsList
+     *
      * @return Product
      */
-    public function setProductTypeId(Identity $productTypeId): self
+    public function setPartsListId(Identity $partsListId): self
     {
-        $this->productTypeId = $productTypeId;
+        $this->partsListId = $partsListId;
 
         return $this;
     }
@@ -827,12 +829,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param Identity $shippingClassId Reference to shippingClass
+     * @param Identity $productTypeId Optional reference to productType
+     *
      * @return Product
      */
-    public function setShippingClassId(Identity $shippingClassId): self
+    public function setProductTypeId(Identity $productTypeId): self
     {
-        $this->shippingClassId = $shippingClassId;
+        $this->productTypeId = $productTypeId;
 
         return $this;
     }
@@ -846,12 +849,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param Identity $unitId Reference to unit
+     * @param Identity $shippingClassId Reference to shippingClass
+     *
      * @return Product
      */
-    public function setUnitId(Identity $unitId): self
+    public function setShippingClassId(Identity $shippingClassId): self
     {
-        $this->unitId = $unitId;
+        $this->shippingClassId = $shippingClassId;
 
         return $this;
     }
@@ -866,6 +870,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @param Identity $taxClassId
+     *
      * @return $this
      */
     public function setTaxClassId(Identity $taxClassId): self
@@ -884,31 +889,14 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return int
-     */
-    public function getAdditionalHandlingTime(): int
-    {
-        return $this->additionalHandlingTime;
-    }
-
-    /**
-     * @param int $additionalHandlingTime
+     * @param Identity $unitId Reference to unit
+     *
      * @return Product
      */
-    public function setAdditionalHandlingTime(int $additionalHandlingTime): self
+    public function setUnitId(Identity $unitId): self
     {
-        $this->additionalHandlingTime = $additionalHandlingTime;
+        $this->unitId = $unitId;
 
-        return $this;
-    }
-
-    /**
-     * @param string $asin Optional Amazon Standard Identification Number
-     * @return Product
-     */
-    public function setAsin(string $asin): self
-    {
-        $this->asin = $asin;
         return $this;
     }
 
@@ -921,13 +909,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param \DateTimeInterface|null $availableFrom Optional available from date. Specify a date, upon when product can be purchased.
+     * @param string $asin Optional Amazon Standard Identification Number
+     *
      * @return Product
      */
-    public function setAvailableFrom(\DateTimeInterface $availableFrom = null): self
+    public function setAsin(string $asin): self
     {
-        $this->availableFrom = $availableFrom;
-
+        $this->asin = $asin;
         return $this;
     }
 
@@ -940,18 +928,22 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param double $basePriceDivisor Optional base price divisor. Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure. E.g. 75ml / 100ml = 0.75
+     * @param \DateTimeInterface|null $availableFrom Optional available from date.
+     *                                               Specify a date, upon when product can be purchased.
+     *
      * @return Product
      */
-    public function setBasePriceDivisor(float $basePriceDivisor): self
+    public function setAvailableFrom(\DateTimeInterface $availableFrom = null): self
     {
-        $this->basePriceDivisor = $basePriceDivisor;
+        $this->availableFrom = $availableFrom;
 
         return $this;
     }
 
     /**
-     * @return double Optional base price divisor. Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure. E.g. 75ml / 100ml = 0.75
+     * @return double Optional base price divisor.
+     *                Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure.
+     *                E.g. 75ml / 100ml = 0.75
      */
     public function getBasePriceDivisor(): float
     {
@@ -959,12 +951,15 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param double $basePriceFactor
+     * @param double $basePriceDivisor Optional base price divisor.
+     *                                 Calculate basePriceDivisor by dividing product filling quantity through
+     *                                 unit pricing base measure. E.g. 75ml / 100ml = 0.75
+     *
      * @return Product
      */
-    public function setBasePriceFactor(float $basePriceFactor): self
+    public function setBasePriceDivisor(float $basePriceDivisor): self
     {
-        $this->basePriceFactor = $basePriceFactor;
+        $this->basePriceDivisor = $basePriceDivisor;
 
         return $this;
     }
@@ -978,12 +973,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param double $basePriceQuantity Optional base price quantity
+     * @param double $basePriceFactor
+     *
      * @return Product
      */
-    public function setBasePriceQuantity(float $basePriceQuantity): self
+    public function setBasePriceFactor(float $basePriceFactor): self
     {
-        $this->basePriceQuantity = $basePriceQuantity;
+        $this->basePriceFactor = $basePriceFactor;
 
         return $this;
     }
@@ -997,12 +993,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param string $basePriceUnitCode
+     * @param double $basePriceQuantity Optional base price quantity
+     *
      * @return Product
      */
-    public function setBasePriceUnitCode(string $basePriceUnitCode): self
+    public function setBasePriceQuantity(float $basePriceQuantity): self
     {
-        $this->basePriceUnitCode = $basePriceUnitCode;
+        $this->basePriceQuantity = $basePriceQuantity;
 
         return $this;
     }
@@ -1016,12 +1013,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param string $basePriceUnitName
+     * @param string $basePriceUnitCode
+     *
      * @return Product
      */
-    public function setBasePriceUnitName(string $basePriceUnitName): self
+    public function setBasePriceUnitCode(string $basePriceUnitCode): self
     {
-        $this->basePriceUnitName = $basePriceUnitName;
+        $this->basePriceUnitCode = $basePriceUnitCode;
 
         return $this;
     }
@@ -1035,12 +1033,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param boolean $considerBasePrice Optional: Set to true to display base price / unit pricing measure
+     * @param string $basePriceUnitName
+     *
      * @return Product
      */
-    public function setConsiderBasePrice(bool $considerBasePrice): self
+    public function setBasePriceUnitName(string $basePriceUnitName): self
     {
-        $this->considerBasePrice = $considerBasePrice;
+        $this->basePriceUnitName = $basePriceUnitName;
 
         return $this;
     }
@@ -1054,18 +1053,21 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param boolean $considerStock Consider stock level? If true, product can only be purchased with a positive stockLevel or when permitNegativeStock is set to true
+     * @param boolean $considerBasePrice Optional: Set to true to display base price / unit pricing measure
+     *
      * @return Product
      */
-    public function setConsiderStock(bool $considerStock): self
+    public function setConsiderBasePrice(bool $considerBasePrice): self
     {
-        $this->considerStock = $considerStock;
+        $this->considerBasePrice = $considerBasePrice;
 
         return $this;
     }
 
     /**
-     * @return boolean Consider stock level? If true, product can only be purchased with a positive stockLevel or when permitNegativeStock is set to true
+     * @return boolean Consider stock level?
+     *                  If true, product can only be purchased with a positive stockLevel or when permitNegativeStock
+     *                  is set to true
      */
     public function getConsiderStock(): bool
     {
@@ -1073,12 +1075,15 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param boolean $considerVariationStock Optional: Consider stock levels of productVariations. Same as considerStock but for variations.
+     * @param boolean $considerStock Consider stock level?
+     *                               If true, product can only be purchased with a positive stockLevel or when
+     *                               permitNegativeStock is set to true
+     *
      * @return Product
      */
-    public function setConsiderVariationStock(bool $considerVariationStock): self
+    public function setConsiderStock(bool $considerStock): self
     {
-        $this->considerVariationStock = $considerVariationStock;
+        $this->considerStock = $considerStock;
 
         return $this;
     }
@@ -1092,12 +1097,14 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param \DateTimeInterface|null $creationDate Creation date
+     * @param boolean $considerVariationStock Optional: Consider stock levels of productVariations.
+     *                                        Same as considerStock but for variations.
+     *
      * @return Product
      */
-    public function setCreationDate(\DateTimeInterface $creationDate = null): self
+    public function setConsiderVariationStock(bool $considerVariationStock): self
     {
-        $this->creationDate = $creationDate;
+        $this->considerVariationStock = $considerVariationStock;
 
         return $this;
     }
@@ -1111,6 +1118,18 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
+     * @param \DateTimeInterface|null $creationDate Creation date
+     *
+     * @return Product
+     */
+    public function setCreationDate(\DateTimeInterface $creationDate = null): self
+    {
+        $this->creationDate = $creationDate;
+
+        return $this;
+    }
+
+    /**
      * @return bool
      */
     public function getDiscountable(): bool
@@ -1120,22 +1139,12 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @param bool $discountable
+     *
      * @return Product
      */
     public function setDiscountable(bool $discountable): self
     {
         $this->discountable = $discountable;
-        return $this;
-    }
-
-    /**
-     * @param string $ean Optional European Article Number (EAN)
-     * @return Product
-     */
-    public function setEan(string $ean): self
-    {
-        $this->ean = $ean;
-
         return $this;
     }
 
@@ -1148,12 +1157,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param string $epid Optional Ebay product ID
+     * @param string $ean Optional European Article Number (EAN)
+     *
      * @return Product
      */
-    public function setEpid(string $epid): self
+    public function setEan(string $ean): self
     {
-        $this->epid = $epid;
+        $this->ean = $ean;
 
         return $this;
     }
@@ -1167,12 +1177,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param string $hazardIdNumber Optional Hazard identifier, encodes general hazard class und subdivision
+     * @param string $epid Optional Ebay product ID
+     *
      * @return Product
      */
-    public function setHazardIdNumber(string $hazardIdNumber): self
+    public function setEpid(string $epid): self
     {
-        $this->hazardIdNumber = $hazardIdNumber;
+        $this->epid = $epid;
 
         return $this;
     }
@@ -1186,12 +1197,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param double $height Optional product height
+     * @param string $hazardIdNumber Optional Hazard identifier, encodes general hazard class und subdivision
+     *
      * @return Product
      */
-    public function setHeight(float $height): self
+    public function setHazardIdNumber(string $hazardIdNumber): self
     {
-        $this->height = $height;
+        $this->hazardIdNumber = $hazardIdNumber;
 
         return $this;
     }
@@ -1205,12 +1217,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param boolean $isActive
+     * @param double $height Optional product height
+     *
      * @return Product
      */
-    public function setIsActive(bool $isActive): self
+    public function setHeight(float $height): self
     {
-        $this->isActive = $isActive;
+        $this->height = $height;
 
         return $this;
     }
@@ -1224,12 +1237,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param boolean $isBatch
+     * @param boolean $isActive
+     *
      * @return Product
      */
-    public function setIsBatch(bool $isBatch): self
+    public function setIsActive(bool $isActive): self
     {
-        $this->isBatch = $isBatch;
+        $this->isActive = $isActive;
 
         return $this;
     }
@@ -1243,12 +1257,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param boolean $isBestBefore
+     * @param boolean $isBatch
+     *
      * @return Product
      */
-    public function setIsBestBefore(bool $isBestBefore): self
+    public function setIsBatch(bool $isBatch): self
     {
-        $this->isBestBefore = $isBestBefore;
+        $this->isBatch = $isBatch;
 
         return $this;
     }
@@ -1262,12 +1277,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param string $isbn Optional International Standard Book Number
+     * @param boolean $isBestBefore
+     *
      * @return Product
      */
-    public function setIsbn(string $isbn): self
+    public function setIsBestBefore(bool $isBestBefore): self
     {
-        $this->isbn = $isbn;
+        $this->isBestBefore = $isBestBefore;
 
         return $this;
     }
@@ -1281,12 +1297,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param boolean $isDivisible Optional: Set to true to allow non-integer quantites for purchase
+     * @param string $isbn Optional International Standard Book Number
+     *
      * @return Product
      */
-    public function setIsDivisible(bool $isDivisible): self
+    public function setIsbn(string $isbn): self
     {
-        $this->isDivisible = $isDivisible;
+        $this->isbn = $isbn;
 
         return $this;
     }
@@ -1300,12 +1317,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param boolean $isMasterProduct Optional flag if product is master product
+     * @param boolean $isDivisible Optional: Set to true to allow non-integer quantites for purchase
+     *
      * @return Product
      */
-    public function setIsMasterProduct(bool $isMasterProduct): self
+    public function setIsDivisible(bool $isDivisible): self
     {
-        $this->isMasterProduct = $isMasterProduct;
+        $this->isDivisible = $isDivisible;
 
         return $this;
     }
@@ -1319,18 +1337,20 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param boolean $isNewProduct Optional flag new product. If true, product will be highlighted as new (creation date may also be considered)
+     * @param boolean $isMasterProduct Optional flag if product is master product
+     *
      * @return Product
      */
-    public function setIsNewProduct(bool $isNewProduct): self
+    public function setIsMasterProduct(bool $isMasterProduct): self
     {
-        $this->isNewProduct = $isNewProduct;
+        $this->isMasterProduct = $isMasterProduct;
 
         return $this;
     }
 
     /**
-     * @return boolean Optional flag new product. If true, product will be highlighted as new (creation date may also be considered)
+     * @return boolean Optional flag new product.
+     *                  If true, product will be highlighted as new (creation date may also be considered)
      */
     public function getIsNewProduct(): bool
     {
@@ -1338,12 +1358,14 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param boolean $isSerialNumber
+     * @param boolean $isNewProduct Optional flag new product.
+     *                              If true, product will be highlighted as new (creation date may also be considered)
+     *
      * @return Product
      */
-    public function setIsSerialNumber(bool $isSerialNumber): self
+    public function setIsNewProduct(bool $isNewProduct): self
     {
-        $this->isSerialNumber = $isSerialNumber;
+        $this->isNewProduct = $isNewProduct;
 
         return $this;
     }
@@ -1357,18 +1379,20 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param boolean $isTopProduct Optional flag top product. If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
+     * @param boolean $isSerialNumber
+     *
      * @return Product
      */
-    public function setIsTopProduct(bool $isTopProduct): self
+    public function setIsSerialNumber(bool $isSerialNumber): self
     {
-        $this->isTopProduct = $isTopProduct;
+        $this->isSerialNumber = $isSerialNumber;
 
         return $this;
     }
 
     /**
-     * @return boolean Optional flag top product. If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
+     * @return boolean Optional flag top product.
+     *                  If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
      */
     public function getIsTopProduct(): bool
     {
@@ -1376,12 +1400,15 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param string $keywords Optional internal keywords and synonyms for product
+     * @param boolean $isTopProduct Optional flag top product.
+     *                              If true, product will be highlighted as top product
+     *                              (e.g. in product lists or in special boxes)
+     *
      * @return Product
      */
-    public function setKeywords(string $keywords): self
+    public function setIsTopProduct(bool $isTopProduct): self
     {
-        $this->keywords = $keywords;
+        $this->isTopProduct = $isTopProduct;
 
         return $this;
     }
@@ -1395,12 +1422,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param double $length Optional product length
+     * @param string $keywords Optional internal keywords and synonyms for product
+     *
      * @return Product
      */
-    public function setLength(float $length): self
+    public function setKeywords(string $keywords): self
     {
-        $this->length = $length;
+        $this->keywords = $keywords;
 
         return $this;
     }
@@ -1414,12 +1442,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param string $manufacturerNumber Optional manufacturer number
+     * @param double $length Optional product length
+     *
      * @return Product
      */
-    public function setManufacturerNumber(string $manufacturerNumber): self
+    public function setLength(float $length): self
     {
-        $this->manufacturerNumber = $manufacturerNumber;
+        $this->length = $length;
 
         return $this;
     }
@@ -1433,12 +1462,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param Manufacturer|null $manufacturer Optional manufacturer
+     * @param string $manufacturerNumber Optional manufacturer number
+     *
      * @return Product
      */
-    public function setManufacturer(Manufacturer $manufacturer = null): self
+    public function setManufacturerNumber(string $manufacturerNumber): self
     {
-        $this->manufacturer = $manufacturer;
+        $this->manufacturerNumber = $manufacturerNumber;
 
         return $this;
     }
@@ -1452,12 +1482,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param double $measurementQuantity Optional measurement quantity
+     * @param Manufacturer|null $manufacturer Optional manufacturer
+     *
      * @return Product
      */
-    public function setMeasurementQuantity(float $measurementQuantity): self
+    public function setManufacturer(Manufacturer $manufacturer = null): self
     {
-        $this->measurementQuantity = $measurementQuantity;
+        $this->manufacturer = $manufacturer;
 
         return $this;
     }
@@ -1471,12 +1502,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param string $measurementUnitCode
+     * @param double $measurementQuantity Optional measurement quantity
+     *
      * @return Product
      */
-    public function setMeasurementUnitCode(string $measurementUnitCode): self
+    public function setMeasurementQuantity(float $measurementQuantity): self
     {
-        $this->measurementUnitCode = $measurementUnitCode;
+        $this->measurementQuantity = $measurementQuantity;
 
         return $this;
     }
@@ -1490,12 +1522,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param \DateTimeInterface|null $minBestBeforeDate
+     * @param string $measurementUnitCode
+     *
      * @return Product
      */
-    public function setMinBestBeforeDate(\DateTimeInterface $minBestBeforeDate = null): self
+    public function setMeasurementUnitCode(string $measurementUnitCode): self
     {
-        $this->minBestBeforeDate = $minBestBeforeDate;
+        $this->measurementUnitCode = $measurementUnitCode;
 
         return $this;
     }
@@ -1509,12 +1542,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param double $minimumOrderQuantity
+     * @param \DateTimeInterface|null $minBestBeforeDate
+     *
      * @return Product
      */
-    public function setMinimumOrderQuantity(float $minimumOrderQuantity): self
+    public function setMinBestBeforeDate(\DateTimeInterface $minBestBeforeDate = null): self
     {
-        $this->minimumOrderQuantity = $minimumOrderQuantity;
+        $this->minBestBeforeDate = $minBestBeforeDate;
 
         return $this;
     }
@@ -1528,12 +1562,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param double $minimumQuantity
+     * @param double $minimumOrderQuantity
+     *
      * @return Product
      */
-    public function setMinimumQuantity(float $minimumQuantity): self
+    public function setMinimumOrderQuantity(float $minimumOrderQuantity): self
     {
-        $this->minimumQuantity = $minimumQuantity;
+        $this->minimumOrderQuantity = $minimumOrderQuantity;
 
         return $this;
     }
@@ -1547,12 +1582,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param \DateTimeInterface $modified
+     * @param double $minimumQuantity
+     *
      * @return Product
      */
-    public function setModified(\DateTimeInterface $modified = null): self
+    public function setMinimumQuantity(float $minimumQuantity): self
     {
-        $this->modified = $modified;
+        $this->minimumQuantity = $minimumQuantity;
 
         return $this;
     }
@@ -1566,12 +1602,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param \DateTimeInterface $newReleaseDate
+     * @param \DateTimeInterface $modified
+     *
      * @return Product
      */
-    public function setNewReleaseDate(\DateTimeInterface $newReleaseDate = null): self
+    public function setModified(\DateTimeInterface $modified = null): self
     {
-        $this->newReleaseDate = $newReleaseDate;
+        $this->modified = $modified;
 
         return $this;
     }
@@ -1585,12 +1622,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param \DateTimeInterface|null $nextAvailableInflowDate Contains the date of the next available inflow.
+     * @param \DateTimeInterface $newReleaseDate
+     *
      * @return Product
      */
-    public function setNextAvailableInflowDate(\DateTimeInterface $nextAvailableInflowDate = null): self
+    public function setNewReleaseDate(\DateTimeInterface $newReleaseDate = null): self
     {
-        $this->nextAvailableInflowDate = $nextAvailableInflowDate;
+        $this->newReleaseDate = $newReleaseDate;
 
         return $this;
     }
@@ -1604,12 +1642,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param double $nextAvailableInflowQuantity Contains the quantity of the next available inflow.
+     * @param \DateTimeInterface|null $nextAvailableInflowDate Contains the date of the next available inflow.
+     *
      * @return Product
      */
-    public function setNextAvailableInflowQuantity(float $nextAvailableInflowQuantity): self
+    public function setNextAvailableInflowDate(\DateTimeInterface $nextAvailableInflowDate = null): self
     {
-        $this->nextAvailableInflowQuantity = $nextAvailableInflowQuantity;
+        $this->nextAvailableInflowDate = $nextAvailableInflowDate;
 
         return $this;
     }
@@ -1623,12 +1662,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param string $note Optional internal product note
+     * @param double $nextAvailableInflowQuantity Contains the quantity of the next available inflow.
+     *
      * @return Product
      */
-    public function setNote(string $note): self
+    public function setNextAvailableInflowQuantity(float $nextAvailableInflowQuantity): self
     {
-        $this->note = $note;
+        $this->nextAvailableInflowQuantity = $nextAvailableInflowQuantity;
 
         return $this;
     }
@@ -1642,12 +1682,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param string $originCountry Optional Origin country
+     * @param string $note Optional internal product note
+     *
      * @return Product
      */
-    public function setOriginCountry(string $originCountry): self
+    public function setNote(string $note): self
     {
-        $this->originCountry = $originCountry;
+        $this->note = $note;
 
         return $this;
     }
@@ -1661,12 +1702,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param double $packagingQuantity Optional: self can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
+     * @param string $originCountry Optional Origin country
+     *
      * @return Product
      */
-    public function setPackagingQuantity(float $packagingQuantity): self
+    public function setOriginCountry(string $originCountry): self
     {
-        $this->packagingQuantity = $packagingQuantity;
+        $this->originCountry = $originCountry;
 
         return $this;
     }
@@ -1680,18 +1722,22 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param boolean $permitNegativeStock Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true.
+     * @param double $packagingQuantity Optional:
+     *                                  self can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
+     *
      * @return Product
      */
-    public function setPermitNegativeStock(bool $permitNegativeStock): self
+    public function setPackagingQuantity(float $packagingQuantity): self
     {
-        $this->permitNegativeStock = $permitNegativeStock;
+        $this->packagingQuantity = $packagingQuantity;
 
         return $this;
     }
 
     /**
-     * @return boolean Optional Permit negative stock / allow overselling. If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true.
+     * @return boolean Optional Permit negative stock / allow overselling.
+     *                  If true, product can be purchased even
+     *                  if stockLevel is less or equal 0 and considerStock is true.
      */
     public function getPermitNegativeStock(): bool
     {
@@ -1699,12 +1745,15 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param double $productWeight Productweight exclusive packaging
+     * @param boolean $permitNegativeStock Optional Permit negative stock / allow overselling.
+     *                                     If true, product can be purchased even if stockLevel is less or equal 0
+     *                                     and considerStock is true.
+     *
      * @return Product
      */
-    public function setProductWeight(float $productWeight): self
+    public function setPermitNegativeStock(bool $permitNegativeStock): self
     {
-        $this->productWeight = $productWeight;
+        $this->permitNegativeStock = $permitNegativeStock;
 
         return $this;
     }
@@ -1718,12 +1767,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param double $purchasePrice
+     * @param double $productWeight Productweight exclusive packaging
+     *
      * @return Product
      */
-    public function setPurchasePrice(float $purchasePrice): self
+    public function setProductWeight(float $productWeight): self
     {
-        $this->purchasePrice = $purchasePrice;
+        $this->productWeight = $productWeight;
 
         return $this;
     }
@@ -1737,12 +1787,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param double $recommendedRetailPrice Optional recommended retail price (gross)
+     * @param double $purchasePrice
+     *
      * @return Product
      */
-    public function setRecommendedRetailPrice(float $recommendedRetailPrice): self
+    public function setPurchasePrice(float $purchasePrice): self
     {
-        $this->recommendedRetailPrice = $recommendedRetailPrice;
+        $this->purchasePrice = $purchasePrice;
 
         return $this;
     }
@@ -1756,12 +1807,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param string $serialNumber Optional serial number
+     * @param double $recommendedRetailPrice Optional recommended retail price (gross)
+     *
      * @return Product
      */
-    public function setSerialNumber(string $serialNumber): self
+    public function setRecommendedRetailPrice(float $recommendedRetailPrice): self
     {
-        $this->serialNumber = $serialNumber;
+        $this->recommendedRetailPrice = $recommendedRetailPrice;
 
         return $this;
     }
@@ -1775,12 +1827,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param double $shippingWeight Productweight inclusive packaging
+     * @param string $serialNumber Optional serial number
+     *
      * @return Product
      */
-    public function setShippingWeight(float $shippingWeight): self
+    public function setSerialNumber(string $serialNumber): self
     {
-        $this->shippingWeight = $shippingWeight;
+        $this->serialNumber = $serialNumber;
 
         return $this;
     }
@@ -1794,13 +1847,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param string $sku Optional stock keeping unit identifier
+     * @param double $shippingWeight Productweight inclusive packaging
+     *
      * @return Product
      */
-    public function setSku(string $sku): self
+    public function setShippingWeight(float $shippingWeight): self
     {
-        $this->setIdentificationStringBySubject('sku', sprintf('SKU = %s', $sku));
-        $this->sku = $sku;
+        $this->shippingWeight = $shippingWeight;
 
         return $this;
     }
@@ -1814,12 +1867,14 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param integer $sort Optional sort number for product sorting in lists
+     * @param string $sku Optional stock keeping unit identifier
+     *
      * @return Product
      */
-    public function setSort(int $sort): self
+    public function setSku(string $sku): self
     {
-        $this->sort = $sort;
+        $this->setIdentificationStringBySubject('sku', \sprintf('SKU = %s', $sku));
+        $this->sku = $sku;
 
         return $this;
     }
@@ -1833,12 +1888,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param float $stockLevel
-     * @return $this
+     * @param integer $sort Optional sort number for product sorting in lists
+     *
+     * @return Product
      */
-    public function setStockLevel(float $stockLevel): self
+    public function setSort(int $sort): self
     {
-        $this->stockLevel = $stockLevel;
+        $this->sort = $sort;
 
         return $this;
     }
@@ -1852,31 +1908,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param integer $supplierDeliveryTime
-     * @return Product
+     * @param float $stockLevel
+     *
+     * @return $this
      */
-    public function setSupplierDeliveryTime(int $supplierDeliveryTime): self
+    public function setStockLevel(float $stockLevel): self
     {
-        $this->supplierDeliveryTime = $supplierDeliveryTime;
-
-        return $this;
-    }
-
-    /**
-     * @return integer
-     */
-    public function getSupplierDeliveryTime(): int
-    {
-        return $this->supplierDeliveryTime;
-    }
-
-    /**
-     * @param double $supplierStockLevel
-     * @return Product
-     */
-    public function setSupplierStockLevel(float $supplierStockLevel): self
-    {
-        $this->supplierStockLevel = $supplierStockLevel;
+        $this->stockLevel = $stockLevel;
 
         return $this;
     }
@@ -1890,12 +1928,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param string $taric Optional TARIC
+     * @param double $supplierStockLevel
+     *
      * @return Product
      */
-    public function setTaric(string $taric): self
+    public function setSupplierStockLevel(float $supplierStockLevel): self
     {
-        $this->taric = $taric;
+        $this->supplierStockLevel = $supplierStockLevel;
 
         return $this;
     }
@@ -1909,12 +1948,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param string $unNumber Optional UN number, used to define hazardous properties
+     * @param string $taric Optional TARIC
+     *
      * @return Product
      */
-    public function setUnNumber(string $unNumber): self
+    public function setTaric(string $taric): self
     {
-        $this->unNumber = $unNumber;
+        $this->taric = $taric;
 
         return $this;
     }
@@ -1928,12 +1968,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param string $upc Optional Universal Product Code
+     * @param string $unNumber Optional UN number, used to define hazardous properties
+     *
      * @return Product
      */
-    public function setUpc(string $upc): self
+    public function setUnNumber(string $unNumber): self
     {
-        $this->upc = $upc;
+        $this->unNumber = $unNumber;
 
         return $this;
     }
@@ -1947,12 +1988,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param double $vat
+     * @param string $upc Optional Universal Product Code
+     *
      * @return Product
      */
-    public function setVat(float $vat): self
+    public function setUpc(string $upc): self
     {
-        $this->vat = $vat;
+        $this->upc = $upc;
 
         return $this;
     }
@@ -1966,12 +2008,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param double $width Optional product width
+     * @param double $vat
+     *
      * @return Product
      */
-    public function setWidth(float $width): self
+    public function setVat(float $vat): self
     {
-        $this->width = $width;
+        $this->vat = $vat;
 
         return $this;
     }
@@ -1985,7 +2028,20 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
+     * @param double $width Optional product width
+     *
+     * @return Product
+     */
+    public function setWidth(float $width): self
+    {
+        $this->width = $width;
+
+        return $this;
+    }
+
+    /**
      * @param TranslatableAttribute|ProductAttribute $attribute
+     *
      * @return Product
      */
     public function addAttribute(TranslatableAttribute $attribute): self
@@ -1996,7 +2052,16 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
+     * @return TranslatableAttribute|ProductAttribute[]
+     */
+    public function getAttributes(): array
+    {
+        return $this->attributes;
+    }
+
+    /**
      * @param TranslatableAttribute|ProductAttribute ...$attributes
+     *
      * @return Product
      */
     public function setAttributes(TranslatableAttribute ...$attributes): TranslatableAttributesInterface
@@ -2004,14 +2069,6 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
         $this->attributes = $attributes;
 
         return $this;
-    }
-
-    /**
-     * @return TranslatableAttribute|ProductAttribute[]
-     */
-    public function getAttributes(): array
-    {
-        return $this->attributes;
     }
 
     /**
@@ -2026,6 +2083,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @param Product2Category $category
+     *
      * @return Product
      */
     public function addCategory(Product2Category $category): self
@@ -2036,7 +2094,16 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
+     * @return Product2Category[]
+     */
+    public function getCategories(): array
+    {
+        return $this->categories;
+    }
+
+    /**
      * @param Product2Category ...$categories
+     *
      * @return Product
      */
     public function setCategories(Product2Category ...$categories): self
@@ -2044,14 +2111,6 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
         $this->categories = $categories;
 
         return $this;
-    }
-
-    /**
-     * @return Product2Category[]
-     */
-    public function getCategories(): array
-    {
-        return $this->categories;
     }
 
     /**
@@ -2066,6 +2125,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @param ProductChecksum $checksum
+     *
      * @return Product
      */
     public function addChecksum(ProductChecksum $checksum): self
@@ -2076,7 +2136,16 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
+     * @return ProductChecksum[]
+     */
+    public function getChecksums(): array
+    {
+        return $this->checksums;
+    }
+
+    /**
      * @param ProductChecksum ...$checksums
+     *
      * @return Product
      */
     public function setChecksums(ProductChecksum ...$checksums): self
@@ -2084,14 +2153,6 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
         $this->checksums = $checksums;
 
         return $this;
-    }
-
-    /**
-     * @return ProductChecksum[]
-     */
-    public function getChecksums(): array
-    {
-        return $this->checksums;
     }
 
     /**
@@ -2106,6 +2167,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @param ProductConfigGroup $configGroup
+     *
      * @return Product
      */
     public function addConfigGroup(ProductConfigGroup $configGroup): self
@@ -2116,7 +2178,16 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
+     * @return ProductConfigGroup[]
+     */
+    public function getConfigGroups(): array
+    {
+        return $this->configGroups;
+    }
+
+    /**
      * @param ProductConfigGroup ...$configGroups
+     *
      * @return Product
      */
     public function setConfigGroups(ProductConfigGroup ...$configGroups): self
@@ -2124,14 +2195,6 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
         $this->configGroups = $configGroups;
 
         return $this;
-    }
-
-    /**
-     * @return ProductConfigGroup[]
-     */
-    public function getConfigGroups(): array
-    {
-        return $this->configGroups;
     }
 
     /**
@@ -2146,22 +2209,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @param CustomerGroupPackagingQuantity $customerGroupPackagingQuantity
+     *
      * @return Product
      */
-    public function addCustomerGroupPackagingQuantity(CustomerGroupPackagingQuantity $customerGroupPackagingQuantity): self
-    {
+    public function addCustomerGroupPackagingQuantity(
+        CustomerGroupPackagingQuantity $customerGroupPackagingQuantity
+    ): self {
         $this->customerGroupPackagingQuantities[] = $customerGroupPackagingQuantity;
-
-        return $this;
-    }
-
-    /**
-     * @param array $customerGroupPackagingQuantities
-     * @return Product
-     */
-    public function setCustomerGroupPackagingQuantities(CustomerGroupPackagingQuantity ...$customerGroupPackagingQuantities): self
-    {
-        $this->customerGroupPackagingQuantities = $customerGroupPackagingQuantities;
 
         return $this;
     }
@@ -2172,6 +2226,19 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     public function getCustomerGroupPackagingQuantities(): array
     {
         return $this->customerGroupPackagingQuantities;
+    }
+
+    /**
+     * @param array $customerGroupPackagingQuantities
+     *
+     * @return Product
+     */
+    public function setCustomerGroupPackagingQuantities(
+        CustomerGroupPackagingQuantity ...$customerGroupPackagingQuantities
+    ): self {
+        $this->customerGroupPackagingQuantities = $customerGroupPackagingQuantities;
+
+        return $this;
     }
 
     /**
@@ -2186,6 +2253,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @param ProductFileDownload $fileDownload
+     *
      * @return Product
      */
     public function addFileDownload(ProductFileDownload $fileDownload): self
@@ -2196,7 +2264,16 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
+     * @return ProductFileDownload[]
+     */
+    public function getFileDownloads(): array
+    {
+        return $this->fileDownloads;
+    }
+
+    /**
      * @param ProductFileDownload ...$fileDownloads
+     *
      * @return Product
      */
     public function setFileDownloads(ProductFileDownload ...$fileDownloads): self
@@ -2204,14 +2281,6 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
         $this->fileDownloads = $fileDownloads;
 
         return $this;
-    }
-
-    /**
-     * @return ProductFileDownload[]
-     */
-    public function getFileDownloads(): array
-    {
-        return $this->fileDownloads;
     }
 
     /**
@@ -2226,6 +2295,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @param ProductI18n $i18n
+     *
      * @return Product
      */
     public function addI18n(ProductI18n $i18n): self
@@ -2233,25 +2303,6 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
         $this->i18ns[] = $i18n;
 
         return $this;
-    }
-
-    /**
-     * @param ProductI18n ...$i18ns
-     * @return Product
-     */
-    public function setI18ns(ProductI18n ...$i18ns): self
-    {
-        $this->i18ns = $i18ns;
-
-        return $this;
-    }
-
-    /**
-     * @return ProductI18n[]
-     */
-    public function getI18ns(): array
-    {
-        return $this->i18ns;
     }
 
     /**
@@ -2266,6 +2317,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @param ProductInvisibility $invisibility
+     *
      * @return Product
      */
     public function addInvisibility(ProductInvisibility $invisibility): self
@@ -2276,7 +2328,16 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
+     * @return ProductInvisibility[]
+     */
+    public function getInvisibilities(): array
+    {
+        return $this->invisibilities;
+    }
+
+    /**
      * @param ProductInvisibility ...$invisibilities
+     *
      * @return Product
      */
     public function setInvisibilities(ProductInvisibility ...$invisibilities): self
@@ -2284,14 +2345,6 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
         $this->invisibilities = $invisibilities;
 
         return $this;
-    }
-
-    /**
-     * @return ProductInvisibility[]
-     */
-    public function getInvisibilities(): array
-    {
-        return $this->invisibilities;
     }
 
     /**
@@ -2306,6 +2359,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @param ProductMediaFile $mediaFile
+     *
      * @return Product
      */
     public function addMediaFile(ProductMediaFile $mediaFile): self
@@ -2316,7 +2370,16 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
+     * @return ProductMediaFile[]
+     */
+    public function getMediaFiles(): array
+    {
+        return $this->mediaFiles;
+    }
+
+    /**
      * @param ProductMediaFile ...$mediaFiles
+     *
      * @return Product
      */
     public function setMediaFiles(ProductMediaFile ...$mediaFiles): self
@@ -2324,14 +2387,6 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
         $this->mediaFiles = $mediaFiles;
 
         return $this;
-    }
-
-    /**
-     * @return ProductMediaFile[]
-     */
-    public function getMediaFiles(): array
-    {
-        return $this->mediaFiles;
     }
 
     /**
@@ -2346,6 +2401,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @param ProductPartsList $partsList
+     *
      * @return Product
      */
     public function addPartsList(ProductPartsList $partsList): self
@@ -2356,7 +2412,16 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
+     * @return ProductPartsList[]
+     */
+    public function getPartsLists(): array
+    {
+        return $this->partsLists;
+    }
+
+    /**
      * @param ProductPartsList ...$partsLists
+     *
      * @return Product
      */
     public function setPartsLists(ProductPartsList ...$partsLists): self
@@ -2364,14 +2429,6 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
         $this->partsLists = $partsLists;
 
         return $this;
-    }
-
-    /**
-     * @return ProductPartsList[]
-     */
-    public function getPartsLists(): array
-    {
-        return $this->partsLists;
     }
 
     /**
@@ -2386,6 +2443,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @param ProductPrice $price
+     *
      * @return Product
      */
     public function addPrice(ProductPrice $price): self
@@ -2396,7 +2454,16 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
+     * @return ProductPrice[]
+     */
+    public function getPrices(): array
+    {
+        return $this->prices;
+    }
+
+    /**
      * @param ProductPrice ...$prices
+     *
      * @return Product
      */
     public function setPrices(ProductPrice ...$prices): self
@@ -2404,14 +2471,6 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
         $this->prices = $prices;
 
         return $this;
-    }
-
-    /**
-     * @return ProductPrice[]
-     */
-    public function getPrices(): array
-    {
-        return $this->prices;
     }
 
     /**
@@ -2426,6 +2485,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @param ProductSpecialPrice $specialPrice
+     *
      * @return Product
      */
     public function addSpecialPrice(ProductSpecialPrice $specialPrice): self
@@ -2436,7 +2496,16 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
+     * @return ProductSpecialPrice[]
+     */
+    public function getSpecialPrices(): array
+    {
+        return $this->specialPrices;
+    }
+
+    /**
      * @param ProductSpecialPrice ...$specialPrices
+     *
      * @return Product
      */
     public function setSpecialPrices(ProductSpecialPrice ...$specialPrices): self
@@ -2444,14 +2513,6 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
         $this->specialPrices = $specialPrices;
 
         return $this;
-    }
-
-    /**
-     * @return ProductSpecialPrice[]
-     */
-    public function getSpecialPrices(): array
-    {
-        return $this->specialPrices;
     }
 
     /**
@@ -2466,6 +2527,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @param ProductSpecific $specific
+     *
      * @return Product
      */
     public function addSpecific(ProductSpecific $specific): self
@@ -2476,7 +2538,16 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
+     * @return ProductSpecific[]
+     */
+    public function getSpecifics(): array
+    {
+        return $this->specifics;
+    }
+
+    /**
      * @param ProductSpecific ...$specifics
+     *
      * @return Product
      */
     public function setSpecifics(ProductSpecific ...$specifics): self
@@ -2484,14 +2555,6 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
         $this->specifics = $specifics;
 
         return $this;
-    }
-
-    /**
-     * @return ProductSpecific[]
-     */
-    public function getSpecifics(): array
-    {
-        return $this->specifics;
     }
 
     /**
@@ -2506,6 +2569,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @param string $countryIso
+     *
      * @return TaxRate|null
      */
     public function findTaxRateByCountryIso(string $countryIso): ?TaxRate
@@ -2529,6 +2593,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @param array<TaxRate> $taxRates
+     *
      * @return Product
      */
     public function setTaxRates(TaxRate ...$taxRates): self
@@ -2540,6 +2605,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @param ProductVariation $variation
+     *
      * @return Product
      */
     public function addVariation(ProductVariation $variation): self
@@ -2550,7 +2616,16 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
+     * @return ProductVariation[]
+     */
+    public function getVariations(): array
+    {
+        return $this->variations;
+    }
+
+    /**
      * @param ProductVariation ...$variations
+     *
      * @return Product
      */
     public function setVariations(ProductVariation ...$variations): self
@@ -2558,14 +2633,6 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
         $this->variations = $variations;
 
         return $this;
-    }
-
-    /**
-     * @return ProductVariation[]
-     */
-    public function getVariations(): array
-    {
-        return $this->variations;
     }
 
     /**
@@ -2580,6 +2647,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @param ProductWarehouseInfo $warehouseInfo
+     *
      * @return Product
      */
     public function addWarehouseInfo(ProductWarehouseInfo $warehouseInfo): self
@@ -2590,7 +2658,16 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
+     * @return ProductWarehouseInfo[]
+     */
+    public function getWarehouseInfo(): array
+    {
+        return $this->warehouseInfo;
+    }
+
+    /**
      * @param ProductWarehouseInfo ...$warehouseInfo
+     *
      * @return Product
      */
     public function setWarehouseInfo(ProductWarehouseInfo ...$warehouseInfo): self
@@ -2598,14 +2675,6 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
         $this->warehouseInfo = $warehouseInfo;
 
         return $this;
-    }
-
-    /**
-     * @return ProductWarehouseInfo[]
-     */
-    public function getWarehouseInfo(): array
-    {
-        return $this->warehouseInfo;
     }
 
     /**
@@ -2632,6 +2701,46 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
+     * @return int
+     */
+    public function getAdditionalHandlingTime(): int
+    {
+        return $this->additionalHandlingTime;
+    }
+
+    /**
+     * @param int $additionalHandlingTime
+     *
+     * @return Product
+     */
+    public function setAdditionalHandlingTime(int $additionalHandlingTime): self
+    {
+        $this->additionalHandlingTime = $additionalHandlingTime;
+
+        return $this;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getSupplierDeliveryTime(): int
+    {
+        return $this->supplierDeliveryTime;
+    }
+
+    /**
+     * @param integer $supplierDeliveryTime
+     *
+     * @return Product
+     */
+    public function setSupplierDeliveryTime(int $supplierDeliveryTime): self
+    {
+        $this->supplierDeliveryTime = $supplierDeliveryTime;
+
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function getIdentificationStrings(): array
@@ -2639,11 +2748,31 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
         $this->unsetIdentificationStringBySubject('name');
         foreach ($this->getI18ns() as $i18n) {
             if ($i18n->getName() !== '') {
-                $this->setIdentificationStringBySubject('name', sprintf('Name = %s', $i18n->getName()));
+                $this->setIdentificationStringBySubject('name', \sprintf('Name = %s', $i18n->getName()));
                 break;
             }
         }
 
         return parent::getIdentificationStrings();
+    }
+
+    /**
+     * @return ProductI18n[]
+     */
+    public function getI18ns(): array
+    {
+        return $this->i18ns;
+    }
+
+    /**
+     * @param ProductI18n ...$i18ns
+     *
+     * @return Product
+     */
+    public function setI18ns(ProductI18n ...$i18ns): self
+    {
+        $this->i18ns = $i18ns;
+
+        return $this;
     }
 }

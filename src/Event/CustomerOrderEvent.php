@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Model\CustomerOrder;
@@ -13,6 +14,7 @@ class CustomerOrderEvent extends Event
 
     /**
      * CustomerOrderEvent constructor.
+     *
      * @param CustomerOrder $order
      */
     public function __construct(CustomerOrder $order)

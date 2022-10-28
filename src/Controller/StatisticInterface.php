@@ -1,7 +1,8 @@
 <?php
+
 /**
  * @copyright 2010-2019 JTL-Software GmbH
- * @package Jtl\Connector\Core\Application
+ * @package   Jtl\Connector\Core\Application
  */
 
 namespace Jtl\Connector\Core\Controller;
@@ -14,7 +15,8 @@ interface StatisticInterface
      * Statistic
      *
      * @param QueryFilter $queryFilter
+     *
      * @return int
      */
-    public function statistic(QueryFilter $queryFilter) : int;
+    public function statistic(QueryFilter $queryFilter): int;
 }

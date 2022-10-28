@@ -11,14 +11,14 @@ use Jtl\Connector\Core\Model\TranslatableAttribute;
 class TranslatableAttributeFactory extends AbstractModelFactory
 {
     /**
-     * @return array
+     * @return array<string, bool|array<int, mixed>>
      */
     protected function makeFakeArray(): array
     {
         return [
-            'isTranslated' => $this->faker->boolean,
+            'isTranslated'     => $this->faker->boolean,
             'isCustomProperty' => $this->faker->boolean,
-            'i18ns' => $this->getFactory('TranslatableAttributeI18n')->makeArray(3)
+            'i18ns'            => $this->getFactory('TranslatableAttributeI18n')->makeArray(3),
         ];
     }
 

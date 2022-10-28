@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Model\QueryFilter;
@@ -17,6 +18,7 @@ class QueryFilterEvent extends Event
 
     /**
      * ModelBeforeQueryFilterEvent constructor.
+     *
      * @param QueryFilter $queryFilter
      */
     public function __construct(QueryFilter $queryFilter)

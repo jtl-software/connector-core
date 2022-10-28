@@ -1,7 +1,8 @@
 <?php
+
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -10,10 +11,12 @@ namespace Jtl\Connector\Core\Model;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Product to specificValue Assignment. Product specifics are used to assign characteristic product attributes like color or  size... When different products have common specifics, products are similar.
+ * Product to specificValue Assignment.
+ * Product specifics are used to assign characteristic product attributes like color or  size...
+ * When different products have common specifics, products are similar.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -29,8 +32,9 @@ class ProductSpecific extends AbstractIdentity
 
     /**
      * Constructor.
+     *
      * @param string $endpoint
-     * @param int $host
+     * @param int    $host
      */
     public function __construct(string $endpoint = '', int $host = 0)
     {
@@ -39,21 +43,22 @@ class ProductSpecific extends AbstractIdentity
     }
 
     /**
-     * @param Identity $specificValueId Reference to specificValue
-     * @return ProductSpecific
-     */
-    public function setSpecificValueId(Identity $specificValueId): ProductSpecific
-    {
-        $this->specificValueId = $specificValueId;
-        
-        return $this;
-    }
-    
-    /**
      * @return Identity Reference to specificValue
      */
     public function getSpecificValueId(): Identity
     {
         return $this->specificValueId;
+    }
+
+    /**
+     * @param Identity $specificValueId Reference to specificValue
+     *
+     * @return ProductSpecific
+     */
+    public function setSpecificValueId(Identity $specificValueId): ProductSpecific
+    {
+        $this->specificValueId = $specificValueId;
+
+        return $this;
     }
 }

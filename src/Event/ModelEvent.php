@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Model\AbstractModel;
@@ -17,6 +18,7 @@ class ModelEvent extends Event
 
     /**
      * ModelAfterActionEvent constructor.
+     *
      * @param AbstractModel $model
      */
     public function __construct(AbstractModel $model)

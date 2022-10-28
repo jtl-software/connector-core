@@ -1,22 +1,21 @@
 <?php
+
 namespace Jtl\Connector\Core\Definition;
 
 final class Action
 {
     public const
-        PULL = 'pull',
-        PUSH = 'push',
-        DELETE = 'delete',
-        STATISTIC = 'statistic';
-
-    public const
-        AUTH = 'auth',
-        ACK = 'ack',
-        CLEAR = 'clear',
-        FEATURES = 'features',
-        FINISH = 'finish',
-        IDENTIFY = 'identify',
-        INIT = 'init';
+        PULL      = 'pull',
+        PUSH      = 'push',
+        DELETE    = 'delete',
+        STATISTIC = 'statistic',
+        AUTH      = 'auth',
+        ACK       = 'ack',
+        CLEAR     = 'clear',
+        FEATURES  = 'features',
+        FINISH    = 'finish',
+        IDENTIFY  = 'identify',
+        INIT      = 'init';
 
     /**
      * @var string[]|null
@@ -37,11 +36,21 @@ final class Action
     ];
 
     /**
+     * @param string $actionName
+     *
+     * @return boolean
+     */
+    public static function isAction(string $actionName): bool
+    {
+        return \in_array($actionName, self::getActions(), true);
+    }
+
+    /**
      * @return integer[]
      */
     public static function getActions(): array
     {
-        if (is_null(self::$actions)) {
+        if (\is_null(self::$actions)) {
             self::$actions = (new \ReflectionClass(self::class))->getConstants();
         }
 
@@ -50,19 +59,11 @@ final class Action
 
     /**
      * @param string $actionName
-     * @return boolean
-     */
-    public static function isAction(string $actionName): bool
-    {
-        return in_array($actionName, self::getActions(), true);
-    }
-
-    /**
-     * @param string $actionName
+     *
      * @return boolean
      */
     public static function isCoreAction(string $actionName): bool
     {
-        return in_array($actionName, self::$coreActions, true);
+        return \in_array($actionName, self::$coreActions, true);
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
@@ -33,6 +34,7 @@ class Identities extends AbstractModel
      * Identities getter
      *
      * @param Identity[] $identities
+     *
      * @return Ack
      */
     public function setIdentities(array $identities): self

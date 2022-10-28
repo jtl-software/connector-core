@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Model\Statistic;
@@ -13,6 +14,7 @@ class StatisticEvent extends Event
 
     /**
      * StatisticEvent constructor.
+     *
      * @param Statistic $statistic
      */
     public function __construct(Statistic $statistic)

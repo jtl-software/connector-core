@@ -1,7 +1,8 @@
 <?php
+
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -12,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Define set articles / parts lists.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -26,7 +27,7 @@ class PartsList extends AbstractIdentity
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
     protected $productId = null;
-    
+
     /**
      * @var double Component quantity
      * @Serializer\Type("double")
@@ -37,8 +38,9 @@ class PartsList extends AbstractIdentity
 
     /**
      * Constructor.
+     *
      * @param string $endpoint
-     * @param int $host
+     * @param int    $host
      */
     public function __construct(string $endpoint = '', int $host = 0)
     {
@@ -47,40 +49,42 @@ class PartsList extends AbstractIdentity
     }
 
     /**
-     * @param Identity $productId Reference to a component / product
-     * @return PartsList
-     */
-    public function setProductId(Identity $productId): PartsList
-    {
-        $this->productId = $productId;
-        
-        return $this;
-    }
-    
-    /**
      * @return Identity Reference to a component / product
      */
     public function getProductId(): Identity
     {
         return $this->productId;
     }
-    
+
     /**
-     * @param double $quantity Component quantity
+     * @param Identity $productId Reference to a component / product
+     *
      * @return PartsList
      */
-    public function setQuantity(float $quantity): PartsList
+    public function setProductId(Identity $productId): PartsList
     {
-        $this->quantity = $quantity;
-        
+        $this->productId = $productId;
+
         return $this;
     }
-    
+
     /**
      * @return double Component quantity
      */
     public function getQuantity(): float
     {
         return $this->quantity;
+    }
+
+    /**
+     * @param double $quantity Component quantity
+     *
+     * @return PartsList
+     */
+    public function setQuantity(float $quantity): PartsList
+    {
+        $this->quantity = $quantity;
+
+        return $this;
     }
 }

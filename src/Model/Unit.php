@@ -1,7 +1,8 @@
 <?php
+
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -12,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Specifies product units like "piece", "bottle", "package".
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -29,26 +30,16 @@ class Unit extends AbstractIdentity
 
     /**
      * @param UnitI18n $i18n
+     *
      * @return Unit
      */
     public function addI18n(UnitI18n $i18n): Unit
     {
         $this->i18ns[] = $i18n;
-        
+
         return $this;
     }
 
-    /**
-     * @param UnitI18n ...$i18ns
-     * @return Unit
-     */
-    public function setI18ns(UnitI18n ...$i18ns): Unit
-    {
-        $this->i18ns = $i18ns;
-        
-        return $this;
-    }
-    
     /**
      * @return UnitI18n[]
      */
@@ -56,14 +47,26 @@ class Unit extends AbstractIdentity
     {
         return $this->i18ns;
     }
-    
+
+    /**
+     * @param UnitI18n ...$i18ns
+     *
+     * @return Unit
+     */
+    public function setI18ns(UnitI18n ...$i18ns): Unit
+    {
+        $this->i18ns = $i18ns;
+
+        return $this;
+    }
+
     /**
      * @return Unit
      */
     public function clearI18ns(): Unit
     {
         $this->i18ns = [];
-        
+
         return $this;
     }
 }

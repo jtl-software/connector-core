@@ -1,8 +1,9 @@
 <?php
+
 /**
  *
  * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Exception
+ * @package   Jtl\Connector\Core\Exception
  */
 
 namespace Jtl\Connector\Core\Exception;
@@ -22,7 +23,7 @@ class RpcException extends \Exception
      */
     public static function parseError(): self
     {
-        return new self("Parse error", ErrorCode::PARSE_ERROR);
+        return new self('Parse error', ErrorCode::PARSE_ERROR);
     }
 
     /**
@@ -35,11 +36,12 @@ class RpcException extends \Exception
 
     /**
      * @param string $method
+     *
      * @return RpcException
      */
     public static function invalidMethod(string $method): self
     {
-        return new self(sprintf('Invalid method (%s)', $method), ErrorCode::INVALID_METHOD);
+        return new self(\sprintf('Invalid method (%s)', $method), ErrorCode::INVALID_METHOD);
     }
 
     /**

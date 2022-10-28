@@ -16,7 +16,8 @@ class AbstractImageTest extends TestCase
      * @dataProvider relationTypeProvider
      *
      * @param AbstractImage $image
-     * @param string $relationType
+     * @param string        $relationType
+     *
      * @throws DefinitionException
      */
     public function testGetRelationType(AbstractImage $image, string $relationType)
@@ -33,7 +34,7 @@ class AbstractImageTest extends TestCase
             [new CategoryImage(), 'category'],
             [new ProductImage(), 'product'],
             [new ProductVariationValueImage(), 'productVariationValue'],
-            [new ManufacturerImage(), 'manufacturer'],
+            [new ManufacturerImage(), 'manufacturer']
         ];
     }
 
@@ -59,7 +60,7 @@ class AbstractImageTest extends TestCase
             ['file.name', 'name'],
             ['some.file.name', 'name'],
             ['filename', ''],
-            ['', ''],
+            ['', '']
         ];
     }
 }

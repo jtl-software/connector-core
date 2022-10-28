@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Definition;
 
 use Jtl\Connector\Core\Definition\RpcMethod;
@@ -13,7 +14,7 @@ class RpcMethodTest extends TestCase
     /**
      * @dataProvider isMethodDataProvider
      *
-     * @param $methodName
+     * @param      $methodName
      * @param bool $shouldBeMethod
      */
     public function testIsMethod($methodName, bool $shouldBeMethod)
@@ -30,7 +31,7 @@ class RpcMethodTest extends TestCase
     {
         $definedMethods = $this->getCorrectConstantsTestCases(RpcMethod::class);
 
-        $customTests = [];
+        $customTests   = [];
         $customTests[] = ['""', false];
         $customTests[] = [' ', false];
         $customTests[] = [false, false];
@@ -42,7 +43,7 @@ class RpcMethodTest extends TestCase
         $customTests[] = ['method\.name', false];
         $customTests[] = ['very.long.method.name', true];
 
-        return array_merge_recursive($definedMethods, $customTests);
+        return \array_merge_recursive($definedMethods, $customTests);
     }
 
     /**

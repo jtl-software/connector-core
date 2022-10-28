@@ -14,6 +14,7 @@ class ConnectorIdentificationEvent extends Event
 
     /**
      * ConnectorIdentificationEvent constructor.
+     *
      * @param ConnectorIdentification $connectorIdentification
      */
     public function __construct(ConnectorIdentification $connectorIdentification)

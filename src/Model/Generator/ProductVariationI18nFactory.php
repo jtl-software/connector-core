@@ -9,8 +9,8 @@ class ProductVariationI18nFactory extends AbstractModelFactory
     protected function makeFakeArray(): array
     {
         return [
-            'name' => $this->faker->text,
-            'languageIso' => $this->faker->languageCode
+            'name'        => $this->faker->text,
+            'languageIso' => $this->faker->languageCode,
         ];
     }
 

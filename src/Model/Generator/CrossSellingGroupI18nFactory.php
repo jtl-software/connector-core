@@ -10,7 +10,7 @@ class CrossSellingGroupI18nFactory extends AbstractI18nFactory
     {
         return [
             'description' => $this->faker->text,
-            'name' => $this->faker->name,
+            'name'        => $this->faker->name,
         ];
     }
 

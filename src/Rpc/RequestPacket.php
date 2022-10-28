@@ -1,10 +1,11 @@
 <?php
+
 namespace Jtl\Connector\Core\Rpc;
 
 use JMS\Serializer\Annotation as Serializer;
+use JMS\Serializer\Serializer as JmsSerializer;
 use Jtl\Connector\Core\Definition\RpcMethod;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
-use JMS\Serializer\Serializer as JmsSerializer;
 
 /**
  * Rpc Request Packet
@@ -41,21 +42,22 @@ class RequestPacket extends Packet
     protected $params = [];
 
     /**
-     * @return string
-     */
-    public function getMethod(): string
-    {
-        return $this->method;
-    }
-
-    /**
-     * @param string $method
+     * @param string             $jtlrpc
+     * @param JmsSerializer|null $serializer
+     *
      * @return RequestPacket
      */
-    public function setMethod(string $method): RequestPacket
+    public static function createFromJtlrpc(string $jtlrpc, JmsSerializer $serializer = null): RequestPacket
     {
-        $this->method = $method;
-        return $this;
+        if (\is_null($serializer)) {
+            $serializer = SerializerBuilder::create()->build();
+        }
+
+        if ($jtlrpc !== '') {
+            return $serializer->deserialize($jtlrpc, RequestPacket::class, 'json');
+        } else {
+            return new static();
+        }
     }
 
     /**
@@ -68,6 +70,7 @@ class RequestPacket extends Packet
 
     /**
      * @param mixed[] $params
+     *
      * @return RequestPacket
      */
     public function setParams(array $params): RequestPacket
@@ -103,20 +106,21 @@ class RequestPacket extends Packet
     }
 
     /**
-     * @param string $jtlrpc
-     * @param JmsSerializer|null $serializer
+     * @return string
+     */
+    public function getMethod(): string
+    {
+        return $this->method;
+    }
+
+    /**
+     * @param string $method
+     *
      * @return RequestPacket
      */
-    public static function createFromJtlrpc(string $jtlrpc, JmsSerializer $serializer = null): RequestPacket
+    public function setMethod(string $method): RequestPacket
     {
-        if (is_null($serializer)) {
-            $serializer = SerializerBuilder::create()->build();
-        }
-
-        if ($jtlrpc !== '') {
-            return $serializer->deserialize($jtlrpc, RequestPacket::class, 'json');
-        } else {
-            return new static();
-        }
+        $this->method = $method;
+        return $this;
     }
 }

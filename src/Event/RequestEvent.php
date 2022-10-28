@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Application\Request;
@@ -13,6 +14,7 @@ class RequestEvent extends Event
 
     /**
      * RequestBeforeHandleEvent constructor.
+     *
      * @param Request $request
      */
     public function __construct(Request $request)

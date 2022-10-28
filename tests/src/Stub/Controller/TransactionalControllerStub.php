@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Stub\Controller;
 
 use Jtl\Connector\Core\Controller\DeleteInterface;
@@ -13,15 +14,18 @@ use Jtl\Connector\Core\Model\QueryFilter;
  * Class TransactionalController
  * @package Jtl\Connector\Core\Test\Stub\Controller
  */
-class TransactionalControllerStub implements DeleteInterface, StatisticInterface, PullInterface, PushInterface, TransactionalInterface
+class TransactionalControllerStub implements
+    DeleteInterface,
+    StatisticInterface,
+    PullInterface,
+    PushInterface,
+    TransactionalInterface
 {
-    /**
-     * @var bool
-     */
-    protected $commitThrowsException = false;
+    protected bool $commitThrowsException = false;
 
     /**
      * TransactionalControllerStub constructor.
+     *
      * @param bool $commitThrowsException
      */
     public function __construct(bool $commitThrowsException = false)
@@ -31,6 +35,7 @@ class TransactionalControllerStub implements DeleteInterface, StatisticInterface
 
     /**
      * @param QueryFilter $queryFilter
+     *
      * @return int
      */
     public function statistic(QueryFilter $queryFilter): int
@@ -40,6 +45,7 @@ class TransactionalControllerStub implements DeleteInterface, StatisticInterface
 
     /**
      * @param AbstractModel $model
+     *
      * @return AbstractModel
      */
     public function delete(AbstractModel $model): AbstractModel
@@ -49,15 +55,17 @@ class TransactionalControllerStub implements DeleteInterface, StatisticInterface
 
     /**
      * @param QueryFilter $queryFilter
+     *
      * @return array
      */
     public function pull(QueryFilter $queryFilter): array
     {
-        return [1, 2, 3];
+        return [1, 2, 3,];
     }
 
     /**
      * @param AbstractModel $model
+     *
      * @return AbstractModel
      */
     public function push(AbstractModel $model): AbstractModel
@@ -75,12 +83,12 @@ class TransactionalControllerStub implements DeleteInterface, StatisticInterface
 
     /**
      * @return bool
-     * @throws \Exception
+     * @throws \RuntimeException
      */
     public function commit(): bool
     {
         if ($this->commitThrowsException) {
-            throw new \Exception("Transaction exception");
+            throw new \RuntimeException('Transaction exception');
         }
         return true;
     }

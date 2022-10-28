@@ -1,7 +1,8 @@
 <?php
+
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -12,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Billing address of a customer (order)
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -28,21 +29,22 @@ class CustomerOrderBillingAddress extends AbstractOrderAddress
     protected $vatNumber = '';
 
     /**
-     * @param string $vatNumber VAT number (german "USt-ID")
-     * @return CustomerOrderBillingAddress
-     */
-    public function setVatNumber(string $vatNumber): CustomerOrderBillingAddress
-    {
-        $this->vatNumber = $vatNumber;
-        
-        return $this;
-    }
-    
-    /**
      * @return string VAT number (german "USt-ID")
      */
     public function getVatNumber(): string
     {
         return $this->vatNumber;
+    }
+
+    /**
+     * @param string $vatNumber VAT number (german "USt-ID")
+     *
+     * @return CustomerOrderBillingAddress
+     */
+    public function setVatNumber(string $vatNumber): CustomerOrderBillingAddress
+    {
+        $this->vatNumber = $vatNumber;
+
+        return $this;
     }
 }

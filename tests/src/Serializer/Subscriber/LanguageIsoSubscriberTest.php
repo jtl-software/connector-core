@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Serializer\Subscriber;
 
 use Jtl\Connector\Core\Model\AbstractI18n;
@@ -32,33 +33,45 @@ class LanguageIsoSubscriberTest extends TestCase
 
     /**
      * @dataProvider i18NDataProvider
+     *
      * @param $model
      */
     public function testOnPostSerializeWithInvalidValue(string $model)
     {
-        $i18nModel = new $model;
+        $i18nModel = new $model();
         $i18nModel->setLanguageIso('___');
 
         $serializedData = $this->serializeModel($i18nModel);
 
-        $jsonObj = json_decode($serializedData);
+        $jsonObj = \json_decode($serializedData);
         $this->assertObjectHasAttribute('languageISO', $jsonObj);
         $this->assertObjectHasAttribute('languageIso', $jsonObj);
         $this->assertEquals($jsonObj->languageISO, $jsonObj->languageIso);
     }
 
     /**
-     * @dataProvider i18NDataProvider
-     * @param $model
+     * @param AbstractI18n $i18nModel
+     *
+     * @return string
      */
-    public function testOnPostSerializeWithEmptyValue(string $model)
+    protected function serializeModel(AbstractI18n $i18nModel): string
     {
-        $i18nModel = new $model;
-        $i18nModel->setLanguageIso("");
+        return SerializerBuilder::create()->build()->serialize($i18nModel, 'json');
+    }
+
+    /**
+     * @dataProvider i18NDataProvider
+     *
+     * @param string $model
+     */
+    public function testOnPostSerializeWithEmptyValue(string $model): void
+    {
+        $i18nModel = new $model();
+        $i18nModel->setLanguageIso('');
 
         $serializedData = $this->serializeModel($i18nModel);
 
-        $jsonObj = json_decode($serializedData);
+        $jsonObj = \json_decode($serializedData);
         $this->assertObjectHasAttribute('languageISO', $jsonObj);
         $this->assertObjectHasAttribute('languageIso', $jsonObj);
         $this->assertSame($jsonObj->languageIso, '');
@@ -66,16 +79,19 @@ class LanguageIsoSubscriberTest extends TestCase
 
     /**
      * @dataProvider i18NDataProvider
-     * @param $model
+     *
+     * @param string $model
+     *
+     * @throws \JsonException
      */
-    public function testOnPostSerializeWithValidValue(string $model)
+    public function testOnPostSerializeWithValidValue(string $model): void
     {
-        $i18nModel = new $model;
+        $i18nModel = new $model();
         $i18nModel->setLanguageIso('de');
 
         $serializedData = $this->serializeModel($i18nModel);
 
-        $jsonObj = json_decode($serializedData);
+        $jsonObj = \json_decode($serializedData, false, 512, \JSON_THROW_ON_ERROR);
 
         $this->assertObjectHasAttribute('languageISO', $jsonObj);
         $this->assertEquals('ger', $jsonObj->languageISO);
@@ -83,15 +99,18 @@ class LanguageIsoSubscriberTest extends TestCase
 
     /**
      * @dataProvider i18NDataProvider
+     *
      * @param string $model
+     *
+     * @throws \JsonException
      */
-    public function testOnPostSerializeWithNoValue(string $model)
+    public function testOnPostSerializeWithNoValue(string $model): void
     {
-        $i18nModel = new $model;
+        $i18nModel = new $model();
 
         $serializedData = $this->serializeModel($i18nModel);
 
-        $jsonObj = json_decode($serializedData);
+        $jsonObj = \json_decode($serializedData, false, 512, \JSON_THROW_ON_ERROR);
 
         $this->assertObjectHasAttribute('languageISO', $jsonObj);
         $this->assertEquals('', $jsonObj->languageISO);
@@ -99,11 +118,12 @@ class LanguageIsoSubscriberTest extends TestCase
 
     /**
      * @dataProvider i18NDataProvider
-     * @param $model
+     *
+     * @param string $model
      */
-    public function testOnPreDeserializeWithValidValue(string $model)
+    public function testOnPreDeserializeWithValidValue(string $model): void
     {
-        $i18nModel = new $model;
+        $i18nModel = new $model();
         $i18nModel->setLanguageIso('de');
 
         /** @var $deserializeData ProductI18n */
@@ -114,25 +134,8 @@ class LanguageIsoSubscriberTest extends TestCase
     }
 
     /**
-     * @dataProvider i18NDataProvider
-     * @param $model
-     */
-    public function testOnPreDeserializeWithInValidValue(string $model)
-    {
-        $value = '_____';
-
-        $i18nModel = new $model;
-        $i18nModel->setLanguageIso($value);
-
-        /** @var $deserializeData ProductI18n */
-        $deserializeData = $this->serializeAndDeserializeModel($i18nModel);
-
-        $this->assertObjectHasAttribute('languageIso', $deserializeData);
-        $this->assertSame($deserializeData->getLanguageIso(), $value);
-    }
-
-    /**
      * @param AbstractI18n $i18nModel
+     *
      * @return mixed
      */
     protected function serializeAndDeserializeModel(AbstractI18n $i18nModel)
@@ -142,12 +145,21 @@ class LanguageIsoSubscriberTest extends TestCase
     }
 
     /**
-     * @param AbstractI18n $i18nModel
-     * @return string
+     * @dataProvider i18NDataProvider
+     *
+     * @param string $model
      */
-    protected function serializeModel(AbstractI18n $i18nModel): string
+    public function testOnPreDeserializeWithInValidValue(string $model): void
     {
-        $serializer = SerializerBuilder::create()->build();
-        return $serializer->serialize($i18nModel, 'json');
+        $value = '_____';
+
+        $i18nModel = new $model();
+        $i18nModel->setLanguageIso($value);
+
+        /** @var $deserializeData ProductI18n */
+        $deserializeData = $this->serializeAndDeserializeModel($i18nModel);
+
+        $this->assertObjectHasAttribute('languageIso', $deserializeData);
+        $this->assertSame($deserializeData->getLanguageIso(), $value);
     }
 }

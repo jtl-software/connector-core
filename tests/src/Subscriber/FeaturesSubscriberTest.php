@@ -14,7 +14,7 @@ class FeaturesSubscriberTest extends TestCase
     public function testSetNeedsFinishCallActive()
     {
         $subscriber = new FeaturesSubscriber();
-        $features = Features::create();
+        $features   = Features::create();
         $this->assertFalse($features->hasFlag('needs_finish_call'));
         $subscriber->setNeedsFinishCallActive(new FeaturesEvent($features));
         $this->assertTrue($features->hasFlag('needs_finish_call'));
@@ -24,7 +24,7 @@ class FeaturesSubscriberTest extends TestCase
     public function testSetNeedsFinishCallActiveOverrideInactive()
     {
         $subscriber = new FeaturesSubscriber();
-        $features = Features::create()->setFlag(new FeatureFlag('needs_finish_call'));
+        $features   = Features::create()->setFlag(new FeatureFlag('needs_finish_call'));
         $this->assertTrue($features->hasFlag('needs_finish_call'));
         $this->assertFalse($features->getFlag('needs_finish_call')->isActive());
         $subscriber->setNeedsFinishCallActive(new FeaturesEvent($features));
@@ -34,7 +34,7 @@ class FeaturesSubscriberTest extends TestCase
     public function testGetSubscribedEvents()
     {
         $expectedEventName = Event::createCoreEventName('Connector', 'features', 'after');
-        $subscribedEvents = FeaturesSubscriber::getSubscribedEvents();
+        $subscribedEvents  = FeaturesSubscriber::getSubscribedEvents();
         $this->assertArrayHasKey($expectedEventName, $subscribedEvents);
         $listeners = $subscribedEvents[$expectedEventName];
         $this->assertIsArray($listeners);

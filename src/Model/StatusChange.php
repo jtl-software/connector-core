@@ -1,7 +1,8 @@
 <?php
+
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -10,14 +11,13 @@ namespace Jtl\Connector\Core\Model;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
 class StatusChange extends AbstractModel
 {
-
     /**
      * @var Identity
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
@@ -25,7 +25,7 @@ class StatusChange extends AbstractModel
      * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
      */
     protected $customerOrderId = null;
-    
+
     /**
      * @var string
      * @Serializer\Type("string")
@@ -33,7 +33,7 @@ class StatusChange extends AbstractModel
      * @Serializer\Accessor(getter="getOrderStatus",setter="setOrderStatus")
      */
     protected $orderStatus = '';
-    
+
     /**
      * @var string
      * @Serializer\Type("string")
@@ -41,7 +41,7 @@ class StatusChange extends AbstractModel
      * @Serializer\Accessor(getter="getPaymentStatus",setter="setPaymentStatus")
      */
     protected $paymentStatus = '';
-    
+
     /**
      * Constructor
      */
@@ -49,18 +49,7 @@ class StatusChange extends AbstractModel
     {
         $this->customerOrderId = new Identity();
     }
-    
-    /**
-     * @param Identity $customerOrderId
-     * @return StatusChange
-     */
-    public function setCustomerOrderId(Identity $customerOrderId): self
-    {
-        $this->customerOrderId = $customerOrderId;
-        
-        return $this;
-    }
-    
+
     /**
      * @return Identity
      */
@@ -70,16 +59,17 @@ class StatusChange extends AbstractModel
     }
 
     /**
-     * @param string $orderStatus
+     * @param Identity $customerOrderId
+     *
      * @return StatusChange
      */
-    public function setOrderStatus(string $orderStatus): self
+    public function setCustomerOrderId(Identity $customerOrderId): self
     {
-        $this->orderStatus = $orderStatus;
-        
+        $this->customerOrderId = $customerOrderId;
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -87,18 +77,19 @@ class StatusChange extends AbstractModel
     {
         return $this->orderStatus;
     }
-    
+
     /**
-     * @param string $paymentStatus
+     * @param string $orderStatus
+     *
      * @return StatusChange
      */
-    public function setPaymentStatus(string $paymentStatus): self
+    public function setOrderStatus(string $orderStatus): self
     {
-        $this->paymentStatus = $paymentStatus;
-        
+        $this->orderStatus = $orderStatus;
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -108,11 +99,26 @@ class StatusChange extends AbstractModel
     }
 
     /**
+     * @param string $paymentStatus
+     *
+     * @return StatusChange
+     */
+    public function setPaymentStatus(string $paymentStatus): self
+    {
+        $this->paymentStatus = $paymentStatus;
+
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function getIdentificationStrings(): array
     {
-        $this->setIdentificationStringBySubject('customerOrderId', sprintf('JTL-Wawi PK = %d', $this->customerOrderId->getHost()));
+        $this->setIdentificationStringBySubject(
+            'customerOrderId',
+            \sprintf('JTL-Wawi PK = %d', $this->customerOrderId->getHost())
+        );
 
         return parent::getIdentificationStrings();
     }

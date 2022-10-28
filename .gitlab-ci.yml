@@ -26,6 +26,8 @@ stages:
   - test
 
 code_quality:
+  variables:
+    CQ_STANDARDS: '/tmp/code-quality/ConnectorCoreStandard.xml'
   before_script: []
 
 test:unit:

@@ -6,24 +6,17 @@ use Jtl\Connector\Core\Exception\TranslatableAttributeException;
 use Jtl\Connector\Core\Model\TranslatableAttribute;
 use Jtl\Connector\Core\Model\TranslatableAttributeI18n;
 use Jtl\Connector\Core\Test\TestCase;
-use stdClass;
 
 class TranslatableAttributeI18nTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-        TranslatableAttributeI18n::setStrictMode(false);
-    }
-
-
     /**
      * @dataProvider getValueProvider
      *
      * @param string $type
-     * @param $originalValue
-     * @param $expectedValue
-     * @param bool $strictMode
+     * @param        $originalValue
+     * @param        $expectedValue
+     * @param bool   $strictMode
+     *
      * @throws TranslatableAttributeException
      */
     public function testGetValue(string $type, $originalValue, $expectedValue, bool $strictMode = false)
@@ -35,7 +28,10 @@ class TranslatableAttributeI18nTest extends TestCase
 
         $actualValue = $i18n->getValue($type);
 
-        $this->assertTrue($expectedValue === $actualValue, sprintf('Casted value (%s) has the wrong type', json_encode($actualValue)));
+        $this->assertTrue(
+            $expectedValue === $actualValue,
+            \sprintf('Casted value (%s) has the wrong type', \json_encode($actualValue))
+        );
     }
 
     /**
@@ -58,9 +54,9 @@ class TranslatableAttributeI18nTest extends TestCase
             ['string', 'foo', 'foo'],
             ['string', '', ''],
             ['foo', 'bar', 'bar'],
-            ['json', '["a", "b"]', ['a', 'b']],
+            ['json', '["a", "b"]', ['a', 'b',]],
             ['json', '{"key1":"value1", "key2":"value2"}', ['key1' => 'value1', 'key2' => 'value2']],
-            ['json', '...asdas', null, false],
+            ['json', '...asdas', null, false]
         ];
     }
 
@@ -80,15 +76,23 @@ class TranslatableAttributeI18nTest extends TestCase
     /**
      * @dataProvider setValueProvider
      *
-     * @param $value
+     * @param        $value
      * @param string $expectedValue
+     *
      * @throws TranslatableAttributeException
      */
     public function testSetValue($value, string $expectedValue)
     {
         $translation = (new TranslatableAttributeI18n())->setValue($value);
 
-        $this->assertTrue($translation->getValue() === $expectedValue, sprintf('Value (%s) is not equal to expected value (%s)', $translation->getValue(), $expectedValue));
+        $this->assertTrue(
+            $translation->getValue() === $expectedValue,
+            \sprintf(
+                'Value (%s) is not equal to expected value (%s)',
+                $translation->getValue(),
+                $expectedValue
+            )
+        );
     }
 
     /**
@@ -129,7 +133,13 @@ class TranslatableAttributeI18nTest extends TestCase
     {
         return [
             [null],
-            [fopen('php://temp', 'r')],
+            [\fopen('php://temp', 'r')],
         ];
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        TranslatableAttributeI18n::setStrictMode(false);
     }
 }

@@ -1,10 +1,9 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Rpc;
 
 use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Controller;
-use Jtl\Connector\Core\Definition\ErrorCode;
-use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Rpc\Method;
 use Jtl\Connector\Core\Test\TestCase;
 
@@ -14,7 +13,6 @@ use Jtl\Connector\Core\Test\TestCase;
  */
 class MethodTest extends TestCase
 {
-
     /**
      *
      */
@@ -35,6 +33,7 @@ class MethodTest extends TestCase
      * @param $expectedController
      * @param $expectedAction
      * @param $isCore
+     *
      * @throws \Exception
      */
     public function testCreateFromRpcMethod($rpcMethod, $expectedController, $expectedAction, $isCore)
@@ -52,13 +51,48 @@ class MethodTest extends TestCase
     public function createFromRpcMethodDataProvider(): array
     {
         return [
-            ['product.pull', 'Product', 'pull', false],
-            ['core.connector.auth', 'Connector', 'auth', true],
-            [' category. pull', 'Category', 'pull', false],
-            ['.', '', '', false],
-            ['..', '', '', false],
-            ['some', 'Invalid', 'invalid', false],
-            ['yo.lo.mio.rio', 'Invalid', 'invalid', false],
+            [
+                'product.pull',
+                'Product',
+                'pull',
+                false,
+            ],
+            [
+                'core.connector.auth',
+                'Connector',
+                'auth',
+                true,
+            ],
+            [
+                ' category. pull',
+                'Category',
+                'pull',
+                false,
+            ],
+            [
+                '.',
+                '',
+                '',
+                false,
+            ],
+            [
+                '..',
+                '',
+                '',
+                false,
+            ],
+            [
+                'some',
+                'Invalid',
+                'invalid',
+                false,
+            ],
+            [
+                'yo.lo.mio.rio',
+                'Invalid',
+                'invalid',
+                false,
+            ],
         ];
     }
 }

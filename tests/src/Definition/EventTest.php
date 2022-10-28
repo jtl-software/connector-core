@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Definition;
 
 use Jtl\Connector\Core\Definition\Action;
@@ -75,6 +76,7 @@ class EventTest extends TestCase
      * @param $action
      * @param $moment
      * @param $expectedException
+     *
      * @throws DefinitionException
      * @throws \ReflectionException
      */

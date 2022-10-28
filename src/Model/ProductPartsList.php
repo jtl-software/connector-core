@@ -1,7 +1,8 @@
 <?php
+
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -12,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Define set articles / parts lists.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -28,21 +29,22 @@ class ProductPartsList extends AbstractIdentity
     protected $quantity = 0.0;
 
     /**
-     * @param double $quantity Component quantity
-     * @return ProductPartsList
-     */
-    public function setQuantity(float $quantity): ProductPartsList
-    {
-        $this->quantity = $quantity;
-        
-        return $this;
-    }
-    
-    /**
      * @return double Component quantity
      */
     public function getQuantity(): float
     {
         return $this->quantity;
+    }
+
+    /**
+     * @param double $quantity Component quantity
+     *
+     * @return ProductPartsList
+     */
+    public function setQuantity(float $quantity): ProductPartsList
+    {
+        $this->quantity = $quantity;
+
+        return $this;
     }
 }

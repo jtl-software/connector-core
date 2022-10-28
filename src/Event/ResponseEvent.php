@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Application\Response;
@@ -13,6 +14,7 @@ class ResponseEvent extends Event
 
     /**
      * ResponseEvent constructor.
+     *
      * @param Response $response
      */
     public function __construct(Response $response)

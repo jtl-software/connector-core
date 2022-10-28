@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Rpc;
 
 use JMS\Serializer\Annotation as Serializer;
@@ -23,7 +24,7 @@ abstract class Packet extends AbstractModel
      * @Serializer\Type("string")
      */
     protected $jtlrpc = '';
-    
+
     /**
      * @var string
      * @Serializer\Type("string")
@@ -43,7 +44,6 @@ abstract class Packet extends AbstractModel
     abstract public function isValid(): bool;
 
 
-
     /**
      * Getter for $jtlrpc
      *
@@ -58,6 +58,7 @@ abstract class Packet extends AbstractModel
      * Setter for $jtlrpc
      *
      * @param string $jtlrpc
+     *
      * @return Packet
      */
     public function setJtlrpc(string $jtlrpc): Packet
@@ -80,6 +81,7 @@ abstract class Packet extends AbstractModel
      * Setter for $id
      *
      * @param string $id
+     *
      * @return Packet
      */
     public function setId(string $id): Packet
@@ -91,11 +93,12 @@ abstract class Packet extends AbstractModel
 
     /**
      * @param JmsSerializer|null $serializer
+     *
      * @return mixed[]
      */
     public function toArray(JmsSerializer $serializer = null): array
     {
-        if (is_null($serializer)) {
+        if (\is_null($serializer)) {
             $serializer = SerializerBuilder::create()->build();
         }
 
@@ -106,6 +109,7 @@ abstract class Packet extends AbstractModel
     /**
      * @param string $id
      * @param string $jtlrpc
+     *
      * @return Packet
      */
     public static function create(string $id, string $jtlrpc = '2.0'): self

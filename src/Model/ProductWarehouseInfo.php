@@ -1,7 +1,8 @@
 <?php
+
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -12,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Product to warehouse info association.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -26,7 +27,7 @@ class ProductWarehouseInfo extends AbstractModel
      * @Serializer\Accessor(getter="getwarehouseId",setter="setwarehouseId")
      */
     protected $warehouseId = null;
-    
+
     /**
      * @var double Optional product inflow quantity for specified warehouse
      * @Serializer\Type("double")
@@ -34,7 +35,7 @@ class ProductWarehouseInfo extends AbstractModel
      * @Serializer\Accessor(getter="getInflowQuantity",setter="setInflowQuantity")
      */
     protected $inflowQuantity = 0.0;
-    
+
     /**
      * @var double
      * @Serializer\Type("double")
@@ -42,7 +43,7 @@ class ProductWarehouseInfo extends AbstractModel
      * @Serializer\Accessor(getter="getstockLevel",setter="setstockLevel")
      */
     protected $stockLevel = 0.0;
-    
+
     /**
      * Constructor
      */
@@ -52,35 +53,25 @@ class ProductWarehouseInfo extends AbstractModel
     }
 
     /**
-     * @param Identity $warehouseId
-     * @return ProductWarehouseInfo
-     */
-    public function setWarehouseId(Identity $warehouseId): ProductWarehouseInfo
-    {
-        $this->warehouseId = $warehouseId;
-        
-        return $this;
-    }
-    
-    /**
      * @return Identity
      */
     public function getWarehouseId(): Identity
     {
         return $this->warehouseId;
     }
-    
+
     /**
-     * @param double $inflowQuantity Optional product inflow quantity for specified warehouse
+     * @param Identity $warehouseId
+     *
      * @return ProductWarehouseInfo
      */
-    public function setInflowQuantity(float $inflowQuantity): ProductWarehouseInfo
+    public function setWarehouseId(Identity $warehouseId): ProductWarehouseInfo
     {
-        $this->inflowQuantity = $inflowQuantity;
-        
+        $this->warehouseId = $warehouseId;
+
         return $this;
     }
-    
+
     /**
      * @return double Optional product inflow quantity for specified warehouse
      */
@@ -88,23 +79,36 @@ class ProductWarehouseInfo extends AbstractModel
     {
         return $this->inflowQuantity;
     }
-    
+
     /**
-     * @param double $stockLevel
+     * @param double $inflowQuantity Optional product inflow quantity for specified warehouse
+     *
      * @return ProductWarehouseInfo
      */
-    public function setStockLevel(float $stockLevel): ProductWarehouseInfo
+    public function setInflowQuantity(float $inflowQuantity): ProductWarehouseInfo
     {
-        $this->stockLevel = $stockLevel;
-        
+        $this->inflowQuantity = $inflowQuantity;
+
         return $this;
     }
-    
+
     /**
      * @return double
      */
     public function getStockLevel(): float
     {
         return $this->stockLevel;
+    }
+
+    /**
+     * @param double $stockLevel
+     *
+     * @return ProductWarehouseInfo
+     */
+    public function setStockLevel(float $stockLevel): ProductWarehouseInfo
+    {
+        $this->stockLevel = $stockLevel;
+
+        return $this;
     }
 }

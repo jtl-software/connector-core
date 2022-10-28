@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Definition;
 
 use Jtl\Connector\Core\Definition\IdentityType;
@@ -13,8 +14,9 @@ class IdentityTypeTest extends TestCase
     /**
      * @dataProvider isTypeDataProvider
      *
-     * @param $type
+     * @param      $type
      * @param bool $shouldBeIdentityType
+     *
      * @throws \ReflectionException
      */
     public function testIsType($type, bool $shouldBeIdentityType)
@@ -29,7 +31,7 @@ class IdentityTypeTest extends TestCase
      */
     public function isTypeDataProvider(): array
     {
-        $testCases = $this->getCorrectConstantsTestCases(IdentityType::class);
+        $testCases   = $this->getCorrectConstantsTestCases(IdentityType::class);
         $testCases[] = [false, false];
         $testCases[] = [-100, false];
         $testCases[] = ['68', true];

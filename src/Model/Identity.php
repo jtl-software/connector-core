@@ -1,7 +1,8 @@
 <?php
+
 /**
- * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2013 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Internal
  */
 
@@ -13,8 +14,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Identity
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Internal
  * @Serializer\AccessType("public_method")
  */
@@ -27,7 +28,7 @@ class Identity extends AbstractModel
      * @Serializer\Accessor(getter="getEndpoint",setter="setEndpoint")
      */
     protected $endpoint = '';
-    
+
     /**
      * @var int
      * @Serializer\Type("integer")
@@ -35,19 +36,45 @@ class Identity extends AbstractModel
      * @Serializer\Accessor(getter="getHost",setter="setHost")
      */
     protected $host = 0;
-    
+
     /**
      * Constructor
      *
      * @param string $endpoint
-     * @param int $host
+     * @param int    $host
      */
     public function __construct(string $endpoint = '', int $host = 0)
     {
         $this->endpoint = $endpoint;
         $this->host     = $host;
     }
-    
+
+    /**
+     * Convert from Array
+     *
+     * @param array $data
+     *
+     * @return Identity
+     */
+    public static function fromArray(array $data)
+    {
+        if (
+            \count($data) !== 2
+            || !isset($data[0])
+            || !\is_string($data[0])
+            || !isset($data[1])
+            || !\is_int($data[1])
+        ) {
+            throw new InvalidArgumentException(
+                'The argument is not valid. 
+                It must consist of exactly two fields.
+                First field (0) must contain a string value and second field (1) must contain an integer value'
+            );
+        }
+
+        return new self($data[0], $data[1]);
+    }
+
     /**
      * Gets the value of endpoint.
      *
@@ -57,20 +84,21 @@ class Identity extends AbstractModel
     {
         return $this->endpoint;
     }
-    
+
     /**
      * Sets the value of endpoint.
      *
      * @param string $endpoint the endpoint
+     *
      * @return Identity
      */
     public function setEndpoint(string $endpoint): Identity
     {
         $this->endpoint = $endpoint;
-        
+
         return $this;
     }
-    
+
     /**
      * Gets the value of host.
      *
@@ -80,20 +108,21 @@ class Identity extends AbstractModel
     {
         return $this->host;
     }
-    
+
     /**
      * Sets the value of host.
      *
      * @param int $host the host
+     *
      * @return Identity
      */
     public function setHost(int $host): Identity
     {
         $this->host = $host;
-        
+
         return $this;
     }
-    
+
     /**
      * Convert to Array
      *
@@ -101,21 +130,9 @@ class Identity extends AbstractModel
      */
     public function toArray(): array
     {
-        return [$this->endpoint, $this->host];
-    }
-
-    /**
-     * Convert from Array
-     *
-     * @param array $data
-     * @return Identity
-     */
-    public static function fromArray(array $data)
-    {
-        if (count($data) !== 2 || !isset($data[0]) || !is_string($data[0]) || !isset($data[1]) || !is_int($data[1])) {
-            throw new InvalidArgumentException('The argument is not valid. It must consist of exactly two fields. First field (0) must contain a string value and second field (1) must contain an integer value');
-        }
-        
-        return new self($data[0], $data[1]);
+        return [
+            $this->endpoint,
+            $this->host,
+        ];
     }
 }

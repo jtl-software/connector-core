@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Model\Category;
@@ -13,6 +14,7 @@ class CategoryEvent extends Event
 
     /**
      * CategoryEvent constructor.
+     *
      * @param Category $category
      */
     public function __construct(Category $category)

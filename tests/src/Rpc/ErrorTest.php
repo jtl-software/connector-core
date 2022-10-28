@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Rpc;
 
 use Jtl\Connector\Core\Exception\RpcException;
@@ -31,7 +32,7 @@ class ErrorTest extends TestCase
 
         $error = new Error();
         $error->setCode(100);
-        $error->setMessage("");
+        $error->setMessage('');
         $error->setData([]);
         $error->validate();
     }
@@ -43,7 +44,7 @@ class ErrorTest extends TestCase
     {
         $error = new Error();
         $error->setCode(101);
-        $error->setMessage("Error messasge");
+        $error->setMessage('Error messasge');
         $error->setData([]);
         $return = $error->validate();
 

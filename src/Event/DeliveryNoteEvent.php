@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Model\DeliveryNote;
@@ -13,6 +14,7 @@ class DeliveryNoteEvent extends Event
 
     /**
      * DeliveryNoteEvent constructor.
+     *
      * @param DeliveryNote $deliveryNote
      */
     public function __construct(DeliveryNote $deliveryNote)

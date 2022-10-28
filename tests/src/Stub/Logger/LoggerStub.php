@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Stub\Logger;
 
 use Monolog\Logger as MonoLogger;
@@ -9,21 +10,24 @@ use Monolog\Logger as MonoLogger;
  */
 class LoggerStub
 {
-    const CHANNEL_CHECKSUM = 'checksum';
-    const CHANNEL_GLOBAL = 'global';
-    const CHANNEL_LINKER = 'linker';
-    const CHANNEL_RPC = 'rpc';
-    const CHANNEL_SESSION = 'session';
+    public const
+        CHANNEL_CHECKSUM = 'checksum',
+        CHANNEL_GLOBAL   = 'global',
+        CHANNEL_LINKER   = 'linker',
+        CHANNEL_RPC      = 'rpc',
+        CHANNEL_SESSION  = 'session';
 
-    const INFO = 'info';
-    const WARNING = 'warning';
-    const DEBUG = 'debug';
-    const ERROR = 'error';
+    public const
+        INFO    = 'info',
+        WARNING = 'warning',
+        DEBUG   = 'debug',
+        ERROR   = 'error';
 
-    protected static $logLevelMappings = [
-        self::INFO => MonoLogger::INFO,
+    /** @var array<string, int> */
+    protected static array $logLevelMappings = [
+        self::INFO    => MonoLogger::INFO,
         self::WARNING => MonoLogger::WARNING,
-        self::ERROR => MonoLogger::ERROR,
-        self::DEBUG => MonoLogger::DEBUG,
+        self::ERROR   => MonoLogger::ERROR,
+        self::DEBUG   => MonoLogger::DEBUG,
     ];
 }

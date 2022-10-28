@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Serializer\Handler;
 
 use JMS\Serializer\DeserializationContext;
@@ -18,15 +19,15 @@ class IdentityHandlerTest extends TestCase
     /**
      * @throws \Exception
      */
-    public function testSerializeEntityMethod()
+    public function testSerializeEntityMethod(): void
     {
         $endpointId = $this->createEndpointId();
-        $hostId = $this->createHostId();
+        $hostId     = $this->createHostId();
 
         $identity = new Identity($endpointId, $hostId);
 
         $identityHandler = new IdentityHandler();
-        $result = $identityHandler->serializeIdentity(
+        $result          = $identityHandler->serializeIdentity(
             new JsonSerializationVisitor(),
             $identity,
             [],
@@ -39,10 +40,10 @@ class IdentityHandlerTest extends TestCase
     /**
      * @throws \Exception
      */
-    public function testDeserializeEntityMethod()
+    public function testDeserializeEntityMethod(): void
     {
         $endpointId = $this->createEndpointId();
-        $hostId = $this->createHostId();
+        $hostId     = $this->createHostId();
 
         $identityHandler = new IdentityHandler();
 
@@ -53,7 +54,10 @@ class IdentityHandlerTest extends TestCase
 
         $result = $identityHandler->deserializeIdentity(
             $visitor,
-            [$endpointId, $hostId],
+            [
+                $endpointId,
+                $hostId,
+            ],
             [],
             new DeserializationContext()
         );
@@ -63,11 +67,13 @@ class IdentityHandlerTest extends TestCase
 
     /**
      * @dataProvider identityDataProvider
+     *
      * @param IdentityHandler $identityHandler
-     * @param array $identityArray
+     * @param array           $identityArray
+     *
      * @throws \Exception
      */
-    public function testDeserializeEntityMultipleMethod(IdentityHandler $identityHandler, array $identityArray)
+    public function testDeserializeEntityMultipleMethod(IdentityHandler $identityHandler, array $identityArray): void
     {
         $identity = new Identity($identityArray[0], $identityArray[1]);
 
@@ -85,17 +91,17 @@ class IdentityHandlerTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array<int, array<int, array<int, int|string>|IdentityHandler>>
      */
-    public function identityDataProvider()
+    public function identityDataProvider(): array
     {
         $identityHandler = new IdentityHandler();
 
         return [
-            [$identityHandler, ["1", 1]],
-            [$identityHandler, ["2", 1]],
-            [$identityHandler, ["3", 2]],
-            [$identityHandler, ["1", 2]]
+            [$identityHandler, ['1', 1,],],
+            [$identityHandler, ['2', 1,],],
+            [$identityHandler, ['3', 2,],],
+            [$identityHandler, ['1', 2,],],
         ];
     }
 }

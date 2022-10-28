@@ -1,7 +1,8 @@
 <?php
+
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -12,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Global language model
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -26,7 +27,7 @@ class Language extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
     protected $id = null;
-    
+
     /**
      * @var boolean Flag default language for frontend. Exact 1 language must be marked as default.
      * @Serializer\Type("boolean")
@@ -42,7 +43,7 @@ class Language extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getNameEnglish",setter="setNameEnglish")
      */
     protected $nameEnglish = '';
-    
+
     /**
      * @var string German term
      * @Serializer\Type("string")
@@ -50,7 +51,7 @@ class Language extends AbstractI18n implements IdentityInterface
      * @Serializer\Accessor(getter="getNameGerman",setter="setNameGerman")
      */
     protected $nameGerman = '';
-    
+
     /**
      * Constructor
      */
@@ -58,18 +59,7 @@ class Language extends AbstractI18n implements IdentityInterface
     {
         $this->id = new Identity();
     }
-    
-    /**
-     * @param Identity $id Unique language id
-     * @return Language
-     */
-    public function setId(Identity $id): Language
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
+
     /**
      * @return Identity Unique language id
      */
@@ -77,18 +67,19 @@ class Language extends AbstractI18n implements IdentityInterface
     {
         return $this->id;
     }
-    
+
     /**
-     * @param boolean $isDefault Flag default language for frontend. Exact 1 language must be marked as default.
+     * @param Identity $id Unique language id
+     *
      * @return Language
      */
-    public function setIsDefault(bool $isDefault): Language
+    public function setId(Identity $id): Language
     {
-        $this->isDefault = $isDefault;
-        
+        $this->id = $id;
+
         return $this;
     }
-    
+
     /**
      * @return boolean Flag default language for frontend. Exact 1 language must be marked as default.
      */
@@ -98,16 +89,17 @@ class Language extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @param string $nameEnglish English term
+     * @param boolean $isDefault Flag default language for frontend. Exact 1 language must be marked as default.
+     *
      * @return Language
      */
-    public function setNameEnglish(string $nameEnglish): Language
+    public function setIsDefault(bool $isDefault): Language
     {
-        $this->nameEnglish = $nameEnglish;
-        
+        $this->isDefault = $isDefault;
+
         return $this;
     }
-    
+
     /**
      * @return string English term
      */
@@ -115,23 +107,36 @@ class Language extends AbstractI18n implements IdentityInterface
     {
         return $this->nameEnglish;
     }
-    
+
     /**
-     * @param string $nameGerman German term
+     * @param string $nameEnglish English term
+     *
      * @return Language
      */
-    public function setNameGerman(string $nameGerman): Language
+    public function setNameEnglish(string $nameEnglish): Language
     {
-        $this->nameGerman = $nameGerman;
-        
+        $this->nameEnglish = $nameEnglish;
+
         return $this;
     }
-    
+
     /**
      * @return string German term
      */
     public function getNameGerman(): string
     {
         return $this->nameGerman;
+    }
+
+    /**
+     * @param string $nameGerman German term
+     *
+     * @return Language
+     */
+    public function setNameGerman(string $nameGerman): Language
+    {
+        $this->nameGerman = $nameGerman;
+
+        return $this;
     }
 }

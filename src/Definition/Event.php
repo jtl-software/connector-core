@@ -13,15 +13,28 @@ final class Event
 {
     public const
         BEFORE = 'before',
-        AFTER = 'after';
+        AFTER  = 'after';
 
     /**
      * @param string $controllerName
      * @param string $actionName
      * @param string $moment
+     *
      * @return string
      * @throws DefinitionException
-     * @throws \ReflectionException
+     */
+    public static function createCoreEventName(string $controllerName, string $actionName, string $moment): string
+    {
+        return 'core.' . self::createEventName($controllerName, $actionName, $moment);
+    }
+
+    /**
+     * @param string $controllerName
+     * @param string $actionName
+     * @param string $moment
+     *
+     * @return string
+     * @throws DefinitionException
      */
     public static function createEventName(string $controllerName, string $actionName, string $moment): string
     {
@@ -37,29 +50,26 @@ final class Event
             throw DefinitionException::unknownMoment($moment);
         }
 
-        return sprintf("%s.%s.%s", Str::toSnakeCase($controllerName), $moment, $actionName);
+        return \sprintf('%s.%s.%s', Str::toSnakeCase($controllerName), $moment, $actionName);
     }
 
     /**
-     * @param string $controllerName
-     * @param string $actionName
      * @param string $moment
-     * @return string
-     * @throws DefinitionException
-     * @throws \ReflectionException
+     *
+     * @return boolean
      */
-    public static function createCoreEventName(string $controllerName, string $actionName, string $moment): string
+    public static function isMoment(string $moment): bool
     {
-        return 'core.' . self::createEventName($controllerName, $actionName, $moment);
+        return \in_array($moment, [self::BEFORE, self::AFTER], true);
     }
 
     /**
      * @param string $controllerName
      * @param string $actionName
      * @param string $moment
+     *
      * @return string
      * @throws DefinitionException
-     * @throws \ReflectionException
      */
     public static function createHandleEventName(string $controllerName, string $actionName, string $moment): string
     {
@@ -68,6 +78,7 @@ final class Event
 
     /**
      * @param string $moment
+     *
      * @return string
      * @throws DefinitionException
      */
@@ -77,15 +88,6 @@ final class Event
             throw DefinitionException::unknownMoment($moment);
         }
 
-        return strtolower(sprintf("rpc.%s", $moment));
-    }
-
-    /**
-     * @param string $moment
-     * @return boolean
-     */
-    public static function isMoment(string $moment): bool
-    {
-        return in_array($moment, [self::BEFORE, self::AFTER], true);
+        return \strtolower(\sprintf('rpc.%s', $moment));
     }
 }

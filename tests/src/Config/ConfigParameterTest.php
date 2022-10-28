@@ -8,13 +8,13 @@ use PHPUnit\Framework\TestCase;
 
 class ConfigParameterTest extends TestCase
 {
-
     /**
      * @dataProvider dataProvider
      *
      * @param string $type
-     * @param $validValue
-     * @param array $invalidValues
+     * @param        $validValue
+     * @param array  $invalidValues
+     *
      * @throws ConfigException
      */
     public function testIsValidValueString(string $type, $validValue, array $invalidValues)
@@ -30,8 +30,9 @@ class ConfigParameterTest extends TestCase
      * @dataProvider dataProvider
      *
      * @param string $type
-     * @param $validValue
-     * @param array $invalidValues
+     * @param        $validValue
+     * @param array  $invalidValues
+     *
      * @throws ConfigException
      */
     public function testSetDefaultValue(string $type, $validValue, array $invalidValues)
@@ -45,17 +46,18 @@ class ConfigParameterTest extends TestCase
      * @dataProvider dataProvider
      *
      * @param string $type
-     * @param $validValue
-     * @param array $invalidValues
+     * @param        $validValue
+     * @param array  $invalidValues
+     *
      * @throws ConfigException
      */
     public function testSetWrongDefaultValue(string $type, $validValue, array $invalidValues)
     {
         $this->expectException(ConfigException::class);
         $this->expectExceptionCode(ConfigException::WRONG_TYPE);
-        $option = new ConfigParameter('foo', $type);
-        $invalidValuesCount = count($invalidValues);
-        $invalidValuesIndex = mt_rand(1, $invalidValuesCount - 1);
+        $option             = new ConfigParameter('foo', $type);
+        $invalidValuesCount = \count($invalidValues);
+        $invalidValuesIndex = \mt_rand(1, $invalidValuesCount - 1);
         $option->setDefaultValue($invalidValues[$invalidValuesIndex]);
     }
 
@@ -63,8 +65,8 @@ class ConfigParameterTest extends TestCase
     {
         $this->expectException(ConfigException::class);
         $this->expectExceptionCode(ConfigException::UNKNOWN_TYPE);
-        $option = new ConfigParameter('foo', ConfigParameter::TYPE_BOOLEAN);
-        $reflectionClass = new \ReflectionClass($option);
+        $option           = new ConfigParameter('foo', ConfigParameter::TYPE_BOOLEAN);
+        $reflectionClass  = new \ReflectionClass($option);
         $reflectionMethod = $reflectionClass->getMethod('setType');
         $reflectionMethod->setAccessible(true);
         $reflectionMethod->invoke($option, 'yolo');
@@ -74,8 +76,8 @@ class ConfigParameterTest extends TestCase
     {
         $this->expectException(ConfigException::class);
         $this->expectExceptionCode(ConfigException::EMPTY_KEY);
-        $option = new ConfigParameter('foo', ConfigParameter::TYPE_INTEGER);
-        $reflectionClass = new \ReflectionClass($option);
+        $option           = new ConfigParameter('foo', ConfigParameter::TYPE_INTEGER);
+        $reflectionClass  = new \ReflectionClass($option);
         $reflectionMethod = $reflectionClass->getMethod('setKey');
         $reflectionMethod->setAccessible(true);
         $reflectionMethod->invoke($option, '');
@@ -85,8 +87,9 @@ class ConfigParameterTest extends TestCase
      * @dataProvider dataProvider
      *
      * @param string $type
-     * @param $validValue
-     * @param array $invalidValues
+     * @param        $validValue
+     * @param array  $invalidValues
+     *
      * @throws ConfigException
      */
     public function testHasDefaultValue(string $type, $validValue, array $invalidValues)

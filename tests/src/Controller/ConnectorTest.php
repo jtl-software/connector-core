@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Controller;
 
 use Jtl\Connector\Core\Application\Application;
@@ -27,52 +28,17 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 class ConnectorTest extends TestCase
 {
     /**
-     * @param IdentityLinker|null $linker
-     * @param ChecksumLinker|null $checksumLinker
-     * @param EventDispatcher|null $eventDispatcher
-     * @param \SessionHandlerInterface|null $sessionHandler
-     * @param TokenValidatorInterface|null $tokenValidator
-     * @param string $featuresPath
-     * @return ConnectorController
-     */
-    protected function createConnectorController(
-        IdentityLinker $linker = null,
-        ChecksumLinker $checksumLinker = null,
-        \SessionHandlerInterface $sessionHandler = null,
-        TokenValidatorInterface $tokenValidator = null,
-        string $featuresPath = ''
-    ): ConnectorController {
-        if (is_null($linker)) {
-            $linker = $this->createMock(IdentityLinker::class);
-        }
-
-        if (is_null($checksumLinker)) {
-            $checksumLinker = $this->createMock(ChecksumLinker::class);
-        }
-
-        if (is_null($sessionHandler)) {
-            $sessionHandler = $this->createMock(\SessionHandlerInterface::class);
-        }
-
-        if (is_null($tokenValidator)) {
-            $tokenValidator = $this->createMock(TokenValidatorInterface::class);
-        }
-
-        return new ConnectorController($featuresPath, $checksumLinker, $linker, $sessionHandler, $tokenValidator);
-    }
-
-    /**
      *
      */
     public function testFeatures()
     {
         $controller = $this->getMockBuilder(ConnectorController::class)
-            ->onlyMethods(['fetchFeaturesData'])
-            ->disableOriginalConstructor()
-            ->getMock();
+                           ->onlyMethods(['fetchFeaturesData'])
+                           ->disableOriginalConstructor()
+                           ->getMock();
 
 
-        $jsonFeatures = ["entities" => ["Category" => ["push" => true]]];
+        $jsonFeatures = ['entities' => ['Category' => ['push' => true]]];
         $controller->expects($this->once())->method('fetchFeaturesData')->willReturn($jsonFeatures);
 
         /** @var Features $features */
@@ -92,6 +58,42 @@ class ConnectorTest extends TestCase
     }
 
     /**
+     * @param IdentityLinker|null           $linker
+     * @param ChecksumLinker|null           $checksumLinker
+     * @param EventDispatcher|null          $eventDispatcher
+     * @param \SessionHandlerInterface|null $sessionHandler
+     * @param TokenValidatorInterface|null  $tokenValidator
+     * @param string                        $featuresPath
+     *
+     * @return ConnectorController
+     */
+    protected function createConnectorController(
+        IdentityLinker           $linker = null,
+        ChecksumLinker           $checksumLinker = null,
+        \SessionHandlerInterface $sessionHandler = null,
+        TokenValidatorInterface  $tokenValidator = null,
+        string                   $featuresPath = ''
+    ): ConnectorController {
+        if (\is_null($linker)) {
+            $linker = $this->createMock(IdentityLinker::class);
+        }
+
+        if (\is_null($checksumLinker)) {
+            $checksumLinker = $this->createMock(ChecksumLinker::class);
+        }
+
+        if (\is_null($sessionHandler)) {
+            $sessionHandler = $this->createMock(\SessionHandlerInterface::class);
+        }
+
+        if (\is_null($tokenValidator)) {
+            $tokenValidator = $this->createMock(TokenValidatorInterface::class);
+        }
+
+        return new ConnectorController($featuresPath, $checksumLinker, $linker, $sessionHandler, $tokenValidator);
+    }
+
+    /**
      * @throws DefinitionException
      * @throws \ReflectionException
      */
@@ -100,17 +102,13 @@ class ConnectorTest extends TestCase
         $linker = $this->createMock(IdentityLinker::class);
         $linker->expects($this->exactly(3))->method('save')->willReturn(true);
         $connector = $this->createConnectorController($linker);
-        $ack = new Ack();
-        $ack->setIdentities([
-            "Foo" => [
-                $this->createIdentity()
-            ],
-            "Category" => [
-                $this->createIdentity(),
-                $this->createIdentity(),
-                $this->createIdentity()
+        $ack       = new Ack();
+        $ack->setIdentities(
+            [
+                'Foo'      => [$this->createIdentity()],
+                'Category' => [$this->createIdentity(), $this->createIdentity(), $this->createIdentity()],
             ]
-        ]);
+        );
 
         $this->assertTrue($connector->ack($ack));
     }
@@ -147,7 +145,7 @@ class ConnectorTest extends TestCase
         $controller = $this->createConnectorController(null, null, null, $tokenValidator);
 
         $auth = (new Authentication())
-            ->setToken(md5(time()));
+            ->setToken(\md5(\time()));
 
         $controller->auth($auth);
     }
@@ -168,7 +166,7 @@ class ConnectorTest extends TestCase
         $connector = $this->createConnectorController(null, null, null, $tokenValidator);
 
         $auth = new Authentication();
-        $auth->setToken(md5(time()));
+        $auth->setToken(\md5(\time()));
 
         $session = $connector->auth($auth);
 
@@ -181,16 +179,16 @@ class ConnectorTest extends TestCase
      */
     public function testIdentify()
     {
-        $endpointVersion = "1.0";
-        $platformName = "ConnectorPlatform";
-        $platformVersion = "0.1";
+        $endpointVersion = '1.0';
+        $platformName    = 'ConnectorPlatform';
+        $platformVersion = '0.1';
 
         $connector = $this->createMock(ConnectorInterface::class);
         $connector->expects($this->once())->method('getEndpointVersion')->willReturn($endpointVersion);
         $connector->expects($this->once())->method('getPlatformVersion')->willReturn($platformVersion);
         $connector->expects($this->once())->method('getPlatformName')->willReturn($platformName);
 
-        $controller = $this->createConnectorController();
+        $controller              = $this->createConnectorController();
         $connectorIdentification = $controller->identify($connector);
 
         $this->assertSame($endpointVersion, $connectorIdentification->getEndpointVersion());

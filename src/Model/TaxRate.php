@@ -1,7 +1,8 @@
 <?php
+
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -10,8 +11,8 @@ namespace Jtl\Connector\Core\Model;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -34,22 +35,23 @@ class TaxRate extends AbstractIdentity
     protected $rate = 0.0;
 
     /**
-     * @param double $rate
-     * @return TaxRate
-     */
-    public function setRate(float $rate): TaxRate
-    {
-        $this->rate = $rate;
-        
-        return $this;
-    }
-    
-    /**
      * @return double
      */
     public function getRate(): float
     {
         return $this->rate;
+    }
+
+    /**
+     * @param double $rate
+     *
+     * @return TaxRate
+     */
+    public function setRate(float $rate): TaxRate
+    {
+        $this->rate = $rate;
+
+        return $this;
     }
 
     /**
@@ -62,12 +64,13 @@ class TaxRate extends AbstractIdentity
 
     /**
      * @param string $countryIso
+     *
      * @return TaxRate
      */
     public function setCountryIso(string $countryIso): self
     {
         $this->countryIso = $countryIso;
-        
+
         return $this;
     }
 }

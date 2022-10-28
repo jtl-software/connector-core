@@ -11,17 +11,18 @@ use Jtl\Connector\Core\Model\TranslatableAttributeI18n;
 class TranslatableAttributeI18nFactory extends AbstractModelFactory
 {
     /**
-     * @return array
+     * @return array<string, string|bool>
      */
     protected function makeFakeArray(): array
     {
         return [
-            'name' => $this->faker->word,
-            'value' => $this->faker->randomElement([
-                true,
-                false,
-                $this->faker->words(3, true)
-            ]),
+            'name'        => $this->faker->word,
+            'value'       => $this->faker
+                ->randomElement([
+                                    true,
+                                    false,
+                                    $this->faker->words(3, true),
+                                ]),
             'languageIso' => $this->faker->languageCode,
         ];
     }

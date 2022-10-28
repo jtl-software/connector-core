@@ -1,6 +1,7 @@
 <?php
+
 /**
- * @author Immanuel Klinkenberg <immanuel.klinkenberg@jtl-software.com>
+ * @author    Immanuel Klinkenberg <immanuel.klinkenberg@jtl-software.com>
  * @copyright 2010-2018 JTL-Software GmbH
  */
 
@@ -22,8 +23,9 @@ class Features extends AbstractModel
 
     /**
      * Features constructor.
+     *
      * @param FeatureEntity[] $entities
-     * @param FeatureFlag[] $flags
+     * @param FeatureFlag[]   $flags
      */
     public function __construct(array $entities = [], array $flags = [])
     {
@@ -32,16 +34,32 @@ class Features extends AbstractModel
     }
 
     /**
-     * @param string $name
-     * @return boolean
+     * @param FeatureEntity[] $entities
+     * @param FeatureFlag[]   $flags
+     *
+     * @return Features
      */
-    public function hasEntity(string $name): bool
+    public static function create(array $entities = [], array $flags = []): Features
     {
-        return isset($this->entities[$name]);
+        $featureEntities = [];
+        foreach ($entities as $name => $methods) {
+            $pull              = $methods['pull'] ?? false;
+            $push              = $methods['push'] ?? false;
+            $delete            = $methods['delete'] ?? false;
+            $featureEntities[] = new FeatureEntity($name, $pull, $push, $delete);
+        }
+
+        $featureFlags = [];
+        foreach ($flags as $name => $value) {
+            $featureFlags[] = new FeatureFlag($name, $value);
+        }
+
+        return new self($featureEntities, $featureFlags);
     }
 
     /**
      * @param string $name
+     *
      * @return FeatureEntity
      */
     public function getEntity(string $name): FeatureEntity
@@ -54,6 +72,16 @@ class Features extends AbstractModel
     }
 
     /**
+     * @param string $name
+     *
+     * @return boolean
+     */
+    public function hasEntity(string $name): bool
+    {
+        return isset($this->entities[$name]);
+    }
+
+    /**
      * @return FeatureEntity[]
      */
     public function getEntities(): array
@@ -63,6 +91,7 @@ class Features extends AbstractModel
 
     /**
      * @param FeatureEntity ...$entities
+     *
      * @return Features
      */
     public function setEntities(FeatureEntity ...$entities): Features
@@ -75,6 +104,7 @@ class Features extends AbstractModel
 
     /**
      * @param FeatureEntity $entity
+     *
      * @return Features
      */
     public function setEntity(FeatureEntity $entity): Features
@@ -85,15 +115,7 @@ class Features extends AbstractModel
 
     /**
      * @param string $name
-     * @return boolean
-     */
-    public function hasFlag(string $name): bool
-    {
-        return isset($this->flags[$name]);
-    }
-
-    /**
-     * @param string $name
+     *
      * @return FeatureFlag
      * @throws FeaturesException
      */
@@ -108,6 +130,17 @@ class Features extends AbstractModel
 
     /**
      * @param string $name
+     *
+     * @return boolean
+     */
+    public function hasFlag(string $name): bool
+    {
+        return isset($this->flags[$name]);
+    }
+
+    /**
+     * @param string $name
+     *
      * @return boolean
      */
     public function isFlagActive(string $name): bool
@@ -129,6 +162,7 @@ class Features extends AbstractModel
 
     /**
      * @param FeatureFlag ...$flags
+     *
      * @return Features
      */
     public function setFlags(FeatureFlag ...$flags): Features
@@ -141,6 +175,7 @@ class Features extends AbstractModel
 
     /**
      * @param FeatureFlag $flag
+     *
      * @return Features
      */
     public function setFlag(FeatureFlag $flag): Features
@@ -156,7 +191,7 @@ class Features extends AbstractModel
     {
         $data = [
             'entities' => [],
-            'flags' => [],
+            'flags'    => [],
         ];
 
         foreach ($this->entities as $entity) {
@@ -168,28 +203,5 @@ class Features extends AbstractModel
         }
 
         return $data;
-    }
-
-    /**
-     * @param FeatureEntity[] $entities
-     * @param FeatureFlag[] $flags
-     * @return Features
-     */
-    public static function create(array $entities = [], array $flags = []): Features
-    {
-        $featureEntities = [];
-        foreach ($entities as $name => $methods) {
-            $pull = $methods['pull'] ?? false;
-            $push = $methods['push'] ?? false;
-            $delete = $methods['delete'] ?? false;
-            $featureEntities[] = new FeatureEntity($name, $pull, $push, $delete);
-        }
-
-        $featureFlags = [];
-        foreach ($flags as $name => $value) {
-            $featureFlags[] = new FeatureFlag($name, $value);
-        }
-
-        return new self($featureEntities, $featureFlags);
     }
 }

@@ -33,17 +33,17 @@ class ConfigSchemaTest extends TestCase
     {
         $schema = new ConfigSchema();
         $schema->setParameter(new ConfigParameter('foo', ConfigParameter::TYPE_INTEGER));
-        $reflectionClass = new \ReflectionClass($schema);
+        $reflectionClass    = new \ReflectionClass($schema);
         $reflectionProperty = $reflectionClass->getProperty('parameters');
         $reflectionProperty->setAccessible(true);
         $schemaArray = $reflectionProperty->getValue($schema);
-        $this->assertEquals(array_values($schemaArray), $schema->getParameters());
+        $this->assertEquals(\array_values($schemaArray), $schema->getParameters());
     }
 
     public function testSetparameter()
     {
-        $schema = new ConfigSchema();
-        $reflectionClass = new \ReflectionClass($schema);
+        $schema             = new ConfigSchema();
+        $reflectionClass    = new \ReflectionClass($schema);
         $reflectionProperty = $reflectionClass->getProperty('parameters');
         $reflectionProperty->setAccessible(true);
         $this->assertCount(0, $reflectionProperty->getValue($schema));
@@ -56,32 +56,32 @@ class ConfigSchemaTest extends TestCase
 
     public function testSetParameters()
     {
-        $schema = new ConfigSchema();
-        $reflectionClass = new \ReflectionClass($schema);
+        $schema             = new ConfigSchema();
+        $reflectionClass    = new \ReflectionClass($schema);
         $reflectionProperty = $reflectionClass->getProperty('parameters');
         $reflectionProperty->setAccessible(true);
         $this->assertCount(0, $reflectionProperty->getValue($schema));
         $defaultParameters = ConfigSchema::createDefaultParameters($this->connectorDir);
         $schema->setParameters(...$defaultParameters);
-        $this->assertCount(count($defaultParameters), $reflectionProperty->getValue($schema));
+        $this->assertCount(\count($defaultParameters), $reflectionProperty->getValue($schema));
     }
 
     public function testGetDefaultValues()
     {
-        $schema = (new ConfigSchema())->setParameters(...ConfigSchema::createDefaultParameters($this->connectorDir));
+        $schema   = (new ConfigSchema())->setParameters(...ConfigSchema::createDefaultParameters($this->connectorDir));
         $expected = [
-            ConfigSchema::LOG_LEVEL => 'info',
-            ConfigSchema::LOG_FORMAT => 'line',
-            ConfigSchema::MAIN_LANGUAGE => 'de',
-            ConfigSchema::CONNECTOR_DIR => $this->connectorDir,
-            ConfigSchema::LOG_DIR => sprintf('%s/var/log', $this->connectorDir),
-            ConfigSchema::CACHE_DIR => sprintf('%s/var/cache', $this->connectorDir),
-            ConfigSchema::PLUGINS_DIR => sprintf('%s/plugins', $this->connectorDir),
-            ConfigSchema::FEATURES_PATH => sprintf('%s/config/features.json', $this->connectorDir),
-            ConfigSchema::DEBUG => false,
+            ConfigSchema::LOG_LEVEL               => 'info',
+            ConfigSchema::LOG_FORMAT              => 'line',
+            ConfigSchema::MAIN_LANGUAGE           => 'de',
+            ConfigSchema::CONNECTOR_DIR           => $this->connectorDir,
+            ConfigSchema::LOG_DIR                 => \sprintf('%s/var/log', $this->connectorDir),
+            ConfigSchema::CACHE_DIR               => \sprintf('%s/var/cache', $this->connectorDir),
+            ConfigSchema::PLUGINS_DIR             => \sprintf('%s/plugins', $this->connectorDir),
+            ConfigSchema::FEATURES_PATH           => \sprintf('%s/config/features.json', $this->connectorDir),
+            ConfigSchema::DEBUG                   => false,
             ConfigSchema::SERIALIZER_ENABLE_CACHE => true,
         ];
-        $actual = $schema->getDefaultValues();
+        $actual   = $schema->getDefaultValues();
         $this->assertEquals($expected, $actual);
     }
 
@@ -94,7 +94,7 @@ class ConfigSchemaTest extends TestCase
         ];
 
         $schema = (new ConfigSchema())->setParameters(...$options);
-        $config = $this->createFileConfig(json_encode(['yo' => false, 'foo' => 'bar']));
+        $config = $this->createFileConfig(\json_encode(['yo' => false, 'foo' => 'bar']));
         $this->assertNull($schema->validateConfig($config));
     }
 
@@ -107,8 +107,8 @@ class ConfigSchemaTest extends TestCase
             ConfigParameter::create('nothing', ConfigParameter::TYPE_STRING, false),
             ConfigParameter::create('yo', ConfigParameter::TYPE_BOOLEAN, true),
         ];
-        $schema = (new ConfigSchema())->setParameters(...$options);
-        $config = $this->createFileConfig(json_encode(['foo' => 42, 'nothing' => true]));
+        $schema  = (new ConfigSchema())->setParameters(...$options);
+        $config  = $this->createFileConfig(\json_encode(['foo' => 42, 'nothing' => true]));
         $schema->validateConfig($config);
     }
 }

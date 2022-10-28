@@ -1,7 +1,8 @@
 <?php
+
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -12,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Shipping Address properties of a customer (order)
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -33,23 +34,23 @@ class CustomerOrderShippingAddress extends AbstractOrderAddress
         $this->customerId = new Identity();
     }
 
-
-    /**
-     * @param Identity $customerId Reference to customer
-     * @return CustomerOrderShippingAddress
-     */
-    public function setCustomerId(Identity $customerId): CustomerOrderShippingAddress
-    {
-        $this->customerId = $customerId;
-        
-        return $this;
-    }
-    
     /**
      * @return Identity Reference to customer
      */
     public function getCustomerId(): Identity
     {
         return $this->customerId;
+    }
+
+    /**
+     * @param Identity $customerId Reference to customer
+     *
+     * @return CustomerOrderShippingAddress
+     */
+    public function setCustomerId(Identity $customerId): CustomerOrderShippingAddress
+    {
+        $this->customerId = $customerId;
+
+        return $this;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
@@ -36,6 +37,7 @@ class Session extends AbstractModel
 
     /**
      * @param string $sessionId
+     *
      * @return Session
      */
     public function setSessionId(string $sessionId): Session
@@ -54,6 +56,7 @@ class Session extends AbstractModel
 
     /**
      * @param int $lifetime
+     *
      * @return Session
      */
     public function setLifetime(int $lifetime): Session

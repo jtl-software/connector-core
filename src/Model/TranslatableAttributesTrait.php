@@ -7,6 +7,7 @@ trait TranslatableAttributesTrait
     /**
      * @param string $name
      * @param string $languageIso
+     *
      * @return TranslatableAttribute|null
      */
     public function findAttribute(string $name, string $languageIso = ''): ?TranslatableAttribute

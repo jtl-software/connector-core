@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Application;
 
 use Jtl\Connector\Core\Application\Request;
@@ -15,11 +16,11 @@ class RequestTest extends TestCase
      */
     public function testCreateFromStatic()
     {
-        $controller = "FooBarController";
-        $action = "pull";
-        $params = [
+        $controller = 'FooBarController';
+        $action     = 'pull';
+        $params     = [
             1,
-            2
+            2,
         ];
 
         $request = Request::create($controller, $action, $params);

@@ -16,13 +16,14 @@ class RelationTypeTest extends TestCase
     /**
      * @dataProvider relatedImageIdentityTypeProvider
      *
-     * @param string $relationType
+     * @param string   $relationType
      * @param int|null $relatedImageIdentityType
+     *
      * @throws DefinitionException|\ReflectionException
      */
     public function testGetRelatedImageIdentityType(string $relationType, ?int $relatedImageIdentityType)
     {
-        if (is_null($relatedImageIdentityType)) {
+        if (\is_null($relatedImageIdentityType)) {
             $this->expectException(DefinitionException::class);
             $this->expectExceptionCode(DefinitionException::UNKNOWN_RELATION_TYPE);
         }
@@ -35,7 +36,8 @@ class RelationTypeTest extends TestCase
      * @dataProvider relatedImageIdentityProvider
      *
      * @param string $relationType
-     * @param bool $hasRelatedImageIdentityType
+     * @param bool   $hasRelatedImageIdentityType
+     *
      * @throws DefinitionException
      */
     public function testHasRelatedImageIdentityType(string $relationType, bool $hasRelatedImageIdentityType)
@@ -47,7 +49,8 @@ class RelationTypeTest extends TestCase
      * @dataProvider relationTypeProvider
      *
      * @param string $relationType
-     * @param bool $isRelationType
+     * @param bool   $isRelationType
+     *
      * @throws DefinitionException
      */
     public function testGetRelatedImageModelName(string $relationType, bool $isRelationType)
@@ -56,14 +59,18 @@ class RelationTypeTest extends TestCase
             $this->expectExceptionObject(DefinitionException::unknownRelationType($relationType));
         }
 
-        $this->assertEquals(sprintf('%sImage', ucfirst($relationType)), RelationType::getRelatedImageModelName($relationType));
+        $this->assertEquals(
+            \sprintf('%sImage', \ucfirst($relationType)),
+            RelationType::getRelatedImageModelName($relationType)
+        );
     }
 
     /**
      * @dataProvider relationTypeProvider
      *
      * @param string $relationType
-     * @param bool $isRelationType
+     * @param bool   $isRelationType
+     *
      * @throws DefinitionException
      */
     public function testGetModelName(string $relationType, bool $isRelationType)
@@ -72,7 +79,7 @@ class RelationTypeTest extends TestCase
             $this->expectExceptionObject(DefinitionException::unknownRelationType($relationType));
         }
 
-        $this->assertEquals(ucfirst($relationType), RelationType::getModelName($relationType));
+        $this->assertEquals(\ucfirst($relationType), RelationType::getModelName($relationType));
     }
 
     /**
@@ -90,7 +97,7 @@ class RelationTypeTest extends TestCase
     /**
      * @dataProvider relationTypeProvider
      *
-     * @param $relationType
+     * @param      $relationType
      * @param bool $isRelationType
      */
     public function testIsRelationType($relationType, bool $isRelationType)
@@ -124,7 +131,7 @@ class RelationTypeTest extends TestCase
             ['ProductStockLevel', false],
             ['CrossSelling', false],
             ['manufacturer', true],
-            ['Manufacturer', true],
+            ['Manufacturer', true]
         ];
     }
 
@@ -138,7 +145,7 @@ class RelationTypeTest extends TestCase
             ['Product', IdentityType::PRODUCT_IMAGE],
             ['manufacturer', IdentityType::MANUFACTURER_IMAGE],
             ['productAttr', null],
-            ['whateverYouWant', null],
+            ['whateverYouWant', null]
         ];
     }
 
@@ -147,6 +154,7 @@ class RelationTypeTest extends TestCase
      *
      * @param $relationType
      * @param $expectedValue
+     *
      * @throws DefinitionException
      * @throws \ReflectionException
      */
@@ -171,7 +179,7 @@ class RelationTypeTest extends TestCase
         return [
             ['category', IdentityType::CATEGORY],
             ['ProductVariationValue', IdentityType::PRODUCT_VARIATION_VALUE],
-            ['foo', DefinitionException::unknownRelationType('foo')],
+            ['foo', DefinitionException::unknownRelationType('foo')]
         ];
     }
 }

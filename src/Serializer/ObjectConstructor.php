@@ -1,7 +1,8 @@
 <?php
+
 /**
  * @copyright 2010-2019 JTL-Software GmbH
- * @package Jtl\Connector\Core\Application
+ * @package   Jtl\Connector\Core\Application
  */
 
 namespace Jtl\Connector\Core\Serializer;
@@ -18,11 +19,12 @@ use JMS\Serializer\Visitor\DeserializationVisitorInterface as Visitor;
 class ObjectConstructor implements ObjectConstructorInterface
 {
     /**
-     * @param Visitor $visitor
+     * @param Visitor       $visitor
      * @param ClassMetadata $metadata
-     * @param mixed $data
-     * @param array $type
-     * @param Context $context
+     * @param mixed         $data
+     * @param array         $type
+     * @param Context       $context
+     *
      * @return object|null
      */
     public function construct(Visitor $visitor, ClassMetadata $metadata, $data, array $type, Context $context): ?object

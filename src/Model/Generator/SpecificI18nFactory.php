@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Jtl\Connector\Core\Model\Generator;
 
 use Jtl\Connector\Core\Model\SpecificI18n;
@@ -8,12 +7,12 @@ use Jtl\Connector\Core\Model\SpecificI18n;
 class SpecificI18nFactory extends AbstractI18nFactory
 {
     /**
-     * @return mixed[]
+     * @return array<string, string>
      */
     protected function makeFakeArray(): array
     {
         return [
-            'name' => $this->faker->word
+            'name' => $this->faker->word,
         ];
     }
 

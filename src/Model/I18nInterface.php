@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Model;
 
 interface I18nInterface

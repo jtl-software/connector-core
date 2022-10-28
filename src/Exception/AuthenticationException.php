@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Exception;
 
 use Jtl\Connector\Core\Definition\ErrorCode;

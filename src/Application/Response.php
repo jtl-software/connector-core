@@ -1,20 +1,30 @@
 <?php
+
 namespace Jtl\Connector\Core\Application;
 
 class Response
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $result;
 
     /**
      * Response constructor.
+     *
      * @param mixed $result
      */
     public function __construct($result)
     {
         $this->result = $result;
+    }
+
+    /**
+     * @param mixed $result
+     *
+     * @return Response
+     */
+    public static function create($result): Response
+    {
+        return new self($result);
     }
 
     /**
@@ -27,20 +37,12 @@ class Response
 
     /**
      * @param mixed $result
+     *
      * @return Response
      */
     public function setResult($result): Response
     {
         $this->result = $result;
         return $this;
-    }
-
-    /**
-     * @param mixed $result
-     * @return Response
-     */
-    public static function create($result): Response
-    {
-        return new self($result);
     }
 }

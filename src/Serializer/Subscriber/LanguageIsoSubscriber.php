@@ -1,12 +1,13 @@
 <?php
+
 namespace Jtl\Connector\Core\Serializer\Subscriber;
 
-use WhiteCube\Lingua\Service as Lingua;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\EventDispatcher\PreDeserializeEvent;
 use JMS\Serializer\Metadata\StaticPropertyMetadata;
 use Jtl\Connector\Core\Model\AbstractI18n;
+use WhiteCube\Lingua\Service as Lingua;
 
 class LanguageIsoSubscriber implements EventSubscriberInterface
 {
@@ -30,15 +31,15 @@ class LanguageIsoSubscriber implements EventSubscriberInterface
     {
         return [
             [
-                'event' => 'serializer.post_serialize',
+                'event'  => 'serializer.post_serialize',
                 'method' => 'onPostSerialize',
-                'format' => 'json'
+                'format' => 'json',
             ],
             [
-                'event' => 'serializer.pre_deserialize',
+                'event'  => 'serializer.pre_deserialize',
                 'method' => 'onPreDeserialize',
-                'format' => 'json'
-            ]
+                'format' => 'json',
+            ],
         ];
     }
 
@@ -50,11 +51,14 @@ class LanguageIsoSubscriber implements EventSubscriberInterface
         $model = $event->getObject();
         if ($model instanceof AbstractI18n) {
             $languageIso = $model->getLanguageIso();
-            if (strlen($languageIso) === 2) {
+            if (\strlen($languageIso) === 2) {
                 $languageIso = $this->languages->fromISO_639_1($languageIso)->toISO_639_2b() ?? $languageIso;
             }
 
-            $event->getVisitor()->visitProperty(new StaticPropertyMetadata('', 'languageISO', $languageIso), $languageIso);
+            $event->getVisitor()->visitProperty(
+                new StaticPropertyMetadata('', 'languageISO', $languageIso),
+                $languageIso
+            );
         }
     }
 
@@ -64,8 +68,8 @@ class LanguageIsoSubscriber implements EventSubscriberInterface
     public function onPreDeserialize(PreDeserializeEvent $event)
     {
         $data = $event->getData();
-        if (is_array($data) && isset($data['languageISO']) && !isset($data['languageIso'])) {
-            $language = $this->languages->fromISO_639_2b($data['languageISO']);
+        if (\is_array($data) && isset($data['languageISO']) && !isset($data['languageIso'])) {
+            $language            = $this->languages->fromISO_639_2b($data['languageISO']);
             $data['languageIso'] = $language->toISO_639_1() ?? $data['languageISO'];
             $event->setData($data);
         }

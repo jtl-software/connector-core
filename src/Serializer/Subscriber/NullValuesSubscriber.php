@@ -1,7 +1,8 @@
 <?php
+
 /**
  * @copyright 2010-2019 JTL-Software GmbH
- * @package Jtl\Connector\Core\Application
+ * @package   Jtl\Connector\Core\Application
  */
 
 namespace Jtl\Connector\Core\Serializer\Subscriber;
@@ -24,21 +25,24 @@ class NullValuesSubscriber implements EventSubscriberInterface
             [
                 'event'  => 'serializer.pre_deserialize',
                 'method' => 'onPreDeserialize',
-                'format' => 'json'
-            ]
+                'format' => 'json',
+            ],
         ];
     }
 
     /**
      * Remove null values
+     *
      * @param PreDeserializeEvent $event
      */
     public function onPreDeserialize(PreDeserializeEvent $event)
     {
-        if (is_array($eventData = $event->getData())) {
-            $event->setData(array_filter($eventData, function ($value) {
-                return $value !== null;
-            }));
+        if (\is_array($eventData = $event->getData())) {
+            $event->setData(
+                \array_filter($eventData, function ($value) {
+                    return $value !== null;
+                })
+            );
         }
     }
 }

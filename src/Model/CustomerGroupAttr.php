@@ -1,7 +1,8 @@
 <?php
+
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -12,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Monolingual customer group attribute.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -36,21 +37,22 @@ class CustomerGroupAttr extends KeyValueAttribute implements IdentityInterface
     }
 
     /**
-     * @param Identity $id Unique customerGroupAttr id
-     * @return CustomerGroupAttr
-     */
-    public function setId(Identity $id): CustomerGroupAttr
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-    
-    /**
      * @return Identity Unique customerGroupAttr id
      */
     public function getId(): Identity
     {
         return $this->id;
+    }
+
+    /**
+     * @param Identity $id Unique customerGroupAttr id
+     *
+     * @return CustomerGroupAttr
+     */
+    public function setId(Identity $id): CustomerGroupAttr
+    {
+        $this->id = $id;
+
+        return $this;
     }
 }

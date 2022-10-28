@@ -1,7 +1,8 @@
 <?php
+
 /**
- * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2013 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Internal
  */
 
@@ -25,23 +26,13 @@ abstract class AbstractModel
     private $identificationStrings = [];
 
     /**
-     * @param string ...$identificationStrings
-     * @return AbstractModel
-     */
-    public function setIdentificationStrings(string ...$identificationStrings): self
-    {
-        $this->identificationStrings = $identificationStrings;
-
-        return $this;
-    }
-
-    /**
      * @param string $identificationString
+     *
      * @return AbstractModel
      */
     public function setIdentificationString(string $identificationString): self
     {
-        if (!in_array($identificationString, $this->identificationStrings, true)) {
+        if (!\in_array($identificationString, $this->identificationStrings, true)) {
             $this->identificationStrings[] = $identificationString;
         }
 
@@ -51,6 +42,7 @@ abstract class AbstractModel
     /**
      * @param string $subject
      * @param string $identificationString
+     *
      * @return $this
      */
     public function setIdentificationStringBySubject(string $subject, string $identificationString): self
@@ -62,11 +54,12 @@ abstract class AbstractModel
 
     /**
      * @param string $identificationString
+     *
      * @return AbstractModel
      */
     public function unsetIdentificationString(string $identificationString): self
     {
-        $index = array_search($identificationString, $this->identificationStrings, true);
+        $index = \array_search($identificationString, $this->identificationStrings, true);
         if ($index !== false) {
             unset($this->identificationStrings[$index]);
         }
@@ -76,6 +69,7 @@ abstract class AbstractModel
 
     /**
      * @param string $subject
+     *
      * @return AbstractModel
      */
     public function unsetIdentificationStringBySubject(string $subject): self
@@ -90,7 +84,19 @@ abstract class AbstractModel
      */
     public function getIdentificationStrings(): array
     {
-        return array_values($this->identificationStrings);
+        return \array_values($this->identificationStrings);
+    }
+
+    /**
+     * @param string ...$identificationStrings
+     *
+     * @return AbstractModel
+     */
+    public function setIdentificationStrings(string ...$identificationStrings): self
+    {
+        $this->identificationStrings = $identificationStrings;
+
+        return $this;
     }
 
     /**
@@ -98,6 +104,6 @@ abstract class AbstractModel
      */
     public function hasIdentificationStrings(): bool
     {
-        return count($this->identificationStrings) > 0;
+        return \count($this->identificationStrings) > 0;
     }
 }

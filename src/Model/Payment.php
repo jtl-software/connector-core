@@ -1,7 +1,8 @@
 <?php
+
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -10,8 +11,8 @@ namespace Jtl\Connector\Core\Model;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -32,7 +33,7 @@ class Payment extends AbstractIdentity
      * @Serializer\Accessor(getter="getBillingInfo",setter="setBillingInfo")
      */
     protected $billingInfo = '';
-    
+
     /**
      * @var \DateTimeInterface
      * @Serializer\Type("DateTimeInterface")
@@ -40,7 +41,7 @@ class Payment extends AbstractIdentity
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
     protected $creationDate = null;
-    
+
     /**
      * @var string
      * @Serializer\Type("string")
@@ -48,7 +49,7 @@ class Payment extends AbstractIdentity
      * @Serializer\Accessor(getter="getPaymentModuleCode",setter="setPaymentModuleCode")
      */
     protected $paymentModuleCode = '';
-    
+
     /**
      * @var double
      * @Serializer\Type("double")
@@ -56,7 +57,7 @@ class Payment extends AbstractIdentity
      * @Serializer\Accessor(getter="getTotalSum",setter="setTotalSum")
      */
     protected $totalSum = 0.0;
-    
+
     /**
      * @var string
      * @Serializer\Type("string")
@@ -67,26 +68,16 @@ class Payment extends AbstractIdentity
 
     /**
      * Constructor.
+     *
      * @param string $endpoint
-     * @param int $host
+     * @param int    $host
      */
     public function __construct(string $endpoint = '', int $host = 0)
     {
         parent::__construct($endpoint, $host);
         $this->customerOrderId = new Identity();
     }
-    
-    /**
-     * @param Identity $customerOrderId
-     * @return Payment
-     */
-    public function setCustomerOrderId(Identity $customerOrderId): Payment
-    {
-        $this->customerOrderId = $customerOrderId;
-        
-        return $this;
-    }
-    
+
     /**
      * @return Identity
      */
@@ -96,16 +87,17 @@ class Payment extends AbstractIdentity
     }
 
     /**
-     * @param string $billingInfo
+     * @param Identity $customerOrderId
+     *
      * @return Payment
      */
-    public function setBillingInfo(string $billingInfo): Payment
+    public function setCustomerOrderId(Identity $customerOrderId): Payment
     {
-        $this->billingInfo = $billingInfo;
-        
+        $this->customerOrderId = $customerOrderId;
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -113,18 +105,19 @@ class Payment extends AbstractIdentity
     {
         return $this->billingInfo;
     }
-    
+
     /**
-     * @param \DateTimeInterface $creationDate
+     * @param string $billingInfo
+     *
      * @return Payment
      */
-    public function setCreationDate(\DateTimeInterface $creationDate = null): Payment
+    public function setBillingInfo(string $billingInfo): Payment
     {
-        $this->creationDate = $creationDate;
-        
+        $this->billingInfo = $billingInfo;
+
         return $this;
     }
-    
+
     /**
      * @return \DateTimeInterface
      */
@@ -132,18 +125,19 @@ class Payment extends AbstractIdentity
     {
         return $this->creationDate;
     }
-    
+
     /**
-     * @param string $paymentModuleCode
+     * @param \DateTimeInterface $creationDate
+     *
      * @return Payment
      */
-    public function setPaymentModuleCode(string $paymentModuleCode): Payment
+    public function setCreationDate(\DateTimeInterface $creationDate = null): Payment
     {
-        $this->paymentModuleCode = $paymentModuleCode;
-        
+        $this->creationDate = $creationDate;
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -151,18 +145,19 @@ class Payment extends AbstractIdentity
     {
         return $this->paymentModuleCode;
     }
-    
+
     /**
-     * @param double $totalSum
+     * @param string $paymentModuleCode
+     *
      * @return Payment
      */
-    public function setTotalSum(float $totalSum): Payment
+    public function setPaymentModuleCode(string $paymentModuleCode): Payment
     {
-        $this->totalSum = $totalSum;
-        
+        $this->paymentModuleCode = $paymentModuleCode;
+
         return $this;
     }
-    
+
     /**
      * @return double
      */
@@ -170,23 +165,36 @@ class Payment extends AbstractIdentity
     {
         return $this->totalSum;
     }
-    
+
     /**
-     * @param string $transactionId
+     * @param double $totalSum
+     *
      * @return Payment
      */
-    public function setTransactionId(string $transactionId): Payment
+    public function setTotalSum(float $totalSum): Payment
     {
-        $this->transactionId = $transactionId;
-        
+        $this->totalSum = $totalSum;
+
         return $this;
     }
-    
+
     /**
      * @return Identity
      */
     public function getTransactionId(): string
     {
         return $this->transactionId;
+    }
+
+    /**
+     * @param string $transactionId
+     *
+     * @return Payment
+     */
+    public function setTransactionId(string $transactionId): Payment
+    {
+        $this->transactionId = $transactionId;
+
+        return $this;
     }
 }

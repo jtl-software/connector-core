@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Connector;
 
 use Jtl\Connector\Core\Application\Application;
@@ -9,7 +10,8 @@ interface HandleRequestInterface
 {
     /**
      * @param Application $application
-     * @param Request $request
+     * @param Request     $request
+     *
      * @return Response
      */
     public function handle(Application $application, Request $request): Response;

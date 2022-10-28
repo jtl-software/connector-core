@@ -18,16 +18,17 @@ class ResponseTest extends TestCase
     public function responseDataProvider()
     {
         return [
-            [new Identity("1")],
-            [[1, 2], 'ABC'],
+            [new Identity('1')],
+            [[1, 2,], 'ABC'],
             [1],
-            ["FOO"],
-            [1.2],
+            ['FOO'],
+            [1.2]
         ];
     }
 
     /**
      * @dataProvider responseDataProvider
+     *
      * @param $result
      */
     public function testCreateFromStatic($result)
@@ -42,7 +43,7 @@ class ResponseTest extends TestCase
      */
     public function testSetResult()
     {
-        $result = "FOO";
+        $result = 'FOO';
 
         $response = new Response(123);
         $response->setResult($result);

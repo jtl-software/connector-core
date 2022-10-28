@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test;
 
 use Faker\Factory;
@@ -6,7 +7,6 @@ use Faker\Generator;
 use Jtl\Connector\Core\Config\ArrayConfig;
 use Jtl\Connector\Core\Config\FileConfig;
 use Jtl\Connector\Core\Model\Identity;
-use Noodlehaus\AbstractConfig;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 
@@ -16,7 +16,7 @@ use org\bovigo\vfs\vfsStreamDirectory;
  */
 class TestCase extends \Jtl\UnitTest\TestCase
 {
-    protected $connectorDir = TEST_DIR;
+    protected $connectorDir = \TEST_DIR;
 
     /**
      * @var string
@@ -33,14 +33,6 @@ class TestCase extends \Jtl\UnitTest\TestCase
      */
     private $rootDir;
 
-    /**
-     *
-     */
-    protected function setUp(): void
-    {
-        $_POST = [];
-    }
-
     protected function tearDown(): void
     {
         parent::tearDown();
@@ -49,19 +41,19 @@ class TestCase extends \Jtl\UnitTest\TestCase
         ];
 
         foreach ($files as $file) {
-            if (!is_null($file) && is_file($file)) {
-                unlink($file);
+            if (!\is_null($file) && \is_file($file)) {
+                \unlink($file);
             }
         }
 
         $dirs = [
-            sprintf('%s/plugins', $this->connectorDir),
-            sprintf('%s/db', $this->connectorDir),
-            sprintf('%s/var', $this->connectorDir),
+            \sprintf('%s/plugins', $this->connectorDir),
+            \sprintf('%s/db', $this->connectorDir),
+            \sprintf('%s/var', $this->connectorDir),
         ];
 
         foreach ($dirs as $dir) {
-            if (is_dir($dir)) {
+            if (\is_dir($dir)) {
                 $this->removeDirRecursive($dir);
             }
         }
@@ -72,30 +64,12 @@ class TestCase extends \Jtl\UnitTest\TestCase
      */
     protected function removeDirRecursive(string $dirname)
     {
-        $elements = glob($dirname . '/*');
+        $elements = \glob($dirname . '/*');
         foreach ($elements as $element) {
-            is_dir($element) ? $this->removeDirRecursive($element) : unlink($element);
+            \is_dir($element) ? $this->removeDirRecursive($element) : \unlink($element);
         }
-        rmdir($dirname);
+        \rmdir($dirname);
         return;
-    }
-
-    /**
-     * @return int
-     * @throws \Exception
-     */
-    protected function createHostId(): int
-    {
-        return random_int(1, 9999);
-    }
-
-    /**
-     * @return string
-     * @throws \Exception
-     */
-    protected function createEndpointId(): string
-    {
-        return sprintf("%s_%s", 't', $this->createHostId());
     }
 
     /**
@@ -108,18 +82,40 @@ class TestCase extends \Jtl\UnitTest\TestCase
     }
 
     /**
+     * @return string
+     * @throws \Exception
+     */
+    protected function createEndpointId(): string
+    {
+        return \sprintf('%s_%s', 't', $this->createHostId());
+    }
+
+    /**
+     * @return int
+     * @throws \Exception
+     */
+    protected function createHostId(): int
+    {
+        return \random_int(1, 9999);
+    }
+
+    /**
      * @param string $className
+     *
      * @return array
      * @throws \ReflectionException
      */
     protected function getCorrectConstantsTestCases(string $className): array
     {
         $reflection = new \ReflectionClass($className);
-        $constants = array_values($reflection->getConstants());
+        $constants  = \array_values($reflection->getConstants());
 
         $testCases = [];
         foreach ($constants as $constant) {
-            $testCases[] = [$constant, true];
+            $testCases[] = [
+                $constant,
+                true,
+            ];
         }
 
         return $testCases;
@@ -127,6 +123,7 @@ class TestCase extends \Jtl\UnitTest\TestCase
 
     /**
      * @param array $data
+     *
      * @return ArrayConfig
      */
     protected function createConfig(array $data = [])
@@ -137,9 +134,10 @@ class TestCase extends \Jtl\UnitTest\TestCase
     /**
      * @param string $payload
      * @param string $extension
+     *
      * @return FileConfig
      */
-    protected function createFileConfig(string $payload = "{}", string $extension = 'json'): FileConfig
+    protected function createFileConfig(string $payload = '{}', string $extension = 'json'): FileConfig
     {
         return new FileConfig($this->createConfigFile($payload, $extension));
     }
@@ -147,36 +145,35 @@ class TestCase extends \Jtl\UnitTest\TestCase
     /**
      * @param string $payload
      * @param string $extension
+     *
      * @return string
      */
     protected function createConfigFile(string $payload = '{}', string $extension = 'json'): string
     {
-        $this->configFile = sprintf('%s/%s.%s', sys_get_temp_dir(), uniqid('connector-config', true), $extension);
-        file_put_contents($this->configFile, $payload);
+        $this->configFile = \sprintf('%s/%s.%s', \sys_get_temp_dir(), \uniqid('connector-config', true), $extension);
+        \file_put_contents($this->configFile, $payload);
         return $this->configFile;
     }
 
     /**
-     * @return vfsStreamDirectory
+     * @return string
      */
-    protected function getRootDir(): vfsStreamDirectory
+    protected function createFile(): string
     {
-        if (is_null($this->rootDir)) {
-            $this->rootDir = vfsStream::setup();
-        }
-        return $this->rootDir;
+        return $this->createFiles(1)[0];
     }
 
     /**
      * @param int $quantity
+     *
      * @return string[]
      */
-    protected function createFiles($quantity = 2): array
+    protected function createFiles(int $quantity = 2): array
     {
         $files = [];
 
-        for ($i=0;$i<$quantity;$i++) {
-            $file = vfsStream::newFile(time() . $i . '-file');
+        for ($i = 0; $i < $quantity; $i++) {
+            $file = vfsStream::newFile(\time() . $i . '-file');
 
             $this->getRootDir()->addChild($file);
 
@@ -187,11 +184,22 @@ class TestCase extends \Jtl\UnitTest\TestCase
     }
 
     /**
-     * @return mixed
+     * @return vfsStreamDirectory
      */
-    protected function createFile(): string
+    protected function getRootDir(): vfsStreamDirectory
     {
-        return $this->createFiles(1)[0];
+        if (\is_null($this->rootDir)) {
+            $this->rootDir = vfsStream::setup();
+        }
+        return $this->rootDir;
+    }
+
+    /**
+     *
+     */
+    protected function setUp(): void
+    {
+        $_POST = [];
     }
 
     /**
@@ -199,7 +207,7 @@ class TestCase extends \Jtl\UnitTest\TestCase
      */
     protected function getFaker(): Generator
     {
-        if (is_null($this->faker)) {
+        if (\is_null($this->faker)) {
             $this->faker = Factory::create();
         }
         return $this->faker;

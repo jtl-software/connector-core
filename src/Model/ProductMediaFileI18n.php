@@ -1,7 +1,8 @@
 <?php
+
 /**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
+ * @copyright  2010-2015 JTL-Software GmbH
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
 
@@ -12,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Locale specific mediafile name + description.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -36,17 +37,6 @@ class ProductMediaFileI18n extends AbstractI18n
     protected $name = '';
 
     /**
-     * @param string $description Locale specific description
-     * @return ProductMediaFileI18n
-     */
-    public function setDescription(string $description): ProductMediaFileI18n
-    {
-        $this->description = $description;
-        
-        return $this;
-    }
-    
-    /**
      * @return string Locale specific description
      */
     public function getDescription(): string
@@ -55,21 +45,34 @@ class ProductMediaFileI18n extends AbstractI18n
     }
 
     /**
-     * @param string $name Locale specific name
+     * @param string $description Locale specific description
+     *
      * @return ProductMediaFileI18n
      */
-    public function setName(string $name): ProductMediaFileI18n
+    public function setDescription(string $description): ProductMediaFileI18n
     {
-        $this->name = $name;
-        
+        $this->description = $description;
+
         return $this;
     }
-    
+
     /**
      * @return string Locale specific name
      */
     public function getName(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @param string $name Locale specific name
+     *
+     * @return ProductMediaFileI18n
+     */
+    public function setName(string $name): ProductMediaFileI18n
+    {
+        $this->name = $name;
+
+        return $this;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Jtl\Connector\Core\Test\Definition;
 
 use Jtl\Connector\Core\Definition\IdentityType;
@@ -19,24 +20,22 @@ class ModelTest extends TestCase
     {
         $modelNamespace = 'Jtl\\Connector\\Core\\Model';
 
-        $definition = new Model();
+        $definition           = new Model();
         $definitionReflection = new \ReflectionClass($definition);
-        $propertyMappings = $definitionReflection->getProperty('propertyMappings');
+        $propertyMappings     = $definitionReflection->getProperty('propertyMappings');
         $propertyMappings->setAccessible(true);
 
-        $exceptions = [
-            Model::PRODUCT_ATTRIBUTE
-        ];
+        $exceptions = [Model::PRODUCT_ATTRIBUTE];
 
         $mappings = $propertyMappings->getValue($definition);
 
         foreach ($mappings as $modelName => $identityMappings) {
-            if (in_array($modelName, $exceptions, true)) {
+            if (\in_array($modelName, $exceptions, true)) {
                 continue;
             }
 
-            $modelClass = sprintf("%s\\%s", $modelNamespace, $modelName);
-            $model = new $modelClass;
+            $modelClass = \sprintf("%s\\%s", $modelNamespace, $modelName);
+            $model      = new $modelClass();
 
             foreach ($identityMappings as $propertyName => $identityType) {
                 $this->assertObjectHasAttribute($propertyName, $model);
@@ -49,9 +48,9 @@ class ModelTest extends TestCase
      */
     public function testMappingsMatchIdentityType()
     {
-        $definition = new Model();
+        $definition           = new Model();
         $definitionReflection = new \ReflectionClass($definition);
-        $propertyMappings = $definitionReflection->getProperty('mappings');
+        $propertyMappings     = $definitionReflection->getProperty('mappings');
         $propertyMappings->setAccessible(true);
 
         foreach ($propertyMappings->getValue($definition) as $mapping) {
@@ -62,9 +61,10 @@ class ModelTest extends TestCase
     /**
      * @dataProvider getModelByTypeProvider
      *
-     * @param int $identityType
-     * @param $expectedResult
+     * @param int  $identityType
+     * @param      $expectedResult
      * @param bool $shouldThrowException
+     *
      * @throws DefinitionException
      * @throws \ReflectionException
      */
@@ -90,7 +90,7 @@ class ModelTest extends TestCase
             [IdentityType::CATEGORY, Model::CATEGORY],
             [0, DefinitionException::unknownIdentityType(0), true],
             [-999999999999999999, DefinitionException::unknownIdentityType(-999999999999999999), true],
-            [IdentityType::SPECIFIC_VALUE_IMAGE, Model::SPECIFIC_VALUE_IMAGE],
+            [IdentityType::SPECIFIC_VALUE_IMAGE, Model::SPECIFIC_VALUE_IMAGE]
         ];
     }
 
@@ -100,7 +100,7 @@ class ModelTest extends TestCase
      */
     public function testGetIdentityTypeModelIsInvalid()
     {
-        $modelName = "InvalidModelName";
+        $modelName = 'InvalidModelName';
 
         $this->expectExceptionObject(DefinitionException::unknownModel($modelName));
 
@@ -112,12 +112,12 @@ class ModelTest extends TestCase
      *
      * @param string $modelName
      * @param string $propertyName
-     * @param bool $expectedResult
+     * @param bool   $expectedResult
      */
     public function testIsIdentityPropertyInvalidPropertyName(
         string $modelName,
         string $propertyName,
-        bool $expectedResult
+        bool   $expectedResult
     ) {
         $result = Model::isIdentityProperty($modelName, $propertyName);
         $this->assertSame($expectedResult, $result);
@@ -135,7 +135,7 @@ class ModelTest extends TestCase
             [Model::PRODUCT, ' ', false],
             [Model::PRODUCT, 'ID', false],
             [Model::CATEGORY, 'ID', false],
-            [Model::CATEGORY, 'id', true],
+            [Model::CATEGORY, 'id', true]
         ];
     }
 
@@ -143,7 +143,7 @@ class ModelTest extends TestCase
      * @dataProvider modelNameProvider
      *
      * @param string $modelName
-     * @param bool $expectedResult
+     * @param bool   $expectedResult
      */
     public function testIsModel(string $modelName, bool $expectedResult)
     {
@@ -154,7 +154,8 @@ class ModelTest extends TestCase
      * @dataProvider modelNameProvider
      *
      * @param string $modelName
-     * @param bool $isModelName
+     * @param bool   $isModelName
+     *
      * @throws DefinitionException
      */
     public function testGetRelationType(string $modelName, bool $isModelName)
@@ -163,7 +164,7 @@ class ModelTest extends TestCase
             $this->expectExceptionObject(DefinitionException::unknownModel($modelName));
         }
 
-        $this->assertEquals(lcfirst($modelName), Model::getRelationType($modelName));
+        $this->assertEquals(\lcfirst($modelName), Model::getRelationType($modelName));
     }
 
     /**
