@@ -600,7 +600,7 @@ class Application
                         $className = Product::class;
                         break;
                 }
-                $type = \sprintf("array<%s>", $className);
+                $type = \sprintf('array<%s>', $className);
                 break;
             default:
                 $type = QueryFilter::class;
