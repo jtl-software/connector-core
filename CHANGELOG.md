@@ -1,3 +1,11 @@
+3.3.6
+-----
+- fix Sqlite Session Write error
+
+3.3.5
+-----
+- Block Php 8.1
+
 3.3.4
 -----
 - Added type to category and product attributes
