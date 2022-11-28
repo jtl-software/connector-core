@@ -10,6 +10,7 @@ namespace jtl\Connector\Core\Session;
 use \jtl\Connector\Core\Database\IDatabase;
 use \jtl\Connector\Core\Database\Mapper;
 use \jtl\Connector\Core\Exception\SessionException;
+use jtl\Connector\Core\IO\Path;
 use \jtl\Connector\Core\Logger\Logger;
 use SQLite3;
 
@@ -163,6 +164,7 @@ abstract class Handler
 
     /**
      * Write Session
+     * @throws \Exception
      */
     public function write($sessionId, $sessionData)
     {
@@ -175,6 +177,22 @@ abstract class Handler
         /** @var SQLite3 $db */
         $db = $this->_db->getDb();
         $success = false;
+
+        try{
+            $this->_db->check();
+        }catch(\Exception $e){
+            $location = $this->_db->location;
+            $sqlite3 = \jtl\Connector\Database\Sqlite3::getInstance();
+            $sqlite3->connect(['location' => $location]);
+            $sqlite3->check();
+            $this->_db = $sqlite3;
+            $db = $this->_db->getDb();
+            try{
+                $this->_db->check();
+            }catch(\Exception $e){
+                throw new \Exception('Could not connect to sqlite database');
+            }
+        }
 
         try {
             $stmt = $db->prepare('INSERT INTO session (sessionId, sessionExpires, sessionData) VALUES(:session_id, :expire, :data)');
