@@ -156,7 +156,9 @@ class Language
      */
     private static function getLocaleString(string $localeStr): string
     {
-        $localeStr = \substr($localeStr, 0, \strpos($localeStr, '_'));
+        if(\strpos($localeStr, '_') !== false) {
+            $localeStr = \substr($localeStr, 0, \strpos($localeStr, '_'));
+        }
 
         if ($localeStr === false) {
             throw new \InvalidArgumentException('locale string must have the format: \'xx_xx\'');
