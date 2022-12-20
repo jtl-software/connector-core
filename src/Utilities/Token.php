@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Utilities;
 
 /**
  * Class Token
+ *
  * @package Jtl\Connector\Core\Utilities
  */
 class Token

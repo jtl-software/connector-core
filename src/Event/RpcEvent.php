@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Event;
 
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Class RpcEvent
+ *
  * @package Jtl\Connector\Core\Event
  */
 class RpcEvent extends Event
@@ -18,12 +21,12 @@ class RpcEvent extends Event
     /**
      * @var string
      */
-    protected $controller;
+    protected string $controller;
 
     /**
      * @var string
      */
-    protected $action;
+    protected string $action;
 
     /**
      * RpcEvent constructor.
@@ -40,9 +43,9 @@ class RpcEvent extends Event
     }
 
     /**
-     * @return array
+     * @return array<mixed>
      */
-    public function getData()
+    public function getData(): array
     {
         return $this->data;
     }

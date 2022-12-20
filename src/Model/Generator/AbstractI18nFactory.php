@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Model\Generator;
 
 abstract class AbstractI18nFactory extends AbstractModelFactory

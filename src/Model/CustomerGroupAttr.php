@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -21,12 +17,12 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerGroupAttr extends KeyValueAttribute implements IdentityInterface
 {
     /**
-     * @var Identity Unique customerGroupAttr id
+     * @var Identity|null Unique customerGroupAttr id
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
-    protected $id = null;
+    protected ?Identity $id = null;
 
     /**
      * Constructor

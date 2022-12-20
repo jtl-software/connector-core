@@ -18,7 +18,7 @@ class TranslatableAttributeTest extends TestCase
      * @param        $expectedTranslation
      * @param array  $translations
      */
-    public function testFindTranslation(string $languageIso, $expectedTranslation, array $translations = [])
+    public function testFindTranslation(string $languageIso, $expectedTranslation, array $translations = []): void
     {
         $attribute = (new TranslatableAttribute())
             ->setI18ns(...$translations);
@@ -69,7 +69,7 @@ class TranslatableAttributeTest extends TestCase
      * @depends      testSetType
      * @throws TranslatableAttributeException
      */
-    public function testFindValue(string $type, ?TranslatableAttributeI18n $translation, $expectedValue)
+    public function testFindValue(string $type, ?TranslatableAttributeI18n $translation, $expectedValue): void
     {
         $attribute = $this->createPartialMock(TranslatableAttribute::class, ['findTranslation']);
 
@@ -118,7 +118,7 @@ class TranslatableAttributeTest extends TestCase
      * @param string $expectedName
      * @param string $languageIso
      */
-    public function testGetName(array $translations, string $expectedName, string $languageIso)
+    public function testGetName(array $translations, string $expectedName, string $languageIso): void
     {
         $attribute = (new TranslatableAttribute())
             ->setI18ns(...$translations);
@@ -167,7 +167,7 @@ class TranslatableAttributeTest extends TestCase
      * @param array       $translations
      * @param array       $expectedValues
      */
-    public function testGetValues(array $translations, array $expectedValues, string $castToType = null)
+    public function testGetValues(array $translations, array $expectedValues, string $castToType = null): void
     {
         $attribute = (new TranslatableAttribute())
             ->setI18ns(...$translations);
@@ -212,7 +212,7 @@ class TranslatableAttributeTest extends TestCase
      * @dataProvider setTypeProvider
      * @return void
      */
-    public function testSetType($actualType, $expectedType)
+    public function testSetType($actualType, $expectedType): void
     {
         $attribute = new TranslatableAttribute();
         $attribute->setType($actualType);

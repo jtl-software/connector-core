@@ -1,14 +1,14 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
+use DateTimeInterface;
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\MustNotBeNullException;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
+use TypeError;
 
 /**
  * Product properties.
@@ -23,76 +23,76 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     use TranslatableAttributesTrait;
 
     /**
-     * @var Identity Optional reference to basePriceUnit
+     * @var Identity|null Optional reference to basePriceUnit
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("basePriceUnitId")
      * @Serializer\Accessor(getter="getBasePriceUnitId",setter="setBasePriceUnitId")
      */
-    protected $basePriceUnitId = null;
+    protected ?Identity $basePriceUnitId = null;
 
     /**
-     * @var Identity Reference to manufacturer
+     * @var Identity|null Reference to manufacturer
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("manufacturerId")
      * @Serializer\Accessor(getter="getManufacturerId",setter="setManufacturerId")
      */
-    protected $manufacturerId = null;
+    protected ?Identity $manufacturerId = null;
 
     /**
-     * @var Identity Reference to master product
+     * @var Identity|null Reference to master product
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("masterProductId")
      * @Serializer\Accessor(getter="getMasterProductId",setter="setMasterProductId")
      */
-    protected $masterProductId = null;
+    protected ?Identity $masterProductId = null;
 
     /**
-     * @var Identity Optional reference to measurement unit id
+     * @var Identity|null Optional reference to measurement unit id
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("measurementUnitId")
      * @Serializer\Accessor(getter="getMeasurementUnitId",setter="setMeasurementUnitId")
      */
-    protected $measurementUnitId = null;
+    protected ?Identity $measurementUnitId = null;
 
     /**
-     * @var Identity Optional reference to partsList
+     * @var Identity|null Optional reference to partsList
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("partsListId")
      * @Serializer\Accessor(getter="getPartsListId",setter="setPartsListId")
      */
-    protected $partsListId = null;
+    protected ?Identity $partsListId = null;
 
     /**
-     * @var Identity Optional reference to productType
+     * @var Identity|null Optional reference to productType
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("productTypeId")
      * @Serializer\Accessor(getter="getProductTypeId",setter="setProductTypeId")
      */
-    protected $productTypeId = null;
+    protected ?Identity $productTypeId = null;
 
     /**
-     * @var Identity Reference to shippingClass
+     * @var Identity|null Reference to shippingClass
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("shippingClassId")
      * @Serializer\Accessor(getter="getShippingClassId",setter="setShippingClassId")
      */
-    protected $shippingClassId = null;
+    protected ?Identity $shippingClassId = null;
 
     /**
-     * @var Identity Reference to tax class
+     * @var Identity|null Reference to tax class
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("taxClassId")
      * @Serializer\Accessor(getter="getTaxClassId",setter="setTaxClassId")
      */
-    protected $taxClassId = null;
+    protected ?Identity $taxClassId = null;
 
     /**
-     * @var Identity Reference to unit
+     * @var Identity|null Reference to unit
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("unitId")
      * @Serializer\Accessor(getter="getUnitId",setter="setUnitId")
      */
-    protected $unitId = null;
+    protected ?Identity $unitId = null;
 
     /**
      * @var integer
@@ -100,7 +100,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("additionalHandlingTime")
      * @Serializer\Accessor(getter="getAdditionalHandlingTime",setter="setAdditionalHandlingTime")
      */
-    protected $additionalHandlingTime = 0;
+    protected int $additionalHandlingTime = 0;
 
     /**
      * @var string Optional Amazon Standard Identification Number
@@ -108,15 +108,15 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("asin")
      * @Serializer\Accessor(getter="getAsin",setter="setAsin")
      */
-    protected $asin = '';
+    protected string $asin = '';
 
     /**
-     * @var \DateTimeInterface Optional available from date. Specify a date, upon when product can be purchased.
+     * @var \DateTimeInterface|null Optional available from date. Specify a date, upon when product can be purchased.
      * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("availableFrom")
      * @Serializer\Accessor(getter="getAvailableFrom",setter="setAvailableFrom")
      */
-    protected $availableFrom = null;
+    protected ?\DateTimeInterface $availableFrom = null;
 
     /**
      * @var double Optional base price divisor.
@@ -126,7 +126,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("basePriceDivisor")
      * @Serializer\Accessor(getter="getBasePriceDivisor",setter="setBasePriceDivisor")
      */
-    protected $basePriceDivisor = 0.0;
+    protected float $basePriceDivisor = 0.0;
 
     /**
      * @var double
@@ -134,7 +134,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("basePriceFactor")
      * @Serializer\Accessor(getter="getBasePriceFactor",setter="setBasePriceFactor")
      */
-    protected $basePriceFactor = 0.0;
+    protected float $basePriceFactor = 0.0;
 
     /**
      * @var double Optional base price quantity
@@ -142,7 +142,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("basePriceQuantity")
      * @Serializer\Accessor(getter="getBasePriceQuantity",setter="setBasePriceQuantity")
      */
-    protected $basePriceQuantity = 0.0;
+    protected float $basePriceQuantity = 0.0;
 
     /**
      * @var string
@@ -150,7 +150,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("basePriceUnitCode")
      * @Serializer\Accessor(getter="getBasePriceUnitCode",setter="setBasePriceUnitCode")
      */
-    protected $basePriceUnitCode = '';
+    protected string $basePriceUnitCode = '';
 
     /**
      * @var string
@@ -158,7 +158,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("basePriceUnitName")
      * @Serializer\Accessor(getter="getBasePriceUnitName",setter="setBasePriceUnitName")
      */
-    protected $basePriceUnitName = '';
+    protected string $basePriceUnitName = '';
 
     /**
      * @var boolean Optional: Set to true to display base price / unit pricing measure
@@ -166,7 +166,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("considerBasePrice")
      * @Serializer\Accessor(getter="getConsiderBasePrice",setter="setConsiderBasePrice")
      */
-    protected $considerBasePrice = false;
+    protected bool $considerBasePrice = false;
 
     /**
      * @var boolean Consider stock level?
@@ -175,7 +175,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("considerStock")
      * @Serializer\Accessor(getter="getConsiderStock",setter="setConsiderStock")
      */
-    protected $considerStock = false;
+    protected bool $considerStock = false;
 
     /**
      * @var boolean Optional: Consider stock levels of productVariations. Same as considerStock but for variations.
@@ -183,15 +183,15 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("considerVariationStock")
      * @Serializer\Accessor(getter="getConsiderVariationStock",setter="setConsiderVariationStock")
      */
-    protected $considerVariationStock = false;
+    protected bool $considerVariationStock = false;
 
     /**
-     * @var \DateTimeInterface Creation date
+     * @var \DateTimeInterface|null Creation date
      * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("creationDate")
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
-    protected $creationDate = null;
+    protected ?\DateTimeInterface $creationDate = null;
 
     /**
      * @var boolean
@@ -199,7 +199,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("discountable")
      * @Serializer\Accessor(getter="getDiscountable",setter="setDiscountable")
      */
-    protected $discountable = true;
+    protected bool $discountable = true;
 
     /**
      * @var string Optional European Article Number (EAN)
@@ -207,7 +207,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("ean")
      * @Serializer\Accessor(getter="getEan",setter="setEan")
      */
-    protected $ean = '';
+    protected string $ean = '';
 
     /**
      * @var string Optional Ebay product ID
@@ -215,7 +215,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("epid")
      * @Serializer\Accessor(getter="getEpid",setter="setEpid")
      */
-    protected $epid = '';
+    protected string $epid = '';
 
     /**
      * @var string Optional Hazard identifier, encodes general hazard class und subdivision
@@ -223,7 +223,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("hazardIdNumber")
      * @Serializer\Accessor(getter="getHazardIdNumber",setter="setHazardIdNumber")
      */
-    protected $hazardIdNumber = '';
+    protected string $hazardIdNumber = '';
 
     /**
      * @var double Optional product height
@@ -231,7 +231,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("height")
      * @Serializer\Accessor(getter="getHeight",setter="setHeight")
      */
-    protected $height = 0.0;
+    protected float $height = 0.0;
 
     /**
      * @var boolean
@@ -239,7 +239,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("isActive")
      * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
      */
-    protected $isActive = false;
+    protected bool $isActive = false;
 
     /**
      * @var boolean
@@ -247,7 +247,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("isBatch")
      * @Serializer\Accessor(getter="getIsBatch",setter="setIsBatch")
      */
-    protected $isBatch = false;
+    protected bool $isBatch = false;
 
     /**
      * @var boolean
@@ -255,7 +255,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("isBestBefore")
      * @Serializer\Accessor(getter="getIsBestBefore",setter="setIsBestBefore")
      */
-    protected $isBestBefore = false;
+    protected bool $isBestBefore = false;
 
     /**
      * @var string Optional International Standard Book Number
@@ -263,7 +263,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("isbn")
      * @Serializer\Accessor(getter="getIsbn",setter="setIsbn")
      */
-    protected $isbn = '';
+    protected string $isbn = '';
 
     /**
      * @var boolean Optional: Set to true to allow non-integer quantites for purchase
@@ -271,7 +271,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("isDivisible")
      * @Serializer\Accessor(getter="getIsDivisible",setter="setIsDivisible")
      */
-    protected $isDivisible = false;
+    protected bool $isDivisible = false;
 
     /**
      * @var boolean Optional flag if product is master product
@@ -279,7 +279,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("isMasterProduct")
      * @Serializer\Accessor(getter="getIsMasterProduct",setter="setIsMasterProduct")
      */
-    protected $isMasterProduct = false;
+    protected bool $isMasterProduct = false;
 
     /**
      * @var boolean Optional flag new product.
@@ -288,7 +288,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("isNewProduct")
      * @Serializer\Accessor(getter="getIsNewProduct",setter="setIsNewProduct")
      */
-    protected $isNewProduct = false;
+    protected bool $isNewProduct = false;
 
     /**
      * @var boolean
@@ -296,7 +296,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("isSerialNumber")
      * @Serializer\Accessor(getter="getIsSerialNumber",setter="setIsSerialNumber")
      */
-    protected $isSerialNumber = false;
+    protected bool $isSerialNumber = false;
 
     /**
      * @var boolean Optional flag top product.
@@ -305,7 +305,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("isTopProduct")
      * @Serializer\Accessor(getter="getIsTopProduct",setter="setIsTopProduct")
      */
-    protected $isTopProduct = false;
+    protected bool $isTopProduct = false;
 
     /**
      * @var string Optional internal keywords and synonyms for product
@@ -313,7 +313,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("keywords")
      * @Serializer\Accessor(getter="getKeywords",setter="setKeywords")
      */
-    protected $keywords = '';
+    protected string $keywords = '';
 
     /**
      * @var double Optional product length
@@ -321,7 +321,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("length")
      * @Serializer\Accessor(getter="getLength",setter="setLength")
      */
-    protected $length = 0.0;
+    protected float $length = 0.0;
 
     /**
      * @var string Optional manufacturer number
@@ -329,15 +329,15 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("manufacturerNumber")
      * @Serializer\Accessor(getter="getManufacturerNumber",setter="setManufacturerNumber")
      */
-    protected $manufacturerNumber = '';
+    protected string $manufacturerNumber = '';
 
     /**
-     * @var Manufacturer
+     * @var Manufacturer|null
      * @Serializer\Type("Jtl\Connector\Core\Model\Manufacturer")
      * @Serializer\SerializedName("manufacturer")
      * @Serializer\Accessor(getter="getManufacturer",setter="setManufacturer")
      */
-    protected $manufacturer = null;
+    protected ?Manufacturer $manufacturer = null;
 
     /**
      * @var double Optional measurement quantity
@@ -345,7 +345,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("measurementQuantity")
      * @Serializer\Accessor(getter="getMeasurementQuantity",setter="setMeasurementQuantity")
      */
-    protected $measurementQuantity = 0.0;
+    protected float $measurementQuantity = 0.0;
 
     /**
      * @var string
@@ -353,15 +353,15 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("measurementUnitCode")
      * @Serializer\Accessor(getter="getMeasurementUnitCode",setter="setMeasurementUnitCode")
      */
-    protected $measurementUnitCode = '';
+    protected string $measurementUnitCode = '';
 
     /**
-     * @var \DateTimeInterface
+     * @var \DateTimeInterface|null
      * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("minBestBeforeDate")
      * @Serializer\Accessor(getter="getMinBestBeforeDate",setter="setMinBestBeforeDate")
      */
-    protected $minBestBeforeDate = null;
+    protected ?\DateTimeInterface $minBestBeforeDate = null;
 
     /**
      * @var double
@@ -369,7 +369,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("minimumOrderQuantity")
      * @Serializer\Accessor(getter="getMinimumOrderQuantity",setter="setMinimumOrderQuantity")
      */
-    protected $minimumOrderQuantity = 0.0;
+    protected float $minimumOrderQuantity = 0.0;
 
     /**
      * @var double
@@ -377,31 +377,31 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("minimumQuantity")
      * @Serializer\Accessor(getter="getMinimumQuantity",setter="setMinimumQuantity")
      */
-    protected $minimumQuantity = 0.0;
+    protected float $minimumQuantity = 0.0;
 
     /**
-     * @var \DateTimeInterface
+     * @var \DateTimeInterface|null
      * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("modified")
      * @Serializer\Accessor(getter="getModified",setter="setModified")
      */
-    protected $modified = null;
+    protected ?\DateTimeInterface $modified = null;
 
     /**
-     * @var \DateTimeInterface
+     * @var \DateTimeInterface|null
      * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("newReleaseDate")
      * @Serializer\Accessor(getter="getNewReleaseDate",setter="setNewReleaseDate")
      */
-    protected $newReleaseDate = null;
+    protected ?\DateTimeInterface $newReleaseDate = null;
 
     /**
-     * @var \DateTimeInterface Contains the date of the next available inflow.
+     * @var \DateTimeInterface|null Contains the date of the next available inflow.
      * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("nextAvailableInflowDate")
      * @Serializer\Accessor(getter="getNextAvailableInflowDate",setter="setNextAvailableInflowDate")
      */
-    protected $nextAvailableInflowDate = null;
+    protected ?\DateTimeInterface $nextAvailableInflowDate = null;
 
     /**
      * @var double Contains the quantity of the next available inflow.
@@ -409,7 +409,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("nextAvailableInflowQuantity")
      * @Serializer\Accessor(getter="getNextAvailableInflowQuantity",setter="setNextAvailableInflowQuantity")
      */
-    protected $nextAvailableInflowQuantity = 0.0;
+    protected float $nextAvailableInflowQuantity = 0.0;
 
     /**
      * @var string Optional internal product note
@@ -417,7 +417,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("note")
      * @Serializer\Accessor(getter="getNote",setter="setNote")
      */
-    protected $note = '';
+    protected string $note = '';
 
     /**
      * @var string Optional Origin country
@@ -425,7 +425,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("originCountry")
      * @Serializer\Accessor(getter="getOriginCountry",setter="setOriginCountry")
      */
-    protected $originCountry = '';
+    protected string $originCountry = '';
 
     /**
      * @var double Optional: self can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
@@ -433,7 +433,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("packagingQuantity")
      * @Serializer\Accessor(getter="getPackagingQuantity",setter="setPackagingQuantity")
      */
-    protected $packagingQuantity = 0.0;
+    protected float $packagingQuantity = 0.0;
 
     /**
      * @var boolean Optional Permit negative stock / allow overselling.
@@ -442,7 +442,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("permitNegativeStock")
      * @Serializer\Accessor(getter="getPermitNegativeStock",setter="setPermitNegativeStock")
      */
-    protected $permitNegativeStock = false;
+    protected bool $permitNegativeStock = false;
 
     /**
      * @var double Productweight exclusive packaging
@@ -450,7 +450,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("productWeight")
      * @Serializer\Accessor(getter="getProductWeight",setter="setProductWeight")
      */
-    protected $productWeight = 0.0;
+    protected float $productWeight = 0.0;
 
     /**
      * @var double
@@ -458,7 +458,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("purchasePrice")
      * @Serializer\Accessor(getter="getPurchasePrice",setter="setPurchasePrice")
      */
-    protected $purchasePrice = 0.0;
+    protected float $purchasePrice = 0.0;
 
     /**
      * @var double Optional recommended retail price (gross)
@@ -466,7 +466,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("recommendedRetailPrice")
      * @Serializer\Accessor(getter="getRecommendedRetailPrice",setter="setRecommendedRetailPrice")
      */
-    protected $recommendedRetailPrice = 0.0;
+    protected float $recommendedRetailPrice = 0.0;
 
     /**
      * @var string Optional serial number
@@ -474,7 +474,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("serialNumber")
      * @Serializer\Accessor(getter="getSerialNumber",setter="setSerialNumber")
      */
-    protected $serialNumber = '';
+    protected string $serialNumber = '';
 
     /**
      * @var double Productweight inclusive packaging
@@ -482,7 +482,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("shippingWeight")
      * @Serializer\Accessor(getter="getShippingWeight",setter="setShippingWeight")
      */
-    protected $shippingWeight = 0.0;
+    protected float $shippingWeight = 0.0;
 
     /**
      * @var string Optional stock keeping unit identifier
@@ -490,7 +490,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("sku")
      * @Serializer\Accessor(getter="getSku",setter="setSku")
      */
-    protected $sku = '';
+    protected string $sku = '';
 
     /**
      * @var integer Optional sort number for product sorting in lists
@@ -498,7 +498,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
-    protected $sort = 0;
+    protected int $sort = 0;
 
     /**
      * @var double
@@ -506,7 +506,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("stockLevel")
      * @Serializer\Accessor(getter="getStockLevel",setter="setStockLevel")
      */
-    protected $stockLevel = 0.0;
+    protected float $stockLevel = 0.0;
 
     /**
      * @var integer
@@ -514,7 +514,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("supplierDeliveryTime")
      * @Serializer\Accessor(getter="getSupplierDeliveryTime",setter="setSupplierDeliveryTime")
      */
-    protected $supplierDeliveryTime = 0;
+    protected int $supplierDeliveryTime = 0;
 
     /**
      * @var double
@@ -522,7 +522,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("supplierStockLevel")
      * @Serializer\Accessor(getter="getSupplierStockLevel",setter="setSupplierStockLevel")
      */
-    protected $supplierStockLevel = 0.0;
+    protected float $supplierStockLevel = 0.0;
 
     /**
      * @var string Optional TARIC
@@ -530,7 +530,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("taric")
      * @Serializer\Accessor(getter="getTaric",setter="setTaric")
      */
-    protected $taric = '';
+    protected string $taric = '';
 
     /**
      * @var string Optional UN number, used to define hazardous properties
@@ -538,7 +538,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("unNumber")
      * @Serializer\Accessor(getter="getUnNumber",setter="setUnNumber")
      */
-    protected $unNumber = '';
+    protected string $unNumber = '';
 
     /**
      * @var string Optional Universal Product Code
@@ -546,7 +546,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("upc")
      * @Serializer\Accessor(getter="getUpc",setter="setUpc")
      */
-    protected $upc = '';
+    protected string $upc = '';
 
     /**
      * @var double
@@ -554,7 +554,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("vat")
      * @Serializer\Accessor(getter="getVat",setter="setVat")
      */
-    protected $vat = 0.0;
+    protected float $vat = 0.0;
 
     /**
      * @var double Optional product width
@@ -562,7 +562,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("width")
      * @Serializer\Accessor(getter="getWidth",setter="setWidth")
      */
-    protected $width = 0.0;
+    protected float $width = 0.0;
 
     /**
      * @var ProductAttribute[]
@@ -570,7 +570,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
-    protected $attributes = [];
+    protected array $attributes = [];
 
     /**
      * @var Product2Category[]
@@ -578,7 +578,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("categories")
      * @Serializer\AccessType("reflection")
      */
-    protected $categories = [];
+    protected array $categories = [];
 
     /**
      * @var ProductChecksum[]
@@ -586,7 +586,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("checksums")
      * @Serializer\AccessType("reflection")
      */
-    protected $checksums = [];
+    protected array $checksums = [];
 
     /**
      * @var ProductConfigGroup[]
@@ -594,7 +594,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("configGroups")
      * @Serializer\AccessType("reflection")
      */
-    protected $configGroups = [];
+    protected array $configGroups = [];
 
     /**
      * @var CustomerGroupPackagingQuantity[]
@@ -602,7 +602,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("customerGroupPackagingQuantities")
      * @Serializer\AccessType("reflection")
      */
-    protected $customerGroupPackagingQuantities = [];
+    protected array $customerGroupPackagingQuantities = [];
 
     /**
      * @var ProductFileDownload[]
@@ -610,7 +610,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("fileDownloads")
      * @Serializer\AccessType("reflection")
      */
-    protected $fileDownloads = [];
+    protected array $fileDownloads = [];
 
     /**
      * @var ProductI18n[]
@@ -618,7 +618,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = [];
+    protected array $i18ns = [];
 
     /**
      * @var ProductInvisibility[]
@@ -626,7 +626,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("invisibilities")
      * @Serializer\AccessType("reflection")
      */
-    protected $invisibilities = [];
+    protected array $invisibilities = [];
 
     /**
      * @var ProductMediaFile[]
@@ -634,7 +634,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("mediaFiles")
      * @Serializer\AccessType("reflection")
      */
-    protected $mediaFiles = [];
+    protected array $mediaFiles = [];
 
     /**
      * @var ProductPartsList[]
@@ -642,7 +642,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("partsLists")
      * @Serializer\AccessType("reflection")
      */
-    protected $partsLists = [];
+    protected array $partsLists = [];
 
     /**
      * @var ProductPrice[]
@@ -650,7 +650,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("prices")
      * @Serializer\AccessType("reflection")
      */
-    protected $prices = [];
+    protected array $prices = [];
 
     /**
      * @var ProductSpecialPrice[]
@@ -658,7 +658,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("specialPrices")
      * @Serializer\AccessType("reflection")
      */
-    protected $specialPrices = [];
+    protected array $specialPrices = [];
 
     /**
      * @var ProductSpecific[]
@@ -666,7 +666,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("specifics")
      * @Serializer\AccessType("reflection")
      */
-    protected $specifics = [];
+    protected array $specifics = [];
 
     /**
      * @var array<TaxRate>
@@ -674,7 +674,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("taxRates")
      * @Serializer\AccessType("reflection")
      */
-    protected $taxRates = [];
+    protected array $taxRates = [];
 
     /**
      * @var ProductVariation[]
@@ -682,7 +682,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("variations")
      * @Serializer\AccessType("reflection")
      */
-    protected $variations = [];
+    protected array $variations = [];
 
     /**
      * @var ProductWarehouseInfo[]
@@ -690,7 +690,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @Serializer\SerializedName("warehouseInfo")
      * @Serializer\AccessType("reflection")
      */
-    protected $warehouseInfo = [];
+    protected array $warehouseInfo = [];
 
     /**
      * Constructor.
@@ -714,18 +714,24 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @return boolean
+     * @throws MustNotBeNullException
+     * @throws TypeError
      */
     public function isVariation(): bool
     {
-        return $this->isMasterProduct === true || $this->masterProductId->getHost() !== 0;
+        return
+            $this->isMasterProduct === true
+            || Validate::checkIdentityAndNotNull($this->masterProductId)->getHost() !== 0;
     }
 
     /**
      * @return Identity Optional reference to basePriceUnit
+     * @throws MustNotBeNullException
+     * @throws TypeError
      */
     public function getBasePriceUnitId(): Identity
     {
-        return $this->basePriceUnitId;
+        return Validate::checkIdentityAndNotNull($this->basePriceUnitId);
     }
 
     /**
@@ -742,10 +748,12 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @return Identity Reference to manufacturer
+     * @throws MustNotBeNullException
+     * @throws TypeError
      */
     public function getManufacturerId(): Identity
     {
-        return $this->manufacturerId;
+        return Validate::checkIdentityAndNotNull($this->manufacturerId);
     }
 
     /**
@@ -762,10 +770,12 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @return Identity Reference to master product
+     * @throws MustNotBeNullException
+     * @throws TypeError
      */
     public function getMasterProductId(): Identity
     {
-        return $this->masterProductId;
+        return Validate::checkIdentityAndNotNull($this->masterProductId);
     }
 
     /**
@@ -782,10 +792,12 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @return Identity Optional reference to measurement unit id
+     * @throws MustNotBeNullException
+     * @throws TypeError
      */
     public function getMeasurementUnitId(): Identity
     {
-        return $this->measurementUnitId;
+        return Validate::checkIdentityAndNotNull($this->measurementUnitId);
     }
 
     /**
@@ -802,10 +814,12 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @return Identity Optional reference to partsList
+     * @throws MustNotBeNullException
+     * @throws TypeError
      */
     public function getPartsListId(): Identity
     {
-        return $this->partsListId;
+        return Validate::checkIdentityAndNotNull($this->partsListId);
     }
 
     /**
@@ -822,10 +836,12 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @return Identity Optional reference to productType
+     * @throws MustNotBeNullException
+     * @throws TypeError
      */
     public function getProductTypeId(): Identity
     {
-        return $this->productTypeId;
+        return Validate::checkIdentityAndNotNull($this->productTypeId);
     }
 
     /**
@@ -842,10 +858,12 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @return Identity Reference to shippingClass
+     * @throws MustNotBeNullException
+     * @throws TypeError
      */
     public function getShippingClassId(): Identity
     {
-        return $this->shippingClassId;
+        return Validate::checkIdentityAndNotNull($this->shippingClassId);
     }
 
     /**
@@ -861,7 +879,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return Identity
+     * @return Identity|null
      */
     public function getTaxClassId(): ?Identity
     {
@@ -882,10 +900,12 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @return Identity Reference to unit
+     * @throws MustNotBeNullException
+     * @throws TypeError
      */
     public function getUnitId(): Identity
     {
-        return $this->unitId;
+        return Validate::checkIdentityAndNotNull($this->unitId);
     }
 
     /**
@@ -1110,11 +1130,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return \DateTimeInterface Creation date
+     * @return DateTimeInterface Creation date
+     * @throws MustNotBeNullException
+     * @throws TypeError
      */
-    public function getCreationDate(): ?\DateTimeInterface
+    public function getCreationDate(): \DateTimeInterface
     {
-        return $this->creationDate;
+        return Validate::checkDateTimeInterfaceAndNotNull($this->creationDate);
     }
 
     /**
@@ -1169,7 +1191,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return Identity Optional Ebay product ID
+     * @return string Optional Ebay product ID
      */
     public function getEpId(): string
     {
@@ -1594,7 +1616,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return \DateTimeInterface|null
      */
     public function getModified(): ?\DateTimeInterface
     {
@@ -1602,7 +1624,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param \DateTimeInterface $modified
+     * @param \DateTimeInterface|null $modified
      *
      * @return Product
      */
@@ -1614,7 +1636,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return \DateTimeInterface|null
      */
     public function getNewReleaseDate(): ?\DateTimeInterface
     {
@@ -1622,7 +1644,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param \DateTimeInterface $newReleaseDate
+     * @param \DateTimeInterface|null $newReleaseDate
      *
      * @return Product
      */
@@ -2040,11 +2062,11 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param TranslatableAttribute|ProductAttribute $attribute
+     * @param ProductAttribute $attribute
      *
      * @return Product
      */
-    public function addAttribute(TranslatableAttribute $attribute): self
+    public function addAttribute(ProductAttribute $attribute): self
     {
         $this->attributes[] = $attribute;
 
@@ -2052,7 +2074,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return TranslatableAttribute|ProductAttribute[]
+     * @return ProductAttribute[]
      */
     public function getAttributes(): array
     {
@@ -2060,12 +2082,13 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param TranslatableAttribute|ProductAttribute ...$attributes
+     * @param ProductAttribute ...$attributes
      *
      * @return Product
      */
     public function setAttributes(TranslatableAttribute ...$attributes): TranslatableAttributesInterface
     {
+        /** @var ProductAttribute[] $attributes */
         $this->attributes = $attributes;
 
         return $this;
@@ -2229,7 +2252,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param array $customerGroupPackagingQuantities
+     * @param CustomerGroupPackagingQuantity ...$customerGroupPackagingQuantities
      *
      * @return Product
      */
@@ -2592,7 +2615,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param array<TaxRate> $taxRates
+     * @param TaxRate ...$taxRates
      *
      * @return Product
      */
@@ -2741,7 +2764,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getIdentificationStrings(): array
     {

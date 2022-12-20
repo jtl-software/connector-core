@@ -1,14 +1,12 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\MustNotBeNullException;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
 
 /**
  * @access     public
@@ -19,12 +17,12 @@ use JMS\Serializer\Annotation as Serializer;
 class StatusChange extends AbstractModel
 {
     /**
-     * @var Identity
+     * @var Identity|null
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerOrderId")
      * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
      */
-    protected $customerOrderId = null;
+    protected ?Identity $customerOrderId = null;
 
     /**
      * @var string
@@ -32,7 +30,7 @@ class StatusChange extends AbstractModel
      * @Serializer\SerializedName("orderStatus")
      * @Serializer\Accessor(getter="getOrderStatus",setter="setOrderStatus")
      */
-    protected $orderStatus = '';
+    protected string $orderStatus = '';
 
     /**
      * @var string
@@ -40,7 +38,7 @@ class StatusChange extends AbstractModel
      * @Serializer\SerializedName("paymentStatus")
      * @Serializer\Accessor(getter="getPaymentStatus",setter="setPaymentStatus")
      */
-    protected $paymentStatus = '';
+    protected string $paymentStatus = '';
 
     /**
      * Constructor
@@ -51,9 +49,9 @@ class StatusChange extends AbstractModel
     }
 
     /**
-     * @return Identity
+     * @return Identity|null
      */
-    public function getCustomerOrderId(): Identity
+    public function getCustomerOrderId(): ?Identity
     {
         return $this->customerOrderId;
     }
@@ -111,13 +109,14 @@ class StatusChange extends AbstractModel
     }
 
     /**
-     * @return array
+     * @return string[]
+     * @throws MustNotBeNullException|\TypeError
      */
     public function getIdentificationStrings(): array
     {
         $this->setIdentificationStringBySubject(
             'customerOrderId',
-            \sprintf('JTL-Wawi PK = %d', $this->customerOrderId->getHost())
+            \sprintf('JTL-Wawi PK = %d', Validate::checkIdentityAndNotNull($this->customerOrderId)->getHost())
         );
 
         return parent::getIdentificationStrings();

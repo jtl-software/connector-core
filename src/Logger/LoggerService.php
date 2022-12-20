@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Logger;
 
 use Jtl\Connector\Core\Exception\LoggerException;
@@ -10,6 +12,7 @@ use Monolog\Logger as MonoLogger;
 use Monolog\Processor\IntrospectionProcessor;
 use Monolog\Processor\ProcessorInterface;
 use Monolog\Processor\PsrLogMessageProcessor;
+use Psr\Log\InvalidArgumentException;
 
 class LoggerService
 {
@@ -74,6 +77,7 @@ class LoggerService
      * @param string $channel
      *
      * @return MonoLogger
+     * @throws InvalidArgumentException
      */
     public function get(string $channel): MonoLogger
     {

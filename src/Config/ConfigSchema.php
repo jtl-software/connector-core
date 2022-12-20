@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Config;
 
 use Jtl\Connector\Core\Exception\ConfigException;
@@ -23,7 +25,7 @@ class ConfigSchema
     /**
      * @var ConfigParameter[]
      */
-    protected $parameters = [];
+    protected array $parameters = [];
 
     /**
      * @param string $connectorDir
@@ -82,6 +84,7 @@ class ConfigSchema
         if (!$this->hasParameter($key)) {
             throw ConfigException::unknownParameter($key);
         }
+
         return $this->parameters[$key];
     }
 
@@ -125,6 +128,7 @@ class ConfigSchema
     public function setParameter(ConfigParameter $parameter): self
     {
         $this->parameters[$parameter->getKey()] = $parameter;
+
         return $this;
     }
 

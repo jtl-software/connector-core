@@ -19,7 +19,7 @@ class PaymentTypeTest extends TestCase
      *
      * @throws \ReflectionException
      */
-    public function testIsType($type, bool $shouldBePaymentType)
+    public function testIsType($type, bool $shouldBePaymentType): void
     {
         $isType = PaymentType::isType($type);
         $this->assertSame($shouldBePaymentType, $isType);

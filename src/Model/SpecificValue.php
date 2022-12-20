@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -26,7 +22,7 @@ class SpecificValue extends AbstractIdentity
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
-    protected $sort = 1;
+    protected int $sort = 1;
 
     /**
      * @var SpecificValueI18n[]
@@ -34,7 +30,7 @@ class SpecificValue extends AbstractIdentity
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = [];
+    protected array $i18ns = [];
 
     /**
      * @return integer Optional sort number

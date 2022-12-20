@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -26,7 +22,7 @@ class ProductVariationI18n extends AbstractI18n
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
-    protected $name = '';
+    protected string $name = '';
 
     /**
      * @return string Locale specific variation name

@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -19,20 +15,20 @@ use JMS\Serializer\Annotation as Serializer;
 class DeliveryNoteItem extends AbstractIdentity
 {
     /**
-     * @var Identity
+     * @var Identity|null
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerOrderItemId")
      * @Serializer\Accessor(getter="getCustomerOrderItemId",setter="setCustomerOrderItemId")
      */
-    protected $customerOrderItemId = null;
+    protected ?Identity $customerOrderItemId = null;
 
     /**
-     * @var Identity Reference to product
+     * @var Identity|null Reference to product
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
-    protected $productId = null;
+    protected ?Identity $productId = null;
 
     /**
      * @var double
@@ -40,7 +36,7 @@ class DeliveryNoteItem extends AbstractIdentity
      * @Serializer\SerializedName("quantity")
      * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
      */
-    protected $quantity = 0.0;
+    protected float $quantity = 0.0;
 
     /**
      * @var DeliveryNoteItemInfo[]
@@ -48,7 +44,7 @@ class DeliveryNoteItem extends AbstractIdentity
      * @Serializer\SerializedName("info")
      * @Serializer\AccessType("reflection")
      */
-    protected $info = [];
+    protected array $info = [];
 
     /**
      * Constructor.

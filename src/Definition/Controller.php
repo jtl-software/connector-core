@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Definition;
 
 final class Controller
@@ -24,7 +26,7 @@ final class Controller
     /**
      * @var string[]|null
      */
-    protected static $controllers = null;
+    protected static ?array $controllers = null;
 
     /**
      * @param string $controllerName

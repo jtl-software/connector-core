@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Model\Category;
@@ -10,7 +12,7 @@ class CategoryEvent extends Event
     /**
      * @var Category
      */
-    protected $category;
+    protected Category $category;
 
     /**
      * CategoryEvent constructor.

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Definition;
 
 final class Action
@@ -20,12 +22,12 @@ final class Action
     /**
      * @var string[]|null
      */
-    protected static $actions = null;
+    protected static ?array $actions = null;
 
     /**
      * @var string[]
      */
-    protected static $coreActions = [
+    protected static array $coreActions = [
         self::AUTH,
         self::ACK,
         self::CLEAR,

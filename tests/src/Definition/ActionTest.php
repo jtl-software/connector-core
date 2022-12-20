@@ -14,7 +14,7 @@ class ActionTest extends TestCase
     /**
      *
      */
-    public function testGetActions()
+    public function testGetActions(): void
     {
         $actions = Action::getActions();
 
@@ -44,7 +44,7 @@ class ActionTest extends TestCase
      *
      * @throws \ReflectionException
      */
-    public function testIsAction($actionName, bool $expectedResult)
+    public function testIsAction($actionName, bool $expectedResult): void
     {
         $this->assertSame($expectedResult, Action::isAction($actionName));
     }
@@ -72,7 +72,7 @@ class ActionTest extends TestCase
      * @param mixed $actionName
      * @param bool  $expectedResult
      */
-    public function testIsCoreAction($actionName, bool $expectedResult)
+    public function testIsCoreAction($actionName, bool $expectedResult): void
     {
         $this->assertSame($expectedResult, Action::isCoreAction($actionName));
     }
@@ -81,7 +81,7 @@ class ActionTest extends TestCase
      * @return array
      * @throws \Exception
      */
-    public function coreActionDataProvider()
+    public function coreActionDataProvider(): array
     {
         return [
             [Action::AUTH, true],

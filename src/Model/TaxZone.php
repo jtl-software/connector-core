@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -26,7 +22,7 @@ class TaxZone extends AbstractIdentity
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
-    protected $name = '';
+    protected string $name = '';
 
     /**
      * @var TaxZoneCountry[]
@@ -34,7 +30,7 @@ class TaxZone extends AbstractIdentity
      * @Serializer\SerializedName("countries")
      * @Serializer\AccessType("reflection")
      */
-    protected $countries = [];
+    protected array $countries = [];
 
     /**
      * @return string Optional tax zone name e.g. "EU Zone"

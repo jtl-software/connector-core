@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Model\QueryFilter;
@@ -7,6 +9,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Class ModelBeforeQueryFilterEvent
+ *
  * @package Jtl\Connector\Core\Event
  */
 class QueryFilterEvent extends Event
@@ -14,7 +17,7 @@ class QueryFilterEvent extends Event
     /**
      * @var QueryFilter
      */
-    protected $queryFilter;
+    protected QueryFilter $queryFilter;
 
     /**
      * ModelBeforeQueryFilterEvent constructor.

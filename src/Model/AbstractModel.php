@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2013 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Internal
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -20,10 +16,9 @@ abstract class AbstractModel
 {
     /**
      * @var string[]
-     *
      * @Serializer\Exclude
      */
-    private $identificationStrings = [];
+    private array $identificationStrings = [];
 
     /**
      * @param string $identificationString

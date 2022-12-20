@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -24,7 +20,7 @@ class GlobalData extends AbstractModel
      * @Serializer\SerializedName("configGroups")
      * @Serializer\AccessType("reflection")
      */
-    protected $configGroups = [];
+    protected array $configGroups = [];
 
     /**
      * @var ConfigItem[]
@@ -32,7 +28,7 @@ class GlobalData extends AbstractModel
      * @Serializer\SerializedName("configItems")
      * @Serializer\AccessType("reflection")
      */
-    protected $configItems = [];
+    protected array $configItems = [];
 
     /**
      * @var CrossSellingGroup[]
@@ -40,7 +36,7 @@ class GlobalData extends AbstractModel
      * @Serializer\SerializedName("crossSellingGroups")
      * @Serializer\AccessType("reflection")
      */
-    protected $crossSellingGroups = [];
+    protected array $crossSellingGroups = [];
 
     /**
      * @var Currency[]
@@ -48,7 +44,7 @@ class GlobalData extends AbstractModel
      * @Serializer\SerializedName("currencies")
      * @Serializer\AccessType("reflection")
      */
-    protected $currencies = [];
+    protected array $currencies = [];
 
     /**
      * @var CustomerGroup[]
@@ -56,7 +52,7 @@ class GlobalData extends AbstractModel
      * @Serializer\SerializedName("customerGroups")
      * @Serializer\AccessType("reflection")
      */
-    protected $customerGroups = [];
+    protected array $customerGroups = [];
 
     /**
      * @var Language[]
@@ -64,7 +60,7 @@ class GlobalData extends AbstractModel
      * @Serializer\SerializedName("languages")
      * @Serializer\AccessType("reflection")
      */
-    protected $languages = [];
+    protected array $languages = [];
 
     /**
      * @var MeasurementUnit[]
@@ -72,7 +68,7 @@ class GlobalData extends AbstractModel
      * @Serializer\SerializedName("measurementUnits")
      * @Serializer\AccessType("reflection")
      */
-    protected $measurementUnits = [];
+    protected array $measurementUnits = [];
 
     /**
      * @var ProductType[]
@@ -80,7 +76,7 @@ class GlobalData extends AbstractModel
      * @Serializer\SerializedName("productTypes")
      * @Serializer\AccessType("reflection")
      */
-    protected $productTypes = [];
+    protected array $productTypes = [];
 
     /**
      * @var ShippingClass[]
@@ -88,7 +84,7 @@ class GlobalData extends AbstractModel
      * @Serializer\SerializedName("shippingClasses")
      * @Serializer\AccessType("reflection")
      */
-    protected $shippingClasses = [];
+    protected array $shippingClasses = [];
 
     /**
      * @var ShippingMethod[]
@@ -96,7 +92,7 @@ class GlobalData extends AbstractModel
      * @Serializer\SerializedName("shippingMethods")
      * @Serializer\AccessType("reflection")
      */
-    protected $shippingMethods = [];
+    protected array $shippingMethods = [];
 
     /**
      * @var TaxRate[]
@@ -104,7 +100,7 @@ class GlobalData extends AbstractModel
      * @Serializer\SerializedName("taxRates")
      * @Serializer\AccessType("reflection")
      */
-    protected $taxRates = [];
+    protected array $taxRates = [];
 
     /**
      * @var Unit[]
@@ -112,7 +108,7 @@ class GlobalData extends AbstractModel
      * @Serializer\SerializedName("units")
      * @Serializer\AccessType("reflection")
      */
-    protected $units = [];
+    protected array $units = [];
 
     /**
      * @var Warehouse[]
@@ -120,7 +116,7 @@ class GlobalData extends AbstractModel
      * @Serializer\SerializedName("warehouses")
      * @Serializer\AccessType("reflection")
      */
-    protected $warehouses = [];
+    protected array $warehouses = [];
 
 
     /**

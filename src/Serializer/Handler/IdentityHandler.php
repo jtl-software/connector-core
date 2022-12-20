@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Serializer\Handler;
 
 use JMS\Serializer\Context;
@@ -14,14 +16,14 @@ use Jtl\Connector\Core\Model\Identity;
 class IdentityHandler implements SubscribingHandlerInterface
 {
     /**
-     * @var Identity[]
+     * @var array<int, array<int, Identity>>
      */
-    protected $identities;
+    protected array $identities;
 
     /**
      * @return array<int, array<string, string|int>>
      */
-    public static function getSubscribingMethods()
+    public static function getSubscribingMethods(): array
     {
         return [
             [
@@ -41,8 +43,7 @@ class IdentityHandler implements SubscribingHandlerInterface
 
     /**
      * @param JsonDeserializationVisitor $visitor
-     * @param array                      $identity
-     * @param array                      $type
+     * @param array{0: string, 1: int}   $identity
      * @param Context                    $context
      *
      * @return Identity
@@ -51,9 +52,8 @@ class IdentityHandler implements SubscribingHandlerInterface
     public function deserializeIdentity(
         JsonDeserializationVisitor $visitor,
         array                      $identity,
-        array                      $type,
         Context                    $context
-    ) {
+    ): Identity {
         $identityObject = new Identity($identity[0], $identity[1]);
         $currentObject  = $visitor->getCurrentObject();
         if ($identity[1] > 0 && !\is_null($currentObject)) {
@@ -81,12 +81,12 @@ class IdentityHandler implements SubscribingHandlerInterface
      *
      * @return array<int, string|int>
      */
-    public function serializeIdentity(
+    public function serializeIdentity( //@phpstan-ignore-line
         JsonSerializationVisitor $visitor,
         Identity                 $identity,
         array                    $type,
         Context                  $context
-    ) {
+    ): array {
         return [
             $identity->getEndpoint(),
             $identity->getHost(),

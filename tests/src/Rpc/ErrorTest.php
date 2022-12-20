@@ -15,7 +15,7 @@ class ErrorTest extends TestCase
     /**
      * @throws RpcException
      */
-    public function testValidateThrowExceptionWhenCodeIsNull()
+    public function testValidateThrowExceptionWhenCodeIsNull(): void
     {
         $this->expectExceptionObject(RpcException::parseError());
 
@@ -26,7 +26,7 @@ class ErrorTest extends TestCase
     /**
      * @throws RpcException
      */
-    public function testValidateThrowExceptionWhenMessageIsNotSet()
+    public function testValidateThrowExceptionWhenMessageIsNotSet(): void
     {
         $this->expectExceptionObject(RpcException::parseError());
 
@@ -40,7 +40,7 @@ class ErrorTest extends TestCase
     /**
      * @throws RpcException
      */
-    public function testValidateCorrect()
+    public function testValidateCorrect(): void
     {
         $error = new Error();
         $error->setCode(101);

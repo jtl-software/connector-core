@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Model\Generator;
 
 use Jtl\Connector\Core\Model\ProductVariationValue;

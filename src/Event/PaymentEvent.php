@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Model\Payment;
@@ -10,7 +12,7 @@ class PaymentEvent extends Event
     /**
      * @var Payment
      */
-    protected $payment;
+    protected Payment $payment;
 
     /**
      * PaymentEvent constructor.

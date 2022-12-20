@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Model\Generator;
 
 use Jtl\Connector\Core\Definition\IdentityType;
@@ -7,6 +9,7 @@ use Jtl\Connector\Core\Model\Customer;
 
 /**
  * Class CustomerFactory
+ *
  * @package Jtl\Connector\Core\Model\Generator
  */
 class CustomerFactory extends AbstractModelFactory

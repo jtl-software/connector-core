@@ -1,14 +1,13 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\MustNotBeNullException;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
+use TypeError;
 
 /**
  * @access     public
@@ -19,12 +18,12 @@ use JMS\Serializer\Annotation as Serializer;
 class ImageI18n extends AbstractI18n implements IdentityInterface
 {
     /**
-     * @var Identity
+     * @var Identity|null
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
-    protected $id = null;
+    protected ?Identity $id = null;
 
     /**
      * @var string
@@ -32,7 +31,7 @@ class ImageI18n extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("altText")
      * @Serializer\Accessor(getter="getAltText",setter="setAltText")
      */
-    protected $altText = '';
+    protected string $altText = '';
 
     /**
      * Constructor
@@ -44,10 +43,12 @@ class ImageI18n extends AbstractI18n implements IdentityInterface
 
     /**
      * @return Identity
+     * @throws MustNotBeNullException
+     * @throws TypeError
      */
     public function getId(): Identity
     {
-        return $this->id;
+        return Validate::checkIdentityAndNotNull($this->id);
     }
 
     /**

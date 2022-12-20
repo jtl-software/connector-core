@@ -1,8 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Rpc;
 
 use JMS\Serializer\Annotation as Serializer;
+use JMS\Serializer\Exception\InvalidArgumentException;
+use JMS\Serializer\Exception\RuntimeException;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer as JmsSerializer;
 use Jtl\Connector\Core\Model\AbstractModel;
@@ -23,13 +27,13 @@ abstract class Packet extends AbstractModel
      * @var string
      * @Serializer\Type("string")
      */
-    protected $jtlrpc = '';
+    protected string $jtlrpc = '';
 
     /**
      * @var string
      * @Serializer\Type("string")
      */
-    protected $id = '';
+    protected string $id = '';
 
     /**
      * Packet constructor.
@@ -64,6 +68,7 @@ abstract class Packet extends AbstractModel
     public function setJtlrpc(string $jtlrpc): Packet
     {
         $this->jtlrpc = $jtlrpc;
+
         return $this;
     }
 
@@ -87,6 +92,7 @@ abstract class Packet extends AbstractModel
     public function setId(string $id): Packet
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -95,6 +101,8 @@ abstract class Packet extends AbstractModel
      * @param JmsSerializer|null $serializer
      *
      * @return mixed[]
+     * @throws RuntimeException
+     * @throws InvalidArgumentException
      */
     public function toArray(JmsSerializer $serializer = null): array
     {
@@ -103,6 +111,7 @@ abstract class Packet extends AbstractModel
         }
 
         $context = (new SerializationContext())->setSerializeNull(true);
+
         return $serializer->toArray($this, $context);
     }
 

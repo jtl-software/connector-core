@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Config;
 
 use Jtl\Connector\Core\Exception\ConfigException;
@@ -14,32 +16,16 @@ class ConfigParameter
     /**
      * @var string[]
      */
-    protected static $types = [
+    protected static array $types = [
         self::TYPE_BOOLEAN,
         self::TYPE_DOUBLE,
         self::TYPE_INTEGER,
         self::TYPE_STRING,
     ];
-
-    /**
-     * @var string
-     */
-    protected $key;
-
-    /**
-     * @var string
-     */
-    protected $type;
-
-    /**
-     * @var bool
-     */
-    protected $required = true;
-
-    /**
-     * @var bool
-     */
-    protected $global = false;
+    protected string       $key;
+    protected string       $type;
+    protected bool         $required = true;
+    protected bool         $global   = false;
 
     /**
      * @var mixed
@@ -88,7 +74,7 @@ class ConfigParameter
         string $key,
         string $type = self::TYPE_STRING,
         bool   $required = true,
-        $global = false,
+        bool   $global = false,
         $defaultValue = null
     ): ConfigParameter {
         return (new self($key, $type, $required, $global))->setDefaultValue($defaultValue);
@@ -115,6 +101,7 @@ class ConfigParameter
         }
 
         $this->key = $key;
+
         return $this;
     }
 
@@ -138,6 +125,7 @@ class ConfigParameter
             throw ConfigException::unknownType($type);
         }
         $this->type = $type;
+
         return $this;
     }
 
@@ -174,7 +162,7 @@ class ConfigParameter
     }
 
     /**
-     * @param $defaultValue
+     * @param mixed $defaultValue
      *
      * @return $this
      * @throws ConfigException
@@ -185,11 +173,12 @@ class ConfigParameter
             throw ConfigException::wrongType($this->getType(), \gettype($defaultValue));
         }
         $this->defaultValue = $defaultValue;
+
         return $this;
     }
 
     /**
-     * @param string $value
+     * @param mixed $value
      *
      * @return boolean
      */

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
@@ -7,12 +9,12 @@ use JMS\Serializer\Annotation as Serializer;
 abstract class AbstractIdentity extends AbstractModel implements IdentityInterface
 {
     /**
-     * @var Identity Unique id
+     * @var Identity|null Unique id
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
-    protected $id = null;
+    protected ?Identity $id = null;
 
     /**
      * AbstractIdentity constructor.

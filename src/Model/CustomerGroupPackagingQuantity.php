@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -21,12 +17,12 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerGroupPackagingQuantity extends AbstractModel
 {
     /**
-     * @var Identity Reference to customergroup.
+     * @var Identity|null Reference to customergroup.
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerGroupId")
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
-    protected $customerGroupId = null;
+    protected ?Identity $customerGroupId = null;
 
     /**
      * @var double Contains the minimum quantity for a customergroup.
@@ -34,7 +30,7 @@ class CustomerGroupPackagingQuantity extends AbstractModel
      * @Serializer\SerializedName("minimumOrderQuantity")
      * @Serializer\Accessor(getter="getMinimumOrderQuantity",setter="setMinimumOrderQuantity")
      */
-    protected $minimumOrderQuantity = 0.0;
+    protected float $minimumOrderQuantity = 0.0;
 
     /**
      * @var double Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
@@ -42,7 +38,7 @@ class CustomerGroupPackagingQuantity extends AbstractModel
      * @Serializer\SerializedName("packagingQuantity")
      * @Serializer\Accessor(getter="getPackagingQuantity",setter="setPackagingQuantity")
      */
-    protected $packagingQuantity = 0.0;
+    protected float $packagingQuantity = 0.0;
 
     /**
      * Constructor

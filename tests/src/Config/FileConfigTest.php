@@ -15,7 +15,7 @@ class FileConfigTest extends TestCase
     /**
      *
      */
-    public function testConfigSetParameter()
+    public function testConfigSetParameter(): void
     {
         $fileConfig = $this->createFileConfig();
 
@@ -31,7 +31,7 @@ class FileConfigTest extends TestCase
     /**
      *
      */
-    public function testConfigSetParameterCannotBeEmpty()
+    public function testConfigSetParameterCannotBeEmpty(): void
     {
         $this->expectException(ConfigException::class);
         $this->getExpectedExceptionCode(ConfigException::EMPTY_KEY);
@@ -41,7 +41,7 @@ class FileConfigTest extends TestCase
         $fileConfig->set('', '');
     }
 
-    public function testSave()
+    public function testSave(): void
     {
         $file = $this->createConfigFile();
         $data = \json_decode(\file_get_contents($file), true);

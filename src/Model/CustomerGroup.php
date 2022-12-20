@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -26,7 +22,7 @@ class CustomerGroup extends AbstractIdentity
      * @Serializer\SerializedName("applyNetPrice")
      * @Serializer\Accessor(getter="getApplyNetPrice",setter="setApplyNetPrice")
      */
-    protected $applyNetPrice = false;
+    protected bool $applyNetPrice = false;
 
     /**
      * @var double Optional percentual discount on all products. Negative Value means surcharge.
@@ -34,7 +30,7 @@ class CustomerGroup extends AbstractIdentity
      * @Serializer\SerializedName("discount")
      * @Serializer\Accessor(getter="getDiscount",setter="setDiscount")
      */
-    protected $discount = 0.0;
+    protected float $discount = 0.0;
 
     /**
      * @var boolean Optional: Flag default customer group
@@ -42,7 +38,7 @@ class CustomerGroup extends AbstractIdentity
      * @Serializer\SerializedName("isDefault")
      * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
      */
-    protected $isDefault = false;
+    protected bool $isDefault = false;
 
     /**
      * @var CustomerGroupAttr[]
@@ -50,7 +46,7 @@ class CustomerGroup extends AbstractIdentity
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
-    protected $attributes = [];
+    protected array $attributes = [];
 
     /**
      * @var CustomerGroupI18n[]
@@ -58,7 +54,7 @@ class CustomerGroup extends AbstractIdentity
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = [];
+    protected array $i18ns = [];
 
     /**
      * @return boolean Optional: Show net prices default instead of gross prices

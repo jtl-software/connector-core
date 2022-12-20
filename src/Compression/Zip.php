@@ -1,12 +1,10 @@
 <?php
 
-/**
- * @copyright 2010-2013 JTL-Software GmbH
- * @package   Jtl\Connector\Core\Compression
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Compression;
 
+use InvalidArgumentException;
 use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\FileNotFoundException;
 
@@ -25,6 +23,7 @@ class Zip
      * @return bool
      * @throws CompressionException
      * @throws FileNotFoundException
+     * @throws InvalidArgumentException
      */
     public function extract(string $sourceFile, string $targetFolder): bool
     {

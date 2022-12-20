@@ -1,16 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Model\Generator;
 
+use Jtl\Connector\Core\Exception\MustNotBeNullException;
 use Jtl\Connector\Core\Model\ProductVariationI18n;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
 
 class ProductVariationI18nFactory extends AbstractModelFactory
 {
+    /**
+     * @return array
+     * @throws MustNotBeNullException
+     * @throws \TypeError
+     */
     protected function makeFakeArray(): array
     {
+        $faker = Validate::checkGeneratorAndNotNull($this->faker);
+
         return [
-            'name'        => $this->faker->text,
-            'languageIso' => $this->faker->languageCode,
+            'name'        => $faker->text,
+            'languageIso' => $faker->languageCode,
         ];
     }
 

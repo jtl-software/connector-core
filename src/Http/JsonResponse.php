@@ -1,8 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Http;
 
+use InvalidArgumentException;
 use Jawira\CaseConverter\CaseConverterException;
+use JMS\Serializer\Exception\RuntimeException;
 use JMS\Serializer\Serializer;
 use Jtl\Connector\Core\Definition\Event;
 use Jtl\Connector\Core\Event\RpcEvent;
@@ -15,6 +19,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\JsonResponse as SymfonyJsonResponse;
+use TypeError;
 
 class JsonResponse extends SymfonyJsonResponse implements LoggerAwareInterface
 {
@@ -31,6 +36,8 @@ class JsonResponse extends SymfonyJsonResponse implements LoggerAwareInterface
      * @param int             $status
      * @param array           $headers
      * @param bool            $json
+     *
+     * @throws TypeError
      */
     public function __construct(
         EventDispatcher $eventDispatcher,
@@ -53,8 +60,10 @@ class JsonResponse extends SymfonyJsonResponse implements LoggerAwareInterface
      * @return JsonResponse
      * @throws DefinitionException
      * @throws CaseConverterException
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
      */
-    public function prepareAndSend(RequestPacket $requestPacket, ResponsePacket $responsePacket)
+    public function prepareAndSend(RequestPacket $requestPacket, ResponsePacket $responsePacket): JsonResponse
     {
         $method       = Method::createFromRpcMethod($requestPacket->getMethod());
         $responseData = $responsePacket->toArray($this->serializer);

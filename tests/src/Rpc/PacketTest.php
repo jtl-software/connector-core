@@ -16,7 +16,7 @@ class PacketTest extends TestCase
      * @throws \ReflectionException
      * @throws \Exception
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $jtlRpc = \random_int(0, 1) === 1 ? Uuid::uuid() : '';
         $id     = \random_int(0, 1) === 1 ? Uuid::uuid() : '';

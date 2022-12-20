@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -26,7 +22,7 @@ class ProductPartsList extends AbstractIdentity
      * @Serializer\SerializedName("quantity")
      * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
      */
-    protected $quantity = 0.0;
+    protected float $quantity = 0.0;
 
     /**
      * @return double Component quantity

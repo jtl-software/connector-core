@@ -1,14 +1,13 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\MustNotBeNullException;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
+use TypeError;
 
 /**
  * @access     public
@@ -24,12 +23,12 @@ class ProductChecksum extends Checksum
     public const TYPE_VARIATION = 1;
 
     /**
-     * @var Identity
+     * @var Identity|null
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("foreignKey")
      * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
      */
-    protected $foreignKey = null;
+    protected ?Identity $foreignKey = null;
 
     /**
      * @var string
@@ -37,7 +36,7 @@ class ProductChecksum extends Checksum
      * @Serializer\SerializedName("endpoint")
      * @Serializer\Accessor(getter="getEndpoint",setter="setEndpoint")
      */
-    protected $endpoint = '';
+    protected string $endpoint = '';
 
     /**
      * @var boolean
@@ -45,7 +44,7 @@ class ProductChecksum extends Checksum
      * @Serializer\SerializedName("hasChanged")
      * @Serializer\Accessor(getter="hasChanged",setter="setHasChanged")
      */
-    protected $hasChanged = false;
+    protected bool $hasChanged = false;
 
     /**
      * @var string
@@ -53,7 +52,7 @@ class ProductChecksum extends Checksum
      * @Serializer\SerializedName("host")
      * @Serializer\Accessor(getter="getHost",setter="setHost")
      */
-    protected $host = '';
+    protected string $host = '';
 
     /**
      * @var integer
@@ -61,14 +60,16 @@ class ProductChecksum extends Checksum
      * @Serializer\SerializedName("type")
      * @Serializer\Accessor(getter="getType",setter="setType")
      */
-    protected $type = self::TYPE_VARIATION;
+    protected int $type = self::TYPE_VARIATION;
 
     /**
      * @return Identity
+     * @throws MustNotBeNullException
+     * @throws TypeError
      */
     public function getForeignKey(): Identity
     {
-        return $this->foreignKey;
+        return Validate::checkIdentityAndNotNull($this->foreignKey);
     }
 
     /**

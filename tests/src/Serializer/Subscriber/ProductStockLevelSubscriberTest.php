@@ -11,7 +11,7 @@ class ProductStockLevelSubscriberTest extends TestCase
     /**
      * @throws \Exception
      */
-    public function testOnPostSerialize()
+    public function testOnPostSerialize(): void
     {
         $stocklevel = \random_int(0, 999);
         $product    = new Product();

@@ -1,14 +1,12 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\MustNotBeNullException;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
 
 /**
  * Shipment Model with reference to a deliveryNote
@@ -21,12 +19,12 @@ use JMS\Serializer\Annotation as Serializer;
 class Shipment extends AbstractIdentity
 {
     /**
-     * @var Identity Reference to deliveryNote
+     * @var Identity|null Reference to deliveryNote
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("deliveryNoteId")
      * @Serializer\Accessor(getter="getDeliveryNoteId",setter="setDeliveryNoteId")
      */
-    protected $deliveryNoteId = null;
+    protected ?Identity $deliveryNoteId = null;
 
     /**
      * @var string Carrier name
@@ -34,15 +32,15 @@ class Shipment extends AbstractIdentity
      * @Serializer\SerializedName("carrierName")
      * @Serializer\Accessor(getter="getCarrierName",setter="setCarrierName")
      */
-    protected $carrierName = '';
+    protected string $carrierName = '';
 
     /**
-     * @var \DateTimeInterface Creation date
+     * @var \DateTimeInterface|null Creation date
      * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("creationDate")
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
-    protected $creationDate = null;
+    protected ?\DateTimeInterface $creationDate = null;
 
     /**
      * @var string Optional Identcode
@@ -50,7 +48,7 @@ class Shipment extends AbstractIdentity
      * @Serializer\SerializedName("identCode")
      * @Serializer\Accessor(getter="getIdentCode",setter="setIdentCode")
      */
-    protected $identCode = '';
+    protected string $identCode = '';
 
     /**
      * @var string Optional shipment note
@@ -58,7 +56,7 @@ class Shipment extends AbstractIdentity
      * @Serializer\SerializedName("note")
      * @Serializer\Accessor(getter="getNote",setter="setNote")
      */
-    protected $note = '';
+    protected string $note = '';
 
     /**
      * @var string
@@ -66,7 +64,7 @@ class Shipment extends AbstractIdentity
      * @Serializer\SerializedName("trackingUrl")
      * @Serializer\Accessor(getter="getTrackingUrl",setter="setTrackingUrl")
      */
-    protected $trackingUrl = '';
+    protected string $trackingUrl = '';
 
     /**
      * Constructor.
@@ -82,10 +80,11 @@ class Shipment extends AbstractIdentity
 
     /**
      * @return Identity Reference to deliveryNote
+     * @throws MustNotBeNullException|\TypeError
      */
     public function getDeliveryNoteId(): Identity
     {
-        return $this->deliveryNoteId;
+        return Validate::checkIdentityAndNotNull($this->deliveryNoteId);
     }
 
     /**

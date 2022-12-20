@@ -1,10 +1,6 @@
 <?php
 
-/**
- *
- * @copyright 2010-2013 JTL-Software GmbH
- * @package   Jtl\Connector\Core\Database
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Database;
 
@@ -32,29 +28,29 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
      *
      * @var string
      */
-    public $location;
+    public string $location;
     /**
      * Optional flags used to determine how to open the SQLite database.
      *
      * @var integer
      */
-    public $mode;
+    public int $mode;
     /**
      * Database connection state
      *
      * @var bool
      */
-    protected $isConnected = false;
+    protected bool $isConnected = false;
     /**
      * Sqlite 3 Database object
      *
      * @var \SQLite3
      */
-    protected $db;
+    protected \SQLite3 $db;
     /**
      * @var LoggerInterface
      */
-    protected $logger;
+    protected LoggerInterface $logger;
 
     /**
      * (non-PHPdoc)
@@ -62,7 +58,7 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
      * @throws Jtl\Connector\Core\Exception\DatabaseException|DatabaseException
      * @see Jtl\Connector\Core\Database\DatabaseInterface::connect()
      */
-    public function connect(array $options = null)
+    public function connect(array $options = null): void
     {
         $this->setOptions($options);
         if (!\is_string($this->location) || $this->location === '') {
@@ -92,7 +88,7 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
      *
      * @param array|null $options
      */
-    public function setOptions(array $options = null)
+    public function setOptions(array $options = null): void
     {
         if (\is_array($options)) {
             // Location
@@ -118,11 +114,10 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
     }
 
     /**
-     * (non-PHPdoc)
-     *
+     * @return bool
      * @see Jtl\Connector\Core\Database\DatabaseInterface::close()
      */
-    public function close()
+    public function close(): bool
     {
         return $this->db->close();
     }
@@ -239,16 +234,18 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
     /**
      * @return bool
      */
-    public function isConnected()
+    public function isConnected(): bool
     {
         return $this->isConnected;
     }
 
     /**
-     * (non-PHPdoc)
+     * @param string $query
+     *
+     * @return string
      * @see Jtl\Connector\Core\Database\DatabaseInterface::escapeString()
      */
-    public function escapeString($query)
+    public function escapeString(string $query): string
     {
         return \Sqlite3::escapeString($query);
     }

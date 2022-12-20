@@ -1,10 +1,6 @@
 <?php
 
-/**
- *
- * @copyright 2010-2012 JTL-Software GmbH
- * @package   Jtl\Connector\Core\Database
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Database;
 
@@ -18,31 +14,37 @@ interface DatabaseInterface
     /**
      * Connect to Database
      */
-    public function connect(array $options = null);
+    public function connect(array $options = null): void;
 
     /**
      * Disconnect from Database
+     *
+     * @return bool
      */
-    public function close();
+    public function close(): bool;
 
     /**
      * Database Query
      *
      * @param string $query
+     *
+     * @return bool|int|array<int, array<string, mixed>>|null
      */
-    public function query($query);
+    public function query(string $query);
 
     /**
      * Database connection state
      *
      * @return bool $this->_isConnected
      */
-    public function isConnected();
+    public function isConnected(): bool;
 
     /**
      * Returns a string that has been properly escaped
      *
+     * @param $query
+     *
      * @return string
      */
-    public function escapeString($query);
+    public function escapeString($query): string;
 }

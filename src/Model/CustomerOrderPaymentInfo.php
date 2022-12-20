@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -26,7 +22,7 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
      * @Serializer\SerializedName("accountHolder")
      * @Serializer\Accessor(getter="getAccountHolder",setter="setAccountHolder")
      */
-    protected $accountHolder = '';
+    protected string $accountHolder = '';
 
     /**
      * @var string Bank account number (deprecated in DE since SEPA)
@@ -34,7 +30,7 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
      * @Serializer\SerializedName("accountNumber")
      * @Serializer\Accessor(getter="getAccountNumber",setter="setAccountNumber")
      */
-    protected $accountNumber = '';
+    protected string $accountNumber = '';
 
     /**
      * @var string Bank code (deprecated in DE since SEPA)
@@ -42,7 +38,7 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
      * @Serializer\SerializedName("bankCode")
      * @Serializer\Accessor(getter="getBankCode",setter="setBankCode")
      */
-    protected $bankCode = '';
+    protected string $bankCode = '';
 
     /**
      * @var string Bank name
@@ -50,7 +46,7 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
      * @Serializer\SerializedName("bankName")
      * @Serializer\Accessor(getter="getBankName",setter="setBankName")
      */
-    protected $bankName = '';
+    protected string $bankName = '';
 
     /**
      * @var string Bank Identifier Code (BIC)
@@ -58,7 +54,7 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
      * @Serializer\SerializedName("bic")
      * @Serializer\Accessor(getter="getBic",setter="setBic")
      */
-    protected $bic = '';
+    protected string $bic = '';
 
     /**
      * @var string Credit card expiration date
@@ -66,7 +62,7 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
      * @Serializer\SerializedName("creditCardExpiration")
      * @Serializer\Accessor(getter="getCreditCardExpiration",setter="setCreditCardExpiration")
      */
-    protected $creditCardExpiration = '';
+    protected string $creditCardExpiration = '';
 
     /**
      * @var string
@@ -74,7 +70,7 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
      * @Serializer\SerializedName("creditCardHolder")
      * @Serializer\Accessor(getter="getCreditCardHolder",setter="setCreditCardHolder")
      */
-    protected $creditCardHolder = '';
+    protected string $creditCardHolder = '';
 
     /**
      * @var string Credit card number
@@ -82,7 +78,7 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
      * @Serializer\SerializedName("creditCardNumber")
      * @Serializer\Accessor(getter="getCreditCardNumber",setter="setCreditCardNumber")
      */
-    protected $creditCardNumber = '';
+    protected string $creditCardNumber = '';
 
     /**
      * @var string Credit card type (e.g. "visa")
@@ -90,7 +86,7 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
      * @Serializer\SerializedName("creditCardType")
      * @Serializer\Accessor(getter="getCreditCardType",setter="setCreditCardType")
      */
-    protected $creditCardType = '';
+    protected string $creditCardType = '';
 
     /**
      * @var string Credit card verification number
@@ -98,7 +94,7 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
      * @Serializer\SerializedName("creditCardVerificationNumber")
      * @Serializer\Accessor(getter="getCreditCardVerificationNumber",setter="setCreditCardVerificationNumber")
      */
-    protected $creditCardVerificationNumber = '';
+    protected string $creditCardVerificationNumber = '';
 
     /**
      * @var string International Bank Account Number (IBAN)
@@ -106,7 +102,7 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
      * @Serializer\SerializedName("iban")
      * @Serializer\Accessor(getter="getIban",setter="setIban")
      */
-    protected $iban = '';
+    protected string $iban = '';
 
     /**
      * @return string Bank account holder name

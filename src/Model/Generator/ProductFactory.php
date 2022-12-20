@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Model\Generator;
 
 use Jtl\Connector\Core\Definition\IdentityType;
@@ -15,7 +17,7 @@ class ProductFactory extends AbstractModelFactory
      * @return array
      * @throws \Exception
      */
-    public function makeOneProductVariant(array $i18ns = null)
+    public function makeOneProductVariant(array $i18ns = null): array
     {
         $data = $this->makeOneProductVariantArray($i18ns);
         return $this->make(\count($data), $data);
@@ -24,7 +26,7 @@ class ProductFactory extends AbstractModelFactory
     /**
      * @throws \Exception
      */
-    public function makeOneProductVariantArray(array $i18ns = null)
+    public function makeOneProductVariantArray(array $i18ns = null): array
     {
         $variationsQuantity = 2;
         if (\is_null($i18ns)) {

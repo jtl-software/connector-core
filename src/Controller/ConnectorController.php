@@ -1,10 +1,6 @@
 <?php
 
-/**
- *
- * @copyright 2010-2013 JTL-Software GmbH
- * @package   Jtl\Connector\Core\Application
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Controller;
 
@@ -15,9 +11,10 @@ use Jtl\Connector\Core\Checksum\ChecksumInterface;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Definition\RelationType;
-use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\AuthenticationException;
 use Jtl\Connector\Core\Exception\DefinitionException;
+use Jtl\Connector\Core\Exception\JsonException;
+use Jtl\Connector\Core\Exception\JsonException as CoreJsonException;
 use Jtl\Connector\Core\Exception\MissingRequirementException;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Linker\IdentityLinker;
@@ -80,18 +77,22 @@ class ConnectorController implements LoggerAwareInterface
      * @return bool
      * @throws MissingRequirementException
      */
-    public function init($params = null)
+    public function init($params = null): bool
     {
         Check::run();
+
         return true;
     }
 
     /**
-     * @param null $params
+     * @param $params
      *
      * @return Features
+     * @throws CoreJsonException
+     * @throws \InvalidArgumentException
+     * @throws \JsonException
      */
-    public function features($params = null)
+    public function features($params = null): Features
     {
         $features = $this->fetchFeaturesData();
 
@@ -110,6 +111,9 @@ class ConnectorController implements LoggerAwareInterface
 
     /**
      * @return array
+     * @throws \InvalidArgumentException
+     * @throws \JsonException
+     * @throws JsonException
      */
     protected function fetchFeaturesData(): array
     {
@@ -164,10 +168,9 @@ class ConnectorController implements LoggerAwareInterface
      * @param Authentication $auth
      *
      * @return Session
-     * @throws ApplicationException
      * @throws AuthenticationException
      */
-    public function auth(Authentication $auth)
+    public function auth(Authentication $auth): Session
     {
         if (empty($auth->getToken())) {
             throw AuthenticationException::tokenMissing();
@@ -182,11 +185,6 @@ class ConnectorController implements LoggerAwareInterface
             throw AuthenticationException::failed();
         }
 
-        if ($this->sessionHandler === null) {
-            $this->logger->error('Could not get any Session');
-            throw ApplicationException::noSession();
-        }
-
         return (new Session())
             ->setSessionId(\session_id())
             ->setLifetime((int)\ini_get('session.gc_maxlifetime'));
@@ -199,7 +197,7 @@ class ConnectorController implements LoggerAwareInterface
      */
     public function identify(ConnectorInterface $endpointConnector): ConnectorIdentification
     {
-        $returnBytes = function ($data): int {
+        $returnBytes = static function ($data): int {
             $data = \trim($data);
             $len  = \strlen($data);
             if ($data === '-1') {
@@ -215,6 +213,7 @@ class ConnectorController implements LoggerAwareInterface
                     $value /= 1024;
                     break;
             }
+
             return (int)\round($value);
         };
 
@@ -240,6 +239,7 @@ class ConnectorController implements LoggerAwareInterface
         if (\session_status() === \PHP_SESSION_ACTIVE) {
             \session_destroy();
         }
+
         return true;
     }
 
@@ -250,12 +250,12 @@ class ConnectorController implements LoggerAwareInterface
      * @throws DefinitionException
      * @throws \ReflectionException
      */
-    public function clear(Identities $identities = null)
+    public function clear(?Identities $identities = null): bool
     {
-        if (!\is_null($identities) && \count($identities->getIdentities()) > 0) {
-            $identities = $identities->getIdentities();
-            foreach ($identities as $relationType => $relationIdentities) {
-                if (empty($relationIdentities)) {
+        if ($identities !== null && \count($identities->getIdentities()) > 0) {
+            $identitiesArr = $identities->getIdentities();
+            foreach ($identitiesArr as $relationType => $relationIdentities) {
+                if ($relationIdentities === null) {
                     $this->linker->clear(RelationType::getIdentityType($relationType));
                 } elseif (\is_array($relationIdentities)) {
                     foreach ($relationIdentities as $identity) {

@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -26,7 +22,7 @@ class ConfigGroup extends AbstractIdentity
      * @Serializer\SerializedName("comment")
      * @Serializer\Accessor(getter="getComment",setter="setComment")
      */
-    protected $comment = '';
+    protected string $comment = '';
 
     /**
      * @var string
@@ -34,7 +30,7 @@ class ConfigGroup extends AbstractIdentity
      * @Serializer\SerializedName("imagePath")
      * @Serializer\Accessor(getter="getImagePath",setter="setImagePath")
      */
-    protected $imagePath = '';
+    protected string $imagePath = '';
 
     /**
      * @var integer Optional maximum number allowed selections. Default 0 for no maximum limitation.
@@ -42,7 +38,7 @@ class ConfigGroup extends AbstractIdentity
      * @Serializer\SerializedName("maximumSelection")
      * @Serializer\Accessor(getter="getMaximumSelection",setter="setMaximumSelection")
      */
-    protected $maximumSelection = 0;
+    protected int $maximumSelection = 0;
 
     /**
      * @var integer Optional minimum number required selections. Default 0 for no minimum requirement.
@@ -50,7 +46,7 @@ class ConfigGroup extends AbstractIdentity
      * @Serializer\SerializedName("minimumSelection")
      * @Serializer\Accessor(getter="getMinimumSelection",setter="setMinimumSelection")
      */
-    protected $minimumSelection = 0;
+    protected int $minimumSelection = 0;
 
     /**
      * @var integer Optional sort order number
@@ -58,7 +54,7 @@ class ConfigGroup extends AbstractIdentity
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
-    protected $sort = 0;
+    protected int $sort = 0;
 
     /**
      * @var integer Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
@@ -66,7 +62,7 @@ class ConfigGroup extends AbstractIdentity
      * @Serializer\SerializedName("type")
      * @Serializer\Accessor(getter="getType",setter="setType")
      */
-    protected $type = 0;
+    protected int $type = 0;
 
     /**
      * @var ConfigGroupI18n[]
@@ -74,7 +70,7 @@ class ConfigGroup extends AbstractIdentity
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = [];
+    protected array $i18ns = [];
 
     /**
      * @return string Optional internal comment to differantiate config groups by comment name

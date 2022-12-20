@@ -19,7 +19,7 @@ class LoggerServiceTest extends TestCase
 
     protected $logDir;
 
-    public function testSetFormat()
+    public function testSetFormat(): void
     {
         $args = [JsonFormatter::BATCH_MODE_NEWLINES];
         $this->factory->setFormat('json', $args);
@@ -30,14 +30,14 @@ class LoggerServiceTest extends TestCase
         $this->assertInstanceOf(JsonFormatter::class, $formatter);
     }
 
-    public function testSetFormatFormatterNotFound()
+    public function testSetFormatFormatterNotFound(): void
     {
         $this->expectException(LoggerException::class);
         $this->expectExceptionCode(LoggerException::FORMATTER_NOT_EXISTS);
         $this->factory->setFormat('yolo');
     }
 
-    public function testSetFormatter()
+    public function testSetFormatter(): void
     {
         $formatterMock = $this->createMock(FormatterInterface::class);
         $this->factory->setFormatter($formatterMock);
@@ -48,7 +48,7 @@ class LoggerServiceTest extends TestCase
         $this->assertEquals($formatterMock, $actualFormatter);
     }
 
-    public function testSetFormatterToExistingLoggers()
+    public function testSetFormatterToExistingLoggers(): void
     {
         $formatterMock = $this->createMock(FormatterInterface::class);
         foreach (['foo', 'bar', 'foobar'] as $channel) {
@@ -64,7 +64,7 @@ class LoggerServiceTest extends TestCase
         }
     }
 
-    public function testGet()
+    public function testGet(): void
     {
         $reflection   = new \ReflectionClass($this->factory);
         $channelsProp = $reflection->getProperty('channels');
@@ -87,13 +87,13 @@ class LoggerServiceTest extends TestCase
         $this->assertEquals($expectedLogFileName, $filenameProp->getValue($handlers[0]));
     }
 
-    public function testHas()
+    public function testHas(): void
     {
         $this->factory->get('foo');
         $this->assertTrue($this->factory->has('foo'));
     }
 
-    public function testHasNot()
+    public function testHasNot(): void
     {
         $this->assertFalse($this->factory->has('bar'));
     }

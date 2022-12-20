@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -23,12 +19,12 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     use TranslatableAttributesTrait;
 
     /**
-     * @var Identity Optional reference to parent category id
+     * @var Identity|null Optional reference to parent category id
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("parentCategoryId")
      * @Serializer\Accessor(getter="getParentCategoryId",setter="setParentCategoryId")
      */
-    protected $parentCategoryId = null;
+    protected ?Identity $parentCategoryId = null;
 
     /**
      * @var boolean
@@ -36,7 +32,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
      * @Serializer\SerializedName("isActive")
      * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
      */
-    protected $isActive = false;
+    protected bool $isActive = false;
 
     /**
      * @var integer
@@ -44,7 +40,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
      * @Serializer\SerializedName("level")
      * @Serializer\Accessor(getter="getLevel",setter="setLevel")
      */
-    protected $level = 0;
+    protected int $level = 0;
 
     /**
      * @var integer Optional sort order number
@@ -52,7 +48,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
-    protected $sort = 0;
+    protected int $sort = 0;
 
     /**
      * @var CategoryAttribute[]
@@ -60,7 +56,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
-    protected $attributes = [];
+    protected array $attributes = [];
 
     /**
      * @var CategoryCustomerGroup[]
@@ -68,7 +64,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
      * @Serializer\SerializedName("customerGroups")
      * @Serializer\AccessType("reflection")
      */
-    protected $customerGroups = [];
+    protected array $customerGroups = [];
 
     /**
      * @var CategoryI18n[]
@@ -76,7 +72,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = [];
+    protected array $i18ns = [];
 
     /**
      * @var CategoryInvisibility[]
@@ -84,7 +80,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
      * @Serializer\SerializedName("invisibilities")
      * @Serializer\AccessType("reflection")
      */
-    protected $invisibilities = [];
+    protected array $invisibilities = [];
 
     /**
      * Constructor.

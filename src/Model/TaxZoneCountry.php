@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -26,7 +22,7 @@ class TaxZoneCountry extends AbstractModel
      * @Serializer\SerializedName("countryIso")
      * @Serializer\Accessor(getter="getCountryIso",setter="setCountryIso")
      */
-    protected $countryIso = '';
+    protected string $countryIso = '';
 
     /**
      * @return string Country ISO 3166-2 (2 letter Uppercase)

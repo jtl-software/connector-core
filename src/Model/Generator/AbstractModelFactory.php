@@ -6,12 +6,15 @@ namespace Jtl\Connector\Core\Model\Generator;
 
 use Faker\Factory;
 use Faker\Generator;
+use JMS\Serializer\Exception\InvalidArgumentException;
 use JMS\Serializer\Serializer;
 use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
+use RuntimeException;
 
 /**
  * Class ModelFactory
+ *
  * @package Jtl\Connector\Core\Model\Generator
  */
 abstract class AbstractModelFactory
@@ -30,6 +33,9 @@ abstract class AbstractModelFactory
      * @param string          $defaultLocale
      * @param Generator|null  $faker
      * @param Serializer|null $serializer
+     *
+     * @throws InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\RuntimeException
      */
     public function __construct(string $defaultLocale = 'de_DE', Generator $faker = null, Serializer $serializer = null)
     {
@@ -204,6 +210,7 @@ abstract class AbstractModelFactory
      * @param string $name
      *
      * @return AbstractModelFactory
+     * @throws RuntimeException
      */
     public function getFactory(string $name): self
     {
@@ -217,13 +224,14 @@ abstract class AbstractModelFactory
      * @param Serializer|null $serializer
      *
      * @return AbstractModelFactory
+     * @throws RuntimeException
      */
     public static function createFactory(
         string     $name,
         string     $locale = 'de_DE',
         Generator  $faker = null,
         Serializer $serializer = null
-    ) {
+    ): AbstractModelFactory {
         $className = \sprintf('%s\\%sFactory', __NAMESPACE__, \ucfirst($name));
         if (!\class_exists($className)) {
             throw new \RuntimeException(\sprintf('Class %s not found', $className));

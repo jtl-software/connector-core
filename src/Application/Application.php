@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Application;
 
 use Composer\Autoload\ClassLoader;
@@ -8,11 +10,14 @@ use DI\ContainerBuilder;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Doctrine\Common\Annotations\AnnotationRegistry;
+use Exception;
+use Jawira\CaseConverter\CaseConverterException;
 use JMS\Serializer\Serializer;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
 use Jtl\Connector\Core\Checksum\ChecksumLoaderInterface;
 use Jtl\Connector\Core\Compression\Zip;
 use Jtl\Connector\Core\Config\ConfigSchema;
+use Jtl\Connector\Core\Config\CoreConfigInterface;
 use Jtl\Connector\Core\Config\FileConfig;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
 use Jtl\Connector\Core\Connector\HandleRequestInterface;
@@ -43,9 +48,9 @@ use Jtl\Connector\Core\Event\StatisticEvent;
 use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\ConfigException;
+use Jtl\Connector\Core\Exception\DatabaseException;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\FileNotFoundException;
-use Jtl\Connector\Core\Exception\HttpException;
 use Jtl\Connector\Core\Exception\LoggerException;
 use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Exception\SessionException;
@@ -73,18 +78,24 @@ use Jtl\Connector\Core\Session\SessionHandlerInterface;
 use Jtl\Connector\Core\Session\SqliteSessionHandler;
 use Jtl\Connector\Core\Subscriber\FeaturesSubscriber;
 use Jtl\Connector\Core\Subscriber\RequestParamsTransformSubscriber;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
 use Monolog\ErrorHandler as MonologErrorHandler;
+use Noodlehaus\AbstractConfig;
 use Noodlehaus\ConfigInterface;
 use Psr\Container\ContainerInterface;
+use Psr\Log\InvalidArgumentException;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use ReflectionClass;
+use ReflectionException;
+use RuntimeException;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Throwable;
+use TypeError;
 
 class Application
 {
@@ -133,42 +144,47 @@ class Application
     /**
      * Application constructor.
      *
-     * @param string               $connectorDir
-     * @param ConfigInterface|null $config
-     * @param ConfigSchema|null    $configSchema
+     * @param string              $connectorDir
+     * @param AbstractConfig|null $config
+     * @param ConfigSchema|null   $configSchema
      *
      * @throws ApplicationException
      * @throws ConfigException
+     * @throws InvalidArgumentException
      * @throws LoggerException
-     * @throws \ReflectionException
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws TypeError
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\RuntimeException
+     * @throws InvalidArgumentException
+     * @throws Exception
      */
     public function __construct(
-        string           $connectorDir,
-        ?ConfigInterface $config = null,
-        ?ConfigSchema    $configSchema = null
+        string          $connectorDir,
+        ?AbstractConfig $config = null,
+        ?ConfigSchema   $configSchema = null
     ) {
         if (!\is_dir($connectorDir)) {
             throw ApplicationException::connectorDirNotExists($connectorDir);
         }
         AnnotationRegistry::registerLoader('class_exists');
 
-        if (\is_null($config)) {
-            $config = new FileConfig(\sprintf('%s/config/config.json', $connectorDir));
+        if ($configSchema !== null && $config instanceof CoreConfigInterface) {
+            $config->setConfigSchema($configSchema);
+        } else {
+            $configSchema = $configSchema ?? new ConfigSchema();
+            $config       = new FileConfig(\sprintf('%s/config/config.json', $connectorDir), $configSchema);
         }
 
-        if (\is_null($configSchema)) {
-            $configSchema = new ConfigSchema();
-        }
 
         $this->prepareConfig($connectorDir, $config, $configSchema);
 
         $serializerCacheDir = null;
         if (
-            $config->get(ConfigSchema::DEBUG, false) === false
-            && $config->get(ConfigSchema::SERIALIZER_ENABLE_CACHE, true) === true
+            $config->getBool(ConfigSchema::DEBUG, false) === false
+            && $config->getBool(ConfigSchema::SERIALIZER_ENABLE_CACHE, true) === true
         ) {
-            $serializerCacheDir = $config->get(ConfigSchema::CACHE_DIR);
+            $serializerCacheDir = $config->getString(ConfigSchema::CACHE_DIR);
         }
 
         $this->connectorDir = $connectorDir;
@@ -183,8 +199,12 @@ class Application
         $this->eventDispatcher = new EventDispatcher();
         $this->fileSystem      = new Filesystem();
         $this->loggerService   =
-            (new LoggerService($this->config->get(ConfigSchema::LOG_DIR), $this->config->get(ConfigSchema::LOG_LEVEL)))
-                ->setFormat($this->config->get(ConfigSchema::LOG_FORMAT));
+            (
+            new LoggerService(
+                Validate::string($this->config->get(ConfigSchema::LOG_DIR)),
+                Validate::string($this->config->get(ConfigSchema::LOG_LEVEL))
+            )
+            )->setFormat(Validate::string($this->config->get(ConfigSchema::LOG_FORMAT)));
 
         $this->container->set(LoggerService::class, $this->loggerService);
         $this->container->set(LoggerInterface::class, $this->loggerService->get(LoggerService::CHANNEL_GLOBAL));
@@ -226,7 +246,6 @@ class Application
      *
      * @return Application
      * @throws DefinitionException
-     * @throws \ReflectionException
      */
     public function registerController(string $controllerName, object $instance): Application
     {
@@ -240,13 +259,24 @@ class Application
     }
 
     /**
+     * @param ConnectorInterface $connector
+     *
+     * @return void
      * @throws ApplicationException
+     * @throws CompressionException
+     * @throws ConfigException
      * @throws DefinitionException
-     * @throws \Throwable
+     * @throws DependencyException
+     * @throws FileNotFoundException
+     * @throws NotFoundException
+     * @throws RpcException
+     * @throws SessionException
+     * @throws Throwable
+     * @throws \ReflectionException
      */
     public function run(ConnectorInterface $connector): void
     {
-        $jtlrpc = $this->httpRequest->get('jtlrpc', '');
+        $jtlrpc = Validate::string($this->httpRequest->get('jtlrpc', ''));
         $this->httpResponse->setLogger($this->loggerService->get(LoggerService::CHANNEL_RPC));
         $this->eventDispatcher->addSubscriber(new RequestParamsTransformSubscriber());
         $this->eventDispatcher->addSubscriber(new FeaturesSubscriber());
@@ -276,7 +306,7 @@ class Application
                 $this->config,
                 $this->container,
                 $this->eventDispatcher,
-                $this->config->get(ConfigSchema::PLUGINS_DIR)
+                Validate::string($this->config->get(ConfigSchema::PLUGINS_DIR))
             );
             $this->configSchema->validateConfig($this->config);
 
@@ -288,7 +318,7 @@ class Application
             }
 
             // Log incoming request packet (debug only and configuration must be initialized)
-            $this->loggerService->get(LoggerService::CHANNEL_RPC)->debug($logJtlrpc);
+            $this->loggerService->get(LoggerService::CHANNEL_RPC)->debug(Validate::string($logJtlrpc));
 
             $event = new RpcEvent($requestPacket->getParams(), $method->getController(), $method->getAction());
             $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::BEFORE));
@@ -311,7 +341,10 @@ class Application
             throw $ex;
         } finally {
             $this->fileSystem->remove($this->deleteFromFileSystem);
-            $this->httpResponse->prepareAndSend($requestPacket, $responsePacket);
+            if (!isset($responsePacket)) {
+                throw new \RuntimeException('responsePacket is not set!');
+            }
+            $this->httpResponse->prepareAndSend($requestPacket, Validate::responsePacket($responsePacket));
 
             if (\random_int(0, 99) === 0) {
                 $this->getSessionHandler()->gc((int)\ini_get('session.gc_maxlifetime'));
@@ -322,9 +355,10 @@ class Application
     /**
      * @param string $rpcMethod
      *
-     * @throws ApplicationException
-     * @throws HttpException
-     * @throws SessionException
+     * @throws SessionException|InvalidArgumentException
+     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     protected function startSession(string $rpcMethod): void
     {
@@ -336,13 +370,10 @@ class Application
         }
 
         $sessionHandler = $this->getSessionHandler();
-
-        if ($sessionHandler instanceof LoggerAwareInterface) {
-            $sessionHandler->setLogger($this->loggerService->get(LoggerService::CHANNEL_SESSION));
-        }
+        $sessionHandler->setLogger($this->loggerService->get(LoggerService::CHANNEL_SESSION));
 
         \session_name($sessionName);
-        if ($sessionId !== null) {
+        if (\is_string($sessionId) && $sessionId !== '') {
             if ($sessionHandler->validateId($sessionId)) {
                 \session_id($sessionId);
             } else {
@@ -361,13 +392,18 @@ class Application
     /**
      * @return SessionHandlerInterface
      * @throws SessionException
+     * @throws InvalidArgumentException
      */
     public function getSessionHandler(): SessionHandlerInterface
     {
         if (!isset($this->sessionHandler)) {
-            $this->sessionHandler = new SqliteSessionHandler(\sprintf('%s/var', $this->connectorDir));
+            try {
+                $this->sessionHandler = new SqliteSessionHandler(\sprintf('%s/var', $this->connectorDir));
+            } catch (DatabaseException | RuntimeException | SessionException $e) {
+            }
             $this->sessionHandler->setLogger($this->loggerService->get(LoggerService::CHANNEL_SESSION));
         }
+
         return $this->sessionHandler;
     }
 
@@ -379,12 +415,15 @@ class Application
     public function setSessionHandler(SessionHandlerInterface $sessionHandler): Application
     {
         $this->sessionHandler = $sessionHandler;
+
         return $this;
     }
 
     /**
      * @param ConnectorInterface $connector
      *
+     * @return void
+     * @throws InvalidArgumentException
      * @throws SessionException
      */
     protected function prepareContainer(ConnectorInterface $connector): void
@@ -442,6 +481,7 @@ class Application
 
         if (\is_dir($pluginsDir)) {
             $finder = (new Finder())->files()->name('/Bootstrap.php/')->in($pluginsDir);
+
             foreach ($finder as $file) {
                 $class = \sprintf(
                     '\\%s\\Bootstrap',
@@ -569,6 +609,7 @@ class Application
      * @throws DependencyException
      * @throws NotFoundException
      * @throws \ReflectionException
+     * @throws CaseConverterException
      */
     protected function createHandleRequest(
         RequestPacket $requestPacket,
@@ -970,6 +1011,7 @@ class Application
     public function setHttpRequest(HttpRequest $httpRequest): self
     {
         $this->httpRequest = $httpRequest;
+
         return $this;
     }
 

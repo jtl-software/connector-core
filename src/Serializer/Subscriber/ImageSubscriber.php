@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Serializer\Subscriber;
 
 use Jawira\CaseConverter\CaseConverterException;
@@ -19,7 +21,7 @@ class ImageSubscriber implements EventSubscriberInterface
     /**
      * @return array<int, array<string, string>>
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             [
@@ -40,7 +42,7 @@ class ImageSubscriber implements EventSubscriberInterface
      *
      * @throws DefinitionException
      */
-    public function onPostSerialize(ObjectEvent $event)
+    public function onPostSerialize(ObjectEvent $event): void
     {
         $object = $event->getObject();
         if (
@@ -51,7 +53,8 @@ class ImageSubscriber implements EventSubscriberInterface
             $id = clone $object->getId();
             $id->setEndpoint(\sprintf('%s#=#%s', $object->getRelationType(), $id->getEndpoint()));
             $serializedId = $id->toArray();
-            $event->getVisitor()->visitProperty(new StaticPropertyMetadata('', 'id', $serializedId), $serializedId);
+            $event->getVisitor() // @phpstan-ignore-line
+                  ->visitProperty(new StaticPropertyMetadata('', 'id', $serializedId), $serializedId);
         }
     }
 
@@ -61,7 +64,7 @@ class ImageSubscriber implements EventSubscriberInterface
      * @throws SerializerException
      * @throws CaseConverterException
      */
-    public function onPostDeserialize(ObjectEvent $event)
+    public function onPostDeserialize(ObjectEvent $event): void
     {
         $object = $event->getObject();
         if ($object instanceof Ack) {
@@ -70,7 +73,7 @@ class ImageSubscriber implements EventSubscriberInterface
             if (isset($identities[$imageIndex])) {
                 $resortedIdentities = [];
                 /** @var Identity $identity */
-                foreach ($identities[$imageIndex] as $identity) {
+                foreach ($identities[$imageIndex] as $identity) { // @phpstan-ignore-line
                     $splittedEndpoint = \explode('#=#', $identity->getEndpoint());
                     if (\count($splittedEndpoint) !== 2) {
                         throw SerializerException::wrongEndpointFormat($identity->getEndpoint());

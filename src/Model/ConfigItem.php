@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -22,20 +18,20 @@ use JMS\Serializer\Annotation as Serializer;
 class ConfigItem extends AbstractIdentity
 {
     /**
-     * @var Identity Reference to configGroup
+     * @var Identity|null Reference to configGroup
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("configGroupId")
      * @Serializer\Accessor(getter="getConfigGroupId",setter="setConfigGroupId")
      */
-    protected $configGroupId = null;
+    protected ?Identity $configGroupId = null;
 
     /**
-     * @var Identity Optional reference to product
+     * @var Identity|null Optional reference to product
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
-    protected $productId = null;
+    protected ?Identity $productId = null;
 
     /**
      * @var integer     Optional:Ignore multiplier.
@@ -44,7 +40,7 @@ class ConfigItem extends AbstractIdentity
      * @Serializer\SerializedName("ignoreMultiplier")
      * @Serializer\Accessor(getter="getIgnoreMultiplier",setter="setIgnoreMultiplier")
      */
-    protected $ignoreMultiplier = 0;
+    protected int $ignoreMultiplier = 0;
 
     /**
      * @var boolean Optional: Inherit product name and description  if productId is set.
@@ -54,7 +50,7 @@ class ConfigItem extends AbstractIdentity
      * @Serializer\SerializedName("inheritProductName")
      * @Serializer\Accessor(getter="getInheritProductName",setter="setInheritProductName")
      */
-    protected $inheritProductName = false;
+    protected bool $inheritProductName = false;
 
     /**
      * @var boolean Optional: Inherit product price of referenced productId.
@@ -63,7 +59,7 @@ class ConfigItem extends AbstractIdentity
      * @Serializer\SerializedName("inheritProductPrice")
      * @Serializer\Accessor(getter="getInheritProductPrice",setter="setInheritProductPrice")
      */
-    protected $inheritProductPrice = false;
+    protected bool $inheritProductPrice = false;
 
     /**
      * @var double Optional initial / predefined quantity. Default is one (1) quantity piece.
@@ -71,7 +67,7 @@ class ConfigItem extends AbstractIdentity
      * @Serializer\SerializedName("initialQuantity")
      * @Serializer\Accessor(getter="getInitialQuantity",setter="setInitialQuantity")
      */
-    protected $initialQuantity = 0.0;
+    protected float $initialQuantity = 0.0;
 
     /**
      * @var boolean Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
@@ -79,7 +75,7 @@ class ConfigItem extends AbstractIdentity
      * @Serializer\SerializedName("isPreSelected")
      * @Serializer\Accessor(getter="getIsPreSelected",setter="setIsPreSelected")
      */
-    protected $isPreSelected = false;
+    protected bool $isPreSelected = false;
 
     /**
      * @var boolean Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted.
@@ -87,7 +83,7 @@ class ConfigItem extends AbstractIdentity
      * @Serializer\SerializedName("isRecommended")
      * @Serializer\Accessor(getter="getIsRecommended",setter="setIsRecommended")
      */
-    protected $isRecommended = false;
+    protected bool $isRecommended = false;
 
     /**
      * @var double Maximum allowed quantity. Default 0 for no maximum limit.
@@ -95,7 +91,7 @@ class ConfigItem extends AbstractIdentity
      * @Serializer\SerializedName("maxQuantity")
      * @Serializer\Accessor(getter="getMaxQuantity",setter="setMaxQuantity")
      */
-    protected $maxQuantity = 0.0;
+    protected float $maxQuantity = 0.0;
 
     /**
      * @var double Optional minimum quantity required to add configItem. Default 0 for no minimum quantity.
@@ -103,7 +99,7 @@ class ConfigItem extends AbstractIdentity
      * @Serializer\SerializedName("minQuantity")
      * @Serializer\Accessor(getter="getMinQuantity",setter="setMinQuantity")
      */
-    protected $minQuantity = 0.0;
+    protected float $minQuantity = 0.0;
 
     /**
      * @var boolean Optional: Show discount compared to productId price.
@@ -112,7 +108,7 @@ class ConfigItem extends AbstractIdentity
      * @Serializer\SerializedName("showDiscount")
      * @Serializer\Accessor(getter="getShowDiscount",setter="setShowDiscount")
      */
-    protected $showDiscount = false;
+    protected bool $showDiscount = false;
 
     /**
      * @var boolean Optional: Show surcharge compared to productId price.
@@ -120,7 +116,7 @@ class ConfigItem extends AbstractIdentity
      * @Serializer\SerializedName("showSurcharge")
      * @Serializer\Accessor(getter="getShowSurcharge",setter="setShowSurcharge")
      */
-    protected $showSurcharge = false;
+    protected bool $showSurcharge = false;
 
     /**
      * @var integer Optional sort order number
@@ -128,7 +124,7 @@ class ConfigItem extends AbstractIdentity
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
-    protected $sort = 0;
+    protected int $sort = 0;
 
     /**
      * @var integer Config item type. 0: Product, 1: Special
@@ -136,7 +132,7 @@ class ConfigItem extends AbstractIdentity
      * @Serializer\SerializedName("type")
      * @Serializer\Accessor(getter="getType",setter="setType")
      */
-    protected $type = 0;
+    protected int $type = 0;
 
     /**
      * @var ConfigItemI18n[]
@@ -144,7 +140,7 @@ class ConfigItem extends AbstractIdentity
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = [];
+    protected array $i18ns = [];
 
     /**
      * @var ConfigItemPrice[]
@@ -152,7 +148,7 @@ class ConfigItem extends AbstractIdentity
      * @Serializer\SerializedName("prices")
      * @Serializer\AccessType("reflection")
      */
-    protected $prices = [];
+    protected array $prices = [];
 
     /**
      * Constructor.

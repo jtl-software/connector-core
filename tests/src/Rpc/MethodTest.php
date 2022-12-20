@@ -16,7 +16,7 @@ class MethodTest extends TestCase
     /**
      *
      */
-    public function testConstructorParameters()
+    public function testConstructorParameters(): void
     {
         $method = new Method('category.push', Controller::CATEGORY, Action::PUSH);
 
@@ -36,7 +36,7 @@ class MethodTest extends TestCase
      *
      * @throws \Exception
      */
-    public function testCreateFromRpcMethod($rpcMethod, $expectedController, $expectedAction, $isCore)
+    public function testCreateFromRpcMethod($rpcMethod, $expectedController, $expectedAction, $isCore): void
     {
         $method = Method::createFromRpcMethod($rpcMethod);
         $this->assertSame($expectedController, $method->getController());

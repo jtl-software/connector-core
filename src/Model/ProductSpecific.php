@@ -1,14 +1,13 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\MustNotBeNullException;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
+use TypeError;
 
 /**
  * Product to specificValue Assignment.
@@ -23,12 +22,12 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductSpecific extends AbstractIdentity
 {
     /**
-     * @var Identity Reference to specificValue
+     * @var Identity|null Reference to specificValue
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("specificValueId")
      * @Serializer\Accessor(getter="getSpecificValueId",setter="setSpecificValueId")
      */
-    protected $specificValueId = null;
+    protected ?Identity $specificValueId = null;
 
     /**
      * Constructor.
@@ -44,10 +43,12 @@ class ProductSpecific extends AbstractIdentity
 
     /**
      * @return Identity Reference to specificValue
+     * @throws MustNotBeNullException
+     * @throws TypeError
      */
     public function getSpecificValueId(): Identity
     {
-        return $this->specificValueId;
+        return Validate::checkIdentityAndNotNull($this->specificValueId);
     }
 
     /**

@@ -30,7 +30,7 @@ class ConnectorTest extends TestCase
     /**
      *
      */
-    public function testFeatures()
+    public function testFeatures(): void
     {
         $controller = $this->getMockBuilder(ConnectorController::class)
                            ->onlyMethods(['fetchFeaturesData'])
@@ -51,7 +51,7 @@ class ConnectorTest extends TestCase
     /**
      *
      */
-    public function testAckEmpty()
+    public function testAckEmpty(): void
     {
         $connector = $this->createConnectorController();
         $this->assertTrue($connector->ack(new Ack()));
@@ -97,7 +97,7 @@ class ConnectorTest extends TestCase
      * @throws DefinitionException
      * @throws \ReflectionException
      */
-    public function testAckInvalidModelName()
+    public function testAckInvalidModelName(): void
     {
         $linker = $this->createMock(IdentityLinker::class);
         $linker->expects($this->exactly(3))->method('save')->willReturn(true);
@@ -117,7 +117,7 @@ class ConnectorTest extends TestCase
      * @throws AuthenticationException
      * @throws ApplicationException
      */
-    public function testAuthMissingToken()
+    public function testAuthMissingToken(): void
     {
         $connector = $this->createConnectorController();
 
@@ -132,7 +132,7 @@ class ConnectorTest extends TestCase
      * @throws AuthenticationException
      * @throws ApplicationException
      */
-    public function testAuthTokenIsInvalid()
+    public function testAuthTokenIsInvalid(): void
     {
         $_SERVER['REMOTE_ADDR'] = '';
         $this->expectExceptionObject(AuthenticationException::failed());
@@ -154,7 +154,7 @@ class ConnectorTest extends TestCase
      * @throws ApplicationException
      * @throws AuthenticationException
      */
-    public function testAuthCorrect()
+    public function testAuthCorrect(): void
     {
         $tokenValidator = $this->createMock(TokenValidatorInterface::class);
 
@@ -177,7 +177,7 @@ class ConnectorTest extends TestCase
     /**
      *
      */
-    public function testIdentify()
+    public function testIdentify(): void
     {
         $endpointVersion = '1.0';
         $platformName    = 'ConnectorPlatform';
@@ -200,7 +200,7 @@ class ConnectorTest extends TestCase
     /**
      *
      */
-    public function testClearSuccess()
+    public function testClearSuccess(): void
     {
         $linker = $this->createMock(IdentityLinker::class);
         $linker->expects($this->once())->method('clear')->willReturn(true);

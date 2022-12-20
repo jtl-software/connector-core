@@ -1,11 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Rpc;
 
 use JMS\Serializer\Annotation as Serializer;
+use JMS\Serializer\Exception\InvalidArgumentException;
 use JMS\Serializer\Serializer as JmsSerializer;
 use Jtl\Connector\Core\Definition\RpcMethod;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
+use RuntimeException;
 
 /**
  * Rpc Request Packet
@@ -27,7 +31,7 @@ class RequestPacket extends Packet
      * @Serializer\SerializedName("method")
      * @Serializer\Accessor(getter="getMethod",setter="setMethod")
      */
-    protected $method = 'undefined.undefined';
+    protected string $method = 'undefined.undefined';
 
     /**
      * A Structured value that holds the parameter values to be used during the
@@ -39,13 +43,15 @@ class RequestPacket extends Packet
      * @Serializer\SerializedName("params")
      * @Serializer\Accessor(getter="getParams",setter="setParams")
      */
-    protected $params = [];
+    protected array $params = [];
 
     /**
      * @param string             $jtlrpc
      * @param JmsSerializer|null $serializer
      *
      * @return RequestPacket
+     * @throws RuntimeException
+     * @throws InvalidArgumentException
      */
     public static function createFromJtlrpc(string $jtlrpc, JmsSerializer $serializer = null): RequestPacket
     {
@@ -54,10 +60,15 @@ class RequestPacket extends Packet
         }
 
         if ($jtlrpc !== '') {
-            return $serializer->deserialize($jtlrpc, RequestPacket::class, 'json');
-        } else {
-            return new static();
+            $packet = $serializer->deserialize($jtlrpc, __CLASS__, 'json');
+            if (!($packet instanceof self)) {
+                throw new \RuntimeException('deserialized Json must be an instance of RequestPacket.');
+            }
+
+            return $packet;
         }
+
+        return new static();
     }
 
     /**
@@ -76,6 +87,7 @@ class RequestPacket extends Packet
     public function setParams(array $params): RequestPacket
     {
         $this->params = $params;
+
         return $this;
     }
 
@@ -87,7 +99,7 @@ class RequestPacket extends Packet
         $isValid = true;
 
         // JSON-RPC protocol
-        if ($this->getJtlrpc() != '2.0') {
+        if ($this->getJtlrpc() !== '2.0') {
             $isValid = false;
         }
 
@@ -121,6 +133,7 @@ class RequestPacket extends Packet
     public function setMethod(string $method): RequestPacket
     {
         $this->method = $method;
+
         return $this;
     }
 }

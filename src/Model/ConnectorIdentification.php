@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -24,7 +20,7 @@ class ConnectorIdentification extends AbstractModel
      * @Serializer\SerializedName("endpointVersion")
      * @Serializer\Accessor(getter="getEndpointVersion",setter="setEndpointVersion")
      */
-    protected $endpointVersion = '';
+    protected string $endpointVersion = '';
 
     /**
      * @var string
@@ -32,7 +28,7 @@ class ConnectorIdentification extends AbstractModel
      * @Serializer\SerializedName("platformName")
      * @Serializer\Accessor(getter="getPlatformName",setter="setPlatformName")
      */
-    protected $platformName = '';
+    protected string $platformName = '';
 
     /**
      * @var string
@@ -40,7 +36,7 @@ class ConnectorIdentification extends AbstractModel
      * @Serializer\SerializedName("platformVersion")
      * @Serializer\Accessor(getter="getPlatformVersion",setter="setPlatformVersion")
      */
-    protected $platformVersion = '';
+    protected string $platformVersion = '';
 
     /**
      * @var integer
@@ -48,15 +44,15 @@ class ConnectorIdentification extends AbstractModel
      * @Serializer\SerializedName("protocolVersion")
      * @Serializer\Accessor(getter="getProtocolVersion",setter="setProtocolVersion")
      */
-    protected $protocolVersion = 0;
+    protected int $protocolVersion = 0;
 
     /**
-     * @var ConnectorServerInfo
+     * @var ConnectorServerInfo|null
      * @Serializer\Type("Jtl\Connector\Core\Model\ConnectorServerInfo")
      * @Serializer\SerializedName("serverInfo")
      * @Serializer\Accessor(getter="getServerInfo",setter="setServerInfo")
      */
-    protected $serverInfo = null;
+    protected ?ConnectorServerInfo $serverInfo = null;
 
     /**
      * @return string

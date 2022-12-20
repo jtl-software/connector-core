@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -21,20 +17,20 @@ use JMS\Serializer\Annotation as Serializer;
 class Customer extends AbstractI18n implements IdentityInterface
 {
     /**
-     * @var Identity References a customer group
+     * @var Identity|null References a customer group
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerGroupId")
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
-    protected $customerGroupId = null;
+    protected ?Identity $customerGroupId = null;
 
     /**
-     * @var Identity Unique customer id
+     * @var Identity|null Unique customer id
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
-    protected $id = null;
+    protected ?Identity $id = null;
 
     /**
      * @var double
@@ -42,15 +38,15 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("accountCredit")
      * @Serializer\Accessor(getter="getAccountCredit",setter="setAccountCredit")
      */
-    protected $accountCredit = 0.0;
+    protected float $accountCredit = 0.0;
 
     /**
-     * @var \DateTimeInterface Date of birth
+     * @var \DateTimeInterface|null Date of birth
      * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("birthday")
      * @Serializer\Accessor(getter="getBirthday",setter="setBirthday")
      */
-    protected $birthday = null;
+    protected ?\DateTimeInterface $birthday = null;
 
     /**
      * @var string City
@@ -58,7 +54,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("city")
      * @Serializer\Accessor(getter="getCity",setter="setCity")
      */
-    protected $city = '';
+    protected string $city = '';
 
     /**
      * @var string Company name
@@ -66,7 +62,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("company")
      * @Serializer\Accessor(getter="getCompany",setter="setCompany")
      */
-    protected $company = '';
+    protected string $company = '';
 
     /**
      * @var string Country ISO 3166-2 (2 letter Uppercase)
@@ -74,15 +70,15 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("countryIso")
      * @Serializer\Accessor(getter="getCountryIso",setter="setCountryIso")
      */
-    protected $countryIso = '';
+    protected string $countryIso = '';
 
     /**
-     * @var \DateTimeInterface
+     * @var \DateTimeInterface|null
      * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("creationDate")
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
-    protected $creationDate = null;
+    protected ?\DateTimeInterface $creationDate = null;
 
     /**
      * @var string Optional customer number set by JTL-Wawi ERP software
@@ -90,7 +86,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("customerNumber")
      * @Serializer\Accessor(getter="getCustomerNumber",setter="setCustomerNumber")
      */
-    protected $customerNumber = '';
+    protected string $customerNumber = '';
 
     /**
      * @var string Delivery instruction e.g. "c/o John Doe"
@@ -98,7 +94,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("deliveryInstruction")
      * @Serializer\Accessor(getter="getDeliveryInstruction",setter="setDeliveryInstruction")
      */
-    protected $deliveryInstruction = '';
+    protected string $deliveryInstruction = '';
 
     /**
      * @var double Percentage discount for customer on all prices
@@ -106,7 +102,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("discount")
      * @Serializer\Accessor(getter="getDiscount",setter="setDiscount")
      */
-    protected $discount = 0.0;
+    protected float $discount = 0.0;
 
     /**
      * @var string E-Mail address
@@ -114,7 +110,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("eMail")
      * @Serializer\Accessor(getter="getEMail",setter="setEMail")
      */
-    protected $eMail = '';
+    protected string $eMail = '';
 
     /**
      * @var string Extra address line e.g. "Apartment 2.5"
@@ -122,7 +118,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("extraAddressLine")
      * @Serializer\Accessor(getter="getExtraAddressLine",setter="setExtraAddressLine")
      */
-    protected $extraAddressLine = '';
+    protected string $extraAddressLine = '';
 
     /**
      * @var string Fax number
@@ -130,7 +126,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("fax")
      * @Serializer\Accessor(getter="getFax",setter="setFax")
      */
-    protected $fax = '';
+    protected string $fax = '';
 
     /**
      * @var string First name
@@ -138,7 +134,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("firstName")
      * @Serializer\Accessor(getter="getFirstName",setter="setFirstName")
      */
-    protected $firstName = '';
+    protected string $firstName = '';
 
     /**
      * @var boolean
@@ -146,7 +142,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("hasCustomerAccount")
      * @Serializer\Accessor(getter="getHasCustomerAccount",setter="setHasCustomerAccount")
      */
-    protected $hasCustomerAccount = false;
+    protected bool $hasCustomerAccount = false;
 
     /**
      * @var boolean Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
@@ -154,7 +150,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("hasNewsletterSubscription")
      * @Serializer\Accessor(getter="getHasNewsletterSubscription",setter="setHasNewsletterSubscription")
      */
-    protected $hasNewsletterSubscription = false;
+    protected bool $hasNewsletterSubscription = false;
 
     /**
      * @var boolean Flag if customer is active (login allowed).
@@ -163,7 +159,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("isActive")
      * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
      */
-    protected $isActive = false;
+    protected bool $isActive = false;
 
     /**
      * @var string Last name
@@ -171,7 +167,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("lastName")
      * @Serializer\Accessor(getter="getLastName",setter="setLastName")
      */
-    protected $lastName = '';
+    protected string $lastName = '';
 
     /**
      * @var string Mobile phone number
@@ -179,7 +175,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("mobile")
      * @Serializer\Accessor(getter="getMobile",setter="setMobile")
      */
-    protected $mobile = '';
+    protected string $mobile = '';
 
     /**
      * @var string customer note
@@ -187,7 +183,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("note")
      * @Serializer\Accessor(getter="getNote",setter="setNote")
      */
-    protected $note = '';
+    protected string $note = '';
 
     /**
      * @var string Customer origin
@@ -195,7 +191,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("origin")
      * @Serializer\Accessor(getter="getOrigin",setter="setOrigin")
      */
-    protected $origin = '';
+    protected string $origin = '';
 
     /**
      * @var string Phone number
@@ -203,7 +199,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("phone")
      * @Serializer\Accessor(getter="getPhone",setter="setPhone")
      */
-    protected $phone = '';
+    protected string $phone = '';
 
     /**
      * @var string Salutation (german: "Anrede")
@@ -211,7 +207,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("salutation")
      * @Serializer\Accessor(getter="getSalutation",setter="setSalutation")
      */
-    protected $salutation = '';
+    protected string $salutation = '';
 
     /**
      * @var string State
@@ -219,7 +215,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("state")
      * @Serializer\Accessor(getter="getState",setter="setState")
      */
-    protected $state = '';
+    protected string $state = '';
 
     /**
      * @var string Street name
@@ -227,7 +223,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("street")
      * @Serializer\Accessor(getter="getStreet",setter="setStreet")
      */
-    protected $street = '';
+    protected string $street = '';
 
     /**
      * @var string Title, e.g. "Prof. Dr."
@@ -235,7 +231,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("title")
      * @Serializer\Accessor(getter="getTitle",setter="setTitle")
      */
-    protected $title = '';
+    protected string $title = '';
 
     /**
      * @var string VAT number (german "USt-ID")
@@ -243,7 +239,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("vatNumber")
      * @Serializer\Accessor(getter="getVatNumber",setter="setVatNumber")
      */
-    protected $vatNumber = '';
+    protected string $vatNumber = '';
 
     /**
      * @var string WWW address
@@ -251,7 +247,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("websiteUrl")
      * @Serializer\Accessor(getter="getWebsiteUrl",setter="setWebsiteUrl")
      */
-    protected $websiteUrl = '';
+    protected string $websiteUrl = '';
 
     /**
      * @var string ZIP / postal code
@@ -259,7 +255,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("zipCode")
      * @Serializer\Accessor(getter="getZipCode",setter="setZipCode")
      */
-    protected $zipCode = '';
+    protected string $zipCode = '';
 
     /**
      * @var KeyValueAttribute[]
@@ -267,7 +263,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
      */
-    protected $attributes = [];
+    protected array $attributes = [];
 
     /**
      * Constructor

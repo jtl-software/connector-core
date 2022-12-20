@@ -17,7 +17,7 @@ class ConfigParameterTest extends TestCase
      *
      * @throws ConfigException
      */
-    public function testIsValidValueString(string $type, $validValue, array $invalidValues)
+    public function testIsValidValueString(string $type, $validValue, array $invalidValues): void
     {
         $option = new ConfigParameter('foo', $type);
         $this->assertTrue($option->isValidValue($validValue));
@@ -35,7 +35,7 @@ class ConfigParameterTest extends TestCase
      *
      * @throws ConfigException
      */
-    public function testSetDefaultValue(string $type, $validValue, array $invalidValues)
+    public function testSetDefaultValue(string $type, $validValue, array $invalidValues): void
     {
         $option = new ConfigParameter('foo', $type);
         $option->setDefaultValue($validValue);
@@ -51,7 +51,7 @@ class ConfigParameterTest extends TestCase
      *
      * @throws ConfigException
      */
-    public function testSetWrongDefaultValue(string $type, $validValue, array $invalidValues)
+    public function testSetWrongDefaultValue(string $type, $validValue, array $invalidValues): void
     {
         $this->expectException(ConfigException::class);
         $this->expectExceptionCode(ConfigException::WRONG_TYPE);
@@ -61,7 +61,7 @@ class ConfigParameterTest extends TestCase
         $option->setDefaultValue($invalidValues[$invalidValuesIndex]);
     }
 
-    public function testSetUnknownType()
+    public function testSetUnknownType(): void
     {
         $this->expectException(ConfigException::class);
         $this->expectExceptionCode(ConfigException::UNKNOWN_TYPE);
@@ -72,7 +72,7 @@ class ConfigParameterTest extends TestCase
         $reflectionMethod->invoke($option, 'yolo');
     }
 
-    public function testSetEmptyKey()
+    public function testSetEmptyKey(): void
     {
         $this->expectException(ConfigException::class);
         $this->expectExceptionCode(ConfigException::EMPTY_KEY);
@@ -92,7 +92,7 @@ class ConfigParameterTest extends TestCase
      *
      * @throws ConfigException
      */
-    public function testHasDefaultValue(string $type, $validValue, array $invalidValues)
+    public function testHasDefaultValue(string $type, $validValue, array $invalidValues): void
     {
         $option = new ConfigParameter('foo', $type);
         $this->assertFalse($option->hasDefaultValue());
@@ -103,7 +103,7 @@ class ConfigParameterTest extends TestCase
     /**
      * @return array[]
      */
-    public function dataProvider()
+    public function dataProvider(): array
     {
         return [
             [ConfigParameter::TYPE_STRING, 'foo', [null, 5, false, true, 0.1]],

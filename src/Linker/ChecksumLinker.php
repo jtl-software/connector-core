@@ -1,9 +1,6 @@
 <?php
 
-/**
- * @copyright 2010-2013 JTL-Software GmbH
- * @package   Jtl\Connector\Core\Linker
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Linker;
 
@@ -16,7 +13,7 @@ use Psr\Log\NullLogger;
 
 class ChecksumLinker implements LoggerAwareInterface
 {
-    protected LoggerInterface $logger;
+    protected LoggerInterface          $logger;
     protected ?ChecksumLoaderInterface $loader;
 
     /**

@@ -1,9 +1,6 @@
 <?php
 
-/**
- * @copyright 2010-2013 JTL-Software GmbH
- * @package   Jtl\Connector\Core\Session
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Session;
 
@@ -11,10 +8,7 @@ use Jtl\Connector\Core\Exception\SessionException;
 
 class SessionHelper
 {
-    /**
-     * @var string
-     */
-    protected $namespace;
+    protected string $namespace;
 
     /**
      * SessionHelper constructor.
@@ -35,7 +29,7 @@ class SessionHelper
     /**
      * @param object $object
      *
-     * @return static
+     * @return self
      * @throws SessionException
      */
     public static function createByObjectClass(object $object): self
@@ -55,7 +49,7 @@ class SessionHelper
     }
 
     /**
-     * @param $name
+     * @param string $name
      *
      * @return mixed|null
      * @throws SessionException
@@ -67,16 +61,17 @@ class SessionHelper
         }
 
         $value = &$_SESSION[$this->namespace][$name] ?? null;
+
         return $value;
     }
 
     /**
-     * @param $name
-     * @param $value
+     * @param string $name
+     * @param mixed  $value
      *
      * @throws SessionException
      */
-    public function __set(string $name, $value)
+    public function __set(string $name, $value): void
     {
         if ($name === '') {
             throw new SessionException("The '{$name}' key must be a non-empty string");
@@ -86,18 +81,19 @@ class SessionHelper
 
     /**
      * @param string $name
-     * @param        $value
+     * @param mixed  $value
      *
      * @return $this
      */
     public function set(string $name, $value): self
     {
         $_SESSION[$this->namespace][$name] = $value;
+
         return $this;
     }
 
     /**
-     * @param $name
+     * @param string $name
      *
      * @return bool
      * @throws SessionException
@@ -122,7 +118,7 @@ class SessionHelper
     }
 
     /**
-     * @param $name
+     * @param string $name
      *
      * @throws SessionException
      */
@@ -145,6 +141,7 @@ class SessionHelper
         if ($this->has($name)) {
             unset($_SESSION[$this->namespace][$name]);
         }
+
         return $this;
     }
 }

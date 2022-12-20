@@ -1,14 +1,13 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\MustNotBeNullException;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
+use TypeError;
 
 /**
  * Product price properties.
@@ -21,28 +20,28 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductPrice extends AbstractIdentity
 {
     /**
-     * @var Identity Reference to customerGroup
+     * @var Identity|null Reference to customerGroup
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerGroupId")
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
-    protected $customerGroupId = null;
+    protected ?Identity $customerGroupId = null;
 
     /**
-     * @var Identity Reference to customer
+     * @var Identity|null Reference to customer
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerId")
      * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
      */
-    protected $customerId = null;
+    protected ?Identity $customerId = null;
 
     /**
-     * @var Identity Reference to product
+     * @var Identity|null Reference to product
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
-    protected $productId = null;
+    protected ?Identity $productId = null;
 
     /**
      * @var ProductPriceItem[]
@@ -50,7 +49,7 @@ class ProductPrice extends AbstractIdentity
      * @Serializer\SerializedName("items")
      * @Serializer\AccessType("reflection")
      */
-    protected $items = [];
+    protected array $items = [];
 
     /**
      * Constructor.
@@ -68,10 +67,12 @@ class ProductPrice extends AbstractIdentity
 
     /**
      * @return Identity Reference to customerGroup
+     * @throws MustNotBeNullException
+     * @throws TypeError
      */
     public function getCustomerGroupId(): Identity
     {
-        return $this->customerGroupId;
+        return Validate::checkIdentityAndNotNull($this->customerGroupId);
     }
 
     /**
@@ -82,15 +83,18 @@ class ProductPrice extends AbstractIdentity
     public function setCustomerGroupId(Identity $customerGroupId): ProductPrice
     {
         $this->customerGroupId = $customerGroupId;
+
         return $this;
     }
 
     /**
      * @return Identity Reference to customer
+     * @throws MustNotBeNullException
+     * @throws TypeError
      */
     public function getCustomerId(): Identity
     {
-        return $this->customerId;
+        return Validate::checkIdentityAndNotNull($this->customerId);
     }
 
     /**
@@ -101,15 +105,18 @@ class ProductPrice extends AbstractIdentity
     public function setCustomerId(Identity $customerId): ProductPrice
     {
         $this->customerId = $customerId;
+
         return $this;
     }
 
     /**
      * @return Identity Reference to product
+     * @throws MustNotBeNullException
+     * @throws TypeError
      */
     public function getProductId(): Identity
     {
-        return $this->productId;
+        return Validate::checkIdentityAndNotNull($this->productId);
     }
 
     /**
@@ -120,6 +127,7 @@ class ProductPrice extends AbstractIdentity
     public function setProductId(Identity $productId): ProductPrice
     {
         $this->productId = $productId;
+
         return $this;
     }
 

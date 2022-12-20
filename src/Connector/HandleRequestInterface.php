@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Connector;
 
 use Jtl\Connector\Core\Application\Application;

@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -24,7 +20,7 @@ class ConnectorServerInfo extends AbstractModel
      * @Serializer\SerializedName("memoryLimit")
      * @Serializer\Accessor(getter="getMemoryLimit",setter="setMemoryLimit")
      */
-    protected $memoryLimit = 0;
+    protected int $memoryLimit = 0;
 
     /**
      * @var integer
@@ -32,7 +28,7 @@ class ConnectorServerInfo extends AbstractModel
      * @Serializer\SerializedName("executionTime")
      * @Serializer\Accessor(getter="getExecutionTime",setter="setExecutionTime")
      */
-    protected $executionTime = 0;
+    protected int $executionTime = 0;
 
     /**
      * @var integer
@@ -40,7 +36,7 @@ class ConnectorServerInfo extends AbstractModel
      * @Serializer\SerializedName("postMaxSize")
      * @Serializer\Accessor(getter="getPostMaxSize",setter="setPostMaxSize")
      */
-    protected $postMaxSize = 0;
+    protected int $postMaxSize = 0;
 
     /**
      * @var integer
@@ -48,7 +44,7 @@ class ConnectorServerInfo extends AbstractModel
      * @Serializer\SerializedName("uploadMaxFilesize")
      * @Serializer\Accessor(getter="getUploadMaxFilesize",setter="setUploadMaxFilesize")
      */
-    protected $uploadMaxFilesize = 0;
+    protected int $uploadMaxFilesize = 0;
 
     /**
      * @return integer

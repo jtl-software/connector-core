@@ -1,9 +1,6 @@
 <?php
 
-/**
- * @author    Immanuel Klinkenberg <immanuel.klinkenberg@jtl-software.com>
- * @copyright 2010-2018 JTL-Software GmbH
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -14,12 +11,12 @@ class Features extends AbstractModel
     /**
      * @var FeatureEntity[]
      */
-    protected $entities = [];
+    protected array $entities = [];
 
     /**
      * @var FeatureFlag[]
      */
-    protected $flags = [];
+    protected array $flags = [];
 
     /**
      * Features constructor.
@@ -61,6 +58,7 @@ class Features extends AbstractModel
      * @param string $name
      *
      * @return FeatureEntity
+     * @throws FeaturesException
      */
     public function getEntity(string $name): FeatureEntity
     {
@@ -187,7 +185,7 @@ class Features extends AbstractModel
     /**
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $data = [
             'entities' => [],

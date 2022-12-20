@@ -21,7 +21,7 @@ class RelationTypeTest extends TestCase
      *
      * @throws DefinitionException|\ReflectionException
      */
-    public function testGetRelatedImageIdentityType(string $relationType, ?int $relatedImageIdentityType)
+    public function testGetRelatedImageIdentityType(string $relationType, ?int $relatedImageIdentityType): void
     {
         if (\is_null($relatedImageIdentityType)) {
             $this->expectException(DefinitionException::class);
@@ -40,7 +40,7 @@ class RelationTypeTest extends TestCase
      *
      * @throws DefinitionException
      */
-    public function testHasRelatedImageIdentityType(string $relationType, bool $hasRelatedImageIdentityType)
+    public function testHasRelatedImageIdentityType(string $relationType, bool $hasRelatedImageIdentityType): void
     {
         $this->assertEquals(RelationType::hasRelatedImageIdentityType($relationType), $hasRelatedImageIdentityType);
     }
@@ -53,7 +53,7 @@ class RelationTypeTest extends TestCase
      *
      * @throws DefinitionException
      */
-    public function testGetRelatedImageModelName(string $relationType, bool $isRelationType)
+    public function testGetRelatedImageModelName(string $relationType, bool $isRelationType): void
     {
         if (!$isRelationType) {
             $this->expectExceptionObject(DefinitionException::unknownRelationType($relationType));
@@ -73,7 +73,7 @@ class RelationTypeTest extends TestCase
      *
      * @throws DefinitionException
      */
-    public function testGetModelName(string $relationType, bool $isRelationType)
+    public function testGetModelName(string $relationType, bool $isRelationType): void
     {
         if (!$isRelationType) {
             $this->expectExceptionObject(DefinitionException::unknownRelationType($relationType));
@@ -88,7 +88,7 @@ class RelationTypeTest extends TestCase
      * @param $relationType
      * @param $isRelationType
      */
-    public function testHasIdentityType($relationType, bool $isRelationType)
+    public function testHasIdentityType($relationType, bool $isRelationType): void
     {
         $hasIdentityType = RelationType::hasIdentityType($relationType);
         $this->assertSame($hasIdentityType, $isRelationType);
@@ -100,7 +100,7 @@ class RelationTypeTest extends TestCase
      * @param      $relationType
      * @param bool $isRelationType
      */
-    public function testIsRelationType($relationType, bool $isRelationType)
+    public function testIsRelationType($relationType, bool $isRelationType): void
     {
         $hasIdentityType = RelationType::isRelationType($relationType);
         $this->assertSame($hasIdentityType, $isRelationType);
@@ -158,7 +158,7 @@ class RelationTypeTest extends TestCase
      * @throws DefinitionException
      * @throws \ReflectionException
      */
-    public function testGetIdentityType($relationType, $expectedValue)
+    public function testGetIdentityType($relationType, $expectedValue): void
     {
         if ($expectedValue instanceof DefinitionException) {
             $this->expectExceptionObject($expectedValue);

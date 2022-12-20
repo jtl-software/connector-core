@@ -1,9 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Error;
+
+use Jtl\Connector\Core\Rpc\RequestPacket;
 
 abstract class AbstractErrorHandler
 {
+    protected RequestPacket $requestPacket;
+
     public function register(): void
     {
         \set_exception_handler($this->getExceptionHandler());
@@ -25,4 +31,16 @@ abstract class AbstractErrorHandler
      * @return callable
      */
     abstract public function getShutdownHandler(): callable;
+
+    /**
+     * @param RequestPacket $requestPacket
+     *
+     * @return ErrorHandler
+     */
+    public function setRequestPacket(RequestPacket $requestPacket): ErrorHandler
+    {
+        $this->requestPacket = $requestPacket;
+
+        return $this;
+    }
 }

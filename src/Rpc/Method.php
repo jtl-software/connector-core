@@ -1,9 +1,6 @@
 <?php
 
-/**
- * @copyright 2010-2013 JTL-Software GmbH
- * @package   Jtl\Connector\Core\Rpc
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Rpc;
 
@@ -18,21 +15,21 @@ class Method
      *
      * @var string
      */
-    protected $rpcMethod = '';
+    protected string $rpcMethod = '';
 
     /**
      * Connector Controller
      *
      * @var string
      */
-    protected $controller = '';
+    protected string $controller = '';
 
     /**
      * Connector Action
      *
      * @var string
      */
-    protected $action = '';
+    protected string $action = '';
 
     /**
      * Constructor

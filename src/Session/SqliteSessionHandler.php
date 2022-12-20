@@ -1,18 +1,18 @@
 <?php
 
-/**
- * @copyright 2010-2013 JTL-Software GmbH
- * @package   Jtl\Connector\Core\Session
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Session;
 
 use Jtl\Connector\Core\Database\Sqlite3;
+use Jtl\Connector\Core\Exception\DatabaseException;
 use Jtl\Connector\Core\Exception\SessionException;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use ReturnTypeWillChange;
+use RuntimeException;
+use Throwable;
 
 /**
  * Session Class
@@ -22,20 +22,9 @@ use ReturnTypeWillChange;
  */
 class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterface
 {
-    /**
-     * @var LoggerInterface
-     */
-    protected $logger;
-
-    /**
-     * @var int
-     */
-    private $lifetime;
-
-    /**
-     * @var Sqlite3
-     */
-    private $db;
+    protected LoggerInterface $logger;
+    private int               $lifetime;
+    private Sqlite3           $db;
 
     /**
      * SqliteSession constructor.
@@ -43,10 +32,12 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      * @param string $databaseDir
      *
      * @throws SessionException
+     * @throws DatabaseException
+     * @throws RuntimeException
      */
     public function __construct(string $databaseDir)
     {
-        if (!\is_dir($databaseDir) && !\mkdir($databaseDir)) {
+        if (!\is_dir($databaseDir) && !\mkdir($databaseDir) && !\is_dir($databaseDir)) {
             throw new SessionException('Could not create sqlite database directory');
         }
         $this->logger   = new NullLogger();
@@ -99,13 +90,13 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
     /**
      * Open Session
      *
-     * @param $savePath
-     * @param $sessionName
+     * @param string $savePath
+     * @param string $sessionName
      *
      * @return bool
      */
     #[ReturnTypeWillChange]
-    public function open($savePath, $sessionName)
+    public function open($savePath, $sessionName): bool
     {
         $this->logger->debug(
             'Open session with save path ({path}) and session name ({name})',
@@ -131,6 +122,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      * @param string $sessionId
      *
      * @return false|string
+     * @throws Throwable
      */
     #[ReturnTypeWillChange]
     public function read($sessionId)
@@ -141,7 +133,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
         $rows = $this->db->query($this->createReadQuery($sessionId, \time()));
         if ($rows !== null && isset($rows[0])) {
             $row = $rows[0];
-            if (isset($row['sessionData']) && \strlen($row['sessionData']) > 0) {
+            if (isset($row['sessionData']) && \is_string($row['sessionData']) && $row['sessionData'] !== '') {
                 return \base64_decode($row['sessionData'], true);
             }
         }
@@ -171,7 +163,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      * @return bool
      */
     #[ReturnTypeWillChange]
-    public function write($sessionId, $sessionData)
+    public function write($sessionId, $sessionData): bool
     {
         $sessionId   = $this->db->escapeString($sessionId);
         $sessionData = \base64_encode($sessionData);
@@ -185,11 +177,15 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
             $stmt = $db->prepare(
                 'INSERT INTO session (sessionId, sessionExpires, sessionData) VALUES(:session_id, :expire, :data)'
             );
+
+            if ($stmt === false) {
+                throw new \RuntimeException('db-statement must not be false.');
+            }
+
             $stmt->bindValue(':session_id', $sessionId, \SQLITE3_TEXT);
             $stmt->bindValue(':expire', $expire, \SQLITE3_INTEGER);
             $stmt->bindValue(':data', $sessionData, \SQLITE3_TEXT);
 
-            /** @var \SQLite3Stmt $stmt */
             $stmt->execute();
             $success = true;
         } catch (\Throwable $ex) {
@@ -222,6 +218,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      * @param string $sessionId
      *
      * @return bool
+     * @throws Throwable
      */
     public function destroy($sessionId): bool
     {
@@ -236,6 +233,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      * @param int $maxLifetime
      *
      * @return bool
+     * @throws Throwable
      */
     #[ReturnTypeWillChange]
     public function gc($maxLifetime): bool
@@ -255,6 +253,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      * @param string $sessionId
      *
      * @return boolean
+     * @throws Throwable
      */
     public function validateId($sessionId): bool
     {
@@ -276,11 +275,15 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      * @param string $sessionData
      *
      * @return bool
+     * @throws RuntimeException
      */
     public function updateTimestamp($sessionId, $sessionData): bool
     {
         $sql  = 'UPDATE session SET sessionExpires = :sessionExpires WHERE sessionId = :sessionId';
         $stmt = $this->db->prepare($sql);
+        if (\is_bool($stmt)) {
+            throw new \RuntimeException('Statement must not be a boolean.');
+        }
         $stmt->bindValue(':sessionExpires', $this->calculateExpiryTime(), \SQLITE3_INTEGER);
         $stmt->bindValue(':sessionId', $sessionId, \SQLITE3_TEXT);
         $stmt->execute();

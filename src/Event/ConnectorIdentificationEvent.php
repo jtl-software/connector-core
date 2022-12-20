@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Model\ConnectorIdentification;
@@ -10,7 +12,7 @@ class ConnectorIdentificationEvent extends Event
     /**
      * @var ConnectorIdentification
      */
-    protected $connectorIdentification;
+    protected ConnectorIdentification $connectorIdentification;
 
     /**
      * ConnectorIdentificationEvent constructor.

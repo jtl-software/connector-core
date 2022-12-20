@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Serializer\Subscriber;
 
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
@@ -11,7 +13,7 @@ class CrossSellingSubscriber implements EventSubscriberInterface
     /**
      * @return array<int, array<string, string>>
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             [
@@ -25,21 +27,22 @@ class CrossSellingSubscriber implements EventSubscriberInterface
     /**
      * @param PreDeserializeEvent $event
      */
-    public function onPreDeserialize(PreDeserializeEvent $event)
+    public function onPreDeserialize(PreDeserializeEvent $event): void
     {
         $className = $event->getType()['name'] ?? '';
         if ($className === CrossSelling::class) {
             $data      = $event->getData();
-            $productId = $data['productId'][1] ?? 0;
-            if (isset($data['items']) && \is_array($data['items'])) {
-                foreach ($data['items'] as $i => $item) {
-                    if (!isset($data['items'][$i]['id'])) {
-                        $crossSellingGroupId = $item['crossSellingGroupId'][1] ?? 0;
-                        $itemId              = self::cantorPairingFunction($productId, $crossSellingGroupId);
+            $productId = $data['productId'][1] ?? 0; // @phpstan-ignore-line
+            if (isset($data['items']) && \is_array($data['items'])) { // @phpstan-ignore-line
+                foreach ($data['items'] as $i => $item) { // @phpstan-ignore-line
+                    if (!isset($data['items'][$i]['id'])) { // @phpstan-ignore-line
+                        $crossSellingGroupId = $item['crossSellingGroupId'][1] ?? 0; // @phpstan-ignore-line
+
+                        $itemId = self::cantorPairingFunction($productId, $crossSellingGroupId); // @phpstan-ignore-line
                         if ($productId !== 0 && $crossSellingGroupId !== 0 && $itemId < \PHP_INT_MAX) {
-                            $data['items'][$i]['id'] = [
-                                '',
-                                $itemId,
+                            $data['items'][$i]['id'] = [ // @phpstan-ignore-line
+                                                         '',
+                                                         $itemId,
                             ];
                         }
                     }

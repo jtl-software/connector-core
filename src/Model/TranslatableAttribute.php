@@ -1,13 +1,11 @@
 <?php
 
-/**
- * @author    Patryk Gorol <patryk.gorol@jtl-software.com>
- * @copyright 2010-2019 JTL-Software GmbH
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use JsonException;
 use Jtl\Connector\Core\Exception\TranslatableAttributeException;
 
 /**
@@ -25,11 +23,12 @@ class TranslatableAttribute extends AbstractIdentity
         TYPE_INT    = 'int',
         TYPE_JSON   = 'json',
         TYPE_STRING = 'string';
+
     /**
      * @var string[]
      * @Serializer\Exclude
      */
-    protected static $types = [
+    protected static array $types = [
         self::TYPE_BOOL,
         self::TYPE_FLOAT,
         self::TYPE_INT,
@@ -42,28 +41,28 @@ class TranslatableAttribute extends AbstractIdentity
      * @Serializer\SerializedName("isTranslated")
      * @Serializer\Accessor(getter="getIsTranslated",setter="setIsTranslated")
      */
-    protected $isTranslated = false;
+    protected bool $isTranslated = false;
     /**
      * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isCustomProperty")
      * @Serializer\Accessor(getter="getIsCustomProperty",setter="setIsCustomProperty")
      */
-    protected $isCustomProperty = false;
+    protected bool $isCustomProperty = false;
     /**
      * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("type")
      * @Serializer\Accessor(getter="getType",setter="setType")
      */
-    protected $type = self::TYPE_STRING;
+    protected string $type = self::TYPE_STRING;
     /**
      * @var TranslatableAttributeI18n[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\TranslatableAttributeI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = [];
+    protected array $i18ns = [];
 
     /**
      * @return string[]
@@ -225,8 +224,9 @@ class TranslatableAttribute extends AbstractIdentity
     /**
      * @param string $languageIso
      *
-     * @return bool|float|int|string|null
+     * @return bool|float|int|string|null|mixed
      * @throws TranslatableAttributeException
+     * @throws JsonException
      */
     public function findValue(string $languageIso)
     {
@@ -239,8 +239,9 @@ class TranslatableAttribute extends AbstractIdentity
     }
 
     /**
-     * @return array
+     * @return array<string, bool|float|int|string|null|mixed>
      * @throws TranslatableAttributeException
+     * @throws JsonException
      */
     public function getValues(): array
     {

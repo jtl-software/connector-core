@@ -1,14 +1,13 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\MustNotBeNullException;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
+use TypeError;
 
 /**
  * @access     public
@@ -19,12 +18,12 @@ use JMS\Serializer\Annotation as Serializer;
 class Payment extends AbstractIdentity
 {
     /**
-     * @var Identity
+     * @var Identity|null
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerOrderId")
      * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
      */
-    protected $customerOrderId = null;
+    protected ?Identity $customerOrderId = null;
 
     /**
      * @var string
@@ -32,15 +31,15 @@ class Payment extends AbstractIdentity
      * @Serializer\SerializedName("billingInfo")
      * @Serializer\Accessor(getter="getBillingInfo",setter="setBillingInfo")
      */
-    protected $billingInfo = '';
+    protected string $billingInfo = '';
 
     /**
-     * @var \DateTimeInterface
+     * @var \DateTimeInterface|null
      * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("creationDate")
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
-    protected $creationDate = null;
+    protected ?\DateTimeInterface $creationDate = null;
 
     /**
      * @var string
@@ -48,7 +47,7 @@ class Payment extends AbstractIdentity
      * @Serializer\SerializedName("paymentModuleCode")
      * @Serializer\Accessor(getter="getPaymentModuleCode",setter="setPaymentModuleCode")
      */
-    protected $paymentModuleCode = '';
+    protected string $paymentModuleCode = '';
 
     /**
      * @var double
@@ -56,7 +55,7 @@ class Payment extends AbstractIdentity
      * @Serializer\SerializedName("totalSum")
      * @Serializer\Accessor(getter="getTotalSum",setter="setTotalSum")
      */
-    protected $totalSum = 0.0;
+    protected float $totalSum = 0.0;
 
     /**
      * @var string
@@ -64,7 +63,7 @@ class Payment extends AbstractIdentity
      * @Serializer\SerializedName("transactionId")
      * @Serializer\Accessor(getter="getTransactionId",setter="setTransactionId")
      */
-    protected $transactionId = '';
+    protected string $transactionId = '';
 
     /**
      * Constructor.
@@ -80,10 +79,12 @@ class Payment extends AbstractIdentity
 
     /**
      * @return Identity
+     * @throws MustNotBeNullException
+     * @throws TypeError
      */
     public function getCustomerOrderId(): Identity
     {
-        return $this->customerOrderId;
+        return Validate::checkIdentityAndNotNull($this->customerOrderId);
     }
 
     /**
@@ -179,7 +180,7 @@ class Payment extends AbstractIdentity
     }
 
     /**
-     * @return Identity
+     * @return string
      */
     public function getTransactionId(): string
     {

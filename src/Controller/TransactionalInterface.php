@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Controller;
 
 /**
  * Interface TransactionalInterface
+ *
  * @package Jtl\Connector\Core\Controller
  */
 interface TransactionalInterface

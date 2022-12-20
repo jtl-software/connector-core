@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Model\Generator;
 
 use Jtl\Connector\Core\Model\ManufacturerI18n;
 
 /**
  * Class ManufacturerI18nFactory
+ *
  * @package Jtl\Connector\Core\Model\Generator
  */
 class ManufacturerI18nFactory extends AbstractModelFactory

@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -26,7 +22,7 @@ class Manufacturer extends AbstractIdentity
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
-    protected $name = '';
+    protected string $name = '';
 
     /**
      * @var integer Optional sort number
@@ -34,7 +30,7 @@ class Manufacturer extends AbstractIdentity
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
-    protected $sort = 0;
+    protected int $sort = 0;
 
     /**
      * @var string Optional url path e.g. 'Products-manufactured-by-X'
@@ -42,7 +38,7 @@ class Manufacturer extends AbstractIdentity
      * @Serializer\SerializedName("urlPath")
      * @Serializer\Accessor(getter="getUrlPath",setter="setUrlPath")
      */
-    protected $urlPath = '';
+    protected string $urlPath = '';
 
     /**
      * @var string Optional manufacturer website URL
@@ -50,7 +46,7 @@ class Manufacturer extends AbstractIdentity
      * @Serializer\SerializedName("websiteUrl")
      * @Serializer\Accessor(getter="getWebsiteUrl",setter="setWebsiteUrl")
      */
-    protected $websiteUrl = '';
+    protected string $websiteUrl = '';
 
     /**
      * @var ManufacturerI18n[]
@@ -58,7 +54,7 @@ class Manufacturer extends AbstractIdentity
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = [];
+    protected array $i18ns = [];
 
     /**
      * @return string Manufacturer (brand) name

@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Model\Generator;
 
 use Jtl\Connector\Core\Model\Category;
 
 /**
  * Class CategoryFactory
+ *
  * @package Jtl\Connector\Core\Model\Generator
  */
 class CategoryFactory extends AbstractModelFactory
