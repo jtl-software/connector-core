@@ -30,14 +30,14 @@ code_quality:
     CQ_STANDARDS: '/tmp/code-quality/ConnectorCoreStandard.xml'
   before_script: []
 
-test:unit:
-  parallel:
-    matrix:
-      - VERSION: [ '7.4','8.0','8.1' ]
-  image: gitlab.jtl-software.com:4567/connector/connector-utils/ci-docker/php/cli:${VERSION}
-  stage: test
-  script:
-    - vendor/bin/phpunit --configuration phpunit.xml.dist --log-junit junit.xml
-  artifacts:
-    reports:
-      junit: junit.xml
+#test:unit:
+#  parallel:
+#    matrix:
+#      - VERSION: [ '7.4','8.0','8.1' ]
+#  image: gitlab.jtl-software.com:4567/connector/connector-utils/ci-docker/php/cli:${VERSION}
+#  stage: test
+#  script:
+#    - vendor/bin/phpunit --configuration phpunit.xml.dist --log-junit junit.xml
+#  artifacts:
+#    reports:
+#      junit: junit.xml
