@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Serializer\Subscriber;
 
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
@@ -12,9 +14,9 @@ use Jtl\Connector\Core\Model\TranslatableAttributeI18n;
 class ProductAttributeSubscriber implements EventSubscriberInterface
 {
     /**
-     * @return array<int, array<string, string>>
+     * @return array{0: array{event: string, method: string, format: string}}
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             [
@@ -28,12 +30,12 @@ class ProductAttributeSubscriber implements EventSubscriberInterface
     /**
      * @param ObjectEvent $event
      */
-    public function onPostSerialize(ObjectEvent $event)
+    public function onPostSerialize(ObjectEvent $event): void
     {
         if ($event->getObject() instanceof TranslatableAttributeI18n) {
             $product = null;
             /** @var \SplObjectStorage $visitingSet */
-            $visitingSet = $event->getContext()->getVisitingSet();
+            $visitingSet = $event->getContext()->getVisitingSet(); // @phpstan-ignore-line
             foreach ($visitingSet as $index => $element) {
                 if ($element instanceof Product) {
                     $product = $element;
@@ -47,7 +49,7 @@ class ProductAttributeSubscriber implements EventSubscriberInterface
                 /** @var TranslatableAttribute $attribute */
                 $attribute     = $visitingSet->current();
                 $productAttrId = $attribute->getId()->toArray();
-                $event->getVisitor()->visitProperty(
+                $event->getVisitor()->visitProperty( // @phpstan-ignore-line
                     new StaticPropertyMetadata('', 'productAttrId', $productAttrId),
                     $productAttrId
                 );

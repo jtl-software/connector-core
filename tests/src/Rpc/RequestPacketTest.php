@@ -19,7 +19,7 @@ class RequestPacketTest extends TestCase
      * @param array $expectedParams
      * @param bool  $isValid
      */
-    public function testValidPacket(array $inputParams, array $expectedParams, bool $isValid)
+    public function testValidPacket(array $inputParams, array $expectedParams, bool $isValid): void
     {
         $requestPacket = new RequestPacket();
         $requestPacket->setId($inputParams[0]);

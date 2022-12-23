@@ -1,14 +1,13 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\MustNotBeNullException;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
+use TypeError;
 
 /**
  * Product-Category Allocation.
@@ -26,7 +25,7 @@ class Product2Category extends AbstractIdentity
      * @Serializer\SerializedName("categoryId")
      * @Serializer\Accessor(getter="getCategoryId",setter="setCategoryId")
      */
-    protected $categoryId = null;
+    protected Identity $categoryId;
 
     /**
      * Constructor.
@@ -42,10 +41,12 @@ class Product2Category extends AbstractIdentity
 
     /**
      * @return Identity Reference to category
+     * @throws MustNotBeNullException
+     * @throws TypeError
      */
     public function getCategoryId(): Identity
     {
-        return $this->categoryId;
+        return Validate::checkIdentityAndNotNull($this->categoryId);
     }
 
     /**

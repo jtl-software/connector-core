@@ -10,7 +10,7 @@ use Jtl\Connector\Core\Test\TestCase;
 
 class ImageSubscriberTest extends TestCase
 {
-    public function testOnPostSerialize()
+    public function testOnPostSerialize(): void
     {
         $endpoint         = $this->getFaker()->word;
         $expectedEndpoint = \sprintf('manufacturer#=#%s', $endpoint);
@@ -22,7 +22,7 @@ class ImageSubscriberTest extends TestCase
         $this->assertEquals($expectedHost, $data['id'][1]);
     }
 
-    public function testOnPostDeserialize()
+    public function testOnPostDeserialize(): void
     {
         $data = [
             'identities' => [

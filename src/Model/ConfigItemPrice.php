@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -26,7 +22,7 @@ class ConfigItemPrice extends AbstractModel
      * @Serializer\SerializedName("customerGroupId")
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
-    protected $customerGroupId = null;
+    protected Identity $customerGroupId;
 
     /**
      * @var double  Net price or percental value to add/deduct to/from product price (depending on type).
@@ -36,7 +32,7 @@ class ConfigItemPrice extends AbstractModel
      * @Serializer\SerializedName("price")
      * @Serializer\Accessor(getter="getPrice",setter="setPrice")
      */
-    protected $price = 0.0;
+    protected float $price = 0.0;
 
     /**
      * @var integer Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
@@ -44,7 +40,7 @@ class ConfigItemPrice extends AbstractModel
      * @Serializer\SerializedName("type")
      * @Serializer\Accessor(getter="getType",setter="setType")
      */
-    protected $type = 0;
+    protected int $type = 0;
 
     /**
      * Constructor

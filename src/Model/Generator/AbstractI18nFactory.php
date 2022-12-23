@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Model\Generator;
 
 abstract class AbstractI18nFactory extends AbstractModelFactory
@@ -8,9 +10,9 @@ abstract class AbstractI18nFactory extends AbstractModelFactory
     protected array $usedLanguages = [];
 
     /**
-     * @param array $override
+     * @param array<mixed> $override
      *
-     * @return array
+     * @return array<string, string>
      */
     public function makeOneArray(array $override = []): array
     {
@@ -30,7 +32,9 @@ abstract class AbstractI18nFactory extends AbstractModelFactory
             }
         }
 
-        return parent::makeOneArray($override) + $languageIsoAppendix;
+        /** @var array<string, string> $makeArray */
+        $makeArray = parent::makeOneArray($override);
+        return $makeArray + $languageIsoAppendix;
     }
 
     /**
@@ -42,11 +46,11 @@ abstract class AbstractI18nFactory extends AbstractModelFactory
     }
 
     /**
-     * @param int   $quantity
-     * @param array $specificOverrides
-     * @param array $globalOverrides
+     * @param int          $quantity
+     * @param array<mixed> $specificOverrides
+     * @param array<mixed> $globalOverrides
      *
-     * @return array
+     * @return array<int, array<string, string>>
      */
     public function makeArray(int $quantity, array $specificOverrides = [], array $globalOverrides = []): array
     {
@@ -55,6 +59,9 @@ abstract class AbstractI18nFactory extends AbstractModelFactory
             $this->clearUsedLanguages();
         }
 
-        return parent::makeArray($quantity, $specificOverrides, $globalOverrides);
+        /** @var array<int, array<string, string>> $makeArray */
+        $makeArray = parent::makeArray($quantity, $specificOverrides, $globalOverrides);
+
+        return $makeArray;
     }
 }

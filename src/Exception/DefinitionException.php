@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Exception;
 
 use Jtl\Connector\Core\Definition\ErrorCode;
@@ -120,7 +122,7 @@ class DefinitionException extends \Exception
     }
 
     /**
-     * @return static
+     * @return self
      */
     public static function relationTypeCannotBeEmpty(): self
     {

@@ -1,14 +1,13 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\MustNotBeNullException;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
+use TypeError;
 
 /**
  * Global language model
@@ -26,7 +25,7 @@ class Language extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
-    protected $id = null;
+    protected Identity $id;
 
     /**
      * @var boolean Flag default language for frontend. Exact 1 language must be marked as default.
@@ -34,7 +33,7 @@ class Language extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("isDefault")
      * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
      */
-    protected $isDefault = false;
+    protected bool $isDefault = false;
 
     /**
      * @var string English term
@@ -42,7 +41,7 @@ class Language extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("nameEnglish")
      * @Serializer\Accessor(getter="getNameEnglish",setter="setNameEnglish")
      */
-    protected $nameEnglish = '';
+    protected string $nameEnglish = '';
 
     /**
      * @var string German term
@@ -50,7 +49,7 @@ class Language extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("nameGerman")
      * @Serializer\Accessor(getter="getNameGerman",setter="setNameGerman")
      */
-    protected $nameGerman = '';
+    protected string $nameGerman = '';
 
     /**
      * Constructor
@@ -62,10 +61,12 @@ class Language extends AbstractI18n implements IdentityInterface
 
     /**
      * @return Identity Unique language id
+     * @throws MustNotBeNullException
+     * @throws TypeError
      */
     public function getId(): Identity
     {
-        return $this->id;
+        return Validate::checkIdentityAndNotNull($this->id);
     }
 
     /**

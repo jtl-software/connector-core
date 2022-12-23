@@ -1,16 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Model\Generator;
 
 use Jtl\Connector\Core\Model\Specific;
+use RuntimeException;
 
 class SpecificFactory extends AbstractModelFactory
 {
     /**
-     * @return array<string, mixed>
+     * @return array{sort: 1, isGlobal: bool, type: mixed, i18ns: array<mixed[]>, values: array<mixed[]>}
+     * @throws RuntimeException
      */
     protected function makeFakeArray(): array
     {
+
         return [
             'sort'     => 1,
             'isGlobal' => $this->faker->boolean,

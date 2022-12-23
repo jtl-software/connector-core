@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Model\Statistic;
@@ -10,7 +12,7 @@ class StatisticEvent extends Event
     /**
      * @var Statistic
      */
-    protected $statistic;
+    protected Statistic $statistic;
 
     /**
      * StatisticEvent constructor.

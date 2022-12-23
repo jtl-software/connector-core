@@ -1,9 +1,6 @@
 <?php
 
-/**
- * @copyright 2010-2013 JTL-Software GmbH
- * @package   Jtl\Connector\Core\Utilities
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Definition;
 
@@ -24,6 +21,7 @@ final class RpcMethod
         IDENTIFY = 'connector.identify',
         FINISH   = 'connector.finish';
 
+    /** @var array<string, string> */
     protected static array $mappedMethods = [
         self::IDENTIFY            => 'core.connector.identify',
         self::FINISH              => 'core.connector.finish',
@@ -47,11 +45,11 @@ final class RpcMethod
     }
 
     /**
-     * @param $method
+     * @param string $method
      *
      * @return string
      */
-    public static function mapMethod($method): string
+    public static function mapMethod(string $method): string
     {
         return self::$mappedMethods[$method] ?? $method;
     }

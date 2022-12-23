@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -26,7 +22,7 @@ class ProductVariationValue extends AbstractIdentity
      * @Serializer\SerializedName("ean")
      * @Serializer\Accessor(getter="getEan",setter="setEan")
      */
-    protected $ean = '';
+    protected string $ean = '';
 
     /**
      * @var double Optional variation extra weight
@@ -34,7 +30,7 @@ class ProductVariationValue extends AbstractIdentity
      * @Serializer\SerializedName("extraWeight")
      * @Serializer\Accessor(getter="getExtraWeight",setter="setExtraWeight")
      */
-    protected $extraWeight = 0.0;
+    protected float $extraWeight = 0.0;
 
     /**
      * @var string Optional Stock Keeping Unit
@@ -42,7 +38,7 @@ class ProductVariationValue extends AbstractIdentity
      * @Serializer\SerializedName("sku")
      * @Serializer\Accessor(getter="getSku",setter="setSku")
      */
-    protected $sku = '';
+    protected string $sku = '';
 
     /**
      * @var integer Optional sort number
@@ -50,7 +46,7 @@ class ProductVariationValue extends AbstractIdentity
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
-    protected $sort = 0;
+    protected int $sort = 0;
 
     /**
      * @var double Optional stock level
@@ -58,7 +54,7 @@ class ProductVariationValue extends AbstractIdentity
      * @Serializer\SerializedName("stockLevel")
      * @Serializer\Accessor(getter="getStockLevel",setter="setStockLevel")
      */
-    protected $stockLevel = 0.0;
+    protected float $stockLevel = 0.0;
 
     /**
      * @var ProductVariationValueExtraCharge[]
@@ -66,7 +62,7 @@ class ProductVariationValue extends AbstractIdentity
      * @Serializer\SerializedName("extraCharges")
      * @Serializer\AccessType("reflection")
      */
-    protected $extraCharges = [];
+    protected array $extraCharges = [];
 
     /**
      * @var ProductVariationValueI18n[]
@@ -74,7 +70,7 @@ class ProductVariationValue extends AbstractIdentity
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = [];
+    protected array $i18ns = [];
 
     /**
      * @var ProductVariationValueInvisibility[]
@@ -82,7 +78,7 @@ class ProductVariationValue extends AbstractIdentity
      * @Serializer\SerializedName("invisibilities")
      * @Serializer\AccessType("reflection")
      */
-    protected $invisibilities = [];
+    protected array $invisibilities = [];
 
     /**
      * @return string
@@ -291,11 +287,11 @@ class ProductVariationValue extends AbstractIdentity
     }
 
     /**
-     * @param ProductVariationValueInvisibility $invisibilities
+     * @param ProductVariationValueInvisibility[] $invisibilities
      *
      * @return ProductVariationValue
      */
-    public function setInvisibilities(ProductVariationValueInvisibility $invisibilities): ProductVariationValue
+    public function setInvisibilities(array $invisibilities): ProductVariationValue
     {
         $this->invisibilities = $invisibilities;
 

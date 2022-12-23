@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Model\StatusChange;
@@ -10,7 +12,7 @@ class StatusChangeEvent extends Event
     /**
      * @var StatusChange
      */
-    protected $statusChange;
+    protected StatusChange $statusChange;
 
     /**
      * StatusChangeEvent constructor.

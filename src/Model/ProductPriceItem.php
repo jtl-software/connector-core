@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -26,7 +22,7 @@ class ProductPriceItem extends AbstractModel
      * @Serializer\SerializedName("netPrice")
      * @Serializer\Accessor(getter="getNetPrice",setter="setNetPrice")
      */
-    protected $netPrice = 0.0;
+    protected float $netPrice = 0.0;
 
     /**
      * @var integer Optional quantity to apply netPrice for. Default 1 for default price.
@@ -36,7 +32,7 @@ class ProductPriceItem extends AbstractModel
      * @Serializer\SerializedName("quantity")
      * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
      */
-    protected $quantity = 0;
+    protected int $quantity = 0;
 
     /**
      * @return double Price value (net)

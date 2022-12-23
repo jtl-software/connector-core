@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 class FeaturesSubscriberTest extends TestCase
 {
-    public function testSetNeedsFinishCallActive()
+    public function testSetNeedsFinishCallActive(): void
     {
         $subscriber = new FeaturesSubscriber();
         $features   = Features::create();
@@ -21,7 +21,7 @@ class FeaturesSubscriberTest extends TestCase
         $this->assertTrue($features->getFlag('needs_finish_call')->isActive());
     }
 
-    public function testSetNeedsFinishCallActiveOverrideInactive()
+    public function testSetNeedsFinishCallActiveOverrideInactive(): void
     {
         $subscriber = new FeaturesSubscriber();
         $features   = Features::create()->setFlag(new FeatureFlag('needs_finish_call'));
@@ -31,7 +31,7 @@ class FeaturesSubscriberTest extends TestCase
         $this->assertTrue($features->getFlag('needs_finish_call')->isActive());
     }
 
-    public function testGetSubscribedEvents()
+    public function testGetSubscribedEvents(): void
     {
         $expectedEventName = Event::createCoreEventName('Connector', 'features', 'after');
         $subscribedEvents  = FeaturesSubscriber::getSubscribedEvents();

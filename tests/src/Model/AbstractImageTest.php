@@ -20,7 +20,7 @@ class AbstractImageTest extends TestCase
      *
      * @throws DefinitionException
      */
-    public function testGetRelationType(AbstractImage $image, string $relationType)
+    public function testGetRelationType(AbstractImage $image, string $relationType): void
     {
         $this->assertEquals($relationType, $image->getRelationType());
     }
@@ -44,7 +44,7 @@ class AbstractImageTest extends TestCase
      * @param string $fileName
      * @param string $expectedExtension
      */
-    public function testGetExtension(string $fileName, string $expectedExtension)
+    public function testGetExtension(string $fileName, string $expectedExtension): void
     {
         $image = $this->getMockForAbstractClass(AbstractImage::class);
         $image->setFilename($fileName);

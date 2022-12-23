@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Event;
 
 use Symfony\Contracts\EventDispatcher\Event;
@@ -9,7 +11,7 @@ class BoolEvent extends Event
     /**
      * @var bool
      */
-    protected $result;
+    protected bool $result;
 
     /**
      * BoolEvent constructor.

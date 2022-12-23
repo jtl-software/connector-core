@@ -1,9 +1,6 @@
 <?php
 
-/**
- * @copyright 2010-2013 JTL-Software GmbH
- * @package   Jtl\Connector\Core\Application
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Checksum;
 
@@ -17,7 +14,7 @@ interface ChecksumLoaderInterface
      *
      * @return string
      */
-    public function read($endpointId, $type);
+    public function read($endpointId, $type): string;
 
     /**
      * Loads the checksum
@@ -28,7 +25,7 @@ interface ChecksumLoaderInterface
      *
      * @return boolean
      */
-    public function write($endpointId, $type, $checksum);
+    public function write($endpointId, $type, $checksum): bool;
 
     /**
      * Loads the checksum
@@ -38,5 +35,5 @@ interface ChecksumLoaderInterface
      *
      * @return boolean
      */
-    public function delete($endpointId, $type);
+    public function delete($endpointId, $type): bool;
 }

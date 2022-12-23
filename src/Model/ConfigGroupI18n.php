@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -26,7 +22,7 @@ class ConfigGroupI18n extends AbstractI18n
      * @Serializer\SerializedName("description")
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
-    protected $description = '';
+    protected string $description = '';
 
     /**
      * @var string Config group name
@@ -34,7 +30,7 @@ class ConfigGroupI18n extends AbstractI18n
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
-    protected $name = '';
+    protected string $name = '';
 
     /**
      * @return string Optional description (HTML)

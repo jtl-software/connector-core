@@ -1,14 +1,12 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\MustNotBeNullException;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
 
 /**
  * Specify productVariationValue to hide from specific customerGroup.
@@ -26,7 +24,7 @@ class ProductVariationValueInvisibility extends AbstractModel
      * @Serializer\SerializedName("customerGroupId")
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
-    protected $customerGroupId = null;
+    protected Identity $customerGroupId;
 
     /**
      * Constructor
@@ -38,10 +36,11 @@ class ProductVariationValueInvisibility extends AbstractModel
 
     /**
      * @return Identity Reference to customerGroup
+     * @throws MustNotBeNullException|\TypeError
      */
     public function getCustomerGroupId(): Identity
     {
-        return $this->customerGroupId;
+        return Validate::checkIdentityAndNotNull($this->customerGroupId);
     }
 
     /**

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Definition;
 
 use Jtl\Connector\Core\Exception\DefinitionException;
@@ -66,6 +68,7 @@ final class Model
      */
     protected static ?array $models = null;
 
+    /** @var array<string, int> */
     protected static array $mappings = [
         self::CATEGORY                      => IdentityType::CATEGORY,
         self::CATEGORY_ATTRIBUTE            => IdentityType::CATEGORY_ATTRIBUTE,
@@ -111,6 +114,7 @@ final class Model
         self::WAREHOUSE                     => IdentityType::WAREHOUSE,
     ];
 
+    /** @var array<string, array<string, int>> */
     protected static array $propertyMappings = [
         self::CATEGORY                             => [
             'id'               => IdentityType::CATEGORY,
@@ -319,13 +323,16 @@ final class Model
     public static function getModels(): array
     {
         if (\is_null(self::$models)) {
-            self::$models = \array_filter(
+            /** @var array<string, string> $models */
+            $models = \array_filter(
                 (new \ReflectionClass(self::class))->getConstants(),
-                function (string $constantValue, $constantName) {
+                // @phpstan-ignore-next-line
+                static function (string $constantValue, $constantName) {
                     return $constantValue !== self::MODEL_NAMESPACE;
                 },
                 \ARRAY_FILTER_USE_BOTH
             );
+            self::$models = $models;
         }
 
         return self::$models;
@@ -353,11 +360,11 @@ final class Model
             throw DefinitionException::unknownIdentityType($type);
         }
 
-        $type = \array_search($type, self::$mappings, true);
-        if ($type === false) {
-            throw DefinitionException::identityTypeMappingNotExists($type);
+        if (($foundType = \array_search($type, self::$mappings, true)) === false) {
+            throw DefinitionException::identityTypeMappingNotExists(0);
         }
-        return $type;
+
+        return $foundType;
     }
 
     /**

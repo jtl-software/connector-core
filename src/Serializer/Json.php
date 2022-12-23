@@ -1,9 +1,6 @@
 <?php
 
-/**
- * @copyright JTL-Software GmbH
- * @package   Jtl\Connector\Core\Serializer
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Serializer;
 
@@ -17,14 +14,22 @@ use Jtl\Connector\Core\Exception\JsonException;
  */
 class Json
 {
-    public static function encode($object, $pretty = false)
+    /**
+     * @param mixed $object
+     * @param bool  $pretty
+     *
+     * @return false|string
+     * @throws JsonException
+     * @throws \JsonException
+     */
+    public static function encode($object, bool $pretty = false)
     {
         $options = 0;
         if ($pretty) {
             $options = \JSON_PRETTY_PRINT;
         }
 
-        $json = \json_encode($object, $options);
+        $json = \json_encode($object, \JSON_THROW_ON_ERROR | $options);
 
         if (\json_last_error() !== \JSON_ERROR_NONE) {
             throw JsonException::encoding(\json_last_error_msg());
@@ -33,13 +38,21 @@ class Json
         return $json;
     }
 
-    public static function decode($string, $assoc = false)
+    /**
+     * @param string $string
+     * @param bool   $assoc
+     *
+     * @return mixed
+     * @throws JsonException
+     * @throws \InvalidArgumentException|\JsonException
+     */
+    public static function decode(string $string, bool $assoc = false)
     {
-        if (empty($string) || !\is_string($string)) {
+        if ($string === '') {
             throw new \InvalidArgumentException(\sprintf('Invalid parameter "%s"', \var_export($string, true)));
         }
 
-        $object = \json_decode($string, $assoc);
+        $object = \json_decode($string, $assoc, 512, \JSON_THROW_ON_ERROR);
         if (\json_last_error() !== \JSON_ERROR_NONE) {
             throw JsonException::decoding(\json_last_error_msg(), $string);
         }

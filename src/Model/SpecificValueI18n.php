@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -26,7 +22,7 @@ class SpecificValueI18n extends AbstractI18n
      * @Serializer\SerializedName("description")
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
-    protected $description = '';
+    protected string $description = '';
 
     /**
      * @var string Optional localized meta description value
@@ -34,7 +30,7 @@ class SpecificValueI18n extends AbstractI18n
      * @Serializer\SerializedName("metaDescription")
      * @Serializer\Accessor(getter="getMetaDescription",setter="setMetaDescription")
      */
-    protected $metaDescription = '';
+    protected string $metaDescription = '';
 
     /**
      * @var string Optional localized meta keywords value
@@ -42,7 +38,7 @@ class SpecificValueI18n extends AbstractI18n
      * @Serializer\SerializedName("metaKeywords")
      * @Serializer\Accessor(getter="getMetaKeywords",setter="setMetaKeywords")
      */
-    protected $metaKeywords = '';
+    protected string $metaKeywords = '';
 
     /**
      * @var string Optional localized title tag value
@@ -50,7 +46,7 @@ class SpecificValueI18n extends AbstractI18n
      * @Serializer\SerializedName("titleTag")
      * @Serializer\Accessor(getter="getTitleTag",setter="setTitleTag")
      */
-    protected $titleTag = '';
+    protected string $titleTag = '';
 
     /**
      * @var string Optional localized URL path
@@ -58,7 +54,7 @@ class SpecificValueI18n extends AbstractI18n
      * @Serializer\SerializedName("urlPath")
      * @Serializer\Accessor(getter="getUrlPath",setter="setUrlPath")
      */
-    protected $urlPath = '';
+    protected string $urlPath = '';
 
     /**
      * @var string Localized value
@@ -66,7 +62,7 @@ class SpecificValueI18n extends AbstractI18n
      * @Serializer\SerializedName("value")
      * @Serializer\Accessor(getter="getValue",setter="setValue")
      */
-    protected $value = '';
+    protected string $value = '';
 
     /**
      * @return string Optional localized description

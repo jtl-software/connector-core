@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -26,7 +22,7 @@ class CategoryCustomerGroup extends AbstractModel
      * @Serializer\SerializedName("customerGroupId")
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
-    protected $customerGroupId = null;
+    protected Identity $customerGroupId;
 
     /**
      * @var double Optional discount on products in specified categoryId for  customerGroupId
@@ -34,7 +30,7 @@ class CategoryCustomerGroup extends AbstractModel
      * @Serializer\SerializedName("discount")
      * @Serializer\Accessor(getter="getDiscount",setter="setDiscount")
      */
-    protected $discount = 0.0;
+    protected float $discount = 0.0;
 
     /**
      * Constructor

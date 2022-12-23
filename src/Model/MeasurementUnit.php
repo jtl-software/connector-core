@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -26,7 +22,7 @@ class MeasurementUnit extends AbstractIdentity
      * @Serializer\SerializedName("code")
      * @Serializer\Accessor(getter="getCode",setter="setCode")
      */
-    protected $code = '';
+    protected string $code = '';
 
     /**
      * @var string Synonym e.g. 'ml'
@@ -34,7 +30,7 @@ class MeasurementUnit extends AbstractIdentity
      * @Serializer\SerializedName("displayCode")
      * @Serializer\Accessor(getter="getDisplayCode",setter="setDisplayCode")
      */
-    protected $displayCode = '';
+    protected string $displayCode = '';
 
     /**
      * @var MeasurementUnitI18n[]
@@ -42,7 +38,7 @@ class MeasurementUnit extends AbstractIdentity
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = [];
+    protected array $i18ns = [];
 
     /**
      * @return string Optional UCUM-Code, see  http://unitsofmeasure.org/

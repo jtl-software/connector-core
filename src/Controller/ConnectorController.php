@@ -1,13 +1,10 @@
 <?php
 
-/**
- *
- * @copyright 2010-2013 JTL-Software GmbH
- * @package   Jtl\Connector\Core\Application
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Controller;
 
+use InvalidArgumentException;
 use Jawira\CaseConverter\CaseConverterException;
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
@@ -15,9 +12,9 @@ use Jtl\Connector\Core\Checksum\ChecksumInterface;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Definition\RelationType;
-use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\AuthenticationException;
 use Jtl\Connector\Core\Exception\DefinitionException;
+use Jtl\Connector\Core\Exception\JsonException as CoreJsonException;
 use Jtl\Connector\Core\Exception\MissingRequirementException;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Linker\IdentityLinker;
@@ -34,6 +31,7 @@ use Jtl\Connector\Core\Utilities\Str;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use RuntimeException;
 
 /**
  * Base Config Controller
@@ -75,23 +73,23 @@ class ConnectorController implements LoggerAwareInterface
 
 
     /**
-     * @param null $params
-     *
      * @return bool
      * @throws MissingRequirementException
      */
-    public function init($params = null)
+    public function init(): bool
     {
         Check::run();
+
         return true;
     }
 
     /**
-     * @param null $params
-     *
      * @return Features
+     * @throws CoreJsonException
+     * @throws InvalidArgumentException
+     * @throws \JsonException
      */
-    public function features($params = null)
+    public function features(): Features
     {
         $features = $this->fetchFeaturesData();
 
@@ -109,20 +107,31 @@ class ConnectorController implements LoggerAwareInterface
     }
 
     /**
-     * @return array
+     * @return array<mixed>
+     * @throws CoreJsonException
+     * @throws InvalidArgumentException
+     * @throws \JsonException
+     * @throws RuntimeException
      */
     protected function fetchFeaturesData(): array
     {
-        return Json::decode(\file_get_contents($this->featuresPath), true);
+        if (($fileContent = \file_get_contents($this->featuresPath)) === false) {
+            throw new \RuntimeException('$fileContent must not be false.');
+        }
+        if (!\is_array(($jsonDecode = Json::decode($fileContent, true)))) {
+            throw new \RuntimeException('JsonDecode must return an array.');
+        }
+
+        return $jsonDecode;
     }
 
     /**
      * @param Ack $ack
      *
      * @return bool
-     * @throws DefinitionException
      * @throws CaseConverterException
-     * @throws \ReflectionException
+     * @throws DefinitionException
+     * @throws InvalidArgumentException
      */
     public function ack(Ack $ack): bool
     {
@@ -164,10 +173,9 @@ class ConnectorController implements LoggerAwareInterface
      * @param Authentication $auth
      *
      * @return Session
-     * @throws ApplicationException
      * @throws AuthenticationException
      */
-    public function auth(Authentication $auth)
+    public function auth(Authentication $auth): Session
     {
         if (empty($auth->getToken())) {
             throw AuthenticationException::tokenMissing();
@@ -182,13 +190,8 @@ class ConnectorController implements LoggerAwareInterface
             throw AuthenticationException::failed();
         }
 
-        if ($this->sessionHandler === null) {
-            $this->logger->error('Could not get any Session');
-            throw ApplicationException::noSession();
-        }
-
         return (new Session())
-            ->setSessionId(\session_id())
+            ->setSessionId(\session_id()) // @phpstan-ignore-line
             ->setLifetime((int)\ini_get('session.gc_maxlifetime'));
     }
 
@@ -199,13 +202,13 @@ class ConnectorController implements LoggerAwareInterface
      */
     public function identify(ConnectorInterface $endpointConnector): ConnectorIdentification
     {
-        $returnBytes = function ($data): int {
+        $returnBytes = static function ($data): int {
             $data = \trim($data);
             $len  = \strlen($data);
             if ($data === '-1') {
                 return -1;
             }
-            $value = \substr($data, 0, $len - 1);
+            $value = (int)\substr($data, 0, $len - 1);
             $unit  = \strtolower(\substr($data, $len - 1));
             switch ($unit) {
                 case 'g':
@@ -215,6 +218,7 @@ class ConnectorController implements LoggerAwareInterface
                     $value /= 1024;
                     break;
             }
+
             return (int)\round($value);
         };
 
@@ -240,6 +244,7 @@ class ConnectorController implements LoggerAwareInterface
         if (\session_status() === \PHP_SESSION_ACTIVE) {
             \session_destroy();
         }
+
         return true;
     }
 
@@ -248,14 +253,14 @@ class ConnectorController implements LoggerAwareInterface
      *
      * @return bool
      * @throws DefinitionException
-     * @throws \ReflectionException
+     * @throws InvalidArgumentException
      */
-    public function clear(Identities $identities = null)
+    public function clear(?Identities $identities = null): bool
     {
-        if (!\is_null($identities) && \count($identities->getIdentities()) > 0) {
-            $identities = $identities->getIdentities();
-            foreach ($identities as $relationType => $relationIdentities) {
-                if (empty($relationIdentities)) {
+        if ($identities !== null && \count($identities->getIdentities()) > 0) {
+            $identitiesArr = $identities->getIdentities();
+            foreach ($identitiesArr as $relationType => $relationIdentities) {
+                if ($relationIdentities === null) { // @phpstan-ignore-line
                     $this->linker->clear(RelationType::getIdentityType($relationType));
                 } elseif (\is_array($relationIdentities)) {
                     foreach ($relationIdentities as $identity) {

@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -26,7 +22,7 @@ class FileUpload extends AbstractIdentity
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
-    protected $productId = null;
+    protected Identity $productId;
 
     /**
      * @var string
@@ -34,7 +30,7 @@ class FileUpload extends AbstractIdentity
      * @Serializer\SerializedName("fileType")
      * @Serializer\Accessor(getter="getFileType",setter="setFileType")
      */
-    protected $fileType = '';
+    protected string $fileType = '';
 
     /**
      * @var boolean
@@ -42,7 +38,7 @@ class FileUpload extends AbstractIdentity
      * @Serializer\SerializedName("isRequired")
      * @Serializer\Accessor(getter="getIsRequired",setter="setIsRequired")
      */
-    protected $isRequired = false;
+    protected bool $isRequired = false;
 
     /**
      * @var FileUploadI18n[]
@@ -50,7 +46,7 @@ class FileUpload extends AbstractIdentity
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = [];
+    protected array $i18ns = [];
 
     /**
      * Constructor.

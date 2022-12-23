@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -26,15 +22,15 @@ class DeliveryNote extends AbstractIdentity
      * @Serializer\SerializedName("customerOrderId")
      * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
      */
-    protected $customerOrderId = null;
+    protected Identity $customerOrderId;
 
     /**
-     * @var \DateTimeInterface Creation date
+     * @var \DateTimeInterface|null Creation date
      * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("creationDate")
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
-    protected $creationDate = null;
+    protected ?\DateTimeInterface $creationDate = null;
 
     /**
      * @var boolean Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
@@ -42,7 +38,7 @@ class DeliveryNote extends AbstractIdentity
      * @Serializer\SerializedName("isFulfillment")
      * @Serializer\Accessor(getter="getIsFulfillment",setter="setIsFulfillment")
      */
-    protected $isFulfillment = false;
+    protected bool $isFulfillment = false;
 
     /**
      * @var string Optional text note
@@ -50,7 +46,7 @@ class DeliveryNote extends AbstractIdentity
      * @Serializer\SerializedName("note")
      * @Serializer\Accessor(getter="getNote",setter="setNote")
      */
-    protected $note = '';
+    protected string $note = '';
 
     /**
      * @var DeliveryNoteItem[]
@@ -58,7 +54,7 @@ class DeliveryNote extends AbstractIdentity
      * @Serializer\SerializedName("items")
      * @Serializer\AccessType("reflection")
      */
-    protected $items = [];
+    protected array $items = [];
 
     /**
      * @var DeliveryNoteTrackingList[]
@@ -66,7 +62,7 @@ class DeliveryNote extends AbstractIdentity
      * @Serializer\SerializedName("trackingLists")
      * @Serializer\AccessType("reflection")
      */
-    protected $trackingLists = [];
+    protected array $trackingLists = [];
 
     /**
      * Constructor.
@@ -245,7 +241,7 @@ class DeliveryNote extends AbstractIdentity
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getIdentificationStrings(): array
     {

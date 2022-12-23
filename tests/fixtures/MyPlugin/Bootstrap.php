@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MyPlugin;
 
 use DI\Container;
@@ -9,8 +11,11 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class Bootstrap implements PluginInterface
 {
-    public function registerListener(ConfigInterface $config, Container $container, EventDispatcher $eventDispatcher)
-    {
+    public function registerListener(
+        ConfigInterface $config,
+        Container       $container,
+        EventDispatcher $eventDispatcher
+    ): void {
         // TODO: Implement registerListener() method.
     }
 }

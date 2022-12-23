@@ -1,14 +1,13 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\MustNotBeNullException;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
+use TypeError;
 
 /**
  * @access     public
@@ -24,7 +23,7 @@ class ProductStockLevel extends AbstractModel
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
-    protected $productId = null;
+    protected Identity $productId;
 
     /**
      * @var double
@@ -32,7 +31,7 @@ class ProductStockLevel extends AbstractModel
      * @Serializer\SerializedName("stockLevel")
      * @Serializer\Accessor(getter="getStockLevel",setter="setStockLevel")
      */
-    protected $stockLevel = 0.0;
+    protected float $stockLevel = 0.0;
 
     /**
      * ProductStockLevel constructor.
@@ -44,10 +43,12 @@ class ProductStockLevel extends AbstractModel
 
     /**
      * @return Identity
+     * @throws MustNotBeNullException
+     * @throws TypeError
      */
     public function getProductId(): Identity
     {
-        return $this->productId;
+        return Validate::checkIdentityAndNotNull($this->productId);
     }
 
     /**

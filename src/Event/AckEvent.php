@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Model\Ack;
@@ -10,7 +12,7 @@ class AckEvent extends Event
     /**
      * @var Ack
      */
-    protected $ack;
+    protected Ack $ack;
 
     /**
      * AckEvent constructor.

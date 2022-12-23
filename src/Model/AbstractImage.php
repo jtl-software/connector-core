@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Exception\DefinitionException;
+use RuntimeException;
 
 /**
  * @access     public
@@ -33,7 +36,7 @@ abstract class AbstractImage extends AbstractIdentity
      * @Serializer\SerializedName("filename")
      * @Serializer\Accessor(getter="getFilename",setter="setFilename")
      */
-    protected $filename = '';
+    protected string $filename = '';
 
     /**
      * @var Identity
@@ -41,7 +44,7 @@ abstract class AbstractImage extends AbstractIdentity
      * @Serializer\SerializedName("foreignKey")
      * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
      */
-    protected $foreignKey = null;
+    protected Identity $foreignKey;
 
     /**
      * @var ImageI18n[]
@@ -49,7 +52,7 @@ abstract class AbstractImage extends AbstractIdentity
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = [];
+    protected array $i18ns = [];
 
     /**
      * @var string
@@ -57,7 +60,7 @@ abstract class AbstractImage extends AbstractIdentity
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
-    protected $name = '';
+    protected string $name = '';
 
     /**
      * @var string
@@ -65,7 +68,7 @@ abstract class AbstractImage extends AbstractIdentity
      * @Serializer\SerializedName("remoteUrl")
      * @Serializer\Accessor(getter="getRemoteUrl",setter="setRemoteUrl")
      */
-    protected $remoteUrl = '';
+    protected string $remoteUrl = '';
 
     /**
      * @var integer
@@ -73,14 +76,14 @@ abstract class AbstractImage extends AbstractIdentity
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
-    protected $sort = 1;
+    protected int $sort = 1;
 
     /**
-     * @var \ReflectionClass
+     * @var \ReflectionClass<self>
      *
      * @Serializer\Exclude
      */
-    protected $reflectionClass;
+    protected \ReflectionClass $reflectionClass;
 
     /**
      * AbstractImage constructor.
@@ -247,8 +250,9 @@ abstract class AbstractImage extends AbstractIdentity
     }
 
     /**
-     * @return array
+     * @return string[]
      * @throws DefinitionException
+     * @throws RuntimeException
      */
     public function getIdentificationStrings(): array
     {
@@ -267,11 +271,16 @@ abstract class AbstractImage extends AbstractIdentity
     /**
      * @return string
      * @throws DefinitionException
+     * @throws RuntimeException
      */
     public function getRelationType(): string
     {
         $modelName = $this->reflectionClass->getShortName();
         $imagePos  = \strpos($modelName, 'Image');
+        if ($imagePos === false) {
+            throw new \RuntimeException('$imagePos must not be false!');
+        }
+
         return Model::getRelationType(\substr($modelName, 0, $imagePos));
     }
 }

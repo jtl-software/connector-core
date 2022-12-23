@@ -1,9 +1,6 @@
 <?php
 
-/**
- * @copyright 2010-2013 JTL-Software GmbH
- * @package   Jtl\Connector\Core\Payment
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Definition;
 
@@ -100,7 +97,7 @@ final class PaymentType
     /**
      * @var null|string[]
      */
-    protected static $types = null;
+    protected static ?array $types = null;
 
     /**
      * @param string $type
@@ -113,12 +110,14 @@ final class PaymentType
     }
 
     /**
-     * @return integer[]
+     * @return array<string, string>
      */
     public static function getTypes(): array
     {
         if (\is_null(self::$types)) {
-            self::$types = (new \ReflectionClass(self::class))->getConstants();
+            /** @var array<string, string> $types */
+            $types       = (new \ReflectionClass(self::class))->getConstants();
+            self::$types = $types;
         }
 
         return self::$types;

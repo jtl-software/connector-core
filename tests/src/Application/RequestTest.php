@@ -14,7 +14,7 @@ class RequestTest extends TestCase
     /**
      *
      */
-    public function testCreateFromStatic()
+    public function testCreateFromStatic(): void
     {
         $controller = 'FooBarController';
         $action     = 'pull';

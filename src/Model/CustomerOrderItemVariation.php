@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -26,7 +22,7 @@ class CustomerOrderItemVariation extends AbstractIdentity
      * @Serializer\SerializedName("productVariationId")
      * @Serializer\Accessor(getter="getProductVariationId",setter="setProductVariationId")
      */
-    protected $productVariationId = null;
+    protected Identity $productVariationId;
 
     /**
      * @var Identity Reference to productVariationValue
@@ -34,7 +30,7 @@ class CustomerOrderItemVariation extends AbstractIdentity
      * @Serializer\SerializedName("productVariationValueId")
      * @Serializer\Accessor(getter="getProductVariationValueId",setter="setProductVariationValueId")
      */
-    protected $productVariationValueId = null;
+    protected Identity $productVariationValueId;
 
     /**
      * @var string Optional custom text value for variation
@@ -42,7 +38,7 @@ class CustomerOrderItemVariation extends AbstractIdentity
      * @Serializer\SerializedName("freeField")
      * @Serializer\Accessor(getter="getFreeField",setter="setFreeField")
      */
-    protected $freeField = '';
+    protected string $freeField = '';
 
     /**
      * @var string Variation name e.g. 'color'
@@ -50,7 +46,7 @@ class CustomerOrderItemVariation extends AbstractIdentity
      * @Serializer\SerializedName("productVariationName")
      * @Serializer\Accessor(getter="getProductVariationName",setter="setProductVariationName")
      */
-    protected $productVariationName = '';
+    protected string $productVariationName = '';
 
     /**
      * @var double
@@ -58,7 +54,7 @@ class CustomerOrderItemVariation extends AbstractIdentity
      * @Serializer\SerializedName("surcharge")
      * @Serializer\Accessor(getter="getSurcharge",setter="setSurcharge")
      */
-    protected $surcharge = 0.0;
+    protected float $surcharge = 0.0;
 
     /**
      * @var string
@@ -66,7 +62,7 @@ class CustomerOrderItemVariation extends AbstractIdentity
      * @Serializer\SerializedName("valueName")
      * @Serializer\Accessor(getter="getValueName",setter="setValueName")
      */
-    protected $valueName = '';
+    protected string $valueName = '';
 
     /**
      * Constructor.

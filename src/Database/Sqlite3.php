@@ -1,10 +1,6 @@
 <?php
 
-/**
- *
- * @copyright 2010-2013 JTL-Software GmbH
- * @package   Jtl\Connector\Core\Database
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Database;
 
@@ -12,6 +8,8 @@ use Jtl\Connector\Core\Exception\DatabaseException;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+
+// @phpstan-ignore-file
 
 /**
  * Sqlite 3 Database Class
@@ -32,44 +30,42 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
      *
      * @var string
      */
-    public $location;
+    public string $location;
     /**
      * Optional flags used to determine how to open the SQLite database.
      *
      * @var integer
      */
-    public $mode;
+    public int $mode;
     /**
      * Database connection state
      *
      * @var bool
      */
-    protected $isConnected = false;
+    protected bool $isConnected = false;
     /**
      * Sqlite 3 Database object
      *
      * @var \SQLite3
      */
-    protected $db;
+    protected \SQLite3 $db;
     /**
      * @var LoggerInterface
      */
-    protected $logger;
+    protected LoggerInterface $logger;
 
     /**
-     * (non-PHPdoc)
-     *
-     * @throws Jtl\Connector\Core\Exception\DatabaseException|DatabaseException
-     * @see Jtl\Connector\Core\Database\DatabaseInterface::connect()
+     * @inheritDoc
+     * @throws DatabaseException
      */
-    public function connect(array $options = null)
+    public function connect(array $options = null): void
     {
         $this->setOptions($options);
-        if (!\is_string($this->location) || $this->location === '') {
+        if (isset($this->location) && $this->location === '') {
             throw new DatabaseException('Wrong type or empty location');
         }
 
-        if ($this->mode === null) {
+        if (isset($this->mode)) {
             $this->mode = \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE | self::SQLITE3_OPEN_SHAREDCACHE;
         }
 
@@ -90,13 +86,13 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
     /**
      * Set Options
      *
-     * @param array|null $options
+     * @param array<string, mixed>|null $options
      */
-    public function setOptions(array $options = null)
+    public function setOptions(array $options = null): void
     {
         if (\is_array($options)) {
             // Location
-            if (isset($options['location']) && \is_string($options['location']) && \strlen($options['location']) > 0) {
+            if (isset($options['location']) && \is_string($options['location']) && $options['location'] !== '') {
                 $this->location = $options['location'];
             }
 
@@ -118,24 +114,27 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
     }
 
     /**
-     * (non-PHPdoc)
-     *
+     * @return bool
      * @see Jtl\Connector\Core\Database\DatabaseInterface::close()
      */
-    public function close()
+    public function close(): bool
     {
         return $this->db->close();
     }
 
     /**
-     * (non-PHPdoc)
+     * @param $query
      *
+     * @return array<int, array<string, mixed>>|bool|int|null
+     * @throws \RuntimeException
      * @throws \Throwable
-     * @see Jtl\Connector\Core\Database\DatabaseInterface::query()
      */
     public function query($query)
     {
-        $command = \substr($query, 0, \strpos($query, ' '));
+        if (($length = \strpos($query, ' ')) === false) {
+            throw new \RuntimeException('$length must not be false.');
+        }
+        $command = \substr($query, 0, $length);
 
         switch (\strtoupper($command)) {
             case 'SELECT':
@@ -153,7 +152,7 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
     /**
      * @param string $query
      *
-     * @return array|null
+     * @return array<int, array<string, mixed>>|null
      * @throws \Throwable
      */
     public function fetch(string $query): ?array
@@ -239,16 +238,18 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
     /**
      * @return bool
      */
-    public function isConnected()
+    public function isConnected(): bool
     {
         return $this->isConnected;
     }
 
     /**
-     * (non-PHPdoc)
+     * @param string $query
+     *
+     * @return string
      * @see Jtl\Connector\Core\Database\DatabaseInterface::escapeString()
      */
-    public function escapeString($query)
+    public function escapeString(string $query): string
     {
         return \Sqlite3::escapeString($query);
     }

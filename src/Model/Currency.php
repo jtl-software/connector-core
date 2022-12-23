@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -27,7 +23,7 @@ class Currency extends AbstractIdentity
      * @Serializer\SerializedName("delimiterCent")
      * @Serializer\Accessor(getter="getDelimiterCent",setter="setDelimiterCent")
      */
-    protected $delimiterCent = '';
+    protected string $delimiterCent = '';
 
     /**
      * @var string Optional delimiter char for thousand. Default=".".
@@ -36,7 +32,7 @@ class Currency extends AbstractIdentity
      * @Serializer\SerializedName("delimiterThousand")
      * @Serializer\Accessor(getter="getDelimiterThousand",setter="setDelimiterThousand")
      */
-    protected $delimiterThousand = '';
+    protected string $delimiterThousand = '';
 
     /**
      * @var double Optional conversion factor to default currency. Default is 1 (equals default currency)
@@ -44,7 +40,7 @@ class Currency extends AbstractIdentity
      * @Serializer\SerializedName("factor")
      * @Serializer\Accessor(getter="getFactor",setter="setFactor")
      */
-    protected $factor = 0.0;
+    protected float $factor = 0.0;
 
     /**
      * @var boolean Optional: Display currency before or after value.
@@ -53,7 +49,7 @@ class Currency extends AbstractIdentity
      * @Serializer\SerializedName("hasCurrencySignBeforeValue")
      * @Serializer\Accessor(getter="getHasCurrencySignBeforeValue",setter="setHasCurrencySignBeforeValue")
      */
-    protected $hasCurrencySignBeforeValue = false;
+    protected bool $hasCurrencySignBeforeValue = false;
 
     /**
      * @var boolean Optional: Flag default currency. True, if this is the default currency.
@@ -62,7 +58,7 @@ class Currency extends AbstractIdentity
      * @Serializer\SerializedName("isDefault")
      * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
      */
-    protected $isDefault = false;
+    protected bool $isDefault = false;
 
     /**
      * @var string
@@ -70,7 +66,7 @@ class Currency extends AbstractIdentity
      * @Serializer\SerializedName("iso")
      * @Serializer\Accessor(getter="getIso",setter="setIso")
      */
-    protected $iso = '';
+    protected string $iso = '';
 
     /**
      * @var string Currency name
@@ -78,7 +74,7 @@ class Currency extends AbstractIdentity
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
-    protected $name = '';
+    protected string $name = '';
 
     /**
      * @var string Optional HTML name e.g. "&euro;"
@@ -86,7 +82,7 @@ class Currency extends AbstractIdentity
      * @Serializer\SerializedName("nameHtml")
      * @Serializer\Accessor(getter="getNameHtml",setter="setNameHtml")
      */
-    protected $nameHtml = '';
+    protected string $nameHtml = '';
 
     /**
      * @return string Optional delimiter char for cent, default=",".

@@ -17,7 +17,7 @@ class EventTest extends TestCase
     /**
      *
      */
-    public function testIsMoment()
+    public function testIsMoment(): void
     {
         $this->assertTrue(Event::isMoment('before'));
         $this->assertTrue(Event::isMoment('after'));
@@ -29,7 +29,7 @@ class EventTest extends TestCase
     /**
      * @throws DefinitionException
      */
-    public function testCreateRpcEventNameInvalidMoment()
+    public function testCreateRpcEventNameInvalidMoment(): void
     {
         $moment = 'justAfter';
 
@@ -41,7 +41,7 @@ class EventTest extends TestCase
     /**
      * @throws DefinitionException
      */
-    public function testCreateRpcEventNameWithCorrectMoment()
+    public function testCreateRpcEventNameWithCorrectMoment(): void
     {
         $eventName = Event::createRpcEventName(Event::AFTER);
         $this->assertSame('rpc.after', $eventName);
@@ -51,7 +51,7 @@ class EventTest extends TestCase
      * @throws DefinitionException
      * @throws \ReflectionException
      */
-    public function testCreateHandleEventName()
+    public function testCreateHandleEventName(): void
     {
         $eventName = Event::createHandleEventName(Controller::PRODUCT, Action::PUSH, Event::AFTER);
 
@@ -62,7 +62,7 @@ class EventTest extends TestCase
      * @throws DefinitionException
      * @throws \ReflectionException
      */
-    public function testCreateCoreEventName()
+    public function testCreateCoreEventName(): void
     {
         $eventName = Event::createCoreEventName(Controller::PRODUCT, Action::PUSH, Event::AFTER);
 
@@ -80,7 +80,7 @@ class EventTest extends TestCase
      * @throws DefinitionException
      * @throws \ReflectionException
      */
-    public function testCreateEventNameInvalidParams($controller, $action, $moment, $expectedException)
+    public function testCreateEventNameInvalidParams($controller, $action, $moment, $expectedException): void
     {
         $this->expectExceptionObject($expectedException);
 
@@ -103,7 +103,7 @@ class EventTest extends TestCase
      * @throws DefinitionException
      * @throws \ReflectionException
      */
-    public function createEventNameCorrectParams()
+    public function createEventNameCorrectParams(): void
     {
         $eventName = Event::createEventName(Controller::PRODUCT, Action::PUSH, Event::BEFORE);
 

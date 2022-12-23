@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Application;
 
 class Request
@@ -23,14 +25,17 @@ class Request
         $this->params     = $params;
     }
 
+    //TODO: brauchts das überhaupt noch? raus statt deprecated?
+
     /**
      * @param string  $controller
      * @param string  $action
      * @param mixed[] $params
      *
      * @return Request
+     * @deprecated
      */
-    public static function create(string $controller, string $action, array $params): Request
+    public static function create(string $controller, string $action, array $params): self
     {
         return new self($controller, $action, $params);
     }
@@ -64,7 +69,7 @@ class Request
      *
      * @return Request
      */
-    public function setParams(array $params): Request
+    public function setParams(array $params): self
     {
         $this->params = $params;
         return $this;

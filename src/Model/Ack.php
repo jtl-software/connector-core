@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2014 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Ack
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -27,14 +23,14 @@ class Ack extends Identities
      * @Serializer\SerializedName("checksums")
      * @Serializer\AccessType("reflection")
      */
-    protected $checksums = [];
+    protected array $checksums = [];
 
     /**
-     * @param ChecksumInterface $checksum
+     * @param Checksum $checksum
      *
      * @return Ack
      */
-    public function addChecksum(ChecksumInterface $checksum): Ack
+    public function addChecksum(Checksum $checksum): Ack
     {
         $this->checksums[] = $checksum;
 

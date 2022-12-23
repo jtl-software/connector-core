@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
@@ -12,7 +14,7 @@ abstract class AbstractOrderAddress extends AbstractIdentity
      * @Serializer\SerializedName("city")
      * @Serializer\Accessor(getter="getCity",setter="setCity")
      */
-    protected $city = '';
+    protected string $city = '';
 
     /**
      * @var string Company name
@@ -20,7 +22,7 @@ abstract class AbstractOrderAddress extends AbstractIdentity
      * @Serializer\SerializedName("company")
      * @Serializer\Accessor(getter="getCompany",setter="setCompany")
      */
-    protected $company = '';
+    protected string $company = '';
 
     /**
      * @var string Country ISO 3166-2 (2 letter Uppercase)
@@ -28,7 +30,7 @@ abstract class AbstractOrderAddress extends AbstractIdentity
      * @Serializer\SerializedName("countryIso")
      * @Serializer\Accessor(getter="getCountryIso",setter="setCountryIso")
      */
-    protected $countryIso = '';
+    protected string $countryIso = '';
 
     /**
      * @var string Delivery instruction e.g. "c/o John Doe"
@@ -36,7 +38,7 @@ abstract class AbstractOrderAddress extends AbstractIdentity
      * @Serializer\SerializedName("deliveryInstruction")
      * @Serializer\Accessor(getter="getDeliveryInstruction",setter="setDeliveryInstruction")
      */
-    protected $deliveryInstruction = '';
+    protected string $deliveryInstruction = '';
 
     /**
      * @var string E-Mail address
@@ -44,7 +46,7 @@ abstract class AbstractOrderAddress extends AbstractIdentity
      * @Serializer\SerializedName("eMail")
      * @Serializer\Accessor(getter="getEMail",setter="setEMail")
      */
-    protected $eMail = '';
+    protected string $eMail = '';
 
     /**
      * @var string Extra address line e.g. 'Apartment 2.5'
@@ -52,7 +54,7 @@ abstract class AbstractOrderAddress extends AbstractIdentity
      * @Serializer\SerializedName("extraAddressLine")
      * @Serializer\Accessor(getter="getExtraAddressLine",setter="setExtraAddressLine")
      */
-    protected $extraAddressLine = '';
+    protected string $extraAddressLine = '';
 
     /**
      * @var string Fax number
@@ -60,7 +62,7 @@ abstract class AbstractOrderAddress extends AbstractIdentity
      * @Serializer\SerializedName("fax")
      * @Serializer\Accessor(getter="getFax",setter="setFax")
      */
-    protected $fax = '';
+    protected string $fax = '';
 
     /**
      * @var string First name
@@ -68,7 +70,7 @@ abstract class AbstractOrderAddress extends AbstractIdentity
      * @Serializer\SerializedName("firstName")
      * @Serializer\Accessor(getter="getFirstName",setter="setFirstName")
      */
-    protected $firstName = '';
+    protected string $firstName = '';
 
     /**
      * @var string Last name
@@ -76,7 +78,7 @@ abstract class AbstractOrderAddress extends AbstractIdentity
      * @Serializer\SerializedName("lastName")
      * @Serializer\Accessor(getter="getLastName",setter="setLastName")
      */
-    protected $lastName = '';
+    protected string $lastName = '';
 
     /**
      * @var string Mobile phone number
@@ -84,7 +86,7 @@ abstract class AbstractOrderAddress extends AbstractIdentity
      * @Serializer\SerializedName("mobile")
      * @Serializer\Accessor(getter="getMobile",setter="setMobile")
      */
-    protected $mobile = '';
+    protected string $mobile = '';
 
     /**
      * @var string Phone number
@@ -92,7 +94,7 @@ abstract class AbstractOrderAddress extends AbstractIdentity
      * @Serializer\SerializedName("phone")
      * @Serializer\Accessor(getter="getPhone",setter="setPhone")
      */
-    protected $phone = '';
+    protected string $phone = '';
 
     /**
      * @var string Salutation e.g. 'Mr.'
@@ -100,7 +102,7 @@ abstract class AbstractOrderAddress extends AbstractIdentity
      * @Serializer\SerializedName("salutation")
      * @Serializer\Accessor(getter="getSalutation",setter="setSalutation")
      */
-    protected $salutation = '';
+    protected string $salutation = '';
 
     /**
      * @var string State
@@ -108,7 +110,7 @@ abstract class AbstractOrderAddress extends AbstractIdentity
      * @Serializer\SerializedName("state")
      * @Serializer\Accessor(getter="getState",setter="setState")
      */
-    protected $state = '';
+    protected string $state = '';
 
     /**
      * @var string Street + streetnumber
@@ -116,7 +118,7 @@ abstract class AbstractOrderAddress extends AbstractIdentity
      * @Serializer\SerializedName("street")
      * @Serializer\Accessor(getter="getStreet",setter="setStreet")
      */
-    protected $street = '';
+    protected string $street = '';
 
     /**
      * @var string Title e.g. ("Prof. Dr.")
@@ -124,7 +126,7 @@ abstract class AbstractOrderAddress extends AbstractIdentity
      * @Serializer\SerializedName("title")
      * @Serializer\Accessor(getter="getTitle",setter="setTitle")
      */
-    protected $title = '';
+    protected string $title = '';
 
     /**
      * @var string Zip / postal code
@@ -132,7 +134,7 @@ abstract class AbstractOrderAddress extends AbstractIdentity
      * @Serializer\SerializedName("zipCode")
      * @Serializer\Accessor(getter="getZipCode",setter="setZipCode")
      */
-    protected $zipCode = '';
+    protected string $zipCode = '';
 
     /**
      * @return string

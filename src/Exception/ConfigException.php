@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Exception;
 
 class ConfigException extends \Exception
@@ -58,8 +60,8 @@ class ConfigException extends \Exception
     }
 
     /**
-     * @param array $invalidProperties
-     * @param array $missingProperties
+     * @param array<scalar> $invalidProperties
+     * @param array<scalar> $missingProperties
      *
      * @return ConfigException
      */

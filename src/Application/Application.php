@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Application;
 
 use Composer\Autoload\ClassLoader;
@@ -8,11 +10,14 @@ use DI\ContainerBuilder;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Doctrine\Common\Annotations\AnnotationRegistry;
+use Exception;
+use Jawira\CaseConverter\CaseConverterException;
 use JMS\Serializer\Serializer;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
 use Jtl\Connector\Core\Checksum\ChecksumLoaderInterface;
 use Jtl\Connector\Core\Compression\Zip;
 use Jtl\Connector\Core\Config\ConfigSchema;
+use Jtl\Connector\Core\Config\CoreConfigInterface;
 use Jtl\Connector\Core\Config\FileConfig;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
 use Jtl\Connector\Core\Connector\HandleRequestInterface;
@@ -43,9 +48,10 @@ use Jtl\Connector\Core\Event\StatisticEvent;
 use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\ConfigException;
+use Jtl\Connector\Core\Exception\DatabaseException;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\FileNotFoundException;
-use Jtl\Connector\Core\Exception\HttpException;
+use Jtl\Connector\Core\Exception\LinkerException;
 use Jtl\Connector\Core\Exception\LoggerException;
 use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Exception\SessionException;
@@ -73,18 +79,25 @@ use Jtl\Connector\Core\Session\SessionHandlerInterface;
 use Jtl\Connector\Core\Session\SqliteSessionHandler;
 use Jtl\Connector\Core\Subscriber\FeaturesSubscriber;
 use Jtl\Connector\Core\Subscriber\RequestParamsTransformSubscriber;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
 use Monolog\ErrorHandler as MonologErrorHandler;
+use Noodlehaus\AbstractConfig;
 use Noodlehaus\ConfigInterface;
 use Psr\Container\ContainerInterface;
+use Psr\Log\InvalidArgumentException;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use ReflectionClass;
+use ReflectionException;
+use RuntimeException;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Exception\DirectoryNotFoundException;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Throwable;
+use TypeError;
 
 class Application
 {
@@ -133,42 +146,47 @@ class Application
     /**
      * Application constructor.
      *
-     * @param string               $connectorDir
-     * @param ConfigInterface|null $config
-     * @param ConfigSchema|null    $configSchema
+     * @param string              $connectorDir
+     * @param AbstractConfig|null $config
+     * @param ConfigSchema|null   $configSchema
      *
      * @throws ApplicationException
      * @throws ConfigException
+     * @throws InvalidArgumentException
      * @throws LoggerException
-     * @throws \ReflectionException
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws TypeError
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\RuntimeException
+     * @throws InvalidArgumentException
+     * @throws Exception
      */
     public function __construct(
-        string           $connectorDir,
-        ?ConfigInterface $config = null,
-        ?ConfigSchema    $configSchema = null
+        string          $connectorDir,
+        ?AbstractConfig $config = null,
+        ?ConfigSchema   $configSchema = null
     ) {
         if (!\is_dir($connectorDir)) {
             throw ApplicationException::connectorDirNotExists($connectorDir);
         }
         AnnotationRegistry::registerLoader('class_exists');
 
-        if (\is_null($config)) {
-            $config = new FileConfig(\sprintf('%s/config/config.json', $connectorDir));
+        if ($configSchema !== null && $config instanceof CoreConfigInterface) {
+            $config->setConfigSchema($configSchema);
+        } else {
+            $configSchema = $configSchema ?? new ConfigSchema();
+            $config       = new FileConfig(\sprintf('%s/config/config.json', $connectorDir), $configSchema);
         }
 
-        if (\is_null($configSchema)) {
-            $configSchema = new ConfigSchema();
-        }
 
         $this->prepareConfig($connectorDir, $config, $configSchema);
 
         $serializerCacheDir = null;
         if (
-            $config->get(ConfigSchema::DEBUG, false) === false
-            && $config->get(ConfigSchema::SERIALIZER_ENABLE_CACHE, true) === true
+            $config->getBool(ConfigSchema::DEBUG, false) === false
+            && $config->getBool(ConfigSchema::SERIALIZER_ENABLE_CACHE, true) === true
         ) {
-            $serializerCacheDir = $config->get(ConfigSchema::CACHE_DIR);
+            $serializerCacheDir = $config->getString(ConfigSchema::CACHE_DIR);
         }
 
         $this->connectorDir = $connectorDir;
@@ -183,8 +201,12 @@ class Application
         $this->eventDispatcher = new EventDispatcher();
         $this->fileSystem      = new Filesystem();
         $this->loggerService   =
-            (new LoggerService($this->config->get(ConfigSchema::LOG_DIR), $this->config->get(ConfigSchema::LOG_LEVEL)))
-                ->setFormat($this->config->get(ConfigSchema::LOG_FORMAT));
+            (
+            new LoggerService(
+                Validate::string($this->config->get(ConfigSchema::LOG_DIR)),
+                Validate::string($this->config->get(ConfigSchema::LOG_LEVEL))
+            )
+            )->setFormat(Validate::string($this->config->get(ConfigSchema::LOG_FORMAT)));
 
         $this->container->set(LoggerService::class, $this->loggerService);
         $this->container->set(LoggerInterface::class, $this->loggerService->get(LoggerService::CHANNEL_GLOBAL));
@@ -226,7 +248,6 @@ class Application
      *
      * @return Application
      * @throws DefinitionException
-     * @throws \ReflectionException
      */
     public function registerController(string $controllerName, object $instance): Application
     {
@@ -240,13 +261,24 @@ class Application
     }
 
     /**
+     * @param ConnectorInterface $connector
+     *
+     * @return void
      * @throws ApplicationException
+     * @throws CompressionException
+     * @throws ConfigException
      * @throws DefinitionException
-     * @throws \Throwable
+     * @throws DependencyException
+     * @throws FileNotFoundException
+     * @throws NotFoundException
+     * @throws RpcException
+     * @throws SessionException
+     * @throws Throwable
+     * @throws \ReflectionException
      */
     public function run(ConnectorInterface $connector): void
     {
-        $jtlrpc = $this->httpRequest->get('jtlrpc', '');
+        $jtlrpc = Validate::string($this->httpRequest->get('jtlrpc', ''));
         $this->httpResponse->setLogger($this->loggerService->get(LoggerService::CHANNEL_RPC));
         $this->eventDispatcher->addSubscriber(new RequestParamsTransformSubscriber());
         $this->eventDispatcher->addSubscriber(new FeaturesSubscriber());
@@ -257,16 +289,16 @@ class Application
 
         try {
             if (!$requestPacket->isValid()) {
-                throw RpcException::invalidRequest();
+                throw RpcException::invalidRequest(); // @phpstan-ignore-line
             }
 
             $method = Method::createFromRequestPacket($requestPacket);
             if (!Controller::isController($method->getController())) {
-                throw DefinitionException::unknownController($method->getController());
+                throw DefinitionException::unknownController($method->getController()); // @phpstan-ignore-line
             }
 
             if (!Action::isAction($method->getAction())) {
-                throw DefinitionException::unknownAction($method->getAction());
+                throw DefinitionException::unknownAction($method->getAction()); // @phpstan-ignore-line
             }
 
             $this->startSession($requestPacket->getMethod());
@@ -276,7 +308,7 @@ class Application
                 $this->config,
                 $this->container,
                 $this->eventDispatcher,
-                $this->config->get(ConfigSchema::PLUGINS_DIR)
+                Validate::string($this->config->get(ConfigSchema::PLUGINS_DIR))
             );
             $this->configSchema->validateConfig($this->config);
 
@@ -288,11 +320,14 @@ class Application
             }
 
             // Log incoming request packet (debug only and configuration must be initialized)
-            $this->loggerService->get(LoggerService::CHANNEL_RPC)->debug($logJtlrpc);
+            $this->loggerService->get(LoggerService::CHANNEL_RPC)->debug(Validate::string($logJtlrpc));
 
             $event = new RpcEvent($requestPacket->getParams(), $method->getController(), $method->getAction());
             $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::BEFORE));
-            $requestPacket->setParams($event->getData());
+            if (!\is_array($data = $event->getData())) {
+                throw new \RuntimeException('$data must be an array.'); // @phpstan-ignore-line
+            }
+            $requestPacket->setParams($data);
 
             $responsePacket = $this->execute($connector, $requestPacket, $method);
             \session_write_close();
@@ -308,10 +343,13 @@ class Application
 
             $this->loggerService->get(LoggerService::CHANNEL_ERROR)->error($ex->getTraceAsString());
 
-            throw $ex;
+            throw $ex; // @phpstan-ignore-line
         } finally {
             $this->fileSystem->remove($this->deleteFromFileSystem);
-            $this->httpResponse->prepareAndSend($requestPacket, $responsePacket);
+            if (!isset($responsePacket)) {
+                throw new \RuntimeException('responsePacket is not set!'); // @phpstan-ignore-line
+            }
+            $this->httpResponse->prepareAndSend($requestPacket, Validate::responsePacket($responsePacket));
 
             if (\random_int(0, 99) === 0) {
                 $this->getSessionHandler()->gc((int)\ini_get('session.gc_maxlifetime'));
@@ -322,8 +360,9 @@ class Application
     /**
      * @param string $rpcMethod
      *
-     * @throws ApplicationException
-     * @throws HttpException
+     * @throws DatabaseException
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
      * @throws SessionException
      */
     protected function startSession(string $rpcMethod): void
@@ -336,13 +375,10 @@ class Application
         }
 
         $sessionHandler = $this->getSessionHandler();
-
-        if ($sessionHandler instanceof LoggerAwareInterface) {
-            $sessionHandler->setLogger($this->loggerService->get(LoggerService::CHANNEL_SESSION));
-        }
+        $sessionHandler->setLogger($this->loggerService->get(LoggerService::CHANNEL_SESSION));
 
         \session_name($sessionName);
-        if ($sessionId !== null) {
+        if (\is_string($sessionId) && $sessionId !== '') {
             if ($sessionHandler->validateId($sessionId)) {
                 \session_id($sessionId);
             } else {
@@ -360,6 +396,9 @@ class Application
 
     /**
      * @return SessionHandlerInterface
+     * @throws DatabaseException
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
      * @throws SessionException
      */
     public function getSessionHandler(): SessionHandlerInterface
@@ -368,6 +407,7 @@ class Application
             $this->sessionHandler = new SqliteSessionHandler(\sprintf('%s/var', $this->connectorDir));
             $this->sessionHandler->setLogger($this->loggerService->get(LoggerService::CHANNEL_SESSION));
         }
+
         return $this->sessionHandler;
     }
 
@@ -379,12 +419,17 @@ class Application
     public function setSessionHandler(SessionHandlerInterface $sessionHandler): Application
     {
         $this->sessionHandler = $sessionHandler;
+
         return $this;
     }
 
     /**
      * @param ConnectorInterface $connector
      *
+     * @return void
+     * @throws DatabaseException
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
      * @throws SessionException
      */
     protected function prepareContainer(ConnectorInterface $connector): void
@@ -402,6 +447,7 @@ class Application
             $loader = $container->has(ChecksumLoaderInterface::class)
                 ? $container->get(ChecksumLoaderInterface::class)
                 : null;
+            /** @var ChecksumLoaderInterface|null $loader */
             $linker = new ChecksumLinker($loader);
             $linker->setLogger($this->loggerService->get(LoggerService::CHANNEL_CHECKSUM));
 
@@ -409,7 +455,9 @@ class Application
         });
 
         $this->container->set(IdentityLinker::class, function (ContainerInterface $container) {
-            $linker = new IdentityLinker($container->get(PrimaryKeyMapperInterface::class));
+            /** @var PrimaryKeyMapperInterface $pkmi */
+            $pkmi   = $container->get(PrimaryKeyMapperInterface::class);
+            $linker = new IdentityLinker($pkmi);
             $linker->setLogger($this->loggerService->get(LoggerService::CHANNEL_LINKER));
 
             return $linker;
@@ -429,6 +477,8 @@ class Application
      * @param Container       $container
      * @param EventDispatcher $eventDispatcher
      * @param string          $pluginsDir
+     *
+     * @throws DirectoryNotFoundException
      */
     protected function loadPlugins(
         ConfigInterface $config,
@@ -442,6 +492,7 @@ class Application
 
         if (\is_dir($pluginsDir)) {
             $finder = (new Finder())->files()->name('/Bootstrap.php/')->in($pluginsDir);
+
             foreach ($finder as $file) {
                 $class = \sprintf(
                     '\\%s\\Bootstrap',
@@ -485,7 +536,9 @@ class Application
 
         $request = $this->createHandleRequest($requestPacket, $method, $modelNamespace);
         if ($request->getController() === Controller::IMAGE && $request->getAction() === Action::PUSH) {
-            $this->handleImagePush(...$request->getParams());
+            /** @var AbstractImage[] $params */
+            $params = $request->getParams();
+            $this->handleImagePush(...$params);
         }
 
         $this->eventDispatcher->dispatch(
@@ -519,10 +572,12 @@ class Application
                 || \in_array($request->getAction(), [Action::PUSH, Action::DELETE], true) === false
             ) {
                 if ($result instanceof AbstractModel) {
-                    $this->container
-                        ->get(IdentityLinker::class)
-                        ->linkModel($result, ($request->getAction() === Action::DELETE));
-                    $this->container->get(ChecksumLinker::class)->link($result);
+                    /** @var IdentityLinker $identityLinker */
+                    $identityLinker = $this->container->get(IdentityLinker::class);
+                    $identityLinker->linkModel($result, ($request->getAction() === Action::DELETE));
+                    /** @var ChecksumLinker $checksumLinker */
+                    $checksumLinker = $this->container->get(ChecksumLinker::class);
+                    $checksumLinker->link($result);
                 }
             }
 
@@ -565,10 +620,13 @@ class Application
      * @param string        $modelNamespace
      *
      * @return Request
+     * @throws CaseConverterException
      * @throws DefinitionException
      * @throws DependencyException
      * @throws NotFoundException
-     * @throws \ReflectionException
+     * @throws ReflectionException
+     * @throws \InvalidArgumentException
+     * @throws LinkerException
      */
     protected function createHandleRequest(
         RequestPacket $requestPacket,
@@ -600,7 +658,7 @@ class Application
                         $className = Product::class;
                         break;
                 }
-                $type = \sprintf("array<%s>", $className);
+                $type = \sprintf('array<%s>', $className);
                 break;
             default:
                 $type = QueryFilter::class;
@@ -623,8 +681,12 @@ class Application
                     break;
                 case Action::PUSH:
                 case Action::DELETE:
-                    $this->container->get(IdentityLinker::class)->linkModel($param);
-                    $this->container->get(ChecksumLinker::class)->link($param);
+                    /** @var IdentityLinker $identityLinker */
+                    $identityLinker = $this->container->get(IdentityLinker::class);
+                    $identityLinker->linkModel($param);
+                    /** @var ChecksumLinker $checksumLinker */
+                    $checksumLinker = $this->container->get(ChecksumLinker::class);
+                    $checksumLinker->link($param);
                     $eventArg = new $eventArgClass($param);
                     break;
                 case Action::PULL:
@@ -634,9 +696,9 @@ class Application
                 case Action::CLEAR:
                     foreach ($param->getIdentities() as $relationType => $identities) {
                         foreach ($identities as $identity) {
-                            $this->container
-                                ->get(IdentityLinker::class)
-                                ->linkIdentity($identity, RelationType::getModelName($relationType), 'id');
+                            /** @var IdentityLinker $identityLinker */
+                            $identityLinker = $this->container->get(IdentityLinker::class);
+                            $identityLinker->linkIdentity($identity, RelationType::getModelName($relationType), 'id');
                         }
                     }
                     break;
@@ -679,15 +741,18 @@ class Application
      * @throws ApplicationException
      * @throws CompressionException
      * @throws DefinitionException
-     * @throws FileNotFoundException*@throws \Exception
+     * @throws FileNotFoundException
      * @throws \Exception
      */
     protected function handleImagePush(AbstractImage ...$images): void
     {
         $imagePaths = [];
-        $tempDir    = $this->deleteFromFileSystem[] = \sprintf(
+        if (!\is_scalar($config = $this->config->get(ConfigSchema::CACHE_DIR))) {
+            throw new \RuntimeException('$config must be scalar.');
+        }
+        $tempDir = $this->deleteFromFileSystem[] = \sprintf(
             '%s/%s',
-            $this->config->get(ConfigSchema::CACHE_DIR),
+            $config,
             \uniqid('images-', true)
         );
         $this->fileSystem->mkdir($tempDir);
@@ -712,7 +777,10 @@ class Application
                 if ($imageData === false) {
                     throw ApplicationException::remoteImageNotFound($image);
                 }
-                $path      = \parse_url($image->getRemoteUrl(), \PHP_URL_PATH);
+                $path = \parse_url($image->getRemoteUrl(), \PHP_URL_PATH);
+                if (!\is_string($path)) {
+                    throw new \RuntimeException('$path must be a string.');
+                }
                 $fileName  = \pathinfo($path, \PATHINFO_BASENAME);
                 $imagePath = \sprintf('%s/%s_%s', $tempDir, \uniqid('', true), $fileName);
                 if (\file_put_contents($imagePath, $imageData) === false) {
@@ -726,15 +794,21 @@ class Application
 
                 $imageFound = false;
                 foreach ($imagePaths as $imagePath) {
-                    $imageFound              = false;
                     $fileInfo                = \pathinfo($imagePath);
                     [$hostId, $relationType] = \explode('_', $fileInfo['filename']);
                     if (
-                        (int)$hostId == $image->getId()->getHost()
+                        (int)$hostId === $image->getId()->getHost()
                         && \strtolower($relationType) === \strtolower($image->getRelationType())
                     ) {
-                        $extension = self::determineExtensionByMimeType(\mime_content_type($imagePath));
-                        if ($extension !== null && $fileInfo['extension'] !== $extension) {
+                        if (!\is_string($contentType = \mime_content_type($imagePath))) {
+                            throw new \RuntimeException('$contentType must be a string.');
+                        }
+                        $extension = self::determineExtensionByMimeType($contentType);
+                        if (
+                            $extension !== null
+                            && isset($fileInfo['extension'])
+                            && $fileInfo['extension'] !== $extension
+                        ) {
                             $newImagePath = \sprintf('%s/%s.%s', $tempDir, $fileInfo['filename'], $extension);
                             \rename($imagePath, $newImagePath);
                             $imagePath = $newImagePath;
@@ -772,6 +846,7 @@ class Application
      * @throws DependencyException
      * @throws NotFoundException
      * @throws \ReflectionException
+     * @throws \RuntimeException
      * @throws \Throwable
      */
     public function handleRequest(ConnectorInterface $connector, Request $request): Response
@@ -782,12 +857,25 @@ class Application
 
         if (Action::isCoreAction($action)) {
             $this->container->set($controllerName, function (ContainerInterface $container) {
+
+                if (!\is_string($featuresPath = $this->config->get(ConfigSchema::FEATURES_PATH))) {
+                    throw new \RuntimeException('$featuresPath must be a string!');
+                }
+                /** @var ChecksumLinker $checksumLinker */
+                $checksumLinker = $container->get(ChecksumLinker::class);
+                /** @var IdentityLinker $identityLinker */
+                $identityLinker = $container->get(IdentityLinker::class);
+                /** @var SessionHandlerInterface $sessionHandlerInterface */
+                $sessionHandlerInterface = $container->get(SessionHandlerInterface::class);
+                /** @var TokenValidatorInterface $tokenValidatorInterface */
+                $tokenValidatorInterface = $container->get(TokenValidatorInterface::class);
+
                 $controller = new ConnectorController(
-                    $this->config->get(ConfigSchema::FEATURES_PATH),
-                    $container->get(ChecksumLinker::class),
-                    $container->get(IdentityLinker::class),
-                    $container->get(SessionHandlerInterface::class),
-                    $container->get(TokenValidatorInterface::class)
+                    $featuresPath,
+                    $checksumLinker,
+                    $identityLinker,
+                    $sessionHandlerInterface,
+                    $tokenValidatorInterface
                 );
 
                 $controller->setLogger($this->loggerService->get(LoggerService::CHANNEL_GLOBAL));
@@ -805,7 +893,9 @@ class Application
 
         $controller = $this->container->get($controllerName);
         if ($controller instanceof LoggerAwareInterface) {
-            $controller->setLogger($this->container->get(LoggerInterface::class));
+            /** @var LoggerInterface $loggerInterface */
+            $loggerInterface = $this->container->get(LoggerInterface::class);
+            $controller->setLogger($loggerInterface);
         }
 
         $result = [];
@@ -821,10 +911,12 @@ class Application
 
                         $dataModel = $controller->$action($model);
                         if ($dataModel instanceof AbstractModel) {
-                            $this->container
-                                ->get(IdentityLinker::class)
-                                ->linkModel($dataModel, ($request->getAction() === Action::DELETE));
-                            $this->container->get(ChecksumLinker::class)->link($dataModel);
+                            /** @var IdentityLinker $identityLinker */
+                            $identityLinker = $this->container->get(IdentityLinker::class);
+                            $identityLinker->linkModel($dataModel, ($request->getAction() === Action::DELETE));
+                            /** @var ChecksumLinker $checksumLinker */
+                            $checksumLinker = $this->container->get(ChecksumLinker::class);
+                            $checksumLinker->link($dataModel);
                         }
                         $result[] = $dataModel;
 
@@ -835,6 +927,10 @@ class Application
                 } catch (Throwable $ex) {
                     if ($controller instanceof TransactionalInterface) {
                         $controller->rollback();
+                    }
+
+                    if (!($model instanceof AbstractModel)) {
+                        throw new \RuntimeException('$model must be instance of AbstractModel.');
                     }
 
                     $this->extendExceptionMessageWithIdentifiers($ex, $model, $controllerName, $action);
@@ -908,8 +1004,9 @@ class Application
      */
     protected function buildRpcResponse(RequestPacket $requestPacket, Response $response): ResponsePacket
     {
-        $responsePacket = ResponsePacket::create($requestPacket->getId())
-                                        ->setResult($response->getResult());
+        /** @var ResponsePacket $responsePacket */
+        $responsePacket = ResponsePacket::create($requestPacket->getId());
+        $responsePacket->setResult($response->getResult());
 
         if (!$responsePacket->isValid()) {
             throw new RpcException('Parse error', ErrorCode::PARSE_ERROR);
@@ -970,6 +1067,7 @@ class Application
     public function setHttpRequest(HttpRequest $httpRequest): self
     {
         $this->httpRequest = $httpRequest;
+
         return $this;
     }
 

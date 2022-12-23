@@ -20,7 +20,7 @@ class LanguageIsoSubscriberTest extends TestCase
     /**
      * @return array
      */
-    public function i18NDataProvider()
+    public function i18NDataProvider(): array
     {
         return [
             [ProductI18n::class],
@@ -36,7 +36,7 @@ class LanguageIsoSubscriberTest extends TestCase
      *
      * @param $model
      */
-    public function testOnPostSerializeWithInvalidValue(string $model)
+    public function testOnPostSerializeWithInvalidValue(string $model): void
     {
         $i18nModel = new $model();
         $i18nModel->setLanguageIso('___');

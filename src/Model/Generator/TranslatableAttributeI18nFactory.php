@@ -1,17 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Model\Generator;
 
 use Jtl\Connector\Core\Model\TranslatableAttributeI18n;
 
 /**
  * Class TranslatableAttributeI18nFactory
+ *
  * @package Jtl\Connector\Core\Model\Generator
  */
 class TranslatableAttributeI18nFactory extends AbstractModelFactory
 {
     /**
-     * @return array<string, string|bool>
+     * @return array{name: string, value: mixed, languageIso: string}
      */
     protected function makeFakeArray(): array
     {

@@ -1,14 +1,12 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\MustNotBeNullException;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
 
 /**
  * Extra charge for productVariationValue per customerGroup.
@@ -26,7 +24,7 @@ class ProductVariationValueExtraCharge extends AbstractModel
      * @Serializer\SerializedName("customerGroupId")
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
-    protected $customerGroupId = null;
+    protected Identity $customerGroupId;
 
     /**
      * @var double Extra charge (net)
@@ -34,7 +32,7 @@ class ProductVariationValueExtraCharge extends AbstractModel
      * @Serializer\SerializedName("extraChargeNet")
      * @Serializer\Accessor(getter="getExtraChargeNet",setter="setExtraChargeNet")
      */
-    protected $extraChargeNet = 0.0;
+    protected float $extraChargeNet = 0.0;
 
     /**
      * Constructor
@@ -46,10 +44,11 @@ class ProductVariationValueExtraCharge extends AbstractModel
 
     /**
      * @return Identity Reference to customerGroup
+     * @throws MustNotBeNullException|\TypeError
      */
     public function getCustomerGroupId(): Identity
     {
-        return $this->customerGroupId;
+        return Validate::checkIdentityAndNotNull($this->customerGroupId);
     }
 
     /**

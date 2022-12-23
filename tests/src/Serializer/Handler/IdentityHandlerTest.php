@@ -58,7 +58,6 @@ class IdentityHandlerTest extends TestCase
                 $endpointId,
                 $hostId,
             ],
-            [],
             new DeserializationContext()
         );
 
@@ -83,7 +82,6 @@ class IdentityHandlerTest extends TestCase
         $result = $identityHandler->deserializeIdentity(
             $visitor,
             $identityArray,
-            [],
             new DeserializationContext()
         );
 

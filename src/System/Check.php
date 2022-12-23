@@ -1,10 +1,6 @@
 <?php
 
-/**
- *
- * @copyright 2010-2013 JTL-Software GmbH
- * @package   Jtl\Connector\Core\System
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\System;
 
@@ -14,9 +10,10 @@ use Jtl\Connector\Core\Exception\MissingRequirementException;
 class Check
 {
     /**
+     * @return void
      * @throws MissingRequirementException
      */
-    public static function run()
+    public static function run(): void
     {
         // PHP
         if (!\version_compare(\PHP_VERSION, Application::MIN_PHP_VERSION, '>=')) {

@@ -1,13 +1,12 @@
 <?php
 
-/**
- * @copyright 2010-2013 JTL-Software GmbH
- * @package   Jtl\Connector\Core\Serializer\Handler
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Serializer;
 
 use JMS\Serializer\EventDispatcher\EventDispatcher;
+use JMS\Serializer\Exception\InvalidArgumentException;
+use JMS\Serializer\Exception\RuntimeException;
 use JMS\Serializer\Handler\HandlerRegistry;
 use JMS\Serializer\SerializerBuilder as JmsBuilder;
 use Jtl\Connector\Core\Serializer\Handler\FeaturesHandler;
@@ -26,6 +25,15 @@ class SerializerBuilder
      * @param string|null $cacheDir
      *
      * @return JmsBuilder
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
+     * @throws RuntimeException
+     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public static function create(string $cacheDir = null): JmsBuilder
     {

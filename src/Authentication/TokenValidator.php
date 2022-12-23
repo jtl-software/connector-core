@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Authentication;
 
 use Jtl\Connector\Core\Exception\TokenValidatorException;
 
 /**
  * Class TokenValidator
+ *
  * @package Jtl\Connector\Core\Authentication
  */
 class TokenValidator implements TokenValidatorInterface

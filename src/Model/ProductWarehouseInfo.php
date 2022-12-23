@@ -1,14 +1,12 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\MustNotBeNullException;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
 
 /**
  * Product to warehouse info association.
@@ -26,7 +24,7 @@ class ProductWarehouseInfo extends AbstractModel
      * @Serializer\SerializedName("warehouseId")
      * @Serializer\Accessor(getter="getwarehouseId",setter="setwarehouseId")
      */
-    protected $warehouseId = null;
+    protected Identity $warehouseId;
 
     /**
      * @var double Optional product inflow quantity for specified warehouse
@@ -34,7 +32,7 @@ class ProductWarehouseInfo extends AbstractModel
      * @Serializer\SerializedName("inflowQuantity")
      * @Serializer\Accessor(getter="getInflowQuantity",setter="setInflowQuantity")
      */
-    protected $inflowQuantity = 0.0;
+    protected float $inflowQuantity = 0.0;
 
     /**
      * @var double
@@ -42,7 +40,7 @@ class ProductWarehouseInfo extends AbstractModel
      * @Serializer\SerializedName("stockLevel")
      * @Serializer\Accessor(getter="getstockLevel",setter="setstockLevel")
      */
-    protected $stockLevel = 0.0;
+    protected float $stockLevel = 0.0;
 
     /**
      * Constructor
@@ -54,10 +52,11 @@ class ProductWarehouseInfo extends AbstractModel
 
     /**
      * @return Identity
+     * @throws MustNotBeNullException|\TypeError
      */
     public function getWarehouseId(): Identity
     {
-        return $this->warehouseId;
+        return Validate::checkIdentityAndNotNull($this->warehouseId);
     }
 
     /**

@@ -1,23 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Class Session
+ *
  * @package Jtl\Connector\Core\Model
  * @Serializer\AccessType("public_method")
  */
 class Session extends AbstractModel
 {
     /**
-     * @var string
+     * @var string|null
      * @Serializer\Type("string")
      * @Serializer\SerializedName("sessionId")
      * @Serializer\Accessor(getter="getSessionId",setter="setSessionId")
      */
-    protected $sessionId = null;
+    protected ?string $sessionId = null;
 
     /**
      * @var integer
@@ -25,7 +28,7 @@ class Session extends AbstractModel
      * @Serializer\SerializedName("lifetime")
      * @Serializer\Accessor(getter="getLifetime",setter="setLifetime")
      */
-    protected $lifetime = 0;
+    protected int $lifetime = 0;
 
     /**
      * @return string

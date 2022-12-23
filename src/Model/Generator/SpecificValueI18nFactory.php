@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Model\Generator;
 
 use Jtl\Connector\Core\Model\SpecificValueI18n;
@@ -11,6 +13,8 @@ class SpecificValueI18nFactory extends AbstractI18nFactory
      */
     protected function makeFakeArray(): array
     {
+
+
         return [
             'value'           => $this->faker->word,
             'urlPath'         => $this->faker->url,

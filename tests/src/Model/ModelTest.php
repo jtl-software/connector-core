@@ -16,7 +16,7 @@ class ModelTest extends TestCase
      *
      * @param string $modelName
      */
-    public function testModelsInitialization(string $modelName)
+    public function testModelsInitialization(string $modelName): void
     {
         $serializer         = SerializerBuilder::create()->build();
         $fullModelClassName = \sprintf("%s\\%s", Model::MODEL_NAMESPACE, $modelName);
@@ -73,7 +73,7 @@ class ModelTest extends TestCase
      * @param string $subject
      * @param bool   $setString
      */
-    public function testUnsetIdentificationString(string $identificationString, string $subject, bool $setString)
+    public function testUnsetIdentificationString(string $identificationString, string $subject, bool $setString): void
     {
         $model       = $this->getMockForAbstractClass(AbstractModel::class);
         $stringCount = \mt_rand(0, 10);
@@ -108,7 +108,8 @@ class ModelTest extends TestCase
         string $identificationString,
         string $subject,
         bool   $setString
-    ) {
+    ): void
+    {
         $model       = $this->getMockForAbstractClass(AbstractModel::class);
         $stringCount = \mt_rand(0, 10);
 

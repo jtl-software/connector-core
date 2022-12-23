@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -26,7 +22,7 @@ class CrossSelling extends AbstractIdentity
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
-    protected $productId = null;
+    protected Identity $productId;
 
     /**
      * @var CrossSellingItem[] Referenced cross-sold products grouped by their crossSellingGroup
@@ -34,7 +30,7 @@ class CrossSelling extends AbstractIdentity
      * @Serializer\SerializedName("items")
      * @Serializer\AccessType("reflection")
      */
-    protected $items = [];
+    protected array $items = [];
 
     /**
      * Constructor.

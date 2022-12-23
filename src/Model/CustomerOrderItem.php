@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -51,7 +47,7 @@ class CustomerOrderItem extends AbstractIdentity
      * @Serializer\SerializedName("configItemId")
      * @Serializer\Accessor(getter="getConfigItemId",setter="setConfigItemId")
      */
-    protected $configItemId = null;
+    protected Identity $configItemId;
 
     /**
      * @var Identity Reference to product
@@ -59,7 +55,7 @@ class CustomerOrderItem extends AbstractIdentity
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
-    protected $productId = null;
+    protected Identity $productId;
 
     /**
      * @var string Order item name
@@ -67,7 +63,7 @@ class CustomerOrderItem extends AbstractIdentity
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
-    protected $name = '';
+    protected string $name = '';
 
     /**
      * @var double Price (net)
@@ -75,7 +71,7 @@ class CustomerOrderItem extends AbstractIdentity
      * @Serializer\SerializedName("price")
      * @Serializer\Accessor(getter="getPrice",setter="setPrice")
      */
-    protected $price = 0.0;
+    protected float $price = 0.0;
 
     /**
      * @var double Price (gross)
@@ -83,7 +79,7 @@ class CustomerOrderItem extends AbstractIdentity
      * @Serializer\SerializedName("priceGross")
      * @Serializer\Accessor(getter="getPriceGross",setter="setPriceGross")
      */
-    protected $priceGross = 0.0;
+    protected float $priceGross = 0.0;
 
     /**
      * @var double Quantity purchased
@@ -91,7 +87,7 @@ class CustomerOrderItem extends AbstractIdentity
      * @Serializer\SerializedName("quantity")
      * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
      */
-    protected $quantity = 0.0;
+    protected float $quantity = 0.0;
 
     /**
      * @var string Stock keeping Unit (unique item identifier)
@@ -99,7 +95,7 @@ class CustomerOrderItem extends AbstractIdentity
      * @Serializer\SerializedName("sku")
      * @Serializer\Accessor(getter="getSku",setter="setSku")
      */
-    protected $sku = '';
+    protected string $sku = '';
 
     /**
      * @var string
@@ -107,7 +103,7 @@ class CustomerOrderItem extends AbstractIdentity
      * @Serializer\SerializedName("type")
      * @Serializer\Accessor(getter="getType",setter="setType")
      */
-    protected $type = '';
+    protected string $type = '';
 
     /**
      * @var string
@@ -115,7 +111,7 @@ class CustomerOrderItem extends AbstractIdentity
      * @Serializer\SerializedName("note")
      * @Serializer\Accessor(getter="getNote",setter="setNote")
      */
-    protected $note = '';
+    protected string $note = '';
 
     /**
      * @var string Optional unique Hashsum (if item is part of configurable item
@@ -123,7 +119,7 @@ class CustomerOrderItem extends AbstractIdentity
      * @Serializer\SerializedName("unique")
      * @Serializer\Accessor(getter="getUnique",setter="setUnique")
      */
-    protected $unique = '';
+    protected string $unique = '';
 
     /**
      * @var double Value added tax
@@ -131,7 +127,7 @@ class CustomerOrderItem extends AbstractIdentity
      * @Serializer\SerializedName("vat")
      * @Serializer\Accessor(getter="getVat",setter="setVat")
      */
-    protected $vat = 0.0;
+    protected float $vat = 0.0;
 
     /**
      * @var CustomerOrderItemVariation[]
@@ -139,7 +135,7 @@ class CustomerOrderItem extends AbstractIdentity
      * @Serializer\SerializedName("variations")
      * @Serializer\AccessType("reflection")
      */
-    protected $variations = [];
+    protected array $variations = [];
 
     /**
      * Constructor.

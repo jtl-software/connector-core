@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class SessionHelperTest extends TestCase
 {
-    public function testHas()
+    public function testHas(): void
     {
         $helper                 = new SessionHelper('foo');
         $_SESSION['foo']['bar'] = 'boofar';
@@ -16,14 +16,14 @@ class SessionHelperTest extends TestCase
         $this->assertTrue($helper->has('you'));
     }
 
-    public function testHasNot()
+    public function testHasNot(): void
     {
         $helper = new SessionHelper('foo');
         $this->assertFalse($helper->has('bar'));
         $this->assertFalse($helper->has('yes'));
     }
 
-    public function testGet()
+    public function testGet(): void
     {
         $helper                 = new SessionHelper('foo');
         $_SESSION['foo']['bar'] = 'vaaaaalue';
@@ -32,14 +32,14 @@ class SessionHelperTest extends TestCase
         $this->assertEquals('taataa', $helper->get('och'));
     }
 
-    public function testGetDefault()
+    public function testGetDefault(): void
     {
         $helper = new SessionHelper('foo');
         $this->assertEquals('baras', $helper->get('foo', 'baras'));
         $this->assertEquals('faburus', $helper->get('och', 'faburus'));
     }
 
-    public function testSet()
+    public function testSet(): void
     {
         $helper = new SessionHelper('yo');
         $helper->set('lo', 'miau');
@@ -47,7 +47,7 @@ class SessionHelperTest extends TestCase
         $this->assertEquals('miau', $_SESSION['yo']['lo']);
     }
 
-    public function testUnset()
+    public function testUnset(): void
     {
         $helper                   = new SessionHelper('tests');
         $_SESSION['tests']['foo'] = 'bar';
@@ -56,7 +56,7 @@ class SessionHelperTest extends TestCase
         $this->assertArrayNotHasKey('foo', $_SESSION['tests']);
     }
 
-    public function testCreateByObjectClass()
+    public function testCreateByObjectClass(): void
     {
         $expectedNamespace           = \ZipArchive::class;
         $helper                      = SessionHelper::createByObjectClass(new \ZipArchive());

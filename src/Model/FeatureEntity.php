@@ -1,9 +1,6 @@
 <?php
 
-/**
- * @author    Immanuel Klinkenberg <immanuel.klinkenberg@jtl-software.com>
- * @copyright 2010-2018 JTL-Software GmbH
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -12,22 +9,22 @@ class FeatureEntity
     /**
      * @var string
      */
-    protected $name = '';
+    protected string $name = '';
 
     /**
      * @var boolean
      */
-    protected $pull = false;
+    protected bool $pull = false;
 
     /**
      * @var boolean
      */
-    protected $push = false;
+    protected bool $push = false;
 
     /**
      * @var boolean
      */
-    protected $delete = false;
+    protected bool $delete = false;
 
     /**
      * FeatureEntity constructor.
@@ -61,6 +58,7 @@ class FeatureEntity
     public function setName(string $name): FeatureEntity
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -72,6 +70,7 @@ class FeatureEntity
     public function setPull(bool $pull): FeatureEntity
     {
         $this->pull = $pull;
+
         return $this;
     }
 
@@ -83,6 +82,7 @@ class FeatureEntity
     public function setPush(bool $push): FeatureEntity
     {
         $this->push = $push;
+
         return $this;
     }
 
@@ -94,13 +94,14 @@ class FeatureEntity
     public function setDelete(bool $delete): FeatureEntity
     {
         $this->delete = $delete;
+
         return $this;
     }
 
     /**
-     * @return boolean[]
+     * @return array{pull: bool, push: bool, delete: bool}
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'pull'   => $this->canPull(),

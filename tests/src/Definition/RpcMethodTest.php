@@ -17,7 +17,7 @@ class RpcMethodTest extends TestCase
      * @param      $methodName
      * @param bool $shouldBeMethod
      */
-    public function testIsMethod($methodName, bool $shouldBeMethod)
+    public function testIsMethod($methodName, bool $shouldBeMethod): void
     {
         $isMethodResult = RpcMethod::isMethod($methodName);
         $this->assertSame($shouldBeMethod, $isMethodResult);
@@ -52,7 +52,7 @@ class RpcMethodTest extends TestCase
      * @param $methodName
      * @param $expectedMapping
      */
-    public function testMapMethod(string $methodName, string $expectedMapping)
+    public function testMapMethod(string $methodName, string $expectedMapping): void
     {
         $mappedName = RpcMethod::mapMethod($methodName);
         $this->assertSame($expectedMapping, $mappedName);
@@ -61,7 +61,7 @@ class RpcMethodTest extends TestCase
     /**
      * @return array
      */
-    public function mapMethodDataProvider()
+    public function mapMethodDataProvider(): array
     {
         return [
             [RpcMethod::CLEAR, 'core.connector.clear'],

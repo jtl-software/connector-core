@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -24,15 +20,15 @@ class DeliveryNoteItemInfo extends AbstractModel
      * @Serializer\SerializedName("batch")
      * @Serializer\Accessor(getter="getBatch",setter="setBatch")
      */
-    protected $batch = '';
+    protected string $batch = '';
 
     /**
-     * @var \DateTimeInterface
+     * @var \DateTimeInterface|null
      * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("bestBefore")
      * @Serializer\Accessor(getter="getBestBefore",setter="setBestBefore")
      */
-    protected $bestBefore = null;
+    protected ?\DateTimeInterface $bestBefore = null;
 
     /**
      * @var double
@@ -40,7 +36,7 @@ class DeliveryNoteItemInfo extends AbstractModel
      * @Serializer\SerializedName("quantity")
      * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
      */
-    protected $quantity = 0.0;
+    protected float $quantity = 0.0;
 
     /**
      * @var integer
@@ -48,7 +44,7 @@ class DeliveryNoteItemInfo extends AbstractModel
      * @Serializer\SerializedName("warehouseId")
      * @Serializer\Accessor(getter="getWarehouseId",setter="setWarehouseId")
      */
-    protected $warehouseId = 0;
+    protected int $warehouseId = 0;
 
     /**
      * @return string

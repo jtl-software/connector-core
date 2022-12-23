@@ -13,7 +13,7 @@ class RequestParamsTransformSubscriberTest extends TestCase
      *
      * @param RpcEvent $event
      */
-    public function testTransformRequestParams(RpcEvent $event)
+    public function testTransformRequestParams(RpcEvent $event): void
     {
         $subscriber = $this->createPartialMock(
             RequestParamsTransformSubscriber::class,
@@ -52,7 +52,7 @@ class RequestParamsTransformSubscriberTest extends TestCase
      * @param array $products
      * @param array $expectedResult
      */
-    public function testTransformProductData(array $products, array $expectedResult)
+    public function testTransformProductData(array $products, array $expectedResult): void
     {
         $subscriber   = new RequestParamsTransformSubscriber();
         $actualResult = $subscriber->transformProductData($products);
@@ -65,7 +65,7 @@ class RequestParamsTransformSubscriberTest extends TestCase
      * @param array $productPrices
      * @param array $expectedResult
      */
-    public function testTransformProductPriceData(array $productPrices, array $expectedResult)
+    public function testTransformProductPriceData(array $productPrices, array $expectedResult): void
     {
         $subscriber   = new RequestParamsTransformSubscriber();
         $actualResult = $subscriber->transformProductPriceData($productPrices);
@@ -78,14 +78,14 @@ class RequestParamsTransformSubscriberTest extends TestCase
      * @param array $productStock
      * @param array $expectedResult
      */
-    public function testTransformStockLevelData(array $productStock, array $expectedResult)
+    public function testTransformStockLevelData(array $productStock, array $expectedResult): void
     {
         $subscriber   = new RequestParamsTransformSubscriber();
         $actualResult = $subscriber->transformProductStockLevelData($productStock);
         $this->assertEquals($expectedResult, $actualResult);
     }
 
-    public function testGetSubscribedEvents()
+    public function testGetSubscribedEvents(): void
     {
         $subscribedEvents = RequestParamsTransformSubscriber::getSubscribedEvents();
         $this->assertTrue(isset($subscribedEvents['rpc.before'][0][0]));

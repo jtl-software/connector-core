@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -26,7 +22,7 @@ class ProductI18n extends AbstractI18n
      * @Serializer\SerializedName("deliveryStatus")
      * @Serializer\Accessor(getter="getDeliveryStatus",setter="setDeliveryStatus")
      */
-    protected $deliveryStatus = '';
+    protected string $deliveryStatus = '';
 
     /**
      * @var string Optional product description
@@ -34,7 +30,7 @@ class ProductI18n extends AbstractI18n
      * @Serializer\SerializedName("description")
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
-    protected $description = '';
+    protected string $description = '';
 
     /**
      * @var string
@@ -42,7 +38,7 @@ class ProductI18n extends AbstractI18n
      * @Serializer\SerializedName("measurementUnitName")
      * @Serializer\Accessor(getter="getMeasurementUnitName",setter="setMeasurementUnitName")
      */
-    protected $measurementUnitName = '';
+    protected string $measurementUnitName = '';
 
     /**
      * @var string
@@ -50,7 +46,7 @@ class ProductI18n extends AbstractI18n
      * @Serializer\SerializedName("metaDescription")
      * @Serializer\Accessor(getter="getMetaDescription",setter="setMetaDescription")
      */
-    protected $metaDescription = '';
+    protected string $metaDescription = '';
 
     /**
      * @var string
@@ -58,7 +54,7 @@ class ProductI18n extends AbstractI18n
      * @Serializer\SerializedName("metaKeywords")
      * @Serializer\Accessor(getter="getMetaKeywords",setter="setMetaKeywords")
      */
-    protected $metaKeywords = '';
+    protected string $metaKeywords = '';
 
     /**
      * @var string Product name / title
@@ -66,7 +62,7 @@ class ProductI18n extends AbstractI18n
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
-    protected $name = '';
+    protected string $name = '';
 
     /**
      * @var string Optional product shortdescription
@@ -74,7 +70,7 @@ class ProductI18n extends AbstractI18n
      * @Serializer\SerializedName("shortDescription")
      * @Serializer\Accessor(getter="getShortDescription",setter="setShortDescription")
      */
-    protected $shortDescription = '';
+    protected string $shortDescription = '';
 
     /**
      * @var string
@@ -82,7 +78,7 @@ class ProductI18n extends AbstractI18n
      * @Serializer\SerializedName("titleTag")
      * @Serializer\Accessor(getter="getTitleTag",setter="setTitleTag")
      */
-    protected $titleTag = '';
+    protected string $titleTag = '';
 
     /**
      * @var string
@@ -90,7 +86,7 @@ class ProductI18n extends AbstractI18n
      * @Serializer\SerializedName("unitName")
      * @Serializer\Accessor(getter="getUnitName",setter="setUnitName")
      */
-    protected $unitName = '';
+    protected string $unitName = '';
 
     /**
      * @var string Optional path of product URL
@@ -98,7 +94,7 @@ class ProductI18n extends AbstractI18n
      * @Serializer\SerializedName("urlPath")
      * @Serializer\Accessor(getter="getUrlPath",setter="setUrlPath")
      */
-    protected $urlPath = '';
+    protected string $urlPath = '';
 
     /**
      * @return string

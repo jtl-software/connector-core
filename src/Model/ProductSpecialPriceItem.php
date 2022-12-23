@@ -1,14 +1,13 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\MustNotBeNullException;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
+use TypeError;
 
 /**
  * special price properties to define a net price for a customerGroup.
@@ -26,7 +25,7 @@ class ProductSpecialPriceItem extends AbstractModel
      * @Serializer\SerializedName("customerGroupId")
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
-    protected $customerGroupId = null;
+    protected Identity $customerGroupId;
 
     /**
      * @var double net price value
@@ -34,7 +33,7 @@ class ProductSpecialPriceItem extends AbstractModel
      * @Serializer\SerializedName("priceNet")
      * @Serializer\Accessor(getter="getPriceNet",setter="setPriceNet")
      */
-    protected $priceNet = 0.0;
+    protected float $priceNet = 0.0;
 
     /**
      * Constructor
@@ -46,10 +45,12 @@ class ProductSpecialPriceItem extends AbstractModel
 
     /**
      * @return Identity Reference to customerGroup
+     * @throws MustNotBeNullException
+     * @throws TypeError
      */
     public function getCustomerGroupId(): Identity
     {
-        return $this->customerGroupId;
+        return Validate::checkIdentityAndNotNull($this->customerGroupId);
     }
 
     /**

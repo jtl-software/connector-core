@@ -19,7 +19,7 @@ class TranslatableAttributeI18nTest extends TestCase
      *
      * @throws TranslatableAttributeException
      */
-    public function testGetValue(string $type, $originalValue, $expectedValue, bool $strictMode = false)
+    public function testGetValue(string $type, $originalValue, $expectedValue, bool $strictMode = false): void
     {
         TranslatableAttributeI18n::setStrictMode($strictMode);
 
@@ -60,7 +60,7 @@ class TranslatableAttributeI18nTest extends TestCase
         ];
     }
 
-    public function testGetValueAndJsonDecodingFailedInStrictMode()
+    public function testGetValueAndJsonDecodingFailedInStrictMode(): void
     {
         $this->expectException(TranslatableAttributeException::class);
         $this->expectExceptionCode(TranslatableAttributeException::DECODING_VALUE_FAILED);
@@ -81,7 +81,7 @@ class TranslatableAttributeI18nTest extends TestCase
      *
      * @throws TranslatableAttributeException
      */
-    public function testSetValue($value, string $expectedValue)
+    public function testSetValue($value, string $expectedValue): void
     {
         $translation = (new TranslatableAttributeI18n())->setValue($value);
 
@@ -119,7 +119,7 @@ class TranslatableAttributeI18nTest extends TestCase
      *
      * @param $value
      */
-    public function testSetValueWrongType($value)
+    public function testSetValueWrongType($value): void
     {
         $this->expectException(TranslatableAttributeException::class);
         $this->expectExceptionCode(TranslatableAttributeException::VALUE_TYPE_INVALID);

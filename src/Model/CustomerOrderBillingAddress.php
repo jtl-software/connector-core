@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -26,7 +22,7 @@ class CustomerOrderBillingAddress extends AbstractOrderAddress
      * @Serializer\SerializedName("vatNumber")
      * @Serializer\Accessor(getter="getVatNumber",setter="setVatNumber")
      */
-    protected $vatNumber = '';
+    protected string $vatNumber = '';
 
     /**
      * @return string VAT number (german "USt-ID")

@@ -1,10 +1,6 @@
 <?php
 
-/**
- *
- * @copyright 2010-2013 JTL-Software GmbH
- * @package   Jtl\Connector\Core\Exception
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Exception;
 
@@ -14,6 +10,7 @@ use Jtl\Connector\Core\Utilities\Str;
 
 /**
  * Class ApplicationException
+ *
  * @package Jtl\Connector\Core\Exception
  */
 class ApplicationException extends \Exception

@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2013 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Internal
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -27,7 +23,7 @@ class Identity extends AbstractModel
      * @Serializer\SerializedName("endpoint")
      * @Serializer\Accessor(getter="getEndpoint",setter="setEndpoint")
      */
-    protected $endpoint = '';
+    protected string $endpoint = '';
 
     /**
      * @var int
@@ -35,7 +31,7 @@ class Identity extends AbstractModel
      * @Serializer\SerializedName("host")
      * @Serializer\Accessor(getter="getHost",setter="setHost")
      */
-    protected $host = 0;
+    protected int $host = 0;
 
     /**
      * Constructor
@@ -52,18 +48,15 @@ class Identity extends AbstractModel
     /**
      * Convert from Array
      *
-     * @param array $data
+     * @param array<int, string|int> $data
      *
      * @return Identity
+     * @throws InvalidArgumentException
      */
-    public static function fromArray(array $data)
+    public static function fromArray(array $data): Identity
     {
         if (
-            \count($data) !== 2
-            || !isset($data[0])
-            || !\is_string($data[0])
-            || !isset($data[1])
-            || !\is_int($data[1])
+            !isset($data[0], $data[1]) || \count($data) !== 2 || !\is_string($data[0]) || !\is_int($data[1])
         ) {
             throw new InvalidArgumentException(
                 'The argument is not valid. 
@@ -126,7 +119,7 @@ class Identity extends AbstractModel
     /**
      * Convert to Array
      *
-     * @return array
+     * @return array{0: string, 1: int}
      */
     public function toArray(): array
     {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Definition;
 
 final class Action
@@ -20,12 +22,12 @@ final class Action
     /**
      * @var string[]|null
      */
-    protected static $actions = null;
+    protected static ?array $actions = null;
 
     /**
      * @var string[]
      */
-    protected static $coreActions = [
+    protected static array $coreActions = [
         self::AUTH,
         self::ACK,
         self::CLEAR,
@@ -46,12 +48,14 @@ final class Action
     }
 
     /**
-     * @return integer[]
+     * @return array<string, string>
      */
     public static function getActions(): array
     {
         if (\is_null(self::$actions)) {
-            self::$actions = (new \ReflectionClass(self::class))->getConstants();
+            /** @var array<string, string> $actions */
+            $actions       = (new \ReflectionClass(self::class))->getConstants();
+            self::$actions = $actions;
         }
 
         return self::$actions;

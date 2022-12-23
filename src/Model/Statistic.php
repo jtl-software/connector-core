@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2013 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Internal
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -25,7 +21,7 @@ class Statistic extends AbstractModel
      * @Serializer\SerializedName("available")
      * @Serializer\Accessor(getter="getAvailable",setter="setAvailable")
      */
-    protected $available = 0;
+    protected int $available = 0;
 
     /**
      * @var string
@@ -33,7 +29,7 @@ class Statistic extends AbstractModel
      * @Serializer\SerializedName("controllerName")
      * @Serializer\Accessor(getter="getControllerName",setter="setControllerName")
      */
-    protected $controllerName = '';
+    protected string $controllerName = '';
 
     /**
      * @return integer
@@ -71,6 +67,7 @@ class Statistic extends AbstractModel
     public function setControllerName(string $controllerName): Statistic
     {
         $this->controllerName = $controllerName;
+
         return $this;
     }
 }

@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -24,7 +20,7 @@ class FileUploadI18n extends AbstractI18n
      * @Serializer\SerializedName("description")
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
-    protected $description = '';
+    protected string $description = '';
 
     /**
      * @var integer
@@ -32,7 +28,7 @@ class FileUploadI18n extends AbstractI18n
      * @Serializer\SerializedName("fileUploadId")
      * @Serializer\Accessor(getter="getFileUploadId",setter="setFileUploadId")
      */
-    protected $fileUploadId = 0;
+    protected int $fileUploadId = 0;
 
     /**
      * @var string
@@ -40,7 +36,7 @@ class FileUploadI18n extends AbstractI18n
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
-    protected $name = '';
+    protected string $name = '';
 
     /**
      * @return string

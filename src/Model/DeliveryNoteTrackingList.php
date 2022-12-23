@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -24,7 +20,7 @@ class DeliveryNoteTrackingList extends AbstractModel
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
-    protected $name = '';
+    protected string $name = '';
 
     /**
      * @var string[]
@@ -32,7 +28,7 @@ class DeliveryNoteTrackingList extends AbstractModel
      * @Serializer\SerializedName("codes")
      * @Serializer\AccessType("reflection")
      */
-    protected $codes = [];
+    protected array $codes = [];
 
     /**
      * @return string

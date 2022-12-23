@@ -43,11 +43,16 @@ use Jtl\Connector\Core\Test\Stub\Controller\TransactionalControllerStub;
 use Jtl\Connector\Core\Utilities\Str;
 use MyPlugin\Bootstrap;
 use Noodlehaus\ConfigInterface;
+use PHPUnit\Framework\InvalidArgumentException;
+use PHPUnit\Framework\MockObject\IncompatibleReturnValueException;
+use PHPUnit\Framework\MockObject\MethodCannotBeConfiguredException;
+use PHPUnit\Framework\MockObject\MethodNameAlreadyConfiguredException;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\FileBag;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
+use TypeError;
 
 /**
  * Class ApplicationTest
@@ -59,8 +64,9 @@ class ApplicationTest extends TestCase
      * @throws ApplicationException
      * @throws ConfigException
      * @throws \ReflectionException
+     * @throws LoggerException
      */
-    public function testHandleRequestControllerClassNotFoundException()
+    public function testHandleRequestControllerClassNotFoundException(): void
     {
         $application = $this->createInitializedApplication();
         $connector   = $this->createConnector();
@@ -79,12 +85,14 @@ class ApplicationTest extends TestCase
      * @throws ConfigException
      * @throws LoggerException
      * @throws \ReflectionException
+     * @throws TypeError
      */
     protected function createInitializedApplication(
         ConfigSchema    $configSchema = null,
         string          $connectorDir = null,
         ConfigInterface $config = null
-    ) {
+    ): Application
+    {
         $sessionHandler = $this->createMock(SessionHandlerInterface::class);
         if (\is_null($configSchema)) {
             $configSchema = (new ConfigSchema())->setParameters(
@@ -118,7 +126,7 @@ class ApplicationTest extends TestCase
      * @throws ApplicationException
      * @throws ConfigException
      * @throws LoggerException
-     * @throws \ReflectionException
+     * @throws \ReflectionException|\TypeError
      */
     protected function createApplication(
         ConfigSchema    $configSchema = null,
@@ -145,6 +153,10 @@ class ApplicationTest extends TestCase
      * @param bool   $tokenValidatorValidateValue
      *
      * @return ConnectorInterface|MockObject
+     * @throws InvalidArgumentException
+     * @throws IncompatibleReturnValueException
+     * @throws MethodCannotBeConfiguredException
+     * @throws MethodNameAlreadyConfiguredException
      */
     public function createConnector($controllerNamespace = '', bool $tokenValidatorValidateValue = true)
     {
@@ -170,7 +182,7 @@ class ApplicationTest extends TestCase
      * @throws \ReflectionException
      * @throws \Throwable
      */
-    public function testHandleRequestControllerAction(string $action, $parameter)
+    public function testHandleRequestControllerAction(string $action, $parameter): void
     {
         $application = $this->createInitializedApplication();
         $connector   = $this->createConnector();
@@ -206,7 +218,7 @@ class ApplicationTest extends TestCase
     /**
      * @return array
      */
-    public function controllerActionsDataProvider()
+    public function controllerActionsDataProvider(): array
     {
         return [
             [
@@ -235,7 +247,7 @@ class ApplicationTest extends TestCase
      * @throws \ReflectionException
      * @throws \Throwable
      */
-    public function testHandleRequestTransactionalMethodsCalls()
+    public function testHandleRequestTransactionalMethodsCalls(): void
     {
         $application = $this->createInitializedApplication();
         $connector   = $this->createConnector();
@@ -257,7 +269,7 @@ class ApplicationTest extends TestCase
      * @throws ApplicationException
      * @throws \Throwable
      */
-    public function testHandleRequestTransactionalControllerFail()
+    public function testHandleRequestTransactionalControllerFail(): void
     {
         $this->expectException(\RuntimeException::class);
         $category    = new Category();
@@ -283,7 +295,7 @@ class ApplicationTest extends TestCase
      * @throws \ReflectionException
      * @throws \Throwable
      */
-    public function testHandleRequestControllerClassNeedToBeInitialized()
+    public function testHandleRequestControllerClassNeedToBeInitialized(): void
     {
         $application = $this->createInitializedApplication();
         $connector   = $this->createConnector();
@@ -301,7 +313,7 @@ class ApplicationTest extends TestCase
      * @throws NotFoundException
      * @throws \ReflectionException
      */
-    public function testPrepareContainer()
+    public function testPrepareContainer(): void
     {
         $config      = $this->createConfig(['foo' => 'you', 'bar' => 'jau']);
         $connector   = $this->createConnector(ConnectorInterface::class);
@@ -324,7 +336,7 @@ class ApplicationTest extends TestCase
      * @throws ConfigException
      * @throws \ReflectionException
      */
-    public function testPrepareConfigSetDefaultParameters()
+    public function testPrepareConfigSetDefaultParameters(): void
     {
         $defaultParameters = ConfigSchema::createDefaultParameters($this->connectorDir);
         $schema            = new ConfigSchema();
@@ -349,7 +361,7 @@ class ApplicationTest extends TestCase
      * @throws ConfigException
      * @throws \ReflectionException
      */
-    public function testPrepareConfigurationSetDefaultValuesInConfig()
+    public function testPrepareConfigurationSetDefaultValuesInConfig(): void
     {
         $schema = (new ConfigSchema())
             ->setParameter(ConfigParameter::create('foo', ConfigParameter::TYPE_INTEGER, true, false, 42))
@@ -373,7 +385,7 @@ class ApplicationTest extends TestCase
     /**
      * @throws \ReflectionException
      */
-    public function testLoadPlugins()
+    public function testLoadPlugins(): void
     {
         $config          = $this->createMock(ConfigInterface::class);
         $container       = $this->createMock(Container::class);
@@ -395,7 +407,7 @@ class ApplicationTest extends TestCase
      * @throws \ReflectionException
      * @throws \Throwable
      */
-    public function testRun()
+    public function testRun(): void
     {
         $serializer = SerializerBuilder::create()->build();
         $factory    = AbstractModelFactory::createFactory(Model::MANUFACTURER);
@@ -479,7 +491,7 @@ class ApplicationTest extends TestCase
      * @throws DefinitionException
      * @throws \Throwable
      */
-    public function testRunInvalidRpcMethod()
+    public function testRunInvalidRpcMethod(): void
     {
         $this->expectException(RpcException::class);
         $this->expectExceptionCode(ErrorCode::INVALID_REQUEST);
@@ -506,7 +518,7 @@ class ApplicationTest extends TestCase
      * @throws DefinitionException
      * @throws \Throwable
      */
-    public function testRunUnknownController()
+    public function testRunUnknownController(): void
     {
         $this->expectException(DefinitionException::class);
         $this->expectExceptionCode(ErrorCode::UNKNOWN_CONTROLLER);
@@ -541,7 +553,7 @@ class ApplicationTest extends TestCase
      * @throws DefinitionException
      * @throws \Throwable
      */
-    public function testRunUnknownAction()
+    public function testRunUnknownAction(): void
     {
         $this->expectException(DefinitionException::class);
         $this->expectExceptionCode(ErrorCode::UNKNOWN_ACTION);
@@ -565,7 +577,7 @@ class ApplicationTest extends TestCase
              ->run($this->createConnector());
     }
 
-    public function testHandleImagePushWithFilesSentByWawi()
+    public function testHandleImagePushWithFilesSentByWawi(): void
     {
         $serializer = SerializerBuilder::create()->build();
         $data       = \file_get_contents(\sprintf('%s/fixtures/images_push.json', \TEST_DIR));
@@ -604,7 +616,7 @@ class ApplicationTest extends TestCase
         }
     }
 
-    public function testHandleImagePushUploadedFileNotFound()
+    public function testHandleImagePushUploadedFileNotFound(): void
     {
         $this->expectException(ApplicationException::class);
         $this->expectExceptionCode(ErrorCode::REQUEST_ERROR);
@@ -622,7 +634,7 @@ class ApplicationTest extends TestCase
      * @throws \Jtl\Connector\Core\Exception\ConfigException
      * @throws \Jtl\Connector\Core\Exception\LoggerException
      */
-    public function testHandleImagePushFileExtractionFailed()
+    public function testHandleImagePushFileExtractionFailed(): void
     {
         $this->expectException(ApplicationException::class);
         $this->expectExceptionCode(ErrorCode::SERVER_ERROR);

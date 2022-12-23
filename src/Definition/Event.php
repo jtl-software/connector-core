@@ -1,12 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Definition;
 
+use Jawira\CaseConverter\CaseConverterException;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Utilities\Str;
 
 /**
  * Class Event
+ *
  * @package Jtl\Connector\Core\Definition
  */
 final class Event
@@ -22,6 +26,7 @@ final class Event
      *
      * @return string
      * @throws DefinitionException
+     * @throws CaseConverterException
      */
     public static function createCoreEventName(string $controllerName, string $actionName, string $moment): string
     {
@@ -35,6 +40,7 @@ final class Event
      *
      * @return string
      * @throws DefinitionException
+     * @throws CaseConverterException
      */
     public static function createEventName(string $controllerName, string $actionName, string $moment): string
     {
@@ -70,6 +76,7 @@ final class Event
      *
      * @return string
      * @throws DefinitionException
+     * @throws CaseConverterException
      */
     public static function createHandleEventName(string $controllerName, string $actionName, string $moment): string
     {

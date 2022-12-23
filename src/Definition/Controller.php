@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Definition;
 
 final class Controller
@@ -22,9 +24,9 @@ final class Controller
         STATUS_CHANGE       = 'StatusChange';
 
     /**
-     * @var string[]|null
+     * @var array<string, string>|null
      */
-    protected static $controllers = null;
+    protected static ?array $controllers = null;
 
     /**
      * @param string $controllerName
@@ -37,12 +39,14 @@ final class Controller
     }
 
     /**
-     * @return integer[]
+     * @return array<string, string>
      */
     public static function getControllers(): array
     {
         if (\is_null(self::$controllers)) {
-            self::$controllers = (new \ReflectionClass(self::class))->getConstants();
+            /** @var array<string, string> $controllers */
+            $controllers       = (new \ReflectionClass(self::class))->getConstants();
+            self::$controllers = $controllers;
         }
 
         return self::$controllers;

@@ -1,10 +1,6 @@
 <?php
 
-/**
- *
- * @copyright 2010-2013 JTL-Software GmbH
- * @package   Jtl\Connector\Core\Rpc
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Rpc;
 
@@ -37,7 +33,7 @@ class ResponsePacket extends Packet
      * @var Error|null
      * @Serializer\Type("Jtl\Connector\Core\Rpc\Error")
      */
-    protected $error = null;
+    protected ?Error $error = null;
 
     /**
      * @return boolean
@@ -48,7 +44,7 @@ class ResponsePacket extends Packet
         $isValid = true;
 
         // JSON-RPC protocol
-        if ($this->getJtlrpc() === null || $this->getJtlrpc() != '2.0') {
+        if ($this->getJtlrpc() !== '2.0') {
             $isValid = false;
         }
 
@@ -63,14 +59,13 @@ class ResponsePacket extends Packet
             $isValid = false;
         }
 
-        if ($this->getError() !== null) {
-            $error = $this->getError();
+        if (($error = $this->getError()) !== null) {
             $error->validate();
         }
 
         // An identifier established by the Client that MUST contain a String,
         // Number, or NULL value if included
-        if ($this->getId() === null || \strlen($this->getId()) == 0) {
+        if ($this->getId() === '') {
             $isValid = false;
         }
 
@@ -93,6 +88,7 @@ class ResponsePacket extends Packet
     public function setResult($result): ResponsePacket
     {
         $this->result = $result;
+
         return $this;
     }
 
@@ -112,6 +108,7 @@ class ResponsePacket extends Packet
     public function setError(Error $error): ResponsePacket
     {
         $this->error = $error;
+
         return $this;
     }
 }

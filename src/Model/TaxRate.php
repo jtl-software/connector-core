@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -24,7 +20,7 @@ class TaxRate extends AbstractIdentity
      * @Serializer\SerializedName("countryIso")
      * @Serializer\Accessor(getter="getCountryIso",setter="setCountryIso")
      */
-    protected $countryIso = '';
+    protected string $countryIso = '';
 
     /**
      * @var double
@@ -32,7 +28,7 @@ class TaxRate extends AbstractIdentity
      * @Serializer\SerializedName("rate")
      * @Serializer\Accessor(getter="getRate",setter="setRate")
      */
-    protected $rate = 0.0;
+    protected float $rate = 0.0;
 
     /**
      * @return double

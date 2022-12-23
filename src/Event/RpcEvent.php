@@ -1,29 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Event;
 
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Class RpcEvent
+ *
  * @package Jtl\Connector\Core\Event
  */
 class RpcEvent extends Event
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $data;
 
-    /**
-     * @var string
-     */
-    protected $controller;
-
-    /**
-     * @var string
-     */
-    protected $action;
+    protected string $controller;
+    protected string $action;
 
     /**
      * RpcEvent constructor.
@@ -40,7 +34,7 @@ class RpcEvent extends Event
     }
 
     /**
-     * @return array
+     * @return mixed
      */
     public function getData()
     {
@@ -55,6 +49,7 @@ class RpcEvent extends Event
     public function setData($data): self
     {
         $this->data = $data;
+
         return $this;
     }
 

@@ -15,7 +15,7 @@ class ResponseTest extends TestCase
     /**
      *
      */
-    public function responseDataProvider()
+    public function responseDataProvider(): array
     {
         return [
             [new Identity('1')],
@@ -31,7 +31,7 @@ class ResponseTest extends TestCase
      *
      * @param $result
      */
-    public function testCreateFromStatic($result)
+    public function testCreateFromStatic($result): void
     {
         $response = Response::create($result);
 
@@ -41,7 +41,7 @@ class ResponseTest extends TestCase
     /**
      *
      */
-    public function testSetResult()
+    public function testSetResult(): void
     {
         $result = 'FOO';
 

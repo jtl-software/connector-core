@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -21,20 +17,20 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductSpecialPrice extends AbstractIdentity
 {
     /**
-     * @var \DateTimeInterface Optional: Activate special price from date
+     * @var \DateTimeInterface|null Optional: Activate special price from date
      * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("activeFromDate")
      * @Serializer\Accessor(getter="getActiveFromDate",setter="setActiveFromDate")
      */
-    protected $activeFromDate = null;
+    protected ?\DateTimeInterface $activeFromDate = null;
 
     /**
-     * @var \DateTimeInterface Optional: Special price active until date
+     * @var \DateTimeInterface|null Optional: Special price active until date
      * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("activeUntilDate")
      * @Serializer\Accessor(getter="getActiveUntilDate",setter="setActiveUntilDate")
      */
-    protected $activeUntilDate = null;
+    protected ?\DateTimeInterface $activeUntilDate = null;
 
     /**
      * @var boolean Optional: Consider activeFrom/activeUntil date range.
@@ -43,7 +39,7 @@ class ProductSpecialPrice extends AbstractIdentity
      * @Serializer\SerializedName("considerDateLimit")
      * @Serializer\Accessor(getter="getConsiderDateLimit",setter="setConsiderDateLimit")
      */
-    protected $considerDateLimit = false;
+    protected bool $considerDateLimit = false;
 
     /**
      * @var boolean Optional: Consider stockLimit value.
@@ -52,7 +48,7 @@ class ProductSpecialPrice extends AbstractIdentity
      * @Serializer\SerializedName("considerStockLimit")
      * @Serializer\Accessor(getter="getConsiderStockLimit",setter="setConsiderStockLimit")
      */
-    protected $considerStockLimit = false;
+    protected bool $considerStockLimit = false;
 
     /**
      * @var boolean Special price is active? Default true, to activate specialPrice.
@@ -61,7 +57,7 @@ class ProductSpecialPrice extends AbstractIdentity
      * @Serializer\SerializedName("isActive")
      * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
      */
-    protected $isActive = false;
+    protected bool $isActive = false;
 
     /**
      * @var integer Optional: SpecialPrice active until stock level quantity
@@ -69,7 +65,7 @@ class ProductSpecialPrice extends AbstractIdentity
      * @Serializer\SerializedName("stockLimit")
      * @Serializer\Accessor(getter="getStockLimit",setter="setStockLimit")
      */
-    protected $stockLimit = 0;
+    protected int $stockLimit = 0;
 
     /**
      * @var ProductSpecialPriceItem[]
@@ -77,7 +73,7 @@ class ProductSpecialPrice extends AbstractIdentity
      * @Serializer\SerializedName("items")
      * @Serializer\AccessType("reflection")
      */
-    protected $items = [];
+    protected array $items = [];
 
     /**
      * @return \DateTimeInterface Optional: Activate special price from date

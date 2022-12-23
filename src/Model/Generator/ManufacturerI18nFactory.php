@@ -1,19 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Model\Generator;
 
 use Jtl\Connector\Core\Model\ManufacturerI18n;
 
 /**
  * Class ManufacturerI18nFactory
+ *
  * @package Jtl\Connector\Core\Model\Generator
  */
 class ManufacturerI18nFactory extends AbstractModelFactory
 {
     /**
-     * @param array $override
+     * @param array<string, mixed>|array{} $override
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function makeFakeArray(array $override = []): array
     {

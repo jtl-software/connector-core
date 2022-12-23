@@ -19,7 +19,7 @@ class StrTest extends TestCase
      *
      * @throws \Exception
      */
-    public function testToCamelCase($data, $expectedResult)
+    public function testToCamelCase($data, $expectedResult): void
     {
         $this->assertSame($expectedResult, Str::toCamelCase($data));
     }
@@ -51,7 +51,7 @@ class StrTest extends TestCase
      *
      * @throws \Exception
      */
-    public function testPascalCase($data, $expectedResult)
+    public function testPascalCase($data, $expectedResult): void
     {
         $this->assertSame($expectedResult, Str::toPascalCase($data));
     }
@@ -83,7 +83,7 @@ class StrTest extends TestCase
      *
      * @throws \Exception
      */
-    public function testSnakeCase($data, $expectedResult)
+    public function testSnakeCase($data, $expectedResult): void
     {
         $this->assertSame($expectedResult, Str::toSnakeCase($data));
     }

@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -34,7 +30,7 @@ class Specific extends AbstractIdentity
      * @Serializer\SerializedName("isGlobal")
      * @Serializer\Accessor(getter="getIsGlobal",setter="setIsGlobal")
      */
-    protected $isGlobal = false;
+    protected bool $isGlobal = false;
 
     /**
      * @var integer Optional sort number
@@ -42,7 +38,7 @@ class Specific extends AbstractIdentity
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
-    protected $sort = 1;
+    protected int $sort = 1;
 
     /**
      * @var string Specific type (radio, dropdown, image...)
@@ -50,7 +46,7 @@ class Specific extends AbstractIdentity
      * @Serializer\SerializedName("type")
      * @Serializer\Accessor(getter="getType",setter="setType")
      */
-    protected $type = '';
+    protected string $type = '';
 
     /**
      * @var SpecificI18n[]
@@ -58,7 +54,7 @@ class Specific extends AbstractIdentity
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = [];
+    protected array $i18ns = [];
 
     /**
      * @var SpecificValue[]
@@ -66,7 +62,7 @@ class Specific extends AbstractIdentity
      * @Serializer\SerializedName("values")
      * @Serializer\AccessType("reflection")
      */
-    protected $values = [];
+    protected array $values = [];
 
     /**
      * @return boolean Optional: Global specific means the specific can be used like a category
@@ -195,7 +191,7 @@ class Specific extends AbstractIdentity
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getIdentificationStrings(): array
     {

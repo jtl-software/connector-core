@@ -1,13 +1,12 @@
 <?php
 
-/**
- * @copyright 2010-2013 JTL-Software GmbH
- * @package   Jtl\Connector\Core\Model
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
+use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
+use stdClass;
 
 /**
  * Database Query Filter
@@ -30,7 +29,7 @@ class QueryFilter
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("limit")
      */
-    protected $limit = 100;
+    protected int $limit = 100;
 
     /**
      * Query item filter (where)
@@ -39,14 +38,14 @@ class QueryFilter
      * @Serializer\Type("array<string, string>")
      * @Serializer\SerializedName("filters")
      */
-    protected $filters = [];
+    protected array $filters = [];
 
     /**
      * Constructor
      *
      * @param integer $limit
      */
-    public function __construct($limit = 100)
+    public function __construct(int $limit = 100)
     {
         $this->filters = [];
         $this->limit   = $limit;
@@ -79,7 +78,7 @@ class QueryFilter
     /**
      * Filters Getter
      *
-     * @return array: string
+     * @return string[]
      */
     public function getFilters(): array
     {
@@ -89,12 +88,21 @@ class QueryFilter
     /**
      * Filters Setter
      *
-     * @param array $filters
+     * @param array<string, mixed> $filters
      *
      * @return QueryFilter
+     * @throws InvalidArgumentException
      */
     public function setFilters(array $filters): QueryFilter
     {
+        foreach ($filters as $index => $filter) {
+            if (\is_scalar($filter)) {
+                $filters[$index] = (string)$filter;
+            } else {
+                throw new \InvalidArgumentException('Filter-Array must be type array<string, scalar>.');
+            }
+        }
+        /** @var array<string, string> $filters */
         $this->filters = $filters;
 
         return $this;
@@ -106,11 +114,12 @@ class QueryFilter
      * @param string $key   Filter key
      * @param string $value Filter value
      *
-     * @return Jtl\Connector\Core\Model\QueryFilter
+     * @return QueryFilter
      */
-    public function addFilter(string $key, $value): QueryFilter
+    public function addFilter(string $key, string $value): QueryFilter
     {
         $this->filters[$key] = $value;
+
         return $this;
     }
 
@@ -156,7 +165,10 @@ class QueryFilter
         return null;
     }
 
-    public function resetFilters()
+    /**
+     * @return void
+     */
+    public function resetFilters(): void
     {
         $this->filters = [];
     }
@@ -167,12 +179,18 @@ class QueryFilter
      * @param mixed  $value
      *
      * @return boolean
+     * @throws InvalidArgumentException
      */
     public function overrideFilter(string $oldKey, string $newKey, $value = null): bool
     {
         if ($this->isFilter($oldKey)) {
             if ($value === null) {
                 $value = $this->filters[$oldKey];
+            }
+            if (\is_scalar($value)) {
+                $value = (string)$value;
+            } else {
+                throw new \InvalidArgumentException('$value must be scalar!');
             }
 
             unset($this->filters[$oldKey]);
@@ -187,7 +205,9 @@ class QueryFilter
     /**
      * Setter
      *
-     * @param \stdClass $obj
+     * @param stdClass $obj
+     *
+     * @throws InvalidArgumentException
      */
     public function set(\stdClass $obj): void
     {

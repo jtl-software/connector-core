@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @copyright  2010-2015 JTL-Software GmbH
- * @package    Jtl\Connector\Core\Model
- * @subpackage Product
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -19,12 +15,12 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductFileDownload extends AbstractModel
 {
     /**
-     * @var \DateTimeInterface
+     * @var \DateTimeInterface|null
      * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("creationDate")
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
-    protected $creationDate = null;
+    protected ?\DateTimeInterface $creationDate = null;
 
     /**
      * @var integer
@@ -32,7 +28,7 @@ class ProductFileDownload extends AbstractModel
      * @Serializer\SerializedName("maxDays")
      * @Serializer\Accessor(getter="getMaxDays",setter="setMaxDays")
      */
-    protected $maxDays = 0;
+    protected int $maxDays = 0;
 
     /**
      * @var integer
@@ -40,7 +36,7 @@ class ProductFileDownload extends AbstractModel
      * @Serializer\SerializedName("maxDownloads")
      * @Serializer\Accessor(getter="getMaxDownloads",setter="setMaxDownloads")
      */
-    protected $maxDownloads = 0;
+    protected int $maxDownloads = 0;
 
     /**
      * @var string
@@ -48,7 +44,7 @@ class ProductFileDownload extends AbstractModel
      * @Serializer\SerializedName("path")
      * @Serializer\Accessor(getter="getPath",setter="setPath")
      */
-    protected $path = '';
+    protected string $path = '';
 
     /**
      * @var string
@@ -56,7 +52,7 @@ class ProductFileDownload extends AbstractModel
      * @Serializer\SerializedName("previewPath")
      * @Serializer\Accessor(getter="getPreviewPath",setter="setPreviewPath")
      */
-    protected $previewPath = '';
+    protected string $previewPath = '';
 
     /**
      * @var integer
@@ -64,7 +60,7 @@ class ProductFileDownload extends AbstractModel
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
-    protected $sort = 0;
+    protected int $sort = 0;
 
     /**
      * @var ProductFileDownloadI18n[]
@@ -72,7 +68,7 @@ class ProductFileDownload extends AbstractModel
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = [];
+    protected array $i18ns = [];
 
     /**
      * @return \DateTimeInterface

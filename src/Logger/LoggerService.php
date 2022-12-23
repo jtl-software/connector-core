@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Logger;
 
 use Jtl\Connector\Core\Exception\LoggerException;
@@ -10,6 +12,9 @@ use Monolog\Logger as MonoLogger;
 use Monolog\Processor\IntrospectionProcessor;
 use Monolog\Processor\ProcessorInterface;
 use Monolog\Processor\PsrLogMessageProcessor;
+use Psr\Log\InvalidArgumentException;
+use ReflectionException;
+use RuntimeException;
 
 class LoggerService
 {
@@ -74,6 +79,8 @@ class LoggerService
      * @param string $channel
      *
      * @return MonoLogger
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
      */
     public function get(string $channel): MonoLogger
     {
@@ -82,7 +89,7 @@ class LoggerService
             $this->channels[$channel] = new MonoLogger($channel);
         }
 
-        $logLevel = MonoLogger::toMonologLevel($this->logLevel);
+        $logLevel = MonoLogger::toMonologLevel($this->logLevel); // @phpstan-ignore-line
         if (!$this->channels[$channel]->isHandling($logLevel)) {
             $fileName = \sprintf('%s/%s.log', $this->logDir, $channel);
             $handler  = new RotatingFileHandler($fileName, $this->maxFiles, $logLevel);
@@ -128,11 +135,13 @@ class LoggerService
     }
 
     /**
-     * @param string $format
-     * @param array  $arguments
+     * @param string               $format
+     * @param array{}|array<mixed> $arguments
      *
      * @return LoggerService
-     * @throws \ReflectionException|LoggerException
+     * @throws LoggerException
+     * @throws RuntimeException
+     * @throws ReflectionException
      */
     public function setFormat(string $format, array $arguments = []): self
     {
@@ -141,6 +150,10 @@ class LoggerService
             throw LoggerException::formatterNotExists($formatterClass);
         }
         $formatter = (new \ReflectionClass($formatterClass))->newInstanceArgs($arguments);
+        if (!($formatter instanceof FormatterInterface)) {
+            throw new \RuntimeException('Formatter ' . $formatterClass . ' not found.');
+        }
+
         $this->setFormatter($formatter);
 
         return $this;

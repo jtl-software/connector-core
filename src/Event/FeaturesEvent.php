@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Model\Features;
@@ -10,7 +12,7 @@ class FeaturesEvent extends Event
     /**
      * @var Features
      */
-    protected $features;
+    protected Features $features;
 
     /**
      * CoreConnectorAfterFeaturesEvent constructor.

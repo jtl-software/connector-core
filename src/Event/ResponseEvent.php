@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Application\Response;
@@ -7,10 +9,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class ResponseEvent extends Event
 {
-    /**
-     * @var Response
-     */
-    protected $response = [];
+    protected Response $response;
 
     /**
      * ResponseEvent constructor.

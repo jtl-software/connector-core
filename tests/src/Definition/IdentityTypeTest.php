@@ -19,7 +19,7 @@ class IdentityTypeTest extends TestCase
      *
      * @throws \ReflectionException
      */
-    public function testIsType($type, bool $shouldBeIdentityType)
+    public function testIsType($type, bool $shouldBeIdentityType): void
     {
         $isType = IdentityType::isType($type);
         $this->assertSame($shouldBeIdentityType, $isType);

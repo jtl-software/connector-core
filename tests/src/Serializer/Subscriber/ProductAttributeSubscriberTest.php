@@ -21,7 +21,7 @@ class ProductAttributeSubscriberTest extends TestCase
     /**
      * @throws \Exception
      */
-    public function testOnPostSerializeAppendProductAttrIdToAttributes()
+    public function testOnPostSerializeAppendProductAttrIdToAttributes(): void
     {
         $product = $this->createProduct();
 
@@ -96,7 +96,7 @@ class ProductAttributeSubscriberTest extends TestCase
     /**
      * @throws \Exception
      */
-    public function testOnPostSerializeAppendProductAttrIdToAttributesNestedObjects()
+    public function testOnPostSerializeAppendProductAttrIdToAttributesNestedObjects(): void
     {
         $product   = $this->createProduct();
         $attribute = $this->addTranslatableAttribute($product);

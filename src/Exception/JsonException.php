@@ -1,11 +1,6 @@
 <?php
 
-/**
- * @author    Immanuel Klinkenberg <immanuel.klinkenberg@jtl-software.com>
- * @copyright 2010-2019 JTL-Software GmbH
- *
- * Created at 15.05.2019 09:06
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Exception;
 
@@ -19,7 +14,7 @@ class JsonException extends \RuntimeException
      *
      * @return JsonException
      */
-    public static function encoding($lastErrorMessage)
+    public static function encoding($lastErrorMessage): JsonException
     {
         return new self(\sprintf('Error while encoding into JSON: %s', $lastErrorMessage), static::ENCODING_ERROR);
     }
@@ -30,7 +25,7 @@ class JsonException extends \RuntimeException
      *
      * @return JsonException
      */
-    public static function decoding($lastErrorMessage, $jsonString = null)
+    public static function decoding($lastErrorMessage, $jsonString = null): JsonException
     {
         $msg = \sprintf('Error while decoding JSON: %s', $lastErrorMessage);
         if (!\is_null($jsonString)) {

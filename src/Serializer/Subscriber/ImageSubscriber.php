@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Serializer\Subscriber;
 
 use Jawira\CaseConverter\CaseConverterException;
@@ -13,13 +15,14 @@ use Jtl\Connector\Core\Model\AbstractImage;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Utilities\Str;
+use RuntimeException;
 
 class ImageSubscriber implements EventSubscriberInterface
 {
     /**
      * @return array<int, array<string, string>>
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             [
@@ -39,8 +42,9 @@ class ImageSubscriber implements EventSubscriberInterface
      * @param ObjectEvent $event
      *
      * @throws DefinitionException
+     * @throws RuntimeException
      */
-    public function onPostSerialize(ObjectEvent $event)
+    public function onPostSerialize(ObjectEvent $event): void
     {
         $object = $event->getObject();
         if (
@@ -51,7 +55,8 @@ class ImageSubscriber implements EventSubscriberInterface
             $id = clone $object->getId();
             $id->setEndpoint(\sprintf('%s#=#%s', $object->getRelationType(), $id->getEndpoint()));
             $serializedId = $id->toArray();
-            $event->getVisitor()->visitProperty(new StaticPropertyMetadata('', 'id', $serializedId), $serializedId);
+            $event->getVisitor() // @phpstan-ignore-line
+                  ->visitProperty(new StaticPropertyMetadata('', 'id', $serializedId), $serializedId);
         }
     }
 
@@ -61,7 +66,7 @@ class ImageSubscriber implements EventSubscriberInterface
      * @throws SerializerException
      * @throws CaseConverterException
      */
-    public function onPostDeserialize(ObjectEvent $event)
+    public function onPostDeserialize(ObjectEvent $event): void
     {
         $object = $event->getObject();
         if ($object instanceof Ack) {

@@ -21,7 +21,7 @@ class TokenValidationTest extends TestCase
      *
      * @throws TokenValidatorException
      */
-    public function testValidateToken(string $connectorToken, string $token, bool $result)
+    public function testValidateToken(string $connectorToken, string $token, bool $result): void
     {
         $validator = new TokenValidator($connectorToken);
         $this->assertEquals($result, $validator->validate($token));
@@ -30,7 +30,7 @@ class TokenValidationTest extends TestCase
     /**
      *
      */
-    public function testInstantiateWithEmptyToken()
+    public function testInstantiateWithEmptyToken(): void
     {
         $this->expectException(TokenValidatorException::class);
         $this->expectExceptionCode(TokenValidatorException::EMPTY_TOKEN);

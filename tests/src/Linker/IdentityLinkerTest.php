@@ -27,7 +27,7 @@ class IdentityLinkerTest extends TestCase
      * @param $hostId
      * @param $shouldBeValid
      */
-    public function testHostIdValidator($hostId, $shouldBeValid)
+    public function testHostIdValidator($hostId, $shouldBeValid): void
     {
         $isValid = $this->createLinker()->isValidHostId($hostId);
 
@@ -39,7 +39,7 @@ class IdentityLinkerTest extends TestCase
      *
      * @return IdentityLinker
      */
-    protected function createLinker($mockedPrimaryKeyMapper = null)
+    protected function createLinker($mockedPrimaryKeyMapper = null): IdentityLinker
     {
         if ($mockedPrimaryKeyMapper === null) {
             $mockedPrimaryKeyMapper = $this->createPrimaryKeyMapperMock();
@@ -69,7 +69,7 @@ class IdentityLinkerTest extends TestCase
      * @return array
      * @throws \Exception
      */
-    public function hostIdDataProvider()
+    public function hostIdDataProvider(): array
     {
         return [
             [0, false],
@@ -84,7 +84,7 @@ class IdentityLinkerTest extends TestCase
      * @param $endpointId
      * @param $shouldBeValid
      */
-    public function testEndpointIdValidator($endpointId, $shouldBeValid)
+    public function testEndpointIdValidator($endpointId, $shouldBeValid): void
     {
         $isValid = $this->createLinker()->isValidEndpointId($endpointId);
         $this->assertEquals($shouldBeValid, $isValid);
@@ -94,7 +94,7 @@ class IdentityLinkerTest extends TestCase
      * @return array
      * @throws \Exception
      */
-    public function endpointIdDataProvider()
+    public function endpointIdDataProvider(): array
     {
         return [
             [0, true],
@@ -106,7 +106,7 @@ class IdentityLinkerTest extends TestCase
     /**
      * @throws \ReflectionException
      */
-    public function testCache()
+    public function testCache(): void
     {
         $linker = $this->createLinker();
 
@@ -150,7 +150,7 @@ class IdentityLinkerTest extends TestCase
     /**
      *
      */
-    public function testHostIdResolver()
+    public function testHostIdResolver(): void
     {
         $linker = $this->createLinker();
 
@@ -168,7 +168,7 @@ class IdentityLinkerTest extends TestCase
     /**
      *
      */
-    public function testEndpointIdResolver()
+    public function testEndpointIdResolver(): void
     {
         $linker = $this->createLinker();
 
@@ -186,7 +186,7 @@ class IdentityLinkerTest extends TestCase
     /**
      *
      */
-    public function testIdentityClear()
+    public function testIdentityClear(): void
     {
         $linker = $this->createLinker();
 
@@ -197,7 +197,7 @@ class IdentityLinkerTest extends TestCase
     /**
      *
      */
-    public function testIdentitySave()
+    public function testIdentitySave(): void
     {
         $endpointId   = $this->createEndpointId();
         $hostId       = $this->createHostId();
@@ -221,7 +221,7 @@ class IdentityLinkerTest extends TestCase
     /**
      *
      */
-    public function testIdentityDelete()
+    public function testIdentityDelete(): void
     {
         $endpointId   = $this->createEndpointId();
         $hostId       = $this->createHostId();
@@ -251,7 +251,7 @@ class IdentityLinkerTest extends TestCase
     /**
      *
      */
-    public function testLinkModel()
+    public function testLinkModel(): void
     {
         $productHostId     = $this->createHostId();
         $productEndpointId = $this->createEndpointId();
@@ -289,7 +289,7 @@ class IdentityLinkerTest extends TestCase
     /**
      *
      */
-    public function testUnlinkModel()
+    public function testUnlinkModel(): void
     {
         $primaryKeyMapper = $this->createPrimaryKeyMapperMock([0]);
         $linker           = $this->createLinker($primaryKeyMapper);
@@ -308,7 +308,7 @@ class IdentityLinkerTest extends TestCase
     /**
      *
      */
-    public function testLinkCollection()
+    public function testLinkCollection(): void
     {
         $expectedHostId = $this->createHostId();
         $endpointId     = $this->createEndpointId();
@@ -331,7 +331,7 @@ class IdentityLinkerTest extends TestCase
     /**
      *
      */
-    public function testUnlinkCollection()
+    public function testUnlinkCollection(): void
     {
         $expectedHostId = $this->createHostId();
         $endpointId     = $this->createEndpointId();
@@ -358,7 +358,7 @@ class IdentityLinkerTest extends TestCase
     /**
      *
      */
-    public function testLinkIdentityList()
+    public function testLinkIdentityList(): void
     {
         $expectedHostId     = $this->createHostId();
         $expectedEndpointId = $this->createEndpointId();

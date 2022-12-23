@@ -62,7 +62,7 @@ class TestCase extends \Jtl\UnitTest\TestCase
     /**
      * @param string $dirname
      */
-    protected function removeDirRecursive(string $dirname)
+    protected function removeDirRecursive(string $dirname): void
     {
         $elements = \glob($dirname . '/*');
         foreach ($elements as $element) {
@@ -126,7 +126,7 @@ class TestCase extends \Jtl\UnitTest\TestCase
      *
      * @return ArrayConfig
      */
-    protected function createConfig(array $data = [])
+    protected function createConfig(array $data = []): ArrayConfig
     {
         return new ArrayConfig($data);
     }

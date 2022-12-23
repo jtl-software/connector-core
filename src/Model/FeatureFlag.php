@@ -1,9 +1,6 @@
 <?php
 
-/**
- * @author    Immanuel Klinkenberg <immanuel.klinkenberg@jtl-software.com>
- * @copyright 2010-2018 JTL-Software GmbH
- */
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -30,12 +27,12 @@ class FeatureFlag
     /**
      * @var string
      */
-    protected $name = '';
+    protected string $name = '';
 
     /**
      * @var boolean
      */
-    protected $active = false;
+    protected bool $active = false;
 
     /**
      * FeatureFlag constructor.

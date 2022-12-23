@@ -15,7 +15,7 @@ class ControllerTest extends TestCase
      *
      * @throws \ReflectionException
      */
-    public function testIsType($controllerName, bool $shouldBeController)
+    public function testIsType($controllerName, bool $shouldBeController): void
     {
         $isType = Controller::isController($controllerName);
         $this->assertSame($shouldBeController, $isType);
