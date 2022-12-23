@@ -8,8 +8,16 @@ use Throwable;
 
 class MustNotBeNullException extends \RuntimeException
 {
-    public function __construct($message = 'variable must not be null.', $code = 0, Throwable $previous = null)
-    {
+    /**
+     * @param string         $message
+     * @param int            $code
+     * @param Throwable|null $previous
+     */
+    public function __construct(
+        string    $message = 'variable must not be null.',
+        int       $code = 0,
+        Throwable $previous = null
+    ) {
         parent::__construct($message, $code, $previous);
     }
 
@@ -26,7 +34,7 @@ class MustNotBeNullException extends \RuntimeException
     /**
      * @param string $type
      *
-     * @return static
+     * @return self
      */
     public static function fromExpectedType(string $type): self
     {

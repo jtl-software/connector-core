@@ -48,12 +48,14 @@ final class Action
     }
 
     /**
-     * @return integer[]
+     * @return array<string, string>
      */
     public static function getActions(): array
     {
         if (\is_null(self::$actions)) {
-            self::$actions = (new \ReflectionClass(self::class))->getConstants();
+            /** @var array<string, string> $actions */
+            $actions       = (new \ReflectionClass(self::class))->getConstants();
+            self::$actions = $actions;
         }
 
         return self::$actions;

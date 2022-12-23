@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
+use TypeError;
 
 /**
  * A category with sort number, link to parent category and level
@@ -19,12 +21,12 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     use TranslatableAttributesTrait;
 
     /**
-     * @var Identity|null Optional reference to parent category id
+     * @var Identity Optional reference to parent category id
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("parentCategoryId")
      * @Serializer\Accessor(getter="getParentCategoryId",setter="setParentCategoryId")
      */
-    protected ?Identity $parentCategoryId = null;
+    protected Identity $parentCategoryId;
 
     /**
      * @var boolean
@@ -175,11 +177,11 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     }
 
     /**
-     * @param TranslatableAttribute|CategoryAttribute $attribute
+     * @param CategoryAttribute $attribute
      *
      * @return Category
      */
-    public function addAttribute(TranslatableAttribute $attribute): self
+    public function addAttribute(CategoryAttribute $attribute): self
     {
         $this->attributes[] = $attribute;
 
@@ -187,7 +189,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     }
 
     /**
-     * @return TranslatableAttribute|CategoryAttribute[]
+     * @return CategoryAttribute[]
      */
     public function getAttributes(): array
     {
@@ -195,12 +197,17 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     }
 
     /**
-     * @param TranslatableAttribute|CategoryAttribute ...$attributes
+     * @param TranslatableAttribute ...$attributes
      *
      * @return Category
+     * @throws TypeError
      */
     public function setAttributes(TranslatableAttribute ...$attributes): TranslatableAttributesInterface
     {
+        foreach ($attributes as $attribute) {
+            Validate::categoryAttribute($attribute);
+        }
+        /** @var CategoryAttribute[] $attributes */
         $this->attributes = $attributes;
 
         return $this;
@@ -323,7 +330,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getIdentificationStrings(): array
     {

@@ -17,12 +17,12 @@ use Jtl\Connector\Core\Utilities\Validator\Validate;
 class StatusChange extends AbstractModel
 {
     /**
-     * @var Identity|null
+     * @var Identity
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerOrderId")
      * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
      */
-    protected ?Identity $customerOrderId = null;
+    protected Identity $customerOrderId;
 
     /**
      * @var string

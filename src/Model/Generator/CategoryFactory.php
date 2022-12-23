@@ -14,7 +14,7 @@ use Jtl\Connector\Core\Model\Category;
 class CategoryFactory extends AbstractModelFactory
 {
     /**
-     * @return array
+     * @return array<string, mixed>
      * @throws \Exception
      */
     protected function makeFakeArray(): array

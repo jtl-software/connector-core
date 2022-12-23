@@ -6,6 +6,7 @@ namespace Jtl\Connector\Core\Model;
 
 use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
+use stdClass;
 
 /**
  * Database Query Filter
@@ -204,7 +205,9 @@ class QueryFilter
     /**
      * Setter
      *
-     * @param \stdClass $obj
+     * @param stdClass $obj
+     *
+     * @throws InvalidArgumentException
      */
     public function set(\stdClass $obj): void
     {

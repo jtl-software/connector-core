@@ -50,6 +50,7 @@ class IdentityType
         PRODUCT_SPECIFIC              = 66,
         CUSTOMER_ORDER_ITEM           = 68;
 
+    /** @var array<string, int>|null */
     protected static ?array $types = null;
 
     /**
@@ -63,12 +64,14 @@ class IdentityType
     }
 
     /**
-     * @return integer[]
+     * @return array<string, int>
      */
     public static function getTypes(): array
     {
         if (\is_null(self::$types)) {
-            self::$types = (new \ReflectionClass(self::class))->getConstants();
+            /** @var array<string, int> $types */
+            $types       = (new \ReflectionClass(self::class))->getConstants();
+            self::$types = $types;
         }
 
         return self::$types;

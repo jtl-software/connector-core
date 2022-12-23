@@ -26,11 +26,11 @@ class Ack extends Identities
     protected array $checksums = [];
 
     /**
-     * @param ChecksumInterface $checksum
+     * @param Checksum $checksum
      *
      * @return Ack
      */
-    public function addChecksum(ChecksumInterface $checksum): Ack
+    public function addChecksum(Checksum $checksum): Ack
     {
         $this->checksums[] = $checksum;
 

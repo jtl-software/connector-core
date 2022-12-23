@@ -22,12 +22,12 @@ use TypeError;
 class ProductSpecific extends AbstractIdentity
 {
     /**
-     * @var Identity|null Reference to specificValue
+     * @var Identity Reference to specificValue
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("specificValueId")
      * @Serializer\Accessor(getter="getSpecificValueId",setter="setSpecificValueId")
      */
-    protected ?Identity $specificValueId = null;
+    protected Identity $specificValueId ;
 
     /**
      * Constructor.

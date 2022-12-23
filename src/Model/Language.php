@@ -20,12 +20,12 @@ use TypeError;
 class Language extends AbstractI18n implements IdentityInterface
 {
     /**
-     * @var Identity|null Unique language id
+     * @var Identity Unique language id
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
-    protected ?Identity $id = null;
+    protected Identity $id;
 
     /**
      * @var boolean Flag default language for frontend. Exact 1 language must be marked as default.

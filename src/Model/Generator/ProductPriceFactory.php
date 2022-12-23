@@ -23,7 +23,12 @@ class ProductPriceFactory extends AbstractModelFactory
     }
 
     /**
-     * @return mixed[]
+     * @return array{
+     *     id:              array<int, int|string>,
+     *     customerGroupId: array<int, int|string>,
+     *     productId:       array<int, int|string>,
+     *     items:           array<mixed>
+     * }
      * @throws \Exception
      */
     protected function makeFakeArray(): array
@@ -40,7 +45,7 @@ class ProductPriceFactory extends AbstractModelFactory
     /**
      * @param bool $withBulkPrices
      *
-     * @return array
+     * @return array<mixed>
      * @throws \Exception
      */
     public function makeItemsArray(bool $withBulkPrices = false): array
@@ -49,7 +54,7 @@ class ProductPriceFactory extends AbstractModelFactory
 
         if ($withBulkPrices === true) {
             $pricesCount = \random_int(1, \random_int(1, 30));
-            $maxQuantity = \random_int($pricesCount, \random_int($pricesCount, 500));
+            $maxQuantity = \random_int($pricesCount, \random_int($pricesCount, 500)); // @phpstan-ignore-line
             $step        = (int)\floor($maxQuantity / $pricesCount);
             $priceStep   = \floor($items[0]['netPrice'] / $pricesCount);
 
@@ -69,7 +74,7 @@ class ProductPriceFactory extends AbstractModelFactory
     }
 
     /**
-     * @param mixe[] $override
+     * @param mixed[] $override
      *
      * @return mixed[]
      */

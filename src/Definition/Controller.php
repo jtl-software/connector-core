@@ -24,7 +24,7 @@ final class Controller
         STATUS_CHANGE       = 'StatusChange';
 
     /**
-     * @var string[]|null
+     * @var array<string, string>|null
      */
     protected static ?array $controllers = null;
 
@@ -39,12 +39,14 @@ final class Controller
     }
 
     /**
-     * @return integer[]
+     * @return array<string, string>
      */
     public static function getControllers(): array
     {
         if (\is_null(self::$controllers)) {
-            self::$controllers = (new \ReflectionClass(self::class))->getConstants();
+            /** @var array<string, string> $controllers */
+            $controllers       = (new \ReflectionClass(self::class))->getConstants();
+            self::$controllers = $controllers;
         }
 
         return self::$controllers;

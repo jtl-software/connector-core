@@ -15,20 +15,20 @@ use JMS\Serializer\Annotation as Serializer;
 class DeliveryNoteItem extends AbstractIdentity
 {
     /**
-     * @var Identity|null
+     * @var Identity
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerOrderItemId")
      * @Serializer\Accessor(getter="getCustomerOrderItemId",setter="setCustomerOrderItemId")
      */
-    protected ?Identity $customerOrderItemId = null;
+    protected Identity $customerOrderItemId;
 
     /**
-     * @var Identity|null Reference to product
+     * @var Identity Reference to product
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
-    protected ?Identity $productId = null;
+    protected Identity $productId;
 
     /**
      * @var double

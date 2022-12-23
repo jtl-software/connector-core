@@ -18,12 +18,12 @@ use TypeError;
 class ProductStockLevel extends AbstractModel
 {
     /**
-     * @var Identity|null
+     * @var Identity
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
-    protected ?Identity $productId = null;
+    protected Identity $productId;
 
     /**
      * @var double

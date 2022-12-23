@@ -17,12 +17,12 @@ use JMS\Serializer\Annotation as Serializer;
 class CategoryCustomerGroup extends AbstractModel
 {
     /**
-     * @var Identity|null Reference to customerGroup
+     * @var Identity Reference to customerGroup
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerGroupId")
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
-    protected ?Identity $customerGroupId = null;
+    protected Identity $customerGroupId;
 
     /**
      * @var double Optional discount on products in specified categoryId for  customerGroupId

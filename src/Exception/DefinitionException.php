@@ -122,7 +122,7 @@ class DefinitionException extends \Exception
     }
 
     /**
-     * @return static
+     * @return self
      */
     public static function relationTypeCannotBeEmpty(): self
     {

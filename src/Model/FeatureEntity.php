@@ -99,7 +99,7 @@ class FeatureEntity
     }
 
     /**
-     * @return boolean[]
+     * @return array{pull: bool, push: bool, delete: bool}
      */
     public function toArray(): array
     {

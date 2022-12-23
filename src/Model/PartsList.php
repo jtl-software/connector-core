@@ -20,12 +20,12 @@ use TypeError;
 class PartsList extends AbstractIdentity
 {
     /**
-     * @var Identity|null Reference to a component / product
+     * @var Identity Reference to a component / product
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
-    protected ?Identity $productId = null;
+    protected Identity $productId;
 
     /**
      * @var double Component quantity

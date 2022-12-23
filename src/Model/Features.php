@@ -31,8 +31,8 @@ class Features extends AbstractModel
     }
 
     /**
-     * @param FeatureEntity[] $entities
-     * @param FeatureFlag[]   $flags
+     * @param array<string, array{pull?: ?bool, push?: ?bool, delete?: ?bool}>|array{} $entities
+     * @param array<string, bool>|array{}                                              $flags
      *
      * @return Features
      */
@@ -183,7 +183,7 @@ class Features extends AbstractModel
     }
 
     /**
-     * @return array
+     * @return array{entities: array<string, array{pull: bool, push: bool, delete: bool}>, flags: array<string, bool>}
      */
     public function toArray(): array
     {

@@ -35,9 +35,9 @@ abstract class AbstractErrorHandler
     /**
      * @param RequestPacket $requestPacket
      *
-     * @return ErrorHandler
+     * @return $this
      */
-    public function setRequestPacket(RequestPacket $requestPacket): ErrorHandler
+    public function setRequestPacket(RequestPacket $requestPacket): self
     {
         $this->requestPacket = $requestPacket;
 

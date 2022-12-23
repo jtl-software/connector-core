@@ -4,29 +4,24 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model\Generator;
 
-use Jtl\Connector\Core\Exception\MustNotBeNullException;
 use Jtl\Connector\Core\Model\SpecificValueI18n;
-use Jtl\Connector\Core\Utilities\Validator\Validate;
-use TypeError;
 
 class SpecificValueI18nFactory extends AbstractI18nFactory
 {
     /**
      * @return array<string, string>
-     * @throws MustNotBeNullException
-     * @throws TypeError
      */
     protected function makeFakeArray(): array
     {
-        $faker = Validate::checkGeneratorAndNotNull($this->faker);
+
 
         return [
-            'value'           => $faker->word,
-            'urlPath'         => $faker->url,
-            'titleTag'        => $faker->word,
-            'metaKeywords'    => $faker->word,
-            'metaDescription' => $faker->sentence,
-            'description'     => $faker->sentence,
+            'value'           => $this->faker->word,
+            'urlPath'         => $this->faker->url,
+            'titleTag'        => $this->faker->word,
+            'metaKeywords'    => $this->faker->word,
+            'metaDescription' => $this->faker->sentence,
+            'description'     => $this->faker->sentence,
         ];
     }
 

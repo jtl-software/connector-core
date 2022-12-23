@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model\Generator;
 
-use Jtl\Connector\Core\Exception\MustNotBeNullException;
 use Jtl\Connector\Core\Model\TranslatableAttributeI18n;
-use Jtl\Connector\Core\Utilities\Validator\Validate;
-use TypeError;
 
 /**
  * Class TranslatableAttributeI18nFactory
@@ -18,22 +15,18 @@ class TranslatableAttributeI18nFactory extends AbstractModelFactory
 {
     /**
      * @return array{name: string, value: mixed, languageIso: string}
-     * @throws MustNotBeNullException
-     * @throws TypeError
      */
     protected function makeFakeArray(): array
     {
-        $faker = Validate::checkGeneratorAndNotNull($this->faker);
-
         return [
-            'name'        => $faker->word,
-            'value'       => $faker
+            'name'        => $this->faker->word,
+            'value'       => $this->faker
                 ->randomElement([
                                     true,
                                     false,
-                                    $faker->words(3, true),
+                                    $this->faker->words(3, true),
                                 ]),
-            'languageIso' => $faker->languageCode,
+            'languageIso' => $this->faker->languageCode,
         ];
     }
 

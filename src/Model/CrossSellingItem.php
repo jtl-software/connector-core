@@ -17,12 +17,12 @@ use JMS\Serializer\Annotation as Serializer;
 class CrossSellingItem extends AbstractIdentity
 {
     /**
-     * @var Identity|null Reference to crossSellingGroup
+     * @var Identity Reference to crossSellingGroup
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("crossSellingGroupId")
      * @Serializer\Accessor(getter="getCrossSellingGroupId",setter="setCrossSellingGroupId")
      */
-    protected ?Identity $crossSellingGroupId = null;
+    protected Identity $crossSellingGroupId;
 
 
     /**

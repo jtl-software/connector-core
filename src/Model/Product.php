@@ -23,76 +23,76 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     use TranslatableAttributesTrait;
 
     /**
-     * @var Identity|null Optional reference to basePriceUnit
+     * @var Identity Optional reference to basePriceUnit
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("basePriceUnitId")
      * @Serializer\Accessor(getter="getBasePriceUnitId",setter="setBasePriceUnitId")
      */
-    protected ?Identity $basePriceUnitId = null;
+    protected Identity $basePriceUnitId;
 
     /**
-     * @var Identity|null Reference to manufacturer
+     * @var Identity Reference to manufacturer
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("manufacturerId")
      * @Serializer\Accessor(getter="getManufacturerId",setter="setManufacturerId")
      */
-    protected ?Identity $manufacturerId = null;
+    protected Identity $manufacturerId;
 
     /**
-     * @var Identity|null Reference to master product
+     * @var Identity Reference to master product
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("masterProductId")
      * @Serializer\Accessor(getter="getMasterProductId",setter="setMasterProductId")
      */
-    protected ?Identity $masterProductId = null;
+    protected Identity $masterProductId;
 
     /**
-     * @var Identity|null Optional reference to measurement unit id
+     * @var Identity Optional reference to measurement unit id
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("measurementUnitId")
      * @Serializer\Accessor(getter="getMeasurementUnitId",setter="setMeasurementUnitId")
      */
-    protected ?Identity $measurementUnitId = null;
+    protected Identity $measurementUnitId;
 
     /**
-     * @var Identity|null Optional reference to partsList
+     * @var Identity Optional reference to partsList
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("partsListId")
      * @Serializer\Accessor(getter="getPartsListId",setter="setPartsListId")
      */
-    protected ?Identity $partsListId = null;
+    protected Identity $partsListId;
 
     /**
-     * @var Identity|null Optional reference to productType
+     * @var Identity Optional reference to productType
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("productTypeId")
      * @Serializer\Accessor(getter="getProductTypeId",setter="setProductTypeId")
      */
-    protected ?Identity $productTypeId = null;
+    protected Identity $productTypeId;
 
     /**
-     * @var Identity|null Reference to shippingClass
+     * @var Identity Reference to shippingClass
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("shippingClassId")
      * @Serializer\Accessor(getter="getShippingClassId",setter="setShippingClassId")
      */
-    protected ?Identity $shippingClassId = null;
+    protected Identity $shippingClassId;
 
     /**
-     * @var Identity|null Reference to tax class
+     * @var Identity Reference to tax class
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("taxClassId")
      * @Serializer\Accessor(getter="getTaxClassId",setter="setTaxClassId")
      */
-    protected ?Identity $taxClassId = null;
+    protected Identity $taxClassId;
 
     /**
-     * @var Identity|null Reference to unit
+     * @var Identity Reference to unit
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("unitId")
      * @Serializer\Accessor(getter="getUnitId",setter="setUnitId")
      */
-    protected ?Identity $unitId = null;
+    protected Identity $unitId;
 
     /**
      * @var integer

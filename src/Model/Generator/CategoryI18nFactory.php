@@ -14,15 +14,18 @@ use Jtl\Connector\Core\Model\CategoryI18n;
 class CategoryI18nFactory extends AbstractModelFactory
 {
     /**
-     * @return array
+     * @return array<string, string>
      * @throws \Exception
      */
     protected function makeFakeArray(): array
     {
+        /** @var string $metaKeywords */
+        $metaKeywords = $this->faker->words(\random_int(0, 5), true);
+
         return [
             'description'     => $this->faker->sentence,
             'metaDescription' => $this->faker->text,
-            'metaKeywords'    => $this->faker->words(\random_int(0, 5), true),
+            'metaKeywords'    => $metaKeywords,
             'name'            => $this->faker->word,
             'titleTag'        => $this->faker->word,
             'urlPath'         => $this->faker->url,

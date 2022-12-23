@@ -9,7 +9,7 @@ use Jtl\Connector\Core\Exception\NotImplementedException;
 class I18nFactory extends AbstractI18nFactory
 {
     /**
-     * @return array
+     * @return array{}
      */
     protected function makeFakeArray(): array
     {

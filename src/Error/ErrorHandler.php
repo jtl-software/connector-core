@@ -65,7 +65,10 @@ class ErrorHandler extends AbstractErrorHandler
             if (($err = \error_get_last()) && \in_array($err['type'], static::$shutdownHandleErrors, true)) {
                 \ob_clean();
 
-                $file = \sprintf('...%s', \substr($err['file'], \strrpos($err['file'], '/')));
+                if (($offset = \strrpos($err['file'], '/')) === false) {
+                    throw new \RuntimeException('$offset must be an integer.');
+                }
+                $file = \sprintf('...%s', \substr($err['file'], $offset));
 
                 $error = new Error();
                 $error->setCode($err['type'])

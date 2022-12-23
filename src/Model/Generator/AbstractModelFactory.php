@@ -8,6 +8,7 @@ use Faker\Factory;
 use Faker\Generator;
 use JMS\Serializer\Exception\InvalidArgumentException;
 use JMS\Serializer\Serializer;
+use Jtl\Connector\Core\Model\AbstractModel;
 use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use RuntimeException;
@@ -19,13 +20,13 @@ use RuntimeException;
  */
 abstract class AbstractModelFactory
 {
-    /** @var array */
+    /** @var array<int, array<string, int>> */
     protected static array $identities = [];
     /** @var AbstractModelFactory[] */
     protected static array $factories = [];
     protected string       $defaultLocale;
-    protected ?Generator   $faker;
-    protected ?Serializer  $serializer;
+    protected Generator    $faker;
+    protected Serializer   $serializer;
 
     /**
      * AbstractModelFactory constructor.
@@ -41,12 +42,12 @@ abstract class AbstractModelFactory
     {
         $this->defaultLocale = $defaultLocale;
 
-        if (\is_null($faker)) {
+        if ($faker === null) {
             $faker = Factory::create($defaultLocale);
         }
         $this->faker = $faker;
 
-        if (\is_null($serializer)) {
+        if ($serializer === null) {
             $serializer = SerializerBuilder::create()->build();
         }
         $this->serializer = $serializer;
@@ -56,12 +57,15 @@ abstract class AbstractModelFactory
      * @param int $identityType
      * @param int $host
      *
-     * @return array|null
+     * @return array<int, int|string>|null
      */
     public static function getIdentityByHost(int $identityType, int $host): ?array
     {
-        if (self::hasIdentityByHost($identityType, $host)) {
-            return self::getIdentity($identityType, \array_search($host, self::$identities[$identityType], true));
+        if (
+            self::hasIdentityByHost($identityType, $host)
+            && ($endpoint = \array_search($host, self::$identities[$identityType], true)) !== false
+        ) {
+            return self::getIdentity($identityType, $endpoint);
         }
         return null;
     }
@@ -81,7 +85,7 @@ abstract class AbstractModelFactory
      * @param integer $identityType
      * @param string  $endpoint
      *
-     * @return array|null
+     * @return array{0: string, 1: int}|null
      */
     public static function getIdentity(int $identityType, string $endpoint): ?array
     {
@@ -106,11 +110,11 @@ abstract class AbstractModelFactory
     }
 
     /**
-     * @param int   $quantity
-     * @param array $specificOverrides
-     * @param array $globalOverrides
+     * @param int          $quantity
+     * @param array<mixed> $specificOverrides
+     * @param array<mixed> $globalOverrides
      *
-     * @return array
+     * @return array<int, array<string|int, mixed>>
      */
     public function makeArray(int $quantity, array $specificOverrides = [], array $globalOverrides = []): array
     {
@@ -122,9 +126,9 @@ abstract class AbstractModelFactory
     }
 
     /**
-     * @param array $override
+     * @param array<mixed> $override
      *
-     * @return array
+     * @return array<string|int, mixed>
      */
     public function makeOneArray(array $override = []): array
     {
@@ -132,32 +136,33 @@ abstract class AbstractModelFactory
     }
 
     /**
-     * @return array
+     * @return array<string|int, mixed>
      */
     abstract protected function makeFakeArray(): array;
 
     /**
-     * @param array $override
+     * @param array<mixed> $override
      *
-     * @return object
+     * @return AbstractModel
      * @throws \Exception
      */
-    public function makeOne(array $override = [])
+    public function makeOne(array $override = []): AbstractModel
     {
         return $this->make(1, [$override])[0];
     }
 
     /**
-     * @param int   $quantity
-     * @param array $specificOverrides
-     * @param array $globalOverrides
+     * @param int          $quantity
+     * @param array<mixed> $specificOverrides
+     * @param array<mixed> $globalOverrides
      *
-     * @return array<object>
+     * @return array<int, AbstractModel>
      */
     public function make(int $quantity, array $specificOverrides = [], array $globalOverrides = []): array
     {
         $models = [];
         for ($i = 0; $i < $quantity; $i++) {
+            /** @var AbstractModel $model */
             $model    = $this->serializer->fromArray(
                 $this->makeOneArray(\array_merge($globalOverrides, $specificOverrides[$i] ?? [])),
                 $this->getModelClass()
@@ -185,25 +190,33 @@ abstract class AbstractModelFactory
     }
 
     /**
-     * @param integer $identityType
+     * @param int $identityType
      *
-     * @return array
-     * @throws \Exception
+     * @return array{0: string, 1: int}
+     * @throws RuntimeException|\InvalidArgumentException
      */
     public function makeIdentityArray(int $identityType): array
     {
+        /** @var IdentityFactory $identityFactory */
+        $identityFactory = $this->getFactory('Identity');
         do {
+            /** @var string $endpoint */
+            /** @var int $host */
             [
                 $endpoint,
                 $host,
-            ] = $this->getFactory('Identity')->makeOneArray();
+            ] = $identityFactory->makeOneArray();
             if (!isset(self::$identities[$identityType][$endpoint])) {
                 break;
             }
         } while (true);
 
         self::setIdentity($identityType, $endpoint, $host);
-        return self::getIdentity($identityType, $endpoint);
+
+        /** @var array{0: string, 1: int} $identity */
+        $identity = self::getIdentity($identityType, $endpoint);
+
+        return $identity;
     }
 
     /**
@@ -212,7 +225,7 @@ abstract class AbstractModelFactory
      * @return AbstractModelFactory
      * @throws RuntimeException
      */
-    public function getFactory(string $name): self
+    public function getFactory(string $name): AbstractModelFactory
     {
         return self::createFactory($name, $this->defaultLocale, $this->faker, $this->serializer);
     }
@@ -240,7 +253,9 @@ abstract class AbstractModelFactory
         $locale         = \str_replace('-', '_', $locale);
         $factoriesIndex = \md5(\sprintf('%s%s', $className, $locale));
         if (!isset(self::$factories[$factoriesIndex])) {
-            self::$factories[$factoriesIndex] = new $className($locale, $faker, $serializer);
+            /** @var AbstractModelFactory $factoryClass */
+            $factoryClass                     = new $className($locale, $faker, $serializer);
+            self::$factories[$factoriesIndex] = $factoryClass;
         }
 
         return self::$factories[$factoriesIndex];

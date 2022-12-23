@@ -30,12 +30,12 @@ class JsonResponse extends SymfonyJsonResponse implements LoggerAwareInterface
     /**
      * JsonResponse constructor.
      *
-     * @param EventDispatcher $eventDispatcher
-     * @param Serializer      $serializer
-     * @param mixed|null      $data
-     * @param int             $status
-     * @param array           $headers
-     * @param bool            $json
+     * @param EventDispatcher                     $eventDispatcher
+     * @param Serializer                          $serializer
+     * @param mixed|null                          $data
+     * @param int                                 $status
+     * @param array<string, null|string|string[]> $headers
+     * @param bool                                $json
      *
      * @throws TypeError
      */

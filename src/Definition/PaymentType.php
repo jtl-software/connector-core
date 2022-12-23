@@ -110,12 +110,14 @@ final class PaymentType
     }
 
     /**
-     * @return integer[]
+     * @return array<string, string>
      */
     public static function getTypes(): array
     {
         if (\is_null(self::$types)) {
-            self::$types = (new \ReflectionClass(self::class))->getConstants();
+            /** @var array<string, string> $types */
+            $types       = (new \ReflectionClass(self::class))->getConstants();
+            self::$types = $types;
         }
 
         return self::$types;

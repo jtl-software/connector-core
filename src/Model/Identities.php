@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
 class Identities extends AbstractModel
 {
     /**
-     * @var Identity[]
+     * @var array<string, array<int, Identity>>
      * @Serializer\Type("array<string, array<Jtl\Connector\Core\Model\Identity>>")
      * @Serializer\SerializedName("identities")
      * @Serializer\Accessor(getter="getIdentities",setter="setIdentities")
@@ -26,7 +26,7 @@ class Identities extends AbstractModel
     /**
      * Identities getter
      *
-     * @return Identity[]
+     * @return array<string, array<int, Identity>>
      */
     public function getIdentities(): array
     {
@@ -36,7 +36,7 @@ class Identities extends AbstractModel
     /**
      * Identities getter
      *
-     * @param Identity[] $identities
+     * @param array<string, array<int, Identity>> $identities
      *
      * @return self
      */

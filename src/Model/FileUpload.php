@@ -17,12 +17,12 @@ use JMS\Serializer\Annotation as Serializer;
 class FileUpload extends AbstractIdentity
 {
     /**
-     * @var Identity|null Reference to product
+     * @var Identity Reference to product
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
-    protected ?Identity $productId = null;
+    protected Identity $productId;
 
     /**
      * @var string

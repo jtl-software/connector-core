@@ -17,12 +17,12 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerGroupPackagingQuantity extends AbstractModel
 {
     /**
-     * @var Identity|null Reference to customergroup.
+     * @var Identity Reference to customergroup.
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerGroupId")
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
-    protected ?Identity $customerGroupId = null;
+    protected Identity $customerGroupId;
 
     /**
      * @var double Contains the minimum quantity for a customergroup.

@@ -13,19 +13,10 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 class RpcEvent extends Event
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $data;
 
-    /**
-     * @var string
-     */
     protected string $controller;
-
-    /**
-     * @var string
-     */
     protected string $action;
 
     /**
@@ -43,9 +34,9 @@ class RpcEvent extends Event
     }
 
     /**
-     * @return array<mixed>
+     * @return mixed
      */
-    public function getData(): array
+    public function getData()
     {
         return $this->data;
     }
@@ -58,6 +49,7 @@ class RpcEvent extends Event
     public function setData($data): self
     {
         $this->data = $data;
+
         return $this;
     }
 

@@ -17,12 +17,12 @@ use JMS\Serializer\Annotation as Serializer;
 class DeliveryNote extends AbstractIdentity
 {
     /**
-     * @var Identity|null Reference to customerOrder
+     * @var Identity Reference to customerOrder
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerOrderId")
      * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
      */
-    protected ?Identity $customerOrderId = null;
+    protected Identity $customerOrderId;
 
     /**
      * @var \DateTimeInterface|null Creation date
@@ -241,7 +241,7 @@ class DeliveryNote extends AbstractIdentity
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getIdentificationStrings(): array
     {

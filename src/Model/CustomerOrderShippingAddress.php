@@ -17,12 +17,12 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerOrderShippingAddress extends AbstractOrderAddress
 {
     /**
-     * @var Identity|null Reference to customer
+     * @var Identity Reference to customer
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerId")
      * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
      */
-    protected ?Identity $customerId = null;
+    protected Identity $customerId;
 
     public function __construct(string $endpoint = '', int $host = 0)
     {

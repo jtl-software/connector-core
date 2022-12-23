@@ -20,28 +20,28 @@ use TypeError;
 class ProductPrice extends AbstractIdentity
 {
     /**
-     * @var Identity|null Reference to customerGroup
+     * @var Identity Reference to customerGroup
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerGroupId")
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
-    protected ?Identity $customerGroupId = null;
+    protected Identity $customerGroupId;
 
     /**
-     * @var Identity|null Reference to customer
+     * @var Identity Reference to customer
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerId")
      * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
      */
-    protected ?Identity $customerId = null;
+    protected Identity $customerId;
 
     /**
-     * @var Identity|null Reference to product
+     * @var Identity Reference to product
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
-    protected ?Identity $productId = null;
+    protected Identity $productId;
 
     /**
      * @var ProductPriceItem[]

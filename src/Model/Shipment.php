@@ -19,12 +19,12 @@ use Jtl\Connector\Core\Utilities\Validator\Validate;
 class Shipment extends AbstractIdentity
 {
     /**
-     * @var Identity|null Reference to deliveryNote
+     * @var Identity Reference to deliveryNote
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("deliveryNoteId")
      * @Serializer\Accessor(getter="getDeliveryNoteId",setter="setDeliveryNoteId")
      */
-    protected ?Identity $deliveryNoteId = null;
+    protected Identity $deliveryNoteId;
 
     /**
      * @var string Carrier name

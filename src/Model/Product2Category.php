@@ -20,12 +20,12 @@ use TypeError;
 class Product2Category extends AbstractIdentity
 {
     /**
-     * @var Identity|null Reference to category
+     * @var Identity Reference to category
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("categoryId")
      * @Serializer\Accessor(getter="getCategoryId",setter="setCategoryId")
      */
-    protected ?Identity $categoryId = null;
+    protected Identity $categoryId;
 
     /**
      * Constructor.

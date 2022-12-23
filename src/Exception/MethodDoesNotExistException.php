@@ -9,7 +9,7 @@ class MethodDoesNotExistException extends \RuntimeException
     /**
      * @param string $methodName
      *
-     * @return static
+     * @return self
      */
     public static function fromName(string $methodName): self
     {

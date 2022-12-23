@@ -9,7 +9,7 @@ class ArrayKeyDoesNotExistException extends \RuntimeException
     /**
      * @param string|int $key
      *
-     * @return $this
+     * @return self
      */
     public static function fromKey($key): self
     {

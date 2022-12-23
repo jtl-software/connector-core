@@ -10,7 +10,7 @@ use Jtl\Connector\Core\Model\Product2Category;
 class Product2CategoryFactory extends AbstractModelFactory
 {
     /**
-     * @return array
+     * @return array{id: array<int, int|string>, categoryId: array<int, int|string>}
      * @throws \Exception
      */
     protected function makeFakeArray(): array

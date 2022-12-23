@@ -17,20 +17,20 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerOrderItemVariation extends AbstractIdentity
 {
     /**
-     * @var Identity|null Reference to productVariation
+     * @var Identity Reference to productVariation
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("productVariationId")
      * @Serializer\Accessor(getter="getProductVariationId",setter="setProductVariationId")
      */
-    protected ?Identity $productVariationId = null;
+    protected Identity $productVariationId;
 
     /**
-     * @var Identity|null Reference to productVariationValue
+     * @var Identity Reference to productVariationValue
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("productVariationValueId")
      * @Serializer\Accessor(getter="getProductVariationValueId",setter="setProductVariationValueId")
      */
-    protected ?Identity $productVariationValueId = null;
+    protected Identity $productVariationValueId;
 
     /**
      * @var string Optional custom text value for variation

@@ -15,6 +15,7 @@ use Jtl\Connector\Core\Model\AbstractImage;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Utilities\Str;
+use RuntimeException;
 
 class ImageSubscriber implements EventSubscriberInterface
 {
@@ -41,6 +42,7 @@ class ImageSubscriber implements EventSubscriberInterface
      * @param ObjectEvent $event
      *
      * @throws DefinitionException
+     * @throws RuntimeException
      */
     public function onPostSerialize(ObjectEvent $event): void
     {
@@ -73,7 +75,7 @@ class ImageSubscriber implements EventSubscriberInterface
             if (isset($identities[$imageIndex])) {
                 $resortedIdentities = [];
                 /** @var Identity $identity */
-                foreach ($identities[$imageIndex] as $identity) { // @phpstan-ignore-line
+                foreach ($identities[$imageIndex] as $identity) {
                     $splittedEndpoint = \explode('#=#', $identity->getEndpoint());
                     if (\count($splittedEndpoint) !== 2) {
                         throw SerializerException::wrongEndpointFormat($identity->getEndpoint());

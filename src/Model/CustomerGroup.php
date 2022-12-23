@@ -181,7 +181,7 @@ class CustomerGroup extends AbstractIdentity
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getIdentificationStrings(): array
     {

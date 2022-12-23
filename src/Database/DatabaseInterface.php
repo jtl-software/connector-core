@@ -13,8 +13,10 @@ interface DatabaseInterface
 {
     /**
      * Connect to Database
+     *
+     * @param array<string, mixed>|null $options
      */
-    public function connect(array $options = null): void;
+    public function connect(?array $options = null): void;
 
     /**
      * Disconnect from Database
@@ -42,9 +44,9 @@ interface DatabaseInterface
     /**
      * Returns a string that has been properly escaped
      *
-     * @param $query
+     * @param string $query
      *
      * @return string
      */
-    public function escapeString($query): string;
+    public function escapeString(string $query): string;
 }

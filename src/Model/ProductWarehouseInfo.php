@@ -19,12 +19,12 @@ use Jtl\Connector\Core\Utilities\Validator\Validate;
 class ProductWarehouseInfo extends AbstractModel
 {
     /**
-     * @var Identity|null
+     * @var Identity
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("warehouseId")
      * @Serializer\Accessor(getter="getwarehouseId",setter="setwarehouseId")
      */
-    protected ?Identity $warehouseId = null;
+    protected Identity $warehouseId;
 
     /**
      * @var double Optional product inflow quantity for specified warehouse

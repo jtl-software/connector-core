@@ -7,6 +7,7 @@ namespace Jtl\Connector\Core\Utilities\Validator;
 use Faker\Generator;
 use InvalidArgumentException;
 use Jtl\Connector\Core\Exception\MustNotBeNullException;
+use Jtl\Connector\Core\Model\CategoryAttribute;
 use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
@@ -60,6 +61,20 @@ class Validate
         self::initValidator($value)->instanceOf(RequestPacket::class);
 
         /** @var RequestPacket $value */
+        return $value;
+    }
+
+    /**
+     * @param mixed $value
+     *
+     * @return CategoryAttribute
+     * @throws TypeError
+     */
+    public static function categoryAttribute($value): CategoryAttribute
+    {
+        self::initValidator($value)->instanceOf(CategoryAttribute::class);
+
+        /** @var CategoryAttribute $value */
         return $value;
     }
 

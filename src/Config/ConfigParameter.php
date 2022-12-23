@@ -65,7 +65,7 @@ class ConfigParameter
      * @param string $type
      * @param bool   $required
      * @param bool   $global
-     * @param null   $defaultValue
+     * @param ?mixed $defaultValue
      *
      * @return ConfigParameter
      * @throws ConfigException

@@ -263,11 +263,10 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
             ['id' => $sessionId, 'time' => \time()]
         );
         $rows = $this->db->query($this->createReadQuery($sessionId, \time()));
-        if ($rows !== null && isset($rows[0]['sessionId']) && $rows[0]['sessionId'] === $sessionId) {
-            return true;
-        }
-
-        return false;
+        return $rows !== null
+               && isset($rows[0]['sessionId'])
+               && \is_string($rows[0]['sessionId'])
+               && $rows[0]['sessionId'] === $sessionId;
     }
 
     /**
@@ -292,9 +291,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
     }
 
     /**
-     * @param LoggerInterface $logger
-     *
-     * @return void
+     * @inheritDoc
      */
     public function setLogger(LoggerInterface $logger): void
     {

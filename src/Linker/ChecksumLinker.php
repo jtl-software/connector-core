@@ -96,22 +96,26 @@ class ChecksumLinker implements LoggerAwareInterface
 
     /**
      * @param AbstractModel $model
-     * @param int           $type
+     * @param int|null      $type
      */
-    public function link(AbstractModel $model, $type = null): void
+    public function link(AbstractModel $model, ?int $type = null): void
     {
         if (!\is_null($this->loader) && \method_exists($model, 'getChecksums')) {
             $checksums = $model->getChecksums();
             foreach ($checksums as &$checksum) {
-                if ($checksum instanceof ChecksumInterface && ($type === null || $checksum->getType() == $type)) {
+                if ($checksum instanceof ChecksumInterface && ($type === null || $checksum->getType() === $type)) {
                     $this->logger->debug('Checksum linking type ({type})...', ['type' => $type]);
 
-                    if ($model->getId()->getEndpoint() !== null && $model->getId()->getEndpoint() != '') {
+                    if (
+                        \method_exists($model, 'getId')
+                        && $model->getId()->getEndpoint() !== null
+                        && $model->getId()->getEndpoint() !== ''
+                    ) {
                         $checksum->setEndpoint(
                             $this->loader->read($model->getId()->getEndpoint(), $checksum->getType())
                         );
 
-                        if ($checksum->getEndpoint() !== null && \strlen($checksum->getEndpoint()) > 0) {
+                        if ($checksum->getEndpoint() !== null && $checksum->getEndpoint() !== '') {
                             if (($checksum->getEndpoint() !== $checksum->getHost())) {
                                 $this->logger->debug(
                                     'Changed checksum for endpoint ({endpoint}) type ({type})',

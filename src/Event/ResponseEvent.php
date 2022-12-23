@@ -9,10 +9,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class ResponseEvent extends Event
 {
-    /**
-     * @var Response
-     */
-    protected $response = [];
+    protected Response $response;
 
     /**
      * ResponseEvent constructor.

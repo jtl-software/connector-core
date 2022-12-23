@@ -18,9 +18,9 @@ class ManufacturerFactory extends AbstractModelFactory
     protected int $sort = 1;
 
     /**
-     * @param array $override
+     * @param array<string, mixed> $override
      *
-     * @return array
+     * @return array<string, mixed>
      * @throws CaseConverterException
      * @throws RuntimeException
      * @throws RuntimeException

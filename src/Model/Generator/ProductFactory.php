@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model\Generator;
 
+use Exception;
 use Jtl\Connector\Core\Definition\IdentityType;
+use Jtl\Connector\Core\Model\AbstractI18n;
 use Jtl\Connector\Core\Model\Product;
 
 class ProductFactory extends AbstractModelFactory
@@ -12,9 +14,9 @@ class ProductFactory extends AbstractModelFactory
     protected bool $withBasePrice = false;
 
     /**
-     * @param array|null $i18ns
+     * @param array<int, array<string, mixed>>|null $i18ns
      *
-     * @return array
+     * @return object[]
      * @throws \Exception
      */
     public function makeOneProductVariant(array $i18ns = null): array
@@ -24,19 +26,26 @@ class ProductFactory extends AbstractModelFactory
     }
 
     /**
-     * @throws \Exception
+     * @param array<int, array<string, mixed>>|null $i18ns
+     *
+     * @return array<mixed>
+     * @throws \RuntimeException
+     * @throws Exception
      */
     public function makeOneProductVariantArray(array $i18ns = null): array
     {
         $variationsQuantity = 2;
         if (\is_null($i18ns)) {
-            $i18ns = $this->getFactory('I18n')->makeArray(\random_int(1, 3));
+            /** @var I18nFactory $i18nFactory */
+            $i18nFactory = $this->getFactory('I18n');
+            $i18ns       = $i18nFactory->makeArray(\random_int(1, 3));
         }
 
-        $productI18ns = $this->getFactory('ProductI18n')->makeArray(\count($i18ns), $i18ns);
-
-        $variantsQuantity = 1;
-        $variations       = [];
+        /** @var ProductI18nFactory $productI18nFactory */
+        $productI18nFactory = $this->getFactory('ProductI18n');
+        $productI18ns       = $productI18nFactory->makeArray(\count($i18ns), $i18ns);
+        $variantsQuantity   = 1;
+        $variations         = [];
         for ($i = 0; $i < $variationsQuantity; $i++) {
             $variationI18ns = \array_map(function (array $i18n) {
                 return $this->getFactory('ProductVariationI18n')->makeOneArray($i18n);
@@ -81,8 +90,8 @@ class ProductFactory extends AbstractModelFactory
         ];
 
         $i = 0;
-        foreach ($variations[0]['values'] as $firstValue) {
-            foreach ($variations[1]['values'] as $secondValue) {
+        foreach ($variations[0]['values'] as $firstValue) { // @phpstan-ignore-line
+            foreach ($variations[1]['values'] as $secondValue) { // @phpstan-ignore-line
                 $variants[] = $this->makeOneArray([
                                                       'masterProductId' => $parentId,
                                                       'isMasterProduct' => false,
@@ -101,7 +110,7 @@ class ProductFactory extends AbstractModelFactory
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>
      * @throws \Exception
      */
     protected function makeFakeArray(): array
@@ -115,6 +124,15 @@ class ProductFactory extends AbstractModelFactory
         $taxRateFactory = $this->getFactory('TaxRate');
         $taxRates       = $taxRateFactory->makeArray(\random_int(1, 30));
         $taxRateFactory->clearUsedCountries();
+
+        if (($taxRatesMaxCount = \count($taxRates) - 1) < 0) {
+            throw new \RuntimeException('taxRatesMaxCount must not be smaller than zero.');
+        }
+
+        if (!($productPriceFactory = $this->getFactory('ProductPrice')) instanceof ProductPriceFactory) {
+            throw new \RuntimeException('productPriceFactory must be instance of ProductPriceFactory!');
+        }
+        /** @var ProductPriceFactory $productPriceFactory */
 
         return [
             'basePriceUnitId'             => $identityFactory->makeOneArray(),
@@ -143,14 +161,14 @@ class ProductFactory extends AbstractModelFactory
                     $this->faker->randomKey(['days', 'years', 'hours', 'minutes', 'seconds'])
                 )
             ),
-            'ean'                         => $this->faker->ean8,
+            'ean'                         => $this->faker->ean8, // @phpstan-ignore-line
             'epid'                        => $this->faker->uuid,
             'hazardIdNumber'              => $this->faker->sha1,
             'height'                      => $this->faker->randomFloat(),
             'isActive'                    => $this->faker->boolean,
             'isBatch'                     => $this->faker->boolean,
             'isBestBefore'                => $this->faker->boolean,
-            'isbn'                        => $this->faker->isbn13,
+            'isbn'                        => $this->faker->isbn13, // @phpstan-ignore-line
             'isDivisible'                 => $this->faker->boolean,
             //'isMasterProduct' => false,
             'isNewProduct'                => $this->faker->boolean,
@@ -191,7 +209,7 @@ class ProductFactory extends AbstractModelFactory
             'taxClassId'                  => $this->makeIdentityArray(IdentityType::TAX_CLASS),
             'unNumber'                    => $this->faker->word,
             'upc'                         => $this->faker->uuid,
-            'vat'                         => $taxRates[\random_int(0, \count($taxRates) - 1)]['rate'],
+            'vat'                         => $taxRates[\random_int(0, $taxRatesMaxCount)]['rate'],
             'width'                       => $this->faker->randomFloat(2),
             'attributes'                  => [],
             'categories'                  => $this->getFactory('Product2Category')->makeArray(\random_int(1, 3)),
@@ -204,9 +222,9 @@ class ProductFactory extends AbstractModelFactory
             'mediaFiles'                  => [],
             'partsLists'                  => [],
             'prices'                      => [
-                $this->getFactory('ProductPrice')
-                     ->setWithBulkPrices(\random_int(0, 1) === 1)
-                     ->makeOneArray(['customerGroupId' => $identityFactory->makeOneArray([1 => 0])])
+                $productPriceFactory
+                    ->setWithBulkPrices(\random_int(0, 1) === 1)
+                    ->makeOneArray(['customerGroupId' => $identityFactory->makeOneArray([1 => 0])])
             ],
             'specialPrices'               => [],
             'specifics'                   => [],

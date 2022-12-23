@@ -7,6 +7,7 @@ namespace Jtl\Connector\Core\Model;
 use JMS\Serializer\Annotation as Serializer;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Exception\DefinitionException;
+use RuntimeException;
 
 /**
  * @access     public
@@ -38,12 +39,12 @@ abstract class AbstractImage extends AbstractIdentity
     protected string $filename = '';
 
     /**
-     * @var Identity|null
+     * @var Identity
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("foreignKey")
      * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
      */
-    protected ?Identity $foreignKey = null;
+    protected Identity $foreignKey;
 
     /**
      * @var ImageI18n[]
@@ -78,7 +79,7 @@ abstract class AbstractImage extends AbstractIdentity
     protected int $sort = 1;
 
     /**
-     * @var \ReflectionClass
+     * @var \ReflectionClass<self>
      *
      * @Serializer\Exclude
      */
@@ -249,8 +250,9 @@ abstract class AbstractImage extends AbstractIdentity
     }
 
     /**
-     * @return array
+     * @return string[]
      * @throws DefinitionException
+     * @throws RuntimeException
      */
     public function getIdentificationStrings(): array
     {
@@ -269,11 +271,16 @@ abstract class AbstractImage extends AbstractIdentity
     /**
      * @return string
      * @throws DefinitionException
+     * @throws RuntimeException
      */
     public function getRelationType(): string
     {
         $modelName = $this->reflectionClass->getShortName();
         $imagePos  = \strpos($modelName, 'Image');
+        if ($imagePos === false) {
+            throw new \RuntimeException('$imagePos must not be false!');
+        }
+
         return Model::getRelationType(\substr($modelName, 0, $imagePos));
     }
 }

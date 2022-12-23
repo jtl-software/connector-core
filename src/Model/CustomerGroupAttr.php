@@ -17,12 +17,12 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerGroupAttr extends KeyValueAttribute implements IdentityInterface
 {
     /**
-     * @var Identity|null Unique customerGroupAttr id
+     * @var Identity Unique customerGroupAttr id
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
-    protected ?Identity $id = null;
+    protected Identity $id;
 
     /**
      * Constructor

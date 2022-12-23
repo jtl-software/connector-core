@@ -9,10 +9,11 @@ use Jtl\Connector\Core\Model\ProductVariationValueI18n;
 class ProductVariationValueI18nFactory extends AbstractModelFactory
 {
     /**
-     * @return mixed[]
+     * @return array{languageIso: string, name: string}
      */
     protected function makeFakeArray(): array
     {
+
         return [
             'languageIso' => $this->faker->languageCode,
             'name'        => $this->faker->text(80),

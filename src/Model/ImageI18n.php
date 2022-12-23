@@ -18,12 +18,12 @@ use TypeError;
 class ImageI18n extends AbstractI18n implements IdentityInterface
 {
     /**
-     * @var Identity|null
+     * @var Identity
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
-    protected ?Identity $id = null;
+    protected Identity $id;
 
     /**
      * @var string

@@ -17,12 +17,12 @@ use JMS\Serializer\Annotation as Serializer;
 class CategoryInvisibility extends AbstractModel
 {
     /**
-     * @var Identity|null Reference to customerGroup that is not allowed to view categoryId
+     * @var Identity Reference to customerGroup that is not allowed to view categoryId
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerGroupId")
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
-    protected ?Identity $customerGroupId = null;
+    protected Identity $customerGroupId;
 
     /**
      * Constructor

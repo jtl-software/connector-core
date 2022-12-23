@@ -14,9 +14,9 @@ use Jtl\Connector\Core\Model\ManufacturerI18n;
 class ManufacturerI18nFactory extends AbstractModelFactory
 {
     /**
-     * @param array $override
+     * @param array<string, mixed>|array{} $override
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function makeFakeArray(array $override = []): array
     {

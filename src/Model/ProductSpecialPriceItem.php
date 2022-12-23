@@ -20,12 +20,12 @@ use TypeError;
 class ProductSpecialPriceItem extends AbstractModel
 {
     /**
-     * @var Identity|null Reference to customerGroup
+     * @var Identity Reference to customerGroup
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerGroupId")
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
-    protected ?Identity $customerGroupId = null;
+    protected Identity $customerGroupId;
 
     /**
      * @var double net price value

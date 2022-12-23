@@ -17,20 +17,20 @@ use JMS\Serializer\Annotation as Serializer;
 class Customer extends AbstractI18n implements IdentityInterface
 {
     /**
-     * @var Identity|null References a customer group
+     * @var Identity References a customer group
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerGroupId")
      * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
      */
-    protected ?Identity $customerGroupId = null;
+    protected Identity $customerGroupId;
 
     /**
-     * @var Identity|null Unique customer id
+     * @var Identity Unique customer id
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
-    protected ?Identity $id = null;
+    protected Identity $id;
 
     /**
      * @var double

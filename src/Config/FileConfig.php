@@ -7,6 +7,7 @@ namespace Jtl\Connector\Core\Config;
 use Jtl\Connector\Core\Exception\ConfigException;
 use Noodlehaus\Config;
 use Noodlehaus\Parser\Json;
+use RuntimeException;
 
 /**
  * Config Class
@@ -114,13 +115,17 @@ class FileConfig extends Config implements CoreConfigInterface
 
     /**
      * @inheritDoc
+     * @throws RuntimeException
      */
     public function getString(string $valueName, ?string $default = null): string
     {
         if ($this->check($valueName) === false) {
             self::throwTypeError($valueName, ConfigParameter::TYPE_STRING);
         }
+        if (!\is_scalar(($returnStr = $this->get($valueName, $default)))) {
+            throw new \RuntimeException('getString must return a scalar type!');
+        }
 
-        return (string)$this->get($valueName, $default);
+        return (string)$returnStr;
     }
 }

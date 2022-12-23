@@ -20,12 +20,12 @@ use TypeError;
 class ProductConfigGroup extends AbstractModel
 {
     /**
-     * @var Identity|null Reference to configGroup
+     * @var Identity Reference to configGroup
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("configGroupId")
      * @Serializer\Accessor(getter="getConfigGroupId",setter="setConfigGroupId")
      */
-    protected ?Identity $configGroupId = null;
+    protected Identity $configGroupId;
 
     /**
      * @var integer Optional sort number

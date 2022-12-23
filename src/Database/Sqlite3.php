@@ -9,6 +9,8 @@ use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
+// @phpstan-ignore-file
+
 /**
  * Sqlite 3 Database Class
  *
@@ -53,19 +55,17 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
     protected LoggerInterface $logger;
 
     /**
-     * (non-PHPdoc)
-     *
-     * @throws Jtl\Connector\Core\Exception\DatabaseException|DatabaseException
-     * @see Jtl\Connector\Core\Database\DatabaseInterface::connect()
+     * @inheritDoc
+     * @throws DatabaseException
      */
     public function connect(array $options = null): void
     {
         $this->setOptions($options);
-        if (!\is_string($this->location) || $this->location === '') {
+        if (isset($this->location) && $this->location === '') {
             throw new DatabaseException('Wrong type or empty location');
         }
 
-        if ($this->mode === null) {
+        if (isset($this->mode)) {
             $this->mode = \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE | self::SQLITE3_OPEN_SHAREDCACHE;
         }
 
@@ -86,13 +86,13 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
     /**
      * Set Options
      *
-     * @param array|null $options
+     * @param array<string, mixed>|null $options
      */
     public function setOptions(array $options = null): void
     {
         if (\is_array($options)) {
             // Location
-            if (isset($options['location']) && \is_string($options['location']) && \strlen($options['location']) > 0) {
+            if (isset($options['location']) && \is_string($options['location']) && $options['location'] !== '') {
                 $this->location = $options['location'];
             }
 
@@ -123,14 +123,18 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
     }
 
     /**
-     * (non-PHPdoc)
+     * @param $query
      *
+     * @return array<int, array<string, mixed>>|bool|int|null
+     * @throws \RuntimeException
      * @throws \Throwable
-     * @see Jtl\Connector\Core\Database\DatabaseInterface::query()
      */
     public function query($query)
     {
-        $command = \substr($query, 0, \strpos($query, ' '));
+        if (($length = \strpos($query, ' ')) === false) {
+            throw new \RuntimeException('$length must not be false.');
+        }
+        $command = \substr($query, 0, $length);
 
         switch (\strtoupper($command)) {
             case 'SELECT':
@@ -148,7 +152,7 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
     /**
      * @param string $query
      *
-     * @return array|null
+     * @return array<int, array<string, mixed>>|null
      * @throws \Throwable
      */
     public function fetch(string $query): ?array

@@ -60,8 +60,8 @@ class ConfigException extends \Exception
     }
 
     /**
-     * @param array $invalidProperties
-     * @param array $missingProperties
+     * @param array<scalar> $invalidProperties
+     * @param array<scalar> $missingProperties
      *
      * @return ConfigException
      */

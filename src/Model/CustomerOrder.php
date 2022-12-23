@@ -53,20 +53,20 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     public const STATUS_SHIPPED = 'shipped';
 
     /**
-     * @var Identity|null Optional reference to customer.
+     * @var Identity Optional reference to customer.
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerId")
      * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
      */
-    protected ?Identity $customerId = null;
+    protected Identity $customerId;
 
     /**
-     * @var Identity|null Unique customerOrder id
+     * @var Identity Unique customerOrder id
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
-    protected ?Identity $id = null;
+    protected Identity $id;
 
     /**
      * @var CustomerOrderBillingAddress|null Billing address
@@ -197,12 +197,12 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     protected string $shippingInfo = '';
 
     /**
-     * @var Identity|null Optional reference to customer.
+     * @var Identity Optional reference to customer.
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("shippingMethodId")
      * @Serializer\Accessor(getter="getShippingMethodId",setter="setShippingMethodId")
      */
-    protected ?Identity $shippingMethodId = null;
+    protected Identity $shippingMethodId;
 
     /**
      * @var string

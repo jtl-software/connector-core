@@ -21,12 +21,12 @@ class Checksum extends AbstractModel implements ChecksumInterface
     public const TYPE_VARIATION = 1;
 
     /**
-     * @var Identity|null
+     * @var Identity
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("foreignKey")
      * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
      */
-    protected ?Identity $foreignKey = null;
+    protected Identity $foreignKey;
 
     /**
      * @var string
