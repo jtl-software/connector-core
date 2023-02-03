@@ -698,48 +698,35 @@ class Application
         }
 
         foreach ($images as $image) {
-            if (!empty($image->getRemoteUrl())) {
-                $imageData = file_get_contents($image->getRemoteUrl());
-                if ($imageData === false) {
-                    throw ApplicationException::remoteImageNotFound($image);
-                }
-                $path = parse_url($image->getRemoteUrl(), PHP_URL_PATH);
-                $fileName = pathinfo($path, PATHINFO_BASENAME);
-                $imagePath = sprintf('%s/%s_%s', $tempDir, uniqid(), $fileName);
-                if (file_put_contents($imagePath, $imageData) === false) {
-                    throw ApplicationException::fileCouldNotGetCreated($imagePath);
-                }
-                $image->setFilename($imagePath);
-            } else {
-                if (!$this->httpRequest->files->has('file')) {
-                    throw ApplicationException::uploadedFileNotFound();
-                }
+            if (!$this->httpRequest->files->has('file')) {
+                throw ApplicationException::uploadedFileNotFound();
+            }
 
+            $imageFound = false;
+            foreach ($imagePaths as $imagePath) {
                 $imageFound = false;
-                foreach ($imagePaths as $imagePath) {
-                    $imageFound = false;
-                    $fileInfo = pathinfo($imagePath);
-                    list($hostId, $relationType) = explode('_', $fileInfo['filename']);
-                    if ((int)$hostId == $image->getId()->getHost()
-                        && strtolower($relationType) === strtolower($image->getRelationType())
-                    ) {
-                        $extension = self::determineExtensionByMimeType(mime_content_type($imagePath));
-                        if ($extension !== null && $fileInfo['extension'] !== $extension) {
-                            $newImagePath = sprintf('%s/%s.%s', $tempDir, $fileInfo['filename'], $extension);
-                            rename($imagePath, $newImagePath);
-                            $imagePath = $newImagePath;
-                        }
-
-                        $image->setFilename($imagePath);
-                        $imageFound = true;
-                        break;
+                $fileInfo = pathinfo($imagePath);
+                list($hostId, $relationType) = explode('_', $fileInfo['filename']);
+                if ((int)$hostId == $image->getId()->getHost()
+                    && strtolower($relationType) === strtolower($image->getRelationType())
+                ) {
+                    $extension = self::determineExtensionByMimeType(mime_content_type($imagePath));
+                    if ($extension !== null && $fileInfo['extension'] !== $extension) {
+                        $newImagePath = sprintf('%s/%s.%s', $tempDir, $fileInfo['filename'], $extension);
+                        rename($imagePath, $newImagePath);
+                        $imagePath = $newImagePath;
                     }
-                }
 
-                if (!$imageFound) {
-                    throw ApplicationException::imageNotFound($image);
+                    $image->setFilename($imagePath);
+                    $imageFound = true;
+                    break;
                 }
             }
+
+            if (!$imageFound) {
+                throw ApplicationException::imageNotFound($image);
+            }
+
         }
     }
 
