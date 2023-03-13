@@ -34,7 +34,7 @@ abstract class AbstractImage extends AbstractIdentity
      * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("filename")
-     * @Serializer\Accessor(getter="getFilename",setter="setFilename")
+     * @Serializer\Accessor(getter="getFilenameSafe",setter="setFilename")
      */
     protected string $filename = '';
 
@@ -117,6 +117,15 @@ abstract class AbstractImage extends AbstractIdentity
     public function getFilename(): string
     {
         return $this->filename;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFilenameSafe(): string
+    {
+        $path = \explode('/', $this->filename);
+        return \end($path);
     }
 
     /**
