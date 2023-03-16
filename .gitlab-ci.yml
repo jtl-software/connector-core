@@ -19,7 +19,7 @@ include:
   - project: 'connector/connector-utils/CI-Templates'
     file:
       - 'auto-create-mr/ci.yaml'
-      - 'code-quality/ci.yaml'
+      - 'code-quality/ci-phpstan.yaml'
 
 stages:
   - createMR
@@ -28,6 +28,7 @@ stages:
 code_quality:
   variables:
     CQ_STANDARDS: '/tmp/code-quality/ConnectorCoreStandard.xml'
+    STAN_NEON_FILE: './phpstan.neon'
   before_script: []
 
 #test:unit:
