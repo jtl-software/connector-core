@@ -68,6 +68,15 @@ class LoggerService
     }
 
     /**
+     * @param string $logLevel
+     * @return void
+     */
+    public function setLogLevel(string $logLevel): void
+    {
+        $this->logLevel = $logLevel;
+    }
+
+    /**
      * @param string $channel
      * @return boolean
      */
