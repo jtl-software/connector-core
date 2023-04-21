@@ -324,10 +324,9 @@ final class Model
     {
         if (\is_null(self::$models)) {
             /** @var array<string, string> $models */
-            $models = \array_filter(
+            $models       = \array_filter(
                 (new \ReflectionClass(self::class))->getConstants(),
-                // @phpstan-ignore-next-line
-                static function (string $constantValue, $constantName) {
+                static function ($constantValue, $constantName) {
                     return $constantValue !== self::MODEL_NAMESPACE;
                 },
                 \ARRAY_FILTER_USE_BOTH

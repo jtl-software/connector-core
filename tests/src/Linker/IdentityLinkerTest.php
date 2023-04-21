@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Linker;
 
 use Jtl\Connector\Core\Definition\IdentityType;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Exception\DefinitionException;
+use Jtl\Connector\Core\Exception\LinkerException;
 use Jtl\Connector\Core\Linker\IdentityLinker;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Jtl\Connector\Core\Model\Category;
@@ -14,9 +17,15 @@ use Jtl\Connector\Core\Model\ProductVariation;
 use Jtl\Connector\Core\Model\ProductWarehouseInfo;
 use Jtl\Connector\Core\Model\ShippingClass;
 use Jtl\Connector\Core\Test\TestCase;
+use Mockery\LegacyMockInterface;
+use PHPUnit\Framework\Exception;
+use PHPUnit\Framework\ExpectationFailedException;
+use ReflectionException;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class IdentityLinkerTest
+ *
  * @package Jtl\Connector\Core\Linker
  */
 class IdentityLinkerTest extends TestCase
@@ -24,10 +33,13 @@ class IdentityLinkerTest extends TestCase
     /**
      * @dataProvider hostIdDataProvider
      *
-     * @param $hostId
-     * @param $shouldBeValid
+     * @param mixed $hostId
+     * @param bool  $shouldBeValid
+     *
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
-    public function testHostIdValidator($hostId, $shouldBeValid): void
+    public function testHostIdValidator($hostId, bool $shouldBeValid): void
     {
         $isValid = $this->createLinker()->isValidHostId($hostId);
 
@@ -35,11 +47,11 @@ class IdentityLinkerTest extends TestCase
     }
 
     /**
-     * @param $mockedPrimaryKeyMapper
+     * @param PrimaryKeyMapperInterface|null $mockedPrimaryKeyMapper
      *
      * @return IdentityLinker
      */
-    protected function createLinker($mockedPrimaryKeyMapper = null): IdentityLinker
+    protected function createLinker(?PrimaryKeyMapperInterface $mockedPrimaryKeyMapper = null): IdentityLinker
     {
         if ($mockedPrimaryKeyMapper === null) {
             $mockedPrimaryKeyMapper = $this->createPrimaryKeyMapperMock();
@@ -48,25 +60,28 @@ class IdentityLinkerTest extends TestCase
     }
 
     /**
-     * @param array $hostId
-     * @param array $endpointId
+     * @param array<int|null>    $hostId
+     * @param array<string|null> $endpointId
      *
-     * @return PrimaryKeyMapperInterface|\Mockery\LegacyMockInterface|\Mockery\MockInterface
+     * @return PrimaryKeyMapperInterface&LegacyMockInterface
+     * @noinspection ReturnTypeCanBeDeclaredInspection
+     * @noinspection ReplaceLegacyMockeryInspection
      */
-    public function createPrimaryKeyMapperMock($hostId = [1], $endpointId = ['1'])
+    public function createPrimaryKeyMapperMock(array $hostId = [1], array $endpointId = ['1'])
     {
+        /** @var PrimaryKeyMapperInterface&LegacyMockInterface $primaryKeyMapper */
         $primaryKeyMapper = \Mockery::mock(PrimaryKeyMapperInterface::class);
-        $primaryKeyMapper->shouldReceive('save')->andReturnTrue();
-        $primaryKeyMapper->shouldReceive('delete')->andReturnTrue();
-        $primaryKeyMapper->shouldReceive('clear')->andReturnTrue();
-        $primaryKeyMapper->shouldReceive('getHostId')->andReturn(...$hostId);
-        $primaryKeyMapper->shouldReceive('getEndpointId')->andReturn(...$endpointId);
+        $primaryKeyMapper->shouldReceive('save')->andReturnTrue(); //@phpstan-ignore-line
+        $primaryKeyMapper->shouldReceive('delete')->andReturnTrue(); //@phpstan-ignore-line
+        $primaryKeyMapper->shouldReceive('clear')->andReturnTrue(); //@phpstan-ignore-line
+        $primaryKeyMapper->shouldReceive('getHostId')->andReturn(...$hostId); //@phpstan-ignore-line
+        $primaryKeyMapper->shouldReceive('getEndpointId')->andReturn(...$endpointId); //@phpstan-ignore-line
 
         return $primaryKeyMapper;
     }
 
     /**
-     * @return array
+     * @return array<int, array<int, int|bool|null>>
      * @throws \Exception
      */
     public function hostIdDataProvider(): array
@@ -81,17 +96,20 @@ class IdentityLinkerTest extends TestCase
     /**
      * @dataProvider endpointIdDataProvider
      *
-     * @param $endpointId
-     * @param $shouldBeValid
+     * @param mixed $endpointId
+     * @param bool  $shouldBeValid
+     *
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
-    public function testEndpointIdValidator($endpointId, $shouldBeValid): void
+    public function testEndpointIdValidator($endpointId, bool $shouldBeValid): void
     {
         $isValid = $this->createLinker()->isValidEndpointId($endpointId);
         $this->assertEquals($shouldBeValid, $isValid);
     }
 
     /**
-     * @return array
+     * @return array<int, array<int, int|bool|string|null>>
      * @throws \Exception
      */
     public function endpointIdDataProvider(): array
@@ -104,7 +122,11 @@ class IdentityLinkerTest extends TestCase
     }
 
     /**
-     * @throws \ReflectionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws Exception
+     * @throws ReflectionException
+     * @throws \Exception
      */
     public function testCache(): void
     {
@@ -148,7 +170,11 @@ class IdentityLinkerTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws DefinitionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function testHostIdResolver(): void
     {
@@ -166,7 +192,11 @@ class IdentityLinkerTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws DefinitionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function testEndpointIdResolver(): void
     {
@@ -180,11 +210,13 @@ class IdentityLinkerTest extends TestCase
         $property  = 'property_doesnt_exists';
         $this->expectExceptionObject(DefinitionException::unknownIdentityProperty($modelName, $property));
 
-        $linker->getEndpointId($modelName, $property, '30');
+        $linker->getEndpointId($modelName, $property, 30);
     }
 
     /**
-     *
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
     public function testIdentityClear(): void
     {
@@ -195,7 +227,13 @@ class IdentityLinkerTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws DefinitionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public function testIdentitySave(): void
     {
@@ -219,7 +257,14 @@ class IdentityLinkerTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws DefinitionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws \InvalidArgumentException
+     * @throws LinkerException
+     * @throws \Exception
      */
     public function testIdentityDelete(): void
     {
@@ -249,7 +294,14 @@ class IdentityLinkerTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws DefinitionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws \InvalidArgumentException
+     * @throws LinkerException
+     * @throws \Exception
      */
     public function testLinkModel(): void
     {
@@ -287,7 +339,14 @@ class IdentityLinkerTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws DefinitionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws \InvalidArgumentException
+     * @throws LinkerException
+     * @throws \Exception
      */
     public function testUnlinkModel(): void
     {
@@ -306,7 +365,14 @@ class IdentityLinkerTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws DefinitionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws \InvalidArgumentException
+     * @throws LinkerException
+     * @throws \Exception
      */
     public function testLinkCollection(): void
     {
@@ -329,7 +395,14 @@ class IdentityLinkerTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws DefinitionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws \InvalidArgumentException
+     * @throws LinkerException
+     * @throws \Exception
      */
     public function testUnlinkCollection(): void
     {
@@ -356,7 +429,13 @@ class IdentityLinkerTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws DefinitionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws LinkerException
+     * @throws \Exception
      */
     public function testLinkIdentityList(): void
     {
@@ -384,7 +463,9 @@ class IdentityLinkerTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
     protected function tearDown(): void
     {

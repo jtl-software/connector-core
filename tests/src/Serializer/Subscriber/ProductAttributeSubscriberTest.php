@@ -1,19 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Serializer\Subscriber;
 
-use Jtl\Connector\Core\Model\AbstractModel;
+use JsonException;
+use Jtl\Connector\Core\Exception\TranslatableAttributeException;
 use Jtl\Connector\Core\Model\Category;
 use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Model\Product;
+use Jtl\Connector\Core\Model\ProductAttribute;
 use Jtl\Connector\Core\Model\TranslatableAttribute;
 use Jtl\Connector\Core\Model\TranslatableAttributeI18n;
+use Jtl\Connector\Core\Model\TranslatableAttributesInterface;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Test\TestCase;
 
 /**
  * Class ObjectTypesSubscriberTest
+ *
  * @package Jtl\Connector\Core\Serializer\Subscriber
  */
 class ProductAttributeSubscriberTest extends TestCase
@@ -34,10 +40,14 @@ class ProductAttributeSubscriberTest extends TestCase
 
         $serializedProduct = $serializer->build()->serialize($product, 'json');
 
-        $productObj = \json_decode($serializedProduct);
+        $productObj = \json_decode($serializedProduct, false, 512, \JSON_THROW_ON_ERROR);
+        $this->assertInstanceOf(Product::class, $productObj);
 
-        foreach ($productObj->attributes[0]->i18ns as $index => $i18n) {
+        foreach ($productObj->getAttributes()[0]->getI18ns() as $index => $i18n) {
             $attributeId = $attributes[$index]->getId();
+            if (!\property_exists($i18n, 'productAttrId')) { //@phpstan-ignore-line
+                $this->fail('property \'productAttrId\' does not exist.');
+            }
             $this->assertSame([$attributeId->getEndpoint(), $attributeId->getHost()], $i18n->productAttrId);
         }
     }
@@ -59,6 +69,8 @@ class ProductAttributeSubscriberTest extends TestCase
      * @param TranslatableAttribute $attribute
      *
      * @return TranslatableAttributeI18n
+     * @throws JsonException
+     * @throws TranslatableAttributeException
      */
     protected function addTranslatableAttributeI18n(TranslatableAttribute $attribute): TranslatableAttributeI18n
     {
@@ -72,21 +84,22 @@ class ProductAttributeSubscriberTest extends TestCase
     }
 
     /**
-     * @param AbstractModel $translatableModel
-     * @param bool          $setId
+     * @param Product|Category $translatableModel
+     * @param bool                            $setId
      *
      * @return TranslatableAttribute
      * @throws \Exception
      */
     protected function addTranslatableAttribute(
-        AbstractModel $translatableModel,
-        bool          $setId = true
+        TranslatableAttributesInterface $translatableModel,
+        bool                            $setId = true
     ): TranslatableAttribute {
         $attributeId = new Identity($this->createEndpointId(), $this->createHostId());
-        $attribute   = new TranslatableAttribute();
+        $attribute   = new ProductAttribute();
         if ($setId) {
             $attribute->setId($attributeId);
         }
+
 
         $translatableModel->addAttribute($attribute);
 
@@ -109,13 +122,21 @@ class ProductAttributeSubscriberTest extends TestCase
 
         $serializedResponse = $serializer->build()->serialize($response, 'json');
 
+        /** @var ResponsePacket $responseObj */
         $responseObj = \json_decode($serializedResponse, false, 512, \JSON_THROW_ON_ERROR);
+        /** @var Product[] $resultArr */
+        $resultArr       = $responseObj->getResult();
+        $responseProduct = $resultArr[0];
+        $i18n            = $responseProduct->getAttributes()[0]->getI18ns()[0];
 
-        $i18n = $responseObj->result[0]->attributes[0]->i18ns[0]->productAttrId;
+        if (!\property_exists($i18n, 'productAttrId')) { //@phpstan-ignore-line
+            $this->fail('property \'productAttrId\' does not exist.');
+        }
 
         $attributeId = $attribute->getId();
 
-        $this->assertSame([$attributeId->getEndpoint(), $attributeId->getHost()], $i18n);
+        /** @noinspection PhpUndefinedFieldInspection */
+        $this->assertSame([$attributeId->getEndpoint(), $attributeId->getHost()], $i18n->productAttrId);
     }
 
     /**
@@ -131,13 +152,19 @@ class ProductAttributeSubscriberTest extends TestCase
 
         $serializedProduct = $serializer->build()->serialize($product, 'json');
 
+        /** @var Product $productObj */
         $productObj = \json_decode($serializedProduct, false, 512, \JSON_THROW_ON_ERROR);
 
-        $i18n = $productObj->attributes[0]->i18ns[0]->productAttrId;
+        $i18n = $productObj->getAttributes()[0]->getI18ns()[0];
+
+        if (!\property_exists($i18n, 'productAttrId')) { //@phpstan-ignore-line
+            $this->fail('property \'productAttrId\' does not exist.');
+        }
 
         $emptyIdentity = new Identity();
 
-        $this->assertSame([$emptyIdentity->getEndpoint(), $emptyIdentity->getHost()], $i18n);
+        /** @noinspection PhpUndefinedFieldInspection */
+        $this->assertSame([$emptyIdentity->getEndpoint(), $emptyIdentity->getHost()], $i18n->productAttrId);
     }
 
     /**
@@ -152,9 +179,10 @@ class ProductAttributeSubscriberTest extends TestCase
 
         $serializedProduct = $serializer->build()->serialize($product, 'json');
 
+        /** @var Product $productObj */
         $productObj = \json_decode($serializedProduct, false, 512, \JSON_THROW_ON_ERROR);
 
-        $this->assertEmpty($productObj->attributes[0]->i18ns);
+        $this->assertEmpty($productObj->getAttributes()[0]->getI18ns());
     }
 
     /**
@@ -173,10 +201,13 @@ class ProductAttributeSubscriberTest extends TestCase
 
         $serializedProduct = $serializer->build()->serialize($category, 'json');
 
+        /** @var Category $categoryObj */
         $categoryObj = \json_decode($serializedProduct, false, 512, \JSON_THROW_ON_ERROR);
 
-        $i18n = $categoryObj->attributes[0]->i18ns[0];
+        $i18n = $categoryObj->getAttributes()[0]->getI18ns()[0];
 
-        $this->assertObjectNotHasAttribute('productAttrId', $i18n);
+        if (!\property_exists($i18n, 'productAttrId')) { //@phpstan-ignore-line
+            $this->fail('$i18n should have property "productAttrId".');
+        }
     }
 }

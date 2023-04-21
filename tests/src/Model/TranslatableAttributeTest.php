@@ -1,25 +1,43 @@
 <?php
 
+declare(strict_types=1);
+
 namespace src\Model;
 
+use JsonException;
 use Jtl\Connector\Core\Exception\TranslatableAttributeException;
+use Jtl\Connector\Core\Model\AbstractModel;
 use Jtl\Connector\Core\Model\Generator\AbstractModelFactory;
 use Jtl\Connector\Core\Model\Generator\TranslatableAttributeI18nFactory;
 use Jtl\Connector\Core\Model\TranslatableAttribute;
 use Jtl\Connector\Core\Model\TranslatableAttributeI18n;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\Exception;
+use PHPUnit\Framework\ExpectationFailedException;
+use PHPUnit\Framework\MockObject\IncompatibleReturnValueException;
+use PHPUnit\Framework\MockObject\MethodCannotBeConfiguredException;
+use PHPUnit\Framework\MockObject\MethodNameAlreadyConfiguredException;
+use PHPUnit\Framework\MockObject\MethodNameNotConfiguredException;
+use PHPUnit\Framework\MockObject\MethodParametersAlreadyConfiguredException;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 class TranslatableAttributeTest extends TestCase
 {
     /**
      * @dataProvider findTranslationProvider
      *
-     * @param string $languageIso
-     * @param        $expectedTranslation
-     * @param array  $translations
+     * @param string                           $languageIso
+     * @param TranslatableAttributeI18n        $expectedTranslation
+     * @param array<TranslatableAttributeI18n> $translations
+     *
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
-    public function testFindTranslation(string $languageIso, $expectedTranslation, array $translations = []): void
-    {
+    public function testFindTranslation(
+        string                    $languageIso,
+        TranslatableAttributeI18n $expectedTranslation,
+        array                     $translations = []
+    ): void {
         $attribute = (new TranslatableAttribute())
             ->setI18ns(...$translations);
 
@@ -29,7 +47,7 @@ class TranslatableAttributeTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array<int, array<int, string|TranslatableAttributeI18n|array<int, TranslatableAttributeI18n>|null>>
      * @throws \Exception
      */
     public function findTranslationProvider(): array
@@ -38,13 +56,18 @@ class TranslatableAttributeTest extends TestCase
         $translationsFactory = AbstractModelFactory::createFactory('TranslatableAttributeI18n');
 
         /** @var TranslatableAttributeI18n[] $translations */
-        $translations      = $translationsFactory->make(\mt_rand(1, 10));
+        $translations      = $translationsFactory->make(\random_int(2, 10));
         $translationsCount = \count($translations);
+        $this->assertGreaterThan(1, $translationsCount);
+        $randomIntMax = $translationsCount - 1;
+        if ($randomIntMax < 1) {
+            $this->fail('$randomIntMax must be greater than 0.');
+        }
 
         return [
             [
                 'es',
-                $translations[\random_int(0, $translationsCount - 1)]->setLanguageIso('es'),
+                $translations[\random_int(0, $randomIntMax)]->setLanguageIso('es'),
                 $translations,
             ],
             [
@@ -64,10 +87,20 @@ class TranslatableAttributeTest extends TestCase
      *
      * @param string                         $type
      * @param TranslatableAttributeI18n|null $translation
-     * @param                                $expectedValue
+     * @param mixed                          $expectedValue
      *
-     * @depends      testSetType
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      * @throws TranslatableAttributeException
+     * @throws JsonException
+     * @throws Exception
+     * @throws \PHPUnit\Framework\InvalidArgumentException
+     * @throws IncompatibleReturnValueException
+     * @throws MethodCannotBeConfiguredException
+     * @throws MethodNameAlreadyConfiguredException
+     * @throws MethodNameNotConfiguredException
+     * @throws MethodParametersAlreadyConfiguredException
+     * @depends      testSetType
      */
     public function testFindValue(string $type, ?TranslatableAttributeI18n $translation, $expectedValue): void
     {
@@ -89,7 +122,7 @@ class TranslatableAttributeTest extends TestCase
     }
 
     /**
-     * @return array[]
+     * @return array<int, array<int, string|AbstractModel|int|null>>
      * @throws \Exception
      */
     public function findValueProvider(): array
@@ -114,9 +147,12 @@ class TranslatableAttributeTest extends TestCase
     /**
      * @dataProvider getNameProvider
      *
-     * @param array  $translations
-     * @param string $expectedName
-     * @param string $languageIso
+     * @param array<TranslatableAttributeI18n> $translations
+     * @param string                           $expectedName
+     * @param string                           $languageIso
+     *
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
     public function testGetName(array $translations, string $expectedName, string $languageIso): void
     {
@@ -129,7 +165,7 @@ class TranslatableAttributeTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array<int, array{0: TranslatableAttributeI18n[], 1: string, 2: string}>
      * @throws \Exception
      */
     public function getNameProvider(): array
@@ -143,8 +179,15 @@ class TranslatableAttributeTest extends TestCase
         for ($i = 0; $i < $rounds; $i++) {
             /** @var TranslatableAttributeI18n[] $translations */
             $translations = $translationsFactory->make(\random_int(1, 5));
-            $selected     = \random_int(0, \count($translations) - 1);
-            $data[]       = [
+            $randomIntMax = \count($translations) - 1;
+
+            if ($randomIntMax < 1) {
+                $selected = 0;
+            } else {
+                $selected = \random_int(0, $randomIntMax);
+            }
+
+            $data[] = [
                 $translations,
                 $translations[$selected]->getName(),
                 $translations[$selected]->getLanguageIso(),
@@ -163,9 +206,14 @@ class TranslatableAttributeTest extends TestCase
     /**
      * @dataProvider getValuesProvider
      *
-     * @param string|null $castToType
-     * @param array       $translations
-     * @param array       $expectedValues
+     * @param TranslatableAttributeI18n[]                      $translations
+     * @param array<string, bool|float|int|string|null|object> $expectedValues
+     * @param string|null                                      $castToType
+     *
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws JsonException
+     * @throws TranslatableAttributeException
      */
     public function testGetValues(array $translations, array $expectedValues, string $castToType = null): void
     {
@@ -178,7 +226,7 @@ class TranslatableAttributeTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array<int, array{0: TranslatableAttributeI18n[], 1: array<string, bool|float|int|string|object>}>
      * @throws \Exception
      */
     public function getValuesProvider(): array
@@ -206,13 +254,15 @@ class TranslatableAttributeTest extends TestCase
     }
 
     /**
-     * @param $actualType
-     * @param $expectedType
+     * @param string $actualType
+     * @param string $expectedType
      *
-     * @dataProvider setTypeProvider
      * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @dataProvider setTypeProvider
      */
-    public function testSetType($actualType, $expectedType): void
+    public function testSetType(string $actualType, string $expectedType): void
     {
         $attribute = new TranslatableAttribute();
         $attribute->setType($actualType);
@@ -220,6 +270,9 @@ class TranslatableAttributeTest extends TestCase
         $this->assertEquals($expectedType, $attribute->getType());
     }
 
+    /**
+     * @return array<int, array<int, bool|string>>
+     */
     public function setTypeProvider(): array
     {
         $data = [];

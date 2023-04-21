@@ -1,28 +1,33 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Definition;
 
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\ExpectationFailedException;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 class ControllerTest extends TestCase
 {
     /**
      * @dataProvider isTypeDataProvider
      *
-     * @param      $controllerName
-     * @param bool $shouldBeController
+     * @param string $controllerName
+     * @param bool   $shouldBeController
      *
-     * @throws \ReflectionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
-    public function testIsType($controllerName, bool $shouldBeController): void
+    public function testIsType(string $controllerName, bool $shouldBeController): void
     {
         $isType = Controller::isController($controllerName);
         $this->assertSame($shouldBeController, $isType);
     }
 
     /**
-     * @return array
+     * @return array<int, mixed>
      * @throws \ReflectionException
      */
     public function isTypeDataProvider(): array

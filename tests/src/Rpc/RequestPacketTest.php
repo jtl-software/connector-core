@@ -1,13 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Rpc;
 
 use JMS\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\ExpectationFailedException;
+use RuntimeException;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class RequestPacketTest
+ *
  * @package Jtl\Connector\Core\Test\Rpc
  */
 class RequestPacketTest extends TestCase
@@ -15,9 +21,12 @@ class RequestPacketTest extends TestCase
     /**
      * @dataProvider validPacketDataProvider
      *
-     * @param array $inputParams
-     * @param array $expectedParams
-     * @param bool  $isValid
+     * @param array{0: string, 1: string, 2: string, 3: array<mixed>} $inputParams
+     * @param array{0: string, 1: string, 2: string, 3: array<mixed>} $expectedParams
+     * @param bool                                                    $isValid
+     *
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
     public function testValidPacket(array $inputParams, array $expectedParams, bool $isValid): void
     {
@@ -34,7 +43,7 @@ class RequestPacketTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array<int, array<int, array<int, int|string|array<int, string>|array{}|array{array{}}>|bool>>
      */
     public function validPacketDataProvider(): array
     {
@@ -100,9 +109,14 @@ class RequestPacketTest extends TestCase
     /**
      * @dataProvider createFromJtlRpcDataProvider
      *
-     * @param string $jtlRpcInput
-     * @param array  $expectedParams
-     * @param bool   $isValid
+     * @param string                                       $jtlRpcInput
+     * @param array{0: string, 1: string, 2: array<mixed>} $expectedParams
+     * @param bool                                         $isValid
+     *
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     * @throws RuntimeException
      */
     public function testCreateFromJtlrpc(string $jtlRpcInput, array $expectedParams, bool $isValid): void
     {
@@ -116,7 +130,7 @@ class RequestPacketTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array<int, array<int, string|array<int, string|array{}|array{0: 'a', 1: 'b'}|array<int, int>>|bool>>
      */
     public function createFromJtlRpcDataProvider(): array
     {
@@ -134,9 +148,14 @@ class RequestPacketTest extends TestCase
     /**
      * @dataProvider createFromJtlRpcDataProvider
      *
-     * @param string $jtlRpcInput
-     * @param array  $expectedParams
-     * @param bool   $isValid
+     * @param string                                       $jtlRpcInput
+     * @param array{0: string, 1: string, 2: array<mixed>} $expectedParams
+     * @param bool                                         $isValid
+     *
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      */
     public function testCreateFromJtlRpcUseAnotherSerializer(
         string $jtlRpcInput,

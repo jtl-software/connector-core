@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Rpc;
 
 use Jtl\Connector\Core\Exception\RpcException;
@@ -7,9 +9,12 @@ use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\ExpectationFailedException;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class ResponsePacketTest
+ *
  * @package Jtl\Connector\Core\Test\Rpc
  */
 class ResponsePacketTest extends TestCase
@@ -19,11 +24,13 @@ class ResponsePacketTest extends TestCase
      *
      * @param string     $id
      * @param Error|null $error
-     * @param            $result
+     * @param mixed      $result
      * @param string     $jtlRpc
      * @param bool       $isValid
      *
      * @throws RpcException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
     public function testIsValid(string $id, ?Error $error, $result, string $jtlRpc, bool $isValid): void
     {
@@ -40,7 +47,7 @@ class ResponsePacketTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array<int, array<int, string|null|bool|Error|array{Products: array{0: Product}}|array{}>>
      */
     public function isValidDataProvider(): array
     {

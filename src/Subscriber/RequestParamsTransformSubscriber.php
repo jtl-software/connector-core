@@ -46,18 +46,30 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
     public function transformRequestParams(RpcEvent $event): void
     {
         if ($event->getAction() === Action::PUSH) {
-            $data = $event->getData();
+            $eventData = $event->getData();
+            if (!\is_array($eventData)) {
+                throw new \RuntimeException('$data must be type array.');
+            }
 
             switch ($event->getController()) {
                 case Controller::PRODUCT:
-                    $data = $this->transformProductData($data); // @phpstan-ignore-line
+                    /** @var array<array<string, mixed>> $eventData */
+                    $data = $this->transformProductData($eventData);
                     break;
                 case Controller::PRODUCT_PRICE:
-                    $data = $this->transformProductPriceData($data); // @phpstan-ignore-line
+                    /** @var array<array<string, mixed>> $eventData */
+                    $data = $this->transformProductPriceData($eventData);
                     break;
                 case Controller::PRODUCT_STOCK_LEVEL:
-                    $data = $this->transformProductStockLevelData($data); // @phpstan-ignore-line
+                    /** @var array{
+                     *     productId: array{0: string, 1: int}|ProductStockLevel|null,
+                     *     sku: ?string,
+                     *     stockLevel: ?float
+                     * } $eventData */
+                    $data = $this->transformProductStockLevelData($eventData);
                     break;
+                default:
+                    $data = $eventData;
             }
 
             $event->setData($data);

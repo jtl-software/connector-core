@@ -1,19 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Application;
 
 use Jtl\Connector\Core\Application\Response;
+use Jtl\Connector\Core\Model\AbstractModel;
 use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\ExpectationFailedException;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class ResponseTest
+ *
  * @package Jtl\Connector\Core\Test\Application
  */
 class ResponseTest extends TestCase
 {
     /**
-     *
+     * @return array<int, array{0: Identity|array{0: int, 1: int}|int|float|string, 1?: string}>
      */
     public function responseDataProvider(): array
     {
@@ -29,7 +35,11 @@ class ResponseTest extends TestCase
     /**
      * @dataProvider responseDataProvider
      *
-     * @param $result
+     * @param AbstractModel|AbstractModel[] $result
+     *
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function testCreateFromStatic($result): void
     {
@@ -39,7 +49,10 @@ class ResponseTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function testSetResult(): void
     {

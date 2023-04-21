@@ -224,7 +224,7 @@ class TranslatableAttribute extends AbstractIdentity
     /**
      * @param string $languageIso
      *
-     * @return bool|float|int|string|null|mixed
+     * @return bool|float|int|string|null|object
      * @throws TranslatableAttributeException
      * @throws JsonException
      */
@@ -239,15 +239,18 @@ class TranslatableAttribute extends AbstractIdentity
     }
 
     /**
-     * @return array<string, bool|float|int|string|null|mixed>
+     * @param string|null $type
+     *
+     * @return array<string, bool|float|int|string|null|object>
      * @throws TranslatableAttributeException
      * @throws JsonException
      */
-    public function getValues(): array
+    public function getValues(?string $type = null): array
     {
+        $type   = $type ?? $this->type ?? self::TYPE_STRING;
         $values = [];
         foreach ($this->i18ns as $i18n) {
-            $values[$i18n->getLanguageIso()] = $i18n->getValue($this->type);
+            $values[$i18n->getLanguageIso()] = $i18n->getValue($type);
         }
 
         return $values;

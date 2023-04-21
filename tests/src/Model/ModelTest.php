@@ -1,12 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Tests\Model;
 
+use Exception;
+use JMS\Serializer\Exception\InvalidArgumentException;
+use JMS\Serializer\Exception\RuntimeException;
 use JMS\Serializer\SerializationContext;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Model\AbstractModel;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\ExpectationFailedException;
 
 class ModelTest extends TestCase
 {
@@ -15,6 +22,9 @@ class ModelTest extends TestCase
      * @doesNotPerformAssertions
      *
      * @param string $modelName
+     *
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
      */
     public function testModelsInitialization(string $modelName): void
     {
@@ -26,19 +36,21 @@ class ModelTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array<mixed>
+     * @throws AssertionFailedError
      */
     public function modelsDataProvider(): array
     {
-        $ignoredModels = self::getIgnoredModels();
+        $this->fail('TODO ARRAY DOC!!!');
+        $ignoredModels = self::getIgnoredModels(); //@phpstan-ignore-line
         $modelsPattern = \dirname(\TEST_DIR) . '/src/Model/*.php';
         return \array_filter(
-            \array_map(function ($modelPath) {
+            \array_map(static function ($modelPath) {
                 $fileInfo  = new \SplFileInfo($modelPath);
                 $modelName = $fileInfo->getBasename('.php');
                 return [$modelName];
             }, \glob($modelsPattern)),
-            function ($value) use ($ignoredModels) {
+            static function ($value) use ($ignoredModels) {
                 return !\in_array($value[0], $ignoredModels, true);
             }
         );
@@ -72,13 +84,15 @@ class ModelTest extends TestCase
      * @param string $identificationString
      * @param string $subject
      * @param bool   $setString
+     *
+     * @throws Exception
      */
     public function testUnsetIdentificationString(string $identificationString, string $subject, bool $setString): void
     {
         $model       = $this->getMockForAbstractClass(AbstractModel::class);
-        $stringCount = \mt_rand(0, 10);
+        $stringCount = \random_int(0, 10);
 
-        $identificationStrings = \array_map(function ($whatever) {
+        $identificationStrings = \array_map(static function ($whatever) {
             return \uniqid('rand-', true);
         }, \array_fill(0, $stringCount, 'foo'));
 
@@ -92,8 +106,9 @@ class ModelTest extends TestCase
         }
 
         $model->unsetIdentificationString($identificationString);
+        /** @var string[] $actualResult */
         $actualResult = $this->getPropertyValueFromObject($model, 'identificationStrings');
-        $this->assertFalse(\in_array($identificationString, $actualResult, true));
+        $this->assertNotContains($identificationString, $actualResult);
         $this->assertCount($stringCount, $actualResult);
     }
 
@@ -103,15 +118,19 @@ class ModelTest extends TestCase
      * @param string $identificationString
      * @param string $subject
      * @param bool   $setString
+     *
+     * @throws \PHPUnit\Framework\Exception
+     * @throws ExpectationFailedException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
      */
     public function testUnsetIdentificationStringBySubject(
         string $identificationString,
         string $subject,
         bool   $setString
-    ): void
-    {
+    ): void {
         $model       = $this->getMockForAbstractClass(AbstractModel::class);
-        $stringCount = \mt_rand(0, 10);
+        $stringCount = \random_int(0, 10);
 
         $identificationStrings = \array_map(function ($whatever) {
             return \uniqid('rand-', true);
@@ -126,32 +145,36 @@ class ModelTest extends TestCase
             if ($string === $identificationString) {
                 $model->setIdentificationStringBySubject($subject, $string);
             } else {
-                switch (\mt_rand(0, 1)) {
+                switch (\random_int(0, 1)) {
                     case 0:
                         $model->setIdentificationString($string);
                         break;
                     case 1:
-                        $model->setIdentificationStringBySubject(\uniqid('sub-'), $string);
+                        $model->setIdentificationStringBySubject(\uniqid('sub-', false), $string);
                         break;
                 }
             }
         }
 
         $model->unsetIdentificationStringBySubject($subject);
+        /** @var string[] $actualResult */
         $actualResult = $this->getPropertyValueFromObject($model, 'identificationStrings');
-        $this->assertFalse(\in_array($identificationString, $actualResult, true));
+        $this->assertNotContains($identificationString, $actualResult);
         $this->assertArrayNotHasKey($subject, $actualResult);
         $this->assertCount($stringCount, $actualResult);
     }
 
     /**
-     * @return array
+     * @return array{
+     *     0: array{0: string, 1: 'hola', 2: true},
+     *     1: array{0: string, 1: 'hallo', 2: false}
+     *  }
      */
     public function unsetIdentificationStringProvider(): array
     {
         return [
-            [\uniqid('foo-'), 'hola', true],
-            [\uniqid('bar-'), 'hallo', false]
+            [\uniqid('foo-', false), 'hola', true],
+            [\uniqid('bar-', false), 'hallo', false]
         ];
     }
 }

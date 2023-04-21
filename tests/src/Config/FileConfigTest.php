@@ -1,26 +1,36 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Config;
 
+use JsonException;
 use Jtl\Connector\Core\Config\FileConfig;
 use Jtl\Connector\Core\Exception\ConfigException;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\Exception;
+use PHPUnit\Framework\ExpectationFailedException;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class FileConfig
+ *
  * @package Jtl\Connector\Core\Test\Config
  */
 class FileConfigTest extends TestCase
 {
     /**
-     *
+     * @return void
+     * @throws ConfigException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
     public function testConfigSetParameter(): void
     {
         $fileConfig = $this->createFileConfig();
 
         $testKey   = 'test';
-        $testValue = \rand();
+        $testValue = \mt_rand();
 
         $fileConfig->set($testKey, $testValue);
 
@@ -29,29 +39,43 @@ class FileConfigTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws ConfigException
      */
     public function testConfigSetParameterCannotBeEmpty(): void
     {
         $this->expectException(ConfigException::class);
-        $this->getExpectedExceptionCode(ConfigException::EMPTY_KEY);
 
         $fileConfig = $this->createFileConfig();
 
         $fileConfig->set('', '');
     }
 
+    /**
+     * @return void
+     * @throws ConfigException
+     * @throws Exception
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws JsonException
+     */
     public function testSave(): void
     {
-        $file = $this->createConfigFile();
-        $data = \json_decode(\file_get_contents($file), true);
+        $file        = $this->createConfigFile();
+        $fileContent = \file_get_contents($file);
+        $this->assertNotFalse($fileContent);
+        $data = \json_decode($fileContent, true, 512, \JSON_THROW_ON_ERROR);
+        $this->assertIsArray($data);
         $this->assertArrayNotHasKey('yo', $data);
         $this->assertArrayNotHasKey('foo', $data);
         $config = new FileConfig($file);
         $config->set('yo', 'lo');
         $config->set('foo', 'bar');
         $config->write();
-        $data = \json_decode(\file_get_contents($file), true);
+        $fileContent = \file_get_contents($file);
+        $this->assertNotFalse($fileContent);
+        $data = \json_decode($fileContent, true, 512, \JSON_THROW_ON_ERROR);
+        $this->assertIsArray($data);
         $this->assertArrayHasKey('yo', $data);
         $this->assertEquals('lo', $data['yo']);
         $this->assertArrayHasKey('foo', $data);

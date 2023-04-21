@@ -1,37 +1,50 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Session;
 
+use Jtl\Connector\Core\Database\Sqlite3;
+use Jtl\Connector\Core\Exception\DatabaseException;
+use Jtl\Connector\Core\Exception\SessionException;
 use Jtl\Connector\Core\Session\SqliteSessionHandler;
 use Jtl\Connector\Core\Test\TestCase;
+use PDOStatement;
+use PHPUnit\Framework\ExpectationFailedException;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 class SqliteSessionHandlerTest extends TestCase
 {
-    /**
-     * @var string
-     */
-    protected $dbFile;
+    protected string               $dbFile;
+    protected SqliteSessionHandler $handler;
+    protected \PDO                 $pdo;
 
     /**
-     * @var SqliteSessionHandler
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
-    protected $handler;
-
-    /**
-     * @var \PDO
-     */
-    protected $pdo;
-
     public function testConstruct(): void
     {
         $this->assertFileExists($this->dbFile);
     }
 
+    /**
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     */
     public function testClose(): void
     {
         $this->assertTrue($this->handler->close());
     }
 
+    /**
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws \Throwable
+     */
     public function testDestroy(): void
     {
         $sessionId   = \uniqid('wtfsess', true);
@@ -48,6 +61,7 @@ class SqliteSessionHandlerTest extends TestCase
      * @param int    $expires
      *
      * @return bool
+     * @throws \PDOException
      */
     protected function insertSessionData(string $sessionId, string $sessionData, int $expires): bool
     {
@@ -63,7 +77,8 @@ class SqliteSessionHandlerTest extends TestCase
     /**
      * @param string $sessionId
      *
-     * @return array|null
+     * @return array<string, scalar>|null
+     * @throws \PDOException
      */
     protected function findSessionData(string $sessionId): ?array
     {
@@ -79,6 +94,12 @@ class SqliteSessionHandlerTest extends TestCase
         return null;
     }
 
+    /**
+     * @return void
+     * @throws \PDOException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     */
     public function testWriteInsert(): void
     {
         $sessionId   = \uniqid('wtfsess', true);
@@ -93,6 +114,12 @@ class SqliteSessionHandlerTest extends TestCase
         $this->assertGreaterThan($now, $data['sessionExpires']);
     }
 
+    /**
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws \PDOException
+     */
     public function testWriteUpdate(): void
     {
         $sessionId   = \uniqid('wtfsess', true);
@@ -107,6 +134,13 @@ class SqliteSessionHandlerTest extends TestCase
         $this->assertEquals($newData, $data['sessionData']);
     }
 
+    /**
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws \PDOException
+     * @throws \Throwable
+     */
     public function testGc(): void
     {
         foreach ([-2, -5, 4, 6, -7, -42] as $expireOffset) {
@@ -121,14 +155,33 @@ class SqliteSessionHandlerTest extends TestCase
     }
 
     /**
-     * @return integer
+     * @return int
+     * @throws \RuntimeException
      */
     protected function countSessionData(): int
     {
-        $sql = 'SELECT COUNT(sessionId) FROM session';
-        return $this->pdo->query($sql)->fetchColumn();
+        $sql   = 'SELECT COUNT(sessionId) FROM session';
+        $query = $this->pdo->query($sql);
+        if ($query instanceof PDOStatement === false) {
+            throw new \RuntimeException('$query must be instance of ' . PDOStatement::class);
+        }
+
+        $return = $query->fetchColumn();
+
+        if (\is_int($return)) {
+            return $return;
+        }
+
+        throw new \RuntimeException('Da fucking return must be an int!!!11elf');
     }
 
+    /**
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws \PDOException
+     * @throws \Throwable
+     */
     public function testValidateIdSuccess(): void
     {
         $sessionId   = \uniqid('wtfsess', true);
@@ -138,6 +191,13 @@ class SqliteSessionHandlerTest extends TestCase
         $this->assertTrue($this->handler->validateId($sessionId));
     }
 
+    /**
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws \PDOException
+     * @throws \Throwable
+     */
     public function testValidateIdFailsSessionExpired(): void
     {
         $sessionId   = \uniqid('wtfsess', true);
@@ -147,17 +207,35 @@ class SqliteSessionHandlerTest extends TestCase
         $this->assertFalse($this->handler->validateId($sessionId));
     }
 
+    /**
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws \Throwable
+     */
     public function testValidateIdFailsSessionDoesNotExist(): void
     {
         $sessionId = \uniqid('wtfsess', true);
         $this->assertFalse($this->handler->validateId($sessionId));
     }
 
+    /**
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     */
     public function testOpen(): void
     {
         $this->assertTrue($this->handler->open('foo', 'bar'));
     }
 
+    /**
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws \PDOException
+     * @throws \Throwable
+     */
     public function testReadSuccess(): void
     {
         $sessionId   = \uniqid('wtfsess', true);
@@ -167,6 +245,13 @@ class SqliteSessionHandlerTest extends TestCase
         $this->assertEquals($sessionData, $this->handler->read($sessionId));
     }
 
+    /**
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws \PDOException
+     * @throws \Throwable
+     */
     public function testReadFailedSessionExpired(): void
     {
         $sessionId   = \uniqid('wtfsess', true);
@@ -176,12 +261,25 @@ class SqliteSessionHandlerTest extends TestCase
         $this->assertEquals('', $this->handler->read($sessionId));
     }
 
+    /**
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws \Throwable
+     */
     public function testReadFailedSessionNotExists(): void
     {
         $sessionId = \uniqid('wtfsess', true);
         $this->assertEquals('', $this->handler->read($sessionId));
     }
 
+    /**
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws \PDOException
+     * @throws \RuntimeException
+     */
     public function testUpdateTimestamp(): void
     {
         $sessionId   = \uniqid('wtfsess', true);
@@ -194,6 +292,13 @@ class SqliteSessionHandlerTest extends TestCase
         $this->assertGreaterThan($expires, $data['sessionExpires']);
     }
 
+    /**
+     * @return void
+     * @throws DatabaseException
+     * @throws SessionException
+     * @throws \PDOException
+     * @throws \RuntimeException
+     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -207,11 +312,17 @@ class SqliteSessionHandlerTest extends TestCase
         );
     }
 
+    /**
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     */
     protected function tearDown(): void
     {
         $refl = new \ReflectionClass($this->handler);
         $prop = $refl->getProperty('db');
         $prop->setAccessible(true);
+        /** @var Sqlite3 $db */
         $db = $prop->getValue($this->handler);
         $db->close();
         parent::tearDown();

@@ -1,11 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Model;
 
+use JsonException;
 use Jtl\Connector\Core\Exception\TranslatableAttributeException;
 use Jtl\Connector\Core\Model\TranslatableAttribute;
 use Jtl\Connector\Core\Model\TranslatableAttributeI18n;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\ExpectationFailedException;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 class TranslatableAttributeI18nTest extends TestCase
 {
@@ -13,11 +19,14 @@ class TranslatableAttributeI18nTest extends TestCase
      * @dataProvider getValueProvider
      *
      * @param string $type
-     * @param        $originalValue
-     * @param        $expectedValue
+     * @param mixed  $originalValue
+     * @param mixed  $expectedValue
      * @param bool   $strictMode
      *
      * @throws TranslatableAttributeException
+     * @throws JsonException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
     public function testGetValue(string $type, $originalValue, $expectedValue, bool $strictMode = false): void
     {
@@ -28,14 +37,15 @@ class TranslatableAttributeI18nTest extends TestCase
 
         $actualValue = $i18n->getValue($type);
 
-        $this->assertTrue(
-            $expectedValue === $actualValue,
+        $this->assertSame(
+            $expectedValue,
+            $actualValue,
             \sprintf('Casted value (%s) has the wrong type', \json_encode($actualValue))
         );
     }
 
     /**
-     * @return array
+     * @return array<int, array<int, null|string|int|float|bool|array<int|string, string>>>
      */
     public function getValueProvider(): array
     {
@@ -60,6 +70,11 @@ class TranslatableAttributeI18nTest extends TestCase
         ];
     }
 
+    /**
+     * @return void
+     * @throws JsonException
+     * @throws TranslatableAttributeException
+     */
     public function testGetValueAndJsonDecodingFailedInStrictMode(): void
     {
         $this->expectException(TranslatableAttributeException::class);
@@ -76,27 +91,44 @@ class TranslatableAttributeI18nTest extends TestCase
     /**
      * @dataProvider setValueProvider
      *
-     * @param        $value
-     * @param string $expectedValue
+     * @param mixed            $value
+     * @param float|int|string|bool $expectedValue
      *
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws JsonException
      * @throws TranslatableAttributeException
+     * @throws AssertionFailedError
      */
-    public function testSetValue($value, string $expectedValue): void
+    public function testSetValue($value, $expectedValue): void
     {
         $translation = (new TranslatableAttributeI18n())->setValue($value);
 
-        $this->assertTrue(
-            $translation->getValue() === $expectedValue,
+        $translationValue = $translation->getValue();
+        if (
+            (
+                \is_string($translationValue)
+                || \is_int($translationValue)
+                || \is_float($translationValue)
+                || \is_bool($translationValue)
+            ) === false
+        ) {
+            $this->fail('$translationValue must be bool|string|int|float.');
+        }
+
+        $this->assertSame(
+            $translation->getValue(),
+            $expectedValue,
             \sprintf(
                 'Value (%s) is not equal to expected value (%s)',
-                $translation->getValue(),
+                $translationValue,
                 $expectedValue
             )
         );
     }
 
     /**
-     * @return array
+     * @return array<int, array<int, bool|string|float|int|array<int|string, string>>>
      */
     public function setValueProvider(): array
     {
@@ -117,7 +149,10 @@ class TranslatableAttributeI18nTest extends TestCase
     /**
      * @dataProvider setValueInvalidTypeProvider
      *
-     * @param $value
+     * @param mixed $value
+     *
+     * @throws JsonException
+     * @throws TranslatableAttributeException
      */
     public function testSetValueWrongType($value): void
     {
@@ -127,16 +162,20 @@ class TranslatableAttributeI18nTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array{0: array{null}, 1: array{0: false|resource}}
      */
     public function setValueInvalidTypeProvider(): array
     {
+        /** @noinspection FopenBinaryUnsafeUsageInspection */
         return [
             [null],
             [\fopen('php://temp', 'r')],
         ];
     }
 
+    /**
+     * @return void
+     */
     protected function setUp(): void
     {
         parent::setUp();

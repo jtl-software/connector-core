@@ -75,7 +75,7 @@ class TranslatableAttributeI18n extends AbstractI18n
     /**
      * @param string $castToType
      *
-     * @return bool|float|int|string|mixed
+     * @return bool|float|int|string|object
      * @throws TranslatableAttributeException
      * @throws JsonException
      */
@@ -92,6 +92,7 @@ class TranslatableAttributeI18n extends AbstractI18n
                 break;
 
             case TranslatableAttribute::TYPE_JSON:
+                /** @var object $value */
                 $value = \json_decode($value, true, 512, \JSON_THROW_ON_ERROR);
                 if (self::$strictMode && \json_last_error() !== \JSON_ERROR_NONE) {
                     throw TranslatableAttributeException::decodingValueFailed($this->name, \json_last_error_msg());

@@ -6,6 +6,7 @@ namespace Jtl\Connector\Core\Controller;
 
 use InvalidArgumentException;
 use Jawira\CaseConverter\CaseConverterException;
+use JsonException;
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
 use Jtl\Connector\Core\Checksum\ChecksumInterface;
@@ -87,7 +88,8 @@ class ConnectorController implements LoggerAwareInterface
      * @return Features
      * @throws CoreJsonException
      * @throws InvalidArgumentException
-     * @throws \JsonException
+     * @throws RuntimeException
+     * @throws JsonException
      */
     public function features(): Features
     {
@@ -144,9 +146,10 @@ class ConnectorController implements LoggerAwareInterface
                 );
                 continue;
             }
-
-            foreach ($identities as $identity) {
-                $this->linker->save($identity->getEndpoint(), $identity->getHost(), $normalizedName);
+            if ($identities !== null) {
+                foreach ($identities as $identity) {
+                    $this->linker->save($identity->getEndpoint(), $identity->getHost(), $normalizedName);
+                }
             }
         }
 
@@ -174,6 +177,7 @@ class ConnectorController implements LoggerAwareInterface
      *
      * @return Session
      * @throws AuthenticationException
+     * @throws RuntimeException
      */
     public function auth(Authentication $auth): Session
     {
@@ -190,8 +194,12 @@ class ConnectorController implements LoggerAwareInterface
             throw AuthenticationException::failed();
         }
 
+        $sessionId = \session_id();
+        if ($sessionId === false) {
+            throw new \RuntimeException('sessionId must not be false.');
+        }
         return (new Session())
-            ->setSessionId(\session_id()) // @phpstan-ignore-line
+            ->setSessionId($sessionId)
             ->setLifetime((int)\ini_get('session.gc_maxlifetime'));
     }
 
@@ -260,7 +268,7 @@ class ConnectorController implements LoggerAwareInterface
         if ($identities !== null && \count($identities->getIdentities()) > 0) {
             $identitiesArr = $identities->getIdentities();
             foreach ($identitiesArr as $relationType => $relationIdentities) {
-                if ($relationIdentities === null) { // @phpstan-ignore-line
+                if ($relationIdentities === null) {
                     $this->linker->clear(RelationType::getIdentityType($relationType));
                 } elseif (\is_array($relationIdentities)) {
                     foreach ($relationIdentities as $identity) {

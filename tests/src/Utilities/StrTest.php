@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Utilities;
 
 use Jtl\Connector\Core\Utilities\Str;
@@ -7,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Class StrTest
+ *
  * @package Jtl\Connector\Core\Test\Utilities
  */
 class StrTest extends TestCase
@@ -14,18 +17,18 @@ class StrTest extends TestCase
     /**
      * @dataProvider toCamelCaseDataProvider
      *
-     * @param mixed $data
-     * @param mixed $expectedResult
+     * @param string $data
+     * @param string $expectedResult
      *
      * @throws \Exception
      */
-    public function testToCamelCase($data, $expectedResult): void
+    public function testToCamelCase(string $data, string $expectedResult): void
     {
         $this->assertSame($expectedResult, Str::toCamelCase($data));
     }
 
     /**
-     * @return array
+     * @return array<int, array{0: string|false|int, 1: string}>
      */
     public function toCamelCaseDataProvider(): array
     {
@@ -46,18 +49,18 @@ class StrTest extends TestCase
     /**
      * @dataProvider toPascalCaseDataProvider
      *
-     * @param mixed $data
-     * @param mixed $expectedResult
+     * @param string $data
+     * @param string $expectedResult
      *
      * @throws \Exception
      */
-    public function testPascalCase($data, $expectedResult): void
+    public function testPascalCase(string $data, string $expectedResult): void
     {
         $this->assertSame($expectedResult, Str::toPascalCase($data));
     }
 
     /**
-     * @return array
+     * @return array<int, array{0: string|false|int, 1: string}>
      */
     public function toPascalCaseDataProvider(): array
     {
@@ -78,18 +81,18 @@ class StrTest extends TestCase
     /**
      * @dataProvider toSnakeCaseDataProvider
      *
-     * @param mixed $data
-     * @param mixed $expectedResult
+     * @param string $data
+     * @param string $expectedResult
      *
      * @throws \Exception
      */
-    public function testSnakeCase($data, $expectedResult): void
+    public function testSnakeCase(string $data, string $expectedResult): void
     {
         $this->assertSame($expectedResult, Str::toSnakeCase($data));
     }
 
     /**
-     * @return array
+     * @return array<int, array{0: string|false|int, 1: string}>
      */
     public function toSnakeCaseDataProvider(): array
     {

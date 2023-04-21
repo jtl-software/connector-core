@@ -1,34 +1,67 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Controller;
 
+use InvalidArgumentException;
+use Jawira\CaseConverter\CaseConverterException;
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
 use Jtl\Connector\Core\Controller\ConnectorController;
-use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\AuthenticationException;
 use Jtl\Connector\Core\Exception\DefinitionException;
+use Jtl\Connector\Core\Exception\JsonException;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Linker\IdentityLinker;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
 use Jtl\Connector\Core\Model\Features;
-use Jtl\Connector\Core\Model\Identities;
-use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Model\Session;
 use Jtl\Connector\Core\Test\TestCase;
-use PHPUnit\Framework\MockObject\Stub\ReturnStub;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use PHPUnit\Framework\Exception;
+use PHPUnit\Framework\ExpectationFailedException;
+use PHPUnit\Framework\MockObject\CannotUseOnlyMethodsException;
+use PHPUnit\Framework\MockObject\ClassAlreadyExistsException;
+use PHPUnit\Framework\MockObject\ClassIsFinalException;
+use PHPUnit\Framework\MockObject\ClassIsReadonlyException;
+use PHPUnit\Framework\MockObject\DuplicateMethodException;
+use PHPUnit\Framework\MockObject\IncompatibleReturnValueException;
+use PHPUnit\Framework\MockObject\InvalidMethodNameException;
+use PHPUnit\Framework\MockObject\MethodCannotBeConfiguredException;
+use PHPUnit\Framework\MockObject\MethodNameAlreadyConfiguredException;
+use PHPUnit\Framework\MockObject\OriginalConstructorInvocationRequiredException;
+use PHPUnit\Framework\MockObject\ReflectionException;
+use PHPUnit\Framework\MockObject\RuntimeException;
+use PHPUnit\Framework\MockObject\UnknownTypeException;
+use SessionHandlerInterface;
 
-/**
- * Class ConnectorTest
- * @package Jtl\Connector\Core\Test\Controller
- */
 class ConnectorTest extends TestCase
 {
     /**
-     *
+     * @return void
+     * @throws \InvalidArgumentException
+     * @throws \JsonException
+     * @throws JsonException
+     * @throws Exception
+     * @throws ExpectationFailedException
+     * @throws \PHPUnit\Framework\InvalidArgumentException
+     * @throws CannotUseOnlyMethodsException
+     * @throws ClassAlreadyExistsException
+     * @throws ClassIsFinalException
+     * @throws ClassIsReadonlyException
+     * @throws DuplicateMethodException
+     * @throws IncompatibleReturnValueException
+     * @throws InvalidMethodNameException
+     * @throws MethodCannotBeConfiguredException
+     * @throws MethodNameAlreadyConfiguredException
+     * @throws OriginalConstructorInvocationRequiredException
+     * @throws ReflectionException
+     * @throws RuntimeException
+     * @throws UnknownTypeException
+     * @throws \RuntimeException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testFeatures(): void
     {
@@ -41,7 +74,6 @@ class ConnectorTest extends TestCase
         $jsonFeatures = ['entities' => ['Category' => ['push' => true]]];
         $controller->expects($this->once())->method('fetchFeaturesData')->willReturn($jsonFeatures);
 
-        /** @var Features $features */
         $features = $controller->features();
 
         $this->assertInstanceOf(Features::class, $features);
@@ -49,7 +81,12 @@ class ConnectorTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws DefinitionException
+     * @throws \InvalidArgumentException
+     * @throws CaseConverterException
+     * @throws ExpectationFailedException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testAckEmpty(): void
     {
@@ -58,12 +95,11 @@ class ConnectorTest extends TestCase
     }
 
     /**
-     * @param IdentityLinker|null           $linker
-     * @param ChecksumLinker|null           $checksumLinker
-     * @param EventDispatcher|null          $eventDispatcher
-     * @param \SessionHandlerInterface|null $sessionHandler
-     * @param TokenValidatorInterface|null  $tokenValidator
-     * @param string                        $featuresPath
+     * @param IdentityLinker|null          $linker
+     * @param ChecksumLinker|null          $checksumLinker
+     * @param SessionHandlerInterface|null $sessionHandler
+     * @param TokenValidatorInterface|null $tokenValidator
+     * @param string                       $featuresPath
      *
      * @return ConnectorController
      */
@@ -95,7 +131,14 @@ class ConnectorTest extends TestCase
 
     /**
      * @throws DefinitionException
-     * @throws \ReflectionException
+     * @throws InvalidArgumentException
+     * @throws CaseConverterException
+     * @throws ExpectationFailedException
+     * @throws \PHPUnit\Framework\InvalidArgumentException
+     * @throws IncompatibleReturnValueException
+     * @throws MethodCannotBeConfiguredException
+     * @throws MethodNameAlreadyConfiguredException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testAckInvalidModelName(): void
     {
@@ -115,7 +158,6 @@ class ConnectorTest extends TestCase
 
     /**
      * @throws AuthenticationException
-     * @throws ApplicationException
      */
     public function testAuthMissingToken(): void
     {
@@ -130,7 +172,9 @@ class ConnectorTest extends TestCase
 
     /**
      * @throws AuthenticationException
-     * @throws ApplicationException
+     * @throws MethodCannotBeConfiguredException
+     * @throws MethodNameAlreadyConfiguredException
+     * @throws \PHPUnit\Framework\InvalidArgumentException
      */
     public function testAuthTokenIsInvalid(): void
     {
@@ -145,14 +189,20 @@ class ConnectorTest extends TestCase
         $controller = $this->createConnectorController(null, null, null, $tokenValidator);
 
         $auth = (new Authentication())
-            ->setToken(\md5(\time()));
+            ->setToken(\md5((string)\time()));
 
         $controller->auth($auth);
     }
 
     /**
-     * @throws ApplicationException
      * @throws AuthenticationException
+     * @throws ExpectationFailedException
+     * @throws IncompatibleReturnValueException
+     * @throws MethodCannotBeConfiguredException
+     * @throws MethodNameAlreadyConfiguredException
+     * @throws Exception
+     * @throws \PHPUnit\Framework\InvalidArgumentException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testAuthCorrect(): void
     {
@@ -166,7 +216,7 @@ class ConnectorTest extends TestCase
         $connector = $this->createConnectorController(null, null, null, $tokenValidator);
 
         $auth = new Authentication();
-        $auth->setToken(\md5(\time()));
+        $auth->setToken(\md5((string)\time()));
 
         $session = $connector->auth($auth);
 
@@ -175,7 +225,13 @@ class ConnectorTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws IncompatibleReturnValueException
+     * @throws MethodCannotBeConfiguredException
+     * @throws MethodNameAlreadyConfiguredException
+     * @throws \PHPUnit\Framework\InvalidArgumentException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testIdentify(): void
     {
@@ -198,7 +254,15 @@ class ConnectorTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws DefinitionException
+     * @throws ExpectationFailedException
+     * @throws IncompatibleReturnValueException
+     * @throws InvalidArgumentException
+     * @throws MethodCannotBeConfiguredException
+     * @throws MethodNameAlreadyConfiguredException
+     * @throws \PHPUnit\Framework\InvalidArgumentException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testClearSuccess(): void
     {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Doctrine\Common\Annotations\AnnotationRegistry;
 
 require_once __DIR__ . DIRECTORY_SEPARATOR . '../vendor/autoload.php';

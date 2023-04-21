@@ -1,21 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Config;
 
+use Exception;
 use Jtl\Connector\Core\Config\ConfigParameter;
 use Jtl\Connector\Core\Exception\ConfigException;
+use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 class ConfigParameterTest extends TestCase
 {
     /**
      * @dataProvider dataProvider
      *
-     * @param string $type
-     * @param        $validValue
-     * @param array  $invalidValues
+     * @param string       $type
+     * @param mixed        $validValue
+     * @param array<mixed> $invalidValues
      *
      * @throws ConfigException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
     public function testIsValidValueString(string $type, $validValue, array $invalidValues): void
     {
@@ -30,12 +37,13 @@ class ConfigParameterTest extends TestCase
      * @dataProvider dataProvider
      *
      * @param string $type
-     * @param        $validValue
-     * @param array  $invalidValues
+     * @param mixed  $validValue
      *
      * @throws ConfigException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
-    public function testSetDefaultValue(string $type, $validValue, array $invalidValues): void
+    public function testSetDefaultValue(string $type, $validValue): void
     {
         $option = new ConfigParameter('foo', $type);
         $option->setDefaultValue($validValue);
@@ -45,22 +53,30 @@ class ConfigParameterTest extends TestCase
     /**
      * @dataProvider dataProvider
      *
-     * @param string $type
-     * @param        $validValue
-     * @param array  $invalidValues
+     * @param string       $type
+     * @param array<mixed> $invalidValues
      *
      * @throws ConfigException
+     * @throws Exception
      */
-    public function testSetWrongDefaultValue(string $type, $validValue, array $invalidValues): void
+    public function testSetWrongDefaultValue(string $type, array $invalidValues): void
     {
         $this->expectException(ConfigException::class);
         $this->expectExceptionCode(ConfigException::WRONG_TYPE);
         $option             = new ConfigParameter('foo', $type);
         $invalidValuesCount = \count($invalidValues);
-        $invalidValuesIndex = \mt_rand(1, $invalidValuesCount - 1);
+        $randomIntMax       = $invalidValuesCount - 1;
+        if ($randomIntMax <= 1) {
+            throw new \RuntimeException('randomIntMax must be greater than 1');
+        }
+        $invalidValuesIndex = \random_int(1, $randomIntMax);
         $option->setDefaultValue($invalidValues[$invalidValuesIndex]);
     }
 
+    /**
+     * @return void
+     * @throws \ReflectionException
+     */
     public function testSetUnknownType(): void
     {
         $this->expectException(ConfigException::class);
@@ -72,6 +88,10 @@ class ConfigParameterTest extends TestCase
         $reflectionMethod->invoke($option, 'yolo');
     }
 
+    /**
+     * @return void
+     * @throws \ReflectionException
+     */
     public function testSetEmptyKey(): void
     {
         $this->expectException(ConfigException::class);
@@ -87,12 +107,13 @@ class ConfigParameterTest extends TestCase
      * @dataProvider dataProvider
      *
      * @param string $type
-     * @param        $validValue
-     * @param array  $invalidValues
+     * @param mixed  $validValue
      *
      * @throws ConfigException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
-    public function testHasDefaultValue(string $type, $validValue, array $invalidValues): void
+    public function testHasDefaultValue(string $type, $validValue): void
     {
         $option = new ConfigParameter('foo', $type);
         $this->assertFalse($option->hasDefaultValue());
@@ -101,7 +122,7 @@ class ConfigParameterTest extends TestCase
     }
 
     /**
-     * @return array[]
+     * @return array<int, array{0: string, 1: string|bool|float|int, 2: array<int, null|int|float|bool|string>}>
      */
     public function dataProvider(): array
     {

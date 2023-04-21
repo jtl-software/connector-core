@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test;
 
 use Faker\Factory;
@@ -9,36 +11,30 @@ use Jtl\Connector\Core\Config\FileConfig;
 use Jtl\Connector\Core\Model\Identity;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
+use PHPUnit\Framework\ExpectationFailedException;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class TestCase
+ *
  * @package Jtl\Connector\Core\Tests
  */
 class TestCase extends \Jtl\UnitTest\TestCase
 {
-    protected $connectorDir = \TEST_DIR;
+    protected string            $connectorDir = \TEST_DIR;
+    protected ?string           $configFile   = null;
+    private ?Generator          $faker        = null;
+    private ?vfsStreamDirectory $rootDir      = null;
 
     /**
-     * @var string
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
-    protected $configFile;
-
-    /**
-     * @var Generator
-     */
-    private $faker;
-
-    /**
-     * @var vfsStreamDirectory
-     */
-    private $rootDir;
-
     protected function tearDown(): void
     {
         parent::tearDown();
-        $files = [
-            $this->configFile,
-        ];
+        $files = [$this->configFile,];
 
         foreach ($files as $file) {
             if (!\is_null($file) && \is_file($file)) {
@@ -61,15 +57,19 @@ class TestCase extends \Jtl\UnitTest\TestCase
 
     /**
      * @param string $dirname
+     *
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
     protected function removeDirRecursive(string $dirname): void
     {
         $elements = \glob($dirname . '/*');
+        $this->assertIsNotBool($elements);
         foreach ($elements as $element) {
             \is_dir($element) ? $this->removeDirRecursive($element) : \unlink($element);
         }
         \rmdir($dirname);
-        return;
     }
 
     /**
@@ -100,9 +100,9 @@ class TestCase extends \Jtl\UnitTest\TestCase
     }
 
     /**
-     * @param string $className
+     * @param class-string $className
      *
-     * @return array
+     * @return array<int, mixed>
      * @throws \ReflectionException
      */
     protected function getCorrectConstantsTestCases(string $className): array
@@ -122,7 +122,7 @@ class TestCase extends \Jtl\UnitTest\TestCase
     }
 
     /**
-     * @param array $data
+     * @param array<mixed> $data
      *
      * @return ArrayConfig
      */
@@ -166,7 +166,7 @@ class TestCase extends \Jtl\UnitTest\TestCase
     /**
      * @param int $quantity
      *
-     * @return string[]
+     * @return array<int, string>
      */
     protected function createFiles(int $quantity = 2): array
     {

@@ -1,13 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Rpc;
 
 use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\AssertionFailedError;
 
 /**
  * Class ErrorTest
+ *
  * @package Jtl\Connector\Core\Test\Rpc
  */
 class ErrorTest extends TestCase
@@ -38,7 +42,8 @@ class ErrorTest extends TestCase
     }
 
     /**
-     * @throws RpcException
+     * @return void
+     * @throws AssertionFailedError
      */
     public function testValidateCorrect(): void
     {
@@ -46,8 +51,10 @@ class ErrorTest extends TestCase
         $error->setCode(101);
         $error->setMessage('Error messasge');
         $error->setData([]);
-        $return = $error->validate();
-
-        $this->assertNull($return);
+        try {
+            $error->validate();
+        } catch (RpcException $rpcException) {
+            $this->fail($rpcException->getMessage());
+        }
     }
 }

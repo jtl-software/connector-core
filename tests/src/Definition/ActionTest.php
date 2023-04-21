@@ -1,18 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Definition;
 
 use Jtl\Connector\Core\Definition\Action;
+use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class ActionTest
+ *
  * @package Jtl\Connector\Core\Test\Definition
  */
 class ActionTest extends TestCase
 {
     /**
-     *
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
     public function testGetActions(): void
     {
@@ -39,18 +46,19 @@ class ActionTest extends TestCase
     /**
      * @dataProvider actionDataProvider
      *
-     * @param mixed $actionName
-     * @param bool  $expectedResult
+     * @param string $actionName
+     * @param bool   $expectedResult
      *
-     * @throws \ReflectionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
-    public function testIsAction($actionName, bool $expectedResult): void
+    public function testIsAction(string $actionName, bool $expectedResult): void
     {
         $this->assertSame($expectedResult, Action::isAction($actionName));
     }
 
     /**
-     * @return array
+     * @return array<int, array{0: string|false, 1: bool}>
      */
     public function actionDataProvider(): array
     {
@@ -69,16 +77,19 @@ class ActionTest extends TestCase
     /**
      * @dataProvider coreActionDataProvider
      *
-     * @param mixed $actionName
-     * @param bool  $expectedResult
+     * @param string $actionName
+     * @param bool   $expectedResult
+     *
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
-    public function testIsCoreAction($actionName, bool $expectedResult): void
+    public function testIsCoreAction(string $actionName, bool $expectedResult): void
     {
         $this->assertSame($expectedResult, Action::isCoreAction($actionName));
     }
 
     /**
-     * @return array
+     * @return array<int, array{0: string|false|int, 1: bool}>
      * @throws \Exception
      */
     public function coreActionDataProvider(): array
