@@ -257,7 +257,7 @@ class IdentityLinker implements LoggerAwareInterface
      */
     public function isValidHostId($hostId): bool
     {
-        return !\is_int($hostId) && $hostId > 0;
+        return \is_int($hostId) && $hostId > 0;
     }
 
     /**

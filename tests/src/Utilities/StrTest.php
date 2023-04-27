@@ -28,7 +28,7 @@ class StrTest extends TestCase
     }
 
     /**
-     * @return array<int, array{0: string|false|int, 1: string}>
+     * @return array<int, array{0: string, 1: string}>
      */
     public function toCamelCaseDataProvider(): array
     {
@@ -36,11 +36,11 @@ class StrTest extends TestCase
             ['snake_case', 'snakeCase',],
             ['PascalCase', 'pascalCase',],
             ['camelCase', 'camelCase',],
-            [false, '',],
+            ['false', 'false',],
             ['', '',],
             ['_snake_case_', 'snakeCase',],
             ['snake__case', 'snakeCase',],
-            [12345, '12345',],
+            ['12345', '12345',],
             ['    ', '',],
             ['sna\\ke', 'sna\\ke',],
         ];
@@ -68,11 +68,11 @@ class StrTest extends TestCase
             ['snake_case', 'SnakeCase',],
             ['camelCase', 'CamelCase',],
             ['PascalCase', 'PascalCase',],
-            [false, '',],
+            ['false', 'False',],
             ['', '',],
             ['_snake_case_', 'SnakeCase',],
             ['snake__case', 'SnakeCase',],
-            [12345, '12345',],
+            ['12345', '12345',],
             ['    ', '',],
             ['sna\\ke', 'Sna\\Ke',],
         ];
@@ -100,11 +100,11 @@ class StrTest extends TestCase
             ['snake_case', 'snake_case',],
             ['camelCase', 'camel_case',],
             ['PascalCase', 'pascal_case',],
-            [false, '',],
+            ['false', 'false',],
             ['', '',],
             ['_snake_case_', 'snake_case',],
             ['snake__case', 'snake_case',],
-            [12345, '12345',],
+            ['12345', '12345',],
             ['    ', '',],
             ['sna\\ke', 'sna\\ke',],
         ];

@@ -83,6 +83,7 @@ use Jtl\Connector\Core\Subscriber\FeaturesSubscriber;
 use Jtl\Connector\Core\Subscriber\RequestParamsTransformSubscriber;
 use Jtl\Connector\Core\Utilities\Validator\Validate;
 use Monolog\ErrorHandler as MonologErrorHandler;
+use Noodlehaus\AbstractConfig;
 use Noodlehaus\ConfigInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Log\InvalidArgumentException;
@@ -166,15 +167,16 @@ class Application
         string           $connectorDir,
         ?ConfigInterface $config = null,
         ?ConfigSchema    $configSchema = null
-    )
-    {
+    ) {
         if (!\is_dir($connectorDir)) {
             throw ApplicationException::connectorDirNotExists($connectorDir);
         }
         AnnotationRegistry::registerLoader('class_exists');
 
-        if ($configSchema !== null && $config instanceof CoreConfigInterface) {
-            $config->setConfigSchema($configSchema);
+        if ($configSchema !== null && $config !== null) {
+            if ($config instanceof CoreConfigInterface) {
+                $config->setConfigSchema($configSchema);
+            }
         } else {
             $configSchema = $configSchema ?? new ConfigSchema();
             $config       = new FileConfig(\sprintf('%s/config/config.json', $connectorDir), $configSchema);
@@ -185,7 +187,8 @@ class Application
 
         $serializerCacheDir = null;
         if (
-            $config->getBool(ConfigSchema::DEBUG, false) === false
+            $config instanceof CoreConfigInterface
+            && $config->getBool(ConfigSchema::DEBUG, false) === false
             && $config->getBool(ConfigSchema::SERIALIZER_ENABLE_CACHE, true) === true
         ) {
             $serializerCacheDir = $config->getString(ConfigSchema::CACHE_DIR);
@@ -353,6 +356,9 @@ class Application
 
             throw $ex;
         } finally {
+            $responsePacket = $responsePacket instanceof ResponsePacket
+                ? $responsePacket
+                : ResponsePacket::create($requestPacket->getId());
             $this->fileSystem->remove($this->deleteFromFileSystem);
             $this->httpResponse->prepareAndSend($requestPacket, Validate::responsePacket($responsePacket));
 
@@ -490,8 +496,7 @@ class Application
         Container       $container,
         EventDispatcher $eventDispatcher,
         string          $pluginsDir
-    ): void
-    {
+    ): void {
         $loader = new ClassLoader();
         $loader->add('', $pluginsDir);
         $loader->register();
@@ -538,8 +543,7 @@ class Application
         ConnectorInterface $connector,
         RequestPacket      $requestPacket,
         Method             $method
-    ): ResponsePacket
-    {
+    ): ResponsePacket {
         $modelNamespace = Model::MODEL_NAMESPACE;
         if ($connector instanceof ModelInterface) {
             $modelNamespace = $connector->getModelNamespace();
@@ -655,8 +659,7 @@ class Application
         RequestPacket $requestPacket,
         Method        $method,
         string        $modelNamespace
-    ): Request
-    {
+    ): Request {
         $controller = $method->getController();
         $action     = $method->getAction();
 
@@ -818,7 +821,7 @@ class Application
 
                 $imageFound = false;
                 foreach ($imagePaths as $imagePath) {
-                    $fileInfo = \pathinfo($imagePath);
+                    $fileInfo                = \pathinfo($imagePath);
                     [$hostId, $relationType] = \explode('_', $fileInfo['filename']);
                     if (
                         (int)$hostId === $image->getId()->getHost()
@@ -997,8 +1000,7 @@ class Application
         ?object   $model,
         string    $controller,
         string    $action
-    ): void
-    {
+    ): void {
         $messages = [
             \sprintf('Controller = %s', $controller),
             \sprintf('Action = %s', $action),

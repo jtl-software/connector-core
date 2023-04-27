@@ -58,7 +58,7 @@ class ActionTest extends TestCase
     }
 
     /**
-     * @return array<int, array{0: string|false, 1: bool}>
+     * @return array<int, array{0: string, 1: bool}>
      */
     public function actionDataProvider(): array
     {
@@ -70,7 +70,7 @@ class ActionTest extends TestCase
             ['PusH', false],
             ['Clear', false],
             [Action::CLEAR, true],
-            [false, false]
+            ['false', false]
         ];
     }
 
@@ -89,7 +89,7 @@ class ActionTest extends TestCase
     }
 
     /**
-     * @return array<int, array{0: string|false|int, 1: bool}>
+     * @return array<int, array{0: string, 1: bool}>
      * @throws \Exception
      */
     public function coreActionDataProvider(): array
@@ -98,9 +98,9 @@ class ActionTest extends TestCase
             [Action::AUTH, true],
             [Action::ACK, true],
             [Action::PULL, false],
-            [false, false],
+            ['false', false],
             ['autH', false],
-            [\random_int(-9999, 9999), false,]
+            [(string)\random_int(-9999, 9999), false]
         ];
     }
 }

@@ -64,7 +64,11 @@ class TransactionalControllerStub implements
      */
     public function pull(QueryFilter $queryFilter): array
     {
-        return [new Product('0', 0), new Product('1', 1)];
+        $product1 = new Product('0', 0);
+        $product1->setCreationDate(new \DateTimeImmutable());
+        $product2 = new Product('1', 1);
+        $product2->setCreationDate(new \DateTimeImmutable());
+        return [$product1, $product2];
     }
 
     /**

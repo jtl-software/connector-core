@@ -44,7 +44,7 @@ class Validate
      */
     public static function responsePacket($value): ResponsePacket
     {
-        self::initValidator($value)->instanceOf(RequestPacket::class);
+        self::initValidator($value)->instanceOf(ResponsePacket::class);
 
         /** @var ResponsePacket $value */
         return $value;

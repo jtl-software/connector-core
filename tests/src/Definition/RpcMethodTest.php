@@ -32,7 +32,7 @@ class RpcMethodTest extends TestCase
     }
 
     /**
-     * @return array<int, mixed>
+     * @return array<int, array{0: string, 1: bool}>
      * @throws \ReflectionException
      */
     public function isMethodDataProvider(): array
@@ -42,8 +42,8 @@ class RpcMethodTest extends TestCase
         $customTests   = [];
         $customTests[] = ['""', false];
         $customTests[] = [' ', false];
-        $customTests[] = [false, false];
-        $customTests[] = [true, false];
+        $customTests[] = ['false', false];
+        $customTests[] = ['true', false];
         $customTests[] = ['.', false];
         $customTests[] = [' connector.pull    ', true];
         $customTests[] = ['...', false];

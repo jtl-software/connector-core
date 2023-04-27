@@ -43,8 +43,9 @@ class Validator implements ValidatorInterface
      */
     public function throwException(): void
     {
+        $value   = \is_object($this->value) ? \get_class($this->value) : $this->value;
         $message = $this->hasValue()
-            ? $this->value . 'must be type ' . $this->assertedType
+            ? $value . ' must be type ' . $this->assertedType
             : 'Type Error: Value is null';
 
         throw new \TypeError($message);

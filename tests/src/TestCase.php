@@ -102,7 +102,7 @@ class TestCase extends \Jtl\UnitTest\TestCase
     /**
      * @param class-string $className
      *
-     * @return array<int, mixed>
+     * @return array<int, array<int, mixed>>
      * @throws \ReflectionException
      */
     protected function getCorrectConstantsTestCases(string $className): array

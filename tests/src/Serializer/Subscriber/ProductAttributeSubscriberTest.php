@@ -7,6 +7,7 @@ namespace Jtl\Connector\Core\Test\Serializer\Subscriber;
 use JsonException;
 use Jtl\Connector\Core\Exception\TranslatableAttributeException;
 use Jtl\Connector\Core\Model\Category;
+use Jtl\Connector\Core\Model\CategoryAttribute;
 use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Model\ProductAttribute;
@@ -16,6 +17,8 @@ use Jtl\Connector\Core\Model\TranslatableAttributesInterface;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\ExpectationFailedException;
+use stdClass;
 
 /**
  * Class ObjectTypesSubscriberTest
@@ -41,11 +44,10 @@ class ProductAttributeSubscriberTest extends TestCase
         $serializedProduct = $serializer->build()->serialize($product, 'json');
 
         $productObj = \json_decode($serializedProduct, false, 512, \JSON_THROW_ON_ERROR);
-        $this->assertInstanceOf(Product::class, $productObj);
 
-        foreach ($productObj->getAttributes()[0]->getI18ns() as $index => $i18n) {
+        foreach ($productObj->attributes[0]->i18ns as $index => $i18n) { //@phpstan-ignore-line
             $attributeId = $attributes[$index]->getId();
-            if (!\property_exists($i18n, 'productAttrId')) { //@phpstan-ignore-line
+            if (!\property_exists($i18n, 'productAttrId')) {
                 $this->fail('property \'productAttrId\' does not exist.');
             }
             $this->assertSame([$attributeId->getEndpoint(), $attributeId->getHost()], $i18n->productAttrId);
@@ -61,6 +63,7 @@ class ProductAttributeSubscriberTest extends TestCase
         $productId = new Identity($this->createEndpointId(), $this->createHostId());
         $product   = new Product();
         $product->setId($productId);
+        $product->setCreationDate(new \DateTimeImmutable());
 
         return $product;
     }
@@ -95,7 +98,11 @@ class ProductAttributeSubscriberTest extends TestCase
         bool                            $setId = true
     ): TranslatableAttribute {
         $attributeId = new Identity($this->createEndpointId(), $this->createHostId());
-        $attribute   = new ProductAttribute();
+        //@phpstan-ignore-next-line
+        if (($translatableModel instanceof Product || $translatableModel instanceof Category) === false) {
+            $this->fail(\sprintf('$translatableModel must be instance of %s|%s', Product::class, Category::class));
+        }
+        $attribute = $translatableModel instanceof Product ? new ProductAttribute() : new CategoryAttribute();
         if ($setId) {
             $attribute->setId($attributeId);
         }
@@ -122,20 +129,24 @@ class ProductAttributeSubscriberTest extends TestCase
 
         $serializedResponse = $serializer->build()->serialize($response, 'json');
 
-        /** @var ResponsePacket $responseObj */
+        /** @var stdClass $responseObj */
         $responseObj = \json_decode($serializedResponse, false, 512, \JSON_THROW_ON_ERROR);
-        /** @var Product[] $resultArr */
-        $resultArr       = $responseObj->getResult();
+        if (!\property_exists($responseObj, 'result')) {
+            $this->fail('responseObject has not property "result"');
+        }
+        $resultArr = $responseObj->result;
+        $this->assertIsArray($resultArr);
+        $this->assertArrayHasKey(0, $resultArr);
         $responseProduct = $resultArr[0];
-        $i18n            = $responseProduct->getAttributes()[0]->getI18ns()[0];
+        /** @var stdClass $i18n */
+        $i18n = $responseProduct->attributes[0]->i18ns[0];
 
-        if (!\property_exists($i18n, 'productAttrId')) { //@phpstan-ignore-line
+        if (!\property_exists($i18n, 'productAttrId')) {
             $this->fail('property \'productAttrId\' does not exist.');
         }
 
         $attributeId = $attribute->getId();
 
-        /** @noinspection PhpUndefinedFieldInspection */
         $this->assertSame([$attributeId->getEndpoint(), $attributeId->getHost()], $i18n->productAttrId);
     }
 
@@ -151,19 +162,17 @@ class ProductAttributeSubscriberTest extends TestCase
         $serializer = SerializerBuilder::create();
 
         $serializedProduct = $serializer->build()->serialize($product, 'json');
+        $productObj        = \json_decode($serializedProduct, false, 512, \JSON_THROW_ON_ERROR);
 
-        /** @var Product $productObj */
-        $productObj = \json_decode($serializedProduct, false, 512, \JSON_THROW_ON_ERROR);
+        /** @var stdClass $i18n */
+        $i18n = $productObj->attributes[0]->i18ns[0]; //@phpstan-ignore-line
 
-        $i18n = $productObj->getAttributes()[0]->getI18ns()[0];
-
-        if (!\property_exists($i18n, 'productAttrId')) { //@phpstan-ignore-line
+        if (!\property_exists($i18n, 'productAttrId')) {
             $this->fail('property \'productAttrId\' does not exist.');
         }
 
         $emptyIdentity = new Identity();
 
-        /** @noinspection PhpUndefinedFieldInspection */
         $this->assertSame([$emptyIdentity->getEndpoint(), $emptyIdentity->getHost()], $i18n->productAttrId);
     }
 
@@ -179,10 +188,9 @@ class ProductAttributeSubscriberTest extends TestCase
 
         $serializedProduct = $serializer->build()->serialize($product, 'json');
 
-        /** @var Product $productObj */
         $productObj = \json_decode($serializedProduct, false, 512, \JSON_THROW_ON_ERROR);
 
-        $this->assertEmpty($productObj->getAttributes()[0]->getI18ns());
+        $this->assertEmpty($productObj->attributes[0]->i18ns); //@phpstan-ignore-line
     }
 
     /**
@@ -201,13 +209,13 @@ class ProductAttributeSubscriberTest extends TestCase
 
         $serializedProduct = $serializer->build()->serialize($category, 'json');
 
-        /** @var Category $categoryObj */
         $categoryObj = \json_decode($serializedProduct, false, 512, \JSON_THROW_ON_ERROR);
 
-        $i18n = $categoryObj->getAttributes()[0]->getI18ns()[0];
+        $i18n = $categoryObj->attributes[0]->i18ns[0]; //@phpstan-ignore-line
 
-        if (!\property_exists($i18n, 'productAttrId')) { //@phpstan-ignore-line
-            $this->fail('$i18n should have property "productAttrId".');
+        $this->assertInstanceOf(stdClass::class, $i18n);
+        if (\property_exists($i18n, 'productAttrId')) {
+            $this->fail('$i18n (from Category) must not have property "productAttrId".');
         }
     }
 }

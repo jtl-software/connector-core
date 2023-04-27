@@ -43,7 +43,7 @@ class ErrorTest extends TestCase
 
     /**
      * @return void
-     * @throws AssertionFailedError
+     * @throws AssertionFailedError|\SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testValidateCorrect(): void
     {
@@ -56,5 +56,6 @@ class ErrorTest extends TestCase
         } catch (RpcException $rpcException) {
             $this->fail($rpcException->getMessage());
         }
+        $this->assertIsObject($error);
     }
 }

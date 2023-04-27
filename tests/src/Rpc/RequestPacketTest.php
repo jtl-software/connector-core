@@ -43,13 +43,13 @@ class RequestPacketTest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, array<int, int|string|array<int, string>|array{}|array{array{}}>|bool>>
+     * @return array<int, array<int, array<int, string|array<int, string>|array{}|array{array{}}>|bool>>
      */
     public function validPacketDataProvider(): array
     {
         return [
             [
-                [$id = \time(), 'undefined.undefined', '2.0', [],],
+                [$id = (string)\time(), 'undefined.undefined', '2.0', [],],
                 [
                     $id,
                     'undefined.undefined',

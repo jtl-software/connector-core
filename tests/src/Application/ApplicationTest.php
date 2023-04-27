@@ -126,9 +126,9 @@ class ApplicationTest extends TestCase
      * @throws \Psr\Log\InvalidArgumentException
      */
     protected function createInitializedApplication(
-        ConfigSchema    $configSchema = null,
-        string          $connectorDir = null,
-        ConfigInterface $config = null
+        ?ConfigSchema    $configSchema = null,
+        ?string          $connectorDir = null,
+        ?ConfigInterface $config = null
     ): Application {
         $sessionHandler = $this->createMock(SessionHandlerInterface::class);
         if (\is_null($configSchema)) {
@@ -170,9 +170,9 @@ class ApplicationTest extends TestCase
      * @throws \Psr\Log\InvalidArgumentException
      */
     protected function createApplication(
-        ConfigSchema    $configSchema = null,
-        string          $connectorDir = null,
-        ConfigInterface $config = null
+        ?ConfigSchema    $configSchema = null,
+        ?string          $connectorDir = null,
+        ?ConfigInterface $config = null
     ): Application {
         if (\is_null($configSchema)) {
             $configSchema = new ConfigSchema();
@@ -239,6 +239,7 @@ class ApplicationTest extends TestCase
      */
     public function testHandleRequestControllerAction(string $action, $parameter): void
     {
+        $mock        = $this->createMock(Product::class);
         $application = $this->createInitializedApplication();
         $connector   = $this->createConnector();
         $controller  = $this->createTransactionalController();
@@ -260,7 +261,11 @@ class ApplicationTest extends TestCase
                 $this->assertInstanceOf(Product::class, $result[0]);
                 break;
             case Action::PULL:
-                $this->assertSame([1, 2, 3], $result);
+                $this->assertIsArray($result);
+                $this->assertArrayHasKey(0, $result);
+                $this->assertArrayHasKey(1, $result);
+                $this->assertInstanceOf(Product::class, $result[0]);
+                $this->assertInstanceOf(Product::class, $result[1]);
                 break;
         }
     }
@@ -280,6 +285,8 @@ class ApplicationTest extends TestCase
      */
     public function controllerActionsDataProvider(): array
     {
+        $product = new Product();
+        $product->setCreationDate(new \DateTimeImmutable());
         return [
             [
                 Action::STATISTIC,
@@ -287,7 +294,7 @@ class ApplicationTest extends TestCase
             ],
             [
                 Action::DELETE,
-                new Product(),
+                $product,
             ],
             [
                 Action::PULL,
@@ -295,7 +302,7 @@ class ApplicationTest extends TestCase
             ],
             [
                 Action::PUSH,
-                new Product(),
+                $product,
             ],
         ];
     }

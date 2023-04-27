@@ -57,7 +57,7 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
             throw new DatabaseException('Wrong type or empty location');
         }
 
-        if (isset($this->mode)) {
+        if (!isset($this->mode)) {
             $this->mode = \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE | self::SQLITE3_OPEN_SHAREDCACHE;
         }
 

@@ -10,9 +10,9 @@ use JMS\Serializer\Exception\RuntimeException;
 use JMS\Serializer\SerializationContext;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Model\AbstractModel;
+use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Test\TestCase;
-use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\ExpectationFailedException;
 
 class ModelTest extends TestCase
@@ -31,25 +31,32 @@ class ModelTest extends TestCase
         $serializer         = SerializerBuilder::create()->build();
         $fullModelClassName = \sprintf("%s\\%s", Model::MODEL_NAMESPACE, $modelName);
         $obj                = new $fullModelClassName();
-        $context            = (new SerializationContext())->setSerializeNull(true);
+        if ($obj instanceof Product) {
+            $obj->setCreationDate(new \DateTimeImmutable());
+        }
+        $context = (new SerializationContext())->setSerializeNull(true);
         $serializer->toArray($obj, $context);
     }
 
     /**
-     * @return array<mixed>
-     * @throws AssertionFailedError
+     * @return array<int, array<int, string>>
+     * @throws ExpectationFailedException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function modelsDataProvider(): array
     {
-        $this->fail('TODO ARRAY DOC!!!');
-        $ignoredModels = self::getIgnoredModels(); //@phpstan-ignore-line
+        $ignoredModels = self::getIgnoredModels();
         $modelsPattern = \dirname(\TEST_DIR) . '/src/Model/*.php';
+        $array_map     = [];
+        $models        = \glob($modelsPattern);
+        $this->assertNotFalse($models);
+        foreach ($models as $key => $modelPath) {
+            $fileInfo        = new \SplFileInfo($modelPath);
+            $modelName       = $fileInfo->getBasename('.php');
+            $array_map[$key] = [$modelName];
+        }
         return \array_filter(
-            \array_map(static function ($modelPath) {
-                $fileInfo  = new \SplFileInfo($modelPath);
-                $modelName = $fileInfo->getBasename('.php');
-                return [$modelName];
-            }, \glob($modelsPattern)),
+            $array_map,
             static function ($value) use ($ignoredModels) {
                 return !\in_array($value[0], $ignoredModels, true);
             }

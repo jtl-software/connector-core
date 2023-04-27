@@ -9,6 +9,7 @@ use Jtl\Connector\Core\Config\ConfigParameter;
 use Jtl\Connector\Core\Exception\ConfigException;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 class ConfigParameterTest extends TestCase
@@ -54,20 +55,22 @@ class ConfigParameterTest extends TestCase
      * @dataProvider dataProvider
      *
      * @param string       $type
+     * @param mixed        $validValue
      * @param array<mixed> $invalidValues
      *
      * @throws ConfigException
+     * @throws RuntimeException
      * @throws Exception
      */
-    public function testSetWrongDefaultValue(string $type, array $invalidValues): void
+    public function testSetWrongDefaultValue(string $type, $validValue, array $invalidValues): void
     {
         $this->expectException(ConfigException::class);
         $this->expectExceptionCode(ConfigException::WRONG_TYPE);
         $option             = new ConfigParameter('foo', $type);
         $invalidValuesCount = \count($invalidValues);
         $randomIntMax       = $invalidValuesCount - 1;
-        if ($randomIntMax <= 1) {
-            throw new \RuntimeException('randomIntMax must be greater than 1');
+        if ($randomIntMax < 1) {
+            throw new \RuntimeException('randomIntMax must be greater than 0');
         }
         $invalidValuesIndex = \random_int(1, $randomIntMax);
         $option->setDefaultValue($invalidValues[$invalidValuesIndex]);

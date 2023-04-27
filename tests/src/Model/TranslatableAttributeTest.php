@@ -27,16 +27,16 @@ class TranslatableAttributeTest extends TestCase
      * @dataProvider findTranslationProvider
      *
      * @param string                           $languageIso
-     * @param TranslatableAttributeI18n        $expectedTranslation
+     * @param TranslatableAttributeI18n|null   $expectedTranslation
      * @param array<TranslatableAttributeI18n> $translations
      *
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
      */
     public function testFindTranslation(
-        string                    $languageIso,
-        TranslatableAttributeI18n $expectedTranslation,
-        array                     $translations = []
+        string                     $languageIso,
+        ?TranslatableAttributeI18n $expectedTranslation,
+        array                      $translations = []
     ): void {
         $attribute = (new TranslatableAttribute())
             ->setI18ns(...$translations);
@@ -292,11 +292,7 @@ class TranslatableAttributeTest extends TestCase
             [
                 '',
                 TranslatableAttribute::TYPE_STRING,
-            ],
-            [
-                false,
-                TranslatableAttribute::TYPE_STRING,
-            ],
+            ]
         ]);
     }
 }

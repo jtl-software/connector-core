@@ -115,7 +115,7 @@ class IdentityLinkerTest extends TestCase
     public function endpointIdDataProvider(): array
     {
         return [
-            [0, true],
+            [0, false],
             [null, false],
             [$this->createEndpointId(), true]
         ];
@@ -318,6 +318,7 @@ class IdentityLinkerTest extends TestCase
         $linker           = $this->createLinker($primaryKeyMapper);
 
         $product = new Product();
+        $product->setCreationDate(new \DateTimeImmutable());
         $product->setId(new Identity($productEndpointId, $productHostId));
 
         $shippingClass = new ShippingClass();
@@ -383,7 +384,8 @@ class IdentityLinkerTest extends TestCase
 
         $linker = $this->createLinker($primaryKeyMapper);
 
-        $product          = new Product();
+        $product = new Product();
+        $product->setCreationDate(new \DateTimeImmutable());
         $productVariation = new ProductWarehouseInfo();
         $productVariation->setWarehouseId(new Identity($endpointId, $expectedHostId));
         $product->addWarehouseInfo($productVariation);
@@ -412,7 +414,8 @@ class IdentityLinkerTest extends TestCase
         $primaryKeyMapper = $this->createPrimaryKeyMapperMock([$expectedHostId, null], [$endpointId, null]);
         $linker           = $this->createLinker($primaryKeyMapper);
 
-        $product          = new Product();
+        $product = new Product();
+        $product->setCreationDate(new \DateTimeImmutable());
         $productVariation = new ProductVariation();
         $productVariation->setId(new Identity($endpointId, $expectedHostId));
         $product->addVariation($productVariation);

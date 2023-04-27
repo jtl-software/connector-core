@@ -10,7 +10,9 @@ use Jtl\Connector\Core\Exception\SessionException;
 use Jtl\Connector\Core\Session\SqliteSessionHandler;
 use Jtl\Connector\Core\Test\TestCase;
 use PDOStatement;
+use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\ExpectationFailedException;
+use RuntimeException;
 use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 class SqliteSessionHandlerTest extends TestCase
@@ -156,7 +158,8 @@ class SqliteSessionHandlerTest extends TestCase
 
     /**
      * @return int
-     * @throws \RuntimeException
+     * @throws AssertionFailedError
+     * @throws RuntimeException
      */
     protected function countSessionData(): int
     {
@@ -168,11 +171,11 @@ class SqliteSessionHandlerTest extends TestCase
 
         $return = $query->fetchColumn();
 
-        if (\is_int($return)) {
-            return $return;
+        if (!\is_numeric($return)) {
+            $this->fail('$return must be numeric.');
         }
 
-        throw new \RuntimeException('Da fucking return must be an int!!!11elf');
+        return (int)$return;
     }
 
     /**

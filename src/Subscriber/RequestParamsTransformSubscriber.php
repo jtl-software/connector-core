@@ -65,7 +65,8 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
                      *     productId: array{0: string, 1: int}|ProductStockLevel|null,
                      *     sku: ?string,
                      *     stockLevel: ?float
-                     * } $eventData */
+                     * } $eventData
+                     */
                     $data = $this->transformProductStockLevelData($eventData);
                     break;
                 default:
@@ -85,9 +86,12 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
     public function transformProductData(array $products): array
     {
         foreach ($products as $i => $product) {
+            /** @var array<string, mixed> $product */
             if (
-                \array_key_exists('stockLevel', $product['stockLevel'])
+                \array_key_exists('stockLevel', $product)
+                && \is_array($product['stockLevel'])
                 && isset($product['stockLevel']['stockLevel'])
+                && \array_key_exists('stockLevel', $product['stockLevel'])
             ) {
                 $products[$i]['stockLevel'] = $product['stockLevel']['stockLevel'];
             }

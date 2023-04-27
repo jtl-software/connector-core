@@ -32,15 +32,16 @@ class IdentityTypeTest extends TestCase
     }
 
     /**
-     * @return array<int, mixed>
+     * @return array<int, array{0: int, 1: bool}>
      * @throws \ReflectionException
      */
     public function isTypeDataProvider(): array
     {
+        /** @var array<int, array{0: int, 1: bool}> $testCases */
         $testCases   = $this->getCorrectConstantsTestCases(IdentityType::class);
-        $testCases[] = [false, false];
+        $testCases[] = [0, false];
         $testCases[] = [-100, false];
-        $testCases[] = ['68', true];
+        $testCases[] = [68, true];
 
         return $testCases;
     }

@@ -32,8 +32,7 @@ class TranslatableAttributeI18nTest extends TestCase
     {
         TranslatableAttributeI18n::setStrictMode($strictMode);
 
-        $i18n = (new TranslatableAttributeI18n())
-            ->setValue($originalValue);
+        $i18n = (new TranslatableAttributeI18n())->setValue($originalValue);
 
         $actualValue = $i18n->getValue($type);
 

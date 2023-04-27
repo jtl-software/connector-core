@@ -27,14 +27,15 @@ class ControllerTest extends TestCase
     }
 
     /**
-     * @return array<int, mixed>
+     * @return array<int, array{0: string, 1: bool}>
      * @throws \ReflectionException
      */
     public function isTypeDataProvider(): array
     {
+        /** @var array<int, array{0: string, 1: bool}> $testCases */
         $testCases   = $this->getCorrectConstantsTestCases(Controller::class);
         $testCases[] = [
-            false,
+            'false',
             false,
         ];
         $testCases[] = ['', false,];

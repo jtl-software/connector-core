@@ -16,7 +16,7 @@ class ProductStockLevelSubscriberTest extends TestCase
     public function testOnPostSerialize(): void
     {
         $stocklevel = \random_int(0, 999);
-        $product    = new Product();
+        $product    = (new Product())->setCreationDate(new \DateTimeImmutable());
         $product->setStockLevel($stocklevel);
 
         $serializer   = SerializerBuilder::create()->build();
