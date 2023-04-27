@@ -80,7 +80,6 @@ class LoggerService
      *
      * @return MonoLogger
      * @throws InvalidArgumentException
-     * @throws RuntimeException
      */
     public function get(string $channel): MonoLogger
     {
@@ -89,7 +88,7 @@ class LoggerService
             $this->channels[$channel] = new MonoLogger($channel);
         }
 
-        $logLevel = MonoLogger::toMonologLevel($this->logLevel); // @phpstan-ignore-line
+        $logLevel = MonoLogger::toMonologLevel($this->logLevel); //@phpstan-ignore-line
         if (!$this->channels[$channel]->isHandling($logLevel)) {
             $fileName = \sprintf('%s/%s.log', $this->logDir, $channel);
             $handler  = new RotatingFileHandler($fileName, $this->maxFiles, $logLevel);

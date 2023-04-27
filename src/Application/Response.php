@@ -13,18 +13,19 @@ class Response
      * Response constructor.
      *
      * @param mixed $result
+     *
      */
     public function __construct($result)
     {
-        $this->result = $result;
+        $this->setResult($result);
     }
 
     /**
      * @param mixed $result
      *
-     * @return Response
+     * @return self
      */
-    public static function create($result): Response
+    public static function create($result): self
     {
         return new self($result);
     }
@@ -40,9 +41,9 @@ class Response
     /**
      * @param mixed $result
      *
-     * @return Response
+     * @return $this
      */
-    public function setResult($result): Response
+    public function setResult($result): self
     {
         $this->result = $result;
         return $this;

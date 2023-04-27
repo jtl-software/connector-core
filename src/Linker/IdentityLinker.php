@@ -257,7 +257,7 @@ class IdentityLinker implements LoggerAwareInterface
      */
     public function isValidHostId($hostId): bool
     {
-        return !\is_int($hostId) && $hostId > 0;
+        return \is_int($hostId) && $hostId > 0;
     }
 
     /**
@@ -458,6 +458,7 @@ class IdentityLinker implements LoggerAwareInterface
      *
      * @return bool
      * @throws DefinitionException
+     * @throws InvalidArgumentException
      * @throws LinkerException
      */
     public function propertyEndpointIdExists(string $modelName, string $property, string $endpointId): bool

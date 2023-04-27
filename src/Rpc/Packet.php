@@ -63,9 +63,9 @@ abstract class Packet extends AbstractModel
      *
      * @param string $jtlrpc
      *
-     * @return Packet
+     * @return $this
      */
-    public function setJtlrpc(string $jtlrpc): Packet
+    public function setJtlrpc(string $jtlrpc): self
     {
         $this->jtlrpc = $jtlrpc;
 
@@ -87,9 +87,9 @@ abstract class Packet extends AbstractModel
      *
      * @param string $id
      *
-     * @return Packet
+     * @return $this
      */
-    public function setId(string $id): Packet
+    public function setId(string $id): self
     {
         $this->id = $id;
 

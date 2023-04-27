@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Logger;
 
 use Jtl\Connector\Core\Exception\LoggerException;
@@ -7,18 +9,28 @@ use Jtl\Connector\Core\Logger\LoggerService;
 use Jtl\Connector\Core\Test\TestCase;
 use Monolog\Formatter\FormatterInterface;
 use Monolog\Formatter\JsonFormatter;
+use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Handler\RotatingFileHandler;
+use PHPUnit\Framework\Exception;
+use PHPUnit\Framework\ExpectationFailedException;
 use Psr\Log\LogLevel;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 class LoggerServiceTest extends TestCase
 {
+    protected LoggerService $factory;
+
+    protected string $logDir;
+
     /**
-     * @var LoggerService
+     * @return void
+     * @throws LoggerException
+     * @throws Exception
+     * @throws ExpectationFailedException
+     * @throws \ReflectionException
+     * @throws \RuntimeException
+     * @throws InvalidArgumentException
      */
-    protected $factory;
-
-    protected $logDir;
-
     public function testSetFormat(): void
     {
         $args = [JsonFormatter::BATCH_MODE_NEWLINES];
@@ -30,6 +42,12 @@ class LoggerServiceTest extends TestCase
         $this->assertInstanceOf(JsonFormatter::class, $formatter);
     }
 
+    /**
+     * @return void
+     * @throws LoggerException
+     * @throws \ReflectionException
+     * @throws \RuntimeException
+     */
     public function testSetFormatFormatterNotFound(): void
     {
         $this->expectException(LoggerException::class);
@@ -37,6 +55,11 @@ class LoggerServiceTest extends TestCase
         $this->factory->setFormat('yolo');
     }
 
+    /**
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     */
     public function testSetFormatter(): void
     {
         $formatterMock = $this->createMock(FormatterInterface::class);
@@ -48,22 +71,40 @@ class LoggerServiceTest extends TestCase
         $this->assertEquals($formatterMock, $actualFormatter);
     }
 
+    /**
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws \Psr\Log\InvalidArgumentException
+     * @throws \RuntimeException
+     * @throws InvalidArgumentException
+     */
     public function testSetFormatterToExistingLoggers(): void
     {
         $formatterMock = $this->createMock(FormatterInterface::class);
         foreach (['foo', 'bar', 'foobar'] as $channel) {
             $fooLogger = $this->factory->get($channel);
-            $handlers  = $fooLogger->getHandlers();
+            /** @var AbstractProcessingHandler[] $handlers */
+            $handlers = $fooLogger->getHandlers();
             $this->assertNotEquals($formatterMock, $handlers[0]->getFormatter());
         }
         $this->factory->setFormatter($formatterMock);
         foreach (['foo', 'bar', 'foobar'] as $channel) {
             $fooLogger = $this->factory->get($channel);
-            $handlers  = $fooLogger->getHandlers();
+            /** @var AbstractProcessingHandler[] $handlers */
+            $handlers = $fooLogger->getHandlers();
             $this->assertEquals($formatterMock, $handlers[0]->getFormatter());
         }
     }
 
+    /**
+     * @return void
+     * @throws Exception
+     * @throws ExpectationFailedException
+     * @throws \Psr\Log\InvalidArgumentException
+     * @throws \ReflectionException
+     * @throws \RuntimeException
+     * @throws InvalidArgumentException
+     */
     public function testGet(): void
     {
         $reflection   = new \ReflectionClass($this->factory);
@@ -73,6 +114,7 @@ class LoggerServiceTest extends TestCase
         $this->assertEmpty($channels);
         $fooChannel = $this->factory->get('foo');
         $channels   = $channelsProp->getValue($this->factory);
+        $this->assertIsArray($channels);
         $this->assertArrayHasKey('foo', $channels);
         $this->assertEquals($fooChannel, $channels['foo']);
         $handlers = $fooChannel->getHandlers();
@@ -87,17 +129,32 @@ class LoggerServiceTest extends TestCase
         $this->assertEquals($expectedLogFileName, $filenameProp->getValue($handlers[0]));
     }
 
+    /**
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws \Psr\Log\InvalidArgumentException
+     * @throws \RuntimeException
+     * @throws InvalidArgumentException
+     */
     public function testHas(): void
     {
         $this->factory->get('foo');
         $this->assertTrue($this->factory->has('foo'));
     }
 
+    /**
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     */
     public function testHasNot(): void
     {
         $this->assertFalse($this->factory->has('bar'));
     }
 
+    /**
+     * @return void
+     */
     protected function setUp(): void
     {
         parent::setUp();

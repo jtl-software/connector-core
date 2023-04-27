@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Serializer\Subscriber;
 
 use Jtl\Connector\Core\Model\Product;
@@ -14,7 +16,7 @@ class ProductStockLevelSubscriberTest extends TestCase
     public function testOnPostSerialize(): void
     {
         $stocklevel = \random_int(0, 999);
-        $product    = new Product();
+        $product    = (new Product())->setCreationDate(new \DateTimeImmutable());
         $product->setStockLevel($stocklevel);
 
         $serializer   = SerializerBuilder::create()->build();

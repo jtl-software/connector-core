@@ -9,14 +9,6 @@ use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
-// @phpstan-ignore-file
-
-/**
- * Sqlite 3 Database Class
- *
- * @access public
- * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
- */
 class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
 {
     /**
@@ -65,7 +57,7 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
             throw new DatabaseException('Wrong type or empty location');
         }
 
-        if (isset($this->mode)) {
+        if (!isset($this->mode)) {
             $this->mode = \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE | self::SQLITE3_OPEN_SHAREDCACHE;
         }
 
@@ -88,7 +80,7 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
      *
      * @param array<string, mixed>|null $options
      */
-    public function setOptions(array $options = null): void
+    public function setOptions(?array $options = null): void
     {
         if (\is_array($options)) {
             // Location

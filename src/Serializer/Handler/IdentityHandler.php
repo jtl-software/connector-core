@@ -44,14 +44,17 @@ class IdentityHandler implements SubscribingHandlerInterface
     /**
      * @param JsonDeserializationVisitor $visitor
      * @param array{0: string, 1: int}   $identity
+     * @param array<mixed>               $type
      * @param Context                    $context
      *
      * @return Identity
      * @throws DefinitionException
+     * @noinspection PhpUnusedParameterInspection
      */
     public function deserializeIdentity(
         JsonDeserializationVisitor $visitor,
         array                      $identity,
+        array                      $type,
         Context                    $context
     ): Identity {
         $identityObject = new Identity($identity[0], $identity[1]);
@@ -60,7 +63,7 @@ class IdentityHandler implements SubscribingHandlerInterface
             $modelName    = (new \ReflectionClass($currentObject))->getShortName();
             $currentPath  = $context->getCurrentPath();
             $propertyName = \end($currentPath);
-            if (Model::isIdentityProperty($modelName, $propertyName)) {
+            if ($propertyName !== false && Model::isIdentityProperty($modelName, $propertyName)) {
                 $identityType = Model::getPropertyIdentityType($modelName, $propertyName);
                 if (!isset($this->identities[$identityType][$identity[1]])) {
                     $this->identities[$identityType][$identity[1]] = $identityObject;

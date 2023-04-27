@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Utilities;
 
 use Jtl\Connector\Core\Utilities\Token;

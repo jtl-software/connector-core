@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Stub\Controller;
 
 use Jtl\Connector\Core\Controller\DeleteInterface;
@@ -8,10 +10,12 @@ use Jtl\Connector\Core\Controller\PushInterface;
 use Jtl\Connector\Core\Controller\StatisticInterface;
 use Jtl\Connector\Core\Controller\TransactionalInterface;
 use Jtl\Connector\Core\Model\AbstractModel;
+use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Model\QueryFilter;
 
 /**
  * Class TransactionalController
+ *
  * @package Jtl\Connector\Core\Test\Stub\Controller
  */
 class TransactionalControllerStub implements
@@ -56,11 +60,15 @@ class TransactionalControllerStub implements
     /**
      * @param QueryFilter $queryFilter
      *
-     * @return array
+     * @return array<int, AbstractModel>
      */
     public function pull(QueryFilter $queryFilter): array
     {
-        return [1, 2, 3,];
+        $product1 = new Product('0', 0);
+        $product1->setCreationDate(new \DateTimeImmutable());
+        $product2 = new Product('1', 1);
+        $product2->setCreationDate(new \DateTimeImmutable());
+        return [$product1, $product2];
     }
 
     /**

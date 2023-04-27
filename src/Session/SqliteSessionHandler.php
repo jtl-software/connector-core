@@ -14,12 +14,6 @@ use ReturnTypeWillChange;
 use RuntimeException;
 use Throwable;
 
-/**
- * Session Class
- *
- * @access public
- * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
- */
 class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterface
 {
     protected LoggerInterface $logger;

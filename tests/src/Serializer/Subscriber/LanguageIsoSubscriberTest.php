@@ -1,7 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Serializer\Subscriber;
 
+use JMS\Serializer\Exception\RuntimeException;
+use JsonException;
 use Jtl\Connector\Core\Model\AbstractI18n;
 use Jtl\Connector\Core\Model\CategoryI18n;
 use Jtl\Connector\Core\Model\CrossSellingGroupI18n;
@@ -10,15 +14,20 @@ use Jtl\Connector\Core\Model\ProductI18n;
 use Jtl\Connector\Core\Model\TranslatableAttributeI18n;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\Exception;
+use PHPUnit\Framework\ExpectationFailedException;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class LanguageIsoSubscriberTest
+ *
  * @package Jtl\Connector\Core\Test\Serializer\Subscriber
  */
 class LanguageIsoSubscriberTest extends TestCase
 {
     /**
-     * @return array
+     * @return array<int, array{0: class-string}>
      */
     public function i18NDataProvider(): array
     {
@@ -34,18 +43,32 @@ class LanguageIsoSubscriberTest extends TestCase
     /**
      * @dataProvider i18NDataProvider
      *
-     * @param $model
+     * @param class-string $model
+     *
+     * @throws AssertionFailedError
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws JsonException
+     * @throws RuntimeException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     * @throws Exception
      */
     public function testOnPostSerializeWithInvalidValue(string $model): void
     {
         $i18nModel = new $model();
+        $this->assertInstanceOf(AbstractI18n::class, $i18nModel);
         $i18nModel->setLanguageIso('___');
 
         $serializedData = $this->serializeModel($i18nModel);
 
-        $jsonObj = \json_decode($serializedData);
-        $this->assertObjectHasAttribute('languageISO', $jsonObj);
-        $this->assertObjectHasAttribute('languageIso', $jsonObj);
+        /** @var object $jsonObj */
+        $jsonObj = \json_decode($serializedData, false, 512, \JSON_THROW_ON_ERROR);
+        if (!\property_exists($jsonObj, 'languageISO')) {
+            $this->fail('property "languageISO" does not exist.');
+        }
+        if (!\property_exists($jsonObj, 'languageIso')) {
+            $this->fail('property "languageIso" does not exist.');
+        }
         $this->assertEquals($jsonObj->languageISO, $jsonObj->languageIso);
     }
 
@@ -53,6 +76,8 @@ class LanguageIsoSubscriberTest extends TestCase
      * @param AbstractI18n $i18nModel
      *
      * @return string
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     * @throws RuntimeException
      */
     protected function serializeModel(AbstractI18n $i18nModel): string
     {
@@ -62,18 +87,27 @@ class LanguageIsoSubscriberTest extends TestCase
     /**
      * @dataProvider i18NDataProvider
      *
-     * @param string $model
+     * @param class-string $model
+     *
+     * @throws Exception
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException|\JsonException
      */
     public function testOnPostSerializeWithEmptyValue(string $model): void
     {
         $i18nModel = new $model();
+        $this->assertInstanceOf(AbstractI18n::class, $i18nModel);
         $i18nModel->setLanguageIso('');
 
         $serializedData = $this->serializeModel($i18nModel);
 
-        $jsonObj = \json_decode($serializedData);
-        $this->assertObjectHasAttribute('languageISO', $jsonObj);
-        $this->assertObjectHasAttribute('languageIso', $jsonObj);
+        /** @var object $jsonObj */
+        $jsonObj = \json_decode($serializedData, false, 512, \JSON_THROW_ON_ERROR);
+        if (!\property_exists($jsonObj, 'languageIso')) {
+            $this->fail('property "languageIso" does not exist.');
+        }
         $this->assertSame($jsonObj->languageIso, '');
     }
 
@@ -82,84 +116,125 @@ class LanguageIsoSubscriberTest extends TestCase
      *
      * @param string $model
      *
-     * @throws \JsonException
+     * @throws Exception
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     * @throws JsonException
      */
     public function testOnPostSerializeWithValidValue(string $model): void
     {
         $i18nModel = new $model();
+        $this->assertInstanceOf(AbstractI18n::class, $i18nModel);
         $i18nModel->setLanguageIso('de');
 
         $serializedData = $this->serializeModel($i18nModel);
 
+        /** @var object $jsonObj */
         $jsonObj = \json_decode($serializedData, false, 512, \JSON_THROW_ON_ERROR);
 
-        $this->assertObjectHasAttribute('languageISO', $jsonObj);
+        if (!\property_exists($jsonObj, 'languageISO')) {
+            $this->fail('property "languageISO" does not exist.');
+        }
         $this->assertEquals('ger', $jsonObj->languageISO);
     }
 
     /**
      * @dataProvider i18NDataProvider
      *
-     * @param string $model
+     * @param class-string $model
      *
-     * @throws \JsonException
+     * @throws Exception
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws JsonException
+     * @throws RuntimeException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      */
     public function testOnPostSerializeWithNoValue(string $model): void
     {
         $i18nModel = new $model();
-
+        $this->assertInstanceOf(AbstractI18n::class, $i18nModel);
         $serializedData = $this->serializeModel($i18nModel);
 
+        /** @var object $jsonObj */
         $jsonObj = \json_decode($serializedData, false, 512, \JSON_THROW_ON_ERROR);
 
-        $this->assertObjectHasAttribute('languageISO', $jsonObj);
+        if (!\property_exists($jsonObj, 'languageISO')) {
+            $this->fail('property "languageISO" does not exist.');
+        }
         $this->assertEquals('', $jsonObj->languageISO);
     }
 
     /**
      * @dataProvider i18NDataProvider
      *
-     * @param string $model
+     * @param class-string $model
+     *
+     * @throws AssertionFailedError
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException|Exception
      */
     public function testOnPreDeserializeWithValidValue(string $model): void
     {
         $i18nModel = new $model();
+        $this->assertInstanceOf(AbstractI18n::class, $i18nModel);
         $i18nModel->setLanguageIso('de');
 
-        /** @var $deserializeData ProductI18n */
         $deserializeData = $this->serializeAndDeserializeModel($i18nModel);
 
-        $this->assertObjectHasAttribute('languageIso', $deserializeData);
+        if (!\property_exists($deserializeData, 'languageIso')) {
+            $this->fail('property "languageISO" does not exist.');
+        }
         $this->assertSame($deserializeData->getLanguageIso(), 'de');
     }
 
     /**
      * @param AbstractI18n $i18nModel
      *
-     * @return mixed
+     * @return ProductI18n
+     * @throws Exception
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      */
-    protected function serializeAndDeserializeModel(AbstractI18n $i18nModel)
+    protected function serializeAndDeserializeModel(AbstractI18n $i18nModel): ProductI18n
     {
-        $serializer = SerializerBuilder::create()->build();
-        return $serializer->deserialize($serializer->serialize($i18nModel, 'json'), ProductI18n::class, 'json');
+        $serializer  = SerializerBuilder::create()->build();
+        $productI18n = $serializer->deserialize($serializer->serialize($i18nModel, 'json'), ProductI18n::class, 'json');
+        $this->assertInstanceOf(ProductI18n::class, $productI18n);
+
+        return $productI18n;
     }
 
     /**
      * @dataProvider i18NDataProvider
      *
-     * @param string $model
+     * @param class-string $model
+     *
+     * @throws Exception
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      */
     public function testOnPreDeserializeWithInValidValue(string $model): void
     {
         $value = '_____';
 
         $i18nModel = new $model();
+        $this->assertInstanceOf(AbstractI18n::class, $i18nModel);
         $i18nModel->setLanguageIso($value);
 
-        /** @var $deserializeData ProductI18n */
         $deserializeData = $this->serializeAndDeserializeModel($i18nModel);
 
-        $this->assertObjectHasAttribute('languageIso', $deserializeData);
+        if (!\property_exists($deserializeData, 'languageIso')) {
+            $this->fail('property "languageISO" does not exist.');
+        }
         $this->assertSame($deserializeData->getLanguageIso(), $value);
     }
 }

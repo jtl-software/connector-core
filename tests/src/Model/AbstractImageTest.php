@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Model;
 
 use Jtl\Connector\Core\Exception\DefinitionException;
@@ -9,6 +11,9 @@ use Jtl\Connector\Core\Model\ManufacturerImage;
 use Jtl\Connector\Core\Model\ProductImage;
 use Jtl\Connector\Core\Model\ProductVariationValueImage;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\ExpectationFailedException;
+use RuntimeException;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 class AbstractImageTest extends TestCase
 {
@@ -19,6 +24,9 @@ class AbstractImageTest extends TestCase
      * @param string        $relationType
      *
      * @throws DefinitionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
      */
     public function testGetRelationType(AbstractImage $image, string $relationType): void
     {
@@ -26,7 +34,12 @@ class AbstractImageTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array{
+     *          0: array{0: CategoryImage},
+     *          1: array{0: ProductImage},
+     *          2: array{0: ProductVariationValueImage},
+     *          3: array{0: ManufacturerImage}
+     *     }
      */
     public function relationTypeProvider(): array
     {
@@ -43,6 +56,9 @@ class AbstractImageTest extends TestCase
      *
      * @param string $fileName
      * @param string $expectedExtension
+     *
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
     public function testGetExtension(string $fileName, string $expectedExtension): void
     {
@@ -52,7 +68,7 @@ class AbstractImageTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array<int, array{0: string, 1: string}>
      */
     public function extensionProvider(): array
     {

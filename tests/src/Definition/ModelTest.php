@@ -1,20 +1,29 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Definition;
 
+use Exception;
 use Jtl\Connector\Core\Definition\IdentityType;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Exception\DefinitionException;
+use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class ModelTest
+ *
  * @package Jtl\Connector\Core\Test\Definition
  */
 class ModelTest extends TestCase
 {
     /**
-     * @throws \ReflectionException
+     * @throws AssertionFailedError
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
     public function testPropertyMappingsMatchModelIdentities(): void
     {
@@ -28,7 +37,7 @@ class ModelTest extends TestCase
         $exceptions = [Model::PRODUCT_ATTRIBUTE];
 
         $mappings = $propertyMappings->getValue($definition);
-
+        $this->assertIsArray($mappings);
         foreach ($mappings as $modelName => $identityMappings) {
             if (\in_array($modelName, $exceptions, true)) {
                 continue;
@@ -38,13 +47,16 @@ class ModelTest extends TestCase
             $model      = new $modelClass();
 
             foreach ($identityMappings as $propertyName => $identityType) {
-                $this->assertObjectHasAttribute($propertyName, $model);
+                if (!\property_exists($model, $propertyName)) {
+                    $this->fail(\sprintf('Object %s has not property %s', \get_class($model), $propertyName));
+                }
             }
         }
     }
 
     /**
-     * @throws \ReflectionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
     public function testMappingsMatchIdentityType(): void
     {
@@ -53,7 +65,9 @@ class ModelTest extends TestCase
         $propertyMappings     = $definitionReflection->getProperty('mappings');
         $propertyMappings->setAccessible(true);
 
-        foreach ($propertyMappings->getValue($definition) as $mapping) {
+        $mappings = $propertyMappings->getValue($definition);
+        $this->assertIsArray($mappings);
+        foreach ($mappings as $mapping) {
             $this->assertTrue(IdentityType::isType($mapping));
         }
     }
@@ -61,16 +75,23 @@ class ModelTest extends TestCase
     /**
      * @dataProvider getModelByTypeProvider
      *
-     * @param int  $identityType
-     * @param      $expectedResult
-     * @param bool $shouldThrowException
+     * @param int              $identityType
+     * @param Exception|string $expectedResult
+     * @param bool             $shouldThrowException
      *
      * @throws DefinitionException
-     * @throws \ReflectionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function testGetModelByType(int $identityType, $expectedResult, bool $shouldThrowException = false): void
     {
         if ($shouldThrowException) {
+            if ($expectedResult instanceof \Exception === false) {
+                throw new \InvalidArgumentException(
+                    'If method should throw an Exception, $expected result must be instance of ' . \Exception::class
+                );
+            }
             $this->expectExceptionObject($expectedResult);
         }
 
@@ -82,7 +103,7 @@ class ModelTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array<int, array{0: int, 1: string|DefinitionException, 2?: true}>
      */
     public function getModelByTypeProvider(): array
     {
@@ -96,7 +117,6 @@ class ModelTest extends TestCase
 
     /**
      * @throws DefinitionException
-     * @throws \ReflectionException
      */
     public function testGetIdentityTypeModelIsInvalid(): void
     {
@@ -113,19 +133,21 @@ class ModelTest extends TestCase
      * @param string $modelName
      * @param string $propertyName
      * @param bool   $expectedResult
+     *
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
     public function testIsIdentityPropertyInvalidPropertyName(
         string $modelName,
         string $propertyName,
         bool   $expectedResult
-    ): void
-    {
+    ): void {
         $result = Model::isIdentityProperty($modelName, $propertyName);
         $this->assertSame($expectedResult, $result);
     }
 
     /**
-     * @return array
+     * @return array<int, array{0: string, 1: string, 2: bool}>
      */
     public function isIdentityPropertyProvider(): array
     {
@@ -145,6 +167,9 @@ class ModelTest extends TestCase
      *
      * @param string $modelName
      * @param bool   $expectedResult
+     *
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
     public function testIsModel(string $modelName, bool $expectedResult): void
     {
@@ -158,6 +183,8 @@ class ModelTest extends TestCase
      * @param bool   $isModelName
      *
      * @throws DefinitionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
     public function testGetRelationType(string $modelName, bool $isModelName): void
     {
@@ -169,7 +196,7 @@ class ModelTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array<int, array{0: string, 1: bool}>
      */
     public function modelNameProvider(): array
     {

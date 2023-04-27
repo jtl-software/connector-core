@@ -46,18 +46,31 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
     public function transformRequestParams(RpcEvent $event): void
     {
         if ($event->getAction() === Action::PUSH) {
-            $data = $event->getData();
+            $eventData = $event->getData();
+            if (!\is_array($eventData)) {
+                throw new \RuntimeException('$data must be type array.');
+            }
 
             switch ($event->getController()) {
                 case Controller::PRODUCT:
-                    $data = $this->transformProductData($data); // @phpstan-ignore-line
+                    /** @var array<array<string, mixed>> $eventData */
+                    $data = $this->transformProductData($eventData);
                     break;
                 case Controller::PRODUCT_PRICE:
-                    $data = $this->transformProductPriceData($data); // @phpstan-ignore-line
+                    /** @var array<array<string, mixed>> $eventData */
+                    $data = $this->transformProductPriceData($eventData);
                     break;
                 case Controller::PRODUCT_STOCK_LEVEL:
-                    $data = $this->transformProductStockLevelData($data); // @phpstan-ignore-line
+                    /** @var array{
+                     *     productId: array{0: string, 1: int}|ProductStockLevel|null,
+                     *     sku: ?string,
+                     *     stockLevel: ?float
+                     * } $eventData
+                     */
+                    $data = $this->transformProductStockLevelData($eventData);
                     break;
+                default:
+                    $data = $eventData;
             }
 
             $event->setData($data);
@@ -73,9 +86,12 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
     public function transformProductData(array $products): array
     {
         foreach ($products as $i => $product) {
+            /** @var array<string, mixed> $product */
             if (
-                \array_key_exists('stockLevel', $product['stockLevel'])
+                \array_key_exists('stockLevel', $product)
+                && \is_array($product['stockLevel'])
                 && isset($product['stockLevel']['stockLevel'])
+                && \array_key_exists('stockLevel', $product['stockLevel'])
             ) {
                 $products[$i]['stockLevel'] = $product['stockLevel']['stockLevel'];
             }

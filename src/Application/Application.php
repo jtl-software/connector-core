@@ -64,6 +64,8 @@ use Jtl\Connector\Core\Model\AbstractImage;
 use Jtl\Connector\Core\Model\AbstractModel;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
+use Jtl\Connector\Core\Model\ConnectorIdentification;
+use Jtl\Connector\Core\Model\Features;
 use Jtl\Connector\Core\Model\Identities;
 use Jtl\Connector\Core\Model\IdentityInterface;
 use Jtl\Connector\Core\Model\Product;
@@ -146,9 +148,9 @@ class Application
     /**
      * Application constructor.
      *
-     * @param string              $connectorDir
-     * @param AbstractConfig|null $config
-     * @param ConfigSchema|null   $configSchema
+     * @param string               $connectorDir
+     * @param ConfigInterface|null $config
+     * @param ConfigSchema|null    $configSchema
      *
      * @throws ApplicationException
      * @throws ConfigException
@@ -162,17 +164,19 @@ class Application
      * @throws Exception
      */
     public function __construct(
-        string          $connectorDir,
-        ?AbstractConfig $config = null,
-        ?ConfigSchema   $configSchema = null
+        string           $connectorDir,
+        ?ConfigInterface $config = null,
+        ?ConfigSchema    $configSchema = null
     ) {
         if (!\is_dir($connectorDir)) {
             throw ApplicationException::connectorDirNotExists($connectorDir);
         }
         AnnotationRegistry::registerLoader('class_exists');
 
-        if ($configSchema !== null && $config instanceof CoreConfigInterface) {
-            $config->setConfigSchema($configSchema);
+        if ($configSchema !== null && $config !== null) {
+            if ($config instanceof CoreConfigInterface) {
+                $config->setConfigSchema($configSchema);
+            }
         } else {
             $configSchema = $configSchema ?? new ConfigSchema();
             $config       = new FileConfig(\sprintf('%s/config/config.json', $connectorDir), $configSchema);
@@ -183,7 +187,8 @@ class Application
 
         $serializerCacheDir = null;
         if (
-            $config->getBool(ConfigSchema::DEBUG, false) === false
+            $config instanceof CoreConfigInterface
+            && $config->getBool(ConfigSchema::DEBUG, false) === false
             && $config->getBool(ConfigSchema::SERIALIZER_ENABLE_CACHE, true) === true
         ) {
             $serializerCacheDir = $config->getString(ConfigSchema::CACHE_DIR);
@@ -286,19 +291,20 @@ class Application
         MonologErrorHandler::register($this->loggerService->get(LoggerService::CHANNEL_ERROR));
         $requestPacket = RequestPacket::createFromJtlrpc($jtlrpc, $this->serializer);
         $this->errorHandler->setRequestPacket($requestPacket);
+        $responsePacket = null;
 
         try {
             if (!$requestPacket->isValid()) {
-                throw RpcException::invalidRequest(); // @phpstan-ignore-line
+                throw RpcException::invalidRequest();
             }
 
             $method = Method::createFromRequestPacket($requestPacket);
             if (!Controller::isController($method->getController())) {
-                throw DefinitionException::unknownController($method->getController()); // @phpstan-ignore-line
+                throw DefinitionException::unknownController($method->getController());
             }
 
             if (!Action::isAction($method->getAction())) {
-                throw DefinitionException::unknownAction($method->getAction()); // @phpstan-ignore-line
+                throw DefinitionException::unknownAction($method->getAction());
             }
 
             $this->startSession($requestPacket->getMethod());
@@ -325,15 +331,20 @@ class Application
             $event = new RpcEvent($requestPacket->getParams(), $method->getController(), $method->getAction());
             $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::BEFORE));
             if (!\is_array($data = $event->getData())) {
-                throw new \RuntimeException('$data must be an array.'); // @phpstan-ignore-line
+                throw new \RuntimeException('$data must be an array.');
             }
             $requestPacket->setParams($data);
 
             $responsePacket = $this->execute($connector, $requestPacket, $method);
             \session_write_close();
         } catch (Throwable $ex) {
+            if (\is_numeric($code = $ex->getCode())) {
+                $codeInt = (int)$code;
+            } else {
+                throw new \RuntimeException('exception code must be numeric.');
+            }
             $error = (new Error())
-                ->setCode($ex->getCode())
+                ->setCode($codeInt)
                 ->setMessage($ex->getMessage())
                 ->setData(Error::createDataFromException($ex));
 
@@ -343,12 +354,12 @@ class Application
 
             $this->loggerService->get(LoggerService::CHANNEL_ERROR)->error($ex->getTraceAsString());
 
-            throw $ex; // @phpstan-ignore-line
+            throw $ex;
         } finally {
+            $responsePacket = $responsePacket instanceof ResponsePacket
+                ? $responsePacket
+                : ResponsePacket::create($requestPacket->getId());
             $this->fileSystem->remove($this->deleteFromFileSystem);
-            if (!isset($responsePacket)) {
-                throw new \RuntimeException('responsePacket is not set!'); // @phpstan-ignore-line
-            }
             $this->httpResponse->prepareAndSend($requestPacket, Validate::responsePacket($responsePacket));
 
             if (\random_int(0, 99) === 0) {
@@ -515,14 +526,18 @@ class Application
      *
      * @return ResponsePacket
      * @throws ApplicationException
+     * @throws CaseConverterException
      * @throws CompressionException
      * @throws DefinitionException
      * @throws DependencyException
      * @throws FileNotFoundException
+     * @throws LinkerException
      * @throws NotFoundException
+     * @throws ReflectionException
      * @throws RpcException
-     * @throws \ReflectionException
-     * @throws \Throwable
+     * @throws RuntimeException
+     * @throws Throwable
+     * @throws \InvalidArgumentException
      */
     protected function execute(
         ConnectorInterface $connector,
@@ -565,7 +580,10 @@ class Application
         }
 
         // Identity mapping
-        $resultData = \is_array($response->getResult()) ? $response->getResult() : [$response->getResult()];
+        $resultData = $response->getResult();
+        if (!\is_array($resultData)) {
+            throw new \RuntimeException('$resultData must be an array.');
+        }
         foreach ($resultData as $result) {
             if (
                 $connector instanceof HandleRequestInterface
@@ -590,6 +608,9 @@ class Application
                     $eventArg      = new $eventArgClass($result);
                     break;
                 case Action::STATISTIC:
+                    if ($result instanceof Statistic === false) {
+                        throw new \RuntimeException('$result must be instance of ' . Statistic::class);
+                    }
                     $eventArg = new StatisticEvent($result);
                     break;
                 case Action::ACK:
@@ -599,9 +620,15 @@ class Application
                     $eventArg = new BoolEvent($result);
                     break;
                 case Action::IDENTIFY:
+                    if ($result instanceof ConnectorIdentification === false) {
+                        throw new \RuntimeException('$result must be instance of ' . ConnectorIdentification::class);
+                    }
                     $eventArg = new ConnectorIdentificationEvent($result);
                     break;
                 case Action::FEATURES:
+                    if ($result instanceof Features === false) {
+                        throw new \RuntimeException('$result must be instance of ' . Features::class);
+                    }
                     $eventArg = new FeaturesEvent($result);
                     break;
             }

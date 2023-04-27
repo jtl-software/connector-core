@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Serializer\Handler;
 
 use JMS\Serializer\DeserializationContext;
@@ -12,6 +14,7 @@ use Jtl\Connector\Core\Test\TestCase;
 
 /**
  * Class IdentityHandlerTest
+ *
  * @package Jtl\Connector\Core\Test\Serializer\Handler
  */
 class IdentityHandlerTest extends TestCase
@@ -58,6 +61,7 @@ class IdentityHandlerTest extends TestCase
                 $endpointId,
                 $hostId,
             ],
+            [],
             new DeserializationContext()
         );
 
@@ -67,8 +71,8 @@ class IdentityHandlerTest extends TestCase
     /**
      * @dataProvider identityDataProvider
      *
-     * @param IdentityHandler $identityHandler
-     * @param array           $identityArray
+     * @param IdentityHandler          $identityHandler
+     * @param array{0: string, 1: int} $identityArray
      *
      * @throws \Exception
      */
@@ -82,6 +86,7 @@ class IdentityHandlerTest extends TestCase
         $result = $identityHandler->deserializeIdentity(
             $visitor,
             $identityArray,
+            [],
             new DeserializationContext()
         );
 

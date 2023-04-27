@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Session;
 
 use Jtl\Connector\Core\Session\SessionHelper;

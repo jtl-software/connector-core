@@ -1,20 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Rpc;
 
+use Jawira\CaseConverter\CaseConverterException;
 use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Rpc\Method;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\ExpectationFailedException;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class MethodTest
+ *
  * @package Jtl\Connector\Core\Test\Rpc
  */
 class MethodTest extends TestCase
 {
     /**
-     *
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
     public function testConstructorParameters(): void
     {
@@ -29,15 +37,21 @@ class MethodTest extends TestCase
     /**
      * @dataProvider createFromRpcMethodDataProvider
      *
-     * @param $rpcMethod
-     * @param $expectedController
-     * @param $expectedAction
-     * @param $isCore
+     * @param string $rpcMethod
+     * @param string $expectedController
+     * @param string $expectedAction
+     * @param bool   $isCore
      *
-     * @throws \Exception
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws CaseConverterException
      */
-    public function testCreateFromRpcMethod($rpcMethod, $expectedController, $expectedAction, $isCore): void
-    {
+    public function testCreateFromRpcMethod(
+        string $rpcMethod,
+        string $expectedController,
+        string $expectedAction,
+        bool   $isCore
+    ): void {
         $method = Method::createFromRpcMethod($rpcMethod);
         $this->assertSame($expectedController, $method->getController());
         $this->assertSame($expectedAction, $method->getAction());
@@ -46,7 +60,7 @@ class MethodTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array<int, array<int, string|bool>>
      */
     public function createFromRpcMethodDataProvider(): array
     {

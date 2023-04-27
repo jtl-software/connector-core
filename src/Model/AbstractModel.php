@@ -6,12 +6,6 @@ namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
 
-/**
- * Core Model Class
- *
- * @access public
- * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
- */
 abstract class AbstractModel
 {
     /**
