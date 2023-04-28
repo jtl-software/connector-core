@@ -107,7 +107,7 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
 
     /**
      * @return bool
-     * @see Jtl\Connector\Core\Database\DatabaseInterface::close()
+     * @see DatabaseInterface::close()
      */
     public function close(): bool
     {
@@ -239,7 +239,7 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
      * @param string $query
      *
      * @return string
-     * @see Jtl\Connector\Core\Database\DatabaseInterface::escapeString()
+     * @see DatabaseInterface::escapeString()
      */
     public function escapeString(string $query): string
     {
