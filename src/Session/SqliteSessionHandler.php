@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Session;
 
+use Exception;
 use Jtl\Connector\Core\Database\Sqlite3;
 use Jtl\Connector\Core\Exception\DatabaseException;
 use Jtl\Connector\Core\Exception\SessionException;
@@ -19,6 +20,8 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
     protected LoggerInterface $logger;
     private int               $lifetime;
     private Sqlite3           $db;
+    private string            $dbLocation;
+    private string            $databaseDir;
 
     /**
      * SqliteSession constructor.
@@ -34,11 +37,13 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
         if (!\is_dir($databaseDir) && !\mkdir($databaseDir) && !\is_dir($databaseDir)) {
             throw new SessionException('Could not create sqlite database directory');
         }
-        $this->logger   = new NullLogger();
-        $this->lifetime = (int)\ini_get('session.gc_maxlifetime');
+        $this->databaseDir = $databaseDir;
+        $this->logger      = new NullLogger();
+        $this->lifetime    = (int)\ini_get('session.gc_maxlifetime');
 
-        $dbLocation = \sprintf('%s/connector.s3db', $databaseDir);
-        $isNew      = !\file_exists($dbLocation);
+        $dbLocation       = \sprintf('%s/connector.s3db', $databaseDir);
+        $this->dbLocation = $dbLocation;
+        $isNew            = !\file_exists($dbLocation);
 
         $sqlite3 = new Sqlite3();
         $sqlite3->connect(['location' => $dbLocation]);
@@ -155,10 +160,30 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      * @param string $sessionData
      *
      * @return bool
+     * @throws RuntimeException
+     * @throws DatabaseException
      */
     #[ReturnTypeWillChange]
     public function write($sessionId, $sessionData): bool
     {
+        try {
+            if ($this->db->checkConnection() === false) {
+                $db = new Sqlite3();
+                $db->connect(['location' => $this->dbLocation]);
+                $this->db = $db;
+            }
+        } catch (Exception $e) {
+            if (
+                !\is_dir($this->databaseDir)
+                && !\mkdir($concurrentDirectory = $this->databaseDir)
+                && !\is_dir($concurrentDirectory)
+            ) {
+                throw new \RuntimeException('Could not create sqlite database directory');
+            }
+            $db = new Sqlite3();
+            $db->connect(['location' => $this->dbLocation]);
+            $this->db = $db;
+        }
         $sessionId   = $this->db->escapeString($sessionId);
         $sessionData = \base64_encode($sessionData);
         $expire      = $this->calculateExpiryTime();

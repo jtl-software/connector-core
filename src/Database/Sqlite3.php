@@ -107,11 +107,90 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
 
     /**
      * @return bool
-     * @see Jtl\Connector\Core\Database\DatabaseInterface::close()
+     * @see DatabaseInterface::close()
      */
     public function close(): bool
     {
         return $this->db->close();
+    }
+
+    /**
+     * @param string $query
+     *
+     * @return mixed
+     */
+    public function fetchSingle(string $query)
+    {
+        return $this->db->querySingle($query);
+    }
+
+    /**
+     * Prepares an SQL statement for execution
+     *
+     * @param string $query
+     *
+     * @return \SQLite3Stmt|boolean Returns an SQLite3Stmt object on success or FALSE on failure.
+     */
+    public function prepare(string $query)
+    {
+        return $this->db->prepare($query);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isConnected(): bool
+    {
+        return $this->isConnected;
+    }
+
+    /**
+     * @param string $query
+     *
+     * @return string
+     * @see DatabaseInterface::escapeString()
+     */
+    public function escapeString(string $query): string
+    {
+        return \Sqlite3::escapeString($query);
+    }
+
+    /**
+     * @return integer
+     */
+    public function getLastInsertRowId(): int
+    {
+        return $this->db->lastInsertRowID();
+    }
+
+    /**
+     * @return \SQLite3
+     */
+    public function getDb(): \SQLite3
+    {
+        return $this->db;
+    }
+
+    /**
+     * @param LoggerInterface $logger
+     *
+     * @return void
+     */
+    public function setLogger(LoggerInterface $logger): void
+    {
+        $this->logger = $logger;
+    }
+
+    /**
+     * @return bool
+     */
+    public function checkConnection(): bool
+    {
+        $result = $this->db->query('SHOW TABLES;');
+        if ($result !== false && $result->fetchArray()) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -203,72 +282,5 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
         }
 
         return false;
-    }
-
-    /**
-     * @param string $query
-     *
-     * @return mixed
-     */
-    public function fetchSingle(string $query)
-    {
-        return $this->db->querySingle($query);
-    }
-
-    /**
-     * Prepares an SQL statement for execution
-     *
-     * @param string $query
-     *
-     * @return \SQLite3Stmt|boolean Returns an SQLite3Stmt object on success or FALSE on failure.
-     */
-    public function prepare(string $query)
-    {
-        return $this->db->prepare($query);
-    }
-
-    /**
-     * @return bool
-     */
-    public function isConnected(): bool
-    {
-        return $this->isConnected;
-    }
-
-    /**
-     * @param string $query
-     *
-     * @return string
-     * @see Jtl\Connector\Core\Database\DatabaseInterface::escapeString()
-     */
-    public function escapeString(string $query): string
-    {
-        return \Sqlite3::escapeString($query);
-    }
-
-    /**
-     * @return integer
-     */
-    public function getLastInsertRowId(): int
-    {
-        return $this->db->lastInsertRowID();
-    }
-
-    /**
-     * @return \SQLite3
-     */
-    public function getDb(): \SQLite3
-    {
-        return $this->db;
-    }
-
-    /**
-     * @param LoggerInterface $logger
-     *
-     * @return void
-     */
-    public function setLogger(LoggerInterface $logger): void
-    {
-        $this->logger = $logger;
     }
 }
