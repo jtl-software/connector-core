@@ -5,8 +5,8 @@ namespace Jtl\Connector\Core\Logger;
 use Jtl\Connector\Core\Exception\LoggerException;
 use Jtl\Connector\Core\Logger\Processor\RequestProcessor;
 use Monolog\Formatter\FormatterInterface;
-use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Handler\FingersCrossedHandler;
+use Monolog\Handler\FormattableHandlerInterface;
 use Monolog\Handler\HandlerInterface;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Level;
@@ -165,8 +165,8 @@ class LoggerService
         $logLevel = MonoLogger::toMonologLevel($this->logLevel);
         if (!$this->channels[$channel]->isHandling($logLevel)) {
             $handler = $this->createChannelSpecificHandler($channel, $logLevel);
-            $this->channels[$channel]->pushHandler($handler);
             $this->channels[$channel]->pushHandler($this->handler);
+            $this->channels[$channel]->pushHandler($handler);
             foreach ($this->processors as $processor) {
                 $this->channels[$channel]->pushProcessor($processor);
             }
@@ -201,7 +201,7 @@ class LoggerService
     {
         foreach ($this->channels as $channel) {
             foreach ($channel->getHandlers() as $handler) {
-                if ($handler instanceof AbstractProcessingHandler) {
+                if ($handler instanceof FormattableHandlerInterface) {
                     $handler->setFormatter($formatter);
                 }
             }

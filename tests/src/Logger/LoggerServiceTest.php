@@ -7,6 +7,8 @@ use Jtl\Connector\Core\Logger\LoggerService;
 use Jtl\Connector\Core\Test\TestCase;
 use Monolog\Formatter\FormatterInterface;
 use Monolog\Formatter\JsonFormatter;
+use Monolog\Handler\FingersCrossedHandler;
+use Monolog\Handler\FormattableHandlerInterface;
 use Monolog\Handler\RotatingFileHandler;
 use Psr\Log\LogLevel;
 
@@ -60,36 +62,48 @@ class LoggerServiceTest extends TestCase
         $formatterMock = $this->createMock(FormatterInterface::class);
         foreach (['foo', 'bar', 'foobar'] as $channel) {
             $fooLogger = $this->factory->get($channel);
-            $handlers = $fooLogger->getHandlers();
+            $handlers  = $fooLogger->getHandlers();
+            $this->assertArrayHasKey(0, $handlers);
+            $this->assertArrayHasKey(1, $handlers);
+            $this->assertInstanceOf(FormattableHandlerInterface::class, $handlers[0]);
+            $this->assertInstanceOf(FormattableHandlerInterface::class, $handlers[1]);
             $this->assertNotEquals($formatterMock, $handlers[0]->getFormatter());
+            $this->assertNotEquals($formatterMock, $handlers[1]->getFormatter());
         }
         $this->factory->setFormatter($formatterMock);
         foreach (['foo', 'bar', 'foobar'] as $channel) {
             $fooLogger = $this->factory->get($channel);
-            $handlers = $fooLogger->getHandlers();
+            $handlers  = $fooLogger->getHandlers();
+            $this->assertArrayHasKey(0, $handlers);
+            $this->assertArrayHasKey(1, $handlers);
+            $this->assertInstanceOf(FormattableHandlerInterface::class, $handlers[0]);
+            $this->assertInstanceOf(FormattableHandlerInterface::class, $handlers[1]);
             $this->assertEquals($formatterMock, $handlers[0]->getFormatter());
+            $this->assertEquals($formatterMock, $handlers[1]->getFormatter());
         }
     }
 
     public function testGet()
     {
-        $reflection = new \ReflectionClass($this->factory);
+        $reflection   = new \ReflectionClass($this->factory);
         $channelsProp = $reflection->getProperty('channels');
         $channelsProp->setAccessible(true);
         $channels = $channelsProp->getValue($this->factory);
         $this->assertEmpty($channels);
         $fooChannel = $this->factory->get('foo');
-        $channels = $channelsProp->getValue($this->factory);
+        $channels   = $channelsProp->getValue($this->factory);
         $this->assertArrayHasKey('foo', $channels);
         $this->assertEquals($fooChannel, $channels['foo']);
         $handlers = $fooChannel->getHandlers();
         $this->assertArrayHasKey(0, $handlers);
+        $this->assertArrayHasKey(1, $handlers);
         $this->assertInstanceOf(RotatingFileHandler::class, $handlers[0]);
+        $this->assertInstanceOf(FingersCrossedHandler::class, $handlers[1]);
         $this->assertEquals($fooChannel, $this->factory->get('foo'));
 
-        $expectedLogFileName = sprintf('%s/foo.log', $this->logDir);
-        $handlerReflection = new \ReflectionClass($handlers[0]);
-        $filenameProp = $handlerReflection->getProperty('filename');
+        $expectedLogFileName = \sprintf('%s/foo.log', $this->logDir);
+        $handlerReflection   = new \ReflectionClass($handlers[0]);
+        $filenameProp        = $handlerReflection->getProperty('filename');
         $filenameProp->setAccessible(true);
         $this->assertEquals($expectedLogFileName, $filenameProp->getValue($handlers[0]));
     }
