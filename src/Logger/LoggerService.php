@@ -3,6 +3,7 @@
 namespace Jtl\Connector\Core\Logger;
 
 use Jtl\Connector\Core\Exception\LoggerException;
+use Jtl\Connector\Core\Logger\Processor\RequestProcessor;
 use Monolog\Formatter\FormatterInterface;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Handler\FingersCrossedHandler;
@@ -16,7 +17,6 @@ use Monolog\Processor\IntrospectionProcessor;
 use Monolog\Processor\MemoryPeakUsageProcessor;
 use Monolog\Processor\ProcessorInterface;
 use Monolog\Processor\PsrLogMessageProcessor;
-use Monolog\Processor\WebProcessor;
 
 class LoggerService
 {
@@ -86,38 +86,11 @@ class LoggerService
             ->pushProcessor(new IntrospectionProcessor())
             ->pushProcessor(new PsrLogMessageProcessor())
             ->pushProcessor(new MemoryPeakUsageProcessor())
-            ->pushProcessor(new WebProcessor(
-                [
-                    // strip jtlauth value from uri
-                    // string replace is faster as regex
-                    'REQUEST_URI'     => \str_replace(
-                        \sprintf('jtlauth=%s', $_GET['jtlauth'] ?? ''),
-                        'jtlauth=***',
-                        $_SERVER['REQUEST_URI'] ?? ''
-                    ),
-                    // might be useful
-                    'REQUEST_METHOD'  => $_SERVER['REQUEST_METHOD'],
-                    'HTTP_USER_AGENT' => $_SERVER['HTTP_USER_AGENT'],
-                    // useful for SaaS Connectors
-                    'REQUEST_DOMAIN'  => $_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'] ?? '',
-                    // post request size in MB
-                    'REQUEST_SIZE'    => \round(
-                        \strlen(\file_get_contents('php://input')) / 1024 / 1024,
-                        4
-                    ) . ' MB',
-                ],
-                [
-                    'url'           => 'REQUEST_URI',
-                    'http_method'   => 'REQUEST_METHOD',
-                    'user_agent'    => 'HTTP_USER_AGENT',
-                    'domain'        => 'REQUEST_DOMAIN',
-                    'request_size'  => 'REQUEST_SIZE',
-                ]
-            ))
+            ->pushProcessor(new RequestProcessor())
             ->pushProcessor(new HostnameProcessor());
 
-        $fileName = \sprintf('%s/combined.log', $this->logDir);
-        $this->combinedHandler  = new RotatingFileHandler($fileName, $this->maxFiles, Logger::DEBUG);
+        $fileName              = \sprintf('%s/combined.log', $this->logDir);
+        $this->combinedHandler = new RotatingFileHandler($fileName, $this->maxFiles, Logger::DEBUG);
         $this->createHandler();
     }
 
@@ -143,11 +116,11 @@ class LoggerService
     protected function createHandler(): void
     {
         // needed if we change the passthru level
-        if($this->handler instanceof FingersCrossedHandler) {
+        if ($this->handler instanceof FingersCrossedHandler) {
             $this->handler->close();
         }
         $handler = new FingersCrossedHandler($this->combinedHandler, Logger::ERROR, 0, true, true, $this->logLevel);
-        if(!\is_null($this->formatter)) {
+        if (!\is_null($this->formatter)) {
             $handler->setFormatter($this->formatter);
         }
         $this->handler = $handler;
@@ -168,7 +141,7 @@ class LoggerService
      * @param Level|int $logLevel
      * @return HandlerInterface
      */
-    protected function createChannelSpecificHandler(string $channel, Level|int $logLevel): HandlerInterface
+    protected function createChannelSpecificHandler(string $channel, $logLevel): HandlerInterface
     {
         $fileName = \sprintf('%s/%s.log', $this->logDir, $channel);
         $handler  = new RotatingFileHandler($fileName, $this->maxFiles, $logLevel);
