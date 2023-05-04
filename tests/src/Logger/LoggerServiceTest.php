@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Test\Logger;
 
+use Composer\InstalledVersions;
 use Jtl\Connector\Core\Exception\LoggerException;
 use Jtl\Connector\Core\Logger\LoggerService;
 use Jtl\Connector\Core\Test\TestCase;
 use Monolog\Formatter\FormatterInterface;
 use Monolog\Formatter\JsonFormatter;
+use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Handler\FingersCrossedHandler;
 use Monolog\Handler\FormattableHandlerInterface;
 use Monolog\Handler\RotatingFileHandler;
@@ -81,14 +83,24 @@ class LoggerServiceTest extends TestCase
      */
     public function testSetFormatterToExistingLoggers(): void
     {
+        $hasNewLog = false;
+        if (\substr(InstalledVersions::getVersion('psr/log') ?? '', 0, 1) === '3') {
+            $hasNewLog = true;
+        }
+
         $formatterMock = $this->createMock(FormatterInterface::class);
         foreach (['foo', 'bar', 'foobar'] as $channel) {
             $fooLogger = $this->factory->get($channel);
             $handlers  = $fooLogger->getHandlers();
             $this->assertArrayHasKey(0, $handlers);
             $this->assertArrayHasKey(1, $handlers);
-            $this->assertInstanceOf(FormattableHandlerInterface::class, $handlers[0]);
-            $this->assertInstanceOf(FormattableHandlerInterface::class, $handlers[1]);
+            if ($hasNewLog) {
+                $this->assertInstanceOf(FormattableHandlerInterface::class, $handlers[0]);
+                $this->assertInstanceOf(FormattableHandlerInterface::class, $handlers[1]);
+            } else {
+                $this->assertInstanceOf(AbstractProcessingHandler::class, $handlers[0]);
+                $this->assertInstanceOf(FingersCrossedHandler::class, $handlers[1]);
+            }
             $this->assertNotEquals($formatterMock, $handlers[0]->getFormatter());
             $this->assertNotEquals($formatterMock, $handlers[1]->getFormatter());
         }
@@ -98,8 +110,13 @@ class LoggerServiceTest extends TestCase
             $handlers  = $fooLogger->getHandlers();
             $this->assertArrayHasKey(0, $handlers);
             $this->assertArrayHasKey(1, $handlers);
-            $this->assertInstanceOf(FormattableHandlerInterface::class, $handlers[0]);
-            $this->assertInstanceOf(FormattableHandlerInterface::class, $handlers[1]);
+            if ($hasNewLog) {
+                $this->assertInstanceOf(FormattableHandlerInterface::class, $handlers[0]);
+                $this->assertInstanceOf(FormattableHandlerInterface::class, $handlers[1]);
+            } else {
+                $this->assertInstanceOf(AbstractProcessingHandler::class, $handlers[0]);
+                $this->assertInstanceOf(FingersCrossedHandler::class, $handlers[1]);
+            }
             $this->assertEquals($formatterMock, $handlers[0]->getFormatter());
             $this->assertEquals($formatterMock, $handlers[1]->getFormatter());
         }

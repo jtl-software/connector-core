@@ -19,7 +19,7 @@ class RequestProcessor implements ProcessorInterface
         $this->extraFields = [
             'http_method'     => $_SERVER['REQUEST_METHOD'] ?? '',
             'user_agent'      => $_SERVER['HTTP_USER_AGENT'] ?? '',
-            'domain'          => $_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'] ?? '',
+            'domain'          => $_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'] ?? ''
         ];
 
         // strip jtlauth value from uri
@@ -47,20 +47,25 @@ class RequestProcessor implements ProcessorInterface
         }
 
         $this->extraFields['request_size'] = \sprintf('%.1F %s', $requestSize, $unit);
+
+        $hostname = \gethostname();
+        if ($hostname !== false) {
+            $this->extraFields['hostname'] = $hostname;
+        }
     }
 
     /**
      * multiple param and return types are needed because some connectors use an older version of monolog
      * @param array{extra:array<mixed>}|LogRecord $record
+     * @phpstan-param array{extra:array<mixed>} $record
      * @return array{extra:array<mixed>}|LogRecord
      */
-    public function __invoke($record) //@phpstan-ignore-line
+    public function __invoke($record) // @phpstan-ignore-line
     {
         if (\is_array($record)) {
             $record['extra'] = \array_merge($record['extra'], $this->extraFields);
-        } else {
-            /** @var LogRecord $record */
-            $record->extra = \array_merge($record->extra, $this->extraFields); //@phpstan-ignore-line
+        } elseif ($record instanceof LogRecord) { // @phpstan-ignore-line
+            $record->extra = \array_merge($record->extra, $this->extraFields);
         }
 
         return $record;

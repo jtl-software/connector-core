@@ -102,11 +102,6 @@ use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Throwable;
 use TypeError;
 
-/**
- * @phpstan-import-type Record from MonoLogger
- * @phpstan-import-type LevelName from MonoLogger
- * @phpstan-import-type Level from MonoLogger
- */
 class Application
 {
     public const PROTOCOL_VERSION = 7;
@@ -208,7 +203,6 @@ class Application
             ->useAutowiring(true)
             ->build();
 
-        /** @phpstan-var Level|LevelName|LogLevel::* $logLevel */
         $logLevel = Validate::string($this->config->get(ConfigSchema::LOG_LEVEL));
         $this->container->set(__CLASS__, $this);
         $this->eventDispatcher = new EventDispatcher();

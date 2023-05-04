@@ -12,7 +12,6 @@ use Monolog\Handler\FormattableHandlerInterface;
 use Monolog\Handler\HandlerInterface;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger as MonoLogger;
-use Monolog\Processor\HostnameProcessor;
 use Monolog\Processor\IntrospectionProcessor;
 use Monolog\Processor\MemoryPeakUsageProcessor;
 use Monolog\Processor\ProcessorInterface;
@@ -23,11 +22,6 @@ use ReflectionException;
 use RuntimeException;
 use UnexpectedValueException;
 
-/**
- * @phpstan-import-type Record from MonoLogger
- * @phpstan-import-type LevelName from MonoLogger
- * @phpstan-import-type Level from MonoLogger
- */
 class LoggerService
 {
     public const
@@ -46,7 +40,7 @@ class LoggerService
 
     protected FormatterInterface $formatter;
     protected string             $logDir;
-    /** @phpstan-var Level|LevelName|LogLevel::* */
+    /** @var int|string|LogLevel  */
     protected $logLevel;
     protected int                $maxFiles = 2;
     /* Final handler that gets wrapped by FingersCrossedHandler */
@@ -61,7 +55,6 @@ class LoggerService
      * @param int|string $logLevel
      * @param int    $maxFiles
      *
-     * @phpstan-param Level|LevelName|LogLevel::* $logLevel
      * @throws InvalidArgumentException
      * @throws RuntimeException
      * @throws UnexpectedValueException
@@ -76,8 +69,7 @@ class LoggerService
             ->pushProcessor(new IntrospectionProcessor())
             ->pushProcessor(new PsrLogMessageProcessor())
             ->pushProcessor(new MemoryPeakUsageProcessor())
-            ->pushProcessor(new RequestProcessor())
-            ->pushProcessor(new HostnameProcessor());
+            ->pushProcessor(new RequestProcessor());
 
         $fileName              = \sprintf('%s/combined.log', $this->logDir);
         $this->combinedHandler = new RotatingFileHandler($fileName, $this->maxFiles, MonoLogger::DEBUG);
@@ -86,7 +78,6 @@ class LoggerService
 
     /**
      * @param int|string $logLevel
-     * @phpstan-param Level|LevelName|LogLevel::* $logLevel
      * @return void
      * @throws InvalidArgumentException
      * @throws RuntimeException
@@ -117,7 +108,7 @@ class LoggerService
         if (isset($this->handler) && $this->handler instanceof FingersCrossedHandler) {
             $this->handler->close();
         }
-        $logLevel = MonoLogger::toMonologLevel($this->logLevel);
+        $logLevel = MonoLogger::toMonologLevel($this->logLevel); // @phpstan-ignore-line
         $handler  = new FingersCrossedHandler($this->combinedHandler, MonoLogger::ERROR, 0, true, true, $logLevel);
         if (isset($this->formatter)) {
             $handler->setFormatter($this->formatter);
@@ -149,16 +140,16 @@ class LoggerService
      * creates legacy handler for each channel
      *
      * @param string     $channel
-     * @param int|string $logLevel
+     * @param int|string|\Monolog\Level $logLevel
+     * @phpstan-param mixed $logLevel
      *
-     * @phpstan-param Level|LevelName|LogLevel::* $logLevel
      * @return HandlerInterface
      * @throws InvalidArgumentException
      */
     protected function createChannelSpecificHandler(string $channel, $logLevel): HandlerInterface
     {
         $fileName     = \sprintf('%s/%s.log', $this->logDir, $channel);
-        $monologLevel = MonoLogger::toMonologLevel($logLevel);
+        $monologLevel = MonoLogger::toMonologLevel($logLevel); // @phpstan-ignore-line
         $handler      = new RotatingFileHandler($fileName, $this->maxFiles, $monologLevel);
         if (isset($this->formatter)) {
             $handler->setFormatter($this->formatter);
@@ -179,7 +170,7 @@ class LoggerService
             $this->channels[$channel] = new MonoLogger($channel);
         }
 
-        $logLevel = MonoLogger::toMonologLevel($this->logLevel);
+        $logLevel = MonoLogger::toMonologLevel($this->logLevel); // @phpstan-ignore-line
         if (!$this->channels[$channel]->isHandling($logLevel)) {
             $handler = $this->createChannelSpecificHandler($channel, $logLevel);
             $this->channels[$channel]->pushHandler($this->handler);
@@ -211,7 +202,10 @@ class LoggerService
     {
         foreach ($this->channels as $channel) {
             foreach ($channel->getHandlers() as $handler) {
-                if ($handler instanceof FormattableHandlerInterface) {
+                if (
+                    $handler instanceof FormattableHandlerInterface
+                    || \method_exists($handler, 'setFormatter')
+                ) {
                     $handler->setFormatter($formatter);
                 }
             }
