@@ -12,7 +12,6 @@ use Monolog\Handler\FormattableHandlerInterface;
 use Monolog\Handler\HandlerInterface;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Level;
-use Monolog\Logger;
 use Monolog\Logger as MonoLogger;
 use Monolog\Processor\HostnameProcessor;
 use Monolog\Processor\IntrospectionProcessor;
@@ -69,7 +68,7 @@ class LoggerService
             ->pushProcessor(new HostnameProcessor());
 
         $fileName              = \sprintf('%s/combined.log', $this->logDir);
-        $this->combinedHandler = new RotatingFileHandler($fileName, $this->maxFiles, Logger::DEBUG);
+        $this->combinedHandler = new RotatingFileHandler($fileName, $this->maxFiles, MonoLogger::DEBUG);
         $this->createHandler();
     }
 
@@ -98,8 +97,9 @@ class LoggerService
         if ($this->handler instanceof FingersCrossedHandler) {
             $this->handler->close();
         }
-        $handler = new FingersCrossedHandler($this->combinedHandler, Logger::ERROR, 0, true, true, $this->logLevel);
-        if (!\is_null($this->formatter)) {
+        $logLevel = MonoLogger::toMonologLevel($this->logLevel); //@phpstan-ignore-line
+        $handler  = new FingersCrossedHandler($this->combinedHandler, MonoLogger::ERROR, 0, true, true, $logLevel);
+        if (!isset($this->formatter)) {
             $handler->setFormatter($this->formatter);
         }
         $this->handler = $handler;
@@ -128,12 +128,13 @@ class LoggerService
     /**
      * creates legacy handler for each channel
      * @param string $channel
-     * @param Level|int $logLevel
+     * @param int|string|Level $logLevel
      * @return HandlerInterface
      */
     protected function createChannelSpecificHandler(string $channel, $logLevel): HandlerInterface
     {
         $fileName = \sprintf('%s/%s.log', $this->logDir, $channel);
+        $logLevel = MonoLogger::toMonologLevel($logLevel); //@phpstan-ignore-line
         $handler  = new RotatingFileHandler($fileName, $this->maxFiles, $logLevel);
         if (!isset($this->formatter)) {
             $handler->setFormatter($this->formatter);
