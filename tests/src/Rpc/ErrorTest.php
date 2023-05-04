@@ -1,12 +1,17 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Rpc;
 
 use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\AssertionFailedError;
 
 /**
  * Class ErrorTest
+ *
  * @package Jtl\Connector\Core\Test\Rpc
  */
 class ErrorTest extends TestCase
@@ -14,7 +19,7 @@ class ErrorTest extends TestCase
     /**
      * @throws RpcException
      */
-    public function testValidateThrowExceptionWhenCodeIsNull()
+    public function testValidateThrowExceptionWhenCodeIsNull(): void
     {
         $this->expectExceptionObject(RpcException::parseError());
 
@@ -25,28 +30,32 @@ class ErrorTest extends TestCase
     /**
      * @throws RpcException
      */
-    public function testValidateThrowExceptionWhenMessageIsNotSet()
+    public function testValidateThrowExceptionWhenMessageIsNotSet(): void
     {
         $this->expectExceptionObject(RpcException::parseError());
 
         $error = new Error();
         $error->setCode(100);
-        $error->setMessage("");
+        $error->setMessage('');
         $error->setData([]);
         $error->validate();
     }
 
     /**
-     * @throws RpcException
+     * @return void
+     * @throws AssertionFailedError|\SebastianBergmann\RecursionContext\InvalidArgumentException
      */
-    public function testValidateCorrect()
+    public function testValidateCorrect(): void
     {
         $error = new Error();
         $error->setCode(101);
-        $error->setMessage("Error messasge");
+        $error->setMessage('Error messasge');
         $error->setData([]);
-        $return = $error->validate();
-
-        $this->assertNull($return);
+        try {
+            $error->validate();
+        } catch (RpcException $rpcException) {
+            $this->fail($rpcException->getMessage());
+        }
+        $this->assertIsObject($error);
     }
 }

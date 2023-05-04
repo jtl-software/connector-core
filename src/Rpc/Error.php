@@ -1,15 +1,12 @@
 <?php
-/**
- *
- * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Rpc
- */
+
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Rpc;
 
-use Jtl\Connector\Core\Model\AbstractModel;
-use Jtl\Connector\Core\Exception\RpcException;
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\RpcException;
+use RuntimeException;
 
 /**
  * Rpc Error
@@ -27,7 +24,7 @@ class Error
      * @var integer
      * @Serializer\Type("integer")
      */
-    public $code = 0;
+    public int $code = 0;
 
     /**
      * A String providing a short description of the error.
@@ -37,7 +34,7 @@ class Error
      * @var string
      * @Serializer\Type("string")
      */
-    public $message = '';
+    public string $message = '';
 
     /**
      * A Primitive or Structured value that contains additional information
@@ -49,6 +46,37 @@ class Error
      * @var mixed
      */
     public $data = null;
+
+    /**
+     * @param \Throwable  $exception
+     * @param string|null $additionalMessage
+     *
+     * @return string
+     * @throws RuntimeException
+     */
+    public static function createDataFromException(\Throwable $exception, string $additionalMessage = null): string
+    {
+        $lastSlashPos = \strrpos($exception->getFile(), '/');
+        if ($lastSlashPos === false) {
+            throw new \RuntimeException('error while parsing...');
+        }
+
+        $file = \sprintf('...%s', \substr($exception->getFile(), $lastSlashPos));
+
+        $data = \sprintf(
+            '%s (Code: %s) in %s:%s',
+            \get_class($exception),
+            $exception->getCode(),
+            $file,
+            $exception->getLine()
+        );
+
+        if (\is_string($additionalMessage)) {
+            $data .= \sprintf(' - %s', $additionalMessage);
+        }
+
+        return $data;
+    }
 
     /**
      * Getter for $code
@@ -64,33 +92,12 @@ class Error
      * Setter for $code
      *
      * @param int $code
+     *
      * @return Error
      */
     public function setCode(int $code): Error
     {
         $this->code = $code;
-        return $this;
-    }
-
-    /**
-     * Getter for $message
-     *
-     * @return string
-     */
-    public function getMessage(): string
-    {
-        return $this->message;
-    }
-
-    /**
-     * Setter for $message
-     *
-     * @param string $message
-     * @return Error
-     */
-    public function setMessage($message): Error
-    {
-        $this->message = $message;
         return $this;
     }
 
@@ -108,6 +115,7 @@ class Error
      * Setter for $data
      *
      * @param mixed $data
+     *
      * @return Error
      */
     public function setData($data): Error
@@ -121,19 +129,13 @@ class Error
      *
      * @throws RpcException
      */
-    final public function validate()
+    final public function validate(): void
     {
         $isValid = true;
 
-        // A Number that indicates the error type that occurred. This MUST be an
-        // integer.
-        if ($this->getCode() === null) {
-            $isValid = false;
-        }
-
         // A String providing a short description of the error. The message
         // SHOULD be limited to a concise single sentence.
-        if ($this->getMessage() === null || strlen($this->getMessage()) == 0) {
+        if ($this->getMessage() === '') {
             $isValid = false;
         }
 
@@ -143,27 +145,25 @@ class Error
     }
 
     /**
-     * @param \Throwable $exception
-     * @param string|null $additionalMessage
+     * Getter for $message
+     *
      * @return string
      */
-    public static function createDataFromException(\Throwable $exception, string $additionalMessage = null): string
+    public function getMessage(): string
     {
-        $lastSlashPos = strrpos($exception->getFile(), '/');
-        $file = sprintf('...%s', substr($exception->getFile(), $lastSlashPos));
+        return $this->message;
+    }
 
-        $data = sprintf(
-            "%s (Code: %s) in %s:%s",
-            get_class($exception),
-            $exception->getCode(),
-            $file,
-            $exception->getLine()
-        );
-
-        if (is_string($additionalMessage)) {
-            $data .= sprintf(' - %s', $additionalMessage);
-        }
-
-        return $data;
+    /**
+     * Setter for $message
+     *
+     * @param string $message
+     *
+     * @return Error
+     */
+    public function setMessage(string $message): Error
+    {
+        $this->message = $message;
+        return $this;
     }
 }

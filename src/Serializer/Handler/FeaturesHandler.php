@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Serializer\Handler;
 
 use JMS\Serializer\Context;
@@ -10,27 +12,35 @@ use Jtl\Connector\Core\Model\Features;
 
 class FeaturesHandler implements SubscribingHandlerInterface
 {
-    public static function getSubscribingMethods()
+    /**
+     * @return array{array{direction: int, format: string, type: string, method: string}}
+     */
+    public static function getSubscribingMethods(): array
     {
         return [
             [
                 'direction' => GraphNavigatorInterface::DIRECTION_SERIALIZATION,
-                'format' => 'json',
-                'type' => Features::class,
-                'method' => 'serializeFeaturesToJson',
-            ]
+                'format'    => 'json',
+                'type'      => Features::class,
+                'method'    => 'serializeFeaturesToJson',
+            ],
         ];
     }
 
     /**
      * @param JsonSerializationVisitor $visitor
-     * @param Features $features
-     * @param array $type
-     * @param Context $context
-     * @return array
+     * @param Features                 $features
+     * @param array                    $type
+     * @param Context                  $context
+     *
+     * @return array|array[]
      */
-    public function serializeFeaturesToJson(JsonSerializationVisitor $visitor, Features $features, array $type, Context $context)
-    {
+    public function serializeFeaturesToJson( //@phpstan-ignore-line
+        JsonSerializationVisitor $visitor,
+        Features                 $features,
+        array                    $type,
+        Context                  $context
+    ): array {
         return $features->toArray();
     }
 }

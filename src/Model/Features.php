@@ -1,8 +1,6 @@
 <?php
-/**
- * @author Immanuel Klinkenberg <immanuel.klinkenberg@jtl-software.com>
- * @copyright 2010-2018 JTL-Software GmbH
- */
+
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -13,17 +11,18 @@ class Features extends AbstractModel
     /**
      * @var FeatureEntity[]
      */
-    protected $entities = [];
+    protected array $entities = [];
 
     /**
      * @var FeatureFlag[]
      */
-    protected $flags = [];
+    protected array $flags = [];
 
     /**
      * Features constructor.
+     *
      * @param FeatureEntity[] $entities
-     * @param FeatureFlag[] $flags
+     * @param FeatureFlag[]   $flags
      */
     public function __construct(array $entities = [], array $flags = [])
     {
@@ -32,17 +31,34 @@ class Features extends AbstractModel
     }
 
     /**
-     * @param string $name
-     * @return boolean
+     * @param array<string, array{pull?: ?bool, push?: ?bool, delete?: ?bool}>|array{} $entities
+     * @param array<string, bool>|array{}                                              $flags
+     *
+     * @return Features
      */
-    public function hasEntity(string $name): bool
+    public static function create(array $entities = [], array $flags = []): Features
     {
-        return isset($this->entities[$name]);
+        $featureEntities = [];
+        foreach ($entities as $name => $methods) {
+            $pull              = $methods['pull'] ?? false;
+            $push              = $methods['push'] ?? false;
+            $delete            = $methods['delete'] ?? false;
+            $featureEntities[] = new FeatureEntity($name, $pull, $push, $delete);
+        }
+
+        $featureFlags = [];
+        foreach ($flags as $name => $value) {
+            $featureFlags[] = new FeatureFlag($name, $value);
+        }
+
+        return new self($featureEntities, $featureFlags);
     }
 
     /**
      * @param string $name
+     *
      * @return FeatureEntity
+     * @throws FeaturesException
      */
     public function getEntity(string $name): FeatureEntity
     {
@@ -51,6 +67,16 @@ class Features extends AbstractModel
         }
 
         throw FeaturesException::entityNotFound($name);
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return boolean
+     */
+    public function hasEntity(string $name): bool
+    {
+        return isset($this->entities[$name]);
     }
 
     /**
@@ -63,6 +89,7 @@ class Features extends AbstractModel
 
     /**
      * @param FeatureEntity ...$entities
+     *
      * @return Features
      */
     public function setEntities(FeatureEntity ...$entities): Features
@@ -75,6 +102,7 @@ class Features extends AbstractModel
 
     /**
      * @param FeatureEntity $entity
+     *
      * @return Features
      */
     public function setEntity(FeatureEntity $entity): Features
@@ -85,15 +113,7 @@ class Features extends AbstractModel
 
     /**
      * @param string $name
-     * @return boolean
-     */
-    public function hasFlag(string $name): bool
-    {
-        return isset($this->flags[$name]);
-    }
-
-    /**
-     * @param string $name
+     *
      * @return FeatureFlag
      * @throws FeaturesException
      */
@@ -108,6 +128,17 @@ class Features extends AbstractModel
 
     /**
      * @param string $name
+     *
+     * @return boolean
+     */
+    public function hasFlag(string $name): bool
+    {
+        return isset($this->flags[$name]);
+    }
+
+    /**
+     * @param string $name
+     *
      * @return boolean
      */
     public function isFlagActive(string $name): bool
@@ -129,6 +160,7 @@ class Features extends AbstractModel
 
     /**
      * @param FeatureFlag ...$flags
+     *
      * @return Features
      */
     public function setFlags(FeatureFlag ...$flags): Features
@@ -141,6 +173,7 @@ class Features extends AbstractModel
 
     /**
      * @param FeatureFlag $flag
+     *
      * @return Features
      */
     public function setFlag(FeatureFlag $flag): Features
@@ -150,13 +183,13 @@ class Features extends AbstractModel
     }
 
     /**
-     * @return array
+     * @return array{entities: array<string, array{pull: bool, push: bool, delete: bool}>, flags: array<string, bool>}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $data = [
             'entities' => [],
-            'flags' => [],
+            'flags'    => [],
         ];
 
         foreach ($this->entities as $entity) {
@@ -168,28 +201,5 @@ class Features extends AbstractModel
         }
 
         return $data;
-    }
-
-    /**
-     * @param FeatureEntity[] $entities
-     * @param FeatureFlag[] $flags
-     * @return Features
-     */
-    public static function create(array $entities = [], array $flags = []): Features
-    {
-        $featureEntities = [];
-        foreach ($entities as $name => $methods) {
-            $pull = $methods['pull'] ?? false;
-            $push = $methods['push'] ?? false;
-            $delete = $methods['delete'] ?? false;
-            $featureEntities[] = new FeatureEntity($name, $pull, $push, $delete);
-        }
-
-        $featureFlags = [];
-        foreach ($flags as $name => $value) {
-            $featureFlags[] = new FeatureFlag($name, $value);
-        }
-
-        return new self($featureEntities, $featureFlags);
     }
 }

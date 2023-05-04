@@ -1,9 +1,6 @@
 <?php
-/**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
- * @subpackage Product
- */
+
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -12,8 +9,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Tax class model (set in JTL-Wawi ERP)
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -25,27 +22,16 @@ class TaxClass extends AbstractIdentity
      * @Serializer\SerializedName("isDefault")
      * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
      */
-    protected $isDefault = false;
-    
+    protected bool $isDefault = false;
+
     /**
      * @var string Optional tax class name
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
-    protected $name = '';
+    protected string $name = '';
 
-    /**
-     * @param boolean $isDefault Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default.
-     * @return TaxClass
-     */
-    public function setIsDefault(bool $isDefault): TaxClass
-    {
-        $this->isDefault = $isDefault;
-        
-        return $this;
-    }
-    
     /**
      * @return boolean Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default.
      */
@@ -53,23 +39,37 @@ class TaxClass extends AbstractIdentity
     {
         return $this->isDefault;
     }
-    
+
     /**
-     * @param string $name Optional tax class name
+     * @param boolean $isDefault Optional:
+     *                           Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default.
+     *
      * @return TaxClass
      */
-    public function setName(string $name): TaxClass
+    public function setIsDefault(bool $isDefault): TaxClass
     {
-        $this->name = $name;
-        
+        $this->isDefault = $isDefault;
+
         return $this;
     }
-    
+
     /**
      * @return string Optional tax class name
      */
     public function getName(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @param string $name Optional tax class name
+     *
+     * @return TaxClass
+     */
+    public function setName(string $name): TaxClass
+    {
+        $this->name = $name;
+
+        return $this;
     }
 }

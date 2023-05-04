@@ -1,19 +1,19 @@
 <?php
-/**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
- * @subpackage Product
- */
+
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\MustNotBeNullException;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
+use TypeError;
 
 /**
  * Product-ConfigGroup Assignment.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -25,7 +25,7 @@ class ProductConfigGroup extends AbstractModel
      * @Serializer\SerializedName("configGroupId")
      * @Serializer\Accessor(getter="getConfigGroupId",setter="setConfigGroupId")
      */
-    protected $configGroupId = null;
+    protected Identity $configGroupId;
 
     /**
      * @var integer Optional sort number
@@ -33,8 +33,8 @@ class ProductConfigGroup extends AbstractModel
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
-    protected $sort = 0;
-    
+    protected int $sort = 0;
+
     /**
      * Constructor
      */
@@ -44,7 +44,18 @@ class ProductConfigGroup extends AbstractModel
     }
 
     /**
+     * @return Identity Reference to configGroup
+     * @throws MustNotBeNullException
+     * @throws TypeError
+     */
+    public function getConfigGroupId(): Identity
+    {
+        return Validate::checkIdentityAndNotNull($this->configGroupId);
+    }
+
+    /**
      * @param Identity $configGroupId Reference to configGroup
+     *
      * @return ProductConfigGroup
      */
     public function setConfigGroupId(Identity $configGroupId): ProductConfigGroup
@@ -55,29 +66,22 @@ class ProductConfigGroup extends AbstractModel
     }
 
     /**
-     * @return Identity Reference to configGroup
-     */
-    public function getConfigGroupId(): Identity
-    {
-        return $this->configGroupId;
-    }
-
-    /**
-     * @param integer $sort Optional sort number
-     * @return ProductConfigGroup
-     */
-    public function setSort(int $sort): ProductConfigGroup
-    {
-        $this->sort = $sort;
-        
-        return $this;
-    }
-    
-    /**
      * @return integer Optional sort number
      */
     public function getSort(): int
     {
         return $this->sort;
+    }
+
+    /**
+     * @param integer $sort Optional sort number
+     *
+     * @return ProductConfigGroup
+     */
+    public function setSort(int $sort): ProductConfigGroup
+    {
+        $this->sort = $sort;
+
+        return $this;
     }
 }

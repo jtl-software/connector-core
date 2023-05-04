@@ -1,17 +1,14 @@
 <?php
-/**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
- * @subpackage Product
- */
+
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -23,27 +20,16 @@ class ProductMediaFileAttrI18n extends AbstractI18n
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
-    protected $name = '';
-    
+    protected string $name = '';
+
     /**
      * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("value")
      * @Serializer\Accessor(getter="getValue",setter="setValue")
      */
-    protected $value = '';
+    protected string $value = '';
 
-    /**
-     * @param string $name
-     * @return ProductMediaFileAttrI18n
-     */
-    public function setName(string $name): ProductMediaFileAttrI18n
-    {
-        $this->name = $name;
-        
-        return $this;
-    }
-    
     /**
      * @return string
      */
@@ -51,23 +37,36 @@ class ProductMediaFileAttrI18n extends AbstractI18n
     {
         return $this->name;
     }
-    
+
     /**
-     * @param string $value
+     * @param string $name
+     *
      * @return ProductMediaFileAttrI18n
      */
-    public function setValue(string $value): ProductMediaFileAttrI18n
+    public function setName(string $name): ProductMediaFileAttrI18n
     {
-        $this->value = $value;
-        
+        $this->name = $name;
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
     public function getValue(): string
     {
         return $this->value;
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return ProductMediaFileAttrI18n
+     */
+    public function setValue(string $value): ProductMediaFileAttrI18n
+    {
+        $this->value = $value;
+
+        return $this;
     }
 }

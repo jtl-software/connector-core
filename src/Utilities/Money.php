@@ -1,30 +1,64 @@
 <?php
-/**
- * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Utilities
- */
+
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Utilities;
 
 class Money
 {
-    private function __construct()
+    /**
+     * @param $net
+     * @param $vat
+     *
+     * @return float
+     * @deprecated since 5.2 use Money::gross() instead.
+     */
+    //phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+    public static function AsGross($net, $vat): float // @phpstan-ignore-line
     {
+        return self::gross($net, $vat);
     }
 
-    public static function AsGross($net, $vat)
+    /**
+     * @param numeric|numeric-string $net
+     * @param numeric|numeric-string $vat
+     *
+     * @return float
+     */
+    public static function gross($net, $vat): float
     {
-        $vat = doubleval($vat);
+        $vat = (float)$vat;
+        $net = (float)$net;
         if ($vat <= 0) {
             return $net;
         }
-        
+
         return $net * ($vat / 100 + 1);
     }
 
-    public static function AsNet($gross, $vat)
+    /**
+     * @param $gross
+     * @param $vat
+     *
+     * @return float
+     * @deprecated since 5.2 use Money::net() instead.
+     */
+    //phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+    public static function AsNet($gross, $vat): float // @phpstan-ignore-line
     {
-        $vat = doubleval($vat);
+        return self::net($gross, $vat);
+    }
+
+    /**
+     * @param numeric|numeric-string $gross
+     * @param numeric|numeric-string $vat
+     *
+     * @return float
+     */
+    public static function net($gross, $vat): float
+    {
+        $vat   = (float)$vat;
+        $gross = (float)$gross;
         if ($vat <= 0) {
             return $gross;
         }

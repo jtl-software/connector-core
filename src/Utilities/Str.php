@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Utilities;
 
 use Jawira\CaseConverter\CaseConverterException;
@@ -8,6 +11,7 @@ class Str
 {
     /**
      * @param string $string
+     *
      * @return string
      * @throws CaseConverterException
      */
@@ -18,6 +22,7 @@ class Str
 
     /**
      * @param string $string
+     *
      * @return string
      * @throws CaseConverterException
      */
@@ -28,6 +33,7 @@ class Str
 
     /**
      * @param string $string
+     *
      * @return string
      * @throws CaseConverterException
      */

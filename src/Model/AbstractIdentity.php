@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
@@ -11,27 +14,17 @@ abstract class AbstractIdentity extends AbstractModel implements IdentityInterfa
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
-    protected $id = null;
+    protected Identity $id;
 
     /**
      * AbstractIdentity constructor.
+     *
      * @param string $endpoint
-     * @param int $host
+     * @param int    $host
      */
     public function __construct(string $endpoint = '', int $host = 0)
     {
         $this->id = new Identity($endpoint, $host);
-    }
-
-    /**
-     * @param Identity $id Unique id
-     * @return self
-     */
-    public function setId(Identity $id): self
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     /**
@@ -40,5 +33,17 @@ abstract class AbstractIdentity extends AbstractModel implements IdentityInterfa
     public function getId(): Identity
     {
         return $this->id;
+    }
+
+    /**
+     * @param Identity $id Unique id
+     *
+     * @return self
+     */
+    public function setId(Identity $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 }

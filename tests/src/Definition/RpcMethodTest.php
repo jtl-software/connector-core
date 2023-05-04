@@ -1,11 +1,17 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Definition;
 
 use Jtl\Connector\Core\Definition\RpcMethod;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\ExpectationFailedException;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class RpcMethodTest
+ *
  * @package Jtl\Connector\Core\Test\Definition
  */
 class RpcMethodTest extends TestCase
@@ -13,28 +19,31 @@ class RpcMethodTest extends TestCase
     /**
      * @dataProvider isMethodDataProvider
      *
-     * @param $methodName
-     * @param bool $shouldBeMethod
+     * @param string $methodName
+     * @param bool   $shouldBeMethod
+     *
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
-    public function testIsMethod($methodName, bool $shouldBeMethod)
+    public function testIsMethod(string $methodName, bool $shouldBeMethod): void
     {
         $isMethodResult = RpcMethod::isMethod($methodName);
         $this->assertSame($shouldBeMethod, $isMethodResult);
     }
 
     /**
-     * @return array
+     * @return array<int, array{0: string, 1: bool}>
      * @throws \ReflectionException
      */
     public function isMethodDataProvider(): array
     {
         $definedMethods = $this->getCorrectConstantsTestCases(RpcMethod::class);
 
-        $customTests = [];
+        $customTests   = [];
         $customTests[] = ['""', false];
         $customTests[] = [' ', false];
-        $customTests[] = [false, false];
-        $customTests[] = [true, false];
+        $customTests[] = ['false', false];
+        $customTests[] = ['true', false];
         $customTests[] = ['.', false];
         $customTests[] = [' connector.pull    ', true];
         $customTests[] = ['...', false];
@@ -42,25 +51,28 @@ class RpcMethodTest extends TestCase
         $customTests[] = ['method\.name', false];
         $customTests[] = ['very.long.method.name', true];
 
-        return array_merge_recursive($definedMethods, $customTests);
+        return \array_merge_recursive($definedMethods, $customTests);
     }
 
     /**
      * @dataProvider mapMethodDataProvider
      *
-     * @param $methodName
-     * @param $expectedMapping
+     * @param string $methodName
+     * @param string $expectedMapping
+     *
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
-    public function testMapMethod(string $methodName, string $expectedMapping)
+    public function testMapMethod(string $methodName, string $expectedMapping): void
     {
         $mappedName = RpcMethod::mapMethod($methodName);
         $this->assertSame($expectedMapping, $mappedName);
     }
 
     /**
-     * @return array
+     * @return array<int, array<int, string>>
      */
-    public function mapMethodDataProvider()
+    public function mapMethodDataProvider(): array
     {
         return [
             [RpcMethod::CLEAR, 'core.connector.clear'],

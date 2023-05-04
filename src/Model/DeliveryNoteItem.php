@@ -1,17 +1,14 @@
 <?php
-/**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
- * @subpackage Product
- */
+
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -23,7 +20,7 @@ class DeliveryNoteItem extends AbstractIdentity
      * @Serializer\SerializedName("customerOrderItemId")
      * @Serializer\Accessor(getter="getCustomerOrderItemId",setter="setCustomerOrderItemId")
      */
-    protected $customerOrderItemId = null;
+    protected Identity $customerOrderItemId;
 
     /**
      * @var Identity Reference to product
@@ -31,7 +28,7 @@ class DeliveryNoteItem extends AbstractIdentity
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
-    protected $productId = null;
+    protected Identity $productId;
 
     /**
      * @var double
@@ -39,39 +36,29 @@ class DeliveryNoteItem extends AbstractIdentity
      * @Serializer\SerializedName("quantity")
      * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
      */
-    protected $quantity = 0.0;
-    
+    protected float $quantity = 0.0;
+
     /**
      * @var DeliveryNoteItemInfo[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\DeliveryNoteItemInfo>")
      * @Serializer\SerializedName("info")
      * @Serializer\AccessType("reflection")
      */
-    protected $info = [];
+    protected array $info = [];
 
     /**
      * Constructor.
+     *
      * @param string $endpoint
-     * @param int $host
+     * @param int    $host
      */
     public function __construct(string $endpoint = '', int $host = 0)
     {
         parent::__construct($endpoint, $host);
-        $this->productId = new Identity();
+        $this->productId           = new Identity();
         $this->customerOrderItemId = new Identity();
     }
-    
-    /**
-     * @param Identity $customerOrderItemId
-     * @return DeliveryNoteItem
-     */
-    public function setCustomerOrderItemId(Identity $customerOrderItemId): DeliveryNoteItem
-    {
-        $this->customerOrderItemId = $customerOrderItemId;
-        
-        return $this;
-    }
-    
+
     /**
      * @return Identity
      */
@@ -81,16 +68,17 @@ class DeliveryNoteItem extends AbstractIdentity
     }
 
     /**
-     * @param Identity $productId Reference to product
+     * @param Identity $customerOrderItemId
+     *
      * @return DeliveryNoteItem
      */
-    public function setProductId(Identity $productId): DeliveryNoteItem
+    public function setCustomerOrderItemId(Identity $customerOrderItemId): DeliveryNoteItem
     {
-        $this->productId = $productId;
-        
+        $this->customerOrderItemId = $customerOrderItemId;
+
         return $this;
     }
-    
+
     /**
      * @return Identity Reference to product
      */
@@ -100,16 +88,17 @@ class DeliveryNoteItem extends AbstractIdentity
     }
 
     /**
-     * @param double $quantity
+     * @param Identity $productId Reference to product
+     *
      * @return DeliveryNoteItem
      */
-    public function setQuantity(float $quantity): DeliveryNoteItem
+    public function setProductId(Identity $productId): DeliveryNoteItem
     {
-        $this->quantity = $quantity;
-        
+        $this->productId = $productId;
+
         return $this;
     }
-    
+
     /**
      * @return double
      */
@@ -117,29 +106,31 @@ class DeliveryNoteItem extends AbstractIdentity
     {
         return $this->quantity;
     }
-    
+
+    /**
+     * @param double $quantity
+     *
+     * @return DeliveryNoteItem
+     */
+    public function setQuantity(float $quantity): DeliveryNoteItem
+    {
+        $this->quantity = $quantity;
+
+        return $this;
+    }
+
     /**
      * @param DeliveryNoteItemInfo $info
+     *
      * @return DeliveryNoteItem
      */
     public function addInfo(DeliveryNoteItemInfo $info): DeliveryNoteItem
     {
         $this->info[] = $info;
-        
+
         return $this;
     }
 
-    /**
-     * @param DeliveryNoteItemInfo ...$info
-     * @return DeliveryNoteItem
-     */
-    public function setInfo(DeliveryNoteItemInfo ...$info): DeliveryNoteItem
-    {
-        $this->info = $info;
-        
-        return $this;
-    }
-    
     /**
      * @return DeliveryNoteItemInfo[]
      */
@@ -147,14 +138,26 @@ class DeliveryNoteItem extends AbstractIdentity
     {
         return $this->info;
     }
-    
+
+    /**
+     * @param DeliveryNoteItemInfo ...$info
+     *
+     * @return DeliveryNoteItem
+     */
+    public function setInfo(DeliveryNoteItemInfo ...$info): DeliveryNoteItem
+    {
+        $this->info = $info;
+
+        return $this;
+    }
+
     /**
      * @return DeliveryNoteItem
      */
     public function clearInfo(): DeliveryNoteItem
     {
         $this->info = [];
-        
+
         return $this;
     }
 }

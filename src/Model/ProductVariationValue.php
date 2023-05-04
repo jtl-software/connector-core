@@ -1,9 +1,6 @@
 <?php
-/**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
- * @subpackage Product
- */
+
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -12,8 +9,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Product variation value model. Each product defines its own variations and variation values.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -25,75 +22,64 @@ class ProductVariationValue extends AbstractIdentity
      * @Serializer\SerializedName("ean")
      * @Serializer\Accessor(getter="getEan",setter="setEan")
      */
-    protected $ean = '';
-    
+    protected string $ean = '';
+
     /**
      * @var double Optional variation extra weight
      * @Serializer\Type("double")
      * @Serializer\SerializedName("extraWeight")
      * @Serializer\Accessor(getter="getExtraWeight",setter="setExtraWeight")
      */
-    protected $extraWeight = 0.0;
-    
+    protected float $extraWeight = 0.0;
+
     /**
      * @var string Optional Stock Keeping Unit
      * @Serializer\Type("string")
      * @Serializer\SerializedName("sku")
      * @Serializer\Accessor(getter="getSku",setter="setSku")
      */
-    protected $sku = '';
-    
+    protected string $sku = '';
+
     /**
      * @var integer Optional sort number
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
-    protected $sort = 0;
-    
+    protected int $sort = 0;
+
     /**
      * @var double Optional stock level
      * @Serializer\Type("double")
      * @Serializer\SerializedName("stockLevel")
      * @Serializer\Accessor(getter="getStockLevel",setter="setStockLevel")
      */
-    protected $stockLevel = 0.0;
-    
+    protected float $stockLevel = 0.0;
+
     /**
      * @var ProductVariationValueExtraCharge[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductVariationValueExtraCharge>")
      * @Serializer\SerializedName("extraCharges")
      * @Serializer\AccessType("reflection")
      */
-    protected $extraCharges = [];
-    
+    protected array $extraCharges = [];
+
     /**
      * @var ProductVariationValueI18n[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductVariationValueI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = [];
-    
+    protected array $i18ns = [];
+
     /**
      * @var ProductVariationValueInvisibility[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductVariationValueInvisibility>")
      * @Serializer\SerializedName("invisibilities")
      * @Serializer\AccessType("reflection")
      */
-    protected $invisibilities = [];
+    protected array $invisibilities = [];
 
-    /**
-     * @param string $ean
-     * @return ProductVariationValue
-     */
-    public function setEan(string $ean): ProductVariationValue
-    {
-        $this->ean = $ean;
-        
-        return $this;
-    }
-    
     /**
      * @return string
      */
@@ -101,18 +87,19 @@ class ProductVariationValue extends AbstractIdentity
     {
         return $this->ean;
     }
-    
+
     /**
-     * @param double $extraWeight Optional variation extra weight
+     * @param string $ean
+     *
      * @return ProductVariationValue
      */
-    public function setExtraWeight(float $extraWeight): ProductVariationValue
+    public function setEan(string $ean): ProductVariationValue
     {
-        $this->extraWeight = $extraWeight;
-        
+        $this->ean = $ean;
+
         return $this;
     }
-    
+
     /**
      * @return double Optional variation extra weight
      */
@@ -120,18 +107,19 @@ class ProductVariationValue extends AbstractIdentity
     {
         return $this->extraWeight;
     }
-    
+
     /**
-     * @param string $sku Optional Stock Keeping Unit
+     * @param double $extraWeight Optional variation extra weight
+     *
      * @return ProductVariationValue
      */
-    public function setSku(string $sku): ProductVariationValue
+    public function setExtraWeight(float $extraWeight): ProductVariationValue
     {
-        $this->sku = $sku;
-        
+        $this->extraWeight = $extraWeight;
+
         return $this;
     }
-    
+
     /**
      * @return string Optional Stock Keeping Unit
      */
@@ -139,18 +127,19 @@ class ProductVariationValue extends AbstractIdentity
     {
         return $this->sku;
     }
-    
+
     /**
-     * @param integer $sort Optional sort number
+     * @param string $sku Optional Stock Keeping Unit
+     *
      * @return ProductVariationValue
      */
-    public function setSort(int $sort): ProductVariationValue
+    public function setSku(string $sku): ProductVariationValue
     {
-        $this->sort = $sort;
-        
+        $this->sku = $sku;
+
         return $this;
     }
-    
+
     /**
      * @return integer Optional sort number
      */
@@ -158,18 +147,19 @@ class ProductVariationValue extends AbstractIdentity
     {
         return $this->sort;
     }
-    
+
     /**
-     * @param double $stockLevel Optional stock level
+     * @param integer $sort Optional sort number
+     *
      * @return ProductVariationValue
      */
-    public function setStockLevel(float $stockLevel): ProductVariationValue
+    public function setSort(int $sort): ProductVariationValue
     {
-        $this->stockLevel = $stockLevel;
-        
+        $this->sort = $sort;
+
         return $this;
     }
-    
+
     /**
      * @return double Optional stock level
      */
@@ -177,30 +167,32 @@ class ProductVariationValue extends AbstractIdentity
     {
         return $this->stockLevel;
     }
-    
+
+    /**
+     * @param double $stockLevel Optional stock level
+     *
+     * @return ProductVariationValue
+     */
+    public function setStockLevel(float $stockLevel): ProductVariationValue
+    {
+        $this->stockLevel = $stockLevel;
+
+        return $this;
+    }
+
     /**
      * @param ProductVariationValueExtraCharge $extraCharge
+     *
      * @return ProductVariationValue
      */
     public function addExtraCharge(
         ProductVariationValueExtraCharge $extraCharge
     ): ProductVariationValue {
         $this->extraCharges[] = $extraCharge;
-        
+
         return $this;
     }
 
-    /**
-     * @param ProductVariationValueExtraCharge ...$extraCharges
-     * @return ProductVariationValue
-     */
-    public function setExtraCharges(ProductVariationValueExtraCharge ...$extraCharges): ProductVariationValue
-    {
-        $this->extraCharges = $extraCharges;
-        
-        return $this;
-    }
-    
     /**
      * @return ProductVariationValueExtraCharge[]
      */
@@ -208,39 +200,41 @@ class ProductVariationValue extends AbstractIdentity
     {
         return $this->extraCharges;
     }
-    
+
+    /**
+     * @param ProductVariationValueExtraCharge ...$extraCharges
+     *
+     * @return ProductVariationValue
+     */
+    public function setExtraCharges(ProductVariationValueExtraCharge ...$extraCharges): ProductVariationValue
+    {
+        $this->extraCharges = $extraCharges;
+
+        return $this;
+    }
+
     /**
      * @return ProductVariationValue
      */
     public function clearExtraCharges(): ProductVariationValue
     {
         $this->extraCharges = [];
-        
+
         return $this;
     }
-    
+
     /**
      * @param ProductVariationValueI18n $i18n
+     *
      * @return ProductVariationValue
      */
     public function addI18n(ProductVariationValueI18n $i18n): ProductVariationValue
     {
         $this->i18ns[] = $i18n;
-        
+
         return $this;
     }
 
-    /**
-     * @param ProductVariationValueI18n ...$i18ns
-     * @return ProductVariationValue
-     */
-    public function setI18ns(ProductVariationValueI18n ...$i18ns): ProductVariationValue
-    {
-        $this->i18ns = $i18ns;
-        
-        return $this;
-    }
-    
     /**
      * @return ProductVariationValueI18n[]
      */
@@ -248,40 +242,42 @@ class ProductVariationValue extends AbstractIdentity
     {
         return $this->i18ns;
     }
-    
+
+    /**
+     * @param ProductVariationValueI18n ...$i18ns
+     *
+     * @return ProductVariationValue
+     */
+    public function setI18ns(ProductVariationValueI18n ...$i18ns): ProductVariationValue
+    {
+        $this->i18ns = $i18ns;
+
+        return $this;
+    }
+
     /**
      * @return ProductVariationValue
      */
     public function clearI18ns(): ProductVariationValue
     {
         $this->i18ns = [];
-        
+
         return $this;
     }
-    
+
     /**
      * @param ProductVariationValueInvisibility $invisibility
+     *
      * @return ProductVariationValue
      */
     public function addInvisibility(
         ProductVariationValueInvisibility $invisibility
     ): ProductVariationValue {
         $this->invisibilities[] = $invisibility;
-        
+
         return $this;
     }
 
-    /**
-     * @param ProductVariationValueInvisibility $invisibilities
-     * @return ProductVariationValue
-     */
-    public function setInvisibilities(ProductVariationValueInvisibility $invisibilities): ProductVariationValue
-    {
-        $this->invisibilities = $invisibilities;
-        
-        return $this;
-    }
-    
     /**
      * @return ProductVariationValueInvisibility[]
      */
@@ -289,14 +285,26 @@ class ProductVariationValue extends AbstractIdentity
     {
         return $this->invisibilities;
     }
-    
+
+    /**
+     * @param ProductVariationValueInvisibility[] $invisibilities
+     *
+     * @return ProductVariationValue
+     */
+    public function setInvisibilities(array $invisibilities): ProductVariationValue
+    {
+        $this->invisibilities = $invisibilities;
+
+        return $this;
+    }
+
     /**
      * @return ProductVariationValue
      */
     public function clearInvisibilities(): ProductVariationValue
     {
         $this->invisibilities = [];
-        
+
         return $this;
     }
 }

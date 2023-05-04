@@ -1,8 +1,6 @@
 <?php
-/**
- * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Session
- */
+
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Session;
 
@@ -10,28 +8,39 @@ use Jtl\Connector\Core\Exception\SessionException;
 
 class SessionHelper
 {
-    /**
-     * @var string
-     */
-    protected $namespace;
+    protected string $namespace;
 
     /**
      * SessionHelper constructor.
+     *
      * @param string $namespace
+     *
      * @throws SessionException
      */
-    public function __construct(string $namespace = "default")
+    public function __construct(string $namespace = 'default')
     {
-        if ($namespace === "") {
-            throw new SessionException("Session namespace must be a non-empty string.");
+        if ($namespace === '') {
+            throw new SessionException('Session namespace must be a non-empty string.');
         }
 
         $this->namespace = $namespace;
     }
 
     /**
+     * @param object $object
+     *
+     * @return self
+     * @throws SessionException
+     */
+    public static function createByObjectClass(object $object): self
+    {
+        return new self(\get_class($object));
+    }
+
+    /**
      * @param string $name
-     * @param mixed $default
+     * @param mixed  $default
+     *
      * @return mixed
      */
     public function get(string $name, $default = null)
@@ -41,6 +50,66 @@ class SessionHelper
 
     /**
      * @param string $name
+     *
+     * @return mixed|null
+     * @throws SessionException
+     */
+    public function & __get(string $name)
+    {
+        if ($name === '') {
+            throw new SessionException("The '{$name}' key must be a non-empty string");
+        }
+
+        $value = &$_SESSION[$this->namespace][$name] ?? null;
+
+        return $value;
+    }
+
+    /**
+     * @param string $name
+     * @param mixed  $value
+     *
+     * @throws SessionException
+     */
+    public function __set(string $name, $value): void
+    {
+        if ($name === '') {
+            throw new SessionException("The '{$name}' key must be a non-empty string");
+        }
+        $this->set($name, $value);
+    }
+
+    /**
+     * @param string $name
+     * @param mixed  $value
+     *
+     * @return $this
+     */
+    public function set(string $name, $value): self
+    {
+        $_SESSION[$this->namespace][$name] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return bool
+     * @throws SessionException
+     */
+    public function __isset(string $name)
+    {
+        if ($name === '') {
+            throw new SessionException("The '{$name}' key must be a non-empty string");
+        }
+
+        return $this->has($name);
+    }
+
+    /**
+     * @param string $name
+     *
      * @return boolean
      */
     public function has(string $name): bool
@@ -50,76 +119,12 @@ class SessionHelper
 
     /**
      * @param string $name
-     * @param $value
-     * @return $this
-     */
-    public function set(string $name, $value): self
-    {
-        $_SESSION[$this->namespace][$name] = $value;
-        return $this;
-    }
-
-    /**
-     * @param string $name
-     * @return SessionHelper
-     */
-    public function unset(string $name): self
-    {
-        if ($this->has($name)) {
-            unset($_SESSION[$this->namespace][$name]);
-        }
-        return $this;
-    }
-
-    /**
-     * @param $name
-     * @param $value
-     * @throws SessionException
-     */
-    public function __set(string $name, $value)
-    {
-        if ($name === "") {
-            throw new SessionException("The '{$name}' key must be a non-empty string");
-        }
-        $this->set($name, $value);
-    }
-
-    /**
-     * @param $name
-     * @return mixed|null
-     * @throws SessionException
-     */
-    public function & __get(string $name)
-    {
-        if ($name === "") {
-            throw new SessionException("The '{$name}' key must be a non-empty string");
-        }
-
-        $value = &$_SESSION[$this->namespace][$name] ?? null;
-        return $value;
-    }
-
-    /**
-     * @param $name
-     * @return bool
-     * @throws SessionException
-     */
-    public function __isset(string $name)
-    {
-        if ($name === "") {
-            throw new SessionException("The '{$name}' key must be a non-empty string");
-        }
-
-        return $this->has($name);
-    }
-
-    /**
-     * @param $name
+     *
      * @throws SessionException
      */
     public function __unset(string $name)
     {
-        if ($name === "") {
+        if ($name === '') {
             throw new SessionException("The '{$name}' key must be a non-empty string");
         }
 
@@ -127,12 +132,16 @@ class SessionHelper
     }
 
     /**
-     * @param object $object
-     * @return static
-     * @throws SessionException
+     * @param string $name
+     *
+     * @return SessionHelper
      */
-    public static function createByObjectClass(object $object): self
+    public function unset(string $name): self
     {
-        return new self(get_class($object));
+        if ($this->has($name)) {
+            unset($_SESSION[$this->namespace][$name]);
+        }
+
+        return $this;
     }
 }

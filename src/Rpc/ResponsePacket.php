@@ -1,13 +1,11 @@
 <?php
-/**
- *
- * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Rpc
- */
+
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Rpc;
 
-use Jtl\Connector\Core\Exception\RpcException;
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\RpcException;
 
 /**
  * Rpc Response Packet
@@ -35,43 +33,7 @@ class ResponsePacket extends Packet
      * @var Error|null
      * @Serializer\Type("Jtl\Connector\Core\Rpc\Error")
      */
-    protected $error = null;
-
-    /**
-     * @return mixed
-     */
-    public function getResult()
-    {
-        return $this->result;
-    }
-
-    /**
-     * @param mixed $result
-     * @return ResponsePacket
-     */
-    public function setResult($result): ResponsePacket
-    {
-        $this->result = $result;
-        return $this;
-    }
-
-    /**
-     * @return Error
-     */
-    public function getError(): ?Error
-    {
-        return $this->error;
-    }
-
-    /**
-     * @param Error $error
-     * @return ResponsePacket
-     */
-    public function setError(Error $error): ResponsePacket
-    {
-        $this->error = $error;
-        return $this;
-    }
+    protected ?Error $error = null;
 
     /**
      * @return boolean
@@ -82,7 +44,7 @@ class ResponsePacket extends Packet
         $isValid = true;
 
         // JSON-RPC protocol
-        if ($this->getJtlrpc() === null || $this->getJtlrpc() != "2.0") {
+        if ($this->getJtlrpc() !== '2.0') {
             $isValid = false;
         }
 
@@ -97,17 +59,56 @@ class ResponsePacket extends Packet
             $isValid = false;
         }
 
-        if ($this->getError() !== null) {
-            $error = $this->getError();
+        if (($error = $this->getError()) !== null) {
             $error->validate();
         }
 
         // An identifier established by the Client that MUST contain a String,
         // Number, or NULL value if included
-        if ($this->getId() === null || strlen($this->getId()) == 0) {
+        if ($this->getId() === '') {
             $isValid = false;
         }
 
         return $isValid;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResult()
+    {
+        return $this->result;
+    }
+
+    /**
+     * @param mixed $result
+     *
+     * @return ResponsePacket
+     */
+    public function setResult($result): ResponsePacket
+    {
+        $this->result = $result;
+
+        return $this;
+    }
+
+    /**
+     * @return Error
+     */
+    public function getError(): ?Error
+    {
+        return $this->error;
+    }
+
+    /**
+     * @param Error $error
+     *
+     * @return ResponsePacket
+     */
+    public function setError(Error $error): ResponsePacket
+    {
+        $this->error = $error;
+
+        return $this;
     }
 }

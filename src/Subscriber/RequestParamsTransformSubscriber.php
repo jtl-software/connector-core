@@ -1,50 +1,76 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Subscriber;
 
+use InvalidArgumentException;
 use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Definition\Event;
 use Jtl\Connector\Core\Event\RpcEvent;
+use Jtl\Connector\Core\Model\Identity;
+use Jtl\Connector\Core\Model\ProductStockLevel;
+use RuntimeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Class RequestParamsTransformSubscriber
+ *
  * @package Jtl\Connector\Core\Subscriber
  */
 class RequestParamsTransformSubscriber implements EventSubscriberInterface
 {
     /**
-     * @return array
+     * @inheritDoc
      * @throws \Exception
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             Event::createRpcEventName(Event::BEFORE) => [
-                ['transformRequestParams', 10000]
-            ]
+                [
+                    'transformRequestParams',
+                    10000,
+                ],
+            ],
         ];
     }
 
     /**
      * @param RpcEvent $event
+     *
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
      */
-    public function transformRequestParams(RpcEvent $event)
+    public function transformRequestParams(RpcEvent $event): void
     {
         if ($event->getAction() === Action::PUSH) {
-            $data = $event->getData();
+            $eventData = $event->getData();
+            if (!\is_array($eventData)) {
+                throw new \RuntimeException('$data must be type array.');
+            }
 
             switch ($event->getController()) {
                 case Controller::PRODUCT:
-                    $data = $this->transformProductData($data);
+                    /** @var array<array<string, mixed>> $eventData */
+                    $data = $this->transformProductData($eventData);
                     break;
                 case Controller::PRODUCT_PRICE:
-                    $data = $this->transformProductPriceData($data);
+                    /** @var array<array<string, mixed>> $eventData */
+                    $data = $this->transformProductPriceData($eventData);
                     break;
                 case Controller::PRODUCT_STOCK_LEVEL:
-                    $data = $this->transformProductStockLevelData($data);
+                    /** @var array{
+                     *     productId: array{0: string, 1: int}|ProductStockLevel|null,
+                     *     sku: ?string,
+                     *     stockLevel: ?float
+                     * } $eventData
+                     */
+                    $data = $this->transformProductStockLevelData($eventData);
                     break;
+                default:
+                    $data = $eventData;
             }
 
             $event->setData($data);
@@ -52,18 +78,30 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param array $products
-     * @return array
+     * @param array<int, array<string, mixed>> $products
+     *
+     * @return array<int, array<string, mixed>>
+     * @throws RuntimeException
      */
     public function transformProductData(array $products): array
     {
         foreach ($products as $i => $product) {
-            if (isset($product['stockLevel']['stockLevel'])) {
+            /** @var array<string, mixed> $product */
+            if (
+                \array_key_exists('stockLevel', $product)
+                && \is_array($product['stockLevel'])
+                && isset($product['stockLevel']['stockLevel'])
+                && \array_key_exists('stockLevel', $product['stockLevel'])
+            ) {
                 $products[$i]['stockLevel'] = $product['stockLevel']['stockLevel'];
             }
 
-            if (isset($product['prices']) && is_array($product['prices'])) {
+            if (isset($product['prices']) && \is_array($product['prices'])) {
+                if (!isset($products[$i]['prices'])) {
+                    throw new \RuntimeException('unexpected array structure.');
+                }
                 foreach ($products[$i]['prices'] as $j => $productPrice) {
+                    /** @var array<string, mixed> $productPrice */
                     $products[$i]['prices'][$j] = self::sortProductPriceItems($productPrice);
                 }
             }
@@ -73,21 +111,44 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param array $productPrices
-     * @return array
+     * @param array<string, mixed> $productPrice
+     *
+     * @return array<string, mixed>
+     */
+    protected static function sortProductPriceItems(array $productPrice): array
+    {
+        if (isset($productPrice['items'])) {
+            /** @var array<string, numeric> $items */
+            $items = $productPrice['items'];
+            \usort($items, static function ($a, $b) {
+                return ($a['quantity'] ?? 0) - ($b['quantity'] ?? 0);
+            });
+            $productPrice['items'] = $items;
+        }
+
+        return $productPrice;
+    }
+
+    /**
+     * @param array<array<string, mixed>> $productPrices
+     *
+     * @return array<int, mixed>
+     * @throws InvalidArgumentException
      */
     public function transformProductPriceData(array $productPrices): array
     {
         $products = [];
 
         foreach ($productPrices as $productPrice) {
-            $hostId = self::extractHostId($productPrice['productId']);
+            /** @var array{string, int} $productId */
+            $productId = $productPrice['productId'];
+            $hostId    = self::extractHostId($productId);
 
             if (!isset($products[$hostId])) {
                 $product = [
-                    'id' => $productPrice['productId'] ?? null,
-                    'sku' => $productPrice['sku'] ?? '',
-                    'vat' => $productPrice['vat'] ?? 0.,
+                    'id'         => $productPrice['productId'] ?? null,
+                    'sku'        => $productPrice['sku'] ?? '',
+                    'vat'        => $productPrice['vat'] ?? 0.,
                     'taxClassId' => $productPrice['taxClassId'] ?? null,
                 ];
 
@@ -97,50 +158,41 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
             $products[$hostId]['prices'][] = self::sortProductPriceItems($productPrice);
         }
 
-        return array_values($products);
+        return \array_values($products);
     }
 
     /**
-     * @param array $productStockLevel
-     * @return array
+     * @param array{string, int} $identity - [endpointId, hostId]
+     *
+     * @return int
+     * @throws InvalidArgumentException
+     */
+    protected static function extractHostId(array $identity): int
+    {
+        return Identity::fromArray($identity)->getHost();
+    }
+
+    /**
+     * @param array{
+     *     productId: array{0: string, 1: int}|ProductStockLevel|null,
+     *     sku: ?string,
+     *     stockLevel: ?float
+     * } $productStockLevel
+     *
+     * @return array<int, array{id: array{0: string, 1: int}|ProductStockLevel, sku: string, stockLevel: float}>
      */
     public function transformProductStockLevelData(array $productStockLevel): array
     {
         $products = [];
         foreach ($productStockLevel as $stockLevel) {
-            $product = [
-                'id' => $stockLevel['productId'] ?? null,
-                'sku' => $stockLevel['sku'] ?? '',
-                'stockLevel' => $stockLevel['stockLevel'] ?? 0.
+            $product    = [
+                'id'         => $stockLevel['productId'] ?? null,
+                'sku'        => $stockLevel['sku'] ?? '',
+                'stockLevel' => $stockLevel['stockLevel'] ?? 0.,
             ];
             $products[] = $product;
         }
 
         return $products;
-    }
-
-    /**
-     * @param array $identity
-     * @return int
-     */
-    protected static function extractHostId(array $identity): int
-    {
-        list($endpointId, $hostId) = $identity;
-        return $hostId;
-    }
-
-    /**
-     * @param array $productPrice
-     * @return array
-     */
-    protected static function sortProductPriceItems(array $productPrice): array
-    {
-        if (isset($productPrice['items'])) {
-            usort($productPrice['items'], function ($a, $b) {
-                return ($a['quantity'] ?? 0) - ($b['quantity'] ?? 0);
-            });
-        }
-
-        return $productPrice;
     }
 }

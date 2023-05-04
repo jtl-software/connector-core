@@ -1,21 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Serializer\Subscriber;
 
-use JMS\Serializer\Serializer;
 use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Test\TestCase;
 
 class ProductStockLevelSubscriberTest extends TestCase
 {
-    public function testOnPostSerialize()
+    /**
+     * @throws \Exception
+     */
+    public function testOnPostSerialize(): void
     {
-        $stocklevel = mt_rand(0, 999);
-        $product = new Product();
+        $stocklevel = \random_int(0, 999);
+        $product    = (new Product())->setCreationDate(new \DateTimeImmutable());
         $product->setStockLevel($stocklevel);
 
-        $serializer = SerializerBuilder::create()->build();
+        $serializer   = SerializerBuilder::create()->build();
         $productArray = $serializer->toArray($product);
         $this->assertEquals(['stockLevel' => $stocklevel], $productArray['stockLevel']);
     }

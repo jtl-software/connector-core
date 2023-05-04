@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Model\DeliveryNote;
@@ -9,10 +12,11 @@ class DeliveryNoteEvent extends Event
     /**
      * @var DeliveryNote
      */
-    protected $deliveryNote;
+    protected DeliveryNote $deliveryNote;
 
     /**
      * DeliveryNoteEvent constructor.
+     *
      * @param DeliveryNote $deliveryNote
      */
     public function __construct(DeliveryNote $deliveryNote)

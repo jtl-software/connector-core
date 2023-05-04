@@ -1,9 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Linker;
 
 use Jtl\Connector\Core\Definition\IdentityType;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Exception\DefinitionException;
+use Jtl\Connector\Core\Exception\LinkerException;
 use Jtl\Connector\Core\Linker\IdentityLinker;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Jtl\Connector\Core\Model\Category;
@@ -13,18 +17,41 @@ use Jtl\Connector\Core\Model\ProductVariation;
 use Jtl\Connector\Core\Model\ProductWarehouseInfo;
 use Jtl\Connector\Core\Model\ShippingClass;
 use Jtl\Connector\Core\Test\TestCase;
+use Mockery\LegacyMockInterface;
+use PHPUnit\Framework\Exception;
+use PHPUnit\Framework\ExpectationFailedException;
+use ReflectionException;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class IdentityLinkerTest
+ *
  * @package Jtl\Connector\Core\Linker
  */
 class IdentityLinkerTest extends TestCase
 {
     /**
-     * @param $mockedPrimaryKeyMapper
+     * @dataProvider hostIdDataProvider
+     *
+     * @param mixed $hostId
+     * @param bool  $shouldBeValid
+     *
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     */
+    public function testHostIdValidator($hostId, bool $shouldBeValid): void
+    {
+        $isValid = $this->createLinker()->isValidHostId($hostId);
+
+        $this->assertEquals($shouldBeValid, $isValid);
+    }
+
+    /**
+     * @param PrimaryKeyMapperInterface|null $mockedPrimaryKeyMapper
+     *
      * @return IdentityLinker
      */
-    protected function createLinker($mockedPrimaryKeyMapper = null)
+    protected function createLinker(?PrimaryKeyMapperInterface $mockedPrimaryKeyMapper = null): IdentityLinker
     {
         if ($mockedPrimaryKeyMapper === null) {
             $mockedPrimaryKeyMapper = $this->createPrimaryKeyMapperMock();
@@ -33,40 +60,31 @@ class IdentityLinkerTest extends TestCase
     }
 
     /**
-     * @param array $hostId
-     * @param array $endpointId
-     * @return PrimaryKeyMapperInterface|\Mockery\LegacyMockInterface|\Mockery\MockInterface
+     * @param array<int|null>    $hostId
+     * @param array<string|null> $endpointId
+     *
+     * @return PrimaryKeyMapperInterface&LegacyMockInterface
+     * @noinspection ReturnTypeCanBeDeclaredInspection
+     * @noinspection ReplaceLegacyMockeryInspection
      */
-    public function createPrimaryKeyMapperMock($hostId = [1], $endpointId = ["1"])
+    public function createPrimaryKeyMapperMock(array $hostId = [1], array $endpointId = ['1'])
     {
+        /** @var PrimaryKeyMapperInterface&LegacyMockInterface $primaryKeyMapper */
         $primaryKeyMapper = \Mockery::mock(PrimaryKeyMapperInterface::class);
-        $primaryKeyMapper->shouldReceive('save')->andReturnTrue();
-        $primaryKeyMapper->shouldReceive('delete')->andReturnTrue();
-        $primaryKeyMapper->shouldReceive('clear')->andReturnTrue();
-        $primaryKeyMapper->shouldReceive('getHostId')->andReturn(...$hostId);
-        $primaryKeyMapper->shouldReceive('getEndpointId')->andReturn(...$endpointId);
+        $primaryKeyMapper->shouldReceive('save')->andReturnTrue(); //@phpstan-ignore-line
+        $primaryKeyMapper->shouldReceive('delete')->andReturnTrue(); //@phpstan-ignore-line
+        $primaryKeyMapper->shouldReceive('clear')->andReturnTrue(); //@phpstan-ignore-line
+        $primaryKeyMapper->shouldReceive('getHostId')->andReturn(...$hostId); //@phpstan-ignore-line
+        $primaryKeyMapper->shouldReceive('getEndpointId')->andReturn(...$endpointId); //@phpstan-ignore-line
 
         return $primaryKeyMapper;
     }
 
     /**
-     * @dataProvider hostIdDataProvider
-     *
-     * @param $hostId
-     * @param $shouldBeValid
-     */
-    public function testHostIdValidator($hostId, $shouldBeValid)
-    {
-        $isValid = $this->createLinker()->isValidHostId($hostId);
-
-        $this->assertEquals($shouldBeValid, $isValid);
-    }
-
-    /**
-     * @return array
+     * @return array<int, array<int, int|bool|null>>
      * @throws \Exception
      */
-    public function hostIdDataProvider()
+    public function hostIdDataProvider(): array
     {
         return [
             [0, false],
@@ -78,32 +96,39 @@ class IdentityLinkerTest extends TestCase
     /**
      * @dataProvider endpointIdDataProvider
      *
-     * @param $endpointId
-     * @param $shouldBeValid
+     * @param mixed $endpointId
+     * @param bool  $shouldBeValid
+     *
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
-    public function testEndpointIdValidator($endpointId, $shouldBeValid)
+    public function testEndpointIdValidator($endpointId, bool $shouldBeValid): void
     {
         $isValid = $this->createLinker()->isValidEndpointId($endpointId);
         $this->assertEquals($shouldBeValid, $isValid);
     }
 
     /**
-     * @return array
+     * @return array<int, array<int, int|bool|string|null>>
      * @throws \Exception
      */
-    public function endpointIdDataProvider()
+    public function endpointIdDataProvider(): array
     {
         return [
-            [0, true],
+            [0, false],
             [null, false],
             [$this->createEndpointId(), true]
         ];
     }
 
     /**
-     * @throws \ReflectionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws Exception
+     * @throws ReflectionException
+     * @throws \Exception
      */
-    public function testCache()
+    public function testCache(): void
     {
         $linker = $this->createLinker();
 
@@ -121,10 +146,10 @@ class IdentityLinkerTest extends TestCase
         $loadCache = $reflection->getMethod('loadCache');
         $loadCache->setAccessible(true);
 
-        $cacheType = IdentityLinker::CACHE_TYPE_ENDPOINT;
-        $type = IdentityType::CATEGORY;
+        $cacheType  = IdentityLinker::CACHE_TYPE_ENDPOINT;
+        $type       = IdentityType::CATEGORY;
         $endpointId = $this->createEndpointId();
-        $hostId = $this->createHostId();
+        $hostId     = $this->createHostId();
 
         $this->assertEmpty($linker->getCache());
 
@@ -145,9 +170,13 @@ class IdentityLinkerTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws DefinitionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
-    public function testHostIdResolver()
+    public function testHostIdResolver(): void
     {
         $linker = $this->createLinker();
 
@@ -156,34 +185,40 @@ class IdentityLinkerTest extends TestCase
         $this->assertSame(1, $hostId);
 
         $modelName = Model::CATEGORY;
-        $property = 'property_doesnt_exists';
+        $property  = 'property_doesnt_exists';
         $this->expectExceptionObject(DefinitionException::unknownIdentityProperty($modelName, $property));
 
         $linker->getHostId($modelName, $property, '30');
     }
 
     /**
-     *
+     * @return void
+     * @throws DefinitionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
-    public function testEndpointIdResolver()
+    public function testEndpointIdResolver(): void
     {
         $linker = $this->createLinker();
 
         $endpointId = $linker->getEndpointId(Model::CATEGORY, 'id', 1);
 
-        $this->assertSame("1", $endpointId);
+        $this->assertSame('1', $endpointId);
 
         $modelName = Model::CATEGORY;
-        $property = 'property_doesnt_exists';
+        $property  = 'property_doesnt_exists';
         $this->expectExceptionObject(DefinitionException::unknownIdentityProperty($modelName, $property));
 
-        $linker->getEndpointId($modelName, $property, '30');
+        $linker->getEndpointId($modelName, $property, 30);
     }
 
     /**
-     *
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
-    public function testIdentityClear()
+    public function testIdentityClear(): void
     {
         $linker = $this->createLinker();
 
@@ -192,14 +227,20 @@ class IdentityLinkerTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws DefinitionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws \InvalidArgumentException
+     * @throws \Exception
      */
-    public function testIdentitySave()
+    public function testIdentitySave(): void
     {
-        $endpointId = $this->createEndpointId();
-        $hostId = $this->createHostId();
-        $modelName = Model::CATEGORY;
-        $property = 'parentCategoryId';
+        $endpointId   = $this->createEndpointId();
+        $hostId       = $this->createHostId();
+        $modelName    = Model::CATEGORY;
+        $property     = 'parentCategoryId';
         $identityType = Model::getIdentityType($modelName);
 
         $linker = $this->createLinker();
@@ -216,18 +257,25 @@ class IdentityLinkerTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws DefinitionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws \InvalidArgumentException
+     * @throws LinkerException
+     * @throws \Exception
      */
-    public function testIdentityDelete()
+    public function testIdentityDelete(): void
     {
-        $endpointId = $this->createEndpointId();
-        $hostId = $this->createHostId();
-        $modelName = Model::CATEGORY;
-        $property = 'id';
+        $endpointId   = $this->createEndpointId();
+        $hostId       = $this->createHostId();
+        $modelName    = Model::CATEGORY;
+        $property     = 'id';
         $identityType = Model::getIdentityType($modelName);
 
         $primaryKeyMapper = $this->createPrimaryKeyMapperMock([0]);
-        $linker = $this->createLinker($primaryKeyMapper);
+        $linker           = $this->createLinker($primaryKeyMapper);
 
         $reflection = new \ReflectionClass($linker);
         $checkCache = $reflection->getMethod('checkCache');
@@ -246,20 +294,31 @@ class IdentityLinkerTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws DefinitionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws \InvalidArgumentException
+     * @throws LinkerException
+     * @throws \Exception
      */
-    public function testLinkModel()
+    public function testLinkModel(): void
     {
-        $productHostId = $this->createHostId();
+        $productHostId     = $this->createHostId();
         $productEndpointId = $this->createEndpointId();
 
-        $shippingClassHostId = $this->createHostId();
+        $shippingClassHostId     = $this->createHostId();
         $shippingClassEndpointId = $this->createEndpointId();
 
-        $primaryKeyMapper = $this->createPrimaryKeyMapperMock([$productHostId, $shippingClassHostId], [$productEndpointId, $shippingClassEndpointId]);
-        $linker = $this->createLinker($primaryKeyMapper);
+        $primaryKeyMapper = $this->createPrimaryKeyMapperMock(
+            [$productHostId, $shippingClassHostId],
+            [$productEndpointId, $shippingClassEndpointId]
+        );
+        $linker           = $this->createLinker($primaryKeyMapper);
 
         $product = new Product();
+        $product->setCreationDate(new \DateTimeImmutable());
         $product->setId(new Identity($productEndpointId, $productHostId));
 
         $shippingClass = new ShippingClass();
@@ -281,15 +340,22 @@ class IdentityLinkerTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws DefinitionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws \InvalidArgumentException
+     * @throws LinkerException
+     * @throws \Exception
      */
-    public function testUnlinkModel()
+    public function testUnlinkModel(): void
     {
         $primaryKeyMapper = $this->createPrimaryKeyMapperMock([0]);
-        $linker = $this->createLinker($primaryKeyMapper);
+        $linker           = $this->createLinker($primaryKeyMapper);
 
         $expectedHostId = $this->createHostId();
-        $endpointId = $this->createEndpointId();
+        $endpointId     = $this->createEndpointId();
 
         $category = new Category();
         $category->setId(new Identity($endpointId, $expectedHostId));
@@ -300,18 +366,26 @@ class IdentityLinkerTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws DefinitionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws \InvalidArgumentException
+     * @throws LinkerException
+     * @throws \Exception
      */
-    public function testLinkCollection()
+    public function testLinkCollection(): void
     {
         $expectedHostId = $this->createHostId();
-        $endpointId = $this->createEndpointId();
+        $endpointId     = $this->createEndpointId();
 
         $primaryKeyMapper = $this->createPrimaryKeyMapperMock([$expectedHostId], [$endpointId]);
 
         $linker = $this->createLinker($primaryKeyMapper);
 
         $product = new Product();
+        $product->setCreationDate(new \DateTimeImmutable());
         $productVariation = new ProductWarehouseInfo();
         $productVariation->setWarehouseId(new Identity($endpointId, $expectedHostId));
         $product->addWarehouseInfo($productVariation);
@@ -323,17 +397,25 @@ class IdentityLinkerTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws DefinitionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws \InvalidArgumentException
+     * @throws LinkerException
+     * @throws \Exception
      */
-    public function testUnlinkCollection()
+    public function testUnlinkCollection(): void
     {
         $expectedHostId = $this->createHostId();
-        $endpointId = $this->createEndpointId();
+        $endpointId     = $this->createEndpointId();
 
         $primaryKeyMapper = $this->createPrimaryKeyMapperMock([$expectedHostId, null], [$endpointId, null]);
-        $linker = $this->createLinker($primaryKeyMapper);
+        $linker           = $this->createLinker($primaryKeyMapper);
 
         $product = new Product();
+        $product->setCreationDate(new \DateTimeImmutable());
         $productVariation = new ProductVariation();
         $productVariation->setId(new Identity($endpointId, $expectedHostId));
         $product->addVariation($productVariation);
@@ -350,16 +432,22 @@ class IdentityLinkerTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws DefinitionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws LinkerException
+     * @throws \Exception
      */
-    public function testLinkIdentityList()
+    public function testLinkIdentityList(): void
     {
-        $expectedHostId = $this->createHostId();
+        $expectedHostId     = $this->createHostId();
         $expectedEndpointId = $this->createEndpointId();
-        $modelName = Model::CONFIG_GROUP;
+        $modelName          = Model::CONFIG_GROUP;
 
-        $primaryKeyMapper = $this->createPrimaryKeyMapperMock([$expectedHostId,0]);
-        $linker = $this->createLinker($primaryKeyMapper);
+        $primaryKeyMapper = $this->createPrimaryKeyMapperMock([$expectedHostId, 0]);
+        $linker           = $this->createLinker($primaryKeyMapper);
 
         $identity = new Identity($expectedEndpointId);
 
@@ -378,7 +466,9 @@ class IdentityLinkerTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
     protected function tearDown(): void
     {

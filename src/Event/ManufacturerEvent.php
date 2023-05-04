@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Model\Manufacturer;
@@ -9,10 +12,11 @@ class ManufacturerEvent extends Event
     /**
      * @var Manufacturer
      */
-    protected $manufacturer;
+    protected Manufacturer $manufacturer;
 
     /**
      * ManufacturerEvent constructor.
+     *
      * @param Manufacturer $manufacturer
      */
     public function __construct(Manufacturer $manufacturer)

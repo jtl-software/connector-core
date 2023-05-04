@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Model;
 
 trait TranslatableAttributesTrait
@@ -7,6 +9,7 @@ trait TranslatableAttributesTrait
     /**
      * @param string $name
      * @param string $languageIso
+     *
      * @return TranslatableAttribute|null
      */
     public function findAttribute(string $name, string $languageIso = ''): ?TranslatableAttribute

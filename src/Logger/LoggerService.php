@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Logger;
 
 use Jtl\Connector\Core\Exception\LoggerException;
@@ -17,6 +19,9 @@ use Monolog\Processor\IntrospectionProcessor;
 use Monolog\Processor\MemoryPeakUsageProcessor;
 use Monolog\Processor\ProcessorInterface;
 use Monolog\Processor\PsrLogMessageProcessor;
+use Psr\Log\InvalidArgumentException;
+use ReflectionException;
+use RuntimeException;
 
 class LoggerService
 {
@@ -28,53 +33,27 @@ class LoggerService
         CHANNEL_RPC      = 'rpc',
         CHANNEL_SESSION  = 'session';
 
-    /**
-     * @var MonoLogger[]
-     */
-    protected $channels = [];
+    /** @var MonoLogger[] */
+    protected array $channels = [];
 
-    /**
-     * @var FormatterInterface
-     */
-    protected $formatter;
+    /** @var ProcessorInterface[] */
+    protected array $processors = [];
 
-    /**
-     * @var string
-     */
-    protected $logDir;
-
-    /**
-     * @var string
-     */
-    protected $logLevel;
-
-    /**
-     * @var integer
-     */
-    protected $maxFiles = 2;
-
-    /**
-     * @var ProcessorInterface
-     */
-    protected $processors = [];
-
-    /**
-     * Final handler that gets wrapped by FingersCrossedHandler
-     * @var HandlerInterface
-     */
-    protected $handler;
-
-    /**
-     * FingersCrossedHandler for combined log file
-     * @var HandlerInterface
-     */
-    protected $combinedHandler;
+    protected FormatterInterface $formatter;
+    protected string             $logDir;
+    protected string             $logLevel;
+    protected int                $maxFiles = 2;
+    /* Final handler that gets wrapped by FingersCrossedHandler */
+    protected HandlerInterface   $handler;
+    /* FingersCrossedHandler for combined log file */
+    protected HandlerInterface   $combinedHandler;
 
     /**
      * LoggerFactory constructor.
+     *
      * @param string $logDir
      * @param string $logLevel
-     * @param int $maxFiles
+     * @param int    $maxFiles
      */
     public function __construct(string $logDir, string $logLevel, int $maxFiles = 2)
     {
@@ -127,12 +106,23 @@ class LoggerService
     }
 
     /**
-     * @param string $channel
-     * @return boolean
+     * @param ProcessorInterface $processor
+     *
+     * @return LoggerService
      */
-    public function has(string $channel): bool
+    public function pushProcessor(ProcessorInterface $processor): self
     {
-        return isset($this->channels[\lcfirst($channel)]);
+        if (\in_array($processor, $this->processors, true)) {
+            return $this;
+        }
+
+        foreach ($this->channels as $channel) {
+            $channel->pushProcessor($processor);
+        }
+
+        $this->processors[] = $processor;
+
+        return $this;
     }
 
     /**
@@ -145,7 +135,7 @@ class LoggerService
     {
         $fileName = \sprintf('%s/%s.log', $this->logDir, $channel);
         $handler  = new RotatingFileHandler($fileName, $this->maxFiles, $logLevel);
-        if (!\is_null($this->formatter)) {
+        if (!isset($this->formatter)) {
             $handler->setFormatter($this->formatter);
         }
         return $handler;
@@ -153,7 +143,9 @@ class LoggerService
 
     /**
      * @param string $channel
+     *
      * @return MonoLogger
+     * @throws InvalidArgumentException
      */
     public function get(string $channel): MonoLogger
     {
@@ -162,7 +154,7 @@ class LoggerService
             $this->channels[$channel] = new MonoLogger($channel);
         }
 
-        $logLevel = MonoLogger::toMonologLevel($this->logLevel);
+        $logLevel = MonoLogger::toMonologLevel($this->logLevel); //@phpstan-ignore-line
         if (!$this->channels[$channel]->isHandling($logLevel)) {
             $handler = $this->createChannelSpecificHandler($channel, $logLevel);
             $this->channels[$channel]->pushHandler($this->handler);
@@ -176,25 +168,18 @@ class LoggerService
     }
 
     /**
-     * @param string $format
-     * @param array $arguments
-     * @return LoggerService
-     * @throws \ReflectionException|LoggerException
+     * @param string $channel
+     *
+     * @return boolean
      */
-    public function setFormat(string $format, array $arguments = []): self
+    public function has(string $channel): bool
     {
-        $formatterClass = \sprintf('Monolog\Formatter\%sFormatter', \ucfirst($format));
-        if (!\class_exists($formatterClass)) {
-            throw LoggerException::formatterNotExists($formatterClass);
-        }
-        $formatter = (new \ReflectionClass($formatterClass))->newInstanceArgs($arguments);
-        $this->setFormatter($formatter);
-
-        return $this;
+        return isset($this->channels[\lcfirst($channel)]);
     }
 
     /**
      * @param FormatterInterface $formatter
+     *
      * @return LoggerService
      */
     public function setFormatter(FormatterInterface $formatter): self
@@ -212,22 +197,26 @@ class LoggerService
     }
 
     /**
-     * @param ProcessorInterface $processor
+     * @param string               $format
+     * @param array{}|array<mixed> $arguments
+     *
      * @return LoggerService
+     * @throws LoggerException
+     * @throws RuntimeException
+     * @throws ReflectionException
      */
-    public function pushProcessor(ProcessorInterface $processor): self
+    public function setFormat(string $format, array $arguments = []): self
     {
-        foreach ($this->processors as $tProcessor) {
-            if ($processor === $tProcessor) {
-                return $this;
-            }
+        $formatterClass = \sprintf('Monolog\Formatter\%sFormatter', \ucfirst($format));
+        if (!\class_exists($formatterClass)) {
+            throw LoggerException::formatterNotExists($formatterClass);
+        }
+        $formatter = (new \ReflectionClass($formatterClass))->newInstanceArgs($arguments);
+        if (!($formatter instanceof FormatterInterface)) {
+            throw new \RuntimeException('Formatter ' . $formatterClass . ' not found.');
         }
 
-        foreach ($this->channels as $channel) {
-            $channel->pushProcessor($processor);
-        }
-
-        $this->processors[] = $processor;
+        $this->setFormatter($formatter);
 
         return $this;
     }

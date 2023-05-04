@@ -1,9 +1,7 @@
 <?php
-/**
- *
- * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Exception
- */
+
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Exception;
 
 /**
@@ -14,10 +12,11 @@ namespace Jtl\Connector\Core\Exception;
  */
 class HttpException extends \Exception
 {
-    const UNKNOWN_METHOD = 10;
+    public const UNKNOWN_METHOD = 10;
 
     /**
      * @param string $method
+     *
      * @return HttpException
      */
     public static function unknownMethod(string $method): HttpException

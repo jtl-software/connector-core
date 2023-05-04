@@ -1,81 +1,79 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Controller;
 
+use InvalidArgumentException;
+use Jawira\CaseConverter\CaseConverterException;
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
 use Jtl\Connector\Core\Controller\ConnectorController;
-use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\AuthenticationException;
 use Jtl\Connector\Core\Exception\DefinitionException;
+use Jtl\Connector\Core\Exception\JsonException;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Linker\IdentityLinker;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
 use Jtl\Connector\Core\Model\Features;
-use Jtl\Connector\Core\Model\Identities;
-use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Model\Session;
 use Jtl\Connector\Core\Test\TestCase;
-use PHPUnit\Framework\MockObject\Stub\ReturnStub;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use PHPUnit\Framework\Exception;
+use PHPUnit\Framework\ExpectationFailedException;
+use PHPUnit\Framework\MockObject\CannotUseOnlyMethodsException;
+use PHPUnit\Framework\MockObject\ClassAlreadyExistsException;
+use PHPUnit\Framework\MockObject\ClassIsFinalException;
+use PHPUnit\Framework\MockObject\ClassIsReadonlyException;
+use PHPUnit\Framework\MockObject\DuplicateMethodException;
+use PHPUnit\Framework\MockObject\IncompatibleReturnValueException;
+use PHPUnit\Framework\MockObject\InvalidMethodNameException;
+use PHPUnit\Framework\MockObject\MethodCannotBeConfiguredException;
+use PHPUnit\Framework\MockObject\MethodNameAlreadyConfiguredException;
+use PHPUnit\Framework\MockObject\OriginalConstructorInvocationRequiredException;
+use PHPUnit\Framework\MockObject\ReflectionException;
+use PHPUnit\Framework\MockObject\RuntimeException;
+use PHPUnit\Framework\MockObject\UnknownTypeException;
+use SessionHandlerInterface;
 
-/**
- * Class ConnectorTest
- * @package Jtl\Connector\Core\Test\Controller
- */
 class ConnectorTest extends TestCase
 {
     /**
-     * @param IdentityLinker|null $linker
-     * @param ChecksumLinker|null $checksumLinker
-     * @param EventDispatcher|null $eventDispatcher
-     * @param \SessionHandlerInterface|null $sessionHandler
-     * @param TokenValidatorInterface|null $tokenValidator
-     * @param string $featuresPath
-     * @return ConnectorController
+     * @return void
+     * @throws \InvalidArgumentException
+     * @throws \JsonException
+     * @throws JsonException
+     * @throws Exception
+     * @throws ExpectationFailedException
+     * @throws \PHPUnit\Framework\InvalidArgumentException
+     * @throws CannotUseOnlyMethodsException
+     * @throws ClassAlreadyExistsException
+     * @throws ClassIsFinalException
+     * @throws ClassIsReadonlyException
+     * @throws DuplicateMethodException
+     * @throws IncompatibleReturnValueException
+     * @throws InvalidMethodNameException
+     * @throws MethodCannotBeConfiguredException
+     * @throws MethodNameAlreadyConfiguredException
+     * @throws OriginalConstructorInvocationRequiredException
+     * @throws ReflectionException
+     * @throws RuntimeException
+     * @throws UnknownTypeException
+     * @throws \RuntimeException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
-    protected function createConnectorController(
-        IdentityLinker $linker = null,
-        ChecksumLinker $checksumLinker = null,
-        \SessionHandlerInterface $sessionHandler = null,
-        TokenValidatorInterface $tokenValidator = null,
-        string $featuresPath = ''
-    ): ConnectorController {
-        if (is_null($linker)) {
-            $linker = $this->createMock(IdentityLinker::class);
-        }
-
-        if (is_null($checksumLinker)) {
-            $checksumLinker = $this->createMock(ChecksumLinker::class);
-        }
-
-        if (is_null($sessionHandler)) {
-            $sessionHandler = $this->createMock(\SessionHandlerInterface::class);
-        }
-
-        if (is_null($tokenValidator)) {
-            $tokenValidator = $this->createMock(TokenValidatorInterface::class);
-        }
-
-        return new ConnectorController($featuresPath, $checksumLinker, $linker, $sessionHandler, $tokenValidator);
-    }
-
-    /**
-     *
-     */
-    public function testFeatures()
+    public function testFeatures(): void
     {
         $controller = $this->getMockBuilder(ConnectorController::class)
-            ->onlyMethods(['fetchFeaturesData'])
-            ->disableOriginalConstructor()
-            ->getMock();
+                           ->onlyMethods(['fetchFeaturesData'])
+                           ->disableOriginalConstructor()
+                           ->getMock();
 
 
-        $jsonFeatures = ["entities" => ["Category" => ["push" => true]]];
+        $jsonFeatures = ['entities' => ['Category' => ['push' => true]]];
         $controller->expects($this->once())->method('fetchFeaturesData')->willReturn($jsonFeatures);
 
-        /** @var Features $features */
         $features = $controller->features();
 
         $this->assertInstanceOf(Features::class, $features);
@@ -83,43 +81,85 @@ class ConnectorTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws DefinitionException
+     * @throws \InvalidArgumentException
+     * @throws CaseConverterException
+     * @throws ExpectationFailedException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
-    public function testAckEmpty()
+    public function testAckEmpty(): void
     {
         $connector = $this->createConnectorController();
         $this->assertTrue($connector->ack(new Ack()));
     }
 
     /**
-     * @throws DefinitionException
-     * @throws \ReflectionException
+     * @param IdentityLinker|null          $linker
+     * @param ChecksumLinker|null          $checksumLinker
+     * @param SessionHandlerInterface|null $sessionHandler
+     * @param TokenValidatorInterface|null $tokenValidator
+     * @param string                       $featuresPath
+     *
+     * @return ConnectorController
      */
-    public function testAckInvalidModelName()
+    protected function createConnectorController(
+        IdentityLinker           $linker = null,
+        ChecksumLinker           $checksumLinker = null,
+        \SessionHandlerInterface $sessionHandler = null,
+        TokenValidatorInterface  $tokenValidator = null,
+        string                   $featuresPath = ''
+    ): ConnectorController {
+        if (\is_null($linker)) {
+            $linker = $this->createMock(IdentityLinker::class);
+        }
+
+        if (\is_null($checksumLinker)) {
+            $checksumLinker = $this->createMock(ChecksumLinker::class);
+        }
+
+        if (\is_null($sessionHandler)) {
+            $sessionHandler = $this->createMock(\SessionHandlerInterface::class);
+        }
+
+        if (\is_null($tokenValidator)) {
+            $tokenValidator = $this->createMock(TokenValidatorInterface::class);
+        }
+
+        return new ConnectorController($featuresPath, $checksumLinker, $linker, $sessionHandler, $tokenValidator);
+    }
+
+    /**
+     * @throws DefinitionException
+     * @throws InvalidArgumentException
+     * @throws CaseConverterException
+     * @throws ExpectationFailedException
+     * @throws \PHPUnit\Framework\InvalidArgumentException
+     * @throws IncompatibleReturnValueException
+     * @throws MethodCannotBeConfiguredException
+     * @throws MethodNameAlreadyConfiguredException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     */
+    public function testAckInvalidModelName(): void
     {
         $linker = $this->createMock(IdentityLinker::class);
         $linker->expects($this->exactly(3))->method('save')->willReturn(true);
         $connector = $this->createConnectorController($linker);
-        $ack = new Ack();
-        $ack->setIdentities([
-            "Foo" => [
-                $this->createIdentity()
-            ],
-            "Category" => [
-                $this->createIdentity(),
-                $this->createIdentity(),
-                $this->createIdentity()
+        $ack       = new Ack();
+        $ack->setIdentities(
+            [
+                'Foo'      => [$this->createIdentity()],
+                'Category' => [$this->createIdentity(), $this->createIdentity(), $this->createIdentity()],
             ]
-        ]);
+        );
 
         $this->assertTrue($connector->ack($ack));
     }
 
     /**
      * @throws AuthenticationException
-     * @throws ApplicationException
      */
-    public function testAuthMissingToken()
+    public function testAuthMissingToken(): void
     {
         $connector = $this->createConnectorController();
 
@@ -132,9 +172,11 @@ class ConnectorTest extends TestCase
 
     /**
      * @throws AuthenticationException
-     * @throws ApplicationException
+     * @throws MethodCannotBeConfiguredException
+     * @throws MethodNameAlreadyConfiguredException
+     * @throws \PHPUnit\Framework\InvalidArgumentException
      */
-    public function testAuthTokenIsInvalid()
+    public function testAuthTokenIsInvalid(): void
     {
         $_SERVER['REMOTE_ADDR'] = '';
         $this->expectExceptionObject(AuthenticationException::failed());
@@ -147,16 +189,22 @@ class ConnectorTest extends TestCase
         $controller = $this->createConnectorController(null, null, null, $tokenValidator);
 
         $auth = (new Authentication())
-            ->setToken(md5(time()));
+            ->setToken(\md5((string)\time()));
 
         $controller->auth($auth);
     }
 
     /**
-     * @throws ApplicationException
      * @throws AuthenticationException
+     * @throws ExpectationFailedException
+     * @throws IncompatibleReturnValueException
+     * @throws MethodCannotBeConfiguredException
+     * @throws MethodNameAlreadyConfiguredException
+     * @throws Exception
+     * @throws \PHPUnit\Framework\InvalidArgumentException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
-    public function testAuthCorrect()
+    public function testAuthCorrect(): void
     {
         $tokenValidator = $this->createMock(TokenValidatorInterface::class);
 
@@ -168,7 +216,7 @@ class ConnectorTest extends TestCase
         $connector = $this->createConnectorController(null, null, null, $tokenValidator);
 
         $auth = new Authentication();
-        $auth->setToken(md5(time()));
+        $auth->setToken(\md5((string)\time()));
 
         $session = $connector->auth($auth);
 
@@ -177,20 +225,26 @@ class ConnectorTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws IncompatibleReturnValueException
+     * @throws MethodCannotBeConfiguredException
+     * @throws MethodNameAlreadyConfiguredException
+     * @throws \PHPUnit\Framework\InvalidArgumentException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
-    public function testIdentify()
+    public function testIdentify(): void
     {
-        $endpointVersion = "1.0";
-        $platformName = "ConnectorPlatform";
-        $platformVersion = "0.1";
+        $endpointVersion = '1.0';
+        $platformName    = 'ConnectorPlatform';
+        $platformVersion = '0.1';
 
         $connector = $this->createMock(ConnectorInterface::class);
         $connector->expects($this->once())->method('getEndpointVersion')->willReturn($endpointVersion);
         $connector->expects($this->once())->method('getPlatformVersion')->willReturn($platformVersion);
         $connector->expects($this->once())->method('getPlatformName')->willReturn($platformName);
 
-        $controller = $this->createConnectorController();
+        $controller              = $this->createConnectorController();
         $connectorIdentification = $controller->identify($connector);
 
         $this->assertSame($endpointVersion, $connectorIdentification->getEndpointVersion());
@@ -200,9 +254,17 @@ class ConnectorTest extends TestCase
     }
 
     /**
-     *
+     * @return void
+     * @throws DefinitionException
+     * @throws ExpectationFailedException
+     * @throws IncompatibleReturnValueException
+     * @throws InvalidArgumentException
+     * @throws MethodCannotBeConfiguredException
+     * @throws MethodNameAlreadyConfiguredException
+     * @throws \PHPUnit\Framework\InvalidArgumentException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
-    public function testClearSuccess()
+    public function testClearSuccess(): void
     {
         $linker = $this->createMock(IdentityLinker::class);
         $linker->expects($this->once())->method('clear')->willReturn(true);

@@ -1,7 +1,12 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Rpc;
 
 use JMS\Serializer\Annotation as Serializer;
+use JMS\Serializer\Exception\InvalidArgumentException;
+use JMS\Serializer\Exception\RuntimeException;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer as JmsSerializer;
 use Jtl\Connector\Core\Model\AbstractModel;
@@ -22,13 +27,13 @@ abstract class Packet extends AbstractModel
      * @var string
      * @Serializer\Type("string")
      */
-    protected $jtlrpc = '';
-    
+    protected string $jtlrpc = '';
+
     /**
      * @var string
      * @Serializer\Type("string")
      */
-    protected $id = '';
+    protected string $id = '';
 
     /**
      * Packet constructor.
@@ -41,7 +46,6 @@ abstract class Packet extends AbstractModel
      * @return boolean
      */
     abstract public function isValid(): bool;
-
 
 
     /**
@@ -58,11 +62,13 @@ abstract class Packet extends AbstractModel
      * Setter for $jtlrpc
      *
      * @param string $jtlrpc
-     * @return Packet
+     *
+     * @return $this
      */
-    public function setJtlrpc(string $jtlrpc): Packet
+    public function setJtlrpc(string $jtlrpc): self
     {
         $this->jtlrpc = $jtlrpc;
+
         return $this;
     }
 
@@ -80,32 +86,39 @@ abstract class Packet extends AbstractModel
      * Setter for $id
      *
      * @param string $id
-     * @return Packet
+     *
+     * @return $this
      */
-    public function setId(string $id): Packet
+    public function setId(string $id): self
     {
         $this->id = $id;
+
         return $this;
     }
 
 
     /**
      * @param JmsSerializer|null $serializer
+     *
      * @return mixed[]
+     * @throws RuntimeException
+     * @throws InvalidArgumentException
      */
     public function toArray(JmsSerializer $serializer = null): array
     {
-        if (is_null($serializer)) {
+        if (\is_null($serializer)) {
             $serializer = SerializerBuilder::create()->build();
         }
 
         $context = (new SerializationContext())->setSerializeNull(true);
+
         return $serializer->toArray($this, $context);
     }
 
     /**
      * @param string $id
      * @param string $jtlrpc
+     *
      * @return Packet
      */
     public static function create(string $id, string $jtlrpc = '2.0'): self

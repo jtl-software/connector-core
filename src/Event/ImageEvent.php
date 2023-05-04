@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Model\AbstractImage;
@@ -9,10 +12,11 @@ class ImageEvent extends Event
     /**
      * @var AbstractImage
      */
-    protected $image;
+    protected AbstractImage $image;
 
     /**
      * ImageEvent constructor.
+     *
      * @param AbstractImage $image
      */
     public function __construct(AbstractImage $image)

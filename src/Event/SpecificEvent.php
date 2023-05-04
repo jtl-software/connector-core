@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Model\Specific;
@@ -9,10 +12,11 @@ class SpecificEvent extends Event
     /**
      * @var Specific
      */
-    protected $specific;
+    protected Specific $specific;
 
     /**
      * SpecificEvent constructor.
+     *
      * @param Specific $specific
      */
     public function __construct(Specific $specific)

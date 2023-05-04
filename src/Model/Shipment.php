@@ -1,19 +1,18 @@
 <?php
-/**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
- * @subpackage Product
- */
+
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\MustNotBeNullException;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
 
 /**
  * Shipment Model with reference to a deliveryNote
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -25,7 +24,7 @@ class Shipment extends AbstractIdentity
      * @Serializer\SerializedName("deliveryNoteId")
      * @Serializer\Accessor(getter="getDeliveryNoteId",setter="setDeliveryNoteId")
      */
-    protected $deliveryNoteId = null;
+    protected Identity $deliveryNoteId;
 
     /**
      * @var string Carrier name
@@ -33,81 +32,73 @@ class Shipment extends AbstractIdentity
      * @Serializer\SerializedName("carrierName")
      * @Serializer\Accessor(getter="getCarrierName",setter="setCarrierName")
      */
-    protected $carrierName = '';
-    
+    protected string $carrierName = '';
+
     /**
-     * @var \DateTimeInterface Creation date
+     * @var \DateTimeInterface|null Creation date
      * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("creationDate")
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
-    protected $creationDate = null;
-    
+    protected ?\DateTimeInterface $creationDate = null;
+
     /**
      * @var string Optional Identcode
      * @Serializer\Type("string")
      * @Serializer\SerializedName("identCode")
      * @Serializer\Accessor(getter="getIdentCode",setter="setIdentCode")
      */
-    protected $identCode = '';
-    
+    protected string $identCode = '';
+
     /**
      * @var string Optional shipment note
      * @Serializer\Type("string")
      * @Serializer\SerializedName("note")
      * @Serializer\Accessor(getter="getNote",setter="setNote")
      */
-    protected $note = '';
-    
+    protected string $note = '';
+
     /**
      * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("trackingUrl")
      * @Serializer\Accessor(getter="getTrackingUrl",setter="setTrackingUrl")
      */
-    protected $trackingUrl = '';
+    protected string $trackingUrl = '';
 
     /**
      * Constructor.
+     *
      * @param string $endpoint
-     * @param int $host
+     * @param int    $host
      */
     public function __construct(string $endpoint = '', int $host = 0)
     {
         parent::__construct($endpoint, $host);
         $this->deliveryNoteId = new Identity();
     }
-    
+
+    /**
+     * @return Identity Reference to deliveryNote
+     * @throws MustNotBeNullException|\TypeError
+     */
+    public function getDeliveryNoteId(): Identity
+    {
+        return Validate::checkIdentityAndNotNull($this->deliveryNoteId);
+    }
+
     /**
      * @param Identity $deliveryNoteId Reference to deliveryNote
+     *
      * @return Shipment
      */
     public function setDeliveryNoteId(Identity $deliveryNoteId): Shipment
     {
         $this->deliveryNoteId = $deliveryNoteId;
-        
+
         return $this;
-    }
-    
-    /**
-     * @return Identity Reference to deliveryNote
-     */
-    public function getDeliveryNoteId(): Identity
-    {
-        return $this->deliveryNoteId;
     }
 
-    /**
-     * @param string $carrierName Carrier name
-     * @return Shipment
-     */
-    public function setCarrierName(string $carrierName): Shipment
-    {
-        $this->carrierName = $carrierName;
-        
-        return $this;
-    }
-    
     /**
      * @return string Carrier name
      */
@@ -115,18 +106,19 @@ class Shipment extends AbstractIdentity
     {
         return $this->carrierName;
     }
-    
+
     /**
-     * @param \DateTimeInterface $creationDate Creation date
+     * @param string $carrierName Carrier name
+     *
      * @return Shipment
      */
-    public function setCreationDate(\DateTimeInterface $creationDate = null): Shipment
+    public function setCarrierName(string $carrierName): Shipment
     {
-        $this->creationDate = $creationDate;
-        
+        $this->carrierName = $carrierName;
+
         return $this;
     }
-    
+
     /**
      * @return \DateTimeInterface Creation date
      */
@@ -134,18 +126,19 @@ class Shipment extends AbstractIdentity
     {
         return $this->creationDate;
     }
-    
+
     /**
-     * @param string $identCode Optional Identcode
+     * @param \DateTimeInterface $creationDate Creation date
+     *
      * @return Shipment
      */
-    public function setIdentCode(string $identCode): Shipment
+    public function setCreationDate(\DateTimeInterface $creationDate = null): Shipment
     {
-        $this->identCode = $identCode;
-        
+        $this->creationDate = $creationDate;
+
         return $this;
     }
-    
+
     /**
      * @return string Optional Identcode
      */
@@ -153,18 +146,19 @@ class Shipment extends AbstractIdentity
     {
         return $this->identCode;
     }
-    
+
     /**
-     * @param string $note Optional shipment note
+     * @param string $identCode Optional Identcode
+     *
      * @return Shipment
      */
-    public function setNote(string $note): Shipment
+    public function setIdentCode(string $identCode): Shipment
     {
-        $this->note = $note;
-        
+        $this->identCode = $identCode;
+
         return $this;
     }
-    
+
     /**
      * @return string Optional shipment note
      */
@@ -172,23 +166,36 @@ class Shipment extends AbstractIdentity
     {
         return $this->note;
     }
-    
+
     /**
-     * @param string $trackingUrl
+     * @param string $note Optional shipment note
+     *
      * @return Shipment
      */
-    public function setTrackingUrl(string $trackingUrl): Shipment
+    public function setNote(string $note): Shipment
     {
-        $this->trackingUrl = $trackingUrl;
-        
+        $this->note = $note;
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
     public function getTrackingUrl(): string
     {
         return $this->trackingUrl;
+    }
+
+    /**
+     * @param string $trackingUrl
+     *
+     * @return Shipment
+     */
+    public function setTrackingUrl(string $trackingUrl): Shipment
+    {
+        $this->trackingUrl = $trackingUrl;
+
+        return $this;
     }
 }

@@ -1,10 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Class Identities
+ *
  * @package Jtl\Connector\Core\Model
  *
  * @Serializer\AccessType("public_method")
@@ -12,17 +16,17 @@ use JMS\Serializer\Annotation as Serializer;
 class Identities extends AbstractModel
 {
     /**
-     * @var Identity[]
+     * @var array<string, array<int, Identity>|null>
      * @Serializer\Type("array<string, array<Jtl\Connector\Core\Model\Identity>>")
      * @Serializer\SerializedName("identities")
      * @Serializer\Accessor(getter="getIdentities",setter="setIdentities")
      */
-    protected $identities = [];
+    protected array $identities = [];
 
     /**
      * Identities getter
      *
-     * @return Identity[]
+     * @return array<string, array<int, Identity>|null>
      */
     public function getIdentities(): array
     {
@@ -32,8 +36,9 @@ class Identities extends AbstractModel
     /**
      * Identities getter
      *
-     * @param Identity[] $identities
-     * @return Ack
+     * @param array<string, array<int, Identity>|null> $identities
+     *
+     * @return self
      */
     public function setIdentities(array $identities): self
     {

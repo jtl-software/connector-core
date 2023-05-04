@@ -1,17 +1,17 @@
 <?php
-/**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
- * @subpackage Product
- */
+
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\MustNotBeNullException;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
+use TypeError;
 
 /**
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -23,7 +23,7 @@ class ProductStockLevel extends AbstractModel
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
-    protected $productId = null;
+    protected Identity $productId;
 
     /**
      * @var double
@@ -31,7 +31,7 @@ class ProductStockLevel extends AbstractModel
      * @Serializer\SerializedName("stockLevel")
      * @Serializer\Accessor(getter="getStockLevel",setter="setStockLevel")
      */
-    protected $stockLevel = 0.0;
+    protected float $stockLevel = 0.0;
 
     /**
      * ProductStockLevel constructor.
@@ -42,7 +42,18 @@ class ProductStockLevel extends AbstractModel
     }
 
     /**
+     * @return Identity
+     * @throws MustNotBeNullException
+     * @throws TypeError
+     */
+    public function getProductId(): Identity
+    {
+        return Validate::checkIdentityAndNotNull($this->productId);
+    }
+
+    /**
      * @param Identity $productId
+     *
      * @return ProductStockLevel
      */
     public function setProductId(Identity $productId): ProductStockLevel
@@ -52,29 +63,22 @@ class ProductStockLevel extends AbstractModel
     }
 
     /**
-     * @return Identity
-     */
-    public function getProductId(): Identity
-    {
-        return $this->productId;
-    }
-
-    /**
-     * @param double $stockLevel
-     * @return ProductStockLevel
-     */
-    public function setStockLevel(float $stockLevel): ProductStockLevel
-    {
-        $this->stockLevel = $stockLevel;
-        
-        return $this;
-    }
-    
-    /**
      * @return double
      */
     public function getStockLevel(): float
     {
         return $this->stockLevel;
+    }
+
+    /**
+     * @param double $stockLevel
+     *
+     * @return ProductStockLevel
+     */
+    public function setStockLevel(float $stockLevel): ProductStockLevel
+    {
+        $this->stockLevel = $stockLevel;
+
+        return $this;
     }
 }

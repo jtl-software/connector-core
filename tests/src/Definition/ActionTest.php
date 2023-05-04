@@ -1,51 +1,64 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Definition;
 
 use Jtl\Connector\Core\Definition\Action;
+use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class ActionTest
+ *
  * @package Jtl\Connector\Core\Test\Definition
  */
 class ActionTest extends TestCase
 {
     /**
-     *
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
-    public function testGetActions()
+    public function testGetActions(): void
     {
         $actions = Action::getActions();
 
-        $this->assertSame([
-            Action::PULL,
-            Action::PUSH,
-            Action::DELETE,
-            Action::STATISTIC,
-            Action::AUTH,
-            Action::ACK,
-            Action::CLEAR,
-            Action::FEATURES,
-            Action::FINISH,
-            Action::IDENTIFY,
-            Action::INIT
-        ], array_values($actions));
+        $this->assertSame(
+            [
+                Action::PULL,
+                Action::PUSH,
+                Action::DELETE,
+                Action::STATISTIC,
+                Action::AUTH,
+                Action::ACK,
+                Action::CLEAR,
+                Action::FEATURES,
+                Action::FINISH,
+                Action::IDENTIFY,
+                Action::INIT,
+            ],
+            \array_values($actions)
+        );
     }
 
     /**
      * @dataProvider actionDataProvider
      *
-     * @param mixed $actionName
-     * @param bool $expectedResult
-     * @throws \ReflectionException
+     * @param string $actionName
+     * @param bool   $expectedResult
+     *
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
-    public function testIsAction($actionName, bool $expectedResult)
+    public function testIsAction(string $actionName, bool $expectedResult): void
     {
         $this->assertSame($expectedResult, Action::isAction($actionName));
     }
 
     /**
-     * @return array
+     * @return array<int, array{0: string, 1: bool}>
      */
     public function actionDataProvider(): array
     {
@@ -57,33 +70,37 @@ class ActionTest extends TestCase
             ['PusH', false],
             ['Clear', false],
             [Action::CLEAR, true],
-            [false, false],
+            ['false', false]
         ];
     }
 
     /**
      * @dataProvider coreActionDataProvider
      *
-     * @param mixed $actionName
-     * @param bool $expectedResult
+     * @param string $actionName
+     * @param bool   $expectedResult
+     *
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
-    public function testIsCoreAction($actionName, bool $expectedResult)
+    public function testIsCoreAction(string $actionName, bool $expectedResult): void
     {
         $this->assertSame($expectedResult, Action::isCoreAction($actionName));
     }
 
     /**
-     * @return array
+     * @return array<int, array{0: string, 1: bool}>
+     * @throws \Exception
      */
-    public function coreActionDataProvider()
+    public function coreActionDataProvider(): array
     {
         return [
             [Action::AUTH, true],
             [Action::ACK, true],
             [Action::PULL, false],
-            [false, false],
+            ['false', false],
             ['autH', false],
-            [rand(-9999, 9999), false],
+            [(string)\random_int(-9999, 9999), false]
         ];
     }
 }

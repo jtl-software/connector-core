@@ -1,36 +1,47 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Serializer\Subscriber;
 
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\Metadata\StaticPropertyMetadata;
+use JMS\Serializer\SerializationContext;
+use JMS\Serializer\Visitor\SerializationVisitorInterface;
 use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Model\TranslatableAttribute;
 use Jtl\Connector\Core\Model\TranslatableAttributeI18n;
+use RuntimeException;
 
 class ProductAttributeSubscriber implements EventSubscriberInterface
 {
-    public static function getSubscribedEvents()
+    /**
+     * @return array{0: array{event: string, method: string, format: string}}
+     */
+    public static function getSubscribedEvents(): array
     {
         return [
             [
-                'event' => 'serializer.post_serialize',
+                'event'  => 'serializer.post_serialize',
                 'method' => 'onPostSerialize',
-                'format' => 'json'
-            ]
+                'format' => 'json',
+            ],
         ];
     }
 
     /**
      * @param ObjectEvent $event
+     *
+     * @throws RuntimeException
      */
-    public function onPostSerialize(ObjectEvent $event)
+    public function onPostSerialize(ObjectEvent $event): void
     {
         if ($event->getObject() instanceof TranslatableAttributeI18n) {
             $product = null;
-            /** @var \SplObjectStorage $visitingSet */
-            $visitingSet = $event->getContext()->getVisitingSet();
+            /** @var SerializationContext $context */
+            $context     = $event->getContext();
+            $visitingSet = $context->getVisitingSet();
             foreach ($visitingSet as $index => $element) {
                 if ($element instanceof Product) {
                     $product = $element;
@@ -38,13 +49,20 @@ class ProductAttributeSubscriber implements EventSubscriberInterface
                 }
             }
 
-            if (!is_null($product)) {
+            if (!\is_null($product)) {
                 $visitingSet->offsetSet($product);
                 $visitingSet->next();
                 /** @var TranslatableAttribute $attribute */
-                $attribute = $visitingSet->current();
+                $attribute     = $visitingSet->current();
                 $productAttrId = $attribute->getId()->toArray();
-                $event->getVisitor()->visitProperty(new StaticPropertyMetadata('', 'productAttrId', $productAttrId), $productAttrId);
+                $visitor       = $event->getVisitor();
+                if ($visitor instanceof SerializationVisitorInterface === false) {
+                    throw new \RuntimeException('$visitor must be instance of ' . SerializationVisitorInterface::class);
+                }
+                $visitor->visitProperty(
+                    new StaticPropertyMetadata('', 'productAttrId', $productAttrId),
+                    $productAttrId
+                );
             }
         }
     }

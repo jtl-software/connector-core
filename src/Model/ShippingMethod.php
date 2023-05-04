@@ -1,17 +1,14 @@
 <?php
-/**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
- * @subpackage Product
- */
+
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -23,24 +20,25 @@ class ShippingMethod extends AbstractIdentity
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
-    protected $name = '';
+    protected string $name = '';
 
-    /**
-     * @param string $name
-     * @return ShippingMethod
-     */
-    public function setName(string $name): ShippingMethod
-    {
-        $this->name = $name;
-        
-        return $this;
-    }
-    
     /**
      * @return string
      */
     public function getName(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return ShippingMethod
+     */
+    public function setName(string $name): ShippingMethod
+    {
+        $this->name = $name;
+
+        return $this;
     }
 }

@@ -1,9 +1,6 @@
 <?php
-/**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
- * @subpackage Product
- */
+
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -12,8 +9,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * warehouse model (set in JTL-Wawi ERP).
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -25,24 +22,25 @@ class Warehouse extends AbstractIdentity
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
-    protected $name = '';
+    protected string $name = '';
 
-    /**
-     * @param string $name Warehouse name
-     * @return Warehouse
-     */
-    public function setName(string $name): Warehouse
-    {
-        $this->name = $name;
-        
-        return $this;
-    }
-    
     /**
      * @return string Warehouse name
      */
     public function getName(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @param string $name Warehouse name
+     *
+     * @return Warehouse
+     */
+    public function setName(string $name): Warehouse
+    {
+        $this->name = $name;
+
+        return $this;
     }
 }
