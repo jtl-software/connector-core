@@ -83,7 +83,6 @@ use Jtl\Connector\Core\Subscriber\FeaturesSubscriber;
 use Jtl\Connector\Core\Subscriber\RequestParamsTransformSubscriber;
 use Jtl\Connector\Core\Utilities\Validator\Validate;
 use Monolog\ErrorHandler as MonologErrorHandler;
-use Noodlehaus\AbstractConfig;
 use Noodlehaus\ConfigInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Log\InvalidArgumentException;
@@ -799,57 +798,39 @@ class Application
         }
 
         foreach ($images as $image) {
-            if (!empty($image->getRemoteUrl())) {
-                $imageData = \file_get_contents($image->getRemoteUrl());
-                if ($imageData === false) {
-                    throw ApplicationException::remoteImageNotFound($image);
-                }
-                $path = \parse_url($image->getRemoteUrl(), \PHP_URL_PATH);
-                if (!\is_string($path)) {
-                    throw new \RuntimeException('$path must be a string.');
-                }
-                $fileName  = \pathinfo($path, \PATHINFO_BASENAME);
-                $imagePath = \sprintf('%s/%s_%s', $tempDir, \uniqid('', true), $fileName);
-                if (\file_put_contents($imagePath, $imageData) === false) {
-                    throw ApplicationException::fileCouldNotGetCreated($imagePath);
-                }
-                $image->setFilename($imagePath);
-            } else {
-                if (!$this->httpRequest->files->has('file')) {
-                    throw ApplicationException::uploadedFileNotFound();
-                }
+            if (!$this->httpRequest->files->has('file')) {
+                throw ApplicationException::uploadedFileNotFound();
+            }
 
-                $imageFound = false;
-                foreach ($imagePaths as $imagePath) {
-                    $fileInfo                = \pathinfo($imagePath);
-                    [$hostId, $relationType] = \explode('_', $fileInfo['filename']);
-                    if (
-                        (int)$hostId === $image->getId()->getHost()
-                        && \strtolower($relationType) === \strtolower($image->getRelationType())
-                    ) {
-                        if (!\is_string($contentType = \mime_content_type($imagePath))) {
-                            throw new \RuntimeException('$contentType must be a string.');
-                        }
-                        $extension = self::determineExtensionByMimeType($contentType);
-                        if (
-                            $extension !== null
-                            && isset($fileInfo['extension'])
-                            && $fileInfo['extension'] !== $extension
-                        ) {
-                            $newImagePath = \sprintf('%s/%s.%s', $tempDir, $fileInfo['filename'], $extension);
-                            \rename($imagePath, $newImagePath);
-                            $imagePath = $newImagePath;
-                        }
-
-                        $image->setFilename($imagePath);
-                        $imageFound = true;
-                        break;
+            $imageFound = false;
+            foreach ($imagePaths as $imagePath) {
+                $fileInfo                = \pathinfo($imagePath);
+                [$hostId, $relationType] = \explode('_', $fileInfo['filename']);
+                if (
+                    (int)$hostId === $image->getId()->getHost()
+                    && \strtolower($relationType) === \strtolower($image->getRelationType())
+                ) {
+                    if (!\is_string($contentType = \mime_content_type($imagePath))) {
+                        throw new \RuntimeException('$contentType must be a string.');
                     }
-                }
+                    $extension = self::determineExtensionByMimeType($contentType);
+                    if (
+                        $extension !== null
+                        && isset($fileInfo['extension'])
+                        && $fileInfo['extension'] !== $extension
+                    ) {
+                        $newImagePath = \sprintf('%s/%s.%s', $tempDir, $fileInfo['filename'], $extension);
+                        \rename($imagePath, $newImagePath);
+                        $imagePath = $newImagePath;
+                    }
 
-                if (!$imageFound) {
-                    throw ApplicationException::imageNotFound($image);
+                    $image->setFilename($imagePath);
+                    $imageFound = true;
+                    break;
                 }
+            }
+            if (!$imageFound) {
+                throw ApplicationException::imageNotFound($image);
             }
         }
     }
@@ -977,7 +958,7 @@ class Application
         if ($action === Action::STATISTIC && $controller instanceof StatisticInterface) {
             $result = (new Statistic())
                 ->setControllerName($controllerName)
-                ->setAvailable($result);
+                ->setAvailable((int)$result);
         }
 
         if (!$result instanceof Response) {
