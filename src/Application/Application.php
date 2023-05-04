@@ -83,11 +83,13 @@ use Jtl\Connector\Core\Subscriber\FeaturesSubscriber;
 use Jtl\Connector\Core\Subscriber\RequestParamsTransformSubscriber;
 use Jtl\Connector\Core\Utilities\Validator\Validate;
 use Monolog\ErrorHandler as MonologErrorHandler;
+use Monolog\Logger as MonoLogger;
 use Noodlehaus\ConfigInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Log\InvalidArgumentException;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
 use ReflectionClass;
 use ReflectionException;
 use RuntimeException;
@@ -100,6 +102,11 @@ use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Throwable;
 use TypeError;
 
+/**
+ * @phpstan-import-type Record from MonoLogger
+ * @phpstan-import-type LevelName from MonoLogger
+ * @phpstan-import-type Level from MonoLogger
+ */
 class Application
 {
     public const PROTOCOL_VERSION = 7;
@@ -201,6 +208,8 @@ class Application
             ->useAutowiring(true)
             ->build();
 
+        /** @phpstan-var Level|LevelName|LogLevel::* $logLevel */
+        $logLevel = Validate::string($this->config->get(ConfigSchema::LOG_LEVEL));
         $this->container->set(__CLASS__, $this);
         $this->eventDispatcher = new EventDispatcher();
         $this->fileSystem      = new Filesystem();
@@ -208,7 +217,7 @@ class Application
             (
             new LoggerService(
                 Validate::string($this->config->get(ConfigSchema::LOG_DIR)),
-                Validate::string($this->config->get(ConfigSchema::LOG_LEVEL))
+                $logLevel
             )
             )->setFormat(Validate::string($this->config->get(ConfigSchema::LOG_FORMAT)));
 

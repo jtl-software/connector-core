@@ -12,7 +12,7 @@ class RequestProcessor implements ProcessorInterface
     /**
      * @var array<string, string>
      */
-    protected $extraFields = [];
+    protected array $extraFields = [];
 
     public function __construct()
     {
@@ -54,12 +54,13 @@ class RequestProcessor implements ProcessorInterface
      * @param array{extra:array<mixed>}|LogRecord $record
      * @return array{extra:array<mixed>}|LogRecord
      */
-    public function __invoke($record)
+    public function __invoke($record) //@phpstan-ignore-line
     {
         if (\is_array($record)) {
             $record['extra'] = \array_merge($record['extra'], $this->extraFields);
         } else {
-            $record->extra = \array_merge($record->extra, $this->extraFields);
+            /** @var LogRecord $record */
+            $record->extra = \array_merge($record->extra, $this->extraFields); //@phpstan-ignore-line
         }
 
         return $record;
