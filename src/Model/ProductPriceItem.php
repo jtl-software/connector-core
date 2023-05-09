@@ -55,11 +55,11 @@ class ProductPriceItem extends AbstractModel
     }
 
     /**
-     * @return float Optional quantity to apply netPrice for.
+     * @return int Optional quantity to apply netPrice for.
      *                  Default 1 for default price. A quantity value of 3 means that the given product price
      *                  will be applied when a customer buys 3 or more items.
      */
-    public function getQuantity(): float
+    public function getQuantity(): int
     {
         return $this->quantity;
     }
