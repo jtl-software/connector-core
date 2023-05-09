@@ -83,7 +83,7 @@ class FileConfig extends Config implements CoreConfigInterface
      */
     public function getBool(string $valueName, ?bool $default = null): bool
     {
-        if ($this->check($valueName) === false) {
+        if ($this->check($valueName, $default) === false) {
             self::throwTypeError($valueName, ConfigParameter::TYPE_BOOLEAN);
         }
 
@@ -92,13 +92,22 @@ class FileConfig extends Config implements CoreConfigInterface
 
     /**
      * @param string $valueName
+     * @param scalar|null $default
+     * @phpstan-param mixed $default
      *
      * @return bool
      * @throws ConfigException
      */
-    private function check(string $valueName): bool
+    private function check(string $valueName, $default): bool
     {
-        return $this->configSchema->getParameter($valueName)->isValidValue($valueName);
+        if (!\is_scalar($default) && !\is_null($default)) {
+            self::throwTypeError(
+                \sprintf('Default value for %s', $valueName),
+                'scalar'
+            );
+        }
+        $value = $this->get($valueName, $default);
+        return $this->configSchema->getParameter($valueName)->isValidValue($value);
     }
 
     /**
@@ -119,7 +128,7 @@ class FileConfig extends Config implements CoreConfigInterface
      */
     public function getString(string $valueName, ?string $default = null): string
     {
-        if ($this->check($valueName) === false) {
+        if ($this->check($valueName, $default) === false) {
             self::throwTypeError($valueName, ConfigParameter::TYPE_STRING);
         }
         if (!\is_scalar(($returnStr = $this->get($valueName, $default)))) {
