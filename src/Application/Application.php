@@ -582,24 +582,32 @@ class Application
 
         // Identity mapping
         $resultData = $response->getResult();
-        if (!\is_array($resultData)) {
+        if (
+            !\is_array($resultData)
+            && !(
+                \in_array($request->getAction(), [Action::ACK, Action::CLEAR, Action::FINISH, Action::INIT], true)
+                && \is_bool($resultData)
+            )
+        ) {
             if (!\is_object($resultData)) {
                 throw new \RuntimeException('$resultData must be an array or object.');
             }
             $resultData = [$resultData];
         }
-        foreach ($resultData as $result) {
-            if (
-                $connector instanceof HandleRequestInterface
-                || \in_array($request->getAction(), [Action::PUSH, Action::DELETE], true) === false
-            ) {
-                if ($result instanceof AbstractModel) {
-                    /** @var IdentityLinker $identityLinker */
-                    $identityLinker = $this->container->get(IdentityLinker::class);
-                    $identityLinker->linkModel($result, ($request->getAction() === Action::DELETE));
-                    /** @var ChecksumLinker $checksumLinker */
-                    $checksumLinker = $this->container->get(ChecksumLinker::class);
-                    $checksumLinker->link($result);
+        if (\is_array($resultData)) {
+            foreach ($resultData as $result) {
+                if (
+                    $connector instanceof HandleRequestInterface
+                    || \in_array($request->getAction(), [Action::PUSH, Action::DELETE], true) === false
+                ) {
+                    if ($result instanceof AbstractModel) {
+                        /** @var IdentityLinker $identityLinker */
+                        $identityLinker = $this->container->get(IdentityLinker::class);
+                        $identityLinker->linkModel($result, ($request->getAction() === Action::DELETE));
+                        /** @var ChecksumLinker $checksumLinker */
+                        $checksumLinker = $this->container->get(ChecksumLinker::class);
+                        $checksumLinker->link($result);
+                    }
                 }
             }
 
