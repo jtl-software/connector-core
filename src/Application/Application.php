@@ -83,7 +83,6 @@ use Jtl\Connector\Core\Subscriber\FeaturesSubscriber;
 use Jtl\Connector\Core\Subscriber\RequestParamsTransformSubscriber;
 use Jtl\Connector\Core\Utilities\Validator\Validate;
 use Monolog\ErrorHandler as MonologErrorHandler;
-use Monolog\Logger as MonoLogger;
 use Noodlehaus\ConfigInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Log\InvalidArgumentException;
@@ -584,7 +583,10 @@ class Application
         // Identity mapping
         $resultData = $response->getResult();
         if (!\is_array($resultData)) {
-            throw new \RuntimeException('$resultData must be an array.');
+            if (!\is_object($resultData)) {
+                throw new \RuntimeException('$resultData must be an array or object.');
+            }
+            $resultData = [$resultData];
         }
         foreach ($resultData as $result) {
             if (
