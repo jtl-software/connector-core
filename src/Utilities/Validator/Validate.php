@@ -117,16 +117,14 @@ class Validate
     /**
      * @param mixed $value
      *
-     * @return \DateTimeInterface
-     * @throws MustNotBeNullException
+     * @return \DateTimeInterface|null
      * @throws TypeError
      */
-    public static function checkDateTimeInterfaceAndNotNull($value): \DateTimeInterface
+    public static function checkDateTimeInterfaceOrNull($value): ?\DateTimeInterface
     {
         if ($value === null) {
-            throw MustNotBeNullException::fromExpectedType(\DateTimeInterface::class);
+            return null;
         }
-
         self::initValidator($value)->instanceOf(\DateTimeInterface::class);
 
         /** @var \DateTimeInterface $value */

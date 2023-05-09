@@ -1130,13 +1130,12 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return DateTimeInterface Creation date
-     * @throws MustNotBeNullException
+     * @return DateTimeInterface|null Creation date
      * @throws TypeError
      */
-    public function getCreationDate(): \DateTimeInterface
+    public function getCreationDate(): ?\DateTimeInterface
     {
-        return Validate::checkDateTimeInterfaceAndNotNull($this->creationDate);
+        return Validate::checkDateTimeInterfaceOrNull($this->creationDate);
     }
 
     /**
