@@ -14,9 +14,9 @@ interface TranslatableAttributesInterface
     /**
      * @param TranslatableAttribute ...$attributes
      *
-     * @return TranslatableAttributesInterface
+     * @return $this
      */
-    public function setAttributes(TranslatableAttribute ...$attributes): TranslatableAttributesInterface;
+    public function setAttributes(TranslatableAttribute ...$attributes): self;
 
     /**
      * @param string $name

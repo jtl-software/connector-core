@@ -67,20 +67,6 @@ class Validate
     /**
      * @param mixed $value
      *
-     * @return CategoryAttribute
-     * @throws TypeError
-     */
-    public static function categoryAttribute($value): CategoryAttribute
-    {
-        self::initValidator($value)->instanceOf(CategoryAttribute::class);
-
-        /** @var CategoryAttribute $value */
-        return $value;
-    }
-
-    /**
-     * @param mixed $value
-     *
      * @return object
      * @throws TypeError
      * @throws \RuntimeException

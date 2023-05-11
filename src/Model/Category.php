@@ -53,7 +53,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     protected int $sort = 0;
 
     /**
-     * @var CategoryAttribute[]
+     * @var TranslatableAttribute[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\CategoryAttribute>")
      * @Serializer\SerializedName("attributes")
      * @Serializer\AccessType("reflection")
@@ -177,11 +177,11 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     }
 
     /**
-     * @param CategoryAttribute $attribute
+     * @param TranslatableAttribute $attribute
      *
      * @return Category
      */
-    public function addAttribute(CategoryAttribute $attribute): self
+    public function addAttribute(TranslatableAttribute $attribute): self
     {
         $this->attributes[] = $attribute;
 
@@ -189,7 +189,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     }
 
     /**
-     * @return CategoryAttribute[]
+     * @return TranslatableAttribute[]
      */
     public function getAttributes(): array
     {
@@ -197,17 +197,10 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     }
 
     /**
-     * @param TranslatableAttribute ...$attributes
-     *
-     * @return Category
-     * @throws TypeError
+     * @inheritDoc
      */
-    public function setAttributes(TranslatableAttribute ...$attributes): TranslatableAttributesInterface
+    public function setAttributes(TranslatableAttribute ...$attributes): self
     {
-        foreach ($attributes as $attribute) {
-            Validate::categoryAttribute($attribute);
-        }
-        /** @var CategoryAttribute[] $attributes */
         $this->attributes = $attributes;
 
         return $this;
