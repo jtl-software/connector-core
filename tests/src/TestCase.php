@@ -19,7 +19,7 @@ use SebastianBergmann\RecursionContext\InvalidArgumentException;
  *
  * @package Jtl\Connector\Core\Tests
  */
-class TestCase extends \Jtl\UnitTest\TestCase
+class TestCase extends \Jtl\Connector\MappingTables\TestCase
 {
     protected string            $connectorDir = \TEST_DIR;
     protected ?string           $configFile   = null;
