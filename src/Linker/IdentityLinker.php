@@ -215,8 +215,8 @@ class IdentityLinker implements LoggerAwareInterface
      */
     protected function buildKey($id, int $identityType, string $cacheType): string
     {
-        if (!\is_scalar($id)) {
-            throw new \InvalidArgumentException('$id must be scalar.');
+        if ($id !== null && !\is_scalar($id)) {
+            throw new \InvalidArgumentException('$id must be scalar or null.');
         }
 
         return \sprintf('%s_%s_%s', $cacheType, $id, $identityType);
