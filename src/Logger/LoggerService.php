@@ -210,6 +210,13 @@ class LoggerService
                 }
             }
         }
+        if (
+            $this->combinedHandler instanceof FormattableHandlerInterface
+            || \method_exists($this->combinedHandler, 'setFormatter')
+        ) {
+            $this->combinedHandler->setFormatter($formatter);
+        }
+
         $this->formatter = $formatter;
 
         return $this;
@@ -234,7 +241,6 @@ class LoggerService
         if (!($formatter instanceof FormatterInterface)) {
             throw new \RuntimeException('Formatter ' . $formatterClass . ' not found.');
         }
-
         $this->setFormatter($formatter);
 
         return $this;
