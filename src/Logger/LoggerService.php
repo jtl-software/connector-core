@@ -206,6 +206,10 @@ class LoggerService
                 }
             }
         }
+        if ($this->combinedHandler instanceof FormattableHandlerInterface) {
+            $this->combinedHandler->setFormatter($formatter);
+        }
+
         $this->formatter = $formatter;
 
         return $this;
