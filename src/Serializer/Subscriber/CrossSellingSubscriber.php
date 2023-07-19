@@ -36,7 +36,7 @@ class CrossSellingSubscriber implements EventSubscriberInterface
             if (isset($data['items']) && \is_array($data['items'])) { // @phpstan-ignore-line
                 foreach ($data['items'] as $i => $item) { // @phpstan-ignore-line
                     if (!isset($data['items'][$i]['id'])) { // @phpstan-ignore-line
-                        $crossSellingGroupId = $item['crossSellingGroupId'][1] ?? 0; // @phpstan-ignore-line
+                        $crossSellingGroupId = $item['crossSellingGroupId'][1] ?? 0;
 
                         $itemId = self::cantorPairingFunction($productId, $crossSellingGroupId); // @phpstan-ignore-line
                         if ($productId !== 0 && $crossSellingGroupId !== 0 && $itemId < \PHP_INT_MAX) {
