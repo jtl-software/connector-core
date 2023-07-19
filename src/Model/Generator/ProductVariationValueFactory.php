@@ -1,21 +1,26 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Model\Generator;
 
-use Jawira\CaseConverter\CaseConverterException;
 use Jtl\Connector\Core\Model\ProductVariationValue;
 
 class ProductVariationValueFactory extends AbstractModelFactory
 {
     /**
-     * @param array $override
-     * @return array
-     * @throws CaseConverterException
+     * @return array{sort: int, i18ns: array<int, array<int|string, mixed>>}
+     * @throws \Exception
      */
     protected function makeFakeArray(): array
     {
+        /** @var ProductVariationValueI18nFactory $i18nsFactory */
+        $i18nsFactory = $this->getFactory('ProductVariationValueI18n');
+        $i18ns        = $i18nsFactory->makeArray(\random_int(1, 5));
+
         return [
-            'sort' => $this->faker->numberBetween(),
-            'i18ns' => $this->getFactory('ProductVariationValueI18n')->makeArray(mt_rand(1, 5))
+            'sort'  => $this->faker->numberBetween(),
+            'i18ns' => $i18ns,
         ];
     }
 

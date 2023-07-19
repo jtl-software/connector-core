@@ -1,8 +1,6 @@
 <?php
-/**
- * @copyright 2010-2019 JTL-Software GmbH
- * @package Jtl\Connector\Core\Application
- */
+
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Controller;
 
@@ -15,6 +13,7 @@ interface PullInterface
      * Select
      *
      * @param QueryFilter $queryFilter
+     *
      * @return AbstractModel[]
      */
     public function pull(QueryFilter $queryFilter): array;

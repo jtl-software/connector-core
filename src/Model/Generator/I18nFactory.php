@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model\Generator;
 
@@ -8,7 +9,7 @@ use Jtl\Connector\Core\Exception\NotImplementedException;
 class I18nFactory extends AbstractI18nFactory
 {
     /**
-     * @return array
+     * @return array{}
      */
     protected function makeFakeArray(): array
     {

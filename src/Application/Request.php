@@ -1,34 +1,43 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Application;
 
 class Request
 {
-    /**
-     * @var string
-     */
-    protected $controller;
-
-    /**
-     * @var string
-     */
-    protected $action;
-
-    /**
-     * @var mixed[]
-     */
-    protected $params = [];
+    protected string $controller;
+    protected string $action;
+    /** @var mixed[] */
+    protected array $params = [];
 
     /**
      * Request constructor.
-     * @param string $controller
-     * @param string $action
+     *
+     * @param string  $controller
+     * @param string  $action
      * @param mixed[] $params
      */
     public function __construct(string $controller, string $action, array $params)
     {
         $this->controller = $controller;
-        $this->action = $action;
-        $this->params = $params;
+        $this->action     = $action;
+        $this->params     = $params;
+    }
+
+    //TODO: brauchts das überhaupt noch? raus statt deprecated?
+
+    /**
+     * @param string  $controller
+     * @param string  $action
+     * @param mixed[] $params
+     *
+     * @return Request
+     * @deprecated
+     */
+    public static function create(string $controller, string $action, array $params): self
+    {
+        return new self($controller, $action, $params);
     }
 
     /**
@@ -57,22 +66,12 @@ class Request
 
     /**
      * @param mixed[] $params
+     *
      * @return Request
      */
-    public function setParams(array $params): Request
+    public function setParams(array $params): self
     {
         $this->params = $params;
         return $this;
-    }
-
-    /**
-     * @param string $controller
-     * @param string $action
-     * @param mixed[] $params
-     * @return Request
-     */
-    public static function create(string $controller, string $action, array $params): Request
-    {
-        return new self($controller, $action, $params);
     }
 }

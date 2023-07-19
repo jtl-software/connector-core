@@ -1,20 +1,22 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Model\Generator;
 
-use Jtl\Connector\Core\Model\Generator\AbstractModelFactory;
 use Jtl\Connector\Core\Model\ProductVariationValueI18n;
 
 class ProductVariationValueI18nFactory extends AbstractModelFactory
 {
     /**
-     * @param mixed[] $override
-     * @return mixed[]
+     * @return array{languageIso: string, name: string}
      */
     protected function makeFakeArray(): array
     {
+
         return [
             'languageIso' => $this->faker->languageCode,
-            'name' => $this->faker->text(80),
+            'name'        => $this->faker->text(80),
         ];
     }
 

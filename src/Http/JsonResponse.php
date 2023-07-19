@@ -1,7 +1,12 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Http;
 
+use InvalidArgumentException;
 use Jawira\CaseConverter\CaseConverterException;
+use JMS\Serializer\Exception\RuntimeException;
 use JMS\Serializer\Serializer;
 use Jtl\Connector\Core\Definition\Event;
 use Jtl\Connector\Core\Event\RpcEvent;
@@ -14,54 +19,56 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\JsonResponse as SymfonyJsonResponse;
+use TypeError;
 
 class JsonResponse extends SymfonyJsonResponse implements LoggerAwareInterface
 {
-    /**
-     * @var LoggerInterface
-     */
-    protected $logger;
-
-    /**
-     * @var EventDispatcher
-     */
-    protected $eventDispatcher;
-
-    /**
-     * @var Serializer
-     */
-    protected $serializer;
+    protected LoggerInterface $logger;
+    protected EventDispatcher $eventDispatcher;
+    protected Serializer      $serializer;
 
     /**
      * JsonResponse constructor.
-     * @param EventDispatcher $eventDispatcher
-     * @param Serializer $serializer
-     * @param null $data
-     * @param int $status
-     * @param array $headers
-     * @param bool $json
+     *
+     * @param EventDispatcher                     $eventDispatcher
+     * @param Serializer                          $serializer
+     * @param mixed|null                          $data
+     * @param int                                 $status
+     * @param array<string, null|string|string[]> $headers
+     * @param bool                                $json
+     *
+     * @throws TypeError
      */
-    public function __construct(EventDispatcher $eventDispatcher, Serializer $serializer, $data = null, int $status = 200, array $headers = [], bool $json = false)
-    {
-        $this->logger = new NullLogger();
+    public function __construct(
+        EventDispatcher $eventDispatcher,
+        Serializer      $serializer,
+        $data = null,
+        int             $status = 200,
+        array           $headers = [],
+        bool            $json = false
+    ) {
+        $this->logger          = new NullLogger();
         $this->eventDispatcher = $eventDispatcher;
-        $this->serializer = $serializer;
+        $this->serializer      = $serializer;
         parent::__construct($data, $status, $headers, $json);
     }
 
     /**
-     * @param RequestPacket $requestPacket
+     * @param RequestPacket  $requestPacket
      * @param ResponsePacket $responsePacket
+     *
      * @return JsonResponse
      * @throws DefinitionException
      * @throws CaseConverterException
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
      */
-    public function prepareAndSend(RequestPacket $requestPacket, ResponsePacket $responsePacket)
+    public function prepareAndSend(RequestPacket $requestPacket, ResponsePacket $responsePacket): JsonResponse
     {
-        $method = Method::createFromRpcMethod($requestPacket->getMethod());
+        $method       = Method::createFromRpcMethod($requestPacket->getMethod());
         $responseData = $responsePacket->toArray($this->serializer);
-        $dataIndex = $responsePacket->getError() !== null ? 'error' : 'result';
-        $event = new RpcEvent($responseData[$dataIndex] ?? [], $method->getController(), $method->getAction());
+        $dataIndex    = $responsePacket->getError() !== null ? 'error' : 'result';
+        $event        = new RpcEvent($responseData[$dataIndex] ?? [], $method->getController(), $method->getAction());
         $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::AFTER));
         $responseData[$dataIndex] = $event->getData();
         $this->setData($responseData);

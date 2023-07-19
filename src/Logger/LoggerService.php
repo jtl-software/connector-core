@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Logger;
 
 use Jtl\Connector\Core\Exception\LoggerException;
@@ -17,6 +19,11 @@ use Monolog\Processor\IntrospectionProcessor;
 use Monolog\Processor\MemoryPeakUsageProcessor;
 use Monolog\Processor\ProcessorInterface;
 use Monolog\Processor\PsrLogMessageProcessor;
+use Psr\Log\LogLevel;
+use Psr\Log\InvalidArgumentException;
+use ReflectionException;
+use RuntimeException;
+use UnexpectedValueException;
 
 class LoggerService
 {
@@ -28,55 +35,34 @@ class LoggerService
         CHANNEL_RPC      = 'rpc',
         CHANNEL_SESSION  = 'session';
 
-    /**
-     * @var MonoLogger[]
-     */
-    protected $channels = [];
+    /** @var MonoLogger[] */
+    protected array $channels = [];
 
-    /**
-     * @var FormatterInterface
-     */
-    protected $formatter;
+    /** @var ProcessorInterface[] */
+    protected array $processors = [];
 
-    /**
-     * @var string
-     */
-    protected $logDir;
-
-    /**
-     * @var string
-     */
+    protected FormatterInterface $formatter;
+    protected string             $logDir;
+    /** @var int|string|LogLevel  */
     protected $logLevel;
-
-    /**
-     * @var integer
-     */
-    protected $maxFiles = 2;
-
-    /**
-     * @var ProcessorInterface
-     */
-    protected $processors = [];
-
-    /**
-     * Final handler that gets wrapped by FingersCrossedHandler
-     * @var HandlerInterface
-     */
-    protected $handler;
-
-    /**
-     * FingersCrossedHandler for combined log file
-     * @var HandlerInterface
-     */
-    protected $combinedHandler;
+    protected int                $maxFiles = 2;
+    /* Final handler that gets wrapped by FingersCrossedHandler */
+    protected HandlerInterface   $handler;
+    /* FingersCrossedHandler for combined log file */
+    protected HandlerInterface   $combinedHandler;
 
     /**
      * LoggerFactory constructor.
+     *
      * @param string $logDir
-     * @param string $logLevel
-     * @param int $maxFiles
+     * @param int|string $logLevel
+     * @param int    $maxFiles
+     *
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
+     * @throws UnexpectedValueException
      */
-    public function __construct(string $logDir, string $logLevel, int $maxFiles = 2)
+    public function __construct(string $logDir, $logLevel, int $maxFiles = 2)
     {
         $this->logDir   = $logDir;
         $this->logLevel = $logLevel;
@@ -86,19 +72,21 @@ class LoggerService
             ->pushProcessor(new IntrospectionProcessor())
             ->pushProcessor(new PsrLogMessageProcessor())
             ->pushProcessor(new MemoryPeakUsageProcessor())
-            ->pushProcessor(new RequestProcessor())
-            ->pushProcessor(new HostnameProcessor());
+            ->pushProcessor(new RequestProcessor());
 
         $fileName              = \sprintf('%s/combined.log', $this->logDir);
-        $this->combinedHandler = new RotatingFileHandler($fileName, $this->maxFiles, Logger::DEBUG);
+        $this->combinedHandler = new RotatingFileHandler($fileName, $this->maxFiles, MonoLogger::DEBUG);
         $this->createHandler();
     }
 
     /**
-     * @param string $logLevel
+     * @param int|string $logLevel
      * @return void
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
+     * @throws UnexpectedValueException
      */
-    public function setLogLevel(string $logLevel): void
+    public function setLogLevel($logLevel): void
     {
         $this->logLevel = $logLevel;
         $this->createHandler();
@@ -111,41 +99,62 @@ class LoggerService
 
     /**
      * (re-)created the handler for the combined log file
+     *
      * @return void
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
+     * @throws UnexpectedValueException
      */
     protected function createHandler(): void
     {
         // needed if we change the passthru level
-        if ($this->handler instanceof FingersCrossedHandler) {
+        if (isset($this->handler) && $this->handler instanceof FingersCrossedHandler) {
             $this->handler->close();
         }
-        $handler = new FingersCrossedHandler($this->combinedHandler, Logger::ERROR, 0, true, true, $this->logLevel);
-        if (!\is_null($this->formatter)) {
+        $logLevel = MonoLogger::toMonologLevel($this->logLevel); // @phpstan-ignore-line
+        $handler  = new FingersCrossedHandler($this->combinedHandler, MonoLogger::ERROR, 0, true, true, $logLevel);
+        if (isset($this->formatter)) {
             $handler->setFormatter($this->formatter);
         }
         $this->handler = $handler;
     }
 
     /**
-     * @param string $channel
-     * @return boolean
+     * @param ProcessorInterface $processor
+     *
+     * @return LoggerService
      */
-    public function has(string $channel): bool
+    public function pushProcessor(ProcessorInterface $processor): self
     {
-        return isset($this->channels[\lcfirst($channel)]);
+        if (\in_array($processor, $this->processors, true)) {
+            return $this;
+        }
+
+        foreach ($this->channels as $channel) {
+            $channel->pushProcessor($processor);
+        }
+
+        $this->processors[] = $processor;
+
+        return $this;
     }
 
     /**
      * creates legacy handler for each channel
-     * @param string $channel
-     * @param Level|int $logLevel
+     *
+     * @param string     $channel
+     * @param int|string|\Monolog\Level $logLevel
+     * @phpstan-param mixed $logLevel
+     *
      * @return HandlerInterface
+     * @throws InvalidArgumentException
      */
     protected function createChannelSpecificHandler(string $channel, $logLevel): HandlerInterface
     {
-        $fileName = \sprintf('%s/%s.log', $this->logDir, $channel);
-        $handler  = new RotatingFileHandler($fileName, $this->maxFiles, $logLevel);
-        if (!\is_null($this->formatter)) {
+        $fileName     = \sprintf('%s/%s.log', $this->logDir, $channel);
+        $monologLevel = MonoLogger::toMonologLevel($logLevel); // @phpstan-ignore-line
+        $handler      = new RotatingFileHandler($fileName, $this->maxFiles, $monologLevel);
+        if (isset($this->formatter)) {
             $handler->setFormatter($this->formatter);
         }
         return $handler;
@@ -153,7 +162,9 @@ class LoggerService
 
     /**
      * @param string $channel
+     *
      * @return MonoLogger
+     * @throws InvalidArgumentException
      */
     public function get(string $channel): MonoLogger
     {
@@ -162,7 +173,7 @@ class LoggerService
             $this->channels[$channel] = new MonoLogger($channel);
         }
 
-        $logLevel = MonoLogger::toMonologLevel($this->logLevel);
+        $logLevel = MonoLogger::toMonologLevel($this->logLevel); // @phpstan-ignore-line
         if (!$this->channels[$channel]->isHandling($logLevel)) {
             $handler = $this->createChannelSpecificHandler($channel, $logLevel);
             $this->channels[$channel]->pushHandler($this->handler);
@@ -176,37 +187,36 @@ class LoggerService
     }
 
     /**
-     * @param string $format
-     * @param array $arguments
-     * @return LoggerService
-     * @throws \ReflectionException|LoggerException
+     * @param string $channel
+     *
+     * @return boolean
      */
-    public function setFormat(string $format, array $arguments = []): self
+    public function has(string $channel): bool
     {
-        $formatterClass = \sprintf('Monolog\Formatter\%sFormatter', \ucfirst($format));
-        if (!\class_exists($formatterClass)) {
-            throw LoggerException::formatterNotExists($formatterClass);
-        }
-        $formatter = (new \ReflectionClass($formatterClass))->newInstanceArgs($arguments);
-        $this->setFormatter($formatter);
-
-        return $this;
+        return isset($this->channels[\lcfirst($channel)]);
     }
 
     /**
      * @param FormatterInterface $formatter
+     *
      * @return LoggerService
      */
     public function setFormatter(FormatterInterface $formatter): self
     {
         foreach ($this->channels as $channel) {
             foreach ($channel->getHandlers() as $handler) {
-                if ($handler instanceof FormattableHandlerInterface) {
+                if (
+                    $handler instanceof FormattableHandlerInterface
+                    || \method_exists($handler, 'setFormatter')
+                ) {
                     $handler->setFormatter($formatter);
                 }
             }
         }
-        if ($this->combinedHandler instanceof FormattableHandlerInterface) {
+        if (
+            $this->combinedHandler instanceof FormattableHandlerInterface
+            || \method_exists($this->combinedHandler, 'setFormatter')
+        ) {
             $this->combinedHandler->setFormatter($formatter);
         }
 
@@ -216,22 +226,25 @@ class LoggerService
     }
 
     /**
-     * @param ProcessorInterface $processor
+     * @param string               $format
+     * @param array{}|array<mixed> $arguments
+     *
      * @return LoggerService
+     * @throws LoggerException
+     * @throws RuntimeException
+     * @throws ReflectionException
      */
-    public function pushProcessor(ProcessorInterface $processor): self
+    public function setFormat(string $format, array $arguments = []): self
     {
-        foreach ($this->processors as $tProcessor) {
-            if ($processor === $tProcessor) {
-                return $this;
-            }
+        $formatterClass = \sprintf('Monolog\Formatter\%sFormatter', \ucfirst($format));
+        if (!\class_exists($formatterClass)) {
+            throw LoggerException::formatterNotExists($formatterClass);
         }
-
-        foreach ($this->channels as $channel) {
-            $channel->pushProcessor($processor);
+        $formatter = (new \ReflectionClass($formatterClass))->newInstanceArgs($arguments);
+        if (!($formatter instanceof FormatterInterface)) {
+            throw new \RuntimeException('Formatter ' . $formatterClass . ' not found.');
         }
-
-        $this->processors[] = $processor;
+        $this->setFormatter($formatter);
 
         return $this;
     }

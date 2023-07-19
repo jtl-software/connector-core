@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Model;
 
 interface TranslatableAttributesInterface
@@ -11,12 +13,14 @@ interface TranslatableAttributesInterface
 
     /**
      * @param TranslatableAttribute ...$attributes
-     * @return TranslatableAttributesInterface
+     *
+     * @return $this
      */
-    public function setAttributes(TranslatableAttribute ...$attributes): TranslatableAttributesInterface;
+    public function setAttributes(TranslatableAttribute ...$attributes): self;
 
     /**
      * @param string $name
+     *
      * @return TranslatableAttribute|null
      */
     public function findAttribute(string $name): ?TranslatableAttribute;

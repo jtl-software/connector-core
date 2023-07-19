@@ -1,19 +1,19 @@
 <?php
-/**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
- * @subpackage Product
- */
+
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\MustNotBeNullException;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
+use TypeError;
 
 /**
  * Define set articles / parts lists.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -25,20 +25,21 @@ class PartsList extends AbstractIdentity
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
      */
-    protected $productId = null;
-    
+    protected Identity $productId;
+
     /**
      * @var double Component quantity
      * @Serializer\Type("double")
      * @Serializer\SerializedName("quantity")
      * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
      */
-    protected $quantity = 0.0;
+    protected float $quantity = 0.0;
 
     /**
      * Constructor.
+     *
      * @param string $endpoint
-     * @param int $host
+     * @param int    $host
      */
     public function __construct(string $endpoint = '', int $host = 0)
     {
@@ -47,40 +48,44 @@ class PartsList extends AbstractIdentity
     }
 
     /**
+     * @return Identity Reference to a component / product
+     * @throws MustNotBeNullException
+     * @throws TypeError
+     */
+    public function getProductId(): Identity
+    {
+        return Validate::checkIdentityAndNotNull($this->productId);
+    }
+
+    /**
      * @param Identity $productId Reference to a component / product
+     *
      * @return PartsList
      */
     public function setProductId(Identity $productId): PartsList
     {
         $this->productId = $productId;
-        
+
         return $this;
     }
-    
-    /**
-     * @return Identity Reference to a component / product
-     */
-    public function getProductId(): Identity
-    {
-        return $this->productId;
-    }
-    
-    /**
-     * @param double $quantity Component quantity
-     * @return PartsList
-     */
-    public function setQuantity(float $quantity): PartsList
-    {
-        $this->quantity = $quantity;
-        
-        return $this;
-    }
-    
+
     /**
      * @return double Component quantity
      */
     public function getQuantity(): float
     {
         return $this->quantity;
+    }
+
+    /**
+     * @param double $quantity Component quantity
+     *
+     * @return PartsList
+     */
+    public function setQuantity(float $quantity): PartsList
+    {
+        $this->quantity = $quantity;
+
+        return $this;
     }
 }

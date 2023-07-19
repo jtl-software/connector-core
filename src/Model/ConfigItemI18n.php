@@ -1,9 +1,6 @@
 <?php
-/**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
- * @subpackage Product
- */
+
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -12,8 +9,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Localized config item name and description.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -25,7 +22,7 @@ class ConfigItemI18n extends AbstractI18n
      * @Serializer\SerializedName("description")
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
-    protected $description = '';
+    protected string $description = '';
 
     /**
      * @var string Config item name. Will be ignored if inheritProductName==true
@@ -33,19 +30,8 @@ class ConfigItemI18n extends AbstractI18n
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
-    protected $name = '';
+    protected string $name = '';
 
-    /**
-     * @param string $description Description (html). Will be ignored, if inheritProductName==true
-     * @return ConfigItemI18n
-     */
-    public function setDescription(string $description): ConfigItemI18n
-    {
-        $this->description = $description;
-        
-        return $this;
-    }
-    
     /**
      * @return string Description (html). Will be ignored, if inheritProductName==true
      */
@@ -55,21 +41,34 @@ class ConfigItemI18n extends AbstractI18n
     }
 
     /**
-     * @param string $name Config item name. Will be ignored if inheritProductName==true
+     * @param string $description Description (html). Will be ignored, if inheritProductName==true
+     *
      * @return ConfigItemI18n
      */
-    public function setName(string $name): ConfigItemI18n
+    public function setDescription(string $description): ConfigItemI18n
     {
-        $this->name = $name;
-        
+        $this->description = $description;
+
         return $this;
     }
-    
+
     /**
      * @return string Config item name. Will be ignored if inheritProductName==true
      */
     public function getName(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @param string $name Config item name. Will be ignored if inheritProductName==true
+     *
+     * @return ConfigItemI18n
+     */
+    public function setName(string $name): ConfigItemI18n
+    {
+        $this->name = $name;
+
+        return $this;
     }
 }

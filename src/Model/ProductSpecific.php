@@ -1,19 +1,21 @@
 <?php
-/**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
- * @subpackage Product
- */
+
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\MustNotBeNullException;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
+use TypeError;
 
 /**
- * Product to specificValue Assignment. Product specifics are used to assign characteristic product attributes like color or  size... When different products have common specifics, products are similar.
+ * Product to specificValue Assignment.
+ * Product specifics are used to assign characteristic product attributes like color or  size...
+ * When different products have common specifics, products are similar.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -25,12 +27,13 @@ class ProductSpecific extends AbstractIdentity
      * @Serializer\SerializedName("specificValueId")
      * @Serializer\Accessor(getter="getSpecificValueId",setter="setSpecificValueId")
      */
-    protected $specificValueId = null;
+    protected Identity $specificValueId ;
 
     /**
      * Constructor.
+     *
      * @param string $endpoint
-     * @param int $host
+     * @param int    $host
      */
     public function __construct(string $endpoint = '', int $host = 0)
     {
@@ -39,21 +42,24 @@ class ProductSpecific extends AbstractIdentity
     }
 
     /**
+     * @return Identity Reference to specificValue
+     * @throws MustNotBeNullException
+     * @throws TypeError
+     */
+    public function getSpecificValueId(): Identity
+    {
+        return Validate::checkIdentityAndNotNull($this->specificValueId);
+    }
+
+    /**
      * @param Identity $specificValueId Reference to specificValue
+     *
      * @return ProductSpecific
      */
     public function setSpecificValueId(Identity $specificValueId): ProductSpecific
     {
         $this->specificValueId = $specificValueId;
-        
+
         return $this;
-    }
-    
-    /**
-     * @return Identity Reference to specificValue
-     */
-    public function getSpecificValueId(): Identity
-    {
-        return $this->specificValueId;
     }
 }

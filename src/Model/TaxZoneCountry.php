@@ -1,9 +1,6 @@
 <?php
-/**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
- * @subpackage Product
- */
+
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -12,8 +9,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * TaxZone to Country Allocation (set in JTL-Wawi ERP).
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -25,24 +22,25 @@ class TaxZoneCountry extends AbstractModel
      * @Serializer\SerializedName("countryIso")
      * @Serializer\Accessor(getter="getCountryIso",setter="setCountryIso")
      */
-    protected $countryIso = '';
+    protected string $countryIso = '';
 
-    /**
-     * @param string $countryIso Country ISO 3166-2 (2 letter Uppercase)
-     * @return TaxZoneCountry
-     */
-    public function setCountryIso(string $countryIso): TaxZoneCountry
-    {
-        $this->countryIso = $countryIso;
-        
-        return $this;
-    }
-    
     /**
      * @return string Country ISO 3166-2 (2 letter Uppercase)
      */
     public function getCountryIso(): string
     {
         return $this->countryIso;
+    }
+
+    /**
+     * @param string $countryIso Country ISO 3166-2 (2 letter Uppercase)
+     *
+     * @return TaxZoneCountry
+     */
+    public function setCountryIso(string $countryIso): TaxZoneCountry
+    {
+        $this->countryIso = $countryIso;
+
+        return $this;
     }
 }

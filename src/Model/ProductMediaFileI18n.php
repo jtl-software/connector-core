@@ -1,9 +1,6 @@
 <?php
-/**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
- * @subpackage Product
- */
+
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
@@ -12,8 +9,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Locale specific mediafile name + description.
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -25,7 +22,7 @@ class ProductMediaFileI18n extends AbstractI18n
      * @Serializer\SerializedName("description")
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
      */
-    protected $description = '';
+    protected string $description = '';
 
     /**
      * @var string Locale specific name
@@ -33,19 +30,8 @@ class ProductMediaFileI18n extends AbstractI18n
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
      */
-    protected $name = '';
+    protected string $name = '';
 
-    /**
-     * @param string $description Locale specific description
-     * @return ProductMediaFileI18n
-     */
-    public function setDescription(string $description): ProductMediaFileI18n
-    {
-        $this->description = $description;
-        
-        return $this;
-    }
-    
     /**
      * @return string Locale specific description
      */
@@ -55,21 +41,34 @@ class ProductMediaFileI18n extends AbstractI18n
     }
 
     /**
-     * @param string $name Locale specific name
+     * @param string $description Locale specific description
+     *
      * @return ProductMediaFileI18n
      */
-    public function setName(string $name): ProductMediaFileI18n
+    public function setDescription(string $description): ProductMediaFileI18n
     {
-        $this->name = $name;
-        
+        $this->description = $description;
+
         return $this;
     }
-    
+
     /**
      * @return string Locale specific name
      */
     public function getName(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @param string $name Locale specific name
+     *
+     * @return ProductMediaFileI18n
+     */
+    public function setName(string $name): ProductMediaFileI18n
+    {
+        $this->name = $name;
+
+        return $this;
     }
 }

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Application\Request;
@@ -9,10 +12,11 @@ class RequestEvent extends Event
     /**
      * @var Request
      */
-    protected $request;
+    protected Request $request;
 
     /**
      * RequestBeforeHandleEvent constructor.
+     *
      * @param Request $request
      */
     public function __construct(Request $request)

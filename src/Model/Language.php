@@ -1,19 +1,19 @@
 <?php
-/**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
- * @subpackage Product
- */
+
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\MustNotBeNullException;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
+use TypeError;
 
 /**
  * Global language model
  *
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -25,15 +25,15 @@ class Language extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
-    protected $id = null;
-    
+    protected Identity $id;
+
     /**
      * @var boolean Flag default language for frontend. Exact 1 language must be marked as default.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isDefault")
      * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
      */
-    protected $isDefault = false;
+    protected bool $isDefault = false;
 
     /**
      * @var string English term
@@ -41,16 +41,16 @@ class Language extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("nameEnglish")
      * @Serializer\Accessor(getter="getNameEnglish",setter="setNameEnglish")
      */
-    protected $nameEnglish = '';
-    
+    protected string $nameEnglish = '';
+
     /**
      * @var string German term
      * @Serializer\Type("string")
      * @Serializer\SerializedName("nameGerman")
      * @Serializer\Accessor(getter="getNameGerman",setter="setNameGerman")
      */
-    protected $nameGerman = '';
-    
+    protected string $nameGerman = '';
+
     /**
      * Constructor
      */
@@ -58,37 +58,29 @@ class Language extends AbstractI18n implements IdentityInterface
     {
         $this->id = new Identity();
     }
-    
+
+    /**
+     * @return Identity Unique language id
+     * @throws MustNotBeNullException
+     * @throws TypeError
+     */
+    public function getId(): Identity
+    {
+        return Validate::checkIdentityAndNotNull($this->id);
+    }
+
     /**
      * @param Identity $id Unique language id
+     *
      * @return Language
      */
     public function setId(Identity $id): Language
     {
         $this->id = $id;
-        
+
         return $this;
     }
-    
-    /**
-     * @return Identity Unique language id
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
-    }
-    
-    /**
-     * @param boolean $isDefault Flag default language for frontend. Exact 1 language must be marked as default.
-     * @return Language
-     */
-    public function setIsDefault(bool $isDefault): Language
-    {
-        $this->isDefault = $isDefault;
-        
-        return $this;
-    }
-    
+
     /**
      * @return boolean Flag default language for frontend. Exact 1 language must be marked as default.
      */
@@ -98,16 +90,17 @@ class Language extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @param string $nameEnglish English term
+     * @param boolean $isDefault Flag default language for frontend. Exact 1 language must be marked as default.
+     *
      * @return Language
      */
-    public function setNameEnglish(string $nameEnglish): Language
+    public function setIsDefault(bool $isDefault): Language
     {
-        $this->nameEnglish = $nameEnglish;
-        
+        $this->isDefault = $isDefault;
+
         return $this;
     }
-    
+
     /**
      * @return string English term
      */
@@ -115,23 +108,36 @@ class Language extends AbstractI18n implements IdentityInterface
     {
         return $this->nameEnglish;
     }
-    
+
     /**
-     * @param string $nameGerman German term
+     * @param string $nameEnglish English term
+     *
      * @return Language
      */
-    public function setNameGerman(string $nameGerman): Language
+    public function setNameEnglish(string $nameEnglish): Language
     {
-        $this->nameGerman = $nameGerman;
-        
+        $this->nameEnglish = $nameEnglish;
+
         return $this;
     }
-    
+
     /**
      * @return string German term
      */
     public function getNameGerman(): string
     {
         return $this->nameGerman;
+    }
+
+    /**
+     * @param string $nameGerman German term
+     *
+     * @return Language
+     */
+    public function setNameGerman(string $nameGerman): Language
+    {
+        $this->nameGerman = $nameGerman;
+
+        return $this;
     }
 }

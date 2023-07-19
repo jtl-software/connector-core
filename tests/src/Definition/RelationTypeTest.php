@@ -1,14 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Definition;
 
 use Jtl\Connector\Core\Definition\IdentityType;
 use Jtl\Connector\Core\Definition\RelationType;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\ExpectationFailedException;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class RelationTypeTest
+ *
  * @package Jtl\Connector\Core\Test\Definition
  */
 class RelationTypeTest extends TestCase
@@ -16,13 +21,16 @@ class RelationTypeTest extends TestCase
     /**
      * @dataProvider relatedImageIdentityTypeProvider
      *
-     * @param string $relationType
+     * @param string   $relationType
      * @param int|null $relatedImageIdentityType
-     * @throws DefinitionException|\ReflectionException
+     *
+     * @throws DefinitionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
-    public function testGetRelatedImageIdentityType(string $relationType, ?int $relatedImageIdentityType)
+    public function testGetRelatedImageIdentityType(string $relationType, ?int $relatedImageIdentityType): void
     {
-        if (is_null($relatedImageIdentityType)) {
+        if (\is_null($relatedImageIdentityType)) {
             $this->expectException(DefinitionException::class);
             $this->expectExceptionCode(DefinitionException::UNKNOWN_RELATION_TYPE);
         }
@@ -35,10 +43,13 @@ class RelationTypeTest extends TestCase
      * @dataProvider relatedImageIdentityProvider
      *
      * @param string $relationType
-     * @param bool $hasRelatedImageIdentityType
+     * @param bool   $hasRelatedImageIdentityType
+     *
      * @throws DefinitionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
-    public function testHasRelatedImageIdentityType(string $relationType, bool $hasRelatedImageIdentityType)
+    public function testHasRelatedImageIdentityType(string $relationType, bool $hasRelatedImageIdentityType): void
     {
         $this->assertEquals(RelationType::hasRelatedImageIdentityType($relationType), $hasRelatedImageIdentityType);
     }
@@ -47,41 +58,53 @@ class RelationTypeTest extends TestCase
      * @dataProvider relationTypeProvider
      *
      * @param string $relationType
-     * @param bool $isRelationType
+     * @param bool   $isRelationType
+     *
      * @throws DefinitionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
-    public function testGetRelatedImageModelName(string $relationType, bool $isRelationType)
+    public function testGetRelatedImageModelName(string $relationType, bool $isRelationType): void
     {
         if (!$isRelationType) {
             $this->expectExceptionObject(DefinitionException::unknownRelationType($relationType));
         }
 
-        $this->assertEquals(sprintf('%sImage', ucfirst($relationType)), RelationType::getRelatedImageModelName($relationType));
+        $this->assertEquals(
+            \sprintf('%sImage', \ucfirst($relationType)),
+            RelationType::getRelatedImageModelName($relationType)
+        );
     }
 
     /**
      * @dataProvider relationTypeProvider
      *
      * @param string $relationType
-     * @param bool $isRelationType
+     * @param bool   $isRelationType
+     *
      * @throws DefinitionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
-    public function testGetModelName(string $relationType, bool $isRelationType)
+    public function testGetModelName(string $relationType, bool $isRelationType): void
     {
         if (!$isRelationType) {
             $this->expectExceptionObject(DefinitionException::unknownRelationType($relationType));
         }
 
-        $this->assertEquals(ucfirst($relationType), RelationType::getModelName($relationType));
+        $this->assertEquals(\ucfirst($relationType), RelationType::getModelName($relationType));
     }
 
     /**
      * @dataProvider relationTypeProvider
      *
-     * @param $relationType
-     * @param $isRelationType
+     * @param string $relationType
+     * @param bool   $isRelationType
+     *
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
-    public function testHasIdentityType($relationType, bool $isRelationType)
+    public function testHasIdentityType(string $relationType, bool $isRelationType): void
     {
         $hasIdentityType = RelationType::hasIdentityType($relationType);
         $this->assertSame($hasIdentityType, $isRelationType);
@@ -90,17 +113,20 @@ class RelationTypeTest extends TestCase
     /**
      * @dataProvider relationTypeProvider
      *
-     * @param $relationType
-     * @param bool $isRelationType
+     * @param string $relationType
+     * @param bool   $isRelationType
+     *
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
-    public function testIsRelationType($relationType, bool $isRelationType)
+    public function testIsRelationType(string $relationType, bool $isRelationType): void
     {
         $hasIdentityType = RelationType::isRelationType($relationType);
         $this->assertSame($hasIdentityType, $isRelationType);
     }
 
     /**
-     * @return mixed[]
+     * @return array<int, array{0: string, 1: bool}>
      */
     public function relationTypeProvider(): array
     {
@@ -115,7 +141,7 @@ class RelationTypeTest extends TestCase
     }
 
     /**
-     * @return mixed[]
+     * @return array<int, array{0: string, 1: bool}>
      */
     public function relatedImageIdentityProvider(): array
     {
@@ -124,12 +150,12 @@ class RelationTypeTest extends TestCase
             ['ProductStockLevel', false],
             ['CrossSelling', false],
             ['manufacturer', true],
-            ['Manufacturer', true],
+            ['Manufacturer', true]
         ];
     }
 
     /**
-     * @return array[]
+     * @return array<int, array{0: string, 1: int|null}>
      */
     public function relatedImageIdentityTypeProvider(): array
     {
@@ -138,19 +164,21 @@ class RelationTypeTest extends TestCase
             ['Product', IdentityType::PRODUCT_IMAGE],
             ['manufacturer', IdentityType::MANUFACTURER_IMAGE],
             ['productAttr', null],
-            ['whateverYouWant', null],
+            ['whateverYouWant', null]
         ];
     }
 
     /**
      * @dataProvider getIdentityTypeDataProvider
      *
-     * @param $relationType
-     * @param $expectedValue
+     * @param string                  $relationType
+     * @param DefinitionException|int $expectedValue
+     *
      * @throws DefinitionException
-     * @throws \ReflectionException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
-    public function testGetIdentityType($relationType, $expectedValue)
+    public function testGetIdentityType(string $relationType, $expectedValue): void
     {
         if ($expectedValue instanceof DefinitionException) {
             $this->expectExceptionObject($expectedValue);
@@ -164,14 +192,14 @@ class RelationTypeTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array<int, array{0: string, 1: int|DefinitionException}>
      */
     public function getIdentityTypeDataProvider(): array
     {
         return [
             ['category', IdentityType::CATEGORY],
             ['ProductVariationValue', IdentityType::PRODUCT_VARIATION_VALUE],
-            ['foo', DefinitionException::unknownRelationType('foo')],
+            ['foo', DefinitionException::unknownRelationType('foo')]
         ];
     }
 }

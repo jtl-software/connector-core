@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Event;
 
@@ -11,10 +12,11 @@ class AckEvent extends Event
     /**
      * @var Ack
      */
-    protected $ack;
+    protected Ack $ack;
 
     /**
      * AckEvent constructor.
+     *
      * @param Ack $ack
      */
     public function __construct(Ack $ack)

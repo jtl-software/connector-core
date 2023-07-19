@@ -1,24 +1,30 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Rpc;
 
+use Jawira\CaseConverter\CaseConverterException;
 use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Controller;
-use Jtl\Connector\Core\Definition\ErrorCode;
-use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Rpc\Method;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\ExpectationFailedException;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class MethodTest
+ *
  * @package Jtl\Connector\Core\Test\Rpc
  */
 class MethodTest extends TestCase
 {
-
     /**
-     *
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      */
-    public function testConstructorParameters()
+    public function testConstructorParameters(): void
     {
         $method = new Method('category.push', Controller::CATEGORY, Action::PUSH);
 
@@ -31,14 +37,21 @@ class MethodTest extends TestCase
     /**
      * @dataProvider createFromRpcMethodDataProvider
      *
-     * @param $rpcMethod
-     * @param $expectedController
-     * @param $expectedAction
-     * @param $isCore
-     * @throws \Exception
+     * @param string $rpcMethod
+     * @param string $expectedController
+     * @param string $expectedAction
+     * @param bool   $isCore
+     *
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws CaseConverterException
      */
-    public function testCreateFromRpcMethod($rpcMethod, $expectedController, $expectedAction, $isCore)
-    {
+    public function testCreateFromRpcMethod(
+        string $rpcMethod,
+        string $expectedController,
+        string $expectedAction,
+        bool   $isCore
+    ): void {
         $method = Method::createFromRpcMethod($rpcMethod);
         $this->assertSame($expectedController, $method->getController());
         $this->assertSame($expectedAction, $method->getAction());
@@ -47,18 +60,53 @@ class MethodTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array<int, array<int, string|bool>>
      */
     public function createFromRpcMethodDataProvider(): array
     {
         return [
-            ['product.pull', 'Product', 'pull', false],
-            ['core.connector.auth', 'Connector', 'auth', true],
-            [' category. pull', 'Category', 'pull', false],
-            ['.', '', '', false],
-            ['..', '', '', false],
-            ['some', 'Invalid', 'invalid', false],
-            ['yo.lo.mio.rio', 'Invalid', 'invalid', false],
+            [
+                'product.pull',
+                'Product',
+                'pull',
+                false,
+            ],
+            [
+                'core.connector.auth',
+                'Connector',
+                'auth',
+                true,
+            ],
+            [
+                ' category. pull',
+                'Category',
+                'pull',
+                false,
+            ],
+            [
+                '.',
+                '',
+                '',
+                false,
+            ],
+            [
+                '..',
+                '',
+                '',
+                false,
+            ],
+            [
+                'some',
+                'Invalid',
+                'invalid',
+                false,
+            ],
+            [
+                'yo.lo.mio.rio',
+                'Invalid',
+                'invalid',
+                false,
+            ],
         ];
     }
 }

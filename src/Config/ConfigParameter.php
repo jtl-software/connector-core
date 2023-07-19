@@ -1,46 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Config;
 
 use Jtl\Connector\Core\Exception\ConfigException;
 
 class ConfigParameter
 {
-    public const
-        TYPE_BOOLEAN = 'boolean',
-        TYPE_DOUBLE = 'double',
-        TYPE_INTEGER = 'integer',
-        TYPE_STRING = 'string';
+    public const TYPE_BOOLEAN = 'boolean';
+    public const TYPE_DOUBLE  = 'double';
+    public const TYPE_INTEGER = 'integer';
+    public const TYPE_STRING  = 'string';
 
     /**
      * @var string[]
      */
-    protected static $types = [
+    protected static array $types = [
         self::TYPE_BOOLEAN,
         self::TYPE_DOUBLE,
         self::TYPE_INTEGER,
         self::TYPE_STRING,
     ];
-
-    /**
-     * @var string
-     */
-    protected $key;
-
-    /**
-     * @var string
-     */
-    protected $type;
-
-    /**
-     * @var bool
-     */
-    protected $required = true;
-
-    /**
-     * @var bool
-     */
-    protected $global = false;
+    protected string       $key;
+    protected string       $type;
+    protected bool         $required = true;
+    protected bool         $global   = false;
 
     /**
      * @var mixed
@@ -49,10 +34,12 @@ class ConfigParameter
 
     /**
      * ConfigParameter constructor.
+     *
      * @param string $key
      * @param string $type
-     * @param bool $required
-     * @param bool $global
+     * @param bool   $required
+     * @param bool   $global
+     *
      * @throws ConfigException
      */
     public function __construct(string $key, string $type, bool $required = true, bool $global = false)
@@ -60,7 +47,37 @@ class ConfigParameter
         $this->setKey($key);
         $this->setType($type);
         $this->required = $required;
-        $this->global = $global;
+        $this->global   = $global;
+    }
+
+    /**
+     * @param string $type
+     *
+     * @return boolean
+     */
+    public static function isType(string $type): bool
+    {
+        return \in_array($type, self::$types, true);
+    }
+
+    /**
+     * @param string $key
+     * @param string $type
+     * @param bool   $required
+     * @param bool   $global
+     * @param ?mixed $defaultValue
+     *
+     * @return ConfigParameter
+     * @throws ConfigException
+     */
+    public static function create(
+        string $key,
+        string $type = self::TYPE_STRING,
+        bool   $required = true,
+        bool   $global = false,
+        $defaultValue = null
+    ): ConfigParameter {
+        return (new self($key, $type, $required, $global))->setDefaultValue($defaultValue);
     }
 
     /**
@@ -73,6 +90,7 @@ class ConfigParameter
 
     /**
      * @param string $key
+     *
      * @return $this
      * @throws ConfigException
      */
@@ -83,6 +101,7 @@ class ConfigParameter
         }
 
         $this->key = $key;
+
         return $this;
     }
 
@@ -96,6 +115,7 @@ class ConfigParameter
 
     /**
      * @param string $type
+     *
      * @return $this
      * @throws ConfigException
      */
@@ -105,6 +125,7 @@ class ConfigParameter
             throw ConfigException::unknownType($type);
         }
         $this->type = $type;
+
         return $this;
     }
 
@@ -124,13 +145,12 @@ class ConfigParameter
         return $this->global;
     }
 
-
     /**
      * @return boolean
      */
     public function hasDefaultValue(): bool
     {
-        return !is_null($this->defaultValue);
+        return !\is_null($this->defaultValue);
     }
 
     /**
@@ -142,48 +162,28 @@ class ConfigParameter
     }
 
     /**
-     * @param $defaultValue
+     * @param mixed $defaultValue
+     *
      * @return $this
      * @throws ConfigException
      */
     public function setDefaultValue($defaultValue): ConfigParameter
     {
-        if (!is_null($defaultValue) && !$this->isValidValue($defaultValue)) {
-            throw ConfigException::wrongType($this->getType(), gettype($defaultValue));
+        if (!\is_null($defaultValue) && !$this->isValidValue($defaultValue)) {
+            throw ConfigException::wrongType($this->getType(), \gettype($defaultValue));
         }
         $this->defaultValue = $defaultValue;
+
         return $this;
     }
 
     /**
-     * @param string $value
+     * @param mixed $value
+     *
      * @return boolean
      */
     public function isValidValue($value): bool
     {
-        return gettype($value) === $this->getType();
-    }
-
-    /**
-     * @param string $type
-     * @return boolean
-     */
-    public static function isType(string $type): bool
-    {
-        return in_array($type, self::$types, true);
-    }
-
-    /**
-     * @param string $key
-     * @param string $type
-     * @param bool $required
-     * @param bool $global
-     * @param null $defaultValue
-     * @return ConfigParameter
-     * @throws ConfigException
-     */
-    public static function create(string $key, string $type = self::TYPE_STRING, bool $required = true, $global = false, $defaultValue = null): ConfigParameter
-    {
-        return (new self($key, $type, $required, $global))->setDefaultValue($defaultValue);
+        return \gettype($value) === $this->getType();
     }
 }

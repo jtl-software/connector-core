@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Test\Session;
 
 use Jtl\Connector\Core\Session\SessionHelper;
@@ -7,45 +9,39 @@ use PHPUnit\Framework\TestCase;
 
 class SessionHelperTest extends TestCase
 {
-    protected function setUp(): void
+    public function testHas(): void
     {
-        parent::setUp();
-        unset($_SESSION);
-    }
-
-    public function testHas()
-    {
-        $helper = new SessionHelper('foo');
+        $helper                 = new SessionHelper('foo');
         $_SESSION['foo']['bar'] = 'boofar';
         $_SESSION['foo']['you'] = 'yalla';
         $this->assertTrue($helper->has('bar'));
         $this->assertTrue($helper->has('you'));
     }
 
-    public function testHasNot()
+    public function testHasNot(): void
     {
         $helper = new SessionHelper('foo');
         $this->assertFalse($helper->has('bar'));
         $this->assertFalse($helper->has('yes'));
     }
 
-    public function testGet()
+    public function testGet(): void
     {
-        $helper = new SessionHelper('foo');
+        $helper                 = new SessionHelper('foo');
         $_SESSION['foo']['bar'] = 'vaaaaalue';
         $_SESSION['foo']['och'] = 'taataa';
         $this->assertEquals('vaaaaalue', $helper->get('bar'));
         $this->assertEquals('taataa', $helper->get('och'));
     }
 
-    public function testGetDefault()
+    public function testGetDefault(): void
     {
         $helper = new SessionHelper('foo');
         $this->assertEquals('baras', $helper->get('foo', 'baras'));
         $this->assertEquals('faburus', $helper->get('och', 'faburus'));
     }
 
-    public function testSet()
+    public function testSet(): void
     {
         $helper = new SessionHelper('yo');
         $helper->set('lo', 'miau');
@@ -53,23 +49,29 @@ class SessionHelperTest extends TestCase
         $this->assertEquals('miau', $_SESSION['yo']['lo']);
     }
 
-    public function testUnset()
+    public function testUnset(): void
     {
-        $helper = new SessionHelper('tests');
+        $helper                   = new SessionHelper('tests');
         $_SESSION['tests']['foo'] = 'bar';
         $this->assertArrayHasKey('foo', $_SESSION['tests']);
         $helper->unset('foo');
         $this->assertArrayNotHasKey('foo', $_SESSION['tests']);
     }
 
-    public function testCreateByObjectClass()
+    public function testCreateByObjectClass(): void
     {
-        $expectedNamespace = \ZipArchive::class;
-        $helper = SessionHelper::createByObjectClass(new \ZipArchive());
-        $reflectionClass = new \ReflectionClass($helper);
+        $expectedNamespace           = \ZipArchive::class;
+        $helper                      = SessionHelper::createByObjectClass(new \ZipArchive());
+        $reflectionClass             = new \ReflectionClass($helper);
         $reflectionPropertyNamespace = $reflectionClass->getProperty('namespace');
         $reflectionPropertyNamespace->setAccessible(true);
         $actualNamespace = $reflectionPropertyNamespace->getValue($helper);
         $this->assertEquals($expectedNamespace, $actualNamespace);
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        unset($_SESSION);
     }
 }

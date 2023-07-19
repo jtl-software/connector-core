@@ -12,7 +12,7 @@
         "role": "Founder"
     }],
     "require": {
-        "php": ">=7.2",
+        "php": ">=7.4",
         "jms/serializer": "^3.3",
         "hassankhan/config": "^3.0",
         "monolog/monolog": "*",
@@ -28,8 +28,12 @@
         "jawira/case-converter": "^3.4",
         "symfony/http-foundation": "^4.0|^5.0",
         "symfony/filesystem": "^4.0|^5.0",
+        "symfony/console": "^4.3|^5.1",
         "fakerphp/faker": "^1.13",
-        "whitecube/lingua": "^1.1"
+        "whitecube/lingua": "^1.1",
+        "ext-fileinfo": "*",
+        "doctrine/dbal": "^2.5",
+        "ext-pdo": "*"
     },
     "require-dev": {
         "mikey179/vfsstream": "^1.6",
@@ -40,12 +44,16 @@
     },
     "autoload": {
         "psr-4": {
-            "Jtl\\Connector\\Core\\": "src/"
+            "Jtl\\Connector\\Core\\": "src/",
+            "Jtl\\Connector\\MappingTables\\": "src/mapping-tables",
+            "Jtl\\Connector\\Dbc\\": "src/dbc/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Jtl\\Connector\\Core\\Test\\": "tests/src"
+            "Jtl\\Connector\\Core\\Test\\": "tests/src",
+            "Jtl\\Connector\\MappingTables\\": "tests/src/mapping-tables",
+            "Jtl\\Connector\\Dbc\\": "tests/src/dbc/"
         }
     }
 }

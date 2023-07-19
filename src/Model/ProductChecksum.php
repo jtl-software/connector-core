@@ -1,17 +1,17 @@
 <?php
-/**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
- * @subpackage Product
- */
+
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\MustNotBeNullException;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
+use TypeError;
 
 /**
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -20,78 +20,70 @@ class ProductChecksum extends Checksum
     /**
      * @var int - Checksum used to check variations for change
      */
-    const TYPE_VARIATION = 1;
-    
+    public const TYPE_VARIATION = 1;
+
     /**
      * @var Identity
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("foreignKey")
      * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
      */
-    protected $foreignKey = null;
-    
+    protected Identity $foreignKey;
+
     /**
      * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("endpoint")
      * @Serializer\Accessor(getter="getEndpoint",setter="setEndpoint")
      */
-    protected $endpoint = '';
-    
+    protected string $endpoint = '';
+
     /**
      * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("hasChanged")
      * @Serializer\Accessor(getter="hasChanged",setter="setHasChanged")
      */
-    protected $hasChanged = false;
-    
+    protected bool $hasChanged = false;
+
     /**
      * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("host")
      * @Serializer\Accessor(getter="getHost",setter="setHost")
      */
-    protected $host = '';
-    
+    protected string $host = '';
+
     /**
      * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("type")
      * @Serializer\Accessor(getter="getType",setter="setType")
      */
-    protected $type = self::TYPE_VARIATION;
-    
+    protected int $type = self::TYPE_VARIATION;
+
+    /**
+     * @return Identity
+     * @throws MustNotBeNullException
+     * @throws TypeError
+     */
+    public function getForeignKey(): Identity
+    {
+        return Validate::checkIdentityAndNotNull($this->foreignKey);
+    }
+
     /**
      * @param Identity $foreignKey
+     *
      * @return ProductChecksum
      */
     public function setForeignKey(Identity $foreignKey): ProductChecksum
     {
         $this->foreignKey = $foreignKey;
-        
+
         return $this;
     }
-    
-    /**
-     * @return Identity
-     */
-    public function getForeignKey(): Identity
-    {
-        return $this->foreignKey;
-    }
-    
-    /**
-     * @param string $endpoint
-     * @return ProductChecksum
-     */
-    public function setEndpoint(string $endpoint): ProductChecksum
-    {
-        $this->endpoint = $endpoint;
-        
-        return $this;
-    }
-    
+
     /**
      * @return string
      */
@@ -99,18 +91,19 @@ class ProductChecksum extends Checksum
     {
         return $this->endpoint;
     }
-    
+
     /**
-     * @param boolean $hasChanged
+     * @param string $endpoint
+     *
      * @return ProductChecksum
      */
-    public function setHasChanged(bool $hasChanged): ProductChecksum
+    public function setEndpoint(string $endpoint): ProductChecksum
     {
-        $this->hasChanged = $hasChanged;
-        
+        $this->endpoint = $endpoint;
+
         return $this;
     }
-    
+
     /**
      * @return boolean
      */
@@ -118,7 +111,7 @@ class ProductChecksum extends Checksum
     {
         return $this->hasChanged;
     }
-    
+
     /**
      * @return boolean
      */
@@ -126,18 +119,19 @@ class ProductChecksum extends Checksum
     {
         return $this->hasChanged;
     }
-    
+
     /**
-     * @param string $host
+     * @param boolean $hasChanged
+     *
      * @return ProductChecksum
      */
-    public function setHost(string $host): ProductChecksum
+    public function setHasChanged(bool $hasChanged): ProductChecksum
     {
-        $this->host = $host;
-        
+        $this->hasChanged = $hasChanged;
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -145,23 +139,36 @@ class ProductChecksum extends Checksum
     {
         return $this->host;
     }
-    
+
     /**
-     * @param integer $type
+     * @param string $host
+     *
      * @return ProductChecksum
      */
-    public function setType(int $type): ProductChecksum
+    public function setHost(string $host): ProductChecksum
     {
-        $this->type = $type;
-        
+        $this->host = $host;
+
         return $this;
     }
-    
+
     /**
      * @return integer
      */
     public function getType(): int
     {
         return $this->type;
+    }
+
+    /**
+     * @param integer $type
+     *
+     * @return ProductChecksum
+     */
+    public function setType(int $type): ProductChecksum
+    {
+        $this->type = $type;
+
+        return $this;
     }
 }

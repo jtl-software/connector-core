@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Model\Product;
@@ -9,10 +12,11 @@ class ProductEvent extends Event
     /**
      * @var Product
      */
-    protected $product;
+    protected Product $product;
 
     /**
      * ProductEvent constructor.
+     *
      * @param Product $product
      */
     public function __construct(Product $product)

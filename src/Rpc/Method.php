@@ -1,17 +1,11 @@
 <?php
-/**
- * @copyright 2010-2013 JTL-Software GmbH
- * @package Jtl\Connector\Core\Rpc
- */
+
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Rpc;
 
 use Jawira\CaseConverter\CaseConverterException;
-use Jtl\Connector\Core\Definition\Action;
-use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Definition\RpcMethod;
-use Jtl\Connector\Core\Exception\DefinitionException;
-use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Utilities\Str;
 
 class Method
@@ -21,21 +15,21 @@ class Method
      *
      * @var string
      */
-    protected $rpcMethod = '';
+    protected string $rpcMethod = '';
 
     /**
      * Connector Controller
      *
      * @var string
      */
-    protected $controller = '';
+    protected string $controller = '';
 
     /**
      * Connector Action
      *
      * @var string
      */
-    protected $action = '';
+    protected string $action = '';
 
     /**
      * Constructor
@@ -46,17 +40,42 @@ class Method
      */
     public function __construct(string $rpcMethod, string $controller, string $action)
     {
-        $this->rpcMethod = $rpcMethod;
+        $this->rpcMethod  = $rpcMethod;
         $this->controller = $controller;
-        $this->action = $action;
+        $this->action     = $action;
     }
 
     /**
-     * @return string
+     * @param RequestPacket $packet
+     *
+     * @return Method
+     * @throws CaseConverterException
      */
-    public function getRpcMethod(): string
+    public static function createFromRequestPacket(RequestPacket $packet): Method
     {
-        return $this->rpcMethod;
+        return static::createFromRpcMethod(RpcMethod::mapMethod($packet->getMethod()));
+    }
+
+    /**
+     * @param string $rpcMethod
+     *
+     * @return Method
+     * @throws CaseConverterException
+     */
+    public static function createFromRpcMethod(string $rpcMethod): Method
+    {
+        $parts      = \explode('.', $rpcMethod);
+        $partsCount = \count($parts);
+        if (!\in_array($partsCount, [2, 3], true)) {
+            $parts = [
+                'invalid',
+                'invalid',
+            ];
+        }
+        $offset     = $partsCount === 3 ? 1 : 0;
+        $controller = Str::toPascalCase($parts[0 + $offset]);
+        $action     = Str::toCamelCase($parts[1 + $offset]);
+        return new self($rpcMethod, $controller, $action);
     }
 
     /**
@@ -80,34 +99,14 @@ class Method
      */
     public function isCore(): bool
     {
-        return strpos($this->getRpcMethod(), "core.") !== false;
+        return \strpos($this->getRpcMethod(), 'core.') !== false;
     }
 
     /**
-     * @param string $rpcMethod
-     * @return Method
-     * @throws CaseConverterException
+     * @return string
      */
-    public static function createFromRpcMethod(string $rpcMethod): Method
+    public function getRpcMethod(): string
     {
-        $parts = explode('.', $rpcMethod);
-        $partsCount = count($parts);
-        if (!in_array($partsCount, [2,3], true)) {
-            $parts = ['invalid', 'invalid'];
-        }
-        $offset = $partsCount === 3 ? 1 : 0;
-        $controller = Str::toPascalCase($parts[0 + $offset]);
-        $action = Str::toCamelCase($parts[1 + $offset]);
-        return new self($rpcMethod, $controller, $action);
-    }
-
-    /**
-     * @param RequestPacket $packet
-     * @return Method
-     * @throws CaseConverterException
-     */
-    public static function createFromRequestPacket(RequestPacket $packet): Method
-    {
-        return static::createFromRpcMethod(RpcMethod::mapMethod($packet->getMethod()));
+        return $this->rpcMethod;
     }
 }

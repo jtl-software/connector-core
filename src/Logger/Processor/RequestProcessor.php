@@ -12,14 +12,14 @@ class RequestProcessor implements ProcessorInterface
     /**
      * @var array<string, string>
      */
-    protected $extraFields = [];
+    protected array $extraFields = [];
 
     public function __construct()
     {
         $this->extraFields = [
             'http_method'     => $_SERVER['REQUEST_METHOD'] ?? '',
             'user_agent'      => $_SERVER['HTTP_USER_AGENT'] ?? '',
-            'domain'          => $_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'] ?? '',
+            'domain'          => $_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'] ?? ''
         ];
 
         // strip jtlauth value from uri
@@ -32,7 +32,11 @@ class RequestProcessor implements ProcessorInterface
         $this->extraFields['uri'] = $uri;
 
         // post request size
-        $requestSize = (float) \strlen(\file_get_contents('php://input'));
+        $input = \file_get_contents('php://input');
+        if (false === $input) {
+            $input = '';
+        }
+        $requestSize = (float) \strlen($input);
         $unit        = 'B';
         if ($requestSize > 1024 && $requestSize < 1024 * 1024) {
             $requestSize /= 1024;
@@ -43,18 +47,24 @@ class RequestProcessor implements ProcessorInterface
         }
 
         $this->extraFields['request_size'] = \sprintf('%.1F %s', $requestSize, $unit);
+
+        $hostname = \gethostname();
+        if ($hostname !== false) {
+            $this->extraFields['hostname'] = $hostname;
+        }
     }
 
     /**
      * multiple param and return types are needed because some connectors use an older version of monolog
-     * @param array|LogRecord $record
-     * @return array|LogRecord
+     * @param array{extra:array<mixed>}|LogRecord $record
+     * @phpstan-param array{extra:array<mixed>} $record
+     * @return array{extra:array<mixed>}|LogRecord
      */
-    public function __invoke($record)
+    public function __invoke($record) // @phpstan-ignore-line
     {
         if (\is_array($record)) {
             $record['extra'] = \array_merge($record['extra'], $this->extraFields);
-        } else {
+        } elseif ($record instanceof LogRecord) { // @phpstan-ignore-line
             $record->extra = \array_merge($record->extra, $this->extraFields);
         }
 

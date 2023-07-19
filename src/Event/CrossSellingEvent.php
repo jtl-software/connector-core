@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Event;
 
 use Jtl\Connector\Core\Model\CrossSelling;
@@ -9,10 +12,11 @@ class CrossSellingEvent extends Event
     /**
      * @var CrossSelling
      */
-    protected $crossSelling;
+    protected CrossSelling $crossSelling;
 
     /**
      * CrossSellingEvent constructor.
+     *
      * @param CrossSelling $crossSelling
      */
     public function __construct(CrossSelling $crossSelling)

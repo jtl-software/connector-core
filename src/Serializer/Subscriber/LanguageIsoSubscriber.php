@@ -1,19 +1,22 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Jtl\Connector\Core\Serializer\Subscriber;
 
-use WhiteCube\Lingua\Service as Lingua;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\EventDispatcher\PreDeserializeEvent;
 use JMS\Serializer\Metadata\StaticPropertyMetadata;
 use Jtl\Connector\Core\Model\AbstractI18n;
+use WhiteCube\Lingua\Service as Lingua;
 
 class LanguageIsoSubscriber implements EventSubscriberInterface
 {
     /**
      * @var Lingua
      */
-    protected $languages;
+    protected Lingua $languages;
 
     /**
      * LanguageIsoSubscriber constructor.
@@ -24,49 +27,52 @@ class LanguageIsoSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @return array
+     * @return array<int, array{event: string, method: string, format: string}>
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             [
-                'event' => 'serializer.post_serialize',
+                'event'  => 'serializer.post_serialize',
                 'method' => 'onPostSerialize',
-                'format' => 'json'
+                'format' => 'json',
             ],
             [
-                'event' => 'serializer.pre_deserialize',
+                'event'  => 'serializer.pre_deserialize',
                 'method' => 'onPreDeserialize',
-                'format' => 'json'
-            ]
+                'format' => 'json',
+            ],
         ];
     }
 
     /**
      * @param ObjectEvent $event
      */
-    public function onPostSerialize(ObjectEvent $event)
+    public function onPostSerialize(ObjectEvent $event): void
     {
         $model = $event->getObject();
         if ($model instanceof AbstractI18n) {
             $languageIso = $model->getLanguageIso();
-            if (strlen($languageIso) === 2) {
-                $languageIso = $this->languages->fromISO_639_1($languageIso)->toISO_639_2b() ?? $languageIso;
+            if (\strlen($languageIso) === 2) {
+                $languageIso = $this->languages->fromISO_639_1($languageIso)->toISO_639_2b();
             }
 
-            $event->getVisitor()->visitProperty(new StaticPropertyMetadata('', 'languageISO', $languageIso), $languageIso);
+            $event->getVisitor()->visitProperty( // @phpstan-ignore-line
+                new StaticPropertyMetadata('', 'languageISO', $languageIso),
+                $languageIso
+            );
         }
     }
 
     /**
      * @param PreDeserializeEvent $event
      */
-    public function onPreDeserialize(PreDeserializeEvent $event)
+    public function onPreDeserialize(PreDeserializeEvent $event): void
     {
         $data = $event->getData();
-        if (is_array($data) && isset($data['languageISO']) && !isset($data['languageIso'])) {
-            $language = $this->languages->fromISO_639_2b($data['languageISO']);
-            $data['languageIso'] = $language->toISO_639_1() ?? $data['languageISO'];
+        if (\is_array($data) && isset($data['languageISO']) && !isset($data['languageIso'])) {
+            $language            = $this->languages->fromISO_639_2b($data['languageISO']);
+            $data['languageIso'] = $language->toISO_639_1();
             $event->setData($data);
         }
     }

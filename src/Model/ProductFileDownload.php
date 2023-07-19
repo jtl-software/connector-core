@@ -1,89 +1,75 @@
 <?php
-/**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
- * @subpackage Product
- */
+
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
 class ProductFileDownload extends AbstractModel
 {
     /**
-     * @var \DateTimeInterface
+     * @var \DateTimeInterface|null
      * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("creationDate")
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
      */
-    protected $creationDate = null;
-    
+    protected ?\DateTimeInterface $creationDate = null;
+
     /**
      * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("maxDays")
      * @Serializer\Accessor(getter="getMaxDays",setter="setMaxDays")
      */
-    protected $maxDays = 0;
-    
+    protected int $maxDays = 0;
+
     /**
      * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("maxDownloads")
      * @Serializer\Accessor(getter="getMaxDownloads",setter="setMaxDownloads")
      */
-    protected $maxDownloads = 0;
-    
+    protected int $maxDownloads = 0;
+
     /**
      * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("path")
      * @Serializer\Accessor(getter="getPath",setter="setPath")
      */
-    protected $path = '';
-    
+    protected string $path = '';
+
     /**
      * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("previewPath")
      * @Serializer\Accessor(getter="getPreviewPath",setter="setPreviewPath")
      */
-    protected $previewPath = '';
-    
+    protected string $previewPath = '';
+
     /**
      * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
      */
-    protected $sort = 0;
-    
+    protected int $sort = 0;
+
     /**
      * @var ProductFileDownloadI18n[]
      * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductFileDownloadI18n>")
      * @Serializer\SerializedName("i18ns")
      * @Serializer\AccessType("reflection")
      */
-    protected $i18ns = [];
+    protected array $i18ns = [];
 
-    /**
-     * @param \DateTimeInterface $creationDate
-     * @return ProductFileDownload
-     */
-    public function setCreationDate(\DateTimeInterface $creationDate = null): ProductFileDownload
-    {
-        $this->creationDate = $creationDate;
-        
-        return $this;
-    }
-    
     /**
      * @return \DateTimeInterface
      */
@@ -91,18 +77,19 @@ class ProductFileDownload extends AbstractModel
     {
         return $this->creationDate;
     }
-    
+
     /**
-     * @param integer $maxDays
+     * @param \DateTimeInterface $creationDate
+     *
      * @return ProductFileDownload
      */
-    public function setMaxDays(int $maxDays): ProductFileDownload
+    public function setCreationDate(\DateTimeInterface $creationDate = null): ProductFileDownload
     {
-        $this->maxDays = $maxDays;
-        
+        $this->creationDate = $creationDate;
+
         return $this;
     }
-    
+
     /**
      * @return integer
      */
@@ -110,18 +97,19 @@ class ProductFileDownload extends AbstractModel
     {
         return $this->maxDays;
     }
-    
+
     /**
-     * @param integer $maxDownloads
+     * @param integer $maxDays
+     *
      * @return ProductFileDownload
      */
-    public function setMaxDownloads(int $maxDownloads): ProductFileDownload
+    public function setMaxDays(int $maxDays): ProductFileDownload
     {
-        $this->maxDownloads = $maxDownloads;
-        
+        $this->maxDays = $maxDays;
+
         return $this;
     }
-    
+
     /**
      * @return integer
      */
@@ -129,18 +117,19 @@ class ProductFileDownload extends AbstractModel
     {
         return $this->maxDownloads;
     }
-    
+
     /**
-     * @param string $path
+     * @param integer $maxDownloads
+     *
      * @return ProductFileDownload
      */
-    public function setPath(string $path): ProductFileDownload
+    public function setMaxDownloads(int $maxDownloads): ProductFileDownload
     {
-        $this->path = $path;
-        
+        $this->maxDownloads = $maxDownloads;
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -148,18 +137,19 @@ class ProductFileDownload extends AbstractModel
     {
         return $this->path;
     }
-    
+
     /**
-     * @param string $previewPath
+     * @param string $path
+     *
      * @return ProductFileDownload
      */
-    public function setPreviewPath(string $previewPath): ProductFileDownload
+    public function setPath(string $path): ProductFileDownload
     {
-        $this->previewPath = $previewPath;
-        
+        $this->path = $path;
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -167,18 +157,19 @@ class ProductFileDownload extends AbstractModel
     {
         return $this->previewPath;
     }
-    
+
     /**
-     * @param integer $sort
+     * @param string $previewPath
+     *
      * @return ProductFileDownload
      */
-    public function setSort(int $sort): ProductFileDownload
+    public function setPreviewPath(string $previewPath): ProductFileDownload
     {
-        $this->sort = $sort;
-        
+        $this->previewPath = $previewPath;
+
         return $this;
     }
-    
+
     /**
      * @return integer
      */
@@ -186,29 +177,31 @@ class ProductFileDownload extends AbstractModel
     {
         return $this->sort;
     }
-    
+
+    /**
+     * @param integer $sort
+     *
+     * @return ProductFileDownload
+     */
+    public function setSort(int $sort): ProductFileDownload
+    {
+        $this->sort = $sort;
+
+        return $this;
+    }
+
     /**
      * @param ProductFileDownloadI18n $i18n
+     *
      * @return ProductFileDownload
      */
     public function addI18n(ProductFileDownloadI18n $i18n): ProductFileDownload
     {
         $this->i18ns[] = $i18n;
-        
+
         return $this;
     }
 
-    /**
-     * @param ProductFileDownloadI18n ...$i18ns
-     * @return ProductFileDownload
-     */
-    public function setI18ns(ProductFileDownloadI18n ...$i18ns): ProductFileDownload
-    {
-        $this->i18ns = $i18ns;
-        
-        return $this;
-    }
-    
     /**
      * @return ProductFileDownloadI18n[]
      */
@@ -216,14 +209,26 @@ class ProductFileDownload extends AbstractModel
     {
         return $this->i18ns;
     }
-    
+
+    /**
+     * @param ProductFileDownloadI18n ...$i18ns
+     *
+     * @return ProductFileDownload
+     */
+    public function setI18ns(ProductFileDownloadI18n ...$i18ns): ProductFileDownload
+    {
+        $this->i18ns = $i18ns;
+
+        return $this;
+    }
+
     /**
      * @return ProductFileDownload
      */
     public function clearI18ns(): ProductFileDownload
     {
         $this->i18ns = [];
-        
+
         return $this;
     }
 }

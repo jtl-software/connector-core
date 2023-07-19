@@ -1,17 +1,17 @@
 <?php
-/**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
- * @subpackage Product
- */
+
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\MustNotBeNullException;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
+use TypeError;
 
 /**
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
@@ -23,7 +23,7 @@ class ImageI18n extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
      */
-    protected $id = null;
+    protected Identity $id;
 
     /**
      * @var string
@@ -31,7 +31,7 @@ class ImageI18n extends AbstractI18n implements IdentityInterface
      * @Serializer\SerializedName("altText")
      * @Serializer\Accessor(getter="getAltText",setter="setAltText")
      */
-    protected $altText = '';
+    protected string $altText = '';
 
     /**
      * Constructor
@@ -40,42 +40,46 @@ class ImageI18n extends AbstractI18n implements IdentityInterface
     {
         $this->id = new Identity();
     }
-    
+
+    /**
+     * @return Identity
+     * @throws MustNotBeNullException
+     * @throws TypeError
+     */
+    public function getId(): Identity
+    {
+        return Validate::checkIdentityAndNotNull($this->id);
+    }
+
     /**
      * @param Identity $id
+     *
      * @return ImageI18n
      */
     public function setId(Identity $id): ImageI18n
     {
         $this->id = $id;
-        
+
         return $this;
-    }
-    
-    /**
-     * @return Identity
-     */
-    public function getId(): Identity
-    {
-        return $this->id;
     }
 
-    /**
-     * @param string $altText
-     * @return ImageI18n
-     */
-    public function setAltText(string $altText): ImageI18n
-    {
-        $this->altText = $altText;
-        
-        return $this;
-    }
-    
     /**
      * @return string
      */
     public function getAltText(): string
     {
         return $this->altText;
+    }
+
+    /**
+     * @param string $altText
+     *
+     * @return ImageI18n
+     */
+    public function setAltText(string $altText): ImageI18n
+    {
+        $this->altText = $altText;
+
+        return $this;
     }
 }

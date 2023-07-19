@@ -1,47 +1,45 @@
 <?php
-/**
- * @copyright 2010-2015 JTL-Software GmbH
- * @package Jtl\Connector\Core\Model
- * @subpackage Product
- */
+
+declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
+use Jtl\Connector\Core\Exception\MustNotBeNullException;
+use Jtl\Connector\Core\Utilities\Validator\Validate;
 
 /**
- * @access public
- * @package Jtl\Connector\Core\Model
+ * @access     public
+ * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
 class StatusChange extends AbstractModel
 {
-
     /**
      * @var Identity
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerOrderId")
      * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
      */
-    protected $customerOrderId = null;
-    
+    protected Identity $customerOrderId;
+
     /**
      * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("orderStatus")
      * @Serializer\Accessor(getter="getOrderStatus",setter="setOrderStatus")
      */
-    protected $orderStatus = '';
-    
+    protected string $orderStatus = '';
+
     /**
      * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("paymentStatus")
      * @Serializer\Accessor(getter="getPaymentStatus",setter="setPaymentStatus")
      */
-    protected $paymentStatus = '';
-    
+    protected string $paymentStatus = '';
+
     /**
      * Constructor
      */
@@ -49,37 +47,27 @@ class StatusChange extends AbstractModel
     {
         $this->customerOrderId = new Identity();
     }
-    
+
     /**
-     * @param Identity $customerOrderId
-     * @return StatusChange
+     * @return Identity|null
      */
-    public function setCustomerOrderId(Identity $customerOrderId): self
-    {
-        $this->customerOrderId = $customerOrderId;
-        
-        return $this;
-    }
-    
-    /**
-     * @return Identity
-     */
-    public function getCustomerOrderId(): Identity
+    public function getCustomerOrderId(): ?Identity
     {
         return $this->customerOrderId;
     }
 
     /**
-     * @param string $orderStatus
+     * @param Identity $customerOrderId
+     *
      * @return StatusChange
      */
-    public function setOrderStatus(string $orderStatus): self
+    public function setCustomerOrderId(Identity $customerOrderId): self
     {
-        $this->orderStatus = $orderStatus;
-        
+        $this->customerOrderId = $customerOrderId;
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -87,18 +75,19 @@ class StatusChange extends AbstractModel
     {
         return $this->orderStatus;
     }
-    
+
     /**
-     * @param string $paymentStatus
+     * @param string $orderStatus
+     *
      * @return StatusChange
      */
-    public function setPaymentStatus(string $paymentStatus): self
+    public function setOrderStatus(string $orderStatus): self
     {
-        $this->paymentStatus = $paymentStatus;
-        
+        $this->orderStatus = $orderStatus;
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -108,11 +97,27 @@ class StatusChange extends AbstractModel
     }
 
     /**
-     * @return array
+     * @param string $paymentStatus
+     *
+     * @return StatusChange
+     */
+    public function setPaymentStatus(string $paymentStatus): self
+    {
+        $this->paymentStatus = $paymentStatus;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     * @throws MustNotBeNullException|\TypeError
      */
     public function getIdentificationStrings(): array
     {
-        $this->setIdentificationStringBySubject('customerOrderId', sprintf('JTL-Wawi PK = %d', $this->customerOrderId->getHost()));
+        $this->setIdentificationStringBySubject(
+            'customerOrderId',
+            \sprintf('JTL-Wawi PK = %d', Validate::checkIdentityAndNotNull($this->customerOrderId)->getHost())
+        );
 
         return parent::getIdentificationStrings();
     }
