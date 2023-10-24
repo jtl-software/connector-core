@@ -34,7 +34,7 @@ class CrossSellingSubscriber implements EventSubscriberInterface
             $data      = $event->getData();
             $productId = $data['productId'][1] ?? 0; // @phpstan-ignore-line
             if (isset($data['items']) && \is_array($data['items'])) { // @phpstan-ignore-line
-                foreach ($data['items'] as $i => $item) { // @phpstan-ignore-line
+                foreach ($data['items'] as $i => $item) {
                     if (!isset($data['items'][$i]['id'])) { // @phpstan-ignore-line
                         $crossSellingGroupId = $item['crossSellingGroupId'][1] ?? 0;
 

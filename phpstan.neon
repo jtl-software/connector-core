@@ -1,4 +1,9 @@
 parameters:
+    ignoreErrors:
+        -
+            message: "#Cannot access offset 'items' on mixed#"
+            path: src/Serializer/Subscriber/CrossSellingSubscriber.php
+            reportUnmatched: false
     excludePaths:
         analyse:
             - '*/vendor/*'
