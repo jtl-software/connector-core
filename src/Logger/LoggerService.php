@@ -108,11 +108,14 @@ class LoggerService
     protected function createHandler(): void
     {
         // needed if we change the passthru level
-        if (isset($this->handler) && $this->handler instanceof FingersCrossedHandler) {
+        if (isset($this->handler)) {
             $this->handler->close();
         }
+        /* disabled fingers crossed handler for now
         $logLevel = MonoLogger::toMonologLevel($this->logLevel); // @phpstan-ignore-line
         $handler  = new FingersCrossedHandler($this->combinedHandler, MonoLogger::ERROR, 0, true, true, $logLevel);
+        */
+        $handler = $this->combinedHandler;
         if (isset($this->formatter)) {
             $handler->setFormatter($this->formatter);
         }
