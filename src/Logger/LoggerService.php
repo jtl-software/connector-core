@@ -7,14 +7,13 @@ namespace Jtl\Connector\Core\Logger;
 use Jtl\Connector\Core\Exception\LoggerException;
 use Jtl\Connector\Core\Logger\Processor\RequestProcessor;
 use Monolog\Formatter\FormatterInterface;
-use Monolog\Handler\FingersCrossedHandler;
+use Monolog\Handler\FilterHandler;
 use Monolog\Handler\FormattableHandlerInterface;
 use Monolog\Handler\HandlerInterface;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Level;
 use Monolog\Logger;
 use Monolog\Logger as MonoLogger;
-use Monolog\Processor\HostnameProcessor;
 use Monolog\Processor\IntrospectionProcessor;
 use Monolog\Processor\MemoryPeakUsageProcessor;
 use Monolog\Processor\ProcessorInterface;
@@ -46,9 +45,9 @@ class LoggerService
     /** @var int|string|LogLevel  */
     protected $logLevel;
     protected int                $maxFiles = 2;
-    /* Final handler that gets wrapped by FingersCrossedHandler */
+    /* Final handler that is wrapped by FilterHandler */
     protected HandlerInterface   $handler;
-    /* FingersCrossedHandler for combined log file */
+    /* Handler that writes to combined log file */
     protected HandlerInterface   $combinedHandler;
 
     /**
@@ -107,20 +106,13 @@ class LoggerService
      */
     protected function createHandler(): void
     {
-        // needed if we change the passthru level
+        // needed if we change the level
         if (isset($this->handler)) {
             $this->handler->close();
         }
-        /* disabled fingers crossed handler for now
-        $logLevel = MonoLogger::toMonologLevel($this->logLevel); // phpstan-ignore-line
-        $handler  = new FingersCrossedHandler($this->combinedHandler, MonoLogger::ERROR, 0, true, true, $logLevel);
-        */
-        $handler = $this->combinedHandler;
-        if (
-            isset($this->formatter)
-            && ( $handler instanceof FormattableHandlerInterface
-            || \method_exists($handler, 'setFormatter') )
-        ) {
+        $logLevel = MonoLogger::toMonologLevel($this->logLevel); // @phpstan-ignore-line
+        $handler  = new FilterHandler($this->combinedHandler, $logLevel);
+        if (isset($this->formatter)) {
             $handler->setFormatter($this->formatter);
         }
         $this->handler = $handler;
