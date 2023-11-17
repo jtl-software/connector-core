@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Jtl\Connector\Core\Logger;
 
 use Jtl\Connector\Core\Exception\LoggerException;
+use Jtl\Connector\Core\Logger\Handler\ChunkedHandler;
 use Jtl\Connector\Core\Logger\Processor\RequestProcessor;
 use Monolog\Formatter\FormatterInterface;
 use Monolog\Handler\FilterHandler;
@@ -74,7 +75,8 @@ class LoggerService
             ->pushProcessor(new RequestProcessor());
 
         $fileName              = \sprintf('%s/combined.log', $this->logDir);
-        $this->combinedHandler = new RotatingFileHandler($fileName, $this->maxFiles, MonoLogger::DEBUG);
+        $handler               = new RotatingFileHandler($fileName, $this->maxFiles, MonoLogger::DEBUG);
+        $this->combinedHandler = new ChunkedHandler($handler);
         $this->createHandler();
     }
 
@@ -153,6 +155,7 @@ class LoggerService
         $fileName     = \sprintf('%s/%s.log', $this->logDir, $channel);
         $monologLevel = MonoLogger::toMonologLevel($logLevel); // @phpstan-ignore-line
         $handler      = new RotatingFileHandler($fileName, $this->maxFiles, $monologLevel);
+        $handler      = new ChunkedHandler($handler);
         if (isset($this->formatter)) {
             $handler->setFormatter($this->formatter);
         }
