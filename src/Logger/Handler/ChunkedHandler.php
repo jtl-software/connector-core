@@ -12,7 +12,6 @@ use Monolog\LogRecord;
 
 class ChunkedHandler extends Handler
 {
-
     private HandlerInterface $nextHandler;
 
     private int $chunkSize = self::MAX_LOG_ENTRY_LENGTH;
@@ -50,11 +49,20 @@ class ChunkedHandler extends Handler
             $total    = \count($chunks);
             $recordId = \md5($message);
             foreach ($chunks as $key => $chunk) {
-                $newRecord                    = clone $record;
-                $newRecord->message           = \sprintf("(part %i/%i) %s", $key, $total, $chunk);
-                $newRecord->extra['recordId'] = $recordId;
+                $recordArray = $record->toArray();
+                $message     = \sprintf("(part %d/%d) %s", $key, $total, $chunk);
 
-                $return = $this->nextHandler->handle($newRecord) ?? $return;
+                $newRecord = new LogRecord(
+                    $recordArray['datetime'],
+                    $recordArray['channel'],
+                    $recordArray['level'],
+                    $message,
+                    $recordArray['context'],
+                    \array_merge($recordArray['extra'], ['recordId' => $recordId]),
+                    $recordArray['formatted']
+                );
+
+                $return = $this->nextHandler->handle($newRecord) ?: $return;
             }
             return $return;
         }
