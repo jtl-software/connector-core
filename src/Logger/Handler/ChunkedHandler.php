@@ -49,17 +49,15 @@ class ChunkedHandler extends Handler
             $total    = \count($chunks);
             $recordId = \md5($message);
             foreach ($chunks as $key => $chunk) {
-                $recordArray = $record->toArray();
-                $message     = \sprintf("(part %d/%d) %s", $key, $total, $chunk);
+                $message = \sprintf("(part %d/%d) %s", $key, $total, $chunk);
 
                 $newRecord = new LogRecord(
-                    $recordArray['datetime'],
-                    $recordArray['channel'],
-                    $recordArray['level'],
+                    $record->datetime,
+                    $record->channel,
+                    $record->level,
                     $message,
-                    $recordArray['context'],
-                    \array_merge($recordArray['extra'], ['recordId' => $recordId]),
-                    $recordArray['formatted']
+                    $record->context,
+                    \array_merge($record->extra, ['recordId' => $recordId]),
                 );
 
                 $return = $this->nextHandler->handle($newRecord) ?: $return;
