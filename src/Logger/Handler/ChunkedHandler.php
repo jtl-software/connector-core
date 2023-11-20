@@ -31,7 +31,7 @@ class ChunkedHandler extends Handler
     /**
      * @inheritDoc
      */
-    public function isHandling(LogRecord $record): bool
+    public function isHandling($record): bool
     {
         return $this->nextHandler->isHandling($record);
     }
@@ -39,7 +39,7 @@ class ChunkedHandler extends Handler
     /**
      * @inheritDoc
      */
-    public function handle(LogRecord $record): bool
+    public function handle($record): bool
     {
         // false means continue to bubble
         $return  = false;
