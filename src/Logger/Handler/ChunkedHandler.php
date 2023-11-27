@@ -37,7 +37,9 @@ class ChunkedHandler extends Handler implements FormattableHandlerInterface
     }
 
     /**
-     * @inheritDoc
+     * @param LogRecord|array<mixed> $record
+     *
+     * @return bool
      */
     public function handle($record): bool
     {
@@ -46,17 +48,20 @@ class ChunkedHandler extends Handler implements FormattableHandlerInterface
 
         $useArray = false;
 
-        if (\class_exists(LogRecord::class) && $record instanceof LogRecord && !\is_array($record)) {
+        if (!\is_array($record) && \class_exists(LogRecord::class) && $record instanceof LogRecord) {
             $message = $record->message;
+            /** @var array<mixed> $extra */
+            $extra = $record->extra;
         } else {
-            $message  = $record['message'];
+            $message = $record['message'];
+            /** @var array<mixed> $extra */
+            $extra    = $record['extra'];
             $useArray = true;
         }
         if ($this->chunkSize > 0 && \is_string($message) && \strlen($message) > $this->chunkSize) {
             $chunks   = \str_split($message, $this->chunkSize);
             $total    = \count($chunks);
             $recordId = \md5($message);
-            $extra    = $useArray ? $record['extra'] : $record->extra;
             $extra    = \array_merge($extra, ['recordId' => $recordId]);
             foreach ($chunks as $key => $chunk) {
                 $message = \sprintf("(part %d/%d) %s", $key, $total, $chunk);
@@ -71,6 +76,7 @@ class ChunkedHandler extends Handler implements FormattableHandlerInterface
                         'message' => $message,
                     ];
                 } else {
+                    /** @var LogRecord $record */
                     $newRecord = new LogRecord(
                         $record->datetime,
                         $record->channel,
@@ -81,10 +87,12 @@ class ChunkedHandler extends Handler implements FormattableHandlerInterface
                     );
                 }
 
+                /** @var LogRecord $newRecord */ // to force phpstan to shut up!
                 $return = $this->nextHandler->handle($newRecord) ?: $return;
             }
             return $return;
         }
+        /** @var LogRecord $record */ // to force phpstan to shut up!
         return $this->nextHandler->handle($record);
     }
 
