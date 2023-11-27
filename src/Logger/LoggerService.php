@@ -68,8 +68,6 @@ class LoggerService
         $this->logLevel = $logLevel;
         $this->maxFiles = $maxFiles;
         $this
-            // should work with FingerCrossedHandler, might add useless data
-            ->pushProcessor(new IntrospectionProcessor())
             ->pushProcessor(new PsrLogMessageProcessor())
             ->pushProcessor(new MemoryPeakUsageProcessor())
             ->pushProcessor(new RequestProcessor());

@@ -10,7 +10,7 @@ use Monolog\Handler\Handler;
 use Monolog\Handler\HandlerInterface;
 use Monolog\LogRecord;
 
-class ChunkedHandler extends Handler
+class ChunkedHandler extends Handler implements FormattableHandlerInterface
 {
     private HandlerInterface $nextHandler;
 
@@ -42,23 +42,44 @@ class ChunkedHandler extends Handler
     public function handle($record): bool
     {
         // false means continue to bubble
-        $return  = false;
-        $message = $record->message;
-        if ($this->chunkSize > 0 && \strlen($message) > $this->chunkSize) {
+        $return = false;
+
+        $useArray = false;
+
+        if (\class_exists(LogRecord::class) && $record instanceof LogRecord && !\is_array($record)) {
+            $message = $record->message;
+        } else {
+            $message  = $record['message'];
+            $useArray = true;
+        }
+        if ($this->chunkSize > 0 && \is_string($message) && \strlen($message) > $this->chunkSize) {
             $chunks   = \str_split($message, $this->chunkSize);
             $total    = \count($chunks);
             $recordId = \md5($message);
+            $extra    = $useArray ? $record['extra'] : $record->extra;
+            $extra    = \array_merge($extra, ['recordId' => $recordId]);
             foreach ($chunks as $key => $chunk) {
                 $message = \sprintf("(part %d/%d) %s", $key, $total, $chunk);
 
-                $newRecord = new LogRecord(
-                    $record->datetime,
-                    $record->channel,
-                    $record->level,
-                    $message,
-                    $record->context,
-                    \array_merge($record->extra, ['recordId' => $recordId]),
-                );
+                if ($useArray) {
+                    $newRecord = [
+                        'level' => $record['level'],
+                        'context' => $record['context'],
+                        'channel' => $record['channel'],
+                        'datetime' => $record['datetime'],
+                        'extra' => $extra,
+                        'message' => $message,
+                    ];
+                } else {
+                    $newRecord = new LogRecord(
+                        $record->datetime,
+                        $record->channel,
+                        $record->level,
+                        $message,
+                        $record->context,
+                        $extra,
+                    );
+                }
 
                 $return = $this->nextHandler->handle($newRecord) ?: $return;
             }
