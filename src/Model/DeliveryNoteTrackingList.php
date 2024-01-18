@@ -31,6 +31,14 @@ class DeliveryNoteTrackingList extends AbstractModel
     protected array $codes = [];
 
     /**
+     * @var string[]
+     * @Serializer\Type("array<string>")
+     * @Serializer\SerializedName("trackingURLs")
+     * @Serializer\AccessType("reflection")
+     */
+    protected array $trackingURLs = [];
+
+    /**
      * @return string
      */
     public function getName(): string
@@ -89,6 +97,45 @@ class DeliveryNoteTrackingList extends AbstractModel
     {
         $this->codes = [];
 
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getTrackingURLs(): array
+    {
+        return $this->trackingURLs;
+    }
+
+    /**
+     * @param string ...$trackingURLs
+     *
+     * @return DeliveryNoteTrackingList
+     */
+    public function setTrackingURLs(string ...$trackingURLs): DeliveryNoteTrackingList
+    {
+        $this->trackingURLs = $trackingURLs;
+        return $this;
+    }
+
+    /**
+     * @param string $trackingURL
+     *
+     * @return DeliveryNoteTrackingList
+     */
+    public function addTrackingURL(string $trackingURL): DeliveryNoteTrackingList
+    {
+        $this->trackingURLs[] = $trackingURL;
+        return $this;
+    }
+
+    /**
+     * @return DeliveryNoteTrackingList
+     */
+    public function clearTrackingURLs(): DeliveryNoteTrackingList
+    {
+        $this->trackingURLs = [];
         return $this;
     }
 }
