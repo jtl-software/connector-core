@@ -111,11 +111,12 @@ class DeliveryNoteTrackingList extends AbstractModel
     /**
      * @param string ...$trackingURLs
      *
-     * @return void
+     * @return DeliveryNoteTrackingList
      */
-    public function setTrackingURLs(string ...$trackingURLs): void
+    public function setTrackingURLs(string ...$trackingURLs): DeliveryNoteTrackingList
     {
         $this->trackingURLs = $trackingURLs;
+        return $this;
     }
 
     /**
