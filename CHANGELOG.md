@@ -1,3 +1,6 @@
+## unreleased
+- CO-2509 add tracking URLs to delivery notes
+
 5.1.3
 -----
 - CO-2056 add fallback for unknown attribute types
