@@ -1,5 +1,32 @@
-## unreleased
+5.2.5
+-----
 - CO-2509 add tracking URLs to delivery notes
+
+5.2.4
+-----
+- add chunked log handler to prevent to big log messages
+
+5.2.3
+-----
+- fix clear all linkings
+
+5.2.2
+-----
+- fix log level filtering
+- remove fingers crossed log handler
+
+5.2.1
+-----
+- update min php version to 8.0
+
+5.2.0
+-----
+- stricter type checking
+
+5.1.4
+-----
+- CO-2251 prevent path leaks
+- add option to set formatter for combined log
 
 5.1.3
 -----
