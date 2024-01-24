@@ -72,7 +72,7 @@ class LoggerService
             ->pushProcessor(new MemoryPeakUsageProcessor())
             ->pushProcessor(new RequestProcessor());
 
-        if (\str_starts_with(InstalledVersions::getVersion('monolog/monolog'), '1.')) {
+        if (\str_starts_with(InstalledVersions::getVersion('monolog/monolog') ?? '', '1.')) {
             $this->newMonolog = false;
         }
 
@@ -170,7 +170,7 @@ class LoggerService
         if (
             isset($this->formatter)
             && ($handler instanceof FormattableHandlerInterface
-            || \method_exists($handler, 'setFormatter'))
+            || \method_exists($handler, 'setFormatter')) // @phpstan-ignore-line
         ) {
             $handler->setFormatter($this->formatter);
         }
