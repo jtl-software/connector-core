@@ -169,8 +169,8 @@ class LoggerService
         }
         if (
             isset($this->formatter)
-            && ($handler instanceof FormattableHandlerInterface
-            || \method_exists($handler, 'setFormatter')) // @phpstan-ignore-line
+            && ($handler instanceof FormattableHandlerInterface // @phpstan-ignore-line
+            || \method_exists($handler, 'setFormatter'))
         ) {
             $handler->setFormatter($this->formatter);
         }
