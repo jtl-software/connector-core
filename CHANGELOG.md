@@ -1,3 +1,7 @@
+5.2.6
+-----
+- fix abstract method error if monolog 1 is used by shopsystem (like prestashop)
+
 5.2.5
 -----
 - CO-2509 add tracking URLs to delivery notes

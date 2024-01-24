@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Logger;
 
+use Composer\InstalledVersions;
 use Jtl\Connector\Core\Exception\LoggerException;
 use Jtl\Connector\Core\Logger\Handler\ChunkedHandler;
 use Jtl\Connector\Core\Logger\Processor\RequestProcessor;
@@ -13,9 +14,7 @@ use Monolog\Handler\FormattableHandlerInterface;
 use Monolog\Handler\HandlerInterface;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Level;
-use Monolog\Logger;
 use Monolog\Logger as MonoLogger;
-use Monolog\Processor\IntrospectionProcessor;
 use Monolog\Processor\MemoryPeakUsageProcessor;
 use Monolog\Processor\ProcessorInterface;
 use Monolog\Processor\PsrLogMessageProcessor;
@@ -50,6 +49,7 @@ class LoggerService
     protected HandlerInterface   $handler;
     /* Handler that writes to combined log file */
     protected HandlerInterface   $combinedHandler;
+    protected bool $newMonolog = true;
 
     /**
      * LoggerFactory constructor.
@@ -72,9 +72,19 @@ class LoggerService
             ->pushProcessor(new MemoryPeakUsageProcessor())
             ->pushProcessor(new RequestProcessor());
 
-        $fileName              = \sprintf('%s/combined.log', $this->logDir);
-        $handler               = new RotatingFileHandler($fileName, $this->maxFiles, MonoLogger::DEBUG);
-        $this->combinedHandler = new ChunkedHandler($handler);
+        if (\str_starts_with(InstalledVersions::getVersion('monolog/monolog'), '1.')) {
+            $this->newMonolog = false;
+        }
+
+        $fileName = \sprintf('%s/combined.log', $this->logDir);
+        $handler  = new RotatingFileHandler($fileName, $this->maxFiles, MonoLogger::DEBUG);
+        // Backwards compatibility for monolog 1.x
+        if ($this->newMonolog) {
+            $this->combinedHandler = new ChunkedHandler($handler);
+        } else {
+            $this->combinedHandler = $handler;
+        }
+
         $this->createHandler();
     }
 
@@ -153,8 +163,15 @@ class LoggerService
         $fileName     = \sprintf('%s/%s.log', $this->logDir, $channel);
         $monologLevel = MonoLogger::toMonologLevel($logLevel); // @phpstan-ignore-line
         $handler      = new RotatingFileHandler($fileName, $this->maxFiles, $monologLevel);
-        $handler      = new ChunkedHandler($handler);
-        if (isset($this->formatter)) {
+        // Backwards compatibility for monolog 1.x
+        if ($this->newMonolog) {
+            $handler = new ChunkedHandler($handler);
+        }
+        if (
+            isset($this->formatter)
+            && ($handler instanceof FormattableHandlerInterface
+            || \method_exists($handler, 'setFormatter'))
+        ) {
             $handler->setFormatter($this->formatter);
         }
         return $handler;
