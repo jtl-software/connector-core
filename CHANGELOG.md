@@ -1,3 +1,7 @@
+5.2.8
+-----
+- remove fallback check, instead use pragmatic approach and assume monolog 1
+
 5.2.7
 -----
 - catch OutOfBoundsException if composer got overloaded but without a monolog version

@@ -77,14 +77,11 @@ class LoggerService
                 $this->newMonolog = false;
             }
         } catch (\OutOfBoundsException $e) {
-            // fallback check
-            // logic: we always have \Monolog\Handler\Handler as we include it,
-            // but if monolog is loaded from a third party vendor and in version 1.x
-            // AbstractHandler is not a subclass of Handler.
-            // dirty but works
-            if (!\is_subclass_of(AbstractHandler::class, \Monolog\Handler\Handler::class)) {
-                $this->newMonolog = false;
-            }
+            // fallback
+            // we can't know for sure
+            // because some third party plugin overloaded composer
+            // to be safe we disable it to not load the chunked handler
+            $this->newMonolog = false;
         }
 
         $fileName = \sprintf('%s/combined.log', $this->logDir);
