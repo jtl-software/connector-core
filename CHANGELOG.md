@@ -1,6 +1,10 @@
+5.2.7
+-----
+- catch OutOfBoundsException if composer got overloaded but without a monolog version
+
 5.2.6
 -----
-- fix abstract method error if monolog 1 is used by shopsystem (like prestashop)
+- fix abstract method error if monolog 1 is used by third party (like prestashop modules)
 
 5.2.5
 -----

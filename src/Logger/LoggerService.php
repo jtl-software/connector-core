@@ -9,6 +9,7 @@ use Jtl\Connector\Core\Exception\LoggerException;
 use Jtl\Connector\Core\Logger\Handler\ChunkedHandler;
 use Jtl\Connector\Core\Logger\Processor\RequestProcessor;
 use Monolog\Formatter\FormatterInterface;
+use Monolog\Handler\AbstractHandler;
 use Monolog\Handler\FilterHandler;
 use Monolog\Handler\FormattableHandlerInterface;
 use Monolog\Handler\HandlerInterface;
@@ -71,9 +72,19 @@ class LoggerService
             ->pushProcessor(new PsrLogMessageProcessor())
             ->pushProcessor(new MemoryPeakUsageProcessor())
             ->pushProcessor(new RequestProcessor());
-
-        if (\str_starts_with(InstalledVersions::getVersion('monolog/monolog') ?? '', '1.')) {
-            $this->newMonolog = false;
+        try {
+            if (\str_starts_with(InstalledVersions::getVersion('monolog/monolog') ?? '', '1.')) {
+                $this->newMonolog = false;
+            }
+        } catch (\OutOfBoundsException $e) {
+            // fallback check
+            // logic: we always have \Monolog\Handler\Handler as we include it,
+            // but if monolog is loaded from a third party vendor and in version 1.x
+            // AbstractHandler is not a subclass of Handler.
+            // dirty but works
+            if (!\is_subclass_of(AbstractHandler::class, \Monolog\Handler\Handler::class)) {
+                $this->newMonolog = false;
+            }
         }
 
         $fileName = \sprintf('%s/combined.log', $this->logDir);
