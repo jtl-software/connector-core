@@ -88,7 +88,14 @@ class LoggerService
         $handler  = new RotatingFileHandler($fileName, $this->maxFiles, MonoLogger::DEBUG);
         // Backwards compatibility for monolog 1.x
         if ($this->newMonolog) {
-            $this->combinedHandler = new ChunkedHandler($handler);
+            try {
+                $this->combinedHandler = new ChunkedHandler($handler);
+            } catch (\Exception | \Throwable) {
+                // double fallback
+                // if, for some reason, the chunked handler is still throwing an error
+                // we should load the old handler instead
+                $this->combinedHandler = $handler;
+            }
         } else {
             $this->combinedHandler = $handler;
         }

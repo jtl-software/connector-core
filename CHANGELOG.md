@@ -1,3 +1,7 @@
+5.2.9
+-----
+- add additional fallback in case ChunkedHandler cannot be loaded
+
 5.2.8
 -----
 - remove fallback check, instead use pragmatic approach and assume monolog 1
