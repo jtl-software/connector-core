@@ -215,10 +215,14 @@ class Application
             )->setFormat(Validate::string($this->config->get(ConfigSchema::LOG_FORMAT)));
 
         $this->container->set(LoggerService::class, $this->loggerService);
-        /** we use a factory to always return the instance from the service, instead of caching it */
+        /** use a factory to always return the instance from the service, instead of a possible stale reference */
         $this->container->set(
             LoggerInterface::class,
-            static fn () => $this->loggerService->get(LoggerService::CHANNEL_GLOBAL)
+            \DI\factory(
+                function (LoggerService $service) {
+                    return $service->get(LoggerService::CHANNEL_GLOBAL);
+                }
+            )->parameter('service', $this->loggerService)
         );
 
         $this->serializer   = SerializerBuilder::create($serializerCacheDir)->build();
