@@ -50,7 +50,7 @@ class LoggerService
     protected HandlerInterface   $handler;
     /* Handler that writes to combined log file */
     protected HandlerInterface   $combinedHandler;
-    protected bool $newMonolog = true;
+    protected bool $useChunkedHandler = false;
 
     /**
      * LoggerFactory constructor.
@@ -72,35 +72,24 @@ class LoggerService
             ->pushProcessor(new PsrLogMessageProcessor())
             ->pushProcessor(new MemoryPeakUsageProcessor())
             ->pushProcessor(new RequestProcessor());
-        try {
-            if (\str_starts_with(InstalledVersions::getVersion('monolog/monolog') ?? '', '1.')) {
-                $this->newMonolog = false;
-            }
-        } catch (\OutOfBoundsException $e) {
-            // fallback
-            // we can't know for sure
-            // because some third party plugin overloaded composer
-            // to be safe we disable it to not load the chunked handler
-            $this->newMonolog = false;
-        }
 
-        $fileName = \sprintf('%s/combined.log', $this->logDir);
-        $handler  = new RotatingFileHandler($fileName, $this->maxFiles, MonoLogger::DEBUG);
-        // Backwards compatibility for monolog 1.x
-        if ($this->newMonolog) {
-            try {
-                $this->combinedHandler = new ChunkedHandler($handler);
-            } catch (\Exception | \Throwable) {
-                // double fallback
-                // if, for some reason, the chunked handler is still throwing an error
-                // we should load the old handler instead
-                $this->combinedHandler = $handler;
-            }
-        } else {
-            $this->combinedHandler = $handler;
-        }
+        $fileName              = \sprintf('%s/combined.log', $this->logDir);
+        $this->combinedHandler = new RotatingFileHandler($fileName, $this->maxFiles, MonoLogger::DEBUG);
 
         $this->createHandler();
+    }
+
+    /**
+     * @return LoggerService
+     */
+    public function useChunkedHandler(): LoggerService
+    {
+        $this->useChunkedHandler = true;
+        if (!$this->combinedHandler instanceof ChunkedHandler) {
+            $this->combinedHandler = new ChunkedHandler($this->combinedHandler);
+            $this->createHandler();
+        }
+        return $this;
     }
 
     /**
@@ -178,8 +167,7 @@ class LoggerService
         $fileName     = \sprintf('%s/%s.log', $this->logDir, $channel);
         $monologLevel = MonoLogger::toMonologLevel($logLevel); // @phpstan-ignore-line
         $handler      = new RotatingFileHandler($fileName, $this->maxFiles, $monologLevel);
-        // Backwards compatibility for monolog 1.x
-        if ($this->newMonolog) {
+        if ($this->useChunkedHandler) {
             $handler = new ChunkedHandler($handler);
         }
         if (

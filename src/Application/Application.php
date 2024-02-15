@@ -215,7 +215,11 @@ class Application
             )->setFormat(Validate::string($this->config->get(ConfigSchema::LOG_FORMAT)));
 
         $this->container->set(LoggerService::class, $this->loggerService);
-        $this->container->set(LoggerInterface::class, $this->loggerService->get(LoggerService::CHANNEL_GLOBAL));
+        /** we use a factory to always return the instance from the service, instead of caching it */
+        $this->container->set(
+            LoggerInterface::class,
+            static fn () => $this->loggerService->get(LoggerService::CHANNEL_GLOBAL)
+        );
 
         $this->serializer   = SerializerBuilder::create($serializerCacheDir)->build();
         $this->httpRequest  = HttpRequest::createFromGlobals();
