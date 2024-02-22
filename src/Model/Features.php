@@ -202,4 +202,20 @@ class Features extends AbstractModel
 
         return $data;
     }
+
+    public function disableEntity(string $entityId): void
+    {
+        if (isset($this->entities[$entityId])) {
+            $this->entities[$entityId]->setPull(false);
+            $this->entities[$entityId]->setPush(false);
+            $this->entities[$entityId]->setDelete(false);
+        }
+    }
+
+    public function disableFlag(string $flagId): void
+    {
+        if (isset($this->flags[$flagId])) {
+            $this->flags[$flagId]->setActive(false);
+        }
+    }
 }

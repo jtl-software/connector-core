@@ -1,3 +1,7 @@
+unreleased
+_____
+- CO-2515 add functionality for connectors to announce disabled features
+
 5.2.9
 -----
 - add additional fallback in case ChunkedHandler cannot be loaded

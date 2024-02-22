@@ -882,12 +882,13 @@ class Application
      */
     public function handleRequest(ConnectorInterface $connector, Request $request): Response
     {
-        $controllerName = $request->getController();
-        $action         = $request->getAction();
-        $params         = $request->getParams();
+        $controllerName   = $request->getController();
+        $action           = $request->getAction();
+        $params           = $request->getParams();
+        $disabledFeatures = $connector->getDisabledFeatures();
 
         if (Action::isCoreAction($action)) {
-            $this->container->set($controllerName, function (ContainerInterface $container) {
+            $this->container->set($controllerName, function (ContainerInterface $container) use ($disabledFeatures) {
 
                 if (!\is_string($featuresPath = $this->config->get(ConfigSchema::FEATURES_PATH))) {
                     throw new \RuntimeException('$featuresPath must be a string!');
@@ -906,7 +907,8 @@ class Application
                     $checksumLinker,
                     $identityLinker,
                     $sessionHandlerInterface,
-                    $tokenValidatorInterface
+                    $tokenValidatorInterface,
+                    $disabledFeatures
                 );
 
                 $controller->setLogger($this->loggerService->get(LoggerService::CHANNEL_GLOBAL));

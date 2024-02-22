@@ -47,22 +47,25 @@ class ConnectorController implements LoggerAwareInterface
     protected LoggerInterface          $logger;
     protected \SessionHandlerInterface $sessionHandler;
     protected TokenValidatorInterface  $tokenValidator;
+    private Features                   $disabledFeatures;
 
     /**
      * ConnectorController constructor.
      *
-     * @param string                   $featuresPath
-     * @param ChecksumLinker           $checksumLinker
-     * @param IdentityLinker           $linker
-     * @param \SessionHandlerInterface $sessionHandler
-     * @param TokenValidatorInterface  $tokenValidator
+     * @param string                             $featuresPath
+     * @param ChecksumLinker                     $checksumLinker
+     * @param IdentityLinker                     $linker
+     * @param \SessionHandlerInterface           $sessionHandler
+     * @param TokenValidatorInterface            $tokenValidator
+     * @param Features $disabledFeatures
      */
     public function __construct(
         string                   $featuresPath,
         ChecksumLinker           $checksumLinker,
         IdentityLinker           $linker,
         \SessionHandlerInterface $sessionHandler,
-        TokenValidatorInterface  $tokenValidator
+        TokenValidatorInterface  $tokenValidator,
+        Features                 $disabledFeatures
     ) {
         $this->featuresPath   = $featuresPath;
         $this->checksumLinker = $checksumLinker;
@@ -70,6 +73,7 @@ class ConnectorController implements LoggerAwareInterface
         $this->logger         = new NullLogger();
         $this->sessionHandler = $sessionHandler;
         $this->tokenValidator = $tokenValidator;
+        $this->disabledFeatures = $disabledFeatures;
     }
 
 
@@ -105,7 +109,25 @@ class ConnectorController implements LoggerAwareInterface
             $flags = $features['flags'];
         }
 
-        return Features::create($entities, $flags);
+        $features = Features::create($entities, $flags);
+
+        foreach ($this->disabledFeatures->getEntities() as $disabledEntity) {
+            foreach ($features->getEntities() as $key => $entity) {
+                if ($entity->getName() === $disabledEntity->getName()) {
+                    $features->disableEntity($key);
+                }
+            }
+        }
+
+        foreach ($this->disabledFeatures->getFlags() as $disabledFlag) {
+            foreach ($features->getFlags() as $key => $entity) {
+                if ($entity->getName() === $disabledFlag->getName()) {
+                    $features->disableFlag($key);
+                }
+            }
+        }
+
+        return $features;
     }
 
     /**

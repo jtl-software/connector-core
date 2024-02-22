@@ -7,6 +7,7 @@ namespace Jtl\Connector\Core\Connector;
 use DI\Container;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
+use Jtl\Connector\Core\Model\Features;
 use Noodlehaus\ConfigInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
@@ -48,4 +49,6 @@ interface ConnectorInterface
      * @return string
      */
     public function getPlatformName(): string;
+
+    public function getDisabledFeatures(): Features;
 }
