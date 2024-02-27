@@ -43,12 +43,12 @@ class Zip
 
         $archive = new \ZipArchive();
         if ($archive->open($sourceFile) === true) {
-            $index = 0;
-            $isBomb = false;
+            $index         = 0;
+            $isBomb        = false;
             $imageTooLarge = false;
 
             while (($stat = $archive->statIndex($index))) {
-                $size = $stat['size'];
+                $size     = $stat['size'];
                 $compSize = $stat['comp_size'];
 
                 // 20MB
