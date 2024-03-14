@@ -141,11 +141,11 @@ class ProductFactory extends AbstractModelFactory
             'partsListId'                 => $identityFactory->makeOneArray(),
             'productTypeId'               => $identityFactory->makeOneArray(),
             'shippingClassId'             => $identityFactory->makeOneArray(),
+            'taxClassId'                  => $this->makeIdentityArray(IdentityType::TAX_CLASS),
             'unitId'                      => $identityFactory->makeOneArray(),
+            'additionalHandlingTime'      => $this->faker->numberBetween(1, 20),
             'asin'                        => $this->faker->word,
             'availableFrom'               => \random_int(0, 1) === 1 ? $this->faker->iso8601 : null,
-            'measurementQuantity'         => $this->faker->randomFloat(2, 1),
-            'measurementUnitCode'         => $this->faker->randomElement($units),
             'basePriceDivisor'            => 0.0,
             'basePriceFactor'             => 0.0,
             'basePriceQuantity'           => $this->faker->randomFloat(3, 1),
@@ -161,6 +161,7 @@ class ProductFactory extends AbstractModelFactory
                     $this->faker->randomKey(['days', 'years', 'hours', 'minutes', 'seconds'])
                 )
             ),
+            'discountable'                => $this->faker->boolean,
             'ean'                         => $this->faker->ean8, // @phpstan-ignore-line
             'epid'                        => $this->faker->uuid,
             'hazardIdNumber'              => $this->faker->sha1,
@@ -178,6 +179,8 @@ class ProductFactory extends AbstractModelFactory
             'length'                      => $this->faker->randomFloat(),
             'manufacturerNumber'          => $this->faker->word(),
             //'manufacturer' => null,
+            'measurementQuantity'         => $this->faker->randomFloat(2, 1),
+            'measurementUnitCode'         => $this->faker->randomElement($units),
             'minBestBeforeDate'           => $this->dateBetween(
                 \sprintf(
                     '+%d %s',
@@ -201,12 +204,11 @@ class ProductFactory extends AbstractModelFactory
             'serialNumber'                => $this->faker->uuid,
             'shippingWeight'              => $this->faker->randomFloat(3),
             'sku'                         => $this->faker->uuid,
-            //'sort' => 0,
+            'sort'                        => $this->faker->numberBetween(1, 10),
             'stockLevel'                  => null,
             'supplierDeliveryTime'        => $this->faker->numberBetween(0, 366),
             'supplierStockLevel'          => $this->faker->randomFloat(),
             'taric'                       => $this->faker->word,
-            'taxClassId'                  => $this->makeIdentityArray(IdentityType::TAX_CLASS),
             'unNumber'                    => $this->faker->word,
             'upc'                         => $this->faker->uuid,
             'vat'                         => $taxRates[\random_int(0, $taxRatesMaxCount)]['rate'],
