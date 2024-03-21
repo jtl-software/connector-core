@@ -39,24 +39,24 @@ class QueryBuilder extends \Doctrine\DBAL\Query\QueryBuilder
 
     /**
      * @return string
-     * @throws QueryException
      */
     public function getSQL(): string
     {
-        if (!\is_null($this->fromTable)) {
+        $fromTable = $this->fromTable;
+        if (!\is_null($fromTable)) {
             $this->resetQueryPart('from');
             switch ($this->getType()) {
                 case self::SELECT:
-                    $this->from($this->fromTable, $this->fromAlias);
+                    $this->from($fromTable, $this->fromAlias);
                     break;
                 case self::INSERT:
-                    $this->insert($this->fromTable);
+                    $this->insert($fromTable);
                     break;
                 case self::UPDATE:
-                    $this->update($this->fromTable, $this->fromAlias);
+                    $this->update($fromTable, $this->fromAlias);
                     break;
                 case self::DELETE:
-                    $this->delete($this->fromTable, $this->fromAlias);
+                    $this->delete($fromTable, $this->fromAlias);
                     break;
             }
         }
