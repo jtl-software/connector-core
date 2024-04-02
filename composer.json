@@ -32,7 +32,7 @@
         "fakerphp/faker": "^1.13",
         "whitecube/lingua": "^1.1",
         "ext-fileinfo": "*",
-        "doctrine/dbal": "^2.5",
+        "doctrine/dbal": "^2.5 | ^3",
         "ext-pdo": "*"
     },
     "require-dev": {
