@@ -38,7 +38,7 @@ abstract class AbstractIdentity extends AbstractModel implements IdentityInterfa
     /**
      * @param Identity $id Unique id
      *
-     * @return self
+     * @return $this
      */
     public function setId(Identity $id): self
     {
