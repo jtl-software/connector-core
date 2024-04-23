@@ -43,6 +43,42 @@ class Zip
 
         $archive = new \ZipArchive();
         if ($archive->open($sourceFile) === true) {
+            $index         = 0;
+            $isBomb        = false;
+            $imageTooLarge = false;
+
+            while (($stat = $archive->statIndex($index))) {
+                $size     = $stat['size'];
+                $compSize = $stat['comp_size'];
+
+                // 20MB
+                if ($size > 20000000) {
+                    $imageTooLarge = true;
+                    break;
+                }
+
+                // Images won't reach a compression ratio this high
+                if ($size / $compSize > 100) {
+                    $isBomb = true;
+                    break;
+                }
+
+                if ($index > 100) {
+                    $isBomb = true;
+                    break;
+                }
+
+                $index++;
+            }
+
+            if ($imageTooLarge) {
+                throw new \RuntimeException("Image {$index} too large");
+            }
+
+            if ($isBomb) {
+                throw new \RuntimeException('Zip bomb detected');
+            }
+
             $archive->extractTo($targetFolder);
             $archive->close();
 
