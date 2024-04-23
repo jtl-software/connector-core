@@ -2,6 +2,10 @@ unreleased
 -----
 - CO-2544 prevent zip bomb upload during image push
 
+5.2.12
+-----
+- add provide for jtl/connector-mapping-tables and jtl/connector-dbc
+
 5.2.9
 -----
 - add additional fallback in case ChunkedHandler cannot be loaded
