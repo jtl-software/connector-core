@@ -211,16 +211,17 @@ class ProductFactory extends AbstractModelFactory
             'upc'                         => $this->faker->uuid,
             'vat'                         => $taxRates[\random_int(0, $taxRatesMaxCount)]['rate'],
             'width'                       => $this->faker->randomFloat(2),
-            'attributes'                  => [],
+            'attributes'                  => $this->getFactory('TranslatableAttribute')->makeArray(\random_int(1, 3)),
             'categories'                  => $this->getFactory('Product2Category')->makeArray(\random_int(1, 3)),
-            'checksums'                   => [],
-            //'configGroups' => [],
-            //'customerGroupPackagingQuantities' => [],
+            'checksums'                   => $this->getFactory('Checksum')->makeArray(\random_int(1, 3)),
+            'configGroups'                => $this->getFactory('ProductConfigGroup')->makeArray(\random_int(1, 3)),
+            'customerGroupPackagingQuantities' => $this->getFactory('CustomerGroupPackagingQuantity')
+                ->makeArray(\random_int(1, 3)),
             //'fileDownloads' => [],
             'i18ns'                       => [$this->getFactory('ProductI18n')->makeOneArray()],
-            'invisibilities'              => [],
+            'invisibilities'              => $this->getFactory('ProductInvisibility')->makeArray(\random_int(1, 3)),
             'mediaFiles'                  => [],
-            'partsLists'                  => [],
+            'partsLists'                  => $this->getFactory('PartsList')->makeArray(\random_int(1, 3)),
             'prices'                      => [
                 $productPriceFactory
                     ->setWithBulkPrices(\random_int(0, 1) === 1)
@@ -230,7 +231,7 @@ class ProductFactory extends AbstractModelFactory
             'specifics'                   => [],
             'taxRates'                    => $taxRates,
             'variations'                  => [],
-            //'warehouseInfo' => [],
+            'warehouseInfo'               => $this->getFactory('ProductWarehouseInfo')->makeArray(\random_int(1, 3)),
         ];
     }
 
