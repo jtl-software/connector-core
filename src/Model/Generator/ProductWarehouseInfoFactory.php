@@ -20,8 +20,8 @@ class ProductWarehouseInfoFactory extends AbstractModelFactory
     {
         return [
             'warehouseId' => $this->getFactory('Identity')->makeOneArray(),
-            'inflowQuantity' => $this->faker->randomNumber(1, 100),
-            'stocklevel' => $this->faker->randomNumber(1, 100)
+            'inflowQuantity' => $this->faker->numberBetween(1, 100),
+            'stocklevel' => $this->faker->numberBetween(1, 100)
         ];
     }
 
