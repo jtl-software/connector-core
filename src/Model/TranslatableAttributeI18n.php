@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
-use JsonException;
 use Jtl\Connector\Core\Exception\TranslatableAttributeException;
 
 /**
@@ -161,7 +160,7 @@ class TranslatableAttributeI18n extends AbstractI18n
      *
      * @return TranslatableAttributeI18n
      * @throws TranslatableAttributeException
-     * @throws JsonException
+     * @throws \JsonException
      */
     public function setValue(mixed $value): self
     {
