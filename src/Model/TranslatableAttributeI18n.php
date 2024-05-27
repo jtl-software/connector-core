@@ -118,41 +118,36 @@ class TranslatableAttributeI18n extends AbstractI18n
         if (self::$strictMode && \json_last_error() !== \JSON_ERROR_NONE) {
             throw TranslatableAttributeException::decodingValueFailed($this->name, \json_last_error_msg());
         }
+        if (!\is_array($jsonArr)) {
+            throw TranslatableAttributeException::valueTypeInvalid($this->name, 'array');
+        }
+
         return $jsonArr;
     }
 
     /**
-     * @deprecated
      * @param string $castToType
      *
      * @return bool|float|int|string|array<mixed>
-     * @throws TranslatableAttributeException
+     * @throws TranslatableAttributeException|\JsonException
      */
     public function getValue(string $castToType = TranslatableAttribute::TYPE_STRING): array|float|bool|int|string
     {
-        $value = $this->value;
         switch ($castToType) {
             case TranslatableAttribute::TYPE_BOOL:
-                $value = !('false' === $this->value) && $this->value;
-                break;
+                return $this->getValueAsBool();
 
             case TranslatableAttribute::TYPE_INT:
-                $value = (int)$this->value;
-                break;
+                return $this->getValueAsInt();
 
             case TranslatableAttribute::TYPE_JSON:
-                $value = \json_decode($value, true);
-                if (self::$strictMode && \json_last_error() !== \JSON_ERROR_NONE) {
-                    throw TranslatableAttributeException::decodingValueFailed($this->name, \json_last_error_msg());
-                }
-                break;
+                return $this->getValueAsJsonArr();
 
             case TranslatableAttribute::TYPE_FLOAT:
-                $value = (float)$this->value;
-                break;
+                return $this->getValueAsFloat();
+            default:
+                return $this->getValueAsString();
         }
-
-        return $value;
     }
 
     /**
@@ -177,11 +172,7 @@ class TranslatableAttributeI18n extends AbstractI18n
 
             case 'array':
             case 'object':
-                $value = \json_encode($value, \JSON_THROW_ON_ERROR);
-                if ($value === false) {
-                    throw TranslatableAttributeException::valueTypeInvalid($this->name, 'array|object');
-                }
-                $this->value = $value;
+                $this->value = \json_encode($value, \JSON_THROW_ON_ERROR);
                 break;
 
             default:

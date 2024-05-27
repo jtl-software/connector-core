@@ -226,7 +226,7 @@ class TranslatableAttributeTest extends TestCase
     }
 
     /**
-     * @return array<int, array{0: TranslatableAttributeI18n[], 1: array<string, bool|float|int|string|object>}>
+     * @return array<int, array{0: TranslatableAttributeI18n[], 1: array<string, string>}>
      * @throws \Exception
      */
     public function getValuesProvider(): array
@@ -241,7 +241,7 @@ class TranslatableAttributeTest extends TestCase
             $translations   = $translationsFactory->make(\random_int(1, 5));
             $expectedValues = [];
             foreach ($translations as $translation) {
-                $expectedValues[$translation->getLanguageIso()] = $translation->getValue();
+                $expectedValues[$translation->getLanguageIso()] = $translation->getValueAsString();
             }
 
             $data[] = [
