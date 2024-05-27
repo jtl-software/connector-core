@@ -73,12 +73,63 @@ class TranslatableAttributeI18n extends AbstractI18n
     }
 
     /**
-     * @param string $castToType
-     *
-     * @return bool|float|int|string|object
+     * @return string
+     */
+    public function getValueAsString(): string
+    {
+        return $this->value;
+    }
+
+    /**
+     * @return int
+     */
+    public function getValueAsInt(): int
+    {
+        return (int)$this->value;
+    }
+
+    /**
+     * @return float
+     */
+    public function getValueAsFloat(): float
+    {
+        return (float)$this->value;
+    }
+
+    /**
+     * @return bool
      * @throws TranslatableAttributeException
      */
-    public function getValue(string $castToType = TranslatableAttribute::TYPE_STRING)
+    public function getValueAsBool(): bool
+    {
+        if (!\in_array($this->value, ['0', '1'], true)) {
+            throw TranslatableAttributeException::valueTypeInvalid($this->name, 'bool');
+        }
+        return $this->value === '1';
+    }
+
+    /**
+     * @return array<mixed>
+     * @throws \JsonException
+     * @throws TranslatableAttributeException
+     */
+    public function getValueAsJsonArr(): array
+    {
+        $jsonArr = \json_decode($this->value, true, 512, \JSON_THROW_ON_ERROR);
+        if (self::$strictMode && \json_last_error() !== \JSON_ERROR_NONE) {
+            throw TranslatableAttributeException::decodingValueFailed($this->name, \json_last_error_msg());
+        }
+        return $jsonArr;
+    }
+
+    /**
+     * @deprecated
+     * @param string $castToType
+     *
+     * @return bool|float|int|string|array<mixed>
+     * @throws TranslatableAttributeException
+     */
+    public function getValue(string $castToType = TranslatableAttribute::TYPE_STRING): array|float|bool|int|string
     {
         $value = $this->value;
         switch ($castToType) {
@@ -91,8 +142,6 @@ class TranslatableAttributeI18n extends AbstractI18n
                 break;
 
             case TranslatableAttribute::TYPE_JSON:
-                /** @var object $value */
-                /** @noinspection JsonEncodingApiUsageInspection */
                 $value = \json_decode($value, true);
                 if (self::$strictMode && \json_last_error() !== \JSON_ERROR_NONE) {
                     throw TranslatableAttributeException::decodingValueFailed($this->name, \json_last_error_msg());
@@ -114,7 +163,7 @@ class TranslatableAttributeI18n extends AbstractI18n
      * @throws TranslatableAttributeException
      * @throws JsonException
      */
-    public function setValue($value): self
+    public function setValue(mixed $value): self
     {
         $type = \gettype($value);
 
@@ -129,7 +178,11 @@ class TranslatableAttributeI18n extends AbstractI18n
 
             case 'array':
             case 'object':
-                $this->value = \json_encode($value, \JSON_THROW_ON_ERROR);
+                $value = \json_encode($value, \JSON_THROW_ON_ERROR);
+                if ($value === false) {
+                    throw TranslatableAttributeException::valueTypeInvalid($this->name, 'array|object');
+                }
+                $this->value = $value;
                 break;
 
             default:
