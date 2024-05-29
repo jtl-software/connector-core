@@ -9,13 +9,7 @@ use Noodlehaus\Config;
 use Noodlehaus\Parser\Json;
 use RuntimeException;
 
-/**
- * Config Class
- *
- * @access public
- * @author Daniel Böhmer <daniel.boehmer@jtl-software.com>
- */
-class FileConfig extends Config implements CoreConfigInterface
+class FileConfig extends Config implements CoreConfigInterface, ConfigSchemaConfigInterface
 {
     protected string $filePath = '';
 
