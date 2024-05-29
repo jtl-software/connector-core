@@ -101,20 +101,37 @@ class TranslatableAttributeI18n extends AbstractI18n
      */
     public function getValueAsBool(): bool
     {
-        if (!\in_array($this->value, ['0', '1'], true)) {
-            throw TranslatableAttributeException::valueTypeInvalid($this->name, 'bool');
+        if (self::$strictMode === true) {
+            if (!\in_array($this->value, ['0', '1'], true)) {
+                throw TranslatableAttributeException::valueTypeInvalid(
+                    $this->name . ' : ' . $this->value,
+                    'bool'
+                );
+            }
+        } elseif (\in_array(\strtolower($this->value), ['0', '1', 'true', 'false'], true)) {
+            if (\strtolower($this->value) === 'true') {
+                $this->value = '1';
+            } elseif (\strtolower($this->value) === 'false') {
+                $this->value = '0';
+            }
+        } else {
+            return (bool)$this->value;
         }
+
         return $this->value === '1';
     }
 
     /**
-     * @return array<mixed>
-     * @throws \JsonException
+     * @return array<mixed>|null
      * @throws TranslatableAttributeException
      */
-    public function getValueAsJsonArr(): array
+    public function getValueAsJsonArr(): ?array
     {
-        $jsonArr = \json_decode($this->value, true, 512, \JSON_THROW_ON_ERROR);
+        $jsonArr = \json_decode($this->value, true);
+        if (self::$strictMode === false && \json_last_error() !== \JSON_ERROR_NONE) {
+            return null;
+        }
+
         if (self::$strictMode && \json_last_error() !== \JSON_ERROR_NONE) {
             throw TranslatableAttributeException::decodingValueFailed($this->name, \json_last_error_msg());
         }
@@ -128,10 +145,10 @@ class TranslatableAttributeI18n extends AbstractI18n
     /**
      * @param string $castToType
      *
-     * @return bool|float|int|string|array<mixed>
+     * @return bool|float|int|string|array<mixed>|null
      * @throws TranslatableAttributeException|\JsonException
      */
-    public function getValue(string $castToType = TranslatableAttribute::TYPE_STRING): array|float|bool|int|string
+    public function getValue(string $castToType = TranslatableAttribute::TYPE_STRING): array|float|bool|int|string|null
     {
         switch ($castToType) {
             case TranslatableAttribute::TYPE_BOOL:
