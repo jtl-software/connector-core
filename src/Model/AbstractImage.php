@@ -212,7 +212,7 @@ abstract class AbstractImage extends AbstractIdentity
     /**
      * @param string $name
      *
-     * @return AbstractImage
+     * @return $this
      */
     public function setName(string $name): self
     {
@@ -231,7 +231,7 @@ abstract class AbstractImage extends AbstractIdentity
     /**
      * @param string $remoteUrl
      *
-     * @return AbstractImage
+     * @return $this
      */
     public function setRemoteUrl(string $remoteUrl): self
     {
@@ -250,7 +250,7 @@ abstract class AbstractImage extends AbstractIdentity
     /**
      * @param int $sort
      *
-     * @return AbstractImage
+     * @return $this
      */
     public function setSort(int $sort): self
     {
