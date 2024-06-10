@@ -103,13 +103,13 @@ class RequestParamsTransformSubscriberTest extends TestCase
     /**
      * @dataProvider transformProductStockLevelProvider
      *
-     * @param array{
-     *     productId: array{0: string, 1: int}|ProductStockLevel|null,
+     * @param array<int, array{
+     *     productId: array{0: string, 1: int},
      *     sku: ?string,
      *     stockLevel: ?float
-     * } $productStock
+     * }> $productStock
      * @param array<int, array{
-     *     id: array{0: string, 1: int}|ProductStockLevel, sku: string, stockLevel: float
+     *     id: array{0: string, 1: int}, sku: string, stockLevel: float
      *     }
      * > $expectedResult
      *
@@ -126,7 +126,7 @@ class RequestParamsTransformSubscriberTest extends TestCase
     /**
      * @return void
      * @throws ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException|\Exception
      */
     public function testGetSubscribedEvents(): void
     {

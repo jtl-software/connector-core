@@ -224,11 +224,11 @@ class TranslatableAttribute extends AbstractIdentity
     /**
      * @param string $languageIso
      *
-     * @return bool|float|int|string|null|object
+     * @return bool|float|int|string|null|array<mixed>
      * @throws TranslatableAttributeException
      * @throws JsonException
      */
-    public function findValue(string $languageIso)
+    public function findValue(string $languageIso): array|float|bool|int|string|null
     {
         $i18n = $this->findTranslation($languageIso);
         if ($i18n instanceof TranslatableAttributeI18n) {
@@ -241,7 +241,7 @@ class TranslatableAttribute extends AbstractIdentity
     /**
      * @param string|null $type
      *
-     * @return array<string, bool|float|int|string|null|object>
+     * @return array<string, bool|float|int|string|null|array<mixed>>
      * @throws TranslatableAttributeException
      * @throws JsonException
      */

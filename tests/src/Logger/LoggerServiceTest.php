@@ -11,6 +11,7 @@ use Jtl\Connector\Core\Test\TestCase;
 use Monolog\Formatter\FormatterInterface;
 use Monolog\Formatter\JsonFormatter;
 use Monolog\Handler\AbstractProcessingHandler;
+use Monolog\Handler\FilterHandler;
 use Monolog\Handler\FingersCrossedHandler;
 use Monolog\Handler\FormattableHandlerInterface;
 use Monolog\Handler\RotatingFileHandler;
@@ -147,7 +148,7 @@ class LoggerServiceTest extends TestCase
         $this->assertArrayHasKey(0, $handlers);
         $this->assertArrayHasKey(1, $handlers);
         $this->assertInstanceOf(RotatingFileHandler::class, $handlers[0]);
-        $this->assertInstanceOf(FingersCrossedHandler::class, $handlers[1]);
+        $this->assertInstanceOf(FilterHandler::class, $handlers[1]);
         $this->assertEquals($fooChannel, $this->factory->get('foo'));
 
         $expectedLogFileName = \sprintf('%s/foo.log', $this->logDir);

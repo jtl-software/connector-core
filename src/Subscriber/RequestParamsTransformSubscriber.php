@@ -50,28 +50,14 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
             if (!\is_array($eventData)) {
                 throw new \RuntimeException('$data must be type array.');
             }
+            /** @var array<int, array<string, mixed>> $eventData */
 
-            switch ($event->getController()) {
-                case Controller::PRODUCT:
-                    /** @var array<array<string, mixed>> $eventData */
-                    $data = $this->transformProductData($eventData);
-                    break;
-                case Controller::PRODUCT_PRICE:
-                    /** @var array<array<string, mixed>> $eventData */
-                    $data = $this->transformProductPriceData($eventData);
-                    break;
-                case Controller::PRODUCT_STOCK_LEVEL:
-                    /** @var array{
-                     *     productId: array{0: string, 1: int}|ProductStockLevel|null,
-                     *     sku: ?string,
-                     *     stockLevel: ?float
-                     * } $eventData
-                     */
-                    $data = $this->transformProductStockLevelData($eventData);
-                    break;
-                default:
-                    $data = $eventData;
-            }
+            $data = match ($event->getController()) {
+                Controller::PRODUCT             => $this->transformProductData($eventData),
+                Controller::PRODUCT_PRICE       => $this->transformProductPriceData($eventData),
+                Controller::PRODUCT_STOCK_LEVEL => $this->transformProductStockLevelData($eventData),
+                default                         => $eventData,
+            };
 
             $event->setData($data);
         }
@@ -173,22 +159,24 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param array{
-     *     productId: array{0: string, 1: int}|ProductStockLevel|null,
-     *     sku: ?string,
-     *     stockLevel: ?float
-     * } $productStockLevel
+     * @param array<int, array<string, mixed>> $productStockLevel
      *
-     * @return array<int, array{id: array{0: string, 1: int}|ProductStockLevel, sku: string, stockLevel: float}>
+     * @return array<int, array{id: array{0: string, 1: int}|ProductStockLevel|null, sku: string, stockLevel: float}>
      */
     public function transformProductStockLevelData(array $productStockLevel): array
     {
         $products = [];
         foreach ($productStockLevel as $stockLevel) {
+            /** @var array{0: string, 1: int}|ProductStockLevel|null $id */
+            $id = $stockLevel['productId'] ?? null;
+            /** @var string $sku */
+            $sku = $stockLevel['sku'] ?? '';
+            /** @var float $sl */
+            $sl         = $stockLevel['stockLevel'] ?? 0.;
             $product    = [
-                'id'         => $stockLevel['productId'] ?? null,
-                'sku'        => $stockLevel['sku'] ?? '',
-                'stockLevel' => $stockLevel['stockLevel'] ?? 0.,
+                'id'         => $id,
+                'sku'        => $sku,
+                'stockLevel' => $sl
             ];
             $products[] = $product;
         }

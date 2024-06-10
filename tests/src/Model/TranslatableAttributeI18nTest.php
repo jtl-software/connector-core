@@ -30,6 +30,16 @@ class TranslatableAttributeI18nTest extends TestCase
      */
     public function testGetValue(string $type, $originalValue, $expectedValue, bool $strictMode = false): void
     {
+        if (
+            \in_array($type, ['bool', 'boolean'], true)
+            && $strictMode === true
+            && !\is_bool($originalValue)
+            && !\in_array($originalValue, ['0', '1'], true)
+        ) {
+            $this->expectException(TranslatableAttributeException::class);
+            $this->expectExceptionCode(TranslatableAttributeException::VALUE_TYPE_INVALID);
+        }
+
         TranslatableAttributeI18n::setStrictMode($strictMode);
 
         $i18n = (new TranslatableAttributeI18n())->setValue($originalValue);
@@ -60,6 +70,13 @@ class TranslatableAttributeI18nTest extends TestCase
             ['bool', '1', true],
             ['bool', '', false],
             ['bool', 'wat', true],
+            ['bool', '0', false],
+            ['bool', '1', true],
+            ['bool', true, true, true],
+            ['bool', false, false, true],
+            ['bool', '0', false, true],
+            ['bool', '1', true, true],
+            ['bool', 'foo', true, true],
             ['string', 'foo', 'foo'],
             ['string', '', ''],
             ['foo', 'bar', 'bar'],

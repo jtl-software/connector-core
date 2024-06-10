@@ -10,13 +10,13 @@ use DI\ContainerBuilder;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Doctrine\Common\Annotations\AnnotationRegistry;
-use Exception;
 use Jawira\CaseConverter\CaseConverterException;
 use JMS\Serializer\Serializer;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
 use Jtl\Connector\Core\Checksum\ChecksumLoaderInterface;
 use Jtl\Connector\Core\Compression\Zip;
 use Jtl\Connector\Core\Config\ConfigSchema;
+use Jtl\Connector\Core\Config\ConfigSchemaConfigInterface;
 use Jtl\Connector\Core\Config\CoreConfigInterface;
 use Jtl\Connector\Core\Config\FileConfig;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
@@ -83,12 +83,10 @@ use Jtl\Connector\Core\Subscriber\FeaturesSubscriber;
 use Jtl\Connector\Core\Subscriber\RequestParamsTransformSubscriber;
 use Jtl\Connector\Core\Utilities\Validator\Validate;
 use Monolog\ErrorHandler as MonologErrorHandler;
-use Noodlehaus\ConfigInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Log\InvalidArgumentException;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
-use Psr\Log\LogLevel;
 use ReflectionClass;
 use ReflectionException;
 use RuntimeException;
@@ -99,7 +97,6 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Throwable;
-use TypeError;
 
 class Application
 {
@@ -130,10 +127,10 @@ class Application
         'image/tiff'               => 'tif',
         'image/x-tiff'             => 'tif',
     ];
-    protected ConfigInterface $config;
-    protected ConfigSchema    $configSchema;
-    protected string          $connectorDir;
-    protected Container       $container;
+    protected CoreConfigInterface $config;
+    protected ConfigSchema        $configSchema;
+    protected string              $connectorDir;
+    protected Container           $container;
     /** @var string[] */
     protected array                   $deleteFromFileSystem = [];
     protected AbstractErrorHandler    $errorHandler;
@@ -148,25 +145,19 @@ class Application
     /**
      * Application constructor.
      *
-     * @param string               $connectorDir
-     * @param ConfigInterface|null $config
-     * @param ConfigSchema|null    $configSchema
+     * @param string                   $connectorDir
+     * @param CoreConfigInterface|null $config
+     * @param ConfigSchema|null        $configSchema
      *
      * @throws ApplicationException
      * @throws ConfigException
-     * @throws InvalidArgumentException
      * @throws LoggerException
      * @throws ReflectionException
-     * @throws TypeError
-     * @throws \JMS\Serializer\Exception\InvalidArgumentException
-     * @throws \JMS\Serializer\Exception\RuntimeException
-     * @throws InvalidArgumentException
-     * @throws Exception
      */
     public function __construct(
-        string           $connectorDir,
-        ?ConfigInterface $config = null,
-        ?ConfigSchema    $configSchema = null
+        string               $connectorDir,
+        ?CoreConfigInterface $config       = null,
+        ?ConfigSchema        $configSchema = null
     ) {
         if (!\is_dir($connectorDir)) {
             throw ApplicationException::connectorDirNotExists($connectorDir);
@@ -174,7 +165,7 @@ class Application
         AnnotationRegistry::registerLoader('class_exists');
 
         if ($configSchema !== null && $config !== null) {
-            if ($config instanceof CoreConfigInterface) {
+            if ($config instanceof ConfigSchemaConfigInterface) {
                 $config->setConfigSchema($configSchema);
             }
         } else {
@@ -232,14 +223,17 @@ class Application
     }
 
     /**
-     * @param string          $connectorDir
-     * @param ConfigInterface $config
-     * @param ConfigSchema    $configSchema
+     * @param string              $connectorDir
+     * @param CoreConfigInterface $config
+     * @param ConfigSchema        $configSchema
      *
      * @throws ConfigException
      */
-    protected function prepareConfig(string $connectorDir, ConfigInterface $config, ConfigSchema $configSchema): void
-    {
+    protected function prepareConfig(
+        string              $connectorDir,
+        CoreConfigInterface $config,
+        ConfigSchema        $configSchema
+    ): void {
         foreach (ConfigSchema::createDefaultParameters($connectorDir) as $parameter) {
             if ($configSchema->hasParameter($parameter->getKey())) {
                 $parameter->setDefaultValue($configSchema->getParameter($parameter->getKey())->getDefaultValue());
@@ -454,7 +448,7 @@ class Application
      */
     protected function prepareContainer(ConnectorInterface $connector): void
     {
-        $this->container->set(ConfigInterface::class, $this->getConfig());
+        $this->container->set(CoreConfigInterface::class, $this->getConfig());
         $this->container->set(SessionHandlerInterface::class, $this->getSessionHandler());
         $this->container->set(TokenValidatorInterface::class, $connector->getTokenValidator());
         $this->container->set(PrimaryKeyMapperInterface::class, $connector->getPrimaryKeyMapper());
@@ -485,26 +479,26 @@ class Application
     }
 
     /**
-     * @return ConfigInterface
+     * @return CoreConfigInterface
      */
-    public function getConfig(): ConfigInterface
+    public function getConfig(): CoreConfigInterface
     {
         return $this->config;
     }
 
     /**
-     * @param ConfigInterface $config
-     * @param Container       $container
-     * @param EventDispatcher $eventDispatcher
-     * @param string          $pluginsDir
+     * @param CoreConfigInterface $config
+     * @param Container           $container
+     * @param EventDispatcher     $eventDispatcher
+     * @param string              $pluginsDir
      *
      * @throws DirectoryNotFoundException
      */
     protected function loadPlugins(
-        ConfigInterface $config,
-        Container       $container,
-        EventDispatcher $eventDispatcher,
-        string          $pluginsDir
+        CoreConfigInterface $config,
+        Container           $container,
+        EventDispatcher     $eventDispatcher,
+        string              $pluginsDir
     ): void {
         $loader = new ClassLoader();
         $loader->add('', $pluginsDir);
