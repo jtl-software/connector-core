@@ -122,9 +122,9 @@ class GlobalData extends AbstractModel
     /**
      * @param ConfigGroup $configGroup
      *
-     * @return GlobalData
+     * @return $this
      */
-    public function addConfigGroup(ConfigGroup $configGroup): GlobalData
+    public function addConfigGroup(ConfigGroup $configGroup): self
     {
         $this->configGroups[] = $configGroup;
 
@@ -142,9 +142,9 @@ class GlobalData extends AbstractModel
     /**
      * @param ConfigGroup ...$configGroups
      *
-     * @return GlobalData
+     * @return $this
      */
-    public function setConfigGroups(ConfigGroup ...$configGroups): GlobalData
+    public function setConfigGroups(ConfigGroup ...$configGroups): self
     {
         $this->configGroups = $configGroups;
 
@@ -152,9 +152,9 @@ class GlobalData extends AbstractModel
     }
 
     /**
-     * @return GlobalData
+     * @return $this
      */
-    public function clearConfigGroups(): GlobalData
+    public function clearConfigGroups(): self
     {
         $this->configGroups = [];
 
@@ -164,9 +164,9 @@ class GlobalData extends AbstractModel
     /**
      * @param ConfigItem $configItem
      *
-     * @return GlobalData
+     * @return $this
      */
-    public function addConfigItem(ConfigItem $configItem): GlobalData
+    public function addConfigItem(ConfigItem $configItem): self
     {
         $this->configItems[] = $configItem;
 
@@ -184,9 +184,9 @@ class GlobalData extends AbstractModel
     /**
      * @param ConfigItem ...$configItems
      *
-     * @return GlobalData
+     * @return $this
      */
-    public function setConfigItems(ConfigItem ...$configItems): GlobalData
+    public function setConfigItems(ConfigItem ...$configItems): self
     {
         $this->configItems = $configItems;
 
@@ -194,9 +194,9 @@ class GlobalData extends AbstractModel
     }
 
     /**
-     * @return GlobalData
+     * @return $this
      */
-    public function clearConfigItems(): GlobalData
+    public function clearConfigItems(): self
     {
         $this->configItems = [];
 
@@ -206,9 +206,9 @@ class GlobalData extends AbstractModel
     /**
      * @param CrossSellingGroup $crossSellingGroup
      *
-     * @return GlobalData
+     * @return $this
      */
-    public function addCrossSellingGroup(CrossSellingGroup $crossSellingGroup): GlobalData
+    public function addCrossSellingGroup(CrossSellingGroup $crossSellingGroup): self
     {
         $this->crossSellingGroups[] = $crossSellingGroup;
 
@@ -226,9 +226,9 @@ class GlobalData extends AbstractModel
     /**
      * @param CrossSellingGroup ...$crossSellingGroups
      *
-     * @return GlobalData
+     * @return $this
      */
-    public function setCrossSellingGroups(CrossSellingGroup ...$crossSellingGroups): GlobalData
+    public function setCrossSellingGroups(CrossSellingGroup ...$crossSellingGroups): self
     {
         $this->crossSellingGroups = $crossSellingGroups;
 
@@ -236,9 +236,9 @@ class GlobalData extends AbstractModel
     }
 
     /**
-     * @return GlobalData
+     * @return $this
      */
-    public function clearCrossSellingGroups(): GlobalData
+    public function clearCrossSellingGroups(): self
     {
         $this->crossSellingGroups = [];
 
@@ -248,9 +248,9 @@ class GlobalData extends AbstractModel
     /**
      * @param Currency $currency
      *
-     * @return GlobalData
+     * @return $this
      */
-    public function addCurrency(Currency $currency): GlobalData
+    public function addCurrency(Currency $currency): self
     {
         $this->currencies[] = $currency;
 
@@ -268,9 +268,9 @@ class GlobalData extends AbstractModel
     /**
      * @param Currency ...$currencies
      *
-     * @return GlobalData
+     * @return $this
      */
-    public function setCurrencies(Currency ...$currencies): GlobalData
+    public function setCurrencies(Currency ...$currencies): self
     {
         $this->currencies = $currencies;
 
@@ -278,9 +278,9 @@ class GlobalData extends AbstractModel
     }
 
     /**
-     * @return GlobalData
+     * @return $this
      */
-    public function clearCurrencies(): GlobalData
+    public function clearCurrencies(): self
     {
         $this->currencies = [];
 
@@ -290,9 +290,9 @@ class GlobalData extends AbstractModel
     /**
      * @param CustomerGroup $customerGroup
      *
-     * @return GlobalData
+     * @return $this
      */
-    public function addCustomerGroup(CustomerGroup $customerGroup): GlobalData
+    public function addCustomerGroup(CustomerGroup $customerGroup): self
     {
         $this->customerGroups[] = $customerGroup;
 
@@ -310,9 +310,9 @@ class GlobalData extends AbstractModel
     /**
      * @param CustomerGroup ...$customerGroups
      *
-     * @return GlobalData
+     * @return $this
      */
-    public function setCustomerGroups(CustomerGroup ...$customerGroups): GlobalData
+    public function setCustomerGroups(CustomerGroup ...$customerGroups): self
     {
         $this->customerGroups = $customerGroups;
 
@@ -320,9 +320,9 @@ class GlobalData extends AbstractModel
     }
 
     /**
-     * @return GlobalData
+     * @return $this
      */
-    public function clearCustomerGroups(): GlobalData
+    public function clearCustomerGroups(): self
     {
         $this->customerGroups = [];
 
@@ -332,9 +332,9 @@ class GlobalData extends AbstractModel
     /**
      * @param Language $language
      *
-     * @return GlobalData
+     * @return $this
      */
-    public function addLanguage(Language $language): GlobalData
+    public function addLanguage(Language $language): self
     {
         $this->languages[] = $language;
 
@@ -352,9 +352,9 @@ class GlobalData extends AbstractModel
     /**
      * @param Language ...$languages
      *
-     * @return GlobalData
+     * @return $this
      */
-    public function setLanguages(Language ...$languages): GlobalData
+    public function setLanguages(Language ...$languages): self
     {
         $this->languages = $languages;
 
@@ -362,9 +362,9 @@ class GlobalData extends AbstractModel
     }
 
     /**
-     * @return GlobalData
+     * @return $this
      */
-    public function clearLanguages(): GlobalData
+    public function clearLanguages(): self
     {
         $this->languages = [];
 
@@ -374,9 +374,9 @@ class GlobalData extends AbstractModel
     /**
      * @param MeasurementUnit $measurementUnit
      *
-     * @return GlobalData
+     * @return $this
      */
-    public function addMeasurementUnit(MeasurementUnit $measurementUnit): GlobalData
+    public function addMeasurementUnit(MeasurementUnit $measurementUnit): self
     {
         $this->measurementUnits[] = $measurementUnit;
 
@@ -394,9 +394,9 @@ class GlobalData extends AbstractModel
     /**
      * @param MeasurementUnit ...$measurementUnits
      *
-     * @return GlobalData
+     * @return $this
      */
-    public function setMeasurementUnits(MeasurementUnit ...$measurementUnits): GlobalData
+    public function setMeasurementUnits(MeasurementUnit ...$measurementUnits): self
     {
         $this->measurementUnits = $measurementUnits;
 
@@ -404,9 +404,9 @@ class GlobalData extends AbstractModel
     }
 
     /**
-     * @return GlobalData
+     * @return $this
      */
-    public function clearMeasurementUnits(): GlobalData
+    public function clearMeasurementUnits(): self
     {
         $this->measurementUnits = [];
 
@@ -416,9 +416,9 @@ class GlobalData extends AbstractModel
     /**
      * @param ProductType $productType
      *
-     * @return GlobalData
+     * @return $this
      */
-    public function addProductType(ProductType $productType): GlobalData
+    public function addProductType(ProductType $productType): self
     {
         $this->productTypes[] = $productType;
 
@@ -436,9 +436,9 @@ class GlobalData extends AbstractModel
     /**
      * @param ProductType ...$productTypes
      *
-     * @return GlobalData
+     * @return $this
      */
-    public function setProductTypes(ProductType ...$productTypes): GlobalData
+    public function setProductTypes(ProductType ...$productTypes): self
     {
         $this->productTypes = $productTypes;
 
@@ -446,9 +446,9 @@ class GlobalData extends AbstractModel
     }
 
     /**
-     * @return GlobalData
+     * @return $this
      */
-    public function clearProductTypes(): GlobalData
+    public function clearProductTypes(): self
     {
         $this->productTypes = [];
 
@@ -458,9 +458,9 @@ class GlobalData extends AbstractModel
     /**
      * @param ShippingClass $shippingClass
      *
-     * @return GlobalData
+     * @return $this
      */
-    public function addShippingClass(ShippingClass $shippingClass): GlobalData
+    public function addShippingClass(ShippingClass $shippingClass): self
     {
         $this->shippingClasses[] = $shippingClass;
 
@@ -478,9 +478,9 @@ class GlobalData extends AbstractModel
     /**
      * @param ShippingClass ...$shippingClasses
      *
-     * @return GlobalData
+     * @return $this
      */
-    public function setShippingClasses(ShippingClass ...$shippingClasses): GlobalData
+    public function setShippingClasses(ShippingClass ...$shippingClasses): self
     {
         $this->shippingClasses = $shippingClasses;
 
@@ -488,9 +488,9 @@ class GlobalData extends AbstractModel
     }
 
     /**
-     * @return GlobalData
+     * @return $this
      */
-    public function clearShippingClasses(): GlobalData
+    public function clearShippingClasses(): self
     {
         $this->shippingClasses = [];
 
@@ -500,9 +500,9 @@ class GlobalData extends AbstractModel
     /**
      * @param ShippingMethod $shippingMethod
      *
-     * @return GlobalData
+     * @return $this
      */
-    public function addShippingMethod(ShippingMethod $shippingMethod): GlobalData
+    public function addShippingMethod(ShippingMethod $shippingMethod): self
     {
         $this->shippingMethods[] = $shippingMethod;
 
@@ -520,9 +520,9 @@ class GlobalData extends AbstractModel
     /**
      * @param ShippingMethod ...$shippingMethods
      *
-     * @return GlobalData
+     * @return $this
      */
-    public function setShippingMethods(ShippingMethod ...$shippingMethods): GlobalData
+    public function setShippingMethods(ShippingMethod ...$shippingMethods): self
     {
         $this->shippingMethods = $shippingMethods;
 
@@ -530,9 +530,9 @@ class GlobalData extends AbstractModel
     }
 
     /**
-     * @return GlobalData
+     * @return $this
      */
-    public function clearShippingMethods(): GlobalData
+    public function clearShippingMethods(): self
     {
         $this->shippingMethods = [];
 
@@ -542,9 +542,9 @@ class GlobalData extends AbstractModel
     /**
      * @param TaxRate $taxRate
      *
-     * @return GlobalData
+     * @return $this
      */
-    public function addTaxRate(TaxRate $taxRate): GlobalData
+    public function addTaxRate(TaxRate $taxRate): self
     {
         $this->taxRates[] = $taxRate;
 
@@ -562,9 +562,9 @@ class GlobalData extends AbstractModel
     /**
      * @param TaxRate ...$taxRates
      *
-     * @return GlobalData
+     * @return $this
      */
-    public function setTaxRates(TaxRate ...$taxRates): GlobalData
+    public function setTaxRates(TaxRate ...$taxRates): self
     {
         $this->taxRates = $taxRates;
 
@@ -572,9 +572,9 @@ class GlobalData extends AbstractModel
     }
 
     /**
-     * @return GlobalData
+     * @return $this
      */
-    public function clearTaxRates(): GlobalData
+    public function clearTaxRates(): self
     {
         $this->taxRates = [];
 
@@ -584,9 +584,9 @@ class GlobalData extends AbstractModel
     /**
      * @param Unit $unit
      *
-     * @return GlobalData
+     * @return $this
      */
-    public function addUnit(Unit $unit): GlobalData
+    public function addUnit(Unit $unit): self
     {
         $this->units[] = $unit;
 
@@ -604,9 +604,9 @@ class GlobalData extends AbstractModel
     /**
      * @param Unit ...$units
      *
-     * @return GlobalData
+     * @return $this
      */
-    public function setUnits(Unit ...$units): GlobalData
+    public function setUnits(Unit ...$units): self
     {
         $this->units = $units;
 
@@ -614,9 +614,9 @@ class GlobalData extends AbstractModel
     }
 
     /**
-     * @return GlobalData
+     * @return $this
      */
-    public function clearUnits(): GlobalData
+    public function clearUnits(): self
     {
         $this->units = [];
 
@@ -626,9 +626,9 @@ class GlobalData extends AbstractModel
     /**
      * @param Warehouse $warehouse
      *
-     * @return GlobalData
+     * @return $this
      */
-    public function addWarehouse(Warehouse $warehouse): GlobalData
+    public function addWarehouse(Warehouse $warehouse): self
     {
         $this->warehouses[] = $warehouse;
 
@@ -646,9 +646,9 @@ class GlobalData extends AbstractModel
     /**
      * @param Warehouse ...$warehouses
      *
-     * @return GlobalData
+     * @return $this
      */
-    public function setWarehouses(Warehouse ...$warehouses): GlobalData
+    public function setWarehouses(Warehouse ...$warehouses): self
     {
         $this->warehouses = $warehouses;
 
@@ -656,9 +656,9 @@ class GlobalData extends AbstractModel
     }
 
     /**
-     * @return GlobalData
+     * @return $this
      */
-    public function clearWarehouses(): GlobalData
+    public function clearWarehouses(): self
     {
         $this->warehouses = [];
 

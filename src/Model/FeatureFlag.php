@@ -57,11 +57,12 @@ class FeatureFlag
     /**
      * @param string $name
      *
-     * @return FeatureFlag
+     * @return $this
      */
-    public function setName(string $name): FeatureFlag
+    public function setName(string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -76,11 +77,12 @@ class FeatureFlag
     /**
      * @param bool $active
      *
-     * @return FeatureFlag
+     * @return $this
      */
-    public function setActive(bool $active): FeatureFlag
+    public function setActive(bool $active): self
     {
         $this->active = $active;
+
         return $this;
     }
 }

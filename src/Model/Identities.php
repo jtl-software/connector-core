@@ -38,7 +38,7 @@ class Identities extends AbstractModel
      *
      * @param array<string, array<int, Identity>|null> $identities
      *
-     * @return self
+     * @return $this
      */
     public function setIdentities(array $identities): self
     {

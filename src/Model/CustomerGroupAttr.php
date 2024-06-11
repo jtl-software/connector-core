@@ -41,13 +41,13 @@ class CustomerGroupAttr extends KeyValueAttribute implements IdentityInterface
     }
 
     /**
-     * @param Identity $id Unique customerGroupAttr id
+     * @param Identity $identity Unique customerGroupAttr id
      *
      * @return $this
      */
-    public function setId(Identity $id): self
+    public function setId(Identity $identity): self
     {
-        $this->id = $id;
+        $this->id = $identity;
 
         return $this;
     }

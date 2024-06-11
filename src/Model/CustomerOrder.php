@@ -291,19 +291,19 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @param Identity $id Unique customerOrder id
+     * @param Identity $identity Unique customerOrder id
      *
      * @return $this
      */
-    public function setId(Identity $id): self
+    public function setId(Identity $identity): self
     {
-        $this->id = $id;
+        $this->id = $identity;
 
         return $this;
     }
 
     /**
-     * @return CustomerOrderBillingAddress Billing address
+     * @return CustomerOrderBillingAddress|null Billing address
      */
     public function getBillingAddress(): ?CustomerOrderBillingAddress
     {

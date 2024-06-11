@@ -295,7 +295,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @return Identity Unique customer id
+     * @inheritDoc
      */
     public function getId(): Identity
     {
@@ -303,13 +303,11 @@ class Customer extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @param Identity $id Unique customer id
-     *
-     * @return $this
+     * @inheritDoc
      */
-    public function setId(Identity $id): self
+    public function setId(Identity $identity): self
     {
-        $this->id = $id;
+        $this->id = $identity;
 
         return $this;
     }
