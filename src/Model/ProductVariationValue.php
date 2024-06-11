@@ -91,9 +91,9 @@ class ProductVariationValue extends AbstractIdentity
     /**
      * @param string $ean
      *
-     * @return ProductVariationValue
+     * @return $this
      */
-    public function setEan(string $ean): ProductVariationValue
+    public function setEan(string $ean): self
     {
         $this->ean = $ean;
 
@@ -111,9 +111,9 @@ class ProductVariationValue extends AbstractIdentity
     /**
      * @param double $extraWeight Optional variation extra weight
      *
-     * @return ProductVariationValue
+     * @return $this
      */
-    public function setExtraWeight(float $extraWeight): ProductVariationValue
+    public function setExtraWeight(float $extraWeight): self
     {
         $this->extraWeight = $extraWeight;
 
@@ -131,9 +131,9 @@ class ProductVariationValue extends AbstractIdentity
     /**
      * @param string $sku Optional Stock Keeping Unit
      *
-     * @return ProductVariationValue
+     * @return $this
      */
-    public function setSku(string $sku): ProductVariationValue
+    public function setSku(string $sku): self
     {
         $this->sku = $sku;
 
@@ -151,9 +151,9 @@ class ProductVariationValue extends AbstractIdentity
     /**
      * @param integer $sort Optional sort number
      *
-     * @return ProductVariationValue
+     * @return $this
      */
-    public function setSort(int $sort): ProductVariationValue
+    public function setSort(int $sort): self
     {
         $this->sort = $sort;
 
@@ -171,9 +171,9 @@ class ProductVariationValue extends AbstractIdentity
     /**
      * @param double $stockLevel Optional stock level
      *
-     * @return ProductVariationValue
+     * @return $this
      */
-    public function setStockLevel(float $stockLevel): ProductVariationValue
+    public function setStockLevel(float $stockLevel): self
     {
         $this->stockLevel = $stockLevel;
 
@@ -183,11 +183,11 @@ class ProductVariationValue extends AbstractIdentity
     /**
      * @param ProductVariationValueExtraCharge $extraCharge
      *
-     * @return ProductVariationValue
+     * @return $this
      */
     public function addExtraCharge(
         ProductVariationValueExtraCharge $extraCharge
-    ): ProductVariationValue {
+    ): self {
         $this->extraCharges[] = $extraCharge;
 
         return $this;
@@ -204,9 +204,9 @@ class ProductVariationValue extends AbstractIdentity
     /**
      * @param ProductVariationValueExtraCharge ...$extraCharges
      *
-     * @return ProductVariationValue
+     * @return $this
      */
-    public function setExtraCharges(ProductVariationValueExtraCharge ...$extraCharges): ProductVariationValue
+    public function setExtraCharges(ProductVariationValueExtraCharge ...$extraCharges): self
     {
         $this->extraCharges = $extraCharges;
 
@@ -214,9 +214,9 @@ class ProductVariationValue extends AbstractIdentity
     }
 
     /**
-     * @return ProductVariationValue
+     * @return $this
      */
-    public function clearExtraCharges(): ProductVariationValue
+    public function clearExtraCharges(): self
     {
         $this->extraCharges = [];
 
@@ -226,9 +226,9 @@ class ProductVariationValue extends AbstractIdentity
     /**
      * @param ProductVariationValueI18n $i18n
      *
-     * @return ProductVariationValue
+     * @return $this
      */
-    public function addI18n(ProductVariationValueI18n $i18n): ProductVariationValue
+    public function addI18n(ProductVariationValueI18n $i18n): self
     {
         $this->i18ns[] = $i18n;
 
@@ -246,9 +246,9 @@ class ProductVariationValue extends AbstractIdentity
     /**
      * @param ProductVariationValueI18n ...$i18ns
      *
-     * @return ProductVariationValue
+     * @return $this
      */
-    public function setI18ns(ProductVariationValueI18n ...$i18ns): ProductVariationValue
+    public function setI18ns(ProductVariationValueI18n ...$i18ns): self
     {
         $this->i18ns = $i18ns;
 
@@ -256,9 +256,9 @@ class ProductVariationValue extends AbstractIdentity
     }
 
     /**
-     * @return ProductVariationValue
+     * @return $this
      */
-    public function clearI18ns(): ProductVariationValue
+    public function clearI18ns(): self
     {
         $this->i18ns = [];
 
@@ -268,11 +268,11 @@ class ProductVariationValue extends AbstractIdentity
     /**
      * @param ProductVariationValueInvisibility $invisibility
      *
-     * @return ProductVariationValue
+     * @return $this
      */
     public function addInvisibility(
         ProductVariationValueInvisibility $invisibility
-    ): ProductVariationValue {
+    ): self {
         $this->invisibilities[] = $invisibility;
 
         return $this;
@@ -289,9 +289,9 @@ class ProductVariationValue extends AbstractIdentity
     /**
      * @param ProductVariationValueInvisibility[] $invisibilities
      *
-     * @return ProductVariationValue
+     * @return $this
      */
-    public function setInvisibilities(array $invisibilities): ProductVariationValue
+    public function setInvisibilities(array $invisibilities): self
     {
         $this->invisibilities = $invisibilities;
 
@@ -299,9 +299,9 @@ class ProductVariationValue extends AbstractIdentity
     }
 
     /**
-     * @return ProductVariationValue
+     * @return $this
      */
-    public function clearInvisibilities(): ProductVariationValue
+    public function clearInvisibilities(): self
     {
         $this->invisibilities = [];
 

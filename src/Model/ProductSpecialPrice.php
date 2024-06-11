@@ -76,7 +76,7 @@ class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
     protected array $items = [];
 
     /**
-     * @return \DateTimeInterface Optional: Activate special price from date
+     * @return \DateTimeInterface|null Optional: Activate special price from date
      */
     public function getActiveFromDate(): ?\DateTimeInterface
     {
@@ -86,9 +86,9 @@ class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
     /**
      * @param \DateTimeInterface|null $activeFromDate Optional: Activate special price from date
      *
-     * @return ProductSpecialPrice
+     * @return $this
      */
-    public function setActiveFromDate(?\DateTimeInterface $activeFromDate = null): ProductSpecialPrice
+    public function setActiveFromDate(?\DateTimeInterface $activeFromDate = null): self
     {
         $this->activeFromDate = $activeFromDate;
 
@@ -96,7 +96,7 @@ class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
     }
 
     /**
-     * @return \DateTimeInterface Optional: Special price active until date
+     * @return \DateTimeInterface|null Optional: Special price active until date
      */
     public function getActiveUntilDate(): ?\DateTimeInterface
     {
@@ -106,9 +106,9 @@ class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
     /**
      * @param \DateTimeInterface|null $activeUntilDate Optional: Special price active until date
      *
-     * @return ProductSpecialPrice
+     * @return $this
      */
-    public function setActiveUntilDate(?\DateTimeInterface $activeUntilDate = null): ProductSpecialPrice
+    public function setActiveUntilDate(?\DateTimeInterface $activeUntilDate = null): self
     {
         $this->activeUntilDate = $activeUntilDate;
 
@@ -129,9 +129,9 @@ class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
      *                                   If true, specialPrice will get active from activeFrom-date and will
      *                                   stop after activeUntil-date.
      *
-     * @return ProductSpecialPrice
+     * @return $this
      */
-    public function setConsiderDateLimit(bool $considerDateLimit): ProductSpecialPrice
+    public function setConsiderDateLimit(bool $considerDateLimit): self
     {
         $this->considerDateLimit = $considerDateLimit;
 
@@ -153,9 +153,9 @@ class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
      *                                    If true, specialPrice will be only active until product stockLevel
      *                                    is greater or equal stockLimit.
      *
-     * @return ProductSpecialPrice
+     * @return $this
      */
-    public function setConsiderStockLimit(bool $considerStockLimit): ProductSpecialPrice
+    public function setConsiderStockLimit(bool $considerStockLimit): self
     {
         $this->considerStockLimit = $considerStockLimit;
 
@@ -176,9 +176,9 @@ class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
      *                                  Special price can still be inactivated, if date or stock Limitations do not
      *                                  match.
      *
-     * @return ProductSpecialPrice
+     * @return $this
      */
-    public function setIsActive(bool $isActive): ProductSpecialPrice
+    public function setIsActive(bool $isActive): self
     {
         $this->isActive = $isActive;
 
@@ -196,9 +196,9 @@ class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
     /**
      * @param integer $stockLimit Optional: SpecialPrice active until stock level quantity
      *
-     * @return ProductSpecialPrice
+     * @return $this
      */
-    public function setStockLimit(int $stockLimit): ProductSpecialPrice
+    public function setStockLimit(int $stockLimit): self
     {
         $this->stockLimit = $stockLimit;
 

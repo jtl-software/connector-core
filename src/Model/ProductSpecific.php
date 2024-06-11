@@ -54,9 +54,9 @@ class ProductSpecific extends AbstractIdentity
     /**
      * @param Identity $specificValueId Reference to specificValue
      *
-     * @return ProductSpecific
+     * @return $this
      */
-    public function setSpecificValueId(Identity $specificValueId): ProductSpecific
+    public function setSpecificValueId(Identity $specificValueId): self
     {
         $this->specificValueId = $specificValueId;
 

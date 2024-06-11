@@ -93,9 +93,9 @@ class ProductVariation extends AbstractIdentity
     /**
      * @param integer $sort Optional sort number
      *
-     * @return ProductVariation
+     * @return $this
      */
-    public function setSort(int $sort): ProductVariation
+    public function setSort(int $sort): self
     {
         $this->sort = $sort;
 
@@ -113,9 +113,9 @@ class ProductVariation extends AbstractIdentity
     /**
      * @param string $type
      *
-     * @return ProductVariation
+     * @return $this
      */
-    public function setType(string $type): ProductVariation
+    public function setType(string $type): self
     {
         $this->type = $type;
 
@@ -125,9 +125,9 @@ class ProductVariation extends AbstractIdentity
     /**
      * @param ProductVariationI18n $i18n
      *
-     * @return ProductVariation
+     * @return $this
      */
-    public function addI18n(ProductVariationI18n $i18n): ProductVariation
+    public function addI18n(ProductVariationI18n $i18n): self
     {
         $this->i18ns[] = $i18n;
 
@@ -145,9 +145,9 @@ class ProductVariation extends AbstractIdentity
     /**
      * @param ProductVariationI18n ...$i18ns
      *
-     * @return ProductVariation
+     * @return $this
      */
-    public function setI18ns(ProductVariationI18n ...$i18ns): ProductVariation
+    public function setI18ns(ProductVariationI18n ...$i18ns): self
     {
         $this->i18ns = $i18ns;
 
@@ -155,9 +155,9 @@ class ProductVariation extends AbstractIdentity
     }
 
     /**
-     * @return ProductVariation
+     * @return $this
      */
-    public function clearI18ns(): ProductVariation
+    public function clearI18ns(): self
     {
         $this->i18ns = [];
 
@@ -167,9 +167,9 @@ class ProductVariation extends AbstractIdentity
     /**
      * @param ProductVariationInvisibility $invisibility
      *
-     * @return ProductVariation
+     * @return $this
      */
-    public function addInvisibility(ProductVariationInvisibility $invisibility): ProductVariation
+    public function addInvisibility(ProductVariationInvisibility $invisibility): self
     {
         $this->invisibilities[] = $invisibility;
 
@@ -187,9 +187,9 @@ class ProductVariation extends AbstractIdentity
     /**
      * @param ProductVariationInvisibility ...$invisibilities
      *
-     * @return ProductVariation
+     * @return $this
      */
-    public function setInvisibilities(ProductVariationInvisibility ...$invisibilities): ProductVariation
+    public function setInvisibilities(ProductVariationInvisibility ...$invisibilities): self
     {
         $this->invisibilities = $invisibilities;
 
@@ -197,9 +197,9 @@ class ProductVariation extends AbstractIdentity
     }
 
     /**
-     * @return ProductVariation
+     * @return $this
      */
-    public function clearInvisibilities(): ProductVariation
+    public function clearInvisibilities(): self
     {
         $this->invisibilities = [];
 
@@ -209,9 +209,9 @@ class ProductVariation extends AbstractIdentity
     /**
      * @param ProductVariationValue $value
      *
-     * @return ProductVariation
+     * @return $this
      */
-    public function addValue(ProductVariationValue $value): ProductVariation
+    public function addValue(ProductVariationValue $value): self
     {
         $this->values[] = $value;
 
@@ -229,9 +229,9 @@ class ProductVariation extends AbstractIdentity
     /**
      * @param ProductVariationValue ...$values
      *
-     * @return ProductVariation
+     * @return $this
      */
-    public function setValues(ProductVariationValue ...$values): ProductVariation
+    public function setValues(ProductVariationValue ...$values): self
     {
         $this->values = $values;
 
@@ -239,9 +239,9 @@ class ProductVariation extends AbstractIdentity
     }
 
     /**
-     * @return ProductVariation
+     * @return $this
      */
-    public function clearValues(): ProductVariation
+    public function clearValues(): self
     {
         $this->values = [];
 
