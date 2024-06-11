@@ -2083,11 +2083,10 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param ProductAttribute ...$attributes
      *
-     * @return Product
+     * @return $this
      */
-    public function setAttributes(TranslatableAttribute ...$attributes): TranslatableAttributesInterface
+    public function setAttributes(TranslatableAttribute ...$attributes): self
     {
-        /** @var ProductAttribute[] $attributes */
         $this->attributes = $attributes;
 
         return $this;
