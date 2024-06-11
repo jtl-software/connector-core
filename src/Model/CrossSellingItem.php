@@ -61,9 +61,9 @@ class CrossSellingItem extends AbstractIdentity
     /**
      * @param Identity $crossSellingGroupId Reference to crossSellingGroup
      *
-     * @return CrossSellingItem
+     * @return $this
      */
-    public function setCrossSellingGroupId(Identity $crossSellingGroupId): CrossSellingItem
+    public function setCrossSellingGroupId(Identity $crossSellingGroupId): self
     {
         $this->crossSellingGroupId = $crossSellingGroupId;
 
@@ -81,9 +81,9 @@ class CrossSellingItem extends AbstractIdentity
     /**
      * @param CrossSellingGroup|null $crossSellingGroup
      *
-     * @return CrossSellingItem
+     * @return $this
      */
-    public function setCrossSellingGroup(?CrossSellingGroup $crossSellingGroup): CrossSellingItem
+    public function setCrossSellingGroup(?CrossSellingGroup $crossSellingGroup): self
     {
         $this->crossSellingGroup = $crossSellingGroup;
         return $this;
@@ -92,9 +92,9 @@ class CrossSellingItem extends AbstractIdentity
     /**
      * @param Identity $productId
      *
-     * @return CrossSellingItem
+     * @return $this
      */
-    public function addProductId(Identity $productId): CrossSellingItem
+    public function addProductId(Identity $productId): self
     {
         $this->productIds[] = $productId;
 
@@ -112,9 +112,9 @@ class CrossSellingItem extends AbstractIdentity
     /**
      * @param Identity ...$productIds
      *
-     * @return CrossSellingItem
+     * @return $this
      */
-    public function setProductIds(Identity ...$productIds): CrossSellingItem
+    public function setProductIds(Identity ...$productIds): self
     {
         $this->productIds = $productIds;
 
@@ -122,9 +122,9 @@ class CrossSellingItem extends AbstractIdentity
     }
 
     /**
-     * @return CrossSellingItem
+     * @return $this
      */
-    public function clearProductIds(): CrossSellingItem
+    public function clearProductIds(): self
     {
         $this->productIds = [];
 

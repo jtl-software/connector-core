@@ -108,7 +108,7 @@ class ConfigSchema
     /**
      * @param ConfigParameter ...$parameters
      *
-     * @return ConfigSchema
+     * @return $this
      */
     public function setParameters(ConfigParameter ...$parameters): self
     {
@@ -122,7 +122,7 @@ class ConfigSchema
     /**
      * @param ConfigParameter $parameter
      *
-     * @return ConfigSchema
+     * @return $this
      */
     public function setParameter(ConfigParameter $parameter): self
     {

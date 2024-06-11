@@ -11,7 +11,7 @@ interface ChecksumInterface
     /**
      * @param Identity $foreignKey
      *
-     * @return self
+     * @return $this
      */
     public function setForeignKey(Identity $foreignKey): self;
 
@@ -23,7 +23,7 @@ interface ChecksumInterface
     /**
      * @param string $endpoint
      *
-     * @return self
+     * @return $this
      */
     public function setEndpoint(string $endpoint): self;
 
@@ -35,7 +35,7 @@ interface ChecksumInterface
     /**
      * @param string $host
      *
-     * @return self
+     * @return $this
      */
     public function setHost(string $host): self;
 
@@ -47,7 +47,7 @@ interface ChecksumInterface
     /**
      * @param int $type
      *
-     * @return self
+     * @return $this
      */
     public function setType(int $type): self;
 
@@ -59,7 +59,7 @@ interface ChecksumInterface
     /**
      * @param boolean $hasChanged
      *
-     * @return self
+     * @return $this
      */
     public function setHasChanged(bool $hasChanged): self;
 

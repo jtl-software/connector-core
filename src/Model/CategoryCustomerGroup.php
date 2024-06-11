@@ -51,9 +51,9 @@ class CategoryCustomerGroup extends AbstractModel
     /**
      * @param Identity $customerGroupId Reference to customerGroup
      *
-     * @return CategoryCustomerGroup
+     * @return $this
      */
-    public function setCustomerGroupId(Identity $customerGroupId): CategoryCustomerGroup
+    public function setCustomerGroupId(Identity $customerGroupId): self
     {
         $this->customerGroupId = $customerGroupId;
 
@@ -71,9 +71,9 @@ class CategoryCustomerGroup extends AbstractModel
     /**
      * @param double $discount Optional discount on products in specified categoryId for  customerGroupId
      *
-     * @return CategoryCustomerGroup
+     * @return $this
      */
-    public function setDiscount(float $discount): CategoryCustomerGroup
+    public function setDiscount(float $discount): self
     {
         $this->discount = $discount;
 

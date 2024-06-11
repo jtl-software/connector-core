@@ -115,9 +115,9 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
     /**
      * @param string $accountHolder Bank account holder name
      *
-     * @return CustomerOrderPaymentInfo
+     * @return $this
      */
-    public function setAccountHolder(string $accountHolder): CustomerOrderPaymentInfo
+    public function setAccountHolder(string $accountHolder): self
     {
         $this->accountHolder = $accountHolder;
 
@@ -135,9 +135,9 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
     /**
      * @param string $accountNumber Bank account number (deprecated in DE since SEPA)
      *
-     * @return CustomerOrderPaymentInfo
+     * @return $this
      */
-    public function setAccountNumber(string $accountNumber): CustomerOrderPaymentInfo
+    public function setAccountNumber(string $accountNumber): self
     {
         $this->accountNumber = $accountNumber;
 
@@ -155,9 +155,9 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
     /**
      * @param string $bankCode Bank code (deprecated in DE since SEPA)
      *
-     * @return CustomerOrderPaymentInfo
+     * @return $this
      */
-    public function setBankCode(string $bankCode): CustomerOrderPaymentInfo
+    public function setBankCode(string $bankCode): self
     {
         $this->bankCode = $bankCode;
 
@@ -175,9 +175,9 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
     /**
      * @param string $bankName Bank name
      *
-     * @return CustomerOrderPaymentInfo
+     * @return $this
      */
-    public function setBankName(string $bankName): CustomerOrderPaymentInfo
+    public function setBankName(string $bankName): self
     {
         $this->bankName = $bankName;
 
@@ -195,9 +195,9 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
     /**
      * @param string $bic Bank Identifier Code (BIC)
      *
-     * @return CustomerOrderPaymentInfo
+     * @return $this
      */
-    public function setBic(string $bic): CustomerOrderPaymentInfo
+    public function setBic(string $bic): self
     {
         $this->bic = $bic;
 
@@ -215,9 +215,9 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
     /**
      * @param string $creditCardExpiration Credit card expiration date
      *
-     * @return CustomerOrderPaymentInfo
+     * @return $this
      */
-    public function setCreditCardExpiration(string $creditCardExpiration): CustomerOrderPaymentInfo
+    public function setCreditCardExpiration(string $creditCardExpiration): self
     {
         $this->creditCardExpiration = $creditCardExpiration;
 
@@ -235,9 +235,9 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
     /**
      * @param string $creditCardHolder
      *
-     * @return CustomerOrderPaymentInfo
+     * @return $this
      */
-    public function setCreditCardHolder(string $creditCardHolder): CustomerOrderPaymentInfo
+    public function setCreditCardHolder(string $creditCardHolder): self
     {
         $this->creditCardHolder = $creditCardHolder;
 
@@ -255,9 +255,9 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
     /**
      * @param string $creditCardNumber Credit card number
      *
-     * @return CustomerOrderPaymentInfo
+     * @return $this
      */
-    public function setCreditCardNumber(string $creditCardNumber): CustomerOrderPaymentInfo
+    public function setCreditCardNumber(string $creditCardNumber): self
     {
         $this->creditCardNumber = $creditCardNumber;
 
@@ -275,9 +275,9 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
     /**
      * @param string $creditCardType Credit card type (e.g. "visa")
      *
-     * @return CustomerOrderPaymentInfo
+     * @return $this
      */
-    public function setCreditCardType(string $creditCardType): CustomerOrderPaymentInfo
+    public function setCreditCardType(string $creditCardType): self
     {
         $this->creditCardType = $creditCardType;
 
@@ -295,9 +295,9 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
     /**
      * @param string $creditCardVerificationNumber Credit card verification number
      *
-     * @return CustomerOrderPaymentInfo
+     * @return $this
      */
-    public function setCreditCardVerificationNumber(string $creditCardVerificationNumber): CustomerOrderPaymentInfo
+    public function setCreditCardVerificationNumber(string $creditCardVerificationNumber): self
     {
         $this->creditCardVerificationNumber = $creditCardVerificationNumber;
 
@@ -315,9 +315,9 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
     /**
      * @param string $iban International Bank Account Number (IBAN)
      *
-     * @return CustomerOrderPaymentInfo
+     * @return $this
      */
-    public function setIban(string $iban): CustomerOrderPaymentInfo
+    public function setIban(string $iban): self
     {
         $this->iban = $iban;
 

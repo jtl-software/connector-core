@@ -85,14 +85,14 @@ class FileConfig extends Config implements CoreConfigInterface, ConfigSchemaConf
     }
 
     /**
-     * @param string $valueName
-     * @param scalar|null $default
-     * @phpstan-param mixed $default
+     * @param string        $valueName
+     * @param mixed   $default
      *
      * @return bool
      * @throws ConfigException
+     * @throws \TypeError
      */
-    private function check(string $valueName, $default): bool
+    private function check(string $valueName, mixed $default): bool
     {
         if (!\is_scalar($default) && !\is_null($default)) {
             self::throwTypeError(

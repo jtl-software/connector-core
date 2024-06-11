@@ -30,11 +30,12 @@ class Authentication extends AbstractModel
     /**
      * @param string $token
      *
-     * @return Authentication
+     * @return $this
      */
-    public function setToken(string $token): Authentication
+    public function setToken(string $token): self
     {
         $this->token = $token;
+
         return $this;
     }
 }

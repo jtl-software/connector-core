@@ -8,14 +8,9 @@ use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 
 class TableManager implements PrimaryKeyMapperInterface
 {
-    /**
-     * @var TableCollection
-     */
     protected TableCollection $collection;
 
     /**
-     * MappingTablesManager constructor.
-     *
      * @param TableInterface ...$tables
      */
     public function __construct(TableInterface ...$tables)
@@ -50,7 +45,7 @@ class TableManager implements PrimaryKeyMapperInterface
      * @param integer $type
      * @param integer $hostId
      *
-     * @return string
+     * @return string|null
      * @throws MappingTablesException
      */
     public function getEndpointId(int $type, int $hostId): ?string
@@ -90,7 +85,7 @@ class TableManager implements PrimaryKeyMapperInterface
      * @return string[]
      * @throws MappingTablesException
      */
-    public function findAllEndpointIds($type): array
+    public function findAllEndpointIds(int $type): array
     {
         return $this->collection->get($type)->findEndpoints([], [], [], null, null, $type);
     }

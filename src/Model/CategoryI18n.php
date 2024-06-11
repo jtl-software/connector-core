@@ -75,9 +75,9 @@ class CategoryI18n extends AbstractI18n
     /**
      * @param string $description Optional localized Long Description
      *
-     * @return CategoryI18n
+     * @return $this
      */
-    public function setDescription(string $description): CategoryI18n
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
@@ -95,9 +95,9 @@ class CategoryI18n extends AbstractI18n
     /**
      * @param string $metaDescription Optional localized  short description used for meta tag description
      *
-     * @return CategoryI18n
+     * @return $this
      */
-    public function setMetaDescription(string $metaDescription): CategoryI18n
+    public function setMetaDescription(string $metaDescription): self
     {
         $this->metaDescription = $metaDescription;
 
@@ -115,9 +115,9 @@ class CategoryI18n extends AbstractI18n
     /**
      * @param string $metaKeywords Optional localized meta tag keywords value
      *
-     * @return CategoryI18n
+     * @return $this
      */
-    public function setMetaKeywords(string $metaKeywords): CategoryI18n
+    public function setMetaKeywords(string $metaKeywords): self
     {
         $this->metaKeywords = $metaKeywords;
 
@@ -135,9 +135,9 @@ class CategoryI18n extends AbstractI18n
     /**
      * @param string $name Localized category name
      *
-     * @return CategoryI18n
+     * @return $this
      */
-    public function setName(string $name): CategoryI18n
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -155,9 +155,9 @@ class CategoryI18n extends AbstractI18n
     /**
      * @param string $titleTag Optional localized title tag value
      *
-     * @return CategoryI18n
+     * @return $this
      */
-    public function setTitleTag(string $titleTag): CategoryI18n
+    public function setTitleTag(string $titleTag): self
     {
         $this->titleTag = $titleTag;
 
@@ -175,9 +175,9 @@ class CategoryI18n extends AbstractI18n
     /**
      * @param string $urlPath Optional localized category URL
      *
-     * @return CategoryI18n
+     * @return $this
      */
-    public function setUrlPath(string $urlPath): CategoryI18n
+    public function setUrlPath(string $urlPath): self
     {
         $this->urlPath = $urlPath;
 

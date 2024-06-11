@@ -24,29 +24,17 @@ use Jtl\Connector\MappingTables\Schema\EndpointColumn;
 abstract class AbstractTable extends AbstractDbcTable implements TableInterface
 {
     public const
-        ENDPOINT_INDEX_NAME = 'endpoint_idx',
-        HOST_INDEX_NAME     = 'host_idx',
-        HOST_ID             = 'host_id',
-        IDENTITY_TYPE       = 'identity_type';
-
-    /**
-     * @var string
-     */
+        ENDPOINT_INDEX_NAME             = 'endpoint_idx',
+        HOST_INDEX_NAME                 = 'host_idx',
+        HOST_ID                         = 'host_id',
+        IDENTITY_TYPE                   = 'identity_type';
     protected string $endpointDelimiter = '||';
+    protected bool $singleIdentity      = true;
 
-    /**
-     * @var boolean
-     */
-    protected bool $singleIdentity = true;
-
-    /**
-     * @var EndpointColumn[]
-     */
+    /** @var EndpointColumn[] */
     private array $endpointColumns = [];
 
     /**
-     * AbstractTable constructor.
-     *
      * @param DbManager $dbManager
      * @param bool      $isSingleIdentity
      *
@@ -710,11 +698,12 @@ abstract class AbstractTable extends AbstractDbcTable implements TableInterface
     /**
      * @param string $endpointDelimiter
      *
-     * @return AbstractTable
+     * @return $this
      */
-    public function setEndpointDelimiter(string $endpointDelimiter): AbstractTable
+    public function setEndpointDelimiter(string $endpointDelimiter): self
     {
         $this->endpointDelimiter = $endpointDelimiter;
+
         return $this;
     }
 
@@ -728,7 +717,7 @@ abstract class AbstractTable extends AbstractDbcTable implements TableInterface
      * @throws DbcRuntimeException
      * @throws \RuntimeException
      */
-    public function extractValueFromEndpoint(string $field, string $endpoint)
+    public function extractValueFromEndpoint(string $field, string $endpoint): mixed
     {
         if (empty($endpoint)) {
             return null;

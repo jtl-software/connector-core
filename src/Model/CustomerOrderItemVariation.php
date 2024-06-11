@@ -88,9 +88,9 @@ class CustomerOrderItemVariation extends AbstractIdentity
     /**
      * @param Identity $productVariationId Reference to productVariation
      *
-     * @return CustomerOrderItemVariation
+     * @return $this
      */
-    public function setProductVariationId(Identity $productVariationId): CustomerOrderItemVariation
+    public function setProductVariationId(Identity $productVariationId): self
     {
         $this->productVariationId = $productVariationId;
 
@@ -108,9 +108,9 @@ class CustomerOrderItemVariation extends AbstractIdentity
     /**
      * @param Identity $productVariationValueId Reference to productVariationValue
      *
-     * @return CustomerOrderItemVariation
+     * @return $this
      */
-    public function setProductVariationValueId(Identity $productVariationValueId): CustomerOrderItemVariation
+    public function setProductVariationValueId(Identity $productVariationValueId): self
     {
         $this->productVariationValueId = $productVariationValueId;
 
@@ -128,9 +128,9 @@ class CustomerOrderItemVariation extends AbstractIdentity
     /**
      * @param string $freeField Optional custom text value for variation
      *
-     * @return CustomerOrderItemVariation
+     * @return $this
      */
-    public function setFreeField(string $freeField): CustomerOrderItemVariation
+    public function setFreeField(string $freeField): self
     {
         $this->freeField = $freeField;
 
@@ -148,9 +148,9 @@ class CustomerOrderItemVariation extends AbstractIdentity
     /**
      * @param string $productVariationName Variation name e.g. 'color'
      *
-     * @return CustomerOrderItemVariation
+     * @return $this
      */
-    public function setProductVariationName(string $productVariationName): CustomerOrderItemVariation
+    public function setProductVariationName(string $productVariationName): self
     {
         $this->productVariationName = $productVariationName;
 
@@ -168,9 +168,9 @@ class CustomerOrderItemVariation extends AbstractIdentity
     /**
      * @param double $surcharge
      *
-     * @return CustomerOrderItemVariation
+     * @return $this
      */
-    public function setSurcharge(float $surcharge): CustomerOrderItemVariation
+    public function setSurcharge(float $surcharge): self
     {
         $this->surcharge = $surcharge;
 
@@ -188,9 +188,9 @@ class CustomerOrderItemVariation extends AbstractIdentity
     /**
      * @param string $valueName
      *
-     * @return CustomerOrderItemVariation
+     * @return $this
      */
-    public function setValueName(string $valueName): CustomerOrderItemVariation
+    public function setValueName(string $valueName): self
     {
         $this->valueName = $valueName;
 

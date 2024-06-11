@@ -41,9 +41,9 @@ class CustomerOrderShippingAddress extends AbstractOrderAddress
     /**
      * @param Identity $customerId Reference to customer
      *
-     * @return CustomerOrderShippingAddress
+     * @return $this
      */
-    public function setCustomerId(Identity $customerId): CustomerOrderShippingAddress
+    public function setCustomerId(Identity $customerId): self
     {
         $this->customerId = $customerId;
 

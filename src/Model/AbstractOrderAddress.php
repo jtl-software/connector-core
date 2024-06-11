@@ -152,6 +152,7 @@ abstract class AbstractOrderAddress extends AbstractIdentity
     public function setCity(string $city): self
     {
         $this->city = $city;
+
         return $this;
     }
 
@@ -171,6 +172,7 @@ abstract class AbstractOrderAddress extends AbstractIdentity
     public function setCompany(string $company): self
     {
         $this->company = $company;
+
         return $this;
     }
 
@@ -190,6 +192,7 @@ abstract class AbstractOrderAddress extends AbstractIdentity
     public function setCountryIso(string $countryIso): self
     {
         $this->countryIso = $countryIso;
+
         return $this;
     }
 
@@ -209,6 +212,7 @@ abstract class AbstractOrderAddress extends AbstractIdentity
     public function setDeliveryInstruction(string $deliveryInstruction): self
     {
         $this->deliveryInstruction = $deliveryInstruction;
+
         return $this;
     }
 
@@ -223,11 +227,12 @@ abstract class AbstractOrderAddress extends AbstractIdentity
     /**
      * @param string $eMail E-Mail address
      *
-     * @return self
+     * @return $this
      */
     public function setEMail(string $eMail): self
     {
         $this->eMail = $eMail;
+
         return $this;
     }
 
@@ -242,11 +247,12 @@ abstract class AbstractOrderAddress extends AbstractIdentity
     /**
      * @param string $extraAddressLine Extra address line e.g. 'Apartment 2.5'
      *
-     * @return self
+     * @return $this
      */
     public function setExtraAddressLine(string $extraAddressLine): self
     {
         $this->extraAddressLine = $extraAddressLine;
+
         return $this;
     }
 
@@ -261,11 +267,12 @@ abstract class AbstractOrderAddress extends AbstractIdentity
     /**
      * @param string $fax Fax number
      *
-     * @return self
+     * @return $this
      */
     public function setFax(string $fax): self
     {
         $this->fax = $fax;
+
         return $this;
     }
 
@@ -280,11 +287,12 @@ abstract class AbstractOrderAddress extends AbstractIdentity
     /**
      * @param string $firstName First name
      *
-     * @return self
+     * @return $this
      */
     public function setFirstName(string $firstName): self
     {
         $this->firstName = $firstName;
+
         return $this;
     }
 
@@ -299,11 +307,12 @@ abstract class AbstractOrderAddress extends AbstractIdentity
     /**
      * @param string $lastName Last name
      *
-     * @return self
+     * @return $this
      */
     public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
+
         return $this;
     }
 
@@ -318,11 +327,12 @@ abstract class AbstractOrderAddress extends AbstractIdentity
     /**
      * @param string $mobile Mobile phone number
      *
-     * @return self
+     * @return $this
      */
     public function setMobile(string $mobile): self
     {
         $this->mobile = $mobile;
+
         return $this;
     }
 
@@ -337,11 +347,12 @@ abstract class AbstractOrderAddress extends AbstractIdentity
     /**
      * @param string $phone Phone number
      *
-     * @return self
+     * @return $this
      */
     public function setPhone(string $phone): self
     {
         $this->phone = $phone;
+
         return $this;
     }
 
@@ -356,11 +367,12 @@ abstract class AbstractOrderAddress extends AbstractIdentity
     /**
      * @param string $salutation Salutation e.g. 'Mr.'
      *
-     * @return self
+     * @return $this
      */
     public function setSalutation(string $salutation): self
     {
         $this->salutation = $salutation;
+
         return $this;
     }
 
@@ -375,11 +387,12 @@ abstract class AbstractOrderAddress extends AbstractIdentity
     /**
      * @param string $state State
      *
-     * @return self
+     * @return $this
      */
     public function setState(string $state): self
     {
         $this->state = $state;
+
         return $this;
     }
 
@@ -394,11 +407,12 @@ abstract class AbstractOrderAddress extends AbstractIdentity
     /**
      * @param string $street Street + streetnumber
      *
-     * @return self
+     * @return $this
      */
     public function setStreet(string $street): self
     {
         $this->street = $street;
+
         return $this;
     }
 
@@ -413,11 +427,12 @@ abstract class AbstractOrderAddress extends AbstractIdentity
     /**
      * @param string $title Title e.g. ("Prof. Dr.")
      *
-     * @return self
+     * @return $this
      */
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -432,11 +447,12 @@ abstract class AbstractOrderAddress extends AbstractIdentity
     /**
      * @param string $zipCode Zip / postal code
      *
-     * @return self
+     * @return $this
      */
     public function setZipCode(string $zipCode): self
     {
         $this->zipCode = $zipCode;
+
         return $this;
     }
 }

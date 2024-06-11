@@ -27,9 +27,9 @@ class CrossSellingGroup extends AbstractIdentity
     /**
      * @param CrossSellingGroupI18n $i18n
      *
-     * @return CrossSellingGroup
+     * @return $this
      */
-    public function addI18n(CrossSellingGroupI18n $i18n): CrossSellingGroup
+    public function addI18n(CrossSellingGroupI18n $i18n): self
     {
         $this->i18ns[] = $i18n;
 
@@ -47,9 +47,9 @@ class CrossSellingGroup extends AbstractIdentity
     /**
      * @param CrossSellingGroupI18n ...$i18ns
      *
-     * @return CrossSellingGroup
+     * @return $this
      */
-    public function setI18ns(CrossSellingGroupI18n ...$i18ns): CrossSellingGroup
+    public function setI18ns(CrossSellingGroupI18n ...$i18ns): self
     {
         $this->i18ns = $i18ns;
 
@@ -57,9 +57,9 @@ class CrossSellingGroup extends AbstractIdentity
     }
 
     /**
-     * @return CrossSellingGroup
+     * @return $this
      */
-    public function clearI18ns(): CrossSellingGroup
+    public function clearI18ns(): self
     {
         $this->i18ns = [];
 

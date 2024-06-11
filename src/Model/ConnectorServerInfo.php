@@ -57,9 +57,9 @@ class ConnectorServerInfo extends AbstractModel
     /**
      * @param integer $memoryLimit
      *
-     * @return ConnectorServerInfo
+     * @return $this
      */
-    public function setMemoryLimit(int $memoryLimit): ConnectorServerInfo
+    public function setMemoryLimit(int $memoryLimit): self
     {
         $this->memoryLimit = $memoryLimit;
 
@@ -77,9 +77,9 @@ class ConnectorServerInfo extends AbstractModel
     /**
      * @param integer $executionTime
      *
-     * @return ConnectorServerInfo
+     * @return $this
      */
-    public function setExecutionTime(int $executionTime): ConnectorServerInfo
+    public function setExecutionTime(int $executionTime): self
     {
         $this->executionTime = $executionTime;
 
@@ -97,9 +97,9 @@ class ConnectorServerInfo extends AbstractModel
     /**
      * @param integer $postMaxSize
      *
-     * @return ConnectorServerInfo
+     * @return $this
      */
-    public function setPostMaxSize(int $postMaxSize): ConnectorServerInfo
+    public function setPostMaxSize(int $postMaxSize): self
     {
         $this->postMaxSize = $postMaxSize;
 
@@ -117,9 +117,9 @@ class ConnectorServerInfo extends AbstractModel
     /**
      * @param integer $uploadMaxFilesize
      *
-     * @return ConnectorServerInfo
+     * @return $this
      */
-    public function setUploadMaxFilesize(int $uploadMaxFilesize): ConnectorServerInfo
+    public function setUploadMaxFilesize(int $uploadMaxFilesize): self
     {
         $this->uploadMaxFilesize = $uploadMaxFilesize;
 

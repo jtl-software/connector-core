@@ -107,7 +107,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     /**
      * @param Identity $parentCategoryId Optional reference to parent category id
      *
-     * @return Category
+     * @return $this
      */
     public function setParentCategoryId(Identity $parentCategoryId): self
     {
@@ -127,7 +127,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     /**
      * @param boolean $isActive
      *
-     * @return Category
+     * @return $this
      */
     public function setIsActive(bool $isActive): self
     {
@@ -147,7 +147,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     /**
      * @param integer $level
      *
-     * @return Category
+     * @return $this
      */
     public function setLevel(int $level): self
     {
@@ -167,7 +167,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     /**
      * @param integer $sort Optional sort order number
      *
-     * @return Category
+     * @return $this
      */
     public function setSort(int $sort): self
     {
@@ -179,7 +179,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     /**
      * @param TranslatableAttribute $attribute
      *
-     * @return Category
+     * @return $this
      */
     public function addAttribute(TranslatableAttribute $attribute): self
     {
@@ -207,7 +207,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     }
 
     /**
-     * @return Category
+     * @return $this
      */
     public function clearAttributes(): self
     {
@@ -219,7 +219,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     /**
      * @param CategoryCustomerGroup $customerGroup
      *
-     * @return Category
+     * @return $this
      */
     public function addCustomerGroup(CategoryCustomerGroup $customerGroup): self
     {
@@ -239,7 +239,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     /**
      * @param CategoryCustomerGroup ...$customerGroups
      *
-     * @return Category
+     * @return $this
      */
     public function setCustomerGroups(CategoryCustomerGroup ...$customerGroups): self
     {
@@ -249,7 +249,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     }
 
     /**
-     * @return Category
+     * @return $this
      */
     public function clearCustomerGroups(): self
     {
@@ -261,7 +261,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     /**
      * @param CategoryI18n $i18n
      *
-     * @return Category
+     * @return $this
      */
     public function addI18n(CategoryI18n $i18n): self
     {
@@ -271,7 +271,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     }
 
     /**
-     * @return Category
+     * @return $this
      */
     public function clearI18ns(): self
     {
@@ -283,7 +283,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     /**
      * @param CategoryInvisibility $invisibility
      *
-     * @return Category
+     * @return $this
      */
     public function addInvisibility(CategoryInvisibility $invisibility): self
     {
@@ -303,7 +303,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     /**
      * @param CategoryInvisibility ...$invisibilities
      *
-     * @return Category
+     * @return $this
      */
     public function setInvisibilities(CategoryInvisibility ...$invisibilities): self
     {
@@ -313,7 +313,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     }
 
     /**
-     * @return Category
+     * @return $this
      */
     public function clearInvisibilities(): self
     {
@@ -357,7 +357,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     /**
      * @param CategoryI18n ...$i18ns
      *
-     * @return Category
+     * @return $this
      */
     public function setI18ns(CategoryI18n ...$i18ns): self
     {

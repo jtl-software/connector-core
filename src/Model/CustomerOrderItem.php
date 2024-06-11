@@ -161,9 +161,9 @@ class CustomerOrderItem extends AbstractIdentity
     /**
      * @param Identity $configItemId Optional reference to configItemId (if item is part of a configurable item)
      *
-     * @return CustomerOrderItem
+     * @return $this
      */
-    public function setConfigItemId(Identity $configItemId): CustomerOrderItem
+    public function setConfigItemId(Identity $configItemId): self
     {
         $this->configItemId = $configItemId;
 
@@ -181,9 +181,9 @@ class CustomerOrderItem extends AbstractIdentity
     /**
      * @param Identity $productId Reference to product
      *
-     * @return CustomerOrderItem
+     * @return $this
      */
-    public function setProductId(Identity $productId): CustomerOrderItem
+    public function setProductId(Identity $productId): self
     {
         $this->productId = $productId;
 
@@ -201,9 +201,9 @@ class CustomerOrderItem extends AbstractIdentity
     /**
      * @param string $name Order item name
      *
-     * @return CustomerOrderItem
+     * @return $this
      */
-    public function setName(string $name): CustomerOrderItem
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -221,9 +221,9 @@ class CustomerOrderItem extends AbstractIdentity
     /**
      * @param double $price Price (net)
      *
-     * @return CustomerOrderItem
+     * @return $this
      */
-    public function setPrice(float $price): CustomerOrderItem
+    public function setPrice(float $price): self
     {
         $this->price = $price;
 
@@ -241,9 +241,9 @@ class CustomerOrderItem extends AbstractIdentity
     /**
      * @param double $priceGross Price (gross)
      *
-     * @return CustomerOrderItem
+     * @return $this
      */
-    public function setPriceGross(float $priceGross): CustomerOrderItem
+    public function setPriceGross(float $priceGross): self
     {
         $this->priceGross = $priceGross;
 
@@ -261,9 +261,9 @@ class CustomerOrderItem extends AbstractIdentity
     /**
      * @param double $quantity Quantity purchased
      *
-     * @return CustomerOrderItem
+     * @return $this
      */
-    public function setQuantity(float $quantity): CustomerOrderItem
+    public function setQuantity(float $quantity): self
     {
         $this->quantity = $quantity;
 
@@ -281,9 +281,9 @@ class CustomerOrderItem extends AbstractIdentity
     /**
      * @param string $sku Stock keeping Unit (unique item identifier)
      *
-     * @return CustomerOrderItem
+     * @return $this
      */
-    public function setSku(string $sku): CustomerOrderItem
+    public function setSku(string $sku): self
     {
         $this->sku = $sku;
 
@@ -301,9 +301,9 @@ class CustomerOrderItem extends AbstractIdentity
     /**
      * @param string $type
      *
-     * @return CustomerOrderItem
+     * @return $this
      */
-    public function setType(string $type): CustomerOrderItem
+    public function setType(string $type): self
     {
         $this->type = $type;
 
@@ -321,9 +321,9 @@ class CustomerOrderItem extends AbstractIdentity
     /**
      * @param string $note
      *
-     * @return CustomerOrderItem
+     * @return $this
      */
-    public function setNote(string $note): CustomerOrderItem
+    public function setNote(string $note): self
     {
         $this->note = $note;
 
@@ -341,9 +341,9 @@ class CustomerOrderItem extends AbstractIdentity
     /**
      * @param string $unique Optional unique Hashsum (if item is part of configurable item
      *
-     * @return CustomerOrderItem
+     * @return $this
      */
-    public function setUnique(string $unique): CustomerOrderItem
+    public function setUnique(string $unique): self
     {
         $this->unique = $unique;
 
@@ -361,9 +361,9 @@ class CustomerOrderItem extends AbstractIdentity
     /**
      * @param double $vat Value added tax
      *
-     * @return CustomerOrderItem
+     * @return $this
      */
-    public function setVat(float $vat): CustomerOrderItem
+    public function setVat(float $vat): self
     {
         $this->vat = $vat;
 
@@ -373,9 +373,9 @@ class CustomerOrderItem extends AbstractIdentity
     /**
      * @param CustomerOrderItemVariation $variation
      *
-     * @return CustomerOrderItem
+     * @return $this
      */
-    public function addVariation(CustomerOrderItemVariation $variation): CustomerOrderItem
+    public function addVariation(CustomerOrderItemVariation $variation): self
     {
         $this->variations[] = $variation;
 
@@ -393,9 +393,9 @@ class CustomerOrderItem extends AbstractIdentity
     /**
      * @param CustomerOrderItemVariation ...$variations
      *
-     * @return CustomerOrderItem
+     * @return $this
      */
-    public function setVariations(CustomerOrderItemVariation ...$variations): CustomerOrderItem
+    public function setVariations(CustomerOrderItemVariation ...$variations): self
     {
         $this->variations = $variations;
 
@@ -403,9 +403,9 @@ class CustomerOrderItem extends AbstractIdentity
     }
 
     /**
-     * @return CustomerOrderItem
+     * @return $this
      */
-    public function clearVariations(): CustomerOrderItem
+    public function clearVariations(): self
     {
         $this->variations = [];
 

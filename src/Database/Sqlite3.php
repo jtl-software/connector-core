@@ -119,7 +119,7 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
      *
      * @return mixed
      */
-    public function fetchSingle(string $query)
+    public function fetchSingle(string $query): mixed
     {
         return $this->db->querySingle($query);
     }
@@ -131,7 +131,7 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
      *
      * @return \SQLite3Stmt|boolean Returns an SQLite3Stmt object on success or FALSE on failure.
      */
-    public function prepare(string $query)
+    public function prepare(string $query): \SQLite3Stmt|bool
     {
         return $this->db->prepare($query);
     }
@@ -200,7 +200,7 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
      * @throws \RuntimeException
      * @throws \Throwable
      */
-    public function query($query)
+    public function query($query): int|bool|array|null
     {
         if (($length = \strpos($query, ' ')) === false) {
             throw new \RuntimeException('$length must not be false.');
@@ -275,7 +275,7 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
      *
      * @return boolean|int
      */
-    public function insert(string $query)
+    public function insert(string $query): bool|int
     {
         if ($this->db->exec($query)) {
             return $this->db->lastInsertRowID();

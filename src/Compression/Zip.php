@@ -8,12 +8,6 @@ use InvalidArgumentException;
 use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\FileNotFoundException;
 
-/**
- * Zip
- *
- * @access public
- * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
- */
 class Zip
 {
     /**

@@ -43,9 +43,9 @@ class CustomerGroupAttr extends KeyValueAttribute implements IdentityInterface
     /**
      * @param Identity $id Unique customerGroupAttr id
      *
-     * @return CustomerGroupAttr
+     * @return $this
      */
-    public function setId(Identity $id): CustomerGroupAttr
+    public function setId(Identity $id): self
     {
         $this->id = $id;
 

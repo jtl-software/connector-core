@@ -32,7 +32,7 @@ interface DatabaseInterface
      *
      * @return bool|int|array<int, array<string, mixed>>|null
      */
-    public function query(string $query);
+    public function query(string $query): bool|int|array|null;
 
     /**
      * Database connection state

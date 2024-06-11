@@ -35,9 +35,9 @@ class CustomerGroupI18n extends AbstractI18n
     /**
      * @param string $name Localized customer group name
      *
-     * @return CustomerGroupI18n
+     * @return $this
      */
-    public function setName(string $name): CustomerGroupI18n
+    public function setName(string $name): self
     {
         $this->name = $name;
 

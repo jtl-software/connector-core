@@ -273,7 +273,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param Identity $customerId Optional reference to customer.
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function setCustomerId(Identity $customerId): self
     {
@@ -293,7 +293,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param Identity $id Unique customerOrder id
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function setId(Identity $id): self
     {
@@ -313,7 +313,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param CustomerOrderBillingAddress|null $billingAddress Billing address
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function setBillingAddress(?CustomerOrderBillingAddress $billingAddress = null): self
     {
@@ -333,7 +333,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param string $carrierName
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function setCarrierName(string $carrierName): self
     {
@@ -353,7 +353,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param DateTimeInterface|null $creationDate Date of creation
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function setCreationDate(?\DateTimeInterface $creationDate = null): self
     {
@@ -373,7 +373,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param string $currencyIso
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function setCurrencyIso(string $currencyIso): self
     {
@@ -393,7 +393,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param string $customerNote
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function setCustomerNote(string $customerNote): self
     {
@@ -413,7 +413,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param DateTimeInterface|null $estimatedDeliveryDate
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function setEstimatedDeliveryDate(?\DateTimeInterface $estimatedDeliveryDate = null): self
     {
@@ -433,7 +433,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param string $note
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function setNote(string $note): self
     {
@@ -453,7 +453,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param string $orderNumber Optional order number (usually set by ERP System later)
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function setOrderNumber(string $orderNumber): self
     {
@@ -474,7 +474,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param \DateTimeInterface|null $paymentDate Payment date
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function setPaymentDate(\DateTimeInterface $paymentDate = null): self
     {
@@ -494,7 +494,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param CustomerOrderPaymentInfo|null $paymentInfo
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function setPaymentInfo(CustomerOrderPaymentInfo $paymentInfo = null): self
     {
@@ -514,7 +514,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param string $paymentModuleCode
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function setPaymentModuleCode(string $paymentModuleCode): self
     {
@@ -534,7 +534,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param string $paymentStatus
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function setPaymentStatus(string $paymentStatus): self
     {
@@ -554,7 +554,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param string $pui
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function setPui(string $pui): self
     {
@@ -574,7 +574,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param CustomerOrderShippingAddress|null $shippingAddress Shipping address
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function setShippingAddress(?CustomerOrderShippingAddress $shippingAddress = null): self
     {
@@ -594,7 +594,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param DateTimeInterface|null $shippingDate Shipping date
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function setShippingDate(\DateTimeInterface $shippingDate = null): self
     {
@@ -614,7 +614,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param string $shippingInfo Additional shipping info
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function setShippingInfo(string $shippingInfo): self
     {
@@ -634,7 +634,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param Identity $shippingMethodId Optional reference to customer.
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function setShippingMethodId(Identity $shippingMethodId): self
     {
@@ -654,7 +654,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param string $shippingMethodName
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function setShippingMethodName(string $shippingMethodName): self
     {
@@ -674,7 +674,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param string $status Shipping status
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function setStatus(string $status): self
     {
@@ -694,7 +694,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param double $totalSum
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function setTotalSum(float $totalSum): self
     {
@@ -714,7 +714,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param double $totalSumGross
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function setTotalSumGross(float $totalSumGross): self
     {
@@ -726,7 +726,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param KeyValueAttribute $attribute
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function addAttribute(KeyValueAttribute $attribute): self
     {
@@ -746,7 +746,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param KeyValueAttribute ...$attributes
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function setAttributes(KeyValueAttribute ...$attributes): self
     {
@@ -756,7 +756,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @return CustomerOrder
+     * @return $this
      */
     public function clearAttributes(): self
     {
@@ -768,7 +768,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param CustomerOrderItem $item
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function addItem(CustomerOrderItem $item): self
     {
@@ -788,7 +788,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     /**
      * @param CustomerOrderItem ...$items
      *
-     * @return CustomerOrder
+     * @return $this
      */
     public function setItems(CustomerOrderItem ...$items): self
     {
@@ -798,7 +798,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @return CustomerOrder
+     * @return $this
      */
     public function clearItems(): self
     {
