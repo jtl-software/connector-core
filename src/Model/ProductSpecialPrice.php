@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ProductSpecialPrice extends AbstractIdentity
+class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
 {
     /**
      * @var \DateTimeInterface|null Optional: Activate special price from date
@@ -208,9 +208,9 @@ class ProductSpecialPrice extends AbstractIdentity
     /**
      * @param ProductSpecialPriceItem $item
      *
-     * @return ProductSpecialPrice
+     * @return $this
      */
-    public function addItem(ProductSpecialPriceItem $item): ProductSpecialPrice
+    public function addItem(AbstractModel $item): self
     {
         $this->items[] = $item;
 
@@ -228,9 +228,9 @@ class ProductSpecialPrice extends AbstractIdentity
     /**
      * @param ProductSpecialPriceItem ...$items
      *
-     * @return ProductSpecialPrice
+     * @return $this
      */
-    public function setItems(ProductSpecialPriceItem ...$items): ProductSpecialPrice
+    public function setItems(AbstractModel ...$items): self
     {
         $this->items = $items;
 
@@ -238,9 +238,9 @@ class ProductSpecialPrice extends AbstractIdentity
     }
 
     /**
-     * @return ProductSpecialPrice
+     * @inheritDoc
      */
-    public function clearItems(): ProductSpecialPrice
+    public function clearItems(): self
     {
         $this->items = [];
 

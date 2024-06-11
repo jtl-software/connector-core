@@ -56,9 +56,9 @@ class ProductConfigGroup extends AbstractModel
     /**
      * @param Identity $configGroupId Reference to configGroup
      *
-     * @return ProductConfigGroup
+     * @return $this
      */
-    public function setConfigGroupId(Identity $configGroupId): ProductConfigGroup
+    public function setConfigGroupId(Identity $configGroupId): self
     {
         $this->configGroupId = $configGroupId;
 
@@ -76,9 +76,9 @@ class ProductConfigGroup extends AbstractModel
     /**
      * @param integer $sort Optional sort number
      *
-     * @return ProductConfigGroup
+     * @return $this
      */
-    public function setSort(int $sort): ProductConfigGroup
+    public function setSort(int $sort): self
     {
         $this->sort = $sort;
 

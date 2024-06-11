@@ -35,9 +35,9 @@ class ProductPartsList extends AbstractIdentity
     /**
      * @param double $quantity Component quantity
      *
-     * @return ProductPartsList
+     * @return $this
      */
-    public function setQuantity(float $quantity): ProductPartsList
+    public function setQuantity(float $quantity): self
     {
         $this->quantity = $quantity;
 

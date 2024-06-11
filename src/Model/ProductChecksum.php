@@ -75,9 +75,9 @@ class ProductChecksum extends Checksum
     /**
      * @param Identity $foreignKey
      *
-     * @return ProductChecksum
+     * @return $this
      */
-    public function setForeignKey(Identity $foreignKey): ProductChecksum
+    public function setForeignKey(Identity $foreignKey): self
     {
         $this->foreignKey = $foreignKey;
 
@@ -95,9 +95,9 @@ class ProductChecksum extends Checksum
     /**
      * @param string $endpoint
      *
-     * @return ProductChecksum
+     * @return $this
      */
-    public function setEndpoint(string $endpoint): ProductChecksum
+    public function setEndpoint(string $endpoint): self
     {
         $this->endpoint = $endpoint;
 
@@ -123,9 +123,9 @@ class ProductChecksum extends Checksum
     /**
      * @param boolean $hasChanged
      *
-     * @return ProductChecksum
+     * @return $this
      */
-    public function setHasChanged(bool $hasChanged): ProductChecksum
+    public function setHasChanged(bool $hasChanged): self
     {
         $this->hasChanged = $hasChanged;
 
@@ -143,9 +143,9 @@ class ProductChecksum extends Checksum
     /**
      * @param string $host
      *
-     * @return ProductChecksum
+     * @return $this
      */
-    public function setHost(string $host): ProductChecksum
+    public function setHost(string $host): self
     {
         $this->host = $host;
 
@@ -163,9 +163,9 @@ class ProductChecksum extends Checksum
     /**
      * @param integer $type
      *
-     * @return ProductChecksum
+     * @return $this
      */
-    public function setType(int $type): ProductChecksum
+    public function setType(int $type): self
     {
         $this->type = $type;
 

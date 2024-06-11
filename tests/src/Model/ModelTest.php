@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Tests\Model;
 
+use Doctrine\Common\Annotations\AnnotationException;
 use Exception;
 use JMS\Serializer\Exception\InvalidArgumentException;
+use JMS\Serializer\Exception\LogicException;
+use JMS\Serializer\Exception\NotAcceptableException;
 use JMS\Serializer\Exception\RuntimeException;
+use JMS\Serializer\Exception\UnsupportedFormatException;
 use JMS\Serializer\SerializationContext;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Model\AbstractModel;
@@ -25,6 +29,11 @@ class ModelTest extends TestCase
      *
      * @throws InvalidArgumentException
      * @throws RuntimeException
+     * @throws AnnotationException
+     * @throws \InvalidArgumentException
+     * @throws LogicException
+     * @throws NotAcceptableException
+     * @throws UnsupportedFormatException
      */
     public function testModelsInitialization(string $modelName): void
     {
@@ -82,6 +91,7 @@ class ModelTest extends TestCase
             'FeatureFlag',
             'TranslatableAttributesInterface',
             'TranslatableAttributesTrait',
+            'ItemsInterface'
         ];
     }
 

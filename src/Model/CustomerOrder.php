@@ -15,7 +15,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class CustomerOrder extends AbstractI18n implements IdentityInterface
+class CustomerOrder extends AbstractI18n implements IdentityInterface, ItemsInterface
 {
     /**
      * @var string - Status when payment is completed
@@ -770,7 +770,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
      *
      * @return $this
      */
-    public function addItem(CustomerOrderItem $item): self
+    public function addItem(AbstractModel $item): self
     {
         $this->items[] = $item;
 
@@ -790,7 +790,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
      *
      * @return $this
      */
-    public function setItems(CustomerOrderItem ...$items): self
+    public function setItems(AbstractModel ...$items): self
     {
         $this->items = $items;
 
@@ -798,7 +798,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @return $this
+     * @inheritDoc
      */
     public function clearItems(): self
     {

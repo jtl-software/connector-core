@@ -43,9 +43,9 @@ class ProductMediaFileI18n extends AbstractI18n
     /**
      * @param string $description Locale specific description
      *
-     * @return ProductMediaFileI18n
+     * @return $this
      */
-    public function setDescription(string $description): ProductMediaFileI18n
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
@@ -63,9 +63,9 @@ class ProductMediaFileI18n extends AbstractI18n
     /**
      * @param string $name Locale specific name
      *
-     * @return ProductMediaFileI18n
+     * @return $this
      */
-    public function setName(string $name): ProductMediaFileI18n
+    public function setName(string $name): self
     {
         $this->name = $name;
 

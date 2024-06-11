@@ -90,9 +90,9 @@ class Payment extends AbstractIdentity
     /**
      * @param Identity $customerOrderId
      *
-     * @return Payment
+     * @return $this
      */
-    public function setCustomerOrderId(Identity $customerOrderId): Payment
+    public function setCustomerOrderId(Identity $customerOrderId): self
     {
         $this->customerOrderId = $customerOrderId;
 
@@ -110,9 +110,9 @@ class Payment extends AbstractIdentity
     /**
      * @param string $billingInfo
      *
-     * @return Payment
+     * @return $this
      */
-    public function setBillingInfo(string $billingInfo): Payment
+    public function setBillingInfo(string $billingInfo): self
     {
         $this->billingInfo = $billingInfo;
 
@@ -120,7 +120,7 @@ class Payment extends AbstractIdentity
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return \DateTimeInterface|null
      */
     public function getCreationDate(): ?\DateTimeInterface
     {
@@ -128,11 +128,11 @@ class Payment extends AbstractIdentity
     }
 
     /**
-     * @param \DateTimeInterface $creationDate
+     * @param \DateTimeInterface|null $creationDate
      *
-     * @return Payment
+     * @return $this
      */
-    public function setCreationDate(\DateTimeInterface $creationDate = null): Payment
+    public function setCreationDate(\DateTimeInterface $creationDate = null): self
     {
         $this->creationDate = $creationDate;
 
@@ -150,9 +150,9 @@ class Payment extends AbstractIdentity
     /**
      * @param string $paymentModuleCode
      *
-     * @return Payment
+     * @return $this
      */
-    public function setPaymentModuleCode(string $paymentModuleCode): Payment
+    public function setPaymentModuleCode(string $paymentModuleCode): self
     {
         $this->paymentModuleCode = $paymentModuleCode;
 
@@ -170,9 +170,9 @@ class Payment extends AbstractIdentity
     /**
      * @param double $totalSum
      *
-     * @return Payment
+     * @return $this
      */
-    public function setTotalSum(float $totalSum): Payment
+    public function setTotalSum(float $totalSum): self
     {
         $this->totalSum = $totalSum;
 
@@ -190,9 +190,9 @@ class Payment extends AbstractIdentity
     /**
      * @param string $transactionId
      *
-     * @return Payment
+     * @return $this
      */
-    public function setTransactionId(string $transactionId): Payment
+    public function setTransactionId(string $transactionId): self
     {
         $this->transactionId = $transactionId;
 

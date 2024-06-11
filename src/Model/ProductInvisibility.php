@@ -48,9 +48,9 @@ class ProductInvisibility extends AbstractModel
     /**
      * @param Identity $customerGroupId Reference to customerGroup
      *
-     * @return ProductInvisibility
+     * @return $this
      */
-    public function setCustomerGroupId(Identity $customerGroupId): ProductInvisibility
+    public function setCustomerGroupId(Identity $customerGroupId): self
     {
         $this->customerGroupId = $customerGroupId;
 

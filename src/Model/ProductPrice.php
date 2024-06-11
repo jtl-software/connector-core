@@ -17,7 +17,7 @@ use TypeError;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class ProductPrice extends AbstractIdentity
+class ProductPrice extends AbstractIdentity implements ItemsInterface
 {
     /**
      * @var Identity Reference to customerGroup
@@ -78,9 +78,9 @@ class ProductPrice extends AbstractIdentity
     /**
      * @param Identity $customerGroupId Reference to customerGroup
      *
-     * @return ProductPrice
+     * @return $this
      */
-    public function setCustomerGroupId(Identity $customerGroupId): ProductPrice
+    public function setCustomerGroupId(Identity $customerGroupId): self
     {
         $this->customerGroupId = $customerGroupId;
 
@@ -100,9 +100,9 @@ class ProductPrice extends AbstractIdentity
     /**
      * @param Identity $customerId Reference to customer
      *
-     * @return ProductPrice
+     * @return $this
      */
-    public function setCustomerId(Identity $customerId): ProductPrice
+    public function setCustomerId(Identity $customerId): self
     {
         $this->customerId = $customerId;
 
@@ -122,9 +122,9 @@ class ProductPrice extends AbstractIdentity
     /**
      * @param Identity $productId Reference to product
      *
-     * @return ProductPrice
+     * @return $this
      */
-    public function setProductId(Identity $productId): ProductPrice
+    public function setProductId(Identity $productId): self
     {
         $this->productId = $productId;
 
@@ -134,9 +134,9 @@ class ProductPrice extends AbstractIdentity
     /**
      * @param ProductPriceItem $item
      *
-     * @return ProductPrice
+     * @return $this
      */
-    public function addItem(ProductPriceItem $item): ProductPrice
+    public function addItem(AbstractModel $item): self
     {
         $this->items[] = $item;
 
@@ -154,9 +154,9 @@ class ProductPrice extends AbstractIdentity
     /**
      * @param ProductPriceItem ...$items
      *
-     * @return ProductPrice
+     * @return $this
      */
-    public function setItems(ProductPriceItem ...$items): ProductPrice
+    public function setItems(AbstractModel ...$items): self
     {
         $this->items = $items;
 
@@ -164,9 +164,9 @@ class ProductPrice extends AbstractIdentity
     }
 
     /**
-     * @return ProductPrice
+     * @inheritDoc
      */
-    public function clearItems(): ProductPrice
+    public function clearItems(): self
     {
         $this->items = [];
 

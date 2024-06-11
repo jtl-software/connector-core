@@ -52,9 +52,9 @@ class Product2Category extends AbstractIdentity
     /**
      * @param Identity $categoryId Reference to category
      *
-     * @return Product2Category
+     * @return $this
      */
-    public function setCategoryId(Identity $categoryId): Product2Category
+    public function setCategoryId(Identity $categoryId): self
     {
         $this->categoryId = $categoryId;
 

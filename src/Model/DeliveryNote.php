@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class DeliveryNote extends AbstractIdentity
+class DeliveryNote extends AbstractIdentity implements ItemsInterface
 {
     /**
      * @var Identity Reference to customerOrder
@@ -161,7 +161,7 @@ class DeliveryNote extends AbstractIdentity
      *
      * @return $this
      */
-    public function addItem(DeliveryNoteItem $item): self
+    public function addItem(AbstractModel $item): self
     {
         $this->items[] = $item;
 
@@ -181,7 +181,7 @@ class DeliveryNote extends AbstractIdentity
      *
      * @return $this
      */
-    public function setItems(DeliveryNoteItem ...$items): self
+    public function setItems(AbstractModel ...$items): self
     {
         $this->items = $items;
 
@@ -189,7 +189,7 @@ class DeliveryNote extends AbstractIdentity
     }
 
     /**
-     * @return $this
+     * @inheritDoc
      */
     public function clearItems(): self
     {
