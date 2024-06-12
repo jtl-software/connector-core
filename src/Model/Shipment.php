@@ -90,9 +90,9 @@ class Shipment extends AbstractIdentity
     /**
      * @param Identity $deliveryNoteId Reference to deliveryNote
      *
-     * @return Shipment
+     * @return $this
      */
-    public function setDeliveryNoteId(Identity $deliveryNoteId): Shipment
+    public function setDeliveryNoteId(Identity $deliveryNoteId): self
     {
         $this->deliveryNoteId = $deliveryNoteId;
 
@@ -110,9 +110,9 @@ class Shipment extends AbstractIdentity
     /**
      * @param string $carrierName Carrier name
      *
-     * @return Shipment
+     * @return $this
      */
-    public function setCarrierName(string $carrierName): Shipment
+    public function setCarrierName(string $carrierName): self
     {
         $this->carrierName = $carrierName;
 
@@ -120,7 +120,7 @@ class Shipment extends AbstractIdentity
     }
 
     /**
-     * @return \DateTimeInterface Creation date
+     * @return \DateTimeInterface|null Creation date
      */
     public function getCreationDate(): ?\DateTimeInterface
     {
@@ -128,11 +128,11 @@ class Shipment extends AbstractIdentity
     }
 
     /**
-     * @param \DateTimeInterface $creationDate Creation date
+     * @param \DateTimeInterface|null $creationDate Creation date
      *
-     * @return Shipment
+     * @return $this
      */
-    public function setCreationDate(\DateTimeInterface $creationDate = null): Shipment
+    public function setCreationDate(\DateTimeInterface $creationDate = null): self
     {
         $this->creationDate = $creationDate;
 
@@ -150,9 +150,9 @@ class Shipment extends AbstractIdentity
     /**
      * @param string $identCode Optional Identcode
      *
-     * @return Shipment
+     * @return $this
      */
-    public function setIdentCode(string $identCode): Shipment
+    public function setIdentCode(string $identCode): self
     {
         $this->identCode = $identCode;
 
@@ -170,9 +170,9 @@ class Shipment extends AbstractIdentity
     /**
      * @param string $note Optional shipment note
      *
-     * @return Shipment
+     * @return $this
      */
-    public function setNote(string $note): Shipment
+    public function setNote(string $note): self
     {
         $this->note = $note;
 
@@ -190,9 +190,9 @@ class Shipment extends AbstractIdentity
     /**
      * @param string $trackingUrl
      *
-     * @return Shipment
+     * @return $this
      */
-    public function setTrackingUrl(string $trackingUrl): Shipment
+    public function setTrackingUrl(string $trackingUrl): self
     {
         $this->trackingUrl = $trackingUrl;
 

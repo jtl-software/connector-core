@@ -83,7 +83,7 @@ class TranslatableAttribute extends AbstractIdentity
     /**
      * @param bool $isTranslated
      *
-     * @return TranslatableAttribute
+     * @return $this
      */
     public function setIsTranslated(bool $isTranslated): self
     {
@@ -103,7 +103,7 @@ class TranslatableAttribute extends AbstractIdentity
     /**
      * @param bool $isCustomProperty
      *
-     * @return TranslatableAttribute
+     * @return $this
      */
     public function setIsCustomProperty(bool $isCustomProperty): self
     {
@@ -158,7 +158,7 @@ class TranslatableAttribute extends AbstractIdentity
     /**
      * @param TranslatableAttributeI18n ...$i18ns
      *
-     * @return TranslatableAttribute
+     * @return $this
      */
     public function setI18ns(TranslatableAttributeI18n ...$i18ns): self
     {
@@ -170,7 +170,7 @@ class TranslatableAttribute extends AbstractIdentity
     /**
      * @param TranslatableAttributeI18n $i18n
      *
-     * @return TranslatableAttribute
+     * @return $this
      */
     public function addI18n(TranslatableAttributeI18n $i18n): self
     {
@@ -180,7 +180,7 @@ class TranslatableAttribute extends AbstractIdentity
     }
 
     /**
-     * @return TranslatableAttribute
+     * @return $this
      */
     public function clearI18ns(): self
     {

@@ -77,7 +77,7 @@ class Specific extends AbstractIdentity
      * @param boolean $isGlobal     Optional: Global specific means the specific can be used like a category
      *                              (e.g. show all red products in shop)
      *
-     * @return Specific
+     * @return $this
      */
     public function setIsGlobal(bool $isGlobal): self
     {
@@ -97,7 +97,7 @@ class Specific extends AbstractIdentity
     /**
      * @param integer $sort Optional sort number
      *
-     * @return Specific
+     * @return $this
      */
     public function setSort(int $sort): self
     {
@@ -117,7 +117,7 @@ class Specific extends AbstractIdentity
     /**
      * @param string $type Specific type (radio, dropdown, image...)
      *
-     * @return Specific
+     * @return $this
      */
     public function setType(string $type): self
     {
@@ -129,7 +129,7 @@ class Specific extends AbstractIdentity
     /**
      * @param SpecificI18n $i18n
      *
-     * @return Specific
+     * @return $this
      */
     public function addI18n(SpecificI18n $i18n): self
     {
@@ -139,7 +139,7 @@ class Specific extends AbstractIdentity
     }
 
     /**
-     * @return Specific
+     * @return $this
      */
     public function clearI18ns(): self
     {
@@ -151,7 +151,7 @@ class Specific extends AbstractIdentity
     /**
      * @param SpecificValue $value
      *
-     * @return Specific
+     * @return $this
      */
     public function addValue(SpecificValue $value): self
     {
@@ -171,7 +171,7 @@ class Specific extends AbstractIdentity
     /**
      * @param SpecificValue ...$values
      *
-     * @return Specific
+     * @return $this
      */
     public function setValues(SpecificValue ...$values): self
     {
@@ -181,7 +181,7 @@ class Specific extends AbstractIdentity
     }
 
     /**
-     * @return Specific
+     * @return $this
      */
     public function clearValues(): self
     {
@@ -217,7 +217,7 @@ class Specific extends AbstractIdentity
     /**
      * @param SpecificI18n ...$i18ns
      *
-     * @return Specific
+     * @return $this
      */
     public function setI18ns(SpecificI18n ...$i18ns): self
     {

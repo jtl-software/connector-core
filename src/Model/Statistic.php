@@ -42,9 +42,9 @@ class Statistic extends AbstractModel
     /**
      * @param integer $available
      *
-     * @return Statistic
+     * @return $this
      */
-    public function setAvailable(int $available): Statistic
+    public function setAvailable(int $available): self
     {
         $this->available = $available;
 
@@ -62,9 +62,9 @@ class Statistic extends AbstractModel
     /**
      * @param string $controllerName
      *
-     * @return Statistic
+     * @return $this
      */
-    public function setControllerName(string $controllerName): Statistic
+    public function setControllerName(string $controllerName): self
     {
         $this->controllerName = $controllerName;
 

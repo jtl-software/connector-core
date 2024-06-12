@@ -35,9 +35,9 @@ class Warehouse extends AbstractIdentity
     /**
      * @param string $name Warehouse name
      *
-     * @return Warehouse
+     * @return $this
      */
-    public function setName(string $name): Warehouse
+    public function setName(string $name): self
     {
         $this->name = $name;
 

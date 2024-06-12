@@ -35,9 +35,9 @@ class UnitI18n extends AbstractI18n
     /**
      * @param string $name Localized unit name
      *
-     * @return UnitI18n
+     * @return $this
      */
-    public function setName(string $name): UnitI18n
+    public function setName(string $name): self
     {
         $this->name = $name;
 

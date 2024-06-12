@@ -27,9 +27,9 @@ class Unit extends AbstractIdentity
     /**
      * @param UnitI18n $i18n
      *
-     * @return Unit
+     * @return $this
      */
-    public function addI18n(UnitI18n $i18n): Unit
+    public function addI18n(UnitI18n $i18n): self
     {
         $this->i18ns[] = $i18n;
 
@@ -47,9 +47,9 @@ class Unit extends AbstractIdentity
     /**
      * @param UnitI18n ...$i18ns
      *
-     * @return Unit
+     * @return $this
      */
-    public function setI18ns(UnitI18n ...$i18ns): Unit
+    public function setI18ns(UnitI18n ...$i18ns): self
     {
         $this->i18ns = $i18ns;
 
@@ -57,9 +57,9 @@ class Unit extends AbstractIdentity
     }
 
     /**
-     * @return Unit
+     * @return $this
      */
-    public function clearI18ns(): Unit
+    public function clearI18ns(): self
     {
         $this->i18ns = [];
 

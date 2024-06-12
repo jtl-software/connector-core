@@ -43,9 +43,9 @@ class SpecificValue extends AbstractIdentity
     /**
      * @param integer $sort Optional sort number
      *
-     * @return SpecificValue
+     * @return $this
      */
-    public function setSort(int $sort): SpecificValue
+    public function setSort(int $sort): self
     {
         $this->sort = $sort;
 
@@ -55,9 +55,9 @@ class SpecificValue extends AbstractIdentity
     /**
      * @param SpecificValueI18n $i18n
      *
-     * @return SpecificValue
+     * @return $this
      */
-    public function addI18n(SpecificValueI18n $i18n): SpecificValue
+    public function addI18n(SpecificValueI18n $i18n): self
     {
         $this->i18ns[] = $i18n;
 
@@ -75,9 +75,9 @@ class SpecificValue extends AbstractIdentity
     /**
      * @param SpecificValueI18n ...$i18ns
      *
-     * @return SpecificValue
+     * @return $this
      */
-    public function setI18ns(SpecificValueI18n ...$i18ns): SpecificValue
+    public function setI18ns(SpecificValueI18n ...$i18ns): self
     {
         $this->i18ns = $i18ns;
 
@@ -85,9 +85,9 @@ class SpecificValue extends AbstractIdentity
     }
 
     /**
-     * @return SpecificValue
+     * @return $this
      */
-    public function clearI18ns(): SpecificValue
+    public function clearI18ns(): self
     {
         $this->i18ns = [];
 
