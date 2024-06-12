@@ -56,9 +56,9 @@ class ProductSpecialPriceItem extends AbstractModel
     /**
      * @param Identity $customerGroupId Reference to customerGroup
      *
-     * @return ProductSpecialPriceItem
+     * @return $this
      */
-    public function setCustomerGroupId(Identity $customerGroupId): ProductSpecialPriceItem
+    public function setCustomerGroupId(Identity $customerGroupId): self
     {
         $this->customerGroupId = $customerGroupId;
 
@@ -76,9 +76,9 @@ class ProductSpecialPriceItem extends AbstractModel
     /**
      * @param double $priceNet net price value
      *
-     * @return ProductSpecialPriceItem
+     * @return $this
      */
-    public function setPriceNet(float $priceNet): ProductSpecialPriceItem
+    public function setPriceNet(float $priceNet): self
     {
         $this->priceNet = $priceNet;
 

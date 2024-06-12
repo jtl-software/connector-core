@@ -116,7 +116,7 @@ class ConfigParameterTest extends TestCase
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
      */
-    public function testHasDefaultValue(string $type, $validValue): void
+    public function testHasDefaultValue(string $type, mixed $validValue): void
     {
         $option = new ConfigParameter('foo', $type);
         $this->assertFalse($option->hasDefaultValue());

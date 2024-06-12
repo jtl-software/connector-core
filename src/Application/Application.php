@@ -254,10 +254,10 @@ class Application
      * @param string $controllerName
      * @param object $instance
      *
-     * @return Application
+     * @return $this
      * @throws DefinitionException
      */
-    public function registerController(string $controllerName, object $instance): Application
+    public function registerController(string $controllerName, object $instance): self
     {
         if (!Controller::isController($controllerName)) {
             throw DefinitionException::unknownController($controllerName);
@@ -428,9 +428,9 @@ class Application
     /**
      * @param SessionHandlerInterface $sessionHandler
      *
-     * @return Application
+     * @return $this
      */
-    public function setSessionHandler(SessionHandlerInterface $sessionHandler): Application
+    public function setSessionHandler(SessionHandlerInterface $sessionHandler): self
     {
         $this->sessionHandler = $sessionHandler;
 

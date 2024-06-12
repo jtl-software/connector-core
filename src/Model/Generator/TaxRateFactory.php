@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model\Generator;
 
+use Faker\Extension\ExtensionNotFound;
+use Jtl\Connector\Core\Exception\MustNotBeNullException;
 use Jtl\Connector\Core\Model\TaxRate;
 use Jtl\Connector\Core\Utilities\Validator\Validate;
 use RuntimeException;
@@ -15,7 +17,10 @@ class TaxRateFactory extends AbstractModelFactory
 
     /**
      * @return array<string, string|float>
-     * @throws RuntimeException|\TypeError
+     * @throws RuntimeException
+     * @throws ExtensionNotFound
+     * @throws MustNotBeNullException
+     * @throws \TypeError
      */
     protected function makeFakeArray(): array
     {
@@ -46,6 +51,9 @@ class TaxRateFactory extends AbstractModelFactory
         throw new \RuntimeException('loop-limit exceeded.');
     }
 
+    /**
+     * @return void
+     */
     public function clearUsedCountries(): void
     {
         $this->usedCountries = [];

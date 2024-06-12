@@ -35,9 +35,9 @@ class SpecificI18n extends AbstractI18n
     /**
      * @param string $name Localized name
      *
-     * @return SpecificI18n
+     * @return $this
      */
-    public function setName(string $name): SpecificI18n
+    public function setName(string $name): self
     {
         $this->name = $name;
 

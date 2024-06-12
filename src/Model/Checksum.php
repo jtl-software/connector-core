@@ -79,9 +79,9 @@ class Checksum extends AbstractModel implements ChecksumInterface
     /**
      * @param Identity $foreignKey
      *
-     * @return Checksum
+     * @return $this
      */
-    public function setForeignKey(Identity $foreignKey): Checksum
+    public function setForeignKey(Identity $foreignKey): self
     {
         $this->foreignKey = $foreignKey;
 
@@ -99,9 +99,9 @@ class Checksum extends AbstractModel implements ChecksumInterface
     /**
      * @param string $endpoint
      *
-     * @return Checksum
+     * @return $this
      */
-    public function setEndpoint(string $endpoint): Checksum
+    public function setEndpoint(string $endpoint): self
     {
         $this->endpoint = $endpoint;
 
@@ -119,9 +119,9 @@ class Checksum extends AbstractModel implements ChecksumInterface
     /**
      * @param boolean $hasChanged
      *
-     * @return Checksum
+     * @return $this
      */
-    public function setHasChanged(bool $hasChanged): Checksum
+    public function setHasChanged(bool $hasChanged): self
     {
         $this->hasChanged = $hasChanged;
 
@@ -147,9 +147,9 @@ class Checksum extends AbstractModel implements ChecksumInterface
     /**
      * @param string $host
      *
-     * @return Checksum
+     * @return $this
      */
-    public function setHost(string $host): Checksum
+    public function setHost(string $host): self
     {
         $this->host = $host;
 
@@ -167,9 +167,9 @@ class Checksum extends AbstractModel implements ChecksumInterface
     /**
      * @param integer $type
      *
-     * @return Checksum
+     * @return $this
      */
-    public function setType(int $type): Checksum
+    public function setType(int $type): self
     {
         $this->type = $type;
 

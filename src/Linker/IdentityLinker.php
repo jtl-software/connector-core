@@ -16,12 +16,6 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use ReflectionException;
 
-/**
- * Identity Connector Linker
- *
- * @access public
- * @author Daniel Böhmer <daniel.boehmer@jtl-software.com>
- */
 class IdentityLinker implements LoggerAwareInterface
 {
     public const
@@ -51,15 +45,15 @@ class IdentityLinker implements LoggerAwareInterface
     }
 
     /**
-     * Constructor
      *
      * @param boolean $useCache
      *
-     * @return IdentityLinker
+     * @return $this
      */
-    public function setUseCache(bool $useCache): IdentityLinker
+    public function setUseCache(bool $useCache): self
     {
         $this->useCache = $useCache;
+
         return $this;
     }
 
@@ -213,7 +207,7 @@ class IdentityLinker implements LoggerAwareInterface
      * @return string
      * @throws InvalidArgumentException
      */
-    protected function buildKey($id, int $identityType, string $cacheType): string
+    protected function buildKey(mixed $id, int $identityType, string $cacheType): string
     {
         if ($id !== null && !\is_scalar($id)) {
             throw new \InvalidArgumentException('$id must be scalar or null.');
@@ -247,6 +241,7 @@ class IdentityLinker implements LoggerAwareInterface
 
         $identityType = Model::getPropertyIdentityType($modelName, $property);
         $modelName    = Model::getModelByType($identityType);
+
         return $this->hostIdExists($modelName, $hostId);
     }
 
@@ -255,7 +250,7 @@ class IdentityLinker implements LoggerAwareInterface
      *
      * @return boolean
      */
-    public function isValidHostId($hostId): bool
+    public function isValidHostId(mixed $hostId): bool
     {
         return \is_int($hostId) && $hostId > 0;
     }
@@ -302,7 +297,7 @@ class IdentityLinker implements LoggerAwareInterface
      * @return boolean
      * @throws InvalidArgumentException
      */
-    protected function checkCache($id, int $identityType, string $cacheType): bool
+    protected function checkCache(mixed $id, int $identityType, string $cacheType): bool
     {
         $result = $this->useCache && \array_key_exists($this->buildKey($id, $identityType, $cacheType), $this->cache);
 
@@ -357,7 +352,7 @@ class IdentityLinker implements LoggerAwareInterface
      * @return int|string|null
      * @throws InvalidArgumentException
      */
-    protected function loadCache($id, int $identityType, string $cacheType)
+    protected function loadCache(mixed $id, int $identityType, string $cacheType): int|string|null
     {
         $result = $this->checkCache($id, $identityType, $cacheType)
             ? $this->cache[$this->buildKey($id, $identityType, $cacheType)]
@@ -417,7 +412,7 @@ class IdentityLinker implements LoggerAwareInterface
      *
      * @return boolean
      */
-    public function isValidEndpointId($endpointId): bool
+    public function isValidEndpointId(mixed $endpointId): bool
     {
         return \is_string($endpointId) && \trim($endpointId) !== '';
     }
@@ -476,6 +471,7 @@ class IdentityLinker implements LoggerAwareInterface
 
         $identityType = Model::getPropertyIdentityType($modelName, $property);
         $modelName    = Model::getModelByType($identityType);
+
         return $this->endpointIdExists($modelName, $endpointId);
     }
 

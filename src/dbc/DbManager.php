@@ -67,10 +67,10 @@ class DbManager
     /**
      * @param AbstractTable $table
      *
-     * @return DbManager
+     * @return $this
      * @throws DbcRuntimeException
      */
-    public function registerTable(AbstractTable $table): DbManager
+    public function registerTable(AbstractTable $table): self
     {
         $this->tables[$table->getTableName()] = $table;
 

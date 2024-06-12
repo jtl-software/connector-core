@@ -21,7 +21,6 @@ class Uuid4Type extends Type
      * @param AbstractPlatform $platform
      *
      * @return string
-     * @throws Exception
      */
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {

@@ -62,7 +62,7 @@ class TranslatableAttributeI18n extends AbstractI18n
     /**
      * @param string $name
      *
-     * @return TranslatableAttributeI18n
+     * @return $this
      */
     public function setName(string $name): self
     {
@@ -170,7 +170,7 @@ class TranslatableAttributeI18n extends AbstractI18n
     /**
      * @param mixed $value
      *
-     * @return TranslatableAttributeI18n
+     * @return $this
      * @throws TranslatableAttributeException
      * @throws \JsonException
      */

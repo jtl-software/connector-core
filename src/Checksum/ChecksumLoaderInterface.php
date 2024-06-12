@@ -14,7 +14,7 @@ interface ChecksumLoaderInterface
      *
      * @return string
      */
-    public function read($endpointId, $type): string;
+    public function read(string $endpointId, int $type): string;
 
     /**
      * Loads the checksum
@@ -25,7 +25,7 @@ interface ChecksumLoaderInterface
      *
      * @return boolean
      */
-    public function write($endpointId, $type, $checksum): bool;
+    public function write(string $endpointId, int $type, string $checksum): bool;
 
     /**
      * Loads the checksum
@@ -35,5 +35,5 @@ interface ChecksumLoaderInterface
      *
      * @return boolean
      */
-    public function delete($endpointId, $type): bool;
+    public function delete(string $endpointId, int $type): bool;
 }

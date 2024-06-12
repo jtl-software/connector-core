@@ -28,7 +28,7 @@ abstract class AbstractIdentity extends AbstractModel implements IdentityInterfa
     }
 
     /**
-     * @return Identity Unique id
+     * @inheritDoc
      */
     public function getId(): Identity
     {
@@ -36,13 +36,11 @@ abstract class AbstractIdentity extends AbstractModel implements IdentityInterfa
     }
 
     /**
-     * @param Identity $id Unique id
-     *
-     * @return $this
+     * @inheritDoc
      */
-    public function setId(Identity $id): self
+    public function setId(Identity $identity): self
     {
-        $this->id = $id;
+        $this->id = $identity;
 
         return $this;
     }

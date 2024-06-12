@@ -43,9 +43,9 @@ class TaxZone extends AbstractIdentity
     /**
      * @param string $name Optional tax zone name e.g. "EU Zone"
      *
-     * @return TaxZone
+     * @return $this
      */
-    public function setName(string $name): TaxZone
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -55,9 +55,9 @@ class TaxZone extends AbstractIdentity
     /**
      * @param TaxZoneCountry $country
      *
-     * @return TaxZone
+     * @return $this
      */
-    public function addCountry(TaxZoneCountry $country): TaxZone
+    public function addCountry(TaxZoneCountry $country): self
     {
         $this->countries[] = $country;
 
@@ -73,9 +73,9 @@ class TaxZone extends AbstractIdentity
     }
 
     /**
-     * @return TaxZone
+     * @return $this
      */
-    public function clearCountries(): TaxZone
+    public function clearCountries(): self
     {
         $this->countries = [];
 

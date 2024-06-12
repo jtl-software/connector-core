@@ -6,6 +6,7 @@ namespace Jtl\Connector\MappingTables;
 
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Exception;
+use Jtl\Connector\Dbc\DbcRuntimeException;
 use RuntimeException;
 
 class TableProxy
@@ -32,7 +33,7 @@ class TableProxy
      * @throws Exception
      * @throws MappingTablesException
      * @throws RuntimeException
-     * @throws \Jtl\Connector\Dbc\DbcRuntimeException
+     * @throws DbcRuntimeException
      */
     public function clear(): int
     {
@@ -85,7 +86,7 @@ class TableProxy
      * @throws Exception
      * @throws MappingTablesException
      * @throws RuntimeException
-     * @throws \Jtl\Connector\Dbc\DbcRuntimeException
+     * @throws DbcRuntimeException
      */
     public function delete(string $endpoint = null, int $hostId = null): int
     {
@@ -123,7 +124,7 @@ class TableProxy
      * @throws Exception
      * @throws MappingTablesException
      * @throws RuntimeException
-     * @throws \Jtl\Connector\Dbc\DbcRuntimeException
+     * @throws DbcRuntimeException
      */
     public function filterMappedEndpoints(array $endpoints): array
     {
@@ -137,7 +138,7 @@ class TableProxy
      * @throws Exception
      * @throws MappingTablesException
      * @throws RuntimeException
-     * @throws \Jtl\Connector\Dbc\DbcRuntimeException
+     * @throws DbcRuntimeException
      */
     public function getEndpoint(int $hostId): ?string
     {
@@ -177,16 +178,17 @@ class TableProxy
     /**
      * @param integer $type
      *
-     * @return TableProxy
+     * @return $this
      * @throws MappingTablesException
      */
-    public function setType(int $type): TableProxy
+    public function setType(int $type): self
     {
         if (!\in_array($type, $this->table->getTypes(), true)) {
             throw MappingTablesException::tableNotResponsibleForType($type);
         }
 
         $this->type = $type;
+
         return $this;
     }
 
@@ -196,7 +198,7 @@ class TableProxy
      *
      * @return int
      * @throws DBALException|MappingTablesException
-     * @throws \Jtl\Connector\Dbc\DbcRuntimeException
+     * @throws DbcRuntimeException
      * @throws RuntimeException
      */
     public function save(string $endpoint, int $hostId): int

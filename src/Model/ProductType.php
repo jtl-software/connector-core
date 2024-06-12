@@ -35,9 +35,9 @@ class ProductType extends AbstractIdentity
     /**
      * @param string $name Optional (internal) product type name
      *
-     * @return ProductType
+     * @return $this
      */
-    public function setName(string $name): ProductType
+    public function setName(string $name): self
     {
         $this->name = $name;
 

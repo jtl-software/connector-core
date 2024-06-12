@@ -34,11 +34,12 @@ class BoolEvent extends Event
     /**
      * @param boolean $result
      *
-     * @return BoolEvent
+     * @return $this
      */
-    public function setResult(bool $result): BoolEvent
+    public function setResult(bool $result): self
     {
         $this->result = $result;
+
         return $this;
     }
 }

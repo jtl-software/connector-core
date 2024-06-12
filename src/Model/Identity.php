@@ -50,10 +50,10 @@ class Identity extends AbstractModel
      *
      * @param array<int, string|int> $data
      *
-     * @return Identity
+     * @return self
      * @throws InvalidArgumentException
      */
-    public static function fromArray(array $data): Identity
+    public static function fromArray(array $data): self
     {
         if (
             !isset($data[0], $data[1]) || \count($data) !== 2 || !\is_string($data[0]) || !\is_int($data[1])
@@ -83,9 +83,9 @@ class Identity extends AbstractModel
      *
      * @param string $endpoint the endpoint
      *
-     * @return Identity
+     * @return $this
      */
-    public function setEndpoint(string $endpoint): Identity
+    public function setEndpoint(string $endpoint): self
     {
         $this->endpoint = $endpoint;
 
@@ -107,9 +107,9 @@ class Identity extends AbstractModel
      *
      * @param int $host the host
      *
-     * @return Identity
+     * @return $this
      */
-    public function setHost(int $host): Identity
+    public function setHost(int $host): self
     {
         $this->host = $host;
 

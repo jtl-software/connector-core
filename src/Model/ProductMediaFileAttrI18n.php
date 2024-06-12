@@ -41,9 +41,9 @@ class ProductMediaFileAttrI18n extends AbstractI18n
     /**
      * @param string $name
      *
-     * @return ProductMediaFileAttrI18n
+     * @return $this
      */
-    public function setName(string $name): ProductMediaFileAttrI18n
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -61,9 +61,9 @@ class ProductMediaFileAttrI18n extends AbstractI18n
     /**
      * @param string $value
      *
-     * @return ProductMediaFileAttrI18n
+     * @return $this
      */
-    public function setValue(string $value): ProductMediaFileAttrI18n
+    public function setValue(string $value): self
     {
         $this->value = $value;
 

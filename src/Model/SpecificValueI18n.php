@@ -75,9 +75,9 @@ class SpecificValueI18n extends AbstractI18n
     /**
      * @param string $description Optional localized description
      *
-     * @return SpecificValueI18n
+     * @return $this
      */
-    public function setDescription(string $description): SpecificValueI18n
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
@@ -95,9 +95,9 @@ class SpecificValueI18n extends AbstractI18n
     /**
      * @param string $metaDescription Optional localized meta description value
      *
-     * @return SpecificValueI18n
+     * @return $this
      */
-    public function setMetaDescription(string $metaDescription): SpecificValueI18n
+    public function setMetaDescription(string $metaDescription): self
     {
         $this->metaDescription = $metaDescription;
 
@@ -115,9 +115,9 @@ class SpecificValueI18n extends AbstractI18n
     /**
      * @param string $metaKeywords Optional localized meta keywords value
      *
-     * @return SpecificValueI18n
+     * @return $this
      */
-    public function setMetaKeywords(string $metaKeywords): SpecificValueI18n
+    public function setMetaKeywords(string $metaKeywords): self
     {
         $this->metaKeywords = $metaKeywords;
 
@@ -135,9 +135,9 @@ class SpecificValueI18n extends AbstractI18n
     /**
      * @param string $titleTag Optional localized title tag value
      *
-     * @return SpecificValueI18n
+     * @return $this
      */
-    public function setTitleTag(string $titleTag): SpecificValueI18n
+    public function setTitleTag(string $titleTag): self
     {
         $this->titleTag = $titleTag;
 
@@ -155,9 +155,9 @@ class SpecificValueI18n extends AbstractI18n
     /**
      * @param string $urlPath Optional localized URL path
      *
-     * @return SpecificValueI18n
+     * @return $this
      */
-    public function setUrlPath(string $urlPath): SpecificValueI18n
+    public function setUrlPath(string $urlPath): self
     {
         $this->urlPath = $urlPath;
 
@@ -175,9 +175,9 @@ class SpecificValueI18n extends AbstractI18n
     /**
      * @param string $value Localized value
      *
-     * @return SpecificValueI18n
+     * @return $this
      */
-    public function setValue(string $value): SpecificValueI18n
+    public function setValue(string $value): self
     {
         $this->value = $value;
 

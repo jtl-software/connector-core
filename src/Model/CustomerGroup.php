@@ -67,7 +67,7 @@ class CustomerGroup extends AbstractIdentity
     /**
      * @param boolean $applyNetPrice Optional: Show net prices default instead of gross prices
      *
-     * @return CustomerGroup
+     * @return $this
      */
     public function setApplyNetPrice(bool $applyNetPrice): self
     {
@@ -87,7 +87,7 @@ class CustomerGroup extends AbstractIdentity
     /**
      * @param double $discount Optional percentual discount on all products. Negative Value means surcharge.
      *
-     * @return CustomerGroup
+     * @return $this
      */
     public function setDiscount(float $discount): self
     {
@@ -107,7 +107,7 @@ class CustomerGroup extends AbstractIdentity
     /**
      * @param boolean $isDefault Optional: Flag default customer group
      *
-     * @return CustomerGroup
+     * @return $this
      */
     public function setIsDefault(bool $isDefault): self
     {
@@ -119,7 +119,7 @@ class CustomerGroup extends AbstractIdentity
     /**
      * @param CustomerGroupAttr $attribute
      *
-     * @return CustomerGroup
+     * @return $this
      */
     public function addAttribute(CustomerGroupAttr $attribute): self
     {
@@ -139,7 +139,7 @@ class CustomerGroup extends AbstractIdentity
     /**
      * @param CustomerGroupAttr ...$attributes
      *
-     * @return CustomerGroup
+     * @return $this
      */
     public function setAttributes(CustomerGroupAttr ...$attributes): self
     {
@@ -149,7 +149,7 @@ class CustomerGroup extends AbstractIdentity
     }
 
     /**
-     * @return CustomerGroup
+     * @return $this
      */
     public function clearAttributes(): self
     {
@@ -161,7 +161,7 @@ class CustomerGroup extends AbstractIdentity
     /**
      * @param CustomerGroupI18n $i18n
      *
-     * @return CustomerGroup
+     * @return $this
      */
     public function addI18n(CustomerGroupI18n $i18n): self
     {
@@ -171,7 +171,7 @@ class CustomerGroup extends AbstractIdentity
     }
 
     /**
-     * @return CustomerGroup
+     * @return $this
      */
     public function clearI18ns(): self
     {
@@ -207,7 +207,7 @@ class CustomerGroup extends AbstractIdentity
     /**
      * @param CustomerGroupI18n ...$i18ns
      *
-     * @return CustomerGroup
+     * @return $this
      */
     public function setI18ns(CustomerGroupI18n ...$i18ns): self
     {

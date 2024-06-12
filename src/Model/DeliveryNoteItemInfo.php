@@ -57,9 +57,9 @@ class DeliveryNoteItemInfo extends AbstractModel
     /**
      * @param string $batch
      *
-     * @return DeliveryNoteItemInfo
+     * @return $this
      */
-    public function setBatch(string $batch): DeliveryNoteItemInfo
+    public function setBatch(string $batch): self
     {
         $this->batch = $batch;
 
@@ -67,7 +67,7 @@ class DeliveryNoteItemInfo extends AbstractModel
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return \DateTimeInterface|null
      */
     public function getBestBefore(): ?\DateTimeInterface
     {
@@ -75,11 +75,11 @@ class DeliveryNoteItemInfo extends AbstractModel
     }
 
     /**
-     * @param \DateTimeInterface $bestBefore
+     * @param \DateTimeInterface|null $bestBefore
      *
-     * @return DeliveryNoteItemInfo
+     * @return $this
      */
-    public function setBestBefore(\DateTimeInterface $bestBefore = null): DeliveryNoteItemInfo
+    public function setBestBefore(\DateTimeInterface $bestBefore = null): self
     {
         $this->bestBefore = $bestBefore;
 
@@ -97,9 +97,9 @@ class DeliveryNoteItemInfo extends AbstractModel
     /**
      * @param double $quantity
      *
-     * @return DeliveryNoteItemInfo
+     * @return $this
      */
-    public function setQuantity(float $quantity): DeliveryNoteItemInfo
+    public function setQuantity(float $quantity): self
     {
         $this->quantity = $quantity;
 
@@ -117,9 +117,9 @@ class DeliveryNoteItemInfo extends AbstractModel
     /**
      * @param integer $warehouseId
      *
-     * @return DeliveryNoteItemInfo
+     * @return $this
      */
-    public function setWarehouseId(int $warehouseId): DeliveryNoteItemInfo
+    public function setWarehouseId(int $warehouseId): self
     {
         $this->warehouseId = $warehouseId;
 

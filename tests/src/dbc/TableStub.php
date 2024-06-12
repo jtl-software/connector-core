@@ -35,7 +35,7 @@ class TableStub extends AbstractTable
      * @throws DbcRuntimeException
      * @throws SchemaException|\RuntimeException
      */
-    public function restrict(string $column, $value): AbstractTable
+    public function restrict(string $column, mixed $value): AbstractTable
     {
         return parent::restrict($column, $value);
     }

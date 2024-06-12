@@ -60,9 +60,9 @@ class PartsList extends AbstractIdentity
     /**
      * @param Identity $productId Reference to a component / product
      *
-     * @return PartsList
+     * @return $this
      */
-    public function setProductId(Identity $productId): PartsList
+    public function setProductId(Identity $productId): self
     {
         $this->productId = $productId;
 

@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @subpackage Product
  * @Serializer\AccessType("public_method")
  */
-class CrossSelling extends AbstractIdentity
+class CrossSelling extends AbstractIdentity implements ItemsInterface
 {
     /**
      * @var Identity Source product
@@ -55,9 +55,9 @@ class CrossSelling extends AbstractIdentity
     /**
      * @param Identity $productId Source product
      *
-     * @return CrossSelling
+     * @return $this
      */
-    public function setProductId(Identity $productId): CrossSelling
+    public function setProductId(Identity $productId): self
     {
         $this->productId = $productId;
 
@@ -67,9 +67,9 @@ class CrossSelling extends AbstractIdentity
     /**
      * @param CrossSellingItem $item
      *
-     * @return CrossSelling
+     * @return $this
      */
-    public function addItem(CrossSellingItem $item): CrossSelling
+    public function addItem(AbstractModel $item): self
     {
         $this->items[] = $item;
 
@@ -87,9 +87,9 @@ class CrossSelling extends AbstractIdentity
     /**
      * @param CrossSellingItem ...$items
      *
-     * @return CrossSelling
+     * @return $this
      */
-    public function setItems(CrossSellingItem ...$items): CrossSelling
+    public function setItems(AbstractModel ...$items): self
     {
         $this->items = $items;
 
@@ -97,9 +97,9 @@ class CrossSelling extends AbstractIdentity
     }
 
     /**
-     * @return CrossSelling
+     * @inheritDoc
      */
-    public function clearItems(): CrossSelling
+    public function clearItems(): self
     {
         $this->items = [];
 

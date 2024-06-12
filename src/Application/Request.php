@@ -67,11 +67,12 @@ class Request
     /**
      * @param mixed[] $params
      *
-     * @return Request
+     * @return $this
      */
     public function setParams(array $params): self
     {
         $this->params = $params;
+
         return $this;
     }
 }

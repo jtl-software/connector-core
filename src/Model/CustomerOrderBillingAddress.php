@@ -35,9 +35,9 @@ class CustomerOrderBillingAddress extends AbstractOrderAddress
     /**
      * @param string $vatNumber VAT number (german "USt-ID")
      *
-     * @return CustomerOrderBillingAddress
+     * @return $this
      */
-    public function setVatNumber(string $vatNumber): CustomerOrderBillingAddress
+    public function setVatNumber(string $vatNumber): self
     {
         $this->vatNumber = $vatNumber;
 

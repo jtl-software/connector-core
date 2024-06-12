@@ -35,9 +35,9 @@ class TaxZoneCountry extends AbstractModel
     /**
      * @param string $countryIso Country ISO 3166-2 (2 letter Uppercase)
      *
-     * @return TaxZoneCountry
+     * @return $this
      */
-    public function setCountryIso(string $countryIso): TaxZoneCountry
+    public function setCountryIso(string $countryIso): self
     {
         $this->countryIso = $countryIso;
 

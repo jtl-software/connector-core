@@ -34,6 +34,8 @@ class ProductAttributeSubscriber implements EventSubscriberInterface
      * @param ObjectEvent $event
      *
      * @throws RuntimeException
+     *
+     * @return void
      */
     public function onPostSerialize(ObjectEvent $event): void
     {

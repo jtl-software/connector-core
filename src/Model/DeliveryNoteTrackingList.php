@@ -49,9 +49,9 @@ class DeliveryNoteTrackingList extends AbstractModel
     /**
      * @param string $name
      *
-     * @return DeliveryNoteTrackingList
+     * @return $this
      */
-    public function setName(string $name): DeliveryNoteTrackingList
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -61,9 +61,9 @@ class DeliveryNoteTrackingList extends AbstractModel
     /**
      * @param string $code
      *
-     * @return DeliveryNoteTrackingList
+     * @return $this
      */
-    public function addCode(string $code): DeliveryNoteTrackingList
+    public function addCode(string $code): self
     {
         $this->codes[] = $code;
 
@@ -81,9 +81,9 @@ class DeliveryNoteTrackingList extends AbstractModel
     /**
      * @param string ...$codes
      *
-     * @return DeliveryNoteTrackingList
+     * @return $this
      */
-    public function setCodes(string ...$codes): DeliveryNoteTrackingList
+    public function setCodes(string ...$codes): self
     {
         $this->codes = $codes;
 
@@ -91,9 +91,9 @@ class DeliveryNoteTrackingList extends AbstractModel
     }
 
     /**
-     * @return DeliveryNoteTrackingList
+     * @return $this
      */
-    public function clearCodes(): DeliveryNoteTrackingList
+    public function clearCodes(): self
     {
         $this->codes = [];
 
@@ -111,31 +111,34 @@ class DeliveryNoteTrackingList extends AbstractModel
     /**
      * @param string ...$trackingURLs
      *
-     * @return DeliveryNoteTrackingList
+     * @return $this
      */
-    public function setTrackingURLs(string ...$trackingURLs): DeliveryNoteTrackingList
+    public function setTrackingURLs(string ...$trackingURLs): self
     {
         $this->trackingURLs = $trackingURLs;
+
         return $this;
     }
 
     /**
      * @param string $trackingURL
      *
-     * @return DeliveryNoteTrackingList
+     * @return $this
      */
-    public function addTrackingURL(string $trackingURL): DeliveryNoteTrackingList
+    public function addTrackingURL(string $trackingURL): self
     {
         $this->trackingURLs[] = $trackingURL;
+
         return $this;
     }
 
     /**
-     * @return DeliveryNoteTrackingList
+     * @return $this
      */
-    public function clearTrackingURLs(): DeliveryNoteTrackingList
+    public function clearTrackingURLs(): self
     {
         $this->trackingURLs = [];
+
         return $this;
     }
 }

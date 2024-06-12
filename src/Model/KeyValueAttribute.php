@@ -42,9 +42,9 @@ class KeyValueAttribute extends AbstractModel
     /**
      * @param string $key Attribute key
      *
-     * @return KeyValueAttribute
+     * @return $this
      */
-    public function setKey(string $key): KeyValueAttribute
+    public function setKey(string $key): self
     {
         $this->key = $key;
 
@@ -62,9 +62,9 @@ class KeyValueAttribute extends AbstractModel
     /**
      * @param string $value Attribute value
      *
-     * @return KeyValueAttribute
+     * @return $this
      */
-    public function setValue(string $value): KeyValueAttribute
+    public function setValue(string $value): self
     {
         $this->value = $value;
 

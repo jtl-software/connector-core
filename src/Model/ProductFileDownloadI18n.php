@@ -41,9 +41,9 @@ class ProductFileDownloadI18n extends AbstractI18n
     /**
      * @param string $description
      *
-     * @return ProductFileDownloadI18n
+     * @return $this
      */
-    public function setDescription(string $description): ProductFileDownloadI18n
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
@@ -61,9 +61,9 @@ class ProductFileDownloadI18n extends AbstractI18n
     /**
      * @param string $name
      *
-     * @return ProductFileDownloadI18n
+     * @return $this
      */
-    public function setName(string $name): ProductFileDownloadI18n
+    public function setName(string $name): self
     {
         $this->name = $name;
 

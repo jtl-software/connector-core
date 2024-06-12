@@ -28,13 +28,14 @@ class TableCollection
     /**
      * @param AbstractTable $table
      *
-     * @return TableCollection
+     * @return $this
      * @throws DbcRuntimeException
      * @throws DbcRuntimeException
      */
-    public function set(AbstractTable $table): TableCollection
+    public function set(AbstractTable $table): self
     {
         $this->tables[$table->getTableName()] = $table;
+
         return $this;
     }
 
@@ -94,7 +95,7 @@ class TableCollection
     /**
      * @param string $className
      *
-     * @return TableCollection
+     * @return self
      * @throws DbcRuntimeException
      */
     public function filterByInstanceClass(string $className): TableCollection

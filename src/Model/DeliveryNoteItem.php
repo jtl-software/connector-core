@@ -70,9 +70,9 @@ class DeliveryNoteItem extends AbstractIdentity
     /**
      * @param Identity $customerOrderItemId
      *
-     * @return DeliveryNoteItem
+     * @return $this
      */
-    public function setCustomerOrderItemId(Identity $customerOrderItemId): DeliveryNoteItem
+    public function setCustomerOrderItemId(Identity $customerOrderItemId): self
     {
         $this->customerOrderItemId = $customerOrderItemId;
 
@@ -90,9 +90,9 @@ class DeliveryNoteItem extends AbstractIdentity
     /**
      * @param Identity $productId Reference to product
      *
-     * @return DeliveryNoteItem
+     * @return $this
      */
-    public function setProductId(Identity $productId): DeliveryNoteItem
+    public function setProductId(Identity $productId): self
     {
         $this->productId = $productId;
 
@@ -110,9 +110,9 @@ class DeliveryNoteItem extends AbstractIdentity
     /**
      * @param double $quantity
      *
-     * @return DeliveryNoteItem
+     * @return $this
      */
-    public function setQuantity(float $quantity): DeliveryNoteItem
+    public function setQuantity(float $quantity): self
     {
         $this->quantity = $quantity;
 
@@ -122,9 +122,9 @@ class DeliveryNoteItem extends AbstractIdentity
     /**
      * @param DeliveryNoteItemInfo $info
      *
-     * @return DeliveryNoteItem
+     * @return $this
      */
-    public function addInfo(DeliveryNoteItemInfo $info): DeliveryNoteItem
+    public function addInfo(DeliveryNoteItemInfo $info): self
     {
         $this->info[] = $info;
 
@@ -142,9 +142,9 @@ class DeliveryNoteItem extends AbstractIdentity
     /**
      * @param DeliveryNoteItemInfo ...$info
      *
-     * @return DeliveryNoteItem
+     * @return $this
      */
-    public function setInfo(DeliveryNoteItemInfo ...$info): DeliveryNoteItem
+    public function setInfo(DeliveryNoteItemInfo ...$info): self
     {
         $this->info = $info;
 
@@ -152,9 +152,9 @@ class DeliveryNoteItem extends AbstractIdentity
     }
 
     /**
-     * @return DeliveryNoteItem
+     * @return $this
      */
-    public function clearInfo(): DeliveryNoteItem
+    public function clearInfo(): self
     {
         $this->info = [];
 

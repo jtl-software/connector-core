@@ -737,7 +737,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param Identity $basePriceUnitId Optional reference to basePriceUnit
      *
-     * @return Product
+     * @return $this
      */
     public function setBasePriceUnitId(Identity $basePriceUnitId): self
     {
@@ -759,7 +759,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param Identity $manufacturerId Reference to manufacturer
      *
-     * @return Product
+     * @return $this
      */
     public function setManufacturerId(Identity $manufacturerId): self
     {
@@ -781,7 +781,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param Identity $masterProductId Reference to master product
      *
-     * @return Product
+     * @return $this
      */
     public function setMasterProductId(Identity $masterProductId): self
     {
@@ -803,7 +803,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param Identity $measurementUnitId Optional reference to measurement unit id
      *
-     * @return Product
+     * @return $this
      */
     public function setMeasurementUnitId(Identity $measurementUnitId): self
     {
@@ -825,7 +825,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param Identity $partsListId Optional reference to partsList
      *
-     * @return Product
+     * @return $this
      */
     public function setPartsListId(Identity $partsListId): self
     {
@@ -847,7 +847,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param Identity $productTypeId Optional reference to productType
      *
-     * @return Product
+     * @return $this
      */
     public function setProductTypeId(Identity $productTypeId): self
     {
@@ -869,7 +869,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param Identity $shippingClassId Reference to shippingClass
      *
-     * @return Product
+     * @return $this
      */
     public function setShippingClassId(Identity $shippingClassId): self
     {
@@ -911,7 +911,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param Identity $unitId Reference to unit
      *
-     * @return Product
+     * @return $this
      */
     public function setUnitId(Identity $unitId): self
     {
@@ -931,11 +931,12 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param string $asin Optional Amazon Standard Identification Number
      *
-     * @return Product
+     * @return $this
      */
     public function setAsin(string $asin): self
     {
         $this->asin = $asin;
+
         return $this;
     }
 
@@ -951,7 +952,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @param \DateTimeInterface|null $availableFrom Optional available from date.
      *                                               Specify a date, upon when product can be purchased.
      *
-     * @return Product
+     * @return $this
      */
     public function setAvailableFrom(\DateTimeInterface $availableFrom = null): self
     {
@@ -975,7 +976,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      *                                 Calculate basePriceDivisor by dividing product filling quantity through
      *                                 unit pricing base measure. E.g. 75ml / 100ml = 0.75
      *
-     * @return Product
+     * @return $this
      */
     public function setBasePriceDivisor(float $basePriceDivisor): self
     {
@@ -995,7 +996,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param double $basePriceFactor
      *
-     * @return Product
+     * @return $this
      */
     public function setBasePriceFactor(float $basePriceFactor): self
     {
@@ -1015,7 +1016,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param double $basePriceQuantity Optional base price quantity
      *
-     * @return Product
+     * @return $this
      */
     public function setBasePriceQuantity(float $basePriceQuantity): self
     {
@@ -1035,7 +1036,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param string $basePriceUnitCode
      *
-     * @return Product
+     * @return $this
      */
     public function setBasePriceUnitCode(string $basePriceUnitCode): self
     {
@@ -1055,7 +1056,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param string $basePriceUnitName
      *
-     * @return Product
+     * @return $this
      */
     public function setBasePriceUnitName(string $basePriceUnitName): self
     {
@@ -1075,7 +1076,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param boolean $considerBasePrice Optional: Set to true to display base price / unit pricing measure
      *
-     * @return Product
+     * @return $this
      */
     public function setConsiderBasePrice(bool $considerBasePrice): self
     {
@@ -1099,7 +1100,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      *                               If true, product can only be purchased with a positive stockLevel or when
      *                               permitNegativeStock is set to true
      *
-     * @return Product
+     * @return $this
      */
     public function setConsiderStock(bool $considerStock): self
     {
@@ -1120,7 +1121,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @param boolean $considerVariationStock Optional: Consider stock levels of productVariations.
      *                                        Same as considerStock but for variations.
      *
-     * @return Product
+     * @return $this
      */
     public function setConsiderVariationStock(bool $considerVariationStock): self
     {
@@ -1141,7 +1142,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param \DateTimeInterface|null $creationDate Creation date
      *
-     * @return Product
+     * @return $this
      */
     public function setCreationDate(\DateTimeInterface $creationDate = null): self
     {
@@ -1161,11 +1162,12 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param bool $discountable
      *
-     * @return Product
+     * @return $this
      */
     public function setDiscountable(bool $discountable): self
     {
         $this->discountable = $discountable;
+
         return $this;
     }
 
@@ -1180,7 +1182,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param string $ean Optional European Article Number (EAN)
      *
-     * @return Product
+     * @return $this
      */
     public function setEan(string $ean): self
     {
@@ -1200,7 +1202,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param string $epid Optional Ebay product ID
      *
-     * @return Product
+     * @return $this
      */
     public function setEpid(string $epid): self
     {
@@ -1220,7 +1222,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param string $hazardIdNumber Optional Hazard identifier, encodes general hazard class und subdivision
      *
-     * @return Product
+     * @return $this
      */
     public function setHazardIdNumber(string $hazardIdNumber): self
     {
@@ -1240,7 +1242,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param double $height Optional product height
      *
-     * @return Product
+     * @return $this
      */
     public function setHeight(float $height): self
     {
@@ -1260,7 +1262,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param boolean $isActive
      *
-     * @return Product
+     * @return $this
      */
     public function setIsActive(bool $isActive): self
     {
@@ -1280,7 +1282,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param boolean $isBatch
      *
-     * @return Product
+     * @return $this
      */
     public function setIsBatch(bool $isBatch): self
     {
@@ -1300,7 +1302,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param boolean $isBestBefore
      *
-     * @return Product
+     * @return $this
      */
     public function setIsBestBefore(bool $isBestBefore): self
     {
@@ -1320,7 +1322,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param string $isbn Optional International Standard Book Number
      *
-     * @return Product
+     * @return $this
      */
     public function setIsbn(string $isbn): self
     {
@@ -1340,7 +1342,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param boolean $isDivisible Optional: Set to true to allow non-integer quantites for purchase
      *
-     * @return Product
+     * @return $this
      */
     public function setIsDivisible(bool $isDivisible): self
     {
@@ -1360,7 +1362,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param boolean $isMasterProduct Optional flag if product is master product
      *
-     * @return Product
+     * @return $this
      */
     public function setIsMasterProduct(bool $isMasterProduct): self
     {
@@ -1382,7 +1384,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @param boolean $isNewProduct Optional flag new product.
      *                              If true, product will be highlighted as new (creation date may also be considered)
      *
-     * @return Product
+     * @return $this
      */
     public function setIsNewProduct(bool $isNewProduct): self
     {
@@ -1402,7 +1404,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param boolean $isSerialNumber
      *
-     * @return Product
+     * @return $this
      */
     public function setIsSerialNumber(bool $isSerialNumber): self
     {
@@ -1425,7 +1427,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      *                              If true, product will be highlighted as top product
      *                              (e.g. in product lists or in special boxes)
      *
-     * @return Product
+     * @return $this
      */
     public function setIsTopProduct(bool $isTopProduct): self
     {
@@ -1445,7 +1447,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param string $keywords Optional internal keywords and synonyms for product
      *
-     * @return Product
+     * @return $this
      */
     public function setKeywords(string $keywords): self
     {
@@ -1465,7 +1467,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param double $length Optional product length
      *
-     * @return Product
+     * @return $this
      */
     public function setLength(float $length): self
     {
@@ -1485,7 +1487,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param string $manufacturerNumber Optional manufacturer number
      *
-     * @return Product
+     * @return $this
      */
     public function setManufacturerNumber(string $manufacturerNumber): self
     {
@@ -1505,7 +1507,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param Manufacturer|null $manufacturer Optional manufacturer
      *
-     * @return Product
+     * @return $this
      */
     public function setManufacturer(Manufacturer $manufacturer = null): self
     {
@@ -1525,7 +1527,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param double $measurementQuantity Optional measurement quantity
      *
-     * @return Product
+     * @return $this
      */
     public function setMeasurementQuantity(float $measurementQuantity): self
     {
@@ -1545,7 +1547,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param string $measurementUnitCode
      *
-     * @return Product
+     * @return $this
      */
     public function setMeasurementUnitCode(string $measurementUnitCode): self
     {
@@ -1565,7 +1567,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param \DateTimeInterface|null $minBestBeforeDate
      *
-     * @return Product
+     * @return $this
      */
     public function setMinBestBeforeDate(\DateTimeInterface $minBestBeforeDate = null): self
     {
@@ -1585,7 +1587,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param double $minimumOrderQuantity
      *
-     * @return Product
+     * @return $this
      */
     public function setMinimumOrderQuantity(float $minimumOrderQuantity): self
     {
@@ -1605,7 +1607,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param double $minimumQuantity
      *
-     * @return Product
+     * @return $this
      */
     public function setMinimumQuantity(float $minimumQuantity): self
     {
@@ -1625,7 +1627,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param \DateTimeInterface|null $modified
      *
-     * @return Product
+     * @return $this
      */
     public function setModified(\DateTimeInterface $modified = null): self
     {
@@ -1645,7 +1647,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param \DateTimeInterface|null $newReleaseDate
      *
-     * @return Product
+     * @return $this
      */
     public function setNewReleaseDate(\DateTimeInterface $newReleaseDate = null): self
     {
@@ -1665,7 +1667,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param \DateTimeInterface|null $nextAvailableInflowDate Contains the date of the next available inflow.
      *
-     * @return Product
+     * @return $this
      */
     public function setNextAvailableInflowDate(\DateTimeInterface $nextAvailableInflowDate = null): self
     {
@@ -1685,7 +1687,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param double $nextAvailableInflowQuantity Contains the quantity of the next available inflow.
      *
-     * @return Product
+     * @return $this
      */
     public function setNextAvailableInflowQuantity(float $nextAvailableInflowQuantity): self
     {
@@ -1705,7 +1707,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param string $note Optional internal product note
      *
-     * @return Product
+     * @return $this
      */
     public function setNote(string $note): self
     {
@@ -1725,7 +1727,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param string $originCountry Optional Origin country
      *
-     * @return Product
+     * @return $this
      */
     public function setOriginCountry(string $originCountry): self
     {
@@ -1746,7 +1748,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      * @param double $packagingQuantity Optional:
      *                                  self can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
      *
-     * @return Product
+     * @return $this
      */
     public function setPackagingQuantity(float $packagingQuantity): self
     {
@@ -1770,7 +1772,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
      *                                     If true, product can be purchased even if stockLevel is less or equal 0
      *                                     and considerStock is true.
      *
-     * @return Product
+     * @return $this
      */
     public function setPermitNegativeStock(bool $permitNegativeStock): self
     {
@@ -1790,7 +1792,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param double $productWeight Productweight exclusive packaging
      *
-     * @return Product
+     * @return $this
      */
     public function setProductWeight(float $productWeight): self
     {
@@ -1810,7 +1812,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param double $purchasePrice
      *
-     * @return Product
+     * @return $this
      */
     public function setPurchasePrice(float $purchasePrice): self
     {
@@ -1830,7 +1832,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param double $recommendedRetailPrice Optional recommended retail price (gross)
      *
-     * @return Product
+     * @return $this
      */
     public function setRecommendedRetailPrice(float $recommendedRetailPrice): self
     {
@@ -1850,7 +1852,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param string $serialNumber Optional serial number
      *
-     * @return Product
+     * @return $this
      */
     public function setSerialNumber(string $serialNumber): self
     {
@@ -1870,7 +1872,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param double $shippingWeight Productweight inclusive packaging
      *
-     * @return Product
+     * @return $this
      */
     public function setShippingWeight(float $shippingWeight): self
     {
@@ -1890,7 +1892,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param string $sku Optional stock keeping unit identifier
      *
-     * @return Product
+     * @return $this
      */
     public function setSku(string $sku): self
     {
@@ -1911,7 +1913,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param integer $sort Optional sort number for product sorting in lists
      *
-     * @return Product
+     * @return $this
      */
     public function setSort(int $sort): self
     {
@@ -1951,7 +1953,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param double $supplierStockLevel
      *
-     * @return Product
+     * @return $this
      */
     public function setSupplierStockLevel(float $supplierStockLevel): self
     {
@@ -1971,7 +1973,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param string $taric Optional TARIC
      *
-     * @return Product
+     * @return $this
      */
     public function setTaric(string $taric): self
     {
@@ -1991,7 +1993,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param string $unNumber Optional UN number, used to define hazardous properties
      *
-     * @return Product
+     * @return $this
      */
     public function setUnNumber(string $unNumber): self
     {
@@ -2011,7 +2013,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param string $upc Optional Universal Product Code
      *
-     * @return Product
+     * @return $this
      */
     public function setUpc(string $upc): self
     {
@@ -2031,7 +2033,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param double $vat
      *
-     * @return Product
+     * @return $this
      */
     public function setVat(float $vat): self
     {
@@ -2051,7 +2053,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param double $width Optional product width
      *
-     * @return Product
+     * @return $this
      */
     public function setWidth(float $width): self
     {
@@ -2063,7 +2065,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param ProductAttribute $attribute
      *
-     * @return Product
+     * @return $this
      */
     public function addAttribute(ProductAttribute $attribute): self
     {
@@ -2093,7 +2095,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return Product
+     * @return $this
      */
     public function clearAttributes(): self
     {
@@ -2105,7 +2107,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param Product2Category $category
      *
-     * @return Product
+     * @return $this
      */
     public function addCategory(Product2Category $category): self
     {
@@ -2125,7 +2127,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param Product2Category ...$categories
      *
-     * @return Product
+     * @return $this
      */
     public function setCategories(Product2Category ...$categories): self
     {
@@ -2135,7 +2137,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return Product
+     * @return $this
      */
     public function clearCategories(): self
     {
@@ -2147,7 +2149,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param ProductChecksum $checksum
      *
-     * @return Product
+     * @return $this
      */
     public function addChecksum(ProductChecksum $checksum): self
     {
@@ -2167,7 +2169,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param ProductChecksum ...$checksums
      *
-     * @return Product
+     * @return $this
      */
     public function setChecksums(ProductChecksum ...$checksums): self
     {
@@ -2177,7 +2179,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return Product
+     * @return $this
      */
     public function clearChecksums(): self
     {
@@ -2189,7 +2191,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param ProductConfigGroup $configGroup
      *
-     * @return Product
+     * @return $this
      */
     public function addConfigGroup(ProductConfigGroup $configGroup): self
     {
@@ -2209,7 +2211,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param ProductConfigGroup ...$configGroups
      *
-     * @return Product
+     * @return $this
      */
     public function setConfigGroups(ProductConfigGroup ...$configGroups): self
     {
@@ -2219,7 +2221,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return Product
+     * @return $this
      */
     public function clearConfigGroups(): self
     {
@@ -2231,7 +2233,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param CustomerGroupPackagingQuantity $customerGroupPackagingQuantity
      *
-     * @return Product
+     * @return $this
      */
     public function addCustomerGroupPackagingQuantity(
         CustomerGroupPackagingQuantity $customerGroupPackagingQuantity
@@ -2252,7 +2254,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param CustomerGroupPackagingQuantity ...$customerGroupPackagingQuantities
      *
-     * @return Product
+     * @return $this
      */
     public function setCustomerGroupPackagingQuantities(
         CustomerGroupPackagingQuantity ...$customerGroupPackagingQuantities
@@ -2263,7 +2265,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return Product
+     * @return $this
      */
     public function clearCustomerGroupPackagingQuantities(): self
     {
@@ -2275,7 +2277,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param ProductFileDownload $fileDownload
      *
-     * @return Product
+     * @return $this
      */
     public function addFileDownload(ProductFileDownload $fileDownload): self
     {
@@ -2295,7 +2297,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param ProductFileDownload ...$fileDownloads
      *
-     * @return Product
+     * @return $this
      */
     public function setFileDownloads(ProductFileDownload ...$fileDownloads): self
     {
@@ -2305,7 +2307,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return Product
+     * @return $this
      */
     public function clearFileDownloads(): self
     {
@@ -2317,7 +2319,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param ProductI18n $i18n
      *
-     * @return Product
+     * @return $this
      */
     public function addI18n(ProductI18n $i18n): self
     {
@@ -2327,7 +2329,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return Product
+     * @return $this
      */
     public function clearI18ns(): self
     {
@@ -2339,7 +2341,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param ProductInvisibility $invisibility
      *
-     * @return Product
+     * @return $this
      */
     public function addInvisibility(ProductInvisibility $invisibility): self
     {
@@ -2359,7 +2361,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param ProductInvisibility ...$invisibilities
      *
-     * @return Product
+     * @return $this
      */
     public function setInvisibilities(ProductInvisibility ...$invisibilities): self
     {
@@ -2369,7 +2371,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return Product
+     * @return $this
      */
     public function clearInvisibilities(): self
     {
@@ -2381,7 +2383,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param ProductMediaFile $mediaFile
      *
-     * @return Product
+     * @return $this
      */
     public function addMediaFile(ProductMediaFile $mediaFile): self
     {
@@ -2401,7 +2403,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param ProductMediaFile ...$mediaFiles
      *
-     * @return Product
+     * @return $this
      */
     public function setMediaFiles(ProductMediaFile ...$mediaFiles): self
     {
@@ -2411,7 +2413,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return Product
+     * @return $this
      */
     public function clearMediaFiles(): self
     {
@@ -2423,7 +2425,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param ProductPartsList $partsList
      *
-     * @return Product
+     * @return $this
      */
     public function addPartsList(ProductPartsList $partsList): self
     {
@@ -2443,7 +2445,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param ProductPartsList ...$partsLists
      *
-     * @return Product
+     * @return $this
      */
     public function setPartsLists(ProductPartsList ...$partsLists): self
     {
@@ -2453,7 +2455,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return Product
+     * @return $this
      */
     public function clearPartsLists(): self
     {
@@ -2465,7 +2467,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param ProductPrice $price
      *
-     * @return Product
+     * @return $this
      */
     public function addPrice(ProductPrice $price): self
     {
@@ -2485,7 +2487,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param ProductPrice ...$prices
      *
-     * @return Product
+     * @return $this
      */
     public function setPrices(ProductPrice ...$prices): self
     {
@@ -2495,7 +2497,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return Product
+     * @return $this
      */
     public function clearPrices(): self
     {
@@ -2507,7 +2509,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param ProductSpecialPrice $specialPrice
      *
-     * @return Product
+     * @return $this
      */
     public function addSpecialPrice(ProductSpecialPrice $specialPrice): self
     {
@@ -2527,7 +2529,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param ProductSpecialPrice ...$specialPrices
      *
-     * @return Product
+     * @return $this
      */
     public function setSpecialPrices(ProductSpecialPrice ...$specialPrices): self
     {
@@ -2537,7 +2539,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return Product
+     * @return $this
      */
     public function clearSpecialPrices(): self
     {
@@ -2549,7 +2551,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param ProductSpecific $specific
      *
-     * @return Product
+     * @return $this
      */
     public function addSpecific(ProductSpecific $specific): self
     {
@@ -2569,7 +2571,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param ProductSpecific ...$specifics
      *
-     * @return Product
+     * @return $this
      */
     public function setSpecifics(ProductSpecific ...$specifics): self
     {
@@ -2579,7 +2581,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return Product
+     * @return $this
      */
     public function clearSpecifics(): self
     {
@@ -2615,7 +2617,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param TaxRate ...$taxRates
      *
-     * @return Product
+     * @return $this
      */
     public function setTaxRates(TaxRate ...$taxRates): self
     {
@@ -2627,7 +2629,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param ProductVariation $variation
      *
-     * @return Product
+     * @return $this
      */
     public function addVariation(ProductVariation $variation): self
     {
@@ -2647,7 +2649,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param ProductVariation ...$variations
      *
-     * @return Product
+     * @return $this
      */
     public function setVariations(ProductVariation ...$variations): self
     {
@@ -2657,7 +2659,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return Product
+     * @return $this
      */
     public function clearVariations(): self
     {
@@ -2669,7 +2671,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param ProductWarehouseInfo $warehouseInfo
      *
-     * @return Product
+     * @return $this
      */
     public function addWarehouseInfo(ProductWarehouseInfo $warehouseInfo): self
     {
@@ -2689,7 +2691,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param ProductWarehouseInfo ...$warehouseInfo
      *
-     * @return Product
+     * @return $this
      */
     public function setWarehouseInfo(ProductWarehouseInfo ...$warehouseInfo): self
     {
@@ -2699,7 +2701,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @return Product
+     * @return $this
      */
     public function clearWarehouseInfo(): self
     {
@@ -2732,7 +2734,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param int $additionalHandlingTime
      *
-     * @return Product
+     * @return $this
      */
     public function setAdditionalHandlingTime(int $additionalHandlingTime): self
     {
@@ -2752,7 +2754,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param integer $supplierDeliveryTime
      *
-     * @return Product
+     * @return $this
      */
     public function setSupplierDeliveryTime(int $supplierDeliveryTime): self
     {
@@ -2788,7 +2790,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     /**
      * @param ProductI18n ...$i18ns
      *
-     * @return Product
+     * @return $this
      */
     public function setI18ns(ProductI18n ...$i18ns): self
     {

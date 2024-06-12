@@ -45,7 +45,7 @@ class Error
      *
      * @var mixed
      */
-    public $data = null;
+    public mixed $data = null;
 
     /**
      * @param \Throwable  $exception
@@ -93,11 +93,12 @@ class Error
      *
      * @param int $code
      *
-     * @return Error
+     * @return $this
      */
-    public function setCode(int $code): Error
+    public function setCode(int $code): self
     {
         $this->code = $code;
+
         return $this;
     }
 
@@ -106,7 +107,7 @@ class Error
      *
      * @return mixed
      */
-    public function getData()
+    public function getData(): mixed
     {
         return $this->data;
     }
@@ -116,11 +117,12 @@ class Error
      *
      * @param mixed $data
      *
-     * @return Error
+     * @return $this
      */
-    public function setData($data): Error
+    public function setData(mixed $data): self
     {
         $this->data = $data;
+
         return $this;
     }
 
@@ -159,11 +161,12 @@ class Error
      *
      * @param string $message
      *
-     * @return Error
+     * @return $this
      */
-    public function setMessage(string $message): Error
+    public function setMessage(string $message): self
     {
         $this->message = $message;
+
         return $this;
     }
 }

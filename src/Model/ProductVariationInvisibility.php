@@ -48,9 +48,9 @@ class ProductVariationInvisibility extends AbstractModel
     /**
      * @param Identity $customerGroupId Reference to customerGroup
      *
-     * @return ProductVariationInvisibility
+     * @return $this
      */
-    public function setCustomerGroupId(Identity $customerGroupId): ProductVariationInvisibility
+    public function setCustomerGroupId(Identity $customerGroupId): self
     {
         $this->customerGroupId = $customerGroupId;
 

@@ -43,9 +43,9 @@ class ConfigItemI18n extends AbstractI18n
     /**
      * @param string $description Description (html). Will be ignored, if inheritProductName==true
      *
-     * @return ConfigItemI18n
+     * @return $this
      */
-    public function setDescription(string $description): ConfigItemI18n
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
@@ -63,9 +63,9 @@ class ConfigItemI18n extends AbstractI18n
     /**
      * @param string $name Config item name. Will be ignored if inheritProductName==true
      *
-     * @return ConfigItemI18n
+     * @return $this
      */
-    public function setName(string $name): ConfigItemI18n
+    public function setName(string $name): self
     {
         $this->name = $name;
 

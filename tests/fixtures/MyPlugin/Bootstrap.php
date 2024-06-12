@@ -14,7 +14,7 @@ class Bootstrap implements PluginInterface
     public function registerListener(
         CoreConfigInterface $config,
         Container           $container,
-        EventDispatcher     $eventDispatcher
+        EventDispatcher $dispatcher
     ): void {
         // TODO: Implement registerListener() method.
     }

@@ -27,9 +27,9 @@ class ProductMediaFileAttr extends AbstractModel
     /**
      * @param ProductMediaFileAttrI18n $i18n
      *
-     * @return ProductMediaFileAttr
+     * @return $this
      */
-    public function addI18n(ProductMediaFileAttrI18n $i18n): ProductMediaFileAttr
+    public function addI18n(ProductMediaFileAttrI18n $i18n): self
     {
         $this->i18ns[] = $i18n;
 
@@ -47,9 +47,9 @@ class ProductMediaFileAttr extends AbstractModel
     /**
      * @param ProductMediaFileAttrI18n ...$i18ns
      *
-     * @return ProductMediaFileAttr
+     * @return $this
      */
-    public function setI18ns(ProductMediaFileAttrI18n ...$i18ns): ProductMediaFileAttr
+    public function setI18ns(ProductMediaFileAttrI18n ...$i18ns): self
     {
         $this->i18ns = $i18ns;
 
@@ -57,9 +57,9 @@ class ProductMediaFileAttr extends AbstractModel
     }
 
     /**
-     * @return ProductMediaFileAttr
+     * @return $this
      */
-    public function clearI18ns(): ProductMediaFileAttr
+    public function clearI18ns(): self
     {
         $this->i18ns = [];
 

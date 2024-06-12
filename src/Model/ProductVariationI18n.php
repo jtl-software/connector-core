@@ -35,9 +35,9 @@ class ProductVariationI18n extends AbstractI18n
     /**
      * @param string $name Locale specific variation name
      *
-     * @return ProductVariationI18n
+     * @return $this
      */
-    public function setName(string $name): ProductVariationI18n
+    public function setName(string $name): self
     {
         $this->name = $name;
 

@@ -63,8 +63,9 @@ class SessionHandler extends AbstractTable implements SessionHandlerInterface
      * @throws InvalidArgumentException
      * @throws DbcRuntimeException
      * @throws \RuntimeException
+     * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
-    public function destroy($sessionId): bool
+    public function destroy(string $sessionId): bool
     {
         $this->delete([self::SESSION_ID => $sessionId]);
         return true;
@@ -77,9 +78,10 @@ class SessionHandler extends AbstractTable implements SessionHandlerInterface
      * @throws DbcRuntimeException
      * @throws \Doctrine\DBAL\Exception
      * @throws \RuntimeException
+     * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
     #[ReturnTypeWillChange]
-    public function gc($maxLifetime): bool
+    public function gc(int $maxLifetime): bool
     {
         $this->createQueryBuilder()
              ->delete()
@@ -95,8 +97,9 @@ class SessionHandler extends AbstractTable implements SessionHandlerInterface
      * @param string $name
      *
      * @return boolean
+     * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
-    public function open($savePath, $name): bool
+    public function open(string $savePath, string $name): bool
     {
         return true;
     }
@@ -108,9 +111,10 @@ class SessionHandler extends AbstractTable implements SessionHandlerInterface
      * @throws Exception|\Doctrine\DBAL\Exception
      * @throws DbcRuntimeException
      * @throws \RuntimeException
+     * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
     #[ReturnTypeWillChange]
-    public function read($sessionId): string
+    public function read(string $sessionId): string
     {
         $stmt = $this->createReadQuery($sessionId, [self::SESSION_DATA])->execute();
         if (\is_object($stmt) && \is_scalar(($fetchOne = $stmt->fetchOne()))) {
@@ -145,8 +149,9 @@ class SessionHandler extends AbstractTable implements SessionHandlerInterface
      * @throws DBALException
      * @throws DbcRuntimeException
      * @throws \RuntimeException
+     * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
-    public function write($sessionId, $sessionData): bool
+    public function write(string $sessionId, string $sessionData): bool
     {
         $data = [
             self::SESSION_DATA => $sessionData,
@@ -180,8 +185,9 @@ class SessionHandler extends AbstractTable implements SessionHandlerInterface
      * @throws \Doctrine\DBAL\Exception|Exception
      * @throws DbcRuntimeException
      * @throws \RuntimeException
+     * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
-    public function validateId($sessionId): bool
+    public function validateId(string $sessionId): bool
     {
         $stmt = $this->createReadQuery($sessionId, [self::SESSION_ID])->execute();
         if (\is_object($stmt)) {
@@ -199,8 +205,9 @@ class SessionHandler extends AbstractTable implements SessionHandlerInterface
      * @throws DBALException
      * @throws DbcRuntimeException
      * @throws \RuntimeException
+     * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
-    public function updateTimestamp($sessionId, $sessionData): bool
+    public function updateTimestamp(string $sessionId, string $sessionData): bool
     {
         $this->update(
             [self::EXPIRES_AT => (new DateTimeImmutable())->setTimestamp($this->calculateExpiryTime())],
@@ -233,7 +240,7 @@ class SessionHandler extends AbstractTable implements SessionHandlerInterface
     }
 
     /**
-     * @param \Psr\Log\LoggerInterface $logger
+     * @param LoggerInterface $logger
      *
      * @return void
      */
@@ -243,7 +250,7 @@ class SessionHandler extends AbstractTable implements SessionHandlerInterface
     }
 
     /**
-     * @return \Psr\Log\LoggerInterface
+     * @return LoggerInterface
      */
     public function getLogger(): LoggerInterface
     {
