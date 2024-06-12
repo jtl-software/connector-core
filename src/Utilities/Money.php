@@ -25,7 +25,7 @@ class Money
      *
      * @return float
      */
-    public static function gross($net, $vat): float
+    public static function gross(float|int|string $net, float|int|string $vat): float
     {
         $vat = (float)$vat;
         $net = (float)$net;
@@ -55,7 +55,7 @@ class Money
      *
      * @return float
      */
-    public static function net($gross, $vat): float
+    public static function net(float|int|string $gross, float|int|string $vat): float
     {
         $vat   = (float)$vat;
         $gross = (float)$gross;

@@ -111,6 +111,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
     /**
      * Close Sesssion
      *
+     * @return bool
      * @throws InvalidArgumentException
      */
     public function close(): bool
@@ -293,6 +294,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
             ['id' => $sessionId, 'time' => \time()]
         );
         $rows = $this->db->query($this->createReadQuery($sessionId, \time()));
+
         return $rows !== null
                && isset($rows[0]['sessionId'])
                && \is_string($rows[0]['sessionId'])

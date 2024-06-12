@@ -15,7 +15,7 @@ interface ValidatorInterface
     /**
      * @param mixed $value
      */
-    public function __construct($value);
+    public function __construct(mixed $value);
 
     /**
      * @return bool
@@ -89,7 +89,7 @@ interface ValidatorInterface
      * @throws TypeError
      * @throws InvalidArgumentException
      */
-    public function hasKey($keyName): bool;
+    public function hasKey(int|string $keyName): bool;
 
     /**
      * @param mixed $keyName
@@ -97,7 +97,7 @@ interface ValidatorInterface
      * @return bool
      * @throws InvalidArgumentException
      */
-    public function isValidArrayKeyName($keyName): bool;
+    public function isValidArrayKeyName(mixed $keyName): bool;
 
     /**
      * @param string $methodName

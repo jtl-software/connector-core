@@ -40,6 +40,7 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
     /**
      * @param RpcEvent $event
      *
+     * @return void
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */

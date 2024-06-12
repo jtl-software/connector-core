@@ -6,6 +6,7 @@ namespace Jtl\Connector\Core\Serializer;
 
 use JMS\Serializer\EventDispatcher\EventDispatcher;
 use JMS\Serializer\Exception\InvalidArgumentException;
+use JMS\Serializer\Exception\LogicException;
 use JMS\Serializer\Exception\RuntimeException;
 use JMS\Serializer\Handler\HandlerRegistry;
 use JMS\Serializer\SerializerBuilder as JmsBuilder;
@@ -27,13 +28,7 @@ class SerializerBuilder
      * @return JmsBuilder
      * @throws InvalidArgumentException
      * @throws RuntimeException
-     * @throws RuntimeException
-     * @throws InvalidArgumentException
-     * @throws InvalidArgumentException
-     * @throws InvalidArgumentException
-     * @throws InvalidArgumentException
-     * @throws InvalidArgumentException
-     * @throws InvalidArgumentException
+     * @throws LogicException
      */
     public static function create(string $cacheDir = null): JmsBuilder
     {

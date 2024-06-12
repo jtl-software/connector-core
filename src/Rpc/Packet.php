@@ -119,7 +119,7 @@ abstract class Packet extends AbstractModel
      * @param string $id
      * @param string $jtlrpc
      *
-     * @return Packet
+     * @return self
      */
     public static function create(string $id, string $jtlrpc = '2.0'): self
     {
