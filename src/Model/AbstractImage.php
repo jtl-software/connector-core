@@ -131,11 +131,12 @@ abstract class AbstractImage extends AbstractIdentity
     /**
      * @param string $filename
      *
-     * @return AbstractImage
+     * @return $this
      */
-    public function setFilename(string $filename): AbstractImage
+    public function setFilename(string $filename): self
     {
         $this->filename = $filename;
+
         return $this;
     }
 
@@ -152,7 +153,7 @@ abstract class AbstractImage extends AbstractIdentity
      *
      * @return $this
      */
-    public function setForeignKey(Identity $foreignKey): AbstractImage
+    public function setForeignKey(Identity $foreignKey): self
     {
         $this->foreignKey = $foreignKey;
 
@@ -212,7 +213,7 @@ abstract class AbstractImage extends AbstractIdentity
     /**
      * @param string $name
      *
-     * @return AbstractImage
+     * @return $this
      */
     public function setName(string $name): self
     {
@@ -231,11 +232,12 @@ abstract class AbstractImage extends AbstractIdentity
     /**
      * @param string $remoteUrl
      *
-     * @return AbstractImage
+     * @return $this
      */
     public function setRemoteUrl(string $remoteUrl): self
     {
         $this->remoteUrl = $remoteUrl;
+
         return $this;
     }
 
@@ -250,11 +252,12 @@ abstract class AbstractImage extends AbstractIdentity
     /**
      * @param int $sort
      *
-     * @return AbstractImage
+     * @return $this
      */
     public function setSort(int $sort): self
     {
         $this->sort = $sort;
+
         return $this;
     }
 

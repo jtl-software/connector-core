@@ -14,10 +14,6 @@ abstract class AbstractDbManagerCommand extends Command
      * @var array<string, mixed>
      */
     protected array $dbParams;
-
-    /**
-     * @var DbManager
-     */
     protected DbManager $dbManager;
 
     /**

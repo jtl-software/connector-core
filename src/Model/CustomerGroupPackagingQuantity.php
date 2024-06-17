@@ -59,9 +59,9 @@ class CustomerGroupPackagingQuantity extends AbstractModel
     /**
      * @param Identity $customerGroupId Reference to customer group.
      *
-     * @return CustomerGroupPackagingQuantity
+     * @return $this
      */
-    public function setCustomerGroupId(Identity $customerGroupId): CustomerGroupPackagingQuantity
+    public function setCustomerGroupId(Identity $customerGroupId): self
     {
         $this->customerGroupId = $customerGroupId;
 
@@ -79,9 +79,9 @@ class CustomerGroupPackagingQuantity extends AbstractModel
     /**
      * @param double $minimumOrderQuantity Contains the minimum quantity for a customergroup.
      *
-     * @return CustomerGroupPackagingQuantity
+     * @return $this
      */
-    public function setMinimumOrderQuantity(float $minimumOrderQuantity): CustomerGroupPackagingQuantity
+    public function setMinimumOrderQuantity(float $minimumOrderQuantity): self
     {
         $this->minimumOrderQuantity = $minimumOrderQuantity;
 
@@ -99,9 +99,9 @@ class CustomerGroupPackagingQuantity extends AbstractModel
     /**
      * @param double $packagingQuantity Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
      *
-     * @return CustomerGroupPackagingQuantity
+     * @return $this
      */
-    public function setPackagingQuantity(float $packagingQuantity): CustomerGroupPackagingQuantity
+    public function setPackagingQuantity(float $packagingQuantity): self
     {
         $this->packagingQuantity = $packagingQuantity;
 

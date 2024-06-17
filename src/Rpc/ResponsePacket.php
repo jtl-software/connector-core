@@ -11,7 +11,6 @@ use Jtl\Connector\Core\Exception\RpcException;
  * Rpc Response Packet
  *
  * @access public
- * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
 class ResponsePacket extends Packet
 {
@@ -23,7 +22,7 @@ class ResponsePacket extends Packet
      *
      * @var mixed
      */
-    protected $result;
+    protected mixed $result;
 
     /**
      * This member is REQUIRED on error This member MUST NOT exist if there was
@@ -75,7 +74,7 @@ class ResponsePacket extends Packet
     /**
      * @return mixed
      */
-    public function getResult()
+    public function getResult(): mixed
     {
         return $this->result;
     }
@@ -83,9 +82,9 @@ class ResponsePacket extends Packet
     /**
      * @param mixed $result
      *
-     * @return ResponsePacket
+     * @return $this
      */
-    public function setResult($result): ResponsePacket
+    public function setResult(mixed $result): self
     {
         $this->result = $result;
 
@@ -93,7 +92,7 @@ class ResponsePacket extends Packet
     }
 
     /**
-     * @return Error
+     * @return Error|null
      */
     public function getError(): ?Error
     {
@@ -103,9 +102,9 @@ class ResponsePacket extends Packet
     /**
      * @param Error $error
      *
-     * @return ResponsePacket
+     * @return $this
      */
-    public function setError(Error $error): ResponsePacket
+    public function setError(Error $error): self
     {
         $this->error = $error;
 

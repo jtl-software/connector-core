@@ -57,13 +57,13 @@ class JsonResponse extends SymfonyJsonResponse implements LoggerAwareInterface
      * @param RequestPacket  $requestPacket
      * @param ResponsePacket $responsePacket
      *
-     * @return JsonResponse
+     * @return $this
      * @throws DefinitionException
      * @throws CaseConverterException
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    public function prepareAndSend(RequestPacket $requestPacket, ResponsePacket $responsePacket): JsonResponse
+    public function prepareAndSend(RequestPacket $requestPacket, ResponsePacket $responsePacket): self
     {
         $method       = Method::createFromRpcMethod($requestPacket->getMethod());
         $responseData = $responsePacket->toArray($this->serializer);

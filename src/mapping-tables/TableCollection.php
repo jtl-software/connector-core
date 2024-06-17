@@ -6,23 +6,13 @@ namespace Jtl\Connector\MappingTables;
 
 class TableCollection
 {
-    /**
-     * @var boolean
-     */
     protected bool $strictMode = false;
-
-    /**
-     * @var TableDummy
-     */
     protected TableDummy $tableDummy;
 
-    /**
-     * @var array<TableInterface>
-     */
+    /** @var array<TableInterface> */
     protected array $tables = [];
 
     /**
-     * TableCollection constructor.
      * @param TableInterface ...$tables
      */
     public function __construct(TableInterface ...$tables)
@@ -34,7 +24,7 @@ class TableCollection
 
     /**
      * @param TableInterface $table
-     * @return TableCollection
+     * @return $this
      */
     public function set(TableInterface $table): self
     {
@@ -117,11 +107,12 @@ class TableCollection
 
     /**
      * @param boolean $strictMode
-     * @return TableCollection
+     * @return $this
      */
     public function setStrictMode(bool $strictMode): self
     {
         $this->strictMode = $strictMode;
+
         return $this;
     }
 

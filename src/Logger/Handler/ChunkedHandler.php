@@ -68,12 +68,12 @@ class ChunkedHandler extends Handler implements FormattableHandlerInterface
 
                 if ($useArray) {
                     $newRecord = [
-                        'level' => $record['level'],
-                        'context' => $record['context'],
-                        'channel' => $record['channel'],
+                        'level'    => $record['level'],
+                        'context'  => $record['context'],
+                        'channel'  => $record['channel'],
                         'datetime' => $record['datetime'],
-                        'extra' => $extra,
-                        'message' => $message,
+                        'extra'    => $extra,
+                        'message'  => $message,
                     ];
                 } else {
                     /** @var LogRecord $record */
@@ -90,12 +90,20 @@ class ChunkedHandler extends Handler implements FormattableHandlerInterface
                 /** @var LogRecord $newRecord */ // to force phpstan to shut up!
                 $return = $this->nextHandler->handle($newRecord) ?: $return;
             }
+
             return $return;
         }
         /** @var LogRecord $record */ // to force phpstan to shut up!
+
         return $this->nextHandler->handle($record);
     }
 
+    /**
+     * @param FormatterInterface $formatter
+     *
+     * @return HandlerInterface
+     * @throws \UnexpectedValueException
+     */
     public function setFormatter(FormatterInterface $formatter): HandlerInterface
     {
         if (
@@ -109,6 +117,10 @@ class ChunkedHandler extends Handler implements FormattableHandlerInterface
         );
     }
 
+    /**
+     * @return FormatterInterface
+     * @throws \UnexpectedValueException
+     */
     public function getFormatter(): FormatterInterface
     {
         if (

@@ -54,11 +54,12 @@ class ProductStockLevel extends AbstractModel
     /**
      * @param Identity $productId
      *
-     * @return ProductStockLevel
+     * @return $this
      */
-    public function setProductId(Identity $productId): ProductStockLevel
+    public function setProductId(Identity $productId): self
     {
         $this->productId = $productId;
+
         return $this;
     }
 
@@ -73,9 +74,9 @@ class ProductStockLevel extends AbstractModel
     /**
      * @param double $stockLevel
      *
-     * @return ProductStockLevel
+     * @return $this
      */
-    public function setStockLevel(float $stockLevel): ProductStockLevel
+    public function setStockLevel(float $stockLevel): self
     {
         $this->stockLevel = $stockLevel;
 

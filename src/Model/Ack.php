@@ -28,9 +28,9 @@ class Ack extends Identities
     /**
      * @param Checksum $checksum
      *
-     * @return Ack
+     * @return $this
      */
-    public function addChecksum(Checksum $checksum): Ack
+    public function addChecksum(Checksum $checksum): self
     {
         $this->checksums[] = $checksum;
 
@@ -46,9 +46,9 @@ class Ack extends Identities
     }
 
     /**
-     * @return Ack
+     * @return $this
      */
-    public function clearChecksums(): Ack
+    public function clearChecksums(): self
     {
         $this->checksums = [];
 

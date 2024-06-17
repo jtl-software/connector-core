@@ -65,9 +65,9 @@ class ConnectorIdentification extends AbstractModel
     /**
      * @param string $endpointVersion
      *
-     * @return ConnectorIdentification
+     * @return $this
      */
-    public function setEndpointVersion(string $endpointVersion): ConnectorIdentification
+    public function setEndpointVersion(string $endpointVersion): self
     {
         $this->endpointVersion = $endpointVersion;
 
@@ -85,9 +85,9 @@ class ConnectorIdentification extends AbstractModel
     /**
      * @param string $platformName
      *
-     * @return ConnectorIdentification
+     * @return $this
      */
-    public function setPlatformName(string $platformName): ConnectorIdentification
+    public function setPlatformName(string $platformName): self
     {
         $this->platformName = $platformName;
 
@@ -105,9 +105,9 @@ class ConnectorIdentification extends AbstractModel
     /**
      * @param string $platformVersion
      *
-     * @return ConnectorIdentification
+     * @return $this
      */
-    public function setPlatformVersion(string $platformVersion): ConnectorIdentification
+    public function setPlatformVersion(string $platformVersion): self
     {
         $this->platformVersion = $platformVersion;
 
@@ -125,9 +125,9 @@ class ConnectorIdentification extends AbstractModel
     /**
      * @param integer $protocolVersion
      *
-     * @return ConnectorIdentification
+     * @return $this
      */
-    public function setProtocolVersion(int $protocolVersion): ConnectorIdentification
+    public function setProtocolVersion(int $protocolVersion): self
     {
         $this->protocolVersion = $protocolVersion;
 
@@ -135,7 +135,7 @@ class ConnectorIdentification extends AbstractModel
     }
 
     /**
-     * @return ConnectorServerInfo
+     * @return ConnectorServerInfo|null
      */
     public function getServerInfo(): ?ConnectorServerInfo
     {
@@ -145,9 +145,9 @@ class ConnectorIdentification extends AbstractModel
     /**
      * @param ConnectorServerInfo $connectorServerInfo
      *
-     * @return ConnectorIdentification
+     * @return $this
      */
-    public function setServerInfo(ConnectorServerInfo $connectorServerInfo): ConnectorIdentification
+    public function setServerInfo(ConnectorServerInfo $connectorServerInfo): self
     {
         $this->serverInfo = $connectorServerInfo;
 

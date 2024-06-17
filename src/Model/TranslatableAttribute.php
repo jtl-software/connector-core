@@ -83,7 +83,7 @@ class TranslatableAttribute extends AbstractIdentity
     /**
      * @param bool $isTranslated
      *
-     * @return TranslatableAttribute
+     * @return $this
      */
     public function setIsTranslated(bool $isTranslated): self
     {
@@ -103,7 +103,7 @@ class TranslatableAttribute extends AbstractIdentity
     /**
      * @param bool $isCustomProperty
      *
-     * @return TranslatableAttribute
+     * @return $this
      */
     public function setIsCustomProperty(bool $isCustomProperty): self
     {
@@ -158,7 +158,7 @@ class TranslatableAttribute extends AbstractIdentity
     /**
      * @param TranslatableAttributeI18n ...$i18ns
      *
-     * @return TranslatableAttribute
+     * @return $this
      */
     public function setI18ns(TranslatableAttributeI18n ...$i18ns): self
     {
@@ -170,7 +170,7 @@ class TranslatableAttribute extends AbstractIdentity
     /**
      * @param TranslatableAttributeI18n $i18n
      *
-     * @return TranslatableAttribute
+     * @return $this
      */
     public function addI18n(TranslatableAttributeI18n $i18n): self
     {
@@ -180,7 +180,7 @@ class TranslatableAttribute extends AbstractIdentity
     }
 
     /**
-     * @return TranslatableAttribute
+     * @return $this
      */
     public function clearI18ns(): self
     {
@@ -224,11 +224,11 @@ class TranslatableAttribute extends AbstractIdentity
     /**
      * @param string $languageIso
      *
-     * @return bool|float|int|string|null|object
+     * @return bool|float|int|string|null|array<mixed>
      * @throws TranslatableAttributeException
      * @throws JsonException
      */
-    public function findValue(string $languageIso)
+    public function findValue(string $languageIso): array|float|bool|int|string|null
     {
         $i18n = $this->findTranslation($languageIso);
         if ($i18n instanceof TranslatableAttributeI18n) {
@@ -241,7 +241,7 @@ class TranslatableAttribute extends AbstractIdentity
     /**
      * @param string|null $type
      *
-     * @return array<string, bool|float|int|string|null|object>
+     * @return array<string, bool|float|int|string|null|array<mixed>>
      * @throws TranslatableAttributeException
      * @throws JsonException
      */

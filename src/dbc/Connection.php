@@ -19,12 +19,13 @@ class Connection extends \Doctrine\DBAL\Connection
     /**
      * @param TableRestriction $restriction
      *
-     * @return Connection
+     * @return $this
      */
-    public function restrictTable(TableRestriction $restriction): Connection
+    public function restrictTable(TableRestriction $restriction): self
     {
         $this->tableRestrictions[$restriction->getTable()->getName()][$restriction->getColumnName()] =
             $restriction->getColumnValue();
+
         return $this;
     }
 
@@ -96,6 +97,7 @@ class Connection extends \Doctrine\DBAL\Connection
      * @return integer
      * @throws Exception
      * @throws DbcRuntimeException|\RuntimeException
+     * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
     public function insert($tableExpression, array $data, array $types = []): int
     {
@@ -121,6 +123,7 @@ class Connection extends \Doctrine\DBAL\Connection
      * @return integer
      * @throws Exception
      * @throws DbcRuntimeException|\RuntimeException
+     * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
     public function update($tableExpression, array $data, array $identifiers, array $types = []): int
     {
@@ -144,6 +147,7 @@ class Connection extends \Doctrine\DBAL\Connection
      * @return int
      * @throws Exception
      * @throws DbcRuntimeException|\RuntimeException
+     * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
     public function delete($tableExpression, array $identifiers, array $types = []): int
     {

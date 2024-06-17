@@ -28,16 +28,4 @@ interface CoreConfigInterface extends ConfigInterface
      * @throws \TypeError
      */
     public function getString(string $valueName, ?string $default = null): string;
-
-    /**
-     * @return ConfigSchema
-     */
-    public function getConfigSchema(): ConfigSchema;
-
-    /**
-     * @param ConfigSchema $configSchema
-     *
-     * @return $this
-     */
-    public function setConfigSchema(ConfigSchema $configSchema): self;
 }

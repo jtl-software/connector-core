@@ -43,9 +43,9 @@ class CategoryInvisibility extends AbstractModel
     /**
      * @param Identity $customerGroupId Reference to customerGroup that is not allowed to view categoryId
      *
-     * @return CategoryInvisibility
+     * @return $this
      */
-    public function setCustomerGroupId(Identity $customerGroupId): CategoryInvisibility
+    public function setCustomerGroupId(Identity $customerGroupId): self
     {
         $this->customerGroupId = $customerGroupId;
 

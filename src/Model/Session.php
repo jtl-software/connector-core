@@ -31,7 +31,7 @@ class Session extends AbstractModel
     protected int $lifetime = 0;
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getSessionId(): ?string
     {
@@ -41,11 +41,12 @@ class Session extends AbstractModel
     /**
      * @param string $sessionId
      *
-     * @return Session
+     * @return $this
      */
-    public function setSessionId(string $sessionId): Session
+    public function setSessionId(string $sessionId): self
     {
         $this->sessionId = $sessionId;
+
         return $this;
     }
 
@@ -60,11 +61,12 @@ class Session extends AbstractModel
     /**
      * @param int $lifetime
      *
-     * @return Session
+     * @return $this
      */
-    public function setLifetime(int $lifetime): Session
+    public function setLifetime(int $lifetime): self
     {
         $this->lifetime = $lifetime;
+
         return $this;
     }
 }

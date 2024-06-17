@@ -51,9 +51,9 @@ class MeasurementUnit extends AbstractIdentity
     /**
      * @param string $code Optional UCUM-Code, see  http://unitsofmeasure.org/
      *
-     * @return MeasurementUnit
+     * @return $this
      */
-    public function setCode(string $code): MeasurementUnit
+    public function setCode(string $code): self
     {
         $this->code = $code;
 
@@ -71,9 +71,9 @@ class MeasurementUnit extends AbstractIdentity
     /**
      * @param string $displayCode Synonym e.g. 'ml'
      *
-     * @return MeasurementUnit
+     * @return $this
      */
-    public function setDisplayCode(string $displayCode): MeasurementUnit
+    public function setDisplayCode(string $displayCode): self
     {
         $this->displayCode = $displayCode;
 
@@ -83,9 +83,9 @@ class MeasurementUnit extends AbstractIdentity
     /**
      * @param MeasurementUnitI18n $i18n
      *
-     * @return MeasurementUnit
+     * @return $this
      */
-    public function addI18n(MeasurementUnitI18n $i18n): MeasurementUnit
+    public function addI18n(MeasurementUnitI18n $i18n): self
     {
         $this->i18ns[] = $i18n;
 
@@ -103,9 +103,9 @@ class MeasurementUnit extends AbstractIdentity
     /**
      * @param MeasurementUnitI18n ...$i18ns
      *
-     * @return MeasurementUnit
+     * @return $this
      */
-    public function setI18ns(MeasurementUnitI18n ...$i18ns): MeasurementUnit
+    public function setI18ns(MeasurementUnitI18n ...$i18ns): self
     {
         $this->i18ns = $i18ns;
 
@@ -113,9 +113,9 @@ class MeasurementUnit extends AbstractIdentity
     }
 
     /**
-     * @return MeasurementUnit
+     * @return $this
      */
-    public function clearI18ns(): MeasurementUnit
+    public function clearI18ns(): self
     {
         $this->i18ns = [];
 

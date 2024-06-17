@@ -83,9 +83,9 @@ class ConfigGroup extends AbstractIdentity
     /**
      * @param string $comment Optional internal comment to differantiate config groups by comment name
      *
-     * @return ConfigGroup
+     * @return $this
      */
-    public function setComment(string $comment): ConfigGroup
+    public function setComment(string $comment): self
     {
         $this->comment = $comment;
 
@@ -103,9 +103,9 @@ class ConfigGroup extends AbstractIdentity
     /**
      * @param string $imagePath
      *
-     * @return ConfigGroup
+     * @return $this
      */
-    public function setImagePath(string $imagePath): ConfigGroup
+    public function setImagePath(string $imagePath): self
     {
         $this->imagePath = $imagePath;
 
@@ -123,9 +123,9 @@ class ConfigGroup extends AbstractIdentity
     /**
      * @param integer $maximumSelection Optional maximum number allowed selections. Default 0 for no maximum limitation.
      *
-     * @return ConfigGroup
+     * @return $this
      */
-    public function setMaximumSelection(int $maximumSelection): ConfigGroup
+    public function setMaximumSelection(int $maximumSelection): self
     {
         $this->maximumSelection = $maximumSelection;
 
@@ -144,9 +144,9 @@ class ConfigGroup extends AbstractIdentity
      * @param integer $minimumSelection Optional minimum number required selections.
      *                                  Default 0 for no minimum requirement.
      *
-     * @return ConfigGroup
+     * @return $this
      */
-    public function setMinimumSelection(int $minimumSelection): ConfigGroup
+    public function setMinimumSelection(int $minimumSelection): self
     {
         $this->minimumSelection = $minimumSelection;
 
@@ -164,9 +164,9 @@ class ConfigGroup extends AbstractIdentity
     /**
      * @param integer $sort Optional sort order number
      *
-     * @return ConfigGroup
+     * @return $this
      */
-    public function setSort(int $sort): ConfigGroup
+    public function setSort(int $sort): self
     {
         $this->sort = $sort;
 
@@ -184,9 +184,9 @@ class ConfigGroup extends AbstractIdentity
     /**
      * @param integer $type Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
      *
-     * @return ConfigGroup
+     * @return $this
      */
-    public function setType(int $type): ConfigGroup
+    public function setType(int $type): self
     {
         $this->type = $type;
 
@@ -196,9 +196,9 @@ class ConfigGroup extends AbstractIdentity
     /**
      * @param ConfigGroupI18n $i18n
      *
-     * @return ConfigGroup
+     * @return $this
      */
-    public function addI18n(ConfigGroupI18n $i18n): ConfigGroup
+    public function addI18n(ConfigGroupI18n $i18n): self
     {
         $this->i18ns[] = $i18n;
 
@@ -216,9 +216,9 @@ class ConfigGroup extends AbstractIdentity
     /**
      * @param ConfigGroupI18n ...$i18ns
      *
-     * @return ConfigGroup
+     * @return $this
      */
-    public function setI18ns(ConfigGroupI18n ...$i18ns): ConfigGroup
+    public function setI18ns(ConfigGroupI18n ...$i18ns): self
     {
         $this->i18ns = $i18ns;
 
@@ -226,9 +226,9 @@ class ConfigGroup extends AbstractIdentity
     }
 
     /**
-     * @return ConfigGroup
+     * @return $this
      */
-    public function clearI18ns(): ConfigGroup
+    public function clearI18ns(): self
     {
         $this->i18ns = [];
 

@@ -70,13 +70,13 @@ class Language extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @param Identity $id Unique language id
+     * @param Identity $identity Unique language id
      *
-     * @return Language
+     * @return $this
      */
-    public function setId(Identity $id): Language
+    public function setId(Identity $identity): self
     {
-        $this->id = $id;
+        $this->id = $identity;
 
         return $this;
     }
@@ -92,9 +92,9 @@ class Language extends AbstractI18n implements IdentityInterface
     /**
      * @param boolean $isDefault Flag default language for frontend. Exact 1 language must be marked as default.
      *
-     * @return Language
+     * @return $this
      */
-    public function setIsDefault(bool $isDefault): Language
+    public function setIsDefault(bool $isDefault): self
     {
         $this->isDefault = $isDefault;
 
@@ -112,9 +112,9 @@ class Language extends AbstractI18n implements IdentityInterface
     /**
      * @param string $nameEnglish English term
      *
-     * @return Language
+     * @return $this
      */
-    public function setNameEnglish(string $nameEnglish): Language
+    public function setNameEnglish(string $nameEnglish): self
     {
         $this->nameEnglish = $nameEnglish;
 
@@ -132,9 +132,9 @@ class Language extends AbstractI18n implements IdentityInterface
     /**
      * @param string $nameGerman German term
      *
-     * @return Language
+     * @return $this
      */
-    public function setNameGerman(string $nameGerman): Language
+    public function setNameGerman(string $nameGerman): self
     {
         $this->nameGerman = $nameGerman;
 

@@ -34,9 +34,9 @@ class Features extends AbstractModel
      * @param array<string, array{pull?: ?bool, push?: ?bool, delete?: ?bool}>|array{} $entities
      * @param array<string, bool>|array{}                                              $flags
      *
-     * @return Features
+     * @return self
      */
-    public static function create(array $entities = [], array $flags = []): Features
+    public static function create(array $entities = [], array $flags = []): self
     {
         $featureEntities = [];
         foreach ($entities as $name => $methods) {
@@ -90,24 +90,26 @@ class Features extends AbstractModel
     /**
      * @param FeatureEntity ...$entities
      *
-     * @return Features
+     * @return $this
      */
-    public function setEntities(FeatureEntity ...$entities): Features
+    public function setEntities(FeatureEntity ...$entities): self
     {
         foreach ($entities as $entity) {
             $this->setEntity($entity);
         }
+
         return $this;
     }
 
     /**
      * @param FeatureEntity $entity
      *
-     * @return Features
+     * @return $this
      */
-    public function setEntity(FeatureEntity $entity): Features
+    public function setEntity(FeatureEntity $entity): self
     {
         $this->entities[$entity->getName()] = $entity;
+
         return $this;
     }
 
@@ -161,24 +163,26 @@ class Features extends AbstractModel
     /**
      * @param FeatureFlag ...$flags
      *
-     * @return Features
+     * @return $this
      */
-    public function setFlags(FeatureFlag ...$flags): Features
+    public function setFlags(FeatureFlag ...$flags): self
     {
         foreach ($flags as $flag) {
             $this->setFlag($flag);
         }
+
         return $this;
     }
 
     /**
      * @param FeatureFlag $flag
      *
-     * @return Features
+     * @return $this
      */
-    public function setFlag(FeatureFlag $flag): Features
+    public function setFlag(FeatureFlag $flag): self
     {
         $this->flags[$flag->getName()] = $flag;
+
         return $this;
     }
 

@@ -60,7 +60,7 @@ class RequestProcessor implements ProcessorInterface
      * @phpstan-param array{extra:array<mixed>} $record
      * @return array{extra:array<mixed>}|LogRecord
      */
-    public function __invoke($record) // @phpstan-ignore-line
+    public function __invoke($record): array|LogRecord // @phpstan-ignore-line
     {
         if (\is_array($record)) {
             $record['extra'] = \array_merge($record['extra'], $this->extraFields);

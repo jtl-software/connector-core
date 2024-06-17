@@ -41,9 +41,9 @@ class CrossSellingGroupI18n extends AbstractI18n
     /**
      * @param string $description Optional localized description
      *
-     * @return CrossSellingGroupI18n
+     * @return $this
      */
-    public function setDescription(string $description): CrossSellingGroupI18n
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
@@ -61,9 +61,9 @@ class CrossSellingGroupI18n extends AbstractI18n
     /**
      * @param string $name Localized name
      *
-     * @return CrossSellingGroupI18n
+     * @return $this
      */
-    public function setName(string $name): CrossSellingGroupI18n
+    public function setName(string $name): self
     {
         $this->name = $name;
 

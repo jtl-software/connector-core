@@ -71,9 +71,9 @@ class FileUpload extends AbstractIdentity
     /**
      * @param Identity $productId Reference to product
      *
-     * @return FileUpload
+     * @return $this
      */
-    public function setProductId(Identity $productId): FileUpload
+    public function setProductId(Identity $productId): self
     {
         $this->productId = $productId;
 
@@ -91,9 +91,9 @@ class FileUpload extends AbstractIdentity
     /**
      * @param string $fileType
      *
-     * @return FileUpload
+     * @return $this
      */
-    public function setFileType(string $fileType): FileUpload
+    public function setFileType(string $fileType): self
     {
         $this->fileType = $fileType;
 
@@ -111,9 +111,9 @@ class FileUpload extends AbstractIdentity
     /**
      * @param boolean $isRequired
      *
-     * @return FileUpload
+     * @return $this
      */
-    public function setIsRequired(bool $isRequired): FileUpload
+    public function setIsRequired(bool $isRequired): self
     {
         $this->isRequired = $isRequired;
 
@@ -123,9 +123,9 @@ class FileUpload extends AbstractIdentity
     /**
      * @param FileUploadI18n $i18n
      *
-     * @return FileUpload
+     * @return $this
      */
-    public function addI18n(FileUploadI18n $i18n): FileUpload
+    public function addI18n(FileUploadI18n $i18n): self
     {
         $this->i18ns[] = $i18n;
 
@@ -143,9 +143,9 @@ class FileUpload extends AbstractIdentity
     /**
      * @param FileUploadI18n ...$i18ns
      *
-     * @return FileUpload
+     * @return $this
      */
-    public function setI18ns(FileUploadI18n ...$i18ns): FileUpload
+    public function setI18ns(FileUploadI18n ...$i18ns): self
     {
         $this->i18ns = $i18ns;
 
@@ -153,9 +153,9 @@ class FileUpload extends AbstractIdentity
     }
 
     /**
-     * @return FileUpload
+     * @return $this
      */
-    public function clearI18ns(): FileUpload
+    public function clearI18ns(): self
     {
         $this->i18ns = [];
 

@@ -174,9 +174,9 @@ class ConfigItem extends AbstractIdentity
     /**
      * @param Identity $configGroupId Reference to configGroup
      *
-     * @return ConfigItem
+     * @return $this
      */
-    public function setConfigGroupId(Identity $configGroupId): ConfigItem
+    public function setConfigGroupId(Identity $configGroupId): self
     {
         $this->configGroupId = $configGroupId;
 
@@ -194,9 +194,9 @@ class ConfigItem extends AbstractIdentity
     /**
      * @param Identity $productId Optional reference to product
      *
-     * @return ConfigItem
+     * @return $this
      */
-    public function setProductId(Identity $productId): ConfigItem
+    public function setProductId(Identity $productId): self
     {
         $this->productId = $productId;
 
@@ -217,9 +217,9 @@ class ConfigItem extends AbstractIdentity
      *                                  If true, quantity of config item will not be increased
      *                                  if product quantity is increased
      *
-     * @return ConfigItem
+     * @return $this
      */
-    public function setIgnoreMultiplier(int $ignoreMultiplier): ConfigItem
+    public function setIgnoreMultiplier(int $ignoreMultiplier): self
     {
         $this->ignoreMultiplier = $ignoreMultiplier;
 
@@ -241,9 +241,9 @@ class ConfigItem extends AbstractIdentity
      *                                    If true, configItem name will be received from referenced product and
      *                                    configItemI18n name will be ignored.
      *
-     * @return ConfigItem
+     * @return $this
      */
-    public function setInheritProductName(bool $inheritProductName): ConfigItem
+    public function setInheritProductName(bool $inheritProductName): self
     {
         $this->inheritProductName = $inheritProductName;
 
@@ -263,9 +263,9 @@ class ConfigItem extends AbstractIdentity
      * @param boolean $inheritProductPrice Optional: Inherit product price of referenced productId.
      *                                     If true, configItem price will be the same as referenced product price.
      *
-     * @return ConfigItem
+     * @return $this
      */
-    public function setInheritProductPrice(bool $inheritProductPrice): ConfigItem
+    public function setInheritProductPrice(bool $inheritProductPrice): self
     {
         $this->inheritProductPrice = $inheritProductPrice;
 
@@ -283,9 +283,9 @@ class ConfigItem extends AbstractIdentity
     /**
      * @param double $initialQuantity Optional initial / predefined quantity. Default is one (1) quantity piece.
      *
-     * @return ConfigItem
+     * @return $this
      */
-    public function setInitialQuantity(float $initialQuantity): ConfigItem
+    public function setInitialQuantity(float $initialQuantity): self
     {
         $this->initialQuantity = $initialQuantity;
 
@@ -304,9 +304,9 @@ class ConfigItem extends AbstractIdentity
      * @param boolean $isPreSelected     Optional: Preselect configItem.
      *                                   If true, configItem will be preselected or prechecked.
      *
-     * @return ConfigItem
+     * @return $this
      */
-    public function setIsPreSelected(bool $isPreSelected): ConfigItem
+    public function setIsPreSelected(bool $isPreSelected): self
     {
         $this->isPreSelected = $isPreSelected;
 
@@ -326,9 +326,9 @@ class ConfigItem extends AbstractIdentity
      * @param boolean $isRecommended Optional: Highlight or recommend config item.
      *                               If true, configItem will be recommended/highlighted.
      *
-     * @return ConfigItem
+     * @return $this
      */
-    public function setIsRecommended(bool $isRecommended): ConfigItem
+    public function setIsRecommended(bool $isRecommended): self
     {
         $this->isRecommended = $isRecommended;
 
@@ -346,9 +346,9 @@ class ConfigItem extends AbstractIdentity
     /**
      * @param double $maxQuantity Maximum allowed quantity. Default 0 for no maximum limit.
      *
-     * @return ConfigItem
+     * @return $this
      */
-    public function setMaxQuantity(float $maxQuantity): ConfigItem
+    public function setMaxQuantity(float $maxQuantity): self
     {
         $this->maxQuantity = $maxQuantity;
 
@@ -367,9 +367,9 @@ class ConfigItem extends AbstractIdentity
      * @param double $minQuantity Optional minimum quantity required to add configItem.
      *                            Default 0 for no minimum quantity.
      *
-     * @return ConfigItem
+     * @return $this
      */
-    public function setMinQuantity(float $minQuantity): ConfigItem
+    public function setMinQuantity(float $minQuantity): self
     {
         $this->minQuantity = $minQuantity;
 
@@ -389,9 +389,9 @@ class ConfigItem extends AbstractIdentity
      * @param boolean $showDiscount Optional: Show discount compared to productId price.
      *                              If true, the discount compared to referenct product price will be shown.
      *
-     * @return ConfigItem
+     * @return $this
      */
-    public function setShowDiscount(bool $showDiscount): ConfigItem
+    public function setShowDiscount(bool $showDiscount): self
     {
         $this->showDiscount = $showDiscount;
 
@@ -409,9 +409,9 @@ class ConfigItem extends AbstractIdentity
     /**
      * @param boolean $showSurcharge Optional: Show surcharge compared to productId price.
      *
-     * @return ConfigItem
+     * @return $this
      */
-    public function setShowSurcharge(bool $showSurcharge): ConfigItem
+    public function setShowSurcharge(bool $showSurcharge): self
     {
         $this->showSurcharge = $showSurcharge;
 
@@ -429,9 +429,9 @@ class ConfigItem extends AbstractIdentity
     /**
      * @param integer $sort Optional sort order number
      *
-     * @return ConfigItem
+     * @return $this
      */
-    public function setSort(int $sort): ConfigItem
+    public function setSort(int $sort): self
     {
         $this->sort = $sort;
 
@@ -449,9 +449,9 @@ class ConfigItem extends AbstractIdentity
     /**
      * @param integer $type Config item type. 0: Product, 1: Special
      *
-     * @return ConfigItem
+     * @return $this
      */
-    public function setType(int $type): ConfigItem
+    public function setType(int $type): self
     {
         $this->type = $type;
 
@@ -461,9 +461,9 @@ class ConfigItem extends AbstractIdentity
     /**
      * @param ConfigItemI18n $i18n
      *
-     * @return ConfigItem
+     * @return $this
      */
-    public function addI18n(ConfigItemI18n $i18n): ConfigItem
+    public function addI18n(ConfigItemI18n $i18n): self
     {
         $this->i18ns[] = $i18n;
 
@@ -481,9 +481,9 @@ class ConfigItem extends AbstractIdentity
     /**
      * @param ConfigItemI18n ...$i18ns
      *
-     * @return ConfigItem
+     * @return $this
      */
-    public function setI18ns(ConfigItemI18n ...$i18ns): ConfigItem
+    public function setI18ns(ConfigItemI18n ...$i18ns): self
     {
         $this->i18ns = $i18ns;
 
@@ -491,9 +491,9 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
-     * @return ConfigItem
+     * @return $this
      */
-    public function clearI18ns(): ConfigItem
+    public function clearI18ns(): self
     {
         $this->i18ns = [];
 
@@ -503,9 +503,9 @@ class ConfigItem extends AbstractIdentity
     /**
      * @param ConfigItemPrice $price
      *
-     * @return ConfigItem
+     * @return $this
      */
-    public function addPrice(ConfigItemPrice $price): ConfigItem
+    public function addPrice(ConfigItemPrice $price): self
     {
         $this->prices[] = $price;
 
@@ -523,9 +523,9 @@ class ConfigItem extends AbstractIdentity
     /**
      * @param ConfigItemPrice ...$prices
      *
-     * @return ConfigItem
+     * @return $this
      */
-    public function setPrices(ConfigItemPrice ...$prices): ConfigItem
+    public function setPrices(ConfigItemPrice ...$prices): self
     {
         $this->prices = $prices;
 
@@ -533,9 +533,9 @@ class ConfigItem extends AbstractIdentity
     }
 
     /**
-     * @return ConfigItem
+     * @return $this
      */
-    public function clearPrices(): ConfigItem
+    public function clearPrices(): self
     {
         $this->prices = [];
 

@@ -8,6 +8,7 @@ use Exception;
 use Jtl\Connector\Core\Database\Sqlite3;
 use Jtl\Connector\Core\Exception\DatabaseException;
 use Jtl\Connector\Core\Exception\SessionException;
+use Psr\Log\InvalidArgumentException;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -93,9 +94,11 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      * @param string $sessionName
      *
      * @return bool
+     * @throws InvalidArgumentException
+     * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
     #[ReturnTypeWillChange]
-    public function open($savePath, $sessionName): bool
+    public function open(string $savePath, string $sessionName): bool
     {
         $this->logger->debug(
             'Open session with save path ({path}) and session name ({name})',
@@ -107,6 +110,9 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
 
     /**
      * Close Sesssion
+     *
+     * @return bool
+     * @throws InvalidArgumentException
      */
     public function close(): bool
     {
@@ -122,9 +128,10 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      *
      * @return false|string
      * @throws Throwable
+     * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
     #[ReturnTypeWillChange]
-    public function read($sessionId)
+    public function read(string $sessionId): bool|string
     {
         $sessionId = $this->db->escapeString($sessionId);
         $this->logger->debug('Read session with id ({id})', ['id' => $sessionId]);
@@ -160,11 +167,13 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      * @param string $sessionData
      *
      * @return bool
-     * @throws RuntimeException
      * @throws DatabaseException
+     * @throws RuntimeException
+     * @throws InvalidArgumentException
+     * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
     #[ReturnTypeWillChange]
-    public function write($sessionId, $sessionData): bool
+    public function write(string $sessionId, string $sessionData): bool
     {
         try {
             if ($this->db->checkConnection() === false) {
@@ -238,8 +247,9 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      *
      * @return bool
      * @throws Throwable
+     * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
-    public function destroy($sessionId): bool
+    public function destroy(string $sessionId): bool
     {
         $sessionId = $this->db->escapeString($sessionId);
         $this->logger->debug('Destroy session with id ({id})', ['id' => $sessionId]);
@@ -253,9 +263,10 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      *
      * @return bool
      * @throws Throwable
+     * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
     #[ReturnTypeWillChange]
-    public function gc($maxLifetime): bool
+    public function gc(int $maxLifetime): bool
     {
         $this->logger->debug(
             'Garbage collection for session with maximum lifetime ({maxLifetime})',
@@ -273,8 +284,9 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      *
      * @return boolean
      * @throws Throwable
+     * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
-    public function validateId($sessionId): bool
+    public function validateId(string $sessionId): bool
     {
         $sessionId = $this->db->escapeString($sessionId);
         $this->logger->debug(
@@ -282,6 +294,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
             ['id' => $sessionId, 'time' => \time()]
         );
         $rows = $this->db->query($this->createReadQuery($sessionId, \time()));
+
         return $rows !== null
                && isset($rows[0]['sessionId'])
                && \is_string($rows[0]['sessionId'])
@@ -294,8 +307,9 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      *
      * @return bool
      * @throws RuntimeException
+     * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
-    public function updateTimestamp($sessionId, $sessionData): bool
+    public function updateTimestamp(string $sessionId, string $sessionData): bool
     {
         $sql  = 'UPDATE session SET sessionExpires = :sessionExpires WHERE sessionId = :sessionId';
         $stmt = $this->db->prepare($sql);

@@ -26,11 +26,7 @@ class ConfigParameter
     protected string       $type;
     protected bool         $required = true;
     protected bool         $global   = false;
-
-    /**
-     * @var mixed
-     */
-    protected $defaultValue;
+    protected mixed        $defaultValue;
 
     /**
      * ConfigParameter constructor.
@@ -61,13 +57,13 @@ class ConfigParameter
     }
 
     /**
-     * @param string $key
-     * @param string $type
-     * @param bool   $required
-     * @param bool   $global
-     * @param ?mixed $defaultValue
+     * @param string     $key
+     * @param string     $type
+     * @param bool       $required
+     * @param bool       $global
+     * @param mixed|null $defaultValue
      *
-     * @return ConfigParameter
+     * @return self
      * @throws ConfigException
      */
     public static function create(
@@ -75,8 +71,8 @@ class ConfigParameter
         string $type = self::TYPE_STRING,
         bool   $required = true,
         bool   $global = false,
-        $defaultValue = null
-    ): ConfigParameter {
+        mixed  $defaultValue = null
+    ): self {
         return (new self($key, $type, $required, $global))->setDefaultValue($defaultValue);
     }
 
@@ -94,7 +90,7 @@ class ConfigParameter
      * @return $this
      * @throws ConfigException
      */
-    protected function setKey(string $key): ConfigParameter
+    protected function setKey(string $key): self
     {
         if (empty($key)) {
             throw ConfigException::keyIsEmpty();
@@ -119,7 +115,7 @@ class ConfigParameter
      * @return $this
      * @throws ConfigException
      */
-    protected function setType(string $type): ConfigParameter
+    protected function setType(string $type): self
     {
         if (!self::isType($type)) {
             throw ConfigException::unknownType($type);
@@ -150,13 +146,13 @@ class ConfigParameter
      */
     public function hasDefaultValue(): bool
     {
-        return !\is_null($this->defaultValue);
+        return isset($this->defaultValue);
     }
 
     /**
      * @return mixed
      */
-    public function getDefaultValue()
+    public function getDefaultValue(): mixed
     {
         return $this->defaultValue;
     }
@@ -167,7 +163,7 @@ class ConfigParameter
      * @return $this
      * @throws ConfigException
      */
-    public function setDefaultValue($defaultValue): ConfigParameter
+    public function setDefaultValue(mixed $defaultValue): self
     {
         if (!\is_null($defaultValue) && !$this->isValidValue($defaultValue)) {
             throw ConfigException::wrongType($this->getType(), \gettype($defaultValue));
@@ -182,7 +178,7 @@ class ConfigParameter
      *
      * @return boolean
      */
-    public function isValidValue($value): bool
+    public function isValidValue(mixed $value): bool
     {
         return \gettype($value) === $this->getType();
     }

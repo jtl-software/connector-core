@@ -17,7 +17,7 @@ abstract class AbstractModel
     /**
      * @param string $identificationString
      *
-     * @return AbstractModel
+     * @return $this
      */
     public function setIdentificationString(string $identificationString): self
     {
@@ -44,7 +44,7 @@ abstract class AbstractModel
     /**
      * @param string $identificationString
      *
-     * @return AbstractModel
+     * @return $this
      */
     public function unsetIdentificationString(string $identificationString): self
     {
@@ -59,7 +59,7 @@ abstract class AbstractModel
     /**
      * @param string $subject
      *
-     * @return AbstractModel
+     * @return $this
      */
     public function unsetIdentificationStringBySubject(string $subject): self
     {
@@ -79,7 +79,7 @@ abstract class AbstractModel
     /**
      * @param string ...$identificationStrings
      *
-     * @return AbstractModel
+     * @return $this
      */
     public function setIdentificationStrings(string ...$identificationStrings): self
     {

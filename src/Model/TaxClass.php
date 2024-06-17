@@ -44,9 +44,9 @@ class TaxClass extends AbstractIdentity
      * @param boolean $isDefault Optional:
      *                           Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default.
      *
-     * @return TaxClass
+     * @return $this
      */
-    public function setIsDefault(bool $isDefault): TaxClass
+    public function setIsDefault(bool $isDefault): self
     {
         $this->isDefault = $isDefault;
 
@@ -64,9 +64,9 @@ class TaxClass extends AbstractIdentity
     /**
      * @param string $name Optional tax class name
      *
-     * @return TaxClass
+     * @return $this
      */
-    public function setName(string $name): TaxClass
+    public function setName(string $name): self
     {
         $this->name = $name;
 

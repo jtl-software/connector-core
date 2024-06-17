@@ -41,9 +41,9 @@ class TaxRate extends AbstractIdentity
     /**
      * @param double $rate
      *
-     * @return TaxRate
+     * @return $this
      */
-    public function setRate(float $rate): TaxRate
+    public function setRate(float $rate): self
     {
         $this->rate = $rate;
 
@@ -61,7 +61,7 @@ class TaxRate extends AbstractIdentity
     /**
      * @param string $countryIso
      *
-     * @return TaxRate
+     * @return $this
      */
     public function setCountryIso(string $countryIso): self
     {

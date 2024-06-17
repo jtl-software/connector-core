@@ -48,9 +48,9 @@ class EndpointColumn
     /**
      * @param Column $column
      * @param bool $primary
-     * @return EndpointColumn
+     * @return self
      */
-    public static function create(Column $column, bool $primary = true): EndpointColumn
+    public static function create(Column $column, bool $primary = true): self
     {
         return new self($column, $primary);
     }

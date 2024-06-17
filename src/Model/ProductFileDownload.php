@@ -81,9 +81,9 @@ class ProductFileDownload extends AbstractModel
     /**
      * @param \DateTimeInterface $creationDate
      *
-     * @return ProductFileDownload
+     * @return $this
      */
-    public function setCreationDate(\DateTimeInterface $creationDate = null): ProductFileDownload
+    public function setCreationDate(\DateTimeInterface $creationDate = null): self
     {
         $this->creationDate = $creationDate;
 
@@ -101,9 +101,9 @@ class ProductFileDownload extends AbstractModel
     /**
      * @param integer $maxDays
      *
-     * @return ProductFileDownload
+     * @return $this
      */
-    public function setMaxDays(int $maxDays): ProductFileDownload
+    public function setMaxDays(int $maxDays): self
     {
         $this->maxDays = $maxDays;
 
@@ -121,9 +121,9 @@ class ProductFileDownload extends AbstractModel
     /**
      * @param integer $maxDownloads
      *
-     * @return ProductFileDownload
+     * @return $this
      */
-    public function setMaxDownloads(int $maxDownloads): ProductFileDownload
+    public function setMaxDownloads(int $maxDownloads): self
     {
         $this->maxDownloads = $maxDownloads;
 
@@ -141,9 +141,9 @@ class ProductFileDownload extends AbstractModel
     /**
      * @param string $path
      *
-     * @return ProductFileDownload
+     * @return $this
      */
-    public function setPath(string $path): ProductFileDownload
+    public function setPath(string $path): self
     {
         $this->path = $path;
 
@@ -161,9 +161,9 @@ class ProductFileDownload extends AbstractModel
     /**
      * @param string $previewPath
      *
-     * @return ProductFileDownload
+     * @return $this
      */
-    public function setPreviewPath(string $previewPath): ProductFileDownload
+    public function setPreviewPath(string $previewPath): self
     {
         $this->previewPath = $previewPath;
 
@@ -181,9 +181,9 @@ class ProductFileDownload extends AbstractModel
     /**
      * @param integer $sort
      *
-     * @return ProductFileDownload
+     * @return $this
      */
-    public function setSort(int $sort): ProductFileDownload
+    public function setSort(int $sort): self
     {
         $this->sort = $sort;
 
@@ -193,9 +193,9 @@ class ProductFileDownload extends AbstractModel
     /**
      * @param ProductFileDownloadI18n $i18n
      *
-     * @return ProductFileDownload
+     * @return $this
      */
-    public function addI18n(ProductFileDownloadI18n $i18n): ProductFileDownload
+    public function addI18n(ProductFileDownloadI18n $i18n): self
     {
         $this->i18ns[] = $i18n;
 
@@ -213,9 +213,9 @@ class ProductFileDownload extends AbstractModel
     /**
      * @param ProductFileDownloadI18n ...$i18ns
      *
-     * @return ProductFileDownload
+     * @return $this
      */
-    public function setI18ns(ProductFileDownloadI18n ...$i18ns): ProductFileDownload
+    public function setI18ns(ProductFileDownloadI18n ...$i18ns): self
     {
         $this->i18ns = $i18ns;
 
@@ -223,9 +223,9 @@ class ProductFileDownload extends AbstractModel
     }
 
     /**
-     * @return ProductFileDownload
+     * @return $this
      */
-    public function clearI18ns(): ProductFileDownload
+    public function clearI18ns(): self
     {
         $this->i18ns = [];
 

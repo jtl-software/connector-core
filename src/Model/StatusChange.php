@@ -59,7 +59,7 @@ class StatusChange extends AbstractModel
     /**
      * @param Identity $customerOrderId
      *
-     * @return StatusChange
+     * @return $this
      */
     public function setCustomerOrderId(Identity $customerOrderId): self
     {
@@ -79,7 +79,7 @@ class StatusChange extends AbstractModel
     /**
      * @param string $orderStatus
      *
-     * @return StatusChange
+     * @return $this
      */
     public function setOrderStatus(string $orderStatus): self
     {
@@ -99,7 +99,7 @@ class StatusChange extends AbstractModel
     /**
      * @param string $paymentStatus
      *
-     * @return StatusChange
+     * @return $this
      */
     public function setPaymentStatus(string $paymentStatus): self
     {

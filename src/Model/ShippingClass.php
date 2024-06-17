@@ -35,9 +35,9 @@ class ShippingClass extends AbstractIdentity
     /**
      * @param string $name Optional (internal) Shipping class name
      *
-     * @return ShippingClass
+     * @return $this
      */
-    public function setName(string $name): ShippingClass
+    public function setName(string $name): self
     {
         $this->name = $name;
 

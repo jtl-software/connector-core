@@ -43,9 +43,8 @@ class LoggerService
 
     protected FormatterInterface $formatter;
     protected string             $logDir;
-    /** @var int|string|LogLevel  */
-    protected $logLevel;
-    protected int                $maxFiles = 2;
+    protected string|int|LogLevel $logLevel;
+    protected int                 $maxFiles = 2;
     /* Final handler that is wrapped by FilterHandler */
     protected HandlerInterface   $handler;
     /* Handler that writes to combined log file */
@@ -55,15 +54,15 @@ class LoggerService
     /**
      * LoggerFactory constructor.
      *
-     * @param string $logDir
+     * @param string     $logDir
      * @param int|string $logLevel
-     * @param int    $maxFiles
+     * @param int        $maxFiles
      *
      * @throws InvalidArgumentException
      * @throws RuntimeException
-     * @throws UnexpectedValueException
+     * @throws UnexpectedValueException|\InvalidArgumentException
      */
-    public function __construct(string $logDir, $logLevel, int $maxFiles = 2)
+    public function __construct(string $logDir, int|string $logLevel, int $maxFiles = 2)
     {
         $this->logDir   = $logDir;
         $this->logLevel = $logLevel;
@@ -80,9 +79,12 @@ class LoggerService
     }
 
     /**
-     * @return LoggerService
+     * @return $this
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
+     * @throws UnexpectedValueException
      */
-    public function useChunkedHandler(): LoggerService
+    public function useChunkedHandler(): self
     {
         $this->useChunkedHandler = true;
         if (!$this->combinedHandler instanceof ChunkedHandler) {
@@ -94,12 +96,13 @@ class LoggerService
 
     /**
      * @param int|string $logLevel
+     *
      * @return void
      * @throws InvalidArgumentException
      * @throws RuntimeException
      * @throws UnexpectedValueException
      */
-    public function setLogLevel($logLevel): void
+    public function setLogLevel(int|string $logLevel): void
     {
         $this->logLevel = $logLevel;
         $this->createHandler();
@@ -135,7 +138,7 @@ class LoggerService
     /**
      * @param ProcessorInterface $processor
      *
-     * @return LoggerService
+     * @return $this
      */
     public function pushProcessor(ProcessorInterface $processor): self
     {
@@ -155,12 +158,13 @@ class LoggerService
     /**
      * creates legacy handler for each channel
      *
-     * @param string     $channel
-     * @param int|string|\Monolog\Level $logLevel
-     * @phpstan-param mixed $logLevel
+     * @param string           $channel
+     * @param int|string|Level $logLevel
      *
      * @return HandlerInterface
      * @throws InvalidArgumentException
+     * @throws UnexpectedValueException
+     * @throws \InvalidArgumentException
      */
     protected function createChannelSpecificHandler(string $channel, $logLevel): HandlerInterface
     {
@@ -185,6 +189,9 @@ class LoggerService
      *
      * @return MonoLogger
      * @throws InvalidArgumentException
+     * @throws UnexpectedValueException
+     * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public function get(string $channel): MonoLogger
     {
@@ -219,7 +226,7 @@ class LoggerService
     /**
      * @param FormatterInterface $formatter
      *
-     * @return LoggerService
+     * @return $this
      */
     public function setFormatter(FormatterInterface $formatter): self
     {
@@ -249,7 +256,7 @@ class LoggerService
      * @param string               $format
      * @param array{}|array<mixed> $arguments
      *
-     * @return LoggerService
+     * @return $this
      * @throws LoggerException
      * @throws RuntimeException
      * @throws ReflectionException

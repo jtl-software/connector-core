@@ -32,7 +32,7 @@ class TableDummy implements TableInterface
     /**
      * @param string $endpoint
      *
-     * @return integer
+     * @return int|null
      */
     public function getHostId(string $endpoint): ?int
     {
@@ -43,7 +43,7 @@ class TableDummy implements TableInterface
      * @param integer      $hostId
      * @param integer|null $type
      *
-     * @return string
+     * @return string|null
      */
     public function getEndpoint(int $hostId, int $type = null): ?string
     {

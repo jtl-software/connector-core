@@ -54,9 +54,9 @@ class ProductVariationValueExtraCharge extends AbstractModel
     /**
      * @param Identity $customerGroupId Reference to customerGroup
      *
-     * @return ProductVariationValueExtraCharge
+     * @return $this
      */
-    public function setCustomerGroupId(Identity $customerGroupId): ProductVariationValueExtraCharge
+    public function setCustomerGroupId(Identity $customerGroupId): self
     {
         $this->customerGroupId = $customerGroupId;
 
@@ -74,9 +74,9 @@ class ProductVariationValueExtraCharge extends AbstractModel
     /**
      * @param double $extraChargeNet Extra charge (net)
      *
-     * @return ProductVariationValueExtraCharge
+     * @return $this
      */
-    public function setExtraChargeNet(float $extraChargeNet): ProductVariationValueExtraCharge
+    public function setExtraChargeNet(float $extraChargeNet): self
     {
         $this->extraChargeNet = $extraChargeNet;
 

@@ -17,6 +17,7 @@ use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
 use Jtl\Connector\Core\Config\ArrayConfig;
 use Jtl\Connector\Core\Config\ConfigParameter;
 use Jtl\Connector\Core\Config\ConfigSchema;
+use Jtl\Connector\Core\Config\CoreConfigInterface;
 use Jtl\Connector\Core\Connector\ConnectorInterface;
 use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Controller;
@@ -53,7 +54,6 @@ use Jtl\Connector\Core\Test\Stub\Controller\TransactionalControllerStub;
 use Jtl\Connector\Core\Test\TestCase;
 use Jtl\Connector\Core\Utilities\Str;
 use MyPlugin\Bootstrap;
-use Noodlehaus\ConfigInterface;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\InvalidArgumentException;
@@ -111,24 +111,20 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @param ConfigSchema|null    $configSchema
-     * @param string|null          $connectorDir
-     * @param ConfigInterface|null $config
+     * @param ConfigSchema|null        $configSchema
+     * @param string|null              $connectorDir
+     * @param CoreConfigInterface|null $config
      *
      * @return Application
      * @throws ApplicationException
      * @throws ConfigException
      * @throws LoggerException
      * @throws ReflectionException
-     * @throws RuntimeException
-     * @throws TypeError
-     * @throws \JMS\Serializer\Exception\InvalidArgumentException
-     * @throws \Psr\Log\InvalidArgumentException
      */
     protected function createInitializedApplication(
-        ?ConfigSchema    $configSchema = null,
-        ?string          $connectorDir = null,
-        ?ConfigInterface $config = null
+        ?ConfigSchema        $configSchema = null,
+        ?string              $connectorDir = null,
+        ?CoreConfigInterface $config = null
     ): Application {
         $sessionHandler = $this->createMock(SessionHandlerInterface::class);
         if (\is_null($configSchema)) {
@@ -155,24 +151,20 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @param ConfigSchema|null    $configSchema
-     * @param string|null          $connectorDir
-     * @param ConfigInterface|null $config
+     * @param ConfigSchema|null        $configSchema
+     * @param string|null              $connectorDir
+     * @param CoreConfigInterface|null $config
      *
      * @return Application
      * @throws ApplicationException
      * @throws ConfigException
      * @throws LoggerException
      * @throws ReflectionException
-     * @throws TypeError
-     * @throws \JMS\Serializer\Exception\InvalidArgumentException
-     * @throws RuntimeException
-     * @throws \Psr\Log\InvalidArgumentException
      */
     protected function createApplication(
-        ?ConfigSchema    $configSchema = null,
-        ?string          $connectorDir = null,
-        ?ConfigInterface $config = null
+        ?ConfigSchema        $configSchema = null,
+        ?string              $connectorDir = null,
+        ?CoreConfigInterface $config       = null
     ): Application {
         if (\is_null($configSchema)) {
             $configSchema = new ConfigSchema();
@@ -440,12 +432,12 @@ class ApplicationTest extends TestCase
         $application = $this->createApplication(null, null, $config);
         $container   = $application->getContainer();
 
-        $this->assertFalse($container->has(ConfigInterface::class));
+        $this->assertFalse($container->has(CoreConfigInterface::class));
         $this->assertFalse($container->has(TokenValidatorInterface::class));
         $this->assertFalse($container->has(PrimaryKeyMapperInterface::class));
         $this->assertFalse($container->has(SessionHandlerInterface::class));
         $this->invokeMethodFromObject($application, 'prepareContainer', $connector);
-        $this->assertEquals($container->get(ConfigInterface::class), $config);
+        $this->assertEquals($container->get(CoreConfigInterface::class), $config);
         $this->assertEquals($container->get(TokenValidatorInterface::class), $connector->getTokenValidator());
         $this->assertEquals($container->get(PrimaryKeyMapperInterface::class), $connector->getPrimaryKeyMapper());
         $this->assertEquals($container->get(SessionHandlerInterface::class), $application->getSessionHandler());
@@ -541,7 +533,7 @@ class ApplicationTest extends TestCase
      */
     public function testLoadPlugins(): void
     {
-        $config          = $this->createMock(ConfigInterface::class);
+        $config          = $this->createMock(CoreConfigInterface::class);
         $container       = $this->createMock(Container::class);
         $eventDispatcher = $this->createMock(EventDispatcher::class);
         $app             = $this->getMockBuilder(Application::class)->disableOriginalConstructor()->getMock();

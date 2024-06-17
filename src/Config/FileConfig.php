@@ -9,13 +9,7 @@ use Noodlehaus\Config;
 use Noodlehaus\Parser\Json;
 use RuntimeException;
 
-/**
- * Config Class
- *
- * @access public
- * @author Daniel Böhmer <daniel.boehmer@jtl-software.com>
- */
-class FileConfig extends Config implements CoreConfigInterface
+class FileConfig extends Config implements CoreConfigInterface, ConfigSchemaConfigInterface
 {
     protected string $filePath = '';
 
@@ -91,14 +85,14 @@ class FileConfig extends Config implements CoreConfigInterface
     }
 
     /**
-     * @param string $valueName
-     * @param scalar|null $default
-     * @phpstan-param mixed $default
+     * @param string        $valueName
+     * @param mixed   $default
      *
      * @return bool
      * @throws ConfigException
+     * @throws \TypeError
      */
-    private function check(string $valueName, $default): bool
+    private function check(string $valueName, mixed $default): bool
     {
         if (!\is_scalar($default) && !\is_null($default)) {
             self::throwTypeError(

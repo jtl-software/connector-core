@@ -66,9 +66,9 @@ class QueryFilter
      *
      * @param integer $limit
      *
-     * @return QueryFilter
+     * @return $this
      */
-    public function setLimit(int $limit): QueryFilter
+    public function setLimit(int $limit): self
     {
         $this->limit = $limit;
 
@@ -90,10 +90,10 @@ class QueryFilter
      *
      * @param array<string, mixed> $filters
      *
-     * @return QueryFilter
+     * @return $this
      * @throws InvalidArgumentException
      */
-    public function setFilters(array $filters): QueryFilter
+    public function setFilters(array $filters): self
     {
         foreach ($filters as $index => $filter) {
             if (\is_scalar($filter)) {
@@ -114,9 +114,9 @@ class QueryFilter
      * @param string $key   Filter key
      * @param string $value Filter value
      *
-     * @return QueryFilter
+     * @return $this
      */
-    public function addFilter(string $key, string $value): QueryFilter
+    public function addFilter(string $key, string $value): self
     {
         $this->filters[$key] = $value;
 
@@ -154,9 +154,9 @@ class QueryFilter
     /**
      * @param string $key
      *
-     * @return mixed|NULL
+     * @return mixed
      */
-    public function getFilter(string $key)
+    public function getFilter(string $key): mixed
     {
         if ($this->isFilter($key)) {
             return $this->filters[$key];
@@ -174,14 +174,14 @@ class QueryFilter
     }
 
     /**
-     * @param string $oldKey
-     * @param string $newKey
-     * @param mixed  $value
+     * @param string     $oldKey
+     * @param string     $newKey
+     * @param mixed|null $value
      *
      * @return boolean
      * @throws InvalidArgumentException
      */
-    public function overrideFilter(string $oldKey, string $newKey, $value = null): bool
+    public function overrideFilter(string $oldKey, string $newKey, mixed $value = null): bool
     {
         if ($this->isFilter($oldKey)) {
             if ($value === null) {

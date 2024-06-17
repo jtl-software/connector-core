@@ -53,9 +53,9 @@ class FeatureEntity
     /**
      * @param string $name
      *
-     * @return FeatureEntity
+     * @return $this
      */
-    public function setName(string $name): FeatureEntity
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -65,9 +65,9 @@ class FeatureEntity
     /**
      * @param bool $pull
      *
-     * @return FeatureEntity
+     * @return $this
      */
-    public function setPull(bool $pull): FeatureEntity
+    public function setPull(bool $pull): self
     {
         $this->pull = $pull;
 
@@ -77,9 +77,9 @@ class FeatureEntity
     /**
      * @param bool $push
      *
-     * @return FeatureEntity
+     * @return $this
      */
-    public function setPush(bool $push): FeatureEntity
+    public function setPush(bool $push): self
     {
         $this->push = $push;
 
@@ -89,9 +89,9 @@ class FeatureEntity
     /**
      * @param bool $delete
      *
-     * @return FeatureEntity
+     * @return $this
      */
-    public function setDelete(bool $delete): FeatureEntity
+    public function setDelete(bool $delete): self
     {
         $this->delete = $delete;
 

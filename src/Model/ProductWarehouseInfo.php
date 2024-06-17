@@ -62,9 +62,9 @@ class ProductWarehouseInfo extends AbstractModel
     /**
      * @param Identity $warehouseId
      *
-     * @return ProductWarehouseInfo
+     * @return $this
      */
-    public function setWarehouseId(Identity $warehouseId): ProductWarehouseInfo
+    public function setWarehouseId(Identity $warehouseId): self
     {
         $this->warehouseId = $warehouseId;
 
@@ -82,9 +82,9 @@ class ProductWarehouseInfo extends AbstractModel
     /**
      * @param double $inflowQuantity Optional product inflow quantity for specified warehouse
      *
-     * @return ProductWarehouseInfo
+     * @return $this
      */
-    public function setInflowQuantity(float $inflowQuantity): ProductWarehouseInfo
+    public function setInflowQuantity(float $inflowQuantity): self
     {
         $this->inflowQuantity = $inflowQuantity;
 
@@ -102,9 +102,9 @@ class ProductWarehouseInfo extends AbstractModel
     /**
      * @param double $stockLevel
      *
-     * @return ProductWarehouseInfo
+     * @return $this
      */
-    public function setStockLevel(float $stockLevel): ProductWarehouseInfo
+    public function setStockLevel(float $stockLevel): self
     {
         $this->stockLevel = $stockLevel;
 

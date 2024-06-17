@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Dbc\Console\Command;
 
-use Drieschel\Oauth2\Server\Database\TableFactory;
-use Jtl\Connector\Dbc\DbManager;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -39,10 +37,10 @@ class UpdateDatabaseSchemaCommand extends AbstractDbManagerCommand
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
-     * @return int|void
+     * @return int
      * @throws \Throwable
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $force = $input->getOption(self::OPTION_FORCE) !== false;
         if ($this->dbManager->hasSchemaUpdates()) {

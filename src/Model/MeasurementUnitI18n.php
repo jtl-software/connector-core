@@ -35,9 +35,9 @@ class MeasurementUnitI18n extends AbstractI18n
     /**
      * @param string $name Localized Name
      *
-     * @return MeasurementUnitI18n
+     * @return $this
      */
-    public function setName(string $name): MeasurementUnitI18n
+    public function setName(string $name): self
     {
         $this->name = $name;
 

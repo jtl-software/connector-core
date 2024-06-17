@@ -67,7 +67,7 @@ class Manufacturer extends AbstractIdentity
     /**
      * @param string $name Manufacturer (brand) name
      *
-     * @return Manufacturer
+     * @return $this
      */
     public function setName(string $name): self
     {
@@ -88,7 +88,7 @@ class Manufacturer extends AbstractIdentity
     /**
      * @param integer $sort Optional sort number
      *
-     * @return Manufacturer
+     * @return $this
      */
     public function setSort(int $sort): self
     {
@@ -108,7 +108,7 @@ class Manufacturer extends AbstractIdentity
     /**
      * @param string $urlPath Optional url path e.g. 'Products-manufactured-by-X'
      *
-     * @return Manufacturer
+     * @return $this
      */
     public function setUrlPath(string $urlPath): self
     {
@@ -128,7 +128,7 @@ class Manufacturer extends AbstractIdentity
     /**
      * @param string $websiteUrl Optional manufacturer website URL
      *
-     * @return Manufacturer
+     * @return $this
      */
     public function setWebsiteUrl(string $websiteUrl): self
     {
@@ -160,7 +160,7 @@ class Manufacturer extends AbstractIdentity
     /**
      * @param ManufacturerI18n ...$i18ns
      *
-     * @return Manufacturer
+     * @return $this
      */
     public function setI18ns(ManufacturerI18n ...$i18ns): self
     {
@@ -170,7 +170,7 @@ class Manufacturer extends AbstractIdentity
     }
 
     /**
-     * @return Manufacturer
+     * @return $this
      */
     public function clearI18ns(): self
     {

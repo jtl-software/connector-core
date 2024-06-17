@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model\Generator;
 
+use DateTimeInterface;
+use Doctrine\Common\Annotations\AnnotationException;
 use Faker\Factory;
 use Faker\Generator;
 use JMS\Serializer\Exception\InvalidArgumentException;
@@ -36,6 +38,8 @@ abstract class AbstractModelFactory
      * @param Serializer|null $serializer
      *
      * @throws InvalidArgumentException
+     * @throws AnnotationException
+     * @throws \InvalidArgumentException
      * @throws \JMS\Serializer\Exception\RuntimeException
      */
     public function __construct(string $defaultLocale = 'de_DE', Generator $faker = null, Serializer $serializer = null)
@@ -184,7 +188,7 @@ abstract class AbstractModelFactory
      * @return mixed
      * @throws \Exception
      */
-    public function makeIdentity(int $identityType)
+    public function makeIdentity(int $identityType): mixed
     {
         return $this->serializer->fromArray($this->makeIdentityArray($identityType), Identity::class);
     }
@@ -287,6 +291,6 @@ abstract class AbstractModelFactory
      */
     protected function dateBetween(string $from, string $to = 'now'): string
     {
-        return $this->faker->dateTimeBetween($from, $to)->format(\DateTime::ATOM);
+        return $this->faker->dateTimeBetween($from, $to)->format(DateTimeInterface::ATOM);
     }
 }
