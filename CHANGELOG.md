@@ -1,6 +1,7 @@
 unreleased
 -----
 - CO-2544 prevent zip bomb upload during image push
+- CO-2601 add missing factories
 
 5.2.12
 -----
