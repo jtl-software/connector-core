@@ -287,11 +287,11 @@ class ProductVariationValue extends AbstractIdentity
     }
 
     /**
-     * @param ProductVariationValueInvisibility[] $invisibilities
+     * @param ProductVariationValueInvisibility ...$invisibilities
      *
      * @return $this
      */
-    public function setInvisibilities(array $invisibilities): self
+    public function setInvisibilities(ProductVariationValueInvisibility ...$invisibilities): self
     {
         $this->invisibilities = $invisibilities;
 
