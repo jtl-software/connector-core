@@ -28,4 +28,24 @@ interface CoreConfigInterface extends ConfigInterface
      * @throws \TypeError
      */
     public function getString(string $valueName, ?string $default = null): string;
+
+    /**
+     * @param string   $valueName
+     * @param int|null $default
+     *
+     * @return int
+     * @throws ConfigException
+     * @throws \TypeError
+     */
+    public function getInt(string $valueName, ?int $default = null): int;
+
+    /**
+     * @param string     $valueName
+     * @param float|null $default
+     *
+     * @return float
+     * @throws ConfigException
+     * @throws \TypeError
+     */
+    public function getFloat(string $valueName, ?float $default = null): float;
 }

@@ -33,4 +33,30 @@ class ArrayConfig extends AbstractConfig implements CoreConfigInterface
 
         return $value;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getInt(string $valueName, ?int $default = null): int
+    {
+        $value = $this->get($valueName, $default);
+        if (!\is_int($value)) {
+            throw new \TypeError(\sprintf('Value for key "%s" must be of type int', $valueName));
+        }
+
+        return $value;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getFloat(string $valueName, ?float $default = null): float
+    {
+        $value = $this->get($valueName, $default);
+        if (!\is_float($value)) {
+            throw new \TypeError(\sprintf('Value for key "%s" must be of type float', $valueName));
+        }
+
+        return $value;
+    }
 }
