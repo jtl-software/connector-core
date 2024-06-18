@@ -6,8 +6,8 @@ namespace Jtl\Connector\Core\Config;
 
 use Jtl\Connector\Core\Exception\ConfigException;
 use Noodlehaus\Config;
+use Noodlehaus\Exception\EmptyDirectoryException;
 use Noodlehaus\Parser\Json;
-use RuntimeException;
 
 class FileConfig extends Config implements CoreConfigInterface, ConfigSchemaConfigInterface
 {
@@ -20,6 +20,8 @@ class FileConfig extends Config implements CoreConfigInterface, ConfigSchemaConf
      *
      * @param string            $filePath
      * @param ConfigSchema|null $configSchema
+     *
+     * @throws EmptyDirectoryException
      */
     public function __construct(string $filePath, ?ConfigSchema $configSchema = null)
     {
@@ -85,8 +87,8 @@ class FileConfig extends Config implements CoreConfigInterface, ConfigSchemaConf
     }
 
     /**
-     * @param string        $valueName
-     * @param mixed   $default
+     * @param string $valueName
+     * @param mixed  $default
      *
      * @return bool
      * @throws ConfigException
@@ -101,6 +103,7 @@ class FileConfig extends Config implements CoreConfigInterface, ConfigSchemaConf
             );
         }
         $value = $this->get($valueName, $default);
+
         return $this->configSchema->getParameter($valueName)->isValidValue($value);
     }
 
@@ -118,7 +121,7 @@ class FileConfig extends Config implements CoreConfigInterface, ConfigSchemaConf
 
     /**
      * @inheritDoc
-     * @throws RuntimeException
+     * @throws \RuntimeException
      */
     public function getString(string $valueName, ?string $default = null): string
     {
@@ -130,5 +133,38 @@ class FileConfig extends Config implements CoreConfigInterface, ConfigSchemaConf
         }
 
         return (string)$returnStr;
+    }
+
+    /**
+     * @inheritDoc
+     * @throws \RuntimeException
+     */
+    public function getInt(string $valueName, ?int $default = null): int
+    {
+        if ($this->check($valueName, $default) === false) {
+            self::throwTypeError($valueName, ConfigParameter::TYPE_INTEGER);
+        }
+        if (!\is_numeric(($returnInt = $this->get($valueName, $default)))) {
+            throw new \RuntimeException('getInt must return a numeric type!');
+        }
+
+        return (int)$returnInt;
+    }
+
+    /**
+     * @inheritDoc
+     * @throws \RuntimeException
+     */
+    public function getFloat(string $valueName, ?float $default = null): float
+    {
+        if ($this->check($valueName, $default) === false) {
+            self::throwTypeError($valueName, ConfigParameter::TYPE_DOUBLE);
+        }
+
+        if (!\is_numeric(($returnFloat = $this->get($valueName, $default)))) {
+            throw new \RuntimeException('getFloat must return a numeric type!');
+        }
+
+        return (float)$returnFloat;
     }
 }
