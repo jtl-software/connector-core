@@ -737,7 +737,7 @@ class AbstractTableTest extends TestCase
      * @throws \Jtl\Connector\Dbc\DbcRuntimeException
      * @throws \RuntimeException
      */
-    public function testExtractValueFromEndpoint(string $field, string $endpoint, $expectedValue): void
+    public function testExtractValueFromEndpoint(string $field, string $endpoint, int|string $expectedValue): void
     {
         $this->assertInstanceOf(TableStub::class, $this->table);
         /** @var TableStub $tableStub */

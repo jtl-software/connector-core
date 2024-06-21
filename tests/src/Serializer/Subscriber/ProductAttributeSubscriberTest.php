@@ -88,7 +88,7 @@ class ProductAttributeSubscriberTest extends TestCase
 
     /**
      * @param Product|Category $translatableModel
-     * @param bool                            $setId
+     * @param bool             $setId
      *
      * @return TranslatableAttribute
      * @throws \Exception

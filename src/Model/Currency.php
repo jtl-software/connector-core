@@ -43,7 +43,7 @@ class Currency extends AbstractIdentity
     protected float $factor = 0.0;
 
     /**
-     * @var boolean Optional: Display currency before or after value.
+     * @var bool Optional: Display currency before or after value.
      *                  Ignore this flag if you have the correct user locale preference.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("hasCurrencySignBeforeValue")
@@ -52,7 +52,7 @@ class Currency extends AbstractIdentity
     protected bool $hasCurrencySignBeforeValue = false;
 
     /**
-     * @var boolean Optional: Flag default currency. True, if this is the default currency.
+     * @var bool Optional: Flag default currency. True, if this is the default currency.
      *                  Exact one currency must be marked as default.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isDefault")
@@ -61,7 +61,6 @@ class Currency extends AbstractIdentity
     protected bool $isDefault = false;
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("iso")
      * @Serializer\Accessor(getter="getIso",setter="setIso")
@@ -129,7 +128,7 @@ class Currency extends AbstractIdentity
     }
 
     /**
-     * @return double Optional conversion factor to default currency. Default is 1 (equals default currency)
+     * @return float Optional conversion factor to default currency. Default is 1 (equals default currency)
      */
     public function getFactor(): float
     {
@@ -137,7 +136,7 @@ class Currency extends AbstractIdentity
     }
 
     /**
-     * @param double $factor Optional conversion factor to default currency. Default is 1 (equals default currency)
+     * @param float $factor Optional conversion factor to default currency. Default is 1 (equals default currency)
      *
      * @return $this
      */
@@ -149,7 +148,7 @@ class Currency extends AbstractIdentity
     }
 
     /**
-     * @return boolean Optional: Display currency before or after value.
+     * @return bool Optional: Display currency before or after value.
      *                  Ignore this flag if you have the correct user locale preference.
      */
     public function getHasCurrencySignBeforeValue(): bool
@@ -158,7 +157,7 @@ class Currency extends AbstractIdentity
     }
 
     /**
-     * @param boolean $hasCurrencySignBeforeValue Optional: Display currency before or after value.
+     * @param bool $hasCurrencySignBeforeValue Optional: Display currency before or after value.
      *                                            Ignore this flag if you have the correct user locale preference.
      *
      * @return $this
@@ -171,7 +170,7 @@ class Currency extends AbstractIdentity
     }
 
     /**
-     * @return boolean Optional: Flag default currency. True, if this is the default currency.
+     * @return bool Optional: Flag default currency. True, if this is the default currency.
      *                  Exact one currency must be marked as default.
      */
     public function getIsDefault(): bool
@@ -180,7 +179,7 @@ class Currency extends AbstractIdentity
     }
 
     /**
-     * @param boolean $isDefault Optional: Flag default currency. True, if this is the default currency.
+     * @param bool $isDefault Optional: Flag default currency. True, if this is the default currency.
      *                           Exact one currency must be marked as default.
      *
      * @return $this

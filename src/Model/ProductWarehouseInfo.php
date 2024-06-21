@@ -19,7 +19,6 @@ use Jtl\Connector\Core\Utilities\Validator\Validate;
 class ProductWarehouseInfo extends AbstractModel
 {
     /**
-     * @var Identity
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("warehouseId")
      * @Serializer\Accessor(getter="getwarehouseId",setter="setwarehouseId")
@@ -72,7 +71,7 @@ class ProductWarehouseInfo extends AbstractModel
     }
 
     /**
-     * @return double Optional product inflow quantity for specified warehouse
+     * @return float Optional product inflow quantity for specified warehouse
      */
     public function getInflowQuantity(): float
     {
@@ -80,7 +79,7 @@ class ProductWarehouseInfo extends AbstractModel
     }
 
     /**
-     * @param double $inflowQuantity Optional product inflow quantity for specified warehouse
+     * @param float $inflowQuantity Optional product inflow quantity for specified warehouse
      *
      * @return $this
      */
@@ -92,7 +91,7 @@ class ProductWarehouseInfo extends AbstractModel
     }
 
     /**
-     * @return double
+     * @return float
      */
     public function getStockLevel(): float
     {
@@ -100,7 +99,7 @@ class ProductWarehouseInfo extends AbstractModel
     }
 
     /**
-     * @param double $stockLevel
+     * @param float $stockLevel
      *
      * @return $this
      */

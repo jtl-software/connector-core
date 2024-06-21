@@ -17,13 +17,9 @@ use TypeError;
  */
 class ProductChecksum extends Checksum
 {
-    /**
-     * @var int - Checksum used to check variations for change
-     */
     public const TYPE_VARIATION = 1;
 
     /**
-     * @var Identity
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("foreignKey")
      * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
@@ -31,7 +27,6 @@ class ProductChecksum extends Checksum
     protected Identity $foreignKey;
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("endpoint")
      * @Serializer\Accessor(getter="getEndpoint",setter="setEndpoint")
@@ -39,7 +34,6 @@ class ProductChecksum extends Checksum
     protected string $endpoint = '';
 
     /**
-     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("hasChanged")
      * @Serializer\Accessor(getter="hasChanged",setter="setHasChanged")
@@ -47,7 +41,6 @@ class ProductChecksum extends Checksum
     protected bool $hasChanged = false;
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("host")
      * @Serializer\Accessor(getter="getHost",setter="setHost")
@@ -55,7 +48,6 @@ class ProductChecksum extends Checksum
     protected string $host = '';
 
     /**
-     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("type")
      * @Serializer\Accessor(getter="getType",setter="setType")
@@ -105,7 +97,7 @@ class ProductChecksum extends Checksum
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function hasChanged(): bool
     {
@@ -113,7 +105,7 @@ class ProductChecksum extends Checksum
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getHasChanged(): bool
     {
@@ -121,7 +113,7 @@ class ProductChecksum extends Checksum
     }
 
     /**
-     * @param boolean $hasChanged
+     * @param bool $hasChanged
      *
      * @return $this
      */
@@ -153,7 +145,7 @@ class ProductChecksum extends Checksum
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getType(): int
     {
@@ -161,7 +153,7 @@ class ProductChecksum extends Checksum
     }
 
     /**
-     * @param integer $type
+     * @param int $type
      *
      * @return $this
      */

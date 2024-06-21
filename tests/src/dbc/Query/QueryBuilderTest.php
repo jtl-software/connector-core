@@ -18,24 +18,13 @@ use Throwable;
 
 class QueryBuilderTest extends TestCase
 {
-    /**
-     * @var QueryBuilder
-     */
     protected QueryBuilder $qb;
 
-    /**
-     * @var CoordinatesStub
-     */
     protected CoordinatesStub $coordsTable;
 
-    /**
-     * @var string
-     */
     protected string $tableExpression = 'yolo';
 
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     protected array $globalIdentifiers = ['foo' => 'bar'];
 
     /**

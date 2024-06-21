@@ -36,7 +36,7 @@ class Uuid4Type extends Type
      *
      * @return string
      */
-    public function convertToPHPValue($value, AbstractPlatform $platform): string
+    public function convertToPHPValue(string $value, AbstractPlatform $platform): string
     {
         return \ctype_xdigit(\str_replace('-', '', $value)) ? $value : \bin2hex($value);
     }
@@ -48,7 +48,7 @@ class Uuid4Type extends Type
      * @return string
      * @throws ConversionException
      */
-    public function convertToDatabaseValue($value, AbstractPlatform $platform): string
+    public function convertToDatabaseValue(string $value, AbstractPlatform $platform): string
     {
         $converted = \hex2bin(\str_replace('-', '', $value));
         if ($converted === false) {
@@ -74,7 +74,7 @@ class Uuid4Type extends Type
      *
      * @return string
      */
-    public function convertToPHPValueSQL($sqlExpr, $platform): string
+    public function convertToPHPValueSQL(string $sqlExpr, AbstractPlatform $platform): string
     {
         if ($platform instanceof MySqlPlatform || $platform instanceof SqlitePlatform) {
             return $platform->getLowerExpression(\sprintf('HEX(%s)', $sqlExpr));
@@ -86,7 +86,7 @@ class Uuid4Type extends Type
     /**
      * @param AbstractPlatform $platform
      *
-     * @return boolean
+     * @return bool
      */
     public function requiresSQLCommentHint(AbstractPlatform $platform): bool
     {
@@ -94,7 +94,7 @@ class Uuid4Type extends Type
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function canRequireSQLConversion(): bool
     {

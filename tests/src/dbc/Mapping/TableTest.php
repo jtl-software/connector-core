@@ -21,9 +21,6 @@ use Throwable;
 
 class TableTest extends TestCase
 {
-    /**
-     * @var CoordinatesStub
-     */
     protected CoordinatesStub $coords;
 
     /**

@@ -6,14 +6,12 @@ namespace Jtl\Connector\Core\Application;
 
 class Response
 {
-    /** @var mixed */
     protected mixed $result;
 
     /**
      * Response constructor.
      *
      * @param mixed $result
-     *
      */
     public function __construct(mixed $result)
     {

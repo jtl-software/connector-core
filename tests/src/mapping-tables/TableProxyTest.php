@@ -13,9 +13,6 @@ use Throwable;
 
 class TableProxyTest extends TestCase
 {
-    /**
-     * @var TableProxy
-     */
     protected TableProxy $proxy;
 
     /**

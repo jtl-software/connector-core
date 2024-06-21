@@ -9,13 +9,11 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Class RequestTest
+ *
  * @package Jtl\Connector\Core\Test\Application
  */
 class RequestTest extends TestCase
 {
-    /**
-     *
-     */
     public function testCreateFromStatic(): void
     {
         $controller = 'FooBarController';

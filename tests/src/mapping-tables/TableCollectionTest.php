@@ -21,9 +21,6 @@ use Throwable;
 
 class TableCollectionTest extends TestCase
 {
-    /**
-     * @var TableCollection
-     */
     protected TableCollection $collection;
 
     /**
@@ -146,7 +143,6 @@ class TableCollectionTest extends TestCase
      * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
-
     public function testGetNotExistingTableWithStrictModeEnabled(): void
     {
         $this->expectException(MappingTablesException::class);

@@ -193,7 +193,7 @@ class ApplicationTest extends TestCase
      * @noinspection UnnecessaryAssertionInspection
      * @noinspection ReturnTypeCanBeDeclaredInspection
      */
-    public function createConnector(string $controllerNamespace = '', bool $tokenValidatorValidateValue = true)
+    public function createConnector(string $controllerNamespace = '', bool $tokenValidatorValidateValue = true): ConnectorInterface&MockObject
     {
         $tokenValidator = $this->createMock(TokenValidatorInterface::class);
         $tokenValidator->expects($this->any())->method('validate')->willReturn($tokenValidatorValidateValue);
@@ -229,7 +229,7 @@ class ApplicationTest extends TestCase
      * @throws \Psr\Log\InvalidArgumentException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
-    public function testHandleRequestControllerAction(string $action, $parameter): void
+    public function testHandleRequestControllerAction(string $action, mixed $parameter): void
     {
         $mock        = $this->createMock(Product::class);
         $application = $this->createInitializedApplication();

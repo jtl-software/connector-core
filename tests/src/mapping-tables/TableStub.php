@@ -50,7 +50,7 @@ class TableStub extends AbstractTable implements TableInterface
     }
 
     /**
-     * @return integer[]
+     * @return int[]
      */
     public function getTypes(): array
     {

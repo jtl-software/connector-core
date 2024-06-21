@@ -159,7 +159,7 @@ class ChecksumLinker implements LoggerAwareInterface
     /**
      * @param ChecksumInterface $checksum
      *
-     * @return boolean
+     * @return bool
      */
     public function save(ChecksumInterface $checksum): bool
     {

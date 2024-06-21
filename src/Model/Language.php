@@ -28,7 +28,7 @@ class Language extends AbstractI18n implements IdentityInterface
     protected Identity $id;
 
     /**
-     * @var boolean Flag default language for frontend. Exact 1 language must be marked as default.
+     * @var bool Flag default language for frontend. Exact 1 language must be marked as default.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isDefault")
      * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
@@ -82,7 +82,7 @@ class Language extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @return boolean Flag default language for frontend. Exact 1 language must be marked as default.
+     * @return bool Flag default language for frontend. Exact 1 language must be marked as default.
      */
     public function getIsDefault(): bool
     {
@@ -90,7 +90,7 @@ class Language extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @param boolean $isDefault Flag default language for frontend. Exact 1 language must be marked as default.
+     * @param bool $isDefault Flag default language for frontend. Exact 1 language must be marked as default.
      *
      * @return $this
      */

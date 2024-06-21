@@ -15,7 +15,6 @@ use JMS\Serializer\Annotation as Serializer;
 class ShippingMethod extends AbstractIdentity
 {
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")

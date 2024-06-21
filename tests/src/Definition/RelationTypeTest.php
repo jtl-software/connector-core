@@ -178,7 +178,7 @@ class RelationTypeTest extends TestCase
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
      */
-    public function testGetIdentityType(string $relationType, $expectedValue): void
+    public function testGetIdentityType(string $relationType, DefinitionException|int $expectedValue): void
     {
         if ($expectedValue instanceof DefinitionException) {
             $this->expectExceptionObject($expectedValue);

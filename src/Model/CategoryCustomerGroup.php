@@ -61,7 +61,7 @@ class CategoryCustomerGroup extends AbstractModel
     }
 
     /**
-     * @return double Optional discount on products in specified categoryId for  customerGroupId
+     * @return float Optional discount on products in specified categoryId for  customerGroupId
      */
     public function getDiscount(): float
     {
@@ -69,7 +69,7 @@ class CategoryCustomerGroup extends AbstractModel
     }
 
     /**
-     * @param double $discount Optional discount on products in specified categoryId for  customerGroupId
+     * @param float $discount Optional discount on products in specified categoryId for  customerGroupId
      *
      * @return $this
      */

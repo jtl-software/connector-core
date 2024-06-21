@@ -42,7 +42,7 @@ abstract class AbstractModelFactory
      * @throws \InvalidArgumentException
      * @throws \JMS\Serializer\Exception\RuntimeException
      */
-    public function __construct(string $defaultLocale = 'de_DE', Generator $faker = null, Serializer $serializer = null)
+    public function __construct(string $defaultLocale = 'de_DE', ?Generator $faker = null, ?Serializer $serializer = null)
     {
         $this->defaultLocale = $defaultLocale;
 
@@ -75,10 +75,10 @@ abstract class AbstractModelFactory
     }
 
     /**
-     * @param integer $identityType
-     * @param integer $host
+     * @param int $identityType
+     * @param int $host
      *
-     * @return boolean
+     * @return bool
      */
     public static function hasIdentityByHost(int $identityType, int $host): bool
     {
@@ -86,8 +86,8 @@ abstract class AbstractModelFactory
     }
 
     /**
-     * @param integer $identityType
-     * @param string  $endpoint
+     * @param int    $identityType
+     * @param string $endpoint
      *
      * @return array{0: string, 1: int}|null
      */
@@ -103,10 +103,10 @@ abstract class AbstractModelFactory
     }
 
     /**
-     * @param integer $identityType
-     * @param string  $endpoint
+     * @param int    $identityType
+     * @param string $endpoint
      *
-     * @return boolean
+     * @return bool
      */
     public static function hasIdentity(int $identityType, string $endpoint): bool
     {
@@ -183,7 +183,7 @@ abstract class AbstractModelFactory
     abstract protected function getModelClass(): string;
 
     /**
-     * @param integer $identityType
+     * @param int $identityType
      *
      * @return mixed
      * @throws \Exception
@@ -246,8 +246,8 @@ abstract class AbstractModelFactory
     public static function createFactory(
         string     $name,
         string     $locale = 'de_DE',
-        Generator  $faker = null,
-        Serializer $serializer = null
+        ?Generator  $faker = null,
+        ?Serializer $serializer = null
     ): AbstractModelFactory {
         $className = \sprintf('%s\\%sFactory', __NAMESPACE__, \ucfirst($name));
         if (!\class_exists($className)) {
@@ -266,9 +266,9 @@ abstract class AbstractModelFactory
     }
 
     /**
-     * @param integer $identityType
-     * @param string  $endpoint
-     * @param integer $host
+     * @param int    $identityType
+     * @param string $endpoint
+     * @param int    $host
      */
     public static function setIdentity(int $identityType, string $endpoint, int $host): void
     {

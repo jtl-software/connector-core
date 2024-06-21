@@ -11,9 +11,7 @@ use RuntimeException;
 
 class Connection extends \Doctrine\DBAL\Connection
 {
-    /**
-     * @var array<string, array<string, mixed>>
-     */
+    /** @var array<string, array<string, mixed>> */
     protected array $tableRestrictions = [];
 
     /**
@@ -33,7 +31,7 @@ class Connection extends \Doctrine\DBAL\Connection
      * @param string $tableExpression
      * @param string $column
      *
-     * @return boolean
+     * @return bool
      */
     public function hasTableRestriction(string $tableExpression, string $column): bool
     {
@@ -53,7 +51,7 @@ class Connection extends \Doctrine\DBAL\Connection
      *
      * @return array<string, mixed>|array<string, array<string, mixed>>
      */
-    public function getTableRestrictions(string $tableExpression = null): array
+    public function getTableRestrictions(?string $tableExpression = null): array
     {
         if ($tableExpression === null) {
             return $this->tableRestrictions;
@@ -70,7 +68,7 @@ class Connection extends \Doctrine\DBAL\Connection
      * @param array<int, array<int|string, scalar>> $data
      * @param string[]                              $types
      *
-     * @return integer
+     * @return int
      * @throws \Exception
      */
     public function multiInsert(string $tableExpression, array $data, array $types = []): int
@@ -94,12 +92,12 @@ class Connection extends \Doctrine\DBAL\Connection
      * @param mixed[]  $data
      * @param string[] $types
      *
-     * @return integer
+     * @return int
      * @throws Exception
      * @throws DbcRuntimeException|\RuntimeException
      * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
-    public function insert($tableExpression, array $data, array $types = []): int
+    public function insert(string $tableExpression, array $data, array $types = []): int
     {
         $return = parent::insert(
             $tableExpression,
@@ -120,12 +118,12 @@ class Connection extends \Doctrine\DBAL\Connection
      * @param mixed[]  $identifiers
      * @param string[] $types
      *
-     * @return integer
+     * @return int
      * @throws Exception
      * @throws DbcRuntimeException|\RuntimeException
      * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
-    public function update($tableExpression, array $data, array $identifiers, array $types = []): int
+    public function update(string $tableExpression, array $data, array $identifiers, array $types = []): int
     {
         $restrictions = $this->getTableRestrictions($tableExpression);
         $data         = \array_merge($data, $restrictions);
@@ -149,7 +147,7 @@ class Connection extends \Doctrine\DBAL\Connection
      * @throws DbcRuntimeException|\RuntimeException
      * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
-    public function delete($tableExpression, array $identifiers, array $types = []): int
+    public function delete(string $tableExpression, array $identifiers, array $types = []): int
     {
         $restrictions = $this->getTableRestrictions($tableExpression);
         $identifiers  = \array_merge($identifiers, $restrictions);

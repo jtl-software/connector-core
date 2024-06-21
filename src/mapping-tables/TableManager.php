@@ -19,7 +19,7 @@ class TableManager implements PrimaryKeyMapperInterface
     }
 
     /**
-     * @param integer $type
+     * @param int $type
      *
      * @return TableInterface
      * @throws MappingTablesException
@@ -30,10 +30,10 @@ class TableManager implements PrimaryKeyMapperInterface
     }
 
     /**
-     * @param integer $type
-     * @param string  $endpointId
+     * @param int    $type
+     * @param string $endpointId
      *
-     * @return integer|null
+     * @return int|null
      * @throws MappingTablesException
      */
     public function getHostId(int $type, string $endpointId): ?int
@@ -42,8 +42,8 @@ class TableManager implements PrimaryKeyMapperInterface
     }
 
     /**
-     * @param integer $type
-     * @param integer $hostId
+     * @param int $type
+     * @param int $hostId
      *
      * @return string|null
      * @throws MappingTablesException
@@ -58,7 +58,7 @@ class TableManager implements PrimaryKeyMapperInterface
      * @param int    $hostId
      * @param int    $type
      *
-     * @return boolean
+     * @return bool
      * @throws MappingTablesException
      */
     public function save(int $type, string $endpointId, int $hostId): bool
@@ -67,20 +67,20 @@ class TableManager implements PrimaryKeyMapperInterface
     }
 
     /**
-     * @param integer      $type
-     * @param string|null  $endpointId
-     * @param integer|null $hostId
+     * @param int         $type
+     * @param string|null $endpointId
+     * @param int|null    $hostId
      *
-     * @return boolean
+     * @return bool
      * @throws MappingTablesException
      */
-    public function delete(int $type, string $endpointId = null, int $hostId = null): bool
+    public function delete(int $type, ?string $endpointId = null, ?int $hostId = null): bool
     {
         return \is_int($this->collection->get($type)->remove($endpointId, $hostId, $type));
     }
 
     /**
-     * @param integer $type
+     * @param int $type
      *
      * @return string[]
      * @throws MappingTablesException
@@ -103,12 +103,12 @@ class TableManager implements PrimaryKeyMapperInterface
     }
 
     /**
-     * @param integer|null $type
+     * @param int|null $type
      *
-     * @return integer
+     * @return int
      * @throws MappingTablesException
      */
-    public function count(int $type = null): int
+    public function count(?int $type = null): int
     {
         if (!\is_null($type)) {
             return $this->collection->get($type)->count([], [], [], null, null, $type);
@@ -122,12 +122,12 @@ class TableManager implements PrimaryKeyMapperInterface
     }
 
     /**
-     * @param integer|null $type
+     * @param int|null $type
      *
-     * @return boolean
+     * @return bool
      * @throws MappingTablesException
      */
-    public function clear(int $type = null): bool
+    public function clear(?int $type = null): bool
     {
         if (!\is_null($type)) {
             return \is_int($this->collection->get($type)->clear($type));
@@ -165,7 +165,7 @@ class TableManager implements PrimaryKeyMapperInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isStrictMode(): bool
     {

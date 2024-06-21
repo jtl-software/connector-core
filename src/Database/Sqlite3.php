@@ -13,44 +13,31 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
 {
     /**
      * Sqlite 3 sharedcache value
-     *
-     * @var integer
      */
     public const SQLITE3_OPEN_SHAREDCACHE = 0x00020000;
     /**
      * Path to the SQLite database, or :memory: to use in-memory database.
-     *
-     * @var string
      */
     public string $location;
     /**
      * Optional flags used to determine how to open the SQLite database.
-     *
-     * @var integer
      */
     public int $mode;
     /**
      * Database connection state
-     *
-     * @var bool
      */
     protected bool $isConnected = false;
     /**
      * Sqlite 3 Database object
-     *
-     * @var \SQLite3
      */
     protected \SQLite3 $db;
-    /**
-     * @var LoggerInterface
-     */
     protected LoggerInterface $logger;
 
     /**
      * @inheritDoc
      * @throws DatabaseException
      */
-    public function connect(array $options = null): void
+    public function connect(?array $options = null): void
     {
         $this->setOptions($options);
         if (isset($this->location) && $this->location === '') {
@@ -129,7 +116,7 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
      *
      * @param string $query
      *
-     * @return \SQLite3Stmt|boolean Returns an SQLite3Stmt object on success or FALSE on failure.
+     * @return \SQLite3Stmt|bool Returns an SQLite3Stmt object on success or FALSE on failure.
      */
     public function prepare(string $query): \SQLite3Stmt|bool
     {
@@ -156,7 +143,7 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getLastInsertRowId(): int
     {
@@ -273,7 +260,7 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
      *
      * @param string $query
      *
-     * @return boolean|int
+     * @return bool|int
      */
     public function insert(string $query): bool|int
     {

@@ -70,7 +70,7 @@ class PartsList extends AbstractIdentity
     }
 
     /**
-     * @return double Component quantity
+     * @return float Component quantity
      */
     public function getQuantity(): float
     {
@@ -78,7 +78,7 @@ class PartsList extends AbstractIdentity
     }
 
     /**
-     * @param double $quantity Component quantity
+     * @param float $quantity Component quantity
      *
      * @return PartsList
      */

@@ -15,7 +15,6 @@ use JMS\Serializer\Annotation as Serializer;
 class Session extends AbstractModel
 {
     /**
-     * @var string|null
      * @Serializer\Type("string")
      * @Serializer\SerializedName("sessionId")
      * @Serializer\Accessor(getter="getSessionId",setter="setSessionId")
@@ -23,7 +22,6 @@ class Session extends AbstractModel
     protected ?string $sessionId = null;
 
     /**
-     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("lifetime")
      * @Serializer\Accessor(getter="getLifetime",setter="setLifetime")

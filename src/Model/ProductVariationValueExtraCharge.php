@@ -64,7 +64,7 @@ class ProductVariationValueExtraCharge extends AbstractModel
     }
 
     /**
-     * @return double Extra charge (net)
+     * @return float Extra charge (net)
      */
     public function getExtraChargeNet(): float
     {
@@ -72,7 +72,7 @@ class ProductVariationValueExtraCharge extends AbstractModel
     }
 
     /**
-     * @param double $extraChargeNet Extra charge (net)
+     * @param float $extraChargeNet Extra charge (net)
      *
      * @return $this
      */

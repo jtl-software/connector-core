@@ -13,9 +13,7 @@ class ConfigParameter
     public const TYPE_INTEGER = 'integer';
     public const TYPE_STRING  = 'string';
 
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     protected static array $types = [
         self::TYPE_BOOLEAN,
         self::TYPE_DOUBLE,
@@ -49,7 +47,7 @@ class ConfigParameter
     /**
      * @param string $type
      *
-     * @return boolean
+     * @return bool
      */
     public static function isType(string $type): bool
     {
@@ -142,7 +140,7 @@ class ConfigParameter
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function hasDefaultValue(): bool
     {
@@ -176,7 +174,7 @@ class ConfigParameter
     /**
      * @param mixed $value
      *
-     * @return boolean
+     * @return bool
      */
     public function isValidValue(mixed $value): bool
     {

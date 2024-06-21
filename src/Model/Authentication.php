@@ -12,7 +12,6 @@ use JMS\Serializer\Annotation as Serializer;
 class Authentication extends AbstractModel
 {
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("token")
      * @Serializer\Accessor(getter="getToken",setter="setToken")

@@ -127,7 +127,7 @@ class DbManagerTest extends TestCase
      * @return array<int, AbstractTable>
      * @throws Exception
      */
-    protected function createTableStubs(DbManager $dbManager, int $amount = null): array
+    protected function createTableStubs(DbManager $dbManager, ?int $amount = null): array
     {
         if (\is_null($amount)) {
             $amount = \random_int(1, 10);
@@ -194,7 +194,7 @@ class DbManagerTest extends TestCase
     }
 
     /**
-     * @return array<array{0: 'foo'|'post', 1: null|'pre', 2: 'foo'|'prepost'}>
+     * @return array<array{0: 'foo'|'post', 1: 'pre'|null, 2: 'foo'|'prepost'}>
      */
     public function tableNameProvider(): array
     {

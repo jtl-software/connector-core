@@ -25,7 +25,6 @@ class QueryFilter
     /**
      * Query item count limitation
      *
-     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("limit")
      */
@@ -43,7 +42,7 @@ class QueryFilter
     /**
      * Constructor
      *
-     * @param integer $limit
+     * @param int $limit
      */
     public function __construct(int $limit = 100)
     {
@@ -54,7 +53,7 @@ class QueryFilter
     /**
      * Limit Getter
      *
-     * @return integer
+     * @return int
      */
     public function getLimit(): int
     {
@@ -64,7 +63,7 @@ class QueryFilter
     /**
      * Limit Setter
      *
-     * @param integer $limit
+     * @param int $limit
      *
      * @return $this
      */
@@ -128,7 +127,7 @@ class QueryFilter
      *
      * @param string $key
      *
-     * @return boolean
+     * @return bool
      */
     public function deleteFilter(string $key): bool
     {
@@ -144,7 +143,7 @@ class QueryFilter
     /**
      * @param string $key
      *
-     * @return boolean
+     * @return bool
      */
     public function isFilter(string $key): bool
     {
@@ -178,7 +177,7 @@ class QueryFilter
      * @param string     $newKey
      * @param mixed|null $value
      *
-     * @return boolean
+     * @return bool
      * @throws InvalidArgumentException
      */
     public function overrideFilter(string $oldKey, string $newKey, mixed $value = null): bool

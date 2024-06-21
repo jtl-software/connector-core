@@ -19,7 +19,7 @@ class ProductFactory extends AbstractModelFactory
      * @return object[]
      * @throws \Exception
      */
-    public function makeOneProductVariant(array $i18ns = null): array
+    public function makeOneProductVariant(?array $i18ns = null): array
     {
         $data = $this->makeOneProductVariantArray($i18ns);
         return $this->make(\count($data), $data);
@@ -32,7 +32,7 @@ class ProductFactory extends AbstractModelFactory
      * @throws \RuntimeException
      * @throws Exception
      */
-    public function makeOneProductVariantArray(array $i18ns = null): array
+    public function makeOneProductVariantArray(?array $i18ns = null): array
     {
         $variationsQuantity = 2;
         if (\is_null($i18ns)) {

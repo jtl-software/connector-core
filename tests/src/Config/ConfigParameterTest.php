@@ -25,7 +25,7 @@ class ConfigParameterTest extends TestCase
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
      */
-    public function testIsValidValueString(string $type, $validValue, array $invalidValues): void
+    public function testIsValidValueString(string $type, mixed $validValue, array $invalidValues): void
     {
         $option = new ConfigParameter('foo', $type);
         $this->assertTrue($option->isValidValue($validValue));
@@ -44,7 +44,7 @@ class ConfigParameterTest extends TestCase
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
      */
-    public function testSetDefaultValue(string $type, $validValue): void
+    public function testSetDefaultValue(string $type, mixed $validValue): void
     {
         $option = new ConfigParameter('foo', $type);
         $option->setDefaultValue($validValue);
@@ -62,7 +62,7 @@ class ConfigParameterTest extends TestCase
      * @throws RuntimeException
      * @throws Exception
      */
-    public function testSetWrongDefaultValue(string $type, $validValue, array $invalidValues): void
+    public function testSetWrongDefaultValue(string $type, mixed $validValue, array $invalidValues): void
     {
         $this->expectException(ConfigException::class);
         $this->expectExceptionCode(ConfigException::WRONG_TYPE);
@@ -125,7 +125,7 @@ class ConfigParameterTest extends TestCase
     }
 
     /**
-     * @return array<int, array{0: string, 1: string|bool|float|int, 2: array<int, null|int|float|bool|string>}>
+     * @return array<int, array{0: string, 1: string|bool|float|int, 2: array<int, int|float|bool|string|null>}>
      */
     public function dataProvider(): array
     {

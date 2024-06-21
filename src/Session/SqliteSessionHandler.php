@@ -148,8 +148,8 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
     }
 
     /**
-     * @param string  $sessionId
-     * @param integer $expiresAt
+     * @param string $sessionId
+     * @param int    $expiresAt
      *
      * @return string
      */
@@ -235,7 +235,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
     }
 
     /**
-     * @return integer
+     * @return int
      */
     protected function calculateExpiryTime(): int
     {
@@ -282,7 +282,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      *
      * @param string $sessionId
      *
-     * @return boolean
+     * @return bool
      * @throws Throwable
      * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */

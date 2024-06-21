@@ -17,7 +17,6 @@ class UpdateDatabaseSchemaCommand extends AbstractDbManagerCommand
     protected static $defaultName = 'database:update-schema';
 
     /**
-     *
      * @throws InvalidArgumentException
      */
     protected function configure(): void

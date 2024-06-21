@@ -15,13 +15,9 @@ use Jtl\Connector\Core\Checksum\ChecksumInterface;
  */
 class Checksum extends AbstractModel implements ChecksumInterface
 {
-    /**
-     * @var int - Checksum used to check variations for change
-     */
     public const TYPE_VARIATION = 1;
 
     /**
-     * @var Identity
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("foreignKey")
      * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
@@ -29,7 +25,6 @@ class Checksum extends AbstractModel implements ChecksumInterface
     protected Identity $foreignKey;
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("endpoint")
      * @Serializer\Accessor(getter="getEndpoint",setter="setEndpoint")
@@ -37,7 +32,6 @@ class Checksum extends AbstractModel implements ChecksumInterface
     protected string $endpoint = '';
 
     /**
-     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("hasChanged")
      * @Serializer\Accessor(getter="getHasChanged",setter="setHasChanged")
@@ -45,7 +39,6 @@ class Checksum extends AbstractModel implements ChecksumInterface
     protected bool $hasChanged = false;
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("host")
      * @Serializer\Accessor(getter="getHost",setter="setHost")
@@ -53,7 +46,6 @@ class Checksum extends AbstractModel implements ChecksumInterface
     protected string $host = '';
 
     /**
-     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("type")
      * @Serializer\Accessor(getter="getType",setter="setType")
@@ -109,7 +101,7 @@ class Checksum extends AbstractModel implements ChecksumInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getHasChanged(): bool
     {
@@ -117,7 +109,7 @@ class Checksum extends AbstractModel implements ChecksumInterface
     }
 
     /**
-     * @param boolean $hasChanged
+     * @param bool $hasChanged
      *
      * @return $this
      */
@@ -129,7 +121,7 @@ class Checksum extends AbstractModel implements ChecksumInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function hasChanged(): bool
     {
@@ -157,7 +149,7 @@ class Checksum extends AbstractModel implements ChecksumInterface
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getType(): int
     {
@@ -165,7 +157,7 @@ class Checksum extends AbstractModel implements ChecksumInterface
     }
 
     /**
-     * @param integer $type
+     * @param int $type
      *
      * @return $this
      */

@@ -84,7 +84,7 @@ class ModelTest extends TestCase
      * @throws InvalidArgumentException
      * @throws \InvalidArgumentException
      */
-    public function testGetModelByType(int $identityType, $expectedResult, bool $shouldThrowException = false): void
+    public function testGetModelByType(int $identityType, Exception|string $expectedResult, bool $shouldThrowException = false): void
     {
         if ($shouldThrowException) {
             if ($expectedResult instanceof \Exception === false) {

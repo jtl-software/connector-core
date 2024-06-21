@@ -41,7 +41,7 @@ class ChunkedHandler extends Handler implements FormattableHandlerInterface
      *
      * @return bool
      */
-    public function handle($record): bool
+    public function handle(LogRecord|array $record): bool
     {
         // false means continue to bubble
         $return = false;

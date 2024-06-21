@@ -54,10 +54,10 @@ class CrossSellingSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param integer $productId
-     * @param integer $crossSellingGroupId
+     * @param int $productId
+     * @param int $crossSellingGroupId
      *
-     * @return integer
+     * @return int
      */
     protected static function cantorPairingFunction(int $productId, int $crossSellingGroupId): int
     {

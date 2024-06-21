@@ -16,29 +16,14 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class CustomerOrderItem extends AbstractIdentity
 {
-    /**
-     * @var string - Discount
-     */
     public const TYPE_DISCOUNT = 'discount';
 
-    /**
-     * @var string - Product
-     */
     public const TYPE_PRODUCT = 'product';
 
-    /**
-     * @var string - Shipping
-     */
     public const TYPE_SHIPPING = 'shipping';
 
-    /**
-     * @var string - Surcharge
-     */
     public const TYPE_SURCHARGE = 'surcharge';
 
-    /**
-     * @var string - Coupon
-     */
     public const TYPE_COUPON = 'coupon';
 
     /**
@@ -98,7 +83,6 @@ class CustomerOrderItem extends AbstractIdentity
     protected string $sku = '';
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("type")
      * @Serializer\Accessor(getter="getType",setter="setType")
@@ -106,7 +90,6 @@ class CustomerOrderItem extends AbstractIdentity
     protected string $type = '';
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("note")
      * @Serializer\Accessor(getter="getNote",setter="setNote")
@@ -211,7 +194,7 @@ class CustomerOrderItem extends AbstractIdentity
     }
 
     /**
-     * @return double Price (net)
+     * @return float Price (net)
      */
     public function getPrice(): float
     {
@@ -219,7 +202,7 @@ class CustomerOrderItem extends AbstractIdentity
     }
 
     /**
-     * @param double $price Price (net)
+     * @param float $price Price (net)
      *
      * @return $this
      */
@@ -231,7 +214,7 @@ class CustomerOrderItem extends AbstractIdentity
     }
 
     /**
-     * @return double PriceGross (gross)
+     * @return float PriceGross (gross)
      */
     public function getPriceGross(): float
     {
@@ -239,7 +222,7 @@ class CustomerOrderItem extends AbstractIdentity
     }
 
     /**
-     * @param double $priceGross Price (gross)
+     * @param float $priceGross Price (gross)
      *
      * @return $this
      */
@@ -251,7 +234,7 @@ class CustomerOrderItem extends AbstractIdentity
     }
 
     /**
-     * @return double Quantity purchased
+     * @return float Quantity purchased
      */
     public function getQuantity(): float
     {
@@ -259,7 +242,7 @@ class CustomerOrderItem extends AbstractIdentity
     }
 
     /**
-     * @param double $quantity Quantity purchased
+     * @param float $quantity Quantity purchased
      *
      * @return $this
      */
@@ -351,7 +334,7 @@ class CustomerOrderItem extends AbstractIdentity
     }
 
     /**
-     * @return double Value added tax
+     * @return float Value added tax
      */
     public function getVat(): float
     {
@@ -359,7 +342,7 @@ class CustomerOrderItem extends AbstractIdentity
     }
 
     /**
-     * @param double $vat Value added tax
+     * @param float $vat Value added tax
      *
      * @return $this
      */

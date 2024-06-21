@@ -24,15 +24,11 @@ abstract class Packet extends AbstractModel
      * A String specifying the version of the JSON-RPC protocol.
      * MUST be exactly "2.0".
      *
-     * @var string
      * @Serializer\Type("string")
      */
     protected string $jtlrpc = '';
 
-    /**
-     * @var string
-     * @Serializer\Type("string")
-     */
+    /** @Serializer\Type("string") */
     protected string $id = '';
 
     /**
@@ -43,7 +39,7 @@ abstract class Packet extends AbstractModel
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     abstract public function isValid(): bool;
 
@@ -104,7 +100,7 @@ abstract class Packet extends AbstractModel
      * @throws RuntimeException
      * @throws InvalidArgumentException
      */
-    public function toArray(JmsSerializer $serializer = null): array
+    public function toArray(?JmsSerializer $serializer = null): array
     {
         if (\is_null($serializer)) {
             $serializer = SerializerBuilder::create()->build();

@@ -12,9 +12,6 @@ use Throwable;
 
 class TableCollectionTest extends TestCase
 {
-    /**
-     * @var TableCollection
-     */
     protected TableCollection $collection;
 
     /**

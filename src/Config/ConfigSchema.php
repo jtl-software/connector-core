@@ -21,9 +21,7 @@ class ConfigSchema
         DEBUG                   = 'debug',
         SERIALIZER_ENABLE_CACHE = 'serializer.enable_cache';
 
-    /**
-     * @var ConfigParameter[]
-     */
+    /** @var ConfigParameter[] */
     protected array $parameters = [];
 
     /**
@@ -90,7 +88,7 @@ class ConfigSchema
     /**
      * @param string $key
      *
-     * @return boolean
+     * @return bool
      */
     public function hasParameter(string $key): bool
     {
@@ -172,7 +170,7 @@ class ConfigSchema
      *
      * @return CoreConfigInterface
      */
-    public function createConfigWithDefaultValues(CoreConfigInterface $config = null): CoreConfigInterface
+    public function createConfigWithDefaultValues(?CoreConfigInterface $config = null): CoreConfigInterface
     {
         if (\is_null($config)) {
             $config = new ArrayConfig([]);

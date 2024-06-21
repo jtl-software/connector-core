@@ -8,14 +8,10 @@ use Jtl\Connector\Core\Exception\FeaturesException;
 
 class Features extends AbstractModel
 {
-    /**
-     * @var FeatureEntity[]
-     */
+    /** @var FeatureEntity[] */
     protected array $entities = [];
 
-    /**
-     * @var FeatureFlag[]
-     */
+    /** @var FeatureFlag[] */
     protected array $flags = [];
 
     /**
@@ -72,7 +68,7 @@ class Features extends AbstractModel
     /**
      * @param string $name
      *
-     * @return boolean
+     * @return bool
      */
     public function hasEntity(string $name): bool
     {
@@ -131,7 +127,7 @@ class Features extends AbstractModel
     /**
      * @param string $name
      *
-     * @return boolean
+     * @return bool
      */
     public function hasFlag(string $name): bool
     {
@@ -141,7 +137,7 @@ class Features extends AbstractModel
     /**
      * @param string $name
      *
-     * @return boolean
+     * @return bool
      */
     public function isFlagActive(string $name): bool
     {

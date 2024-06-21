@@ -54,7 +54,7 @@ class SessionHelper
      * @return mixed|null
      * @throws SessionException
      */
-    public function & __get(string $name)
+    public function & __get(string $name): mixed
     {
         if ($name === '') {
             throw new SessionException("The '{$name}' key must be a non-empty string");
@@ -98,7 +98,7 @@ class SessionHelper
      * @return bool
      * @throws SessionException
      */
-    public function __isset(string $name)
+    public function __isset(string $name): bool
     {
         if ($name === '') {
             throw new SessionException("The '{$name}' key must be a non-empty string");
@@ -110,7 +110,7 @@ class SessionHelper
     /**
      * @param string $name
      *
-     * @return boolean
+     * @return bool
      */
     public function has(string $name): bool
     {
@@ -122,7 +122,7 @@ class SessionHelper
      *
      * @throws SessionException
      */
-    public function __unset(string $name)
+    public function __unset(string $name): void
     {
         if ($name === '') {
             throw new SessionException("The '{$name}' key must be a non-empty string");

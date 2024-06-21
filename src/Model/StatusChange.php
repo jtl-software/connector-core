@@ -17,7 +17,6 @@ use Jtl\Connector\Core\Utilities\Validator\Validate;
 class StatusChange extends AbstractModel
 {
     /**
-     * @var Identity
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerOrderId")
      * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
@@ -25,7 +24,6 @@ class StatusChange extends AbstractModel
     protected Identity $customerOrderId;
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("orderStatus")
      * @Serializer\Accessor(getter="getOrderStatus",setter="setOrderStatus")
@@ -33,7 +31,6 @@ class StatusChange extends AbstractModel
     protected string $orderStatus = '';
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("paymentStatus")
      * @Serializer\Accessor(getter="getPaymentStatus",setter="setPaymentStatus")

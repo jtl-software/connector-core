@@ -69,7 +69,7 @@ class CustomerGroupPackagingQuantity extends AbstractModel
     }
 
     /**
-     * @return double Contains the minimum quantity for a customergroup.
+     * @return float Contains the minimum quantity for a customergroup.
      */
     public function getMinimumOrderQuantity(): float
     {
@@ -77,7 +77,7 @@ class CustomerGroupPackagingQuantity extends AbstractModel
     }
 
     /**
-     * @param double $minimumOrderQuantity Contains the minimum quantity for a customergroup.
+     * @param float $minimumOrderQuantity Contains the minimum quantity for a customergroup.
      *
      * @return $this
      */
@@ -89,7 +89,7 @@ class CustomerGroupPackagingQuantity extends AbstractModel
     }
 
     /**
-     * @return double Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
+     * @return float Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
      */
     public function getPackagingQuantity(): float
     {
@@ -97,7 +97,7 @@ class CustomerGroupPackagingQuantity extends AbstractModel
     }
 
     /**
-     * @param double $packagingQuantity Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
+     * @param float $packagingQuantity Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
      *
      * @return $this
      */

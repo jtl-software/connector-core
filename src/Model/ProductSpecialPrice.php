@@ -33,7 +33,7 @@ class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
     protected ?\DateTimeInterface $activeUntilDate = null;
 
     /**
-     * @var boolean Optional: Consider activeFrom/activeUntil date range.
+     * @var bool Optional: Consider activeFrom/activeUntil date range.
      *              If true, specialPrice will get active from activeFrom-date and will stop after activeUntil-date.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("considerDateLimit")
@@ -42,7 +42,7 @@ class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
     protected bool $considerDateLimit = false;
 
     /**
-     * @var boolean Optional: Consider stockLimit value.
+     * @var bool Optional: Consider stockLimit value.
      *              If true, specialPrice will be only active until product stockLevel is greater or equal stockLimit.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("considerStockLimit")
@@ -51,7 +51,7 @@ class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
     protected bool $considerStockLimit = false;
 
     /**
-     * @var boolean Special price is active? Default true, to activate specialPrice.
+     * @var bool Special price is active? Default true, to activate specialPrice.
      *              Special price can still be inactivated, if date or stock Limitations do not match.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isActive")
@@ -60,7 +60,7 @@ class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
     protected bool $isActive = false;
 
     /**
-     * @var integer Optional: SpecialPrice active until stock level quantity
+     * @var int Optional: SpecialPrice active until stock level quantity
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("stockLimit")
      * @Serializer\Accessor(getter="getStockLimit",setter="setStockLimit")
@@ -116,7 +116,7 @@ class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
     }
 
     /**
-     * @return boolean Optional: Consider activeFrom/activeUntil date range.
+     * @return bool Optional: Consider activeFrom/activeUntil date range.
      *                  If true, specialPrice will get active from activeFrom-date and will stop after activeUntil-date.
      */
     public function getConsiderDateLimit(): bool
@@ -125,7 +125,7 @@ class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
     }
 
     /**
-     * @param boolean $considerDateLimit Optional: Consider activeFrom/activeUntil date range.
+     * @param bool $considerDateLimit Optional: Consider activeFrom/activeUntil date range.
      *                                   If true, specialPrice will get active from activeFrom-date and will
      *                                   stop after activeUntil-date.
      *
@@ -139,7 +139,7 @@ class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
     }
 
     /**
-     * @return boolean Optional: Consider stockLimit value.
+     * @return bool Optional: Consider stockLimit value.
      *                  If true, specialPrice will be only active until product
      *                  stockLevel is greater or equal stockLimit.
      */
@@ -149,7 +149,7 @@ class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
     }
 
     /**
-     * @param boolean $considerStockLimit Optional: Consider stockLimit value.
+     * @param bool $considerStockLimit Optional: Consider stockLimit value.
      *                                    If true, specialPrice will be only active until product stockLevel
      *                                    is greater or equal stockLimit.
      *
@@ -163,7 +163,7 @@ class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
     }
 
     /**
-     * @return boolean Special price is active? Default true, to activate specialPrice.
+     * @return bool Special price is active? Default true, to activate specialPrice.
      *                  Special price can still be inactivated, if date or stock Limitations do not match.
      */
     public function getIsActive(): bool
@@ -172,9 +172,9 @@ class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
     }
 
     /**
-     * @param boolean $isActive         Special price is active? Default true, to activate specialPrice.
-     *                                  Special price can still be inactivated, if date or stock Limitations do not
-     *                                  match.
+     * @param bool $isActive Special price is active? Default true, to activate specialPrice.
+     *                          Special price can still be inactivated, if date or stock Limitations do not
+     *                          match.
      *
      * @return $this
      */
@@ -186,7 +186,7 @@ class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
     }
 
     /**
-     * @return integer Optional: SpecialPrice active until stock level quantity
+     * @return int Optional: SpecialPrice active until stock level quantity
      */
     public function getStockLimit(): int
     {
@@ -194,7 +194,7 @@ class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
     }
 
     /**
-     * @param integer $stockLimit Optional: SpecialPrice active until stock level quantity
+     * @param int $stockLimit Optional: SpecialPrice active until stock level quantity
      *
      * @return $this
      */

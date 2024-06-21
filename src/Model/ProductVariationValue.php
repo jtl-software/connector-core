@@ -17,7 +17,6 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductVariationValue extends AbstractIdentity
 {
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("ean")
      * @Serializer\Accessor(getter="getEan",setter="setEan")
@@ -41,7 +40,7 @@ class ProductVariationValue extends AbstractIdentity
     protected string $sku = '';
 
     /**
-     * @var integer Optional sort number
+     * @var int Optional sort number
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
@@ -101,7 +100,7 @@ class ProductVariationValue extends AbstractIdentity
     }
 
     /**
-     * @return double Optional variation extra weight
+     * @return float Optional variation extra weight
      */
     public function getExtraWeight(): float
     {
@@ -109,7 +108,7 @@ class ProductVariationValue extends AbstractIdentity
     }
 
     /**
-     * @param double $extraWeight Optional variation extra weight
+     * @param float $extraWeight Optional variation extra weight
      *
      * @return $this
      */
@@ -141,7 +140,7 @@ class ProductVariationValue extends AbstractIdentity
     }
 
     /**
-     * @return integer Optional sort number
+     * @return int Optional sort number
      */
     public function getSort(): int
     {
@@ -149,7 +148,7 @@ class ProductVariationValue extends AbstractIdentity
     }
 
     /**
-     * @param integer $sort Optional sort number
+     * @param int $sort Optional sort number
      *
      * @return $this
      */
@@ -161,7 +160,7 @@ class ProductVariationValue extends AbstractIdentity
     }
 
     /**
-     * @return double Optional stock level
+     * @return float Optional stock level
      */
     public function getStockLevel(): float
     {
@@ -169,7 +168,7 @@ class ProductVariationValue extends AbstractIdentity
     }
 
     /**
-     * @param double $stockLevel Optional stock level
+     * @param float $stockLevel Optional stock level
      *
      * @return $this
      */

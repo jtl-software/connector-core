@@ -15,7 +15,6 @@ use JMS\Serializer\Annotation as Serializer;
 class DeliveryNoteItem extends AbstractIdentity
 {
     /**
-     * @var Identity
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerOrderItemId")
      * @Serializer\Accessor(getter="getCustomerOrderItemId",setter="setCustomerOrderItemId")
@@ -100,7 +99,7 @@ class DeliveryNoteItem extends AbstractIdentity
     }
 
     /**
-     * @return double
+     * @return float
      */
     public function getQuantity(): float
     {
@@ -108,7 +107,7 @@ class DeliveryNoteItem extends AbstractIdentity
     }
 
     /**
-     * @param double $quantity
+     * @param float $quantity
      *
      * @return $this
      */

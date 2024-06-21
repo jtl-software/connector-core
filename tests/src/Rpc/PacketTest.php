@@ -10,6 +10,7 @@ use Jtl\Connector\Core\Test\TestCase;
 
 /**
  * Class PacketTest
+ *
  * @package Jtl\Connector\Core\Test\Rpc
  */
 class PacketTest extends TestCase
@@ -34,7 +35,7 @@ class PacketTest extends TestCase
     {
         return new class extends Packet {
             /**
-             * @return boolean
+             * @return bool
              */
             public function isValid(): bool
             {

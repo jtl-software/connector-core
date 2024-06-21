@@ -21,5 +21,5 @@ interface PluginInterface
         CoreConfigInterface $config,
         Container           $container,
         EventDispatcher     $dispatcher
-    );
+    ): mixed;
 }

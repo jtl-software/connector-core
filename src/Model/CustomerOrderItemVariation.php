@@ -57,7 +57,6 @@ class CustomerOrderItemVariation extends AbstractIdentity
     protected float $surcharge = 0.0;
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("valueName")
      * @Serializer\Accessor(getter="getValueName",setter="setValueName")
@@ -158,7 +157,7 @@ class CustomerOrderItemVariation extends AbstractIdentity
     }
 
     /**
-     * @return double
+     * @return float
      */
     public function getSurcharge(): float
     {
@@ -166,7 +165,7 @@ class CustomerOrderItemVariation extends AbstractIdentity
     }
 
     /**
-     * @param double $surcharge
+     * @param float $surcharge
      *
      * @return $this
      */

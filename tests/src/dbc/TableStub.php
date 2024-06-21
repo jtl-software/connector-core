@@ -49,7 +49,7 @@ class TableStub extends AbstractTable
      * @throws Exception
      * @throws DbcRuntimeException|\RuntimeException
      */
-    public function findAll(int $fetchType = \PDO::FETCH_ASSOC, array $columns = null): array
+    public function findAll(int $fetchType = \PDO::FETCH_ASSOC, ?array $columns = null): array
     {
         if (\is_null($columns)) {
             $columns = $this->getColumnNames();
@@ -80,7 +80,7 @@ class TableStub extends AbstractTable
      * @throws DbcRuntimeException
      * @throws \RuntimeException
      */
-    public function find(array $identifier, int $fetchType = \PDO::FETCH_ASSOC, array $columns = null): array
+    public function find(array $identifier, int $fetchType = \PDO::FETCH_ASSOC, ?array $columns = null): array
     {
         if (\is_null($columns)) {
             $columns = $this->getColumnNames();

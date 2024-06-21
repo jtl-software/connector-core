@@ -10,9 +10,7 @@ use Jtl\Connector\Dbc\Connection;
 
 class QueryBuilder extends \Doctrine\DBAL\Query\QueryBuilder
 {
-    /**
-     * @var array{empty}|array<string, array<string, mixed>>|array<string, mixed>
-     */
+    /** @var array{empty}|array<string, array<string, mixed>>|array<string, mixed> */
     protected array   $tableRestrictions = [];
     protected ?string $fromTable;
     protected ?string $fromAlias;
@@ -28,8 +26,8 @@ class QueryBuilder extends \Doctrine\DBAL\Query\QueryBuilder
     public function __construct(
         Connection $connection,
         array      $tableRestrictions = [],
-        string     $fromTable = null,
-        string     $fromAlias = null
+        ?string     $fromTable = null,
+        ?string     $fromAlias = null
     ) {
         parent::__construct($connection);
         $this->tableRestrictions = $tableRestrictions;

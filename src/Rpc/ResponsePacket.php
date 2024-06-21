@@ -19,8 +19,6 @@ class ResponsePacket extends Packet
      * This member MUST NOT exist if there was an error invoking the method.
      * The value of this member is determined by the method invoked on the
      * Server.
-     *
-     * @var mixed
      */
     protected mixed $result;
 
@@ -29,13 +27,12 @@ class ResponsePacket extends Packet
      * no error triggered during invocation.
      * The value for this member MUST be an Object as defined in section 5.1.
      *
-     * @var Error|null
      * @Serializer\Type("Jtl\Connector\Core\Rpc\Error")
      */
     protected ?Error $error = null;
 
     /**
-     * @return boolean
+     * @return bool
      * @throws RpcException
      */
     public function isValid(): bool

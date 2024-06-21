@@ -104,10 +104,10 @@ class ConnectorTest extends TestCase
      * @return ConnectorController
      */
     protected function createConnectorController(
-        IdentityLinker           $linker = null,
-        ChecksumLinker           $checksumLinker = null,
-        \SessionHandlerInterface $sessionHandler = null,
-        TokenValidatorInterface  $tokenValidator = null,
+        ?IdentityLinker           $linker = null,
+        ?ChecksumLinker           $checksumLinker = null,
+        ?\SessionHandlerInterface $sessionHandler = null,
+        ?TokenValidatorInterface  $tokenValidator = null,
         string                   $featuresPath = ''
     ): ConnectorController {
         if (\is_null($linker)) {

@@ -11,9 +11,6 @@ use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 class TableDummyTest extends TestCase
 {
-    /**
-     * @var TableDummy
-     */
     protected TableDummy $table;
 
     /**

@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Class TokenTest
+ *
  * @package Jtl\Connector\Core\Test\Utilities
  */
 class TokenTest extends TestCase

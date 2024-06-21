@@ -46,7 +46,7 @@ class TableCollection
     }
 
     /**
-     * @param integer $type
+     * @param int $type
      */
     public function removeByType(int $type): void
     {
@@ -56,8 +56,8 @@ class TableCollection
     }
 
     /**
-     * @param integer $type
-     * @return boolean
+     * @param int $type
+     * @return bool
      */
     public function has(int $type): bool
     {
@@ -65,7 +65,7 @@ class TableCollection
     }
 
     /**
-     * @param integer $type
+     * @param int $type
      * @return TableInterface
      * @throws MappingTablesException
      */
@@ -98,7 +98,7 @@ class TableCollection
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isStrictMode(): bool
     {
@@ -106,7 +106,7 @@ class TableCollection
     }
 
     /**
-     * @param boolean $strictMode
+     * @param bool $strictMode
      * @return $this
      */
     public function setStrictMode(bool $strictMode): self
@@ -117,7 +117,7 @@ class TableCollection
     }
 
     /**
-     * @param integer $type
+     * @param int $type
      * @return TableDummy
      */
     protected function getTableDummy(int $type): TableDummy

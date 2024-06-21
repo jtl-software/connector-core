@@ -51,6 +51,7 @@ class CrossSellingSubscriberTest extends TestCase
 
     /**
      * //phpcs:ignore Generic.Files.LineLength.TooLong
+     *
      * @return array<int, array<int, array<string, array<int, array<string, array<int, array<int, int|string>|int|string>>|int|string>>|int>>
      */
     public function crossSellingDataProvider(): array

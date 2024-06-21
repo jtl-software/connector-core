@@ -15,7 +15,6 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductFileDownloadI18n extends AbstractI18n
 {
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("description")
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
@@ -23,7 +22,6 @@ class ProductFileDownloadI18n extends AbstractI18n
     protected string $description = '';
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")

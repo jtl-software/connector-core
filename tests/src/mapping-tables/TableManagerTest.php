@@ -13,9 +13,6 @@ use Throwable;
 
 class TableManagerTest extends TestCase
 {
-    /**
-     * @var TableManager
-     */
     protected TableManager $mtm;
 
     /**

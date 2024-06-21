@@ -65,7 +65,6 @@ class CustomerOrderPaymentInfo extends AbstractIdentity
     protected string $creditCardExpiration = '';
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("creditCardHolder")
      * @Serializer\Accessor(getter="getCreditCardHolder",setter="setCreditCardHolder")

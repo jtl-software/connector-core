@@ -24,21 +24,15 @@ class FeatureFlag
         VARIATION_PRODUCTS_SUPPORTED             = 'variation_products_supported',
         VARIATION_COMBINATIONS_SUPPORTED         = 'variation_combinations_supported';
 
-    /**
-     * @var string
-     */
     protected string $name = '';
 
-    /**
-     * @var boolean
-     */
     protected bool $active = false;
 
     /**
      * FeatureFlag constructor.
      *
-     * @param string  $name
-     * @param boolean $active
+     * @param string $name
+     * @param bool   $active
      */
     public function __construct(string $name, bool $active = false)
     {

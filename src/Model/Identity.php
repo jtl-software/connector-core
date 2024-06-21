@@ -18,7 +18,6 @@ use JMS\Serializer\Annotation as Serializer;
 class Identity extends AbstractModel
 {
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("endpoint")
      * @Serializer\Accessor(getter="getEndpoint",setter="setEndpoint")
@@ -26,7 +25,6 @@ class Identity extends AbstractModel
     protected string $endpoint = '';
 
     /**
-     * @var int
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("host")
      * @Serializer\Accessor(getter="getHost",setter="setHost")

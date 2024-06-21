@@ -6,9 +6,7 @@ namespace Jtl\Connector\Dbc;
 
 class TableCollection
 {
-    /**
-     * @var AbstractTable[]
-     */
+    /** @var AbstractTable[] */
     protected array $tables = [];
 
     /**
@@ -42,7 +40,7 @@ class TableCollection
     /**
      * @param AbstractTable $table
      *
-     * @return boolean
+     * @return bool
      * @throws \Exception
      */
     public function removeByInstance(AbstractTable $table): bool
@@ -57,7 +55,7 @@ class TableCollection
     /**
      * @param string $name
      *
-     * @return boolean
+     * @return bool
      */
     public function has(string $name): bool
     {
@@ -81,7 +79,7 @@ class TableCollection
     /**
      * @param string $name
      *
-     * @return boolean
+     * @return bool
      */
     public function removeByName(string $name): bool
     {

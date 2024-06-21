@@ -9,9 +9,7 @@ use Monolog\Processor\ProcessorInterface;
 
 class RequestProcessor implements ProcessorInterface
 {
-    /**
-     * @var array<string, string>
-     */
+    /** @var array<string, string> */
     protected array $extraFields = [];
 
     public function __construct()
@@ -56,11 +54,12 @@ class RequestProcessor implements ProcessorInterface
 
     /**
      * multiple param and return types are needed because some connectors use an older version of monolog
+     *
      * @param array{extra:array<mixed>}|LogRecord $record
      * @phpstan-param array{extra:array<mixed>} $record
      * @return array{extra:array<mixed>}|LogRecord
      */
-    public function __invoke($record): array|LogRecord // @phpstan-ignore-line
+    public function __invoke(array|LogRecord $record): array|LogRecord // @phpstan-ignore-line
     {
         if (\is_array($record)) {
             $record['extra'] = \array_merge($record['extra'], $this->extraFields);

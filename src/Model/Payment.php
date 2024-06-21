@@ -18,7 +18,6 @@ use TypeError;
 class Payment extends AbstractIdentity
 {
     /**
-     * @var Identity
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("customerOrderId")
      * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
@@ -26,7 +25,6 @@ class Payment extends AbstractIdentity
     protected Identity $customerOrderId;
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("billingInfo")
      * @Serializer\Accessor(getter="getBillingInfo",setter="setBillingInfo")
@@ -34,7 +32,6 @@ class Payment extends AbstractIdentity
     protected string $billingInfo = '';
 
     /**
-     * @var \DateTimeInterface|null
      * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("creationDate")
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
@@ -42,7 +39,6 @@ class Payment extends AbstractIdentity
     protected ?\DateTimeInterface $creationDate = null;
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("paymentModuleCode")
      * @Serializer\Accessor(getter="getPaymentModuleCode",setter="setPaymentModuleCode")
@@ -58,7 +54,6 @@ class Payment extends AbstractIdentity
     protected float $totalSum = 0.0;
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("transactionId")
      * @Serializer\Accessor(getter="getTransactionId",setter="setTransactionId")
@@ -132,7 +127,7 @@ class Payment extends AbstractIdentity
      *
      * @return $this
      */
-    public function setCreationDate(\DateTimeInterface $creationDate = null): self
+    public function setCreationDate(?\DateTimeInterface $creationDate = null): self
     {
         $this->creationDate = $creationDate;
 
@@ -160,7 +155,7 @@ class Payment extends AbstractIdentity
     }
 
     /**
-     * @return double
+     * @return float
      */
     public function getTotalSum(): float
     {
@@ -168,7 +163,7 @@ class Payment extends AbstractIdentity
     }
 
     /**
-     * @param double $totalSum
+     * @param float $totalSum
      *
      * @return $this
      */

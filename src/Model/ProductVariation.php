@@ -17,33 +17,15 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProductVariation extends AbstractIdentity
 {
-    /**
-     * @var string - Multiple values displayed as radio buttons.
-     */
-    public const TYPE_RADIO = 'radio';
-    /**
-     * @var string - Multiple values displayed as drop down.
-     */
-    public const TYPE_SELECT = 'select';
-    /**
-     * @var string - boxes showing a text
-     */
-    public const TYPE_TEXTBOX = 'textbox';
-    /**
-     * @var string - Optional text input (no values)
-     */
-    public const TYPE_FREE_TEXT = 'freetext';
-    /**
-     * @var string - Required text input (no values)
-     */
+    public const TYPE_RADIO                = 'radio';
+    public const TYPE_SELECT               = 'select';
+    public const TYPE_TEXTBOX              = 'textbox';
+    public const TYPE_FREE_TEXT            = 'freetext';
     public const TYPE_FREE_TEXT_OBLIGATORY = 'obligatory_freetext';
-    /**
-     * @var string - boxes showing a color
-     */
-    public const TYPE_IMAGE_SWATCHES = 'image_swatches';
+    public const TYPE_IMAGE_SWATCHES       = 'image_swatches';
 
     /**
-     * @var integer Optional sort number
+     * @var int Optional sort number
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
@@ -51,7 +33,6 @@ class ProductVariation extends AbstractIdentity
     protected int $sort = 0;
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("type")
      * @Serializer\Accessor(getter="getType",setter="setType")
@@ -83,7 +64,7 @@ class ProductVariation extends AbstractIdentity
     protected array $values = [];
 
     /**
-     * @return integer Optional sort number
+     * @return int Optional sort number
      */
     public function getSort(): int
     {
@@ -91,7 +72,7 @@ class ProductVariation extends AbstractIdentity
     }
 
     /**
-     * @param integer $sort Optional sort number
+     * @param int $sort Optional sort number
      *
      * @return $this
      */

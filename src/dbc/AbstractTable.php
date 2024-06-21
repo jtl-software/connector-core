@@ -16,14 +16,8 @@ use Jtl\Connector\Dbc\Schema\TableRestriction;
 
 abstract class AbstractTable
 {
-    /**
-     * @var DbManager
-     */
     protected DbManager $dbManager;
 
-    /**
-     * @var Table
-     */
     protected Table $tableSchema;
 
     /**
@@ -48,7 +42,7 @@ abstract class AbstractTable
      * @throws DbcRuntimeException
      * @throws DbcRuntimeException
      */
-    public function insert(array $data, array $types = null): int
+    public function insert(array $data, ?array $types = null): int
     {
         if (\is_null($types)) {
             $types = $this->getColumnTypesFor(...\array_keys($data));
@@ -172,7 +166,7 @@ abstract class AbstractTable
      * @param mixed[]       $identifiers
      * @param string[]|null $types
      *
-     * @return integer
+     * @return int
      * @throws DBALException
      * @throws DbcRuntimeException
      * @throws DbcRuntimeException
@@ -197,7 +191,7 @@ abstract class AbstractTable
      * @throws DbcRuntimeException
      * @throws DbcRuntimeException
      */
-    public function delete(array $identifiers, array $types = null): int
+    public function delete(array $identifiers, ?array $types = null): int
     {
         if (\is_null($types)) {
             $types = $this->getColumnTypesFor(...\array_keys($identifiers));
@@ -293,7 +287,7 @@ abstract class AbstractTable
      * @return QueryBuilder
      * @throws DbcRuntimeException
      */
-    protected function createQueryBuilder(string $tableAlias = null): QueryBuilder
+    protected function createQueryBuilder(?string $tableAlias = null): QueryBuilder
     {
         return new QueryBuilder(
             $this->getConnection(),

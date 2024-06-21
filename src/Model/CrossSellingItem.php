@@ -26,7 +26,6 @@ class CrossSellingItem extends AbstractIdentity
 
 
     /**
-     * @var CrossSellingGroup|null
      * @Serializer\Type("Jtl\Connector\Core\Model\CrossSellingGroup")
      * @Serializer\SerializedName("crossSellingGroup")
      * @Serializer\Accessor(getter="getCrossSellingGroup",setter="setCrossSellingGroup")

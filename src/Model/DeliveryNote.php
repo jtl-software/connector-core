@@ -33,7 +33,7 @@ class DeliveryNote extends AbstractIdentity implements ItemsInterface
     protected ?\DateTimeInterface $creationDate = null;
 
     /**
-     * @var boolean Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
+     * @var bool Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isFulfillment")
      * @Serializer\Accessor(getter="getIsFulfillment",setter="setIsFulfillment")
@@ -109,7 +109,7 @@ class DeliveryNote extends AbstractIdentity implements ItemsInterface
      *
      * @return $this
      */
-    public function setCreationDate(\DateTimeInterface $creationDate = null): self
+    public function setCreationDate(?\DateTimeInterface $creationDate = null): self
     {
         $this->creationDate = $creationDate;
 
@@ -117,7 +117,7 @@ class DeliveryNote extends AbstractIdentity implements ItemsInterface
     }
 
     /**
-     * @return boolean Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
+     * @return bool Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
      */
     public function getIsFulfillment(): bool
     {
@@ -125,7 +125,7 @@ class DeliveryNote extends AbstractIdentity implements ItemsInterface
     }
 
     /**
-     * @param boolean $isFulfillment Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
+     * @param bool $isFulfillment Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
      *
      * @return $this
      */

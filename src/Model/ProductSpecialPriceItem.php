@@ -66,7 +66,7 @@ class ProductSpecialPriceItem extends AbstractModel
     }
 
     /**
-     * @return double net price value
+     * @return float net price value
      */
     public function getPriceNet(): float
     {
@@ -74,7 +74,7 @@ class ProductSpecialPriceItem extends AbstractModel
     }
 
     /**
-     * @param double $priceNet net price value
+     * @param float $priceNet net price value
      *
      * @return $this
      */

@@ -15,7 +15,6 @@ use JMS\Serializer\Annotation as Serializer;
 class DeliveryNoteTrackingList extends AbstractModel
 {
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")

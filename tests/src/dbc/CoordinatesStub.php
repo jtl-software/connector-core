@@ -30,7 +30,7 @@ class CoordinatesStub extends AbstractTable
      * @param float $y
      * @param float $z
      *
-     * @return boolean
+     * @return bool
      * @throws Exception
      * @throws DbcRuntimeException
      * @throws DbcRuntimeException

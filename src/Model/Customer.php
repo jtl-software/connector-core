@@ -73,7 +73,6 @@ class Customer extends AbstractI18n implements IdentityInterface
     protected string $countryIso = '';
 
     /**
-     * @var \DateTimeInterface|null
      * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("creationDate")
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
@@ -137,7 +136,6 @@ class Customer extends AbstractI18n implements IdentityInterface
     protected string $firstName = '';
 
     /**
-     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("hasCustomerAccount")
      * @Serializer\Accessor(getter="getHasCustomerAccount",setter="setHasCustomerAccount")
@@ -145,7 +143,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     protected bool $hasCustomerAccount = false;
 
     /**
-     * @var boolean Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
+     * @var bool Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("hasNewsletterSubscription")
      * @Serializer\Accessor(getter="getHasNewsletterSubscription",setter="setHasNewsletterSubscription")
@@ -153,7 +151,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     protected bool $hasNewsletterSubscription = false;
 
     /**
-     * @var boolean Flag if customer is active (login allowed).
+     * @var bool Flag if customer is active (login allowed).
      *              True, if customer is allowed to login with his E-Mail address and password.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isActive")
@@ -313,7 +311,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @return double
+     * @return float
      */
     public function getAccountCredit(): float
     {
@@ -321,7 +319,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @param double $accountCredit
+     * @param float $accountCredit
      *
      * @return $this
      */
@@ -345,7 +343,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      *
      * @return $this
      */
-    public function setBirthday(\DateTimeInterface $birthday = null): self
+    public function setBirthday(?\DateTimeInterface $birthday = null): self
     {
         $this->birthday = $birthday;
 
@@ -425,7 +423,7 @@ class Customer extends AbstractI18n implements IdentityInterface
      *
      * @return $this
      */
-    public function setCreationDate(\DateTimeInterface $creationDate = null): self
+    public function setCreationDate(?\DateTimeInterface $creationDate = null): self
     {
         $this->creationDate = $creationDate;
 
@@ -474,7 +472,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @return double Percentage discount for customer on all prices
+     * @return float Percentage discount for customer on all prices
      */
     public function getDiscount(): float
     {
@@ -482,7 +480,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @param double $discount Percentage discount for customer on all prices
+     * @param float $discount Percentage discount for customer on all prices
      *
      * @return $this
      */
@@ -574,7 +572,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getHasCustomerAccount(): bool
     {
@@ -582,7 +580,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @param boolean $hasCustomerAccount
+     * @param bool $hasCustomerAccount
      *
      * @return $this
      */
@@ -594,7 +592,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @return boolean Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
+     * @return bool Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
      */
     public function getHasNewsletterSubscription(): bool
     {
@@ -602,7 +600,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @param boolean $hasNewsletterSubscription Optional flag if customer receives newsletter.
+     * @param bool $hasNewsletterSubscription Optional flag if customer receives newsletter.
      *                                           If true, customer wants to receive newsletter.
      *
      * @return $this
@@ -615,7 +613,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @return boolean Flag if customer is active (login allowed).
+     * @return bool Flag if customer is active (login allowed).
      *                  True, if customer is allowed to login with his E-Mail address and password.
      */
     public function getIsActive(): bool
@@ -624,7 +622,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @param boolean $isActive Flag if customer is active (login allowed).
+     * @param bool $isActive Flag if customer is active (login allowed).
      *                          True, if customer is allowed to login with his E-Mail address and password.
      *
      * @return $this

@@ -46,7 +46,7 @@ class SessionHandler extends AbstractTable implements SessionHandlerInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function close(): bool
     {
@@ -96,7 +96,7 @@ class SessionHandler extends AbstractTable implements SessionHandlerInterface
      * @param string $savePath
      * @param string $name
      *
-     * @return boolean
+     * @return bool
      * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
     public function open(string $savePath, string $name): bool
@@ -171,7 +171,7 @@ class SessionHandler extends AbstractTable implements SessionHandlerInterface
     }
 
     /**
-     * @return integer
+     * @return int
      */
     protected function calculateExpiryTime(): int
     {
@@ -181,7 +181,7 @@ class SessionHandler extends AbstractTable implements SessionHandlerInterface
     /**
      * @param string $sessionId
      *
-     * @return boolean
+     * @return bool
      * @throws \Doctrine\DBAL\Exception|Exception
      * @throws DbcRuntimeException
      * @throws \RuntimeException
@@ -201,7 +201,7 @@ class SessionHandler extends AbstractTable implements SessionHandlerInterface
      * @param string $sessionId
      * @param string $sessionData
      *
-     * @return boolean
+     * @return bool
      * @throws DBALException
      * @throws DbcRuntimeException
      * @throws \RuntimeException

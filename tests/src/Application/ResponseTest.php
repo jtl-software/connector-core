@@ -41,7 +41,7 @@ class ResponseTest extends TestCase
      * @throws InvalidArgumentException
      * @throws \InvalidArgumentException
      */
-    public function testCreateFromStatic($result): void
+    public function testCreateFromStatic(AbstractModel|array $result): void
     {
         $response = Response::create($result);
 

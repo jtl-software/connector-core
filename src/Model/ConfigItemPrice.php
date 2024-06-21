@@ -35,7 +35,7 @@ class ConfigItemPrice extends AbstractModel
     protected float $price = 0.0;
 
     /**
-     * @var integer Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
+     * @var int Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("type")
      * @Serializer\Accessor(getter="getType",setter="setType")
@@ -71,7 +71,7 @@ class ConfigItemPrice extends AbstractModel
     }
 
     /**
-     * @return double   Net price or percental value to add/deduct to/from product price (depending on type).
+     * @return float   Net price or percental value to add/deduct to/from product price (depending on type).
      *                  Positive value means surcharge, negative value means discount.
      *                  Also see configItem.vat for value added tax.
      */
@@ -81,9 +81,9 @@ class ConfigItemPrice extends AbstractModel
     }
 
     /**
-     * @param double $price Net price or percental value to add/deduct to/from product price (depending on type).
-     *                      Positive value means surcharge, negative value means discount.
-     *                      Also see configItem.vat for value added tax.
+     * @param float $price Net price or percental value to add/deduct to/from product price (depending on type).
+     *                     Positive value means surcharge, negative value means discount.
+     *                     Also see configItem.vat for value added tax.
      *
      * @return $this
      */
@@ -95,7 +95,7 @@ class ConfigItemPrice extends AbstractModel
     }
 
     /**
-     * @return integer Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
+     * @return int Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
      */
     public function getType(): int
     {
@@ -103,7 +103,7 @@ class ConfigItemPrice extends AbstractModel
     }
 
     /**
-     * @param integer $type Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
+     * @param int $type Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
      *
      * @return $this
      */

@@ -26,7 +26,7 @@ final class RpcMethod
     /**
      * @param string $methodName
      *
-     * @return boolean
+     * @return bool
      */
     public static function isMethod(string $methodName): bool
     {

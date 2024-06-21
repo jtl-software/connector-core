@@ -24,7 +24,6 @@ class RequestPacket extends Packet
      * are reserved for rpc-internal methods and extensions and MUST NOT be used
      * for anything else.
      *
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("method")
      * @Serializer\Accessor(getter="getMethod",setter="setMethod")
@@ -57,7 +56,7 @@ class RequestPacket extends Packet
      * @throws \JMS\Serializer\Exception\RuntimeException
      * @throws UnsupportedFormatException
      */
-    public static function createFromJtlrpc(string $jtlrpc, JmsSerializer $serializer = null): RequestPacket
+    public static function createFromJtlrpc(string $jtlrpc, ?JmsSerializer $serializer = null): RequestPacket
     {
         if (\is_null($serializer)) {
             $serializer = SerializerBuilder::create()->build();
@@ -96,7 +95,7 @@ class RequestPacket extends Packet
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isValid(): bool
     {

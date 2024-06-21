@@ -17,7 +17,7 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerGroup extends AbstractIdentity
 {
     /**
-     * @var boolean Optional: Show net prices default instead of gross prices
+     * @var bool Optional: Show net prices default instead of gross prices
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("applyNetPrice")
      * @Serializer\Accessor(getter="getApplyNetPrice",setter="setApplyNetPrice")
@@ -33,7 +33,7 @@ class CustomerGroup extends AbstractIdentity
     protected float $discount = 0.0;
 
     /**
-     * @var boolean Optional: Flag default customer group
+     * @var bool Optional: Flag default customer group
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isDefault")
      * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
@@ -57,7 +57,7 @@ class CustomerGroup extends AbstractIdentity
     protected array $i18ns = [];
 
     /**
-     * @return boolean Optional: Show net prices default instead of gross prices
+     * @return bool Optional: Show net prices default instead of gross prices
      */
     public function getApplyNetPrice(): bool
     {
@@ -65,7 +65,7 @@ class CustomerGroup extends AbstractIdentity
     }
 
     /**
-     * @param boolean $applyNetPrice Optional: Show net prices default instead of gross prices
+     * @param bool $applyNetPrice Optional: Show net prices default instead of gross prices
      *
      * @return $this
      */
@@ -77,7 +77,7 @@ class CustomerGroup extends AbstractIdentity
     }
 
     /**
-     * @return double Optional percentual discount on all products. Negative Value means surcharge.
+     * @return float Optional percentual discount on all products. Negative Value means surcharge.
      */
     public function getDiscount(): float
     {
@@ -85,7 +85,7 @@ class CustomerGroup extends AbstractIdentity
     }
 
     /**
-     * @param double $discount Optional percentual discount on all products. Negative Value means surcharge.
+     * @param float $discount Optional percentual discount on all products. Negative Value means surcharge.
      *
      * @return $this
      */
@@ -97,7 +97,7 @@ class CustomerGroup extends AbstractIdentity
     }
 
     /**
-     * @return boolean Optional: Flag default customer group
+     * @return bool Optional: Flag default customer group
      */
     public function getIsDefault(): bool
     {
@@ -105,7 +105,7 @@ class CustomerGroup extends AbstractIdentity
     }
 
     /**
-     * @param boolean $isDefault Optional: Flag default customer group
+     * @param bool $isDefault Optional: Flag default customer group
      *
      * @return $this
      */

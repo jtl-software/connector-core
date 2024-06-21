@@ -33,7 +33,7 @@ class ProductMediaFile extends AbstractIdentity
     protected string $path = '';
 
     /**
-     * @var integer Optional sort number
+     * @var int Optional sort number
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
@@ -113,7 +113,7 @@ class ProductMediaFile extends AbstractIdentity
     }
 
     /**
-     * @return integer Optional sort number
+     * @return int Optional sort number
      */
     public function getSort(): int
     {
@@ -121,7 +121,7 @@ class ProductMediaFile extends AbstractIdentity
     }
 
     /**
-     * @param integer $sort Optional sort number
+     * @param int $sort Optional sort number
      *
      * @return $this
      */

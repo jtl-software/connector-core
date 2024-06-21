@@ -60,7 +60,7 @@ class FileConfig extends Config implements CoreConfigInterface, ConfigSchemaConf
      * @return void
      * @throws ConfigException
      */
-    public function set($key, $value): void
+    public function set(string $key, mixed $value): void
     {
         if (empty($key)) {
             throw ConfigException::keyIsEmpty();

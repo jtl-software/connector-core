@@ -39,7 +39,7 @@ class IdentityLinkerTest extends TestCase
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
      */
-    public function testHostIdValidator($hostId, bool $shouldBeValid): void
+    public function testHostIdValidator(mixed $hostId, bool $shouldBeValid): void
     {
         $isValid = $this->createLinker()->isValidHostId($hostId);
 
@@ -67,7 +67,7 @@ class IdentityLinkerTest extends TestCase
      * @noinspection ReturnTypeCanBeDeclaredInspection
      * @noinspection ReplaceLegacyMockeryInspection
      */
-    public function createPrimaryKeyMapperMock(array $hostId = [1], array $endpointId = ['1'])
+    public function createPrimaryKeyMapperMock(array $hostId = [1], array $endpointId = ['1']): PrimaryKeyMapperInterface&LegacyMockInterface
     {
         /** @var PrimaryKeyMapperInterface&LegacyMockInterface $primaryKeyMapper */
         $primaryKeyMapper = \Mockery::mock(PrimaryKeyMapperInterface::class);
@@ -102,7 +102,7 @@ class IdentityLinkerTest extends TestCase
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
      */
-    public function testEndpointIdValidator($endpointId, bool $shouldBeValid): void
+    public function testEndpointIdValidator(mixed $endpointId, bool $shouldBeValid): void
     {
         $isValid = $this->createLinker()->isValidEndpointId($endpointId);
         $this->assertEquals($shouldBeValid, $isValid);

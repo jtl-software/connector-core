@@ -102,7 +102,7 @@ class TranslatableAttributeTest extends TestCase
      * @throws MethodParametersAlreadyConfiguredException
      * @depends      testSetType
      */
-    public function testFindValue(string $type, ?TranslatableAttributeI18n $translation, $expectedValue): void
+    public function testFindValue(string $type, ?TranslatableAttributeI18n $translation, mixed $expectedValue): void
     {
         $attribute = $this->createPartialMock(TranslatableAttribute::class, ['findTranslation']);
 
@@ -207,7 +207,7 @@ class TranslatableAttributeTest extends TestCase
      * @dataProvider getValuesProvider
      *
      * @param TranslatableAttributeI18n[]                      $translations
-     * @param array<string, bool|float|int|string|null|object> $expectedValues
+     * @param array<string, bool|float|int|string|object|null> $expectedValues
      * @param string|null                                      $castToType
      *
      * @throws ExpectationFailedException
@@ -215,7 +215,7 @@ class TranslatableAttributeTest extends TestCase
      * @throws JsonException
      * @throws TranslatableAttributeException
      */
-    public function testGetValues(array $translations, array $expectedValues, string $castToType = null): void
+    public function testGetValues(array $translations, array $expectedValues, ?string $castToType = null): void
     {
         $attribute = (new TranslatableAttribute())
             ->setI18ns(...$translations);

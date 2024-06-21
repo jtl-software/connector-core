@@ -25,7 +25,6 @@ class ConfigGroup extends AbstractIdentity
     protected string $comment = '';
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("imagePath")
      * @Serializer\Accessor(getter="getImagePath",setter="setImagePath")
@@ -33,7 +32,7 @@ class ConfigGroup extends AbstractIdentity
     protected string $imagePath = '';
 
     /**
-     * @var integer Optional maximum number allowed selections. Default 0 for no maximum limitation.
+     * @var int Optional maximum number allowed selections. Default 0 for no maximum limitation.
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("maximumSelection")
      * @Serializer\Accessor(getter="getMaximumSelection",setter="setMaximumSelection")
@@ -41,7 +40,7 @@ class ConfigGroup extends AbstractIdentity
     protected int $maximumSelection = 0;
 
     /**
-     * @var integer Optional minimum number required selections. Default 0 for no minimum requirement.
+     * @var int Optional minimum number required selections. Default 0 for no minimum requirement.
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("minimumSelection")
      * @Serializer\Accessor(getter="getMinimumSelection",setter="setMinimumSelection")
@@ -49,7 +48,7 @@ class ConfigGroup extends AbstractIdentity
     protected int $minimumSelection = 0;
 
     /**
-     * @var integer Optional sort order number
+     * @var int Optional sort order number
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
@@ -57,7 +56,7 @@ class ConfigGroup extends AbstractIdentity
     protected int $sort = 0;
 
     /**
-     * @var integer Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
+     * @var int Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("type")
      * @Serializer\Accessor(getter="getType",setter="setType")
@@ -113,7 +112,7 @@ class ConfigGroup extends AbstractIdentity
     }
 
     /**
-     * @return integer Optional maximum number allowed selections. Default 0 for no maximum limitation.
+     * @return int Optional maximum number allowed selections. Default 0 for no maximum limitation.
      */
     public function getMaximumSelection(): int
     {
@@ -121,7 +120,7 @@ class ConfigGroup extends AbstractIdentity
     }
 
     /**
-     * @param integer $maximumSelection Optional maximum number allowed selections. Default 0 for no maximum limitation.
+     * @param int $maximumSelection Optional maximum number allowed selections. Default 0 for no maximum limitation.
      *
      * @return $this
      */
@@ -133,7 +132,7 @@ class ConfigGroup extends AbstractIdentity
     }
 
     /**
-     * @return integer Optional minimum number required selections. Default 0 for no minimum requirement.
+     * @return int Optional minimum number required selections. Default 0 for no minimum requirement.
      */
     public function getMinimumSelection(): int
     {
@@ -141,7 +140,7 @@ class ConfigGroup extends AbstractIdentity
     }
 
     /**
-     * @param integer $minimumSelection Optional minimum number required selections.
+     * @param int $minimumSelection Optional minimum number required selections.
      *                                  Default 0 for no minimum requirement.
      *
      * @return $this
@@ -154,7 +153,7 @@ class ConfigGroup extends AbstractIdentity
     }
 
     /**
-     * @return integer Optional sort order number
+     * @return int Optional sort order number
      */
     public function getSort(): int
     {
@@ -162,7 +161,7 @@ class ConfigGroup extends AbstractIdentity
     }
 
     /**
-     * @param integer $sort Optional sort order number
+     * @param int $sort Optional sort order number
      *
      * @return $this
      */
@@ -174,7 +173,7 @@ class ConfigGroup extends AbstractIdentity
     }
 
     /**
-     * @return integer Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
+     * @return int Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
      */
     public function getType(): int
     {
@@ -182,7 +181,7 @@ class ConfigGroup extends AbstractIdentity
     }
 
     /**
-     * @param integer $type Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
+     * @param int $type Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
      *
      * @return $this
      */

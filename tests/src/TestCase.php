@@ -194,9 +194,6 @@ class TestCase extends \Jtl\Connector\MappingTables\TestCase
         return $this->rootDir;
     }
 
-    /**
-     *
-     */
     protected function setUp(): void
     {
         $_POST = [];

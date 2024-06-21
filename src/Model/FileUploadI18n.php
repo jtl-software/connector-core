@@ -15,7 +15,6 @@ use JMS\Serializer\Annotation as Serializer;
 class FileUploadI18n extends AbstractI18n
 {
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("description")
      * @Serializer\Accessor(getter="getDescription",setter="setDescription")
@@ -23,7 +22,6 @@ class FileUploadI18n extends AbstractI18n
     protected string $description = '';
 
     /**
-     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("fileUploadId")
      * @Serializer\Accessor(getter="getFileUploadId",setter="setFileUploadId")
@@ -31,7 +29,6 @@ class FileUploadI18n extends AbstractI18n
     protected int $fileUploadId = 0;
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
@@ -67,7 +64,7 @@ class FileUploadI18n extends AbstractI18n
     }
 
     /**
-     * @param integer $fileUploadId
+     * @param int $fileUploadId
      *
      * @return $this
      */

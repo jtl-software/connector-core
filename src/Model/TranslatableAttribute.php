@@ -36,21 +36,18 @@ class TranslatableAttribute extends AbstractIdentity
         self::TYPE_STRING,
     ];
     /**
-     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isTranslated")
      * @Serializer\Accessor(getter="getIsTranslated",setter="setIsTranslated")
      */
     protected bool $isTranslated = false;
     /**
-     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isCustomProperty")
      * @Serializer\Accessor(getter="getIsCustomProperty",setter="setIsCustomProperty")
      */
     protected bool $isCustomProperty = false;
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("type")
      * @Serializer\Accessor(getter="getType",setter="setType")
@@ -224,7 +221,7 @@ class TranslatableAttribute extends AbstractIdentity
     /**
      * @param string $languageIso
      *
-     * @return bool|float|int|string|null|array<mixed>
+     * @return bool|float|int|string|array<mixed>|null
      * @throws TranslatableAttributeException
      * @throws JsonException
      */
@@ -241,7 +238,7 @@ class TranslatableAttribute extends AbstractIdentity
     /**
      * @param string|null $type
      *
-     * @return array<string, bool|float|int|string|null|array<mixed>>
+     * @return array<string, bool|float|int|string|array<mixed>|null>
      * @throws TranslatableAttributeException
      * @throws JsonException
      */
