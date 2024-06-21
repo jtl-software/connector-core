@@ -54,13 +54,15 @@ class FileConfig extends Config implements CoreConfigInterface, ConfigSchemaConf
     }
 
     /**
-     * @param string $key
-     * @param mixed  $value
+     * @phpstan-param string $key
+     *
+     * @param mixed $key
+     * @param mixed $value
      *
      * @return void
      * @throws ConfigException
      */
-    public function set(string $key, mixed $value): void
+    public function set(mixed $key, mixed $value): void
     {
         if (empty($key)) {
             throw ConfigException::keyIsEmpty();

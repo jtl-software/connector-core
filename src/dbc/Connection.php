@@ -60,6 +60,7 @@ class Connection extends \Doctrine\DBAL\Connection
         if (!isset($this->tableRestrictions[$tableExpression])) {
             $this->tableRestrictions[$tableExpression] = [];
         }
+
         return $this->tableRestrictions[$tableExpression];
     }
 
@@ -84,11 +85,14 @@ class Connection extends \Doctrine\DBAL\Connection
             $this->rollback();
             throw $e;
         }
+
         return $affectedRows;
     }
 
     /**
-     * @param string   $tableExpression
+     * @phpstan-param string $tableExpression
+     *
+     * @param mixed    $tableExpression
      * @param mixed[]  $data
      * @param string[] $types
      *
@@ -97,7 +101,7 @@ class Connection extends \Doctrine\DBAL\Connection
      * @throws DbcRuntimeException|\RuntimeException
      * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
-    public function insert(string $tableExpression, array $data, array $types = []): int
+    public function insert(mixed $tableExpression, array $data, array $types = []): int
     {
         $return = parent::insert(
             $tableExpression,
@@ -113,7 +117,9 @@ class Connection extends \Doctrine\DBAL\Connection
     }
 
     /**
-     * @param string   $tableExpression
+     * @phpstan-param string $tableExpression
+     *
+     * @param mixed    $tableExpression
      * @param mixed[]  $data
      * @param mixed[]  $identifiers
      * @param string[] $types
@@ -123,7 +129,7 @@ class Connection extends \Doctrine\DBAL\Connection
      * @throws DbcRuntimeException|\RuntimeException
      * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
-    public function update(string $tableExpression, array $data, array $identifiers, array $types = []): int
+    public function update(mixed $tableExpression, array $data, array $identifiers, array $types = []): int
     {
         $restrictions = $this->getTableRestrictions($tableExpression);
         $data         = \array_merge($data, $restrictions);
@@ -134,11 +140,14 @@ class Connection extends \Doctrine\DBAL\Connection
         if (!\is_numeric($return)) {
             throw new RuntimeException('update must return a numeric value.');
         }
+
         return (int)$return;
     }
 
     /**
-     * @param string   $tableExpression
+     * @phpstan-param string $tableExpression
+     *
+     * @param mixed    $tableExpression
      * @param mixed[]  $identifiers
      * @param string[] $types
      *
@@ -147,7 +156,7 @@ class Connection extends \Doctrine\DBAL\Connection
      * @throws DbcRuntimeException|\RuntimeException
      * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
-    public function delete(string $tableExpression, array $identifiers, array $types = []): int
+    public function delete(mixed $tableExpression, array $identifiers, array $types = []): int
     {
         $restrictions = $this->getTableRestrictions($tableExpression);
         $identifiers  = \array_merge($identifiers, $restrictions);
@@ -157,6 +166,7 @@ class Connection extends \Doctrine\DBAL\Connection
         if (!\is_numeric($return)) {
             throw new RuntimeException('delete must return a numeric value.');
         }
+
         return (int)$return;
     }
 }

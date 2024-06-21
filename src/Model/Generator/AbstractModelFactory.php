@@ -9,6 +9,7 @@ use Doctrine\Common\Annotations\AnnotationException;
 use Faker\Factory;
 use Faker\Generator;
 use JMS\Serializer\Exception\InvalidArgumentException;
+use JMS\Serializer\Exception\LogicException;
 use JMS\Serializer\Serializer;
 use Jtl\Connector\Core\Model\AbstractModel;
 use Jtl\Connector\Core\Model\Identity;
@@ -37,13 +38,17 @@ abstract class AbstractModelFactory
      * @param Generator|null  $faker
      * @param Serializer|null $serializer
      *
-     * @throws InvalidArgumentException
      * @throws AnnotationException
+     * @throws InvalidArgumentException
      * @throws \InvalidArgumentException
+     * @throws LogicException
      * @throws \JMS\Serializer\Exception\RuntimeException
      */
-    public function __construct(string $defaultLocale = 'de_DE', ?Generator $faker = null, ?Serializer $serializer = null)
-    {
+    public function __construct(
+        string      $defaultLocale = 'de_DE',
+        ?Generator  $faker = null,
+        ?Serializer $serializer = null
+    ) {
         $this->defaultLocale = $defaultLocale;
 
         if ($faker === null) {
@@ -71,6 +76,7 @@ abstract class AbstractModelFactory
         ) {
             return self::getIdentity($identityType, $endpoint);
         }
+
         return null;
     }
 
@@ -99,6 +105,7 @@ abstract class AbstractModelFactory
                 self::$identities[$identityType][$endpoint],
             ];
         }
+
         return null;
     }
 
@@ -126,6 +133,7 @@ abstract class AbstractModelFactory
         for ($i = 0; $i < $quantity; $i++) {
             $models[] = $this->makeOneArray(\array_merge($globalOverrides, $specificOverrides[$i] ?? []));
         }
+
         return $models;
     }
 
@@ -244,8 +252,8 @@ abstract class AbstractModelFactory
      * @throws RuntimeException
      */
     public static function createFactory(
-        string     $name,
-        string     $locale = 'de_DE',
+        string      $name,
+        string      $locale = 'de_DE',
         ?Generator  $faker = null,
         ?Serializer $serializer = null
     ): AbstractModelFactory {

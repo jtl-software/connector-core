@@ -493,6 +493,7 @@ class Application
      * @param string              $pluginsDir
      *
      * @throws DirectoryNotFoundException
+     * @throws \TypeError
      */
     protected function loadPlugins(
         CoreConfigInterface $config,
