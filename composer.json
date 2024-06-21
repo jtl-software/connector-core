@@ -12,7 +12,7 @@
         "role": "Founder"
     }],
     "require": {
-        "php": ">=8.0",
+        "php": ">=8.1",
         "jms/serializer": "^3.3",
         "hassankhan/config": "^3.0",
         "monolog/monolog": "*",
