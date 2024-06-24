@@ -24,6 +24,10 @@ class CustomerOrderShippingAddress extends AbstractOrderAddress
      */
     protected Identity $customerId;
 
+    /**
+     * @param string $endpoint
+     * @param int    $host
+     */
     public function __construct(string $endpoint = '', int $host = 0)
     {
         parent::__construct($endpoint, $host);

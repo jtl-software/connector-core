@@ -19,6 +19,8 @@ class TableDummy implements TableInterface
 
     /**
      * @param int $type
+     *
+     * @return void
      */
     public function setType(int $type): void
     {
@@ -95,9 +97,9 @@ class TableDummy implements TableInterface
         array $where = [],
         array $parameters = [],
         array $orderBy = [],
-        ?int   $limit = null,
-        ?int   $offset = null,
-        ?int   $type = null
+        ?int  $limit = null,
+        ?int  $offset = null,
+        ?int  $type = null
     ): int {
         return 0;
     }
@@ -116,9 +118,9 @@ class TableDummy implements TableInterface
         array $where = [],
         array $parameters = [],
         array $orderBy = [],
-        ?int   $limit = null,
-        ?int   $offset = null,
-        ?int   $type = null
+        ?int  $limit = null,
+        ?int  $offset = null,
+        ?int  $type = null
     ): array {
         return [];
     }

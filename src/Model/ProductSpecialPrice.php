@@ -126,8 +126,8 @@ class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
 
     /**
      * @param bool $considerDateLimit Optional: Consider activeFrom/activeUntil date range.
-     *                                   If true, specialPrice will get active from activeFrom-date and will
-     *                                   stop after activeUntil-date.
+     *                                If true, specialPrice will get active from activeFrom-date and will
+     *                                stop after activeUntil-date.
      *
      * @return $this
      */
@@ -150,8 +150,8 @@ class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
 
     /**
      * @param bool $considerStockLimit Optional: Consider stockLimit value.
-     *                                    If true, specialPrice will be only active until product stockLevel
-     *                                    is greater or equal stockLimit.
+     *                                 If true, specialPrice will be only active until product stockLevel
+     *                                 is greater or equal stockLimit.
      *
      * @return $this
      */
@@ -173,8 +173,8 @@ class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
 
     /**
      * @param bool $isActive Special price is active? Default true, to activate specialPrice.
-     *                          Special price can still be inactivated, if date or stock Limitations do not
-     *                          match.
+     *                       Special price can still be inactivated, if date or stock Limitations do not
+     *                       match.
      *
      * @return $this
      */
@@ -206,7 +206,9 @@ class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
     }
 
     /**
-     * @param ProductSpecialPriceItem $item
+     * @phpstan-param ProductSpecialPriceItem $item
+     *
+     * @param AbstractModel $item
      *
      * @return $this
      */
@@ -226,7 +228,9 @@ class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
     }
 
     /**
-     * @param ProductSpecialPriceItem ...$items
+     * @phpstan-param ProductSpecialPriceItem ...$items
+     *
+     * @param AbstractModel ...$items
      *
      * @return $this
      */

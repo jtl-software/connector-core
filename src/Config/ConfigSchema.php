@@ -145,6 +145,7 @@ class ConfigSchema
     /**
      * @param CoreConfigInterface $config
      *
+     * @return void
      * @throws ConfigException
      */
     public function validateConfig(CoreConfigInterface $config): void

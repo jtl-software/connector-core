@@ -6,7 +6,7 @@ namespace Jtl\Connector\MappingTables;
 
 class TableCollection
 {
-    protected bool $strictMode = false;
+    protected bool       $strictMode = false;
     protected TableDummy $tableDummy;
 
     /** @var array<TableInterface> */
@@ -24,6 +24,7 @@ class TableCollection
 
     /**
      * @param TableInterface $table
+     *
      * @return $this
      */
     public function set(TableInterface $table): self
@@ -37,6 +38,8 @@ class TableCollection
 
     /**
      * @param TableInterface $table
+     *
+     * @return void
      */
     public function removeByInstance(TableInterface $table): void
     {
@@ -47,6 +50,8 @@ class TableCollection
 
     /**
      * @param int $type
+     *
+     * @return void
      */
     public function removeByType(int $type): void
     {
@@ -57,6 +62,7 @@ class TableCollection
 
     /**
      * @param int $type
+     *
      * @return bool
      */
     public function has(int $type): bool
@@ -66,6 +72,7 @@ class TableCollection
 
     /**
      * @param int $type
+     *
      * @return TableInterface
      * @throws MappingTablesException
      */
@@ -107,6 +114,7 @@ class TableCollection
 
     /**
      * @param bool $strictMode
+     *
      * @return $this
      */
     public function setStrictMode(bool $strictMode): self
@@ -118,6 +126,7 @@ class TableCollection
 
     /**
      * @param int $type
+     *
      * @return TableDummy
      */
     protected function getTableDummy(int $type): TableDummy

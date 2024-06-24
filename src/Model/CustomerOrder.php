@@ -17,19 +17,14 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class CustomerOrder extends AbstractI18n implements IdentityInterface, ItemsInterface
 {
-    public const PAYMENT_STATUS_COMPLETED = 'completed';
-
-    public const PAYMENT_STATUS_PARTIALLY = 'partially_paid';
-
-    public const PAYMENT_STATUS_UNPAID = 'unpaid';
-
-    public const STATUS_NEW = 'new';
-
-    public const STATUS_CANCELLED = 'cancelled';
-
-    public const STATUS_PARTIALLY_SHIPPED = 'partially_shipped';
-
-    public const STATUS_SHIPPED = 'shipped';
+    public const
+        PAYMENT_STATUS_COMPLETED = 'completed',
+        PAYMENT_STATUS_PARTIALLY = 'partially_paid',
+        PAYMENT_STATUS_UNPAID    = 'unpaid',
+        STATUS_NEW               = 'new',
+        STATUS_CANCELLED         = 'cancelled',
+        STATUS_PARTIALLY_SHIPPED = 'partially_shipped',
+        STATUS_SHIPPED           = 'shipped';
 
     /**
      * @var Identity Optional reference to customer.
@@ -735,7 +730,9 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface, ItemsInte
     }
 
     /**
-     * @param CustomerOrderItem $item
+     * @phpstan-param CustomerOrderItem $item
+     *
+     * @param AbstractModel $item
      *
      * @return $this
      */
@@ -755,7 +752,9 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface, ItemsInte
     }
 
     /**
-     * @param CustomerOrderItem ...$items
+     * @phpstan-param CustomerOrderItem ...$items
+     *
+     * @param AbstractModel ...$items
      *
      * @return $this
      */

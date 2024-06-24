@@ -16,6 +16,7 @@ use Jtl\Connector\Core\Test\TestCase;
 class PacketTest extends TestCase
 {
     /**
+     * @return void
      * @throws \ReflectionException
      * @throws \Exception
      */

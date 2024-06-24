@@ -30,7 +30,7 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
     /**
      * Sqlite 3 Database object
      */
-    protected \SQLite3 $db;
+    protected \SQLite3        $db;
     protected LoggerInterface $logger;
 
     /**
@@ -66,6 +66,8 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
      * Set Options
      *
      * @param array<string, mixed>|null $options
+     *
+     * @return void
      */
     public function setOptions(?array $options = null): void
     {
@@ -177,34 +179,30 @@ class Sqlite3 implements DatabaseInterface, LoggerAwareInterface
         if ($result !== false && $result->fetchArray()) {
             return true;
         }
+
         return false;
     }
 
     /**
-     * @param $query
+     * @param string $query
      *
      * @return array<int, array<string, mixed>>|bool|int|null
      * @throws \RuntimeException
      * @throws \Throwable
      */
-    public function query($query): int|bool|array|null
+    public function query(string $query): int|bool|array|null
     {
         if (($length = \strpos($query, ' ')) === false) {
             throw new \RuntimeException('$length must not be false.');
         }
         $command = \substr($query, 0, $length);
 
-        switch (\strtoupper($command)) {
-            case 'SELECT':
-                return $this->fetch($query);
-            case 'UPDATE':
-            case 'DELETE':
-                return $this->exec($query);
-            case 'INSERT':
-                return $this->insert($query);
-        }
-
-        return null;
+        return match (\strtoupper($command)) {
+            'SELECT'           => $this->fetch($query),
+            'UPDATE', 'DELETE' => $this->exec($query),
+            'INSERT'           => $this->insert($query),
+            default            => null,
+        };
     }
 
     /**

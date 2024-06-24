@@ -26,6 +26,8 @@ class CrossSellingSubscriber implements EventSubscriberInterface
 
     /**
      * @param PreDeserializeEvent $event
+     *
+     * @return void
      */
     public function onPreDeserialize(PreDeserializeEvent $event): void
     {

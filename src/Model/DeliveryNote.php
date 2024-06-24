@@ -157,7 +157,9 @@ class DeliveryNote extends AbstractIdentity implements ItemsInterface
     }
 
     /**
-     * @param DeliveryNoteItem $item
+     * @phpstan-param DeliveryNoteItem $item
+     *
+     * @param AbstractModel $item
      *
      * @return $this
      */
@@ -177,7 +179,9 @@ class DeliveryNote extends AbstractIdentity implements ItemsInterface
     }
 
     /**
-     * @param DeliveryNoteItem ...$items
+     * @phpstan-param DeliveryNoteItem ...$items
+     *
+     * @param AbstractModel ...$items
      *
      * @return $this
      */

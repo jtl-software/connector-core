@@ -71,6 +71,9 @@ class FileConfig extends Config implements CoreConfigInterface, ConfigSchemaConf
         parent::set($key, $value);
     }
 
+    /**
+     * @return void
+     */
     public function write(): void
     {
         $this->toFile($this->filePath);

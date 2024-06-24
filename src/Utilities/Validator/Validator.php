@@ -23,6 +23,7 @@ class Validator implements ValidatorInterface
 
     /**
      * @inheritDoc
+     * @throws \TypeError
      */
     public function string(): string
     {
@@ -39,6 +40,7 @@ class Validator implements ValidatorInterface
 
     /**
      * @inheritDoc
+     * @throws \TypeError
      */
     public function throwException(): void
     {
@@ -60,6 +62,7 @@ class Validator implements ValidatorInterface
 
     /**
      * @inheritDoc
+     * @throws \TypeError
      */
     public function int(): int
     {
@@ -76,6 +79,7 @@ class Validator implements ValidatorInterface
 
     /**
      * @inheritDoc
+     * @throws \TypeError
      */
     public function float(): float
     {
@@ -92,6 +96,7 @@ class Validator implements ValidatorInterface
 
     /**
      * @inheritDoc
+     * @throws \TypeError
      */
     public function bool(): bool
     {
@@ -108,6 +113,7 @@ class Validator implements ValidatorInterface
 
     /**
      * @inheritDoc
+     * @throws \TypeError
      */
     public function instanceOf(string $class): bool
     {
@@ -121,6 +127,8 @@ class Validator implements ValidatorInterface
 
     /**
      * @inheritDoc
+     * @throws PropertyDoesNotExist
+     * @throws \TypeError
      */
     public function hasProperty(string $propertyName): bool
     {
@@ -134,6 +142,7 @@ class Validator implements ValidatorInterface
 
     /**
      * @inheritDoc
+     * @throws \TypeError
      */
     public function isObject(): bool
     {
@@ -166,6 +175,7 @@ class Validator implements ValidatorInterface
 
     /**
      * @inheritDoc
+     * @throws \TypeError
      */
     public function array(): array
     {
@@ -182,6 +192,7 @@ class Validator implements ValidatorInterface
 
     /**
      * @inheritDoc
+     * @throws \InvalidArgumentException
      */
     public function isValidArrayKeyName(mixed $keyName): bool
     {
@@ -194,6 +205,8 @@ class Validator implements ValidatorInterface
 
     /**
      * @inheritDoc
+     * @throws MethodDoesNotExistException
+     * @throws \TypeError
      */
     public function hasMethod(string $methodName): bool
     {

@@ -54,9 +54,9 @@ class TableManager implements PrimaryKeyMapperInterface
     }
 
     /**
+     * @param int    $type
      * @param string $endpointId
      * @param int    $hostId
-     * @param int    $type
      *
      * @return bool
      * @throws MappingTablesException
@@ -118,6 +118,7 @@ class TableManager implements PrimaryKeyMapperInterface
         foreach ($this->collection->toArray() as $table) {
             $count += $table->count();
         }
+
         return $count;
     }
 
@@ -150,6 +151,7 @@ class TableManager implements PrimaryKeyMapperInterface
         foreach ($tables as $table) {
             $this->setMappingTable($table);
         }
+
         return $this;
     }
 
@@ -161,6 +163,7 @@ class TableManager implements PrimaryKeyMapperInterface
     public function setMappingTable(TableInterface $table): TableManager
     {
         $this->collection->set($table);
+
         return $this;
     }
 
@@ -180,6 +183,7 @@ class TableManager implements PrimaryKeyMapperInterface
     public function setStrictMode(bool $strictMode): TableManager
     {
         $this->collection->setStrictMode($strictMode);
+
         return $this;
     }
 }

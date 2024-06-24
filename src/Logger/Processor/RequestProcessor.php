@@ -12,6 +12,9 @@ class RequestProcessor implements ProcessorInterface
     /** @var array<string, string> */
     protected array $extraFields = [];
 
+    /**
+     * RequestProcessor constructor.
+     */
     public function __construct()
     {
         $this->extraFields = [

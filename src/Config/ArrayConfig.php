@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Config;
 
+use Jtl\Connector\Core\Exception\ConfigException;
 use Noodlehaus\AbstractConfig;
 
 class ArrayConfig extends AbstractConfig implements CoreConfigInterface
 {
     /**
      * @inheritDoc
+     * @throws \TypeError
      */
     public function getBool(string $valueName, ?bool $default = null): bool
     {
@@ -23,6 +25,7 @@ class ArrayConfig extends AbstractConfig implements CoreConfigInterface
 
     /**
      * @inheritDoc
+     * @throws \TypeError
      */
     public function getString(string $valueName, ?string $default = null): string
     {
@@ -36,6 +39,7 @@ class ArrayConfig extends AbstractConfig implements CoreConfigInterface
 
     /**
      * @inheritDoc
+     * @throws \TypeError
      */
     public function getInt(string $valueName, ?int $default = null): int
     {
@@ -49,6 +53,7 @@ class ArrayConfig extends AbstractConfig implements CoreConfigInterface
 
     /**
      * @inheritDoc
+     * @throws \TypeError
      */
     public function getFloat(string $valueName, ?float $default = null): float
     {

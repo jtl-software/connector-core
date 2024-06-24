@@ -28,6 +28,7 @@ class ResponsePacketTest extends TestCase
      * @param string     $jtlRpc
      * @param bool       $isValid
      *
+     * @return void
      * @throws RpcException
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException

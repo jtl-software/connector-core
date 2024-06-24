@@ -1083,8 +1083,8 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @param bool $considerStock Consider stock level?
-     *                               If true, product can only be purchased with a positive stockLevel or when
-     *                               permitNegativeStock is set to true
+     *                            If true, product can only be purchased with a positive stockLevel or when
+     *                            permitNegativeStock is set to true
      *
      * @return $this
      */
@@ -1105,7 +1105,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @param bool $considerVariationStock Optional: Consider stock levels of productVariations.
-     *                                        Same as considerStock but for variations.
+     *                                     Same as considerStock but for variations.
      *
      * @return $this
      */
@@ -1368,7 +1368,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @param bool $isNewProduct Optional flag new product.
-     *                              If true, product will be highlighted as new (creation date may also be considered)
+     *                           If true, product will be highlighted as new (creation date may also be considered)
      *
      * @return $this
      */
@@ -1410,8 +1410,8 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @param bool $isTopProduct Optional flag top product.
-     *                              If true, product will be highlighted as top product
-     *                              (e.g. in product lists or in special boxes)
+     *                           If true, product will be highlighted as top product
+     *                           (e.g. in product lists or in special boxes)
      *
      * @return $this
      */
@@ -1755,8 +1755,8 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
 
     /**
      * @param bool $permitNegativeStock Optional Permit negative stock / allow overselling.
-     *                                     If true, product can be purchased even if stockLevel is less or equal 0
-     *                                     and considerStock is true.
+     *                                  If true, product can be purchased even if stockLevel is less or equal 0
+     *                                  and considerStock is true.
      *
      * @return $this
      */
@@ -2069,7 +2069,9 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     }
 
     /**
-     * @param ProductAttribute ...$attributes
+     * @phpstan-param ProductAttribute ...$attributes
+     *
+     * @param TranslatableAttribute ...$attributes
      *
      * @return $this
      */

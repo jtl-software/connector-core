@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Utilities\Validator;
 
-use InvalidArgumentException;
 use Jtl\Connector\Core\Exception\ArrayKeyDoesNotExistException;
 use Jtl\Connector\Core\Exception\MethodDoesNotExistException;
 use PHPStan\BetterReflection\Reflection\Exception\PropertyDoesNotExist;
-use TypeError;
 
 interface ValidatorInterface
 {
@@ -68,7 +66,7 @@ interface ValidatorInterface
 
     /**
      * @return void
-     * @throws TypeError
+     * @throws \TypeError
      */
     public function throwException(): void;
 
@@ -77,7 +75,7 @@ interface ValidatorInterface
      *
      * @return bool
      * @throws PropertyDoesNotExist
-     * @throws TypeError
+     * @throws \TypeError
      */
     public function hasProperty(string $propertyName): bool;
 
@@ -86,8 +84,8 @@ interface ValidatorInterface
      *
      * @return bool
      * @throws ArrayKeyDoesNotExistException
-     * @throws TypeError
-     * @throws InvalidArgumentException
+     * @throws \TypeError
+     * @throws \InvalidArgumentException
      */
     public function hasKey(int|string $keyName): bool;
 
@@ -95,7 +93,7 @@ interface ValidatorInterface
      * @param mixed $keyName
      *
      * @return bool
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function isValidArrayKeyName(mixed $keyName): bool;
 
@@ -104,7 +102,7 @@ interface ValidatorInterface
      *
      * @return bool
      * @throws MethodDoesNotExistException
-     * @throws TypeError
+     * @throws \TypeError
      */
     public function hasMethod(string $methodName): bool;
 }
