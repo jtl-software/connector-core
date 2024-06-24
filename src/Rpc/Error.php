@@ -6,7 +6,6 @@ namespace Jtl\Connector\Core\Rpc;
 
 use JMS\Serializer\Annotation as Serializer;
 use Jtl\Connector\Core\Exception\RpcException;
-use RuntimeException;
 
 /**
  * Rpc Error
@@ -48,7 +47,7 @@ class Error
      * @param string|null $additionalMessage
      *
      * @return string
-     * @throws RuntimeException
+     * @throws \RuntimeException
      */
     public static function createDataFromException(\Throwable $exception, ?string $additionalMessage = null): string
     {
@@ -125,6 +124,7 @@ class Error
     /**
      * Validates a Rpc Error
      *
+     * @return void
      * @throws RpcException
      */
     final public function validate(): void

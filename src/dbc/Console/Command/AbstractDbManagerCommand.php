@@ -11,7 +11,7 @@ use Symfony\Component\Console\Exception\LogicException;
 abstract class AbstractDbManagerCommand extends Command
 {
     /** @var array<string, mixed> */
-    protected array $dbParams;
+    protected array     $dbParams;
     protected DbManager $dbManager;
 
     /**
@@ -31,6 +31,8 @@ abstract class AbstractDbManagerCommand extends Command
 
     /**
      * @param callable $callback
+     *
+     * @return void
      */
     public function registerTables(callable $callback): void
     {

@@ -12,6 +12,8 @@ interface IdentityInterface
     public function getId(): Identity;
 
     /**
+     * @param Identity $identity
+     *
      * @return $this
      */
     public function setId(Identity $identity): self;

@@ -8,7 +8,6 @@ use Faker\Extension\ExtensionNotFound;
 use Jtl\Connector\Core\Exception\MustNotBeNullException;
 use Jtl\Connector\Core\Model\TaxRate;
 use Jtl\Connector\Core\Utilities\Validator\Validate;
-use RuntimeException;
 
 class TaxRateFactory extends AbstractModelFactory
 {
@@ -17,7 +16,7 @@ class TaxRateFactory extends AbstractModelFactory
 
     /**
      * @return array<string, string|float>
-     * @throws RuntimeException
+     * @throws \RuntimeException
      * @throws ExtensionNotFound
      * @throws MustNotBeNullException
      * @throws \TypeError
@@ -32,7 +31,9 @@ class TaxRateFactory extends AbstractModelFactory
 
     /**
      * @return string
-     * @throws \RuntimeException|\TypeError
+     * @throws MustNotBeNullException
+     * @throws \RuntimeException
+     * @throws \TypeError
      */
     protected function getUnusedCountryIso(): string
     {

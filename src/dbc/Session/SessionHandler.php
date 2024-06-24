@@ -228,6 +228,7 @@ class SessionHandler extends AbstractTable implements SessionHandlerInterface
     /**
      * @param Table $tableSchema
      *
+     * @return void
      * @throws SchemaException
      * @throws \Doctrine\DBAL\Exception
      */

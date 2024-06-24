@@ -41,7 +41,8 @@ class CrossSellingItem extends AbstractIdentity
     protected array $productIds = [];
 
     /**
-     * Constructor
+     * @param string $endpoint
+     * @param int    $host
      */
     public function __construct(string $endpoint = '', int $host = 0)
     {

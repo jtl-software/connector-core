@@ -156,6 +156,7 @@ class DbManager
     }
 
     /**
+     * @return void
      * @throws \Throwable
      */
     public function updateDatabaseSchema(): void

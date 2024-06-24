@@ -13,7 +13,6 @@ use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use ReturnTypeWillChange;
-use RuntimeException;
 use Throwable;
 
 class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterface
@@ -31,7 +30,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      *
      * @throws SessionException
      * @throws DatabaseException
-     * @throws RuntimeException
+     * @throws \RuntimeException
      */
     public function __construct(string $databaseDir)
     {
@@ -168,7 +167,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      *
      * @return bool
      * @throws DatabaseException
-     * @throws RuntimeException
+     * @throws \RuntimeException
      * @throws InvalidArgumentException
      * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
@@ -306,7 +305,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      * @param string $sessionData
      *
      * @return bool
-     * @throws RuntimeException
+     * @throws \RuntimeException
      * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
     public function updateTimestamp(string $sessionId, string $sessionData): bool

@@ -65,7 +65,9 @@ class CrossSelling extends AbstractIdentity implements ItemsInterface
     }
 
     /**
-     * @param CrossSellingItem $item
+     * @phpstan-param CrossSellingItem $item
+     *
+     * @param AbstractModel $item
      *
      * @return $this
      */
@@ -85,7 +87,9 @@ class CrossSelling extends AbstractIdentity implements ItemsInterface
     }
 
     /**
-     * @param CrossSellingItem ...$items
+     * @phpstan-param CrossSellingItem ...$items
+     *
+     * @param AbstractModel ...$items
      *
      * @return $this
      */

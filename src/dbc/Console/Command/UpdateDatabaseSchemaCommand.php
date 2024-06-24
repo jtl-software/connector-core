@@ -14,9 +14,11 @@ class UpdateDatabaseSchemaCommand extends AbstractDbManagerCommand
     public const
         OPTION_FORCE = 'force';
 
-    protected static $defaultName = 'database:update-schema';
+    /** @var string */
+    protected static $defaultName = 'database:update-schema'; // phpcs:ignore
 
     /**
+     * @return void
      * @throws InvalidArgumentException
      */
     protected function configure(): void

@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Subscriber;
 
-use InvalidArgumentException;
 use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Definition\Event;
 use Jtl\Connector\Core\Event\RpcEvent;
 use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Model\ProductStockLevel;
-use RuntimeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -41,8 +39,8 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
      * @param RpcEvent $event
      *
      * @return void
-     * @throws InvalidArgumentException
-     * @throws RuntimeException
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
     public function transformRequestParams(RpcEvent $event): void
     {
@@ -68,7 +66,7 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
      * @param array<int, array<string, mixed>> $products
      *
      * @return array<int, array<string, mixed>>
-     * @throws RuntimeException
+     * @throws \RuntimeException
      */
     public function transformProductData(array $products): array
     {
@@ -120,7 +118,7 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
      * @param array<array<string, mixed>> $productPrices
      *
      * @return array<int, mixed>
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function transformProductPriceData(array $productPrices): array
     {
@@ -152,7 +150,7 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
      * @param array{string, int} $identity - [endpointId, hostId]
      *
      * @return int
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     protected static function extractHostId(array $identity): int
     {

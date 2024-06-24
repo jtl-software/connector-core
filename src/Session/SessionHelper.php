@@ -69,6 +69,7 @@ class SessionHelper
      * @param string $name
      * @param mixed  $value
      *
+     * @return void
      * @throws SessionException
      */
     public function __set(string $name, mixed $value): void
@@ -120,6 +121,7 @@ class SessionHelper
     /**
      * @param string $name
      *
+     * @return void
      * @throws SessionException
      */
     public function __unset(string $name): void

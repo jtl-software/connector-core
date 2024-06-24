@@ -40,6 +40,8 @@ class TranslatableAttributeI18n extends AbstractI18n
 
     /**
      * @param bool $strictMode
+     *
+     * @return void
      */
     public static function setStrictMode(bool $strictMode): void
     {

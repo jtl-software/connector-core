@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
-use stdClass;
 
 /**
  * Database Query Filter
@@ -90,7 +88,7 @@ class QueryFilter
      * @param array<string, mixed> $filters
      *
      * @return $this
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function setFilters(array $filters): self
     {
@@ -178,7 +176,7 @@ class QueryFilter
      * @param mixed|null $value
      *
      * @return bool
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function overrideFilter(string $oldKey, string $newKey, mixed $value = null): bool
     {
@@ -204,9 +202,10 @@ class QueryFilter
     /**
      * Setter
      *
-     * @param stdClass $obj
+     * @param \stdClass $obj
      *
-     * @throws InvalidArgumentException
+     * @return void
+     * @throws \InvalidArgumentException
      */
     public function set(\stdClass $obj): void
     {

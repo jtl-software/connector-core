@@ -7,10 +7,15 @@ namespace Jtl\Connector\Core\Application;
 use Composer\Autoload\ClassLoader;
 use DI\Container;
 use DI\ContainerBuilder;
+use DI\Definition\Exception\InvalidDefinition;
 use DI\DependencyException;
 use DI\NotFoundException;
+use Doctrine\Common\Annotations\AnnotationException;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Jawira\CaseConverter\CaseConverterException;
+use JMS\Serializer\Exception\LogicException;
+use JMS\Serializer\Exception\NotAcceptableException;
+use JMS\Serializer\Exception\UnsupportedFormatException;
 use JMS\Serializer\Serializer;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
 use Jtl\Connector\Core\Checksum\ChecksumLoaderInterface;
@@ -83,6 +88,7 @@ use Jtl\Connector\Core\Subscriber\FeaturesSubscriber;
 use Jtl\Connector\Core\Subscriber\RequestParamsTransformSubscriber;
 use Jtl\Connector\Core\Utilities\Validator\Validate;
 use Monolog\ErrorHandler as MonologErrorHandler;
+use Noodlehaus\Exception\EmptyDirectoryException;
 use Psr\Container\ContainerInterface;
 use Psr\Log\InvalidArgumentException;
 use Psr\Log\LoggerAwareInterface;
@@ -94,6 +100,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Exception\DirectoryNotFoundException;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Throwable;
@@ -151,8 +158,21 @@ class Application
      *
      * @throws ApplicationException
      * @throws ConfigException
+     * @throws DependencyException
+     * @throws InvalidArgumentException
      * @throws LoggerException
      * @throws ReflectionException
+     * @throws RuntimeException
+     * @throws InvalidDefinition
+     * @throws AnnotationException
+     * @throws \InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     * @throws LogicException
+     * @throws \JMS\Serializer\Exception\RuntimeException
+     * @throws \LogicException
+     * @throws EmptyDirectoryException
+     * @throws \TypeError
+     * @throws \UnexpectedValueException
      */
     public function __construct(
         string               $connectorDir,
@@ -227,6 +247,7 @@ class Application
      * @param CoreConfigInterface $config
      * @param ConfigSchema        $configSchema
      *
+     * @return void
      * @throws ConfigException
      */
     protected function prepareConfig(
@@ -256,6 +277,7 @@ class Application
      *
      * @return $this
      * @throws DefinitionException
+     * @throws \LogicException
      */
     public function registerController(string $controllerName, object $instance): self
     {
@@ -374,10 +396,15 @@ class Application
     /**
      * @param string $rpcMethod
      *
+     *
+     * @return void
      * @throws DatabaseException
      * @throws InvalidArgumentException
      * @throws RuntimeException
      * @throws SessionException
+     * @throws \InvalidArgumentException
+     * @throws BadRequestException
+     * @throws \UnexpectedValueException
      */
     protected function startSession(string $rpcMethod): void
     {
@@ -414,6 +441,8 @@ class Application
      * @throws InvalidArgumentException
      * @throws RuntimeException
      * @throws SessionException
+     * @throws \InvalidArgumentException
+     * @throws \UnexpectedValueException
      */
     public function getSessionHandler(): SessionHandlerInterface
     {
@@ -445,6 +474,9 @@ class Application
      * @throws InvalidArgumentException
      * @throws RuntimeException
      * @throws SessionException
+     * @throws \InvalidArgumentException
+     * @throws \LogicException
+     * @throws \UnexpectedValueException
      */
     protected function prepareContainer(ConnectorInterface $connector): void
     {
@@ -492,6 +524,7 @@ class Application
      * @param EventDispatcher     $eventDispatcher
      * @param string              $pluginsDir
      *
+     * @return void
      * @throws DirectoryNotFoundException
      * @throws \TypeError
      */
@@ -667,10 +700,15 @@ class Application
      * @throws CaseConverterException
      * @throws DefinitionException
      * @throws DependencyException
+     * @throws InvalidArgumentException
+     * @throws LinkerException
+     * @throws LogicException
      * @throws NotFoundException
      * @throws ReflectionException
      * @throws \InvalidArgumentException
-     * @throws LinkerException
+     * @throws NotAcceptableException
+     * @throws \JMS\Serializer\Exception\RuntimeException
+     * @throws UnsupportedFormatException
      */
     protected function createHandleRequest(
         RequestPacket $requestPacket,
@@ -782,6 +820,7 @@ class Application
     /**
      * @param AbstractImage ...$images
      *
+     * @return void
      * @throws ApplicationException
      * @throws CompressionException
      * @throws DefinitionException
@@ -856,7 +895,7 @@ class Application
     /**
      * @param string $mimeType
      *
-     * @return string
+     * @return string|null
      */
     protected static function determineExtensionByMimeType(string $mimeType): ?string
     {
@@ -992,6 +1031,7 @@ class Application
      * @param string      $controller
      * @param string      $action
      *
+     * @return void
      * @throws \ReflectionException
      */
     protected function extendExceptionMessageWithIdentifiers(

@@ -40,7 +40,7 @@ abstract class AbstractTable
      * @return int
      * @throws DBALException
      * @throws DbcRuntimeException
-     * @throws DbcRuntimeException
+     * @throws \RuntimeException
      */
     public function insert(array $data, ?array $types = null): int
     {
@@ -126,13 +126,15 @@ abstract class AbstractTable
 
     /**
      * @param Table $schemaTable
+     *
+     * @return void
      */
     protected function preCreateTableSchema(Table $schemaTable): void
     {
     }
 
     /**
-     * @param $tableSchema Table
+     * @param Table $tableSchema
      *
      * @return void
      */
@@ -140,6 +142,8 @@ abstract class AbstractTable
 
     /**
      * @param Table $schemaTable
+     *
+     * @return void
      */
     protected function postCreateTableSchema(Table $schemaTable): void
     {
@@ -169,7 +173,7 @@ abstract class AbstractTable
      * @return int
      * @throws DBALException
      * @throws DbcRuntimeException
-     * @throws DbcRuntimeException
+     * @throws \RuntimeException
      */
     public function update(array $data, array $identifiers, ?array $types = null): int
     {
@@ -187,9 +191,8 @@ abstract class AbstractTable
      *
      * @return int
      * @throws DBALException
-     * @throws InvalidArgumentException
      * @throws DbcRuntimeException
-     * @throws DbcRuntimeException
+     * @throws \RuntimeException
      */
     public function delete(array $identifiers, ?array $types = null): int
     {
