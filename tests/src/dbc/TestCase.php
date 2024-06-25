@@ -20,8 +20,8 @@ abstract class TestCase extends JtlTestCase
     public const TABLE_PREFIX = 'pre_';
     public const SCHEMA       = \TESTROOT . '/tmp/db.sqlite';
     protected TableStub|\Jtl\Connector\MappingTables\TableStub $table;
-    private PDO       $pdo;
-    private DbManager $dbManager;
+    private PDO                                                $pdo;
+    private DbManager                                          $dbManager;
 
     /**
      * @return array<int, array<string, int|string|\DateTimeImmutable>>
@@ -48,6 +48,7 @@ abstract class TestCase extends JtlTestCase
     }
 
     /**
+     * @return void
      * @throws Throwable
      * @throws DBALException
      */
@@ -72,6 +73,7 @@ abstract class TestCase extends JtlTestCase
             $dbManagerStub   = DbManagerStub::createFromParams(['pdo' => $this->getPDO()], null, self::TABLE_PREFIX);
             $this->dbManager = $dbManagerStub;
         }
+
         return $this->dbManager;
     }
 
@@ -96,6 +98,7 @@ abstract class TestCase extends JtlTestCase
             }
             $this->pdo = new PDO('sqlite:' . self::SCHEMA);
         }
+
         return $this->pdo;
     }
 
@@ -133,6 +136,7 @@ abstract class TestCase extends JtlTestCase
 
         /** @var numeric-string $return */
         $return = $result->fetchOne();
+
         return (int)$return;
     }
 
@@ -140,8 +144,10 @@ abstract class TestCase extends JtlTestCase
      * @param AbstractTable                            $table
      * @param array<int, array<string, scalar|object>> $fixtures
      *
+     * @return void
      * @throws DBALException
      * @throws DbcRuntimeException
+     * @throws RuntimeException
      */
     protected function insertFixtures(AbstractTable $table, array $fixtures): void
     {

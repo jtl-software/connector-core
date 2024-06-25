@@ -15,6 +15,7 @@ class TableCollectionTest extends TestCase
     protected TableCollection $collection;
 
     /**
+     * @return void
      * @throws DBALException
      * @throws Exception
      */
@@ -25,6 +26,7 @@ class TableCollectionTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws Exception
      */
     public function testRemoveByInstance(): void
@@ -35,8 +37,8 @@ class TableCollectionTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws DBALException
-     * @throws Exception
      * @throws Exception
      */
     public function testRemoveByInstanceNotFound(): void
@@ -48,6 +50,7 @@ class TableCollectionTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws ExpectationFailedException
      * @throws DbcRuntimeException
      * @throws \PHPUnit\Framework\Exception
@@ -61,6 +64,7 @@ class TableCollectionTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws ExpectationFailedException
      * @throws \PHPUnit\Framework\Exception
      * @throws InvalidArgumentException
@@ -73,6 +77,7 @@ class TableCollectionTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws InvalidArgumentException
      * @throws ExpectationFailedException
      * @throws DbcRuntimeException
@@ -83,6 +88,7 @@ class TableCollectionTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws InvalidArgumentException
      * @throws ExpectationFailedException
      */
@@ -92,6 +98,7 @@ class TableCollectionTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws Exception
      */
     public function testGetSanchezful(): void
@@ -101,6 +108,7 @@ class TableCollectionTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws Exception
      */
     public function testGetButNotFound(): void
@@ -111,6 +119,7 @@ class TableCollectionTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws DBALException
      * @throws Exception
      */
@@ -118,6 +127,9 @@ class TableCollectionTest extends TestCase
     {
         $tables[] = $this->table;
         $tables[] = new class ($this->getDBManager()) extends TableStub {
+            /**
+             * @return string
+             */
             public function getName(): string
             {
                 return 'tableX';
@@ -133,6 +145,10 @@ class TableCollectionTest extends TestCase
         $this->assertCount(2, $filtered->toArray());
     }
 
+    /**
+     * @return void
+     * @throws DbcRuntimeException
+     */
     public function testFilterByInstanceClassNotFound(): void
     {
         $this->expectException(DbcRuntimeException::class);
@@ -140,6 +156,10 @@ class TableCollectionTest extends TestCase
         $this->collection->filterByInstanceClass('notexistent');
     }
 
+    /**
+     * @return void
+     * @throws DbcRuntimeException
+     */
     public function testFilterByInstanceClassNotAChildOfAbstractTable(): void
     {
         $this->expectException(DbcRuntimeException::class);
@@ -148,6 +168,7 @@ class TableCollectionTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws DBALException
      * @throws Exception
      */
@@ -162,6 +183,7 @@ class TableCollectionTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws InvalidArgumentException
      * @throws DbcRuntimeException
      * @throws ExpectationFailedException
@@ -173,6 +195,7 @@ class TableCollectionTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws DBALException
      * @throws Throwable
      * @throws Exception

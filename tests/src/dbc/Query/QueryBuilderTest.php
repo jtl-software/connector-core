@@ -28,6 +28,7 @@ class QueryBuilderTest extends TestCase
     protected array $globalIdentifiers = ['foo' => 'bar'];
 
     /**
+     * @return void
      * @throws QueryException
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
@@ -48,6 +49,7 @@ class QueryBuilderTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws QueryException
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
@@ -67,6 +69,7 @@ class QueryBuilderTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws QueryException
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
@@ -101,6 +104,7 @@ class QueryBuilderTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws QueryException
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
@@ -116,6 +120,7 @@ class QueryBuilderTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws DBALException
      * @throws Exception
      * @throws ExpectationFailedException
@@ -152,6 +157,7 @@ class QueryBuilderTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws DBALException
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
@@ -169,6 +175,7 @@ class QueryBuilderTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws DBALException
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
@@ -187,6 +194,7 @@ class QueryBuilderTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws DBALException
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
@@ -204,6 +212,7 @@ class QueryBuilderTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws DBALException
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
@@ -221,6 +230,7 @@ class QueryBuilderTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws DBALException
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
@@ -239,6 +249,7 @@ class QueryBuilderTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws DBALException
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
@@ -256,6 +267,7 @@ class QueryBuilderTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws DBALException
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
@@ -273,6 +285,7 @@ class QueryBuilderTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws DBALException
      * @throws QueryException
      * @throws ExpectationFailedException
@@ -301,6 +314,7 @@ class QueryBuilderTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws DBALException
      * @throws \Exception
      * @throws Throwable
