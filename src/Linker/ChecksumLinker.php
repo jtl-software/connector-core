@@ -7,6 +7,7 @@ namespace Jtl\Connector\Core\Linker;
 use Jtl\Connector\Core\Checksum\ChecksumInterface;
 use Jtl\Connector\Core\Checksum\ChecksumLoaderInterface;
 use Jtl\Connector\Core\Model\AbstractModel;
+use Psr\Log\InvalidArgumentException;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -97,6 +98,9 @@ class ChecksumLinker implements LoggerAwareInterface
     /**
      * @param AbstractModel $model
      * @param int|null      $type
+     *
+     * @return void
+     * @throws InvalidArgumentException
      */
     public function link(AbstractModel $model, ?int $type = null): void
     {
@@ -159,7 +163,7 @@ class ChecksumLinker implements LoggerAwareInterface
     /**
      * @param ChecksumInterface $checksum
      *
-     * @return boolean
+     * @return bool
      */
     public function save(ChecksumInterface $checksum): bool
     {
@@ -170,6 +174,7 @@ class ChecksumLinker implements LoggerAwareInterface
         if ($checksum->getForeignKey()->getEndpoint() !== '' && $checksum->getForeignKey()->getHost()) {
             $this->loader->delete($checksum->getForeignKey()->getEndpoint(), $checksum->getType());
             $this->loader->write($checksum->getForeignKey()->getEndpoint(), $checksum->getType(), $checksum->getHost());
+
             return true;
         }
 

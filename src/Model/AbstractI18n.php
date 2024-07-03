@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
 abstract class AbstractI18n extends AbstractModel implements I18nInterface
 {
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("languageIso")
      * @Serializer\Accessor(getter="getLanguageIso",setter="setLanguageIso")

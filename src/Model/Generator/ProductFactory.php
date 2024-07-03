@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model\Generator;
 
-use Exception;
 use Jtl\Connector\Core\Definition\IdentityType;
-use Jtl\Connector\Core\Model\AbstractI18n;
 use Jtl\Connector\Core\Model\Product;
 
 class ProductFactory extends AbstractModelFactory
@@ -19,7 +17,7 @@ class ProductFactory extends AbstractModelFactory
      * @return object[]
      * @throws \Exception
      */
-    public function makeOneProductVariant(array $i18ns = null): array
+    public function makeOneProductVariant(?array $i18ns = null): array
     {
         $data = $this->makeOneProductVariantArray($i18ns);
         return $this->make(\count($data), $data);
@@ -30,9 +28,9 @@ class ProductFactory extends AbstractModelFactory
      *
      * @return array<mixed>
      * @throws \RuntimeException
-     * @throws Exception
+     * @throws \Exception
      */
-    public function makeOneProductVariantArray(array $i18ns = null): array
+    public function makeOneProductVariantArray(?array $i18ns = null): array
     {
         $variationsQuantity = 2;
         if (\is_null($i18ns)) {
@@ -111,6 +109,7 @@ class ProductFactory extends AbstractModelFactory
 
     /**
      * @return array<string, mixed>
+     * @throws \RuntimeException
      * @throws \Exception
      */
     protected function makeFakeArray(): array

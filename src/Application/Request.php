@@ -33,7 +33,7 @@ class Request
      * @param mixed[] $params
      *
      * @return Request
-     * @deprecated
+     * @deprecated - check if still needed
      */
     public static function create(string $controller, string $action, array $params): self
     {

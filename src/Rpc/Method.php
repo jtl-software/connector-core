@@ -12,22 +12,16 @@ class Method
 {
     /**
      * Rcp Method
-     *
-     * @var string
      */
     protected string $rpcMethod = '';
 
     /**
      * Connector Controller
-     *
-     * @var string
      */
     protected string $controller = '';
 
     /**
      * Connector Action
-     *
-     * @var string
      */
     protected string $action = '';
 
@@ -96,7 +90,7 @@ class Method
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isCore(): bool
     {

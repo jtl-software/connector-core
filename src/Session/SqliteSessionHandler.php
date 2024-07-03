@@ -13,7 +13,6 @@ use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use ReturnTypeWillChange;
-use RuntimeException;
 use Throwable;
 
 class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterface
@@ -31,7 +30,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      *
      * @throws SessionException
      * @throws DatabaseException
-     * @throws RuntimeException
+     * @throws \RuntimeException
      */
     public function __construct(string $databaseDir)
     {
@@ -148,8 +147,8 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
     }
 
     /**
-     * @param string  $sessionId
-     * @param integer $expiresAt
+     * @param string $sessionId
+     * @param int    $expiresAt
      *
      * @return string
      */
@@ -168,7 +167,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      *
      * @return bool
      * @throws DatabaseException
-     * @throws RuntimeException
+     * @throws \RuntimeException
      * @throws InvalidArgumentException
      * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
@@ -235,7 +234,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
     }
 
     /**
-     * @return integer
+     * @return int
      */
     protected function calculateExpiryTime(): int
     {
@@ -282,7 +281,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      *
      * @param string $sessionId
      *
-     * @return boolean
+     * @return bool
      * @throws Throwable
      * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
@@ -306,7 +305,7 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      * @param string $sessionData
      *
      * @return bool
-     * @throws RuntimeException
+     * @throws \RuntimeException
      * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
     public function updateTimestamp(string $sessionId, string $sessionData): bool

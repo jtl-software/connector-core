@@ -44,7 +44,7 @@ class DefinitionException extends \Exception
     }
 
     /**
-     * @param integer $identityType
+     * @param int $identityType
      *
      * @return self
      */

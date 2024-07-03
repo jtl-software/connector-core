@@ -45,9 +45,11 @@ class LoggerService
     protected string             $logDir;
     protected string|int|LogLevel $logLevel;
     protected int                 $maxFiles = 2;
-    /* Final handler that is wrapped by FilterHandler */
+    // Final handler that is wrapped by FilterHandler
+
     protected HandlerInterface   $handler;
-    /* Handler that writes to combined log file */
+    // Handler that writes to combined log file
+
     protected HandlerInterface   $combinedHandler;
     protected bool $useChunkedHandler = false;
 
@@ -166,7 +168,7 @@ class LoggerService
      * @throws UnexpectedValueException
      * @throws \InvalidArgumentException
      */
-    protected function createChannelSpecificHandler(string $channel, $logLevel): HandlerInterface
+    protected function createChannelSpecificHandler(string $channel, int|string|Level $logLevel): HandlerInterface
     {
         $fileName     = \sprintf('%s/%s.log', $this->logDir, $channel);
         $monologLevel = MonoLogger::toMonologLevel($logLevel); // @phpstan-ignore-line
@@ -216,7 +218,7 @@ class LoggerService
     /**
      * @param string $channel
      *
-     * @return boolean
+     * @return bool
      */
     public function has(string $channel): bool
     {

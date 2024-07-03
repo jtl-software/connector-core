@@ -23,13 +23,18 @@ class TranslatableAttributeI18nTest extends TestCase
      * @param mixed  $expectedValue
      * @param bool   $strictMode
      *
+     * @return void
      * @throws TranslatableAttributeException
      * @throws JsonException
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
      */
-    public function testGetValue(string $type, $originalValue, $expectedValue, bool $strictMode = false): void
-    {
+    public function testGetValue(
+        string $type,
+        mixed  $originalValue,
+        mixed  $expectedValue,
+        bool   $strictMode = false
+    ): void {
         if (
             \in_array($type, ['bool', 'boolean'], true)
             && $strictMode === true
@@ -54,7 +59,7 @@ class TranslatableAttributeI18nTest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, null|string|int|float|bool|array<int|string, string>>>
+     * @return array<int, array<int, string|int|float|bool|array<int|string, string>|null>>
      */
     public function getValueProvider(): array
     {
@@ -107,16 +112,17 @@ class TranslatableAttributeI18nTest extends TestCase
     /**
      * @dataProvider setValueProvider
      *
-     * @param mixed            $value
+     * @param mixed                 $value
      * @param float|int|string|bool $expectedValue
      *
+     * @return void
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
      * @throws JsonException
      * @throws TranslatableAttributeException
      * @throws AssertionFailedError
      */
-    public function testSetValue($value, $expectedValue): void
+    public function testSetValue(mixed $value, float|int|string|bool $expectedValue): void
     {
         $translation = (new TranslatableAttributeI18n())->setValue($value);
 
@@ -167,10 +173,11 @@ class TranslatableAttributeI18nTest extends TestCase
      *
      * @param mixed $value
      *
+     * @return void
      * @throws JsonException
      * @throws TranslatableAttributeException
      */
-    public function testSetValueWrongType($value): void
+    public function testSetValueWrongType(mixed $value): void
     {
         $this->expectException(TranslatableAttributeException::class);
         $this->expectExceptionCode(TranslatableAttributeException::VALUE_TYPE_INVALID);

@@ -10,10 +10,8 @@ use Symfony\Component\Console\Exception\LogicException;
 
 abstract class AbstractDbManagerCommand extends Command
 {
-    /**
-     * @var array<string, mixed>
-     */
-    protected array $dbParams;
+    /** @var array<string, mixed> */
+    protected array     $dbParams;
     protected DbManager $dbManager;
 
     /**
@@ -24,7 +22,7 @@ abstract class AbstractDbManagerCommand extends Command
      *
      * @throws LogicException
      */
-    public function __construct(DbManager $dbManager, string $name = null)
+    public function __construct(DbManager $dbManager, ?string $name = null)
     {
         $this->dbManager = $dbManager;
         $this->dbParams  = $dbManager->getConnection()->getParams();
@@ -33,6 +31,8 @@ abstract class AbstractDbManagerCommand extends Command
 
     /**
      * @param callable $callback
+     *
+     * @return void
      */
     public function registerTables(callable $callback): void
     {

@@ -17,7 +17,6 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductI18n extends AbstractI18n
 {
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("deliveryStatus")
      * @Serializer\Accessor(getter="getDeliveryStatus",setter="setDeliveryStatus")
@@ -33,7 +32,6 @@ class ProductI18n extends AbstractI18n
     protected string $description = '';
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("measurementUnitName")
      * @Serializer\Accessor(getter="getMeasurementUnitName",setter="setMeasurementUnitName")
@@ -41,7 +39,6 @@ class ProductI18n extends AbstractI18n
     protected string $measurementUnitName = '';
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("metaDescription")
      * @Serializer\Accessor(getter="getMetaDescription",setter="setMetaDescription")
@@ -49,7 +46,6 @@ class ProductI18n extends AbstractI18n
     protected string $metaDescription = '';
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("metaKeywords")
      * @Serializer\Accessor(getter="getMetaKeywords",setter="setMetaKeywords")
@@ -73,7 +69,6 @@ class ProductI18n extends AbstractI18n
     protected string $shortDescription = '';
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("titleTag")
      * @Serializer\Accessor(getter="getTitleTag",setter="setTitleTag")
@@ -81,7 +76,6 @@ class ProductI18n extends AbstractI18n
     protected string $titleTag = '';
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("unitName")
      * @Serializer\Accessor(getter="getUnitName",setter="setUnitName")

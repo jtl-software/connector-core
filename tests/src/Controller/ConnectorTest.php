@@ -82,10 +82,20 @@ class ConnectorTest extends TestCase
 
     /**
      * @return void
-     * @throws DefinitionException
-     * @throws \InvalidArgumentException
      * @throws CaseConverterException
+     * @throws ClassAlreadyExistsException
+     * @throws ClassIsFinalException
+     * @throws ClassIsReadonlyException
+     * @throws DefinitionException
+     * @throws DuplicateMethodException
      * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws InvalidMethodNameException
+     * @throws OriginalConstructorInvocationRequiredException
+     * @throws ReflectionException
+     * @throws RuntimeException
+     * @throws UnknownTypeException
+     * @throws \PHPUnit\Framework\InvalidArgumentException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testAckEmpty(): void
@@ -102,12 +112,22 @@ class ConnectorTest extends TestCase
      * @param string                       $featuresPath
      *
      * @return ConnectorController
+     * @throws ClassAlreadyExistsException
+     * @throws ClassIsFinalException
+     * @throws ClassIsReadonlyException
+     * @throws DuplicateMethodException
+     * @throws InvalidMethodNameException
+     * @throws OriginalConstructorInvocationRequiredException
+     * @throws ReflectionException
+     * @throws RuntimeException
+     * @throws UnknownTypeException
+     * @throws \PHPUnit\Framework\InvalidArgumentException
      */
     protected function createConnectorController(
-        IdentityLinker           $linker = null,
-        ChecksumLinker           $checksumLinker = null,
-        \SessionHandlerInterface $sessionHandler = null,
-        TokenValidatorInterface  $tokenValidator = null,
+        ?IdentityLinker           $linker = null,
+        ?ChecksumLinker           $checksumLinker = null,
+        ?\SessionHandlerInterface $sessionHandler = null,
+        ?TokenValidatorInterface  $tokenValidator = null,
         string                   $featuresPath = ''
     ): ConnectorController {
         if (\is_null($linker)) {
@@ -130,14 +150,24 @@ class ConnectorTest extends TestCase
     }
 
     /**
-     * @throws DefinitionException
-     * @throws InvalidArgumentException
+     * @return void
      * @throws CaseConverterException
+     * @throws ClassAlreadyExistsException
+     * @throws ClassIsFinalException
+     * @throws ClassIsReadonlyException
+     * @throws DefinitionException
+     * @throws DuplicateMethodException
      * @throws ExpectationFailedException
-     * @throws \PHPUnit\Framework\InvalidArgumentException
      * @throws IncompatibleReturnValueException
+     * @throws InvalidArgumentException
+     * @throws InvalidMethodNameException
      * @throws MethodCannotBeConfiguredException
      * @throws MethodNameAlreadyConfiguredException
+     * @throws OriginalConstructorInvocationRequiredException
+     * @throws ReflectionException
+     * @throws RuntimeException
+     * @throws UnknownTypeException
+     * @throws \PHPUnit\Framework\InvalidArgumentException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testAckInvalidModelName(): void
@@ -157,7 +187,10 @@ class ConnectorTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws AuthenticationException
+     * @throws \Psr\Log\InvalidArgumentException
+     * @throws \RuntimeException
      */
     public function testAuthMissingToken(): void
     {
@@ -171,10 +204,22 @@ class ConnectorTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws AuthenticationException
+     * @throws ClassAlreadyExistsException
+     * @throws ClassIsFinalException
+     * @throws ClassIsReadonlyException
+     * @throws DuplicateMethodException
+     * @throws InvalidMethodNameException
      * @throws MethodCannotBeConfiguredException
      * @throws MethodNameAlreadyConfiguredException
+     * @throws OriginalConstructorInvocationRequiredException
+     * @throws ReflectionException
+     * @throws RuntimeException
+     * @throws UnknownTypeException
      * @throws \PHPUnit\Framework\InvalidArgumentException
+     * @throws \Psr\Log\InvalidArgumentException
+     * @throws \RuntimeException
      */
     public function testAuthTokenIsInvalid(): void
     {
@@ -195,13 +240,25 @@ class ConnectorTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws AuthenticationException
+     * @throws ClassAlreadyExistsException
+     * @throws ClassIsFinalException
+     * @throws ClassIsReadonlyException
+     * @throws DuplicateMethodException
+     * @throws Exception
      * @throws ExpectationFailedException
      * @throws IncompatibleReturnValueException
+     * @throws InvalidMethodNameException
      * @throws MethodCannotBeConfiguredException
      * @throws MethodNameAlreadyConfiguredException
-     * @throws Exception
+     * @throws OriginalConstructorInvocationRequiredException
+     * @throws ReflectionException
+     * @throws RuntimeException
+     * @throws UnknownTypeException
      * @throws \PHPUnit\Framework\InvalidArgumentException
+     * @throws \Psr\Log\InvalidArgumentException
+     * @throws \RuntimeException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testAuthCorrect(): void
@@ -226,10 +283,19 @@ class ConnectorTest extends TestCase
 
     /**
      * @return void
+     * @throws ClassAlreadyExistsException
+     * @throws ClassIsFinalException
+     * @throws ClassIsReadonlyException
+     * @throws DuplicateMethodException
      * @throws ExpectationFailedException
      * @throws IncompatibleReturnValueException
+     * @throws InvalidMethodNameException
      * @throws MethodCannotBeConfiguredException
      * @throws MethodNameAlreadyConfiguredException
+     * @throws OriginalConstructorInvocationRequiredException
+     * @throws ReflectionException
+     * @throws RuntimeException
+     * @throws UnknownTypeException
      * @throws \PHPUnit\Framework\InvalidArgumentException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
@@ -255,12 +321,21 @@ class ConnectorTest extends TestCase
 
     /**
      * @return void
+     * @throws ClassAlreadyExistsException
+     * @throws ClassIsFinalException
+     * @throws ClassIsReadonlyException
      * @throws DefinitionException
+     * @throws DuplicateMethodException
      * @throws ExpectationFailedException
      * @throws IncompatibleReturnValueException
      * @throws InvalidArgumentException
+     * @throws InvalidMethodNameException
      * @throws MethodCannotBeConfiguredException
      * @throws MethodNameAlreadyConfiguredException
+     * @throws OriginalConstructorInvocationRequiredException
+     * @throws ReflectionException
+     * @throws RuntimeException
+     * @throws UnknownTypeException
      * @throws \PHPUnit\Framework\InvalidArgumentException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */

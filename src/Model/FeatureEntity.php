@@ -6,24 +6,12 @@ namespace Jtl\Connector\Core\Model;
 
 class FeatureEntity
 {
-    /**
-     * @var string
-     */
     protected string $name = '';
 
-    /**
-     * @var boolean
-     */
     protected bool $pull = false;
 
-    /**
-     * @var boolean
-     */
     protected bool $push = false;
 
-    /**
-     * @var boolean
-     */
     protected bool $delete = false;
 
     /**

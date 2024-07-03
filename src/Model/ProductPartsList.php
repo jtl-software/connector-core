@@ -25,7 +25,7 @@ class ProductPartsList extends AbstractIdentity
     protected float $quantity = 0.0;
 
     /**
-     * @return double Component quantity
+     * @return float Component quantity
      */
     public function getQuantity(): float
     {
@@ -33,7 +33,7 @@ class ProductPartsList extends AbstractIdentity
     }
 
     /**
-     * @param double $quantity Component quantity
+     * @param float $quantity Component quantity
      *
      * @return $this
      */

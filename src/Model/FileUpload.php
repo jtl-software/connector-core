@@ -25,7 +25,6 @@ class FileUpload extends AbstractIdentity
     protected Identity $productId;
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("fileType")
      * @Serializer\Accessor(getter="getFileType",setter="setFileType")
@@ -33,7 +32,6 @@ class FileUpload extends AbstractIdentity
     protected string $fileType = '';
 
     /**
-     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isRequired")
      * @Serializer\Accessor(getter="getIsRequired",setter="setIsRequired")
@@ -101,7 +99,7 @@ class FileUpload extends AbstractIdentity
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getIsRequired(): bool
     {
@@ -109,7 +107,7 @@ class FileUpload extends AbstractIdentity
     }
 
     /**
-     * @param boolean $isRequired
+     * @param bool $isRequired
      *
      * @return $this
      */

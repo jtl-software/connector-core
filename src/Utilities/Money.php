@@ -13,7 +13,7 @@ class Money
      * @return float
      * @deprecated since 5.2 use Money::gross() instead.
      */
-    //phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+    //phpcs:ignore
     public static function AsGross($net, $vat): float // @phpstan-ignore-line
     {
         return self::gross($net, $vat);
@@ -43,7 +43,7 @@ class Money
      * @return float
      * @deprecated since 5.2 use Money::net() instead.
      */
-    //phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+    //phpcs:ignore
     public static function AsNet($gross, $vat): float // @phpstan-ignore-line
     {
         return self::net($gross, $vat);

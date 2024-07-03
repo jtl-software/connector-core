@@ -15,7 +15,6 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductMediaFileAttrI18n extends AbstractI18n
 {
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
@@ -23,7 +22,6 @@ class ProductMediaFileAttrI18n extends AbstractI18n
     protected string $name = '';
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("value")
      * @Serializer\Accessor(getter="getValue",setter="setValue")

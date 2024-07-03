@@ -15,7 +15,6 @@ use JMS\Serializer\Annotation as Serializer;
 class ConnectorServerInfo extends AbstractModel
 {
     /**
-     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("memoryLimit")
      * @Serializer\Accessor(getter="getMemoryLimit",setter="setMemoryLimit")
@@ -23,7 +22,6 @@ class ConnectorServerInfo extends AbstractModel
     protected int $memoryLimit = 0;
 
     /**
-     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("executionTime")
      * @Serializer\Accessor(getter="getExecutionTime",setter="setExecutionTime")
@@ -31,7 +29,6 @@ class ConnectorServerInfo extends AbstractModel
     protected int $executionTime = 0;
 
     /**
-     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("postMaxSize")
      * @Serializer\Accessor(getter="getPostMaxSize",setter="setPostMaxSize")
@@ -39,7 +36,6 @@ class ConnectorServerInfo extends AbstractModel
     protected int $postMaxSize = 0;
 
     /**
-     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("uploadMaxFilesize")
      * @Serializer\Accessor(getter="getUploadMaxFilesize",setter="setUploadMaxFilesize")
@@ -47,7 +43,7 @@ class ConnectorServerInfo extends AbstractModel
     protected int $uploadMaxFilesize = 0;
 
     /**
-     * @return integer
+     * @return int
      */
     public function getMemoryLimit(): int
     {
@@ -55,7 +51,7 @@ class ConnectorServerInfo extends AbstractModel
     }
 
     /**
-     * @param integer $memoryLimit
+     * @param int $memoryLimit
      *
      * @return $this
      */
@@ -75,7 +71,7 @@ class ConnectorServerInfo extends AbstractModel
     }
 
     /**
-     * @param integer $executionTime
+     * @param int $executionTime
      *
      * @return $this
      */
@@ -95,7 +91,7 @@ class ConnectorServerInfo extends AbstractModel
     }
 
     /**
-     * @param integer $postMaxSize
+     * @param int $postMaxSize
      *
      * @return $this
      */
@@ -115,7 +111,7 @@ class ConnectorServerInfo extends AbstractModel
     }
 
     /**
-     * @param integer $uploadMaxFilesize
+     * @param int $uploadMaxFilesize
      *
      * @return $this
      */

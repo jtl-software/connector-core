@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
 class Statistic extends AbstractModel
 {
     /**
-     * @var int
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("available")
      * @Serializer\Accessor(getter="getAvailable",setter="setAvailable")
@@ -24,7 +23,6 @@ class Statistic extends AbstractModel
     protected int $available = 0;
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("controllerName")
      * @Serializer\Accessor(getter="getControllerName",setter="setControllerName")
@@ -32,7 +30,7 @@ class Statistic extends AbstractModel
     protected string $controllerName = '';
 
     /**
-     * @return integer
+     * @return int
      */
     public function getAvailable(): int
     {
@@ -40,7 +38,7 @@ class Statistic extends AbstractModel
     }
 
     /**
-     * @param integer $available
+     * @param int $available
      *
      * @return $this
      */

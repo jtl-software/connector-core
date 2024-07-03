@@ -16,6 +16,8 @@ interface ConnectorInterface
      * @param CoreConfigInterface $config
      * @param Container           $container
      * @param EventDispatcher     $dispatcher
+     *
+     * @return void
      */
     public function initialize(CoreConfigInterface $config, Container $container, EventDispatcher $dispatcher): void;
 

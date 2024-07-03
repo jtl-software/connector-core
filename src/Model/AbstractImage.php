@@ -31,7 +31,6 @@ use RuntimeException;
 abstract class AbstractImage extends AbstractIdentity
 {
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("filename")
      * @Serializer\Accessor(getter="getFilenameSafe",setter="setFilename")
@@ -39,7 +38,6 @@ abstract class AbstractImage extends AbstractIdentity
     protected string $filename = '';
 
     /**
-     * @var Identity
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("foreignKey")
      * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
@@ -55,7 +53,6 @@ abstract class AbstractImage extends AbstractIdentity
     protected array $i18ns = [];
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("name")
      * @Serializer\Accessor(getter="getName",setter="setName")
@@ -63,7 +60,6 @@ abstract class AbstractImage extends AbstractIdentity
     protected string $name = '';
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("remoteUrl")
      * @Serializer\Accessor(getter="getRemoteUrl",setter="setRemoteUrl")
@@ -71,7 +67,6 @@ abstract class AbstractImage extends AbstractIdentity
     protected string $remoteUrl = '';
 
     /**
-     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")

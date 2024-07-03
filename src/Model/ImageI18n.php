@@ -18,7 +18,6 @@ use TypeError;
 class ImageI18n extends AbstractI18n implements IdentityInterface
 {
     /**
-     * @var Identity
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("id")
      * @Serializer\Accessor(getter="getId",setter="setId")
@@ -26,7 +25,6 @@ class ImageI18n extends AbstractI18n implements IdentityInterface
     protected Identity $id;
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("altText")
      * @Serializer\Accessor(getter="getAltText",setter="setAltText")

@@ -15,7 +15,6 @@ use JMS\Serializer\Annotation as Serializer;
 class ConnectorIdentification extends AbstractModel
 {
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("endpointVersion")
      * @Serializer\Accessor(getter="getEndpointVersion",setter="setEndpointVersion")
@@ -23,7 +22,6 @@ class ConnectorIdentification extends AbstractModel
     protected string $endpointVersion = '';
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("platformName")
      * @Serializer\Accessor(getter="getPlatformName",setter="setPlatformName")
@@ -31,7 +29,6 @@ class ConnectorIdentification extends AbstractModel
     protected string $platformName = '';
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("platformVersion")
      * @Serializer\Accessor(getter="getPlatformVersion",setter="setPlatformVersion")
@@ -39,7 +36,6 @@ class ConnectorIdentification extends AbstractModel
     protected string $platformVersion = '';
 
     /**
-     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("protocolVersion")
      * @Serializer\Accessor(getter="getProtocolVersion",setter="setProtocolVersion")
@@ -47,7 +43,6 @@ class ConnectorIdentification extends AbstractModel
     protected int $protocolVersion = 0;
 
     /**
-     * @var ConnectorServerInfo|null
      * @Serializer\Type("Jtl\Connector\Core\Model\ConnectorServerInfo")
      * @Serializer\SerializedName("serverInfo")
      * @Serializer\Accessor(getter="getServerInfo",setter="setServerInfo")
@@ -115,7 +110,7 @@ class ConnectorIdentification extends AbstractModel
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getProtocolVersion(): int
     {
@@ -123,7 +118,7 @@ class ConnectorIdentification extends AbstractModel
     }
 
     /**
-     * @param integer $protocolVersion
+     * @param int $protocolVersion
      *
      * @return $this
      */

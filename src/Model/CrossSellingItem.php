@@ -26,7 +26,6 @@ class CrossSellingItem extends AbstractIdentity
 
 
     /**
-     * @var CrossSellingGroup|null
      * @Serializer\Type("Jtl\Connector\Core\Model\CrossSellingGroup")
      * @Serializer\SerializedName("crossSellingGroup")
      * @Serializer\Accessor(getter="getCrossSellingGroup",setter="setCrossSellingGroup")
@@ -42,7 +41,8 @@ class CrossSellingItem extends AbstractIdentity
     protected array $productIds = [];
 
     /**
-     * Constructor
+     * @param string $endpoint
+     * @param int    $host
      */
     public function __construct(string $endpoint = '', int $host = 0)
     {

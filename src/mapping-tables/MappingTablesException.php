@@ -49,8 +49,8 @@ class MappingTablesException extends \Exception
     }
 
     /**
-     * @param integer $actualLength
-     * @param integer $expectedLength
+     * @param int $actualLength
+     * @param int $expectedLength
      *
      * @return self
      */

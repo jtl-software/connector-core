@@ -59,7 +59,6 @@ class Shipment extends AbstractIdentity
     protected string $note = '';
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("trackingUrl")
      * @Serializer\Accessor(getter="getTrackingUrl",setter="setTrackingUrl")
@@ -132,7 +131,7 @@ class Shipment extends AbstractIdentity
      *
      * @return $this
      */
-    public function setCreationDate(\DateTimeInterface $creationDate = null): self
+    public function setCreationDate(?\DateTimeInterface $creationDate = null): self
     {
         $this->creationDate = $creationDate;
 

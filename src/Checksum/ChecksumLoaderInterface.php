@@ -23,7 +23,7 @@ interface ChecksumLoaderInterface
      * @param int    $type
      * @param string $checksum
      *
-     * @return boolean
+     * @return bool
      */
     public function write(string $endpointId, int $type, string $checksum): bool;
 
@@ -33,7 +33,7 @@ interface ChecksumLoaderInterface
      * @param string $endpointId
      * @param int    $type
      *
-     * @return boolean
+     * @return bool
      */
     public function delete(string $endpointId, int $type): bool;
 }

@@ -18,7 +18,6 @@ use TypeError;
 class ProductStockLevel extends AbstractModel
 {
     /**
-     * @var Identity
      * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
      * @Serializer\SerializedName("productId")
      * @Serializer\Accessor(getter="getProductId",setter="setProductId")
@@ -64,7 +63,7 @@ class ProductStockLevel extends AbstractModel
     }
 
     /**
-     * @return double
+     * @return float
      */
     public function getStockLevel(): float
     {
@@ -72,7 +71,7 @@ class ProductStockLevel extends AbstractModel
     }
 
     /**
-     * @param double $stockLevel
+     * @param float $stockLevel
      *
      * @return $this
      */

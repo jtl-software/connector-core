@@ -24,7 +24,7 @@ class Specific extends AbstractIdentity
         TYPE_IMAGE_TEXT = 'BILD-TEXT';
 
     /**
-     * @var boolean Optional: Global specific means the specific can be used like a category
+     * @var bool Optional: Global specific means the specific can be used like a category
      *              (e.g. show all red products in shop)
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isGlobal")
@@ -33,7 +33,7 @@ class Specific extends AbstractIdentity
     protected bool $isGlobal = false;
 
     /**
-     * @var integer Optional sort number
+     * @var int Optional sort number
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
@@ -65,7 +65,7 @@ class Specific extends AbstractIdentity
     protected array $values = [];
 
     /**
-     * @return boolean Optional: Global specific means the specific can be used like a category
+     * @return bool Optional: Global specific means the specific can be used like a category
      *                  (e.g. show all red products in shop)
      */
     public function getIsGlobal(): bool
@@ -74,8 +74,8 @@ class Specific extends AbstractIdentity
     }
 
     /**
-     * @param boolean $isGlobal     Optional: Global specific means the specific can be used like a category
-     *                              (e.g. show all red products in shop)
+     * @param bool $isGlobal Optional: Global specific means the specific can be used like a category
+     *                          (e.g. show all red products in shop)
      *
      * @return $this
      */
@@ -87,7 +87,7 @@ class Specific extends AbstractIdentity
     }
 
     /**
-     * @return integer Optional sort number
+     * @return int Optional sort number
      */
     public function getSort(): int
     {
@@ -95,7 +95,7 @@ class Specific extends AbstractIdentity
     }
 
     /**
-     * @param integer $sort Optional sort number
+     * @param int $sort Optional sort number
      *
      * @return $this
      */

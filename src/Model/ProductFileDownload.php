@@ -15,7 +15,6 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductFileDownload extends AbstractModel
 {
     /**
-     * @var \DateTimeInterface|null
      * @Serializer\Type("DateTimeInterface")
      * @Serializer\SerializedName("creationDate")
      * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
@@ -23,7 +22,6 @@ class ProductFileDownload extends AbstractModel
     protected ?\DateTimeInterface $creationDate = null;
 
     /**
-     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("maxDays")
      * @Serializer\Accessor(getter="getMaxDays",setter="setMaxDays")
@@ -31,7 +29,6 @@ class ProductFileDownload extends AbstractModel
     protected int $maxDays = 0;
 
     /**
-     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("maxDownloads")
      * @Serializer\Accessor(getter="getMaxDownloads",setter="setMaxDownloads")
@@ -39,7 +36,6 @@ class ProductFileDownload extends AbstractModel
     protected int $maxDownloads = 0;
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("path")
      * @Serializer\Accessor(getter="getPath",setter="setPath")
@@ -47,7 +43,6 @@ class ProductFileDownload extends AbstractModel
     protected string $path = '';
 
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("previewPath")
      * @Serializer\Accessor(getter="getPreviewPath",setter="setPreviewPath")
@@ -55,7 +50,6 @@ class ProductFileDownload extends AbstractModel
     protected string $previewPath = '';
 
     /**
-     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
@@ -83,7 +77,7 @@ class ProductFileDownload extends AbstractModel
      *
      * @return $this
      */
-    public function setCreationDate(\DateTimeInterface $creationDate = null): self
+    public function setCreationDate(?\DateTimeInterface $creationDate = null): self
     {
         $this->creationDate = $creationDate;
 
@@ -91,7 +85,7 @@ class ProductFileDownload extends AbstractModel
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getMaxDays(): int
     {
@@ -99,7 +93,7 @@ class ProductFileDownload extends AbstractModel
     }
 
     /**
-     * @param integer $maxDays
+     * @param int $maxDays
      *
      * @return $this
      */
@@ -111,7 +105,7 @@ class ProductFileDownload extends AbstractModel
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getMaxDownloads(): int
     {
@@ -119,7 +113,7 @@ class ProductFileDownload extends AbstractModel
     }
 
     /**
-     * @param integer $maxDownloads
+     * @param int $maxDownloads
      *
      * @return $this
      */
@@ -171,7 +165,7 @@ class ProductFileDownload extends AbstractModel
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getSort(): int
     {
@@ -179,7 +173,7 @@ class ProductFileDownload extends AbstractModel
     }
 
     /**
-     * @param integer $sort
+     * @param int $sort
      *
      * @return $this
      */

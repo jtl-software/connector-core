@@ -30,12 +30,12 @@ class SerializerBuilder
      * @throws RuntimeException
      * @throws LogicException
      */
-    public static function create(string $cacheDir = null): JmsBuilder
+    public static function create(?string $cacheDir = null): JmsBuilder
     {
         $builder = JmsBuilder::create()
                              ->addDefaultHandlers()
                              ->setObjectConstructor(new ObjectConstructor())
-                             ->configureListeners(function (EventDispatcher $dispatcher) {
+                             ->configureListeners(function (EventDispatcher $dispatcher): void {
                                  $dispatcher->addSubscriber(new NullValuesSubscriber());
                                  $dispatcher->addSubscriber(new ImageSubscriber());
                                  $dispatcher->addSubscriber(new LanguageIsoSubscriber());
@@ -43,7 +43,7 @@ class SerializerBuilder
                                  $dispatcher->addSubscriber(new ProductStockLevelSubscriber());
                                  $dispatcher->addSubscriber(new CrossSellingSubscriber());
                              })
-                             ->configureHandlers(function (HandlerRegistry $registry) {
+                             ->configureHandlers(function (HandlerRegistry $registry): void {
                                  $registry->registerSubscribingHandler(new IdentityHandler());
                                  $registry->registerSubscribingHandler(new FeaturesHandler());
                              });

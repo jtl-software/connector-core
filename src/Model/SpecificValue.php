@@ -17,7 +17,7 @@ use JMS\Serializer\Annotation as Serializer;
 class SpecificValue extends AbstractIdentity
 {
     /**
-     * @var integer Optional sort number
+     * @var int Optional sort number
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
@@ -33,7 +33,7 @@ class SpecificValue extends AbstractIdentity
     protected array $i18ns = [];
 
     /**
-     * @return integer Optional sort number
+     * @return int Optional sort number
      */
     public function getSort(): int
     {
@@ -41,7 +41,7 @@ class SpecificValue extends AbstractIdentity
     }
 
     /**
-     * @param integer $sort Optional sort number
+     * @param int $sort Optional sort number
      *
      * @return $this
      */

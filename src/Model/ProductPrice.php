@@ -132,7 +132,9 @@ class ProductPrice extends AbstractIdentity implements ItemsInterface
     }
 
     /**
-     * @param ProductPriceItem $item
+     * @phpstan-param ProductPriceItem $item
+     *
+     * @param AbstractModel $item
      *
      * @return $this
      */
@@ -152,7 +154,9 @@ class ProductPrice extends AbstractIdentity implements ItemsInterface
     }
 
     /**
-     * @param ProductPriceItem ...$items
+     * @phpstan-param ProductPriceItem ...$items
+     *
+     * @param AbstractModel ...$items
      *
      * @return $this
      */

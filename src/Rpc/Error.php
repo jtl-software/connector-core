@@ -6,7 +6,6 @@ namespace Jtl\Connector\Core\Rpc;
 
 use JMS\Serializer\Annotation as Serializer;
 use Jtl\Connector\Core\Exception\RpcException;
-use RuntimeException;
 
 /**
  * Rpc Error
@@ -21,7 +20,6 @@ class Error
      *
      * This MUST be an integer.
      *
-     * @var integer
      * @Serializer\Type("integer")
      */
     public int $code = 0;
@@ -31,7 +29,6 @@ class Error
      *
      * The message SHOULD be limited to a concise single sentence.
      *
-     * @var string
      * @Serializer\Type("string")
      */
     public string $message = '';
@@ -42,8 +39,6 @@ class Error
      *
      * This may be omitted. The value of this member is defined by the Server
      * (e.g. detailed error information, nested errors etc.).
-     *
-     * @var mixed
      */
     public mixed $data = null;
 
@@ -52,9 +47,9 @@ class Error
      * @param string|null $additionalMessage
      *
      * @return string
-     * @throws RuntimeException
+     * @throws \RuntimeException
      */
-    public static function createDataFromException(\Throwable $exception, string $additionalMessage = null): string
+    public static function createDataFromException(\Throwable $exception, ?string $additionalMessage = null): string
     {
         $lastSlashPos = \strrpos($exception->getFile(), '/');
         if ($lastSlashPos === false) {
@@ -81,7 +76,7 @@ class Error
     /**
      * Getter for $code
      *
-     * @return integer
+     * @return int
      */
     public function getCode(): int
     {
@@ -129,6 +124,7 @@ class Error
     /**
      * Validates a Rpc Error
      *
+     * @return void
      * @throws RpcException
      */
     final public function validate(): void

@@ -17,6 +17,15 @@ use Monolog\Handler\FormattableHandlerInterface;
 use Monolog\Handler\RotatingFileHandler;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\ExpectationFailedException;
+use PHPUnit\Framework\MockObject\ClassAlreadyExistsException;
+use PHPUnit\Framework\MockObject\ClassIsFinalException;
+use PHPUnit\Framework\MockObject\ClassIsReadonlyException;
+use PHPUnit\Framework\MockObject\DuplicateMethodException;
+use PHPUnit\Framework\MockObject\InvalidMethodNameException;
+use PHPUnit\Framework\MockObject\OriginalConstructorInvocationRequiredException;
+use PHPUnit\Framework\MockObject\ReflectionException;
+use PHPUnit\Framework\MockObject\RuntimeException;
+use PHPUnit\Framework\MockObject\UnknownTypeException;
 use Psr\Log\LogLevel;
 use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
@@ -61,8 +70,18 @@ class LoggerServiceTest extends TestCase
 
     /**
      * @return void
+     * @throws ClassAlreadyExistsException
+     * @throws ClassIsFinalException
+     * @throws ClassIsReadonlyException
+     * @throws DuplicateMethodException
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
+     * @throws InvalidMethodNameException
+     * @throws OriginalConstructorInvocationRequiredException
+     * @throws ReflectionException
+     * @throws RuntimeException
+     * @throws UnknownTypeException
+     * @throws \PHPUnit\Framework\InvalidArgumentException
      */
     public function testSetFormatter(): void
     {
@@ -77,10 +96,23 @@ class LoggerServiceTest extends TestCase
 
     /**
      * @return void
+     * @throws Exception
      * @throws ExpectationFailedException
-     * @throws \Psr\Log\InvalidArgumentException
-     * @throws \RuntimeException
      * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \OutOfBoundsException
+     * @throws \PHPUnit\Framework\InvalidArgumentException
+     * @throws ClassAlreadyExistsException
+     * @throws ClassIsFinalException
+     * @throws ClassIsReadonlyException
+     * @throws DuplicateMethodException
+     * @throws InvalidMethodNameException
+     * @throws OriginalConstructorInvocationRequiredException
+     * @throws ReflectionException
+     * @throws RuntimeException
+     * @throws UnknownTypeException
+     * @throws \Psr\Log\InvalidArgumentException
+     * @throws \UnexpectedValueException
      */
     public function testSetFormatterToExistingLoggers(): void
     {
@@ -127,10 +159,11 @@ class LoggerServiceTest extends TestCase
      * @return void
      * @throws Exception
      * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws \Psr\Log\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RuntimeException
-     * @throws InvalidArgumentException
+     * @throws \UnexpectedValueException
      */
     public function testGet(): void
     {
@@ -161,9 +194,10 @@ class LoggerServiceTest extends TestCase
     /**
      * @return void
      * @throws ExpectationFailedException
-     * @throws \Psr\Log\InvalidArgumentException
-     * @throws \RuntimeException
      * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \Psr\Log\InvalidArgumentException
+     * @throws \UnexpectedValueException
      */
     public function testHas(): void
     {
@@ -183,6 +217,10 @@ class LoggerServiceTest extends TestCase
 
     /**
      * @return void
+     * @throws \InvalidArgumentException
+     * @throws \Psr\Log\InvalidArgumentException
+     * @throws \RuntimeException
+     * @throws \UnexpectedValueException
      */
     protected function setUp(): void
     {

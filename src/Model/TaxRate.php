@@ -15,7 +15,6 @@ use JMS\Serializer\Annotation as Serializer;
 class TaxRate extends AbstractIdentity
 {
     /**
-     * @var string
      * @Serializer\Type("string")
      * @Serializer\SerializedName("countryIso")
      * @Serializer\Accessor(getter="getCountryIso",setter="setCountryIso")
@@ -31,7 +30,7 @@ class TaxRate extends AbstractIdentity
     protected float $rate = 0.0;
 
     /**
-     * @return double
+     * @return float
      */
     public function getRate(): float
     {
@@ -39,7 +38,7 @@ class TaxRate extends AbstractIdentity
     }
 
     /**
-     * @param double $rate
+     * @param float $rate
      *
      * @return $this
      */

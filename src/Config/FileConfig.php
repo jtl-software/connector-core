@@ -54,13 +54,15 @@ class FileConfig extends Config implements CoreConfigInterface, ConfigSchemaConf
     }
 
     /**
-     * @param string $key
-     * @param mixed  $value
+     * @phpstan-param string $key
+     *
+     * @param mixed $key
+     * @param mixed $value
      *
      * @return void
      * @throws ConfigException
      */
-    public function set($key, $value): void
+    public function set(mixed $key, mixed $value): void
     {
         if (empty($key)) {
             throw ConfigException::keyIsEmpty();
@@ -69,6 +71,9 @@ class FileConfig extends Config implements CoreConfigInterface, ConfigSchemaConf
         parent::set($key, $value);
     }
 
+    /**
+     * @return void
+     */
     public function write(): void
     {
         $this->toFile($this->filePath);

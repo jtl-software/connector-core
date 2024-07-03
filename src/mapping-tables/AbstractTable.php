@@ -29,7 +29,7 @@ abstract class AbstractTable extends AbstractDbcTable implements TableInterface
         HOST_ID                         = 'host_id',
         IDENTITY_TYPE                   = 'identity_type';
     protected string $endpointDelimiter = '||';
-    protected bool $singleIdentity      = true;
+    protected bool   $singleIdentity    = true;
 
     /** @var EndpointColumn[] */
     private array $endpointColumns = [];
@@ -38,6 +38,7 @@ abstract class AbstractTable extends AbstractDbcTable implements TableInterface
      * @param DbManager $dbManager
      * @param bool      $isSingleIdentity
      *
+     * @throws MappingTablesException
      * @throws \Exception
      */
     public function __construct(DbManager $dbManager, bool $isSingleIdentity = true)
@@ -69,7 +70,7 @@ abstract class AbstractTable extends AbstractDbcTable implements TableInterface
     /**
      * @param string $name
      *
-     * @return boolean
+     * @return bool
      */
     protected function hasEndpointColumn(string $name): bool
     {
@@ -100,7 +101,7 @@ abstract class AbstractTable extends AbstractDbcTable implements TableInterface
     /**
      * @param string $endpoint
      *
-     * @return integer|null
+     * @return int|null
      * @throws DBALException
      * @throws MappingTablesException
      * @throws \RuntimeException
@@ -130,7 +131,7 @@ abstract class AbstractTable extends AbstractDbcTable implements TableInterface
     }
 
     /**
-     * @param boolean $onlyPrimaryColumns
+     * @param bool $onlyPrimaryColumns
      *
      * @return array<string>
      */
@@ -142,7 +143,7 @@ abstract class AbstractTable extends AbstractDbcTable implements TableInterface
     }
 
     /**
-     * @param boolean $onlyPrimaryColumns
+     * @param bool $onlyPrimaryColumns
      *
      * @return array<Column>
      */
@@ -228,9 +229,9 @@ abstract class AbstractTable extends AbstractDbcTable implements TableInterface
     }
 
     /**
-     * @param integer|null $type
+     * @param int|null $type
      *
-     * @return boolean
+     * @return bool
      */
     public function isResponsible(?int $type): bool
     {
@@ -247,7 +248,7 @@ abstract class AbstractTable extends AbstractDbcTable implements TableInterface
      * @throws DbcRuntimeException
      * @throws \RuntimeException
      */
-    public function getEndpoint(int $hostId, int $type = null): ?string
+    public function getEndpoint(int $hostId, ?int $type = null): ?string
     {
         $endpointData = $this->createEndpointIdQuery($hostId, $type)->execute();
         if (!($endpointData instanceof Result)) {
@@ -263,8 +264,8 @@ abstract class AbstractTable extends AbstractDbcTable implements TableInterface
     }
 
     /**
-     * @param integer      $hostId
-     * @param integer|null $type
+     * @param int      $hostId
+     * @param int|null $type
      *
      * @return QueryBuilder
      * @throws Exception
@@ -273,7 +274,7 @@ abstract class AbstractTable extends AbstractDbcTable implements TableInterface
      * @throws \RuntimeException
      * @throws \RuntimeException
      */
-    protected function createEndpointIdQuery(int $hostId, int $type = null): QueryBuilder
+    protected function createEndpointIdQuery(int $hostId, ?int $type = null): QueryBuilder
     {
         if (!$this->isResponsible($type)) {
             throw MappingTablesException::tableNotResponsibleForType($type);
@@ -296,7 +297,7 @@ abstract class AbstractTable extends AbstractDbcTable implements TableInterface
     }
 
     /**
-     * @param boolean $onlyPrimaryColumns
+     * @param bool $onlyPrimaryColumns
      *
      * @return array<string>
      * @throws Exception
@@ -352,10 +353,10 @@ abstract class AbstractTable extends AbstractDbcTable implements TableInterface
     }
 
     /**
-     * @param string  $endpoint
-     * @param integer $hostId
+     * @param string $endpoint
+     * @param int    $hostId
      *
-     * @return integer
+     * @return int
      * @throws DBALException
      * @throws MappingTablesException
      * @throws DbcRuntimeException
@@ -384,18 +385,18 @@ abstract class AbstractTable extends AbstractDbcTable implements TableInterface
     }
 
     /**
-     * @param string|null  $endpoint
-     * @param integer|null $hostId
-     * @param integer|null $type
+     * @param string|null $endpoint
+     * @param int|null    $hostId
+     * @param int|null    $type
      *
-     * @return integer
+     * @return int
      * @throws DBALException
      * @throws Exception
      * @throws MappingTablesException
      * @throws DbcRuntimeException
      * @throws \RuntimeException
      */
-    public function remove(string $endpoint = null, int $hostId = null, int $type = null): int
+    public function remove(?string $endpoint = null, ?int $hostId = null, ?int $type = null): int
     {
         $qb = $this->createQueryBuilder()
                    ->delete($this->getTableName());
@@ -407,16 +408,18 @@ abstract class AbstractTable extends AbstractDbcTable implements TableInterface
         if ($useHostId) {
             $qb->andWhere(self::HOST_ID . ' = :' . self::HOST_ID)
                ->setParameter(self::HOST_ID, $hostId, Types::INTEGER);
-        } elseif ($endpoint !== null) {
-            foreach ($this->extractEndpoint($endpoint) as $column => $value) {
-                if (\in_array($column, $primaryColumnNames)) {
-                    $qb
-                        ->andWhere($column . ' = :' . $column)
-                        ->setParameter(
-                            $column,
-                            $value,
-                            $primaryColumns[\array_search($column, $primaryColumnNames)]->getType()->getName()
-                        );
+        } else {
+            if ($endpoint !== null) {
+                foreach ($this->extractEndpoint($endpoint) as $column => $value) {
+                    if (\in_array($column, $primaryColumnNames)) {
+                        $qb
+                            ->andWhere($column . ' = :' . $column)
+                            ->setParameter(
+                                $column,
+                                $value,
+                                $primaryColumns[\array_search($column, $primaryColumnNames)]->getType()->getName()
+                            );
+                    }
                 }
             }
         }
@@ -440,7 +443,7 @@ abstract class AbstractTable extends AbstractDbcTable implements TableInterface
      * @return int
      * @throws \RuntimeException
      */
-    private function returnInt($value, string $methodName): int
+    private function returnInt(mixed $value, string $methodName): int
     {
         if (!\is_int($value)) {
             throw new \RuntimeException(
@@ -452,15 +455,15 @@ abstract class AbstractTable extends AbstractDbcTable implements TableInterface
     }
 
     /**
-     * @param integer|null $type
+     * @param int|null $type
      *
-     * @return integer
+     * @return int
      * @throws Exception
      * @throws MappingTablesException
      * @throws DbcRuntimeException
      * @throws \RuntimeException
      */
-    public function clear(int $type = null): int
+    public function clear(?int $type = null): int
     {
         $qb = $this->createQueryBuilder()
                    ->delete($this->getTableName());
@@ -480,14 +483,14 @@ abstract class AbstractTable extends AbstractDbcTable implements TableInterface
     }
 
     /**
-     * @param string[]     $where
-     * @param mixed[]      $parameters
-     * @param string[]     $orderBy
-     * @param integer|null $limit
-     * @param integer|null $offset
-     * @param integer|null $type
+     * @param string[] $where
+     * @param mixed[]  $parameters
+     * @param string[] $orderBy
+     * @param int|null $limit
+     * @param int|null $offset
+     * @param int|null $type
      *
-     * @return integer
+     * @return int
      * @throws DBALException|MappingTablesException|\RuntimeException
      * @throws \Doctrine\DBAL\Driver\Exception
      */
@@ -495,9 +498,9 @@ abstract class AbstractTable extends AbstractDbcTable implements TableInterface
         array $where = [],
         array $parameters = [],
         array $orderBy = [],
-        int   $limit = null,
-        int   $offset = null,
-        int   $type = null
+        ?int  $limit = null,
+        ?int  $offset = null,
+        ?int  $type = null
     ): int {
         if (
             !($dbPlatform = $this->getDbManager()->getConnection()->getDatabasePlatform()) instanceof AbstractPlatform
@@ -520,9 +523,9 @@ abstract class AbstractTable extends AbstractDbcTable implements TableInterface
      * @param string[]                 $where
      * @param array<int|string, mixed> $parameters
      * @param array<string, string>    $orderBy
-     * @param integer|null             $limit
-     * @param integer|null             $offset
-     * @param integer|null             $type
+     * @param int|null                 $limit
+     * @param int|null                 $offset
+     * @param int|null                 $type
      *
      * @return QueryBuilder
      * @throws DBALException
@@ -535,9 +538,9 @@ abstract class AbstractTable extends AbstractDbcTable implements TableInterface
         array $where = [],
         array $parameters = [],
         array $orderBy = [],
-        int   $limit = null,
-        int   $offset = null,
-        int   $type = null
+        ?int  $limit = null,
+        ?int  $offset = null,
+        ?int  $type = null
     ): QueryBuilder {
         $qb = $this->createQueryBuilder();
 
@@ -581,12 +584,12 @@ abstract class AbstractTable extends AbstractDbcTable implements TableInterface
     }
 
     /**
-     * @param string[]     $where
-     * @param mixed[]      $parameters
-     * @param string[]     $orderBy
-     * @param integer|null $limit
-     * @param integer|null $offset
-     * @param integer|null $type
+     * @param string[] $where
+     * @param mixed[]  $parameters
+     * @param string[] $orderBy
+     * @param int|null $limit
+     * @param int|null $offset
+     * @param int|null $type
      *
      * @return string[]
      * @throws DBALException
@@ -598,9 +601,9 @@ abstract class AbstractTable extends AbstractDbcTable implements TableInterface
         array $where = [],
         array $parameters = [],
         array $orderBy = [],
-        int   $limit = null,
-        int   $offset = null,
-        int   $type = null
+        ?int  $limit = null,
+        ?int  $offset = null,
+        ?int  $type = null
     ): array {
         $stmt = $this->createFindQuery($where, $parameters, $orderBy, $limit, $offset, $type)
                      ->select($this->getEndpointColumnExpressions())
@@ -723,16 +726,17 @@ abstract class AbstractTable extends AbstractDbcTable implements TableInterface
             return null;
         }
         $extracted = $this->extractEndpoint($endpoint);
+
         return $extracted[$field] ?? null;
     }
 
     /**
-     * @param integer|null $type
+     * @param int|null $type
      *
      * @return TableProxy
      * @throws MappingTablesException
      */
-    public function createProxy(int $type = null): TableProxy
+    public function createProxy(?int $type = null): TableProxy
     {
         if (\is_null($type)) {
             $types    = $this->getTypes();

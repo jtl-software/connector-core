@@ -28,7 +28,7 @@ class ProductConfigGroup extends AbstractModel
     protected Identity $configGroupId;
 
     /**
-     * @var integer Optional sort number
+     * @var int Optional sort number
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
@@ -66,7 +66,7 @@ class ProductConfigGroup extends AbstractModel
     }
 
     /**
-     * @return integer Optional sort number
+     * @return int Optional sort number
      */
     public function getSort(): int
     {
@@ -74,7 +74,7 @@ class ProductConfigGroup extends AbstractModel
     }
 
     /**
-     * @param integer $sort Optional sort number
+     * @param int $sort Optional sort number
      *
      * @return $this
      */

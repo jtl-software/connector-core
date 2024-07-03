@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Rpc;
 
+use Doctrine\Common\Annotations\AnnotationException;
 use JMS\Serializer\Annotation as Serializer;
 use JMS\Serializer\Exception\InvalidArgumentException;
+use JMS\Serializer\Exception\LogicException;
+use JMS\Serializer\Exception\NotAcceptableException;
 use JMS\Serializer\Exception\RuntimeException;
+use JMS\Serializer\Exception\UnsupportedFormatException;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer as JmsSerializer;
 use Jtl\Connector\Core\Model\AbstractModel;
@@ -24,15 +28,11 @@ abstract class Packet extends AbstractModel
      * A String specifying the version of the JSON-RPC protocol.
      * MUST be exactly "2.0".
      *
-     * @var string
      * @Serializer\Type("string")
      */
     protected string $jtlrpc = '';
 
-    /**
-     * @var string
-     * @Serializer\Type("string")
-     */
+    /** @Serializer\Type("string") */
     protected string $id = '';
 
     /**
@@ -43,7 +43,7 @@ abstract class Packet extends AbstractModel
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     abstract public function isValid(): bool;
 
@@ -101,10 +101,15 @@ abstract class Packet extends AbstractModel
      * @param JmsSerializer|null $serializer
      *
      * @return mixed[]
-     * @throws RuntimeException
      * @throws InvalidArgumentException
+     * @throws RuntimeException
+     * @throws AnnotationException
+     * @throws \InvalidArgumentException
+     * @throws LogicException
+     * @throws NotAcceptableException
+     * @throws UnsupportedFormatException
      */
-    public function toArray(JmsSerializer $serializer = null): array
+    public function toArray(?JmsSerializer $serializer = null): array
     {
         if (\is_null($serializer)) {
             $serializer = SerializerBuilder::create()->build();

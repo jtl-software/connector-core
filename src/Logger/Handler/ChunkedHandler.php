@@ -12,14 +12,14 @@ use Monolog\LogRecord;
 
 class ChunkedHandler extends Handler implements FormattableHandlerInterface
 {
+    public const MAX_LOG_ENTRY_LENGTH = 31320;
     private HandlerInterface $nextHandler;
-
     private int $chunkSize = self::MAX_LOG_ENTRY_LENGTH;
 
-
-    public const
-        MAX_LOG_ENTRY_LENGTH = 31320;
-
+    /**
+     * @param HandlerInterface $nextHandler
+     * @param int|null         $chunkSize
+     */
     public function __construct(HandlerInterface $nextHandler, ?int $chunkSize = null)
     {
         $this->nextHandler = $nextHandler;
@@ -41,7 +41,7 @@ class ChunkedHandler extends Handler implements FormattableHandlerInterface
      *
      * @return bool
      */
-    public function handle($record): bool
+    public function handle(LogRecord|array $record): bool
     {
         // false means continue to bubble
         $return = false;

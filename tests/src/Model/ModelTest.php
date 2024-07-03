@@ -27,6 +27,7 @@ class ModelTest extends TestCase
      *
      * @param string $modelName
      *
+     * @return void
      * @throws InvalidArgumentException
      * @throws RuntimeException
      * @throws AnnotationException
@@ -102,6 +103,7 @@ class ModelTest extends TestCase
      * @param string $subject
      * @param bool   $setString
      *
+     * @return void
      * @throws Exception
      */
     public function testUnsetIdentificationString(string $identificationString, string $subject, bool $setString): void
@@ -136,6 +138,7 @@ class ModelTest extends TestCase
      * @param string $subject
      * @param bool   $setString
      *
+     * @return void
      * @throws \PHPUnit\Framework\Exception
      * @throws ExpectationFailedException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException

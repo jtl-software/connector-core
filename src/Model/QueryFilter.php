@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model;
 
-use InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
-use stdClass;
 
 /**
  * Database Query Filter
@@ -25,7 +23,6 @@ class QueryFilter
     /**
      * Query item count limitation
      *
-     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("limit")
      */
@@ -43,7 +40,7 @@ class QueryFilter
     /**
      * Constructor
      *
-     * @param integer $limit
+     * @param int $limit
      */
     public function __construct(int $limit = 100)
     {
@@ -54,7 +51,7 @@ class QueryFilter
     /**
      * Limit Getter
      *
-     * @return integer
+     * @return int
      */
     public function getLimit(): int
     {
@@ -64,7 +61,7 @@ class QueryFilter
     /**
      * Limit Setter
      *
-     * @param integer $limit
+     * @param int $limit
      *
      * @return $this
      */
@@ -91,7 +88,7 @@ class QueryFilter
      * @param array<string, mixed> $filters
      *
      * @return $this
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function setFilters(array $filters): self
     {
@@ -128,7 +125,7 @@ class QueryFilter
      *
      * @param string $key
      *
-     * @return boolean
+     * @return bool
      */
     public function deleteFilter(string $key): bool
     {
@@ -144,7 +141,7 @@ class QueryFilter
     /**
      * @param string $key
      *
-     * @return boolean
+     * @return bool
      */
     public function isFilter(string $key): bool
     {
@@ -178,8 +175,8 @@ class QueryFilter
      * @param string     $newKey
      * @param mixed|null $value
      *
-     * @return boolean
-     * @throws InvalidArgumentException
+     * @return bool
+     * @throws \InvalidArgumentException
      */
     public function overrideFilter(string $oldKey, string $newKey, mixed $value = null): bool
     {
@@ -205,9 +202,10 @@ class QueryFilter
     /**
      * Setter
      *
-     * @param stdClass $obj
+     * @param \stdClass $obj
      *
-     * @throws InvalidArgumentException
+     * @return void
+     * @throws \InvalidArgumentException
      */
     public function set(\stdClass $obj): void
     {

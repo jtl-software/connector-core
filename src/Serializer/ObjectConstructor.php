@@ -25,8 +25,13 @@ class ObjectConstructor implements ObjectConstructorInterface
      *
      * @return object|null
      */
-    public function construct(Visitor $visitor, ClassMetadata $metadata, $data, array $type, Context $context): ?object
-    {
+    public function construct(
+        Visitor       $visitor,
+        ClassMetadata $metadata,
+        mixed         $data,
+        array         $type,
+        Context       $context
+    ): ?object {
         $className = $metadata->name;
 
         return new $className();

@@ -17,7 +17,7 @@ use JMS\Serializer\Annotation as Serializer;
 class TaxClass extends AbstractIdentity
 {
     /**
-     * @var boolean Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default.
+     * @var bool Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default.
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isDefault")
      * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
@@ -33,7 +33,7 @@ class TaxClass extends AbstractIdentity
     protected string $name = '';
 
     /**
-     * @return boolean Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default.
+     * @return bool Optional: Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default.
      */
     public function getIsDefault(): bool
     {
@@ -41,7 +41,7 @@ class TaxClass extends AbstractIdentity
     }
 
     /**
-     * @param boolean $isDefault Optional:
+     * @param bool $isDefault Optional:
      *                           Flag default tax class. Default is false. Exact 1 taxClass has to be marked as default.
      *
      * @return $this

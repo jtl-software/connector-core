@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Http;
 
+use Doctrine\Common\Annotations\AnnotationException;
 use InvalidArgumentException;
 use Jawira\CaseConverter\CaseConverterException;
+use JMS\Serializer\Exception\LogicException;
+use JMS\Serializer\Exception\NotAcceptableException;
 use JMS\Serializer\Exception\RuntimeException;
+use JMS\Serializer\Exception\UnsupportedFormatException;
 use JMS\Serializer\Serializer;
 use Jtl\Connector\Core\Definition\Event;
 use Jtl\Connector\Core\Event\RpcEvent;
@@ -37,6 +41,7 @@ class JsonResponse extends SymfonyJsonResponse implements LoggerAwareInterface
      * @param array<string, null|string|string[]> $headers
      * @param bool                                $json
      *
+     * @throws InvalidArgumentException
      * @throws TypeError
      */
     public function __construct(
@@ -58,10 +63,16 @@ class JsonResponse extends SymfonyJsonResponse implements LoggerAwareInterface
      * @param ResponsePacket $responsePacket
      *
      * @return $this
-     * @throws DefinitionException
      * @throws CaseConverterException
+     * @throws DefinitionException
      * @throws InvalidArgumentException
      * @throws RuntimeException
+     * @throws AnnotationException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     * @throws LogicException
+     * @throws NotAcceptableException
+     * @throws UnsupportedFormatException
+     * @throws \Psr\Log\InvalidArgumentException
      */
     public function prepareAndSend(RequestPacket $requestPacket, ResponsePacket $responsePacket): self
     {

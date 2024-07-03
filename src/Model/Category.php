@@ -29,7 +29,6 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     protected Identity $parentCategoryId;
 
     /**
-     * @var boolean
      * @Serializer\Type("boolean")
      * @Serializer\SerializedName("isActive")
      * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
@@ -37,7 +36,6 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     protected bool $isActive = false;
 
     /**
-     * @var integer
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("level")
      * @Serializer\Accessor(getter="getLevel",setter="setLevel")
@@ -45,7 +43,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     protected int $level = 0;
 
     /**
-     * @var integer Optional sort order number
+     * @var int Optional sort order number
      * @Serializer\Type("integer")
      * @Serializer\SerializedName("sort")
      * @Serializer\Accessor(getter="getSort",setter="setSort")
@@ -117,7 +115,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getIsActive(): bool
     {
@@ -125,7 +123,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     }
 
     /**
-     * @param boolean $isActive
+     * @param bool $isActive
      *
      * @return $this
      */
@@ -137,7 +135,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getLevel(): int
     {
@@ -145,7 +143,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     }
 
     /**
-     * @param integer $level
+     * @param int $level
      *
      * @return $this
      */
@@ -157,7 +155,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     }
 
     /**
-     * @return integer Optional sort order number
+     * @return int Optional sort order number
      */
     public function getSort(): int
     {
@@ -165,7 +163,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     }
 
     /**
-     * @param integer $sort Optional sort order number
+     * @param int $sort Optional sort order number
      *
      * @return $this
      */
