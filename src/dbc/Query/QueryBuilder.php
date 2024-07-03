@@ -37,6 +37,7 @@ class QueryBuilder extends \Doctrine\DBAL\Query\QueryBuilder
 
     /**
      * @return string
+     * @throws QueryException
      */
     public function getSQL(): string
     {

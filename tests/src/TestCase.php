@@ -160,6 +160,8 @@ class TestCase extends \Jtl\Connector\MappingTables\TestCase
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
+     * @throws vfsStreamException
      */
     protected function createFile(): string
     {

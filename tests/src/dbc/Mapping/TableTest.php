@@ -24,6 +24,7 @@ class TableTest extends TestCase
     protected CoordinatesStub $coords;
 
     /**
+     * @return void
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      * @throws ExpectationFailedException
      */
@@ -33,6 +34,7 @@ class TableTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      * @throws \RuntimeException
      * @throws ExpectationFailedException
@@ -43,6 +45,7 @@ class TableTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws SchemaException
      * @throws DBALException
      * @throws \Exception
@@ -64,6 +67,7 @@ class TableTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws DBALException
      * @throws ExpectationFailedException
      * @throws DbcRuntimeException
@@ -86,6 +90,7 @@ class TableTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws DBALException
      * @throws ExpectationFailedException
      * @throws DbcRuntimeException
@@ -107,6 +112,7 @@ class TableTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws DBALException
      * @throws ExpectationFailedException
      * @throws DbcRuntimeException
@@ -163,6 +169,7 @@ class TableTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws Exception
      * @throws ExpectationFailedException
      * @throws ReflectionException
@@ -192,6 +199,7 @@ class TableTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws DBALException
      * @throws Exception
      * @throws ExpectationFailedException
@@ -226,6 +234,7 @@ class TableTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws Exception
      * @throws ReflectionException
      * @throws DbcRuntimeException
@@ -252,6 +261,7 @@ class TableTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws DBALException
      * @throws \Exception
      */
@@ -273,6 +283,7 @@ class TableTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws DBALException
      * @throws \Exception
      */
@@ -293,6 +304,7 @@ class TableTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws DBALException
      * @throws \Exception
      * @throws \Exception
@@ -311,6 +323,7 @@ class TableTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws DBALException
      * @throws \Exception
      * @throws \Exception
@@ -329,6 +342,7 @@ class TableTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws InvalidArgumentException
      * @throws DBALException
      * @throws \Exception
@@ -345,6 +359,7 @@ class TableTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws InvalidArgumentException
      * @throws DBALException
      * @throws \Exception
@@ -361,6 +376,7 @@ class TableTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws DBALException
      * @throws Throwable
      * @throws \Exception

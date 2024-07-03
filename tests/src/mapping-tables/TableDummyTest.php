@@ -14,6 +14,7 @@ class TableDummyTest extends TestCase
     protected TableDummy $table;
 
     /**
+     * @return void
      * @throws InvalidArgumentException
      * @throws ExpectationFailedException
      */
@@ -25,6 +26,7 @@ class TableDummyTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
      */
@@ -36,6 +38,7 @@ class TableDummyTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws InvalidArgumentException
      * @throws ExpectationFailedException
      */
@@ -45,6 +48,7 @@ class TableDummyTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
      */
@@ -56,6 +60,7 @@ class TableDummyTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
      */
@@ -67,6 +72,7 @@ class TableDummyTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws InvalidArgumentException
      * @throws ExpectationFailedException
      */
@@ -76,6 +82,7 @@ class TableDummyTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
      */
@@ -87,6 +94,7 @@ class TableDummyTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
      * @throws Exception
@@ -104,6 +112,7 @@ class TableDummyTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
      */
@@ -115,8 +124,10 @@ class TableDummyTest extends TestCase
     }
 
     /**
+     * @return void
      * @throws InvalidArgumentException
      * @throws ExpectationFailedException
+     * @noinspection PhpExpressionResultUnusedInspection
      */
     public function testFindNotFetchedEndpoints(): void
     {
@@ -124,9 +135,13 @@ class TableDummyTest extends TestCase
         $this->table->save('a', 333);
         $this->table->save('b', 9714);
         $notFetched = $this->table->filterMappedEndpoints($endpoints);
+        /** @noinspection PhpConditionAlreadyCheckedInspection */
         $this->assertEquals($endpoints, $notFetched);
     }
 
+    /**
+     * @return void
+     */
     protected function setUp(): void
     {
         parent::setUp();

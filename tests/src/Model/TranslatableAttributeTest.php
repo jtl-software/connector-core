@@ -14,11 +14,20 @@ use Jtl\Connector\Core\Model\TranslatableAttributeI18n;
 use Jtl\Connector\Core\Test\TestCase;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\ExpectationFailedException;
+use PHPUnit\Framework\MockObject\ClassAlreadyExistsException;
+use PHPUnit\Framework\MockObject\ClassIsFinalException;
+use PHPUnit\Framework\MockObject\ClassIsReadonlyException;
+use PHPUnit\Framework\MockObject\DuplicateMethodException;
 use PHPUnit\Framework\MockObject\IncompatibleReturnValueException;
+use PHPUnit\Framework\MockObject\InvalidMethodNameException;
 use PHPUnit\Framework\MockObject\MethodCannotBeConfiguredException;
 use PHPUnit\Framework\MockObject\MethodNameAlreadyConfiguredException;
 use PHPUnit\Framework\MockObject\MethodNameNotConfiguredException;
 use PHPUnit\Framework\MockObject\MethodParametersAlreadyConfiguredException;
+use PHPUnit\Framework\MockObject\OriginalConstructorInvocationRequiredException;
+use PHPUnit\Framework\MockObject\ReflectionException;
+use PHPUnit\Framework\MockObject\RuntimeException;
+use PHPUnit\Framework\MockObject\UnknownTypeException;
 use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 class TranslatableAttributeTest extends TestCase
@@ -30,6 +39,7 @@ class TranslatableAttributeTest extends TestCase
      * @param TranslatableAttributeI18n|null   $expectedTranslation
      * @param array<TranslatableAttributeI18n> $translations
      *
+     * @return void
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
      */
@@ -89,17 +99,27 @@ class TranslatableAttributeTest extends TestCase
      * @param TranslatableAttributeI18n|null $translation
      * @param mixed                          $expectedValue
      *
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws TranslatableAttributeException
-     * @throws JsonException
+     * @return void
      * @throws Exception
-     * @throws \PHPUnit\Framework\InvalidArgumentException
+     * @throws ExpectationFailedException
      * @throws IncompatibleReturnValueException
+     * @throws InvalidArgumentException
+     * @throws JsonException
      * @throws MethodCannotBeConfiguredException
      * @throws MethodNameAlreadyConfiguredException
      * @throws MethodNameNotConfiguredException
      * @throws MethodParametersAlreadyConfiguredException
+     * @throws TranslatableAttributeException
+     * @throws \PHPUnit\Framework\InvalidArgumentException
+     * @throws ClassAlreadyExistsException
+     * @throws ClassIsFinalException
+     * @throws ClassIsReadonlyException
+     * @throws DuplicateMethodException
+     * @throws InvalidMethodNameException
+     * @throws OriginalConstructorInvocationRequiredException
+     * @throws ReflectionException
+     * @throws RuntimeException
+     * @throws UnknownTypeException
      * @depends      testSetType
      */
     public function testFindValue(string $type, ?TranslatableAttributeI18n $translation, mixed $expectedValue): void
@@ -151,6 +171,7 @@ class TranslatableAttributeTest extends TestCase
      * @param string                           $expectedName
      * @param string                           $languageIso
      *
+     * @return void
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
      */
@@ -210,6 +231,7 @@ class TranslatableAttributeTest extends TestCase
      * @param array<string, bool|float|int|string|object|null> $expectedValues
      * @param string|null                                      $castToType
      *
+     * @return void
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
      * @throws JsonException

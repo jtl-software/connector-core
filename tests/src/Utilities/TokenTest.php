@@ -15,6 +15,7 @@ use PHPUnit\Framework\TestCase;
 class TokenTest extends TestCase
 {
     /**
+     * @return void
      * @throws \Exception
      */
     public function testGenerateToken(): void

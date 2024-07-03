@@ -37,6 +37,7 @@ class ResponseTest extends TestCase
      *
      * @param AbstractModel|int|string|float|int[] $result
      *
+     * @return void
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
      */

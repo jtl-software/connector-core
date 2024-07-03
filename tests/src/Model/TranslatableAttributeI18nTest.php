@@ -23,13 +23,18 @@ class TranslatableAttributeI18nTest extends TestCase
      * @param mixed  $expectedValue
      * @param bool   $strictMode
      *
+     * @return void
      * @throws TranslatableAttributeException
      * @throws JsonException
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
      */
-    public function testGetValue(string $type, mixed $originalValue, mixed $expectedValue, bool $strictMode = false): void
-    {
+    public function testGetValue(
+        string $type,
+        mixed  $originalValue,
+        mixed  $expectedValue,
+        bool   $strictMode = false
+    ): void {
         if (
             \in_array($type, ['bool', 'boolean'], true)
             && $strictMode === true
@@ -110,6 +115,7 @@ class TranslatableAttributeI18nTest extends TestCase
      * @param mixed                 $value
      * @param float|int|string|bool $expectedValue
      *
+     * @return void
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
      * @throws JsonException
@@ -167,6 +173,7 @@ class TranslatableAttributeI18nTest extends TestCase
      *
      * @param mixed $value
      *
+     * @return void
      * @throws JsonException
      * @throws TranslatableAttributeException
      */

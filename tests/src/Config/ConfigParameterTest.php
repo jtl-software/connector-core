@@ -21,6 +21,7 @@ class ConfigParameterTest extends TestCase
      * @param mixed        $validValue
      * @param array<mixed> $invalidValues
      *
+     * @return void
      * @throws ConfigException
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
@@ -40,6 +41,7 @@ class ConfigParameterTest extends TestCase
      * @param string $type
      * @param mixed  $validValue
      *
+     * @return void
      * @throws ConfigException
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
@@ -58,6 +60,7 @@ class ConfigParameterTest extends TestCase
      * @param mixed        $validValue
      * @param array<mixed> $invalidValues
      *
+     * @return void
      * @throws ConfigException
      * @throws RuntimeException
      * @throws Exception
@@ -112,6 +115,7 @@ class ConfigParameterTest extends TestCase
      * @param string $type
      * @param mixed  $validValue
      *
+     * @return void
      * @throws ConfigException
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
