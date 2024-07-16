@@ -20,6 +20,7 @@ use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
 use Jtl\Connector\Core\Model\Features;
 use Jtl\Connector\Core\Model\Session;
+use Jtl\Connector\Core\Rpc\Warnings;
 use Jtl\Connector\Core\Test\TestCase;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\ExpectationFailedException;
@@ -150,7 +151,12 @@ class ConnectorTest extends TestCase
         }
 
         if (\is_null($container)) {
-            $container = $this->createMock(Container::class);
+            $container        = $this->createMock(Container::class);
+            $warningsInstance = new Warnings();
+            $container->method('get')
+                ->with(Warnings::WARNINGS)
+                ->willReturn($warningsInstance);
+            $container->set(Warnings::WARNINGS, $warningsInstance);
         }
 
         return new ConnectorController(
