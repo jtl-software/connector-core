@@ -81,6 +81,7 @@ use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Rpc\Method;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
+use Jtl\Connector\Core\Rpc\Warnings;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Session\SessionHandlerInterface;
 use Jtl\Connector\Core\Session\SqliteSessionHandler;
@@ -236,6 +237,7 @@ class Application
             )->parameter('service', $this->loggerService)
         );
 
+        $this->container->set(Warnings::WARNINGS, new Warnings());
         $this->serializer   = SerializerBuilder::create($serializerCacheDir)->build();
         $this->httpRequest  = HttpRequest::createFromGlobals();
         $this->httpResponse = new HttpResponse($this->eventDispatcher, $this->serializer);
@@ -361,6 +363,11 @@ class Application
             $requestPacket->setParams($data);
 
             $responsePacket = $this->execute($connector, $requestPacket, $method);
+            if ($this->container->get(Warnings::WARNINGS)->hasSpecificWarningType(Warnings::TYPE_SEND)) {
+                $responsePacket->addWarnings(
+                    ...$this->container->get(Warnings::WARNINGS)->getWarningsByType(Warnings::TYPE_SEND)
+                );
+            }
             \session_write_close();
         } catch (Throwable $ex) {
             if (\is_numeric($code = $ex->getCode())) {
@@ -940,7 +947,8 @@ class Application
                     $checksumLinker,
                     $identityLinker,
                     $sessionHandlerInterface,
-                    $tokenValidatorInterface
+                    $tokenValidatorInterface,
+                    $this->container
                 );
 
                 $controller->setLogger($this->loggerService->get(LoggerService::CHANNEL_GLOBAL));

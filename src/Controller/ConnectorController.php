@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Controller;
 
+use DI\Container;
 use Jawira\CaseConverter\CaseConverterException;
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
@@ -24,6 +25,8 @@ use Jtl\Connector\Core\Model\ConnectorServerInfo;
 use Jtl\Connector\Core\Model\Features;
 use Jtl\Connector\Core\Model\Identities;
 use Jtl\Connector\Core\Model\Session;
+use Jtl\Connector\Core\Rpc\Warning;
+use Jtl\Connector\Core\Rpc\Warnings;
 use Jtl\Connector\Core\Serializer\Json;
 use Jtl\Connector\Core\System\Check;
 use Jtl\Connector\Core\Utilities\Str;
@@ -45,6 +48,7 @@ class ConnectorController implements LoggerAwareInterface
     protected LoggerInterface          $logger;
     protected \SessionHandlerInterface $sessionHandler;
     protected TokenValidatorInterface  $tokenValidator;
+    protected Container                $container;
 
     /**
      * ConnectorController constructor.
@@ -54,13 +58,15 @@ class ConnectorController implements LoggerAwareInterface
      * @param IdentityLinker           $linker
      * @param \SessionHandlerInterface $sessionHandler
      * @param TokenValidatorInterface  $tokenValidator
+     * @param Container                $container
      */
     public function __construct(
         string                   $featuresPath,
         ChecksumLinker           $checksumLinker,
         IdentityLinker           $linker,
         \SessionHandlerInterface $sessionHandler,
-        TokenValidatorInterface  $tokenValidator
+        TokenValidatorInterface  $tokenValidator,
+        Container                $container
     ) {
         $this->featuresPath   = $featuresPath;
         $this->checksumLinker = $checksumLinker;
@@ -68,6 +74,7 @@ class ConnectorController implements LoggerAwareInterface
         $this->logger         = new NullLogger();
         $this->sessionHandler = $sessionHandler;
         $this->tokenValidator = $tokenValidator;
+        $this->container      = $container;
     }
 
 
@@ -138,6 +145,11 @@ class ConnectorController implements LoggerAwareInterface
         foreach ($ack->getIdentities() as $modelName => $identities) {
             $normalizedName = Str::toPascalCase($modelName);
             if (!Model::isModel($normalizedName)) {
+                $this->container->get(Warnings::WARNINGS)->addWarning(
+                    (new Warning())
+                        ->setMessage('ACK: Unknown core entity (' . $normalizedName . ')! Skipping related ack\'s...')
+                        ->setType(Warnings::TYPE_SEND)
+                );
                 $this->logger->warning(
                     'ACK: Unknown core entity ({name})! Skipping related ack\'s...',
                     ['name' => $normalizedName]

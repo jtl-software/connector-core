@@ -31,6 +31,9 @@ class ResponsePacket extends Packet
      */
     protected ?Error $error = null;
 
+    /** @var Warning[] $warnings */
+    protected array $warnings = [];
+
     /**
      * @return bool
      * @throws RpcException
@@ -57,6 +60,12 @@ class ResponsePacket extends Packet
 
         if (($error = $this->getError()) !== null) {
             $error->validate();
+        }
+
+        if (!empty($warnings = $this->getWarnings())) {
+            foreach ($warnings as $warning) {
+                $warning->validate();
+            }
         }
 
         // An identifier established by the Client that MUST contain a String,
@@ -104,6 +113,28 @@ class ResponsePacket extends Packet
     public function setError(Error $error): self
     {
         $this->error = $error;
+
+        return $this;
+    }
+
+    /**
+     * @return array<Warning>
+     */
+    public function getWarnings(): array
+    {
+        return $this->warnings;
+    }
+
+    /**
+     * @param Warning ...$warnings
+     *
+     * @return $this
+     */
+    public function addWarnings(Warning ...$warnings): self
+    {
+        foreach ($warnings as $warning) {
+            $this->warnings[] = $warning;
+        }
 
         return $this;
     }
