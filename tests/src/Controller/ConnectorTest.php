@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Test\Controller;
 
+use DI\Container;
 use InvalidArgumentException;
 use Jawira\CaseConverter\CaseConverterException;
 use Jtl\Connector\Core\Application\Application;
@@ -109,6 +110,7 @@ class ConnectorTest extends TestCase
      * @param ChecksumLinker|null          $checksumLinker
      * @param SessionHandlerInterface|null $sessionHandler
      * @param TokenValidatorInterface|null $tokenValidator
+     * @param Container|null               $container
      * @param string                       $featuresPath
      *
      * @return ConnectorController
@@ -128,6 +130,7 @@ class ConnectorTest extends TestCase
         ?ChecksumLinker           $checksumLinker = null,
         ?\SessionHandlerInterface $sessionHandler = null,
         ?TokenValidatorInterface  $tokenValidator = null,
+        ?Container                $container = null,
         string                   $featuresPath = ''
     ): ConnectorController {
         if (\is_null($linker)) {
@@ -146,7 +149,18 @@ class ConnectorTest extends TestCase
             $tokenValidator = $this->createMock(TokenValidatorInterface::class);
         }
 
-        return new ConnectorController($featuresPath, $checksumLinker, $linker, $sessionHandler, $tokenValidator);
+        if (\is_null($container)) {
+            $container = $this->createMock(Container::class);
+        }
+
+        return new ConnectorController(
+            $featuresPath,
+            $checksumLinker,
+            $linker,
+            $sessionHandler,
+            $tokenValidator,
+            $container
+        );
     }
 
     /**

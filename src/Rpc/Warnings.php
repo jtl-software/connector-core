@@ -39,9 +39,11 @@ class Warnings
             return false;
         }
 
-        foreach ($this->warnings as $warning) {
-            if ($warning->getType() === $type) {
-                return true;
+        if (!\is_null($this->warnings)) {
+            foreach ($this->warnings as $warning) {
+                if ($warning->getType() === $type) {
+                    return true;
+                }
             }
         }
 
@@ -69,14 +71,18 @@ class Warnings
         if (!$this->hasWarnings()) {
             return null;
         }
-        foreach ($this->warnings as $warning) {
-            if (
-                $warning->getType() === $type
-                || ($includeDefault === true && $warning->getType() === self::TYPE_DEFAULT)
-            ) {
-                $warnings[] = $warning;
+
+        if (!\is_null($this->warnings)) {
+            foreach ($this->warnings as $warning) {
+                if (
+                    $warning->getType() === $type
+                    || ($includeDefault === true && $warning->getType() === self::TYPE_DEFAULT)
+                ) {
+                    $warnings[] = $warning;
+                }
             }
         }
+
         return empty($warnings) ? null : $warnings;
     }
 }

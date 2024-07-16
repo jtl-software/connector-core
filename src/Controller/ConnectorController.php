@@ -145,7 +145,9 @@ class ConnectorController implements LoggerAwareInterface
         foreach ($ack->getIdentities() as $modelName => $identities) {
             $normalizedName = Str::toPascalCase($modelName);
             if (!Model::isModel($normalizedName)) {
-                $this->container->get(Warnings::WARNINGS)->addWarning(
+                /** @var Warnings $warnings */
+                $warnings = $this->container->get(Warnings::WARNINGS);
+                $warnings->addWarning(
                     (new Warning())
                         ->setMessage('ACK: Unknown core entity (' . $normalizedName . ')! Skipping related ack\'s...')
                         ->setType(Warnings::TYPE_SEND)

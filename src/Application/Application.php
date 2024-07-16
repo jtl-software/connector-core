@@ -363,10 +363,13 @@ class Application
             $requestPacket->setParams($data);
 
             $responsePacket = $this->execute($connector, $requestPacket, $method);
-            if ($this->container->get(Warnings::WARNINGS)->hasSpecificWarningType(Warnings::TYPE_SEND)) {
-                $responsePacket->addWarnings(
-                    ...$this->container->get(Warnings::WARNINGS)->getWarningsByType(Warnings::TYPE_SEND)
-                );
+            /** @var Warnings $warnings */
+            $warnings = $this->container->get(Warnings::WARNINGS);
+            if ($warnings->hasSpecificWarningType(Warnings::TYPE_SEND)) {
+                $sendableWarnings = $warnings->getWarningsByType(Warnings::TYPE_SEND);
+                if (!\is_null($sendableWarnings)) {
+                    $responsePacket->addWarnings(...$sendableWarnings);
+                }
             }
             \session_write_close();
         } catch (Throwable $ex) {
