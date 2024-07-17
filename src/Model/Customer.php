@@ -13,7 +13,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
-#[Serializer\AccessType(["public_method"])]
+#[Serializer\AccessType(['value' => 'public_method'])]
 class Customer extends AbstractI18n implements IdentityInterface
 {
     /** @var Identity References a customer group */
@@ -191,7 +191,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     /** @var KeyValueAttribute[] */
     #[Serializer\Type('array<Jtl\Connector\Core\Model\KeyValueAttribute>')]
     #[Serializer\SerializedName('attributes')]
-    #[Serializer\AccessType(['reflection'])]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $attributes = [];
 
     /**

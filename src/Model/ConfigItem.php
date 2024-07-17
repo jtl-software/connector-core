@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
-#[Serializer\AccessType(['public_method'])]
+#[Serializer\AccessType(['value' => 'public_method'])]
 class ConfigItem extends AbstractIdentity
 {
     /** @var Identity Reference to configGroup */
@@ -117,13 +117,13 @@ class ConfigItem extends AbstractIdentity
     /** @var ConfigItemI18n[] */
     #[Serializer\Type('array<Jtl\Connector\Core\Model\ConfigItemI18n>')]
     #[Serializer\SerializedName('i18ns')]
-    #[Serializer\AccessType(['reflection'])]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $i18ns = [];
 
     /** @var ConfigItemPrice[] */
     #[Serializer\Type('array<Jtl\Connector\Core\Model\ConfigItemPrice>')]
     #[Serializer\SerializedName('prices')]
-    #[Serializer\AccessType(['reflection'])]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $prices = [];
 
     /**

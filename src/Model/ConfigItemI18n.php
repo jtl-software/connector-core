@@ -13,7 +13,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
-#[Serializer\AccessType(['public_method'])]
+#[Serializer\AccessType(['value' => 'public_method'])]
 class ConfigItemI18n extends AbstractI18n
 {
     /** @var string Description (html). Will be ignored, if inheritProductName==true */

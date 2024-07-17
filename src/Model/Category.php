@@ -15,7 +15,7 @@ use TypeError;
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
-#[Serializer\AccessType(['public_method'])]
+#[Serializer\AccessType(['value' => 'public_method'])]
 class Category extends AbstractIdentity implements TranslatableAttributesInterface
 {
     use TranslatableAttributesTrait;
@@ -45,25 +45,25 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     /** @var TranslatableAttribute[] */
     #[Serializer\Type('array<Jtl\Connector\Core\Model\CategoryAttribute>')]
     #[Serializer\SerializedName('attributes')]
-    #[Serializer\AccessType(['reflection'])]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $attributes = [];
 
     /** @var CategoryCustomerGroup[] */
     #[Serializer\Type('array<Jtl\Connector\Core\Model\CategoryCustomerGroup>')]
     #[Serializer\SerializedName('customerGroups')]
-    #[Serializer\AccessType(['reflection'])]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $customerGroups = [];
 
     /** @var CategoryI18n[] */
     #[Serializer\Type('array<Jtl\Connector\Core\Model\CategoryI18n>')]
     #[Serializer\SerializedName('i18ns')]
-    #[Serializer\AccessType(['reflection'])]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $i18ns = [];
 
     /** @var CategoryInvisibility[] */
     #[Serializer\Type('array<Jtl\Connector\Core\Model\CategoryInvisibility>')]
     #[Serializer\SerializedName('invisibilities')]
-    #[Serializer\AccessType(['reflection'])]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $invisibilities = [];
 
     /**

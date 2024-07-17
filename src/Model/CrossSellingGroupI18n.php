@@ -11,7 +11,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
-#[Serializer\AccessType(['public_method'])]
+#[Serializer\AccessType(['value' => 'public_method'])]
 class CrossSellingGroupI18n extends AbstractI18n
 {
     /** @var string Optional localized description */

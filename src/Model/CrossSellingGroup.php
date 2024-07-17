@@ -13,13 +13,13 @@ use JMS\Serializer\Annotation as Serializer;
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
-#[Serializer\AccessType(["public_method"])]
+#[Serializer\AccessType(['value' => 'public_method'])]
 class CrossSellingGroup extends AbstractIdentity
 {
     /** @var CrossSellingGroupI18n[] */
     #[Serializer\Type("array<Jtl\Connector\Core\Model\CrossSellingGroupI18n>")]
     #[Serializer\SerializedName("i18ns")]
-    #[Serializer\AccessType(['reflection'])]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $i18ns = [];
 
     /**

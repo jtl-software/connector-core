@@ -13,11 +13,11 @@ use JMS\Serializer\Annotation as Serializer;
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
-#[Serializer\AccessType(['public_method'])]
+#[Serializer\AccessType(['value' => 'public_method'])]
 class ConfigItemPrice extends AbstractModel
 {
     /** @var Identity Reference to customerGroup */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('customerGroupId')]
     #[Serializer\Accessor(getter: 'getCustomerGroupId', setter: 'setCustomerGroupId')]
     protected Identity $customerGroupId;

@@ -13,7 +13,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
-#[Serializer\AccessType(["public_method"])]
+#[Serializer\AccessType(['value' => 'public_method'])]
 class CrossSellingItem extends AbstractIdentity
 {
     /** @var Identity Reference to crossSellingGroup */
@@ -28,9 +28,9 @@ class CrossSellingItem extends AbstractIdentity
     protected ?CrossSellingGroup $crossSellingGroup = null;
 
     /** @var Identity[] Referenced target product ID */
-    #[Serializer\Type(Identity::class)]
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\Identity>')]
     #[Serializer\SerializedName('productIds')]
-    #[Serializer\AccessType(['reflection'])]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $productIds = [];
 
     /**

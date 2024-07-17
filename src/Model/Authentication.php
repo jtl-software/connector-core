@@ -6,7 +6,7 @@ namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
 
-#[Serializer\AccessType(['public_method'])]
+#[Serializer\AccessType(['value' => 'public_method'])]
 class Authentication extends AbstractModel
 {
     #[Serializer\Type('string')]

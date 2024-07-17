@@ -12,7 +12,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @access  public
  * @package Jtl\Connector\Core\Model\Common
  */
-#[Serializer\AccessType(['public_method'])]
+#[Serializer\AccessType(['value' => 'public_method'])]
 abstract class AbstractI18n extends AbstractModel implements I18nInterface
 {
     #[Serializer\Type('string')]

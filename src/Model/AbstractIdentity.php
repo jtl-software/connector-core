@@ -8,7 +8,7 @@ use JMS\Serializer\Annotation as Serializer;
 
 abstract class AbstractIdentity extends AbstractModel implements IdentityInterface
 {
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('id')]
     #[Serializer\Accessor(getter: 'getId', setter: 'setId')]
     protected Identity $id;

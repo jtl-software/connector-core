@@ -14,7 +14,7 @@ use RuntimeException;
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
  */
-#[Serializer\AccessType(['public_method'])]
+#[Serializer\AccessType(['value' => 'public_method'])]
 #[Serializer\Discriminator(
     field   : 'relationType',
     map     : [
@@ -43,7 +43,7 @@ abstract class AbstractImage extends AbstractIdentity
     /** @var ImageI18n[] */
     #[Serializer\Type('array<Jtl\Connector\Core\Model\ImageI18n>')]
     #[Serializer\SerializedName('i18ns')]
-    #[Serializer\AccessType(['reflection'])]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $i18ns = [];
 
     #[Serializer\Type('string')]
