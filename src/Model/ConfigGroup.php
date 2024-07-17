@@ -12,63 +12,49 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['public_method'])]
 class ConfigGroup extends AbstractIdentity
 {
-    /**
-     * @var string Optional internal comment to differantiate config groups by comment name
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("comment")
-     * @Serializer\Accessor(getter="getComment",setter="setComment")
-     */
+    /** @var string Optional internal comment to differantiate config groups by comment name */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('comment')]
+    #[Serializer\Accessor(getter: 'getComment', setter: 'setComment')]
     protected string $comment = '';
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("imagePath")
-     * @Serializer\Accessor(getter="getImagePath",setter="setImagePath")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('imagePath')]
+    #[Serializer\Accessor(getter: 'getImagePath', setter: 'setImagePath')]
     protected string $imagePath = '';
 
-    /**
-     * @var int Optional maximum number allowed selections. Default 0 for no maximum limitation.
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("maximumSelection")
-     * @Serializer\Accessor(getter="getMaximumSelection",setter="setMaximumSelection")
-     */
+    /** @var int Optional maximum number allowed selections. Default 0 for no maximum limitation. */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('maximumSelection')]
+    #[Serializer\Accessor(getter: 'getMaximumSelection', setter: 'setMaximumSelection')]
     protected int $maximumSelection = 0;
 
-    /**
-     * @var int Optional minimum number required selections. Default 0 for no minimum requirement.
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("minimumSelection")
-     * @Serializer\Accessor(getter="getMinimumSelection",setter="setMinimumSelection")
-     */
+    /** @var int Optional minimum number required selections. Default 0 for no minimum requirement. */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('minimumSelection')]
+    #[Serializer\Accessor(getter: 'getMinimumSelection', setter: 'setMinimumSelection')]
     protected int $minimumSelection = 0;
 
-    /**
-     * @var int Optional sort order number
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("sort")
-     * @Serializer\Accessor(getter="getSort",setter="setSort")
-     */
+    /** @var int Optional sort order number */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('sort')]
+    #[Serializer\Accessor(getter: 'getSort', setter: 'setSort')]
     protected int $sort = 0;
 
-    /**
-     * @var int Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("type")
-     * @Serializer\Accessor(getter="getType",setter="setType")
-     */
+    /** @var int Config group item type. 0: Checkbox, 1:Radio, 2, Dropdown, 3: Multiselect */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('type')]
+    #[Serializer\Accessor(getter: 'getType', setter: 'setType')]
     protected int $type = 0;
 
-    /**
-     * @var ConfigGroupI18n[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ConfigGroupI18n>")
-     * @Serializer\SerializedName("i18ns")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ConfigGroupI18n[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ConfigGroupI18n>')]
+    #[Serializer\SerializedName('i18ns')]
+    #[Serializer\AccessType(['reflection'])]
     protected array $i18ns = [];
 
     /**

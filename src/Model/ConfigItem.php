@@ -13,141 +13,117 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['public_method'])]
 class ConfigItem extends AbstractIdentity
 {
-    /**
-     * @var Identity Reference to configGroup
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("configGroupId")
-     * @Serializer\Accessor(getter="getConfigGroupId",setter="setConfigGroupId")
-     */
+    /** @var Identity Reference to configGroup */
+    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\SerializedName('configGroupId')]
+    #[Serializer\Accessor(getter: 'getConfigGroupId', setter: 'setConfigGroupId')]
     protected Identity $configGroupId;
 
-    /**
-     * @var Identity Optional reference to product
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("productId")
-     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
-     */
+    /** @var Identity Optional reference to product */
+    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\SerializedName('productId')]
+    #[Serializer\Accessor(getter: 'getProductId', setter: 'setProductId')]
     protected Identity $productId;
 
     /**
      * @var int     Optional:Ignore multiplier.
      *                  If true, quantity of config item will not be increased if product quantity is increased
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("ignoreMultiplier")
-     * @Serializer\Accessor(getter="getIgnoreMultiplier",setter="setIgnoreMultiplier")
      */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('ignoreMultiplier')]
+    #[Serializer\Accessor(getter: 'getIgnoreMultiplier', setter: 'setIgnoreMultiplier')]
     protected int $ignoreMultiplier = 0;
 
     /**
      * @var bool Optional: Inherit product name and description  if productId is set.
      *                  If true, configItem name will be received from referenced
      *                  product and configItemI18n name will be ignored.
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("inheritProductName")
-     * @Serializer\Accessor(getter="getInheritProductName",setter="setInheritProductName")
      */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('inheritProductName')]
+    #[Serializer\Accessor(getter: 'getInheritProductName', setter: 'setInheritProductName')]
     protected bool $inheritProductName = false;
 
     /**
      * @var bool Optional: Inherit product price of referenced productId.
      *              If true, configItem price will be the same as referenced product price.
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("inheritProductPrice")
-     * @Serializer\Accessor(getter="getInheritProductPrice",setter="setInheritProductPrice")
      */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('inheritProductPrice')]
+    #[Serializer\Accessor(getter: 'getInheritProductPrice', setter: 'setInheritProductPrice')]
     protected bool $inheritProductPrice = false;
 
-    /**
-     * @var double Optional initial / predefined quantity. Default is one (1) quantity piece.
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("initialQuantity")
-     * @Serializer\Accessor(getter="getInitialQuantity",setter="setInitialQuantity")
-     */
+    /** @var double Optional initial / predefined quantity. Default is one (1) quantity piece. */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('initialQuantity')]
+    #[Serializer\Accessor(getter: 'getInitialQuantity', setter: 'setInitialQuantity')]
     protected float $initialQuantity = 0.0;
 
-    /**
-     * @var bool Optional: Preselect configItem. If true, configItem will be preselected or prechecked.
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isPreSelected")
-     * @Serializer\Accessor(getter="getIsPreSelected",setter="setIsPreSelected")
-     */
+    /** @var bool Optional: Preselect configItem. If true, configItem will be preselected or prechecked. */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('isPreSelected')]
+    #[Serializer\Accessor(getter: 'getIsPreSelected', setter: 'setIsPreSelected')]
     protected bool $isPreSelected = false;
 
-    /**
-     * @var bool Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted.
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isRecommended")
-     * @Serializer\Accessor(getter="getIsRecommended",setter="setIsRecommended")
-     */
+    /** @var bool Optional: Highlight or recommend config item. If true, configItem will be recommended/highlighted. */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('isRecommended')]
+    #[Serializer\Accessor(getter: 'getIsRecommended', setter: 'setIsRecommended')]
     protected bool $isRecommended = false;
 
-    /**
-     * @var double Maximum allowed quantity. Default 0 for no maximum limit.
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("maxQuantity")
-     * @Serializer\Accessor(getter="getMaxQuantity",setter="setMaxQuantity")
-     */
+    /** @var double Maximum allowed quantity. Default 0 for no maximum limit. */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('maxQuantity')]
+    #[Serializer\Accessor(getter: 'getMaxQuantity', setter: 'setMaxQuantity')]
     protected float $maxQuantity = 0.0;
 
-    /**
-     * @var double Optional minimum quantity required to add configItem. Default 0 for no minimum quantity.
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("minQuantity")
-     * @Serializer\Accessor(getter="getMinQuantity",setter="setMinQuantity")
-     */
+    /** @var double Optional minimum quantity required to add configItem. Default 0 for no minimum quantity. */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('minQuantity')]
+    #[Serializer\Accessor(getter: 'getMinQuantity', setter: 'setMinQuantity')]
     protected float $minQuantity = 0.0;
 
     /**
      * @var bool Optional: Show discount compared to productId price.
      *              If true, the discount compared to referenct product price will be shown.
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("showDiscount")
-     * @Serializer\Accessor(getter="getShowDiscount",setter="setShowDiscount")
      */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('showDiscount')]
+    #[Serializer\Accessor(getter: 'getShowDiscount', setter: 'setShowDiscount')]
     protected bool $showDiscount = false;
 
-    /**
-     * @var bool Optional: Show surcharge compared to productId price.
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("showSurcharge")
-     * @Serializer\Accessor(getter="getShowSurcharge",setter="setShowSurcharge")
-     */
+    /** @var bool Optional: Show surcharge compared to productId price. */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('showSurcharge')]
+    #[Serializer\Accessor(getter: 'getShowSurcharge', setter: 'setShowSurcharge')]
     protected bool $showSurcharge = false;
 
-    /**
-     * @var int Optional sort order number
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("sort")
-     * @Serializer\Accessor(getter="getSort",setter="setSort")
-     */
+    /** @var int Optional sort order number */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('sort')]
+    #[Serializer\Accessor(getter: 'getSort', setter: 'setSort')]
     protected int $sort = 0;
 
-    /**
-     * @var int Config item type. 0: Product, 1: Special
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("type")
-     * @Serializer\Accessor(getter="getType",setter="setType")
-     */
+    /** @var int Config item type. 0: Product, 1: Special */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('type')]
+    #[Serializer\Accessor(getter: 'getType', setter: 'setType')]
     protected int $type = 0;
 
-    /**
-     * @var ConfigItemI18n[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ConfigItemI18n>")
-     * @Serializer\SerializedName("i18ns")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ConfigItemI18n[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ConfigItemI18n>')]
+    #[Serializer\SerializedName('i18ns')]
+    #[Serializer\AccessType(['reflection'])]
     protected array $i18ns = [];
 
-    /**
-     * @var ConfigItemPrice[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ConfigItemPrice>")
-     * @Serializer\SerializedName("prices")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ConfigItemPrice[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ConfigItemPrice>')]
+    #[Serializer\SerializedName('prices')]
+    #[Serializer\AccessType(['reflection'])]
     protected array $prices = [];
 
     /**

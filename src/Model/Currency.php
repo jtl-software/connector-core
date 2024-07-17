@@ -12,75 +12,67 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['public_method'])]
 class Currency extends AbstractIdentity
 {
     /**
      * @var string Optional delimiter char for cent, default=",".
      *              Ignore this flag if you have the correct user locale preference.
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("delimiterCent")
-     * @Serializer\Accessor(getter="getDelimiterCent",setter="setDelimiterCent")
      */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('delimiterCent')]
+    #[Serializer\Accessor(getter: 'getDelimiterCent', setter: 'setDelimiterCent')]
     protected string $delimiterCent = '';
 
     /**
      * @var string Optional delimiter char for thousand. Default=".".
      *              Ignore this flag if you have the correct user locale preference.
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("delimiterThousand")
-     * @Serializer\Accessor(getter="getDelimiterThousand",setter="setDelimiterThousand")
      */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('delimiterThousand')]
+    #[Serializer\Accessor(getter: 'getDelimiterThousand', setter: 'setDelimiterThousand')]
     protected string $delimiterThousand = '';
 
-    /**
-     * @var double Optional conversion factor to default currency. Default is 1 (equals default currency)
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("factor")
-     * @Serializer\Accessor(getter="getFactor",setter="setFactor")
-     */
+    /** @var double Optional conversion factor to default currency. Default is 1 (equals default currency) */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('factor')]
+    #[Serializer\Accessor(getter: 'getFactor', setter: 'setFactor')]
     protected float $factor = 0.0;
 
     /**
      * @var bool Optional: Display currency before or after value.
      *                  Ignore this flag if you have the correct user locale preference.
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("hasCurrencySignBeforeValue")
-     * @Serializer\Accessor(getter="getHasCurrencySignBeforeValue",setter="setHasCurrencySignBeforeValue")
      */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('hasCurrencySignBeforeValue')]
+    #[Serializer\Accessor(getter: 'getHasCurrencySignBeforeValue', setter: 'setHasCurrencySignBeforeValue')]
     protected bool $hasCurrencySignBeforeValue = false;
 
     /**
      * @var bool Optional: Flag default currency. True, if this is the default currency.
      *                  Exact one currency must be marked as default.
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isDefault")
-     * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
      */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('isDefault')]
+    #[Serializer\Accessor(getter: 'getIsDefault', setter: 'setIsDefault')]
     protected bool $isDefault = false;
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("iso")
-     * @Serializer\Accessor(getter="getIso",setter="setIso")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('iso')]
+    #[Serializer\Accessor(getter: 'getIso', setter: 'setIso')]
     protected string $iso = '';
 
-    /**
-     * @var string Currency name
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("name")
-     * @Serializer\Accessor(getter="getName",setter="setName")
-     */
+    /** @var string Currency name */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('name')]
+    #[Serializer\Accessor(getter: 'getName', setter: 'setName')]
     protected string $name = '';
 
-    /**
-     * @var string Optional HTML name e.g. "&euro;"
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("nameHtml")
-     * @Serializer\Accessor(getter="getNameHtml",setter="setNameHtml")
-     */
+    /** @var string Optional HTML name e.g. "&euro;" */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('nameHtml')]
+    #[Serializer\Accessor(getter: 'getNameHtml', setter: 'setNameHtml')]
     protected string $nameHtml = '';
 
     /**
@@ -158,7 +150,7 @@ class Currency extends AbstractIdentity
 
     /**
      * @param bool $hasCurrencySignBeforeValue Optional: Display currency before or after value.
-     *                                            Ignore this flag if you have the correct user locale preference.
+     *                                         Ignore this flag if you have the correct user locale preference.
      *
      * @return $this
      */
@@ -180,7 +172,7 @@ class Currency extends AbstractIdentity
 
     /**
      * @param bool $isDefault Optional: Flag default currency. True, if this is the default currency.
-     *                           Exact one currency must be marked as default.
+     *                        Exact one currency must be marked as default.
      *
      * @return $this
      */

@@ -12,56 +12,44 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['public_method'])]
 class CategoryI18n extends AbstractI18n
 {
-    /**
-     * @var string Optional localized Long Description
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("description")
-     * @Serializer\Accessor(getter="getDescription",setter="setDescription")
-     */
+    /** @var string Optional localized Long Description */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('description')]
+    #[Serializer\Accessor(getter: 'getDescription', setter: 'setDescription')]
     protected string $description = '';
 
-    /**
-     * @var string Optional localized  short description used for meta tag description
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("metaDescription")
-     * @Serializer\Accessor(getter="getMetaDescription",setter="setMetaDescription")
-     */
+    /** @var string Optional localized  short description used for meta tag description */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('metaDescription')]
+    #[Serializer\Accessor(getter: 'getMetaDescription', setter: 'setMetaDescription')]
     protected string $metaDescription = '';
 
-    /**
-     * @var string Optional localized meta tag keywords value
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("metaKeywords")
-     * @Serializer\Accessor(getter="getMetaKeywords",setter="setMetaKeywords")
-     */
+    /** @var string Optional localized meta tag keywords value */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('metaKeywords')]
+    #[Serializer\Accessor(getter: 'getMetaKeywords', setter: 'setMetaKeywords')]
     protected string $metaKeywords = '';
 
-    /**
-     * @var string Localized category name
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("name")
-     * @Serializer\Accessor(getter="getName",setter="setName")
-     */
+    /** @var string Localized category name */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('name')]
+    #[Serializer\Accessor(getter: 'getName', setter: 'setName')]
     protected string $name = '';
 
-    /**
-     * @var string Optional localized title tag value
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("titleTag")
-     * @Serializer\Accessor(getter="getTitleTag",setter="setTitleTag")
-     */
+    /** @var string Optional localized title tag value */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('titleTag')]
+    #[Serializer\Accessor(getter: 'getTitleTag', setter: 'setTitleTag')]
     protected string $titleTag = '';
 
-    /**
-     * @var string Optional localized category URL
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("urlPath")
-     * @Serializer\Accessor(getter="getUrlPath",setter="setUrlPath")
-     */
+    /** @var string Optional localized category URL */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('urlPath')]
+    #[Serializer\Accessor(getter: 'getUrlPath', setter: 'setUrlPath')]
     protected string $urlPath = '';
 
     /**

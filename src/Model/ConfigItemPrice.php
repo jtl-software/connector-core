@@ -12,34 +12,30 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['public_method'])]
 class ConfigItemPrice extends AbstractModel
 {
-    /**
-     * @var Identity Reference to customerGroup
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("customerGroupId")
-     * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
-     */
+    /** @var Identity Reference to customerGroup */
+    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\SerializedName('customerGroupId')]
+    #[Serializer\Accessor(getter: 'getCustomerGroupId', setter: 'setCustomerGroupId')]
     protected Identity $customerGroupId;
 
     /**
      * @var double  Net price or percental value to add/deduct to/from product price (depending on type).
      *              Positive value means surcharge, negative value means discount.
      *              Also see configItem.vat for value added tax.
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("price")
-     * @Serializer\Accessor(getter="getPrice",setter="setPrice")
      */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('price')]
+    #[Serializer\Accessor(getter: 'getPrice', setter: 'setPrice')]
     protected float $price = 0.0;
 
-    /**
-     * @var int Optional type. Default is fixed price (Type 0). Type 1 defines percental price type.
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("type")
-     * @Serializer\Accessor(getter="getType",setter="setType")
-     */
+    /** @var int Optional type. Default is fixed price (Type 0). Type 1 defines percental price type. */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('type')]
+    #[Serializer\Accessor(getter: 'getType', setter: 'setType')]
     protected int $type = 0;
 
     /**

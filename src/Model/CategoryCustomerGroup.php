@@ -12,24 +12,20 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['public_method'])]
 class CategoryCustomerGroup extends AbstractModel
 {
-    /**
-     * @var Identity Reference to customerGroup
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("customerGroupId")
-     * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
-     */
+    /** @var Identity Reference to customerGroup */
+    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\SerializedName('customerGroupId')]
+    #[Serializer\Accessor(getter: 'getCustomerGroupId', setter: 'setCustomerGroupId')]
     protected Identity $customerGroupId;
 
-    /**
-     * @var double Optional discount on products in specified categoryId for  customerGroupId
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("discount")
-     * @Serializer\Accessor(getter="getDiscount",setter="setDiscount")
-     */
+    /** @var double Optional discount on products in specified categoryId for  customerGroupId */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('discount')]
+    #[Serializer\Accessor(getter: 'getDiscount', setter: 'setDiscount')]
     protected float $discount = 0.0;
 
     /**

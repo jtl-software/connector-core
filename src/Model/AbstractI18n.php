@@ -11,15 +11,13 @@ use JMS\Serializer\Annotation as Serializer;
  *
  * @access  public
  * @package Jtl\Connector\Core\Model\Common
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['public_method'])]
 abstract class AbstractI18n extends AbstractModel implements I18nInterface
 {
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("languageIso")
-     * @Serializer\Accessor(getter="getLanguageIso",setter="setLanguageIso")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('languageIso')]
+    #[Serializer\Accessor(getter: 'getLanguageIso', setter: 'setLanguageIso')]
     protected string $languageIso = '';
 
     /**
