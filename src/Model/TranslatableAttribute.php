@@ -51,6 +51,7 @@ class TranslatableAttribute extends AbstractIdentity
     #[Serializer\Accessor(getter: 'getType', setter: 'setType')]
     protected string $type = self::TYPE_STRING;
 
+    /** @var TranslatableAttributeI18n[] */
     #[Serializer\Type('array<Jtl\Connector\Core\Model\TranslatableAttributeI18n>')]
     #[Serializer\SerializedName('i18ns')]
     #[Serializer\AccessType(['value' => 'reflection'])]
