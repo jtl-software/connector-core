@@ -30,24 +30,34 @@ class Warnings
 
     /**
      * @param string $type
+     * @param bool   $includeDefault
      * @return bool
      */
-    public function hasSpecificWarningType(string $type): bool
+    public function hasSpecificWarningType(string $type, bool $includeDefault = true): bool
     {
 
         if (!$this->hasWarnings()) {
             return false;
         }
 
-        if (!\is_null($this->warnings)) {
-            foreach ($this->warnings as $warning) {
-                if ($warning->getType() === $type) {
-                    return true;
+        $return = false;
+        /** @var Warning[] $warnings */
+        $warnings = $this->warnings;
+        foreach ($warnings as $warning) {
+            if ($warning->getType() === $type) {
+                $return = true;
+            }
+        }
+
+        if ($return === false && $includeDefault === true) {
+            foreach ($warnings as $warning) {
+                if ($warning->getType() === self::TYPE_DEFAULT) {
+                    $return = true;
                 }
             }
         }
 
-        return false;
+        return $return;
     }
 
     /**

@@ -18,6 +18,7 @@ use Jtl\Connector\Core\Exception\JsonException as CoreJsonException;
 use Jtl\Connector\Core\Exception\MissingRequirementException;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Linker\IdentityLinker;
+use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
 use Jtl\Connector\Core\Model\ConnectorIdentification;
@@ -25,15 +26,12 @@ use Jtl\Connector\Core\Model\ConnectorServerInfo;
 use Jtl\Connector\Core\Model\Features;
 use Jtl\Connector\Core\Model\Identities;
 use Jtl\Connector\Core\Model\Session;
-use Jtl\Connector\Core\Rpc\Warning;
-use Jtl\Connector\Core\Rpc\Warnings;
 use Jtl\Connector\Core\Serializer\Json;
 use Jtl\Connector\Core\System\Check;
 use Jtl\Connector\Core\Utilities\Str;
 use Psr\Log\InvalidArgumentException;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
 
 /**
  * Base Config Controller
@@ -71,10 +69,10 @@ class ConnectorController implements LoggerAwareInterface
         $this->featuresPath   = $featuresPath;
         $this->checksumLinker = $checksumLinker;
         $this->linker         = $linker;
-        $this->logger         = new NullLogger();
         $this->sessionHandler = $sessionHandler;
         $this->tokenValidator = $tokenValidator;
         $this->container      = $container;
+        $this->logger         = new Logger($container);
     }
 
 
@@ -144,14 +142,7 @@ class ConnectorController implements LoggerAwareInterface
     {
         foreach ($ack->getIdentities() as $modelName => $identities) {
             $normalizedName = Str::toPascalCase($modelName);
-            if (!Model::isModel($normalizedName)) {
-                /** @var Warnings $warnings */
-                $warnings = $this->container->get(Warnings::WARNINGS);
-                $warnings->addWarning(
-                    (new Warning())
-                        ->setMessage('ACK: Unknown core entity (' . $normalizedName . ')! Skipping related ack\'s...')
-                        ->setType(Warnings::TYPE_SEND)
-                );
+            if (Model::isModel($normalizedName)) {
                 $this->logger->warning(
                     'ACK: Unknown core entity ({name})! Skipping related ack\'s...',
                     ['name' => $normalizedName]
