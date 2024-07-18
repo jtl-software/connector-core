@@ -11,23 +11,21 @@ use Jtl\Connector\Core\Exception\TranslatableAttributeException;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class TranslatableAttributeI18n extends AbstractI18n
 {
-    /** @Serializer\Exclude */
+    #[Serializer\Exclude]
     protected static bool $strictMode = false;
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("name")
-     * @Serializer\Accessor(getter="getName",setter="setName")
-     */
+
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('name')]
+    #[Serializer\Accessor(getter: 'getName', setter: 'setName')]
     protected string $name = '';
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("value")
-     * @Serializer\Accessor(getter="getValue",setter="setValue")
-     */
+    
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('value')]
+    #[Serializer\Accessor(getter: 'getValueAsString', setter: 'setValue')]
     protected string $value = '';
 
     /**

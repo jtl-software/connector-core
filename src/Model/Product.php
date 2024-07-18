@@ -16,666 +16,512 @@ use TypeError;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class Product extends AbstractIdentity implements TranslatableAttributesInterface
 {
     use TranslatableAttributesTrait;
 
-    /**
-     * @var Identity Optional reference to basePriceUnit
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("basePriceUnitId")
-     * @Serializer\Accessor(getter="getBasePriceUnitId",setter="setBasePriceUnitId")
-     */
+    /** @var Identity Optional reference to basePriceUnit */
+    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\SerializedName('basePriceUnitId')]
+    #[Serializer\Accessor(getter: 'getBasePriceUnitId', setter: 'setBasePriceUnitId')]
     protected Identity $basePriceUnitId;
 
-    /**
-     * @var Identity Reference to manufacturer
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("manufacturerId")
-     * @Serializer\Accessor(getter="getManufacturerId",setter="setManufacturerId")
-     */
+    /** @var Identity Reference to manufacturer */
+    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\SerializedName('manufacturerId')]
+    #[Serializer\Accessor(getter: 'getManufacturerId', setter: 'setManufacturerId')]
     protected Identity $manufacturerId;
 
-    /**
-     * @var Identity Reference to master product
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("masterProductId")
-     * @Serializer\Accessor(getter="getMasterProductId",setter="setMasterProductId")
-     */
+    /** @var Identity Reference to master product */
+    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\SerializedName('masterProductId')]
+    #[Serializer\Accessor(getter: 'getMasterProductId', setter: 'setMasterProductId')]
     protected Identity $masterProductId;
 
-    /**
-     * @var Identity Optional reference to measurement unit id
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("measurementUnitId")
-     * @Serializer\Accessor(getter="getMeasurementUnitId",setter="setMeasurementUnitId")
-     */
+    /** @var Identity Optional reference to measurement unit id */
+    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\SerializedName('measurementUnitId')]
+    #[Serializer\Accessor(getter: 'getMeasurementUnitId', setter: 'setMeasurementUnitId')]
     protected Identity $measurementUnitId;
 
-    /**
-     * @var Identity Optional reference to partsList
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("partsListId")
-     * @Serializer\Accessor(getter="getPartsListId",setter="setPartsListId")
-     */
+    /** @var Identity Optional reference to partsList */
+    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\SerializedName('partsListId')]
+    #[Serializer\Accessor(getter: 'getPartsListId', setter: 'setPartsListId')]
     protected Identity $partsListId;
 
-    /**
-     * @var Identity Optional reference to productType
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("productTypeId")
-     * @Serializer\Accessor(getter="getProductTypeId",setter="setProductTypeId")
-     */
+    /** @var Identity Optional reference to productType */
+    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\SerializedName('productTypeId')]
+    #[Serializer\Accessor(getter: 'getProductTypeId', setter: 'setProductTypeId')]
     protected Identity $productTypeId;
 
-    /**
-     * @var Identity Reference to shippingClass
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("shippingClassId")
-     * @Serializer\Accessor(getter="getShippingClassId",setter="setShippingClassId")
-     */
+    /** @var Identity Reference to shippingClass */
+    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\SerializedName('shippingClassId')]
+    #[Serializer\Accessor(getter: 'getShippingClassId', setter: 'setShippingClassId')]
     protected Identity $shippingClassId;
 
-    /**
-     * @var Identity Reference to tax class
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("taxClassId")
-     * @Serializer\Accessor(getter="getTaxClassId",setter="setTaxClassId")
-     */
+    /** @var Identity Reference to tax class */
+    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\SerializedName('taxClassId')]
+    #[Serializer\Accessor(getter: 'getTaxClassId', setter: 'setTaxClassId')]
     protected Identity $taxClassId;
 
-    /**
-     * @var Identity Reference to unit
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("unitId")
-     * @Serializer\Accessor(getter="getUnitId",setter="setUnitId")
-     */
+    /** @var Identity Reference to unit */
+    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\SerializedName('unitId')]
+    #[Serializer\Accessor(getter: 'getUnitId', setter: 'setUnitId')]
     protected Identity $unitId;
 
-    /**
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("additionalHandlingTime")
-     * @Serializer\Accessor(getter="getAdditionalHandlingTime",setter="setAdditionalHandlingTime")
-     */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('additionalHandlingTime')]
+    #[Serializer\Accessor(getter: 'getAdditionalHandlingTime', setter: 'setAdditionalHandlingTime')]
     protected int $additionalHandlingTime = 0;
 
-    /**
-     * @var string Optional Amazon Standard Identification Number
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("asin")
-     * @Serializer\Accessor(getter="getAsin",setter="setAsin")
-     */
+    /** @var string Optional Amazon Standard Identification Number */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('asin')]
+    #[Serializer\Accessor(getter: 'getAsin', setter: 'setAsin')]
     protected string $asin = '';
 
     /**
      * @var \DateTimeInterface|null Optional available from date. Specify a date, upon when product can be purchased.
-     * @Serializer\Type("DateTimeInterface")
-     * @Serializer\SerializedName("availableFrom")
-     * @Serializer\Accessor(getter="getAvailableFrom",setter="setAvailableFrom")
      */
+    #[Serializer\Type('DateTimeInterface')]
+    #[Serializer\SerializedName('availableFrom')]
+    #[Serializer\Accessor(getter: 'getAvailableFrom', setter: 'setAvailableFrom')]
     protected ?\DateTimeInterface $availableFrom = null;
 
     /**
      * @var double Optional base price divisor.
      * Calculate basePriceDivisor by dividing product filling quantity through unit pricing base measure.
      * E.g. 75ml / 100ml = 0.75
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("basePriceDivisor")
-     * @Serializer\Accessor(getter="getBasePriceDivisor",setter="setBasePriceDivisor")
      */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('basePriceDivisor')]
+    #[Serializer\Accessor(getter: 'getBasePriceDivisor', setter: 'setBasePriceDivisor')]
     protected float $basePriceDivisor = 0.0;
 
-    /**
-     * @var double
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("basePriceFactor")
-     * @Serializer\Accessor(getter="getBasePriceFactor",setter="setBasePriceFactor")
-     */
+    /** @var double */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('basePriceFactor')]
+    #[Serializer\Accessor(getter: 'getBasePriceFactor', setter: 'setBasePriceFactor')]
     protected float $basePriceFactor = 0.0;
 
-    /**
-     * @var double Optional base price quantity
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("basePriceQuantity")
-     * @Serializer\Accessor(getter="getBasePriceQuantity",setter="setBasePriceQuantity")
-     */
+    /** @var double Optional base price quantity */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('basePriceQuantity')]
+    #[Serializer\Accessor(getter: 'getBasePriceQuantity', setter: 'setBasePriceQuantity')]
     protected float $basePriceQuantity = 0.0;
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("basePriceUnitCode")
-     * @Serializer\Accessor(getter="getBasePriceUnitCode",setter="setBasePriceUnitCode")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('basePriceUnitCode')]
+    #[Serializer\Accessor(getter: 'getBasePriceUnitCode', setter: 'setBasePriceUnitCode')]
     protected string $basePriceUnitCode = '';
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("basePriceUnitName")
-     * @Serializer\Accessor(getter="getBasePriceUnitName",setter="setBasePriceUnitName")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('basePriceUnitName')]
+    #[Serializer\Accessor(getter: 'getBasePriceUnitName', setter: 'setBasePriceUnitName')]
     protected string $basePriceUnitName = '';
 
-    /**
-     * @var bool Optional: Set to true to display base price / unit pricing measure
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("considerBasePrice")
-     * @Serializer\Accessor(getter="getConsiderBasePrice",setter="setConsiderBasePrice")
-     */
+    /** @var bool Optional: Set to true to display base price / unit pricing measure */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('considerBasePrice')]
+    #[Serializer\Accessor(getter: 'getConsiderBasePrice', setter: 'setConsiderBasePrice')]
     protected bool $considerBasePrice = false;
 
     /**
      * @var bool Consider stock level?
      * If true, product can only be purchased with a positive stockLevel or when permitNegativeStock is set to true
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("considerStock")
-     * @Serializer\Accessor(getter="getConsiderStock",setter="setConsiderStock")
      */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('considerStock')]
+    #[Serializer\Accessor(getter: 'getConsiderStock', setter: 'setConsiderStock')]
     protected bool $considerStock = false;
 
-    /**
-     * @var bool Optional: Consider stock levels of productVariations. Same as considerStock but for variations.
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("considerVariationStock")
-     * @Serializer\Accessor(getter="getConsiderVariationStock",setter="setConsiderVariationStock")
-     */
+    /** @var bool Optional: Consider stock levels of productVariations. Same as considerStock but for variations. */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('considerVariationStock')]
+    #[Serializer\Accessor(getter: 'getConsiderVariationStock', setter: 'setConsiderVariationStock')]
     protected bool $considerVariationStock = false;
 
-    /**
-     * @var \DateTimeInterface|null Creation date
-     * @Serializer\Type("DateTimeInterface")
-     * @Serializer\SerializedName("creationDate")
-     * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
-     */
+    /** @var \DateTimeInterface|null Creation date */
+    #[Serializer\Type('DateTimeInterface')]
+    #[Serializer\SerializedName('creationDate')]
+    #[Serializer\Accessor(getter: 'getCreationDate', setter: 'setCreationDate')]
     protected ?\DateTimeInterface $creationDate = null;
 
-    /**
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("discountable")
-     * @Serializer\Accessor(getter="getDiscountable",setter="setDiscountable")
-     */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('discountable')]
+    #[Serializer\Accessor(getter: 'getDiscountable', setter: 'setDiscountable')]
     protected bool $discountable = true;
 
-    /**
-     * @var string Optional European Article Number (EAN)
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("ean")
-     * @Serializer\Accessor(getter="getEan",setter="setEan")
-     */
+    /** @var string Optional European Article Number (EAN) */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('ean')]
+    #[Serializer\Accessor(getter: 'getEan', setter: 'setEan')]
     protected string $ean = '';
 
-    /**
-     * @var string Optional Ebay product ID
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("epid")
-     * @Serializer\Accessor(getter="getEpid",setter="setEpid")
-     */
+    /** @var string Optional Ebay product ID */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('epid')]
+    #[Serializer\Accessor(getter: 'getEpid', setter: 'setEpid')]
     protected string $epid = '';
 
-    /**
-     * @var string Optional Hazard identifier, encodes general hazard class und subdivision
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("hazardIdNumber")
-     * @Serializer\Accessor(getter="getHazardIdNumber",setter="setHazardIdNumber")
-     */
+    /** @var string Optional Hazard identifier, encodes general hazard class und subdivision */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('hazardIdNumber')]
+    #[Serializer\Accessor(getter: 'getHazardIdNumber', setter: 'setHazardIdNumber')]
     protected string $hazardIdNumber = '';
 
-    /**
-     * @var double Optional product height
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("height")
-     * @Serializer\Accessor(getter="getHeight",setter="setHeight")
-     */
+    /** @var double Optional product height */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('height')]
+    #[Serializer\Accessor(getter: 'getHeight', setter: 'setHeight')]
     protected float $height = 0.0;
 
-    /**
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isActive")
-     * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
-     */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('isActive')]
+    #[Serializer\Accessor(getter: 'getIsActive', setter: 'setIsActive')]
     protected bool $isActive = false;
 
-    /**
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isBatch")
-     * @Serializer\Accessor(getter="getIsBatch",setter="setIsBatch")
-     */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('isBatch')]
+    #[Serializer\Accessor(getter: 'getIsBatch', setter: 'setIsBatch')]
     protected bool $isBatch = false;
 
-    /**
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isBestBefore")
-     * @Serializer\Accessor(getter="getIsBestBefore",setter="setIsBestBefore")
-     */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('isBestBefore')]
+    #[Serializer\Accessor(getter: 'getIsBestBefore', setter: 'setIsBestBefore')]
     protected bool $isBestBefore = false;
 
-    /**
-     * @var string Optional International Standard Book Number
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("isbn")
-     * @Serializer\Accessor(getter="getIsbn",setter="setIsbn")
-     */
+    /** @var string Optional International Standard Book Number */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('isbn')]
+    #[Serializer\Accessor(getter: 'getIsbn', setter: 'setIsbn')]
     protected string $isbn = '';
 
-    /**
-     * @var bool Optional: Set to true to allow non-integer quantites for purchase
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isDivisible")
-     * @Serializer\Accessor(getter="getIsDivisible",setter="setIsDivisible")
-     */
+    /** @var bool Optional: Set to true to allow non-integer quantites for purchase */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('isDivisible')]
+    #[Serializer\Accessor(getter: 'getIsDivisible', setter: 'setIsDivisible')]
     protected bool $isDivisible = false;
 
-    /**
-     * @var bool Optional flag if product is master product
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isMasterProduct")
-     * @Serializer\Accessor(getter="getIsMasterProduct",setter="setIsMasterProduct")
-     */
+    /** @var bool Optional flag if product is master product */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('isMasterProduct')]
+    #[Serializer\Accessor(getter: 'getIsMasterProduct', setter: 'setIsMasterProduct')]
     protected bool $isMasterProduct = false;
 
     /**
      * @var bool Optional flag new product.
      * If true, product will be highlighted as new (creation date may also be considered)
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isNewProduct")
-     * @Serializer\Accessor(getter="getIsNewProduct",setter="setIsNewProduct")
      */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('isNewProduct')]
+    #[Serializer\Accessor(getter: 'getIsNewProduct', setter: 'setIsNewProduct')]
     protected bool $isNewProduct = false;
 
-    /**
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isSerialNumber")
-     * @Serializer\Accessor(getter="getIsSerialNumber",setter="setIsSerialNumber")
-     */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('isSerialNumber')]
+    #[Serializer\Accessor(getter: 'getIsSerialNumber', setter: 'setIsSerialNumber')]
     protected bool $isSerialNumber = false;
 
     /**
      * @var bool Optional flag top product.
      * If true, product will be highlighted as top product (e.g. in product lists or in special boxes)
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isTopProduct")
-     * @Serializer\Accessor(getter="getIsTopProduct",setter="setIsTopProduct")
      */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('isTopProduct')]
+    #[Serializer\Accessor(getter: 'getIsTopProduct', setter: 'setIsTopProduct')]
     protected bool $isTopProduct = false;
 
-    /**
-     * @var string Optional internal keywords and synonyms for product
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("keywords")
-     * @Serializer\Accessor(getter="getKeywords",setter="setKeywords")
-     */
+    /** @var string Optional internal keywords and synonyms for product */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('keywords')]
+    #[Serializer\Accessor(getter: 'getKeywords', setter: 'setKeywords')]
     protected string $keywords = '';
 
-    /**
-     * @var double Optional product length
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("length")
-     * @Serializer\Accessor(getter="getLength",setter="setLength")
-     */
+    /** @var double Optional product length */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('length')]
+    #[Serializer\Accessor(getter: 'getLength', setter: 'setLength')]
     protected float $length = 0.0;
 
-    /**
-     * @var string Optional manufacturer number
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("manufacturerNumber")
-     * @Serializer\Accessor(getter="getManufacturerNumber",setter="setManufacturerNumber")
-     */
+    /** @var string Optional manufacturer number */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('manufacturerNumber')]
+    #[Serializer\Accessor(getter: 'getManufacturerNumber', setter: 'setManufacturerNumber')]
     protected string $manufacturerNumber = '';
 
-    /**
-     * @Serializer\Type("Jtl\Connector\Core\Model\Manufacturer")
-     * @Serializer\SerializedName("manufacturer")
-     * @Serializer\Accessor(getter="getManufacturer",setter="setManufacturer")
-     */
+    #[Serializer\Type('Jtl\Connector\Core\Model\Manufacturer')]
+    #[Serializer\SerializedName('manufacturer')]
+    #[Serializer\Accessor(getter: 'getManufacturer', setter: 'setManufacturer')]
     protected ?Manufacturer $manufacturer = null;
 
-    /**
-     * @var double Optional measurement quantity
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("measurementQuantity")
-     * @Serializer\Accessor(getter="getMeasurementQuantity",setter="setMeasurementQuantity")
-     */
+    /** @var double Optional measurement quantity */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('measurementQuantity')]
+    #[Serializer\Accessor(getter: 'getMeasurementQuantity', setter: 'setMeasurementQuantity')]
     protected float $measurementQuantity = 0.0;
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("measurementUnitCode")
-     * @Serializer\Accessor(getter="getMeasurementUnitCode",setter="setMeasurementUnitCode")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('measurementUnitCode')]
+    #[Serializer\Accessor(getter: 'getMeasurementUnitCode', setter: 'setMeasurementUnitCode')]
     protected string $measurementUnitCode = '';
 
-    /**
-     * @Serializer\Type("DateTimeInterface")
-     * @Serializer\SerializedName("minBestBeforeDate")
-     * @Serializer\Accessor(getter="getMinBestBeforeDate",setter="setMinBestBeforeDate")
-     */
+    #[Serializer\Type('DateTimeInterface')]
+    #[Serializer\SerializedName('minBestBeforeDate')]
+    #[Serializer\Accessor(getter: 'getMinBestBeforeDate', setter: 'setMinBestBeforeDate')]
     protected ?\DateTimeInterface $minBestBeforeDate = null;
 
-    /**
-     * @var double
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("minimumOrderQuantity")
-     * @Serializer\Accessor(getter="getMinimumOrderQuantity",setter="setMinimumOrderQuantity")
-     */
+    /** @var double */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('minimumOrderQuantity')]
+    #[Serializer\Accessor(getter: 'getMinimumOrderQuantity', setter: 'setMinimumOrderQuantity')]
     protected float $minimumOrderQuantity = 0.0;
 
-    /**
-     * @var double
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("minimumQuantity")
-     * @Serializer\Accessor(getter="getMinimumQuantity",setter="setMinimumQuantity")
-     */
+    /** @var double */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('minimumQuantity')]
+    #[Serializer\Accessor(getter: 'getMinimumQuantity', setter: 'setMinimumQuantity')]
     protected float $minimumQuantity = 0.0;
 
-    /**
-     * @Serializer\Type("DateTimeInterface")
-     * @Serializer\SerializedName("modified")
-     * @Serializer\Accessor(getter="getModified",setter="setModified")
-     */
+    #[Serializer\Type('DateTimeInterface')]
+    #[Serializer\SerializedName('modified')]
+    #[Serializer\Accessor(getter: 'getModified', setter: 'setModified')]
     protected ?\DateTimeInterface $modified = null;
 
-    /**
-     * @Serializer\Type("DateTimeInterface")
-     * @Serializer\SerializedName("newReleaseDate")
-     * @Serializer\Accessor(getter="getNewReleaseDate",setter="setNewReleaseDate")
-     */
+    #[Serializer\Type('DateTimeInterface')]
+    #[Serializer\SerializedName('newReleaseDate')]
+    #[Serializer\Accessor(getter: 'getNewReleaseDate', setter: 'setNewReleaseDate')]
     protected ?\DateTimeInterface $newReleaseDate = null;
 
-    /**
-     * @var \DateTimeInterface|null Contains the date of the next available inflow.
-     * @Serializer\Type("DateTimeInterface")
-     * @Serializer\SerializedName("nextAvailableInflowDate")
-     * @Serializer\Accessor(getter="getNextAvailableInflowDate",setter="setNextAvailableInflowDate")
-     */
+    /** @var \DateTimeInterface|null Contains the date of the next available inflow. */
+    #[Serializer\Type('DateTimeInterface')]
+    #[Serializer\SerializedName('nextAvailableInflowDate')]
+    #[Serializer\Accessor(getter: 'getNextAvailableInflowDate', setter: 'setNextAvailableInflowDate')]
     protected ?\DateTimeInterface $nextAvailableInflowDate = null;
 
-    /**
-     * @var double Contains the quantity of the next available inflow.
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("nextAvailableInflowQuantity")
-     * @Serializer\Accessor(getter="getNextAvailableInflowQuantity",setter="setNextAvailableInflowQuantity")
-     */
+    /** @var double Contains the quantity of the next available inflow. */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('nextAvailableInflowQuantity')]
+    #[Serializer\Accessor(getter: 'getNextAvailableInflowQuantity', setter: 'setNextAvailableInflowQuantity')]
     protected float $nextAvailableInflowQuantity = 0.0;
 
-    /**
-     * @var string Optional internal product note
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("note")
-     * @Serializer\Accessor(getter="getNote",setter="setNote")
-     */
+    /** @var string Optional internal product note */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('note')]
+    #[Serializer\Accessor(getter: 'getNote', setter: 'setNote')]
     protected string $note = '';
 
-    /**
-     * @var string Optional Origin country
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("originCountry")
-     * @Serializer\Accessor(getter="getOriginCountry",setter="setOriginCountry")
-     */
+    /** @var string Optional Origin country */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('originCountry')]
+    #[Serializer\Accessor(getter: 'getOriginCountry', setter: 'setOriginCountry')]
     protected string $originCountry = '';
 
-    /**
-     * @var double Optional: self can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("packagingQuantity")
-     * @Serializer\Accessor(getter="getPackagingQuantity",setter="setPackagingQuantity")
-     */
+    /** @var double Optional: self can only be purchased in multiples of takeOffQuantity e.g. 5,10,15... */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('packagingQuantity')]
+    #[Serializer\Accessor(getter: 'getPackagingQuantity', setter: 'setPackagingQuantity')]
     protected float $packagingQuantity = 0.0;
 
     /**
      * @var bool Optional Permit negative stock / allow overselling.
      * If true, product can be purchased even if stockLevel is less or equal 0 and considerStock is true.
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("permitNegativeStock")
-     * @Serializer\Accessor(getter="getPermitNegativeStock",setter="setPermitNegativeStock")
      */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('permitNegativeStock')]
+    #[Serializer\Accessor(getter: 'getPermitNegativeStock', setter: 'setPermitNegativeStock')]
     protected bool $permitNegativeStock = false;
 
-    /**
-     * @var double Productweight exclusive packaging
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("productWeight")
-     * @Serializer\Accessor(getter="getProductWeight",setter="setProductWeight")
-     */
+    /** @var double Productweight exclusive packaging */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('productWeight')]
+    #[Serializer\Accessor(getter: 'getProductWeight', setter: 'setProductWeight')]
     protected float $productWeight = 0.0;
 
-    /**
-     * @var double
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("purchasePrice")
-     * @Serializer\Accessor(getter="getPurchasePrice",setter="setPurchasePrice")
-     */
+    /** @var double */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('purchasePrice')]
+    #[Serializer\Accessor(getter: 'getPurchasePrice', setter: 'setPurchasePrice')]
     protected float $purchasePrice = 0.0;
 
-    /**
-     * @var double Optional recommended retail price (gross)
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("recommendedRetailPrice")
-     * @Serializer\Accessor(getter="getRecommendedRetailPrice",setter="setRecommendedRetailPrice")
-     */
+    /** @var double Optional recommended retail price (gross) */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('recommendedRetailPrice')]
+    #[Serializer\Accessor(getter: 'getRecommendedRetailPrice', setter: 'setRecommendedRetailPrice')]
     protected float $recommendedRetailPrice = 0.0;
 
-    /**
-     * @var string Optional serial number
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("serialNumber")
-     * @Serializer\Accessor(getter="getSerialNumber",setter="setSerialNumber")
-     */
+    /** @var string Optional serial number */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('serialNumber')]
+    #[Serializer\Accessor(getter: 'getSerialNumber', setter: 'setSerialNumber')]
     protected string $serialNumber = '';
 
-    /**
-     * @var double Productweight inclusive packaging
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("shippingWeight")
-     * @Serializer\Accessor(getter="getShippingWeight",setter="setShippingWeight")
-     */
+    /** @var double Productweight inclusive packaging */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('shippingWeight')]
+    #[Serializer\Accessor(getter: 'getShippingWeight', setter: 'setShippingWeight')]
     protected float $shippingWeight = 0.0;
 
-    /**
-     * @var string Optional stock keeping unit identifier
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("sku")
-     * @Serializer\Accessor(getter="getSku",setter="setSku")
-     */
+    /** @var string Optional stock keeping unit identifier */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('sku')]
+    #[Serializer\Accessor(getter: 'getSku', setter: 'setSku')]
     protected string $sku = '';
 
-    /**
-     * @var int Optional sort number for product sorting in lists
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("sort")
-     * @Serializer\Accessor(getter="getSort",setter="setSort")
-     */
+    /** @var int Optional sort number for product sorting in lists */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('sort')]
+    #[Serializer\Accessor(getter: 'getSort', setter: 'setSort')]
     protected int $sort = 0;
 
-    /**
-     * @var double
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("stockLevel")
-     * @Serializer\Accessor(getter="getStockLevel",setter="setStockLevel")
-     */
+    /** @var double */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('stockLevel')]
+    #[Serializer\Accessor(getter: 'getStockLevel', setter: 'setStockLevel')]
     protected float $stockLevel = 0.0;
 
-    /**
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("supplierDeliveryTime")
-     * @Serializer\Accessor(getter="getSupplierDeliveryTime",setter="setSupplierDeliveryTime")
-     */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('supplierDeliveryTime')]
+    #[Serializer\Accessor(getter: 'getSupplierDeliveryTime', setter: 'setSupplierDeliveryTime')]
     protected int $supplierDeliveryTime = 0;
 
-    /**
-     * @var double
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("supplierStockLevel")
-     * @Serializer\Accessor(getter="getSupplierStockLevel",setter="setSupplierStockLevel")
-     */
+    /** @var double */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('supplierStockLevel')]
+    #[Serializer\Accessor(getter: 'getSupplierStockLevel', setter: 'setSupplierStockLevel')]
     protected float $supplierStockLevel = 0.0;
 
-    /**
-     * @var string Optional TARIC
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("taric")
-     * @Serializer\Accessor(getter="getTaric",setter="setTaric")
-     */
+    /** @var string Optional TARIC */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('taric')]
+    #[Serializer\Accessor(getter: 'getTaric', setter: 'setTaric')]
     protected string $taric = '';
 
-    /**
-     * @var string Optional UN number, used to define hazardous properties
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("unNumber")
-     * @Serializer\Accessor(getter="getUnNumber",setter="setUnNumber")
-     */
+    /** @var string Optional UN number, used to define hazardous properties */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('unNumber')]
+    #[Serializer\Accessor(getter: 'getUnNumber', setter: 'setUnNumber')]
     protected string $unNumber = '';
 
-    /**
-     * @var string Optional Universal Product Code
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("upc")
-     * @Serializer\Accessor(getter="getUpc",setter="setUpc")
-     */
+    /** @var string Optional Universal Product Code */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('upc')]
+    #[Serializer\Accessor(getter: 'getUpc', setter: 'setUpc')]
     protected string $upc = '';
 
-    /**
-     * @var double
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("vat")
-     * @Serializer\Accessor(getter="getVat",setter="setVat")
-     */
+    /** @var double */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('vat')]
+    #[Serializer\Accessor(getter: 'getVat', setter: 'setVat')]
     protected float $vat = 0.0;
 
-    /**
-     * @var double Optional product width
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("width")
-     * @Serializer\Accessor(getter="getWidth",setter="setWidth")
-     */
+    /** @var double Optional product width */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('width')]
+    #[Serializer\Accessor(getter: 'getWidth', setter: 'setWidth')]
     protected float $width = 0.0;
 
-    /**
-     * @var ProductAttribute[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductAttribute>")
-     * @Serializer\SerializedName("attributes")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ProductAttribute[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ProductAttribute>')]
+    #[Serializer\SerializedName('attributes')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $attributes = [];
 
-    /**
-     * @var Product2Category[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\Product2Category>")
-     * @Serializer\SerializedName("categories")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var Product2Category[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\Product2Category>')]
+    #[Serializer\SerializedName('categories')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $categories = [];
 
-    /**
-     * @var ProductChecksum[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductChecksum>")
-     * @Serializer\SerializedName("checksums")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ProductChecksum[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ProductChecksum>')]
+    #[Serializer\SerializedName('checksums')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $checksums = [];
 
-    /**
-     * @var ProductConfigGroup[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductConfigGroup>")
-     * @Serializer\SerializedName("configGroups")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ProductConfigGroup[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ProductConfigGroup>')]
+    #[Serializer\SerializedName('configGroups')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $configGroups = [];
 
-    /**
-     * @var CustomerGroupPackagingQuantity[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\CustomerGroupPackagingQuantity>")
-     * @Serializer\SerializedName("customerGroupPackagingQuantities")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var CustomerGroupPackagingQuantity[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\CustomerGroupPackagingQuantity>')]
+    #[Serializer\SerializedName('customerGroupPackagingQuantities')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $customerGroupPackagingQuantities = [];
 
-    /**
-     * @var ProductFileDownload[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductFileDownload>")
-     * @Serializer\SerializedName("fileDownloads")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ProductFileDownload[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ProductFileDownload>')]
+    #[Serializer\SerializedName('fileDownloads')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $fileDownloads = [];
 
-    /**
-     * @var ProductI18n[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductI18n>")
-     * @Serializer\SerializedName("i18ns")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ProductI18n[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ProductI18n>')]
+    #[Serializer\SerializedName('i18ns')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $i18ns = [];
 
-    /**
-     * @var ProductInvisibility[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductInvisibility>")
-     * @Serializer\SerializedName("invisibilities")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ProductInvisibility[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ProductInvisibility>')]
+    #[Serializer\SerializedName('invisibilities')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $invisibilities = [];
 
-    /**
-     * @var ProductMediaFile[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductMediaFile>")
-     * @Serializer\SerializedName("mediaFiles")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ProductMediaFile[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ProductMediaFile>')]
+    #[Serializer\SerializedName('mediaFiles')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $mediaFiles = [];
 
-    /**
-     * @var ProductPartsList[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductPartsList>")
-     * @Serializer\SerializedName("partsLists")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ProductPartsList[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ProductPartsList>')]
+    #[Serializer\SerializedName('partsLists')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $partsLists = [];
 
-    /**
-     * @var ProductPrice[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductPrice>")
-     * @Serializer\SerializedName("prices")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ProductPrice[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ProductPrice>')]
+    #[Serializer\SerializedName('prices')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $prices = [];
 
-    /**
-     * @var ProductSpecialPrice[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductSpecialPrice>")
-     * @Serializer\SerializedName("specialPrices")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ProductSpecialPrice[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ProductSpecialPrice>')]
+    #[Serializer\SerializedName('specialPrices')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $specialPrices = [];
 
-    /**
-     * @var ProductSpecific[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductSpecific>")
-     * @Serializer\SerializedName("specifics")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ProductSpecific[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ProductSpecific>')]
+    #[Serializer\SerializedName('specifics')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $specifics = [];
 
-    /**
-     * @var array<TaxRate>
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\TaxRate>")
-     * @Serializer\SerializedName("taxRates")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var array<TaxRate> */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\TaxRate>')]
+    #[Serializer\SerializedName('taxRates')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $taxRates = [];
 
-    /**
-     * @var ProductVariation[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductVariation>")
-     * @Serializer\SerializedName("variations")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ProductVariation[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ProductVariation>')]
+    #[Serializer\SerializedName('variations')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $variations = [];
 
-    /**
-     * @var ProductWarehouseInfo[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductWarehouseInfo>")
-     * @Serializer\SerializedName("warehouseInfo")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ProductWarehouseInfo[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ProductWarehouseInfo>')]
+    #[Serializer\SerializedName('warehouseInfo')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $warehouseInfo = [];
 
     /**

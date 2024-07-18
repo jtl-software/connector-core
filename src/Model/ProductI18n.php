@@ -12,82 +12,62 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class ProductI18n extends AbstractI18n
 {
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("deliveryStatus")
-     * @Serializer\Accessor(getter="getDeliveryStatus",setter="setDeliveryStatus")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('deliveryStatus')]
+    #[Serializer\Accessor(getter: 'getDeliveryStatus', setter: 'setDeliveryStatus')]
     protected string $deliveryStatus = '';
 
-    /**
-     * @var string Optional product description
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("description")
-     * @Serializer\Accessor(getter="getDescription",setter="setDescription")
-     */
+    /** @var string Optional product description */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('description')]
+    #[Serializer\Accessor(getter: 'getDescription', setter: 'setDescription')]
     protected string $description = '';
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("measurementUnitName")
-     * @Serializer\Accessor(getter="getMeasurementUnitName",setter="setMeasurementUnitName")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('measurementUnitName')]
+    #[Serializer\Accessor(getter: 'getMeasurementUnitName', setter: 'setMeasurementUnitName')]
     protected string $measurementUnitName = '';
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("metaDescription")
-     * @Serializer\Accessor(getter="getMetaDescription",setter="setMetaDescription")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('metaDescription')]
+    #[Serializer\Accessor(getter: 'getMetaDescription', setter: 'setMetaDescription')]
     protected string $metaDescription = '';
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("metaKeywords")
-     * @Serializer\Accessor(getter="getMetaKeywords",setter="setMetaKeywords")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('metaKeywords')]
+    #[Serializer\Accessor(getter: 'getMetaKeywords', setter: 'setMetaKeywords')]
     protected string $metaKeywords = '';
 
-    /**
-     * @var string Product name / title
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("name")
-     * @Serializer\Accessor(getter="getName",setter="setName")
-     */
+    /** @var string Product name / title */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('name')]
+    #[Serializer\Accessor(getter: 'getName', setter: 'setName')]
     protected string $name = '';
 
-    /**
-     * @var string Optional product shortdescription
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("shortDescription")
-     * @Serializer\Accessor(getter="getShortDescription",setter="setShortDescription")
-     */
+    /** @var string Optional product shortdescription */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('shortDescription')]
+    #[Serializer\Accessor(getter: 'getShortDescription', setter: 'setShortDescription')]
     protected string $shortDescription = '';
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("titleTag")
-     * @Serializer\Accessor(getter="getTitleTag",setter="setTitleTag")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('titleTag')]
+    #[Serializer\Accessor(getter: 'getTitleTag', setter: 'setTitleTag')]
     protected string $titleTag = '';
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("unitName")
-     * @Serializer\Accessor(getter="getUnitName",setter="setUnitName")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('unitName')]
+    #[Serializer\Accessor(getter: 'getUnitName', setter: 'setUnitName')]
     protected string $unitName = '';
 
-    /**
-     * @var string Optional path of product URL
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("urlPath")
-     * @Serializer\Accessor(getter="getUrlPath",setter="setUrlPath")
-     */
+    /** @var string Optional path of product URL */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('urlPath')]
+    #[Serializer\Accessor(getter: 'getUrlPath', setter: 'setUrlPath')]
     protected string $urlPath = '';
 
     /**

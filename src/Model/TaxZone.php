@@ -12,24 +12,20 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class TaxZone extends AbstractIdentity
 {
-    /**
-     * @var string Optional tax zone name e.g. "EU Zone"
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("name")
-     * @Serializer\Accessor(getter="getName",setter="setName")
-     */
+    /** @var string Optional tax zone name e.g. "EU Zone" */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('name')]
+    #[Serializer\Accessor(getter: 'getName', setter: 'setName')]
     protected string $name = '';
 
-    /**
-     * @var TaxZoneCountry[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\TaxZoneCountry>")
-     * @Serializer\SerializedName("countries")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var TaxZoneCountry[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\TaxZoneCountry>')]
+    #[Serializer\SerializedName('countries')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $countries = [];
 
     /**

@@ -15,24 +15,20 @@ use TypeError;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class ProductConfigGroup extends AbstractModel
 {
-    /**
-     * @var Identity Reference to configGroup
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("configGroupId")
-     * @Serializer\Accessor(getter="getConfigGroupId",setter="setConfigGroupId")
-     */
+    /** @var Identity Reference to configGroup */
+    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\SerializedName('configGroupId')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected Identity $configGroupId;
 
-    /**
-     * @var int Optional sort number
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("sort")
-     * @Serializer\Accessor(getter="getSort",setter="setSort")
-     */
+    /** @var int Optional sort number */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('sort')]
+    #[Serializer\Accessor(getter: 'getSort', setter: 'setSort')]
     protected int $sort = 0;
 
     /**

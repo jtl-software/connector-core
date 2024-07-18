@@ -12,16 +12,14 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class Unit extends AbstractIdentity
 {
-    /**
-     * @var UnitI18n[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\UnitI18n>")
-     * @Serializer\SerializedName("i18ns")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var UnitI18n[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\UnitI18n>')]
+    #[Serializer\SerializedName('i18ns')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $i18ns = [];
 
     /**

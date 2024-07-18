@@ -14,31 +14,25 @@ use Jtl\Connector\Core\Utilities\Validator\Validate;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class ProductWarehouseInfo extends AbstractModel
 {
-    /**
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("warehouseId")
-     * @Serializer\Accessor(getter="getwarehouseId",setter="setwarehouseId")
-     */
+    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\SerializedName('warehouseId')]
+    #[Serializer\Accessor(getter: 'getWarehouseId', setter: 'setWarehouseId')]
     protected Identity $warehouseId;
 
-    /**
-     * @var double Optional product inflow quantity for specified warehouse
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("inflowQuantity")
-     * @Serializer\Accessor(getter="getInflowQuantity",setter="setInflowQuantity")
-     */
+    /** @var double Optional product inflow quantity for specified warehouse */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('inflowQuantity')]
+    #[Serializer\Accessor(getter: 'getInflowQuantity', setter: 'setInflowQuantity')]
     protected float $inflowQuantity = 0.0;
 
-    /**
-     * @var double
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("stockLevel")
-     * @Serializer\Accessor(getter="getstockLevel",setter="setstockLevel")
-     */
+    /** @var double */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('stockLevel')]
+    #[Serializer\Accessor(getter: 'getStockLevel', setter: 'setStockLevel')]
     protected float $stockLevel = 0.0;
 
     /**

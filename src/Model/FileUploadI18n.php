@@ -10,29 +10,23 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class FileUploadI18n extends AbstractI18n
 {
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("description")
-     * @Serializer\Accessor(getter="getDescription",setter="setDescription")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('description')]
+    #[Serializer\Accessor(getter: 'getDescription', setter: 'setDescription')]
     protected string $description = '';
 
-    /**
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("fileUploadId")
-     * @Serializer\Accessor(getter="getFileUploadId",setter="setFileUploadId")
-     */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('fileUploadId')]
+    #[Serializer\Accessor(getter: 'getFileUploadId', setter: 'setFileUploadId')]
     protected int $fileUploadId = 0;
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("name")
-     * @Serializer\Accessor(getter="getName",setter="setName")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('name')]
+    #[Serializer\Accessor(getter: 'getName', setter: 'setName')]
     protected string $name = '';
 
     /**

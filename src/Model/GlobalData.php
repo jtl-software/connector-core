@@ -10,112 +10,86 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class GlobalData extends AbstractModel
 {
-    /**
-     * @var ConfigGroup[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ConfigGroup>")
-     * @Serializer\SerializedName("configGroups")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ConfigGroup[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ConfigGroup>')]
+    #[Serializer\SerializedName('configGroups')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $configGroups = [];
 
-    /**
-     * @var ConfigItem[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ConfigItem>")
-     * @Serializer\SerializedName("configItems")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ConfigItem[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ConfigItem>')]
+    #[Serializer\SerializedName('configItems')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $configItems = [];
 
-    /**
-     * @var CrossSellingGroup[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\CrossSellingGroup>")
-     * @Serializer\SerializedName("crossSellingGroups")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var CrossSellingGroup[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\CrossSellingGroup>')]
+    #[Serializer\SerializedName('crossSellingGroups')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $crossSellingGroups = [];
 
-    /**
-     * @var Currency[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\Currency>")
-     * @Serializer\SerializedName("currencies")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var Currency[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\Currency>')]
+    #[Serializer\SerializedName('currencies')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $currencies = [];
 
-    /**
-     * @var CustomerGroup[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\CustomerGroup>")
-     * @Serializer\SerializedName("customerGroups")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var CustomerGroup[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\CustomerGroup>')]
+    #[Serializer\SerializedName('customerGroups')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $customerGroups = [];
 
-    /**
-     * @var Language[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\Language>")
-     * @Serializer\SerializedName("languages")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var Language[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\Language>')]
+    #[Serializer\SerializedName('languages')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $languages = [];
 
-    /**
-     * @var MeasurementUnit[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\MeasurementUnit>")
-     * @Serializer\SerializedName("measurementUnits")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var MeasurementUnit[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\MeasurementUnit>')]
+    #[Serializer\SerializedName('measurementUnits')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $measurementUnits = [];
 
-    /**
-     * @var ProductType[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductType>")
-     * @Serializer\SerializedName("productTypes")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ProductType[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ProductType>')]
+    #[Serializer\SerializedName('productTypes')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $productTypes = [];
 
-    /**
-     * @var ShippingClass[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ShippingClass>")
-     * @Serializer\SerializedName("shippingClasses")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ShippingClass[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ShippingClass>')]
+    #[Serializer\SerializedName('shippingClasses')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $shippingClasses = [];
 
-    /**
-     * @var ShippingMethod[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ShippingMethod>")
-     * @Serializer\SerializedName("shippingMethods")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ShippingMethod[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ShippingMethod>')]
+    #[Serializer\SerializedName('shippingMethods')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $shippingMethods = [];
 
-    /**
-     * @var TaxRate[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\TaxRate>")
-     * @Serializer\SerializedName("taxRates")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var TaxRate[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\TaxRate>')]
+    #[Serializer\SerializedName('taxRates')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $taxRates = [];
 
-    /**
-     * @var Unit[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\Unit>")
-     * @Serializer\SerializedName("units")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var Unit[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\Unit>')]
+    #[Serializer\SerializedName('units')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $units = [];
 
-    /**
-     * @var Warehouse[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\Warehouse>")
-     * @Serializer\SerializedName("warehouses")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var Warehouse[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\Warehouse>')]
+    #[Serializer\SerializedName('warehouses')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $warehouses = [];
 
 

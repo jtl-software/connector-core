@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class ProductVariation extends AbstractIdentity
 {
     public const TYPE_RADIO                = 'radio';
@@ -24,43 +24,33 @@ class ProductVariation extends AbstractIdentity
     public const TYPE_FREE_TEXT_OBLIGATORY = 'obligatory_freetext';
     public const TYPE_IMAGE_SWATCHES       = 'image_swatches';
 
-    /**
-     * @var int Optional sort number
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("sort")
-     * @Serializer\Accessor(getter="getSort",setter="setSort")
-     */
+    /** @var int Optional sort number */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('sort')]
+    #[Serializer\Accessor(getter: 'getSort', setter: 'setSort')]
     protected int $sort = 0;
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("type")
-     * @Serializer\Accessor(getter="getType",setter="setType")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('type')]
+    #[Serializer\Accessor(getter: 'getType', setter: 'setType')]
     protected string $type = '';
 
-    /**
-     * @var ProductVariationI18n[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductVariationI18n>")
-     * @Serializer\SerializedName("i18ns")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ProductVariationI18n[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ProductVariationI18n>')]
+    #[Serializer\SerializedName('i18ns')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $i18ns = [];
 
-    /**
-     * @var ProductVariationInvisibility[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductVariationInvisibility>")
-     * @Serializer\SerializedName("invisibilities")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ProductVariationInvisibility[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ProductVariationInvisibility>')]
+    #[Serializer\SerializedName('invisibilities')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $invisibilities = [];
 
-    /**
-     * @var ProductVariationValue[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductVariationValue>")
-     * @Serializer\SerializedName("values")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ProductVariationValue[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ProductVariationValue>')]
+    #[Serializer\SerializedName('values')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $values = [];
 
     /**

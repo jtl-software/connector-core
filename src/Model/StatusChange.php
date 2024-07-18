@@ -12,29 +12,23 @@ use Jtl\Connector\Core\Utilities\Validator\Validate;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class StatusChange extends AbstractModel
 {
-    /**
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("customerOrderId")
-     * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
-     */
+    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\SerializedName('customerOrderId')]
+    #[Serializer\Accessor(getter: 'getCustomerOrderId', setter: 'setCustomerOrderId')]
     protected Identity $customerOrderId;
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("orderStatus")
-     * @Serializer\Accessor(getter="getOrderStatus",setter="setOrderStatus")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('orderStatus')]
+    #[Serializer\Accessor(getter: 'getOrderStatus', setter: 'setOrderStatus')]
     protected string $orderStatus = '';
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("paymentStatus")
-     * @Serializer\Accessor(getter="getPaymentStatus",setter="setPaymentStatus")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('paymentStatus')]
+    #[Serializer\Accessor(getter: 'getPaymentStatus', setter: 'setPaymentStatus')]
     protected string $paymentStatus = '';
 
     /**

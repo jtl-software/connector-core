@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class Specific extends AbstractIdentity
 {
     public const
@@ -26,42 +26,34 @@ class Specific extends AbstractIdentity
     /**
      * @var bool Optional: Global specific means the specific can be used like a category
      *              (e.g. show all red products in shop)
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isGlobal")
-     * @Serializer\Accessor(getter="getIsGlobal",setter="setIsGlobal")
      */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('isGlobal')]
+    #[Serializer\Accessor(getter: 'getIsGlobal', setter: 'setIsGlobal')]
     protected bool $isGlobal = false;
 
-    /**
-     * @var int Optional sort number
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("sort")
-     * @Serializer\Accessor(getter="getSort",setter="setSort")
-     */
+    /**  @var int Optional sort number */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('sort')]
+    #[Serializer\Accessor(getter: 'getSort', setter: 'setSort')]
     protected int $sort = 1;
 
-    /**
-     * @var string Specific type (radio, dropdown, image...)
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("type")
-     * @Serializer\Accessor(getter="getType",setter="setType")
-     */
+    /** @var string Specific type (radio, dropdown, image...) */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('type')]
+    #[Serializer\Accessor(getter: 'getType', setter: 'setType')]
     protected string $type = '';
 
-    /**
-     * @var SpecificI18n[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\SpecificI18n>")
-     * @Serializer\SerializedName("i18ns")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var SpecificI18n[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\SpecificI18n>')]
+    #[Serializer\SerializedName('i18ns')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $i18ns = [];
 
-    /**
-     * @var SpecificValue[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\SpecificValue>")
-     * @Serializer\SerializedName("values")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var SpecificValue[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\SpecificValue>')]
+    #[Serializer\SerializedName('values')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $values = [];
 
     /**

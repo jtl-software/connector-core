@@ -12,16 +12,14 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class CustomerOrderBillingAddress extends AbstractOrderAddress
 {
-    /**
-     * @var string VAT number (german "USt-ID")
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("vatNumber")
-     * @Serializer\Accessor(getter="getVatNumber",setter="setVatNumber")
-     */
+    /** @var string VAT number (german "USt-ID") */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('vatNumber')]
+    #[Serializer\Accessor(getter: 'getVatNumber', setter: 'setVatNumber')]
     protected string $vatNumber = '';
 
     /**

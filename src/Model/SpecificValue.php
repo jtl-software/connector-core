@@ -12,24 +12,20 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class SpecificValue extends AbstractIdentity
 {
-    /**
-     * @var int Optional sort number
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("sort")
-     * @Serializer\Accessor(getter="getSort",setter="setSort")
-     */
+    /**  @var int Optional sort number */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('sort')]
+    #[Serializer\Accessor(getter: 'getSort', setter: 'setSort')]
     protected int $sort = 1;
 
-    /**
-     * @var SpecificValueI18n[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\SpecificValueI18n>")
-     * @Serializer\SerializedName("i18ns")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var SpecificValueI18n[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\SpecificValueI18n>')]
+    #[Serializer\SerializedName('i18ns')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $i18ns = [];
 
     /**

@@ -11,8 +11,8 @@ use JMS\Serializer\Annotation as Serializer;
  *
  * @access  public
  * @package Jtl\Connector\Core\Model
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class QueryFilter
 {
     public const
@@ -20,21 +20,18 @@ class QueryFilter
         FILTER_PARENT_ID      = 'parentId',
         FILTER_RELATION_TYPE  = 'relationType';
 
-    /**
-     * Query item count limitation
-     *
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("limit")
-     */
+    /** Query item count limitation */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('limit')]
     protected int $limit = 100;
 
     /**
      * Query item filter (where)
      *
      * @var array<string, string>
-     * @Serializer\Type("array<string, string>")
-     * @Serializer\SerializedName("filters")
      */
+    #[Serializer\Type('array<string, string>')]
+    #[Serializer\SerializedName('filters')]
     protected array $filters = [];
 
     /**

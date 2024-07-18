@@ -10,31 +10,25 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class DeliveryNoteTrackingList extends AbstractModel
 {
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("name")
-     * @Serializer\Accessor(getter="getName",setter="setName")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('name')]
+    #[Serializer\Accessor(getter: 'getName', setter: 'setName')]
     protected string $name = '';
 
-    /**
-     * @var string[]
-     * @Serializer\Type("array<string>")
-     * @Serializer\SerializedName("codes")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var string[] */
+    #[Serializer\Type('array<string>')]
+    #[Serializer\SerializedName('codes')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $codes = [];
 
-    /**
-     * @var string[]
-     * @Serializer\Type("array<string>")
-     * @Serializer\SerializedName("trackingURLs")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var string[] */
+    #[Serializer\Type('array<string>')]
+    #[Serializer\SerializedName('trackingURLs')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $trackingURLs = [];
 
     /**

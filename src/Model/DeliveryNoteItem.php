@@ -10,39 +10,31 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class DeliveryNoteItem extends AbstractIdentity
 {
-    /**
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("customerOrderItemId")
-     * @Serializer\Accessor(getter="getCustomerOrderItemId",setter="setCustomerOrderItemId")
-     */
+    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\SerializedName('customerOrderItemId')]
+    #[Serializer\Accessor(getter: 'getCustomerOrderItemId', setter: 'setCustomerOrderItemId')]
     protected Identity $customerOrderItemId;
 
-    /**
-     * @var Identity Reference to product
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("productId")
-     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
-     */
+    /** @var Identity Reference to product */
+    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\SerializedName('productId')]
+    #[Serializer\Accessor(getter: 'getProductId', setter: 'setProductId')]
     protected Identity $productId;
 
-    /**
-     * @var double
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("quantity")
-     * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
-     */
+    /** @var double */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('quantity')]
+    #[Serializer\Accessor(getter: 'getQuantity', setter: 'setQuantity')]
     protected float $quantity = 0.0;
 
-    /**
-     * @var DeliveryNoteItemInfo[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\DeliveryNoteItemInfo>")
-     * @Serializer\SerializedName("info")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var DeliveryNoteItemInfo[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\DeliveryNoteItemInfo>')]
+    #[Serializer\SerializedName('info')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $info = [];
 
     /**

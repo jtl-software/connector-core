@@ -13,8 +13,8 @@ use Jtl\Connector\Core\Exception\TranslatableAttributeException;
  *
  * @access  public
  * @package Jtl\Connector\Core\Model\TranslatableAttribute
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class TranslatableAttribute extends AbstractIdentity
 {
     public const
@@ -26,8 +26,8 @@ class TranslatableAttribute extends AbstractIdentity
 
     /**
      * @var string[]
-     * @Serializer\Exclude
      */
+    #[Serializer\Exclude]
     protected static array $types = [
         self::TYPE_BOOL,
         self::TYPE_FLOAT,
@@ -35,30 +35,25 @@ class TranslatableAttribute extends AbstractIdentity
         self::TYPE_JSON,
         self::TYPE_STRING,
     ];
-    /**
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isTranslated")
-     * @Serializer\Accessor(getter="getIsTranslated",setter="setIsTranslated")
-     */
+
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('isTranslated')]
+    #[Serializer\Accessor(getter: 'getIsTranslated', setter: 'setIsTranslated')]
     protected bool $isTranslated = false;
-    /**
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isCustomProperty")
-     * @Serializer\Accessor(getter="getIsCustomProperty",setter="setIsCustomProperty")
-     */
+
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('isCustomProperty')]
+    #[Serializer\Accessor(getter: 'getIsCustomProperty', setter: 'setIsCustomProperty')]
     protected bool $isCustomProperty = false;
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("type")
-     * @Serializer\Accessor(getter="getType",setter="setType")
-     */
+
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('type')]
+    #[Serializer\Accessor(getter: 'getType', setter: 'setType')]
     protected string $type = self::TYPE_STRING;
-    /**
-     * @var TranslatableAttributeI18n[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\TranslatableAttributeI18n>")
-     * @Serializer\SerializedName("i18ns")
-     * @Serializer\AccessType("reflection")
-     */
+
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\TranslatableAttributeI18n>')]
+    #[Serializer\SerializedName('i18ns')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $i18ns = [];
 
     /**

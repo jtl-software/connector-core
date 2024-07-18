@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class CustomerOrder extends AbstractI18n implements IdentityInterface, ItemsInterface
 {
     public const
@@ -26,194 +26,144 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface, ItemsInte
         STATUS_PARTIALLY_SHIPPED = 'partially_shipped',
         STATUS_SHIPPED           = 'shipped';
 
-    /**
-     * @var Identity Optional reference to customer.
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("customerId")
-     * @Serializer\Accessor(getter="getCustomerId",setter="setCustomerId")
-     */
+    /** @var Identity Optional reference to customer. */
+    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\SerializedName('customerId')]
+    #[Serializer\Accessor(getter: 'getCustomerId', setter: 'setCustomerId')]
     protected Identity $customerId;
 
-    /**
-     * @var Identity Unique customerOrder id
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
+    /** @var Identity Unique customerOrder id */
+    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\SerializedName('id')]
+    #[Serializer\Accessor(getter: 'getId', setter: 'setId')]
     protected Identity $id;
 
-    /**
-     * @var CustomerOrderBillingAddress|null Billing address
-     * @Serializer\Type("Jtl\Connector\Core\Model\CustomerOrderBillingAddress")
-     * @Serializer\SerializedName("billingAddress")
-     * @Serializer\Accessor(getter="getBillingAddress",setter="setBillingAddress")
-     */
+    /** @var CustomerOrderBillingAddress|null Billing address */
+    #[Serializer\Type('Jtl\Connector\Core\Model\CustomerOrderBillingAddress')]
+    #[Serializer\SerializedName('billingAddress')]
+    #[Serializer\Accessor(getter: 'getBillingAddress', setter: 'setBillingAddress')]
     protected ?CustomerOrderBillingAddress $billingAddress = null;
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("carrierName")
-     * @Serializer\Accessor(getter="getCarrierName",setter="setCarrierName")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('carrierName')]
+    #[Serializer\Accessor(getter: 'getCarrierName', setter: 'setCarrierName')]
     protected string $carrierName = '';
 
-    /**
-     * @var \DateTimeInterface|null Date of creation
-     * @Serializer\Type("DateTimeInterface")
-     * @Serializer\SerializedName("creationDate")
-     * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
-     */
+    /** @var \DateTimeInterface|null Date of creation */
+    #[Serializer\Type('DateTimeInterface')]
+    #[Serializer\SerializedName('creationDate')]
+    #[Serializer\Accessor(getter: 'getCreationDate', setter: 'setCreationDate')]
     protected ?\DateTimeInterface $creationDate = null;
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("currencyIso")
-     * @Serializer\Accessor(getter="getCurrencyIso",setter="setCurrencyIso")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('currencyIso')]
+    #[Serializer\Accessor(getter: 'getCurrencyIso', setter: 'setCurrencyIso')]
     protected string $currencyIso = '';
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("customerNote")
-     * @Serializer\Accessor(getter="getCustomerNote",setter="setCustomerNote")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('customerNote')]
+    #[Serializer\Accessor(getter: 'getCustomerNote', setter: 'setCustomerNote')]
     protected string $customerNote = '';
 
-    /**
-     * @Serializer\Type("DateTimeInterface")
-     * @Serializer\SerializedName("estimatedDeliveryDate")
-     * @Serializer\Accessor(getter="getEstimatedDeliveryDate",setter="setEstimatedDeliveryDate")
-     */
+    #[Serializer\Type('DateTimeInterface')]
+    #[Serializer\SerializedName('estimatedDeliveryDate')]
+    #[Serializer\Accessor(getter: 'getEstimatedDeliveryDate', setter: 'setEstimatedDeliveryDate')]
     protected ?\DateTimeInterface $estimatedDeliveryDate = null;
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("note")
-     * @Serializer\Accessor(getter="getNote",setter="setNote")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('note')]
+    #[Serializer\Accessor(getter: 'getNote', setter: 'setNote')]
     protected string $note = '';
 
-    /**
-     * @var string Optional order number (usually set by ERP System later)
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("orderNumber")
-     * @Serializer\Accessor(getter="getOrderNumber",setter="setOrderNumber")
-     */
+    /** @var string Optional order number (usually set by ERP System later) */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('orderNumber')]
+    #[Serializer\Accessor(getter: 'getOrderNumber', setter: 'setOrderNumber')]
     protected string $orderNumber = '';
 
-    /**
-     * @var \DateTimeInterface|null Payment date
-     * @Serializer\Type("DateTimeInterface")
-     * @Serializer\SerializedName("paymentDate")
-     * @Serializer\Accessor(getter="getPaymentDate",setter="setPaymentDate")
-     */
+    /** @var \DateTimeInterface|null Payment date */
+    #[Serializer\Type('DateTimeInterface')]
+    #[Serializer\SerializedName('paymentDate')]
+    #[Serializer\Accessor(getter: 'getPaymentDate', setter: 'setPaymentDate')]
     protected ?\DateTimeInterface $paymentDate = null;
 
-    /**
-     * @Serializer\Type("Jtl\Connector\Core\Model\CustomerOrderPaymentInfo")
-     * @Serializer\SerializedName("paymentInfo")
-     * @Serializer\Accessor(getter="getPaymentInfo",setter="setPaymentInfo")
-     */
+    #[Serializer\Type('Jtl\Connector\Core\Model\CustomerOrderPaymentInfo')]
+    #[Serializer\SerializedName('paymentInfo')]
+    #[Serializer\Accessor(getter: 'getPaymentInfo', setter: 'setPaymentInfo')]
     protected ?CustomerOrderPaymentInfo $paymentInfo = null;
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("paymentModuleCode")
-     * @Serializer\Accessor(getter="getPaymentModuleCode",setter="setPaymentModuleCode")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('paymentModuleCode')]
+    #[Serializer\Accessor(getter: 'getPaymentModuleCode', setter: 'setPaymentModuleCode')]
     protected string $paymentModuleCode = '';
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("paymentStatus")
-     * @Serializer\Accessor(getter="getPaymentStatus",setter="setPaymentStatus")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('paymentStatus')]
+    #[Serializer\Accessor(getter: 'getPaymentStatus', setter: 'setPaymentStatus')]
     protected string $paymentStatus = '';
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("pui")
-     * @Serializer\Accessor(getter="getPui",setter="setPui")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('pui')]
+    #[Serializer\Accessor(getter: 'getPui', setter: 'setPui')]
     protected string $pui = '';
 
-    /**
-     * @var CustomerOrderShippingAddress|null Shipping address
-     * @Serializer\Type("Jtl\Connector\Core\Model\CustomerOrderShippingAddress")
-     * @Serializer\SerializedName("shippingAddress")
-     * @Serializer\Accessor(getter="getShippingAddress",setter="setShippingAddress")
-     */
+    /** @var CustomerOrderShippingAddress|null Shipping address */
+    #[Serializer\Type('Jtl\Connector\Core\Model\CustomerOrderShippingAddress')]
+    #[Serializer\SerializedName('shippingAddress')]
+    #[Serializer\Accessor(getter: 'getShippingAddress', setter: 'setShippingAddress')]
     protected ?CustomerOrderShippingAddress $shippingAddress = null;
 
-    /**
-     * @var \DateTimeInterface|null Shipping date
-     * @Serializer\Type("DateTimeInterface")
-     * @Serializer\SerializedName("shippingDate")
-     * @Serializer\Accessor(getter="getShippingDate",setter="setShippingDate")
-     */
+    /** @var \DateTimeInterface|null Shipping date */
+    #[Serializer\Type('DateTimeInterface')]
+    #[Serializer\SerializedName('shippingDate')]
+    #[Serializer\Accessor(getter: 'getShippingDate', setter: 'setShippingDate')]
     protected ?\DateTimeInterface $shippingDate = null;
 
-    /**
-     * @var string Additional shipping info
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("shippingInfo")
-     * @Serializer\Accessor(getter="getShippingInfo",setter="setShippingInfo")
-     */
+    /** @var string Additional shipping info */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('shippingInfo')]
+    #[Serializer\Accessor(getter: 'getShippingInfo', setter: 'setShippingInfo')]
     protected string $shippingInfo = '';
 
-    /**
-     * @var Identity Optional reference to customer.
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("shippingMethodId")
-     * @Serializer\Accessor(getter="getShippingMethodId",setter="setShippingMethodId")
-     */
+    /** @var Identity Optional reference to customer. */
+    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\SerializedName('shippingMethodId')]
+    #[Serializer\Accessor(getter: 'getShippingMethodId', setter: 'setShippingMethodId')]
     protected Identity $shippingMethodId;
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("shippingMethodName")
-     * @Serializer\Accessor(getter="getShippingMethodName",setter="setShippingMethodName")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('shippingMethodName')]
+    #[Serializer\Accessor(getter: 'getShippingMethodName', setter: 'setShippingMethodName')]
     protected string $shippingMethodName = '';
 
-    /**
-     * @var string Shipping status
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("status")
-     * @Serializer\Accessor(getter="getStatus",setter="setStatus")
-     */
+    /** @var string Shipping status */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('status')]
+    #[Serializer\Accessor(getter: 'getStatus', setter: 'setStatus')]
     protected string $status = '';
 
-    /**
-     * @var double
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("totalSum")
-     * @Serializer\Accessor(getter="getTotalSum",setter="setTotalSum")
-     */
+    /** @var double */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('totalSum')]
+    #[Serializer\Accessor(getter: 'getTotalSum', setter: 'setTotalSum')]
     protected float $totalSum = 0.0;
 
-    /**
-     * @var double
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("totalSumGross")
-     * @Serializer\Accessor(getter="getTotalSumGross",setter="setTotalSumGross")
-     */
+    /** @var double */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('totalSumGross')]
+    #[Serializer\Accessor(getter: 'getTotalSumGross', setter: 'setTotalSumGross')]
     protected float $totalSumGross = 0.0;
 
-    /**
-     * @var KeyValueAttribute[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\KeyValueAttribute>")
-     * @Serializer\SerializedName("attributes")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var KeyValueAttribute[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\KeyValueAttribute>')]
+    #[Serializer\SerializedName('attributes')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $attributes = [];
 
-    /**
-     * @var CustomerOrderItem[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\CustomerOrderItem>")
-     * @Serializer\SerializedName("items")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var CustomerOrderItem[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\CustomerOrderItem>')]
+    #[Serializer\SerializedName('items')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $items = [];
 
     /**

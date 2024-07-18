@@ -15,16 +15,14 @@ use TypeError;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class Product2Category extends AbstractIdentity
 {
-    /**
-     * @var Identity Reference to category
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("categoryId")
-     * @Serializer\Accessor(getter="getCategoryId",setter="setCategoryId")
-     */
+    /** @var Identity Reference to category */
+    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\SerializedName('categoryId')]
+    #[Serializer\Accessor(getter: 'getCategoryId', setter: 'setCategoryId')]
     protected Identity $categoryId;
 
     /**

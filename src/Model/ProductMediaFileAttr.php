@@ -12,16 +12,14 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class ProductMediaFileAttr extends AbstractModel
 {
-    /**
-     * @var ProductMediaFileAttrI18n[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductMediaFileAttrI18n>")
-     * @Serializer\SerializedName("i18ns")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ProductMediaFileAttrI18n[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ProductMediaFileAttrI18n>')]
+    #[Serializer\SerializedName('i18ns')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $i18ns = [];
 
     /**
