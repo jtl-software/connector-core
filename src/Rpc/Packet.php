@@ -20,19 +20,17 @@ use Jtl\Connector\Core\Serializer\SerializerBuilder;
  * Rpc Packet
  *
  * @access public
- * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
 abstract class Packet extends AbstractModel
 {
     /**
      * A String specifying the version of the JSON-RPC protocol.
      * MUST be exactly "2.0".
-     *
-     * @Serializer\Type("string")
      */
+    #[Serializer\Type('string')]
     protected string $jtlrpc = '';
 
-    /** @Serializer\Type("string") */
+    #[Serializer\Type('string')]
     protected string $id = '';
 
     /**

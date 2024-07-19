@@ -11,7 +11,6 @@ use Jtl\Connector\Core\Exception\RpcException;
  * Rpc Error
  *
  * @access public
- * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
 class Error
 {
@@ -19,18 +18,16 @@ class Error
      * A Number that indicates the error type that occurred.
      *
      * This MUST be an integer.
-     *
-     * @Serializer\Type("integer")
      */
+    #[Serializer\Type('integer')]
     public int $code = 0;
 
     /**
      * A String providing a short description of the error.
      *
      * The message SHOULD be limited to a concise single sentence.
-     *
-     * @Serializer\Type("string")
      */
+    #[Serializer\Type('string')]
     public string $message = '';
 
     /**

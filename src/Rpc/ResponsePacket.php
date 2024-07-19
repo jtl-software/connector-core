@@ -26,9 +26,8 @@ class ResponsePacket extends Packet
      * This member is REQUIRED on error This member MUST NOT exist if there was
      * no error triggered during invocation.
      * The value for this member MUST be an Object as defined in section 5.1.
-     *
-     * @Serializer\Type("Jtl\Connector\Core\Rpc\Error")
      */
+    #[Serializer\Type(['value' => Error::class])]
     protected ?Error $error = null;
 
     /**
