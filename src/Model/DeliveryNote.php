@@ -17,13 +17,13 @@ use JMS\Serializer\Annotation as Serializer;
 class DeliveryNote extends AbstractIdentity implements ItemsInterface
 {
     /** @var Identity Reference to customerOrder */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('customerOrderId')]
     #[Serializer\Accessor(getter: 'getCustomerOrderId', setter: 'setCustomerOrderId')]
     protected Identity $customerOrderId;
 
     /** @var \DateTimeInterface|null Creation date */
-    #[Serializer\Type('DateTimeInterface')]
+    #[Serializer\Type(\DateTimeInterface::class)]
     #[Serializer\SerializedName('creationDate')]
     #[Serializer\Accessor(getter: 'getCreationDate', setter: 'setCreationDate')]
     protected ?\DateTimeInterface $creationDate = null;

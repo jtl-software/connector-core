@@ -19,7 +19,7 @@ use Jtl\Connector\Core\Utilities\Validator\Validate;
 class Shipment extends AbstractIdentity
 {
     /** @var Identity Reference to deliveryNote */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('deliveryNoteId')]
     #[Serializer\Accessor(getter: 'getDeliveryNoteId', setter: 'setDeliveryNoteId')]
     protected Identity $deliveryNoteId;
@@ -31,7 +31,7 @@ class Shipment extends AbstractIdentity
     protected string $carrierName = '';
 
     /** @var \DateTimeInterface|null Creation date */
-    #[Serializer\Type('DateTimeInterface|null')]
+    #[Serializer\Type(\DateTimeInterface::class)]
     #[Serializer\SerializedName('creationDate')]
     #[Serializer\Accessor(getter: 'getCreationDate', setter: 'setCreationDate')]
     protected ?\DateTimeInterface $creationDate = null;

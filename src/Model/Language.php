@@ -20,7 +20,7 @@ use TypeError;
 class Language extends AbstractI18n implements IdentityInterface
 {
     /** @var Identity Unique language id */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('id')]
     #[Serializer\Accessor(getter: 'getId', setter: 'setId')]
     protected Identity $id;

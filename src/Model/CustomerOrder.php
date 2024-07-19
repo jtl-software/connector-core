@@ -27,19 +27,19 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface, ItemsInte
         STATUS_SHIPPED           = 'shipped';
 
     /** @var Identity Optional reference to customer. */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('customerId')]
     #[Serializer\Accessor(getter: 'getCustomerId', setter: 'setCustomerId')]
     protected Identity $customerId;
 
     /** @var Identity Unique customerOrder id */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('id')]
     #[Serializer\Accessor(getter: 'getId', setter: 'setId')]
     protected Identity $id;
 
     /** @var CustomerOrderBillingAddress|null Billing address */
-    #[Serializer\Type('Jtl\Connector\Core\Model\CustomerOrderBillingAddress')]
+    #[Serializer\Type(CustomerOrderBillingAddress::class)]
     #[Serializer\SerializedName('billingAddress')]
     #[Serializer\Accessor(getter: 'getBillingAddress', setter: 'setBillingAddress')]
     protected ?CustomerOrderBillingAddress $billingAddress = null;
@@ -50,7 +50,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface, ItemsInte
     protected string $carrierName = '';
 
     /** @var \DateTimeInterface|null Date of creation */
-    #[Serializer\Type('DateTimeInterface')]
+    #[Serializer\Type(\DateTimeInterface::class)]
     #[Serializer\SerializedName('creationDate')]
     #[Serializer\Accessor(getter: 'getCreationDate', setter: 'setCreationDate')]
     protected ?\DateTimeInterface $creationDate = null;
@@ -65,7 +65,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface, ItemsInte
     #[Serializer\Accessor(getter: 'getCustomerNote', setter: 'setCustomerNote')]
     protected string $customerNote = '';
 
-    #[Serializer\Type('DateTimeInterface')]
+    #[Serializer\Type(\DateTimeInterface::class)]
     #[Serializer\SerializedName('estimatedDeliveryDate')]
     #[Serializer\Accessor(getter: 'getEstimatedDeliveryDate', setter: 'setEstimatedDeliveryDate')]
     protected ?\DateTimeInterface $estimatedDeliveryDate = null;
@@ -82,12 +82,12 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface, ItemsInte
     protected string $orderNumber = '';
 
     /** @var \DateTimeInterface|null Payment date */
-    #[Serializer\Type('DateTimeInterface')]
+    #[Serializer\Type(\DateTimeInterface::class)]
     #[Serializer\SerializedName('paymentDate')]
     #[Serializer\Accessor(getter: 'getPaymentDate', setter: 'setPaymentDate')]
     protected ?\DateTimeInterface $paymentDate = null;
 
-    #[Serializer\Type('Jtl\Connector\Core\Model\CustomerOrderPaymentInfo')]
+    #[Serializer\Type(CustomerOrderPaymentInfo::class)]
     #[Serializer\SerializedName('paymentInfo')]
     #[Serializer\Accessor(getter: 'getPaymentInfo', setter: 'setPaymentInfo')]
     protected ?CustomerOrderPaymentInfo $paymentInfo = null;
@@ -108,13 +108,13 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface, ItemsInte
     protected string $pui = '';
 
     /** @var CustomerOrderShippingAddress|null Shipping address */
-    #[Serializer\Type('Jtl\Connector\Core\Model\CustomerOrderShippingAddress')]
+    #[Serializer\Type(CustomerOrderShippingAddress::class)]
     #[Serializer\SerializedName('shippingAddress')]
     #[Serializer\Accessor(getter: 'getShippingAddress', setter: 'setShippingAddress')]
     protected ?CustomerOrderShippingAddress $shippingAddress = null;
 
     /** @var \DateTimeInterface|null Shipping date */
-    #[Serializer\Type('DateTimeInterface')]
+    #[Serializer\Type(\DateTimeInterface::class)]
     #[Serializer\SerializedName('shippingDate')]
     #[Serializer\Accessor(getter: 'getShippingDate', setter: 'setShippingDate')]
     protected ?\DateTimeInterface $shippingDate = null;
@@ -126,7 +126,7 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface, ItemsInte
     protected string $shippingInfo = '';
 
     /** @var Identity Optional reference to customer. */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('shippingMethodId')]
     #[Serializer\Accessor(getter: 'getShippingMethodId', setter: 'setShippingMethodId')]
     protected Identity $shippingMethodId;
@@ -142,13 +142,11 @@ class CustomerOrder extends AbstractI18n implements IdentityInterface, ItemsInte
     #[Serializer\Accessor(getter: 'getStatus', setter: 'setStatus')]
     protected string $status = '';
 
-    /** @var double */
     #[Serializer\Type('double')]
     #[Serializer\SerializedName('totalSum')]
     #[Serializer\Accessor(getter: 'getTotalSum', setter: 'setTotalSum')]
     protected float $totalSum = 0.0;
 
-    /** @var double */
     #[Serializer\Type('double')]
     #[Serializer\SerializedName('totalSumGross')]
     #[Serializer\Accessor(getter: 'getTotalSumGross', setter: 'setTotalSumGross')]

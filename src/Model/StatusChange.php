@@ -16,7 +16,7 @@ use Jtl\Connector\Core\Utilities\Validator\Validate;
 #[Serializer\AccessType(['value' => 'public_method'])]
 class StatusChange extends AbstractModel
 {
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('customerOrderId')]
     #[Serializer\Accessor(getter: 'getCustomerOrderId', setter: 'setCustomerOrderId')]
     protected Identity $customerOrderId;

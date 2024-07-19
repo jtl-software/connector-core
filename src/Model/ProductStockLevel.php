@@ -17,12 +17,12 @@ use TypeError;
 #[Serializer\AccessType(['value' => 'public_method'])]
 class ProductStockLevel extends AbstractModel
 {
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('productId')]
     #[Serializer\Accessor(getter: 'getProductId', setter: 'setProductId')]
     protected Identity $productId;
 
-    /** @var double */
+
     #[Serializer\Type('double')]
     #[Serializer\SerializedName('stockLevel')]
     #[Serializer\Accessor(getter: 'getStockLevel', setter: 'setStockLevel')]

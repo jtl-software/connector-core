@@ -17,13 +17,13 @@ use JMS\Serializer\Annotation as Serializer;
 class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
 {
     /** @var \DateTimeInterface|null Optional: Activate special price from date */
-    #[Serializer\Type('DateTimeInterface')]
+    #[Serializer\Type(\DateTimeInterface::class)]
     #[Serializer\SerializedName('activeFromDate')]
     #[Serializer\Accessor(getter: 'getActiveFromDate', setter: 'setActiveFromDate')]
     protected ?\DateTimeInterface $activeFromDate = null;
 
     /** @var \DateTimeInterface|null Optional: Special price active until date */
-    #[Serializer\Type('DateTimeInterface')]
+    #[Serializer\Type(\DateTimeInterface::class)]
     #[Serializer\SerializedName('activeUntilDate')]
     #[Serializer\Accessor(getter: 'getActiveUntilDate', setter: 'setActiveUntilDate')]
     protected ?\DateTimeInterface $activeUntilDate = null;

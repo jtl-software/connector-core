@@ -19,7 +19,7 @@ class ProductChecksum extends Checksum
 {
     public const TYPE_VARIATION = 1;
 
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('foreignKey')]
     #[Serializer\Accessor(getter: 'getForeignKey', setter: 'setForeignKey')]
     protected Identity $foreignKey;

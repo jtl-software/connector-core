@@ -20,7 +20,7 @@ use TypeError;
 class Product2Category extends AbstractIdentity
 {
     /** @var Identity Reference to category */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('categoryId')]
     #[Serializer\Accessor(getter: 'getCategoryId', setter: 'setCategoryId')]
     protected Identity $categoryId;

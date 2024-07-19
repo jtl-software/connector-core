@@ -12,32 +12,26 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class CustomerGroupPackagingQuantity extends AbstractModel
 {
-    /**
-     * @var Identity Reference to customergroup.
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("customerGroupId")
-     * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
-     */
+    /** @var Identity Reference to customergroup. */
+    #[Serializer\Type(Identity::class)]
+    #[Serializer\SerializedName('customerGroupId')]
+    #[Serializer\Accessor(getter: 'getCustomerGroupId', setter: 'setCustomerGroupId')]
     protected Identity $customerGroupId;
 
-    /**
-     * @var double Contains the minimum quantity for a customergroup.
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("minimumOrderQuantity")
-     * @Serializer\Accessor(getter="getMinimumOrderQuantity",setter="setMinimumOrderQuantity")
-     */
+    /** @var double Contains the minimum quantity for a customergroup. */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('minimumOrderQuantity')]
+    #[Serializer\Accessor(getter: 'getMinimumOrderQuantity', setter: 'setMinimum')]
     protected float $minimumOrderQuantity = 0.0;
 
-    /**
-     * @var double Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15...
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("packagingQuantity")
-     * @Serializer\Accessor(getter="getPackagingQuantity",setter="setPackagingQuantity")
-     */
+    /** @var double Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15... */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('packagingQuantity')]
+    #[Serializer\Accessor(getter: 'getPackagingQuantity', setter: 'setPackagingQuantity')]
     protected float $packagingQuantity = 0.0;
 
     /**

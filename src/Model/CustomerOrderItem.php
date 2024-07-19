@@ -27,13 +27,13 @@ class CustomerOrderItem extends AbstractIdentity
     public const TYPE_COUPON = 'coupon';
 
     /** @var Identity Optional reference to configItemId (if item is part of a configurable item) */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('configItemId')]
     #[Serializer\Accessor(getter: 'getConfigItemId', setter: 'setConfigItemId')]
     protected Identity $configItemId;
 
     /** @var Identity Reference to product */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('productId')]
     #[Serializer\Accessor(getter: 'getProductId', setter: 'setProductId')]
     protected Identity $productId;

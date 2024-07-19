@@ -22,7 +22,7 @@ use TypeError;
 class ProductSpecific extends AbstractIdentity
 {
     /** @var Identity Reference to specificValue */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('specificValueId')]
     #[Serializer\Accessor(getter: 'getSpecificValueId', setter: 'setSpecificValueId')]
     protected Identity $specificValueId ;

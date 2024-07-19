@@ -18,13 +18,13 @@ use JMS\Serializer\Annotation as Serializer;
 class ConfigItem extends AbstractIdentity
 {
     /** @var Identity Reference to configGroup */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('configGroupId')]
     #[Serializer\Accessor(getter: 'getConfigGroupId', setter: 'setConfigGroupId')]
     protected Identity $configGroupId;
 
     /** @var Identity Optional reference to product */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('productId')]
     #[Serializer\Accessor(getter: 'getProductId', setter: 'setProductId')]
     protected Identity $productId;

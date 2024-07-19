@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation as Serializer;
 #[Serializer\AccessType(['value' => 'public_method'])]
 class ProductFileDownload extends AbstractModel
 {
-    #[Serializer\Type('DateTimeInterface')]
+    #[Serializer\Type(\DateTimeInterface::class)]
     #[Serializer\SerializedName('creationDate')]
     #[Serializer\Accessor(getter: 'getCreationDate', setter: 'setCreationDate')]
     protected ?\DateTimeInterface $creationDate = null;

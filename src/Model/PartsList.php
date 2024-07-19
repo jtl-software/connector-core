@@ -20,7 +20,7 @@ use TypeError;
 class PartsList extends AbstractIdentity
 {
     /** @var Identity Reference to a component / product */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('productId')]
     #[Serializer\Accessor(getter: 'getProductId', setter: 'setProductId')]
     protected Identity $productId;

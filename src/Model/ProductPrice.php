@@ -20,19 +20,19 @@ use TypeError;
 class ProductPrice extends AbstractIdentity implements ItemsInterface
 {
     /** @var Identity Reference to customerGroup */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('customerGroupId')]
     #[Serializer\Accessor(getter: 'getCustomerGroupId', setter: 'setCustomerGroupId')]
     protected Identity $customerGroupId;
 
     /** @var Identity Reference to customer */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('customerId')]
     #[Serializer\Accessor(getter: 'getCustomerId', setter: 'setCustomerId')]
     protected Identity $customerId;
 
     /** @var Identity Reference to product */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('productId')]
     #[Serializer\Accessor(getter: 'getProductId', setter: 'setProductId')]
     protected Identity $productId;

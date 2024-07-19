@@ -14,18 +14,18 @@ use JMS\Serializer\Annotation as Serializer;
 #[Serializer\AccessType(['value' => 'public_method'])]
 class DeliveryNoteItem extends AbstractIdentity
 {
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('customerOrderItemId')]
     #[Serializer\Accessor(getter: 'getCustomerOrderItemId', setter: 'setCustomerOrderItemId')]
     protected Identity $customerOrderItemId;
 
     /** @var Identity Reference to product */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('productId')]
     #[Serializer\Accessor(getter: 'getProductId', setter: 'setProductId')]
     protected Identity $productId;
 
-    /** @var double */
+
     #[Serializer\Type('double')]
     #[Serializer\SerializedName('quantity')]
     #[Serializer\Accessor(getter: 'getQuantity', setter: 'setQuantity')]

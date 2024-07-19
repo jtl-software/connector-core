@@ -17,13 +17,13 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerOrderItemVariation extends AbstractIdentity
 {
     /** @var Identity Reference to productVariation */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('productVariationId')]
     #[Serializer\Accessor(getter: 'getProductVariationId', setter: 'setProductVariationId')]
     protected Identity $productVariationId;
 
     /** @var Identity Reference to productVariationValue */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('productVariationValueId')]
     #[Serializer\Accessor(getter: 'getProductVariationValueId', setter: 'setProductVariationValueId')]
     protected Identity $productVariationValueId;
@@ -40,7 +40,7 @@ class CustomerOrderItemVariation extends AbstractIdentity
     #[Serializer\Accessor(getter: 'getProductVariationName', setter: 'setProductVariationName')]
     protected string $productVariationName = '';
 
-    /** @var double */
+
     #[Serializer\Type('double')]
     #[Serializer\SerializedName('surcharge')]
     #[Serializer\Accessor(getter: 'getSurcharge', setter: 'setSurcharge')]

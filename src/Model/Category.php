@@ -21,7 +21,7 @@ class Category extends AbstractIdentity implements TranslatableAttributesInterfa
     use TranslatableAttributesTrait;
 
     /** @var Identity Optional reference to parent category id */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('parentCategoryId')]
     #[Serializer\Accessor(getter: 'getParentCategoryId', setter: 'setParentCategoryId')]
     protected Identity $parentCategoryId;

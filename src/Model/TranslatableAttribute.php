@@ -24,9 +24,7 @@ class TranslatableAttribute extends AbstractIdentity
         TYPE_JSON   = 'json',
         TYPE_STRING = 'string';
 
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     #[Serializer\Exclude]
     protected static array $types = [
         self::TYPE_BOOL,

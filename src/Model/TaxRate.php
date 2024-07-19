@@ -14,13 +14,12 @@ use JMS\Serializer\Annotation as Serializer;
 #[Serializer\AccessType(['value' => 'public_method'])]
 class TaxRate extends AbstractIdentity
 {
-
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('countryIso')]
     #[Serializer\Accessor(getter: 'getCountryIso', setter: 'setCountryIso')]
     protected string $countryIso = '';
 
-    /** @var double */
+
     #[Serializer\Type('double')]
     #[Serializer\SerializedName('rate')]
     #[Serializer\Accessor(getter: 'getRate', setter: 'setRate')]

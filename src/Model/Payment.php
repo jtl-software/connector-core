@@ -17,7 +17,7 @@ use TypeError;
 #[Serializer\AccessType(['value' => 'public_method'])]
 class Payment extends AbstractIdentity
 {
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('customerOrderId')]
     #[Serializer\Accessor(getter: 'getCustomerOrderId', setter: 'setCustomerOrderId')]
     protected Identity $customerOrderId;
@@ -27,7 +27,7 @@ class Payment extends AbstractIdentity
     #[Serializer\Accessor(getter: 'getBillingInfo', setter: 'setBillingInfo')]
     protected string $billingInfo = '';
 
-    #[Serializer\Type('DateTimeInterface')]
+    #[Serializer\Type(\DateTimeInterface::class)]
     #[Serializer\SerializedName('creationDate')]
     #[Serializer\Accessor(getter: 'getCreationDate', setter: 'setCreationDate')]
     protected ?\DateTimeInterface $creationDate = null;
@@ -37,7 +37,7 @@ class Payment extends AbstractIdentity
     #[Serializer\Accessor(getter: 'getPaymentModuleCode', setter: 'setPaymentModuleCode')]
     protected string $paymentModuleCode = '';
 
-    /** @var double */
+
     #[Serializer\Type('double')]
     #[Serializer\SerializedName('totalSum')]
     #[Serializer\Accessor(getter: 'getTotalSum', setter: 'setTotalSum')]

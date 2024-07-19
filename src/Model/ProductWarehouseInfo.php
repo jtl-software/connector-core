@@ -18,7 +18,7 @@ use Jtl\Connector\Core\Utilities\Validator\Validate;
 #[Serializer\AccessType(['value' => 'public_method'])]
 class ProductWarehouseInfo extends AbstractModel
 {
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('warehouseId')]
     #[Serializer\Accessor(getter: 'getWarehouseId', setter: 'setWarehouseId')]
     protected Identity $warehouseId;
@@ -29,7 +29,7 @@ class ProductWarehouseInfo extends AbstractModel
     #[Serializer\Accessor(getter: 'getInflowQuantity', setter: 'setInflowQuantity')]
     protected float $inflowQuantity = 0.0;
 
-    /** @var double */
+
     #[Serializer\Type('double')]
     #[Serializer\SerializedName('stockLevel')]
     #[Serializer\Accessor(getter: 'getStockLevel', setter: 'setStockLevel')]

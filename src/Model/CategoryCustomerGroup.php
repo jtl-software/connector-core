@@ -17,7 +17,7 @@ use JMS\Serializer\Annotation as Serializer;
 class CategoryCustomerGroup extends AbstractModel
 {
     /** @var Identity Reference to customerGroup */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('customerGroupId')]
     #[Serializer\Accessor(getter: 'getCustomerGroupId', setter: 'setCustomerGroupId')]
     protected Identity $customerGroupId;

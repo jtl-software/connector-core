@@ -21,12 +21,12 @@ class DeliveryNoteItemInfo extends AbstractModel
     protected string $batch = '';
 
     /** @var \DateTimeInterface|null */
-    #[Serializer\Type('DateTimeInterface')]
+    #[Serializer\Type(\DateTimeInterface::class)]
     #[Serializer\SerializedName('bestBefore')]
     #[Serializer\Accessor(getter: 'getBestBefore', setter: 'setBestBefore')]
     protected ?\DateTimeInterface $bestBefore = null;
 
-    /** @var double */
+    
     #[Serializer\Type('double')]
     #[Serializer\SerializedName('quantity')]
     #[Serializer\Accessor(getter: 'getQuantity', setter: 'setQuantity')]

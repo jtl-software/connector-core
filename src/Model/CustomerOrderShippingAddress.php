@@ -17,7 +17,7 @@ use JMS\Serializer\Annotation as Serializer;
 class CustomerOrderShippingAddress extends AbstractOrderAddress
 {
     /** @var Identity Reference to customer */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('customerId')]
     #[Serializer\Accessor(getter: 'getCustomerId', setter: 'setCustomerId')]
     protected Identity $customerId;

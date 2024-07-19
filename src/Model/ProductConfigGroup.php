@@ -20,7 +20,7 @@ use TypeError;
 class ProductConfigGroup extends AbstractModel
 {
     /** @var Identity Reference to configGroup */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('configGroupId')]
     #[Serializer\AccessType(['value' => 'reflection'])]
     protected Identity $configGroupId;

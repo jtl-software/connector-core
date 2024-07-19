@@ -22,7 +22,7 @@ class TranslatableAttributeI18n extends AbstractI18n
     #[Serializer\SerializedName('name')]
     #[Serializer\Accessor(getter: 'getName', setter: 'setName')]
     protected string $name = '';
-    
+
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('value')]
     #[Serializer\Accessor(getter: 'getValueAsString', setter: 'setValue')]

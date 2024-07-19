@@ -17,7 +17,7 @@ class Checksum extends AbstractModel implements ChecksumInterface
 {
     public const TYPE_VARIATION = 1;
 
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('foreignKey')]
     #[Serializer\AccessType(['value' => 'reflection'])]
     protected Identity $foreignKey;

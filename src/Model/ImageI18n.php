@@ -17,7 +17,7 @@ use TypeError;
 #[Serializer\AccessType(['value' => 'public_method'])]
 class ImageI18n extends AbstractI18n implements IdentityInterface
 {
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('id')]
     #[Serializer\Accessor(getter: 'getId', setter: 'setId')]
     protected Identity $id;

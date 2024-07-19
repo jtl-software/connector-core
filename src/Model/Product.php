@@ -23,55 +23,55 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     use TranslatableAttributesTrait;
 
     /** @var Identity Optional reference to basePriceUnit */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('basePriceUnitId')]
     #[Serializer\Accessor(getter: 'getBasePriceUnitId', setter: 'setBasePriceUnitId')]
     protected Identity $basePriceUnitId;
 
     /** @var Identity Reference to manufacturer */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('manufacturerId')]
     #[Serializer\Accessor(getter: 'getManufacturerId', setter: 'setManufacturerId')]
     protected Identity $manufacturerId;
 
     /** @var Identity Reference to master product */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('masterProductId')]
     #[Serializer\Accessor(getter: 'getMasterProductId', setter: 'setMasterProductId')]
     protected Identity $masterProductId;
 
     /** @var Identity Optional reference to measurement unit id */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('measurementUnitId')]
     #[Serializer\Accessor(getter: 'getMeasurementUnitId', setter: 'setMeasurementUnitId')]
     protected Identity $measurementUnitId;
 
     /** @var Identity Optional reference to partsList */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('partsListId')]
     #[Serializer\Accessor(getter: 'getPartsListId', setter: 'setPartsListId')]
     protected Identity $partsListId;
 
     /** @var Identity Optional reference to productType */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('productTypeId')]
     #[Serializer\Accessor(getter: 'getProductTypeId', setter: 'setProductTypeId')]
     protected Identity $productTypeId;
 
     /** @var Identity Reference to shippingClass */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('shippingClassId')]
     #[Serializer\Accessor(getter: 'getShippingClassId', setter: 'setShippingClassId')]
     protected Identity $shippingClassId;
 
     /** @var Identity Reference to tax class */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('taxClassId')]
     #[Serializer\Accessor(getter: 'getTaxClassId', setter: 'setTaxClassId')]
     protected Identity $taxClassId;
 
     /** @var Identity Reference to unit */
-    #[Serializer\Type('Jtl\Connector\Core\Model\Identity')]
+    #[Serializer\Type(Identity::class)]
     #[Serializer\SerializedName('unitId')]
     #[Serializer\Accessor(getter: 'getUnitId', setter: 'setUnitId')]
     protected Identity $unitId;
@@ -87,10 +87,8 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     #[Serializer\Accessor(getter: 'getAsin', setter: 'setAsin')]
     protected string $asin = '';
 
-    /**
-     * @var \DateTimeInterface|null Optional available from date. Specify a date, upon when product can be purchased.
-     */
-    #[Serializer\Type('DateTimeInterface')]
+    /** @var \DateTimeInterface|null Optional available from date. Specify a date, upon when product can be purchased. */
+    #[Serializer\Type(\DateTimeInterface::class)]
     #[Serializer\SerializedName('availableFrom')]
     #[Serializer\Accessor(getter: 'getAvailableFrom', setter: 'setAvailableFrom')]
     protected ?\DateTimeInterface $availableFrom = null;
@@ -105,7 +103,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     #[Serializer\Accessor(getter: 'getBasePriceDivisor', setter: 'setBasePriceDivisor')]
     protected float $basePriceDivisor = 0.0;
 
-    /** @var double */
+
     #[Serializer\Type('double')]
     #[Serializer\SerializedName('basePriceFactor')]
     #[Serializer\Accessor(getter: 'getBasePriceFactor', setter: 'setBasePriceFactor')]
@@ -149,7 +147,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     protected bool $considerVariationStock = false;
 
     /** @var \DateTimeInterface|null Creation date */
-    #[Serializer\Type('DateTimeInterface')]
+    #[Serializer\Type(\DateTimeInterface::class)]
     #[Serializer\SerializedName('creationDate')]
     #[Serializer\Accessor(getter: 'getCreationDate', setter: 'setCreationDate')]
     protected ?\DateTimeInterface $creationDate = null;
@@ -257,7 +255,7 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     #[Serializer\Accessor(getter: 'getManufacturerNumber', setter: 'setManufacturerNumber')]
     protected string $manufacturerNumber = '';
 
-    #[Serializer\Type('Jtl\Connector\Core\Model\Manufacturer')]
+    #[Serializer\Type(Manufacturer::class)]
     #[Serializer\SerializedName('manufacturer')]
     #[Serializer\Accessor(getter: 'getManufacturer', setter: 'setManufacturer')]
     protected ?Manufacturer $manufacturer = null;
@@ -273,35 +271,33 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     #[Serializer\Accessor(getter: 'getMeasurementUnitCode', setter: 'setMeasurementUnitCode')]
     protected string $measurementUnitCode = '';
 
-    #[Serializer\Type('DateTimeInterface')]
+    #[Serializer\Type(\DateTimeInterface::class)]
     #[Serializer\SerializedName('minBestBeforeDate')]
     #[Serializer\Accessor(getter: 'getMinBestBeforeDate', setter: 'setMinBestBeforeDate')]
     protected ?\DateTimeInterface $minBestBeforeDate = null;
 
-    /** @var double */
     #[Serializer\Type('double')]
     #[Serializer\SerializedName('minimumOrderQuantity')]
     #[Serializer\Accessor(getter: 'getMinimumOrderQuantity', setter: 'setMinimumOrderQuantity')]
     protected float $minimumOrderQuantity = 0.0;
 
-    /** @var double */
     #[Serializer\Type('double')]
     #[Serializer\SerializedName('minimumQuantity')]
     #[Serializer\Accessor(getter: 'getMinimumQuantity', setter: 'setMinimumQuantity')]
     protected float $minimumQuantity = 0.0;
 
-    #[Serializer\Type('DateTimeInterface')]
+    #[Serializer\Type(\DateTimeInterface::class)]
     #[Serializer\SerializedName('modified')]
     #[Serializer\Accessor(getter: 'getModified', setter: 'setModified')]
     protected ?\DateTimeInterface $modified = null;
 
-    #[Serializer\Type('DateTimeInterface')]
+    #[Serializer\Type(\DateTimeInterface::class)]
     #[Serializer\SerializedName('newReleaseDate')]
     #[Serializer\Accessor(getter: 'getNewReleaseDate', setter: 'setNewReleaseDate')]
     protected ?\DateTimeInterface $newReleaseDate = null;
 
     /** @var \DateTimeInterface|null Contains the date of the next available inflow. */
-    #[Serializer\Type('DateTimeInterface')]
+    #[Serializer\Type(\DateTimeInterface::class)]
     #[Serializer\SerializedName('nextAvailableInflowDate')]
     #[Serializer\Accessor(getter: 'getNextAvailableInflowDate', setter: 'setNextAvailableInflowDate')]
     protected ?\DateTimeInterface $nextAvailableInflowDate = null;
@@ -345,7 +341,6 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     #[Serializer\Accessor(getter: 'getProductWeight', setter: 'setProductWeight')]
     protected float $productWeight = 0.0;
 
-    /** @var double */
     #[Serializer\Type('double')]
     #[Serializer\SerializedName('purchasePrice')]
     #[Serializer\Accessor(getter: 'getPurchasePrice', setter: 'setPurchasePrice')]
@@ -381,7 +376,6 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     #[Serializer\Accessor(getter: 'getSort', setter: 'setSort')]
     protected int $sort = 0;
 
-    /** @var double */
     #[Serializer\Type('double')]
     #[Serializer\SerializedName('stockLevel')]
     #[Serializer\Accessor(getter: 'getStockLevel', setter: 'setStockLevel')]
@@ -392,7 +386,6 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     #[Serializer\Accessor(getter: 'getSupplierDeliveryTime', setter: 'setSupplierDeliveryTime')]
     protected int $supplierDeliveryTime = 0;
 
-    /** @var double */
     #[Serializer\Type('double')]
     #[Serializer\SerializedName('supplierStockLevel')]
     #[Serializer\Accessor(getter: 'getSupplierStockLevel', setter: 'setSupplierStockLevel')]
@@ -416,7 +409,6 @@ class Product extends AbstractIdentity implements TranslatableAttributesInterfac
     #[Serializer\Accessor(getter: 'getUpc', setter: 'setUpc')]
     protected string $upc = '';
 
-    /** @var double */
     #[Serializer\Type('double')]
     #[Serializer\SerializedName('vat')]
     #[Serializer\Accessor(getter: 'getVat', setter: 'setVat')]
