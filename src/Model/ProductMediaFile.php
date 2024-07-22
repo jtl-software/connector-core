@@ -12,64 +12,50 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class ProductMediaFile extends AbstractIdentity
 {
-    /**
-     * @var string Optional media file category name
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("mediaFileCategory")
-     * @Serializer\Accessor(getter="getMediaFileCategory",setter="setMediaFileCategory")
-     */
+    /** @var string Optional media file category name */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('mediaFileCategory')]
+    #[Serializer\Accessor(getter: 'getMediaFileCategory', setter: 'setMediaFileCategory')]
     protected string $mediaFileCategory = '';
 
-    /**
-     * @var string File path
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("path")
-     * @Serializer\Accessor(getter="getPath",setter="setPath")
-     */
+    /** @var string File path */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('path')]
+    #[Serializer\Accessor(getter: 'getPath', setter: 'setPath')]
     protected string $path = '';
 
-    /**
-     * @var int Optional sort number
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("sort")
-     * @Serializer\Accessor(getter="getSort",setter="setSort")
-     */
+    /** @var int Optional sort number */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('sort')]
+    #[Serializer\Accessor(getter: 'getSort', setter: 'setSort')]
     protected int $sort = 0;
 
-    /**
-     * @var string Media file type e.g. 'pdf'
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("type")
-     * @Serializer\Accessor(getter="getType",setter="setType")
-     */
+    /** @var string Media file type e.g. 'pdf' */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('type')]
+    #[Serializer\Accessor(getter: 'getType', setter: 'setType')]
     protected string $type = '';
 
-    /**
-     * @var string Complete URL
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("url")
-     * @Serializer\Accessor(getter="getUrl",setter="setUrl")
-     */
+    /** @var string Complete URL */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('url')]
+    #[Serializer\Accessor(getter: 'getUrl', setter: 'setUrl')]
     protected string $url = '';
 
-    /**
-     * @var ProductMediaFileAttr[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductMediaFileAttr>")
-     * @Serializer\SerializedName("attributes")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ProductMediaFileAttr[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ProductMediaFileAttr>')]
+    #[Serializer\SerializedName('attributes')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $attributes = [];
 
-    /**
-     * @var ProductMediaFileI18n[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductMediaFileI18n>")
-     * @Serializer\SerializedName("i18ns")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ProductMediaFileI18n[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ProductMediaFileI18n>')]
+    #[Serializer\SerializedName('i18ns')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $i18ns = [];
 
     /**

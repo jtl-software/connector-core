@@ -10,23 +10,19 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class TaxRate extends AbstractIdentity
 {
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("countryIso")
-     * @Serializer\Accessor(getter="getCountryIso",setter="setCountryIso")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('countryIso')]
+    #[Serializer\Accessor(getter: 'getCountryIso', setter: 'setCountryIso')]
     protected string $countryIso = '';
 
-    /**
-     * @var double
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("rate")
-     * @Serializer\Accessor(getter="getRate",setter="setRate")
-     */
+
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('rate')]
+    #[Serializer\Accessor(getter: 'getRate', setter: 'setRate')]
     protected float $rate = 0.0;
 
     /**

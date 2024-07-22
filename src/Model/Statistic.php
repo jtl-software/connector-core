@@ -15,18 +15,14 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class Statistic extends AbstractModel
 {
-    /**
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("available")
-     * @Serializer\Accessor(getter="getAvailable",setter="setAvailable")
-     */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('available')]
+    #[Serializer\Accessor(getter: 'getAvailable', setter: 'setAvailable')]
     protected int $available = 0;
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("controllerName")
-     * @Serializer\Accessor(getter="getControllerName",setter="setControllerName")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('controllerName')]
+    #[Serializer\Accessor(getter: 'getControllerName', setter: 'setControllerName')]
     protected string $controllerName = '';
 
     /**

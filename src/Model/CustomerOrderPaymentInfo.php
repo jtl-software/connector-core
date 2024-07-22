@@ -12,95 +12,73 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class CustomerOrderPaymentInfo extends AbstractIdentity
 {
-    /**
-     * @var string Bank account holder name
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("accountHolder")
-     * @Serializer\Accessor(getter="getAccountHolder",setter="setAccountHolder")
-     */
+    /** @var string Bank account holder name */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('accountHolder')]
+    #[Serializer\Accessor(getter: 'getAccountHolder', setter: 'setAccountHolder')]
     protected string $accountHolder = '';
 
-    /**
-     * @var string Bank account number (deprecated in DE since SEPA)
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("accountNumber")
-     * @Serializer\Accessor(getter="getAccountNumber",setter="setAccountNumber")
-     */
+    /** @var string Bank account number (deprecated in DE since SEPA) */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('accountNumber')]
+    #[Serializer\Accessor(getter: 'getAccountNumber', setter: 'setAccountNumber')]
     protected string $accountNumber = '';
 
-    /**
-     * @var string Bank code (deprecated in DE since SEPA)
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("bankCode")
-     * @Serializer\Accessor(getter="getBankCode",setter="setBankCode")
-     */
+    /** @var string Bank code (deprecated in DE since SEPA) */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('bankCode')]
+    #[Serializer\Accessor(getter: 'getBankCode', setter: 'setBankCode')]
     protected string $bankCode = '';
 
-    /**
-     * @var string Bank name
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("bankName")
-     * @Serializer\Accessor(getter="getBankName",setter="setBankName")
-     */
+    /** @var string Bank name */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('bankName')]
+    #[Serializer\Accessor(getter: 'getBankName', setter: 'setBankName')]
     protected string $bankName = '';
 
-    /**
-     * @var string Bank Identifier Code (BIC)
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("bic")
-     * @Serializer\Accessor(getter="getBic",setter="setBic")
-     */
+    /** @var string Bank Identifier Code (BIC) */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('bic')]
+    #[Serializer\Accessor(getter: 'getBic', setter: 'setBic')]
     protected string $bic = '';
 
-    /**
-     * @var string Credit card expiration date
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("creditCardExpiration")
-     * @Serializer\Accessor(getter="getCreditCardExpiration",setter="setCreditCardExpiration")
-     */
+    /** @var string Credit card expiration date */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('creditCardExpiration')]
+    #[Serializer\Accessor(getter: 'getCreditCardExpiration', setter: 'setCreditCardExpiration')]
     protected string $creditCardExpiration = '';
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("creditCardHolder")
-     * @Serializer\Accessor(getter="getCreditCardHolder",setter="setCreditCardHolder")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('creditCardHolder')]
+    #[Serializer\Accessor(getter: 'getCreditCardHolder', setter: 'setCreditCardHolder')]
     protected string $creditCardHolder = '';
 
-    /**
-     * @var string Credit card number
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("creditCardNumber")
-     * @Serializer\Accessor(getter="getCreditCardNumber",setter="setCreditCardNumber")
-     */
+    /** @var string Credit card number */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('creditCardNumber')]
+    #[Serializer\Accessor(getter: 'getCreditCardNumber', setter: 'setCreditCardNumber')]
     protected string $creditCardNumber = '';
 
-    /**
-     * @var string Credit card type (e.g. "visa")
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("creditCardType")
-     * @Serializer\Accessor(getter="getCreditCardType",setter="setCreditCardType")
-     */
+    /** @var string Credit card type (e.g. "visa") */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('creditCardType')]
+    #[Serializer\Accessor(getter: 'getCreditCardType', setter: 'setCreditCardType')]
     protected string $creditCardType = '';
 
-    /**
-     * @var string Credit card verification number
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("creditCardVerificationNumber")
-     * @Serializer\Accessor(getter="getCreditCardVerificationNumber",setter="setCreditCardVerificationNumber")
-     */
+    /** @var string Credit card verification number */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('creditCardVerificationNumber')]
+    #[Serializer\Accessor(getter: 'getCreditCardVerificationNumber', setter: 'setCreditCardVerificationNumber')]
     protected string $creditCardVerificationNumber = '';
 
-    /**
-     * @var string International Bank Account Number (IBAN)
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("iban")
-     * @Serializer\Accessor(getter="getIban",setter="setIban")
-     */
+    /** @var string International Bank Account Number (IBAN) */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('iban')]
+    #[Serializer\Accessor(getter: 'getIban', setter: 'setIban')]
     protected string $iban = '';
 
     /**

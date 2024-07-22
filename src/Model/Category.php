@@ -14,72 +14,56 @@ use TypeError;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class Category extends AbstractIdentity implements TranslatableAttributesInterface
 {
     use TranslatableAttributesTrait;
 
-    /**
-     * @var Identity Optional reference to parent category id
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("parentCategoryId")
-     * @Serializer\Accessor(getter="getParentCategoryId",setter="setParentCategoryId")
-     */
+    /** @var Identity Optional reference to parent category id */
+    #[Serializer\Type(Identity::class)]
+    #[Serializer\SerializedName('parentCategoryId')]
+    #[Serializer\Accessor(getter: 'getParentCategoryId', setter: 'setParentCategoryId')]
     protected Identity $parentCategoryId;
 
-    /**
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isActive")
-     * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
-     */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('isActive')]
+    #[Serializer\Accessor(getter: 'getIsActive', setter: 'setIsActive')]
     protected bool $isActive = false;
 
-    /**
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("level")
-     * @Serializer\Accessor(getter="getLevel",setter="setLevel")
-     */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('level')]
+    #[Serializer\Accessor(getter: 'getLevel', setter: 'setLevel')]
     protected int $level = 0;
 
-    /**
-     * @var int Optional sort order number
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("sort")
-     * @Serializer\Accessor(getter="getSort",setter="setSort")
-     */
+    /** @var int Optional sort order number */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('sort')]
+    #[Serializer\Accessor(getter: 'getSort', setter: 'setSort')]
     protected int $sort = 0;
 
-    /**
-     * @var TranslatableAttribute[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\CategoryAttribute>")
-     * @Serializer\SerializedName("attributes")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var TranslatableAttribute[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\CategoryAttribute>')]
+    #[Serializer\SerializedName('attributes')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $attributes = [];
 
-    /**
-     * @var CategoryCustomerGroup[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\CategoryCustomerGroup>")
-     * @Serializer\SerializedName("customerGroups")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var CategoryCustomerGroup[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\CategoryCustomerGroup>')]
+    #[Serializer\SerializedName('customerGroups')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $customerGroups = [];
 
-    /**
-     * @var CategoryI18n[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\CategoryI18n>")
-     * @Serializer\SerializedName("i18ns")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var CategoryI18n[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\CategoryI18n>')]
+    #[Serializer\SerializedName('i18ns')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $i18ns = [];
 
-    /**
-     * @var CategoryInvisibility[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\CategoryInvisibility>")
-     * @Serializer\SerializedName("invisibilities")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var CategoryInvisibility[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\CategoryInvisibility>')]
+    #[Serializer\SerializedName('invisibilities')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $invisibilities = [];
 
     /**

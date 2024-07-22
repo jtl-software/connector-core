@@ -10,22 +10,18 @@ use JMS\Serializer\Annotation as Serializer;
  * Class Session
  *
  * @package Jtl\Connector\Core\Model
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class Session extends AbstractModel
 {
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("sessionId")
-     * @Serializer\Accessor(getter="getSessionId",setter="setSessionId")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('sessionId')]
+    #[Serializer\Accessor(getter: 'getSessionId', setter: 'setSessionId')]
     protected ?string $sessionId = null;
 
-    /**
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("lifetime")
-     * @Serializer\Accessor(getter="getLifetime",setter="setLifetime")
-     */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('lifetime')]
+    #[Serializer\Accessor(getter: 'getLifetime', setter: 'setLifetime')]
     protected int $lifetime = 0;
 
     /**

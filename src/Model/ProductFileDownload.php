@@ -10,58 +10,44 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class ProductFileDownload extends AbstractModel
 {
-    /**
-     * @Serializer\Type("DateTimeInterface")
-     * @Serializer\SerializedName("creationDate")
-     * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
-     */
+    #[Serializer\Type(\DateTimeInterface::class)]
+    #[Serializer\SerializedName('creationDate')]
+    #[Serializer\Accessor(getter: 'getCreationDate', setter: 'setCreationDate')]
     protected ?\DateTimeInterface $creationDate = null;
 
-    /**
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("maxDays")
-     * @Serializer\Accessor(getter="getMaxDays",setter="setMaxDays")
-     */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('maxDays')]
+    #[Serializer\Accessor(getter: 'getMaxDays', setter: 'setMaxDays')]
     protected int $maxDays = 0;
 
-    /**
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("maxDownloads")
-     * @Serializer\Accessor(getter="getMaxDownloads",setter="setMaxDownloads")
-     */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('maxDownloads')]
+    #[Serializer\Accessor(getter: 'getMaxDownloads', setter: 'setMaxDownloads')]
     protected int $maxDownloads = 0;
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("path")
-     * @Serializer\Accessor(getter="getPath",setter="setPath")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('path')]
+    #[Serializer\Accessor(getter: 'getPath', setter: 'setPath')]
     protected string $path = '';
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("previewPath")
-     * @Serializer\Accessor(getter="getPreviewPath",setter="setPreviewPath")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('previewPath')]
+    #[Serializer\Accessor(getter: 'getPreviewPath', setter: 'setPreviewPath')]
     protected string $previewPath = '';
 
-    /**
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("sort")
-     * @Serializer\Accessor(getter="getSort",setter="setSort")
-     */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('sort')]
+    #[Serializer\Accessor(getter: 'getSort', setter: 'setSort')]
     protected int $sort = 0;
 
-    /**
-     * @var ProductFileDownloadI18n[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductFileDownloadI18n>")
-     * @Serializer\SerializedName("i18ns")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ProductFileDownloadI18n[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ProductFileDownloadI18n>')]
+    #[Serializer\SerializedName('i18ns')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $i18ns = [];
 
     /**

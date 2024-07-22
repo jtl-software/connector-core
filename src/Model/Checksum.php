@@ -11,45 +11,35 @@ use Jtl\Connector\Core\Checksum\ChecksumInterface;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class Checksum extends AbstractModel implements ChecksumInterface
 {
     public const TYPE_VARIATION = 1;
 
-    /**
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("foreignKey")
-     * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
-     */
+    #[Serializer\Type(Identity::class)]
+    #[Serializer\SerializedName('foreignKey')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected Identity $foreignKey;
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("endpoint")
-     * @Serializer\Accessor(getter="getEndpoint",setter="setEndpoint")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('endpoint')]
+    #[Serializer\Accessor(getter: 'getEndpoint', setter: 'setEndpoint')]
     protected string $endpoint = '';
 
-    /**
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("hasChanged")
-     * @Serializer\Accessor(getter="getHasChanged",setter="setHasChanged")
-     */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('hasChanged')]
+    #[Serializer\Accessor(getter: 'getHasChanged', setter: 'setHasChanged')]
     protected bool $hasChanged = false;
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("host")
-     * @Serializer\Accessor(getter="getHost",setter="setHost")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('host')]
+    #[Serializer\Accessor(getter: 'getHost', setter: 'setHost')]
     protected string $host = '';
 
-    /**
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("type")
-     * @Serializer\Accessor(getter="getType",setter="setType")
-     */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('type')]
+    #[Serializer\Accessor(getter: 'getType', setter: 'setType')]
     protected int $type = 0;
 
     /**

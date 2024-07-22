@@ -12,56 +12,44 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class DeliveryNote extends AbstractIdentity implements ItemsInterface
 {
-    /**
-     * @var Identity Reference to customerOrder
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("customerOrderId")
-     * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
-     */
+    /** @var Identity Reference to customerOrder */
+    #[Serializer\Type(Identity::class)]
+    #[Serializer\SerializedName('customerOrderId')]
+    #[Serializer\Accessor(getter: 'getCustomerOrderId', setter: 'setCustomerOrderId')]
     protected Identity $customerOrderId;
 
-    /**
-     * @var \DateTimeInterface|null Creation date
-     * @Serializer\Type("DateTimeInterface")
-     * @Serializer\SerializedName("creationDate")
-     * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
-     */
+    /** @var \DateTimeInterface|null Creation date */
+    #[Serializer\Type(\DateTimeInterface::class)]
+    #[Serializer\SerializedName('creationDate')]
+    #[Serializer\Accessor(getter: 'getCreationDate', setter: 'setCreationDate')]
     protected ?\DateTimeInterface $creationDate = null;
 
-    /**
-     * @var bool Optional flag for fulfillment. True, if delivery ist fulfilled by someone else
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isFulfillment")
-     * @Serializer\Accessor(getter="getIsFulfillment",setter="setIsFulfillment")
-     */
+    /** @var bool Optional flag for fulfillment. True, if delivery ist fulfilled by someone else */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('isFulfillment')]
+    #[Serializer\Accessor(getter: 'getIsFulfillment', setter: 'setIsFulfillment')]
     protected bool $isFulfillment = false;
 
-    /**
-     * @var string Optional text note
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("note")
-     * @Serializer\Accessor(getter="getNote",setter="setNote")
-     */
+    /** @var string Optional text note */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('note')]
+    #[Serializer\Accessor(getter: 'getNote', setter: 'setNote')]
     protected string $note = '';
 
-    /**
-     * @var DeliveryNoteItem[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\DeliveryNoteItem>")
-     * @Serializer\SerializedName("items")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var DeliveryNoteItem[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\DeliveryNoteItem>')]
+    #[Serializer\SerializedName('items')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $items = [];
 
-    /**
-     * @var DeliveryNoteTrackingList[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\DeliveryNoteTrackingList>")
-     * @Serializer\SerializedName("trackingLists")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var DeliveryNoteTrackingList[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\DeliveryNoteTrackingList>')]
+    #[Serializer\SerializedName('trackingLists')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $trackingLists = [];
 
     /**

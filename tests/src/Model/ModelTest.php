@@ -65,12 +65,14 @@ class ModelTest extends TestCase
             $modelName       = $fileInfo->getBasename('.php');
             $array_map[$key] = [$modelName];
         }
-        return \array_filter(
+        $return = \array_filter(
             $array_map,
             static function ($value) use ($ignoredModels) {
                 return !\in_array($value[0], $ignoredModels, true);
             }
         );
+
+        return $return;
     }
 
     /**

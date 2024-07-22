@@ -6,16 +6,12 @@ namespace Jtl\Connector\Core\Model;
 
 use JMS\Serializer\Annotation as Serializer;
 
-/**
- * @Serializer\AccessType("public_method")
- */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class Authentication extends AbstractModel
 {
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("token")
-     * @Serializer\Accessor(getter="getToken",setter="setToken")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('token')]
+    #[Serializer\Accessor(getter: 'getToken', setter: 'setToken')]
     protected string $token = '';
 
     /**

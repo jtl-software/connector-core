@@ -12,255 +12,186 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class Customer extends AbstractI18n implements IdentityInterface
 {
-    /**
-     * @var Identity References a customer group
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("customerGroupId")
-     * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
-     */
+    /** @var Identity References a customer group */
+    #[Serializer\Type(Identity::class)]
+    #[Serializer\SerializedName('customerGroupId')]
+    #[Serializer\Accessor(getter: 'getCustomerGroupId', setter: 'setCustomerGroupId')]
     protected Identity $customerGroupId;
 
-    /**
-     * @var Identity Unique customer id
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
+    /** @var Identity Unique customer id */
+    #[Serializer\Type(Identity::class)]
+    #[Serializer\SerializedName('id')]
+    #[Serializer\Accessor(getter: 'getId', setter: 'setId')]
     protected Identity $id;
 
-    /**
-     * @var double
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("accountCredit")
-     * @Serializer\Accessor(getter="getAccountCredit",setter="setAccountCredit")
-     */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('accountCredit')]
+    #[Serializer\Accessor(getter: 'getAccountCredit', setter: 'setAccountCredit')]
     protected float $accountCredit = 0.0;
 
-    /**
-     * @var \DateTimeInterface|null Date of birth
-     * @Serializer\Type("DateTimeInterface")
-     * @Serializer\SerializedName("birthday")
-     * @Serializer\Accessor(getter="getBirthday",setter="setBirthday")
-     */
+    #[Serializer\Type(\DateTimeInterface::class)]
+    #[Serializer\SerializedName('birthday')]
+    #[Serializer\Accessor(getter: 'getBirthday', setter: 'setBirthday')]
     protected ?\DateTimeInterface $birthday = null;
 
-    /**
-     * @var string City
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("city")
-     * @Serializer\Accessor(getter="getCity",setter="setCity")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('city')]
+    #[Serializer\Accessor(getter: 'getCity', setter: 'setCity')]
     protected string $city = '';
 
-    /**
-     * @var string Company name
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("company")
-     * @Serializer\Accessor(getter="getCompany",setter="setCompany")
-     */
+    /** @var string Company name */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('company')]
+    #[Serializer\Accessor(getter: 'getCompany', setter: 'setCompany')]
     protected string $company = '';
 
-    /**
-     * @var string Country ISO 3166-2 (2 letter Uppercase)
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("countryIso")
-     * @Serializer\Accessor(getter="getCountryIso",setter="setCountryIso")
-     */
+    /** @var string Country ISO 3166-2 (2 letter Uppercase) */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('countryIso')]
+    #[Serializer\Accessor(getter: 'getCountryIso', setter: 'setCountryIso')]
     protected string $countryIso = '';
 
-    /**
-     * @Serializer\Type("DateTimeInterface")
-     * @Serializer\SerializedName("creationDate")
-     * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
-     */
+    #[Serializer\Type(\DateTimeInterface::class)]
+    #[Serializer\SerializedName('creationDate')]
+    #[Serializer\Accessor(getter: 'getCreationDate', setter: 'setCreationDate')]
     protected ?\DateTimeInterface $creationDate = null;
 
-    /**
-     * @var string Optional customer number set by JTL-Wawi ERP software
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("customerNumber")
-     * @Serializer\Accessor(getter="getCustomerNumber",setter="setCustomerNumber")
-     */
+    /** @var string Optional customer number set by JTL-Wawi ERP software */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('customerNumber')]
+    #[Serializer\Accessor(getter: 'getCustomerNumber', setter: 'setCustomerNumber')]
     protected string $customerNumber = '';
 
-    /**
-     * @var string Delivery instruction e.g. "c/o John Doe"
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("deliveryInstruction")
-     * @Serializer\Accessor(getter="getDeliveryInstruction",setter="setDeliveryInstruction")
-     */
+    /** @var string Delivery instruction e.g. "c/o John Doe" */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('deliveryInstruction')]
+    #[Serializer\Accessor(getter: 'getDeliveryInstruction', setter: 'setDeliveryInstruction')]
     protected string $deliveryInstruction = '';
 
-    /**
-     * @var double Percentage discount for customer on all prices
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("discount")
-     * @Serializer\Accessor(getter="getDiscount",setter="setDiscount")
-     */
+    /** @var double Percentage discount for customer on all prices */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('discount')]
+    #[Serializer\Accessor(getter: 'getDiscount', setter: 'setDiscount')]
     protected float $discount = 0.0;
 
-    /**
-     * @var string E-Mail address
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("eMail")
-     * @Serializer\Accessor(getter="getEMail",setter="setEMail")
-     */
+    /** @var string E-Mail address */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('eMail')]
+    #[Serializer\Accessor(getter: 'getEMail', setter: 'setEMail')]
     protected string $eMail = '';
 
-    /**
-     * @var string Extra address line e.g. "Apartment 2.5"
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("extraAddressLine")
-     * @Serializer\Accessor(getter="getExtraAddressLine",setter="setExtraAddressLine")
-     */
+    /** @var string Extra address line e.g. "Apartment 2.5" */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('extraAddressLine')]
+    #[Serializer\Accessor(getter: 'getExtraAddressLine', setter: 'setExtraAddressLine')]
     protected string $extraAddressLine = '';
 
-    /**
-     * @var string Fax number
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("fax")
-     * @Serializer\Accessor(getter="getFax",setter="setFax")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('fax')]
+    #[Serializer\Accessor(getter: 'getFax', setter: 'setFax')]
     protected string $fax = '';
 
-    /**
-     * @var string First name
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("firstName")
-     * @Serializer\Accessor(getter="getFirstName",setter="setFirstName")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('firstName')]
+    #[Serializer\Accessor(getter: 'getFirstName', setter: 'setFirstName')]
     protected string $firstName = '';
 
-    /**
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("hasCustomerAccount")
-     * @Serializer\Accessor(getter="getHasCustomerAccount",setter="setHasCustomerAccount")
-     */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('hasCustomerAccount')]
+    #[Serializer\Accessor(getter: 'getHasCustomerAccount', setter: 'setHasCustomerAccount')]
     protected bool $hasCustomerAccount = false;
 
-    /**
-     * @var bool Optional flag if customer receives newsletter. If true, customer wants to receive newsletter.
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("hasNewsletterSubscription")
-     * @Serializer\Accessor(getter="getHasNewsletterSubscription",setter="setHasNewsletterSubscription")
-     */
+    /** @var bool Optional flag if customer receives newsletter. If true, customer wants to receive newsletter. */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('hasNewsletterSubscription')]
+    #[Serializer\Accessor(getter: 'getHasNewsletterSubscription', setter: 'setHasNewsletterSubscription')]
     protected bool $hasNewsletterSubscription = false;
 
     /**
      * @var bool Flag if customer is active (login allowed).
      *              True, if customer is allowed to login with his E-Mail address and password.
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isActive")
-     * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
      */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('isActive')]
+    #[Serializer\Accessor(getter: 'getIsActive', setter: 'setIsActive')]
     protected bool $isActive = false;
 
-    /**
-     * @var string Last name
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("lastName")
-     * @Serializer\Accessor(getter="getLastName",setter="setLastName")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('lastName')]
+    #[Serializer\Accessor(getter: 'getLastName', setter: 'setLastName')]
     protected string $lastName = '';
 
-    /**
-     * @var string Mobile phone number
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("mobile")
-     * @Serializer\Accessor(getter="getMobile",setter="setMobile")
-     */
+    /** @var string Mobile phone number */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('mobile')]
+    #[Serializer\Accessor(getter: 'getMobile', setter: 'setMobile')]
     protected string $mobile = '';
 
-    /**
-     * @var string customer note
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("note")
-     * @Serializer\Accessor(getter="getNote",setter="setNote")
-     */
+    /** @var string customer note */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('note')]
+    #[Serializer\Accessor(getter: 'getNote', setter: 'setNote')]
     protected string $note = '';
 
-    /**
-     * @var string Customer origin
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("origin")
-     * @Serializer\Accessor(getter="getOrigin",setter="setOrigin")
-     */
+    /** @var string Customer origin */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('origin')]
+    #[Serializer\Accessor(getter: 'getOrigin', setter: 'setOrigin')]
     protected string $origin = '';
 
-    /**
-     * @var string Phone number
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("phone")
-     * @Serializer\Accessor(getter="getPhone",setter="setPhone")
-     */
+    /** @var string Phone number */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('phone')]
+    #[Serializer\Accessor(getter: 'getPhone', setter: 'setPhone')]
     protected string $phone = '';
 
-    /**
-     * @var string Salutation (german: "Anrede")
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("salutation")
-     * @Serializer\Accessor(getter="getSalutation",setter="setSalutation")
-     */
+    /** @var string Salutation (german: "Anrede") */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('salutation')]
+    #[Serializer\Accessor(getter: 'getSalutation', setter: 'setSalutation')]
     protected string $salutation = '';
 
-    /**
-     * @var string State
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("state")
-     * @Serializer\Accessor(getter="getState",setter="setState")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('state')]
+    #[Serializer\Accessor(getter: 'getState', setter: 'setState')]
     protected string $state = '';
 
-    /**
-     * @var string Street name
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("street")
-     * @Serializer\Accessor(getter="getStreet",setter="setStreet")
-     */
+    /** @var string Street name and number */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('street')]
+    #[Serializer\Accessor(getter: 'getStreet', setter: 'setStreet')]
     protected string $street = '';
 
-    /**
-     * @var string Title, e.g. "Prof. Dr."
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("title")
-     * @Serializer\Accessor(getter="getTitle",setter="setTitle")
-     */
+    /** @var string Title, e.g. "Prof. Dr." */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('title')]
+    #[Serializer\Accessor(getter: 'getTitle', setter: 'setTitle')]
     protected string $title = '';
 
-    /**
-     * @var string VAT number (german "USt-ID")
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("vatNumber")
-     * @Serializer\Accessor(getter="getVatNumber",setter="setVatNumber")
-     */
+    /** @var string VAT number (german "USt-ID") */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('vatNumber')]
+    #[Serializer\Accessor(getter: 'getVatNumber', setter: 'setVatNumber')]
     protected string $vatNumber = '';
 
-    /**
-     * @var string WWW address
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("websiteUrl")
-     * @Serializer\Accessor(getter="getWebsiteUrl",setter="setWebsiteUrl")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('websiteUrl')]
+    #[Serializer\Accessor(getter: 'getWebsiteUrl', setter: 'setWebsiteUrl')]
     protected string $websiteUrl = '';
 
-    /**
-     * @var string ZIP / postal code
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("zipCode")
-     * @Serializer\Accessor(getter="getZipCode",setter="setZipCode")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('zipCode')]
+    #[Serializer\Accessor(getter: 'getZipCode', setter: 'setZipCode')]
     protected string $zipCode = '';
 
-    /**
-     * @var KeyValueAttribute[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\KeyValueAttribute>")
-     * @Serializer\SerializedName("attributes")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var KeyValueAttribute[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\KeyValueAttribute>')]
+    #[Serializer\SerializedName('attributes')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $attributes = [];
 
     /**
@@ -331,7 +262,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @return \DateTimeInterface Date of birth
+     * @return \DateTimeInterface|null Date of birth
      */
     public function getBirthday(): ?\DateTimeInterface
     {
@@ -339,7 +270,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @param \DateTimeInterface $birthday Date of birth
+     * @param \DateTimeInterface|null $birthday Date of birth
      *
      * @return $this
      */
@@ -411,7 +342,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return \DateTimeInterface|null
      */
     public function getCreationDate(): ?\DateTimeInterface
     {
@@ -419,7 +350,7 @@ class Customer extends AbstractI18n implements IdentityInterface
     }
 
     /**
-     * @param \DateTimeInterface $creationDate
+     * @param \DateTimeInterface|null $creationDate
      *
      * @return $this
      */
@@ -601,7 +532,7 @@ class Customer extends AbstractI18n implements IdentityInterface
 
     /**
      * @param bool $hasNewsletterSubscription Optional flag if customer receives newsletter.
-     *                                           If true, customer wants to receive newsletter.
+     *                                        If true, customer wants to receive newsletter.
      *
      * @return $this
      */
@@ -623,7 +554,7 @@ class Customer extends AbstractI18n implements IdentityInterface
 
     /**
      * @param bool $isActive Flag if customer is active (login allowed).
-     *                          True, if customer is allowed to login with his E-Mail address and password.
+     *                       True, if customer is allowed to login with his E-Mail address and password.
      *
      * @return $this
      */

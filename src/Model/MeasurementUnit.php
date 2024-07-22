@@ -12,32 +12,26 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class MeasurementUnit extends AbstractIdentity
 {
-    /**
-     * @var string Optional UCUM-Code, see  http://unitsofmeasure.org/
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("code")
-     * @Serializer\Accessor(getter="getCode",setter="setCode")
-     */
+    /** @var string Optional UCUM-Code, see  http://unitsofmeasure.org/ */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('code')]
+    #[Serializer\Accessor(getter: 'getCode', setter: 'setCode')]
     protected string $code = '';
 
-    /**
-     * @var string Synonym e.g. 'ml'
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("displayCode")
-     * @Serializer\Accessor(getter="getDisplayCode",setter="setDisplayCode")
-     */
+    /** @var string Synonym e.g. 'ml' */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('displayCode')]
+    #[Serializer\Accessor(getter: 'getDisplayCode', setter: 'setDisplayCode')]
     protected string $displayCode = '';
 
-    /**
-     * @var MeasurementUnitI18n[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\MeasurementUnitI18n>")
-     * @Serializer\SerializedName("i18ns")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var MeasurementUnitI18n[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\MeasurementUnitI18n>')]
+    #[Serializer\SerializedName('i18ns')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $i18ns = [];
 
     /**

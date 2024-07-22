@@ -13,22 +13,18 @@ use TypeError;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class ImageI18n extends AbstractI18n implements IdentityInterface
 {
-    /**
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
+    #[Serializer\Type(Identity::class)]
+    #[Serializer\SerializedName('id')]
+    #[Serializer\Accessor(getter: 'getId', setter: 'setId')]
     protected Identity $id;
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("altText")
-     * @Serializer\Accessor(getter="getAltText",setter="setAltText")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('altText')]
+    #[Serializer\Accessor(getter: 'getAltText', setter: 'setAltText')]
     protected string $altText = '';
 
     /**

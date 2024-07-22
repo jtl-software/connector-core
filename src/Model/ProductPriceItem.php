@@ -12,26 +12,24 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class ProductPriceItem extends AbstractModel
 {
-    /**
-     * @var double Price value (net)
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("netPrice")
-     * @Serializer\Accessor(getter="getNetPrice",setter="setNetPrice")
-     */
+    /** @var double Price value (net) */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('netPrice')]
+    #[Serializer\Accessor(getter: 'getNetPrice', setter: 'setNetPrice')]
     protected float $netPrice = 0.0;
 
     /**
      * @var int Optional quantity to apply netPrice for. Default 1 for default price.
      *              A quantity value of 3 means that the given product price
      *              will be applied when a customer buys 3 or more items.
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("quantity")
-     * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
      */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('quantity')]
+    #[Serializer\Accessor(getter: 'getQuantity', setter: 'setQuantity')]
     protected int $quantity = 0;
 
     /**

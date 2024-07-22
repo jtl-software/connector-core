@@ -13,71 +13,56 @@ use RuntimeException;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
- * @Serializer\Discriminator(
- *     field = "relationType",
- *     disabled = false,
- *     map = {
- *       "category": "Jtl\Connector\Core\Model\CategoryImage",
- *       "configGroup": "Jtl\Connector\Core\Model\ConfigGroupImage",
- *       "manufacturer": "Jtl\Connector\Core\Model\ManufacturerImage",
- *       "product": "Jtl\Connector\Core\Model\ProductImage",
- *       "productVariationValue": "Jtl\Connector\Core\Model\ProductVariationValueImage",
- *       "specific": "Jtl\Connector\Core\Model\SpecificImage",
- *       "specificValue": "Jtl\Connector\Core\Model\SpecificValueImage"
- *     }
- * )
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
+#[Serializer\Discriminator(
+    field   : 'relationType',
+    map     : [
+        'category' => 'Jtl\Connector\Core\Model\CategoryImage',
+        'configGroup' => 'Jtl\Connector\Core\Model\ConfigGroupImage',
+        'manufacturer' => 'Jtl\Connector\Core\Model\ManufacturerImage',
+        'product' => 'Jtl\Connector\Core\Model\ProductImage',
+        'productVariationValue' => 'Jtl\Connector\Core\Model\ProductVariationValueImage',
+        'specific' => 'Jtl\Connector\Core\Model\SpecificImage',
+        'specificValue' => 'Jtl\Connector\Core\Model\SpecificValueImage'
+    ],
+    disabled: false
+)]
 abstract class AbstractImage extends AbstractIdentity
 {
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("filename")
-     * @Serializer\Accessor(getter="getFilenameSafe",setter="setFilename")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('filename')]
+    #[Serializer\Accessor(getter: 'getFilenameSafe', setter: 'setFilename')]
     protected string $filename = '';
 
-    /**
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("foreignKey")
-     * @Serializer\Accessor(getter="getForeignKey",setter="setForeignKey")
-     */
+    #[Serializer\Type(Identity::class)]
+    #[Serializer\SerializedName('foreignKey')]
+    #[Serializer\Accessor(getter: 'getForeignKey', setter: 'setForeignKey')]
     protected Identity $foreignKey;
 
-    /**
-     * @var ImageI18n[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ImageI18n>")
-     * @Serializer\SerializedName("i18ns")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ImageI18n[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ImageI18n>')]
+    #[Serializer\SerializedName('i18ns')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $i18ns = [];
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("name")
-     * @Serializer\Accessor(getter="getName",setter="setName")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('name')]
+    #[Serializer\Accessor(getter: 'getName', setter: 'setName')]
     protected string $name = '';
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("remoteUrl")
-     * @Serializer\Accessor(getter="getRemoteUrl",setter="setRemoteUrl")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('remoteUrl')]
+    #[Serializer\Accessor(getter: 'getRemoteUrl', setter: 'setRemoteUrl')]
     protected string $remoteUrl = '';
 
-    /**
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("sort")
-     * @Serializer\Accessor(getter="getSort",setter="setSort")
-     */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('sort')]
+    #[Serializer\Accessor(getter: 'getSort', setter: 'setSort')]
     protected int $sort = 1;
 
-    /**
-     * @var \ReflectionClass<self>
-     *
-     * @Serializer\Exclude
-     */
+    /** @var \ReflectionClass<self> */
+    #[Serializer\Exclude]
     protected \ReflectionClass $reflectionClass;
 
     /**
