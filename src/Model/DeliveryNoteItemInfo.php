@@ -14,25 +14,22 @@ use JMS\Serializer\Annotation as Serializer;
 #[Serializer\AccessType(['value' => 'public_method'])]
 class DeliveryNoteItemInfo extends AbstractModel
 {
-    /** @var string */
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('batch')]
     #[Serializer\Accessor(getter: 'getBatch', setter: 'setBatch')]
     protected string $batch = '';
 
-    /** @var \DateTimeInterface|null */
     #[Serializer\Type(\DateTimeInterface::class)]
     #[Serializer\SerializedName('bestBefore')]
     #[Serializer\Accessor(getter: 'getBestBefore', setter: 'setBestBefore')]
     protected ?\DateTimeInterface $bestBefore = null;
 
-    
+
     #[Serializer\Type('double')]
     #[Serializer\SerializedName('quantity')]
     #[Serializer\Accessor(getter: 'getQuantity', setter: 'setQuantity')]
     protected float $quantity = 0.0;
 
-    /** @var integer */
     #[Serializer\Type('integer')]
     #[Serializer\SerializedName('warehouseId')]
     #[Serializer\Accessor(getter: 'getWarehouseId', setter: 'setWarehouseId')]
@@ -71,7 +68,7 @@ class DeliveryNoteItemInfo extends AbstractModel
      *
      * @return $this
      */
-    public function setBestBefore(\DateTimeInterface $bestBefore = null): self
+    public function setBestBefore(?\DateTimeInterface $bestBefore = null): self
     {
         $this->bestBefore = $bestBefore;
 
@@ -79,7 +76,7 @@ class DeliveryNoteItemInfo extends AbstractModel
     }
 
     /**
-     * @return double
+     * @return float
      */
     public function getQuantity(): float
     {
@@ -87,7 +84,7 @@ class DeliveryNoteItemInfo extends AbstractModel
     }
 
     /**
-     * @param double $quantity
+     * @param float $quantity
      *
      * @return $this
      */
@@ -107,7 +104,7 @@ class DeliveryNoteItemInfo extends AbstractModel
     }
 
     /**
-     * @param integer $warehouseId
+     * @param int $warehouseId
      *
      * @return $this
      */

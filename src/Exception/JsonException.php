@@ -21,7 +21,7 @@ class JsonException extends \RuntimeException
 
     /**
      * @param string      $lastErrorMessage
-     * @param string|null $jsonString |null
+     * @param string|null $jsonString
      *
      * @return self
      */

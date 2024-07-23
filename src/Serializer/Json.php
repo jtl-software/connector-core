@@ -42,7 +42,6 @@ class Json
      * @param bool   $assoc
      *
      * @return mixed
-     * @throws JsonException
      * @throws \InvalidArgumentException|\JsonException
      */
     public static function decode(string $string, bool $assoc = false): mixed
@@ -53,7 +52,7 @@ class Json
 
         $object = \json_decode($string, $assoc, 512, \JSON_THROW_ON_ERROR);
         if (\json_last_error() !== \JSON_ERROR_NONE) {
-            throw JsonException::decoding(\json_last_error_msg(), $string);
+            throw \JsonException::decoding(\json_last_error_msg(), $string);
         }
 
         return $object;

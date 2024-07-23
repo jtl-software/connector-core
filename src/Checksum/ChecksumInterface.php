@@ -57,14 +57,14 @@ interface ChecksumInterface
     public function getType(): int;
 
     /**
-     * @param boolean $hasChanged
+     * @param bool $hasChanged
      *
      * @return $this
      */
     public function setHasChanged(bool $hasChanged): self;
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function hasChanged(): bool;
 }
