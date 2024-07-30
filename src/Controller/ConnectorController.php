@@ -18,7 +18,6 @@ use Jtl\Connector\Core\Exception\JsonException as CoreJsonException;
 use Jtl\Connector\Core\Exception\MissingRequirementException;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Linker\IdentityLinker;
-use Jtl\Connector\Core\Logger\Logger;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
 use Jtl\Connector\Core\Model\ConnectorIdentification;
@@ -32,6 +31,7 @@ use Jtl\Connector\Core\Utilities\Str;
 use Psr\Log\InvalidArgumentException;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 /**
  * Base Config Controller
@@ -72,7 +72,7 @@ class ConnectorController implements LoggerAwareInterface
         $this->sessionHandler = $sessionHandler;
         $this->tokenValidator = $tokenValidator;
         $this->container      = $container;
-        $this->logger         = new Logger($container);
+        $this->logger         = new NullLogger();
     }
 
 
@@ -142,7 +142,7 @@ class ConnectorController implements LoggerAwareInterface
     {
         foreach ($ack->getIdentities() as $modelName => $identities) {
             $normalizedName = Str::toPascalCase($modelName);
-            if (Model::isModel($normalizedName)) {
+            if (!Model::isModel($normalizedName)) {
                 $this->logger->warning(
                     'ACK: Unknown core entity ({name})! Skipping related ack\'s...',
                     ['name' => $normalizedName]

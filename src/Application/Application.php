@@ -222,7 +222,8 @@ class Application
             (
             new LoggerService(
                 Validate::string($this->config->get(ConfigSchema::LOG_DIR)),
-                $logLevel
+                $logLevel,
+                $this->container
             )
             )->setFormat(Validate::string($this->config->get(ConfigSchema::LOG_FORMAT)));
 
@@ -237,7 +238,6 @@ class Application
             )->parameter('service', $this->loggerService)
         );
 
-        $this->container->set(Warnings::WARNINGS, new Warnings());
         $this->serializer   = SerializerBuilder::create($serializerCacheDir)->build();
         $this->httpRequest  = HttpRequest::createFromGlobals();
         $this->httpResponse = new HttpResponse($this->eventDispatcher, $this->serializer);
@@ -364,12 +364,10 @@ class Application
 
             $responsePacket = $this->execute($connector, $requestPacket, $method);
             /** @var Warnings $warnings */
-            $warnings = $this->container->get(Warnings::WARNINGS);
-            if ($warnings->hasSpecificWarningType(Warnings::TYPE_SEND)) {
-                $sendableWarnings = $warnings->getWarningsByType(Warnings::TYPE_SEND);
-                if (!\is_null($sendableWarnings)) {
-                    $responsePacket->addWarnings(...$sendableWarnings);
-                }
+            $warnings = $this->container->get(Warnings::class);
+            // Only check for Type Default because we don't differentiate yet
+            if ($warnings->getWarningsByType(Warnings::TYPE_DEFAULT) !== null) {
+                $responsePacket->addWarnings(...$warnings->getWarningsByType(Warnings::TYPE_DEFAULT));
             }
             \session_write_close();
         } catch (Throwable $ex) {

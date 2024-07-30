@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Jtl\Connector\Core\Test\Logger;
 
 use Composer\InstalledVersions;
+use DI\Container;
 use Jtl\Connector\Core\Exception\LoggerException;
 use Jtl\Connector\Core\Logger\LoggerService;
 use Jtl\Connector\Core\Test\TestCase;
@@ -225,7 +226,8 @@ class LoggerServiceTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        $container     = $this->createMock(Container::class);
         $this->logDir  = \sprintf('%s/var/log', $this->connectorDir);
-        $this->factory = new LoggerService($this->logDir, LogLevel::DEBUG);
+        $this->factory = new LoggerService($this->logDir, LogLevel::DEBUG, $container);
     }
 }

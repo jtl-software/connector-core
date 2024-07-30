@@ -154,9 +154,9 @@ class ConnectorTest extends TestCase
             $container        = $this->createMock(Container::class);
             $warningsInstance = new Warnings();
             $container->method('get')
-                ->with(Warnings::WARNINGS)
+                ->with(Warnings::class)
                 ->willReturn($warningsInstance);
-            $container->set(Warnings::WARNINGS, $warningsInstance);
+            $container->set(Warnings::class, $warningsInstance);
         }
 
         return new ConnectorController(

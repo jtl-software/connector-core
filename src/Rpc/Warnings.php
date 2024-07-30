@@ -11,8 +11,6 @@ class Warnings
         TYPE_SEND    = 'send',
         TYPE_DEFAULT = 'default';
 
-    public const WARNINGS = 'warnings';
-
     /** @var array<Warning>|null */
     protected ?array $warnings = null;
 

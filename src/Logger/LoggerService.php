@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Jtl\Connector\Core\Logger;
 
 use Composer\InstalledVersions;
+use DI\Container;
 use Jtl\Connector\Core\Exception\LoggerException;
 use Jtl\Connector\Core\Logger\Handler\ChunkedHandler;
 use Jtl\Connector\Core\Logger\Processor\RequestProcessor;
+use Jtl\Connector\Core\Logger\Processor\WarningProcessor;
 use Monolog\Formatter\FormatterInterface;
 use Monolog\Handler\AbstractHandler;
 use Monolog\Handler\FilterHandler;
@@ -58,13 +60,14 @@ class LoggerService
      *
      * @param string     $logDir
      * @param int|string $logLevel
+     * @param Container  $container
      * @param int        $maxFiles
      *
      * @throws InvalidArgumentException
      * @throws RuntimeException
      * @throws UnexpectedValueException|\InvalidArgumentException
      */
-    public function __construct(string $logDir, int|string $logLevel, int $maxFiles = 2)
+    public function __construct(string $logDir, int|string $logLevel, Container $container, int $maxFiles = 2)
     {
         $this->logDir   = $logDir;
         $this->logLevel = $logLevel;
@@ -72,7 +75,8 @@ class LoggerService
         $this
             ->pushProcessor(new PsrLogMessageProcessor())
             ->pushProcessor(new MemoryPeakUsageProcessor())
-            ->pushProcessor(new RequestProcessor());
+            ->pushProcessor(new RequestProcessor())
+            ->pushProcessor(new WarningProcessor($container));
 
         $fileName              = \sprintf('%s/combined.log', $this->logDir);
         $this->combinedHandler = new RotatingFileHandler($fileName, $this->maxFiles, MonoLogger::DEBUG);
