@@ -31,11 +31,11 @@ class WarningProcessor implements ProcessorInterface
      */
     public function __invoke(array|LogRecord $record): array|LogRecord
     {
-        if (isset($record['context'][self::SEND_TO_WAWI]) && $record['context'][self::SEND_TO_WAWI] === false) {
-            return $record;
+        if (isset($record['context'][self::SEND_TO_WAWI]) &&
+            (bool)$record['context'][self::SEND_TO_WAWI]) {
+            $this->warnings->addWarning($record['message']);
         }
 
-        $this->warnings->addWarning($record['message']);
         return $record;
     }
 }

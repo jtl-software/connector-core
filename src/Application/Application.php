@@ -218,12 +218,14 @@ class Application
         $this->container->set(__CLASS__, $this);
         $this->eventDispatcher = new EventDispatcher();
         $this->fileSystem      = new Filesystem();
+        /** @var Warnings $warnings */
+        $warnings = $this->container->get(Warnings::class);
         $this->loggerService   =
             (
             new LoggerService(
                 Validate::string($this->config->get(ConfigSchema::LOG_DIR)),
                 $logLevel,
-                $this->container->get(Warnings::class)
+                $warnings
             )
             )->setFormat(Validate::string($this->config->get(ConfigSchema::LOG_FORMAT)));
 
@@ -947,8 +949,7 @@ class Application
                     $checksumLinker,
                     $identityLinker,
                     $sessionHandlerInterface,
-                    $tokenValidatorInterface,
-                    $this->container
+                    $tokenValidatorInterface
                 );
 
                 $controller->setLogger($this->loggerService->get(LoggerService::CHANNEL_GLOBAL));
