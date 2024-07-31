@@ -31,7 +31,7 @@ class ResponsePacket extends Packet
      */
     protected ?Error $error = null;
 
-    /** @var Warning[] $warnings */
+    /** @var array<int, string> $warnings */
     protected array $warnings = [];
 
     /**
@@ -62,9 +62,11 @@ class ResponsePacket extends Packet
             $error->validate();
         }
 
-        if (!empty($warnings = $this->getWarnings())) {
-            foreach ($warnings as $warning) {
-                $warning->validate();
+        if (!empty($this->warnings)) {
+            foreach ($this->warnings as $warning) {
+                if (!\is_string($warning)) {
+                    $isValid = false;
+                }
             }
         }
 
@@ -118,7 +120,7 @@ class ResponsePacket extends Packet
     }
 
     /**
-     * @return array<Warning>
+     * @return array<string>
      */
     public function getWarnings(): array
     {
@@ -126,11 +128,11 @@ class ResponsePacket extends Packet
     }
 
     /**
-     * @param Warning ...$warnings
+     * @param string ...$warnings
      *
      * @return $this
      */
-    public function addWarnings(Warning ...$warnings): self
+    public function addWarnings(string ...$warnings): self
     {
         foreach ($warnings as $warning) {
             $this->warnings[] = $warning;

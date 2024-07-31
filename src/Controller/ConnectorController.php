@@ -46,7 +46,6 @@ class ConnectorController implements LoggerAwareInterface
     protected LoggerInterface          $logger;
     protected \SessionHandlerInterface $sessionHandler;
     protected TokenValidatorInterface  $tokenValidator;
-    protected Container                $container;
 
     /**
      * ConnectorController constructor.
@@ -56,7 +55,6 @@ class ConnectorController implements LoggerAwareInterface
      * @param IdentityLinker           $linker
      * @param \SessionHandlerInterface $sessionHandler
      * @param TokenValidatorInterface  $tokenValidator
-     * @param Container                $container
      */
     public function __construct(
         string                   $featuresPath,
@@ -64,14 +62,12 @@ class ConnectorController implements LoggerAwareInterface
         IdentityLinker           $linker,
         \SessionHandlerInterface $sessionHandler,
         TokenValidatorInterface  $tokenValidator,
-        Container                $container
     ) {
         $this->featuresPath   = $featuresPath;
         $this->checksumLinker = $checksumLinker;
         $this->linker         = $linker;
         $this->sessionHandler = $sessionHandler;
         $this->tokenValidator = $tokenValidator;
-        $this->container      = $container;
         $this->logger         = new NullLogger();
     }
 

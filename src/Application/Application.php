@@ -223,7 +223,7 @@ class Application
             new LoggerService(
                 Validate::string($this->config->get(ConfigSchema::LOG_DIR)),
                 $logLevel,
-                $this->container
+                $this->container->get(Warnings::class)
             )
             )->setFormat(Validate::string($this->config->get(ConfigSchema::LOG_FORMAT)));
 
@@ -365,9 +365,8 @@ class Application
             $responsePacket = $this->execute($connector, $requestPacket, $method);
             /** @var Warnings $warnings */
             $warnings = $this->container->get(Warnings::class);
-            // Only check for Type Default because we don't differentiate yet
-            if ($warnings->getWarningsByType(Warnings::TYPE_DEFAULT) !== null) {
-                $responsePacket->addWarnings(...$warnings->getWarningsByType(Warnings::TYPE_DEFAULT));
+            if ($warnings->hasWarnings()) {
+                $responsePacket->addWarnings(...$warnings->getWarnings());
             }
             \session_write_close();
         } catch (Throwable $ex) {

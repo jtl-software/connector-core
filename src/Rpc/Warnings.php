@@ -6,20 +6,15 @@ namespace Jtl\Connector\Core\Rpc;
 
 class Warnings
 {
-    public const
-        TYPE_LOG     = 'log',
-        TYPE_SEND    = 'send',
-        TYPE_DEFAULT = 'default';
-
-    /** @var array<Warning>|null */
-    protected ?array $warnings = null;
+    /** @var array<int, string> */
+    protected array $warnings = [];
 
     /**
      * @return bool
      */
     public function hasWarnings(): bool
     {
-        if ($this->warnings === null || \count($this->warnings) === 0) {
+        if (\count($this->warnings) === 0) {
             return false;
         }
 
@@ -27,70 +22,20 @@ class Warnings
     }
 
     /**
-     * @param string $type
-     * @param bool   $includeDefault
-     * @return bool
-     */
-    public function hasSpecificWarningType(string $type, bool $includeDefault = true): bool
-    {
-
-        if (!$this->hasWarnings()) {
-            return false;
-        }
-
-        $return = false;
-        /** @var Warning[] $warnings */
-        $warnings = $this->warnings;
-        foreach ($warnings as $warning) {
-            if ($warning->getType() === $type) {
-                $return = true;
-            }
-        }
-
-        if ($return === false && $includeDefault === true) {
-            foreach ($warnings as $warning) {
-                if ($warning->getType() === self::TYPE_DEFAULT) {
-                    $return = true;
-                }
-            }
-        }
-
-        return $return;
-    }
-
-    /**
-     * @param Warning $warning
+     * @param string $message
      * @return $this
      */
-    public function addWarning(Warning $warning): self
+    public function addWarning(string $message): self
     {
-        $this->warnings[] = $warning;
+        $this->warnings[] = $message;
         return $this;
     }
 
     /**
-     * @param string $type
-     * @param bool   $includeDefault
-     * @return array<Warning>|null
+     * @return array<int, string>
      */
-    public function getWarningsByType(string $type, bool $includeDefault = true): ?array
+    public function getWarnings(): array
     {
-        $warnings = [];
-        if (!$this->hasWarnings()) {
-            return null;
-        }
-
-        if (!\is_null($this->warnings)) {
-            foreach ($this->warnings as $warning) {
-                if (
-                    $warning->getType() === $type
-                    || ($includeDefault === true && $warning->getType() === self::TYPE_DEFAULT)
-                ) {
-                    $warnings[] = $warning;
-                }
-            }
-        }
-
-        return empty($warnings) ? null : $warnings;
+        return $this->warnings;
     }
 }

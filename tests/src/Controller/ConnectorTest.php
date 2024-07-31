@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Test\Controller;
 
-use DI\Container;
 use InvalidArgumentException;
 use Jawira\CaseConverter\CaseConverterException;
 use Jtl\Connector\Core\Application\Application;
@@ -20,7 +19,6 @@ use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
 use Jtl\Connector\Core\Model\Features;
 use Jtl\Connector\Core\Model\Session;
-use Jtl\Connector\Core\Rpc\Warnings;
 use Jtl\Connector\Core\Test\TestCase;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\ExpectationFailedException;
@@ -111,7 +109,6 @@ class ConnectorTest extends TestCase
      * @param ChecksumLinker|null          $checksumLinker
      * @param SessionHandlerInterface|null $sessionHandler
      * @param TokenValidatorInterface|null $tokenValidator
-     * @param Container|null               $container
      * @param string                       $featuresPath
      *
      * @return ConnectorController
@@ -131,7 +128,6 @@ class ConnectorTest extends TestCase
         ?ChecksumLinker           $checksumLinker = null,
         ?\SessionHandlerInterface $sessionHandler = null,
         ?TokenValidatorInterface  $tokenValidator = null,
-        ?Container                $container = null,
         string                   $featuresPath = ''
     ): ConnectorController {
         if (\is_null($linker)) {
@@ -150,22 +146,12 @@ class ConnectorTest extends TestCase
             $tokenValidator = $this->createMock(TokenValidatorInterface::class);
         }
 
-        if (\is_null($container)) {
-            $container        = $this->createMock(Container::class);
-            $warningsInstance = new Warnings();
-            $container->method('get')
-                ->with(Warnings::class)
-                ->willReturn($warningsInstance);
-            $container->set(Warnings::class, $warningsInstance);
-        }
-
         return new ConnectorController(
             $featuresPath,
             $checksumLinker,
             $linker,
             $sessionHandler,
-            $tokenValidator,
-            $container
+            $tokenValidator
         );
     }
 
