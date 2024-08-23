@@ -219,8 +219,8 @@ class Application
         $this->eventDispatcher = new EventDispatcher();
         $this->fileSystem      = new Filesystem();
         /** @var Warnings $warnings */
-        $warnings = $this->container->get(Warnings::class);
-        $this->loggerService   =
+        $warnings            = $this->container->get(Warnings::class);
+        $this->loggerService =
             (
             new LoggerService(
                 Validate::string($this->config->get(ConfigSchema::LOG_DIR)),

@@ -13,8 +13,11 @@ class WarningProcessor implements ProcessorInterface
     public const SEND_TO_WAWI = 'sendToWawi';
 
     private Warnings $warnings;
+
     /**
      * WarningProcessor constructor.
+     *
+     * @param Warnings $warnings
      */
     public function __construct(Warnings $warnings)
     {
@@ -24,15 +27,19 @@ class WarningProcessor implements ProcessorInterface
 
     /**
      * multiple param and return types are needed because some connectors use an older version of monolog
+     *
      * @template T of array{message:string,context:array<mixed>}|LogRecord
-     * @param T $record
+     * @param array|LogRecord $record
+     * @phpstan-param T $record
      *
      * @return T
      */
     public function __invoke(array|LogRecord $record): array|LogRecord
     {
-        if (isset($record['context'][self::SEND_TO_WAWI]) &&
-            (bool)$record['context'][self::SEND_TO_WAWI]) {
+        if (
+            isset($record['context'][self::SEND_TO_WAWI]) &&
+            (bool)$record['context'][self::SEND_TO_WAWI]
+        ) {
             $this->warnings->addWarning($record['message']);
         }
 
