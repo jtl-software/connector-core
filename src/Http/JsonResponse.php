@@ -38,7 +38,7 @@ class JsonResponse extends SymfonyJsonResponse implements LoggerAwareInterface
      * @param Serializer                          $serializer
      * @param mixed|null                          $data
      * @param int                                 $status
-     * @param array<string, null|string|string[]> $headers
+     * @param array<string, string|string[]|null> $headers
      * @param bool                                $json
      *
      * @throws InvalidArgumentException
@@ -47,7 +47,7 @@ class JsonResponse extends SymfonyJsonResponse implements LoggerAwareInterface
     public function __construct(
         EventDispatcher $eventDispatcher,
         Serializer      $serializer,
-        $data = null,
+        mixed           $data = null,
         int             $status = 200,
         array           $headers = [],
         bool            $json = false
@@ -90,7 +90,7 @@ class JsonResponse extends SymfonyJsonResponse implements LoggerAwareInterface
     /**
      * @param LoggerInterface $logger
      *
-     * @retrun void
+     * @return void
      */
     public function setLogger(LoggerInterface $logger): void
     {
