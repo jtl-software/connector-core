@@ -329,7 +329,7 @@ class SessionHandlerTest extends TestCase
      * @throws \PDOException
      * @throws RandomException
      * @throws \RuntimeException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function testGc(): void
     {
