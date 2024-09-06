@@ -6,19 +6,21 @@ namespace Jtl\Connector\Core\Connector;
 
 use DI\Container;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
+use Jtl\Connector\Core\Config\CoreConfigInterface;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Jtl\Connector\Core\Model\Features;
-use Noodlehaus\ConfigInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 interface ConnectorInterface
 {
     /**
-     * @param ConfigInterface $config
-     * @param Container       $container
-     * @param EventDispatcher $dispatcher
+     * @param CoreConfigInterface $config
+     * @param Container           $container
+     * @param EventDispatcher     $dispatcher
+     *
+     * @return void
      */
-    public function initialize(ConfigInterface $config, Container $container, EventDispatcher $dispatcher): void;
+    public function initialize(CoreConfigInterface $config, Container $container, EventDispatcher $dispatcher): void;
 
     /**
      * @return PrimaryKeyMapperInterface
@@ -50,5 +52,8 @@ interface ConnectorInterface
      */
     public function getPlatformName(): string;
 
+    /**
+     * @return Features
+     */
     public function getDisabledFeatures(): Features;
 }

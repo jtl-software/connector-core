@@ -11,7 +11,6 @@ use Jtl\Connector\Core\Exception\RpcException;
  * Rpc Response Packet
  *
  * @access public
- * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
  */
 class ResponsePacket extends Packet
 {
@@ -20,23 +19,19 @@ class ResponsePacket extends Packet
      * This member MUST NOT exist if there was an error invoking the method.
      * The value of this member is determined by the method invoked on the
      * Server.
-     *
-     * @var mixed
      */
-    protected $result;
+    protected mixed $result;
 
     /**
      * This member is REQUIRED on error This member MUST NOT exist if there was
      * no error triggered during invocation.
      * The value for this member MUST be an Object as defined in section 5.1.
-     *
-     * @var Error|null
-     * @Serializer\Type("Jtl\Connector\Core\Rpc\Error")
      */
+    #[Serializer\Type(['value' => Error::class])]
     protected ?Error $error = null;
 
     /**
-     * @return boolean
+     * @return bool
      * @throws RpcException
      */
     public function isValid(): bool
@@ -75,7 +70,7 @@ class ResponsePacket extends Packet
     /**
      * @return mixed
      */
-    public function getResult()
+    public function getResult(): mixed
     {
         return $this->result;
     }
@@ -83,9 +78,9 @@ class ResponsePacket extends Packet
     /**
      * @param mixed $result
      *
-     * @return ResponsePacket
+     * @return $this
      */
-    public function setResult($result): ResponsePacket
+    public function setResult(mixed $result): self
     {
         $this->result = $result;
 
@@ -93,7 +88,7 @@ class ResponsePacket extends Packet
     }
 
     /**
-     * @return Error
+     * @return Error|null
      */
     public function getError(): ?Error
     {
@@ -103,9 +98,9 @@ class ResponsePacket extends Packet
     /**
      * @param Error $error
      *
-     * @return ResponsePacket
+     * @return $this
      */
-    public function setError(Error $error): ResponsePacket
+    public function setError(Error $error): self
     {
         $this->error = $error;
 

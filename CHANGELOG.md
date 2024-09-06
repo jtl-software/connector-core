@@ -1,6 +1,11 @@
 unreleased
-_____
+-----
+- CO-2544 prevent zip bomb upload during image push
 - CO-2515 add functionality for connectors to announce disabled features
+
+5.2.12
+-----
+- add provide for jtl/connector-mapping-tables and jtl/connector-dbc
 
 5.2.9
 -----

@@ -10,9 +10,7 @@ use Jtl\Connector\Dbc\Connection;
 
 class QueryBuilder extends \Doctrine\DBAL\Query\QueryBuilder
 {
-    /**
-     * @var array{empty}|array<string, array<string, mixed>>|array<string, mixed>
-     */
+    /** @var array{empty}|array<string, array<string, mixed>>|array<string, mixed> */
     protected array   $tableRestrictions = [];
     protected ?string $fromTable;
     protected ?string $fromAlias;
@@ -28,8 +26,8 @@ class QueryBuilder extends \Doctrine\DBAL\Query\QueryBuilder
     public function __construct(
         Connection $connection,
         array      $tableRestrictions = [],
-        string     $fromTable = null,
-        string     $fromAlias = null
+        ?string    $fromTable = null,
+        ?string    $fromAlias = null
     ) {
         parent::__construct($connection);
         $this->tableRestrictions = $tableRestrictions;
@@ -43,20 +41,21 @@ class QueryBuilder extends \Doctrine\DBAL\Query\QueryBuilder
      */
     public function getSQL(): string
     {
-        if (!\is_null($this->fromTable)) {
+        $fromTable = $this->fromTable;
+        if (!\is_null($fromTable)) {
             $this->resetQueryPart('from');
             switch ($this->getType()) {
                 case self::SELECT:
-                    $this->from($this->fromTable, $this->fromAlias);
+                    $this->from($fromTable, $this->fromAlias);
                     break;
                 case self::INSERT:
-                    $this->insert($this->fromTable);
+                    $this->insert($fromTable);
                     break;
                 case self::UPDATE:
-                    $this->update($this->fromTable, $this->fromAlias);
+                    $this->update($fromTable, $this->fromAlias);
                     break;
                 case self::DELETE:
-                    $this->delete($this->fromTable, $this->fromAlias);
+                    $this->delete($fromTable, $this->fromAlias);
                     break;
             }
         }
@@ -69,11 +68,14 @@ class QueryBuilder extends \Doctrine\DBAL\Query\QueryBuilder
             }
             $this->assignTableRestrictions(\is_array($table) ? $table['table'] : $table);
         }
+
         return parent::getSQL();
     }
 
     /**
      * @param string $table
+     *
+     * @return void
      */
     protected function assignTableRestrictions(string $table): void
     {
