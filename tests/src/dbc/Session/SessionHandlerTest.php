@@ -331,7 +331,7 @@ class SessionHandlerTest extends TestCase
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function testGc(): void
+    public function testGc(): void // @phpstan-ignore-line
     {
         $expiredCount = 0;
         $insertedRows = \random_int(3, 10);
