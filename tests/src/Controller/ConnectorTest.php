@@ -128,7 +128,7 @@ class ConnectorTest extends TestCase
         ?ChecksumLinker           $checksumLinker = null,
         ?\SessionHandlerInterface $sessionHandler = null,
         ?TokenValidatorInterface  $tokenValidator = null,
-        string                   $featuresPath = ''
+        string                    $featuresPath = ''
     ): ConnectorController {
         if (\is_null($linker)) {
             $linker = $this->createMock(IdentityLinker::class);
@@ -146,7 +146,14 @@ class ConnectorTest extends TestCase
             $tokenValidator = $this->createMock(TokenValidatorInterface::class);
         }
 
-        return new ConnectorController($featuresPath, $checksumLinker, $linker, $sessionHandler, $tokenValidator);
+        return new ConnectorController(
+            $featuresPath,
+            $checksumLinker,
+            $linker,
+            $sessionHandler,
+            $tokenValidator,
+            new Features()
+        );
     }
 
     /**
