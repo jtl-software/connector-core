@@ -88,6 +88,7 @@ use Jtl\Connector\Core\Subscriber\FeaturesSubscriber;
 use Jtl\Connector\Core\Subscriber\RequestParamsTransformSubscriber;
 use Jtl\Connector\Core\Utilities\Validator\Validate;
 use Monolog\ErrorHandler as MonologErrorHandler;
+use Noodlehaus\ConfigInterface;
 use Noodlehaus\Exception\EmptyDirectoryException;
 use Psr\Container\ContainerInterface;
 use Psr\Log\InvalidArgumentException;
@@ -110,7 +111,7 @@ class Application
     public const PROTOCOL_VERSION = 7;
     public const MIN_PHP_VERSION  = '7.4';
     /** @var array<string, string> */
-    protected static array    $mimeTypeToExtensionMappings = [
+    protected static array        $mimeTypeToExtensionMappings = [
         'image/bmp'                => 'bmp',
         'image/x-bmp'              => 'bmp',
         'image/x-bitmap'           => 'bmp',
@@ -176,7 +177,7 @@ class Application
      */
     public function __construct(
         string               $connectorDir,
-        ?CoreConfigInterface $config       = null,
+        ?CoreConfigInterface $config = null,
         ?ConfigSchema        $configSchema = null
     ) {
         if (!\is_dir($connectorDir)) {
@@ -519,20 +520,20 @@ class Application
     }
 
     /**
-     * @param CoreConfigInterface $config
-     * @param Container           $container
-     * @param EventDispatcher     $eventDispatcher
-     * @param string              $pluginsDir
+     * @param ConfigInterface $config
+     * @param Container       $container
+     * @param EventDispatcher $eventDispatcher
+     * @param string          $pluginsDir
      *
      * @return void
      * @throws DirectoryNotFoundException
      * @throws \TypeError
      */
     protected function loadPlugins(
-        CoreConfigInterface $config,
-        Container           $container,
-        EventDispatcher     $eventDispatcher,
-        string              $pluginsDir
+        ConfigInterface $config,
+        Container       $container,
+        EventDispatcher $eventDispatcher,
+        string          $pluginsDir
     ): void {
         $loader = new ClassLoader();
         $loader->add('', $pluginsDir);
@@ -612,8 +613,10 @@ class Application
         $eventName = null;
         if (Action::isCoreAction($request->getAction())) {
             $eventName = Event::createCoreEventName($request->getController(), $request->getAction(), Event::AFTER);
-        } elseif (Action::isAction($request->getAction())) {
-            $eventName = Event::createEventName($request->getController(), $request->getAction(), Event::AFTER);
+        } else {
+            if (Action::isAction($request->getAction())) {
+                $eventName = Event::createEventName($request->getController(), $request->getAction(), Event::AFTER);
+            }
         }
 
         // Identity mapping
@@ -947,13 +950,15 @@ class Application
 
                 return $controller;
             });
-        } elseif (!$this->container->has($controllerName)) {
-            $controllerClass = \sprintf("%s\\%sController", $connector->getControllerNamespace(), $controllerName);
-            if (!\class_exists($controllerClass)) {
-                throw new ApplicationException(\sprintf('Controller class %s does not exist!', $controllerClass));
-            }
+        } else {
+            if (!$this->container->has($controllerName)) {
+                $controllerClass = \sprintf("%s\\%sController", $connector->getControllerNamespace(), $controllerName);
+                if (!\class_exists($controllerClass)) {
+                    throw new ApplicationException(\sprintf('Controller class %s does not exist!', $controllerClass));
+                }
 
-            $this->container->set($controllerName, $this->container->get($controllerClass));
+                $this->container->set($controllerName, $this->container->get($controllerClass));
+            }
         }
 
         $controller = $this->container->get($controllerName);
