@@ -327,9 +327,9 @@ class SessionHandlerTest extends TestCase
      * @throws \Doctrine\DBAL\DBALException
      * @throws \Doctrine\DBAL\Driver\Exception
      * @throws \PDOException
-     * @throws RandomException
      * @throws \RuntimeException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @noinspection PhpDocMissingThrowsInspection - RandomException since 8.2, can't use in 8.1
      */
     public function testGc(): void
     {
