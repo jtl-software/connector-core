@@ -18,11 +18,11 @@ class Bootstrap implements PluginInterface
      *
      * @return mixed
      */
-    public function registerListener(
+    public function registerListener( //phpcs:ignore
         CoreConfigInterface $config,
         Container           $container,
         EventDispatcher     $dispatcher
-    ): mixed {
+    ) {
         // TODO: Implement registerListener() method.
         return null;
     }
