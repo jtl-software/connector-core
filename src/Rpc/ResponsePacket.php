@@ -19,8 +19,11 @@ class ResponsePacket extends Packet
      * This member MUST NOT exist if there was an error invoking the method.
      * The value of this member is determined by the method invoked on the
      * Server.
+     *
+     * @noinspection PhpMissingFieldTypeInspection not set because it breaks wawi auth calls
+     * @var mixed
      */
-    protected mixed $result;
+    protected $result; // phpcs:ignore
 
     /**
      * This member is REQUIRED on error This member MUST NOT exist if there was
