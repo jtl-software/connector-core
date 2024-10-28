@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Controller;
 
+use DI\Container;
 use Jawira\CaseConverter\CaseConverterException;
 use Jtl\Connector\Core\Application\Application;
 use Jtl\Connector\Core\Authentication\TokenValidatorInterface;
@@ -17,6 +18,7 @@ use Jtl\Connector\Core\Exception\JsonException as CoreJsonException;
 use Jtl\Connector\Core\Exception\MissingRequirementException;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Linker\IdentityLinker;
+use Jtl\Connector\Core\Logger\Processor\WarningProcessor;
 use Jtl\Connector\Core\Model\Ack;
 use Jtl\Connector\Core\Model\Authentication;
 use Jtl\Connector\Core\Model\ConnectorIdentification;
@@ -24,6 +26,7 @@ use Jtl\Connector\Core\Model\ConnectorServerInfo;
 use Jtl\Connector\Core\Model\Features;
 use Jtl\Connector\Core\Model\Identities;
 use Jtl\Connector\Core\Model\Session;
+use Jtl\Connector\Core\Rpc\Warnings;
 use Jtl\Connector\Core\Serializer\Json;
 use Jtl\Connector\Core\System\Check;
 use Jtl\Connector\Core\Utilities\Str;
@@ -60,14 +63,14 @@ class ConnectorController implements LoggerAwareInterface
         ChecksumLinker           $checksumLinker,
         IdentityLinker           $linker,
         \SessionHandlerInterface $sessionHandler,
-        TokenValidatorInterface  $tokenValidator
+        TokenValidatorInterface  $tokenValidator,
     ) {
         $this->featuresPath   = $featuresPath;
         $this->checksumLinker = $checksumLinker;
         $this->linker         = $linker;
-        $this->logger         = new NullLogger();
         $this->sessionHandler = $sessionHandler;
         $this->tokenValidator = $tokenValidator;
+        $this->logger         = new NullLogger();
     }
 
 
@@ -140,7 +143,7 @@ class ConnectorController implements LoggerAwareInterface
             if (!Model::isModel($normalizedName)) {
                 $this->logger->warning(
                     'ACK: Unknown core entity ({name})! Skipping related ack\'s...',
-                    ['name' => $normalizedName]
+                    ['name' => $normalizedName, WarningProcessor::SEND_TO_WAWI => true]
                 );
                 continue;
             }
@@ -155,9 +158,10 @@ class ConnectorController implements LoggerAwareInterface
         foreach ($ack->getChecksums() as $checksum) {
             if (($checksum instanceof ChecksumInterface) && !$this->checksumLinker->save($checksum)) {
                 $context = [
-                    'endpoint' => $checksum->getForeignKey()->getEndpoint(),
-                    'host'     => $checksum->getForeignKey()->getHost(),
-                    'type'     => $checksum->getType(),
+                    'endpoint'                      => $checksum->getForeignKey()->getEndpoint(),
+                    'host'                          => $checksum->getForeignKey()->getHost(),
+                    'type'                          => $checksum->getType(),
+                    WarningProcessor::SEND_TO_WAWI  => true
                 ];
 
                 $this->logger->warning(

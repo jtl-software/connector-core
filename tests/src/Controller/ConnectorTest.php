@@ -146,7 +146,13 @@ class ConnectorTest extends TestCase
             $tokenValidator = $this->createMock(TokenValidatorInterface::class);
         }
 
-        return new ConnectorController($featuresPath, $checksumLinker, $linker, $sessionHandler, $tokenValidator);
+        return new ConnectorController(
+            $featuresPath,
+            $checksumLinker,
+            $linker,
+            $sessionHandler,
+            $tokenValidator
+        );
     }
 
     /**

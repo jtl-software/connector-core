@@ -81,6 +81,7 @@ use Jtl\Connector\Core\Rpc\Error;
 use Jtl\Connector\Core\Rpc\Method;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
+use Jtl\Connector\Core\Rpc\Warnings;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Session\SessionHandlerInterface;
 use Jtl\Connector\Core\Session\SqliteSessionHandler;
@@ -217,11 +218,14 @@ class Application
         $this->container->set(__CLASS__, $this);
         $this->eventDispatcher = new EventDispatcher();
         $this->fileSystem      = new Filesystem();
-        $this->loggerService   =
+        /** @var Warnings $warnings */
+        $warnings            = $this->container->get(Warnings::class);
+        $this->loggerService =
             (
             new LoggerService(
                 Validate::string($this->config->get(ConfigSchema::LOG_DIR)),
-                $logLevel
+                $logLevel,
+                $warnings
             )
             )->setFormat(Validate::string($this->config->get(ConfigSchema::LOG_FORMAT)));
 
@@ -361,6 +365,11 @@ class Application
             $requestPacket->setParams($data);
 
             $responsePacket = $this->execute($connector, $requestPacket, $method);
+            /** @var Warnings $warnings */
+            $warnings = $this->container->get(Warnings::class);
+            if ($warnings->hasWarnings()) {
+                $responsePacket->addWarnings(...$warnings->getWarnings());
+            }
             \session_write_close();
         } catch (Throwable $ex) {
             if (\is_numeric($code = $ex->getCode())) {

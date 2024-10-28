@@ -1,6 +1,7 @@
 unreleased
 -----
 - CO-2544 prevent zip bomb upload during image push
+- CO-2177 add support for warning messages in response
 
 5.2.12
 -----

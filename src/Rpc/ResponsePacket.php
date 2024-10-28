@@ -33,6 +33,9 @@ class ResponsePacket extends Packet
     #[Serializer\Type(['value' => Error::class])]
     protected ?Error $error = null;
 
+    /** @var array<int, string> $warnings */
+    protected array $warnings = [];
+
     /**
      * @return bool
      * @throws RpcException
@@ -59,6 +62,14 @@ class ResponsePacket extends Packet
 
         if (($error = $this->getError()) !== null) {
             $error->validate();
+        }
+
+        if (!empty($this->warnings)) {
+            foreach ($this->warnings as $warning) {
+                if (!\is_string($warning)) {
+                    $isValid = false;
+                }
+            }
         }
 
         // An identifier established by the Client that MUST contain a String,
@@ -106,6 +117,28 @@ class ResponsePacket extends Packet
     public function setError(Error $error): self
     {
         $this->error = $error;
+
+        return $this;
+    }
+
+    /**
+     * @return array<string>
+     */
+    public function getWarnings(): array
+    {
+        return $this->warnings;
+    }
+
+    /**
+     * @param string ...$warnings
+     *
+     * @return $this
+     */
+    public function addWarnings(string ...$warnings): self
+    {
+        foreach ($warnings as $warning) {
+            $this->warnings[] = $warning;
+        }
 
         return $this;
     }
