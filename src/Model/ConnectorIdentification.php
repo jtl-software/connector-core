@@ -10,43 +10,33 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class ConnectorIdentification extends AbstractModel
 {
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("endpointVersion")
-     * @Serializer\Accessor(getter="getEndpointVersion",setter="setEndpointVersion")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('endpointVersion')]
+    #[Serializer\Accessor(getter: 'getEndpointVersion', setter: 'setEndpointVersion')]
     protected string $endpointVersion = '';
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("platformName")
-     * @Serializer\Accessor(getter="getPlatformName",setter="setPlatformName")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('platformName')]
+    #[Serializer\Accessor(getter: 'getPlatformName', setter: 'setPlatformName')]
     protected string $platformName = '';
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("platformVersion")
-     * @Serializer\Accessor(getter="getPlatformVersion",setter="setPlatformVersion")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('platformVersion')]
+    #[Serializer\Accessor(getter: 'getPlatformVersion', setter: 'setPlatformVersion')]
     protected string $platformVersion = '';
 
-    /**
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("protocolVersion")
-     * @Serializer\Accessor(getter="getProtocolVersion",setter="setProtocolVersion")
-     */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('protocolVersion')]
+    #[Serializer\Accessor(getter: 'getProtocolVersion', setter: 'setProtocolVersion')]
     protected int $protocolVersion = 0;
 
-    /**
-     * @Serializer\Type("Jtl\Connector\Core\Model\ConnectorServerInfo")
-     * @Serializer\SerializedName("serverInfo")
-     * @Serializer\Accessor(getter="getServerInfo",setter="setServerInfo")
-     */
+    #[Serializer\Type(ConnectorServerInfo::class)]
+    #[Serializer\SerializedName('serverInfo')]
+    #[Serializer\Accessor(getter: 'getServerInfo', setter: 'setServerInfo')]
     protected ?ConnectorServerInfo $serverInfo = null;
 
     /**

@@ -12,71 +12,55 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class ProductVariationValue extends AbstractIdentity
 {
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("ean")
-     * @Serializer\Accessor(getter="getEan",setter="setEan")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('ean')]
+    #[Serializer\Accessor(getter: 'getEan', setter: 'setEan')]
     protected string $ean = '';
 
-    /**
-     * @var double Optional variation extra weight
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("extraWeight")
-     * @Serializer\Accessor(getter="getExtraWeight",setter="setExtraWeight")
-     */
+    /** @var double Optional variation extra weight */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('extraWeight')]
+    #[Serializer\Accessor(getter: 'getExtraWeight', setter: 'setExtraWeight')]
     protected float $extraWeight = 0.0;
 
-    /**
-     * @var string Optional Stock Keeping Unit
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("sku")
-     * @Serializer\Accessor(getter="getSku",setter="setSku")
-     */
+    /** @var string Optional Stock Keeping Unit */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('sku')]
+    #[Serializer\Accessor(getter: 'getSku', setter: 'setSku')]
     protected string $sku = '';
 
-    /**
-     * @var int Optional sort number
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("sort")
-     * @Serializer\Accessor(getter="getSort",setter="setSort")
-     */
+    /** @var int Optional sort number */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('sort')]
+    #[Serializer\Accessor(getter: 'getSort', setter: 'setSort')]
     protected int $sort = 0;
 
-    /**
-     * @var double Optional stock level
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("stockLevel")
-     * @Serializer\Accessor(getter="getStockLevel",setter="setStockLevel")
-     */
+    /** @var double Optional stock level */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('stockLevel')]
+    #[Serializer\Accessor(getter: 'getStockLevel', setter: 'setStockLevel')]
     protected float $stockLevel = 0.0;
 
-    /**
-     * @var ProductVariationValueExtraCharge[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductVariationValueExtraCharge>")
-     * @Serializer\SerializedName("extraCharges")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ProductVariationValueExtraCharge[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ProductVariationValueExtraCharge>')]
+    #[Serializer\SerializedName('extraCharges')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $extraCharges = [];
 
-    /**
-     * @var ProductVariationValueI18n[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductVariationValueI18n>")
-     * @Serializer\SerializedName("i18ns")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ProductVariationValueI18n[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ProductVariationValueI18n>')]
+    #[Serializer\SerializedName('i18ns')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $i18ns = [];
 
-    /**
-     * @var ProductVariationValueInvisibility[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductVariationValueInvisibility>")
-     * @Serializer\SerializedName("invisibilities")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ProductVariationValueInvisibility[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ProductVariationValueInvisibility>')]
+    #[Serializer\SerializedName('invisibilities')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $invisibilities = [];
 
     /**

@@ -12,32 +12,25 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class CrossSellingItem extends AbstractIdentity
 {
-    /**
-     * @var Identity Reference to crossSellingGroup
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("crossSellingGroupId")
-     * @Serializer\Accessor(getter="getCrossSellingGroupId",setter="setCrossSellingGroupId")
-     */
+    /** @var Identity Reference to crossSellingGroup */
+    #[Serializer\Type(Identity::class)]
+    #[Serializer\SerializedName('crossSellingGroupId')]
+    #[Serializer\Accessor(getter: 'getCrossSellingGroupId', setter: 'setCrossSellingGroupId')]
     protected Identity $crossSellingGroupId;
 
-
-    /**
-     * @Serializer\Type("Jtl\Connector\Core\Model\CrossSellingGroup")
-     * @Serializer\SerializedName("crossSellingGroup")
-     * @Serializer\Accessor(getter="getCrossSellingGroup",setter="setCrossSellingGroup")
-     */
+    #[Serializer\Type(CrossSellingGroup::class)]
+    #[Serializer\SerializedName('crossSellingGroup')]
+    #[Serializer\Accessor(getter: 'getCrossSellingGroup', setter: 'setCrossSellingGroup')]
     protected ?CrossSellingGroup $crossSellingGroup = null;
 
-    /**
-     * @var Identity[] Referenced target product ID
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\Identity>")
-     * @Serializer\SerializedName("productIds")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var Identity[] Referenced target product ID */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\Identity>')]
+    #[Serializer\SerializedName('productIds')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $productIds = [];
 
     /**

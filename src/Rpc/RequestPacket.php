@@ -23,11 +23,10 @@ class RequestPacket extends Packet
      * (U+002E or ASCII 46)
      * are reserved for rpc-internal methods and extensions and MUST NOT be used
      * for anything else.
-     *
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("method")
-     * @Serializer\Accessor(getter="getMethod",setter="setMethod")
      */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('method')]
+    #[Serializer\Accessor(getter: 'getMethod', setter: 'setMethod')]
     protected string $method = 'undefined.undefined';
 
     /**
@@ -36,10 +35,10 @@ class RequestPacket extends Packet
      * This member MAY be omitted.
      *
      * @var mixed[]
-     * @Serializer\Type("array")
-     * @Serializer\SerializedName("params")
-     * @Serializer\Accessor(getter="getParams",setter="setParams")
      */
+    #[Serializer\Type('array')]
+    #[Serializer\SerializedName('params')]
+    #[Serializer\Accessor(getter: 'getParams', setter: 'setParams')]
     protected array $params = [];
 
     /**

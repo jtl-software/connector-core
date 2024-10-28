@@ -12,48 +12,38 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class CustomerGroup extends AbstractIdentity
 {
-    /**
-     * @var bool Optional: Show net prices default instead of gross prices
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("applyNetPrice")
-     * @Serializer\Accessor(getter="getApplyNetPrice",setter="setApplyNetPrice")
-     */
+    /** @var bool Optional: Show net prices default instead of gross prices */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('applyNetPrice')]
+    #[Serializer\Accessor(getter: 'getApplyNetPrice', setter: 'setApplyNetPrice')]
     protected bool $applyNetPrice = false;
 
-    /**
-     * @var double Optional percentual discount on all products. Negative Value means surcharge.
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("discount")
-     * @Serializer\Accessor(getter="getDiscount",setter="setDiscount")
-     */
+    /** @var double Optional percentual discount on all products. Negative Value means surcharge. */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('discount')]
+    #[Serializer\Accessor(getter: 'getDiscount', setter: 'setDiscount')]
     protected float $discount = 0.0;
 
-    /**
-     * @var bool Optional: Flag default customer group
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isDefault")
-     * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
-     */
+    /** @var bool Optional: Flag default customer group */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('isDefault')]
+    #[Serializer\Accessor(getter: 'getIsDefault', setter: 'setIsDefault')]
     protected bool $isDefault = false;
 
-    /**
-     * @var CustomerGroupAttr[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\CustomerGroupAttr>")
-     * @Serializer\SerializedName("attributes")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var CustomerGroupAttr[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\CustomerGroupAttr>')]
+    #[Serializer\SerializedName('attributes')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $attributes = [];
 
-    /**
-     * @var CustomerGroupI18n[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\CustomerGroupI18n>")
-     * @Serializer\SerializedName("i18ns")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var CustomerGroupI18n[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\CustomerGroupI18n>')]
+    #[Serializer\SerializedName('i18ns')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $i18ns = [];
 
     /**

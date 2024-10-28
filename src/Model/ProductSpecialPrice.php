@@ -12,67 +12,59 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class ProductSpecialPrice extends AbstractIdentity implements ItemsInterface
 {
-    /**
-     * @var \DateTimeInterface|null Optional: Activate special price from date
-     * @Serializer\Type("DateTimeInterface")
-     * @Serializer\SerializedName("activeFromDate")
-     * @Serializer\Accessor(getter="getActiveFromDate",setter="setActiveFromDate")
-     */
+    /** @var \DateTimeInterface|null Optional: Activate special price from date */
+    #[Serializer\Type(\DateTimeInterface::class)]
+    #[Serializer\SerializedName('activeFromDate')]
+    #[Serializer\Accessor(getter: 'getActiveFromDate', setter: 'setActiveFromDate')]
     protected ?\DateTimeInterface $activeFromDate = null;
 
-    /**
-     * @var \DateTimeInterface|null Optional: Special price active until date
-     * @Serializer\Type("DateTimeInterface")
-     * @Serializer\SerializedName("activeUntilDate")
-     * @Serializer\Accessor(getter="getActiveUntilDate",setter="setActiveUntilDate")
-     */
+    /** @var \DateTimeInterface|null Optional: Special price active until date */
+    #[Serializer\Type(\DateTimeInterface::class)]
+    #[Serializer\SerializedName('activeUntilDate')]
+    #[Serializer\Accessor(getter: 'getActiveUntilDate', setter: 'setActiveUntilDate')]
     protected ?\DateTimeInterface $activeUntilDate = null;
 
     /**
      * @var bool Optional: Consider activeFrom/activeUntil date range.
      *              If true, specialPrice will get active from activeFrom-date and will stop after activeUntil-date.
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("considerDateLimit")
-     * @Serializer\Accessor(getter="getConsiderDateLimit",setter="setConsiderDateLimit")
      */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('considerDateLimit')]
+    #[Serializer\Accessor(getter: 'getConsiderDateLimit', setter: 'setConsiderDateLimit')]
     protected bool $considerDateLimit = false;
 
     /**
      * @var bool Optional: Consider stockLimit value.
      *              If true, specialPrice will be only active until product stockLevel is greater or equal stockLimit.
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("considerStockLimit")
-     * @Serializer\Accessor(getter="getConsiderStockLimit",setter="setConsiderStockLimit")
      */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('considerStockLimit')]
+    #[Serializer\Accessor(getter: 'getConsiderStockLimit', setter: 'setConsiderStockLimit')]
     protected bool $considerStockLimit = false;
 
     /**
      * @var bool Special price is active? Default true, to activate specialPrice.
      *              Special price can still be inactivated, if date or stock Limitations do not match.
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isActive")
-     * @Serializer\Accessor(getter="getIsActive",setter="setIsActive")
      */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('isActive')]
+    #[Serializer\Accessor(getter: 'getIsActive', setter: 'setIsActive')]
     protected bool $isActive = false;
 
-    /**
-     * @var int Optional: SpecialPrice active until stock level quantity
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("stockLimit")
-     * @Serializer\Accessor(getter="getStockLimit",setter="setStockLimit")
-     */
+    /** @var int Optional: SpecialPrice active until stock level quantity */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('stockLimit')]
+    #[Serializer\Accessor(getter: 'getStockLimit', setter: 'setStockLimit')]
     protected int $stockLimit = 0;
 
-    /**
-     * @var ProductSpecialPriceItem[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\ProductSpecialPriceItem>")
-     * @Serializer\SerializedName("items")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var ProductSpecialPriceItem[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\ProductSpecialPriceItem>')]
+    #[Serializer\SerializedName('items')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $items = [];
 
     /**

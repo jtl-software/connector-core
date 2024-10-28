@@ -13,22 +13,18 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Internal
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class Identity extends AbstractModel
 {
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("endpoint")
-     * @Serializer\Accessor(getter="getEndpoint",setter="setEndpoint")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('endpoint')]
+    #[Serializer\Accessor(getter: 'getEndpoint', setter: 'setEndpoint')]
     protected string $endpoint = '';
 
-    /**
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("host")
-     * @Serializer\Accessor(getter="getHost",setter="setHost")
-     */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('host')]
+    #[Serializer\Accessor(getter: 'getHost', setter: 'setHost')]
     protected int $host = 0;
 
     /**

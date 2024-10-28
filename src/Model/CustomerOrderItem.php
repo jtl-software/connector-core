@@ -12,8 +12,8 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class CustomerOrderItem extends AbstractIdentity
 {
     public const TYPE_DISCOUNT = 'discount';
@@ -26,98 +26,74 @@ class CustomerOrderItem extends AbstractIdentity
 
     public const TYPE_COUPON = 'coupon';
 
-    /**
-     * @var Identity Optional reference to configItemId (if item is part of a configurable item)
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("configItemId")
-     * @Serializer\Accessor(getter="getConfigItemId",setter="setConfigItemId")
-     */
+    /** @var Identity Optional reference to configItemId (if item is part of a configurable item) */
+    #[Serializer\Type(Identity::class)]
+    #[Serializer\SerializedName('configItemId')]
+    #[Serializer\Accessor(getter: 'getConfigItemId', setter: 'setConfigItemId')]
     protected Identity $configItemId;
 
-    /**
-     * @var Identity Reference to product
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("productId")
-     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
-     */
+    /** @var Identity Reference to product */
+    #[Serializer\Type(Identity::class)]
+    #[Serializer\SerializedName('productId')]
+    #[Serializer\Accessor(getter: 'getProductId', setter: 'setProductId')]
     protected Identity $productId;
 
-    /**
-     * @var string Order item name
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("name")
-     * @Serializer\Accessor(getter="getName",setter="setName")
-     */
+    /** @var string Order item name */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('name')]
+    #[Serializer\Accessor(getter: 'getName', setter: 'setName')]
     protected string $name = '';
 
-    /**
-     * @var double Price (net)
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("price")
-     * @Serializer\Accessor(getter="getPrice",setter="setPrice")
-     */
+    /** @var double Price (net) */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('price')]
+    #[Serializer\Accessor(getter: 'getPrice', setter: 'setPrice')]
     protected float $price = 0.0;
 
-    /**
-     * @var double Price (gross)
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("priceGross")
-     * @Serializer\Accessor(getter="getPriceGross",setter="setPriceGross")
-     */
+    /** @var double Price (gross) */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('priceGross')]
+    #[Serializer\Accessor(getter: 'getPriceGross', setter: 'setPriceGross')]
     protected float $priceGross = 0.0;
 
-    /**
-     * @var double Quantity purchased
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("quantity")
-     * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
-     */
+    /** @var double Quantity purchased */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('quantity')]
+    #[Serializer\Accessor(getter: 'getQuantity', setter: 'setQuantity')]
     protected float $quantity = 0.0;
 
-    /**
-     * @var string Stock keeping Unit (unique item identifier)
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("sku")
-     * @Serializer\Accessor(getter="getSku",setter="setSku")
-     */
+    /** @var string Stock keeping Unit (unique item identifier) */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('sku')]
+    #[Serializer\Accessor(getter: 'getSku', setter: 'setSku')]
     protected string $sku = '';
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("type")
-     * @Serializer\Accessor(getter="getType",setter="setType")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('type')]
+    #[Serializer\Accessor(getter: 'getType', setter: 'setType')]
     protected string $type = '';
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("note")
-     * @Serializer\Accessor(getter="getNote",setter="setNote")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('note')]
+    #[Serializer\Accessor(getter: 'getNote', setter: 'setNote')]
     protected string $note = '';
 
-    /**
-     * @var string Optional unique Hashsum (if item is part of configurable item
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("unique")
-     * @Serializer\Accessor(getter="getUnique",setter="setUnique")
-     */
+    /** @var string Optional unique Hashsum (if item is part of configurable item */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('unique')]
+    #[Serializer\Accessor(getter: 'getUnique', setter: 'setUnique')]
     protected string $unique = '';
 
-    /**
-     * @var double Value added tax
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("vat")
-     * @Serializer\Accessor(getter="getVat",setter="setVat")
-     */
+    /** @var double Value added tax */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('vat')]
+    #[Serializer\Accessor(getter: 'getVat', setter: 'setVat')]
     protected float $vat = 0.0;
 
-    /**
-     * @var CustomerOrderItemVariation[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\CustomerOrderItemVariation>")
-     * @Serializer\SerializedName("variations")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var CustomerOrderItemVariation[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\CustomerOrderItemVariation>')]
+    #[Serializer\SerializedName('variations')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $variations = [];
 
     /**

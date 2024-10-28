@@ -15,24 +15,20 @@ use TypeError;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class ProductSpecialPriceItem extends AbstractModel
 {
-    /**
-     * @var Identity Reference to customerGroup
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("customerGroupId")
-     * @Serializer\Accessor(getter="getCustomerGroupId",setter="setCustomerGroupId")
-     */
+    /** @var Identity Reference to customerGroup */
+    #[Serializer\Type(Identity::class)]
+    #[Serializer\SerializedName('customerGroupId')]
+    #[Serializer\Accessor(getter: 'getCustomerGroupId', setter: 'setCustomerGroupId')]
     protected Identity $customerGroupId;
 
-    /**
-     * @var double net price value
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("priceNet")
-     * @Serializer\Accessor(getter="getPriceNet",setter="setPriceNet")
-     */
+    /** @var double net price value */
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('priceNet')]
+    #[Serializer\Accessor(getter: 'getPriceNet', setter: 'setPriceNet')]
     protected float $priceNet = 0.0;
 
     /**

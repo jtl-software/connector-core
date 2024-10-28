@@ -13,16 +13,14 @@ use Jtl\Connector\Core\Checksum\ChecksumInterface;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Internal
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class Ack extends Identities
 {
-    /**
-     * @var Checksum[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\Checksum>")
-     * @Serializer\SerializedName("checksums")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var Checksum[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\Checksum>')]
+    #[Serializer\SerializedName('checksums')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $checksums = [];
 
     /**

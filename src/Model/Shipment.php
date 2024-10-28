@@ -14,55 +14,43 @@ use Jtl\Connector\Core\Utilities\Validator\Validate;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class Shipment extends AbstractIdentity
 {
-    /**
-     * @var Identity Reference to deliveryNote
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("deliveryNoteId")
-     * @Serializer\Accessor(getter="getDeliveryNoteId",setter="setDeliveryNoteId")
-     */
+    /** @var Identity Reference to deliveryNote */
+    #[Serializer\Type(Identity::class)]
+    #[Serializer\SerializedName('deliveryNoteId')]
+    #[Serializer\Accessor(getter: 'getDeliveryNoteId', setter: 'setDeliveryNoteId')]
     protected Identity $deliveryNoteId;
 
-    /**
-     * @var string Carrier name
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("carrierName")
-     * @Serializer\Accessor(getter="getCarrierName",setter="setCarrierName")
-     */
+    /** @var string Carrier name */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('carrierName')]
+    #[Serializer\Accessor(getter: 'getCarrierName', setter: 'setCarrierName')]
     protected string $carrierName = '';
 
-    /**
-     * @var \DateTimeInterface|null Creation date
-     * @Serializer\Type("DateTimeInterface")
-     * @Serializer\SerializedName("creationDate")
-     * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
-     */
+    /** @var \DateTimeInterface|null Creation date */
+    #[Serializer\Type(\DateTimeInterface::class)]
+    #[Serializer\SerializedName('creationDate')]
+    #[Serializer\Accessor(getter: 'getCreationDate', setter: 'setCreationDate')]
     protected ?\DateTimeInterface $creationDate = null;
 
-    /**
-     * @var string Optional Identcode
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("identCode")
-     * @Serializer\Accessor(getter="getIdentCode",setter="setIdentCode")
-     */
+    /** @var string Optional Identcode */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('identCode')]
+    #[Serializer\Accessor(getter: 'getIdentCode', setter: 'setIdentCode')]
     protected string $identCode = '';
 
-    /**
-     * @var string Optional shipment note
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("note")
-     * @Serializer\Accessor(getter="getNote",setter="setNote")
-     */
+    /** @var string Optional shipment note */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('note')]
+    #[Serializer\Accessor(getter: 'getNote', setter: 'setNote')]
     protected string $note = '';
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("trackingUrl")
-     * @Serializer\Accessor(getter="getTrackingUrl",setter="setTrackingUrl")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('trackingUrl')]
+    #[Serializer\Accessor(getter: 'getTrackingUrl', setter: 'setTrackingUrl')]
     protected string $trackingUrl = '';
 
     /**

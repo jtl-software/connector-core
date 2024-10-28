@@ -43,7 +43,7 @@ class Json
      *
      * @return mixed
      * @throws \InvalidArgumentException
-     * @throws \JsonException
+     * @throws JsonException
      */
     public static function decode(string $string, bool $assoc = false): mixed
     {

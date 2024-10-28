@@ -15,40 +15,32 @@ use TypeError;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class Language extends AbstractI18n implements IdentityInterface
 {
-    /**
-     * @var Identity Unique language id
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("id")
-     * @Serializer\Accessor(getter="getId",setter="setId")
-     */
+    /** @var Identity Unique language id */
+    #[Serializer\Type(Identity::class)]
+    #[Serializer\SerializedName('id')]
+    #[Serializer\Accessor(getter: 'getId', setter: 'setId')]
     protected Identity $id;
 
-    /**
-     * @var bool Flag default language for frontend. Exact 1 language must be marked as default.
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isDefault")
-     * @Serializer\Accessor(getter="getIsDefault",setter="setIsDefault")
-     */
+    /** @var bool Flag default language for frontend. Exact 1 language must be marked as default. */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('isDefault')]
+    #[Serializer\Accessor(getter: 'getIsDefault', setter: 'setIsDefault')]
     protected bool $isDefault = false;
 
-    /**
-     * @var string English term
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("nameEnglish")
-     * @Serializer\Accessor(getter="getNameEnglish",setter="setNameEnglish")
-     */
+    /** @var string English term */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('nameEnglish')]
+    #[Serializer\Accessor(getter: 'getNameEnglish', setter: 'setNameEnglish')]
     protected string $nameEnglish = '';
 
-    /**
-     * @var string German term
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("nameGerman")
-     * @Serializer\Accessor(getter="getNameGerman",setter="setNameGerman")
-     */
+    /** @var string German term */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('nameGerman')]
+    #[Serializer\Accessor(getter: 'getNameGerman', setter: 'setNameGerman')]
     protected string $nameGerman = '';
 
     /**

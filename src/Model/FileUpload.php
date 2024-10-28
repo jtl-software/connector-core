@@ -12,38 +12,30 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class FileUpload extends AbstractIdentity
 {
-    /**
-     * @var Identity Reference to product
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("productId")
-     * @Serializer\Accessor(getter="getProductId",setter="setProductId")
-     */
+    /** @var Identity Reference to product */
+    #[Serializer\Type(Identity::class)]
+    #[Serializer\SerializedName('productId')]
+    #[Serializer\Accessor(getter: 'getProductId', setter: 'setProductId')]
     protected Identity $productId;
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("fileType")
-     * @Serializer\Accessor(getter="getFileType",setter="setFileType")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('fileType')]
+    #[Serializer\Accessor(getter: 'getFileType', setter: 'setFileType')]
     protected string $fileType = '';
 
-    /**
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("isRequired")
-     * @Serializer\Accessor(getter="getIsRequired",setter="setIsRequired")
-     */
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('isRequired')]
+    #[Serializer\Accessor(getter: 'getIsRequired', setter: 'setIsRequired')]
     protected bool $isRequired = false;
 
-    /**
-     * @var FileUploadI18n[]
-     * @Serializer\Type("array<Jtl\Connector\Core\Model\FileUploadI18n>")
-     * @Serializer\SerializedName("i18ns")
-     * @Serializer\AccessType("reflection")
-     */
+    /** @var FileUploadI18n[] */
+    #[Serializer\Type('array<Jtl\Connector\Core\Model\FileUploadI18n>')]
+    #[Serializer\SerializedName('i18ns')]
+    #[Serializer\AccessType(['value' => 'reflection'])]
     protected array $i18ns = [];
 
     /**

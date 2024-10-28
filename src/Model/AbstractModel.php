@@ -8,10 +8,8 @@ use JMS\Serializer\Annotation as Serializer;
 
 abstract class AbstractModel
 {
-    /**
-     * @var string[]
-     * @Serializer\Exclude
-     */
+    /** @var string[] */
+    #[Serializer\Exclude]
     private array $identificationStrings = [];
 
     /**

@@ -10,37 +10,29 @@ use JMS\Serializer\Annotation as Serializer;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class DeliveryNoteItemInfo extends AbstractModel
 {
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("batch")
-     * @Serializer\Accessor(getter="getBatch",setter="setBatch")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('batch')]
+    #[Serializer\Accessor(getter: 'getBatch', setter: 'setBatch')]
     protected string $batch = '';
 
-    /**
-     * @Serializer\Type("DateTimeInterface")
-     * @Serializer\SerializedName("bestBefore")
-     * @Serializer\Accessor(getter="getBestBefore",setter="setBestBefore")
-     */
+    #[Serializer\Type(\DateTimeInterface::class)]
+    #[Serializer\SerializedName('bestBefore')]
+    #[Serializer\Accessor(getter: 'getBestBefore', setter: 'setBestBefore')]
     protected ?\DateTimeInterface $bestBefore = null;
 
-    /**
-     * @var double
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("quantity")
-     * @Serializer\Accessor(getter="getQuantity",setter="setQuantity")
-     */
+
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('quantity')]
+    #[Serializer\Accessor(getter: 'getQuantity', setter: 'setQuantity')]
     protected float $quantity = 0.0;
 
-    /**
-     * @Serializer\Type("integer")
-     * @Serializer\SerializedName("warehouseId")
-     * @Serializer\Accessor(getter="getWarehouseId",setter="setWarehouseId")
-     */
+    #[Serializer\Type('integer')]
+    #[Serializer\SerializedName('warehouseId')]
+    #[Serializer\Accessor(getter: 'getWarehouseId', setter: 'setWarehouseId')]
     protected int $warehouseId = 0;
 
     /**

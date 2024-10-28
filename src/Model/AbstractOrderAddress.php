@@ -8,132 +8,100 @@ use JMS\Serializer\Annotation as Serializer;
 
 abstract class AbstractOrderAddress extends AbstractIdentity
 {
-    /**
-     * @var string City
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("city")
-     * @Serializer\Accessor(getter="getCity",setter="setCity")
-     */
+    /** @var string City */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('city')]
+    #[Serializer\Accessor(getter: 'getCity', setter: 'setCity')]
     protected string $city = '';
 
-    /**
-     * @var string Company name
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("company")
-     * @Serializer\Accessor(getter="getCompany",setter="setCompany")
-     */
+    /** @var string Company name */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('company')]
+    #[Serializer\Accessor(getter: 'getCompany', setter: 'setCompany')]
     protected string $company = '';
 
-    /**
-     * @var string Country ISO 3166-2 (2 letter Uppercase)
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("countryIso")
-     * @Serializer\Accessor(getter="getCountryIso",setter="setCountryIso")
-     */
+    /** @var string Country ISO 3166-2 (2 letter Uppercase) */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('countryIso')]
+    #[Serializer\Accessor(getter: 'getCountryIso', setter: 'setCountryIso')]
     protected string $countryIso = '';
 
-    /**
-     * @var string Delivery instruction e.g. "c/o John Doe"
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("deliveryInstruction")
-     * @Serializer\Accessor(getter="getDeliveryInstruction",setter="setDeliveryInstruction")
-     */
+    /** @var string Delivery instruction e.g. "c/o John Doe" */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('deliveryInstruction')]
+    #[Serializer\Accessor(getter: 'getDeliveryInstruction', setter: 'setDeliveryInstruction')]
     protected string $deliveryInstruction = '';
 
-    /**
-     * @var string E-Mail address
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("eMail")
-     * @Serializer\Accessor(getter="getEMail",setter="setEMail")
-     */
+    /** @var string E-Mail address */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('eMail')]
+    #[Serializer\Accessor(getter: 'getEMail', setter: 'setEMail')]
     protected string $eMail = '';
 
-    /**
-     * @var string Extra address line e.g. 'Apartment 2.5'
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("extraAddressLine")
-     * @Serializer\Accessor(getter="getExtraAddressLine",setter="setExtraAddressLine")
-     */
+    /** @var string Extra address line e.g. 'Apartment 2.5' */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('extraAddressLine')]
+    #[Serializer\Accessor(getter: 'getExtraAddressLine', setter: 'setExtraAddressLine')]
     protected string $extraAddressLine = '';
 
-    /**
-     * @var string Fax number
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("fax")
-     * @Serializer\Accessor(getter="getFax",setter="setFax")
-     */
+    /** @var string Fax number */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('fax')]
+    #[Serializer\Accessor(getter: 'getFax', setter: 'setFax')]
     protected string $fax = '';
 
-    /**
-     * @var string First name
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("firstName")
-     * @Serializer\Accessor(getter="getFirstName",setter="setFirstName")
-     */
+    /** @var string First name */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('firstName')]
+    #[Serializer\Accessor(getter: 'getFirstName', setter: 'setFirstName')]
     protected string $firstName = '';
 
-    /**
-     * @var string Last name
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("lastName")
-     * @Serializer\Accessor(getter="getLastName",setter="setLastName")
-     */
+    /** @var string Last name */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('lastName')]
+    #[Serializer\Accessor(getter: 'getLastName', setter: 'setLastName')]
     protected string $lastName = '';
 
-    /**
-     * @var string Mobile phone number
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("mobile")
-     * @Serializer\Accessor(getter="getMobile",setter="setMobile")
-     */
+    /** @var string Mobile phone number */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('mobile')]
+    #[Serializer\Accessor(getter: 'getMobile', setter: 'setMobile')]
     protected string $mobile = '';
 
-    /**
-     * @var string Phone number
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("phone")
-     * @Serializer\Accessor(getter="getPhone",setter="setPhone")
-     */
+    /** @var string Phone number */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('phone')]
+    #[Serializer\Accessor(getter: 'getPhone', setter: 'setPhone')]
     protected string $phone = '';
 
-    /**
-     * @var string Salutation e.g. 'Mr.'
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("salutation")
-     * @Serializer\Accessor(getter="getSalutation",setter="setSalutation")
-     */
+    /** @var string Salutation e.g. 'Mr.' */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('salutation')]
+    #[Serializer\Accessor(getter: 'getSalutation', setter: 'setSalutation')]
     protected string $salutation = '';
 
-    /**
-     * @var string State
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("state")
-     * @Serializer\Accessor(getter="getState",setter="setState")
-     */
+    /** @var string State */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('state')]
+    #[Serializer\Accessor(getter: 'getState', setter: 'setState')]
     protected string $state = '';
 
-    /**
-     * @var string Street + streetnumber
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("street")
-     * @Serializer\Accessor(getter="getStreet",setter="setStreet")
-     */
+    /** @var string Street + streetnumber */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('street')]
+    #[Serializer\Accessor(getter: 'getStreet', setter: 'setStreet')]
     protected string $street = '';
 
-    /**
-     * @var string Title e.g. ("Prof. Dr.")
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("title")
-     * @Serializer\Accessor(getter="getTitle",setter="setTitle")
-     */
+    /** @var string Title e.g. ("Prof. Dr.") */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('title')]
+    #[Serializer\Accessor(getter: 'getTitle', setter: 'setTitle')]
     protected string $title = '';
 
-    /**
-     * @var string Zip / postal code
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("zipCode")
-     * @Serializer\Accessor(getter="getZipCode",setter="setZipCode")
-     */
+    /** @var string Zip / postal code */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('zipCode')]
+    #[Serializer\Accessor(getter: 'getZipCode', setter: 'setZipCode')]
     protected string $zipCode = '';
 
     /**

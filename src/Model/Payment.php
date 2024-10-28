@@ -13,51 +13,39 @@ use TypeError;
  * @access     public
  * @package    Jtl\Connector\Core\Model
  * @subpackage Product
- * @Serializer\AccessType("public_method")
  */
+#[Serializer\AccessType(['value' => 'public_method'])]
 class Payment extends AbstractIdentity
 {
-    /**
-     * @Serializer\Type("Jtl\Connector\Core\Model\Identity")
-     * @Serializer\SerializedName("customerOrderId")
-     * @Serializer\Accessor(getter="getCustomerOrderId",setter="setCustomerOrderId")
-     */
+    #[Serializer\Type(Identity::class)]
+    #[Serializer\SerializedName('customerOrderId')]
+    #[Serializer\Accessor(getter: 'getCustomerOrderId', setter: 'setCustomerOrderId')]
     protected Identity $customerOrderId;
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("billingInfo")
-     * @Serializer\Accessor(getter="getBillingInfo",setter="setBillingInfo")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('billingInfo')]
+    #[Serializer\Accessor(getter: 'getBillingInfo', setter: 'setBillingInfo')]
     protected string $billingInfo = '';
 
-    /**
-     * @Serializer\Type("DateTimeInterface")
-     * @Serializer\SerializedName("creationDate")
-     * @Serializer\Accessor(getter="getCreationDate",setter="setCreationDate")
-     */
+    #[Serializer\Type(\DateTimeInterface::class)]
+    #[Serializer\SerializedName('creationDate')]
+    #[Serializer\Accessor(getter: 'getCreationDate', setter: 'setCreationDate')]
     protected ?\DateTimeInterface $creationDate = null;
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("paymentModuleCode")
-     * @Serializer\Accessor(getter="getPaymentModuleCode",setter="setPaymentModuleCode")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('paymentModuleCode')]
+    #[Serializer\Accessor(getter: 'getPaymentModuleCode', setter: 'setPaymentModuleCode')]
     protected string $paymentModuleCode = '';
 
-    /**
-     * @var double
-     * @Serializer\Type("double")
-     * @Serializer\SerializedName("totalSum")
-     * @Serializer\Accessor(getter="getTotalSum",setter="setTotalSum")
-     */
+
+    #[Serializer\Type('double')]
+    #[Serializer\SerializedName('totalSum')]
+    #[Serializer\Accessor(getter: 'getTotalSum', setter: 'setTotalSum')]
     protected float $totalSum = 0.0;
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("transactionId")
-     * @Serializer\Accessor(getter="getTransactionId",setter="setTransactionId")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('transactionId')]
+    #[Serializer\Accessor(getter: 'getTransactionId', setter: 'setTransactionId')]
     protected string $transactionId = '';
 
     /**
