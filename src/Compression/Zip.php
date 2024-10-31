@@ -4,16 +4,9 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Compression;
 
-use InvalidArgumentException;
 use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\FileNotFoundException;
 
-/**
- * Zip
- *
- * @access public
- * @author Daniel Böhmer <daniel.boehmer@jtl-software.de>
- */
 class Zip
 {
     /**
@@ -23,7 +16,8 @@ class Zip
      * @return bool
      * @throws CompressionException
      * @throws FileNotFoundException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
     public function extract(string $sourceFile, string $targetFolder): bool
     {
