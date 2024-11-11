@@ -4,7 +4,7 @@ variables:
   PHP_VERSION: '8.1'
 
 default:
-  image: gitlab.jtl-software.com:4567/connector/connector-utils/ci-docker/php/cli:${PHP_VERSION}
+  image: ${CI_REGISTRY}/connector/connector-utils/ci-docker/php/cli:${PHP_VERSION}
   tags:
     - docker
 
@@ -95,7 +95,7 @@ tests:
   parallel:
     matrix:
       - PHP_VERSION: ['8.1', '8.2', '8.3']
-  image: gitlab.jtl-software.com:4567/connector/connector-utils/ci-docker/php/cli:${PHP_VERSION}
+  image: ${CI_REGISTRY}/connector/connector-utils/ci-docker/php/cli:${PHP_VERSION}
   script:
     - composer run tests:ci
   artifacts:
