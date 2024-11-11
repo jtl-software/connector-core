@@ -3,6 +3,7 @@ unreleased
 - CO-2544 prevent zip bomb upload during image push
 - CO-2177 add support for warning messages in response
 - CO-2601 add missing factories
+- CO-2761 update setter name
 
 5.2.12
 -----
