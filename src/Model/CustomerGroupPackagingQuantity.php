@@ -25,7 +25,7 @@ class CustomerGroupPackagingQuantity extends AbstractModel
     /** @var double Contains the minimum quantity for a customergroup. */
     #[Serializer\Type('double')]
     #[Serializer\SerializedName('minimumOrderQuantity')]
-    #[Serializer\Accessor(getter: 'getMinimumOrderQuantity', setter: 'setMinimum')]
+    #[Serializer\Accessor(getter: 'getMinimumOrderQuantity', setter: 'setMinimumOrderQuantity')]
     protected float $minimumOrderQuantity = 0.0;
 
     /** @var double Product can only be purchased in multiples of takeOffQuantity e.g. 5,10,15... */
