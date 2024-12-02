@@ -65,9 +65,9 @@ class Connection extends \Doctrine\DBAL\Connection
     }
 
     /**
-     * @param string                                $tableExpression
-     * @param array<int, array<int|string, scalar>> $data
-     * @param string[]                              $types
+     * @param string                                                   $tableExpression
+     * @param array<int, array<int|string, scalar|\DateTimeInterface>> $data
+     * @param string[]                                                 $types
      *
      * @return int
      * @throws \Exception
