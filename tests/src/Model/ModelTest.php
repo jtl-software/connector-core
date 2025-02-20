@@ -18,23 +18,26 @@ use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Test\TestCase;
 use PHPUnit\Framework\ExpectationFailedException;
+use Random\RandomException;
 
 class ModelTest extends TestCase
 {
     /**
      * @dataProvider modelsDataProvider
-     * @doesNotPerformAssertions
      *
      * @param string $modelName
      *
      * @return void
-     * @throws InvalidArgumentException
-     * @throws RuntimeException
      * @throws AnnotationException
-     * @throws \InvalidArgumentException
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
      * @throws LogicException
      * @throws NotAcceptableException
+     * @throws RuntimeException
      * @throws UnsupportedFormatException
+     * @throws \InvalidArgumentException
+     * @throws RandomException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testModelsInitialization(string $modelName): void
     {
@@ -44,8 +47,16 @@ class ModelTest extends TestCase
         if ($obj instanceof Product) {
             $obj->setCreationDate(new \DateTimeImmutable());
         }
+
+        if ($obj instanceof AbstractModel) {
+            $this->assertSame(1, $obj->getModelCount());
+            $randModelCount = \random_int(2, 100);
+            $obj->setModelCount($randModelCount);
+            $this->assertSame($randModelCount, $obj->getModelCount());
+        }
+
         $context = (new SerializationContext())->setSerializeNull(true);
-        $serializer->toArray($obj, $context);
+        $this->assertNotEmpty($serializer->toArray($obj, $context));
     }
 
     /**

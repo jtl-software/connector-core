@@ -977,10 +977,26 @@ class Application
             case Action::PUSH:
             case Action::DELETE:
                 try {
-                    $model = null;
+                    $model          = null;
+                    $firstClassName = null;
                     foreach ($params as $model) {
                         if ($controller instanceof TransactionalInterface) {
                             $controller->beginTransaction();
+                        }
+
+                        if ($model instanceof AbstractModel) {
+                            if ($firstClassName === null) {
+                                $firstClassName = $model::class;
+                            }
+                            $isSameModel = true;
+                            foreach ($params as $tempModel) {
+                                if ($tempModel instanceof $firstClassName === false) {
+                                    $isSameModel = false;
+                                }
+                            }
+                            if ($isSameModel === true) {
+                                $model->setModelCount(\count($params));
+                            }
                         }
 
                         $dataModel = $controller->$action($model);
