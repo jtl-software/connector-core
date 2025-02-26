@@ -11,7 +11,7 @@ interface DeleteInterface
     /**
      * Delete
      *
-     * @param AbstractModel[] $model
+     * @param AbstractModel ...$model
      *
      * @return AbstractModel[]
      */

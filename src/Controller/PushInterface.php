@@ -11,7 +11,7 @@ interface PushInterface
     /**
      * Insert or update
      *
-     * @param AbstractModel[] $model
+     * @param AbstractModel ...$model
      *
      * @return AbstractModel[]
      */
