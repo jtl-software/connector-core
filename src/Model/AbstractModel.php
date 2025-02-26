@@ -8,8 +8,6 @@ use JMS\Serializer\Annotation as Serializer;
 
 abstract class AbstractModel
 {
-    #[Serializer\Exclude]
-    protected int $modelCount = 1;
     /** @var string[] */
     #[Serializer\Exclude]
     private array $identificationStrings = [];
@@ -94,24 +92,5 @@ abstract class AbstractModel
     public function hasIdentificationStrings(): bool
     {
         return \count($this->identificationStrings) > 0;
-    }
-
-    /**
-     * @return int
-     */
-    public function getModelCount(): int
-    {
-        return $this->modelCount;
-    }
-
-    /**
-     * @param int $modelCount
-     *
-     * @return $this
-     */
-    public function setModelCount(int $modelCount): self
-    {
-        $this->modelCount = $modelCount;
-        return $this;
     }
 }
