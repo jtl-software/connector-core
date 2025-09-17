@@ -993,10 +993,10 @@ class Application
                             $checksumLinker->link($dataModel);
                         }
                         $result[] = $dataModel;
+                    }
 
-                        if ($controller instanceof TransactionalInterface) {
-                            $controller->commit();
-                        }
+                    if ($controller instanceof TransactionalInterface) {
+                        $controller->commit();
                     }
                 } catch (Throwable $ex) {
                     if ($controller instanceof TransactionalInterface) {
