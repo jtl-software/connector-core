@@ -1,5 +1,7 @@
 unreleased
 -----
+- CO-3165 add IdentityType for deleted product image
+
 
 5.3.0
 -----
