@@ -90,6 +90,7 @@ use Jtl\Connector\Core\Subscriber\FeaturesSubscriber;
 use Jtl\Connector\Core\Subscriber\RequestParamsTransformSubscriber;
 use Jtl\Connector\Core\Subscriber\SyncErrorSubscriber;
 use Jtl\Connector\Core\SyncError\SqliteSyncErrorCollector;
+use Jtl\Connector\Core\SyncError\SyncErrorCollectorAwareInterface;
 use Jtl\Connector\Core\SyncError\SyncErrorCollectorInterface;
 use Jtl\Connector\Core\Utilities\Validator\Validate;
 use Monolog\ErrorHandler as MonologErrorHandler;
@@ -1015,6 +1016,15 @@ class Application
             /** @var LoggerInterface $loggerInterface */
             $loggerInterface = $this->container->get(LoggerInterface::class);
             $controller->setLogger($loggerInterface);
+        }
+
+        if (
+            $controller instanceof SyncErrorCollectorAwareInterface
+            && $this->container->has(SyncErrorCollectorInterface::class)
+        ) {
+            /** @var SyncErrorCollectorInterface $syncErrorCollector */
+            $syncErrorCollector = $this->container->get(SyncErrorCollectorInterface::class);
+            $controller->setSyncErrorCollector($syncErrorCollector);
         }
 
         $result = [];
