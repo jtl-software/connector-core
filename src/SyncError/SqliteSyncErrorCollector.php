@@ -14,6 +14,7 @@ class SqliteSyncErrorCollector implements SyncErrorCollectorInterface, LoggerAwa
     protected Sqlite3          $db;
     protected LoggerInterface  $logger;
     protected bool             $tableCreated = false;
+    protected string           $scope        = '';
 
     /**
      * @param Sqlite3 $db
@@ -37,6 +38,7 @@ class SqliteSyncErrorCollector implements SyncErrorCollectorInterface, LoggerAwa
         $this->db->exec(
             'CREATE TABLE IF NOT EXISTS sync_errors ('
             . 'id INTEGER PRIMARY KEY AUTOINCREMENT,'
+            . 'scope TEXT NOT NULL DEFAULT \'\',' // phpcs:ignore
             . 'controller TEXT NOT NULL,'
             . 'action TEXT NOT NULL,'
             . 'entity_id TEXT NOT NULL DEFAULT \'\',' // phpcs:ignore
@@ -45,6 +47,14 @@ class SqliteSyncErrorCollector implements SyncErrorCollectorInterface, LoggerAwa
             . ')'
         );
         $this->tableCreated = true;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setScope(string $scope): void
+    {
+        $this->scope = $scope;
     }
 
     /**
@@ -61,8 +71,8 @@ class SqliteSyncErrorCollector implements SyncErrorCollectorInterface, LoggerAwa
         ));
 
         $stmt = $this->db->prepare(
-            'INSERT INTO sync_errors (controller, action, entity_id, message, created_at)'
-            . ' VALUES (:controller, :action, :entity_id, :message, :created_at)'
+            'INSERT INTO sync_errors (scope, controller, action, entity_id, message, created_at)'
+            . ' VALUES (:scope, :controller, :action, :entity_id, :message, :created_at)'
         );
 
         if (!$stmt instanceof \SQLite3Stmt) {
@@ -70,6 +80,7 @@ class SqliteSyncErrorCollector implements SyncErrorCollectorInterface, LoggerAwa
             return;
         }
 
+        $stmt->bindValue(':scope', $this->scope, \SQLITE3_TEXT);
         $stmt->bindValue(':controller', $controller, \SQLITE3_TEXT);
         $stmt->bindValue(':action', $action, \SQLITE3_TEXT);
         $stmt->bindValue(':entity_id', $entityId, \SQLITE3_TEXT);
@@ -83,15 +94,23 @@ class SqliteSyncErrorCollector implements SyncErrorCollectorInterface, LoggerAwa
      */
     public function getAll(): array
     {
-        /** @var array<int, array<string, mixed>>|null $rows */
-        $rows = $this->db->fetch('SELECT * FROM sync_errors ORDER BY id ASC');
+        $stmt = $this->db->prepare(
+            'SELECT * FROM sync_errors WHERE scope = :scope ORDER BY id ASC'
+        );
 
-        if ($rows === null) {
+        if (!$stmt instanceof \SQLite3Stmt) {
+            return [];
+        }
+
+        $stmt->bindValue(':scope', $this->scope, \SQLITE3_TEXT);
+        $result = $stmt->execute();
+
+        if (!$result instanceof \SQLite3Result) {
             return [];
         }
 
         $entries = [];
-        foreach ($rows as $row) {
+        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             /** @var array{controller: string, action: string, entity_id: string, message: string, created_at: string} $row */
             $entries[] = new SyncErrorEntry(
                 $row['controller'],
@@ -110,7 +129,14 @@ class SqliteSyncErrorCollector implements SyncErrorCollectorInterface, LoggerAwa
      */
     public function clear(): void
     {
-        $this->db->exec('DELETE FROM sync_errors');
+        $stmt = $this->db->prepare('DELETE FROM sync_errors WHERE scope = :scope');
+
+        if (!$stmt instanceof \SQLite3Stmt) {
+            return;
+        }
+
+        $stmt->bindValue(':scope', $this->scope, \SQLITE3_TEXT);
+        $stmt->execute();
     }
 
     /**
@@ -118,10 +144,22 @@ class SqliteSyncErrorCollector implements SyncErrorCollectorInterface, LoggerAwa
      */
     public function hasErrors(): bool
     {
-        /** @var int|string|false|null $count */
-        $count = $this->db->fetchSingle('SELECT COUNT(*) FROM sync_errors');
+        $stmt = $this->db->prepare('SELECT COUNT(*) FROM sync_errors WHERE scope = :scope');
 
-        return (int)$count > 0;
+        if (!$stmt instanceof \SQLite3Stmt) {
+            return false;
+        }
+
+        $stmt->bindValue(':scope', $this->scope, \SQLITE3_TEXT);
+        $result = $stmt->execute();
+
+        if (!$result instanceof \SQLite3Result) {
+            return false;
+        }
+
+        $row = $result->fetchArray(\SQLITE3_NUM);
+
+        return \is_array($row) && (int)$row[0] > 0;
     }
 
     /**

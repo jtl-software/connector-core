@@ -12,6 +12,7 @@ use PHPUnit\Framework\TestCase;
 class SqliteSyncErrorCollectorTest extends TestCase
 {
     protected SqliteSyncErrorCollector $collector;
+    protected Sqlite3                 $sqlite;
 
     /**
      * @return void
@@ -20,9 +21,9 @@ class SqliteSyncErrorCollectorTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $sqlite = new Sqlite3();
-        $sqlite->connect(['location' => ':memory:']);
-        $this->collector = new SqliteSyncErrorCollector($sqlite);
+        $this->sqlite    = new Sqlite3();
+        $this->sqlite->connect(['location' => ':memory:']);
+        $this->collector = new SqliteSyncErrorCollector($this->sqlite);
     }
 
     /**
@@ -97,5 +98,76 @@ class SqliteSyncErrorCollectorTest extends TestCase
         $this->assertCount(1, $first);
         $this->assertCount(1, $second);
         $this->assertSame($first[0]->getMessage(), $second[0]->getMessage());
+    }
+
+    /**
+     * @return void
+     */
+    public function testScopeIsolatesErrors(): void
+    {
+        $collectorA = new SqliteSyncErrorCollector($this->sqlite);
+        $collectorA->setScope('customer-1');
+
+        $collectorB = new SqliteSyncErrorCollector($this->sqlite);
+        $collectorB->setScope('customer-2');
+
+        $collectorA->collect('Product', 'push', '1', new \RuntimeException('Error A'));
+        $collectorB->collect('Category', 'delete', '2', new \RuntimeException('Error B'));
+        $collectorB->collect('Image', 'push', '3', new \RuntimeException('Error B2'));
+
+        $this->assertTrue($collectorA->hasErrors());
+        $this->assertTrue($collectorB->hasErrors());
+
+        $errorsA = $collectorA->getAll();
+        $errorsB = $collectorB->getAll();
+
+        $this->assertCount(1, $errorsA);
+        $this->assertCount(2, $errorsB);
+
+        $this->assertSame('Error A', $errorsA[0]->getMessage());
+        $this->assertSame('Error B', $errorsB[0]->getMessage());
+        $this->assertSame('Error B2', $errorsB[1]->getMessage());
+    }
+
+    /**
+     * @return void
+     */
+    public function testClearOnlyClearsCurrentScope(): void
+    {
+        $collectorA = new SqliteSyncErrorCollector($this->sqlite);
+        $collectorA->setScope('customer-1');
+
+        $collectorB = new SqliteSyncErrorCollector($this->sqlite);
+        $collectorB->setScope('customer-2');
+
+        $collectorA->collect('Product', 'push', '1', new \RuntimeException('Error A'));
+        $collectorB->collect('Category', 'delete', '2', new \RuntimeException('Error B'));
+
+        $collectorA->clear();
+
+        $this->assertFalse($collectorA->hasErrors());
+        $this->assertTrue($collectorB->hasErrors());
+        $this->assertCount(1, $collectorB->getAll());
+    }
+
+    /**
+     * @return void
+     */
+    public function testUnscopedDefaultWorksAsEmptyScope(): void
+    {
+        // Without setScope, errors use empty string scope
+        $this->collector->collect('Product', 'push', '1', new \RuntimeException('Unscoped'));
+
+        $scoped = new SqliteSyncErrorCollector($this->sqlite);
+        $scoped->setScope('customer-1');
+        $scoped->collect('Product', 'push', '2', new \RuntimeException('Scoped'));
+
+        // Unscoped collector should only see its own error
+        $this->assertCount(1, $this->collector->getAll());
+        $this->assertSame('Unscoped', $this->collector->getAll()[0]->getMessage());
+
+        // Scoped collector should only see its own error
+        $this->assertCount(1, $scoped->getAll());
+        $this->assertSame('Scoped', $scoped->getAll()[0]->getMessage());
     }
 }

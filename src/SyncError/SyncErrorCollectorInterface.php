@@ -7,6 +7,19 @@ namespace Jtl\Connector\Core\SyncError;
 interface SyncErrorCollectorInterface
 {
     /**
+     * Set a scope identifier to isolate errors per tenant.
+     *
+     * In SaaS environments where multiple customers share the same storage,
+     * all operations (collect, getAll, clear, hasErrors) will be scoped to
+     * this identifier. When not set, operations are unscoped.
+     *
+     * @param string $scope The scope identifier (e.g. credentials ID)
+     *
+     * @return void
+     */
+    public function setScope(string $scope): void;
+
+    /**
      * Collect a sync error for later aggregation.
      *
      * @param string     $controller The controller name (e.g. 'Product', 'Category')

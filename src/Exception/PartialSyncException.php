@@ -36,7 +36,7 @@ class PartialSyncException extends \RuntimeException
     protected function buildMessage(array $errors): string
     {
         $count = \count($errors);
-        $lines = [\sprintf('Partial sync completed with %d error(s):', $count)];
+        $lines = [\sprintf('Sync completed with %d error(s):', $count)];
 
         foreach ($errors as $index => $error) {
             $lines[] = \sprintf(
