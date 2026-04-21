@@ -46,6 +46,24 @@ class SqliteSyncErrorCollector implements SyncErrorCollectorInterface, LoggerAwa
             . 'created_at TEXT NOT NULL'
             . ')'
         );
+
+        // Migrate: add scope column to tables created before multi-tenant support
+        /** @var array<int, array<string, mixed>>|null $columns */
+        $columns    = $this->db->fetch('PRAGMA table_info(sync_errors)');
+        $hasScope   = false;
+        if (\is_array($columns)) {
+            foreach ($columns as $column) {
+                if (isset($column['name']) && $column['name'] === 'scope') {
+                    $hasScope = true;
+                    break;
+                }
+            }
+        }
+
+        if (!$hasScope) {
+            $this->db->exec('ALTER TABLE sync_errors ADD COLUMN scope TEXT NOT NULL DEFAULT \'\''); // phpcs:ignore
+        }
+
         $this->tableCreated = true;
     }
 
