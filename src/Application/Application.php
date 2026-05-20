@@ -113,8 +113,8 @@ use Throwable;
 
 class Application
 {
-    public const int PROTOCOL_VERSION   = 7;
-    public const string MIN_PHP_VERSION = '7.4';
+    public const PROTOCOL_VERSION   = 7;
+    public const MIN_PHP_VERSION = '7.4';
     /** @var array<string, string> */
     protected static array    $mimeTypeToExtensionMappings = [
         'image/bmp'                => 'bmp',
