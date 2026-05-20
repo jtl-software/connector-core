@@ -21,7 +21,7 @@ class SqliteSyncErrorCollectorTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->sqlite    = new Sqlite3();
+        $this->sqlite = new Sqlite3();
         $this->sqlite->connect(['location' => ':memory:']);
         $this->collector = new SqliteSyncErrorCollector($this->sqlite);
     }

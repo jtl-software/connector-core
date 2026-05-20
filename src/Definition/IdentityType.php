@@ -6,7 +6,7 @@ namespace Jtl\Connector\Core\Definition;
 
 class IdentityType
 {
-    public const
+    public const int
         CATEGORY                      = 1,
         CUSTOMER                      = 2,
         CUSTOMER_ORDER                = 4,
