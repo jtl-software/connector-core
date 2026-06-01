@@ -17,11 +17,10 @@ use Jtl\Connector\Core\Model\ProductVariation;
 use Jtl\Connector\Core\Model\ProductWarehouseInfo;
 use Jtl\Connector\Core\Model\ShippingClass;
 use Jtl\Connector\Core\Test\TestCase;
-use Mockery\Exception\RuntimeException;
-use Mockery\LegacyMockInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\ExpectationFailedException;
+use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionException;
 
 /**
@@ -65,19 +64,30 @@ class IdentityLinkerTest extends TestCase
      * @param array<int|null>    $hostId
      * @param array<string|null> $endpointId
      *
-     * @return PrimaryKeyMapperInterface&LegacyMockInterface
+     * @return PrimaryKeyMapperInterface&MockObject
      */
     public function createPrimaryKeyMapperMock(
         array $hostId = [1],
         array $endpointId = ['1']
-    ): PrimaryKeyMapperInterface&LegacyMockInterface {
-        /** @var PrimaryKeyMapperInterface&LegacyMockInterface $primaryKeyMapper */
-        $primaryKeyMapper = \Mockery::mock(PrimaryKeyMapperInterface::class);
-        $primaryKeyMapper->shouldReceive('save')->andReturnTrue();                    //@phpstan-ignore-line
-        $primaryKeyMapper->shouldReceive('delete')->andReturnTrue();                  //@phpstan-ignore-line
-        $primaryKeyMapper->shouldReceive('clear')->andReturnTrue();                   //@phpstan-ignore-line
-        $primaryKeyMapper->shouldReceive('getHostId')->andReturn(...$hostId);         //@phpstan-ignore-line
-        $primaryKeyMapper->shouldReceive('getEndpointId')->andReturn(...$endpointId); //@phpstan-ignore-line
+    ): PrimaryKeyMapperInterface&MockObject {
+        $primaryKeyMapper = $this->createMock(PrimaryKeyMapperInterface::class);
+        $primaryKeyMapper->method('save')->willReturn(true);
+        $primaryKeyMapper->method('delete')->willReturn(true);
+        $primaryKeyMapper->method('clear')->willReturn(true);
+
+        $hostIdQueue = $hostId;
+        $primaryKeyMapper->method('getHostId')->willReturnCallback(
+            static function () use (&$hostIdQueue): ?int {
+                return \array_shift($hostIdQueue);
+            }
+        );
+
+        $endpointIdQueue = $endpointId;
+        $primaryKeyMapper->method('getEndpointId')->willReturnCallback(
+            static function () use (&$endpointIdQueue): ?string {
+                return \array_shift($endpointIdQueue);
+            }
+        );
 
         return $primaryKeyMapper;
     }
@@ -464,17 +474,5 @@ class IdentityLinkerTest extends TestCase
 
         $endpointId = $linker->getEndpointId($modelName, 'id', $expectedHostId);
         $this->assertNotEquals($expectedEndpointId, $endpointId);
-    }
-
-    /**
-     * @return void
-     * @throws \InvalidArgumentException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        \Mockery::close();
     }
 }
