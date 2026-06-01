@@ -19,10 +19,10 @@ use Jtl\Connector\Core\Model\ShippingClass;
 use Jtl\Connector\Core\Test\TestCase;
 use Mockery\Exception\RuntimeException;
 use Mockery\LegacyMockInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\ExpectationFailedException;
 use ReflectionException;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class IdentityLinkerTest
@@ -32,17 +32,14 @@ use SebastianBergmann\RecursionContext\InvalidArgumentException;
 class IdentityLinkerTest extends TestCase
 {
     /**
-     * @dataProvider hostIdDataProvider
-     *
      * @param mixed $hostId
      * @param bool  $shouldBeValid
      *
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
-     * @throws RuntimeException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
+    #[DataProvider('hostIdDataProvider')]
     public function testHostIdValidator(mixed $hostId, bool $shouldBeValid): void
     {
         $isValid = $this->createLinker()->isValidHostId($hostId);
@@ -54,8 +51,6 @@ class IdentityLinkerTest extends TestCase
      * @param PrimaryKeyMapperInterface|null $mockedPrimaryKeyMapper
      *
      * @return IdentityLinker
-     * @throws ReflectionException
-     * @throws RuntimeException
      */
     protected function createLinker(?PrimaryKeyMapperInterface $mockedPrimaryKeyMapper = null): IdentityLinker
     {
@@ -71,8 +66,6 @@ class IdentityLinkerTest extends TestCase
      * @param array<string|null> $endpointId
      *
      * @return PrimaryKeyMapperInterface&LegacyMockInterface
-     * @throws ReflectionException
-     * @throws RuntimeException
      */
     public function createPrimaryKeyMapperMock(
         array $hostId = [1],
@@ -93,27 +86,26 @@ class IdentityLinkerTest extends TestCase
      * @return array<int, array<int, int|bool|null>>
      * @throws \Exception
      */
-    public function hostIdDataProvider(): array
+    public static function hostIdDataProvider(): array
     {
+        $hostId = \random_int(1, 9999);
+
         return [
             [0, false],
             [null, false],
-            [$this->createHostId(), true]
+            [$hostId, true]
         ];
     }
 
     /**
-     * @dataProvider endpointIdDataProvider
-     *
      * @param mixed $endpointId
      * @param bool  $shouldBeValid
      *
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
-     * @throws RuntimeException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
+    #[DataProvider('endpointIdDataProvider')]
     public function testEndpointIdValidator(mixed $endpointId, bool $shouldBeValid): void
     {
         $isValid = $this->createLinker()->isValidEndpointId($endpointId);
@@ -124,22 +116,24 @@ class IdentityLinkerTest extends TestCase
      * @return array<int, array<int, int|bool|string|null>>
      * @throws \Exception
      */
-    public function endpointIdDataProvider(): array
+    public static function endpointIdDataProvider(): array
     {
+        $hostId     = \random_int(1, 9999);
+        $endpointId = \sprintf('%s_%s', 't', $hostId);
+
         return [
             [0, false],
             [null, false],
-            [$this->createEndpointId(), true]
+            [$endpointId, true]
         ];
     }
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
      * @throws Exception
-     * @throws ReflectionException
      * @throws \Exception
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testCache(): void
     {
@@ -185,11 +179,9 @@ class IdentityLinkerTest extends TestCase
     /**
      * @return void
      * @throws DefinitionException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
-     * @throws RuntimeException
      * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testHostIdResolver(): void
     {
@@ -209,11 +201,9 @@ class IdentityLinkerTest extends TestCase
     /**
      * @return void
      * @throws DefinitionException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
-     * @throws RuntimeException
      * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testEndpointIdResolver(): void
     {
@@ -232,10 +222,8 @@ class IdentityLinkerTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
-     * @throws RuntimeException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testIdentityClear(): void
     {
@@ -248,11 +236,10 @@ class IdentityLinkerTest extends TestCase
     /**
      * @return void
      * @throws DefinitionException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
-     * @throws \InvalidArgumentException
      * @throws \Exception
+     * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testIdentitySave(): void
     {
@@ -278,12 +265,11 @@ class IdentityLinkerTest extends TestCase
     /**
      * @return void
      * @throws DefinitionException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
+     * @throws \Exception
+     * @throws \InvalidArgumentException
      * @throws \InvalidArgumentException
      * @throws LinkerException
-     * @throws \Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testIdentityDelete(): void
     {
@@ -315,12 +301,11 @@ class IdentityLinkerTest extends TestCase
     /**
      * @return void
      * @throws DefinitionException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
+     * @throws \Exception
+     * @throws \InvalidArgumentException
      * @throws \InvalidArgumentException
      * @throws LinkerException
-     * @throws \Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testLinkModel(): void
     {
@@ -361,12 +346,11 @@ class IdentityLinkerTest extends TestCase
     /**
      * @return void
      * @throws DefinitionException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
+     * @throws \Exception
+     * @throws \InvalidArgumentException
      * @throws \InvalidArgumentException
      * @throws LinkerException
-     * @throws \Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testUnlinkModel(): void
     {
@@ -387,12 +371,11 @@ class IdentityLinkerTest extends TestCase
     /**
      * @return void
      * @throws DefinitionException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
+     * @throws \Exception
+     * @throws \InvalidArgumentException
      * @throws \InvalidArgumentException
      * @throws LinkerException
-     * @throws \Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testLinkCollection(): void
     {
@@ -418,12 +401,11 @@ class IdentityLinkerTest extends TestCase
     /**
      * @return void
      * @throws DefinitionException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
+     * @throws \Exception
+     * @throws \InvalidArgumentException
      * @throws \InvalidArgumentException
      * @throws LinkerException
-     * @throws \Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testUnlinkCollection(): void
     {
@@ -453,11 +435,11 @@ class IdentityLinkerTest extends TestCase
     /**
      * @return void
      * @throws DefinitionException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \Exception
+     * @throws \InvalidArgumentException
      * @throws \InvalidArgumentException
      * @throws LinkerException
-     * @throws \Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testLinkIdentityList(): void
     {
@@ -486,8 +468,8 @@ class IdentityLinkerTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     protected function tearDown(): void
     {

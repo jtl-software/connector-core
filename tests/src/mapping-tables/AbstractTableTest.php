@@ -6,27 +6,16 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\MappingTables;
 
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception as DBALException;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\SchemaException;
 use Doctrine\DBAL\Types\Types;
 use Jtl\Connector\Dbc\DbcRuntimeException;
 use Jtl\Connector\Dbc\DbManager;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\ExpectationFailedException;
-use PHPUnit\Framework\MockObject\ClassAlreadyExistsException;
-use PHPUnit\Framework\MockObject\ClassIsFinalException;
-use PHPUnit\Framework\MockObject\ClassIsReadonlyException;
-use PHPUnit\Framework\MockObject\DuplicateMethodException;
-use PHPUnit\Framework\MockObject\IncompatibleReturnValueException;
-use PHPUnit\Framework\MockObject\InvalidMethodNameException;
-use PHPUnit\Framework\MockObject\MethodCannotBeConfiguredException;
-use PHPUnit\Framework\MockObject\MethodNameAlreadyConfiguredException;
-use PHPUnit\Framework\MockObject\OriginalConstructorInvocationRequiredException;
-use PHPUnit\Framework\MockObject\RuntimeException;
-use PHPUnit\Framework\MockObject\UnknownTypeException;
 use ReflectionException;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 use Throwable;
 
 class AbstractTableTest extends TestCase
@@ -34,10 +23,9 @@ class AbstractTableTest extends TestCase
     /**
      * @return void
      * @throws DBALException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
      * @throws DbcRuntimeException
-     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testTableSchema(): void
     {
@@ -53,12 +41,11 @@ class AbstractTableTest extends TestCase
     /**
      * @return void
      * @throws DBALException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws SchemaException
      * @throws DbcRuntimeException
+     * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\Exception
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws SchemaException
      */
     public function testHostIndex(): void
     {
@@ -78,12 +65,11 @@ class AbstractTableTest extends TestCase
     /**
      * @return void
      * @throws DBALException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws SchemaException
      * @throws DbcRuntimeException
+     * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\Exception
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws SchemaException
      */
     public function testPrimaryIndex(): void
     {
@@ -91,9 +77,8 @@ class AbstractTableTest extends TestCase
         /** @var TableStub $tableStub */
         $tableStub   = $this->table;
         $tableSchema = $tableStub->getTableSchema();
-        $this->assertTrue($tableSchema->hasPrimaryKey());
-        $primaryKey = $tableSchema->getPrimaryKey();
-        $this->assertNotNull($primaryKey);
+        $this->assertNotNull($tableSchema->getPrimaryKey());
+        $primaryKey     = $tableSchema->getPrimaryKey();
         $primaryColumns = $primaryKey->getColumns();
         $this->assertCount(3, $primaryColumns);
         $this->assertEquals(TableStub::COL_ID1, $primaryColumns[0]);
@@ -104,12 +89,11 @@ class AbstractTableTest extends TestCase
     /**
      * @return void
      * @throws DBALException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws SchemaException
      * @throws DbcRuntimeException
+     * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\Exception
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws SchemaException
      */
     public function testEndpointIndex(): void
     {
@@ -130,11 +114,9 @@ class AbstractTableTest extends TestCase
     /**
      * @return void
      * @throws DBALException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws MappingTablesException
-     * @throws \Doctrine\DBAL\Driver\Exception
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetHostId(): void
     {
@@ -148,12 +130,11 @@ class AbstractTableTest extends TestCase
 
     /**
      * @return void
-     * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws MappingTablesException
      * @throws DbcRuntimeException
-     * @throws \RuntimeException
+     * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws MappingTablesException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetEndpointId(): void
     {
@@ -178,14 +159,13 @@ class AbstractTableTest extends TestCase
      * @return void
      * @throws DBALException
      * @throws DbcRuntimeException
-     * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws MappingTablesException
      * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws MappingTablesException
      * @throws \PDOException
      * @throws \PHPUnit\Framework\Exception
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testSave(): void
     {
@@ -200,14 +180,13 @@ class AbstractTableTest extends TestCase
      * @return void
      * @throws DBALException
      * @throws DbcRuntimeException
-     * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws MappingTablesException
      * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws MappingTablesException
      * @throws \PDOException
      * @throws \PHPUnit\Framework\Exception
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testDeleteByEndpointId(): void
     {
@@ -227,14 +206,13 @@ class AbstractTableTest extends TestCase
      * @return void
      * @throws DBALException
      * @throws DbcRuntimeException
-     * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws MappingTablesException
      * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws MappingTablesException
      * @throws \PDOException
      * @throws \PHPUnit\Framework\Exception
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testDeleteByHostId(): void
     {
@@ -251,20 +229,18 @@ class AbstractTableTest extends TestCase
     }
 
     /**
-     * @dataProvider deleteByHostIdMultipleEntriesProvider
-     *
      * @param string|null $endpoint
      *
      * @return void
      * @throws DBALException
-     * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws MappingTablesException
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws DbcRuntimeException
-     * @throws \RuntimeException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws MappingTablesException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
+    #[DataProvider('deleteByHostIdMultipleEntriesProvider')]
     public function testDeleteByHostIdMultipleEntries(?string $endpoint): void
     {
         $this->assertInstanceOf(TableStub::class, $this->table);
@@ -284,7 +260,7 @@ class AbstractTableTest extends TestCase
     /**
      * @return array{0: array{null}, 1: array{string}}
      */
-    public function deleteByHostIdMultipleEntriesProvider(): array
+    public static function deleteByHostIdMultipleEntriesProvider(): array
     {
         return [
             [null],
@@ -296,14 +272,13 @@ class AbstractTableTest extends TestCase
      * @return void
      * @throws DBALException
      * @throws DbcRuntimeException
-     * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws MappingTablesException
      * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws MappingTablesException
      * @throws \PDOException
      * @throws \PHPUnit\Framework\Exception
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testClearDifferentTypes(): void
     {
@@ -319,15 +294,14 @@ class AbstractTableTest extends TestCase
     /**
      * @return void
      * @throws DBALException
-     * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws MappingTablesException
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws DbcRuntimeException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws MappingTablesException
      * @throws \PDOException
      * @throws \PHPUnit\Framework\Exception
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testClearAll(): void
     {
@@ -341,10 +315,10 @@ class AbstractTableTest extends TestCase
 
     /**
      * @return void
+     * @throws DbcRuntimeException
      * @throws Exception
      * @throws MappingTablesException
-     * @throws DbcRuntimeException
-     * @throws \RuntimeException|InvalidArgumentException
+     * @throws \RuntimeException|\InvalidArgumentException
      */
     public function testClearUnknownType(): void
     {
@@ -359,13 +333,12 @@ class AbstractTableTest extends TestCase
     /**
      * @return void
      * @throws DBALException
-     * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws MappingTablesException
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws DbcRuntimeException
-     * @throws \RuntimeException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws MappingTablesException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testCount(): void
     {
@@ -383,11 +356,10 @@ class AbstractTableTest extends TestCase
     /**
      * @return void
      * @throws DBALException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws MappingTablesException
      * @throws \Doctrine\DBAL\Driver\Exception
-     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     * @throws MappingTablesException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testCountWithWhereCondition(): void
     {
@@ -413,11 +385,10 @@ class AbstractTableTest extends TestCase
      * @return void
      * @throws DBALException
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws MappingTablesException
      * @throws \PHPUnit\Framework\Exception
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testFindEndpointsByType(): void
     {
@@ -436,12 +407,11 @@ class AbstractTableTest extends TestCase
     /**
      * @return void
      * @throws DBALException
-     * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws MappingTablesException
      * @throws DbcRuntimeException
-     * @throws \RuntimeException
+     * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws MappingTablesException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testFindAllEndpointsWithNoData(): void
     {
@@ -450,20 +420,18 @@ class AbstractTableTest extends TestCase
         $tableStub = $this->table;
         $tableStub->clear(TableStub::TYPE1);
         $endpoints = $tableStub->findEndpoints([], [], [], null, null, TableStub::TYPE1);
-        $this->assertIsArray($endpoints);
         $this->assertEmpty($endpoints);
     }
 
     /**
      * @return void
      * @throws DBALException
-     * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws MappingTablesException
      * @throws DbcRuntimeException
+     * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws MappingTablesException
      * @throws \PHPUnit\Framework\Exception
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testFilterMappedEndpoints(): void
     {
@@ -490,10 +458,9 @@ class AbstractTableTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
+     * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testCreateEndpointData(): void
     {
@@ -512,10 +479,9 @@ class AbstractTableTest extends TestCase
 
     /**
      * @return void
+     * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\Exception
-     * @throws ExpectationFailedException
-     * @throws \ReflectionException
-     * @throws InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testCreateEndpointDataFailsTooMuchData(): void
     {
@@ -528,10 +494,9 @@ class AbstractTableTest extends TestCase
 
     /**
      * @return void
+     * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\Exception
-     * @throws ExpectationFailedException
-     * @throws \ReflectionException
-     * @throws InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testCreateEndpointDataFailsNotEnoughData(): void
     {
@@ -544,9 +509,9 @@ class AbstractTableTest extends TestCase
 
     /**
      * @return void
+     * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testBuildEndpoint(): void
     {
@@ -560,30 +525,16 @@ class AbstractTableTest extends TestCase
     }
 
     /**
-     * @dataProvider endpointWithColumnKeysProvider
-     *
      * @param array<string, mixed> $endpointData
      * @param array<int, string>   $endpointColumnNames
      * @param string               $expectedEndpoint
      *
      * @return void
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
-     * @throws DuplicateMethodException
-     * @throws ExpectationFailedException
-     * @throws IncompatibleReturnValueException
-     * @throws InvalidArgumentException
-     * @throws InvalidMethodNameException
-     * @throws MethodCannotBeConfiguredException
-     * @throws MethodNameAlreadyConfiguredException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws RuntimeException
-     * @throws UnknownTypeException
+     * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\Exception
-     * @throws \PHPUnit\Framework\InvalidArgumentException
-     * @throws \PHPUnit\Framework\MockObject\ReflectionException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
+    #[DataProvider('endpointWithColumnKeysProvider')]
     public function testBuildEndpointWithColumnKeys(
         array  $endpointData,
         array  $endpointColumnNames,
@@ -604,7 +555,7 @@ class AbstractTableTest extends TestCase
     /**
      * @return array<int, array<int, array<string, string>|array<int, string>|string>>
      */
-    public function endpointWithColumnKeysProvider(): array
+    public static function endpointWithColumnKeysProvider(): array
     {
         return [
             [
@@ -618,11 +569,10 @@ class AbstractTableTest extends TestCase
     /**
      * @return void
      * @throws DBALException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws MappingTablesException
      * @throws DbcRuntimeException
-     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     * @throws MappingTablesException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testExtractEndpoint(): void
     {
@@ -643,10 +593,10 @@ class AbstractTableTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws MappingTablesException
      * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testExplodeEndpoint(): void
     {
@@ -666,10 +616,10 @@ class AbstractTableTest extends TestCase
 
     /**
      * @return void
+     * @throws \InvalidArgumentException
      * @throws MappingTablesException
      * @throws \PHPUnit\Framework\Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testExplodeEndpointWithEmptyString(): void
     {
@@ -685,7 +635,7 @@ class AbstractTableTest extends TestCase
      * @return void
      * @throws DBALException
      * @throws DbcRuntimeException
-     * @throws \RuntimeException|InvalidArgumentException
+     * @throws \RuntimeException|\InvalidArgumentException
      */
     public function testExtractEndpointUnknownType(): void
     {
@@ -700,11 +650,11 @@ class AbstractTableTest extends TestCase
 
     /**
      * @return void
-     * @throws MappingTablesException
-     * @throws SchemaException
      * @throws DBALException
      * @throws Exception
      * @throws \Exception
+     * @throws MappingTablesException
+     * @throws SchemaException
      */
     public function testAddColumnType(): void
     {
@@ -712,15 +662,18 @@ class AbstractTableTest extends TestCase
         $table->setEndpointColumn('test', Types::BINARY);
         $schema = $table->getTableSchema();
         $column = $schema->getColumn('test');
-        $this->assertEquals(Types::BINARY, $column->getType()->getName());
+        $this->assertEquals(
+            Types::BINARY,
+            \Doctrine\DBAL\Types\Type::getTypeRegistry()->lookupName($column->getType())
+        );
     }
 
     /**
      * @return void
-     * @throws MappingTablesException
      * @throws DBALException
      * @throws Exception
      * @throws \Exception
+     * @throws MappingTablesException
      */
     public function testAddColumn(): void
     {
@@ -734,10 +687,10 @@ class AbstractTableTest extends TestCase
 
     /**
      * @return void
-     * @throws MappingTablesException
      * @throws DBALException
      * @throws Exception
      * @throws \Exception
+     * @throws MappingTablesException
      */
     public function testAddColumnNotPrimary(): void
     {
@@ -753,7 +706,6 @@ class AbstractTableTest extends TestCase
     /**
      * @return void
      * @throws DBALException
-     * @throws \RuntimeException
      */
     public function testEmptyTypes(): void
     {
@@ -771,20 +723,18 @@ class AbstractTableTest extends TestCase
     }
 
     /**
-     * @dataProvider extractValueFromEndpointProvider
-     *
      * @param string     $field
      * @param string     $endpoint
      * @param int|string $expectedValue
      *
      * @return void
      * @throws DBALException
-     * @throws MappingTablesException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
      * @throws DbcRuntimeException
-     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     * @throws MappingTablesException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
+    #[DataProvider('extractValueFromEndpointProvider')]
     public function testExtractValueFromEndpoint(string $field, string $endpoint, int|string $expectedValue): void
     {
         $this->assertInstanceOf(TableStub::class, $this->table);
@@ -797,7 +747,7 @@ class AbstractTableTest extends TestCase
     /**
      * @return array<int, array<int, int|string>>
      */
-    public function extractValueFromEndpointProvider(): array
+    public static function extractValueFromEndpointProvider(): array
     {
         return [
             [TableStub::COL_ID1, \sprintf('%d||%d||%s||%d', 5, 42, 'strg', TableStub::TYPE1), 5],
@@ -807,14 +757,12 @@ class AbstractTableTest extends TestCase
     }
 
     /**
-     * @dataProvider wrongTypesProvider
-     *
      * @param mixed[] $types
      *
      * @return void
      * @throws DBALException
-     * @throws \RuntimeException
      */
+    #[DataProvider('wrongTypesProvider')]
     public function testWrongTypes(array $types): void
     {
         $this->expectException(MappingTablesException::class);
@@ -846,7 +794,7 @@ class AbstractTableTest extends TestCase
     /**
      * @return array<int, array<int, array<int, string|float|bool|\stdClass>>>
      */
-    public function wrongTypesProvider(): array
+    public static function wrongTypesProvider(): array
     {
         return [
             [['string']],

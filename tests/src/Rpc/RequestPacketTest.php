@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Test\Rpc;
 
-use Doctrine\Common\Annotations\AnnotationException;
 use JMS\Serializer\Exception\LogicException;
 use JMS\Serializer\Exception\NotAcceptableException;
 use JMS\Serializer\Exception\UnsupportedFormatException;
 use JMS\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\ExpectationFailedException;
 use RuntimeException;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class RequestPacketTest
@@ -23,16 +22,15 @@ use SebastianBergmann\RecursionContext\InvalidArgumentException;
 class RequestPacketTest extends TestCase
 {
     /**
-     * @dataProvider validPacketDataProvider
-     *
      * @param array{0: string, 1: string, 2: string, 3: array<mixed>} $inputParams
      * @param array{0: string, 1: string, 2: string, 3: array<mixed>} $expectedParams
      * @param bool                                                    $isValid
      *
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
+    #[DataProvider('validPacketDataProvider')]
     public function testValidPacket(array $inputParams, array $expectedParams, bool $isValid): void
     {
         $requestPacket = new RequestPacket();
@@ -48,9 +46,9 @@ class RequestPacketTest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, array<int, string|array<int, string>|array{}|array{array{}}>|bool>>
+     * @return list<array{list<mixed>, list<mixed>, bool}>
      */
-    public function validPacketDataProvider(): array
+    public static function validPacketDataProvider(): array
     {
         return [
             [
@@ -112,24 +110,21 @@ class RequestPacketTest extends TestCase
     }
 
     /**
-     * @dataProvider createFromJtlRpcDataProvider
-     *
      * @param string                                       $jtlRpcInput
      * @param array{0: string, 1: string, 2: array<mixed>} $expectedParams
      * @param bool                                         $isValid
      *
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws RuntimeException
-     * @throws AnnotationException
+     * @throws \InvalidArgumentException
      * @throws \InvalidArgumentException
      * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\RuntimeException
      * @throws LogicException
      * @throws NotAcceptableException
-     * @throws \JMS\Serializer\Exception\RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws UnsupportedFormatException
      */
+    #[DataProvider('createFromJtlRpcDataProvider')]
     public function testCreateFromJtlrpc(string $jtlRpcInput, array $expectedParams, bool $isValid): void
     {
         $requestPacket = RequestPacket::createFromJtlrpc($jtlRpcInput);
@@ -144,7 +139,7 @@ class RequestPacketTest extends TestCase
     /**
      * @return array<int, array<int, string|array<int, string|array{}|array{0: 'a', 1: 'b'}|array<int, int>>|bool>>
      */
-    public function createFromJtlRpcDataProvider(): array
+    public static function createFromJtlRpcDataProvider(): array
     {
         return [
             ['', ['', 'undefined.undefined', [],], false,],
@@ -158,24 +153,21 @@ class RequestPacketTest extends TestCase
     }
 
     /**
-     * @dataProvider createFromJtlRpcDataProvider
-     *
      * @param string                                       $jtlRpcInput
      * @param array{0: string, 1: string, 2: array<mixed>} $expectedParams
      * @param bool                                         $isValid
      *
      * @return void
-     * @throws AnnotationException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws LogicException
-     * @throws NotAcceptableException
-     * @throws RuntimeException
-     * @throws UnsupportedFormatException
+     * @throws \InvalidArgumentException
      * @throws \InvalidArgumentException
      * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws \JMS\Serializer\Exception\RuntimeException
+     * @throws LogicException
+     * @throws NotAcceptableException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws UnsupportedFormatException
      */
+    #[DataProvider('createFromJtlRpcDataProvider')]
     public function testCreateFromJtlRpcUseAnotherSerializer(
         string $jtlRpcInput,
         array  $expectedParams,

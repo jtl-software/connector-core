@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Dbc;
 
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception as DBALException;
 use Exception;
 use PHPUnit\Framework\ExpectationFailedException;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 use Throwable;
 
 class TableCollectionTest extends TestCase
@@ -51,10 +50,10 @@ class TableCollectionTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
      * @throws DbcRuntimeException
+     * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\Exception
-     * @throws InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testRemoveByName(): void
     {
@@ -65,9 +64,9 @@ class TableCollectionTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
+     * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\Exception
-     * @throws InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testRemoveByNameNotFound(): void
     {
@@ -78,9 +77,9 @@ class TableCollectionTest extends TestCase
 
     /**
      * @return void
-     * @throws InvalidArgumentException
-     * @throws ExpectationFailedException
      * @throws DbcRuntimeException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testHas(): void
     {
@@ -89,8 +88,8 @@ class TableCollectionTest extends TestCase
 
     /**
      * @return void
-     * @throws InvalidArgumentException
-     * @throws ExpectationFailedException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testHasNot(): void
     {
@@ -184,9 +183,9 @@ class TableCollectionTest extends TestCase
 
     /**
      * @return void
-     * @throws InvalidArgumentException
      * @throws DbcRuntimeException
-     * @throws ExpectationFailedException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testFilterOneByInstanceClassReturnNull(): void
     {
@@ -197,8 +196,8 @@ class TableCollectionTest extends TestCase
     /**
      * @return void
      * @throws DBALException
-     * @throws Throwable
      * @throws Exception
+     * @throws Throwable
      */
     protected function setUp(): void
     {

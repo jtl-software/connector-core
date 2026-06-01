@@ -55,7 +55,7 @@ class SyncErrorSubscriberTest extends TestCase
 
         // Should not throw
         $this->subscriber->afterFinish($event);
-        $this->assertTrue(true);
+        $this->assertFalse($this->collector->hasErrors());
     }
 
     /**

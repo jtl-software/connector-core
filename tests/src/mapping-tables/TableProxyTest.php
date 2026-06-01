@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\MappingTables;
 
-use Doctrine\DBAL\DBALException;
-use Doctrine\DBAL\Driver\Exception;
+use Doctrine\DBAL\Exception as DBALException;
 use Jtl\Connector\Dbc\DbcRuntimeException;
 use PHPUnit\Framework\ExpectationFailedException;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 use Throwable;
 
 class TableProxyTest extends TestCase
@@ -17,10 +15,10 @@ class TableProxyTest extends TestCase
 
     /**
      * @return void
-     * @throws MappingTablesException
      * @throws DBALException
-     * @throws Throwable
      * @throws \Exception
+     * @throws MappingTablesException
+     * @throws Throwable
      */
     protected function setUp(): void
     {
@@ -33,11 +31,9 @@ class TableProxyTest extends TestCase
     /**
      * @return void
      * @throws DBALException
-     * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws MappingTablesException
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetHostId(): void
     {
@@ -50,11 +46,9 @@ class TableProxyTest extends TestCase
     /**
      * @return void
      * @throws DBALException
-     * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws MappingTablesException
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetHostIdFromNotSelectedType(): void
     {
@@ -67,11 +61,9 @@ class TableProxyTest extends TestCase
     /**
      * @return void
      * @throws DBALException
-     * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws MappingTablesException
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetHostIdWhichNotExists(): void
     {
@@ -84,12 +76,10 @@ class TableProxyTest extends TestCase
     /**
      * @return void
      * @throws DBALException
-     * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws MappingTablesException
      * @throws \Doctrine\DBAL\Exception
-     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     * @throws MappingTablesException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testCountAndClear(): void
     {
@@ -100,12 +90,11 @@ class TableProxyTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws MappingTablesException
      * @throws DbcRuntimeException
      * @throws \Doctrine\DBAL\Exception
-     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     * @throws MappingTablesException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetEndpoint(): void
     {
@@ -117,12 +106,11 @@ class TableProxyTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws MappingTablesException
      * @throws DbcRuntimeException
      * @throws \Doctrine\DBAL\Exception
-     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     * @throws MappingTablesException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetEndpointFromNotSelectedType(): void
     {
@@ -136,11 +124,9 @@ class TableProxyTest extends TestCase
     /**
      * @return void
      * @throws DBALException
-     * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws MappingTablesException
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testDeleteByHostId(): void
     {
@@ -153,11 +139,9 @@ class TableProxyTest extends TestCase
     /**
      * @return void
      * @throws DBALException
-     * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws MappingTablesException
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testDeleteByHostIdWithMultipleEntries(): void
     {
@@ -170,11 +154,9 @@ class TableProxyTest extends TestCase
     /**
      * @return void
      * @throws DBALException
-     * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws MappingTablesException
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testDeleteByEndpointId(): void
     {
@@ -186,9 +168,9 @@ class TableProxyTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws MappingTablesException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetAndSetType(): void
     {
@@ -211,12 +193,10 @@ class TableProxyTest extends TestCase
     /**
      * @return void
      * @throws DBALException
-     * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws MappingTablesException
      * @throws DbcRuntimeException
-     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     * @throws MappingTablesException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testSave(): void
     {
@@ -232,11 +212,10 @@ class TableProxyTest extends TestCase
     /**
      * @return void
      * @throws DBALException
+     * @throws \InvalidArgumentException
      * @throws MappingTablesException
      * @throws \PHPUnit\Framework\Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testFindEndpoints(): void
     {
@@ -245,9 +224,9 @@ class TableProxyTest extends TestCase
 
     /**
      * @return void
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\Exception
-     * @throws ExpectationFailedException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetTable(): void
     {

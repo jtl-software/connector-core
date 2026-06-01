@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\MappingTables;
 
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception as DBALException;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\SchemaException;
@@ -42,8 +42,8 @@ class TableStub extends AbstractTable implements TableInterface
 
     /**
      * @return void
-     * @throws MappingTablesException
      * @throws Exception
+     * @throws MappingTablesException
      */
     public function defineEndpoint(): void
     {
@@ -78,11 +78,11 @@ class TableStub extends AbstractTable implements TableInterface
      * @param Table $tableSchema
      *
      * @return void
+     * @throws DbcRuntimeException
      * @throws Exception
      * @throws MappingTablesException
-     * @throws SchemaException
-     * @throws DbcRuntimeException
      * @throws \RuntimeException
+     * @throws SchemaException
      */
     public function createTableSchema(Table $tableSchema): void
     {
@@ -114,9 +114,9 @@ class TableStub extends AbstractTable implements TableInterface
      * @param mixed[] $data
      *
      * @return mixed[]
+     * @throws DBALException
      * @throws DbcRuntimeException
      * @throws MappingTablesException
-     * @throws DBALException
      * @throws \RuntimeException
      */
     public function createEndpointData(array $data): array

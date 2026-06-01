@@ -17,8 +17,8 @@ class PacketTest extends TestCase
 {
     /**
      * @return void
-     * @throws \ReflectionException
      * @throws \Exception
+     * @throws \ReflectionException
      */
     public function testToArray(): void
     {

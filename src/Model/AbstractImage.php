@@ -61,10 +61,6 @@ abstract class AbstractImage extends AbstractIdentity
     #[Serializer\Accessor(getter: 'getSort', setter: 'setSort')]
     protected int $sort = 1;
 
-    /** @var \ReflectionClass<self> */
-    #[Serializer\Exclude]
-    protected \ReflectionClass $reflectionClass;
-
     /**
      * AbstractImage constructor.
      *
@@ -73,7 +69,6 @@ abstract class AbstractImage extends AbstractIdentity
      */
     public function __construct(string $endpoint = '', int $host = 0)
     {
-        $this->reflectionClass = new \ReflectionClass($this);
         parent::__construct($endpoint, $host);
         $this->foreignKey = new Identity();
     }
@@ -267,7 +262,7 @@ abstract class AbstractImage extends AbstractIdentity
      */
     public function getRelationType(): string
     {
-        $modelName = $this->reflectionClass->getShortName();
+        $modelName = (new \ReflectionClass($this))->getShortName();
         $imagePos  = \strpos($modelName, 'Image');
         if ($imagePos === false) {
             throw new \RuntimeException('$imagePos must not be false!');

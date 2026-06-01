@@ -8,7 +8,6 @@ use Jtl\Connector\Core\Application\Request;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class RequestTest
@@ -20,8 +19,8 @@ class RequestTest extends TestCase
     /**
      * @return void
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testCreateFromStatic(): void
     {

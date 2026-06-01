@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\MappingTables;
 
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception as DBALException;
 use Exception;
 use Jtl\Connector\Dbc\DbcRuntimeException;
 use PHPUnit\Framework\ExpectationFailedException;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 use Throwable;
 
 class TableManagerTest extends TestCase
@@ -17,10 +16,10 @@ class TableManagerTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws MappingTablesException
      * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetMappingTable(): void
     {
@@ -30,9 +29,9 @@ class TableManagerTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws MappingTablesException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetHostId(): void
     {
@@ -44,9 +43,9 @@ class TableManagerTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws MappingTablesException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetEndpointId(): void
     {
@@ -57,9 +56,9 @@ class TableManagerTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws MappingTablesException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testSave(): void
     {
@@ -72,9 +71,9 @@ class TableManagerTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws MappingTablesException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testDeleteByEndpointId(): void
     {
@@ -85,9 +84,9 @@ class TableManagerTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws MappingTablesException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testDeleteByHostId(): void
     {
@@ -98,10 +97,10 @@ class TableManagerTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws MappingTablesException
      * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testFindAllEndpointsIds(): void
     {
@@ -111,10 +110,10 @@ class TableManagerTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws MappingTablesException
      * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testFindNotFetchedEndpoints(): void
     {
@@ -140,13 +139,12 @@ class TableManagerTest extends TestCase
      * @return void
      * @throws DBALException
      * @throws DbcRuntimeException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws MappingTablesException
      * @throws \Doctrine\DBAL\Driver\Exception
      * @throws \Doctrine\DBAL\Exception
+     * @throws \InvalidArgumentException
+     * @throws MappingTablesException
      * @throws \PDOException
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testClear(): void
     {
@@ -159,13 +157,12 @@ class TableManagerTest extends TestCase
      * @return void
      * @throws DBALException
      * @throws DbcRuntimeException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws MappingTablesException
      * @throws \Doctrine\DBAL\Driver\Exception
      * @throws \Doctrine\DBAL\Exception
+     * @throws \InvalidArgumentException
+     * @throws MappingTablesException
      * @throws \PDOException
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testClearByType(): void
     {
@@ -180,9 +177,9 @@ class TableManagerTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws MappingTablesException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testCount(): void
     {
@@ -191,10 +188,10 @@ class TableManagerTest extends TestCase
 
     /**
      * @return void
+     * @throws \InvalidArgumentException
      * @throws MappingTablesException
      * @throws \PHPUnit\Framework\Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetNotExistingTableWithStrictModeDisabled(): void
     {
@@ -219,8 +216,8 @@ class TableManagerTest extends TestCase
     /**
      * @return void
      * @throws DBALException
-     * @throws Throwable
      * @throws Exception
+     * @throws Throwable
      */
     protected function setUp(): void
     {

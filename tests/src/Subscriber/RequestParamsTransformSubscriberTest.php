@@ -7,6 +7,7 @@ namespace Jtl\Connector\Core\Test\Subscriber;
 use InvalidArgumentException;
 use Jtl\Connector\Core\Event\RpcEvent;
 use Jtl\Connector\Core\Subscriber\RequestParamsTransformSubscriber;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\MockObject\MethodCannotBeConfiguredException;
@@ -18,20 +19,19 @@ use PHPUnit\Framework\TestCase;
 class RequestParamsTransformSubscriberTest extends TestCase
 {
     /**
-     * @dataProvider transformRequestParamsProvider
-     *
      * @param RpcEvent $event
      *
      * @return void
-     * @throws InvalidArgumentException
      * @throws Exception
-     * @throws \PHPUnit\Framework\InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws MethodCannotBeConfiguredException
      * @throws MethodNameAlreadyConfiguredException
      * @throws MethodNameNotConfiguredException
      * @throws MethodParametersAlreadyConfiguredException
+     * @throws \PHPUnit\Framework\InvalidArgumentException
      * @throws \RuntimeException
      */
+    #[DataProvider('transformRequestParamsProvider')]
     public function testTransformRequestParams(RpcEvent $event): void
     {
         $subscriber = $this->createPartialMock(
@@ -66,16 +66,15 @@ class RequestParamsTransformSubscriberTest extends TestCase
     }
 
     /**
-     * @dataProvider transformProductProvider
-     *
      * @param array<int, array<string, mixed>> $products
      * @param array<int, array<string, mixed>> $expectedResult
      *
      * @return void
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * \Exception
      * @throws \RuntimeException
-     * @throws ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
+    #[DataProvider('transformProductProvider')]
     public function testTransformProductData(array $products, array $expectedResult): void
     {
         $subscriber   = new RequestParamsTransformSubscriber();
@@ -84,16 +83,15 @@ class RequestParamsTransformSubscriberTest extends TestCase
     }
 
     /**
-     * @dataProvider transformProductPriceProvider
-     *
      * @param array<array<string, mixed>> $productPrices
      * @param array<int, mixed>           $expectedResult
      *
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * \Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
+    #[DataProvider('transformProductPriceProvider')]
     public function testTransformProductPriceData(array $productPrices, array $expectedResult): void
     {
         $subscriber   = new RequestParamsTransformSubscriber();
@@ -102,15 +100,14 @@ class RequestParamsTransformSubscriberTest extends TestCase
     }
 
     /**
-     * @dataProvider transformProductStockLevelProvider
-     *
      * @param array<int, array{productId: array{0: string, 1: int}, sku: ?string, stockLevel: ?float}> $productStock
      * @param array<int, array{id: array{0: string, 1: int}, sku: string, stockLevel: float}>          $expectedResult
      *
      * @return void
-     * @throws ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * \Exception
      */
+    #[DataProvider('transformProductStockLevelProvider')]
     public function testTransformStockLevelData(array $productStock, array $expectedResult): void
     {
         $subscriber   = new RequestParamsTransformSubscriber();
@@ -120,8 +117,8 @@ class RequestParamsTransformSubscriberTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException|\Exception
+     * @throws \Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetSubscribedEvents(): void
     {
@@ -135,7 +132,7 @@ class RequestParamsTransformSubscriberTest extends TestCase
     /**
      * @return array<int, array{0: RpcEvent}>
      */
-    public function transformRequestParamsProvider(): array
+    public static function transformRequestParamsProvider(): array
     {
         return [
             [new RpcEvent(['foo', 'bar'], 'Product', 'push')],
@@ -152,7 +149,7 @@ class RequestParamsTransformSubscriberTest extends TestCase
     /**
      * @return array<int, array<int, array<int, array<string, array<int|string, array<string, array<int, array<string, array<int, int|string>|float|int>>>|float>|float|string>>>>
      */
-    public function transformProductProvider(): array
+    public static function transformProductProvider(): array
     {
         //phpcs:enable
         return [
@@ -243,7 +240,7 @@ class RequestParamsTransformSubscriberTest extends TestCase
     /**
      * @return array<int, array<int, array<int,array<string, array<int,array<string, array<int, array<string, array<int, int|string>|float|int>|int|string>|float|int|string>|int|string>|float|string>>>>
      */
-    public function transformProductPriceProvider(): array
+    public static function transformProductPriceProvider(): array
     {
         //phpcs:enable
         return [
@@ -495,7 +492,7 @@ class RequestParamsTransformSubscriberTest extends TestCase
     /**
      * @return array<int, array<int, array<int, array<string, array<int, int|string>|float|string>>>>
      */
-    public function transformProductStockLevelProvider(): array
+    public static function transformProductStockLevelProvider(): array
     {
         return [
             [

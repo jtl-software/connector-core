@@ -11,33 +11,22 @@ use Jtl\Connector\Core\Model\ManufacturerImage;
 use Jtl\Connector\Core\Model\ProductImage;
 use Jtl\Connector\Core\Model\ProductVariationValueImage;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\ExpectationFailedException;
-use PHPUnit\Framework\MockObject\ClassAlreadyExistsException;
-use PHPUnit\Framework\MockObject\ClassIsFinalException;
-use PHPUnit\Framework\MockObject\ClassIsReadonlyException;
-use PHPUnit\Framework\MockObject\DuplicateMethodException;
-use PHPUnit\Framework\MockObject\InvalidMethodNameException;
-use PHPUnit\Framework\MockObject\OriginalConstructorInvocationRequiredException;
-use PHPUnit\Framework\MockObject\ReflectionException;
-use PHPUnit\Framework\MockObject\UnknownClassException;
-use PHPUnit\Framework\MockObject\UnknownTypeException;
 use RuntimeException;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 class AbstractImageTest extends TestCase
 {
     /**
-     * @dataProvider relationTypeProvider
-     *
      * @param AbstractImage $image
      * @param string        $relationType
      *
      * @return void
      * @throws DefinitionException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws RuntimeException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
+    #[DataProvider('relationTypeProvider')]
     public function testGetRelationType(AbstractImage $image, string $relationType): void
     {
         $this->assertEquals($relationType, $image->getRelationType());
@@ -51,7 +40,7 @@ class AbstractImageTest extends TestCase
      *          3: array{0: ManufacturerImage}
      *     }
      */
-    public function relationTypeProvider(): array
+    public static function relationTypeProvider(): array
     {
         return [
             [new CategoryImage(), 'category'],
@@ -62,26 +51,14 @@ class AbstractImageTest extends TestCase
     }
 
     /**
-     * @dataProvider extensionProvider
-     *
      * @param string $fileName
      * @param string $expectedExtension
      *
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws \PHPUnit\Framework\InvalidArgumentException
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
-     * @throws DuplicateMethodException
-     * @throws InvalidMethodNameException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
-     * @throws \PHPUnit\Framework\MockObject\RuntimeException
-     * @throws UnknownClassException
-     * @throws UnknownTypeException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
+    #[DataProvider('extensionProvider')]
     public function testGetExtension(string $fileName, string $expectedExtension): void
     {
         $image = $this->getMockForAbstractClass(AbstractImage::class);
@@ -92,7 +69,7 @@ class AbstractImageTest extends TestCase
     /**
      * @return array<int, array{0: string, 1: string}>
      */
-    public function extensionProvider(): array
+    public static function extensionProvider(): array
     {
         return [
             ['file.name', 'name'],

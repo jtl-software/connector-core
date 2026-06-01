@@ -10,25 +10,24 @@ use Jtl\Connector\Core\Model\TranslatableAttribute;
 use Jtl\Connector\Core\Model\TranslatableAttributeI18n;
 use Jtl\Connector\Core\Test\TestCase;
 use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\ExpectationFailedException;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 class TranslatableAttributeI18nTest extends TestCase
 {
     /**
-     * @dataProvider getValueProvider
-     *
      * @param string $type
      * @param mixed  $originalValue
      * @param mixed  $expectedValue
      * @param bool   $strictMode
      *
      * @return void
-     * @throws TranslatableAttributeException
+     * @throws \InvalidArgumentException
      * @throws JsonException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws TranslatableAttributeException
      */
+    #[DataProvider('getValueProvider')]
     public function testGetValue(
         string $type,
         mixed  $originalValue,
@@ -61,7 +60,7 @@ class TranslatableAttributeI18nTest extends TestCase
     /**
      * @return array<int, array<int, string|int|float|bool|array<int|string, string>|null>>
      */
-    public function getValueProvider(): array
+    public static function getValueProvider(): array
     {
         return [
             ['int', '2', 2],
@@ -110,18 +109,17 @@ class TranslatableAttributeI18nTest extends TestCase
     }
 
     /**
-     * @dataProvider setValueProvider
-     *
      * @param mixed                 $value
      * @param float|int|string|bool $expectedValue
      *
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws JsonException
-     * @throws TranslatableAttributeException
      * @throws AssertionFailedError
+     * @throws \InvalidArgumentException
+     * @throws JsonException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws TranslatableAttributeException
      */
+    #[DataProvider('setValueProvider')]
     public function testSetValue(mixed $value, float|int|string|bool $expectedValue): void
     {
         $translation = (new TranslatableAttributeI18n())->setValue($value);
@@ -152,7 +150,7 @@ class TranslatableAttributeI18nTest extends TestCase
     /**
      * @return array<int, array<int, bool|string|float|int|array<int|string, string>>>
      */
-    public function setValueProvider(): array
+    public static function setValueProvider(): array
     {
         return [
             [true, '1'],
@@ -169,14 +167,13 @@ class TranslatableAttributeI18nTest extends TestCase
     }
 
     /**
-     * @dataProvider setValueInvalidTypeProvider
-     *
      * @param mixed $value
      *
      * @return void
      * @throws JsonException
      * @throws TranslatableAttributeException
      */
+    #[DataProvider('setValueInvalidTypeProvider')]
     public function testSetValueWrongType(mixed $value): void
     {
         $this->expectException(TranslatableAttributeException::class);
@@ -187,7 +184,7 @@ class TranslatableAttributeI18nTest extends TestCase
     /**
      * @return array{0: array{null}, 1: array{0: false|resource}}
      */
-    public function setValueInvalidTypeProvider(): array
+    public static function setValueInvalidTypeProvider(): array
     {
         /** @noinspection FopenBinaryUnsafeUsageInspection */
         return [

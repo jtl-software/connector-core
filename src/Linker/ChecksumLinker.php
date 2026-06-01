@@ -37,8 +37,10 @@ class ChecksumLinker implements LoggerAwareInterface
     public static function find(AbstractModel $model, int $type): ?ChecksumInterface
     {
         if (\method_exists($model, 'getChecksums')) {
-            foreach ($model->getChecksums() as $checksum) {
-                if ($checksum instanceof ChecksumInterface && $checksum->getType() == $type) {
+            /** @var ChecksumInterface[] $checksums */
+            $checksums = $model->getChecksums();
+            foreach ($checksums as $checksum) {
+                if ($checksum->getType() == $type) {
                     return $checksum;
                 }
             }
@@ -57,10 +59,11 @@ class ChecksumLinker implements LoggerAwareInterface
     public static function findByEndpoint(AbstractModel $model, string $endpoint, int $type): ?ChecksumInterface
     {
         if (\method_exists($model, 'getChecksums')) {
-            foreach ($model->getChecksums() as $checksum) {
+            /** @var ChecksumInterface[] $checksums */
+            $checksums = $model->getChecksums();
+            foreach ($checksums as $checksum) {
                 if (
-                    $checksum instanceof ChecksumInterface
-                    && $checksum->getType() == $type
+                    $checksum->getType() == $type
                     && $checksum->getForeignKey()->getEndpoint() === $endpoint
                 ) {
                     return $checksum;
@@ -81,10 +84,11 @@ class ChecksumLinker implements LoggerAwareInterface
     public static function findByHost(AbstractModel $model, int $host, int $type): ?ChecksumInterface
     {
         if (\method_exists($model, 'getChecksums')) {
-            foreach ($model->getChecksums() as $checksum) {
+            /** @var ChecksumInterface[] $checksums */
+            $checksums = $model->getChecksums();
+            foreach ($checksums as $checksum) {
                 if (
-                    $checksum instanceof ChecksumInterface
-                    && $checksum->getType() == $type
+                    $checksum->getType() == $type
                     && $checksum->getForeignKey()->getHost() == $host
                 ) {
                     return $checksum;
@@ -105,51 +109,54 @@ class ChecksumLinker implements LoggerAwareInterface
     public function link(AbstractModel $model, ?int $type = null): void
     {
         if (!\is_null($this->loader) && \method_exists($model, 'getChecksums')) {
+            /** @var ChecksumInterface[] $checksums */
             $checksums = $model->getChecksums();
             foreach ($checksums as &$checksum) {
-                if ($checksum instanceof ChecksumInterface && ($type === null || $checksum->getType() === $type)) {
+                if ($type === null || $checksum->getType() === $type) {
                     $this->logger->debug('Checksum linking type ({type})...', ['type' => $type]);
 
                     if (
                         \method_exists($model, 'getId')
-                        && $model->getId()->getEndpoint() !== null
-                        && $model->getId()->getEndpoint() !== ''
                     ) {
-                        $checksum->setEndpoint(
-                            $this->loader->read($model->getId()->getEndpoint(), $checksum->getType())
-                        );
+                        /** @var \Jtl\Connector\Core\Model\Identity $modelId */
+                        $modelId = $model->getId();
+                        if ($modelId->getEndpoint() !== '') {
+                            $checksum->setEndpoint(
+                                $this->loader->read($modelId->getEndpoint(), $checksum->getType())
+                            );
 
-                        if ($checksum->getEndpoint() !== null && $checksum->getEndpoint() !== '') {
-                            if (($checksum->getEndpoint() !== $checksum->getHost())) {
+                            if ($checksum->getEndpoint() !== '') {
+                                if (($checksum->getEndpoint() !== $checksum->getHost())) {
+                                    $this->logger->debug(
+                                        'Changed checksum for endpoint ({endpoint}) type ({type})',
+                                        [
+                                            'endpoint' => $modelId->getEndpoint(),
+                                            'type'     => $type,
+                                        ]
+                                    );
+                                    $checksum->setHasChanged(true);
+                                    $this->loader->delete($modelId->getEndpoint(), $checksum->getType());
+                                    $this->loader->write(
+                                        $modelId->getEndpoint(),
+                                        $checksum->getType(),
+                                        $checksum->getHost()
+                                    );
+                                }
+                            } else {
                                 $this->logger->debug(
-                                    'Changed checksum for endpoint ({endpoint}) type ({type})',
+                                    'Write new checksum for endpoint ({endpoint}) type ({type})',
                                     [
-                                        'endpoint' => $model->getId()->getEndpoint(),
+                                        'endpoint' => $modelId->getEndpoint(),
                                         'type'     => $type,
                                     ]
                                 );
                                 $checksum->setHasChanged(true);
-                                $this->loader->delete($model->getId()->getEndpoint(), $checksum->getType());
                                 $this->loader->write(
-                                    $model->getId()->getEndpoint(),
+                                    $modelId->getEndpoint(),
                                     $checksum->getType(),
                                     $checksum->getHost()
                                 );
                             }
-                        } else {
-                            $this->logger->debug(
-                                'Write new checksum for endpoint ({endpoint}) type ({type})',
-                                [
-                                    'endpoint' => $model->getId()->getEndpoint(),
-                                    'type'     => $type,
-                                ]
-                            );
-                            $checksum->setHasChanged(true);
-                            $this->loader->write(
-                                $model->getId()->getEndpoint(),
-                                $checksum->getType(),
-                                $checksum->getHost()
-                            );
                         }
                     } else {
                         $this->logger->debug('New checksum with empty endpoint type ({type})', ['type' => $type]);

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Test\Serializer\Subscriber;
 
-use Doctrine\Common\Annotations\AnnotationException;
 use JMS\Serializer\Exception\LogicException;
 use JMS\Serializer\Exception\NotAcceptableException;
 use JMS\Serializer\Exception\RuntimeException;
@@ -16,21 +15,18 @@ use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Test\TestCase;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\ExpectationFailedException;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 class ImageSubscriberTest extends TestCase
 {
     /**
      * @return void
-     * @throws AnnotationException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws LogicException
-     * @throws NotAcceptableException
-     * @throws RuntimeException
-     * @throws UnsupportedFormatException
+     * @throws \InvalidArgumentException
      * @throws \InvalidArgumentException
      * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     * @throws LogicException
+     * @throws NotAcceptableException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws UnsupportedFormatException
      */
     public function testOnPostSerialize(): void
     {
@@ -40,6 +36,7 @@ class ImageSubscriberTest extends TestCase
         $image            = (new ManufacturerImage())->setId(new Identity($endpoint, $expectedHost));
         $serializer       = SerializerBuilder::create()->build();
         $data             = $serializer->toArray($image);
+        $this->assertIsArray($data['id']);
         $this->assertEquals($expectedEndpoint, $data['id'][0]);
         $this->assertEquals($expectedHost, $data['id'][1]);
     }
@@ -47,14 +44,12 @@ class ImageSubscriberTest extends TestCase
     /**
      * @return void
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws RuntimeException
-     * @throws AnnotationException
+     * @throws \InvalidArgumentException
      * @throws \InvalidArgumentException
      * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws LogicException
      * @throws NotAcceptableException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws UnsupportedFormatException
      */
     public function testOnPostDeserialize(): void

@@ -63,7 +63,7 @@ class TableManager implements PrimaryKeyMapperInterface
      */
     public function save(int $type, string $endpointId, int $hostId): bool
     {
-        return \is_int($this->collection->get($type)->save($endpointId, $hostId));
+        return $this->collection->get($type)->save($endpointId, $hostId) > 0;
     }
 
     /**
@@ -76,7 +76,7 @@ class TableManager implements PrimaryKeyMapperInterface
      */
     public function delete(int $type, ?string $endpointId = null, ?int $hostId = null): bool
     {
-        return \is_int($this->collection->get($type)->remove($endpointId, $hostId, $type));
+        return $this->collection->get($type)->remove($endpointId, $hostId, $type) >= 0;
     }
 
     /**
@@ -131,7 +131,7 @@ class TableManager implements PrimaryKeyMapperInterface
     public function clear(?int $type = null): bool
     {
         if (!\is_null($type)) {
-            return \is_int($this->collection->get($type)->clear($type));
+            return $this->collection->get($type)->clear($type) >= 0;
         }
 
         foreach ($this->collection->toArray() as $table) {
