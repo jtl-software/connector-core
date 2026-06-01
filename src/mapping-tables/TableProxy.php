@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\MappingTables;
 
-use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Exception;
 use Jtl\Connector\Dbc\DbcRuntimeException;
 use RuntimeException;
@@ -30,10 +29,10 @@ class TableProxy
 
     /**
      * @return int
+     * @throws DbcRuntimeException
      * @throws Exception
      * @throws MappingTablesException
      * @throws RuntimeException
-     * @throws DbcRuntimeException
      */
     public function clear(): int
     {
@@ -41,17 +40,16 @@ class TableProxy
     }
 
     /**
-     * @param string[] $where
-     * @param string[] $parameters
-     * @param string[] $orderBy
-     * @param int|null $limit
-     * @param int|null $offset
+     * @param string[]              $where
+     * @param string[]              $parameters
+     * @param array<string, string> $orderBy
+     * @param int|null              $limit
+     * @param int|null              $offset
      *
      * @return int
-     * @throws DBALException
+     * @throws Exception
      * @throws MappingTablesException
      * @throws RuntimeException
-     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function count(
         array $where = [],
@@ -82,11 +80,11 @@ class TableProxy
      * @param int|null    $hostId
      *
      * @return int
-     * @throws DBALException
+     * @throws DbcRuntimeException
+     * @throws Exception
      * @throws Exception
      * @throws MappingTablesException
      * @throws RuntimeException
-     * @throws DbcRuntimeException
      */
     public function delete(?string $endpoint = null, ?int $hostId = null): int
     {
@@ -94,14 +92,14 @@ class TableProxy
     }
 
     /**
-     * @param string[] $where
-     * @param string[] $parameters
-     * @param string[] $orderBy
-     * @param int|null $limit
-     * @param int|null $offset
+     * @param string[]              $where
+     * @param string[]              $parameters
+     * @param array<string, string> $orderBy
+     * @param int|null              $limit
+     * @param int|null              $offset
      *
      * @return string[]
-     * @throws DBALException
+     * @throws Exception
      * @throws Exception
      * @throws MappingTablesException
      * @throws RuntimeException
@@ -120,11 +118,11 @@ class TableProxy
      * @param string[] $endpoints
      *
      * @return string[]
-     * @throws DBALException
+     * @throws DbcRuntimeException
+     * @throws Exception
      * @throws Exception
      * @throws MappingTablesException
      * @throws RuntimeException
-     * @throws DbcRuntimeException
      */
     public function filterMappedEndpoints(array $endpoints): array
     {
@@ -135,10 +133,10 @@ class TableProxy
      * @param int $hostId
      *
      * @return string|null
+     * @throws DbcRuntimeException
      * @throws Exception
      * @throws MappingTablesException
      * @throws RuntimeException
-     * @throws DbcRuntimeException
      */
     public function getEndpoint(int $hostId): ?string
     {
@@ -149,9 +147,8 @@ class TableProxy
      * @param string $endpoint
      *
      * @return int|null
-     * @throws DBALException
+     * @throws Exception
      * @throws MappingTablesException
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws RuntimeException
      */
     public function getHostId(string $endpoint): ?int
@@ -197,8 +194,8 @@ class TableProxy
      * @param int    $hostId
      *
      * @return int
-     * @throws DBALException|MappingTablesException
      * @throws DbcRuntimeException
+     * @throws Exception|MappingTablesException
      * @throws RuntimeException
      */
     public function save(string $endpoint, int $hostId): int

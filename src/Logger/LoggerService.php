@@ -44,11 +44,11 @@ class LoggerService
 
     protected FormatterInterface $formatter;
     protected string             $logDir;
-    protected string|int|LogLevel $logLevel;
+    protected string|int $logLevel;
     protected int                 $maxFiles = 2;
     // Final handler that is wrapped by FilterHandler
 
-    protected HandlerInterface   $handler;
+    protected ?HandlerInterface   $handler = null;
     // Handler that writes to combined log file
 
     protected HandlerInterface   $combinedHandler;
@@ -129,15 +129,50 @@ class LoggerService
     protected function createHandler(): void
     {
         // needed if we change the level
-        if (isset($this->handler)) {
+        if ($this->handler !== null) {
             $this->handler->close();
         }
-        $logLevel = MonoLogger::toMonologLevel($this->logLevel); // @phpstan-ignore-line
+        $logLevel = $this->resolveLogLevel($this->logLevel);
         $handler  = new FilterHandler($this->combinedHandler, $logLevel);
         if (isset($this->formatter)) {
             $handler->setFormatter($this->formatter);
         }
         $this->handler = $handler;
+    }
+
+    /**
+     * @param int|string|Level $level
+     *
+     * @return Level
+     * @throws \InvalidArgumentException
+     */
+    protected function resolveLogLevel(int|string|Level $level): Level
+    {
+        if ($level instanceof Level) {
+            return $level;
+        }
+        if (\is_int($level)) {
+            return Level::from($level);
+        }
+
+        /** @var array<string, Level> $nameMap */
+        $nameMap = [
+            'debug'     => Level::Debug,
+            'info'      => Level::Info,
+            'notice'    => Level::Notice,
+            'warning'   => Level::Warning,
+            'error'     => Level::Error,
+            'critical'  => Level::Critical,
+            'alert'     => Level::Alert,
+            'emergency' => Level::Emergency,
+        ];
+
+        $normalized = \strtolower($level);
+        if (isset($nameMap[$normalized])) {
+            return $nameMap[$normalized];
+        }
+
+        throw new \InvalidArgumentException(\sprintf('Unknown log level: %s', $level));
     }
 
     /**
@@ -168,22 +203,18 @@ class LoggerService
      *
      * @return HandlerInterface
      * @throws InvalidArgumentException
-     * @throws UnexpectedValueException
      * @throws \InvalidArgumentException
+     * @throws UnexpectedValueException
      */
     protected function createChannelSpecificHandler(string $channel, int|string|Level $logLevel): HandlerInterface
     {
         $fileName     = \sprintf('%s/%s.log', $this->logDir, $channel);
-        $monologLevel = MonoLogger::toMonologLevel($logLevel); // @phpstan-ignore-line
+        $monologLevel = $this->resolveLogLevel($logLevel);
         $handler      = new RotatingFileHandler($fileName, $this->maxFiles, $monologLevel);
         if ($this->useChunkedHandler) {
             $handler = new ChunkedHandler($handler);
         }
-        if (
-            isset($this->formatter)
-            && ($handler instanceof FormattableHandlerInterface // @phpstan-ignore-line
-            || \method_exists($handler, 'setFormatter'))
-        ) {
+        if (isset($this->formatter)) {
             $handler->setFormatter($this->formatter);
         }
         return $handler;
@@ -193,10 +224,10 @@ class LoggerService
      * @param string $channel
      *
      * @return MonoLogger
-     * @throws InvalidArgumentException
-     * @throws UnexpectedValueException
-     * @throws \InvalidArgumentException
      * @throws \Exception
+     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws UnexpectedValueException
      */
     public function get(string $channel): MonoLogger
     {
@@ -205,9 +236,10 @@ class LoggerService
             $this->channels[$channel] = new MonoLogger($channel);
         }
 
-        $logLevel = MonoLogger::toMonologLevel($this->logLevel); // @phpstan-ignore-line
+        $logLevel = $this->resolveLogLevel($this->logLevel);
         if (!$this->channels[$channel]->isHandling($logLevel)) {
             $handler = $this->createChannelSpecificHandler($channel, $logLevel);
+            \assert($this->handler !== null);
             $this->channels[$channel]->pushHandler($this->handler);
             $this->channels[$channel]->pushHandler($handler);
             foreach ($this->processors as $processor) {
@@ -263,8 +295,8 @@ class LoggerService
      *
      * @return $this
      * @throws LoggerException
-     * @throws RuntimeException
      * @throws ReflectionException
+     * @throws RuntimeException
      */
     public function setFormat(string $format, array $arguments = []): self
     {

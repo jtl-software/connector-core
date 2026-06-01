@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Jtl\Connector\Core\Test\Definition;
 
 use Jtl\Connector\Core\Definition\Action;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class ActionTest
@@ -18,8 +18,8 @@ class ActionTest extends TestCase
 {
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetActions(): void
     {
@@ -44,15 +44,14 @@ class ActionTest extends TestCase
     }
 
     /**
-     * @dataProvider actionDataProvider
-     *
      * @param string $actionName
      * @param bool   $expectedResult
      *
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
+    #[DataProvider('actionDataProvider')]
     public function testIsAction(string $actionName, bool $expectedResult): void
     {
         $this->assertSame($expectedResult, Action::isAction($actionName));
@@ -61,7 +60,7 @@ class ActionTest extends TestCase
     /**
      * @return array<int, array{0: string, 1: bool}>
      */
-    public function actionDataProvider(): array
+    public static function actionDataProvider(): array
     {
         return [
             [Action::PULL, true],
@@ -76,15 +75,14 @@ class ActionTest extends TestCase
     }
 
     /**
-     * @dataProvider coreActionDataProvider
-     *
      * @param string $actionName
      * @param bool   $expectedResult
      *
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
+    #[DataProvider('coreActionDataProvider')]
     public function testIsCoreAction(string $actionName, bool $expectedResult): void
     {
         $this->assertSame($expectedResult, Action::isCoreAction($actionName));
@@ -94,7 +92,7 @@ class ActionTest extends TestCase
      * @return array<int, array{0: string, 1: bool}>
      * @throws \Exception
      */
-    public function coreActionDataProvider(): array
+    public static function coreActionDataProvider(): array
     {
         return [
             [Action::AUTH, true],

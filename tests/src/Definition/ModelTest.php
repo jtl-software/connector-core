@@ -8,9 +8,9 @@ use Jtl\Connector\Core\Definition\IdentityType;
 use Jtl\Connector\Core\Definition\Model;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class ModelTest
@@ -22,8 +22,8 @@ class ModelTest extends TestCase
     /**
      * @return void
      * @throws AssertionFailedError
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testPropertyMappingsMatchModelIdentities(): void
     {
@@ -38,6 +38,7 @@ class ModelTest extends TestCase
 
         $mappings = $propertyMappings->getValue($definition);
         $this->assertIsArray($mappings);
+        /** @var array<string, array<string, int>> $mappings */
         foreach ($mappings as $modelName => $identityMappings) {
             if (\in_array($modelName, $exceptions, true)) {
                 continue;
@@ -56,8 +57,8 @@ class ModelTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testMappingsMatchIdentityType(): void
     {
@@ -68,24 +69,24 @@ class ModelTest extends TestCase
 
         $mappings = $propertyMappings->getValue($definition);
         $this->assertIsArray($mappings);
+        /** @var array<string, int> $mappings */
         foreach ($mappings as $mapping) {
             $this->assertTrue(IdentityType::isType($mapping));
         }
     }
 
     /**
-     * @dataProvider getModelByTypeProvider
-     *
      * @param int               $identityType
      * @param \Exception|string $expectedResult
      * @param bool              $shouldThrowException
      *
      * @return void
      * @throws DefinitionException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
      * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
+    #[DataProvider('getModelByTypeProvider')]
     public function testGetModelByType(
         int               $identityType,
         \Exception|string $expectedResult,
@@ -110,7 +111,7 @@ class ModelTest extends TestCase
     /**
      * @return array<int, array{0: int, 1: string|DefinitionException, 2?: true}>
      */
-    public function getModelByTypeProvider(): array
+    public static function getModelByTypeProvider(): array
     {
         return [
             [IdentityType::CATEGORY, Model::CATEGORY],
@@ -134,16 +135,15 @@ class ModelTest extends TestCase
     }
 
     /**
-     * @dataProvider isIdentityPropertyProvider
-     *
      * @param string $modelName
      * @param string $propertyName
      * @param bool   $expectedResult
      *
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
+    #[DataProvider('isIdentityPropertyProvider')]
     public function testIsIdentityPropertyInvalidPropertyName(
         string $modelName,
         string $propertyName,
@@ -156,7 +156,7 @@ class ModelTest extends TestCase
     /**
      * @return array<int, array{0: string, 1: string, 2: bool}>
      */
-    public function isIdentityPropertyProvider(): array
+    public static function isIdentityPropertyProvider(): array
     {
         return [
             [Model::SHIPMENT, 'id', false],
@@ -170,31 +170,29 @@ class ModelTest extends TestCase
     }
 
     /**
-     * @dataProvider modelNameProvider
-     *
      * @param string $modelName
      * @param bool   $expectedResult
      *
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
+    #[DataProvider('modelNameProvider')]
     public function testIsModel(string $modelName, bool $expectedResult): void
     {
         $this->assertEquals($expectedResult, Model::isModel($modelName));
     }
 
     /**
-     * @dataProvider modelNameProvider
-     *
      * @param string $modelName
      * @param bool   $isModelName
      *
      * @return void
      * @throws DefinitionException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
+    #[DataProvider('modelNameProvider')]
     public function testGetRelationType(string $modelName, bool $isModelName): void
     {
         if (!$isModelName) {
@@ -207,7 +205,7 @@ class ModelTest extends TestCase
     /**
      * @return array<int, array{0: string, 1: bool}>
      */
-    public function modelNameProvider(): array
+    public static function modelNameProvider(): array
     {
         return [
             [Model::PRODUCT, true],

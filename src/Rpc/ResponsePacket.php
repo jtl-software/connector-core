@@ -66,7 +66,7 @@ class ResponsePacket extends Packet
 
         if (!empty($this->warnings)) {
             foreach ($this->warnings as $warning) {
-                if (!\is_string($warning)) {
+                if ($warning === '') {
                     $isValid = false;
                 }
             }

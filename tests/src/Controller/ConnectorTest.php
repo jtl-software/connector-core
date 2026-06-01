@@ -23,45 +23,18 @@ use Jtl\Connector\Core\Test\TestCase;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\MockObject\CannotUseOnlyMethodsException;
-use PHPUnit\Framework\MockObject\ClassAlreadyExistsException;
-use PHPUnit\Framework\MockObject\ClassIsFinalException;
-use PHPUnit\Framework\MockObject\ClassIsReadonlyException;
-use PHPUnit\Framework\MockObject\DuplicateMethodException;
-use PHPUnit\Framework\MockObject\IncompatibleReturnValueException;
-use PHPUnit\Framework\MockObject\InvalidMethodNameException;
-use PHPUnit\Framework\MockObject\MethodCannotBeConfiguredException;
-use PHPUnit\Framework\MockObject\MethodNameAlreadyConfiguredException;
-use PHPUnit\Framework\MockObject\OriginalConstructorInvocationRequiredException;
-use PHPUnit\Framework\MockObject\ReflectionException;
-use PHPUnit\Framework\MockObject\RuntimeException;
-use PHPUnit\Framework\MockObject\UnknownTypeException;
 use SessionHandlerInterface;
 
 class ConnectorTest extends TestCase
 {
     /**
      * @return void
+     * @throws CannotUseOnlyMethodsException
+     * @throws Exception
      * @throws \InvalidArgumentException
      * @throws \JsonException
      * @throws JsonException
-     * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws \PHPUnit\Framework\InvalidArgumentException
-     * @throws CannotUseOnlyMethodsException
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
-     * @throws DuplicateMethodException
-     * @throws IncompatibleReturnValueException
-     * @throws InvalidMethodNameException
-     * @throws MethodCannotBeConfiguredException
-     * @throws MethodNameAlreadyConfiguredException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
-     * @throws RuntimeException
-     * @throws UnknownTypeException
-     * @throws \RuntimeException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testFeatures(): void
     {
@@ -83,20 +56,9 @@ class ConnectorTest extends TestCase
     /**
      * @return void
      * @throws CaseConverterException
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
      * @throws DefinitionException
-     * @throws DuplicateMethodException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws InvalidMethodNameException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
-     * @throws RuntimeException
-     * @throws UnknownTypeException
-     * @throws \PHPUnit\Framework\InvalidArgumentException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testAckEmpty(): void
     {
@@ -112,16 +74,6 @@ class ConnectorTest extends TestCase
      * @param string                       $featuresPath
      *
      * @return ConnectorController
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
-     * @throws DuplicateMethodException
-     * @throws InvalidMethodNameException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
-     * @throws RuntimeException
-     * @throws UnknownTypeException
-     * @throws \PHPUnit\Framework\InvalidArgumentException
      */
     protected function createConnectorController(
         ?IdentityLinker           $linker = null,
@@ -158,23 +110,9 @@ class ConnectorTest extends TestCase
     /**
      * @return void
      * @throws CaseConverterException
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
      * @throws DefinitionException
-     * @throws DuplicateMethodException
-     * @throws ExpectationFailedException
-     * @throws IncompatibleReturnValueException
-     * @throws InvalidArgumentException
-     * @throws InvalidMethodNameException
-     * @throws MethodCannotBeConfiguredException
-     * @throws MethodNameAlreadyConfiguredException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
-     * @throws RuntimeException
-     * @throws UnknownTypeException
-     * @throws \PHPUnit\Framework\InvalidArgumentException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testAckInvalidModelName(): void
     {
@@ -196,7 +134,6 @@ class ConnectorTest extends TestCase
      * @return void
      * @throws AuthenticationException
      * @throws \Psr\Log\InvalidArgumentException
-     * @throws \RuntimeException
      */
     public function testAuthMissingToken(): void
     {
@@ -212,20 +149,7 @@ class ConnectorTest extends TestCase
     /**
      * @return void
      * @throws AuthenticationException
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
-     * @throws DuplicateMethodException
-     * @throws InvalidMethodNameException
-     * @throws MethodCannotBeConfiguredException
-     * @throws MethodNameAlreadyConfiguredException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
-     * @throws RuntimeException
-     * @throws UnknownTypeException
-     * @throws \PHPUnit\Framework\InvalidArgumentException
      * @throws \Psr\Log\InvalidArgumentException
-     * @throws \RuntimeException
      */
     public function testAuthTokenIsInvalid(): void
     {
@@ -248,24 +172,9 @@ class ConnectorTest extends TestCase
     /**
      * @return void
      * @throws AuthenticationException
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
-     * @throws DuplicateMethodException
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws IncompatibleReturnValueException
-     * @throws InvalidMethodNameException
-     * @throws MethodCannotBeConfiguredException
-     * @throws MethodNameAlreadyConfiguredException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
-     * @throws RuntimeException
-     * @throws UnknownTypeException
-     * @throws \PHPUnit\Framework\InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \Psr\Log\InvalidArgumentException
-     * @throws \RuntimeException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testAuthCorrect(): void
     {
@@ -289,21 +198,7 @@ class ConnectorTest extends TestCase
 
     /**
      * @return void
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
-     * @throws DuplicateMethodException
-     * @throws ExpectationFailedException
-     * @throws IncompatibleReturnValueException
-     * @throws InvalidMethodNameException
-     * @throws MethodCannotBeConfiguredException
-     * @throws MethodNameAlreadyConfiguredException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
-     * @throws RuntimeException
-     * @throws UnknownTypeException
-     * @throws \PHPUnit\Framework\InvalidArgumentException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testIdentify(): void
     {
@@ -327,23 +222,9 @@ class ConnectorTest extends TestCase
 
     /**
      * @return void
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
      * @throws DefinitionException
-     * @throws DuplicateMethodException
-     * @throws ExpectationFailedException
-     * @throws IncompatibleReturnValueException
-     * @throws InvalidArgumentException
-     * @throws InvalidMethodNameException
-     * @throws MethodCannotBeConfiguredException
-     * @throws MethodNameAlreadyConfiguredException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
-     * @throws RuntimeException
-     * @throws UnknownTypeException
-     * @throws \PHPUnit\Framework\InvalidArgumentException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testClearSuccess(): void
     {

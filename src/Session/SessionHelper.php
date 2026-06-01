@@ -45,6 +45,7 @@ class SessionHelper
      */
     public function get(string $name, mixed $default = null): mixed
     {
+        /** @var array<string, array<string, mixed>> $_SESSION */
         return $_SESSION[$this->namespace][$name] ?? $default;
     }
 
@@ -60,6 +61,7 @@ class SessionHelper
             throw new SessionException("The '{$name}' key must be a non-empty string");
         }
 
+        /** @var array<string, array<string, mixed>> $_SESSION */
         $value = &$_SESSION[$this->namespace][$name] ?? null;
 
         return $value;
@@ -88,6 +90,7 @@ class SessionHelper
      */
     public function set(string $name, mixed $value): self
     {
+        /** @var array<string, array<string, mixed>> $_SESSION */
         $_SESSION[$this->namespace][$name] = $value;
 
         return $this;
@@ -115,6 +118,7 @@ class SessionHelper
      */
     public function has(string $name): bool
     {
+        /** @var array<string, array<string, mixed>> $_SESSION */
         return isset($_SESSION[$this->namespace][$name]);
     }
 
@@ -141,6 +145,7 @@ class SessionHelper
     public function unset(string $name): self
     {
         if ($this->has($name)) {
+            /** @var array<string, array<string, mixed>> $_SESSION */
             unset($_SESSION[$this->namespace][$name]);
         }
 

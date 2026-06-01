@@ -14,7 +14,6 @@ use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use org\bovigo\vfs\vfsStreamException;
 use PHPUnit\Framework\ExpectationFailedException;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class TestCase
@@ -30,8 +29,7 @@ class TestCase extends \Jtl\Connector\MappingTables\TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     protected function tearDown(): void
     {
@@ -61,8 +59,7 @@ class TestCase extends \Jtl\Connector\MappingTables\TestCase
      * @param string $dirname
      *
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     protected function removeDirRecursive(string $dirname): void
     {
@@ -107,7 +104,7 @@ class TestCase extends \Jtl\Connector\MappingTables\TestCase
      * @return array<int, array<int, mixed>>
      * @throws \ReflectionException
      */
-    protected function getCorrectConstantsTestCases(string $className): array
+    protected static function getCorrectConstantsTestCases(string $className): array
     {
         $reflection = new \ReflectionClass($className);
         $constants  = \array_values($reflection->getConstants());

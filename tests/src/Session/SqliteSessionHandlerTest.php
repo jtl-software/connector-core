@@ -13,7 +13,6 @@ use PDOStatement;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\ExpectationFailedException;
 use RuntimeException;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 class SqliteSessionHandlerTest extends TestCase
 {
@@ -23,8 +22,8 @@ class SqliteSessionHandlerTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testConstruct(): void
     {
@@ -33,8 +32,8 @@ class SqliteSessionHandlerTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \Psr\Log\InvalidArgumentException
      */
     public function testClose(): void
@@ -44,8 +43,8 @@ class SqliteSessionHandlerTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \Throwable
      */
     public function testDestroy(): void
@@ -91,7 +90,10 @@ class SqliteSessionHandlerTest extends TestCase
         $stmt->execute();
         $data = $stmt->fetch(\PDO::FETCH_ASSOC);
         if (\is_array($data)) {
-            $data['sessionData'] = \base64_decode($data['sessionData'], true);
+            /** @var string $sessionData */
+            $sessionData         = $data['sessionData'];
+            $data['sessionData'] = \base64_decode($sessionData, true);
+            /** @var array<string, scalar> $data */
             return $data;
         }
         return null;
@@ -100,11 +102,10 @@ class SqliteSessionHandlerTest extends TestCase
     /**
      * @return void
      * @throws DatabaseException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws RuntimeException
+     * @throws \InvalidArgumentException
      * @throws \InvalidArgumentException
      * @throws \PDOException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \Psr\Log\InvalidArgumentException
      */
     public function testWriteInsert(): void
@@ -114,8 +115,9 @@ class SqliteSessionHandlerTest extends TestCase
         $now         = \time();
         $this->assertNull($this->findSessionData($sessionId));
         $this->handler->write($sessionId, $sessionData);
+        /** @var array<string, scalar>|null $data */
         $data = $this->findSessionData($sessionId);
-        $this->assertIsArray($data);
+        $this->assertNotNull($data);
         $this->assertEquals($sessionId, $data['sessionId']);
         $this->assertEquals($sessionData, $data['sessionData']);
         $this->assertGreaterThan($now, $data['sessionExpires']);
@@ -124,11 +126,10 @@ class SqliteSessionHandlerTest extends TestCase
     /**
      * @return void
      * @throws DatabaseException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws RuntimeException
+     * @throws \InvalidArgumentException
      * @throws \InvalidArgumentException
      * @throws \PDOException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \Psr\Log\InvalidArgumentException
      */
     public function testWriteUpdate(): void
@@ -140,16 +141,16 @@ class SqliteSessionHandlerTest extends TestCase
         $newData = $this->getFaker()->text . '213';
         $this->handler->write($sessionId, $newData);
         $data = $this->findSessionData($sessionId);
-        $this->assertIsArray($data);
+        $this->assertNotNull($data);
         $this->assertEquals($sessionId, $data['sessionId']);
         $this->assertEquals($newData, $data['sessionData']);
     }
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws \PDOException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \Throwable
      */
     public function testGc(): void
@@ -168,7 +169,7 @@ class SqliteSessionHandlerTest extends TestCase
     /**
      * @return int
      * @throws AssertionFailedError
-     * @throws RuntimeException
+     * @throws \RuntimeException
      */
     protected function countSessionData(): int
     {
@@ -189,9 +190,9 @@ class SqliteSessionHandlerTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws \PDOException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \Throwable
      */
     public function testValidateIdSuccess(): void
@@ -205,9 +206,9 @@ class SqliteSessionHandlerTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws \PDOException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \Throwable
      */
     public function testValidateIdFailsSessionExpired(): void
@@ -221,8 +222,8 @@ class SqliteSessionHandlerTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \Throwable
      */
     public function testValidateIdFailsSessionDoesNotExist(): void
@@ -233,8 +234,8 @@ class SqliteSessionHandlerTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \Psr\Log\InvalidArgumentException
      */
     public function testOpen(): void
@@ -244,9 +245,9 @@ class SqliteSessionHandlerTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws \PDOException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \Throwable
      */
     public function testReadSuccess(): void
@@ -260,9 +261,9 @@ class SqliteSessionHandlerTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws \PDOException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \Throwable
      */
     public function testReadFailedSessionExpired(): void
@@ -276,8 +277,8 @@ class SqliteSessionHandlerTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \Throwable
      */
     public function testReadFailedSessionNotExists(): void
@@ -288,11 +289,10 @@ class SqliteSessionHandlerTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws RuntimeException
+     * @throws \InvalidArgumentException
      * @throws \InvalidArgumentException
      * @throws \PDOException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testUpdateTimestamp(): void
     {
@@ -309,9 +309,8 @@ class SqliteSessionHandlerTest extends TestCase
     /**
      * @return void
      * @throws DatabaseException
-     * @throws SessionException
      * @throws \PDOException
-     * @throws \RuntimeException
+     * @throws SessionException
      */
     protected function setUp(): void
     {
@@ -328,8 +327,8 @@ class SqliteSessionHandlerTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     protected function tearDown(): void
     {

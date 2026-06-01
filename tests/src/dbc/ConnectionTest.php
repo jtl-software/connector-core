@@ -4,15 +4,11 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Dbc;
 
-use Doctrine\DBAL\DBALException;
-use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Schema\SchemaException;
 use Jtl\Connector\Dbc\Query\QueryBuilder;
 use Jtl\Connector\Dbc\Schema\TableRestriction;
-use Jtl\Connector\MappingTables\Validator;
 use PHPUnit\Framework\ExpectationFailedException;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 use Throwable;
 
 class ConnectionTest extends TestCase
@@ -21,16 +17,13 @@ class ConnectionTest extends TestCase
 
     /**
      * @return void
-     * @throws DBALException
      * @throws DbcRuntimeException
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws SchemaException
-     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws \InvalidArgumentException
      * @throws \PDOException
      * @throws \PHPUnit\Framework\Exception
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws SchemaException
      */
     public function testInsertWithTableRestriction(): void
     {
@@ -47,33 +40,29 @@ class ConnectionTest extends TestCase
         $this->assertEquals(3, $this->countRows($this->table->getTableName()));
         $qb   = $this->connection->createQueryBuilder();
         $stmt = $qb
-            ->select($this->table->getColumnNames())
+            ->select(...$this->table->getColumnNames())
             ->from($this->table->getTableName())
             ->where(TableStub::A . ' = :a')
-            ->setParameter('a', 25)->execute();
+            ->setParameter('a', 25)->executeQuery();
 
-        $result = Validator::returnResult($stmt, 'stmt')->fetchAll();
+        $result = $stmt->fetchAllAssociative();
 
         $this->assertCount(1, $result);
         $this->assertArrayHasKey(0, $result);
         $row = $result[0];
-        $this->assertIsArray($row);
         $this->assertArrayHasKey(TableStub::B, $row);
         $this->assertEquals('b string', $row[TableStub::B]);
     }
 
     /**
      * @return void
-     * @throws DBALException
      * @throws DbcRuntimeException
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws SchemaException
-     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws \InvalidArgumentException
      * @throws \PDOException
      * @throws \PHPUnit\Framework\Exception
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws SchemaException
      */
     public function testUpdateWithTableRestriction(): void
     {
@@ -91,33 +80,29 @@ class ConnectionTest extends TestCase
         $this->connection->update($this->table->getTableName(), $data, $identifier);
         $qb   = $this->connection->createQueryBuilder();
         $stmt = $qb
-            ->select($this->table->getColumnNames())
+            ->select(...$this->table->getColumnNames())
             ->from($this->table->getTableName())
             ->where(TableStub::A . ' = :a')
-            ->setParameter('a', 25)->execute();
+            ->setParameter('a', 25)->executeQuery();
 
-        $result = Validator::returnResult($stmt, 'stmt')->fetchAll();
+        $result = $stmt->fetchAllAssociative();
 
         $this->assertCount(1, $result);
         $this->assertArrayHasKey(0, $result);
         $row = $result[0];
-        $this->assertIsArray($row);
         $this->assertArrayHasKey(TableStub::B, $row);
         $this->assertEquals('b string', $row[TableStub::B]);
     }
 
     /**
      * @return void
-     * @throws DBALException
      * @throws DbcRuntimeException
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws SchemaException
-     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws \InvalidArgumentException
      * @throws \PDOException
      * @throws \PHPUnit\Framework\Exception
-     * @throws \RuntimeException
-     * @throws InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws SchemaException
      */
     public function testDeleteWithTableRestriction(): void
     {
@@ -129,26 +114,24 @@ class ConnectionTest extends TestCase
         $this->assertEquals(1, $this->countRows($this->table->getTableName()));
         $qb   = $this->connection->createQueryBuilder();
         $stmt = $qb
-            ->select($this->table->getColumnNames())
+            ->select(...$this->table->getColumnNames())
             ->from($this->table->getTableName())
-            ->execute();
+            ->executeQuery();
 
-        $result = Validator::returnResult($stmt, 'stmt')->fetchAll();
+        $result = $stmt->fetchAllAssociative();
 
         $this->assertCount(0, $result);
     }
 
     /**
      * @return void
-     * @throws DBALException
      * @throws DbcRuntimeException
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws SchemaException
-     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws \InvalidArgumentException
      * @throws \PDOException
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws SchemaException
      */
     public function testDeleteWithTableRestrictionAndAdditionalIdentifier(): void
     {
@@ -162,11 +145,11 @@ class ConnectionTest extends TestCase
 
     /**
      * @return void
-     * @throws DBALException
-     * @throws ExpectationFailedException
-     * @throws SchemaException
      * @throws DbcRuntimeException
-     * @throws InvalidArgumentException
+     * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws SchemaException
      */
     public function testHasTableRestriction(): void
     {
@@ -179,9 +162,9 @@ class ConnectionTest extends TestCase
 
     /**
      * @return void
-     * @throws DBALException
-     * @throws SchemaException
+     * @throws Exception
      * @throws \Exception
+     * @throws SchemaException
      */
     public function testGetTableRestrictionsAll(): void
     {
@@ -197,7 +180,6 @@ class ConnectionTest extends TestCase
         /** @var array<string, array<string, int|string>> $restrictions */
         $restrictions = $this->connection->getTableRestrictions();
         $this->assertArrayHasKey($this->table->getTableName(), $restrictions);
-        $this->assertIsArray($restrictions[$this->table->getTableName()]);
         $this->assertArrayHasKey(TableStub::B, $restrictions[$this->table->getTableName()]);
         $this->assertEquals('b string', $restrictions[$this->table->getTableName()][TableStub::B]);
 
@@ -208,9 +190,9 @@ class ConnectionTest extends TestCase
 
     /**
      * @return void
-     * @throws DBALException
-     * @throws SchemaException
+     * @throws Exception
      * @throws \Exception
+     * @throws SchemaException
      */
     public function testGetTableRestrictionsFromTable(): void
     {
@@ -230,9 +212,9 @@ class ConnectionTest extends TestCase
 
     /**
      * @return void
+     * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\Exception
-     * @throws InvalidArgumentException
-     * @throws ExpectationFailedException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testCreateQueryBuilder(): void
     {
@@ -241,14 +223,11 @@ class ConnectionTest extends TestCase
 
     /**
      * @return void
-     * @throws DBALException
      * @throws DbcRuntimeException
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws \InvalidArgumentException
      * @throws \PDOException
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testInsert(): void
     {
@@ -263,14 +242,11 @@ class ConnectionTest extends TestCase
 
     /**
      * @return void
-     * @throws DBALException
      * @throws DbcRuntimeException
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws \InvalidArgumentException
      * @throws \PDOException
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testMultiInsert(): void
     {
@@ -313,10 +289,9 @@ class ConnectionTest extends TestCase
      * @return void
      * @throws DbcRuntimeException
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\Exception
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testUpdateRow(): void
     {
@@ -331,17 +306,16 @@ class ConnectionTest extends TestCase
         $this->assertEquals(1, $this->connection->update($this->table->getTableName(), $data, $identifier));
 
         $stmt = $this->connection->createQueryBuilder()
-                                 ->select($this->table->getColumnNames())
+                                 ->select(...$this->table->getColumnNames())
                                  ->from($this->table->getTableName())
                                  ->where(TableStub::ID . ' = :id')
                                  ->setParameter('id', 1)
-                                 ->execute();
+                                 ->executeQuery();
 
-        $result = Validator::returnResult($stmt, 'stmt')->fetchAll();
+        $result = $stmt->fetchAllAssociative();
 
         $this->assertCount(1, $result);
         $row = $result[0];
-        $this->assertIsArray($row);
         $this->assertArrayHasKey(TableStub::ID, $row);
         $this->assertArrayHasKey(TableStub::A, $row);
         $this->assertArrayHasKey(TableStub::B, $row);
@@ -354,15 +328,12 @@ class ConnectionTest extends TestCase
 
     /**
      * @return void
-     * @throws DBALException
      * @throws DbcRuntimeException
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws \InvalidArgumentException
      * @throws \PDOException
      * @throws \PHPUnit\Framework\Exception
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testDeleteRow(): void
     {
@@ -370,13 +341,13 @@ class ConnectionTest extends TestCase
         $this->assertEquals(1, $this->connection->delete($this->table->getTableName(), $identifier));
 
         $stmt = $this->connection->createQueryBuilder()
-                                 ->select($this->table->getColumnNames())
+                                 ->select(...$this->table->getColumnNames())
                                  ->from($this->table->getTableName())
                                  ->where(TableStub::ID . ' = :id')
                                  ->setParameter('id', 3)
-                                 ->execute();
+                                 ->executeQuery();
 
-        $result = Validator::returnResult($stmt, 'stmt')->fetchAll();
+        $result = $stmt->fetchAllAssociative();
 
         $this->assertCount(0, $result);
         $this->assertEquals(1, $this->countRows($this->table->getTableName()));
@@ -385,7 +356,6 @@ class ConnectionTest extends TestCase
     /**
      * @return void
      * @throws Exception
-     * @throws DBALException
      * @throws \Exception
      * @throws Throwable
      */
@@ -394,13 +364,6 @@ class ConnectionTest extends TestCase
         $this->table = new TableStub($this->getDBManager());
         parent::setUp();
         $this->insertFixtures($this->table, self::getTableStubFixtures());
-        $params = [
-            'pdo'          => $this->getPDO(),
-            'wrapperClass' => Connection::class
-        ];
-        $config = null;
-        /** @var Connection $connection */
-        $connection       = DriverManager::getConnection($params, $config);
-        $this->connection = $connection;
+        $this->connection = $this->getDBManager()->getConnection();
     }
 }

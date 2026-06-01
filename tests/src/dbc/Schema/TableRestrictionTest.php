@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Dbc\Schema;
 
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception as DBALException;
 use Doctrine\DBAL\Schema\SchemaException;
 use Exception;
 use Jtl\Connector\Dbc\DbcRuntimeException;
 use Jtl\Connector\Dbc\TableStub;
 use Jtl\Connector\Dbc\TestCase;
 use PHPUnit\Framework\ExpectationFailedException;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 use Throwable;
 
 class TableRestrictionTest extends TestCase
@@ -19,11 +18,10 @@ class TableRestrictionTest extends TestCase
     /**
      * @return void
      * @throws DBALException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
      * @throws DbcRuntimeException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws SchemaException
-     * @throws \RuntimeException
      */
     public function testInitializationSuccessful(): void
     {
@@ -41,12 +39,10 @@ class TableRestrictionTest extends TestCase
      * @throws DBALException
      * @throws DbcRuntimeException
      * @throws SchemaException
-     * @throws \RuntimeException
      */
     public function testInitializationWithNotExistingColumn(): void
     {
-        $this->expectException(SchemaException::class);
-        $this->expectExceptionCode(SchemaException::COLUMN_DOESNT_EXIST);
+        $this->expectException(\Doctrine\DBAL\Schema\Exception\ColumnDoesNotExist::class);
         $tableSchema = $this->table->getTableSchema();
         new TableRestriction($tableSchema, 'yolo', 'c');
     }
@@ -54,11 +50,10 @@ class TableRestrictionTest extends TestCase
     /**
      * @return void
      * @throws DBALException
-     * @throws SchemaException
      * @throws DbcRuntimeException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws SchemaException
      */
     public function testCreate(): void
     {
@@ -74,8 +69,8 @@ class TableRestrictionTest extends TestCase
     /**
      * @return void
      * @throws DBALException
-     * @throws Throwable
      * @throws Exception
+     * @throws Throwable
      */
     protected function setUp(): void
     {

@@ -16,9 +16,9 @@ class TaxRateFactory extends AbstractModelFactory
 
     /**
      * @return array<string, string|float>
-     * @throws \RuntimeException
      * @throws ExtensionNotFound
      * @throws MustNotBeNullException
+     * @throws \RuntimeException
      * @throws \TypeError
      */
     protected function makeFakeArray(): array

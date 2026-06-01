@@ -15,15 +15,14 @@ use Jtl\Connector\Core\Subscriber\FeaturesSubscriber;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 class FeaturesSubscriberTest extends TestCase
 {
     /**
      * @return void
      * @throws FeaturesException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testSetNeedsFinishCallActive(): void
     {
@@ -38,8 +37,8 @@ class FeaturesSubscriberTest extends TestCase
     /**
      * @return void
      * @throws FeaturesException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testSetNeedsFinishCallActiveOverrideInactive(): void
     {
@@ -56,8 +55,8 @@ class FeaturesSubscriberTest extends TestCase
      * @throws CaseConverterException
      * @throws DefinitionException
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetSubscribedEvents(): void
     {

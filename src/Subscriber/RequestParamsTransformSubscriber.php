@@ -85,10 +85,12 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
                 if (!isset($products[$i]['prices'])) {
                     throw new \RuntimeException('unexpected array structure.');
                 }
-                foreach ($products[$i]['prices'] as $j => $productPrice) {
-                    /** @var array<string, mixed> $productPrice */
-                    $products[$i]['prices'][$j] = self::sortProductPriceItems($productPrice);
+                /** @var array<int, array<string, mixed>> $prices */
+                $prices = $products[$i]['prices'];
+                foreach ($prices as $j => $productPrice) {
+                    $prices[$j] = self::sortProductPriceItems($productPrice);
                 }
+                $products[$i]['prices'] = $prices;
             }
         }
 
@@ -103,10 +105,10 @@ class RequestParamsTransformSubscriber implements EventSubscriberInterface
     protected static function sortProductPriceItems(array $productPrice): array
     {
         if (isset($productPrice['items'])) {
-            /** @var array<string, numeric> $items */
+            /** @var array<int, array{quantity?: numeric}> $items */
             $items = $productPrice['items'];
-            \usort($items, static function ($a, $b) {
-                return ($a['quantity'] ?? 0) - ($b['quantity'] ?? 0);
+            \usort($items, static function (array $a, array $b): int {
+                return (int)(($a['quantity'] ?? 0) - ($b['quantity'] ?? 0));
             });
             $productPrice['items'] = $items;
         }

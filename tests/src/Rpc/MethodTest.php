@@ -9,8 +9,8 @@ use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Rpc\Method;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\ExpectationFailedException;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class MethodTest
@@ -21,8 +21,8 @@ class MethodTest extends TestCase
 {
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testConstructorParameters(): void
     {
@@ -35,18 +35,17 @@ class MethodTest extends TestCase
     }
 
     /**
-     * @dataProvider createFromRpcMethodDataProvider
-     *
      * @param string $rpcMethod
      * @param string $expectedController
      * @param string $expectedAction
      * @param bool   $isCore
      *
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
      * @throws CaseConverterException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
+    #[DataProvider('createFromRpcMethodDataProvider')]
     public function testCreateFromRpcMethod(
         string $rpcMethod,
         string $expectedController,
@@ -63,7 +62,7 @@ class MethodTest extends TestCase
     /**
      * @return array<int, array<int, string|bool>>
      */
-    public function createFromRpcMethodDataProvider(): array
+    public static function createFromRpcMethodDataProvider(): array
     {
         return [
             [
