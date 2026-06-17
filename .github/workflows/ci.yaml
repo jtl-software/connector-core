@@ -42,3 +42,45 @@ jobs:
         with:
           name: phpunit-${{ matrix.php-version }}
           path: phpunit.xml
+
+  phpstan:
+    name: PHPStan Static Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          coverage: none
+          tools: composer:v2
+          extensions: json, sqlite3, zip, fileinfo, pdo
+
+      - name: Install dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist
+
+      - name: Run PHPStan
+        run: php -d memory_limit=512M ./vendor/bin/phpstan analyse src tests --level max -c ./vendor/jtl/connector-cq/phpstan.neon
+
+  phpcs:
+    name: PHP Code Sniffer
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          coverage: none
+          tools: composer:v2
+          extensions: json, sqlite3, zip, fileinfo, pdo
+
+      - name: Install dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist
+
+      - name: Run PHP Code Sniffer
+        run: ./vendor/bin/phpcs --basepath=. --extensions=php --standard=JtlConnector src tests
