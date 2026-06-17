@@ -90,6 +90,7 @@ use Jtl\Connector\Core\Subscriber\SyncErrorSubscriber;
 use Jtl\Connector\Core\SyncError\SqliteSyncErrorCollector;
 use Jtl\Connector\Core\SyncError\SyncErrorCollectorAwareInterface;
 use Jtl\Connector\Core\SyncError\SyncErrorCollectorInterface;
+use Jtl\Connector\Core\Utilities\RateLimiter;
 use Jtl\Connector\Core\Utilities\Validator\Validate;
 use Monolog\ErrorHandler as MonologErrorHandler;
 use Noodlehaus\Exception\EmptyDirectoryException;
@@ -216,7 +217,9 @@ class Application
         $this->container->set(__CLASS__, $this);
         $this->eventDispatcher = new EventDispatcher();
         $this->fileSystem      = new Filesystem();
-        /** @var Warnings $warnings */
+        /**
+ * @var Warnings $warnings
+*/
         $warnings            = $this->container->get(Warnings::class);
         $this->loggerService =
             (
@@ -228,7 +231,9 @@ class Application
             )->setFormat(Validate::string($this->config->get(ConfigSchema::LOG_FORMAT)));
 
         $this->container->set(LoggerService::class, $this->loggerService);
-        /** use a factory to always return the instance from the service, instead of a possible stale reference */
+        /**
+ * use a factory to always return the instance from the service, instead of a possible stale reference
+*/
         $this->container->set(
             LoggerInterface::class,
             \DI\factory(
@@ -236,6 +241,13 @@ class Application
                     return $service->get(LoggerService::CHANNEL_GLOBAL);
                 }
             )->parameter('service', $this->loggerService)
+        );
+
+        $this->container->set(
+            RateLimiter::class,
+            function () {
+                return new RateLimiter($this->connectorDir, $this->loggerService);
+            }
         );
 
         $this->serializer   = SerializerBuilder::create($serializerCacheDir)->build();
@@ -335,6 +347,13 @@ class Application
                 throw DefinitionException::unknownAction($method->getAction());
             }
 
+            // Rate limiting check
+            /**
+ * @var RateLimiter $rateLimiter
+*/
+            $rateLimiter = $this->container->get(RateLimiter::class);
+            $rateLimiter->checkLimit($requestPacket->getMethod());
+
             $this->startSession($requestPacket->getMethod());
             $connector->initialize($this->config, $this->container, $this->eventDispatcher);
             $this->prepareContainer($connector);
@@ -364,11 +383,16 @@ class Application
             $requestPacket->setParams($data);
 
             $responsePacket = $this->execute($connector, $requestPacket, $method);
-            /** @var Warnings $warnings */
+            /**
+ * @var Warnings $warnings
+*/
             $warnings = $this->container->get(Warnings::class);
             if ($warnings->hasWarnings()) {
                 $responsePacket->addWarnings(...$warnings->getWarnings());
             }
+
+            // Record successful request for rate limiting
+            $rateLimiter->recordRequest($requestPacket->getMethod());
             \session_write_close();
         } catch (Throwable $ex) {
             if (\is_numeric($code = $ex->getCode())) {
@@ -381,7 +405,9 @@ class Application
                 ->setMessage($ex->getMessage())
                 ->setData(Error::createDataFromException($ex));
 
-            /** @var ResponsePacket $responsePacket */
+            /**
+ * @var ResponsePacket $responsePacket
+*/
             $responsePacket = ResponsePacket::create($requestPacket->getId());
             $responsePacket->setError($error);
 
@@ -403,7 +429,6 @@ class Application
 
     /**
      * @param string $rpcMethod
-     *
      *
      * @return void
      * @throws BadRequestException
@@ -535,25 +560,35 @@ class Application
             $this->container->set(ChecksumLoaderInterface::class, $connector->getChecksumLoader());
         }
 
-        $this->container->set(ChecksumLinker::class, function (ContainerInterface $container) {
-            $loader = $container->has(ChecksumLoaderInterface::class)
+        $this->container->set(
+            ChecksumLinker::class,
+            function (ContainerInterface $container) {
+                $loader = $container->has(ChecksumLoaderInterface::class)
                 ? $container->get(ChecksumLoaderInterface::class)
                 : null;
-            /** @var ChecksumLoaderInterface|null $loader */
-            $linker = new ChecksumLinker($loader);
-            $linker->setLogger($this->loggerService->get(LoggerService::CHANNEL_CHECKSUM));
+                /**
+            * @var ChecksumLoaderInterface|null $loader
+            */
+                $linker = new ChecksumLinker($loader);
+                $linker->setLogger($this->loggerService->get(LoggerService::CHANNEL_CHECKSUM));
 
-            return $linker;
-        });
+                return $linker;
+            }
+        );
 
-        $this->container->set(IdentityLinker::class, function (ContainerInterface $container) {
-            /** @var PrimaryKeyMapperInterface $pkmi */
-            $pkmi   = $container->get(PrimaryKeyMapperInterface::class);
-            $linker = new IdentityLinker($pkmi);
-            $linker->setLogger($this->loggerService->get(LoggerService::CHANNEL_LINKER));
+        $this->container->set(
+            IdentityLinker::class,
+            function (ContainerInterface $container) {
+                /**
+            * @var PrimaryKeyMapperInterface $pkmi
+            */
+                $pkmi   = $container->get(PrimaryKeyMapperInterface::class);
+                $linker = new IdentityLinker($pkmi);
+                $linker->setLogger($this->loggerService->get(LoggerService::CHANNEL_LINKER));
 
-            return $linker;
-        });
+                return $linker;
+            }
+        );
     }
 
     /**
@@ -634,7 +669,9 @@ class Application
 
         $request = $this->createHandleRequest($requestPacket, $method, $modelNamespace);
         if ($request->getController() === Controller::IMAGE && $request->getAction() === Action::PUSH) {
-            /** @var AbstractImage[] $params */
+            /**
+ * @var AbstractImage[] $params
+*/
             $params = $request->getParams();
             $this->handleImagePush(...$params);
         }
@@ -667,14 +704,12 @@ class Application
         if (!\is_array($resultData)) {
             if (
                 !\is_object($resultData)
-                && !(
-                    \is_bool($resultData)
-                    && \in_array(
-                        $request->getAction(),
-                        [Action::ACK, Action::CLEAR, Action::FINISH, Action::INIT],
-                        true
-                    )
-                )
+                && !(                \is_bool($resultData)
+                && \in_array(
+                    $request->getAction(),
+                    [Action::ACK, Action::CLEAR, Action::FINISH, Action::INIT],
+                    true
+                ))
             ) {
                 throw new \RuntimeException('$resultData must be an array|object|bool.');
             }
@@ -686,10 +721,14 @@ class Application
                 || \in_array($request->getAction(), [Action::PUSH, Action::DELETE], true) === false
             ) {
                 if ($result instanceof AbstractModel) {
-                    /** @var IdentityLinker $identityLinker */
+                    /**
+ * @var IdentityLinker $identityLinker
+*/
                     $identityLinker = $this->container->get(IdentityLinker::class);
                     $identityLinker->linkModel($result, ($request->getAction() === Action::DELETE));
-                    /** @var ChecksumLinker $checksumLinker */
+                    /**
+ * @var ChecksumLinker $checksumLinker
+*/
                     $checksumLinker = $this->container->get(ChecksumLinker::class);
                     $checksumLinker->link($result);
                 }
@@ -842,7 +881,9 @@ class Application
                             continue;
                         }
                         foreach ($identities as $identity) {
-                            /** @var IdentityLinker $identityLinker */
+                            /**
+     * @var IdentityLinker $identityLinker
+*/
                             $identityLinker = $this->container->get(IdentityLinker::class);
                             $identityLinker->linkIdentity($identity, RelationType::getModelName($relationType), 'id');
                         }
@@ -905,7 +946,9 @@ class Application
         $this->fileSystem->mkdir($tempDir);
 
         if ($this->httpRequest->files->has('file')) {
-            /** @var UploadedFile $zipFile */
+            /**
+ * @var UploadedFile $zipFile
+*/
             $zipFile = $this->httpRequest->files->get('file');
             $archive = new Zip();
             if ($archive->extract($zipFile->getRealPath(), $tempDir)) {
@@ -985,32 +1028,43 @@ class Application
         $params         = $request->getParams();
 
         if (Action::isCoreAction($action)) {
-            $this->container->set($controllerName, function (ContainerInterface $container) {
+            $this->container->set(
+                $controllerName,
+                function (ContainerInterface $container) {
 
-                if (!\is_string($featuresPath = $this->config->get(ConfigSchema::FEATURES_PATH))) {
-                    throw new \RuntimeException('$featuresPath must be a string!');
+                    if (!\is_string($featuresPath = $this->config->get(ConfigSchema::FEATURES_PATH))) {
+                        throw new \RuntimeException('$featuresPath must be a string!');
+                    }
+                    /**
+                * @var ChecksumLinker $checksumLinker
+                */
+                    $checksumLinker = $container->get(ChecksumLinker::class);
+                    /**
+                * @var IdentityLinker $identityLinker
+                */
+                    $identityLinker = $container->get(IdentityLinker::class);
+                    /**
+                * @var SessionHandlerInterface $sessionHandlerInterface
+                */
+                    $sessionHandlerInterface = $container->get(SessionHandlerInterface::class);
+                    /**
+                * @var TokenValidatorInterface $tokenValidatorInterface
+                */
+                    $tokenValidatorInterface = $container->get(TokenValidatorInterface::class);
+
+                    $controller = new ConnectorController(
+                        $featuresPath,
+                        $checksumLinker,
+                        $identityLinker,
+                        $sessionHandlerInterface,
+                        $tokenValidatorInterface
+                    );
+
+                    $controller->setLogger($this->loggerService->get(LoggerService::CHANNEL_GLOBAL));
+
+                    return $controller;
                 }
-                /** @var ChecksumLinker $checksumLinker */
-                $checksumLinker = $container->get(ChecksumLinker::class);
-                /** @var IdentityLinker $identityLinker */
-                $identityLinker = $container->get(IdentityLinker::class);
-                /** @var SessionHandlerInterface $sessionHandlerInterface */
-                $sessionHandlerInterface = $container->get(SessionHandlerInterface::class);
-                /** @var TokenValidatorInterface $tokenValidatorInterface */
-                $tokenValidatorInterface = $container->get(TokenValidatorInterface::class);
-
-                $controller = new ConnectorController(
-                    $featuresPath,
-                    $checksumLinker,
-                    $identityLinker,
-                    $sessionHandlerInterface,
-                    $tokenValidatorInterface
-                );
-
-                $controller->setLogger($this->loggerService->get(LoggerService::CHANNEL_GLOBAL));
-
-                return $controller;
-            });
+            );
         } elseif (!$this->container->has($controllerName)) {
             $controllerClass = \sprintf("%s\\%sController", $connector->getControllerNamespace(), $controllerName);
             if (!\class_exists($controllerClass)) {
@@ -1023,7 +1077,9 @@ class Application
         $controller = $this->container->get($controllerName);
         \assert(\is_object($controller));
         if ($controller instanceof LoggerAwareInterface) {
-            /** @var LoggerInterface $loggerInterface */
+            /**
+ * @var LoggerInterface $loggerInterface
+*/
             $loggerInterface = $this->container->get(LoggerInterface::class);
             $controller->setLogger($loggerInterface);
         }
@@ -1032,7 +1088,9 @@ class Application
             $controller instanceof SyncErrorCollectorAwareInterface
             && $this->container->has(SyncErrorCollectorInterface::class)
         ) {
-            /** @var SyncErrorCollectorInterface $syncErrorCollector */
+            /**
+ * @var SyncErrorCollectorInterface $syncErrorCollector
+*/
             $syncErrorCollector = $this->container->get(SyncErrorCollectorInterface::class);
             $controller->setSyncErrorCollector($syncErrorCollector);
         }
@@ -1051,12 +1109,14 @@ class Application
                     $dataModels = $controller->$action(...$params);
 
                     foreach ($dataModels as $dataModel) {
-                        /** @var IdentityLinker $identityLinker */
-                        $identityLinker = $this->container->get(IdentityLinker::class);
-                        $identityLinker->linkModel($dataModel, ($request->getAction() === Action::DELETE));
-                        /** @var ChecksumLinker $checksumLinker */
-                        $checksumLinker = $this->container->get(ChecksumLinker::class);
-                        $checksumLinker->link($dataModel);
+                        if ($dataModel instanceof AbstractModel) {
+                            /** @var IdentityLinker $identityLinker */
+                            $identityLinker = $this->container->get(IdentityLinker::class);
+                            $identityLinker->linkModel($dataModel, ($request->getAction() === Action::DELETE));
+                            /** @var ChecksumLinker $checksumLinker */
+                            $checksumLinker = $this->container->get(ChecksumLinker::class);
+                            $checksumLinker->link($dataModel);
+                        }
                         $result[] = $dataModel;
                     }
 
@@ -1069,7 +1129,9 @@ class Application
                     }
 
                     if ($this->container->has(SyncErrorCollectorInterface::class)) {
-                        /** @var SyncErrorCollectorInterface $collector */
+                        /**
+     * @var SyncErrorCollectorInterface $collector
+*/
                         $collector = $this->container->get(SyncErrorCollectorInterface::class);
                         foreach ($params as $model) {
                             $entityId = '';
@@ -1169,7 +1231,9 @@ class Application
      */
     protected function buildRpcResponse(RequestPacket $requestPacket, Response $response): ResponsePacket
     {
-        /** @var ResponsePacket $responsePacket */
+        /**
+ * @var ResponsePacket $responsePacket
+*/
         $responsePacket = ResponsePacket::create($requestPacket->getId());
         $responsePacket->setResult($response->getResult());
 

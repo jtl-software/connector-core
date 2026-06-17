@@ -137,6 +137,9 @@ class ConfigSchemaTest extends TestCase
             ConfigSchema::FEATURES_PATH           => \sprintf('%s/config/features.json', $this->connectorDir),
             ConfigSchema::DEBUG                   => false,
             ConfigSchema::SERIALIZER_ENABLE_CACHE => true,
+            ConfigSchema::RATE_LIMIT_GENERAL      => 60,
+            ConfigSchema::RATE_LIMIT_AUTH         => 5,
+            ConfigSchema::RATE_LIMIT_WINDOW       => 60,
         ];
         $actual   = $schema->getDefaultValues();
         $this->assertEquals($expected, $actual);
