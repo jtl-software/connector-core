@@ -11,8 +11,8 @@
         "homepage": "http://www.jtl-software.de",
         "role": "Founder"
     }],
-    "require": {
-        "php": ">=8.2",
+        "require": {
+        "php": ">=8.3",
         "jms/serializer": "*",
         "hassankhan/config": "^3.0",
         "monolog/monolog": "^3.0",
