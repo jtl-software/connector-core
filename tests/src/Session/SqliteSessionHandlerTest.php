@@ -103,7 +103,6 @@ class SqliteSessionHandlerTest extends TestCase
      * @return void
      * @throws DatabaseException
      * @throws \InvalidArgumentException
-     * @throws \InvalidArgumentException
      * @throws \PDOException
      * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \Psr\Log\InvalidArgumentException
@@ -126,7 +125,6 @@ class SqliteSessionHandlerTest extends TestCase
     /**
      * @return void
      * @throws DatabaseException
-     * @throws \InvalidArgumentException
      * @throws \InvalidArgumentException
      * @throws \PDOException
      * @throws \PHPUnit\Framework\ExpectationFailedException
