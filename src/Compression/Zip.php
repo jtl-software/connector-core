@@ -39,7 +39,7 @@ class Zip
         if ($archive->open($sourceFile) === true) {
             $index         = 0;
             $isBomb        = false;
-            $imageTooLarge = false;
+            $tooLargeEntry = null;
 
             while (($stat = $archive->statIndex($index))) {
                 $size     = $stat['size'];
@@ -47,7 +47,7 @@ class Zip
 
                 // 20MB
                 if ($size > 20000000) {
-                    $imageTooLarge = true;
+                    $tooLargeEntry = $stat['name'];
                     break;
                 }
 
@@ -65,8 +65,8 @@ class Zip
                 $index++;
             }
 
-            if ($imageTooLarge) {
-                throw new \RuntimeException("Image {$index} too large");
+            if (!\is_null($tooLargeEntry)) {
+                throw new \RuntimeException(\sprintf('Image "%s" too large', $tooLargeEntry));
             }
 
             if ($isBomb) {
