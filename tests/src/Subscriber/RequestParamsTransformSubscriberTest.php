@@ -71,7 +71,6 @@ class RequestParamsTransformSubscriberTest extends TestCase
      *
      * @return void
      * @throws \PHPUnit\Framework\ExpectationFailedException
-     * \Exception
      * @throws \RuntimeException
      */
     #[DataProvider('transformProductProvider')]
@@ -88,7 +87,6 @@ class RequestParamsTransformSubscriberTest extends TestCase
      *
      * @return void
      * @throws \InvalidArgumentException
-     * \Exception
      * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     #[DataProvider('transformProductPriceProvider')]
@@ -105,7 +103,6 @@ class RequestParamsTransformSubscriberTest extends TestCase
      *
      * @return void
      * @throws \PHPUnit\Framework\ExpectationFailedException
-     * \Exception
      */
     #[DataProvider('transformProductStockLevelProvider')]
     public function testTransformStockLevelData(array $productStock, array $expectedResult): void

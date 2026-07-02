@@ -13,7 +13,6 @@ use PDOStatement;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\ExpectationFailedException;
 use RuntimeException;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 class SqliteSessionHandlerTest extends TestCase
 {
@@ -142,6 +141,7 @@ class SqliteSessionHandlerTest extends TestCase
      * @throws RuntimeException
      * @throws \InvalidArgumentException
      * @throws \PDOException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \Psr\Log\InvalidArgumentException
      */
     public function testWriteInsert(): void
@@ -164,8 +164,8 @@ class SqliteSessionHandlerTest extends TestCase
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
      * @throws RuntimeException
-     * @throws \InvalidArgumentException
      * @throws \PDOException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \Psr\Log\InvalidArgumentException
      */
     public function testWriteUpdate(): void
