@@ -68,7 +68,7 @@ class LanguageIsoSubscriberTest extends TestCase
         $serializedData = $this->serializeModel($i18nModel);
 
         /** @var object $jsonObj */
-        $jsonObj = \json_decode($serializedData, false, 512, \JSON_THROW_ON_ERROR);
+        $jsonObj = \json_decode($serializedData, false, 512, JSON_THROW_ON_ERROR);
         if (!\property_exists($jsonObj, 'languageISO')) {
             $this->fail('property "languageISO" does not exist.');
         }
@@ -118,7 +118,7 @@ class LanguageIsoSubscriberTest extends TestCase
         $serializedData = $this->serializeModel($i18nModel);
 
         /** @var object $jsonObj */
-        $jsonObj = \json_decode($serializedData, false, 512, \JSON_THROW_ON_ERROR);
+        $jsonObj = \json_decode($serializedData, false, 512, JSON_THROW_ON_ERROR);
         if (!\property_exists($jsonObj, 'languageIso')) {
             $this->fail('property "languageIso" does not exist.');
         }
@@ -150,7 +150,7 @@ class LanguageIsoSubscriberTest extends TestCase
         $serializedData = $this->serializeModel($i18nModel);
 
         /** @var object $jsonObj */
-        $jsonObj = \json_decode($serializedData, false, 512, \JSON_THROW_ON_ERROR);
+        $jsonObj = \json_decode($serializedData, false, 512, JSON_THROW_ON_ERROR);
 
         if (!\property_exists($jsonObj, 'languageISO')) {
             $this->fail('property "languageISO" does not exist.');
@@ -181,7 +181,7 @@ class LanguageIsoSubscriberTest extends TestCase
         $serializedData = $this->serializeModel($i18nModel);
 
         /** @var object $jsonObj */
-        $jsonObj = \json_decode($serializedData, false, 512, \JSON_THROW_ON_ERROR);
+        $jsonObj = \json_decode($serializedData, false, 512, JSON_THROW_ON_ERROR);
 
         if (!\property_exists($jsonObj, 'languageISO')) {
             $this->fail('property "languageISO" does not exist.');
@@ -259,7 +259,7 @@ class LanguageIsoSubscriberTest extends TestCase
     {
         $serializer  = SerializerBuilder::create()->build();
         $productI18n = $serializer->deserialize(
-            \json_encode(['languageISO' => '']),
+            \json_encode(['languageISO' => ''], JSON_THROW_ON_ERROR),
             ProductI18n::class,
             'json'
         );
@@ -290,7 +290,7 @@ class LanguageIsoSubscriberTest extends TestCase
     {
         $serializer  = SerializerBuilder::create()->build();
         $productI18n = $serializer->deserialize(
-            \json_encode(['languageISO' => 'ger']),
+            \json_encode(['languageISO' => 'ger'], JSON_THROW_ON_ERROR),
             ProductI18n::class,
             'json'
         );
@@ -349,7 +349,7 @@ class LanguageIsoSubscriberTest extends TestCase
     {
         $serializer  = SerializerBuilder::create()->build();
         $productI18n = $serializer->deserialize(
-            \json_encode([]),
+            \json_encode([], JSON_THROW_ON_ERROR),
             ProductI18n::class,
             'json'
         );
@@ -380,7 +380,7 @@ class LanguageIsoSubscriberTest extends TestCase
     {
         $serializer  = SerializerBuilder::create()->build();
         $productI18n = $serializer->deserialize(
-            \json_encode(['languageISO' => 'ger', 'languageIso' => 'en']),
+            \json_encode(['languageISO' => 'ger', 'languageIso' => 'en'], JSON_THROW_ON_ERROR),
             ProductI18n::class,
             'json'
         );
