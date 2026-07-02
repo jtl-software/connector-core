@@ -10,7 +10,6 @@ use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Schema\Comparator;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\DBAL\Schema\SchemaException;
-use Doctrine\DBAL\Schema\SchemaManagerFactory;
 use Doctrine\DBAL\Schema\Table;
 use RuntimeException;
 

@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Jtl\Connector\Dbc;
 
 use Doctrine\DBAL\Exception as DBALException;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Query\QueryBuilder;
-use Doctrine\DBAL\Result;
 use RuntimeException;
 use Throwable;
 
