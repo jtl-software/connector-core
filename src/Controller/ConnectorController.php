@@ -42,12 +42,12 @@ use Psr\Log\NullLogger;
  */
 class ConnectorController implements LoggerAwareInterface
 {
-    protected string                   $featuresPath;
-    protected ChecksumLinker           $checksumLinker;
-    protected IdentityLinker           $linker;
-    protected LoggerInterface          $logger;
+    protected string $featuresPath;
+    protected ChecksumLinker $checksumLinker;
+    protected IdentityLinker $linker;
+    protected LoggerInterface $logger;
     protected \SessionHandlerInterface $sessionHandler;
-    protected TokenValidatorInterface  $tokenValidator;
+    protected TokenValidatorInterface $tokenValidator;
 
     /**
      * ConnectorController constructor.
@@ -59,11 +59,11 @@ class ConnectorController implements LoggerAwareInterface
      * @param TokenValidatorInterface  $tokenValidator
      */
     public function __construct(
-        string                   $featuresPath,
-        ChecksumLinker           $checksumLinker,
-        IdentityLinker           $linker,
+        string $featuresPath,
+        ChecksumLinker $checksumLinker,
+        IdentityLinker $linker,
         \SessionHandlerInterface $sessionHandler,
-        TokenValidatorInterface  $tokenValidator,
+        TokenValidatorInterface $tokenValidator,
     ) {
         $this->featuresPath   = $featuresPath;
         $this->checksumLinker = $checksumLinker;
@@ -99,13 +99,13 @@ class ConnectorController implements LoggerAwareInterface
 
         /** @var array<string, array{pull?: bool|null, push?: bool|null, delete?: bool|null}> $entities */
         $entities = [];
-        if (isset($features['entities'])) {
+        if (isset($features['entities']) && \is_array($features['entities'])) {
             $entities = $features['entities'];
         }
 
         /** @var array<string, bool> $flags */
         $flags = [];
-        if (isset($features['flags'])) {
+        if (isset($features['flags']) && \is_array($features['flags'])) {
             $flags = $features['flags'];
         }
 
