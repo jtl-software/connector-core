@@ -63,7 +63,7 @@ class TableManager implements PrimaryKeyMapperInterface
      */
     public function save(int $type, string $endpointId, int $hostId): bool
     {
-        return $this->collection->get($type)->save($endpointId, $hostId) > 0;
+        return $this->collection->get($type)->save($endpointId, $hostId) >= 0;
     }
 
     /**
