@@ -58,7 +58,8 @@ class IdentityHandler implements SubscribingHandlerInterface
         $identityObject = new Identity($identity[0], $identity[1]);
         $currentObject  = $visitor->getCurrentObject();
         if ($identity[1] > 0 && !\is_null($currentObject)) {
-            $modelName    = (new \ReflectionClass($currentObject))->getShortName();
+            $modelName = (new \ReflectionClass($currentObject))->getShortName();
+            /** @var array<int, string> $currentPath */
             $currentPath  = $context->getCurrentPath();
             $propertyName = \end($currentPath);
             if ($propertyName !== false && Model::isIdentityProperty($modelName, $propertyName)) {

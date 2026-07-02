@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Jtl\Connector\Dbc;
 
 use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Exception as DBALException;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Doctrine\DBAL\Schema\SchemaException;
 use Doctrine\DBAL\Schema\Table;
@@ -34,15 +33,15 @@ abstract class AbstractTable
     }
 
     /**
-     * @param mixed[]       $data
-     * @param string[]|null $types
+     * @param array<string, mixed>                                                                          $data
+     * @param array<int<0, max>|string, \Doctrine\DBAL\ParameterType|\Doctrine\DBAL\Types\Type|string>|null $types
      *
-     * @return int
-     * @throws DBALException
+     * @return int|string
      * @throws DbcRuntimeException
+     * @throws Exception
      * @throws \RuntimeException
      */
-    public function insert(array $data, ?array $types = null): int
+    public function insert(array $data, ?array $types = null): int|string
     {
         if (\is_null($types)) {
             $types = $this->getColumnTypesFor(...\array_keys($data));
@@ -54,9 +53,9 @@ abstract class AbstractTable
     /**
      * @param string ...$columnNames
      *
-     * @return string[]
-     * @throws DBALException
+     * @return array<string, string>
      * @throws DbcRuntimeException
+     * @throws Exception
      */
     protected function getColumnTypesFor(string ...$columnNames): array
     {
@@ -67,15 +66,15 @@ abstract class AbstractTable
 
     /**
      * @return array<string, string>
-     * @throws DBALException
      * @throws DbcRuntimeException
+     * @throws Exception
      * @throws SchemaException
      */
     public function getColumnTypes(): array
     {
         $columnTypes = [];
         foreach ($this->getTableSchema()->getColumns() as $column) {
-            $columnTypes[$column->getName()] = $column->getType()->getName();
+            $columnTypes[$column->getName()] = Type::getTypeRegistry()->lookupName($column->getType());
         }
         return $columnTypes;
     }
@@ -83,7 +82,7 @@ abstract class AbstractTable
     /**
      * @return Table
      * @throws DbcRuntimeException
-     * @throws DBALException
+     * @throws Exception
      */
     public function getTableSchema(): Table
     {
@@ -92,7 +91,9 @@ abstract class AbstractTable
             $this->preCreateTableSchema($this->tableSchema);
             $this->createTableSchema($this->tableSchema);
             $this->postCreateTableSchema($this->tableSchema);
-            if (\count($this->tableSchema->getColumns()) === 0) {
+            /** @var array<int, \Doctrine\DBAL\Schema\Column> $columns */
+            $columns = $this->tableSchema->getColumns();
+            if (\count($columns) === 0) {
                 throw DbcRuntimeException::tableEmpty($this->tableSchema->getName());
             }
         }
@@ -102,8 +103,8 @@ abstract class AbstractTable
 
     /**
      * @return Table
-     * @throws Exception
      * @throws DbcRuntimeException
+     * @throws Exception
      */
     protected function createSchemaTable(): Table
     {
@@ -166,16 +167,16 @@ abstract class AbstractTable
     }
 
     /**
-     * @param mixed[]       $data
-     * @param mixed[]       $identifiers
-     * @param string[]|null $types
+     * @param array<string, mixed>                                                                          $data
+     * @param array<string, mixed>                                                                          $identifiers
+     * @param array<int<0, max>|string, \Doctrine\DBAL\ParameterType|\Doctrine\DBAL\Types\Type|string>|null $types
      *
-     * @return int
-     * @throws DBALException
+     * @return int|string
      * @throws DbcRuntimeException
+     * @throws Exception
      * @throws \RuntimeException
      */
-    public function update(array $data, array $identifiers, ?array $types = null): int
+    public function update(array $data, array $identifiers, ?array $types = null): int|string
     {
         if (\is_null($types)) {
             $types =
@@ -186,15 +187,15 @@ abstract class AbstractTable
     }
 
     /**
-     * @param mixed[]       $identifiers
-     * @param string[]|null $types
+     * @param array<string, mixed>                                                                          $identifiers
+     * @param array<int<0, max>|string, \Doctrine\DBAL\ParameterType|\Doctrine\DBAL\Types\Type|string>|null $types
      *
-     * @return int
-     * @throws DBALException
+     * @return int|string
      * @throws DbcRuntimeException
+     * @throws Exception
      * @throws \RuntimeException
      */
-    public function delete(array $identifiers, ?array $types = null): int
+    public function delete(array $identifiers, ?array $types = null): int|string
     {
         if (\is_null($types)) {
             $types = $this->getColumnTypesFor(...\array_keys($identifiers));
@@ -206,7 +207,7 @@ abstract class AbstractTable
     /**
      * @return string[]
      * @throws DbcRuntimeException
-     * @throws DBALException
+     * @throws Exception
      */
     public function getColumnNames(): array
     {
@@ -229,11 +230,11 @@ abstract class AbstractTable
     }
 
     /**
-     * @param array<int, array<string>> $rows
+     * @param array<int, array<int|string, mixed>> $rows
      *
-     * @return array<int, array<int|string, string>>
-     * @throws DBALException
+     * @return array<int, array<int|string, mixed>>
      * @throws DbcRuntimeException
+     * @throws Exception
      */
     protected function convertAllToPhpValues(array $rows): array
     {
@@ -246,11 +247,11 @@ abstract class AbstractTable
     }
 
     /**
-     * @param array<string> $row
+     * @param array<int|string, mixed> $row
      *
-     * @return array<int|string, string>
+     * @return array<int|string, mixed>
      * @throws DbcRuntimeException
-     * @throws DBALException
+     * @throws Exception
      */
     protected function convertToPhpValues(array $row): array
     {
@@ -276,7 +277,9 @@ abstract class AbstractTable
 
                 //Dirty BIGINT to int cast
                 if ($result[$index] !== null && $types[$index] === Types::BIGINT) {
-                    $result[$index] = (int)$result[$index];
+                    /** @var int|float|string|bool $bigintValue */
+                    $bigintValue    = $result[$index];
+                    $result[$index] = (int)$bigintValue;
                 }
             }
         }
@@ -306,7 +309,7 @@ abstract class AbstractTable
      *
      * @return $this
      * @throws DbcRuntimeException
-     * @throws DBALException
+     * @throws Exception
      * @throws SchemaException
      */
     protected function restrict(string $column, mixed $value): self

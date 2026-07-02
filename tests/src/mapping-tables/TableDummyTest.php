@@ -7,7 +7,6 @@ namespace Jtl\Connector\MappingTables;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 class TableDummyTest extends TestCase
 {
@@ -15,8 +14,8 @@ class TableDummyTest extends TestCase
 
     /**
      * @return void
-     * @throws InvalidArgumentException
-     * @throws ExpectationFailedException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testClear(): void
     {
@@ -27,8 +26,8 @@ class TableDummyTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testFindEndpoints(): void
     {
@@ -39,8 +38,8 @@ class TableDummyTest extends TestCase
 
     /**
      * @return void
-     * @throws InvalidArgumentException
-     * @throws ExpectationFailedException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetTypeDefault(): void
     {
@@ -49,8 +48,8 @@ class TableDummyTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testRemove(): void
     {
@@ -61,8 +60,8 @@ class TableDummyTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetHostId(): void
     {
@@ -73,8 +72,8 @@ class TableDummyTest extends TestCase
 
     /**
      * @return void
-     * @throws InvalidArgumentException
-     * @throws ExpectationFailedException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testCount(): void
     {
@@ -83,8 +82,8 @@ class TableDummyTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetEndpointId(): void
     {
@@ -95,9 +94,9 @@ class TableDummyTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
      * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testSetType(): void
     {
@@ -113,8 +112,8 @@ class TableDummyTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testSave(): void
     {
@@ -125,8 +124,8 @@ class TableDummyTest extends TestCase
 
     /**
      * @return void
-     * @throws InvalidArgumentException
-     * @throws ExpectationFailedException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @noinspection PhpExpressionResultUnusedInspection
      */
     public function testFindNotFetchedEndpoints(): void

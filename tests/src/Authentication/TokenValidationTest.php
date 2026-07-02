@@ -6,9 +6,9 @@ namespace Jtl\Connector\Core\Test\Authentication;
 
 use Jtl\Connector\Core\Authentication\TokenValidator;
 use Jtl\Connector\Core\Exception\TokenValidatorException;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class TokenValidationTest
@@ -18,17 +18,16 @@ use SebastianBergmann\RecursionContext\InvalidArgumentException;
 class TokenValidationTest extends TestCase
 {
     /**
-     * @dataProvider tokenDataProvider
-     *
      * @param string $connectorToken
      * @param string $token
      * @param bool   $result
      *
      * @return void
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws TokenValidatorException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
      */
+    #[DataProvider('tokenDataProvider')]
     public function testValidateToken(string $connectorToken, string $token, bool $result): void
     {
         $validator = new TokenValidator($connectorToken);
@@ -48,7 +47,7 @@ class TokenValidationTest extends TestCase
     /**
      * @return array<int, array{0: string, 1: string, 2: bool}>
      */
-    public function tokenDataProvider(): array
+    public static function tokenDataProvider(): array
     {
         return [
             ['foo', 'foo', true],

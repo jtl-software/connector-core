@@ -14,8 +14,8 @@ interface CoreConfigInterface extends ConfigInterface
      * @param bool|null $default
      *
      * @return bool|null
-     * @throws \TypeError
      * @throws ConfigException
+     * @throws \TypeError
      */
     public function getBool(string $valueName, ?bool $default = null): ?bool;
 

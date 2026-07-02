@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Tests\Model;
 
-use Doctrine\Common\Annotations\AnnotationException;
 use Exception;
 use JMS\Serializer\Exception\InvalidArgumentException;
 use JMS\Serializer\Exception\LogicException;
@@ -17,25 +16,25 @@ use Jtl\Connector\Core\Model\AbstractModel;
 use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\ExpectationFailedException;
 
 class ModelTest extends TestCase
 {
     /**
-     * @dataProvider modelsDataProvider
      * @doesNotPerformAssertions
      *
      * @param string $modelName
      *
      * @return void
-     * @throws InvalidArgumentException
-     * @throws RuntimeException
-     * @throws AnnotationException
+     * @throws \InvalidArgumentException
      * @throws \InvalidArgumentException
      * @throws LogicException
      * @throws NotAcceptableException
+     * @throws RuntimeException
      * @throws UnsupportedFormatException
      */
+    #[DataProvider('modelsDataProvider')]
     public function testModelsInitialization(string $modelName): void
     {
         $serializer         = SerializerBuilder::create()->build();
@@ -50,16 +49,18 @@ class ModelTest extends TestCase
 
     /**
      * @return array<int, array<int, string>>
-     * @throws ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \RuntimeException
      */
-    public function modelsDataProvider(): array
+    public static function modelsDataProvider(): array
     {
         $ignoredModels = self::getIgnoredModels();
         $modelsPattern = \dirname(\TEST_DIR) . '/src/Model/*.php';
         $array_map     = [];
         $models        = \glob($modelsPattern);
-        $this->assertNotFalse($models);
+        if ($models === false) {
+            throw new \RuntimeException('glob() returned false');
+        }
         foreach ($models as $key => $modelPath) {
             $fileInfo        = new \SplFileInfo($modelPath);
             $modelName       = $fileInfo->getBasename('.php');
@@ -99,8 +100,6 @@ class ModelTest extends TestCase
     }
 
     /**
-     * @dataProvider unsetIdentificationStringProvider
-     *
      * @param string $identificationString
      * @param string $subject
      * @param bool   $setString
@@ -108,6 +107,7 @@ class ModelTest extends TestCase
      * @return void
      * @throws Exception
      */
+    #[DataProvider('unsetIdentificationStringProvider')]
     public function testUnsetIdentificationString(string $identificationString, string $subject, bool $setString): void
     {
         $model       = $this->getMockForAbstractClass(AbstractModel::class);
@@ -134,18 +134,16 @@ class ModelTest extends TestCase
     }
 
     /**
-     * @dataProvider unsetIdentificationStringProvider
-     *
      * @param string $identificationString
      * @param string $subject
      * @param bool   $setString
      *
      * @return void
-     * @throws \PHPUnit\Framework\Exception
-     * @throws ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      * @throws Exception
+     * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
+    #[DataProvider('unsetIdentificationStringProvider')]
     public function testUnsetIdentificationStringBySubject(
         string $identificationString,
         string $subject,
@@ -192,7 +190,7 @@ class ModelTest extends TestCase
      *     1: array{0: string, 1: 'hallo', 2: false}
      *  }
      */
-    public function unsetIdentificationStringProvider(): array
+    public static function unsetIdentificationStringProvider(): array
     {
         return [
             [\uniqid('foo-', false), 'hola', true],

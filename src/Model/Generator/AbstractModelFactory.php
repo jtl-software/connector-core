@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Model\Generator;
 
-use Doctrine\Common\Annotations\AnnotationException;
 use Faker\Factory;
 use Faker\Generator;
 use JMS\Serializer\Exception\InvalidArgumentException;
@@ -39,7 +38,6 @@ abstract class AbstractModelFactory
      * @param Generator|null  $faker
      * @param Serializer|null $serializer
      *
-     * @throws AnnotationException
      * @throws InvalidArgumentException
      * @throws \InvalidArgumentException
      * @throws LogicException
@@ -132,7 +130,9 @@ abstract class AbstractModelFactory
     {
         $models = [];
         for ($i = 0; $i < $quantity; $i++) {
-            $models[] = $this->makeOneArray(\array_merge($globalOverrides, $specificOverrides[$i] ?? []));
+            /** @var array<string|int, mixed> $specificOverride */
+            $specificOverride = $specificOverrides[$i] ?? [];
+            $models[]         = $this->makeOneArray(\array_merge($globalOverrides, $specificOverride));
         }
 
         return $models;
@@ -171,19 +171,21 @@ abstract class AbstractModelFactory
      *
      * @return array<int, AbstractModel>
      * @throws LogicException
-     * @throws RuntimeException
      * @throws NotAcceptableException
+     * @throws RuntimeException
      * @throws UnsupportedFormatException
      */
     public function make(int $quantity, array $specificOverrides = [], array $globalOverrides = []): array
     {
         $models = [];
         for ($i = 0; $i < $quantity; $i++) {
-            /** @var AbstractModel $model */
-            $model    = $this->serializer->fromArray(
-                $this->makeOneArray(\array_merge($globalOverrides, $specificOverrides[$i] ?? [])),
+            /** @var array<string|int, mixed> $specificOverride */
+            $specificOverride = $specificOverrides[$i] ?? [];
+            $model            = $this->serializer->fromArray(
+                $this->makeOneArray(\array_merge($globalOverrides, $specificOverride)),
                 $this->getModelClass()
             );
+            \assert($model instanceof AbstractModel);
             $models[] = $model;
         }
 
@@ -210,8 +212,8 @@ abstract class AbstractModelFactory
      * @param int $identityType
      *
      * @return array{0: string, 1: int}
-     * @throws \RuntimeException
      * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
     public function makeIdentityArray(int $identityType): array
     {

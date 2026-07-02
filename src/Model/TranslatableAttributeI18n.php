@@ -166,8 +166,8 @@ class TranslatableAttributeI18n extends AbstractI18n
      * @param mixed $value
      *
      * @return $this
-     * @throws TranslatableAttributeException
      * @throws \JsonException
+     * @throws TranslatableAttributeException
      */
     public function setValue(mixed $value): self
     {

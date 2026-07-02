@@ -4,27 +4,25 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Dbc;
 
-use Doctrine\DBAL\DBALException;
-use RuntimeException;
+use Doctrine\DBAL\Exception;
 
 class DbManagerStub extends DbManager
 {
     /**
-     * @return array<int, AbstractTable>
+     * @return array<AbstractTable>
      */
     public function getTables(): array
     {
-        return parent::getTables();
+        return \array_values(parent::getTables());
     }
 
     /**
-     * @return array<int, \Doctrine\DBAL\Schema\Table>
-     * @throws DBALException
+     * @return array<\Doctrine\DBAL\Schema\Table>
      * @throws DbcRuntimeException
-     * @throws DbcRuntimeException
+     * @throws Exception
      */
     public function getSchemaTables(): array
     {
-        return parent::getSchemaTables();
+        return \array_values(parent::getSchemaTables());
     }
 }

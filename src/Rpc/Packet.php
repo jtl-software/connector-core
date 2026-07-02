@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Rpc;
 
-use Doctrine\Common\Annotations\AnnotationException;
 use JMS\Serializer\Annotation as Serializer;
 use JMS\Serializer\Exception\InvalidArgumentException;
 use JMS\Serializer\Exception\LogicException;
@@ -100,11 +99,10 @@ abstract class Packet extends AbstractModel
      *
      * @return mixed[]
      * @throws InvalidArgumentException
-     * @throws RuntimeException
-     * @throws AnnotationException
      * @throws \InvalidArgumentException
      * @throws LogicException
      * @throws NotAcceptableException
+     * @throws RuntimeException
      * @throws UnsupportedFormatException
      */
     public function toArray(?JmsSerializer $serializer = null): array

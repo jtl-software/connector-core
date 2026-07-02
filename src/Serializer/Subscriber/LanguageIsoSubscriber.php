@@ -56,7 +56,9 @@ class LanguageIsoSubscriber implements EventSubscriberInterface
                 $languageIso = $this->languages->fromISO_639_1($languageIso)->toISO_639_2b();
             }
 
-            $event->getVisitor()->visitProperty( // @phpstan-ignore-line
+            /** @var \JMS\Serializer\JsonSerializationVisitor $visitor */
+            $visitor = $event->getVisitor();
+            $visitor->visitProperty(
                 new StaticPropertyMetadata('', 'languageISO', $languageIso),
                 $languageIso
             );
@@ -72,7 +74,9 @@ class LanguageIsoSubscriber implements EventSubscriberInterface
     {
         $data = $event->getData();
         if (\is_array($data) && isset($data['languageISO']) && !isset($data['languageIso'])) {
-            $language            = $this->languages->fromISO_639_2b($data['languageISO']);
+            /** @var string $languageISO */
+            $languageISO         = $data['languageISO'];
+            $language            = $this->languages->fromISO_639_2b($languageISO);
             $data['languageIso'] = $language->toISO_639_1();
             $event->setData($data);
         }

@@ -35,9 +35,9 @@ class ProductStockLevelSubscriber implements EventSubscriberInterface
         $model = $event->getObject();
         if ($model instanceof Product) {
             $stockLevel = ['stockLevel' => $model->getStockLevel()];
-            $event // @phpstan-ignore-line
-            ->getVisitor()
-            ->visitProperty(
+            /** @var \JMS\Serializer\JsonSerializationVisitor $visitor */
+            $visitor = $event->getVisitor();
+            $visitor->visitProperty(
                 new StaticPropertyMetadata('', 'stockLevel', $stockLevel),
                 $stockLevel
             );

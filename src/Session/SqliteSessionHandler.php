@@ -28,9 +28,9 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      *
      * @param string $databaseDir
      *
-     * @throws SessionException
      * @throws DatabaseException
      * @throws \RuntimeException
+     * @throws SessionException
      */
     public function __construct(string $databaseDir)
     {
@@ -167,8 +167,8 @@ class SqliteSessionHandler implements SessionHandlerInterface, LoggerAwareInterf
      *
      * @return bool
      * @throws DatabaseException
-     * @throws \RuntimeException
      * @throws InvalidArgumentException
+     * @throws \RuntimeException
      * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
     #[ReturnTypeWillChange]

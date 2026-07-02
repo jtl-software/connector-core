@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Dbc;
 
-use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\ForwardCompatibility\Result;
+use Doctrine\DBAL\Result;
 use Doctrine\DBAL\Schema\SchemaException;
 use Doctrine\DBAL\Schema\Table;
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAL\Types\Types;
 
 class TableStub extends AbstractTable
 {
@@ -31,8 +30,8 @@ class TableStub extends AbstractTable
      * @param mixed  $value
      *
      * @return AbstractTable
-     * @throws DBALException
      * @throws DbcRuntimeException
+     * @throws Exception
      * @throws SchemaException|\RuntimeException
      */
     public function restrict(string $column, mixed $value): AbstractTable
@@ -41,52 +40,44 @@ class TableStub extends AbstractTable
     }
 
     /**
-     * @param int                     $fetchType
      * @param array<int, string>|null $columns
      *
-     * @return array<int, array<string>>
-     * @throws DBALException
-     * @throws Exception
+     * @return array<int, array<int|string, mixed>>
      * @throws DbcRuntimeException|\RuntimeException
+     * @throws Exception
      */
-    public function findAll(int $fetchType = \PDO::FETCH_ASSOC, ?array $columns = null): array
+    public function findAll(?array $columns = null): array
     {
         if (\is_null($columns)) {
             $columns = $this->getColumnNames();
         }
 
-        $stmt = $this->createQueryBuilder()->select($columns)
+        $stmt = $this->createQueryBuilder()->select(...$columns)
                      ->from($this->getTableName())
-                     ->execute();
-
-        if ($stmt instanceof Result === false) {
-            throw new \RuntimeException('$stmt must be instance of ' . Result::class);
-        }
+                     ->executeQuery();
 
         /** @var array<int, array<string>> $result */
-        $result = $stmt->fetchAll($fetchType);
+        $result = $stmt->fetchAllAssociative();
 
         return $this->convertAllToPhpValues($result);
     }
 
     /**
      * @param array<string, mixed> $identifier
-     * @param int                  $fetchType
      * @param array<string>|null   $columns
      *
-     * @return array<int, array<string>>
-     * @throws DBALException
-     * @throws Exception
+     * @return array<int, array<int|string, mixed>>
      * @throws DbcRuntimeException
+     * @throws Exception
      * @throws \RuntimeException
      */
-    public function find(array $identifier, int $fetchType = \PDO::FETCH_ASSOC, ?array $columns = null): array
+    public function find(array $identifier, ?array $columns = null): array
     {
         if (\is_null($columns)) {
             $columns = $this->getColumnNames();
         }
 
-        $qb = $this->createQueryBuilder()->select($columns)
+        $qb = $this->createQueryBuilder()->select(...$columns)
                    ->from($this->getTableName());
 
         foreach ($identifier as $column => $value) {
@@ -94,13 +85,10 @@ class TableStub extends AbstractTable
                ->setParameter($column, $value);
         }
 
-        $stmt = $qb->execute();
-        if ($stmt instanceof Result === false) {
-            throw new \RuntimeException('$stmt must be instance of ' . Result::class);
-        }
+        $stmt = $qb->executeQuery();
 
         /** @var array<int, array<string>> $result */
-        $result = $stmt->fetchAll($fetchType);
+        $result = $stmt->fetchAllAssociative();
 
         return $this->convertAllToPhpValues($result);
     }
@@ -114,10 +102,10 @@ class TableStub extends AbstractTable
      */
     protected function createTableSchema(Table $tableSchema): void
     {
-        $tableSchema->addColumn(self::ID, Type::INTEGER, ['autoincrement' => true]);
-        $tableSchema->addColumn(self::A, Type::INTEGER, ['notnull' => false]);
-        $tableSchema->addColumn(self::B, Type::STRING, ['length' => 64]);
-        $tableSchema->addColumn(self::C, Type::DATETIME_IMMUTABLE);
+        $tableSchema->addColumn(self::ID, Types::INTEGER, ['autoincrement' => true]);
+        $tableSchema->addColumn(self::A, Types::INTEGER, ['notnull' => false]);
+        $tableSchema->addColumn(self::B, Types::STRING, ['length' => 64]);
+        $tableSchema->addColumn(self::C, Types::DATETIME_IMMUTABLE);
         $tableSchema->setPrimaryKey([self::ID]);
     }
 }

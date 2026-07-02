@@ -6,8 +6,8 @@ namespace Jtl\Connector\Core\Test\Definition;
 
 use Jtl\Connector\Core\Definition\IdentityType;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\ExpectationFailedException;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class IdentityTypeTest
@@ -17,15 +17,14 @@ use SebastianBergmann\RecursionContext\InvalidArgumentException;
 class IdentityTypeTest extends TestCase
 {
     /**
-     * @dataProvider isTypeDataProvider
-     *
      * @param int  $type
      * @param bool $shouldBeIdentityType
      *
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
+    #[DataProvider('isTypeDataProvider')]
     public function testIsType(int $type, bool $shouldBeIdentityType): void
     {
         $isType = IdentityType::isType($type);
@@ -34,12 +33,11 @@ class IdentityTypeTest extends TestCase
 
     /**
      * @return array<int, array{0: int, 1: bool}>
-     * @throws \ReflectionException
      */
-    public function isTypeDataProvider(): array
+    public static function isTypeDataProvider(): array
     {
         /** @var array<int, array{0: int, 1: bool}> $testCases */
-        $testCases   = $this->getCorrectConstantsTestCases(IdentityType::class);
+        $testCases   = self::getCorrectConstantsTestCases(IdentityType::class);
         $testCases[] = [0, false];
         $testCases[] = [-100, false];
         $testCases[] = [68, true];

@@ -68,9 +68,9 @@ class Validate
      * @param mixed $value
      *
      * @return object
-     * @throws TypeError
-     * @throws \RuntimeException
      * @throws InvalidArgumentException
+     * @throws \RuntimeException
+     * @throws TypeError
      */
     public static function productObj(mixed $value): object
     {

@@ -89,20 +89,23 @@ class ConnectorController implements LoggerAwareInterface
      * @return Features
      * @throws CoreJsonException
      * @throws \InvalidArgumentException
-     * @throws \RuntimeException
      * @throws \JsonException
+     * @throws \RuntimeException
      */
     public function features(): Features
     {
+        /** @var array{entities?: array<string, array{pull?: bool|null, push?: bool|null, delete?: bool|null}>, flags?: array<string, bool>} $features */
         $features = $this->fetchFeaturesData();
 
+        /** @var array<string, array{pull?: bool|null, push?: bool|null, delete?: bool|null}> $entities */
         $entities = [];
-        if (isset($features['entities']) && \is_array($features['entities'])) {
+        if (isset($features['entities'])) {
             $entities = $features['entities'];
         }
 
+        /** @var array<string, bool> $flags */
         $flags = [];
-        if (isset($features['flags']) && \is_array($features['flags'])) {
+        if (isset($features['flags'])) {
             $flags = $features['flags'];
         }
 
@@ -156,7 +159,7 @@ class ConnectorController implements LoggerAwareInterface
 
         // Checksum linking
         foreach ($ack->getChecksums() as $checksum) {
-            if (($checksum instanceof ChecksumInterface) && !$this->checksumLinker->save($checksum)) {
+            if (!$this->checksumLinker->save($checksum)) {
                 $context = [
                     'endpoint'                      => $checksum->getForeignKey()->getEndpoint(),
                     'host'                          => $checksum->getForeignKey()->getHost(),
@@ -179,8 +182,8 @@ class ConnectorController implements LoggerAwareInterface
      *
      * @return Session
      * @throws AuthenticationException
-     * @throws \RuntimeException
      * @throws InvalidArgumentException
+     * @throws \RuntimeException
      */
     public function auth(Authentication $auth): Session
     {
@@ -214,7 +217,7 @@ class ConnectorController implements LoggerAwareInterface
      */
     public function identify(ConnectorInterface $endpointConnector): ConnectorIdentification
     {
-        $returnBytes = static function ($data): int {
+        $returnBytes = static function (string $data): int {
             $data = \trim($data);
             $len  = \strlen($data);
             if ($data === '-1') {
@@ -235,10 +238,10 @@ class ConnectorController implements LoggerAwareInterface
         };
 
         $serverInfo = (new ConnectorServerInfo())
-            ->setMemoryLimit($returnBytes(\ini_get('memory_limit')))
+            ->setMemoryLimit($returnBytes(\ini_get('memory_limit') ?: ''))
             ->setExecutionTime((int)\ini_get('max_execution_time'))
-            ->setPostMaxSize($returnBytes(\ini_get('post_max_size')))
-            ->setUploadMaxFilesize($returnBytes(\ini_get('upload_max_filesize')));
+            ->setPostMaxSize($returnBytes(\ini_get('post_max_size') ?: ''))
+            ->setUploadMaxFilesize($returnBytes(\ini_get('upload_max_filesize') ?: ''));
 
         return (new ConnectorIdentification())
             ->setEndpointVersion($endpointConnector->getEndpointVersion())
@@ -275,15 +278,13 @@ class ConnectorController implements LoggerAwareInterface
                 if (empty($relationIdentities)) {
                     $this->linker->clear(RelationType::getIdentityType($relationType));
                 } else {
-                    if (\is_array($relationIdentities)) {
-                        foreach ($relationIdentities as $identity) {
-                            $endpointId = empty($identity->getEndpoint()) ? null : $identity->getEndpoint();
-                            $this->linker->delete(
-                                RelationType::getModelName($relationType),
-                                $endpointId,
-                                $identity->getHost()
-                            );
-                        }
+                    foreach ($relationIdentities as $identity) {
+                        $endpointId = empty($identity->getEndpoint()) ? null : $identity->getEndpoint();
+                        $this->linker->delete(
+                            RelationType::getModelName($relationType),
+                            $endpointId,
+                            $identity->getHost()
+                        );
                     }
                 }
             }

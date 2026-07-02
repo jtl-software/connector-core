@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Jtl\Connector\Dbc;
 
 use Doctrine\DBAL\Configuration;
-use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Schema\AbstractSchemaManager;
+use Doctrine\DBAL\Schema\Comparator;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\DBAL\Schema\SchemaException;
 use Doctrine\DBAL\Schema\Table;
@@ -48,7 +47,7 @@ class DbManager
      * @param string|null          $tablesPrefix
      *
      * @return self
-     * @throws DBALException
+     * @throws Exception
      */
     public static function createFromParams(
         array         $params,
@@ -56,7 +55,7 @@ class DbManager
         ?string        $tablesPrefix = null
     ): self {
         $params['wrapperClass'] = Connection::class;
-        /** @var Connection $connection */
+        /** @var array{wrapperClass: class-string<Connection>, driver?: 'ibm_db2'|'mysqli'|'oci8'|'pdo_mysql'|'pdo_oci'|'pdo_pgsql'|'pdo_sqlite'|'pdo_sqlsrv'|'pgsql'|'sqlite3'|'sqlsrv', path?: string, url?: string} $params */
         $connection = DriverManager::getConnection($params, $config);
 
         return new self($connection, $tablesPrefix);
@@ -77,18 +76,23 @@ class DbManager
 
     /**
      * @return string[]
-     * @throws DBALException
      * @throws DbcRuntimeException
+     * @throws Exception
      */
     public function getSchema(): array
     {
-        return (new Schema($this->getSchemaTables()))->toSql($this->connection->getDatabasePlatform());
+        $schema   = new Schema($this->getSchemaTables());
+        $platform = $this->connection->getDatabasePlatform();
+
+        return $platform->getAlterSchemaSQL(
+            (new Comparator($platform))->compareSchemas(new Schema(), $schema)
+        );
     }
 
     /**
      * @return Table[]
-     * @throws DBALException
      * @throws DbcRuntimeException
+     * @throws Exception
      */
     public function getSchemaTables(): array
     {
@@ -107,9 +111,9 @@ class DbManager
 
     /**
      * @return bool
-     * @throws DBALException
      * @throws DbcRuntimeException
      * @throws DbcRuntimeException|\RuntimeException
+     * @throws Exception
      */
     public function hasSchemaUpdates(): bool
     {
@@ -118,27 +122,73 @@ class DbManager
 
     /**
      * @return string[]
-     * @throws DBALException
      * @throws DbcRuntimeException
+     * @throws DbcRuntimeException|RuntimeException
      * @throws Exception
      * @throws SchemaException
-     * @throws DbcRuntimeException|RuntimeException
      */
     public function getSchemaUpdates(): array
     {
-        /** @var Configuration $configuration */
-        $configuration = $this->connection->getConfiguration();
-        /** @var AbstractSchemaManager $schemaManager */
-        $schemaManager              = $this->connection->getSchemaManager();
+        $configuration              = $this->connection->getConfiguration();
+        $schemaManager              = $this->connection->createSchemaManager();
         $originalSchemaAssetsFilter = $configuration->getSchemaAssetsFilter();
         $configuration->setSchemaAssetsFilter($this->createSchemaAssetsFilterCallback());
-        $fromSchema       = $schemaManager->createSchema();
-        $updateStatements = $fromSchema->getMigrateToSql(
-            new Schema($this->getSchemaTables()),
-            $this->connection->getDatabasePlatform()
-        );
+        $fromSchema = $schemaManager->introspectSchema();
+        $toSchema   = new Schema($this->getSchemaTables());
+        $this->normalizeIntrospectedSchema($fromSchema, $toSchema);
+        $comparator       = $schemaManager->createComparator();
+        $schemaDiff       = $comparator->compareSchemas($fromSchema, $toSchema);
+        $platform         = $this->connection->getDatabasePlatform();
+        $updateStatements = $platform->getAlterSchemaSQL($schemaDiff);
         $configuration->setSchemaAssetsFilter($originalSchemaAssetsFilter);
         return $updateStatements;
+    }
+
+    /**
+     * Normalizes the introspected schema to account for platform-specific round-trip
+     * inconsistencies (e.g. SQLite not distinguishing DateTime from DateTimeImmutable,
+     * or returning float defaults as strings).
+     *
+     * @param Schema $introspectedSchema
+     * @param Schema $targetSchema
+     *
+     * @return void
+     */
+    protected function normalizeIntrospectedSchema(Schema $introspectedSchema, Schema $targetSchema): void
+    {
+        foreach ($targetSchema->getTables() as $targetTable) {
+            $tableName = $targetTable->getName();
+            if (!$introspectedSchema->hasTable($tableName)) {
+                continue;
+            }
+
+            $introspectedTable = $introspectedSchema->getTable($tableName);
+
+            foreach ($targetTable->getColumns() as $targetColumn) {
+                $columnName = $targetColumn->getName();
+                if (!$introspectedTable->hasColumn($columnName)) {
+                    continue;
+                }
+
+                $introspectedColumn = $introspectedTable->getColumn($columnName);
+                $targetType         = $targetColumn->getType();
+                $introspectedType   = $introspectedColumn->getType();
+
+                if ($targetType::class !== $introspectedType::class) {
+                    $introspectedColumn->setType($targetType);
+                }
+
+                $targetDefault       = $targetColumn->getDefault();
+                $introspectedDefault = $introspectedColumn->getDefault();
+                if ($targetDefault !== $introspectedDefault) {
+                    if (\is_numeric($targetDefault) && \is_numeric($introspectedDefault)) {
+                        if ((float)$targetDefault === (float)$introspectedDefault) {
+                            $introspectedColumn->setDefault($targetDefault);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -163,7 +213,7 @@ class DbManager
     {
         $this->connection->transactional(function ($connection): void {
             foreach ($this->getSchemaUpdates() as $ddl) {
-                $connection->executeQuery($ddl);
+                $connection->executeStatement($ddl);
             }
         });
     }

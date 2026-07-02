@@ -26,21 +26,17 @@ class WarningProcessor implements ProcessorInterface
 
 
     /**
-     * multiple param and return types are needed because some connectors use an older version of monolog
+     * @param LogRecord $record
      *
-     * @template T of array{message:string,context:array<mixed>}|LogRecord
-     * @param array|LogRecord $record
-     * @phpstan-param T $record
-     *
-     * @return T
+     * @return LogRecord
      */
-    public function __invoke(array|LogRecord $record): array|LogRecord
+    public function __invoke(LogRecord $record): LogRecord
     {
         if (
-            isset($record['context'][self::SEND_TO_WAWI]) &&
-            (bool)$record['context'][self::SEND_TO_WAWI]
+            isset($record->context[self::SEND_TO_WAWI]) &&
+            (bool)$record->context[self::SEND_TO_WAWI]
         ) {
-            $this->warnings->addWarning($record['message']);
+            $this->warnings->addWarning($record->message);
         }
 
         return $record;

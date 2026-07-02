@@ -4,19 +4,9 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\MappingTables;
 
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception as DBALException;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\ExpectationFailedException;
-use PHPUnit\Framework\MockObject\ClassAlreadyExistsException;
-use PHPUnit\Framework\MockObject\ClassIsFinalException;
-use PHPUnit\Framework\MockObject\ClassIsReadonlyException;
-use PHPUnit\Framework\MockObject\DuplicateMethodException;
-use PHPUnit\Framework\MockObject\InvalidMethodNameException;
-use PHPUnit\Framework\MockObject\OriginalConstructorInvocationRequiredException;
-use PHPUnit\Framework\MockObject\ReflectionException;
-use PHPUnit\Framework\MockObject\RuntimeException;
-use PHPUnit\Framework\MockObject\UnknownTypeException;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 class TableCollectionTest extends TestCase
 {
@@ -24,9 +14,9 @@ class TableCollectionTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
      * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testToArray(): void
     {
@@ -39,10 +29,10 @@ class TableCollectionTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws MappingTablesException
      * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws MappingTablesException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testSetAndGet(): void
     {
@@ -59,8 +49,8 @@ class TableCollectionTest extends TestCase
 
     /**
      * @return void
-     * @throws InvalidArgumentException
      * @throws ExpectationFailedException|Exception
+     * @throws \InvalidArgumentException
      */
     public function testHas(): void
     {
@@ -71,8 +61,8 @@ class TableCollectionTest extends TestCase
 
     /**
      * @return void
-     * @throws InvalidArgumentException
      * @throws ExpectationFailedException|Exception
+     * @throws \InvalidArgumentException
      */
     public function testHasNot(): void
     {
@@ -83,19 +73,9 @@ class TableCollectionTest extends TestCase
 
     /**
      * @return void
-     * @throws InvalidMethodNameException
-     * @throws RuntimeException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws InvalidArgumentException
-     * @throws ClassIsFinalException
-     * @throws ExpectationFailedException
-     * @throws \PHPUnit\Framework\InvalidArgumentException
-     * @throws DuplicateMethodException
-     * @throws ClassIsReadonlyException
-     * @throws ReflectionException
-     * @throws UnknownTypeException
      * @throws Exception
-     * @throws ClassAlreadyExistsException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testRemoveByType(): void
     {
@@ -114,20 +94,10 @@ class TableCollectionTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws MappingTablesException
-     * @throws \PHPUnit\Framework\InvalidArgumentException
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
-     * @throws DuplicateMethodException
-     * @throws InvalidMethodNameException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
-     * @throws RuntimeException
-     * @throws UnknownTypeException
      * @throws \Exception
+     * @throws \InvalidArgumentException
+     * @throws MappingTablesException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testRemoveByInstance(): void
     {
@@ -142,10 +112,10 @@ class TableCollectionTest extends TestCase
 
     /**
      * @return void
-     * @throws MappingTablesException
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws MappingTablesException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetNotExistingTableWithStrictModeEnabled(): void
     {
@@ -159,10 +129,10 @@ class TableCollectionTest extends TestCase
 
     /**
      * @return void
-     * @throws MappingTablesException
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws MappingTablesException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetNotExistingTableWithStrictModeDisabled(): void
     {
@@ -178,8 +148,8 @@ class TableCollectionTest extends TestCase
     /**
      * @return void
      * @throws DBALException
-     * @throws \Throwable
      * @throws \Exception
+     * @throws \Throwable
      */
     protected function setUp(): void
     {
