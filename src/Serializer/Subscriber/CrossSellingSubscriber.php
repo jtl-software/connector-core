@@ -36,7 +36,7 @@ class CrossSellingSubscriber implements EventSubscriberInterface
             /** @var array{productId?: array{0: string, 1: int}, items?: array<int, array<string, mixed>>} $data */
             $data      = $event->getData();
             $productId = $data['productId'][1] ?? 0;
-            if (isset($data['items'])) {
+            if (isset($data['items']) && \is_array($data['items'])) {
                 foreach ($data['items'] as $i => $item) {
                     if (!isset($data['items'][$i]['id'])) {
                         /** @var array{crossSellingGroupId?: array{0: string, 1: int}} $item */
