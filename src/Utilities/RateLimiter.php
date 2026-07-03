@@ -126,10 +126,6 @@ class RateLimiter
         }
 
         foreach ($files as $file) {
-            if (!\is_string($file)) {
-                continue;
-            }
-
             $content = \file_get_contents($file);
             if ($content === false) {
                 continue;

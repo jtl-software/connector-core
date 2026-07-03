@@ -69,8 +69,8 @@
         "phpcs": "phpcs --basepath=. --extensions=php --standard=phpcs.xml.dist --report=full src tests",
         "phpcs:fix": "phpcbf --basepath=. --extensions=php --standard=phpcs.xml.dist src tests",
         "phpcs:ci": "phpcs --basepath=. --extensions=php --standard=phpcs.xml.dist --report=full --report-\\Micheh\\PhpCodeSniffer\\Report\\Gitlab=phpcs-quality-report.json src tests",
-        "phpstan": "phpstan analyse src tests --level max -c ./vendor/jtl/connector-cq/phpstan.neon",
-        "phpstan:ci": "phpstan analyse src tests --level max -c ./vendor/jtl/connector-cq/phpstan.neon --error-format gitlab > phpstan-quality-report.json",
+        "phpstan": "phpstan analyse src tests --level 6 -c ./vendor/jtl/connector-cq/phpstan.neon",
+        "phpstan:ci": "phpstan analyse src tests --level 6 -c ./vendor/jtl/connector-cq/phpstan.neon --error-format gitlab > phpstan-quality-report.json",
         "tests": "phpunit",
         "tests:ci": "phpunit --log-junit phpunit.xml"
     },

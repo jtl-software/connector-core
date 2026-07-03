@@ -1069,7 +1069,7 @@ class Application
 
                 try {
                     \assert(\method_exists($controller, $action));
-                    /** @var AbstractModel[] $dataModels */
+                    /** @var iterable<mixed> $dataModels */
                     $dataModels = $controller->$action(...$params);
 
                     foreach ($dataModels as $dataModel) {

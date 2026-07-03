@@ -138,8 +138,8 @@ class QueryBuilderTest extends TestCase
         }
         $this->assertArrayHasKey(0, $datasets);
         $this->assertArrayHasKey(1, $datasets);
-        $this->assertEquals(3, $datasets[0]['z']); //@phpstan-ignore-line
-        $this->assertEquals(5., $datasets[1]['z']); //@phpstan-ignore-line
+        $this->assertEquals(3, $datasets[0]['z']);
+        $this->assertEquals(5., $datasets[1]['z']);
 
         $qb = $this->getDBManager()->getConnection()->createQueryBuilder();
         $qb->update($this->coordsTable->getTableName())
@@ -148,8 +148,8 @@ class QueryBuilderTest extends TestCase
             ->executeStatement();
 
         $datasets = $this->coordsTable->findAll();
-        $this->assertEquals(10.5, $datasets[0]['z']); //@phpstan-ignore-line
-        $this->assertEquals(10.5, $datasets[1]['z']); //@phpstan-ignore-line
+        $this->assertEquals(10.5, $datasets[0]['z']);
+        $this->assertEquals(10.5, $datasets[1]['z']);
     }
 
     /**

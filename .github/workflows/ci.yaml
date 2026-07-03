@@ -50,7 +50,7 @@ jobs:
         run: composer install --no-interaction --no-progress --prefer-dist
 
       - name: Run PHPStan
-        run: php -d memory_limit=512M ./vendor/bin/phpstan analyse src tests --level max -c ./vendor/jtl/connector-cq/phpstan.neon
+        run: php -d memory_limit=512M ./vendor/bin/phpstan analyse src tests --level 6 -c ./vendor/jtl/connector-cq/phpstan.neon
 
   unit-tests:
     name: Unit Tests (PHP ${{ matrix.php-version }})

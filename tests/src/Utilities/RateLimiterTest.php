@@ -52,7 +52,6 @@ class RateLimiterTest extends TestCase
     {
         $this->rateLimiter->setGeneralLimit(5);
         $this->rateLimiter->checkLimit(RpcMethod::INIT, 'test-client');
-        $this->assertTrue(true);
     }
 
     /**
@@ -169,7 +168,6 @@ class RateLimiterTest extends TestCase
         $this->removeDirRecursive($rateLimitDir);
 
         $this->rateLimiter->cleanup();
-        $this->assertTrue(true);
     }
 
     /**
@@ -188,7 +186,6 @@ class RateLimiterTest extends TestCase
         $this->rateLimiter->recordRequest(RpcMethod::INIT, 'client2');
 
         $this->rateLimiter->checkLimit(RpcMethod::INIT, 'client2');
-        $this->assertTrue(true);
     }
 
     /**
@@ -207,7 +204,6 @@ class RateLimiterTest extends TestCase
         $this->rateLimiter->recordRequest(RpcMethod::ACK, 'client');
 
         $this->rateLimiter->checkLimit(RpcMethod::ACK, 'client');
-        $this->assertTrue(true);
     }
 
     /**
