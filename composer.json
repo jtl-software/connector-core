@@ -13,7 +13,7 @@
     }],
     "require": {
         "php": ">=8.3",
-        "jms/serializer": "*",
+        "jms/serializer": "^3.0",
         "hassankhan/config": "^3.0",
         "monolog/monolog": "^3.0",
         "symfony/finder": "^7.0",
