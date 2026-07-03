@@ -68,7 +68,7 @@ class LanguageIsoSubscriberTest extends TestCase
         $serializedData = $this->serializeModel($i18nModel);
 
         /** @var object $jsonObj */
-        $jsonObj = \json_decode($serializedData, false, 512, \JSON_THROW_ON_ERROR);
+        $jsonObj = \json_decode($serializedData, false, 512, JSON_THROW_ON_ERROR);
         if (!\property_exists($jsonObj, 'languageISO')) {
             $this->fail('property "languageISO" does not exist.');
         }
@@ -118,7 +118,7 @@ class LanguageIsoSubscriberTest extends TestCase
         $serializedData = $this->serializeModel($i18nModel);
 
         /** @var object $jsonObj */
-        $jsonObj = \json_decode($serializedData, false, 512, \JSON_THROW_ON_ERROR);
+        $jsonObj = \json_decode($serializedData, false, 512, JSON_THROW_ON_ERROR);
         if (!\property_exists($jsonObj, 'languageIso')) {
             $this->fail('property "languageIso" does not exist.');
         }
@@ -150,7 +150,7 @@ class LanguageIsoSubscriberTest extends TestCase
         $serializedData = $this->serializeModel($i18nModel);
 
         /** @var object $jsonObj */
-        $jsonObj = \json_decode($serializedData, false, 512, \JSON_THROW_ON_ERROR);
+        $jsonObj = \json_decode($serializedData, false, 512, JSON_THROW_ON_ERROR);
 
         if (!\property_exists($jsonObj, 'languageISO')) {
             $this->fail('property "languageISO" does not exist.');
@@ -181,7 +181,7 @@ class LanguageIsoSubscriberTest extends TestCase
         $serializedData = $this->serializeModel($i18nModel);
 
         /** @var object $jsonObj */
-        $jsonObj = \json_decode($serializedData, false, 512, \JSON_THROW_ON_ERROR);
+        $jsonObj = \json_decode($serializedData, false, 512, JSON_THROW_ON_ERROR);
 
         if (!\property_exists($jsonObj, 'languageISO')) {
             $this->fail('property "languageISO" does not exist.');
@@ -238,6 +238,68 @@ class LanguageIsoSubscriberTest extends TestCase
     }
 
     /**
+     * Reproduces the real-world payload shape sent by JTL-Wawi: only the exchange
+     * field "languageISO" is present, "languageIso" is missing entirely.
+     *
+     * @return void
+     * @throws AnnotationException
+     * @throws AssertionFailedError
+     * @throws Exception
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws JsonException
+     * @throws LogicException
+     * @throws NotAcceptableException
+     * @throws RuntimeException
+     * @throws UnsupportedFormatException
+     * @throws \InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     */
+    public function testOnPreDeserializeWithEmptyLanguageIsoAndNoLanguageIsoKeyDoesNotThrow(): void
+    {
+        $serializer  = SerializerBuilder::create()->build();
+        $productI18n = $serializer->deserialize(
+            \json_encode(['languageISO' => ''], JSON_THROW_ON_ERROR),
+            ProductI18n::class,
+            'json'
+        );
+
+        $this->assertInstanceOf(ProductI18n::class, $productI18n);
+        $this->assertSame('', $productI18n->getLanguageIso());
+    }
+
+    /**
+     * Same payload shape as JTL-Wawi sends it, but with an actual language code
+     * that must still be converted from ISO-639-2b to ISO-639-1.
+     *
+     * @return void
+     * @throws AnnotationException
+     * @throws AssertionFailedError
+     * @throws Exception
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws JsonException
+     * @throws LogicException
+     * @throws NotAcceptableException
+     * @throws RuntimeException
+     * @throws UnsupportedFormatException
+     * @throws \InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     */
+    public function testOnPreDeserializeWithValidLanguageIsoAndNoLanguageIsoKeyConverts(): void
+    {
+        $serializer  = SerializerBuilder::create()->build();
+        $productI18n = $serializer->deserialize(
+            \json_encode(['languageISO' => 'ger'], JSON_THROW_ON_ERROR),
+            ProductI18n::class,
+            'json'
+        );
+
+        $this->assertInstanceOf(ProductI18n::class, $productI18n);
+        $this->assertSame('de', $productI18n->getLanguageIso());
+    }
+
+    /**
      * @param class-string $model
      *
      * @return void
@@ -263,5 +325,67 @@ class LanguageIsoSubscriberTest extends TestCase
         $deserializeData = $this->serializeAndDeserializeModel($i18nModel);
 
         $this->assertSame($deserializeData->getLanguageIso(), $value);
+    }
+
+    /**
+     * When "languageISO" is absent from the payload, the condition
+     * isset($data['languageISO']) is false, so no conversion must occur and
+     * languageIso stays at its default empty value.
+     *
+     * @return void
+     * @throws AnnotationException
+     * @throws AssertionFailedError
+     * @throws Exception
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws LogicException
+     * @throws NotAcceptableException
+     * @throws RuntimeException
+     * @throws UnsupportedFormatException
+     * @throws \InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     */
+    public function testOnPreDeserializeWhenLanguageISOKeyAbsentNoConversionHappens(): void
+    {
+        $serializer  = SerializerBuilder::create()->build();
+        $productI18n = $serializer->deserialize(
+            \json_encode([], JSON_THROW_ON_ERROR),
+            ProductI18n::class,
+            'json'
+        );
+
+        $this->assertInstanceOf(ProductI18n::class, $productI18n);
+        $this->assertSame('', $productI18n->getLanguageIso());
+    }
+
+    /**
+     * When both "languageISO" and "languageIso" are present in the payload,
+     * the condition !isset($data['languageIso']) is false, so the subscriber
+     * must leave the existing "languageIso" value untouched.
+     *
+     * @return void
+     * @throws AnnotationException
+     * @throws AssertionFailedError
+     * @throws Exception
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     * @throws LogicException
+     * @throws NotAcceptableException
+     * @throws RuntimeException
+     * @throws UnsupportedFormatException
+     * @throws \InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     */
+    public function testOnPreDeserializeWhenBothKeysArePresentLanguageIsoIsNotOverwritten(): void
+    {
+        $serializer  = SerializerBuilder::create()->build();
+        $productI18n = $serializer->deserialize(
+            \json_encode(['languageISO' => 'ger', 'languageIso' => 'en'], JSON_THROW_ON_ERROR),
+            ProductI18n::class,
+            'json'
+        );
+
+        $this->assertInstanceOf(ProductI18n::class, $productI18n);
+        $this->assertSame('en', $productI18n->getLanguageIso());
     }
 }

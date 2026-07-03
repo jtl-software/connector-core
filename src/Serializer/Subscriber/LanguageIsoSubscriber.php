@@ -73,10 +73,9 @@ class LanguageIsoSubscriber implements EventSubscriberInterface
     public function onPreDeserialize(PreDeserializeEvent $event): void
     {
         $data = $event->getData();
-        if (\is_array($data) && isset($data['languageISO']) && !isset($data['languageIso'])) {
-            /** @var string $languageISO */
-            $languageISO         = $data['languageISO'];
-            $language            = $this->languages->fromISO_639_2b($languageISO);
+        $dataLanguageISO = $data['languageISO'] ?? null;
+        if (\is_array($data) && isset($dataLanguageISO) && !empty($dataLanguageISO) && !isset($data['languageIso'])) {
+            $language            = $this->languages->fromISO_639_2b($dataLanguageISO);
             $data['languageIso'] = $language->toISO_639_1();
             $event->setData($data);
         }
