@@ -1,5 +1,7 @@
 unreleased
 - CO-2876 implement model count
+- CO-3450 Oversized image upload errors now include the affected image name and ID.
+
 -----
 - CO-3165 add IdentityType for deleted product image
 
