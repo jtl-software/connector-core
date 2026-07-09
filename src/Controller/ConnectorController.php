@@ -94,18 +94,17 @@ class ConnectorController implements LoggerAwareInterface
      */
     public function features(): Features
     {
-        /** @var array{entities?: array<string, array{pull?: bool|null, push?: bool|null, delete?: bool|null}>, flags?: array<string, bool>} $features */
         $features = $this->fetchFeaturesData();
 
-        /** @var array<string, array{pull?: bool|null, push?: bool|null, delete?: bool|null}> $entities */
         $entities = [];
         if (isset($features['entities']) && \is_array($features['entities'])) {
+            /** @var array<string, array{pull?: bool|null, push?: bool|null, delete?: bool|null}> $entities */
             $entities = $features['entities'];
         }
 
-        /** @var array<string, bool> $flags */
         $flags = [];
         if (isset($features['flags']) && \is_array($features['flags'])) {
+            /** @var array<string, bool> $flags */
             $flags = $features['flags'];
         }
 

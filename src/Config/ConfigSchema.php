@@ -19,7 +19,10 @@ class ConfigSchema
         PLUGINS_DIR             = 'plugins_dir',
         FEATURES_PATH           = 'features_path',
         DEBUG                   = 'debug',
-        SERIALIZER_ENABLE_CACHE = 'serializer.enable_cache';
+        SERIALIZER_ENABLE_CACHE = 'serializer.enable_cache',
+        RATE_LIMIT_GENERAL      = 'rate_limit.general',
+        RATE_LIMIT_AUTH         = 'rate_limit.auth',
+        RATE_LIMIT_WINDOW       = 'rate_limit.window';
 
     /** @var ConfigParameter[] */
     protected array $parameters = [];
@@ -67,6 +70,9 @@ class ConfigSchema
             ),
             ConfigParameter::create(self::DEBUG, ConfigParameter::TYPE_BOOLEAN, true, true, false),
             ConfigParameter::create(self::SERIALIZER_ENABLE_CACHE, ConfigParameter::TYPE_BOOLEAN, true, true, true),
+            ConfigParameter::create(self::RATE_LIMIT_GENERAL, ConfigParameter::TYPE_INTEGER, true, false, 60),
+            ConfigParameter::create(self::RATE_LIMIT_AUTH, ConfigParameter::TYPE_INTEGER, true, false, 5),
+            ConfigParameter::create(self::RATE_LIMIT_WINDOW, ConfigParameter::TYPE_INTEGER, true, false, 60),
         ];
     }
 

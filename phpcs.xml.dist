@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<ruleset name="JTL Connector Project">
+    <description>JTL Connector project ruleset with exclusions for PHP 8.1 compatibility</description>
+
+    <!-- Use JtlConnector standard -->
+    <rule ref="JtlConnector" />
+
+    <!-- Exclude test file that requires PHP 8.1 compatibility -->
+    <!-- The file cannot have typed constants (requires PHP 8.2+) but tests need it -->
+    <exclude-pattern>tests/src/dbc/TestCase.php</exclude-pattern>
+</ruleset>

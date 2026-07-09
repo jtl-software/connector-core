@@ -11,22 +11,22 @@
         "homepage": "http://www.jtl-software.de",
         "role": "Founder"
     }],
-        "require": {
+    "require": {
         "php": ">=8.3",
-        "jms/serializer": "*",
+        "jms/serializer": "^3.0",
         "hassankhan/config": "^3.0",
         "monolog/monolog": "^3.0",
-        "symfony/finder": "^8.0",
-        "symfony/event-dispatcher": "^8.0",
-        "doctrine/collections": "^3.0",
+        "symfony/finder": "^7.0",
+        "symfony/event-dispatcher": "^7.0",
+        "doctrine/collections": "^2.6",
         "ext-json": "*",
         "ext-sqlite3": "*",
         "ext-zip": "*",
         "php-di/php-di": "^7.0",
         "jawira/case-converter": "^3.4",
-        "symfony/http-foundation": "^8.0",
-        "symfony/filesystem": "^8.0",
-        "symfony/console": "^8.0",
+        "symfony/http-foundation": "^7.0",
+        "symfony/filesystem": "^7.0",
+        "symfony/console": "^7.0",
         "fakerphp/faker": "^1.13",
         "whitecube/lingua": "^1.1",
         "ext-fileinfo": "*",
@@ -66,17 +66,20 @@
             "@phpcs",
             "@phpstan"
         ],
-        "phpcs": "phpcs --basepath=. --extensions=php --standard=JtlConnector --report=full src tests",
-        "phpcs:fix": "phpcbf --basepath=. --extensions=php --standard=JtlConnector src tests",
-        "phpcs:ci": "phpcs --basepath=. --extensions=php --standard=JtlConnector --report=full --report-\\\\Micheh\\\\PhpCodeSniffer\\\\Report\\\\Gitlab=phpcs-quality-report.json src tests",
-        "phpstan": "phpstan analyse src tests --level max -c ./vendor/jtl/connector-cq/phpstan.neon",
-        "phpstan:ci": "phpstan analyse src tests --level max -c ./vendor/jtl/connector-cq/phpstan.neon --error-format gitlab > phpstan-quality-report.json",
+        "phpcs": "phpcs --basepath=. --extensions=php --standard=phpcs.xml.dist --report=full src tests",
+        "phpcs:fix": "phpcbf --basepath=. --extensions=php --standard=phpcs.xml.dist src tests",
+        "phpcs:ci": "phpcs --basepath=. --extensions=php --standard=phpcs.xml.dist --report=full --report-\\Micheh\\PhpCodeSniffer\\Report\\Gitlab=phpcs-quality-report.json src tests",
+        "phpstan": "phpstan analyse src tests --level 6 -c ./vendor/jtl/connector-cq/phpstan.neon",
+        "phpstan:ci": "phpstan analyse src tests --level 6 -c ./vendor/jtl/connector-cq/phpstan.neon --error-format gitlab > phpstan-quality-report.json",
         "tests": "phpunit",
         "tests:ci": "phpunit --log-junit phpunit.xml"
     },
     "config": {
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "platform": {
+            "php": "8.3.0"
         }
     }
 }

@@ -9,6 +9,7 @@ final class ErrorCode
     public const int
         NO_SESSION            = 789,
         AUTHENTICATION_FAILED = 790,
+        RATE_LIMIT_EXCEEDED   = 429,
         INVALID_SESSION       = -32000,
         UNINITIALIZED_SESSION = -32001,
         INVALID_REQUEST       = -32600,

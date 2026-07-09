@@ -88,8 +88,8 @@ class ProductFactory extends AbstractModelFactory
         ];
 
         $i = 0;
-        foreach ($variations[0]['values'] as $firstValue) { //@phpstan-ignore-line
-            foreach ($variations[1]['values'] as $secondValue) { //@phpstan-ignore-line
+        foreach ($variations[0]['values'] as $firstValue) {
+            foreach ($variations[1]['values'] as $secondValue) {
                 $variants[] = $this->makeOneArray([
                                                       'masterProductId' => $parentId,
                                                       'isMasterProduct' => false,
