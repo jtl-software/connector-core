@@ -1,5 +1,6 @@
 unreleased
 ------
+- CO-3450 Oversized image upload errors now include the affected image name and ID.
 
 
 5.3.2
