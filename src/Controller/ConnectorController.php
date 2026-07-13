@@ -99,13 +99,13 @@ class ConnectorController implements LoggerAwareInterface
 
         /** @var array<string, array{pull?: bool|null, push?: bool|null, delete?: bool|null}> $entities */
         $entities = [];
-        if (isset($features['entities']) && \is_array($features['entities'])) {
+        if (isset($features['entities'])) {
             $entities = $features['entities'];
         }
 
         /** @var array<string, bool> $flags */
         $flags = [];
-        if (isset($features['flags']) && \is_array($features['flags'])) {
+        if (isset($features['flags'])) {
             $flags = $features['flags'];
         }
 

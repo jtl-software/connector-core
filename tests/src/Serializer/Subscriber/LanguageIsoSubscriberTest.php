@@ -242,11 +242,9 @@ class LanguageIsoSubscriberTest extends TestCase
      * field "languageISO" is present, "languageIso" is missing entirely.
      *
      * @return void
-     * @throws AnnotationException
      * @throws AssertionFailedError
      * @throws Exception
      * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
      * @throws \InvalidArgumentException
      * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws JsonException
@@ -273,11 +271,9 @@ class LanguageIsoSubscriberTest extends TestCase
      * that must still be converted from ISO-639-2b to ISO-639-1.
      *
      * @return void
-     * @throws AnnotationException
      * @throws AssertionFailedError
      * @throws Exception
      * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
      * @throws \InvalidArgumentException
      * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws JsonException
@@ -333,11 +329,9 @@ class LanguageIsoSubscriberTest extends TestCase
      * languageIso stays at its default empty value.
      *
      * @return void
-     * @throws AnnotationException
      * @throws AssertionFailedError
      * @throws Exception
      * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
      * @throws \InvalidArgumentException
      * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws LogicException
@@ -364,11 +358,9 @@ class LanguageIsoSubscriberTest extends TestCase
      * must leave the existing "languageIso" value untouched.
      *
      * @return void
-     * @throws AnnotationException
      * @throws AssertionFailedError
      * @throws Exception
      * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
      * @throws \InvalidArgumentException
      * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws LogicException
