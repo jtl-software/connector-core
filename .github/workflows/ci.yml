@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [master, develop]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  no-cruft:
+    name: No IDE/OS cruft
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check for .idea/.code/.DS_Store files
+        run: |
+          matches=$(find . \( -name .idea -o -name .code -o -name .DS_Store \) -not -path "./vendor/*")
+          if [ -n "$matches" ]; then
+            echo "::error::Found .idea, .code or .DS_Store. Please remove them from the project.";
+            echo "$matches";
+            exit 1;
+          fi
+
+  phpcs:
+    name: Coding standard (phpcs)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: json, sqlite3, pdo_sqlite, zip, fileinfo
+          coverage: none
+      - uses: ramsey/composer-install@v3
+      - run: composer phpcs
+
+  phpstan:
+    name: Static analysis (phpstan)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: json, sqlite3, pdo_sqlite, zip, fileinfo
+          coverage: none
+      - uses: ramsey/composer-install@v3
+      - run: composer phpstan
+
+  tests:
+    name: Tests (PHP ${{ matrix.php-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: ['8.3', '8.4']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: json, sqlite3, pdo_sqlite, zip, fileinfo
+          coverage: none
+      - uses: ramsey/composer-install@v3
+      - run: composer tests
