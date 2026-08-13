@@ -69,7 +69,7 @@ class SqliteSessionHandlerTest extends TestCase
     {
         $sql  = 'INSERT INTO session (sessionId, sessionData, sessionExpires) VALUES(:sid,:data,:expires)';
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue('sid', $sessionId, \PDO::PARAM_STR);
+        $stmt->bindValue('sid', $this->hashSessionId($sessionId), \PDO::PARAM_STR);
         $stmt->bindValue('data', \base64_encode($sessionData), \PDO::PARAM_STR);
         $stmt->bindValue('expires', $expires, \PDO::PARAM_INT);
         $stmt->execute();
@@ -86,7 +86,7 @@ class SqliteSessionHandlerTest extends TestCase
     {
         $sql  = 'SELECT * FROM session WHERE sessionId = :sid';
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue('sid', $sessionId, \PDO::PARAM_STR);
+        $stmt->bindValue('sid', $this->hashSessionId($sessionId), \PDO::PARAM_STR);
         $stmt->execute();
         $data = $stmt->fetch(\PDO::FETCH_ASSOC);
         if (\is_array($data)) {
@@ -97,6 +97,42 @@ class SqliteSessionHandlerTest extends TestCase
             return $data;
         }
         return null;
+    }
+
+    /**
+     * Mirrors SqliteSessionHandler::hashSessionId() so tests can assert against the stored,
+     * hashed representation instead of the plaintext session id.
+     *
+     * @param string $sessionId
+     *
+     * @return string
+     */
+    protected function hashSessionId(string $sessionId): string
+    {
+        return \hash('sha256', $sessionId);
+    }
+
+    /**
+     * CO-3583: the session id is a bearer token replayed by clients on every request, so it must
+     * not be recoverable in plaintext from the SQLite file at rest.
+     *
+     * @return void
+     * @throws DatabaseException
+     * @throws \InvalidArgumentException
+     * @throws \PDOException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \Psr\Log\InvalidArgumentException
+     */
+    public function testWriteDoesNotStorePlaintextSessionId(): void
+    {
+        $sessionId   = \uniqid('wtfsess', true);
+        $sessionData = $this->getFaker()->text;
+        $this->handler->write($sessionId, $sessionData);
+        /** @var array<string, scalar>|null $data */
+        $data = $this->findSessionData($sessionId);
+        $this->assertNotNull($data);
+        $this->assertNotEquals($sessionId, $data['sessionId']);
+        $this->assertEquals($this->hashSessionId($sessionId), $data['sessionId']);
     }
 
     /**
@@ -117,7 +153,7 @@ class SqliteSessionHandlerTest extends TestCase
         /** @var array<string, scalar>|null $data */
         $data = $this->findSessionData($sessionId);
         $this->assertNotNull($data);
-        $this->assertEquals($sessionId, $data['sessionId']);
+        $this->assertEquals($this->hashSessionId($sessionId), $data['sessionId']);
         $this->assertEquals($sessionData, $data['sessionData']);
         $this->assertGreaterThan($now, $data['sessionExpires']);
     }
@@ -140,7 +176,7 @@ class SqliteSessionHandlerTest extends TestCase
         $this->handler->write($sessionId, $newData);
         $data = $this->findSessionData($sessionId);
         $this->assertNotNull($data);
-        $this->assertEquals($sessionId, $data['sessionId']);
+        $this->assertEquals($this->hashSessionId($sessionId), $data['sessionId']);
         $this->assertEquals($newData, $data['sessionData']);
     }
 
