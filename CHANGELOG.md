@@ -2,6 +2,7 @@ unreleased
 - CO-2876 implement model count
 - CO-3450 Oversized image upload errors now include the affected image name and ID.
 - CO-3468 use constant-time comparison in TokenValidator to prevent timing attacks
+- CO-3583 store session ids hashed (SHA-256) in SqliteSessionHandler instead of in plaintext
 
 -----
 - CO-3165 add IdentityType for deleted product image
