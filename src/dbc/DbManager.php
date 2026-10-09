@@ -211,11 +211,12 @@ class DbManager
      */
     public function updateDatabaseSchema(): void
     {
-        $this->connection->transactional(function ($connection): void {
-            foreach ($this->getSchemaUpdates() as $ddl) {
-                $connection->executeStatement($ddl);
-            }
-        });
+        // No transaction wrapper: schema updates are DDL, which implicitly COMMITs on
+        // MySQL/MariaDB (and can't be rolled back there anyway). Wrapping it in a
+        // transaction makes the surrounding commit fail with "There is no active transaction".
+        foreach ($this->getSchemaUpdates() as $ddl) {
+            $this->connection->executeStatement($ddl);
+        }
     }
 
     /**

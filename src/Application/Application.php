@@ -210,6 +210,7 @@ class Application
         $this->configSchema = $configSchema;
         $this->container    = (new ContainerBuilder())
             ->useAutowiring(true)
+            ->useAttributes(true)
             ->build();
 
         $logLevel = Validate::string($this->config->get(ConfigSchema::LOG_LEVEL));
@@ -416,7 +417,7 @@ class Application
      */
     protected function startSession(string $rpcMethod): void
     {
-        $sessionId   = $this->httpRequest->query->get('jtlauth');
+        $sessionId   = $this->httpRequest->get('jtlauth');
         $sessionName = 'JtlConnector';
 
         if ($sessionId === null && $rpcMethod !== RpcMethod::AUTH) {

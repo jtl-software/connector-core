@@ -3,6 +3,15 @@
          bootstrap="tests/bootstrap.php"
          colors="true"
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.5/phpunit.xsd">
+  <php>
+    <!--
+      Pin the timezone so tz-naive DateTime round-trips (e.g. Doctrine DBAL's
+      datetime type, which stores/reads without an offset) are deterministic
+      regardless of the runner's timezone. Without this the dbc mapping-table
+      tests fail on any non-UTC host.
+    -->
+    <ini name="date.timezone" value="UTC"/>
+  </php>
   <source>
     <include>
       <directory suffix=".php">src</directory>

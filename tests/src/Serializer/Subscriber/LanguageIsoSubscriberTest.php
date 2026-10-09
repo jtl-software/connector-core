@@ -68,7 +68,7 @@ class LanguageIsoSubscriberTest extends TestCase
         $serializedData = $this->serializeModel($i18nModel);
 
         /** @var object $jsonObj */
-        $jsonObj = \json_decode($serializedData, false, 512, JSON_THROW_ON_ERROR);
+        $jsonObj = \json_decode($serializedData, false, 512, \JSON_THROW_ON_ERROR);
         if (!\property_exists($jsonObj, 'languageISO')) {
             $this->fail('property "languageISO" does not exist.');
         }
@@ -118,7 +118,7 @@ class LanguageIsoSubscriberTest extends TestCase
         $serializedData = $this->serializeModel($i18nModel);
 
         /** @var object $jsonObj */
-        $jsonObj = \json_decode($serializedData, false, 512, JSON_THROW_ON_ERROR);
+        $jsonObj = \json_decode($serializedData, false, 512, \JSON_THROW_ON_ERROR);
         if (!\property_exists($jsonObj, 'languageIso')) {
             $this->fail('property "languageIso" does not exist.');
         }
@@ -150,7 +150,7 @@ class LanguageIsoSubscriberTest extends TestCase
         $serializedData = $this->serializeModel($i18nModel);
 
         /** @var object $jsonObj */
-        $jsonObj = \json_decode($serializedData, false, 512, JSON_THROW_ON_ERROR);
+        $jsonObj = \json_decode($serializedData, false, 512, \JSON_THROW_ON_ERROR);
 
         if (!\property_exists($jsonObj, 'languageISO')) {
             $this->fail('property "languageISO" does not exist.');
@@ -181,7 +181,7 @@ class LanguageIsoSubscriberTest extends TestCase
         $serializedData = $this->serializeModel($i18nModel);
 
         /** @var object $jsonObj */
-        $jsonObj = \json_decode($serializedData, false, 512, JSON_THROW_ON_ERROR);
+        $jsonObj = \json_decode($serializedData, false, 512, \JSON_THROW_ON_ERROR);
 
         if (!\property_exists($jsonObj, 'languageISO')) {
             $this->fail('property "languageISO" does not exist.');
@@ -242,24 +242,22 @@ class LanguageIsoSubscriberTest extends TestCase
      * field "languageISO" is present, "languageIso" is missing entirely.
      *
      * @return void
-     * @throws AnnotationException
      * @throws AssertionFailedError
      * @throws Exception
      * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws JsonException
      * @throws LogicException
      * @throws NotAcceptableException
      * @throws RuntimeException
      * @throws UnsupportedFormatException
-     * @throws \InvalidArgumentException
-     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      */
     public function testOnPreDeserializeWithEmptyLanguageIsoAndNoLanguageIsoKeyDoesNotThrow(): void
     {
         $serializer  = SerializerBuilder::create()->build();
         $productI18n = $serializer->deserialize(
-            \json_encode(['languageISO' => ''], JSON_THROW_ON_ERROR),
+            \json_encode(['languageISO' => ''], \JSON_THROW_ON_ERROR),
             ProductI18n::class,
             'json'
         );
@@ -273,24 +271,22 @@ class LanguageIsoSubscriberTest extends TestCase
      * that must still be converted from ISO-639-2b to ISO-639-1.
      *
      * @return void
-     * @throws AnnotationException
      * @throws AssertionFailedError
      * @throws Exception
      * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws JsonException
      * @throws LogicException
      * @throws NotAcceptableException
      * @throws RuntimeException
      * @throws UnsupportedFormatException
-     * @throws \InvalidArgumentException
-     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      */
     public function testOnPreDeserializeWithValidLanguageIsoAndNoLanguageIsoKeyConverts(): void
     {
         $serializer  = SerializerBuilder::create()->build();
         $productI18n = $serializer->deserialize(
-            \json_encode(['languageISO' => 'ger'], JSON_THROW_ON_ERROR),
+            \json_encode(['languageISO' => 'ger'], \JSON_THROW_ON_ERROR),
             ProductI18n::class,
             'json'
         );
@@ -333,23 +329,21 @@ class LanguageIsoSubscriberTest extends TestCase
      * languageIso stays at its default empty value.
      *
      * @return void
-     * @throws AnnotationException
      * @throws AssertionFailedError
      * @throws Exception
      * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws LogicException
      * @throws NotAcceptableException
      * @throws RuntimeException
      * @throws UnsupportedFormatException
-     * @throws \InvalidArgumentException
-     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      */
     public function testOnPreDeserializeWhenLanguageISOKeyAbsentNoConversionHappens(): void
     {
         $serializer  = SerializerBuilder::create()->build();
         $productI18n = $serializer->deserialize(
-            \json_encode([], JSON_THROW_ON_ERROR),
+            \json_encode([], \JSON_THROW_ON_ERROR),
             ProductI18n::class,
             'json'
         );
@@ -364,23 +358,21 @@ class LanguageIsoSubscriberTest extends TestCase
      * must leave the existing "languageIso" value untouched.
      *
      * @return void
-     * @throws AnnotationException
      * @throws AssertionFailedError
      * @throws Exception
      * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws LogicException
      * @throws NotAcceptableException
      * @throws RuntimeException
      * @throws UnsupportedFormatException
-     * @throws \InvalidArgumentException
-     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      */
     public function testOnPreDeserializeWhenBothKeysArePresentLanguageIsoIsNotOverwritten(): void
     {
         $serializer  = SerializerBuilder::create()->build();
         $productI18n = $serializer->deserialize(
-            \json_encode(['languageISO' => 'ger', 'languageIso' => 'en'], JSON_THROW_ON_ERROR),
+            \json_encode(['languageISO' => 'ger', 'languageIso' => 'en'], \JSON_THROW_ON_ERROR),
             ProductI18n::class,
             'json'
         );
