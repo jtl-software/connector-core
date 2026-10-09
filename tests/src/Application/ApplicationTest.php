@@ -34,6 +34,7 @@ use Jtl\Connector\Core\Exception\ConfigException;
 use Jtl\Connector\Core\Exception\DatabaseException;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\FileNotFoundException;
+use Jtl\Connector\Core\Exception\FileTooLargeException;
 use Jtl\Connector\Core\Exception\LoggerException;
 use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Exception\SessionException;
@@ -80,6 +81,24 @@ use TypeError;
  */
 class ApplicationTest extends TestCase
 {
+    /** @var string[] */
+    private array $temporaryArchivePaths = [];
+
+    /**
+     * @return void
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     */
+    protected function tearDown(): void
+    {
+        foreach ($this->temporaryArchivePaths as $archivePath) {
+            if (\is_file($archivePath)) {
+                \unlink($archivePath);
+            }
+        }
+
+        parent::tearDown();
+    }
+
     /**
      * @return void
      * @throws ApplicationException
@@ -908,5 +927,152 @@ class ApplicationTest extends TestCase
         $request->files   = $filebag;
         $app              = $this->createApplication()->setHttpRequest($request);
         $this->invokeMethodFromObject($app, 'handleImagePush', ...$images);
+    }
+
+    /**
+     * @param string $name
+     * @param string $filename
+     * @param string $expectedImageLabel
+     *
+     * @return void
+     * @throws ApplicationException
+     * @throws ConfigException
+     * @throws DependencyException
+     * @throws EmptyDirectoryException
+     * @throws FileException
+     * @throws \InvalidArgumentException
+     * @throws InvalidDefinition
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     * @throws LoggerException
+     * @throws LogicException
+     * @throws \LogicException
+     * @throws NotAcceptableException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \Psr\Log\InvalidArgumentException
+     * @throws TypeError
+     * @throws \UnexpectedValueException
+     * @throws UnsupportedFormatException
+     */
+    #[DataProvider('tooLargeImageLabelDataProvider')]
+    public function testHandleImagePushNamesTheWawiImageWhenAnImageIsTooLarge(
+        string $name,
+        string $filename,
+        string $expectedImageLabel
+    ): void {
+        $images = $this->deserializeImagesPushFixture();
+        // First fixture image: image ID 284, product (foreign key) ID 1
+        $images[0]->setName($name)->setFilename($filename);
+
+        $archivePath = $this->createArchiveWithOversizedEntry('284_Product.jpg');
+        $app         = $this->createApplication()->setHttpRequest($this->createImagePushRequest($archivePath));
+
+        $this->expectException(ApplicationException::class);
+        $this->expectExceptionCode(ApplicationException::IMAGE_TOO_LARGE);
+        $this->expectExceptionMessage(
+            \sprintf(
+                'Image "%s" of Product (JTL-Wawi ID = 1, image ID = 284) is too large (25 MB, max. 20 MB)',
+                $expectedImageLabel
+            )
+        );
+
+        $this->invokeMethodFromObject($app, 'handleImagePush', ...$images);
+    }
+
+    /**
+     * @return array<string, array{string, string, string}>
+     */
+    public static function tooLargeImageLabelDataProvider(): array
+    {
+        return [
+            'image name sent by Wawi'          => ['Sommerkleid rot', 'sommerkleid-rot.jpg', 'Sommerkleid rot'],
+            'falls back to the Wawi file name' => ['', 'sommerkleid-rot.jpg', 'sommerkleid-rot.jpg'],
+            'falls back to the archive entry'  => ['', '', '284_Product.jpg'],
+        ];
+    }
+
+    /**
+     * @return void
+     * @throws ApplicationException
+     * @throws ConfigException
+     * @throws DependencyException
+     * @throws EmptyDirectoryException
+     * @throws FileException
+     * @throws \InvalidArgumentException
+     * @throws InvalidDefinition
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     * @throws LoggerException
+     * @throws LogicException
+     * @throws \LogicException
+     * @throws NotAcceptableException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \Psr\Log\InvalidArgumentException
+     * @throws TypeError
+     * @throws \UnexpectedValueException
+     * @throws UnsupportedFormatException
+     */
+    public function testHandleImagePushRethrowsTooLargeEntryWithoutMatchingImage(): void
+    {
+        $images      = $this->deserializeImagesPushFixture();
+        $archivePath = $this->createArchiveWithOversizedEntry('999_Product.jpg');
+        $app         = $this->createApplication()->setHttpRequest($this->createImagePushRequest($archivePath));
+
+        $this->expectException(FileTooLargeException::class);
+        $this->expectExceptionMessage('File "999_Product.jpg" is too large (25 MB, max. 20 MB)');
+
+        $this->invokeMethodFromObject($app, 'handleImagePush', ...$images);
+    }
+
+    /**
+     * @return ProductImage[]
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     * @throws LogicException
+     * @throws NotAcceptableException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws UnsupportedFormatException
+     */
+    private function deserializeImagesPushFixture(): array
+    {
+        $data = \file_get_contents(\sprintf('%s/fixtures/images_push.json', \TEST_DIR));
+        $this->assertNotFalse($data);
+        /** @var ProductImage[] $images */
+        $images = SerializerBuilder::create()->build()
+                                   ->deserialize($data, \sprintf('array<%s>', AbstractImage::class), 'json');
+
+        return $images;
+    }
+
+    /**
+     * @param string $archivePath
+     *
+     * @return HttpRequest
+     * @throws FileException
+     */
+    private function createImagePushRequest(string $archivePath): HttpRequest
+    {
+        $request        = new HttpRequest();
+        $request->files = new FileBag([
+            'file' => new UploadedFile($archivePath, 'images.zip', 'application/octet-stream', \UPLOAD_ERR_OK, true),
+        ]);
+
+        return $request;
+    }
+
+    /**
+     * @param string $entryName
+     *
+     * @return string
+     */
+    private function createArchiveWithOversizedEntry(string $entryName): string
+    {
+        $archivePath = \sprintf('%s/%s.zip', \sys_get_temp_dir(), \uniqid('too-large-', true));
+
+        $archive = new \ZipArchive();
+        $archive->open($archivePath, \ZipArchive::CREATE);
+        $archive->addFromString($entryName, \str_repeat('a', 25_000_000));
+        $archive->close();
+
+        $this->temporaryArchivePaths[] = $archivePath;
+
+        return $archivePath;
     }
 }

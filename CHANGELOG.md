@@ -1,6 +1,6 @@
 unreleased
 ------
-- CO-3450 Oversized image upload errors now include the affected image name and ID.
+- CO-3450 Oversized image upload errors now name the affected image as known in JTL-Wawi: image name (fallback: file name), ID of the related entity (e.g. kArtikel) and image ID. `Zip::extract()` now throws `FileTooLargeException` (a `CompressionException`) instead of `\RuntimeException`.
 - CO-3468 use constant-time comparison in TokenValidator to prevent timing attacks
 
 
