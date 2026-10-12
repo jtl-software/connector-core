@@ -55,6 +55,7 @@ use Jtl\Connector\Core\Database\Sqlite3;
 use Jtl\Connector\Core\Exception\DatabaseException;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\FileNotFoundException;
+use Jtl\Connector\Core\Exception\FileTooLargeException;
 use Jtl\Connector\Core\Exception\LinkerException;
 use Jtl\Connector\Core\Exception\LoggerException;
 use Jtl\Connector\Core\Exception\RpcException;
@@ -909,7 +910,16 @@ class Application
             /** @var UploadedFile $zipFile */
             $zipFile = $this->httpRequest->files->get('file');
             $archive = new Zip();
-            if ($archive->extract($zipFile->getRealPath(), $tempDir)) {
+            try {
+                $extracted = $archive->extract($zipFile->getRealPath(), $tempDir);
+            } catch (FileTooLargeException $exception) {
+                $image = self::findImageByFileName($exception->getEntryName(), ...$images);
+                if ($image === null) {
+                    throw $exception;
+                }
+                throw ApplicationException::imageTooLarge($image, $exception);
+            }
+            if ($extracted) {
                 $finder = (new Finder())->files()->ignoreDotFiles(true)->in($tempDir);
                 foreach ($finder as $file) {
                     $imagePaths[] = $file->getRealpath();
@@ -926,12 +936,8 @@ class Application
 
             $imageFound = false;
             foreach ($imagePaths as $imagePath) {
-                $fileInfo                = \pathinfo($imagePath);
-                [$hostId, $relationType] = \explode('_', $fileInfo['filename']);
-                if (
-                    (int)$hostId === $image->getId()->getHost()
-                    && \strtolower($relationType) === \strtolower($image->getRelationType())
-                ) {
+                $fileInfo = \pathinfo($imagePath);
+                if (self::isFileOfImage($imagePath, $image)) {
                     if (!\is_string($contentType = \mime_content_type($imagePath))) {
                         throw new \RuntimeException('$contentType must be a string.');
                     }
@@ -955,6 +961,43 @@ class Application
                 throw ApplicationException::imageNotFound($image);
             }
         }
+    }
+
+    /**
+     * @param string        $fileName
+     * @param AbstractImage ...$images
+     *
+     * @return AbstractImage|null
+     * @throws DefinitionException
+     * @throws \RuntimeException
+     */
+    protected static function findImageByFileName(string $fileName, AbstractImage ...$images): ?AbstractImage
+    {
+        foreach ($images as $image) {
+            if (self::isFileOfImage($fileName, $image)) {
+                return $image;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Image files in the pushed archive are named "{hostId}_{relationType}.{extension}".
+     *
+     * @param string        $fileName
+     * @param AbstractImage $image
+     *
+     * @return bool
+     * @throws DefinitionException
+     * @throws \RuntimeException
+     */
+    protected static function isFileOfImage(string $fileName, AbstractImage $image): bool
+    {
+        $nameParts = \explode('_', \pathinfo($fileName, \PATHINFO_FILENAME));
+
+        return (int)$nameParts[0] === $image->getId()->getHost()
+            && \strtolower($nameParts[1] ?? '') === \strtolower($image->getRelationType());
     }
 
     /**

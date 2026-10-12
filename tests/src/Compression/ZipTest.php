@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Jtl\Connector\Core\Test\Compression;
 
 use Jtl\Connector\Core\Compression\Zip;
+use Jtl\Connector\Core\Exception\FileTooLargeException;
 use Jtl\Connector\Core\Test\TestCase;
 
 /**
@@ -13,6 +14,8 @@ use Jtl\Connector\Core\Test\TestCase;
 class ZipTest extends TestCase
 {
     private const string TOO_LARGE_ENTRY_NAME = '284_Product.jpg';
+
+    private const int TOO_LARGE_ENTRY_SIZE = 25_000_000;
 
     private string $targetFolder;
 
@@ -65,12 +68,15 @@ class ZipTest extends TestCase
 
         try {
             $zip->extract($archivePath, $this->targetFolder);
-            $this->fail('Expected RuntimeException was not thrown.');
-        } catch (\RuntimeException $exception) {
+            $this->fail('Expected FileTooLargeException was not thrown.');
+        } catch (FileTooLargeException $exception) {
             $this->assertSame(
-                \sprintf('Image "%s" too large', self::TOO_LARGE_ENTRY_NAME),
+                \sprintf('File "%s" is too large (25 MB, max. 20 MB)', self::TOO_LARGE_ENTRY_NAME),
                 $exception->getMessage()
             );
+            $this->assertSame(self::TOO_LARGE_ENTRY_NAME, $exception->getEntryName());
+            $this->assertSame(self::TOO_LARGE_ENTRY_SIZE, $exception->getSize());
+            $this->assertSame(Zip::MAX_ENTRY_SIZE, $exception->getMaxSize());
         }
     }
 
@@ -83,7 +89,7 @@ class ZipTest extends TestCase
 
         $archive = new \ZipArchive();
         $archive->open($archivePath, \ZipArchive::CREATE);
-        $archive->addFromString(self::TOO_LARGE_ENTRY_NAME, \str_repeat('a', 20_000_001));
+        $archive->addFromString(self::TOO_LARGE_ENTRY_NAME, \str_repeat('a', self::TOO_LARGE_ENTRY_SIZE));
         $archive->close();
 
         $this->archivePath = $archivePath;
