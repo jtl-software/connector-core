@@ -42,9 +42,9 @@
         "micheh/phpcs-gitlab": "^2.0",
         "slevomat/coding-standard": "^8.29"
     },
-    "provide": {
-        "jtl/connector-mapping-tables": "4.0.8",
-        "jtl/connector-dbc": "v2.1.13"
+    "conflict": {
+        "jtl/connector-mapping-tables": "*",
+        "jtl/connector-dbc": "*"
     },
     "autoload": {
         "psr-4": {

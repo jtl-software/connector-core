@@ -1,11 +1,11 @@
-# src/mapping-tables — ⚠️ vendored from jtl/connector-mapping-tables
+# src/mapping-tables — ⚠️ bundled port of jtl/connector-mapping-tables
 
-> **External origin.** This directory is a copy of the standalone package
-> **`jtl/connector-mapping-tables`** (declared in `composer.json` → `provide:
-> jtl/connector-mapping-tables`, namespaced `Jtl\Connector\MappingTables\` via PSR-4). It has
-> its own upstream repository and release cycle. **Prefer fixing bugs upstream** and
-> re-syncing; edits made only here will be lost on the next sync and won't reach other
-> consumers. If you must change it here, flag it so it can be mirrored upstream.
+> **External origin.** This directory started as a copy of the standalone package
+> **`jtl/connector-mapping-tables`** (namespaced `Jtl\Connector\MappingTables\` via PSR-4).
+> Core 6 migrated it to DBAL 4; the standalone package is still DBAL 2 and only serves core 5
+> endpoints, so `composer.json` declares `conflict: jtl/connector-mapping-tables`. **Never
+> re-sync from upstream**: that would revert the DBAL 4 migration. If a fix also matters for
+> core 5, flag it so it can be ported to the standalone package.
 
 ## Purpose
 

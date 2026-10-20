@@ -104,9 +104,10 @@ Supporting subsystems: `Definition` (protocol constants/enums), `Event` (dispatc
 - **CHANGELOG.md** follows the existing style — add an entry for any behavioural or API change.
 - **Repo hygiene**: never commit IDE/OS cruft — `.idea`, `.code`, or `.DS_Store` files
   (outside `vendor/`) must not be committed.
-- **Vendored sub-packages**: `src/dbc` and `src/mapping-tables` are code from the separate
-  upstream packages `jtl/connector-dbc` and `jtl/connector-mapping-tables` (see `provide` in
-  `composer.json`). Prefer fixing those upstream; see their local `CLAUDE.md` before editing.
+- **Bundled sub-packages**: `src/dbc` and `src/mapping-tables` originate from the separate
+  packages `jtl/connector-dbc` and `jtl/connector-mapping-tables`, but core 6 ships its own
+  DBAL 4 port of both, while the standalone packages are still DBAL 2. `composer.json` declares
+  `conflict` with them. Never re-sync from upstream; see their local `CLAUDE.md` before editing.
 - **Before finishing any change**: run `composer phpcs:fix`, then `composer analyse` and
   `composer tests`, and report the actual results.
 

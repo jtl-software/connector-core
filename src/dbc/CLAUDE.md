@@ -1,11 +1,11 @@
-# src/dbc — ⚠️ vendored from jtl/connector-dbc
+# src/dbc — ⚠️ bundled port of jtl/connector-dbc
 
-> **External origin.** This directory is a copy of the standalone package
-> **`jtl/connector-dbc`** (declared in `composer.json` → `provide: jtl/connector-dbc`, and
-> namespaced `Jtl\Connector\Dbc\` via PSR-4). It has its own upstream repository and release
-> cycle. **Prefer fixing bugs upstream** and re-syncing; edits made only here will be lost on
-> the next sync and won't reach other consumers of the package. If you must change it here,
-> call that out explicitly so it can be mirrored upstream.
+> **External origin.** This directory started as a copy of the standalone package
+> **`jtl/connector-dbc`** (namespaced `Jtl\Connector\Dbc\` via PSR-4). Core 6 migrated it to
+> DBAL 4; the standalone package is still DBAL 2 and only serves core 5 endpoints, so
+> `composer.json` declares `conflict: jtl/connector-dbc`. **Never re-sync from upstream**: that
+> would revert the DBAL 4 migration. If a fix also matters for core 5, call it out so it can be
+> ported to the standalone package.
 
 ## Purpose
 
