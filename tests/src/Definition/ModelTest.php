@@ -32,7 +32,6 @@ class ModelTest extends TestCase
         $definition           = new Model();
         $definitionReflection = new \ReflectionClass($definition);
         $propertyMappings     = $definitionReflection->getProperty('propertyMappings');
-        $propertyMappings->setAccessible(true);
 
         $exceptions = [Model::PRODUCT_ATTRIBUTE];
 
@@ -65,7 +64,6 @@ class ModelTest extends TestCase
         $definition           = new Model();
         $definitionReflection = new \ReflectionClass($definition);
         $propertyMappings     = $definitionReflection->getProperty('mappings');
-        $propertyMappings->setAccessible(true);
 
         $mappings = $propertyMappings->getValue($definition);
         $this->assertIsArray($mappings);

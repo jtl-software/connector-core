@@ -109,8 +109,7 @@ class SessionHelperTest extends TestCase
         $helper                      = SessionHelper::createByObjectClass(new \ZipArchive());
         $reflectionClass             = new \ReflectionClass($helper);
         $reflectionPropertyNamespace = $reflectionClass->getProperty('namespace');
-        $reflectionPropertyNamespace->setAccessible(true);
-        $actualNamespace = $reflectionPropertyNamespace->getValue($helper);
+        $actualNamespace             = $reflectionPropertyNamespace->getValue($helper);
         $this->assertEquals($expectedNamespace, $actualNamespace);
     }
 

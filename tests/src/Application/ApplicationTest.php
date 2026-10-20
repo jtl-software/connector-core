@@ -82,7 +82,29 @@ use TypeError;
 class ApplicationTest extends TestCase
 {
     /** @var string[] */
-    private array $temporaryArchivePaths = [];
+    private array    $temporaryArchivePaths = [];
+    private ?\Closure $restoreHandlers      = null;
+
+    /**
+     * @return void
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // Application::run() registers the core and the Monolog error/exception handlers. Unwind to the
+        // handlers on top of the stack now instead of rebuilding the stack, which would reset error masks.
+        $errorHandler          = self::currentErrorHandler();
+        $exceptionHandler      = self::currentExceptionHandler();
+        $this->restoreHandlers = static function () use ($errorHandler, $exceptionHandler): void {
+            while (($handler = self::currentErrorHandler()) !== null && $handler !== $errorHandler) {
+                \restore_error_handler();
+            }
+            while (($handler = self::currentExceptionHandler()) !== null && $handler !== $exceptionHandler) {
+                \restore_exception_handler();
+            }
+        };
+    }
 
     /**
      * @return void
@@ -92,6 +114,10 @@ class ApplicationTest extends TestCase
     {
         unset($_GET['jtlauth']);
 
+        if ($this->restoreHandlers !== null) {
+            ($this->restoreHandlers)();
+        }
+
         foreach ($this->temporaryArchivePaths as $archivePath) {
             if (\is_file($archivePath)) {
                 \unlink($archivePath);
@@ -99,6 +125,30 @@ class ApplicationTest extends TestCase
         }
 
         parent::tearDown();
+    }
+
+    /**
+     * PHP 8.3 has no get_error_handler(); push a probe and pop it again, which keeps the stack and its error masks.
+     *
+     * @return callable|null
+     */
+    private static function currentErrorHandler(): ?callable
+    {
+        $handler = \set_error_handler(static fn (): bool => false);
+        \restore_error_handler();
+
+        return $handler;
+    }
+
+    /**
+     * @return callable|null
+     */
+    private static function currentExceptionHandler(): ?callable
+    {
+        $handler = \set_exception_handler(static fn (): null => null);
+        \restore_exception_handler();
+
+        return $handler;
     }
 
     /**

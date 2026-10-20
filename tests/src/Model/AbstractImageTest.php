@@ -61,7 +61,8 @@ class AbstractImageTest extends TestCase
     #[DataProvider('extensionProvider')]
     public function testGetExtension(string $fileName, string $expectedExtension): void
     {
-        $image = $this->getMockForAbstractClass(AbstractImage::class);
+        $image = new class extends AbstractImage {
+        };
         $image->setFilename($fileName);
         $this->assertEquals($expectedExtension, $image->getExtension());
     }
