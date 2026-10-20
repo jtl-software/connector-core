@@ -82,9 +82,8 @@ use TypeError;
 class ApplicationTest extends TestCase
 {
     /** @var string[] */
-    private array $temporaryArchivePaths = [];
-    private int   $errorHandlerDepth     = 0;
-    private int   $exceptionHandlerDepth = 0;
+    private array    $temporaryArchivePaths = [];
+    private ?\Closure $restoreHandlers      = null;
 
     /**
      * @return void
@@ -92,8 +91,19 @@ class ApplicationTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->errorHandlerDepth     = self::countErrorHandlers();
-        $this->exceptionHandlerDepth = self::countExceptionHandlers();
+
+        // Application::run() registers the core and the Monolog error/exception handlers. Unwind to the
+        // handlers on top of the stack now instead of rebuilding the stack, which would reset error masks.
+        $errorHandler          = self::currentErrorHandler();
+        $exceptionHandler      = self::currentExceptionHandler();
+        $this->restoreHandlers = static function () use ($errorHandler, $exceptionHandler): void {
+            while (($handler = self::currentErrorHandler()) !== null && $handler !== $errorHandler) {
+                \restore_error_handler();
+            }
+            while (($handler = self::currentExceptionHandler()) !== null && $handler !== $exceptionHandler) {
+                \restore_exception_handler();
+            }
+        };
     }
 
     /**
@@ -104,12 +114,8 @@ class ApplicationTest extends TestCase
     {
         unset($_GET['jtlauth']);
 
-        // Application::run() registers the core and the Monolog error/exception handlers, drop them again.
-        for ($i = self::countErrorHandlers() - $this->errorHandlerDepth; $i > 0; $i--) {
-            \restore_error_handler();
-        }
-        for ($i = self::countExceptionHandlers() - $this->exceptionHandlerDepth; $i > 0; $i--) {
-            \restore_exception_handler();
+        if ($this->restoreHandlers !== null) {
+            ($this->restoreHandlers)();
         }
 
         foreach ($this->temporaryArchivePaths as $archivePath) {
@@ -122,45 +128,27 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * PHP has no getter for the handler stack, so pop every handler and push them back.
+     * PHP 8.3 has no get_error_handler(); push a probe and pop it again, which keeps the stack and its error masks.
      *
-     * @return int
+     * @return callable|null
      */
-    private static function countErrorHandlers(): int
+    private static function currentErrorHandler(): ?callable
     {
-        $handlers = [];
-        while (($handler = \set_error_handler(static fn (): bool => false)) !== null) {
-            \restore_error_handler();
-            \restore_error_handler();
-            $handlers[] = $handler;
-        }
+        $handler = \set_error_handler(static fn (): bool => false);
         \restore_error_handler();
 
-        foreach (\array_reverse($handlers) as $handler) {
-            \set_error_handler($handler);
-        }
-
-        return \count($handlers);
+        return $handler;
     }
 
     /**
-     * @return int
+     * @return callable|null
      */
-    private static function countExceptionHandlers(): int
+    private static function currentExceptionHandler(): ?callable
     {
-        $handlers = [];
-        while (($handler = \set_exception_handler(static fn (): null => null)) !== null) {
-            \restore_exception_handler();
-            \restore_exception_handler();
-            $handlers[] = $handler;
-        }
+        $handler = \set_exception_handler(static fn (): null => null);
         \restore_exception_handler();
 
-        foreach (\array_reverse($handlers) as $handler) {
-            \set_exception_handler($handler);
-        }
-
-        return \count($handlers);
+        return $handler;
     }
 
     /**
