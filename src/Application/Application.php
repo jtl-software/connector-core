@@ -328,6 +328,9 @@ class Application
                 throw RpcException::invalidRequest();
             }
 
+            // Authenticate before resolving the method, otherwise unauthenticated callers can probe which methods exist
+            $this->startSession($requestPacket->getMethod());
+
             $method = Method::createFromRequestPacket($requestPacket);
             if (!Controller::isController($method->getController())) {
                 throw DefinitionException::unknownController($method->getController());
@@ -337,7 +340,6 @@ class Application
                 throw DefinitionException::unknownAction($method->getAction());
             }
 
-            $this->startSession($requestPacket->getMethod());
             $connector->initialize($this->config, $this->container, $this->eventDispatcher);
             $this->prepareContainer($connector);
             $this->loadPlugins(
@@ -421,7 +423,7 @@ class Application
         $sessionId   = $this->httpRequest->get('jtlauth');
         $sessionName = 'JtlConnector';
 
-        if ($sessionId === null && $rpcMethod !== RpcMethod::AUTH) {
+        if ((!\is_string($sessionId) || $sessionId === '') && $rpcMethod !== RpcMethod::AUTH) {
             throw new SessionException('No session', ErrorCode::NO_SESSION);
         }
 

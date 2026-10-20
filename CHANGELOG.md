@@ -2,6 +2,7 @@ unreleased
 ------
 - CO-3450 Oversized image upload errors now name the affected image as known in JTL-Wawi: image name (fallback: file name), ID of the related entity (e.g. kArtikel) and image ID. `Zip::extract()` now throws `FileTooLargeException` (a `CompressionException`) instead of `\RuntimeException`.
 - CO-3468 use constant-time comparison in TokenValidator to prevent timing attacks
+- CO-3671 authenticate the session before resolving the RPC method and treat an empty `jtlauth` like a missing one, so unauthenticated requests can no longer probe which controllers and actions exist
 
 
 5.3.2

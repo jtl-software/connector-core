@@ -90,6 +90,8 @@ class ApplicationTest extends TestCase
      */
     protected function tearDown(): void
     {
+        unset($_GET['jtlauth']);
+
         foreach ($this->temporaryArchivePaths as $archivePath) {
             if (\is_file($archivePath)) {
                 \unlink($archivePath);
@@ -213,6 +215,23 @@ class ApplicationTest extends TestCase
         }
 
         return new Application($connectorDir, $config, $configSchema);
+    }
+
+    /**
+     * Application whose session start always succeeds, i.e. a request of an authenticated caller.
+     *
+     * @return Application&MockObject
+     * @throws Throwable
+     */
+    protected function createApplicationWithSession(): Application&MockObject
+    {
+        $app = $this->getMockBuilder(Application::class)
+                    ->setConstructorArgs([$this->connectorDir, new ArrayConfig([]), new ConfigSchema()])
+                    ->onlyMethods(['startSession'])
+                    ->getMock();
+        $app->expects($this->once())->method('startSession');
+
+        return $app;
     }
 
     /**
@@ -741,7 +760,7 @@ class ApplicationTest extends TestCase
 
         $this->expectOutputString(\json_encode($responsePacket->toArray($serializer), \JSON_THROW_ON_ERROR));
 
-        $this->createApplication()
+        $this->createApplicationWithSession()
              ->run($this->createConnector());
     }
 
@@ -783,6 +802,48 @@ class ApplicationTest extends TestCase
                                         ->setData(Error::createDataFromException($ex));
         $responsePacket  = (new ResponsePacket())->setJtlrpc('2.0')->setId($id)->setError($error);
         $this->expectOutputString(\json_encode($responsePacket->toArray($serializer), \JSON_THROW_ON_ERROR));
+
+        $this->createApplicationWithSession()
+             ->run($this->createConnector());
+    }
+
+    /**
+     * @return array<string, array{0: string, 1: string|null}>
+     */
+    public static function unauthenticatedRequestDataProvider(): array
+    {
+        return [
+            'unknown action without jtlauth'        => ['connector.identification', null],
+            'unknown action with empty jtlauth'     => ['connector.identification', ''],
+            'unknown controller with empty jtlauth' => ['foo.bar', ''],
+            'known method without jtlauth'          => ['manufacturer.pull', null],
+            'known method with empty jtlauth'       => ['connector.identify', ''],
+        ];
+    }
+
+    /**
+     * @param string      $method
+     * @param string|null $jtlauth
+     *
+     * @return void
+     * @throws Throwable
+     */
+    #[DataProvider('unauthenticatedRequestDataProvider')]
+    public function testRunRejectsUnauthenticatedRequestBeforeResolvingMethod(string $method, ?string $jtlauth): void
+    {
+        $this->expectException(SessionException::class);
+        $this->expectExceptionCode(ErrorCode::NO_SESSION);
+        $this->expectOutputRegex(\sprintf('/"error":\{"code":%d,"message":"No session"/', ErrorCode::NO_SESSION));
+
+        $requestPacket   = (new RequestPacket())->setJtlrpc('2.0')
+                                                ->setMethod($method)
+                                                ->setParams([])
+                                                ->setId('1')
+                                                ->toArray();
+        $_POST['jtlrpc'] = \json_encode($requestPacket, \JSON_THROW_ON_ERROR);
+        if ($jtlauth !== null) {
+            $_GET['jtlauth'] = $jtlauth;
+        }
 
         $this->createApplication()
              ->run($this->createConnector());
