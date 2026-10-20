@@ -1201,9 +1201,7 @@ class Application
         $messages[]         = $ex->getMessage();
         $reflectionClass    = new ReflectionClass($ex);
         $reflectionProperty = $reflectionClass->getProperty('message');
-        $reflectionProperty->setAccessible(true);
         $reflectionProperty->setValue($ex, \implode(' | ', $messages));
-        $reflectionProperty->setAccessible(false);
     }
 
     /**

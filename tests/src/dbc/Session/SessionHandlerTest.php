@@ -35,7 +35,6 @@ class SessionHandlerTest extends TestCase
         $handler             = new SessionHandler($this->createMock(DbManager::class));
         $reflection          = new \ReflectionClass($handler);
         $reflMaxLifetimeProp = $reflection->getProperty('maxLifetime');
-        $reflMaxLifetimeProp->setAccessible(true);
         $this->assertEquals($expected, $reflMaxLifetimeProp->getValue($handler));
     }
 

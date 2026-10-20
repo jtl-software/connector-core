@@ -85,7 +85,6 @@ class ConfigParameterTest extends TestCase
         $option           = new ConfigParameter('foo', ConfigParameter::TYPE_BOOLEAN);
         $reflectionClass  = new \ReflectionClass($option);
         $reflectionMethod = $reflectionClass->getMethod('setType');
-        $reflectionMethod->setAccessible(true);
         $reflectionMethod->invoke($option, 'yolo');
     }
 
@@ -99,7 +98,6 @@ class ConfigParameterTest extends TestCase
         $option           = new ConfigParameter('foo', ConfigParameter::TYPE_INTEGER);
         $reflectionClass  = new \ReflectionClass($option);
         $reflectionMethod = $reflectionClass->getMethod('setKey');
-        $reflectionMethod->setAccessible(true);
         $reflectionMethod->invoke($option, '');
     }
 

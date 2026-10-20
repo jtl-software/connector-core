@@ -375,7 +375,6 @@ class SqliteSessionHandlerTest extends TestCase
     {
         $refl = new \ReflectionClass($this->handler);
         $prop = $refl->getProperty('db');
-        $prop->setAccessible(true);
         /** @var Sqlite3 $db */
         $db = $prop->getValue($this->handler);
         $db->close();

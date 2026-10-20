@@ -63,8 +63,7 @@ class ConfigSchemaTest extends TestCase
         $schema->setParameter(new ConfigParameter('foo', ConfigParameter::TYPE_INTEGER));
         $reflectionClass    = new \ReflectionClass($schema);
         $reflectionProperty = $reflectionClass->getProperty('parameters');
-        $reflectionProperty->setAccessible(true);
-        $schemaArray = $reflectionProperty->getValue($schema);
+        $schemaArray        = $reflectionProperty->getValue($schema);
         $this->assertIsArray($schemaArray);
         $this->assertEquals(\array_values($schemaArray), $schema->getParameters());
     }
@@ -81,8 +80,7 @@ class ConfigSchemaTest extends TestCase
         $schema             = new ConfigSchema();
         $reflectionClass    = new \ReflectionClass($schema);
         $reflectionProperty = $reflectionClass->getProperty('parameters');
-        $reflectionProperty->setAccessible(true);
-        $reflectSchema = $reflectionProperty->getValue($schema);
+        $reflectSchema      = $reflectionProperty->getValue($schema);
         $this->assertIsArray($reflectSchema);
         $this->assertCount(0, $reflectSchema);
         $option = new ConfigParameter('foo', ConfigParameter::TYPE_INTEGER);
@@ -106,8 +104,7 @@ class ConfigSchemaTest extends TestCase
         $schema             = new ConfigSchema();
         $reflectionClass    = new \ReflectionClass($schema);
         $reflectionProperty = $reflectionClass->getProperty('parameters');
-        $reflectionProperty->setAccessible(true);
-        $reflectSchema = $reflectionProperty->getValue($schema);
+        $reflectSchema      = $reflectionProperty->getValue($schema);
         $this->assertIsArray($reflectSchema);
         $this->assertCount(0, $reflectSchema);
         $defaultParameters = ConfigSchema::createDefaultParameters($this->connectorDir);

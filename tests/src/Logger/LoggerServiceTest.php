@@ -39,8 +39,7 @@ class LoggerServiceTest extends TestCase
         $this->factory->setFormat('json', $args);
         $reflection    = new \ReflectionClass($this->factory);
         $formatterProp = $reflection->getProperty('formatter');
-        $formatterProp->setAccessible(true);
-        $formatter = $formatterProp->getValue($this->factory);
+        $formatter     = $formatterProp->getValue($this->factory);
         $this->assertInstanceOf(JsonFormatter::class, $formatter);
     }
 
@@ -64,9 +63,8 @@ class LoggerServiceTest extends TestCase
     {
         $formatterMock = $this->createMock(FormatterInterface::class);
         $this->factory->setFormatter($formatterMock);
-        $reflection    = new \ReflectionClass($this->factory);
-        $formatterProp = $reflection->getProperty('formatter');
-        $formatterProp->setAccessible(true);
+        $reflection      = new \ReflectionClass($this->factory);
+        $formatterProp   = $reflection->getProperty('formatter');
         $actualFormatter = $formatterProp->getValue($this->factory);
         $this->assertEquals($formatterMock, $actualFormatter);
     }
@@ -135,8 +133,7 @@ class LoggerServiceTest extends TestCase
     {
         $reflection   = new \ReflectionClass($this->factory);
         $channelsProp = $reflection->getProperty('channels');
-        $channelsProp->setAccessible(true);
-        $channels = $channelsProp->getValue($this->factory);
+        $channels     = $channelsProp->getValue($this->factory);
         $this->assertEmpty($channels);
         $fooChannel = $this->factory->get('foo');
         $channels   = $channelsProp->getValue($this->factory);
@@ -153,7 +150,6 @@ class LoggerServiceTest extends TestCase
         $expectedLogFileName = \sprintf('%s/foo.log', $this->logDir);
         $handlerReflection   = new \ReflectionClass($handlers[0]);
         $filenameProp        = $handlerReflection->getProperty('filename');
-        $filenameProp->setAccessible(true);
         $this->assertEquals($expectedLogFileName, $filenameProp->getValue($handlers[0]));
     }
 

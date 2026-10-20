@@ -152,16 +152,12 @@ class IdentityLinkerTest extends TestCase
         $reflection = new \ReflectionClass($linker);
 
         $deleteCache = $reflection->getMethod('deleteCache');
-        $deleteCache->setAccessible(true);
 
         $saveCache = $reflection->getMethod('saveCache');
-        $saveCache->setAccessible(true);
 
         $checkCache = $reflection->getMethod('checkCache');
-        $checkCache->setAccessible(true);
 
         $loadCache = $reflection->getMethod('loadCache');
-        $loadCache->setAccessible(true);
 
         $cacheType  = IdentityLinker::CACHE_TYPE_ENDPOINT;
         $type       = IdentityType::CATEGORY;
@@ -266,7 +262,6 @@ class IdentityLinkerTest extends TestCase
 
         $reflection = new \ReflectionClass($linker);
         $checkCache = $reflection->getMethod('checkCache');
-        $checkCache->setAccessible(true);
 
         $cacheExists = $checkCache->invoke($linker, $endpointId, $identityType, IdentityLinker::CACHE_TYPE_ENDPOINT);
         $this->assertTrue($cacheExists);
@@ -294,7 +289,6 @@ class IdentityLinkerTest extends TestCase
 
         $reflection = new \ReflectionClass($linker);
         $checkCache = $reflection->getMethod('checkCache');
-        $checkCache->setAccessible(true);
 
         $linker->save($endpointId, $hostId, $modelName, $property);
 
