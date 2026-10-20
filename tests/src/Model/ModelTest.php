@@ -17,13 +17,12 @@ use Jtl\Connector\Core\Model\Product;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Test\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
 use PHPUnit\Framework\ExpectationFailedException;
 
 class ModelTest extends TestCase
 {
     /**
-     * @doesNotPerformAssertions
-     *
      * @param string $modelName
      *
      * @return void
@@ -35,6 +34,7 @@ class ModelTest extends TestCase
      * @throws UnsupportedFormatException
      */
     #[DataProvider('modelsDataProvider')]
+    #[DoesNotPerformAssertions]
     public function testModelsInitialization(string $modelName): void
     {
         $serializer         = SerializerBuilder::create()->build();
@@ -110,7 +110,8 @@ class ModelTest extends TestCase
     #[DataProvider('unsetIdentificationStringProvider')]
     public function testUnsetIdentificationString(string $identificationString, string $subject, bool $setString): void
     {
-        $model       = $this->getMockForAbstractClass(AbstractModel::class);
+        $model       = new class extends AbstractModel {
+        };
         $stringCount = \random_int(0, 10);
 
         $identificationStrings = \array_map(static function ($whatever) {
@@ -149,7 +150,8 @@ class ModelTest extends TestCase
         string $subject,
         bool   $setString
     ): void {
-        $model       = $this->getMockForAbstractClass(AbstractModel::class);
+        $model       = new class extends AbstractModel {
+        };
         $stringCount = \random_int(0, 10);
 
         $identificationStrings = \array_map(function ($whatever) {

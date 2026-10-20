@@ -83,6 +83,18 @@ class ApplicationTest extends TestCase
 {
     /** @var string[] */
     private array $temporaryArchivePaths = [];
+    private int   $errorHandlerDepth     = 0;
+    private int   $exceptionHandlerDepth = 0;
+
+    /**
+     * @return void
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->errorHandlerDepth     = self::countErrorHandlers();
+        $this->exceptionHandlerDepth = self::countExceptionHandlers();
+    }
 
     /**
      * @return void
@@ -92,6 +104,14 @@ class ApplicationTest extends TestCase
     {
         unset($_GET['jtlauth']);
 
+        // Application::run() registers the core and the Monolog error/exception handlers, drop them again.
+        for ($i = self::countErrorHandlers() - $this->errorHandlerDepth; $i > 0; $i--) {
+            \restore_error_handler();
+        }
+        for ($i = self::countExceptionHandlers() - $this->exceptionHandlerDepth; $i > 0; $i--) {
+            \restore_exception_handler();
+        }
+
         foreach ($this->temporaryArchivePaths as $archivePath) {
             if (\is_file($archivePath)) {
                 \unlink($archivePath);
@@ -99,6 +119,48 @@ class ApplicationTest extends TestCase
         }
 
         parent::tearDown();
+    }
+
+    /**
+     * PHP has no getter for the handler stack, so pop every handler and push them back.
+     *
+     * @return int
+     */
+    private static function countErrorHandlers(): int
+    {
+        $handlers = [];
+        while (($handler = \set_error_handler(static fn (): bool => false)) !== null) {
+            \restore_error_handler();
+            \restore_error_handler();
+            $handlers[] = $handler;
+        }
+        \restore_error_handler();
+
+        foreach (\array_reverse($handlers) as $handler) {
+            \set_error_handler($handler);
+        }
+
+        return \count($handlers);
+    }
+
+    /**
+     * @return int
+     */
+    private static function countExceptionHandlers(): int
+    {
+        $handlers = [];
+        while (($handler = \set_exception_handler(static fn (): null => null)) !== null) {
+            \restore_exception_handler();
+            \restore_exception_handler();
+            $handlers[] = $handler;
+        }
+        \restore_exception_handler();
+
+        foreach (\array_reverse($handlers) as $handler) {
+            \set_exception_handler($handler);
+        }
+
+        return \count($handlers);
     }
 
     /**
