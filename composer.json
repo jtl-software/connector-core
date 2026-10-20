@@ -13,7 +13,7 @@
     }],
     "require": {
         "php": ">=8.3",
-        "jms/serializer": "*",
+        "jms/serializer": "^3.32",
         "hassankhan/config": "^3.0",
         "monolog/monolog": "^3.0",
         "symfony/finder": "^7.4",
@@ -24,7 +24,7 @@
         "ext-zip": "*",
         "php-di/php-di": "^7.0",
         "jawira/case-converter": "^3.4",
-        "symfony/http-foundation": "^7.4",
+        "symfony/http-foundation": "^7.4.19",
         "symfony/filesystem": "^7.4",
         "symfony/console": "^7.4",
         "fakerphp/faker": "^1.13",
@@ -42,9 +42,9 @@
         "micheh/phpcs-gitlab": "^2.0",
         "slevomat/coding-standard": "^8.29"
     },
-    "provide": {
-        "jtl/connector-mapping-tables": "4.0.8",
-        "jtl/connector-dbc": "v2.1.13"
+    "conflict": {
+        "jtl/connector-mapping-tables": "*",
+        "jtl/connector-dbc": "*"
     },
     "autoload": {
         "psr-4": {

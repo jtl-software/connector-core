@@ -76,9 +76,10 @@ class SessionHelperTest extends TestCase
     {
         $helper = new SessionHelper('yo');
         $helper->set('lo', 'miau');
-        /** @var array<string, array<string, mixed>> $_SESSION */
-        $this->assertArrayHasKey('lo', $_SESSION['yo']);
-        $this->assertEquals('miau', $_SESSION['yo']['lo']);
+        /** @var array<string, array<string, string>> $session */
+        $session = $_SESSION;
+        $this->assertArrayHasKey('lo', $session['yo']);
+        $this->assertEquals('miau', $session['yo']['lo']);
     }
 
     /**
@@ -94,7 +95,9 @@ class SessionHelperTest extends TestCase
         $_SESSION['tests']['foo'] = 'bar';
         $this->assertArrayHasKey('foo', $_SESSION['tests']);
         $helper->unset('foo');
-        $this->assertArrayNotHasKey('foo', $_SESSION['tests']);
+        /** @var array<string, array<string, string>> $session */
+        $session = $_SESSION;
+        $this->assertArrayNotHasKey('foo', $session['tests']);
     }
 
     /**
