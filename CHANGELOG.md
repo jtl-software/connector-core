@@ -1,6 +1,9 @@
 unreleased
 ------
-- BREAKING raise the minimum PHP version from 8.1 to 8.3 (typed class constants are used)
+
+6.0.0
+------
+- BREAKING raise the minimum PHP version from 8.1 to 8.3 (typed class constants are used; `Application::MIN_PHP_VERSION` is now `8.3`)
 - BREAKING upgrade runtime dependencies: `doctrine/dbal` ^2.5 -> ^4.0, `doctrine/collections` ^1.4 -> ^2.6, `php-di/php-di` ^6.0 -> ^7.0, `monolog/monolog` * -> ^3.0, `jms/serializer` * -> ^3.32, `symfony/console`, `symfony/event-dispatcher`, `symfony/filesystem` and `symfony/finder` -> ^7.4, `symfony/http-foundation` -> ^7.4.19 (CVE-2026-108082: ReDoS via the `Cache-Control` request header in earlier versions)
 - BREAKING remove the unused `doctrine/annotations` and `doctrine/cache` dependencies
 - BREAKING the DI container reads PHP attributes (`#[Inject]`) instead of docblock annotations (`@Inject`); endpoints that configure injection via `@Inject` must switch to attributes
