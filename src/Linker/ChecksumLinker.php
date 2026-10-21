@@ -120,7 +120,9 @@ class ChecksumLinker implements LoggerAwareInterface
                     ) {
                         /** @var \Jtl\Connector\Core\Model\Identity $modelId */
                         $modelId = $model->getId();
-                        if ($modelId->getEndpoint() !== '') {
+                        if ($modelId->getEndpoint() === '') {
+                            $checksum->setHasChanged(true);
+                        } else {
                             $checksum->setEndpoint(
                                 $this->loader->read($modelId->getEndpoint(), $checksum->getType())
                             );
