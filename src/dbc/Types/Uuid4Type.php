@@ -72,6 +72,14 @@ class Uuid4Type extends Type
      */
     public function convertToPHPValueSQL(string $sqlExpr, AbstractPlatform $platform): string
     {
-        return \sprintf('LOWER(HEX(%s))', $sqlExpr);
+        if (
+            $platform instanceof \Doctrine\DBAL\Platforms\MySQLPlatform
+            || $platform instanceof \Doctrine\DBAL\Platforms\MariaDBPlatform
+            || $platform instanceof \Doctrine\DBAL\Platforms\SQLitePlatform
+        ) {
+            return \sprintf('LOWER(HEX(%s))', $sqlExpr);
+        }
+
+        return $sqlExpr;
     }
 }
