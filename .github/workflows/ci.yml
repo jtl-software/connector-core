@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  hygiene:
+    name: Repository hygiene
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check for IDE/OS files
+        run: |
+          found=$(find . \( -name .idea -o -name .code -o -name .DS_Store \) -not -path "./vendor/*" -not -path "./.git/*")
+          if [ -n "$found" ]; then
+            echo "Found .idea, .code or .DS_Store. Please remove them from your project:"
+            echo "$found"
+            exit 1
+          fi
+
+  analyse:
+    name: Static analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: sqlite3, zip, fileinfo, pdo
+          tools: composer
+      - run: composer install --no-progress --no-interaction
+      - run: composer analyse
+
+  tests:
+    name: Tests (PHP ${{ matrix.php-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: ['8.3', '8.4']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: sqlite3, zip, fileinfo, pdo
+          tools: composer
+      - run: composer install --no-progress --no-interaction
+      - run: composer tests
