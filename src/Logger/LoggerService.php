@@ -151,8 +151,8 @@ class LoggerService
         if ($level instanceof Level) {
             return $level;
         }
-        if (\is_int($level)) {
-            return Level::from($level);
+        if (\is_int($level) || \is_numeric($level)) {
+            return Level::from((int)$level);
         }
 
         /** @var array<string, Level> $nameMap */
