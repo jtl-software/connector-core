@@ -11,6 +11,7 @@ use JMS\Serializer\SerializationContext;
 use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Serializer\Handler\IdentityHandler;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Class IdentityHandlerTest
@@ -71,14 +72,13 @@ class IdentityHandlerTest extends TestCase
     }
 
     /**
-     * @dataProvider identityDataProvider
-     *
      * @param IdentityHandler          $identityHandler
      * @param array{0: string, 1: int} $identityArray
      *
      * @return void
      * @throws \Exception
      */
+    #[DataProvider('identityDataProvider')]
     public function testDeserializeEntityMultipleMethod(IdentityHandler $identityHandler, array $identityArray): void
     {
         $identity = new Identity($identityArray[0], $identityArray[1]);
@@ -99,7 +99,7 @@ class IdentityHandlerTest extends TestCase
     /**
      * @return array<int, array<int, array<int, int|string>|IdentityHandler>>
      */
-    public function identityDataProvider(): array
+    public static function identityDataProvider(): array
     {
         $identityHandler = new IdentityHandler();
 

@@ -11,7 +11,6 @@ use Jtl\Connector\Core\Test\TestCase;
 use Noodlehaus\Exception\EmptyDirectoryException;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\ExpectationFailedException;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class FileConfig
@@ -24,8 +23,8 @@ class FileConfigTest extends TestCase
      * @return void
      * @throws ConfigException
      * @throws EmptyDirectoryException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testConfigSetParameter(): void
     {
@@ -57,11 +56,11 @@ class FileConfigTest extends TestCase
     /**
      * @return void
      * @throws ConfigException
-     * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws JsonException
      * @throws EmptyDirectoryException
+     * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws JsonException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testSave(): void
     {

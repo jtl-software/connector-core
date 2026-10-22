@@ -10,8 +10,8 @@ use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Definition\Event;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\ExpectationFailedException;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class EventTest
@@ -22,8 +22,8 @@ class EventTest extends TestCase
 {
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testIsMoment(): void
     {
@@ -50,8 +50,8 @@ class EventTest extends TestCase
     /**
      * @return void
      * @throws DefinitionException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testCreateRpcEventNameWithCorrectMoment(): void
     {
@@ -61,10 +61,10 @@ class EventTest extends TestCase
 
     /**
      * @return void
-     * @throws DefinitionException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
      * @throws CaseConverterException
+     * @throws DefinitionException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testCreateHandleEventName(): void
     {
@@ -77,8 +77,8 @@ class EventTest extends TestCase
      * @return void
      * @throws CaseConverterException
      * @throws DefinitionException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testCreateCoreEventName(): void
     {
@@ -88,8 +88,6 @@ class EventTest extends TestCase
     }
 
     /**
-     * @dataProvider createEventNameInvalidParamsDataProvider
-     *
      * @param string     $controller
      * @param string     $action
      * @param string     $moment
@@ -99,6 +97,7 @@ class EventTest extends TestCase
      * @throws CaseConverterException
      * @throws DefinitionException
      */
+    #[DataProvider('createEventNameInvalidParamsDataProvider')]
     public function testCreateEventNameInvalidParams(
         string     $controller,
         string     $action,
@@ -113,7 +112,7 @@ class EventTest extends TestCase
     /**
      * @return array<int, array{0: string, 1: string, 2: string, 3: DefinitionException}>
      */
-    public function createEventNameInvalidParamsDataProvider(): array
+    public static function createEventNameInvalidParamsDataProvider(): array
     {
         return [
             ['foo', '', '', DefinitionException::unknownController('foo')],
@@ -126,8 +125,8 @@ class EventTest extends TestCase
      * @return void
      * @throws CaseConverterException
      * @throws DefinitionException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function createEventNameCorrectParams(): void
     {

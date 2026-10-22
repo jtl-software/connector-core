@@ -44,7 +44,13 @@ class Validator implements ValidatorInterface
      */
     public function throwException(): void
     {
-        $value   = \is_object($this->value) ? \get_class($this->value) : $this->value;
+        if (\is_object($this->value)) {
+            $value = \get_class($this->value);
+        } elseif (\is_scalar($this->value)) {
+            $value = (string)$this->value;
+        } else {
+            $value = \get_debug_type($this->value);
+        }
         $message = $this->hasValue()
             ? $value . ' must be type ' . $this->assertedType
             : 'Type Error: Value is null';
@@ -158,9 +164,9 @@ class Validator implements ValidatorInterface
      * @param int|string $keyName
      *
      * @return bool
+     * @throws ArrayKeyDoesNotExistException
      * @throws \InvalidArgumentException
      * @throws \TypeError
-     * @throws ArrayKeyDoesNotExistException
      */
     public function hasKey(int|string $keyName): bool
     {

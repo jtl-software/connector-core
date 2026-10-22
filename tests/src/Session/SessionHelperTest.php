@@ -9,18 +9,18 @@ use Jtl\Connector\Core\Session\SessionHelper;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 class SessionHelperTest extends TestCase
 {
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testHas(): void
     {
-        $helper                 = new SessionHelper('foo');
+        $helper = new SessionHelper('foo');
+        /** @var array<string, array<string, mixed>> $_SESSION */
         $_SESSION['foo']['bar'] = 'boofar';
         $_SESSION['foo']['you'] = 'yalla';
         $this->assertTrue($helper->has('bar'));
@@ -29,8 +29,8 @@ class SessionHelperTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testHasNot(): void
     {
@@ -41,12 +41,13 @@ class SessionHelperTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGet(): void
     {
-        $helper                 = new SessionHelper('foo');
+        $helper = new SessionHelper('foo');
+        /** @var array<string, array<string, mixed>> $_SESSION */
         $_SESSION['foo']['bar'] = 'vaaaaalue';
         $_SESSION['foo']['och'] = 'taataa';
         $this->assertEquals('vaaaaalue', $helper->get('bar'));
@@ -55,8 +56,8 @@ class SessionHelperTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetDefault(): void
     {
@@ -67,39 +68,43 @@ class SessionHelperTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
      * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testSet(): void
     {
         $helper = new SessionHelper('yo');
         $helper->set('lo', 'miau');
-        $this->assertArrayHasKey('lo', $_SESSION['yo']);
-        $this->assertEquals('miau', $_SESSION['yo']['lo']);
+        /** @var array<string, array<string, string>> $session */
+        $session = $_SESSION;
+        $this->assertArrayHasKey('lo', $session['yo']);
+        $this->assertEquals('miau', $session['yo']['lo']);
     }
 
     /**
      * @return void
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testUnset(): void
     {
-        $helper                   = new SessionHelper('tests');
+        $helper = new SessionHelper('tests');
+        /** @var array<string, array<string, mixed>> $_SESSION */
         $_SESSION['tests']['foo'] = 'bar';
         $this->assertArrayHasKey('foo', $_SESSION['tests']);
         $helper->unset('foo');
-        $this->assertArrayNotHasKey('foo', $_SESSION['tests']);
+        /** @var array<string, array<string, string>> $session */
+        $session = $_SESSION;
+        $this->assertArrayNotHasKey('foo', $session['tests']);
     }
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws SessionException
-     * @throws \ReflectionException
      */
     public function testCreateByObjectClass(): void
     {
@@ -107,8 +112,7 @@ class SessionHelperTest extends TestCase
         $helper                      = SessionHelper::createByObjectClass(new \ZipArchive());
         $reflectionClass             = new \ReflectionClass($helper);
         $reflectionPropertyNamespace = $reflectionClass->getProperty('namespace');
-        $reflectionPropertyNamespace->setAccessible(true);
-        $actualNamespace = $reflectionPropertyNamespace->getValue($helper);
+        $actualNamespace             = $reflectionPropertyNamespace->getValue($helper);
         $this->assertEquals($expectedNamespace, $actualNamespace);
     }
 

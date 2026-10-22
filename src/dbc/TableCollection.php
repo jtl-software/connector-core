@@ -59,7 +59,7 @@ class TableCollection
      */
     public function has(string $name): bool
     {
-        return isset($this->tables[$name]) && $this->tables[$name] instanceof AbstractTable;
+        return isset($this->tables[$name]);
     }
 
     /**

@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Dbc\Mapping;
 
-use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
-use Doctrine\DBAL\ForwardCompatibility\Result;
 use Doctrine\DBAL\Schema\SchemaException;
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAL\Types\Types;
 use Jtl\Connector\Dbc\CoordinatesStub;
 use Jtl\Connector\Dbc\DbcRuntimeException;
 use Jtl\Connector\Dbc\TableStub;
@@ -25,8 +23,8 @@ class TableTest extends TestCase
 
     /**
      * @return void
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     * @throws ExpectationFailedException
+     * \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetName(): void
     {
@@ -35,9 +33,8 @@ class TableTest extends TestCase
 
     /**
      * @return void
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     * @throws \RuntimeException
-     * @throws ExpectationFailedException
+     * \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetTableName(): void
     {
@@ -46,9 +43,9 @@ class TableTest extends TestCase
 
     /**
      * @return void
-     * @throws SchemaException
-     * @throws DBALException
+     * @throws Exception
      * @throws \Exception
+     * @throws SchemaException
      */
     public function testRestrict(): void
     {
@@ -68,36 +65,34 @@ class TableTest extends TestCase
 
     /**
      * @return void
-     * @throws DBALException
-     * @throws ExpectationFailedException
      * @throws DbcRuntimeException
-     * @throws SchemaException
+     * @throws Exception
      * @throws \PHPUnit\Framework\Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     * @throws \RuntimeException
+     * \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws SchemaException
      */
     public function testGetTableSchema(): void
     {
         $table   = $this->coords->getTableSchema();
         $columns = $table->getColumns();
         $this->assertCount(3, $columns);
-        $this->assertArrayHasKey(CoordinatesStub::COL_X, $columns);
-        $this->assertEquals(CoordinatesStub::COL_X, $columns[CoordinatesStub::COL_X]->getName());
-        $this->assertArrayHasKey(CoordinatesStub::COL_Y, $columns);
-        $this->assertEquals(CoordinatesStub::COL_Y, $columns[CoordinatesStub::COL_Y]->getName());
-        $this->assertArrayHasKey(CoordinatesStub::COL_Z, $columns);
-        $this->assertEquals(CoordinatesStub::COL_Z, $columns[CoordinatesStub::COL_Z]->getName());
+        $this->assertTrue($table->hasColumn(CoordinatesStub::COL_X));
+        $this->assertEquals(CoordinatesStub::COL_X, $table->getColumn(CoordinatesStub::COL_X)->getName());
+        $this->assertTrue($table->hasColumn(CoordinatesStub::COL_Y));
+        $this->assertEquals(CoordinatesStub::COL_Y, $table->getColumn(CoordinatesStub::COL_Y)->getName());
+        $this->assertTrue($table->hasColumn(CoordinatesStub::COL_Z));
+        $this->assertEquals(CoordinatesStub::COL_Z, $table->getColumn(CoordinatesStub::COL_Z)->getName());
     }
 
     /**
      * @return void
-     * @throws DBALException
-     * @throws ExpectationFailedException
      * @throws DbcRuntimeException
-     * @throws SchemaException
+     * @throws Exception
      * @throws \PHPUnit\Framework\Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     * @throws \RuntimeException
+     * \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws SchemaException
      */
     public function testGetColumnTypes(): void
     {
@@ -106,19 +101,18 @@ class TableTest extends TestCase
         $this->assertArrayHasKey(CoordinatesStub::COL_X, $columns);
         $this->assertArrayHasKey(CoordinatesStub::COL_Y, $columns);
         $this->assertArrayHasKey(CoordinatesStub::COL_Z, $columns);
-        $this->assertEquals(Type::FLOAT, $columns[CoordinatesStub::COL_X]);
-        $this->assertEquals(Type::FLOAT, $columns[CoordinatesStub::COL_Y]);
-        $this->assertEquals(Type::FLOAT, $columns[CoordinatesStub::COL_Y]);
+        $this->assertEquals(Types::FLOAT, $columns[CoordinatesStub::COL_X]);
+        $this->assertEquals(Types::FLOAT, $columns[CoordinatesStub::COL_Y]);
+        $this->assertEquals(Types::FLOAT, $columns[CoordinatesStub::COL_Y]);
     }
 
     /**
      * @return void
-     * @throws DBALException
-     * @throws ExpectationFailedException
      * @throws DbcRuntimeException
+     * @throws Exception
      * @throws \PHPUnit\Framework\Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     * @throws \RuntimeException
+     * \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetColumnNames(): void
     {
@@ -136,21 +130,19 @@ class TableTest extends TestCase
      * @return void
      * @throws DbcRuntimeException
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws ReflectionException
      * @throws \PHPUnit\Framework\Exception
-     * @throws \RuntimeException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testConvertToPhpValuesAssoc(): void
     {
         $connection = $this->table->getDbManager()->getConnection();
         $result     = $connection->createQueryBuilder()
-                                 ->select($this->table->getColumnNames())
+                                 ->select(...$this->table->getColumnNames())
                                  ->from($this->table->getTableName())
-                                 ->execute();
+                                 ->executeQuery();
 
-        $rows = Validator::returnResult($result, 'result')->fetchAll();
+        $rows = $result->fetchAllAssociative();
 
         $this->assertCount(2, $rows);
         $mappedRow = $this->invokeMethodFromObject($this->table, 'convertToPhpValues', $rows[1]);
@@ -170,25 +162,23 @@ class TableTest extends TestCase
 
     /**
      * @return void
-     * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws ReflectionException
      * @throws DbcRuntimeException
+     * @throws Exception
      * @throws \PHPUnit\Framework\Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     * @throws \RuntimeException
+     * \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testConvertToPhpValuesPartiallyAssoc(): void
     {
         $connection = $this->table->getDbManager()->getConnection();
         $result     = $connection->createQueryBuilder()
-                                 ->select(['a', 'c'])
+                                 ->select('a', 'c')
                                  ->from($this->table->getTableName())
-                                 ->execute();
-        $rows       = Validator::returnResult($result, 'result')->fetchAll();
+                                 ->executeQuery();
+        $rows       = $result->fetchAllAssociative();
 
         $this->assertCount(2, $rows);
-        /** @var array<string> $mappedRow */
+        /** @var array<string, mixed> $mappedRow */
         $mappedRow = $this->invokeMethodFromObject($this->table, 'convertToPhpValues', $rows[1]);
         $this->assertCount(2, $mappedRow);
         $this->assertArrayHasKey(TableStub::A, $mappedRow);
@@ -200,25 +190,23 @@ class TableTest extends TestCase
 
     /**
      * @return void
-     * @throws DBALException
-     * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws ReflectionException
      * @throws DbcRuntimeException
+     * @throws Exception
+     * @throws Exception
      * @throws \PHPUnit\Framework\Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException|\RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testConvertToPhpValuesNumeric(): void
     {
         $connection = $this->table->getDbManager()->getConnection();
         $result     = $connection->createQueryBuilder()
-                                 ->select($this->table->getColumnNames())
+                                 ->select(...$this->table->getColumnNames())
                                  ->from($this->table->getTableName())
-                                 ->execute();
-        $rows       = Validator::returnResult($result, 'result')->fetchAll(\PDO::FETCH_NUM);
+                                 ->executeQuery();
+        $rows       = $result->fetchAllNumeric();
 
         $this->assertCount(2, $rows);
-        /** @var array<int|string, string> $mappedRow */
+        /** @var array<int|string, mixed> $mappedRow */
         $mappedRow = $this->invokeMethodFromObject($this->table, 'convertToPhpValues', $rows[1]);
         $this->assertArrayHasKey(0, $mappedRow);
         $this->assertIsInt($mappedRow[0]);
@@ -235,13 +223,11 @@ class TableTest extends TestCase
 
     /**
      * @return void
-     * @throws Exception
-     * @throws ReflectionException
      * @throws DbcRuntimeException
+     * @throws Exception
      * @throws \PHPUnit\Framework\Exception
-     * @throws ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     * @throws \RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * \RuntimeException
      */
     public function testConvertToPhpValuesPartiallyNumericFails(): void
     {
@@ -250,11 +236,11 @@ class TableTest extends TestCase
 
         $connection = $this->table->getDbManager()->getConnection();
         $result     = $connection->createQueryBuilder()
-                                 ->select(['a', 'c'])
+                                 ->select('a', 'c')
                                  ->from($this->table->getTableName())
-                                 ->execute();
+                                 ->executeQuery();
 
-        $rows = Validator::returnResult($result, 'result')->fetchAll(\PDO::FETCH_NUM);
+        $rows = $result->fetchAllNumeric();
 
         $this->assertCount(2, $rows);
         $this->invokeMethodFromObject($this->table, 'convertToPhpValues', $rows[1]);
@@ -262,7 +248,7 @@ class TableTest extends TestCase
 
     /**
      * @return void
-     * @throws DBALException
+     * @throws Exception
      * @throws \Exception
      */
     public function testInsertWithTableColumnTypes(): void
@@ -276,7 +262,6 @@ class TableTest extends TestCase
         $this->assertCount(1, $rows);
         $data = \reset($rows);
         $this->assertIsNotBool($data);
-        $this->assertIsArray($data);
         $this->assertArrayHasKey('c', $data);
         $this->assertInstanceOf(\DateTimeImmutable::class, $data['c']);
         $this->assertEquals($c, $data['c']);
@@ -284,7 +269,7 @@ class TableTest extends TestCase
 
     /**
      * @return void
-     * @throws DBALException
+     * @throws Exception
      * @throws \Exception
      */
     public function testInsertWithoutTypes(): void
@@ -298,14 +283,13 @@ class TableTest extends TestCase
         $this->assertCount(1, $rows);
         $data = \reset($rows);
         $this->assertIsNotBool($data);
-        $this->assertIsArray($data);
         $this->assertArrayHasKey('c', $data);
         $this->assertEquals($c, $data['c']);
     }
 
     /**
      * @return void
-     * @throws DBALException
+     * @throws Exception
      * @throws \Exception
      * @throws \Exception
      */
@@ -324,7 +308,7 @@ class TableTest extends TestCase
 
     /**
      * @return void
-     * @throws DBALException
+     * @throws Exception
      * @throws \Exception
      * @throws \Exception
      */
@@ -343,9 +327,9 @@ class TableTest extends TestCase
 
     /**
      * @return void
-     * @throws InvalidArgumentException
-     * @throws DBALException
+     * @throws Exception
      * @throws \Exception
+     * @throws \InvalidArgumentException
      */
     public function testDeleteWithTableColumnTypes(): void
     {
@@ -360,9 +344,9 @@ class TableTest extends TestCase
 
     /**
      * @return void
-     * @throws InvalidArgumentException
-     * @throws DBALException
+     * @throws Exception
      * @throws \Exception
+     * @throws \InvalidArgumentException
      */
     public function testDeleteWithoutTypes(): void
     {
@@ -377,10 +361,10 @@ class TableTest extends TestCase
 
     /**
      * @return void
-     * @throws DBALException
+     * @throws Exception
+     * @throws \Exception
+     * @throws \Exception
      * @throws Throwable
-     * @throws \Exception
-     * @throws \Exception
      */
     protected function setUp(): void
     {

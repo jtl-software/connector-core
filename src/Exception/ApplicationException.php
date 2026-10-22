@@ -17,7 +17,8 @@ class ApplicationException extends \Exception
 {
     public const int
         CONNECTOR_DIR_NOT_EXISTS = 10,
-        IMAGE_NOT_FOUND          = 20;
+        IMAGE_NOT_FOUND          = 20,
+        IMAGE_TOO_LARGE          = 30;
 
 
     /**
@@ -68,6 +69,40 @@ class ApplicationException extends \Exception
                 $image->getForeignKey()->getHost()
             ),
             self::IMAGE_NOT_FOUND
+        );
+    }
+
+    /**
+     * Names the image as known in JTL-Wawi; the archive entry name only contains technical IDs.
+     *
+     * @param AbstractImage         $image
+     * @param FileTooLargeException $previous
+     *
+     * @return self
+     * @throws \Exception
+     */
+    public static function imageTooLarge(AbstractImage $image, FileTooLargeException $previous): self
+    {
+        $imageLabel = $image->getName();
+        if ($imageLabel === '') {
+            // Still the file name sent by JTL-Wawi, it is only replaced after a successful extraction
+            $imageLabel = $image->getFilename();
+        }
+        if ($imageLabel === '') {
+            $imageLabel = $previous->getEntryName();
+        }
+
+        return new self(
+            \sprintf(
+                'Image "%s" of %s (JTL-Wawi ID = %d, image ID = %d) is too large (%s)',
+                $imageLabel,
+                Str::toPascalCase($image->getRelationType()),
+                $image->getForeignKey()->getHost(),
+                $image->getId()->getHost(),
+                $previous->getSizeInfo()
+            ),
+            self::IMAGE_TOO_LARGE,
+            $previous
         );
     }
 

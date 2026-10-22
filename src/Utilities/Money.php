@@ -7,14 +7,14 @@ namespace Jtl\Connector\Core\Utilities;
 class Money
 {
     /**
-     * @param $net
-     * @param $vat
+     * @param numeric|numeric-string $net
+     * @param numeric|numeric-string $vat
      *
      * @return float
      * @deprecated since 5.2 use Money::gross() instead.
      */
     //phpcs:ignore
-    public static function AsGross($net, $vat): float // @phpstan-ignore-line
+    public static function AsGross(float|int|string $net, float|int|string $vat): float
     {
         return self::gross($net, $vat);
     }
@@ -37,14 +37,14 @@ class Money
     }
 
     /**
-     * @param $gross
-     * @param $vat
+     * @param numeric|numeric-string $gross
+     * @param numeric|numeric-string $vat
      *
      * @return float
      * @deprecated since 5.2 use Money::net() instead.
      */
     //phpcs:ignore
-    public static function AsNet($gross, $vat): float // @phpstan-ignore-line
+    public static function AsNet(float|int|string $gross, float|int|string $vat): float
     {
         return self::net($gross, $vat);
     }

@@ -31,34 +31,26 @@ class ChunkedHandler extends Handler implements FormattableHandlerInterface
     /**
      * @inheritDoc
      */
-    public function isHandling($record): bool
+    public function isHandling(LogRecord $record): bool
     {
         return $this->nextHandler->isHandling($record);
     }
 
     /**
-     * @param LogRecord|array<mixed> $record
+     * @param LogRecord $record
      *
      * @return bool
      */
-    public function handle(LogRecord|array $record): bool
+    public function handle(LogRecord $record): bool
     {
         // false means continue to bubble
         $return = false;
 
-        $useArray = false;
+        $message = $record->message;
+        /** @var array<mixed> $extra */
+        $extra = $record->extra;
 
-        if (!\is_array($record) && \class_exists(LogRecord::class) && $record instanceof LogRecord) {
-            $message = $record->message;
-            /** @var array<mixed> $extra */
-            $extra = $record->extra;
-        } else {
-            $message = $record['message'];
-            /** @var array<mixed> $extra */
-            $extra    = $record['extra'];
-            $useArray = true;
-        }
-        if ($this->chunkSize > 0 && \is_string($message) && \strlen($message) > $this->chunkSize) {
+        if ($this->chunkSize > 0 && \strlen($message) > $this->chunkSize) {
             $chunks   = \str_split($message, $this->chunkSize);
             $total    = \count($chunks);
             $recordId = \md5($message);
@@ -66,34 +58,20 @@ class ChunkedHandler extends Handler implements FormattableHandlerInterface
             foreach ($chunks as $key => $chunk) {
                 $message = \sprintf("(part %d/%d) %s", $key, $total, $chunk);
 
-                if ($useArray) {
-                    $newRecord = [
-                        'level'    => $record['level'],
-                        'context'  => $record['context'],
-                        'channel'  => $record['channel'],
-                        'datetime' => $record['datetime'],
-                        'extra'    => $extra,
-                        'message'  => $message,
-                    ];
-                } else {
-                    /** @var LogRecord $record */
-                    $newRecord = new LogRecord(
-                        $record->datetime,
-                        $record->channel,
-                        $record->level,
-                        $message,
-                        $record->context,
-                        $extra,
-                    );
-                }
+                $newRecord = new LogRecord(
+                    $record->datetime,
+                    $record->channel,
+                    $record->level,
+                    $message,
+                    $record->context,
+                    $extra,
+                );
 
-                /** @var LogRecord $newRecord */ // to force phpstan to shut up!
                 $return = $this->nextHandler->handle($newRecord) ?: $return;
             }
 
             return $return;
         }
-        /** @var LogRecord $record */ // to force phpstan to shut up!
 
         return $this->nextHandler->handle($record);
     }
@@ -106,11 +84,13 @@ class ChunkedHandler extends Handler implements FormattableHandlerInterface
      */
     public function setFormatter(FormatterInterface $formatter): HandlerInterface
     {
-        if (
-            $this->nextHandler instanceof FormattableHandlerInterface
-            || \method_exists($this->nextHandler, 'setFormatter')
-        ) {
+        if ($this->nextHandler instanceof FormattableHandlerInterface) {
             return $this->nextHandler->setFormatter($formatter);
+        }
+        if (\method_exists($this->nextHandler, 'setFormatter')) {
+            /** @var HandlerInterface $result */
+            $result = $this->nextHandler->setFormatter($formatter);
+            return $result;
         }
         throw new \UnexpectedValueException(
             'The nested handler of type ' . \get_class($this->nextHandler) . ' does not support formatters.'
@@ -123,11 +103,13 @@ class ChunkedHandler extends Handler implements FormattableHandlerInterface
      */
     public function getFormatter(): FormatterInterface
     {
-        if (
-            $this->nextHandler instanceof FormattableHandlerInterface
-            || \method_exists($this->nextHandler, 'getFormatter')
-        ) {
+        if ($this->nextHandler instanceof FormattableHandlerInterface) {
             return $this->nextHandler->getFormatter();
+        }
+        if (\method_exists($this->nextHandler, 'getFormatter')) {
+            /** @var FormatterInterface $result */
+            $result = $this->nextHandler->getFormatter();
+            return $result;
         }
         throw new \UnexpectedValueException(
             'The nested handler of type ' . \get_class($this->nextHandler) . ' does not support formatters.'

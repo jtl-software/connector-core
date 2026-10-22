@@ -33,16 +33,17 @@ class CrossSellingSubscriber implements EventSubscriberInterface
     {
         $className = $event->getType()['name'] ?? '';
         if ($className === CrossSelling::class) {
+            /** @var array{productId?: array{0: string, 1: int}, items?: array<int, array<string, mixed>>} $data */
             $data      = $event->getData();
-            $productId = $data['productId'][1] ?? 0; // @phpstan-ignore-line
-            if (isset($data['items']) && \is_array($data['items'])) { // @phpstan-ignore-line
+            $productId = $data['productId'][1] ?? 0;
+            if (isset($data['items'])) {
                 foreach ($data['items'] as $i => $item) {
-                    if (!isset($data['items'][$i]['id'])) { // @phpstan-ignore-line
+                    if (!isset($data['items'][$i]['id'])) {
+                        /** @var array{crossSellingGroupId?: array{0: string, 1: int}} $item */
                         $crossSellingGroupId = $item['crossSellingGroupId'][1] ?? 0;
-
-                        $itemId = self::cantorPairingFunction($productId, $crossSellingGroupId); // @phpstan-ignore-line
+                        $itemId              = self::cantorPairingFunction($productId, $crossSellingGroupId);
                         if ($productId !== 0 && $crossSellingGroupId !== 0 && $itemId < \PHP_INT_MAX) {
-                            $data['items'][$i]['id'] = [ // @phpstan-ignore-line
+                            $data['items'][$i]['id'] = [
                                                          '',
                                                          $itemId,
                             ];

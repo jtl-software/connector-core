@@ -47,7 +47,9 @@ class ProductAttributeSubscriberTest extends TestCase
         $productObj = \json_decode($serializedProduct, false, 512, \JSON_THROW_ON_ERROR);
 
         foreach ($productObj->attributes[0]->i18ns as $index => $i18n) { //@phpstan-ignore-line
+            /** @var int $index */
             $attributeId = $attributes[$index]->getId();
+            /** @var stdClass $i18n */
             if (!\property_exists($i18n, 'productAttrId')) {
                 $this->fail('property \'productAttrId\' does not exist.');
             }
@@ -141,9 +143,16 @@ class ProductAttributeSubscriberTest extends TestCase
         $resultArr = $responseObj->result;
         $this->assertIsArray($resultArr);
         $this->assertArrayHasKey(0, $resultArr);
+        /** @var stdClass $responseProduct */
         $responseProduct = $resultArr[0];
+        /** @var list<stdClass> $attributes */
+        $attributes = $responseProduct->attributes;
+        /** @var stdClass $firstAttr */
+        $firstAttr = $attributes[0];
+        /** @var list<stdClass> $i18ns */
+        $i18ns = $firstAttr->i18ns;
         /** @var stdClass $i18n */
-        $i18n = $responseProduct->attributes[0]->i18ns[0];
+        $i18n = $i18ns[0];
 
         if (!\property_exists($i18n, 'productAttrId')) {
             $this->fail('property \'productAttrId\' does not exist.');

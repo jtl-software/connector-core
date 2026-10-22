@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Rpc;
 
-use Doctrine\Common\Annotations\AnnotationException;
 use JMS\Serializer\Annotation as Serializer;
 use JMS\Serializer\Exception\InvalidArgumentException;
 use JMS\Serializer\Exception\LogicException;
@@ -47,12 +46,11 @@ class RequestPacket extends Packet
      *
      * @return RequestPacket
      * @throws InvalidArgumentException
-     * @throws RuntimeException
-     * @throws AnnotationException
      * @throws \InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\RuntimeException
      * @throws LogicException
      * @throws NotAcceptableException
-     * @throws \JMS\Serializer\Exception\RuntimeException
+     * @throws RuntimeException
      * @throws UnsupportedFormatException
      */
     public static function createFromJtlrpc(string $jtlrpc, ?JmsSerializer $serializer = null): RequestPacket

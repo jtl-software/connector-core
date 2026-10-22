@@ -94,7 +94,7 @@ final class PaymentType
         WIRECARD             = 'pm_wirecard',
         WORLDPAY             = 'pm_worldpay';
 
-    /** @var string[]|null */
+    /** @var array<string, string>|null */
     protected static ?array $types = null;
 
     /**

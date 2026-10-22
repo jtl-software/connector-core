@@ -16,7 +16,8 @@ class Check
     public static function run(): void
     {
         // PHP
-        if (!\version_compare(\PHP_VERSION, Application::MIN_PHP_VERSION, '>=')) {
+        $phpVersion = \PHP_VERSION;
+        if (\version_compare($phpVersion, Application::MIN_PHP_VERSION, '<')) {
             throw new MissingRequirementException(
                 \sprintf(
                     'The connector needs at least PHP version %s, %s given',

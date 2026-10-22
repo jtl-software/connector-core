@@ -177,6 +177,7 @@ class SqliteSyncErrorCollector implements SyncErrorCollectorInterface, LoggerAwa
 
         $row = $result->fetchArray(\SQLITE3_NUM);
 
+        /** @var array{0: int}|false $row */
         return \is_array($row) && (int)$row[0] > 0;
     }
 

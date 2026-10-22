@@ -27,8 +27,8 @@ class SerializerBuilder
      *
      * @return JmsBuilder
      * @throws InvalidArgumentException
-     * @throws RuntimeException
      * @throws LogicException
+     * @throws RuntimeException
      */
     public static function create(?string $cacheDir = null): JmsBuilder
     {

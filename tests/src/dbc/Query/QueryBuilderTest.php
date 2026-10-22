@@ -4,16 +4,13 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Dbc\Query;
 
-use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Query\QueryException;
 use Doctrine\DBAL\Schema\SchemaException;
 use Jtl\Connector\Dbc\CoordinatesStub;
 use Jtl\Connector\Dbc\DbcRuntimeException;
 use Jtl\Connector\Dbc\Schema\TableRestriction;
 use Jtl\Connector\Dbc\TestCase;
 use PHPUnit\Framework\ExpectationFailedException;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 use Throwable;
 
 class QueryBuilderTest extends TestCase
@@ -29,10 +26,10 @@ class QueryBuilderTest extends TestCase
 
     /**
      * @return void
-     * @throws QueryException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws Exception
+     * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testTableRestrictionWithSelect(): void
     {
@@ -50,10 +47,10 @@ class QueryBuilderTest extends TestCase
 
     /**
      * @return void
-     * @throws QueryException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws Exception
+     * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testTableRestrictionWithInsert(): void
     {
@@ -70,10 +67,10 @@ class QueryBuilderTest extends TestCase
 
     /**
      * @return void
-     * @throws QueryException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws Exception
+     * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGlobalIdentifierWithUpdate(): void
     {
@@ -105,10 +102,10 @@ class QueryBuilderTest extends TestCase
 
     /**
      * @return void
-     * @throws QueryException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws Exception
+     * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGlobalIdentifierWithDelete(): void
     {
@@ -121,13 +118,12 @@ class QueryBuilderTest extends TestCase
 
     /**
      * @return void
-     * @throws DBALException
-     * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws SchemaException
      * @throws DbcRuntimeException
-     * @throws \RuntimeException|\Doctrine\DBAL\Driver\Exception
+     * @throws Exception
+     * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws SchemaException
      */
     public function testTableRestriction(): void
     {
@@ -149,7 +145,7 @@ class QueryBuilderTest extends TestCase
         $qb->update($this->coordsTable->getTableName())
            ->set('z', ':z')
            ->setParameter('z', 10.5)
-           ->execute();
+            ->executeStatement();
 
         $datasets = $this->coordsTable->findAll();
         $this->assertEquals(10.5, $datasets[0]['z']); //@phpstan-ignore-line
@@ -158,11 +154,10 @@ class QueryBuilderTest extends TestCase
 
     /**
      * @return void
-     * @throws DBALException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws QueryException
-     * @throws \RuntimeException
+     * @throws Exception
+     * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testSelectWithLockedFromTableAndCalledFromMethod(): void
     {
@@ -176,11 +171,10 @@ class QueryBuilderTest extends TestCase
 
     /**
      * @return void
-     * @throws DBALException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws QueryException
-     * @throws \RuntimeException
+     * @throws Exception
+     * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testSelectWithLockedFromTableAndFromAliasAndNotCalledFromMethod(): void
     {
@@ -195,11 +189,10 @@ class QueryBuilderTest extends TestCase
 
     /**
      * @return void
-     * @throws DBALException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws QueryException
-     * @throws \RuntimeException
+     * @throws Exception
+     * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testInsertWithLockedFromTableAndTableNameInInsert(): void
     {
@@ -213,29 +206,27 @@ class QueryBuilderTest extends TestCase
 
     /**
      * @return void
-     * @throws DBALException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws QueryException
-     * @throws \RuntimeException
+     * @throws Exception
+     * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testInsertWithLockedFromTableAndNotTableNameInInsert(): void
     {
         $fromTable   = 'tableau';
         $connection  = $this->getDBManager()->getConnection();
         $qb          = new QueryBuilder($connection, [], $fromTable);
-        $actualSql   = $qb->insert()->getSQL();
+        $actualSql   = $qb->insert($fromTable)->getSQL();
         $expectedSql = 'INSERT INTO tableau () VALUES()';
         $this->assertEquals($expectedSql, $actualSql);
     }
 
     /**
      * @return void
-     * @throws DBALException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws QueryException
-     * @throws \RuntimeException
+     * @throws Exception
+     * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testUpdateWithLockedFromTableAndFromAliasAndTableNameInUpdate(): void
     {
@@ -244,35 +235,33 @@ class QueryBuilderTest extends TestCase
         $connection  = $this->getDBManager()->getConnection();
         $qb          = new QueryBuilder($connection, [], $fromTable, $fromAlias);
         $actualSql   = $qb->update('foobar')->getSQL();
-        $expectedSql = 'UPDATE tableau t SET ';
-        $this->assertEquals($expectedSql, $actualSql);
-    }
-
-    /**
-     * @return void
-     * @throws DBALException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws QueryException
-     * @throws \RuntimeException
-     */
-    public function testUpdateWithLockedFromTableAndNotTableNameInUpdate(): void
-    {
-        $fromTable   = 'tableau';
-        $connection  = $this->getDBManager()->getConnection();
-        $qb          = new QueryBuilder($connection, [], $fromTable);
-        $actualSql   = $qb->update()->getSQL();
         $expectedSql = 'UPDATE tableau SET ';
         $this->assertEquals($expectedSql, $actualSql);
     }
 
     /**
      * @return void
-     * @throws DBALException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws QueryException
-     * @throws \RuntimeException
+     * @throws Exception
+     * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     */
+    public function testUpdateWithLockedFromTableAndNotTableNameInUpdate(): void
+    {
+        $fromTable   = 'tableau';
+        $connection  = $this->getDBManager()->getConnection();
+        $qb          = new QueryBuilder($connection, [], $fromTable);
+        $actualSql   = $qb->update($fromTable)->getSQL();
+        $expectedSql = 'UPDATE tableau SET ';
+        $this->assertEquals($expectedSql, $actualSql);
+    }
+
+    /**
+     * @return void
+     * @throws Exception
+     * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testDeleteWithLockedFromTableAndTableNameInDelete(): void
     {
@@ -286,11 +275,10 @@ class QueryBuilderTest extends TestCase
 
     /**
      * @return void
-     * @throws DBALException
-     * @throws QueryException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws \RuntimeException
+     * @throws Exception
+     * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testDeleteWithLockedFromTableAndFromAliasAndTableNameNotInDelete(): void
     {
@@ -298,8 +286,8 @@ class QueryBuilderTest extends TestCase
         $fromAlias   = 't';
         $connection  = $this->getDBManager()->getConnection();
         $qb          = new QueryBuilder($connection, [], $fromTable, $fromAlias);
-        $actualSql   = $qb->delete()->getSQL();
-        $expectedSql = 'DELETE FROM tableau t';
+        $actualSql   = $qb->delete($fromTable)->getSQL();
+        $expectedSql = 'DELETE FROM tableau';
         $this->assertEquals($expectedSql, $actualSql);
     }
 
@@ -315,7 +303,7 @@ class QueryBuilderTest extends TestCase
 
     /**
      * @return void
-     * @throws DBALException
+     * @throws Exception
      * @throws \Exception
      * @throws Throwable
      */

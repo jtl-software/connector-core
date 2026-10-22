@@ -6,8 +6,8 @@ namespace Jtl\Connector\Core\Test\Definition;
 
 use Jtl\Connector\Core\Definition\RpcMethod;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\ExpectationFailedException;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class RpcMethodTest
@@ -17,15 +17,14 @@ use SebastianBergmann\RecursionContext\InvalidArgumentException;
 class RpcMethodTest extends TestCase
 {
     /**
-     * @dataProvider isMethodDataProvider
-     *
      * @param string $methodName
      * @param bool   $shouldBeMethod
      *
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
+    #[DataProvider('isMethodDataProvider')]
     public function testIsMethod(string $methodName, bool $shouldBeMethod): void
     {
         $isMethodResult = RpcMethod::isMethod($methodName);
@@ -33,12 +32,11 @@ class RpcMethodTest extends TestCase
     }
 
     /**
-     * @return array<int, array{0: string, 1: bool}>
-     * @throws \ReflectionException
+     * @return array<int, array<int, mixed>>
      */
-    public function isMethodDataProvider(): array
+    public static function isMethodDataProvider(): array
     {
-        $definedMethods = $this->getCorrectConstantsTestCases(RpcMethod::class);
+        $definedMethods = self::getCorrectConstantsTestCases(RpcMethod::class);
 
         $customTests   = [];
         $customTests[] = ['""', false];
@@ -52,19 +50,18 @@ class RpcMethodTest extends TestCase
         $customTests[] = ['method\.name', false];
         $customTests[] = ['very.long.method.name', true];
 
-        return \array_merge_recursive($definedMethods, $customTests);
+        return \array_merge($definedMethods, $customTests);
     }
 
     /**
-     * @dataProvider mapMethodDataProvider
-     *
      * @param string $methodName
      * @param string $expectedMapping
      *
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
+    #[DataProvider('mapMethodDataProvider')]
     public function testMapMethod(string $methodName, string $expectedMapping): void
     {
         $mappedName = RpcMethod::mapMethod($methodName);
@@ -74,7 +71,7 @@ class RpcMethodTest extends TestCase
     /**
      * @return array<int, array<int, string>>
      */
-    public function mapMethodDataProvider(): array
+    public static function mapMethodDataProvider(): array
     {
         return [
             [RpcMethod::CLEAR, 'core.connector.clear'],

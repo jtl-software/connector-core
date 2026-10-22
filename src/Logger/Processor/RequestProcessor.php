@@ -17,15 +17,20 @@ class RequestProcessor implements ProcessorInterface
      */
     public function __construct()
     {
+        /** @var array<string, string> $server */
+        $server = $_SERVER;
+        /** @var array<string, string> $get */
+        $get = $_GET;
+
         $this->extraFields = [
-            'http_method' => $_SERVER['REQUEST_METHOD'] ?? '',
-            'user_agent'  => $_SERVER['HTTP_USER_AGENT'] ?? '',
-            'domain'      => $_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'] ?? ''
+            'http_method' => $server['REQUEST_METHOD'] ?? '',
+            'user_agent'  => $server['HTTP_USER_AGENT'] ?? '',
+            'domain'      => $server['HTTP_HOST'] ?? $server['SERVER_NAME'] ?? ''
         ];
 
         // strip jtlauth value from uri
-        $uri     = $_SERVER['REQUEST_URI'] ?? '';
-        $session = $_GET['jtlauth'] ?? '';
+        $uri     = $server['REQUEST_URI'] ?? '';
+        $session = $get['jtlauth'] ?? '';
         if ($session !== '') {
             // string replace is faster as regex
             $uri = \str_replace(\sprintf('jtlauth=%s', $session), 'jtlauth=***', $uri);
@@ -56,20 +61,13 @@ class RequestProcessor implements ProcessorInterface
     }
 
     /**
-     * multiple param and return types are needed because some connectors use an older version of monolog
+     * @param LogRecord $record
      *
-     * @param array{extra:array<mixed>}|LogRecord $record
-     *
-     * @phpstan-param array{extra:array<mixed>}   $record
-     * @return array{extra:array<mixed>}|LogRecord
+     * @return LogRecord
      */
-    public function __invoke(array|LogRecord $record): array|LogRecord
+    public function __invoke(LogRecord $record): LogRecord
     {
-        if (\is_array($record)) {
-            $record['extra'] = \array_merge($record['extra'], $this->extraFields);
-        } elseif ($record instanceof LogRecord) {
-            $record->extra = \array_merge($record->extra, $this->extraFields);
-        }
+        $record->extra = \array_merge($record->extra, $this->extraFields);
 
         return $record;
     }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Jtl\Connector\Core\Test\Utilities;
 
 use Jtl\Connector\Core\Utilities\Str;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -15,14 +16,13 @@ use PHPUnit\Framework\TestCase;
 class StrTest extends TestCase
 {
     /**
-     * @dataProvider toCamelCaseDataProvider
-     *
      * @param string $data
      * @param string $expectedResult
      *
      * @return void
      * @throws \Exception
      */
+    #[DataProvider('toCamelCaseDataProvider')]
     public function testToCamelCase(string $data, string $expectedResult): void
     {
         $this->assertSame($expectedResult, Str::toCamelCase($data));
@@ -31,7 +31,7 @@ class StrTest extends TestCase
     /**
      * @return array<int, array{0: string, 1: string}>
      */
-    public function toCamelCaseDataProvider(): array
+    public static function toCamelCaseDataProvider(): array
     {
         return [
             ['snake_case', 'snakeCase',],
@@ -48,14 +48,13 @@ class StrTest extends TestCase
     }
 
     /**
-     * @dataProvider toPascalCaseDataProvider
-     *
      * @param string $data
      * @param string $expectedResult
      *
      * @return void
      * @throws \Exception
      */
+    #[DataProvider('toPascalCaseDataProvider')]
     public function testPascalCase(string $data, string $expectedResult): void
     {
         $this->assertSame($expectedResult, Str::toPascalCase($data));
@@ -64,7 +63,7 @@ class StrTest extends TestCase
     /**
      * @return array<int, array{0: string|false|int, 1: string}>
      */
-    public function toPascalCaseDataProvider(): array
+    public static function toPascalCaseDataProvider(): array
     {
         return [
             ['snake_case', 'SnakeCase',],
@@ -81,14 +80,13 @@ class StrTest extends TestCase
     }
 
     /**
-     * @dataProvider toSnakeCaseDataProvider
-     *
      * @param string $data
      * @param string $expectedResult
      *
      * @return void
      * @throws \Exception
      */
+    #[DataProvider('toSnakeCaseDataProvider')]
     public function testSnakeCase(string $data, string $expectedResult): void
     {
         $this->assertSame($expectedResult, Str::toSnakeCase($data));
@@ -97,7 +95,7 @@ class StrTest extends TestCase
     /**
      * @return array<int, array{0: string|false|int, 1: string}>
      */
-    public function toSnakeCaseDataProvider(): array
+    public static function toSnakeCaseDataProvider(): array
     {
         return [
             ['snake_case', 'snake_case',],

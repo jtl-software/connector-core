@@ -27,8 +27,8 @@ class ProductFactory extends AbstractModelFactory
      * @param array<int, array<string, mixed>>|null $i18ns
      *
      * @return array<mixed>
-     * @throws \RuntimeException
      * @throws \Exception
+     * @throws \RuntimeException
      */
     public function makeOneProductVariantArray(?array $i18ns = null): array
     {
@@ -109,8 +109,8 @@ class ProductFactory extends AbstractModelFactory
 
     /**
      * @return array<string, mixed>
-     * @throws \RuntimeException
      * @throws \Exception
+     * @throws \RuntimeException
      */
     protected function makeFakeArray(): array
     {

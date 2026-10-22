@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Core\Test\Serializer\Subscriber;
 
-use Doctrine\Common\Annotations\AnnotationException;
 use JMS\Serializer\Exception\LogicException;
 use JMS\Serializer\Exception\NotAcceptableException;
 use JMS\Serializer\Exception\RuntimeException;
@@ -19,9 +18,9 @@ use Jtl\Connector\Core\Model\TranslatableAttributeI18n;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Test\TestCase;
 use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\ExpectationFailedException;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class LanguageIsoSubscriberTest
@@ -33,7 +32,7 @@ class LanguageIsoSubscriberTest extends TestCase
     /**
      * @return array<int, array{0: class-string}>
      */
-    public function i18NDataProvider(): array
+    public static function i18NDataProvider(): array
     {
         return [
             [ProductI18n::class],
@@ -45,24 +44,21 @@ class LanguageIsoSubscriberTest extends TestCase
     }
 
     /**
-     * @dataProvider i18NDataProvider
-     *
      * @param class-string $model
      *
      * @return void
-     * @throws AnnotationException
      * @throws AssertionFailedError
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws JsonException
      * @throws LogicException
      * @throws NotAcceptableException
-     * @throws RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws UnsupportedFormatException
-     * @throws \InvalidArgumentException
-     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      */
+    #[DataProvider('i18NDataProvider')]
     public function testOnPostSerializeWithInvalidValue(string $model): void
     {
         $i18nModel = new $model();
@@ -86,13 +82,11 @@ class LanguageIsoSubscriberTest extends TestCase
      * @param AbstractI18n $i18nModel
      *
      * @return string
-     * @throws AnnotationException
-     * @throws LogicException
-     * @throws NotAcceptableException
-     * @throws RuntimeException
-     * @throws UnsupportedFormatException
      * @throws \InvalidArgumentException
      * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     * @throws LogicException
+     * @throws NotAcceptableException
+     * @throws UnsupportedFormatException
      */
     protected function serializeModel(AbstractI18n $i18nModel): string
     {
@@ -100,24 +94,21 @@ class LanguageIsoSubscriberTest extends TestCase
     }
 
     /**
-     * @dataProvider i18NDataProvider
-     *
      * @param class-string $model
      *
      * @return void
-     * @throws AnnotationException
      * @throws AssertionFailedError
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws JsonException
      * @throws LogicException
      * @throws NotAcceptableException
-     * @throws RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws UnsupportedFormatException
-     * @throws \InvalidArgumentException
-     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      */
+    #[DataProvider('i18NDataProvider')]
     public function testOnPostSerializeWithEmptyValue(string $model): void
     {
         $i18nModel = new $model();
@@ -135,24 +126,21 @@ class LanguageIsoSubscriberTest extends TestCase
     }
 
     /**
-     * @dataProvider i18NDataProvider
-     *
      * @param string $model
      *
      * @return void
-     * @throws AnnotationException
      * @throws AssertionFailedError
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws JsonException
      * @throws LogicException
      * @throws NotAcceptableException
-     * @throws RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws UnsupportedFormatException
-     * @throws \InvalidArgumentException
-     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      */
+    #[DataProvider('i18NDataProvider')]
     public function testOnPostSerializeWithValidValue(string $model): void
     {
         $i18nModel = new $model();
@@ -171,24 +159,21 @@ class LanguageIsoSubscriberTest extends TestCase
     }
 
     /**
-     * @dataProvider i18NDataProvider
-     *
      * @param class-string $model
      *
      * @return void
-     * @throws AnnotationException
      * @throws AssertionFailedError
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws JsonException
      * @throws LogicException
      * @throws NotAcceptableException
-     * @throws RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws UnsupportedFormatException
-     * @throws \InvalidArgumentException
-     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      */
+    #[DataProvider('i18NDataProvider')]
     public function testOnPostSerializeWithNoValue(string $model): void
     {
         $i18nModel = new $model();
@@ -205,23 +190,20 @@ class LanguageIsoSubscriberTest extends TestCase
     }
 
     /**
-     * @dataProvider i18NDataProvider
-     *
      * @param class-string $model
      *
      * @return void
-     * @throws AnnotationException
      * @throws AssertionFailedError
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws LogicException
-     * @throws NotAcceptableException
-     * @throws RuntimeException
-     * @throws UnsupportedFormatException
+     * @throws \InvalidArgumentException
      * @throws \InvalidArgumentException
      * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     * @throws LogicException
+     * @throws NotAcceptableException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws UnsupportedFormatException
      */
+    #[DataProvider('i18NDataProvider')]
     public function testOnPreDeserializeWithValidValue(string $model): void
     {
         $i18nModel = new $model();
@@ -230,9 +212,6 @@ class LanguageIsoSubscriberTest extends TestCase
 
         $deserializeData = $this->serializeAndDeserializeModel($i18nModel);
 
-        if (!\property_exists($deserializeData, 'languageIso')) {
-            $this->fail('property "languageISO" does not exist.');
-        }
         $this->assertSame($deserializeData->getLanguageIso(), 'de');
     }
 
@@ -241,14 +220,12 @@ class LanguageIsoSubscriberTest extends TestCase
      *
      * @return ProductI18n
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws RuntimeException
-     * @throws AnnotationException
+     * @throws \InvalidArgumentException
      * @throws \InvalidArgumentException
      * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws LogicException
      * @throws NotAcceptableException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws UnsupportedFormatException
      */
     protected function serializeAndDeserializeModel(AbstractI18n $i18nModel): ProductI18n
@@ -261,23 +238,78 @@ class LanguageIsoSubscriberTest extends TestCase
     }
 
     /**
-     * @dataProvider i18NDataProvider
-     *
-     * @param class-string $model
+     * Reproduces the real-world payload shape sent by JTL-Wawi: only the exchange
+     * field "languageISO" is present, "languageIso" is missing entirely.
      *
      * @return void
-     * @throws AnnotationException
      * @throws AssertionFailedError
      * @throws Exception
      * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     * @throws JsonException
      * @throws LogicException
      * @throws NotAcceptableException
      * @throws RuntimeException
      * @throws UnsupportedFormatException
+     */
+    public function testOnPreDeserializeWithEmptyLanguageIsoAndNoLanguageIsoKeyDoesNotThrow(): void
+    {
+        $serializer  = SerializerBuilder::create()->build();
+        $productI18n = $serializer->deserialize(
+            \json_encode(['languageISO' => ''], \JSON_THROW_ON_ERROR),
+            ProductI18n::class,
+            'json'
+        );
+
+        $this->assertInstanceOf(ProductI18n::class, $productI18n);
+        $this->assertSame('', $productI18n->getLanguageIso());
+    }
+
+    /**
+     * Same payload shape as JTL-Wawi sends it, but with an actual language code
+     * that must still be converted from ISO-639-2b to ISO-639-1.
+     *
+     * @return void
+     * @throws AssertionFailedError
+     * @throws Exception
+     * @throws ExpectationFailedException
      * @throws \InvalidArgumentException
      * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     * @throws JsonException
+     * @throws LogicException
+     * @throws NotAcceptableException
+     * @throws RuntimeException
+     * @throws UnsupportedFormatException
      */
+    public function testOnPreDeserializeWithValidLanguageIsoAndNoLanguageIsoKeyConverts(): void
+    {
+        $serializer  = SerializerBuilder::create()->build();
+        $productI18n = $serializer->deserialize(
+            \json_encode(['languageISO' => 'ger'], \JSON_THROW_ON_ERROR),
+            ProductI18n::class,
+            'json'
+        );
+
+        $this->assertInstanceOf(ProductI18n::class, $productI18n);
+        $this->assertSame('de', $productI18n->getLanguageIso());
+    }
+
+    /**
+     * @param class-string $model
+     *
+     * @return void
+     * @throws AssertionFailedError
+     * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     * @throws LogicException
+     * @throws NotAcceptableException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws UnsupportedFormatException
+     */
+    #[DataProvider('i18NDataProvider')]
     public function testOnPreDeserializeWithInValidValue(string $model): void
     {
         $value = '_____';
@@ -288,9 +320,64 @@ class LanguageIsoSubscriberTest extends TestCase
 
         $deserializeData = $this->serializeAndDeserializeModel($i18nModel);
 
-        if (!\property_exists($deserializeData, 'languageIso')) {
-            $this->fail('property "languageISO" does not exist.');
-        }
         $this->assertSame($deserializeData->getLanguageIso(), $value);
+    }
+
+    /**
+     * When "languageISO" is absent from the payload, the condition
+     * isset($data['languageISO']) is false, so no conversion must occur and
+     * languageIso stays at its default empty value.
+     *
+     * @return void
+     * @throws AssertionFailedError
+     * @throws Exception
+     * @throws ExpectationFailedException
+     * @throws \InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     * @throws LogicException
+     * @throws NotAcceptableException
+     * @throws RuntimeException
+     * @throws UnsupportedFormatException
+     */
+    public function testOnPreDeserializeWhenLanguageISOKeyAbsentNoConversionHappens(): void
+    {
+        $serializer  = SerializerBuilder::create()->build();
+        $productI18n = $serializer->deserialize(
+            \json_encode([], \JSON_THROW_ON_ERROR),
+            ProductI18n::class,
+            'json'
+        );
+
+        $this->assertInstanceOf(ProductI18n::class, $productI18n);
+        $this->assertSame('', $productI18n->getLanguageIso());
+    }
+
+    /**
+     * When both "languageISO" and "languageIso" are present in the payload,
+     * the condition !isset($data['languageIso']) is false, so the subscriber
+     * must leave the existing "languageIso" value untouched.
+     *
+     * @return void
+     * @throws AssertionFailedError
+     * @throws Exception
+     * @throws ExpectationFailedException
+     * @throws \InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     * @throws LogicException
+     * @throws NotAcceptableException
+     * @throws RuntimeException
+     * @throws UnsupportedFormatException
+     */
+    public function testOnPreDeserializeWhenBothKeysArePresentLanguageIsoIsNotOverwritten(): void
+    {
+        $serializer  = SerializerBuilder::create()->build();
+        $productI18n = $serializer->deserialize(
+            \json_encode(['languageISO' => 'ger', 'languageIso' => 'en'], \JSON_THROW_ON_ERROR),
+            ProductI18n::class,
+            'json'
+        );
+
+        $this->assertInstanceOf(ProductI18n::class, $productI18n);
+        $this->assertSame('en', $productI18n->getLanguageIso());
     }
 }

@@ -224,8 +224,8 @@ class IdentityLinker implements LoggerAwareInterface
      *
      * @return bool
      * @throws DefinitionException
-     * @throws LinkerException
      * @throws \InvalidArgumentException
+     * @throws LinkerException
      */
     public function propertyHostIdExists(string $modelName, string $property, int $hostId): bool
     {
@@ -262,8 +262,8 @@ class IdentityLinker implements LoggerAwareInterface
      *
      * @return bool
      * @throws DefinitionException
-     * @throws LinkerException
      * @throws \InvalidArgumentException
+     * @throws LinkerException
      */
     public function hostIdExists(string $modelName, int $hostId): bool
     {

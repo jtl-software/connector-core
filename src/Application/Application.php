@@ -10,8 +10,6 @@ use DI\ContainerBuilder;
 use DI\Definition\Exception\InvalidDefinition;
 use DI\DependencyException;
 use DI\NotFoundException;
-use Doctrine\Common\Annotations\AnnotationException;
-use Doctrine\Common\Annotations\AnnotationRegistry;
 use Jawira\CaseConverter\CaseConverterException;
 use JMS\Serializer\Exception\LogicException;
 use JMS\Serializer\Exception\NotAcceptableException;
@@ -57,6 +55,7 @@ use Jtl\Connector\Core\Database\Sqlite3;
 use Jtl\Connector\Core\Exception\DatabaseException;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\FileNotFoundException;
+use Jtl\Connector\Core\Exception\FileTooLargeException;
 use Jtl\Connector\Core\Exception\LinkerException;
 use Jtl\Connector\Core\Exception\LoggerException;
 use Jtl\Connector\Core\Exception\RpcException;
@@ -113,8 +112,8 @@ use Throwable;
 
 class Application
 {
-    public const PROTOCOL_VERSION = 7;
-    public const MIN_PHP_VERSION  = '7.4';
+    public const int    PROTOCOL_VERSION = 7;
+    public const string MIN_PHP_VERSION  = '8.3';
     /** @var array<string, string> */
     protected static array    $mimeTypeToExtensionMappings = [
         'image/bmp'                => 'bmp',
@@ -165,18 +164,17 @@ class Application
      * @throws ApplicationException
      * @throws ConfigException
      * @throws DependencyException
+     * @throws EmptyDirectoryException
      * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws InvalidDefinition
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\RuntimeException
      * @throws LoggerException
+     * @throws LogicException
+     * @throws \LogicException
      * @throws ReflectionException
      * @throws RuntimeException
-     * @throws InvalidDefinition
-     * @throws AnnotationException
-     * @throws \InvalidArgumentException
-     * @throws \JMS\Serializer\Exception\InvalidArgumentException
-     * @throws LogicException
-     * @throws \JMS\Serializer\Exception\RuntimeException
-     * @throws \LogicException
-     * @throws EmptyDirectoryException
      * @throws \TypeError
      * @throws \UnexpectedValueException
      */
@@ -188,8 +186,6 @@ class Application
         if (!\is_dir($connectorDir)) {
             throw ApplicationException::connectorDirNotExists($connectorDir);
         }
-        AnnotationRegistry::registerLoader('class_exists');
-
         if ($configSchema !== null && $config !== null) {
             if ($config instanceof ConfigSchemaConfigInterface) {
                 $config->setConfigSchema($configSchema);
@@ -204,8 +200,7 @@ class Application
 
         $serializerCacheDir = null;
         if (
-            $config instanceof CoreConfigInterface
-            && $config->getBool(ConfigSchema::DEBUG, false) === false
+            $config->getBool(ConfigSchema::DEBUG, false) === false
             && $config->getBool(ConfigSchema::SERIALIZER_ENABLE_CACHE, true) === true
         ) {
             $serializerCacheDir = $config->getString(ConfigSchema::CACHE_DIR);
@@ -215,8 +210,8 @@ class Application
         $this->config       = $config;
         $this->configSchema = $configSchema;
         $this->container    = (new ContainerBuilder())
-            ->useAnnotations(true)
             ->useAutowiring(true)
+            ->useAttributes(true)
             ->build();
 
         $logLevel = Validate::string($this->config->get(ConfigSchema::LOG_LEVEL));
@@ -310,14 +305,14 @@ class Application
      * @throws DependencyException
      * @throws FileNotFoundException
      * @throws NotFoundException
+     * @throws \ReflectionException
      * @throws RpcException
      * @throws SessionException
      * @throws Throwable
-     * @throws \ReflectionException
      */
     public function run(ConnectorInterface $connector): void
     {
-        $jtlrpc = Validate::string($this->httpRequest->get('jtlrpc', ''));
+        $jtlrpc = Validate::string($this->httpRequest->request->get('jtlrpc', ''));
         $this->httpResponse->setLogger($this->loggerService->get(LoggerService::CHANNEL_RPC));
         $this->eventDispatcher->addSubscriber(new RequestParamsTransformSubscriber());
         $this->eventDispatcher->addSubscriber(new FeaturesSubscriber());
@@ -333,6 +328,9 @@ class Application
                 throw RpcException::invalidRequest();
             }
 
+            // Authenticate before resolving the method, otherwise unauthenticated callers can probe which methods exist
+            $this->startSession($requestPacket->getMethod());
+
             $method = Method::createFromRequestPacket($requestPacket);
             if (!Controller::isController($method->getController())) {
                 throw DefinitionException::unknownController($method->getController());
@@ -342,7 +340,6 @@ class Application
                 throw DefinitionException::unknownAction($method->getAction());
             }
 
-            $this->startSession($requestPacket->getMethod());
             $connector->initialize($this->config, $this->container, $this->eventDispatcher);
             $this->prepareContainer($connector);
             $this->loadPlugins(
@@ -413,12 +410,12 @@ class Application
      *
      *
      * @return void
+     * @throws BadRequestException
      * @throws DatabaseException
      * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws RuntimeException
      * @throws SessionException
-     * @throws \InvalidArgumentException
-     * @throws BadRequestException
      * @throws \UnexpectedValueException
      */
     protected function startSession(string $rpcMethod): void
@@ -426,7 +423,7 @@ class Application
         $sessionId   = $this->httpRequest->get('jtlauth');
         $sessionName = 'JtlConnector';
 
-        if ($sessionId === null && $rpcMethod !== RpcMethod::AUTH) {
+        if ((!\is_string($sessionId) || $sessionId === '') && $rpcMethod !== RpcMethod::AUTH) {
             throw new SessionException('No session', ErrorCode::NO_SESSION);
         }
 
@@ -454,9 +451,9 @@ class Application
      * @return SessionHandlerInterface
      * @throws DatabaseException
      * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws RuntimeException
      * @throws SessionException
-     * @throws \InvalidArgumentException
      * @throws \UnexpectedValueException
      */
     public function getSessionHandler(): SessionHandlerInterface
@@ -506,9 +503,7 @@ class Application
             $sqlite->connect(['location' => $dbLocation]);
 
             $collector = new SqliteSyncErrorCollector($sqlite);
-            if ($collector instanceof LoggerAwareInterface) {
-                $collector->setLogger($this->loggerService->get(LoggerService::CHANNEL_GLOBAL));
-            }
+            $collector->setLogger($this->loggerService->get(LoggerService::CHANNEL_GLOBAL));
 
             $this->container->set(SyncErrorCollectorInterface::class, $collector);
 
@@ -527,10 +522,10 @@ class Application
      * @return void
      * @throws DatabaseException
      * @throws InvalidArgumentException
-     * @throws RuntimeException
-     * @throws SessionException
      * @throws \InvalidArgumentException
      * @throws \LogicException
+     * @throws RuntimeException
+     * @throws SessionException
      * @throws \UnexpectedValueException
      */
     protected function prepareContainer(ConnectorInterface $connector): void
@@ -623,13 +618,13 @@ class Application
      * @throws DefinitionException
      * @throws DependencyException
      * @throws FileNotFoundException
+     * @throws \InvalidArgumentException
      * @throws LinkerException
      * @throws NotFoundException
      * @throws ReflectionException
      * @throws RpcException
      * @throws RuntimeException
      * @throws Throwable
-     * @throws \InvalidArgumentException
      */
     protected function execute(
         ConnectorInterface $connector,
@@ -722,6 +717,9 @@ class Application
                 case Action::CLEAR:
                 case Action::FINISH:
                 case Action::INIT:
+                    if (!\is_bool($result)) {
+                        throw new \RuntimeException('$result must be a bool.');
+                    }
                     $eventArg = new BoolEvent($result);
                     break;
                 case Action::IDENTIFY:
@@ -756,13 +754,13 @@ class Application
      * @throws DefinitionException
      * @throws DependencyException
      * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\RuntimeException
      * @throws LinkerException
      * @throws LogicException
+     * @throws NotAcceptableException
      * @throws NotFoundException
      * @throws ReflectionException
-     * @throws \InvalidArgumentException
-     * @throws NotAcceptableException
-     * @throws \JMS\Serializer\Exception\RuntimeException
      * @throws UnsupportedFormatException
      */
     protected function createHandleRequest(
@@ -814,10 +812,16 @@ class Application
             $eventArg = null;
             switch ($action) {
                 case Action::ACK:
+                    if (!$param instanceof Ack) {
+                        throw new \RuntimeException('$param must be instance of Ack.');
+                    }
                     $eventArg = new AckEvent($param);
                     break;
                 case Action::PUSH:
                 case Action::DELETE:
+                    if (!$param instanceof AbstractModel) {
+                        throw new \RuntimeException('$param must be instance of AbstractModel.');
+                    }
                     /** @var IdentityLinker $identityLinker */
                     $identityLinker = $this->container->get(IdentityLinker::class);
                     $identityLinker->linkModel($param);
@@ -828,10 +832,19 @@ class Application
                     break;
                 case Action::PULL:
                 case Action::STATISTIC:
+                    if (!$param instanceof QueryFilter) {
+                        throw new \RuntimeException('$param must be instance of QueryFilter.');
+                    }
                     $eventArg = new QueryFilterEvent($param);
                     break;
                 case Action::CLEAR:
+                    if (!$param instanceof Identities) {
+                        throw new \RuntimeException('$param must be instance of Identities.');
+                    }
                     foreach ($param->getIdentities() as $relationType => $identities) {
+                        if ($identities === null) {
+                            continue;
+                        }
                         foreach ($identities as $identity) {
                             /** @var IdentityLinker $identityLinker */
                             $identityLinker = $this->container->get(IdentityLinker::class);
@@ -879,8 +892,8 @@ class Application
      * @throws ApplicationException
      * @throws CompressionException
      * @throws DefinitionException
-     * @throws FileNotFoundException
      * @throws \Exception
+     * @throws FileNotFoundException
      */
     protected function handleImagePush(AbstractImage ...$images): void
     {
@@ -899,7 +912,16 @@ class Application
             /** @var UploadedFile $zipFile */
             $zipFile = $this->httpRequest->files->get('file');
             $archive = new Zip();
-            if ($archive->extract($zipFile->getRealPath(), $tempDir)) {
+            try {
+                $extracted = $archive->extract($zipFile->getRealPath(), $tempDir);
+            } catch (FileTooLargeException $exception) {
+                $image = self::findImageByFileName($exception->getEntryName(), ...$images);
+                if ($image === null) {
+                    throw $exception;
+                }
+                throw ApplicationException::imageTooLarge($image, $exception);
+            }
+            if ($extracted) {
                 $finder = (new Finder())->files()->ignoreDotFiles(true)->in($tempDir);
                 foreach ($finder as $file) {
                     $imagePaths[] = $file->getRealpath();
@@ -916,12 +938,8 @@ class Application
 
             $imageFound = false;
             foreach ($imagePaths as $imagePath) {
-                $fileInfo                = \pathinfo($imagePath);
-                [$hostId, $relationType] = \explode('_', $fileInfo['filename']);
-                if (
-                    (int)$hostId === $image->getId()->getHost()
-                    && \strtolower($relationType) === \strtolower($image->getRelationType())
-                ) {
+                $fileInfo = \pathinfo($imagePath);
+                if (self::isFileOfImage($imagePath, $image)) {
                     if (!\is_string($contentType = \mime_content_type($imagePath))) {
                         throw new \RuntimeException('$contentType must be a string.');
                     }
@@ -945,6 +963,43 @@ class Application
                 throw ApplicationException::imageNotFound($image);
             }
         }
+    }
+
+    /**
+     * @param string        $fileName
+     * @param AbstractImage ...$images
+     *
+     * @return AbstractImage|null
+     * @throws DefinitionException
+     * @throws \RuntimeException
+     */
+    protected static function findImageByFileName(string $fileName, AbstractImage ...$images): ?AbstractImage
+    {
+        foreach ($images as $image) {
+            if (self::isFileOfImage($fileName, $image)) {
+                return $image;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Image files in the pushed archive are named "{hostId}_{relationType}.{extension}".
+     *
+     * @param string        $fileName
+     * @param AbstractImage $image
+     *
+     * @return bool
+     * @throws DefinitionException
+     * @throws \RuntimeException
+     */
+    protected static function isFileOfImage(string $fileName, AbstractImage $image): bool
+    {
+        $nameParts = \explode('_', \pathinfo($fileName, \PATHINFO_FILENAME));
+
+        return (int)$nameParts[0] === $image->getId()->getHost()
+            && \strtolower($nameParts[1] ?? '') === \strtolower($image->getRelationType());
     }
 
     /**
@@ -1012,6 +1067,7 @@ class Application
         }
 
         $controller = $this->container->get($controllerName);
+        \assert(\is_object($controller));
         if ($controller instanceof LoggerAwareInterface) {
             /** @var LoggerInterface $loggerInterface */
             $loggerInterface = $this->container->get(LoggerInterface::class);
@@ -1036,17 +1092,17 @@ class Application
                 }
 
                 try {
+                    \assert(\method_exists($controller, $action));
+                    /** @var AbstractModel[] $dataModels */
                     $dataModels = $controller->$action(...$params);
 
                     foreach ($dataModels as $dataModel) {
-                        if ($dataModel instanceof AbstractModel) {
-                            /** @var IdentityLinker $identityLinker */
-                            $identityLinker = $this->container->get(IdentityLinker::class);
-                            $identityLinker->linkModel($dataModel, ($request->getAction() === Action::DELETE));
-                            /** @var ChecksumLinker $checksumLinker */
-                            $checksumLinker = $this->container->get(ChecksumLinker::class);
-                            $checksumLinker->link($dataModel);
-                        }
+                        /** @var IdentityLinker $identityLinker */
+                        $identityLinker = $this->container->get(IdentityLinker::class);
+                        $identityLinker->linkModel($dataModel, ($request->getAction() === Action::DELETE));
+                        /** @var ChecksumLinker $checksumLinker */
+                        $checksumLinker = $this->container->get(ChecksumLinker::class);
+                        $checksumLinker->link($dataModel);
                         $result[] = $dataModel;
                     }
 
@@ -1088,18 +1144,23 @@ class Application
                 }
                 break;
             case Action::IDENTIFY:
+                \assert(\method_exists($controller, $action));
+                /** @var ConnectorIdentification $result */
                 $result = $controller->$action($connector);
                 break;
             default:
+                \assert(\method_exists($controller, $action));
                 $param  = \count($params) > 0 ? \reset($params) : null;
                 $result = $controller->$action($param);
                 break;
         }
 
         if ($action === Action::STATISTIC && $controller instanceof StatisticInterface) {
-            $result = (new Statistic())
+            /** @var int $statisticCount */
+            $statisticCount = $result;
+            $result         = (new Statistic())
                 ->setControllerName($controllerName)
-                ->setAvailable((int)$result);
+                ->setAvailable($statisticCount);
         }
 
         if (!$result instanceof Response) {
@@ -1140,9 +1201,7 @@ class Application
         $messages[]         = $ex->getMessage();
         $reflectionClass    = new ReflectionClass($ex);
         $reflectionProperty = $reflectionClass->getProperty('message');
-        $reflectionProperty->setAccessible(true);
         $reflectionProperty->setValue($ex, \implode(' | ', $messages));
-        $reflectionProperty->setAccessible(false);
     }
 
     /**

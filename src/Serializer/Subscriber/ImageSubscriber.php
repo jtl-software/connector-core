@@ -56,8 +56,9 @@ class ImageSubscriber implements EventSubscriberInterface
             $id = clone $object->getId();
             $id->setEndpoint(\sprintf('%s#=#%s', $object->getRelationType(), $id->getEndpoint()));
             $serializedId = $id->toArray();
-            $event->getVisitor() // @phpstan-ignore-line
-                  ->visitProperty(new StaticPropertyMetadata('', 'id', $serializedId), $serializedId);
+            /** @var \JMS\Serializer\JsonSerializationVisitor $visitor */
+            $visitor = $event->getVisitor();
+            $visitor->visitProperty(new StaticPropertyMetadata('', 'id', $serializedId), $serializedId);
         }
     }
 
@@ -65,8 +66,8 @@ class ImageSubscriber implements EventSubscriberInterface
      * @param ObjectEvent $event
      *
      * @return void
-     * @throws SerializerException
      * @throws CaseConverterException
+     * @throws SerializerException
      */
     public function onPostDeserialize(ObjectEvent $event): void
     {

@@ -15,15 +15,15 @@ class ProductVariationFactory extends AbstractModelFactory
      * @return array{
      *     id: array<int, int|string>,
      *     sort: int,
-     *     i18ns: array<int, ProductVariationI18n>,
+     *     i18ns: array<int, array<int|string, mixed>>,
      *     values: array{}
      *     }
-     * @throws \RuntimeException
      * @throws Exception
+     * @throws \RuntimeException
      */
     protected function makeFakeArray(): array
     {
-        /** @var ProductVariationI18n[] $i18ns */
+        /** @var array<int, array<string|int, mixed>> $i18ns */
         $i18ns = $this->getFactory('ProductVariationI18n')->makeArray(\random_int(1, 5));
 
         return [

@@ -8,8 +8,8 @@ use Jtl\Connector\Core\Application\Response;
 use Jtl\Connector\Core\Model\AbstractModel;
 use Jtl\Connector\Core\Model\Identity;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\ExpectationFailedException;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class ResponseTest
@@ -21,7 +21,7 @@ class ResponseTest extends TestCase
     /**
      * @return array<int, array{0: Identity|array{0: int, 1: int}|int|float|string, 1?: string}>
      */
-    public function responseDataProvider(): array
+    public static function responseDataProvider(): array
     {
         return [
             [new Identity('1')],
@@ -33,14 +33,13 @@ class ResponseTest extends TestCase
     }
 
     /**
-     * @dataProvider responseDataProvider
-     *
      * @param AbstractModel|int|string|float|int[] $result
      *
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
+    #[DataProvider('responseDataProvider')]
     public function testCreateFromStatic(AbstractModel|int|string|float|array $result): void
     {
         $response = Response::create($result);
@@ -50,9 +49,9 @@ class ResponseTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
      * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testSetResult(): void
     {

@@ -5,71 +5,26 @@ declare(strict_types=1);
 namespace Jtl\Connector\Dbc\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Platforms\MariaDb1027Platform;
-use Doctrine\DBAL\Platforms\MySQL57Platform;
-use Doctrine\DBAL\Platforms\MySQL80Platform;
-use Doctrine\DBAL\Platforms\MySqlPlatform;
-use Doctrine\DBAL\Platforms\SqlitePlatform;
-use Doctrine\DBAL\Types\ConversionException;
+use Doctrine\DBAL\Platforms\MariaDBPlatform;
+use Doctrine\DBAL\Platforms\MySQLPlatform;
+use Doctrine\DBAL\Platforms\SQLitePlatform;
+use Doctrine\DBAL\Types\Exception\InvalidType;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\ExpectationFailedException;
-use PHPUnit\Framework\MockObject\ClassAlreadyExistsException;
-use PHPUnit\Framework\MockObject\ClassIsFinalException;
-use PHPUnit\Framework\MockObject\ClassIsReadonlyException;
-use PHPUnit\Framework\MockObject\DuplicateMethodException;
-use PHPUnit\Framework\MockObject\InvalidMethodNameException;
-use PHPUnit\Framework\MockObject\OriginalConstructorInvocationRequiredException;
-use PHPUnit\Framework\MockObject\ReflectionException;
-use PHPUnit\Framework\MockObject\RuntimeException;
-use PHPUnit\Framework\MockObject\UnknownClassException;
-use PHPUnit\Framework\MockObject\UnknownTypeException;
 use PHPUnit\Framework\TestCase;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 class Uuid4TypeTest extends TestCase
 {
     /**
-     * @return void
-     * @throws InvalidMethodNameException
-     * @throws ClassIsFinalException
-     * @throws ExpectationFailedException
-     * @throws \PHPUnit\Framework\InvalidArgumentException
-     * @throws DuplicateMethodException
-     * @throws RuntimeException
-     * @throws ClassIsReadonlyException
-     * @throws ReflectionException
-     * @throws UnknownTypeException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws InvalidArgumentException
-     * @throws ClassAlreadyExistsException
-     */
-    public function testRequiresSQLCommentHint(): void
-    {
-        $platform = $this->createMock(AbstractPlatform::class);
-        $type     = new Uuid4Type();
-        $this->assertTrue($type->requiresSQLCommentHint($platform));
-    }
-
-    /**
-     * @dataProvider convertToDatabaseValueProvider
-     *
      * @param string $givenValue
      * @param string $convertedValue
      *
      * @return void
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
-     * @throws ConversionException
-     * @throws DuplicateMethodException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws InvalidMethodNameException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
-     * @throws RuntimeException
-     * @throws UnknownTypeException
-     * @throws \PHPUnit\Framework\InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws InvalidType
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
+    #[DataProvider('convertToDatabaseValueProvider')]
     public function testConvertToDatabaseValue(string $givenValue, string $convertedValue): void
     {
         $platform = $this->createMock(AbstractPlatform::class);
@@ -78,25 +33,14 @@ class Uuid4TypeTest extends TestCase
     }
 
     /**
-     * @dataProvider convertToPhpValueProvider
-     *
      * @param string $givenValue
      * @param string $convertedValue
      *
      * @return void
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
-     * @throws DuplicateMethodException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws InvalidMethodNameException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
-     * @throws RuntimeException
-     * @throws UnknownTypeException
-     * @throws \PHPUnit\Framework\InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
+    #[DataProvider('convertToPhpValueProvider')]
     public function testConvertToPHPValue(string $givenValue, string $convertedValue): void
     {
         $platform = $this->createMock(AbstractPlatform::class);
@@ -105,16 +49,15 @@ class Uuid4TypeTest extends TestCase
     }
 
     /**
-     * @dataProvider convertToPHPValueSQLProvider
-     *
      * @param AbstractPlatform $platform
      * @param string           $columnExpresion
      * @param string           $expectedExpression
      *
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
+    #[DataProvider('convertToPHPValueSQLProvider')]
     public function testConvertToPHPValueSQL(
         AbstractPlatform $platform,
         string           $columnExpresion,
@@ -127,7 +70,7 @@ class Uuid4TypeTest extends TestCase
      * @return array<int, array<int, string>>
      * @throws \RuntimeException
      */
-    public function convertToDatabaseValueProvider(): array
+    public static function convertToDatabaseValueProvider(): array
     {
         $firstDecode  = \base64_decode('M23C0lBHSZWTeGvlPztRvg==', true);
         $secondDecode = \base64_decode('ZRBfJrVcTwSX0ErDbtYltw==', true);
@@ -145,7 +88,7 @@ class Uuid4TypeTest extends TestCase
      * @return array<int, array<int, string>>
      * @throws \RuntimeException
      */
-    public function convertToPhpValueProvider(): array
+    public static function convertToPhpValueProvider(): array
     {
         $decode = \base64_decode('M23C0lBHSZWTeGvlPztRvg==', true);
         if ($decode === false) {
@@ -162,27 +105,16 @@ class Uuid4TypeTest extends TestCase
 
     /**
      * @return array<int, array{0: AbstractPlatform, 1: string, 2: string}>
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
-     * @throws DuplicateMethodException
-     * @throws InvalidMethodNameException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
-     * @throws RuntimeException
-     * @throws UnknownTypeException
-     * @throws \PHPUnit\Framework\InvalidArgumentException
-     * @throws UnknownClassException
      */
-    public function convertToPHPValueSQLProvider(): array
+    public static function convertToPHPValueSQLProvider(): array
     {
         return [
-            [new MySqlPlatform(), 'foo', 'LOWER(HEX(foo))'],
-            [new MariaDb1027Platform(), 'bar', 'LOWER(HEX(bar))'],
-            [new MySQL57Platform(), 'foobar', 'LOWER(HEX(foobar))'],
-            [new MySQL80Platform(), 'yeeha', 'LOWER(HEX(yeeha))'],
-            [new SqlitePlatform(), 'rofl', 'LOWER(HEX(rofl))'],
-            [$this->getMockForAbstractClass(AbstractPlatform::class), 'abcde', 'abcde'],
+            [new MySQLPlatform(), 'foo', 'LOWER(HEX(foo))'],
+            [new MariaDBPlatform(), 'bar', 'LOWER(HEX(bar))'],
+            [new MySQLPlatform(), 'foobar', 'LOWER(HEX(foobar))'],
+            [new MySQLPlatform(), 'yeeha', 'LOWER(HEX(yeeha))'],
+            [new SQLitePlatform(), 'rofl', 'LOWER(HEX(rofl))'],
+            [new SQLitePlatform(), 'abcde', 'LOWER(HEX(abcde))'],
         ];
     }
 }

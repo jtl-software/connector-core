@@ -19,7 +19,7 @@ final class Action
         IDENTIFY  = 'identify',
         INIT      = 'init';
 
-    /** @var string[]|null */
+    /** @var array<string, string>|null */
     protected static ?array $actions = null;
 
     /** @var string[] */

@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Jtl\Connector\Dbc\Session;
 
 use DateTimeImmutable;
-use Doctrine\DBAL\DBALException;
-use Doctrine\DBAL\Driver\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\DBAL\Schema\SchemaException;
@@ -59,9 +57,9 @@ class SessionHandler extends AbstractTable implements SessionHandlerInterface
      * @param string $sessionId
      *
      * @return bool
-     * @throws DBALException
-     * @throws InvalidArgumentException
      * @throws DbcRuntimeException
+     * @throws \Doctrine\DBAL\Exception
+     * @throws InvalidArgumentException
      * @throws \RuntimeException
      * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
@@ -84,10 +82,10 @@ class SessionHandler extends AbstractTable implements SessionHandlerInterface
     public function gc(int $maxLifetime): bool
     {
         $this->createQueryBuilder()
-             ->delete()
-             ->andWhere($this->getConnection()->getExpressionBuilder()->lte(self::EXPIRES_AT, ':now'))
+             ->delete($this->getTableName())
+             ->andWhere($this->getConnection()->createExpressionBuilder()->lte(self::EXPIRES_AT, ':now'))
              ->setParameter('now', new DateTimeImmutable(), Types::DATETIME_IMMUTABLE)
-             ->execute();
+             ->executeStatement();
 
         return true;
     }
@@ -108,16 +106,16 @@ class SessionHandler extends AbstractTable implements SessionHandlerInterface
      * @param string $sessionId
      *
      * @return string
-     * @throws Exception|\Doctrine\DBAL\Exception
      * @throws DbcRuntimeException
+     * @throws \Doctrine\DBAL\Exception
      * @throws \RuntimeException
      * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
     #[ReturnTypeWillChange]
     public function read(string $sessionId): string
     {
-        $stmt = $this->createReadQuery($sessionId, [self::SESSION_DATA])->execute();
-        if (\is_object($stmt) && \is_scalar(($fetchOne = $stmt->fetchOne()))) {
+        $stmt = $this->createReadQuery($sessionId, [self::SESSION_DATA])->executeQuery();
+        if (\is_scalar(($fetchOne = $stmt->fetchOne()))) {
             return (string)$fetchOne;
         }
         return '';
@@ -134,10 +132,10 @@ class SessionHandler extends AbstractTable implements SessionHandlerInterface
     protected function createReadQuery(string $sessionId, array $columns = [self::SESSION_DATA]): QueryBuilder
     {
         return $this->createQueryBuilder()
-                    ->select($columns)
-                    ->where($this->getConnection()->getExpressionBuilder()->eq(self::SESSION_ID, ':sessionId'))
+                    ->select(...$columns)
+                    ->where($this->getConnection()->createExpressionBuilder()->eq(self::SESSION_ID, ':sessionId'))
                     ->setParameter('sessionId', $sessionId)
-                    ->andWhere($this->getConnection()->getExpressionBuilder()->gt(self::EXPIRES_AT, ':now'))
+                    ->andWhere($this->getConnection()->createExpressionBuilder()->gt(self::EXPIRES_AT, ':now'))
                     ->setParameter('now', new DateTimeImmutable(), Types::DATETIME_IMMUTABLE);
     }
 
@@ -146,8 +144,8 @@ class SessionHandler extends AbstractTable implements SessionHandlerInterface
      * @param string $sessionData
      *
      * @return bool
-     * @throws DBALException
      * @throws DbcRuntimeException
+     * @throws \Doctrine\DBAL\Exception
      * @throws \RuntimeException
      * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
@@ -182,19 +180,15 @@ class SessionHandler extends AbstractTable implements SessionHandlerInterface
      * @param string $sessionId
      *
      * @return bool
-     * @throws \Doctrine\DBAL\Exception|Exception
      * @throws DbcRuntimeException
+     * @throws \Doctrine\DBAL\Exception
      * @throws \RuntimeException
      * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
     public function validateId(string $sessionId): bool
     {
-        $stmt = $this->createReadQuery($sessionId, [self::SESSION_ID])->execute();
-        if (\is_object($stmt)) {
-            return $stmt->fetchOne() === $sessionId;
-        }
-
-        return false;
+        $stmt = $this->createReadQuery($sessionId, [self::SESSION_ID])->executeQuery();
+        return $stmt->fetchOne() === $sessionId;
     }
 
     /**
@@ -202,8 +196,8 @@ class SessionHandler extends AbstractTable implements SessionHandlerInterface
      * @param string $sessionData
      *
      * @return bool
-     * @throws DBALException
      * @throws DbcRuntimeException
+     * @throws \Doctrine\DBAL\Exception
      * @throws \RuntimeException
      * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
@@ -229,8 +223,8 @@ class SessionHandler extends AbstractTable implements SessionHandlerInterface
      * @param Table $tableSchema
      *
      * @return void
-     * @throws SchemaException
      * @throws \Doctrine\DBAL\Exception
+     * @throws SchemaException
      */
     protected function createTableSchema(Table $tableSchema): void
     {

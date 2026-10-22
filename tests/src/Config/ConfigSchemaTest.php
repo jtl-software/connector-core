@@ -12,7 +12,6 @@ use Jtl\Connector\Core\Test\TestCase;
 use Noodlehaus\Exception\EmptyDirectoryException;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\ExpectationFailedException;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 class ConfigSchemaTest extends TestCase
 {
@@ -20,8 +19,8 @@ class ConfigSchemaTest extends TestCase
      * @return void
      * @throws ConfigException
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetOption(): void
     {
@@ -43,8 +42,8 @@ class ConfigSchemaTest extends TestCase
     /**
      * @return void
      * @throws ConfigException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testIsParameter(): void
     {
@@ -55,8 +54,8 @@ class ConfigSchemaTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetParameters(): void
     {
@@ -64,8 +63,7 @@ class ConfigSchemaTest extends TestCase
         $schema->setParameter(new ConfigParameter('foo', ConfigParameter::TYPE_INTEGER));
         $reflectionClass    = new \ReflectionClass($schema);
         $reflectionProperty = $reflectionClass->getProperty('parameters');
-        $reflectionProperty->setAccessible(true);
-        $schemaArray = $reflectionProperty->getValue($schema);
+        $schemaArray        = $reflectionProperty->getValue($schema);
         $this->assertIsArray($schemaArray);
         $this->assertEquals(\array_values($schemaArray), $schema->getParameters());
     }
@@ -74,16 +72,15 @@ class ConfigSchemaTest extends TestCase
      * @return void
      * @throws ConfigException
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testSetparameter(): void
     {
         $schema             = new ConfigSchema();
         $reflectionClass    = new \ReflectionClass($schema);
         $reflectionProperty = $reflectionClass->getProperty('parameters');
-        $reflectionProperty->setAccessible(true);
-        $reflectSchema = $reflectionProperty->getValue($schema);
+        $reflectSchema      = $reflectionProperty->getValue($schema);
         $this->assertIsArray($reflectSchema);
         $this->assertCount(0, $reflectSchema);
         $option = new ConfigParameter('foo', ConfigParameter::TYPE_INTEGER);
@@ -99,16 +96,15 @@ class ConfigSchemaTest extends TestCase
      * @return void
      * @throws ConfigException
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testSetParameters(): void
     {
         $schema             = new ConfigSchema();
         $reflectionClass    = new \ReflectionClass($schema);
         $reflectionProperty = $reflectionClass->getProperty('parameters');
-        $reflectionProperty->setAccessible(true);
-        $reflectSchema = $reflectionProperty->getValue($schema);
+        $reflectSchema      = $reflectionProperty->getValue($schema);
         $this->assertIsArray($reflectSchema);
         $this->assertCount(0, $reflectSchema);
         $defaultParameters = ConfigSchema::createDefaultParameters($this->connectorDir);
@@ -121,8 +117,8 @@ class ConfigSchemaTest extends TestCase
     /**
      * @return void
      * @throws ConfigException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testGetDefaultValues(): void
     {
@@ -147,9 +143,9 @@ class ConfigSchemaTest extends TestCase
      * @return void
      * @throws ConfigException
      * @throws EmptyDirectoryException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws JsonException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testValidate(): void
     {
@@ -169,10 +165,10 @@ class ConfigSchemaTest extends TestCase
     /**
      * @return void
      * @throws ConfigException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws JsonException
      * @throws EmptyDirectoryException
+     * @throws \InvalidArgumentException
+     * @throws JsonException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testValidateHasInvalidValueAndMissingRequiredProperty(): void
     {

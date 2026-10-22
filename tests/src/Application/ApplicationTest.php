@@ -8,7 +8,6 @@ use DI\Container;
 use DI\Definition\Exception\InvalidDefinition;
 use DI\DependencyException;
 use DI\NotFoundException;
-use Doctrine\Common\Annotations\AnnotationException;
 use Jawira\CaseConverter\CaseConverterException;
 use JMS\Serializer\Exception\LogicException;
 use JMS\Serializer\Exception\NotAcceptableException;
@@ -35,6 +34,7 @@ use Jtl\Connector\Core\Exception\ConfigException;
 use Jtl\Connector\Core\Exception\DatabaseException;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\FileNotFoundException;
+use Jtl\Connector\Core\Exception\FileTooLargeException;
 use Jtl\Connector\Core\Exception\LoggerException;
 use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Exception\SessionException;
@@ -62,27 +62,15 @@ use MyPlugin\Bootstrap;
 use Noodlehaus\Exception\EmptyDirectoryException;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\ExpectationFailedException;
-use PHPUnit\Framework\InvalidArgumentException;
 use PHPUnit\Framework\MockObject\CannotUseOnlyMethodsException;
-use PHPUnit\Framework\MockObject\ClassAlreadyExistsException;
-use PHPUnit\Framework\MockObject\ClassIsFinalException;
-use PHPUnit\Framework\MockObject\ClassIsReadonlyException;
-use PHPUnit\Framework\MockObject\DuplicateMethodException;
-use PHPUnit\Framework\MockObject\IncompatibleReturnValueException;
-use PHPUnit\Framework\MockObject\InvalidMethodNameException;
-use PHPUnit\Framework\MockObject\MethodCannotBeConfiguredException;
-use PHPUnit\Framework\MockObject\MethodNameAlreadyConfiguredException;
-use PHPUnit\Framework\MockObject\MethodNameNotConfiguredException;
-use PHPUnit\Framework\MockObject\MethodParametersAlreadyConfiguredException;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\MockObject\OriginalConstructorInvocationRequiredException;
-use PHPUnit\Framework\MockObject\UnknownTypeException;
 use ReflectionException;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\FileBag;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Throwable;
 use TypeError;
 
@@ -93,37 +81,91 @@ use TypeError;
  */
 class ApplicationTest extends TestCase
 {
+    /** @var string[] */
+    private array    $temporaryArchivePaths = [];
+    private ?\Closure $restoreHandlers      = null;
+
     /**
      * @return void
-     * @throws AnnotationException
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // Application::run() registers the core and the Monolog error/exception handlers. Unwind to the
+        // handlers on top of the stack now instead of rebuilding the stack, which would reset error masks.
+        $errorHandler          = self::currentErrorHandler();
+        $exceptionHandler      = self::currentExceptionHandler();
+        $this->restoreHandlers = static function () use ($errorHandler, $exceptionHandler): void {
+            while (($handler = self::currentErrorHandler()) !== null && $handler !== $errorHandler) {
+                \restore_error_handler();
+            }
+            while (($handler = self::currentExceptionHandler()) !== null && $handler !== $exceptionHandler) {
+                \restore_exception_handler();
+            }
+        };
+    }
+
+    /**
+     * @return void
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     */
+    protected function tearDown(): void
+    {
+        unset($_GET['jtlauth']);
+
+        if ($this->restoreHandlers !== null) {
+            ($this->restoreHandlers)();
+        }
+
+        foreach ($this->temporaryArchivePaths as $archivePath) {
+            if (\is_file($archivePath)) {
+                \unlink($archivePath);
+            }
+        }
+
+        parent::tearDown();
+    }
+
+    /**
+     * PHP 8.3 has no get_error_handler(); push a probe and pop it again, which keeps the stack and its error masks.
+     *
+     * @return callable|null
+     */
+    private static function currentErrorHandler(): ?callable
+    {
+        $handler = \set_error_handler(static fn (): bool => false);
+        \restore_error_handler();
+
+        return $handler;
+    }
+
+    /**
+     * @return callable|null
+     */
+    private static function currentExceptionHandler(): ?callable
+    {
+        $handler = \set_exception_handler(static fn (): null => null);
+        \restore_exception_handler();
+
+        return $handler;
+    }
+
+    /**
+     * @return void
      * @throws ApplicationException
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
      * @throws ConfigException
      * @throws DependencyException
-     * @throws DuplicateMethodException
      * @throws EmptyDirectoryException
-     * @throws IncompatibleReturnValueException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws InvalidDefinition
-     * @throws InvalidMethodNameException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws LoggerException
      * @throws LogicException
-     * @throws MethodCannotBeConfiguredException
-     * @throws MethodNameAlreadyConfiguredException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
-     * @throws RuntimeException
-     * @throws TypeError
-     * @throws UnknownTypeException
-     * @throws \InvalidArgumentException
-     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws \LogicException
-     * @throws \PHPUnit\Framework\MockObject\ReflectionException
-     * @throws \PHPUnit\Framework\MockObject\RuntimeException
      * @throws \Psr\Log\InvalidArgumentException
-     * @throws \RuntimeException
+     * @throws TypeError
      * @throws \UnexpectedValueException
      */
     public function testHandleRequestControllerClassNotFoundException(): void
@@ -141,32 +183,19 @@ class ApplicationTest extends TestCase
      * @param CoreConfigInterface|null $config
      *
      * @return Application
-     * @throws AnnotationException
      * @throws ApplicationException
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
      * @throws ConfigException
      * @throws DependencyException
-     * @throws DuplicateMethodException
      * @throws EmptyDirectoryException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws InvalidDefinition
-     * @throws InvalidMethodNameException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws LoggerException
      * @throws LogicException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
-     * @throws RuntimeException
-     * @throws TypeError
-     * @throws UnknownTypeException
-     * @throws \InvalidArgumentException
-     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws \LogicException
-     * @throws \PHPUnit\Framework\MockObject\ReflectionException
-     * @throws \PHPUnit\Framework\MockObject\RuntimeException
      * @throws \Psr\Log\InvalidArgumentException
-     * @throws \RuntimeException
+     * @throws TypeError
      * @throws \UnexpectedValueException
      */
     protected function createInitializedApplication(
@@ -207,19 +236,15 @@ class ApplicationTest extends TestCase
      * @throws ApplicationException
      * @throws ConfigException
      * @throws DependencyException
-     * @throws LoggerException
-     * @throws ReflectionException
-     * @throws RuntimeException
-     * @throws TypeError
-     * @throws InvalidDefinition
-     * @throws AnnotationException
+     * @throws EmptyDirectoryException
      * @throws \InvalidArgumentException
+     * @throws InvalidDefinition
      * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     * @throws LoggerException
      * @throws LogicException
      * @throws \LogicException
-     * @throws EmptyDirectoryException
      * @throws \Psr\Log\InvalidArgumentException
-     * @throws \RuntimeException
+     * @throws TypeError
      * @throws \UnexpectedValueException
      */
     protected function createApplication(
@@ -243,23 +268,28 @@ class ApplicationTest extends TestCase
     }
 
     /**
+     * Application whose session start always succeeds, i.e. a request of an authenticated caller.
+     *
+     * @return Application&MockObject
+     * @throws Throwable
+     */
+    protected function createApplicationWithSession(): Application&MockObject
+    {
+        $app = $this->getMockBuilder(Application::class)
+                    ->setConstructorArgs([$this->connectorDir, new ArrayConfig([]), new ConfigSchema()])
+                    ->onlyMethods(['startSession'])
+                    ->getMock();
+        $app->expects($this->once())->method('startSession');
+
+        return $app;
+    }
+
+    /**
      * @param string $controllerNamespace
      * @param bool   $tokenValidatorValidateValue
      *
      * @return ConnectorInterface&MockObject
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
-     * @throws DuplicateMethodException
-     * @throws IncompatibleReturnValueException
-     * @throws InvalidArgumentException
-     * @throws InvalidMethodNameException
-     * @throws MethodCannotBeConfiguredException
-     * @throws MethodNameAlreadyConfiguredException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws UnknownTypeException
-     * @throws \PHPUnit\Framework\MockObject\ReflectionException
-     * @throws \PHPUnit\Framework\MockObject\RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function createConnector(
         string $controllerNamespace = '',
@@ -278,46 +308,28 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @dataProvider controllerActionsDataProvider
-     *
      * @param string $action
      * @param mixed  $parameter
      *
      * @return void
-     * @throws AnnotationException
      * @throws ApplicationException
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
      * @throws ConfigException
      * @throws DependencyException
-     * @throws DuplicateMethodException
      * @throws EmptyDirectoryException
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws IncompatibleReturnValueException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws InvalidDefinition
-     * @throws InvalidMethodNameException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws LoggerException
      * @throws LogicException
-     * @throws MethodCannotBeConfiguredException
-     * @throws MethodNameAlreadyConfiguredException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
-     * @throws RuntimeException
-     * @throws TypeError
-     * @throws UnknownTypeException
-     * @throws \InvalidArgumentException
-     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws \LogicException
-     * @throws \PHPUnit\Framework\MockObject\ReflectionException
-     * @throws \PHPUnit\Framework\MockObject\RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \Psr\Log\InvalidArgumentException
-     * @throws \RuntimeException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws TypeError
      * @throws \UnexpectedValueException
      */
+    #[DataProvider('controllerActionsDataProvider')]
     public function testHandleRequestControllerAction(string $action, mixed $parameter): void
     {
         $mock        = $this->createMock(Product::class);
@@ -364,7 +376,7 @@ class ApplicationTest extends TestCase
     /**
      * @return array<int, array{0: string, 1: QueryFilter|Product}>
      */
-    public function controllerActionsDataProvider(): array
+    public static function controllerActionsDataProvider(): array
     {
         $product = new Product();
         $product->setCreationDate(new \DateTimeImmutable());
@@ -391,40 +403,21 @@ class ApplicationTest extends TestCase
 
     /**
      * @return void
-     * @throws AnnotationException
      * @throws ApplicationException
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
      * @throws ConfigException
      * @throws DependencyException
-     * @throws DuplicateMethodException
      * @throws EmptyDirectoryException
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws IncompatibleReturnValueException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws InvalidDefinition
-     * @throws InvalidMethodNameException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws LoggerException
      * @throws LogicException
-     * @throws MethodCannotBeConfiguredException
-     * @throws MethodNameAlreadyConfiguredException
-     * @throws MethodNameNotConfiguredException
-     * @throws MethodParametersAlreadyConfiguredException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
-     * @throws RuntimeException
-     * @throws TypeError
-     * @throws UnknownTypeException
-     * @throws \InvalidArgumentException
-     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws \LogicException
-     * @throws \PHPUnit\Framework\MockObject\ReflectionException
-     * @throws \PHPUnit\Framework\MockObject\RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \Psr\Log\InvalidArgumentException
-     * @throws \RuntimeException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws TypeError
      * @throws \UnexpectedValueException
      */
     public function testHandleRequestTransactionalMethodsCalls(): void
@@ -450,38 +443,20 @@ class ApplicationTest extends TestCase
 
     /**
      * @return void
-     * @throws AnnotationException
      * @throws ApplicationException
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
      * @throws ConfigException
      * @throws DependencyException
-     * @throws DuplicateMethodException
      * @throws EmptyDirectoryException
      * @throws Exception
-     * @throws IncompatibleReturnValueException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws InvalidDefinition
-     * @throws InvalidMethodNameException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws LoggerException
      * @throws LogicException
-     * @throws MethodCannotBeConfiguredException
-     * @throws MethodNameAlreadyConfiguredException
-     * @throws MethodNameNotConfiguredException
-     * @throws MethodParametersAlreadyConfiguredException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
-     * @throws RuntimeException
-     * @throws TypeError
-     * @throws UnknownTypeException
-     * @throws \InvalidArgumentException
-     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws \LogicException
-     * @throws \PHPUnit\Framework\MockObject\ReflectionException
-     * @throws \PHPUnit\Framework\MockObject\RuntimeException
      * @throws \Psr\Log\InvalidArgumentException
-     * @throws \RuntimeException
+     * @throws TypeError
      * @throws \UnexpectedValueException
      */
     public function testHandleRequestTransactionalControllerFail(): void
@@ -505,37 +480,20 @@ class ApplicationTest extends TestCase
 
     /**
      * @return void
-     * @throws AnnotationException
      * @throws ApplicationException
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
      * @throws ConfigException
      * @throws DependencyException
-     * @throws DuplicateMethodException
      * @throws EmptyDirectoryException
-     * @throws ExpectationFailedException
-     * @throws IncompatibleReturnValueException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws InvalidDefinition
-     * @throws InvalidMethodNameException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws LoggerException
      * @throws LogicException
-     * @throws MethodCannotBeConfiguredException
-     * @throws MethodNameAlreadyConfiguredException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
-     * @throws RuntimeException
-     * @throws TypeError
-     * @throws UnknownTypeException
-     * @throws \InvalidArgumentException
-     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws \LogicException
-     * @throws \PHPUnit\Framework\MockObject\ReflectionException
-     * @throws \PHPUnit\Framework\MockObject\RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \Psr\Log\InvalidArgumentException
-     * @throws \RuntimeException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws TypeError
      * @throws \UnexpectedValueException
      */
     public function testHandleRequestControllerClassNeedToBeInitialized(): void
@@ -552,40 +510,23 @@ class ApplicationTest extends TestCase
 
     /**
      * @return void
-     * @throws AnnotationException
      * @throws ApplicationException
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
      * @throws ConfigException
      * @throws DatabaseException
      * @throws DependencyException
-     * @throws DuplicateMethodException
      * @throws EmptyDirectoryException
-     * @throws ExpectationFailedException
-     * @throws IncompatibleReturnValueException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws InvalidDefinition
-     * @throws InvalidMethodNameException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws LoggerException
      * @throws LogicException
-     * @throws MethodCannotBeConfiguredException
-     * @throws MethodNameAlreadyConfiguredException
+     * @throws \LogicException
      * @throws NotFoundException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
-     * @throws RuntimeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \Psr\Log\InvalidArgumentException
      * @throws SessionException
      * @throws TypeError
-     * @throws UnknownTypeException
-     * @throws \InvalidArgumentException
-     * @throws \JMS\Serializer\Exception\InvalidArgumentException
-     * @throws \LogicException
-     * @throws \PHPUnit\Framework\MockObject\ReflectionException
-     * @throws \PHPUnit\Framework\MockObject\RuntimeException
-     * @throws \Psr\Log\InvalidArgumentException
-     * @throws \RuntimeException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      * @throws \UnexpectedValueException
      */
     public function testPrepareContainer(): void
@@ -609,19 +550,8 @@ class ApplicationTest extends TestCase
     /**
      * @return void
      * @throws ConfigException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
-     * @throws DuplicateMethodException
-     * @throws InvalidMethodNameException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws \PHPUnit\Framework\MockObject\ReflectionException
-     * @throws \PHPUnit\Framework\MockObject\RuntimeException
-     * @throws UnknownTypeException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testPrepareConfigSetDefaultParameters(): void
     {
@@ -645,20 +575,9 @@ class ApplicationTest extends TestCase
 
     /**
      * @return void
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
      * @throws ConfigException
-     * @throws DuplicateMethodException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws InvalidMethodNameException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
-     * @throws UnknownTypeException
-     * @throws \PHPUnit\Framework\MockObject\ReflectionException
-     * @throws \PHPUnit\Framework\MockObject\RuntimeException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testPrepareConfigurationSetDefaultValuesInConfig(): void
     {
@@ -683,19 +602,8 @@ class ApplicationTest extends TestCase
 
     /**
      * @return void
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
-     * @throws DuplicateMethodException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws InvalidMethodNameException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
-     * @throws UnknownTypeException
-     * @throws \PHPUnit\Framework\MockObject\ReflectionException
-     * @throws \PHPUnit\Framework\MockObject\RuntimeException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testLoadPlugins(): void
     {
@@ -716,40 +624,22 @@ class ApplicationTest extends TestCase
     /**
      * @return void
      * @throws ApplicationException
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
+     * @throws CannotUseOnlyMethodsException
+     * @throws CaseConverterException
      * @throws CompressionException
      * @throws ConfigException
      * @throws DefinitionException
      * @throws DependencyException
-     * @throws DuplicateMethodException
      * @throws Exception
-     * @throws ExpectationFailedException
      * @throws FileNotFoundException
-     * @throws IncompatibleReturnValueException
-     * @throws InvalidArgumentException
-     * @throws InvalidMethodNameException
+     * @throws \InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws JsonException
-     * @throws MethodCannotBeConfiguredException
-     * @throws MethodNameAlreadyConfiguredException
      * @throws NotFoundException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws RpcException
-     * @throws RuntimeException
      * @throws SessionException
      * @throws Throwable
-     * @throws UnknownTypeException
-     * @throws \JMS\Serializer\Exception\InvalidArgumentException
-     * @throws CaseConverterException
-     * @throws CannotUseOnlyMethodsException
-     * @throws MethodNameNotConfiguredException
-     * @throws MethodParametersAlreadyConfiguredException
-     * @throws \PHPUnit\Framework\MockObject\ReflectionException
-     * @throws \PHPUnit\Framework\MockObject\RuntimeException
-     * @throws \RuntimeException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testRun(): void
     {
@@ -842,22 +732,16 @@ class ApplicationTest extends TestCase
      * @throws DefinitionException
      * @throws DependencyException
      * @throws FileNotFoundException
-     * @throws IncompatibleReturnValueException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws JsonException
      * @throws LoggerException
-     * @throws MethodCannotBeConfiguredException
-     * @throws MethodNameAlreadyConfiguredException
      * @throws NotFoundException
-     * @throws ReflectionException
+     * @throws \Psr\Log\InvalidArgumentException
      * @throws RpcException
-     * @throws RuntimeException
      * @throws SessionException
      * @throws Throwable
      * @throws TypeError
-     * @throws \JMS\Serializer\Exception\InvalidArgumentException
-     * @throws \Psr\Log\InvalidArgumentException
-     * @throws \RuntimeException
      */
     public function testRunInvalidRpcMethod(): void
     {
@@ -889,22 +773,16 @@ class ApplicationTest extends TestCase
      * @throws DefinitionException
      * @throws DependencyException
      * @throws FileNotFoundException
-     * @throws IncompatibleReturnValueException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws JsonException
      * @throws LoggerException
-     * @throws MethodCannotBeConfiguredException
-     * @throws MethodNameAlreadyConfiguredException
      * @throws NotFoundException
-     * @throws ReflectionException
+     * @throws \Psr\Log\InvalidArgumentException
      * @throws RpcException
-     * @throws RuntimeException
      * @throws SessionException
      * @throws Throwable
      * @throws TypeError
-     * @throws \JMS\Serializer\Exception\InvalidArgumentException
-     * @throws \Psr\Log\InvalidArgumentException
-     * @throws \RuntimeException
      */
     public function testRunUnknownController(): void
     {
@@ -932,34 +810,28 @@ class ApplicationTest extends TestCase
 
         $this->expectOutputString(\json_encode($responsePacket->toArray($serializer), \JSON_THROW_ON_ERROR));
 
-        $this->createApplication()
+        $this->createApplicationWithSession()
              ->run($this->createConnector());
     }
 
     /**
      * @return void
      * @throws ApplicationException
+     * @throws CompressionException
      * @throws ConfigException
      * @throws DefinitionException
      * @throws DependencyException
-     * @throws IncompatibleReturnValueException
-     * @throws InvalidArgumentException
-     * @throws LoggerException
-     * @throws MethodCannotBeConfiguredException
-     * @throws MethodNameAlreadyConfiguredException
-     * @throws NotFoundException
-     * @throws ReflectionException
-     * @throws RpcException
-     * @throws RuntimeException
-     * @throws SessionException
-     * @throws TypeError
+     * @throws FileNotFoundException
+     * @throws \InvalidArgumentException
      * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws JsonException
-     * @throws CompressionException
-     * @throws FileNotFoundException
+     * @throws LoggerException
+     * @throws NotFoundException
      * @throws \Psr\Log\InvalidArgumentException
-     * @throws \RuntimeException
+     * @throws RpcException
+     * @throws SessionException
      * @throws Throwable
+     * @throws TypeError
      */
     public function testRunUnknownAction(): void
     {
@@ -981,47 +853,75 @@ class ApplicationTest extends TestCase
         $responsePacket  = (new ResponsePacket())->setJtlrpc('2.0')->setId($id)->setError($error);
         $this->expectOutputString(\json_encode($responsePacket->toArray($serializer), \JSON_THROW_ON_ERROR));
 
+        $this->createApplicationWithSession()
+             ->run($this->createConnector());
+    }
+
+    /**
+     * @return array<string, array{0: string, 1: string|null}>
+     */
+    public static function unauthenticatedRequestDataProvider(): array
+    {
+        return [
+            'unknown action without jtlauth'        => ['connector.identification', null],
+            'unknown action with empty jtlauth'     => ['connector.identification', ''],
+            'unknown controller with empty jtlauth' => ['foo.bar', ''],
+            'known method without jtlauth'          => ['manufacturer.pull', null],
+            'known method with empty jtlauth'       => ['connector.identify', ''],
+        ];
+    }
+
+    /**
+     * @param string      $method
+     * @param string|null $jtlauth
+     *
+     * @return void
+     * @throws Throwable
+     */
+    #[DataProvider('unauthenticatedRequestDataProvider')]
+    public function testRunRejectsUnauthenticatedRequestBeforeResolvingMethod(string $method, ?string $jtlauth): void
+    {
+        $this->expectException(SessionException::class);
+        $this->expectExceptionCode(ErrorCode::NO_SESSION);
+        $this->expectOutputRegex(\sprintf('/"error":\{"code":%d,"message":"No session"/', ErrorCode::NO_SESSION));
+
+        $requestPacket   = (new RequestPacket())->setJtlrpc('2.0')
+                                                ->setMethod($method)
+                                                ->setParams([])
+                                                ->setId('1')
+                                                ->toArray();
+        $_POST['jtlrpc'] = \json_encode($requestPacket, \JSON_THROW_ON_ERROR);
+        if ($jtlauth !== null) {
+            $_GET['jtlauth'] = $jtlauth;
+        }
+
         $this->createApplication()
              ->run($this->createConnector());
     }
 
     /**
      * @return void
-     * @throws AnnotationException
      * @throws ApplicationException
      * @throws CaseConverterException
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
      * @throws ConfigException
      * @throws DefinitionException
      * @throws DependencyException
-     * @throws DuplicateMethodException
      * @throws EmptyDirectoryException
-     * @throws ExpectationFailedException
      * @throws FileException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws InvalidDefinition
-     * @throws InvalidMethodNameException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws LoggerException
      * @throws LogicException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
-     * @throws RuntimeException
-     * @throws TypeError
-     * @throws UnknownTypeException
-     * @throws \InvalidArgumentException
-     * @throws \JMS\Serializer\Exception\InvalidArgumentException
-     * @throws NotAcceptableException
-     * @throws UnsupportedFormatException
      * @throws \LogicException
-     * @throws \PHPUnit\Framework\MockObject\ReflectionException
-     * @throws \PHPUnit\Framework\MockObject\RuntimeException
+     * @throws NotAcceptableException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \Psr\Log\InvalidArgumentException
-     * @throws \RuntimeException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      * @throws \Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException
+     * @throws TypeError
      * @throws \UnexpectedValueException
+     * @throws UnsupportedFormatException
      */
     public function testHandleImagePushWithFilesSentByWawi(): void
     {
@@ -1041,10 +941,7 @@ class ApplicationTest extends TestCase
         );
         $filebag          = new FileBag(['file' => $file]);
 
-        $request = $this->getMockBuilder(HttpRequest::class)
-                        ->disableOriginalConstructor()
-                        ->getMock();
-
+        $request        = new HttpRequest();
         $request->files = $filebag;
 
         $app = $this->createApplication()
@@ -1065,27 +962,22 @@ class ApplicationTest extends TestCase
 
     /**
      * @return void
-     * @throws AnnotationException
      * @throws ApplicationException
      * @throws ConfigException
      * @throws DependencyException
      * @throws EmptyDirectoryException
-     * @throws ExpectationFailedException
+     * @throws \InvalidArgumentException
      * @throws InvalidDefinition
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws LoggerException
      * @throws LogicException
-     * @throws NotAcceptableException
-     * @throws ReflectionException
-     * @throws RuntimeException
-     * @throws TypeError
-     * @throws UnsupportedFormatException
-     * @throws \InvalidArgumentException
-     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws \LogicException
+     * @throws NotAcceptableException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \Psr\Log\InvalidArgumentException
-     * @throws \RuntimeException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws TypeError
      * @throws \UnexpectedValueException
+     * @throws UnsupportedFormatException
      */
     public function testHandleImagePushUploadedFileNotFound(): void
     {
@@ -1103,39 +995,25 @@ class ApplicationTest extends TestCase
 
     /**
      * @return void
-     * @throws AnnotationException
      * @throws ApplicationException
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
      * @throws ConfigException
      * @throws DependencyException
-     * @throws DuplicateMethodException
      * @throws EmptyDirectoryException
-     * @throws ExpectationFailedException
      * @throws FileException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws InvalidDefinition
-     * @throws InvalidMethodNameException
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws LoggerException
      * @throws LogicException
-     * @throws NotAcceptableException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
-     * @throws RuntimeException
-     * @throws TypeError
-     * @throws UnknownTypeException
-     * @throws UnsupportedFormatException
-     * @throws \InvalidArgumentException
-     * @throws \JMS\Serializer\Exception\InvalidArgumentException
      * @throws \LogicException
-     * @throws \PHPUnit\Framework\MockObject\ReflectionException
-     * @throws \PHPUnit\Framework\MockObject\RuntimeException
+     * @throws NotAcceptableException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \Psr\Log\InvalidArgumentException
-     * @throws \RuntimeException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      * @throws \Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException
+     * @throws TypeError
      * @throws \UnexpectedValueException
+     * @throws UnsupportedFormatException
      */
     public function testHandleImagePushFileExtractionFailed(): void
     {
@@ -1156,12 +1034,156 @@ class ApplicationTest extends TestCase
             true
         );
         $filebag          = new FileBag(['file' => $file]);
-        $request          = $this->getMockBuilder(HttpRequest::class)
-                                 ->disableOriginalConstructor()
-                                 ->getMock();
-
-        $request->files = $filebag;
-        $app            = $this->createApplication()->setHttpRequest($request);
+        $request          = new HttpRequest();
+        $request->files   = $filebag;
+        $app              = $this->createApplication()->setHttpRequest($request);
         $this->invokeMethodFromObject($app, 'handleImagePush', ...$images);
+    }
+
+    /**
+     * @param string $name
+     * @param string $filename
+     * @param string $expectedImageLabel
+     *
+     * @return void
+     * @throws ApplicationException
+     * @throws ConfigException
+     * @throws DependencyException
+     * @throws EmptyDirectoryException
+     * @throws FileException
+     * @throws \InvalidArgumentException
+     * @throws InvalidDefinition
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     * @throws LoggerException
+     * @throws LogicException
+     * @throws \LogicException
+     * @throws NotAcceptableException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \Psr\Log\InvalidArgumentException
+     * @throws TypeError
+     * @throws \UnexpectedValueException
+     * @throws UnsupportedFormatException
+     */
+    #[DataProvider('tooLargeImageLabelDataProvider')]
+    public function testHandleImagePushNamesTheWawiImageWhenAnImageIsTooLarge(
+        string $name,
+        string $filename,
+        string $expectedImageLabel
+    ): void {
+        $images = $this->deserializeImagesPushFixture();
+        // First fixture image: image ID 284, product (foreign key) ID 1
+        $images[0]->setName($name)->setFilename($filename);
+
+        $archivePath = $this->createArchiveWithOversizedEntry('284_Product.jpg');
+        $app         = $this->createApplication()->setHttpRequest($this->createImagePushRequest($archivePath));
+
+        $this->expectException(ApplicationException::class);
+        $this->expectExceptionCode(ApplicationException::IMAGE_TOO_LARGE);
+        $this->expectExceptionMessage(
+            \sprintf(
+                'Image "%s" of Product (JTL-Wawi ID = 1, image ID = 284) is too large (25 MB, max. 20 MB)',
+                $expectedImageLabel
+            )
+        );
+
+        $this->invokeMethodFromObject($app, 'handleImagePush', ...$images);
+    }
+
+    /**
+     * @return array<string, array{string, string, string}>
+     */
+    public static function tooLargeImageLabelDataProvider(): array
+    {
+        return [
+            'image name sent by Wawi'          => ['Sommerkleid rot', 'sommerkleid-rot.jpg', 'Sommerkleid rot'],
+            'falls back to the Wawi file name' => ['', 'sommerkleid-rot.jpg', 'sommerkleid-rot.jpg'],
+            'falls back to the archive entry'  => ['', '', '284_Product.jpg'],
+        ];
+    }
+
+    /**
+     * @return void
+     * @throws ApplicationException
+     * @throws ConfigException
+     * @throws DependencyException
+     * @throws EmptyDirectoryException
+     * @throws FileException
+     * @throws \InvalidArgumentException
+     * @throws InvalidDefinition
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     * @throws LoggerException
+     * @throws LogicException
+     * @throws \LogicException
+     * @throws NotAcceptableException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \Psr\Log\InvalidArgumentException
+     * @throws TypeError
+     * @throws \UnexpectedValueException
+     * @throws UnsupportedFormatException
+     */
+    public function testHandleImagePushRethrowsTooLargeEntryWithoutMatchingImage(): void
+    {
+        $images      = $this->deserializeImagesPushFixture();
+        $archivePath = $this->createArchiveWithOversizedEntry('999_Product.jpg');
+        $app         = $this->createApplication()->setHttpRequest($this->createImagePushRequest($archivePath));
+
+        $this->expectException(FileTooLargeException::class);
+        $this->expectExceptionMessage('File "999_Product.jpg" is too large (25 MB, max. 20 MB)');
+
+        $this->invokeMethodFromObject($app, 'handleImagePush', ...$images);
+    }
+
+    /**
+     * @return ProductImage[]
+     * @throws \JMS\Serializer\Exception\InvalidArgumentException
+     * @throws LogicException
+     * @throws NotAcceptableException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws UnsupportedFormatException
+     */
+    private function deserializeImagesPushFixture(): array
+    {
+        $data = \file_get_contents(\sprintf('%s/fixtures/images_push.json', \TEST_DIR));
+        $this->assertNotFalse($data);
+        /** @var ProductImage[] $images */
+        $images = SerializerBuilder::create()->build()
+                                   ->deserialize($data, \sprintf('array<%s>', AbstractImage::class), 'json');
+
+        return $images;
+    }
+
+    /**
+     * @param string $archivePath
+     *
+     * @return HttpRequest
+     * @throws FileException
+     */
+    private function createImagePushRequest(string $archivePath): HttpRequest
+    {
+        $request        = new HttpRequest();
+        $request->files = new FileBag([
+            'file' => new UploadedFile($archivePath, 'images.zip', 'application/octet-stream', \UPLOAD_ERR_OK, true),
+        ]);
+
+        return $request;
+    }
+
+    /**
+     * @param string $entryName
+     *
+     * @return string
+     */
+    private function createArchiveWithOversizedEntry(string $entryName): string
+    {
+        $archivePath = \sprintf('%s/%s.zip', \sys_get_temp_dir(), \uniqid('too-large-', true));
+
+        $archive = new \ZipArchive();
+        $archive->open($archivePath, \ZipArchive::CREATE);
+        $archive->addFromString($entryName, \str_repeat('a', 25_000_000));
+        $archive->close();
+
+        $this->temporaryArchivePaths[] = $archivePath;
+
+        return $archivePath;
     }
 }

@@ -84,8 +84,8 @@ interface ValidatorInterface
      *
      * @return bool
      * @throws ArrayKeyDoesNotExistException
-     * @throws \TypeError
      * @throws \InvalidArgumentException
+     * @throws \TypeError
      */
     public function hasKey(int|string $keyName): bool;
 

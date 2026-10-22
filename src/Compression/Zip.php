@@ -6,9 +6,13 @@ namespace Jtl\Connector\Core\Compression;
 
 use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\FileNotFoundException;
+use Jtl\Connector\Core\Exception\FileTooLargeException;
 
 class Zip
 {
+    /** Maximum uncompressed size of a single archive entry in bytes (20 MB) */
+    public const int MAX_ENTRY_SIZE = 20000000;
+
     /**
      * @param string $sourceFile
      * @param string $targetFolder
@@ -16,6 +20,7 @@ class Zip
      * @return bool
      * @throws CompressionException
      * @throws FileNotFoundException
+     * @throws FileTooLargeException
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
@@ -39,15 +44,14 @@ class Zip
         if ($archive->open($sourceFile) === true) {
             $index         = 0;
             $isBomb        = false;
-            $imageTooLarge = false;
+            $tooLargeEntry = null;
 
             while (($stat = $archive->statIndex($index))) {
                 $size     = $stat['size'];
                 $compSize = $stat['comp_size'];
 
-                // 20MB
-                if ($size > 20000000) {
-                    $imageTooLarge = true;
+                if ($size > self::MAX_ENTRY_SIZE) {
+                    $tooLargeEntry = $stat;
                     break;
                 }
 
@@ -65,8 +69,8 @@ class Zip
                 $index++;
             }
 
-            if ($imageTooLarge) {
-                throw new \RuntimeException("Image {$index} too large");
+            if (!\is_null($tooLargeEntry)) {
+                throw new FileTooLargeException($tooLargeEntry['name'], $tooLargeEntry['size'], self::MAX_ENTRY_SIZE);
             }
 
             if ($isBomb) {

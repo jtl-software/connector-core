@@ -25,8 +25,8 @@ final class Event
      * @param string $moment
      *
      * @return string
-     * @throws DefinitionException
      * @throws CaseConverterException
+     * @throws DefinitionException
      */
     public static function createCoreEventName(string $controllerName, string $actionName, string $moment): string
     {
@@ -39,8 +39,8 @@ final class Event
      * @param string $moment
      *
      * @return string
-     * @throws DefinitionException
      * @throws CaseConverterException
+     * @throws DefinitionException
      */
     public static function createEventName(string $controllerName, string $actionName, string $moment): string
     {
@@ -75,8 +75,8 @@ final class Event
      * @param string $moment
      *
      * @return string
-     * @throws DefinitionException
      * @throws CaseConverterException
+     * @throws DefinitionException
      */
     public static function createHandleEventName(string $controllerName, string $actionName, string $moment): string
     {

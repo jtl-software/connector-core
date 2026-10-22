@@ -206,16 +206,16 @@ class QueryFilter
      */
     public function set(\stdClass $obj): void
     {
-        if (!\is_object($obj)) {
-            return;
-        }
-
         if (isset($obj->limit)) {
-            $this->setLimit($obj->limit);
+            /** @var int $limit */
+            $limit = $obj->limit;
+            $this->setLimit($limit);
         }
 
-        if (isset($obj->filters) && \is_object($obj->filters)) {
-            $this->setFilters(\get_object_vars($obj->filters));
+        if (isset($obj->filters) && $obj->filters instanceof \stdClass) {
+            /** @var array<string, mixed> $filters */
+            $filters = \get_object_vars($obj->filters);
+            $this->setFilters($filters);
         }
     }
 }

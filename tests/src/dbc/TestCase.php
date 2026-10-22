@@ -4,23 +4,16 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Dbc;
 
-use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception as DBALException;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Query\QueryBuilder;
-use Doctrine\DBAL\Result;
-use Jtl\UnitTest\TestCase as JtlTestCase;
-use PDO;
-use PDOException;
 use RuntimeException;
 use Throwable;
 
-abstract class TestCase extends JtlTestCase
+abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
     public const string TABLE_PREFIX = 'pre_';
     public const string SCHEMA       = \TESTROOT . '/tmp/db.sqlite';
     protected TableStub|\Jtl\Connector\MappingTables\TableStub $table;
-    private PDO                                                $pdo;
     private DbManager                                          $dbManager;
 
     /**
@@ -49,8 +42,8 @@ abstract class TestCase extends JtlTestCase
 
     /**
      * @return void
-     * @throws Throwable
      * @throws DBALException
+     * @throws Throwable
      */
     protected function setUp(): void
     {
@@ -63,28 +56,11 @@ abstract class TestCase extends JtlTestCase
     /**
      * @return DbManager
      * @throws DBALException
-     * @throws PDOException
-     * @throws RuntimeException|\Doctrine\DBAL\DBALException
+     * @throws RuntimeException
      */
     protected function getDBManager(): DbManager
     {
         if (!isset($this->dbManager)) {
-            /** @var DbManagerStub $dbManagerStub */
-            $dbManagerStub   = DbManagerStub::createFromParams(['pdo' => $this->getPDO()], null, self::TABLE_PREFIX);
-            $this->dbManager = $dbManagerStub;
-        }
-
-        return $this->dbManager;
-    }
-
-    /**
-     * @return PDO
-     * @throws RuntimeException
-     * @throws PDOException
-     */
-    protected function getPDO(): PDO
-    {
-        if (!isset($this->pdo)) {
             if (
                 !\is_dir(\dirname(self::SCHEMA))
                 && !\mkdir($concurrentDirectory = \dirname(self::SCHEMA))
@@ -96,10 +72,17 @@ abstract class TestCase extends JtlTestCase
             if (\file_exists(self::SCHEMA)) {
                 \unlink(self::SCHEMA);
             }
-            $this->pdo = new PDO('sqlite:' . self::SCHEMA);
+
+            /** @var DbManagerStub $dbManagerStub */
+            $dbManagerStub   = DbManagerStub::createFromParams(
+                ['driver' => 'pdo_sqlite', 'path' => self::SCHEMA],
+                null,
+                self::TABLE_PREFIX
+            );
+            $this->dbManager = $dbManagerStub;
         }
 
-        return $this->pdo;
+        return $this->dbManager;
     }
 
     /**
@@ -108,19 +91,14 @@ abstract class TestCase extends JtlTestCase
      *
      * @return int
      * @throws DBALException
-     * @throws PDOException
      * @throws RuntimeException
-     * @throws Exception|\Doctrine\DBAL\DBALException
-     * @throws \Doctrine\DBAL\Driver\Exception
      */
     protected function countRows(string $tableName, array $conditions = []): int
     {
         $connection = $this->getDbManager()->getConnection();
 
-        /** @var AbstractPlatform $platform */
-        $platform = $connection->getDatabasePlatform();
-        $qb       = (new QueryBuilder($connection))
-            ->select($platform->getCountExpression('*'))
+        $qb = (new QueryBuilder($connection))
+            ->select(\sprintf('COUNT(%s)', '*'))
             ->from($tableName);
 
         foreach ($conditions as $column => $value) {
@@ -129,10 +107,7 @@ abstract class TestCase extends JtlTestCase
                 ->setParameter($column, $value);
         }
 
-        $result = $qb->execute();
-        if ($result instanceof Result === false) {
-            throw new RuntimeException('unexpected Type, expected instance of Result');
-        }
+        $result = $qb->executeQuery();
 
         /** @var numeric-string $return */
         $return = $result->fetchOne();
@@ -154,5 +129,61 @@ abstract class TestCase extends JtlTestCase
         foreach ($fixtures as $fixture) {
             $table->insert($fixture);
         }
+    }
+
+    /**
+     * @param object $object
+     * @param string $methodName
+     * @param mixed  ...$arguments
+     *
+     * @return mixed
+     * @throws \ReflectionException
+     */
+    protected function invokeMethodFromObject(object $object, string $methodName, mixed ...$arguments): mixed
+    {
+        $reflectionClass  = new \ReflectionClass($object);
+        $reflectionMethod = $reflectionClass->getMethod($methodName);
+
+        return $reflectionMethod->invoke($object, ...$arguments);
+    }
+
+    /**
+     * @param object $object
+     * @param string $propertyName
+     *
+     * @return mixed
+     * @throws \RuntimeException
+     */
+    protected function getPropertyValueFromObject(object $object, string $propertyName): mixed
+    {
+        $reflectionClass = new \ReflectionClass($object);
+        do {
+            if ($reflectionClass->hasProperty($propertyName)) {
+                break;
+            }
+        } while ($reflectionClass = $reflectionClass->getParentClass());
+
+        if (!$reflectionClass instanceof \ReflectionClass) {
+            throw new \RuntimeException(\sprintf('Property "%s" not found on %s', $propertyName, $object::class));
+        }
+
+        $reflectionProperty = $reflectionClass->getProperty($propertyName);
+
+        return $reflectionProperty->getValue($object);
+    }
+
+    /**
+     * @param object $object
+     * @param string $propertyName
+     * @param mixed  $value
+     *
+     * @return void
+     * @throws \ReflectionException
+     */
+    protected function setPropertyValueFromObject(object $object, string $propertyName, mixed $value): void
+    {
+        $reflectionClass    = new \ReflectionClass($object);
+        $reflectionProperty = $reflectionClass->getProperty($propertyName);
+        $reflectionProperty->setValue($object, $value);
     }
 }

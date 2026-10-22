@@ -56,18 +56,22 @@ class ProductPriceFactory extends AbstractModelFactory
 
         if ($withBulkPrices === true) {
             $pricesCount = \random_int(1, \random_int(1, 30));
-            $maxQuantity = \random_int($pricesCount, \random_int($pricesCount, 500)); // @phpstan-ignore-line
+            $maxQuantity = $pricesCount + \random_int(0, 500);
             $step        = (int)\floor($maxQuantity / $pricesCount);
-            $priceStep   = \floor($items[0]['netPrice'] / $pricesCount);
+            /** @var float $firstNetPrice */
+            $firstNetPrice = $items[0]['netPrice'];
+            $priceStep     = \floor($firstNetPrice / $pricesCount);
 
             $quantity = 0;
             for ($i = 0; $i < $pricesCount; $i++) {
                 $quantity += $step;
-                $minPrice  = $items[$i]['netPrice'] - $priceStep;
-                if ($minPrice > $items[$i]['netPrice'] || $minPrice < 0) {
-                    $minPrice = (($items[$i]['netPrice'] - 0.1) / 2);
+                /** @var float $currentNetPrice */
+                $currentNetPrice = $items[$i]['netPrice'];
+                $minPrice        = $currentNetPrice - $priceStep;
+                if ($minPrice > $currentNetPrice || $minPrice < 0) {
+                    $minPrice = (($currentNetPrice - 0.1) / 2);
                 }
-                $price   = $this->faker->randomFloat(4, $minPrice, $items[$i]['netPrice']);
+                $price   = $this->faker->randomFloat(4, $minPrice, $currentNetPrice);
                 $items[] = $this->makeItemArray(['quantity' => $quantity, 'netPrice' => $price]);
             }
         }

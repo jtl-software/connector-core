@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\Dbc;
 
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception as DbalException;
 use Doctrine\DBAL\Schema\Table;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Types\Types;
 use Exception;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\ExpectationFailedException;
 use RuntimeException;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 use Throwable;
 
 class DbManagerTest extends TestCase
 {
     /**
      * @return void
-     * @throws DBALException
+     * @throws DbalException
      * @throws Exception
      */
     public function testRegisterTable(): void
@@ -34,7 +34,7 @@ class DbManagerTest extends TestCase
 
     /**
      * @return void
-     * @throws DBALException
+     * @throws DbalException
      * @throws Exception
      */
     public function testTablesPrefix(): void
@@ -52,7 +52,7 @@ class DbManagerTest extends TestCase
 
     /**
      * @return void
-     * @throws DBALException
+     * @throws DbalException
      * @throws Exception
      */
     public function testHasSchemaUpdates(): void
@@ -66,7 +66,7 @@ class DbManagerTest extends TestCase
 
     /**
      * @return void
-     * @throws DBALException
+     * @throws DbalException
      * @throws Exception
      */
     public function testGetSchemaUpdates(): void
@@ -79,8 +79,8 @@ class DbManagerTest extends TestCase
 
     /**
      * @return void
+     * @throws DbalException
      * @throws Throwable
-     * @throws DBALException
      */
     public function testUpdateDatabaseSchema(): void
     {
@@ -92,27 +92,27 @@ class DbManagerTest extends TestCase
 
     /**
      * @return void
-     * @throws DBALException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws DbalException
+     * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testCreateFromParams(): void
     {
-        $dbm = DbManager::createFromParams(['url' => 'sqlite:///:memory:']);
+        $dbm = DbManager::createFromParams(['driver' => 'pdo_sqlite', 'memory' => true]);
         $this->assertInstanceOf(DbManager::class, $dbm);
     }
 
     /**
      * @return void
-     * @throws DBALException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws DbalException
      * @throws Exception
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testCreateSchemaAssetsFilterCallback(): void
     {
-        $dbm      = DbManager::createFromParams(['url' => 'sqlite:///:memory:']);
+        $dbm      = DbManager::createFromParams(['driver' => 'pdo_sqlite', 'memory' => true]);
         $callback = $dbm->createSchemaAssetsFilterCallback();
         $tables   = $this->createTableStubs($dbm);
 
@@ -184,42 +184,42 @@ class DbManagerTest extends TestCase
     }
 
     /**
-     * @dataProvider tableNameProvider
-     *
      * @param string      $shortName
      * @param string|null $tablesPrefix
      * @param string      $expectedTableName
      *
      * @return void
-     * @throws DBALException
+     * @throws DbalException
      * @throws DbcRuntimeException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
+    #[DataProvider('tableNameProvider')]
     public function testCreateTableName(string $shortName, ?string $tablesPrefix, string $expectedTableName): void
     {
-        $dbm             = DbManager::createFromParams(['url' => 'sqlite:///:memory:'], null, $tablesPrefix);
+        $params          = ['driver' => 'pdo_sqlite', 'memory' => true];
+        $dbm             = DbManager::createFromParams($params, null, $tablesPrefix);
         $actualTableName = $dbm->createTableName($shortName);
         $this->assertEquals($expectedTableName, $actualTableName);
     }
 
     /**
      * @return void
-     * @throws DBALException
+     * @throws DbalException
      * @throws DbcRuntimeException
      */
     public function testCreateTableNameEmptyString(): void
     {
         $this->expectException(DbcRuntimeException::class);
         $this->expectExceptionCode(DbcRuntimeException::TABLE_NAME_EMPTY);
-        $dbm = DbManager::createFromParams(['url' => 'sqlite:///:memory:'], null, 'foo');
+        $dbm = DbManager::createFromParams(['driver' => 'pdo_sqlite', 'memory' => true], null, 'foo');
         $dbm->createTableName('');
     }
 
     /**
      * @return array<array{0: 'foo'|'post', 1: 'pre'|null, 2: 'foo'|'prepost'}>
      */
-    public function tableNameProvider(): array
+    public static function tableNameProvider(): array
     {
         return [
             ['foo', null, 'foo'],
@@ -229,7 +229,7 @@ class DbManagerTest extends TestCase
 
     /**
      * @return void
-     * @throws DBALException
+     * @throws DbalException
      * @throws Exception
      * @throws Throwable
      */

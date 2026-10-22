@@ -18,17 +18,7 @@ use Monolog\Handler\FormattableHandlerInterface;
 use Monolog\Handler\RotatingFileHandler;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\ExpectationFailedException;
-use PHPUnit\Framework\MockObject\ClassAlreadyExistsException;
-use PHPUnit\Framework\MockObject\ClassIsFinalException;
-use PHPUnit\Framework\MockObject\ClassIsReadonlyException;
-use PHPUnit\Framework\MockObject\DuplicateMethodException;
-use PHPUnit\Framework\MockObject\InvalidMethodNameException;
-use PHPUnit\Framework\MockObject\OriginalConstructorInvocationRequiredException;
-use PHPUnit\Framework\MockObject\ReflectionException;
-use PHPUnit\Framework\MockObject\RuntimeException;
-use PHPUnit\Framework\MockObject\UnknownTypeException;
 use Psr\Log\LogLevel;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 class LoggerServiceTest extends TestCase
 {
@@ -38,12 +28,10 @@ class LoggerServiceTest extends TestCase
 
     /**
      * @return void
-     * @throws LoggerException
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws \ReflectionException
-     * @throws \RuntimeException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws LoggerException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testSetFormat(): void
     {
@@ -51,16 +39,13 @@ class LoggerServiceTest extends TestCase
         $this->factory->setFormat('json', $args);
         $reflection    = new \ReflectionClass($this->factory);
         $formatterProp = $reflection->getProperty('formatter');
-        $formatterProp->setAccessible(true);
-        $formatter = $formatterProp->getValue($this->factory);
+        $formatter     = $formatterProp->getValue($this->factory);
         $this->assertInstanceOf(JsonFormatter::class, $formatter);
     }
 
     /**
      * @return void
      * @throws LoggerException
-     * @throws \ReflectionException
-     * @throws \RuntimeException
      */
     public function testSetFormatFormatterNotFound(): void
     {
@@ -71,26 +56,15 @@ class LoggerServiceTest extends TestCase
 
     /**
      * @return void
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
-     * @throws DuplicateMethodException
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
-     * @throws InvalidMethodNameException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
-     * @throws RuntimeException
-     * @throws UnknownTypeException
-     * @throws \PHPUnit\Framework\InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testSetFormatter(): void
     {
         $formatterMock = $this->createMock(FormatterInterface::class);
         $this->factory->setFormatter($formatterMock);
-        $reflection    = new \ReflectionClass($this->factory);
-        $formatterProp = $reflection->getProperty('formatter');
-        $formatterProp->setAccessible(true);
+        $reflection      = new \ReflectionClass($this->factory);
+        $formatterProp   = $reflection->getProperty('formatter');
         $actualFormatter = $formatterProp->getValue($this->factory);
         $this->assertEquals($formatterMock, $actualFormatter);
     }
@@ -98,20 +72,10 @@ class LoggerServiceTest extends TestCase
     /**
      * @return void
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws \InvalidArgumentException
      * @throws \OutOfBoundsException
-     * @throws \PHPUnit\Framework\InvalidArgumentException
-     * @throws ClassAlreadyExistsException
-     * @throws ClassIsFinalException
-     * @throws ClassIsReadonlyException
-     * @throws DuplicateMethodException
-     * @throws InvalidMethodNameException
-     * @throws OriginalConstructorInvocationRequiredException
-     * @throws ReflectionException
-     * @throws RuntimeException
-     * @throws UnknownTypeException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \Psr\Log\InvalidArgumentException
      * @throws \UnexpectedValueException
      */
@@ -159,19 +123,17 @@ class LoggerServiceTest extends TestCase
     /**
      * @return void
      * @throws Exception
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
      * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \Psr\Log\InvalidArgumentException
-     * @throws \ReflectionException
      * @throws \UnexpectedValueException
      */
     public function testGet(): void
     {
         $reflection   = new \ReflectionClass($this->factory);
         $channelsProp = $reflection->getProperty('channels');
-        $channelsProp->setAccessible(true);
-        $channels = $channelsProp->getValue($this->factory);
+        $channels     = $channelsProp->getValue($this->factory);
         $this->assertEmpty($channels);
         $fooChannel = $this->factory->get('foo');
         $channels   = $channelsProp->getValue($this->factory);
@@ -188,15 +150,14 @@ class LoggerServiceTest extends TestCase
         $expectedLogFileName = \sprintf('%s/foo.log', $this->logDir);
         $handlerReflection   = new \ReflectionClass($handlers[0]);
         $filenameProp        = $handlerReflection->getProperty('filename');
-        $filenameProp->setAccessible(true);
         $this->assertEquals($expectedLogFileName, $filenameProp->getValue($handlers[0]));
     }
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
      * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \Psr\Log\InvalidArgumentException
      * @throws \UnexpectedValueException
      */
@@ -208,8 +169,8 @@ class LoggerServiceTest extends TestCase
 
     /**
      * @return void
-     * @throws ExpectationFailedException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testHasNot(): void
     {
@@ -220,7 +181,6 @@ class LoggerServiceTest extends TestCase
      * @return void
      * @throws \InvalidArgumentException
      * @throws \Psr\Log\InvalidArgumentException
-     * @throws \RuntimeException
      * @throws \UnexpectedValueException
      */
     protected function setUp(): void
