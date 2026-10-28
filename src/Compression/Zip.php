@@ -55,9 +55,12 @@ class Zip
                     break;
                 }
 
-                // Images won't reach a compression ratio this high.
-                // A comp_size of 0 (e.g. empty entries or directories) must not trigger a division by zero.
-                if ($compSize > 0 && $size / $compSize > 100) {
+                // A comp_size of 0 with a non-zero uncompressed size is inconsistent (malformed entry)
+                // and must be rejected, as ZipArchive may report success while writing a truncated file.
+                // A genuinely empty entry (size and comp_size both 0, e.g. empty files or directories)
+                // is allowed and must not trigger a division by zero.
+                // Images won't reach a compression ratio above 100.
+                if (($compSize === 0 && $size > 0) || ($compSize > 0 && $size / $compSize > 100)) {
                     $isBomb = true;
                     break;
                 }

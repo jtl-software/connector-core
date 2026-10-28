@@ -19,6 +19,10 @@ class ZipTest extends TestCase
 
     private const string ZERO_BYTE_ENTRY_NAME = 'empty.jpg';
 
+    private const string BOMB_ENTRY_NAME = 'bomb.jpg';
+
+    private const int BOMB_ENTRY_SIZE = 1_000_000;
+
     private string $targetFolder;
 
     private ?string $archivePath = null;
@@ -98,6 +102,21 @@ class ZipTest extends TestCase
     }
 
     /**
+     * @return void
+     */
+    public function testExtractThrowsZipBombExceptionWhenAZipBombFollowsAnEmptyEntry(): void
+    {
+        $archivePath = $this->createArchiveWithEmptyEntryFollowedByBomb();
+
+        $zip = new Zip();
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Zip bomb detected');
+
+        $zip->extract($archivePath, $this->targetFolder);
+    }
+
+    /**
      * @return string
      */
     private function createArchiveWithOversizedEntry(): string
@@ -124,6 +143,24 @@ class ZipTest extends TestCase
         $archive = new \ZipArchive();
         $archive->open($archivePath, \ZipArchive::CREATE);
         $archive->addFromString(self::ZERO_BYTE_ENTRY_NAME, '');
+        $archive->close();
+
+        $this->archivePath = $archivePath;
+
+        return $archivePath;
+    }
+
+    /**
+     * @return string
+     */
+    private function createArchiveWithEmptyEntryFollowedByBomb(): string
+    {
+        $archivePath = \sprintf('%s/%s.zip', \sys_get_temp_dir(), \uniqid('empty-then-bomb-', true));
+
+        $archive = new \ZipArchive();
+        $archive->open($archivePath, \ZipArchive::CREATE);
+        $archive->addFromString(self::ZERO_BYTE_ENTRY_NAME, '');
+        $archive->addFromString(self::BOMB_ENTRY_NAME, \str_repeat('a', self::BOMB_ENTRY_SIZE));
         $archive->close();
 
         $this->archivePath = $archivePath;
