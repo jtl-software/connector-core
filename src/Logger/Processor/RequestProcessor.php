@@ -19,8 +19,6 @@ class RequestProcessor implements ProcessorInterface
     {
         /** @var array<string, string> $server */
         $server = $_SERVER;
-        /** @var array<string, string> $get */
-        $get = $_GET;
 
         $this->extraFields = [
             'http_method' => $server['REQUEST_METHOD'] ?? '',
@@ -28,14 +26,7 @@ class RequestProcessor implements ProcessorInterface
             'domain'      => $server['HTTP_HOST'] ?? $server['SERVER_NAME'] ?? ''
         ];
 
-        // strip jtlauth value from uri
-        $uri     = $server['REQUEST_URI'] ?? '';
-        $session = $get['jtlauth'] ?? '';
-        if ($session !== '') {
-            // string replace is faster as regex
-            $uri = \str_replace(\sprintf('jtlauth=%s', $session), 'jtlauth=***', $uri);
-        }
-        $this->extraFields['uri'] = $uri;
+        $this->extraFields['uri'] = $this->redactJtlauth($server['REQUEST_URI'] ?? '');
 
         // post request size
         $input = \file_get_contents('php://input');
@@ -58,6 +49,69 @@ class RequestProcessor implements ProcessorInterface
         if ($hostname !== false) {
             $this->extraFields['hostname'] = $hostname;
         }
+    }
+
+    /**
+     * Replaces the value of the jtlauth query parameter with ***. jtlauth is the session credential replayed by the
+     * client, so it must not be logged. Each parameter is matched the way PHP itself populates $_GET: the query is
+     * split on the configured argument separators (arg_separator.input, "&" by default) and each pair's name is run
+     * through parse_str(), so url-encoding ("%6atlauth"), "+"/whitespace and NUL truncation ("jtlauth%00x") all still
+     * resolve to jtlauth. The value is dropped regardless of its own encoding; the raw name and separators are kept.
+     *
+     * @param string $uri
+     *
+     * @return string
+     */
+    protected function redactJtlauth(string $uri): string
+    {
+        $queryStart = \strpos($uri, '?');
+        if ($queryStart === false) {
+            return $uri;
+        }
+
+        $prefix = \substr($uri, 0, $queryStart + 1);
+        $query  = \substr($uri, $queryStart + 1);
+
+        // "#" is not a fragment delimiter here: a fragment is never sent to the server, and PHP parses the whole
+        // query string into $_GET treating "#" as an ordinary character, so the entire query is parsed the same way.
+        $separators = \preg_quote($this->queryParameterSeparators(), '/');
+        $parts      = \preg_split('/([' . $separators . '])/', $query, -1, \PREG_SPLIT_DELIM_CAPTURE);
+        if ($parts === false) {
+            // unreachable with this fixed pattern, but never log an unparsed query: it may still carry the credential
+            return $prefix . '***';
+        }
+        foreach ($parts as $index => $part) {
+            // odd indices are the captured separators, and a pair without "=" carries no value to redact
+            if ($index % 2 === 1 || !\str_contains($part, '=')) {
+                continue;
+            }
+            \parse_str($part, $parsed);
+            foreach (\array_keys($parsed) as $name) {
+                if (\strtolower((string)$name) === 'jtlauth') {
+                    $parts[$index] = \explode('=', $part, 2)[0] . '=***';
+                    break;
+                }
+            }
+        }
+
+        return $prefix . \implode('', $parts);
+    }
+
+    /**
+     * The characters PHP treats as query-argument separators when it parses the request into $_GET. Every character in
+     * arg_separator.input is a separator; the default is "&". Overridable so the semicolon path can be regression
+     * tested (the ini setting is PHP_INI_PERDIR and cannot be changed at runtime).
+     *
+     * @return string
+     */
+    protected function queryParameterSeparators(): string
+    {
+        $separators = \ini_get('arg_separator.input');
+        if ($separators === false || $separators === '') {
+            return '&';
+        }
+
+        return $separators;
     }
 
     /**

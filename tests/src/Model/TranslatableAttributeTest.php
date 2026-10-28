@@ -58,6 +58,11 @@ class TranslatableAttributeTest extends TestCase
         if ($translationsCount < 2) {
             throw new \RuntimeException('$translationsCount must be greater than 1.');
         }
+        // findTranslation() resolves by language ISO; the faker-generated ISOs repeat, so make them unique (none is
+        // 'es', so the row below that sets one translation to 'es' stays the only match).
+        foreach ($translations as $index => $translation) {
+            $translation->setLanguageIso(\sprintf('l%d', $index));
+        }
         $randomIntMax = $translationsCount - 1;
 
         return [
@@ -169,6 +174,11 @@ class TranslatableAttributeTest extends TestCase
         for ($i = 0; $i < $rounds; $i++) {
             /** @var TranslatableAttributeI18n[] $translations */
             $translations = $translationsFactory->make(\random_int(1, 5));
+            // getName() resolves by language ISO, so the faker-generated ISOs (a small pool that repeats) must be made
+            // unique, otherwise the selected translation is not the one getName() returns for its ISO.
+            foreach ($translations as $index => $translation) {
+                $translation->setLanguageIso(\sprintf('l%d', $index));
+            }
             $randomIntMax = \count($translations) - 1;
 
             if ($randomIntMax < 1) {

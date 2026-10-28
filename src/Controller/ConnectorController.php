@@ -192,13 +192,17 @@ class ConnectorController implements LoggerAwareInterface
         }
 
         if ($this->tokenValidator->validate($auth->getToken()) === false) {
-            $context = [
-                'token' => $auth->getToken(),
-                'ip'    => $_SERVER['REMOTE_ADDR'],
-            ];
-            $this->logger->warning('Unauthorized access with token ({token}) from ip ({ip})', $context);
+            // Never log the submitted token.
+            $this->logger->warning(
+                'Unauthorized access from ip ({ip})',
+                ['ip' => $_SERVER['REMOTE_ADDR'] ?? '']
+            );
             throw AuthenticationException::failed();
         }
+
+        // Mark the session authenticated (and regenerate its id) before reading it, so that the id returned to
+        // JTL-Wawi is the authenticated one that startSession() will accept on the following requests.
+        Application::markSessionAuthenticated();
 
         $sessionId = \session_id();
         if ($sessionId === false) {
