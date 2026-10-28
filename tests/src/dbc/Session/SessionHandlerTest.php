@@ -52,7 +52,7 @@ class SessionHandlerTest extends TestCase
         $data = [
             SessionHandler::SESSION_ID   => $sessionId,
             SessionHandler::SESSION_DATA => $sessionData,
-            SessionHandler::EXPIRES_AT   => (new \DateTimeImmutable())->setTimestamp(\time() + 1)
+            SessionHandler::EXPIRES_AT   => (new \DateTimeImmutable())->setTimestamp(\time() + 3600)
         ];
 
         $this->handler->insert($data);
@@ -128,7 +128,7 @@ class SessionHandlerTest extends TestCase
         $data = [
             SessionHandler::SESSION_ID   => $sessionId,
             SessionHandler::SESSION_DATA => $sessionData,
-            SessionHandler::EXPIRES_AT   => (new \DateTimeImmutable())->setTimestamp(\time() + 1)
+            SessionHandler::EXPIRES_AT   => (new \DateTimeImmutable())->setTimestamp(\time() + 3600)
         ];
 
         $this->handler->insert($data);
@@ -299,7 +299,7 @@ class SessionHandlerTest extends TestCase
         $data = [
             SessionHandler::SESSION_ID   => $sessionId,
             SessionHandler::SESSION_DATA => $sessionData,
-            SessionHandler::EXPIRES_AT   => (new \DateTimeImmutable())->setTimestamp(\time() + 1)
+            SessionHandler::EXPIRES_AT   => (new \DateTimeImmutable())->setTimestamp(\time() + 3600)
         ];
 
         $this->handler->insert($data);
