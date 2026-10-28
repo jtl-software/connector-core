@@ -55,8 +55,9 @@ class Zip
                     break;
                 }
 
-                // Images won't reach a compression ratio this high
-                if ($size / $compSize > 100) {
+                // Images won't reach a compression ratio this high.
+                // A comp_size of 0 (e.g. empty entries or directories) must not trigger a division by zero.
+                if ($compSize > 0 && $size / $compSize > 100) {
                     $isBomb = true;
                     break;
                 }
