@@ -1019,6 +1019,47 @@ class ApplicationTest extends TestCase
     }
 
     /**
+     * The auth request is also logged redacted for the non-canonical "connector.auth" spelling, which resolves to the
+     * same Connector/auth controller and action as "core.connector.auth". Keying the redaction off the resolved
+     * controller/action instead of the literal method string keeps the token out of the log for the alias too
+     * (CO-3709).
+     *
+     * @return void
+     * @throws Throwable
+     */
+    public function testRunDoesNotLogTheAuthTokenForTheConnectorAuthAlias(): void
+    {
+        $token           = 'CO3709-alias-canary-token';
+        $_POST['jtlrpc'] = \sprintf(
+            '{"jtlrpc":"2.0","id":"co3709","method":"connector.auth","params":{"token":"%s"}}',
+            $token
+        );
+
+        $configSchema = $this->getMockBuilder(ConfigSchema::class)->onlyMethods(['validateConfig'])->getMock();
+        $app          = $this->getMockBuilder(Application::class)
+                             ->setConstructorArgs([$this->connectorDir, new ArrayConfig([]), $configSchema])
+                             ->onlyMethods(['startSession', 'loadPlugins', 'prepareContainer'])
+                             ->getMock();
+
+        $rpcLog = new TestHandler(Level::Debug);
+        $app->getLoggerService()->get(LoggerService::CHANNEL_RPC)->pushHandler($rpcLog);
+
+        \ob_start();
+        try {
+            $app->run($this->createConnector());
+        } catch (Throwable) {
+            // intentionally ignored, the assertion is only about what reached the RPC log
+        }
+        \ob_end_clean();
+
+        $this->assertNotEmpty($rpcLog->getRecords(), 'the auth request should have been logged at debug level');
+        foreach ($rpcLog->getRecords() as $record) {
+            $this->assertStringNotContainsString($token, $record->message);
+            $this->assertStringNotContainsString($token, (string)\json_encode($record->context));
+        }
+    }
+
+    /**
      * @return void
      * @throws ApplicationException
      * @throws CaseConverterException

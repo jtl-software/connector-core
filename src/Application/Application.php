@@ -359,8 +359,11 @@ class Application
             );
             $this->configSchema->validateConfig($this->config);
 
-            // Log incoming request packet (debug only and configuration must be initialized)
-            $logJtlrpc = $requestPacket->getMethod() === RpcMethod::AUTH
+            // Log incoming request packet (debug only and configuration must be initialized). Redact when the request
+            // dispatches to the auth controller/action - both "core.connector.auth" and the "connector.auth" alias
+            // resolve to Connector/auth - not just the canonical method string, so the submitted token is never logged
+            // for an accepted non-canonical spelling (CO-3709).
+            $logJtlrpc = ($method->getController() === Controller::CONNECTOR && $method->getAction() === Action::AUTH)
                 ? $this->redactAuthRequestForLog($requestPacket)
                 : $jtlrpc;
             $this->loggerService->get(LoggerService::CHANNEL_RPC)->debug(Validate::string($logJtlrpc));
