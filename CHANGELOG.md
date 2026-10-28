@@ -1,5 +1,6 @@
 unreleased
 ------
+- CO-3709 SECURITY require an authenticated session for every method except `core.connector.auth`: a failed or missing authentication no longer leaves a session that can be replayed as `jtlauth`. `core.connector.auth` now marks and regenerates the session on success and discards it on failure, the session id is no longer sent as a cookie, and neither the submitted token nor the plaintext session id is logged. Sessions created before the update carry no marker and are rejected once with `INVALID_SESSION`, so clients must re-run `core.connector.auth`.
 
 6.0.0
 ------
