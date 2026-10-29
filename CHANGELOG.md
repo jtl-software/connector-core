@@ -1,5 +1,6 @@
 unreleased
 ------
+- CO-3669 `Zip::extract()` no longer throws a `DivisionByZeroError` on zero-byte entries (empty files, directories); entries with `comp_size` 0 and `size` 0 are accepted, entries with `comp_size` 0 but `size` > 0 are rejected as zip bomb
 
 6.0.0
 ------
