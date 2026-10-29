@@ -28,6 +28,7 @@ use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Definition\ErrorCode;
 use Jtl\Connector\Core\Definition\Event;
 use Jtl\Connector\Core\Definition\Model;
+use Jtl\Connector\Core\Definition\RpcMethod;
 use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\ConfigException;
@@ -935,6 +936,62 @@ class ApplicationTest extends TestCase
     }
 
     /**
+     * @return array<string, array{string}>
+     */
+    public static function foreignSessionRpcMethodProvider(): array
+    {
+        return [
+            'auth'     => [RpcMethod::AUTH],
+            'non-auth' => ['manufacturer.pull'],
+        ];
+    }
+
+    /**
+     * End-to-end through run(): an endpoint may be bootstrapped with its own (e.g. shop) PHP session already active.
+     * The connector refuses to run inside it - auth would otherwise mark and regenerate that foreign session - and
+     * must leave it alone instead of discarding it as unauthenticated (CO-3709).
+     *
+     * @param string $rpcMethod
+     *
+     * @return void
+     * @throws Throwable
+     */
+    #[RunInSeparateProcess]
+    #[DataProvider('foreignSessionRpcMethodProvider')]
+    public function testRunRefusesAForeignSessionAndLeavesItUntouched(string $rpcMethod): void
+    {
+        // stand-in for the shop's session: what matters is that it is already active when run() starts
+        \session_set_save_handler(new SqliteSessionHandler($this->connectorDir . '/var'), true);
+        \ini_set('session.use_cookies', '0');
+        \ini_set('session.cache_limiter', '');
+        \session_id('shop-session');
+        \session_start();
+        $_SESSION['cart'] = ['shop-item'];
+
+        unset($_GET['jtlauth']);
+        $_POST['jtlrpc'] = \sprintf(
+            '{"jtlrpc":"2.0","id":"co3709","method":"%s","params":{"token":"CO3709-token"}}',
+            $rpcMethod
+        );
+
+        \ob_start();
+        try {
+            $this->createApplication()->run($this->createConnector());
+        } catch (Throwable) {
+            // run() rethrows; the response has already been written to the output buffer
+        }
+        $output = (string)\ob_get_clean();
+
+        $this->assertStringContainsString('"code":' . ErrorCode::SERVER_ERROR, $output);
+        $this->assertStringContainsString('another session is already active', $output);
+        $this->assertSame(\PHP_SESSION_ACTIVE, \session_status(), 'the endpoint session must not be closed');
+        $this->assertSame('shop-session', \session_id(), 'the endpoint session must not be regenerated');
+        $this->assertSame(['shop-item'], $_SESSION['cart'] ?? null);
+        $this->assertArrayNotHasKey(Application::SESSION_AUTHENTICATED, $_SESSION);
+        \session_abort();
+    }
+
+    /**
      * End-to-end through run(): a replay of an authenticated session id is accepted for a non-auth method and the
      * session is kept (CO-3709). Only loadPlugins/prepareContainer are stubbed; startSession and closeSession run.
      *
@@ -1019,19 +1076,35 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * The auth request is also logged redacted for the non-canonical "connector.auth" spelling, which resolves to the
-     * same Connector/auth controller and action as "core.connector.auth". Keying the redaction off the resolved
-     * controller/action instead of the literal method string keeps the token out of the log for the alias too
-     * (CO-3709).
+     * @return array<string, array{string}>
+     */
+    public static function nonCanonicalAuthMethodProvider(): array
+    {
+        return [
+            'connector.auth alias'            => ['connector.auth'],
+            'core action on other controller' => ['core.product.auth'],
+            'non-core on other controller'    => ['product.auth'],
+        ];
+    }
+
+    /**
+     * The auth request is also logged redacted for non-canonical spellings. All of them resolve to the auth action,
+     * and handleRequest() dispatches a core action to ConnectorController whatever the controller name, so each one
+     * reaches ConnectorController::auth() with a token. Keying the redaction off the resolved action instead of the
+     * literal method string (or the controller name) keeps the token out of the log for all of them (CO-3709).
+     *
+     * @param string $rpcMethod
      *
      * @return void
      * @throws Throwable
      */
-    public function testRunDoesNotLogTheAuthTokenForTheConnectorAuthAlias(): void
+    #[DataProvider('nonCanonicalAuthMethodProvider')]
+    public function testRunDoesNotLogTheAuthTokenForNonCanonicalAuthMethods(string $rpcMethod): void
     {
         $token           = 'CO3709-alias-canary-token';
         $_POST['jtlrpc'] = \sprintf(
-            '{"jtlrpc":"2.0","id":"co3709","method":"connector.auth","params":{"token":"%s"}}',
+            '{"jtlrpc":"2.0","id":"co3709","method":"%s","params":{"token":"%s"}}',
+            $rpcMethod,
             $token
         );
 

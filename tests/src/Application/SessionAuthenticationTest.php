@@ -189,6 +189,52 @@ class SessionAuthenticationTest extends TestCase
     }
 
     /**
+     * session_regenerate_id() only warns and returns false when it cannot regenerate the id (e.g. once flushed
+     * endpoint output has sent the headers). Marking the session anyway would authenticate the unchanged
+     * pre-authentication id, so authentication must fail instead. A handler that cannot destroy the old session
+     * drives session_regenerate_id() into the same false return without committing headers in the test process.
+     *
+     * @return void
+     * @throws \Throwable
+     */
+    #[RunInSeparateProcess]
+    public function testMarkSessionAuthenticatedFailsClosedWhenIdCannotBeRegenerated(): void
+    {
+        $handler = new class ($this->connectorDir . '/var') extends SqliteSessionHandler {
+            /**
+             * @param string $sessionId
+             *
+             * @return bool
+             */
+            public function destroy(string $sessionId): bool
+            {
+                return false;
+            }
+        };
+        \session_set_save_handler($handler, true);
+        \ini_set('session.use_cookies', '0');
+        \ini_set('session.cache_limiter', '');
+        \session_id('before-auth');
+        \session_start();
+
+        // swallow the expected "Session object destruction failed" warning, as the core ErrorHandler does in run()
+        \set_error_handler(static fn (): bool => true, \E_WARNING);
+        try {
+            Application::markSessionAuthenticated();
+            $this->fail('authentication must fail when the session id cannot be regenerated');
+        } catch (SessionException $exception) {
+            $this->assertSame(ErrorCode::SERVER_ERROR, $exception->getCode());
+        } finally {
+            \restore_error_handler();
+            if (\session_status() === \PHP_SESSION_ACTIVE) {
+                \session_abort();
+            }
+        }
+
+        $this->assertArrayNotHasKey(Application::SESSION_AUTHENTICATED, $_SESSION);
+    }
+
+    /**
      * @return void
      */
     public function testMarkSessionAuthenticatedIsNoopWithoutActiveSession(): void

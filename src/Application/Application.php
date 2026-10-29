@@ -331,6 +331,9 @@ class Application
         $requestPacket = RequestPacket::createFromJtlrpc($jtlrpc, $this->serializer);
         $this->errorHandler->setRequestPacket($requestPacket);
         $responsePacket = null;
+        // A session that is already active (e.g. a shop session the endpoint was bootstrapped with) was not opened by
+        // this request. startSession() refuses to run inside it, and it is not ours to close or discard below.
+        $foreignSessionActive = \session_status() === \PHP_SESSION_ACTIVE;
 
         try {
             if (!$requestPacket->isValid()) {
@@ -359,11 +362,12 @@ class Application
             );
             $this->configSchema->validateConfig($this->config);
 
-            // Log incoming request packet (debug only and configuration must be initialized). Redact when the request
-            // dispatches to the auth controller/action - both "core.connector.auth" and the "connector.auth" alias
-            // resolve to Connector/auth - not just the canonical method string, so the submitted token is never logged
-            // for an accepted non-canonical spelling (CO-3709).
-            $logJtlrpc = ($method->getController() === Controller::CONNECTOR && $method->getAction() === Action::AUTH)
+            // Log incoming request packet (debug only and configuration must be initialized). Redact every request that
+            // resolves to the auth action, not just the canonical method string: handleRequest() dispatches a core
+            // action to ConnectorController whatever the controller name, so "connector.auth", "core.product.auth" etc.
+            // all reach ConnectorController::auth() with a token. Matches the redaction of the logged auth response
+            // (HttpResponse::prepareAndSend()), so the submitted token is never logged for any spelling (CO-3709).
+            $logJtlrpc = $method->getAction() === Action::AUTH
                 ? $this->redactAuthRequestForLog($requestPacket)
                 : $jtlrpc;
             $this->loggerService->get(LoggerService::CHANNEL_RPC)->debug(Validate::string($logJtlrpc));
@@ -404,10 +408,12 @@ class Application
                 ? $responsePacket
                 : ResponsePacket::create($requestPacket->getId());
             // Closing the session must not mask the original error or prevent the response from being sent.
-            try {
-                $this->closeSession();
-            } catch (Throwable $sessionException) {
-                $this->loggerService->get(LoggerService::CHANNEL_SESSION)->error($sessionException->getMessage());
+            if (!$foreignSessionActive) {
+                try {
+                    $this->closeSession();
+                } catch (Throwable $sessionException) {
+                    $this->loggerService->get(LoggerService::CHANNEL_SESSION)->error($sessionException->getMessage());
+                }
             }
             $this->fileSystem->remove($this->deleteFromFileSystem);
             $this->httpResponse->prepareAndSend($requestPacket, Validate::responsePacket($responsePacket));
@@ -433,6 +439,16 @@ class Application
      */
     protected function startSession(string $rpcMethod): void
     {
+        // The connector must own the session it authenticates. With another session already active (e.g. a shop
+        // session the endpoint was bootstrapped with) session_start() would be a no-op and auth would mark and
+        // regenerate that foreign session instead, so refuse; run() leaves the foreign session untouched.
+        if (\session_status() === \PHP_SESSION_ACTIVE) {
+            throw new SessionException(
+                'Cannot start the connector session, another session is already active',
+                ErrorCode::SERVER_ERROR
+            );
+        }
+
         $sessionId   = $this->httpRequest->get('jtlauth');
         $sessionName = 'JtlConnector';
 
@@ -456,8 +472,8 @@ class Application
         // of a (yet) unauthenticated session from leaking via Set-Cookie on, for example, a failed authentication.
         // The cache limiter is disabled as well, so session_start() sends no headers of its own (the response headers
         // are set in HttpResponse::prepareAndSend()). Guarded so these never warn if an endpoint already produced
-        // output or a session is somehow active (headers are then already committed, so no cookie can be sent anyway).
-        if (\session_status() === \PHP_SESSION_NONE && !\headers_sent()) {
+        // output (headers are then already committed, so no cookie can be sent anyway).
+        if (!\headers_sent()) {
             \ini_set('session.use_cookies', '0');
             \ini_set('session.cache_limiter', '');
         }
@@ -479,18 +495,25 @@ class Application
 
     /**
      * Marks the active session as authenticated and gives it a fresh id (prevents session fixation). Called by the
-     * auth controller after the token was validated; the new id is the one returned to JTL-Wawi.
+     * auth controller after the token was validated; the new id is the one returned to JTL-Wawi. If the id cannot be
+     * regenerated the session is left unmarked and authentication fails.
      *
      * @internal
      *
      * @return void
+     * @throws SessionException
      */
     public static function markSessionAuthenticated(): void
     {
         if (\session_status() !== \PHP_SESSION_ACTIVE) {
             return;
         }
-        \session_regenerate_id(true);
+        // Fail closed: session_regenerate_id() only warns and returns false (e.g. once an endpoint flushed output and
+        // headers are sent, or the old session cannot be destroyed). Marking the session anyway would authenticate the
+        // unchanged pre-authentication id and defeat the anti-fixation protection.
+        if (!\session_regenerate_id(true)) {
+            throw new SessionException('Session id could not be regenerated', ErrorCode::SERVER_ERROR);
+        }
         $_SESSION[self::SESSION_AUTHENTICATED] = true;
     }
 

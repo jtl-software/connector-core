@@ -16,6 +16,7 @@ use Jtl\Connector\Core\Exception\AuthenticationException;
 use Jtl\Connector\Core\Exception\DefinitionException;
 use Jtl\Connector\Core\Exception\JsonException as CoreJsonException;
 use Jtl\Connector\Core\Exception\MissingRequirementException;
+use Jtl\Connector\Core\Exception\SessionException;
 use Jtl\Connector\Core\Linker\ChecksumLinker;
 use Jtl\Connector\Core\Linker\IdentityLinker;
 use Jtl\Connector\Core\Logger\Processor\WarningProcessor;
@@ -184,6 +185,7 @@ class ConnectorController implements LoggerAwareInterface
      * @throws AuthenticationException
      * @throws InvalidArgumentException
      * @throws \RuntimeException
+     * @throws SessionException
      */
     public function auth(Authentication $auth): Session
     {
