@@ -612,7 +612,8 @@ abstract class AbstractTable extends AbstractDbcTable implements TableInterface
             }
         }
 
-        $concatExpression = \implode(' || ', $concatParts);
+        // MySQL/MariaDB read "||" as logical OR, so the concatenation must come from the platform.
+        $concatExpression = $this->getConnection()->getDatabasePlatform()->getConcatExpression(...$concatParts);
 
         $preparedEndpoints = [];
         foreach ($endpoints as $endpoint) {

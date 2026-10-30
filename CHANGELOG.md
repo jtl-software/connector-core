@@ -1,5 +1,6 @@
 unreleased
 ------
+- CO-3719 `AbstractTable::filterMappedEndpoints()` builds the endpoint expression with the platform's concat expression again (`CONCAT()` on MySQL/MariaDB, where `||` is a logical OR), so already linked endpoints are no longer reported as not linked
 - CO-3669 `Zip::extract()` no longer throws a `DivisionByZeroError` on zero-byte entries (empty files, directories); entries with `comp_size` 0 and `size` 0 are accepted, entries with `comp_size` 0 but `size` > 0 are rejected as zip bomb
 
 6.0.0
