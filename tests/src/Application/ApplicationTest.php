@@ -28,6 +28,7 @@ use Jtl\Connector\Core\Definition\Controller;
 use Jtl\Connector\Core\Definition\ErrorCode;
 use Jtl\Connector\Core\Definition\Event;
 use Jtl\Connector\Core\Definition\Model;
+use Jtl\Connector\Core\Definition\RpcMethod;
 use Jtl\Connector\Core\Exception\ApplicationException;
 use Jtl\Connector\Core\Exception\CompressionException;
 use Jtl\Connector\Core\Exception\ConfigException;
@@ -38,6 +39,7 @@ use Jtl\Connector\Core\Exception\FileTooLargeException;
 use Jtl\Connector\Core\Exception\LoggerException;
 use Jtl\Connector\Core\Exception\RpcException;
 use Jtl\Connector\Core\Exception\SessionException;
+use Jtl\Connector\Core\Logger\LoggerService;
 use Jtl\Connector\Core\Mapper\PrimaryKeyMapperInterface;
 use Jtl\Connector\Core\Model\AbstractImage;
 use Jtl\Connector\Core\Model\Ack;
@@ -53,11 +55,14 @@ use Jtl\Connector\Core\Rpc\RequestPacket;
 use Jtl\Connector\Core\Rpc\ResponsePacket;
 use Jtl\Connector\Core\Serializer\SerializerBuilder;
 use Jtl\Connector\Core\Session\SessionHandlerInterface;
+use Jtl\Connector\Core\Session\SqliteSessionHandler;
 use Jtl\Connector\Core\Subscriber\FeaturesSubscriber;
 use Jtl\Connector\Core\Subscriber\RequestParamsTransformSubscriber;
 use Jtl\Connector\Core\Test\Stub\Controller\TransactionalControllerStub;
 use Jtl\Connector\Core\Test\TestCase;
 use Jtl\Connector\Core\Utilities\Str;
+use Monolog\Handler\TestHandler;
+use Monolog\Level;
 use MyPlugin\Bootstrap;
 use Noodlehaus\Exception\EmptyDirectoryException;
 use PHPUnit\Framework\Exception;
@@ -71,6 +76,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\FileBag;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\RunInSeparateProcess;
 use Throwable;
 use TypeError;
 
@@ -897,6 +903,233 @@ class ApplicationTest extends TestCase
 
         $this->createApplication()
              ->run($this->createConnector());
+    }
+
+    /**
+     * End-to-end through run(): a session that exists but is not authenticated (e.g. left by a failed auth) is
+     * rejected for a non-auth method and is discarded, so it cannot be replayed (CO-3709). Covers the enforcement
+     * and the closeSession() wiring in run()'s finally, not just the methods in isolation.
+     *
+     * @return void
+     * @throws Throwable
+     */
+    #[RunInSeparateProcess]
+    public function testRunRejectsAndDiscardsUnauthenticatedSessionReplay(): void
+    {
+        (new SqliteSessionHandler($this->connectorDir . '/var'))->write('leftover-id', '');
+        $_GET['jtlauth'] = 'leftover-id';
+        $_POST['jtlrpc'] = '{"jtlrpc":"2.0","id":"co3709","method":"manufacturer.pull","params":{}}';
+
+        \ob_start();
+        try {
+            $this->createApplication()->run($this->createConnector());
+        } catch (Throwable) {
+            // run() rethrows; the response has already been written to the output buffer
+        }
+        $output = (string)\ob_get_clean();
+
+        $this->assertStringContainsString('"code":' . ErrorCode::INVALID_SESSION, $output);
+        $this->assertFalse(
+            (new SqliteSessionHandler($this->connectorDir . '/var'))->validateId('leftover-id'),
+            'the unauthenticated session must not survive the request'
+        );
+    }
+
+    /**
+     * @return array<string, array{string}>
+     */
+    public static function foreignSessionRpcMethodProvider(): array
+    {
+        return [
+            'auth'     => [RpcMethod::AUTH],
+            'non-auth' => ['manufacturer.pull'],
+        ];
+    }
+
+    /**
+     * End-to-end through run(): an endpoint may be bootstrapped with its own (e.g. shop) PHP session already active.
+     * The connector refuses to run inside it - auth would otherwise mark and regenerate that foreign session - and
+     * must leave it alone instead of discarding it as unauthenticated (CO-3709).
+     *
+     * @param string $rpcMethod
+     *
+     * @return void
+     * @throws Throwable
+     */
+    #[RunInSeparateProcess]
+    #[DataProvider('foreignSessionRpcMethodProvider')]
+    public function testRunRefusesAForeignSessionAndLeavesItUntouched(string $rpcMethod): void
+    {
+        // stand-in for the shop's session: what matters is that it is already active when run() starts
+        \session_set_save_handler(new SqliteSessionHandler($this->connectorDir . '/var'), true);
+        \ini_set('session.use_cookies', '0');
+        \ini_set('session.cache_limiter', '');
+        \session_id('shop-session');
+        \session_start();
+        $_SESSION['cart'] = ['shop-item'];
+
+        unset($_GET['jtlauth']);
+        $_POST['jtlrpc'] = \sprintf(
+            '{"jtlrpc":"2.0","id":"co3709","method":"%s","params":{"token":"CO3709-token"}}',
+            $rpcMethod
+        );
+
+        \ob_start();
+        try {
+            $this->createApplication()->run($this->createConnector());
+        } catch (Throwable) {
+            // run() rethrows; the response has already been written to the output buffer
+        }
+        $output = (string)\ob_get_clean();
+
+        $this->assertStringContainsString('"code":' . ErrorCode::SERVER_ERROR, $output);
+        $this->assertStringContainsString('another session is already active', $output);
+        $this->assertSame(\PHP_SESSION_ACTIVE, \session_status(), 'the endpoint session must not be closed');
+        $this->assertSame('shop-session', \session_id(), 'the endpoint session must not be regenerated');
+        $this->assertSame(['shop-item'], $_SESSION['cart']);
+        $this->assertArrayNotHasKey(Application::SESSION_AUTHENTICATED, $_SESSION);
+        \session_abort();
+    }
+
+    /**
+     * End-to-end through run(): a replay of an authenticated session id is accepted for a non-auth method and the
+     * session is kept (CO-3709). Only loadPlugins/prepareContainer are stubbed; startSession and closeSession run.
+     *
+     * @return void
+     * @throws Throwable
+     */
+    #[RunInSeparateProcess]
+    public function testRunAcceptsAndPersistsAuthenticatedSessionReplay(): void
+    {
+        \session_set_save_handler(new SqliteSessionHandler($this->connectorDir . '/var'), true);
+        \ini_set('session.use_cookies', '0');
+        \ini_set('session.cache_limiter', '');
+        \session_id('good-id');
+        \session_start();
+        $_SESSION[Application::SESSION_AUTHENTICATED] = true;
+        \session_write_close();
+
+        $_GET['jtlauth'] = 'good-id';
+        $_POST['jtlrpc'] = '{"jtlrpc":"2.0","id":"co3709","method":"manufacturer.pull","params":{}}';
+
+        $configSchema = $this->getMockBuilder(ConfigSchema::class)->onlyMethods(['validateConfig'])->getMock();
+        $app          = $this->getMockBuilder(Application::class)
+                             ->setConstructorArgs([$this->connectorDir, new ArrayConfig([]), $configSchema])
+                             ->onlyMethods(['loadPlugins', 'prepareContainer'])
+                             ->getMock();
+
+        \ob_start();
+        try {
+            $app->run($this->createConnector());
+        } catch (Throwable) {
+            // the pull fails (no manufacturer controller is wired), but startSession already accepted the session
+        }
+        $output = (string)\ob_get_clean();
+
+        $this->assertStringNotContainsString('"code":' . ErrorCode::INVALID_SESSION, $output);
+        $this->assertTrue(
+            (new SqliteSessionHandler($this->connectorDir . '/var'))->validateId('good-id'),
+            'the authenticated session must be kept'
+        );
+    }
+
+    /**
+     * run() must never log the submitted auth token, regardless of the JSON formatting of the request (CO-3709). The
+     * old regex-based redaction missed e.g. a space before the colon.
+     *
+     * @return void
+     * @throws Throwable
+     */
+    public function testRunDoesNotLogTheAuthToken(): void
+    {
+        $token = 'CO3709-canary-token';
+        // hand-crafted raw packet: the whitespace around the colon defeated the previous "token":\s?"..." regex
+        $_POST['jtlrpc'] = \sprintf(
+            '{"jtlrpc":"2.0","id":"co3709","method":"core.connector.auth","params":{"token" : "%s"}}',
+            $token
+        );
+
+        $configSchema = $this->getMockBuilder(ConfigSchema::class)->onlyMethods(['validateConfig'])->getMock();
+        $app          = $this->getMockBuilder(Application::class)
+                             ->setConstructorArgs([$this->connectorDir, new ArrayConfig([]), $configSchema])
+                             ->onlyMethods(['startSession', 'loadPlugins', 'prepareContainer'])
+                             ->getMock();
+
+        $rpcLog = new TestHandler(Level::Debug);
+        $app->getLoggerService()->get(LoggerService::CHANNEL_RPC)->pushHandler($rpcLog);
+
+        // The token is logged (if at all) before the controller runs, so the request is not fully wired; swallow the
+        // resulting output and exception, the assertion is only about what reached the RPC log.
+        \ob_start();
+        try {
+            $app->run($this->createConnector());
+        } catch (Throwable) {
+            // intentionally ignored
+        }
+        \ob_end_clean();
+
+        $this->assertNotEmpty($rpcLog->getRecords(), 'the auth request should have been logged at debug level');
+        foreach ($rpcLog->getRecords() as $record) {
+            $this->assertStringNotContainsString($token, $record->message);
+            $this->assertStringNotContainsString($token, (string)\json_encode($record->context));
+        }
+    }
+
+    /**
+     * @return array<string, array{string}>
+     */
+    public static function nonCanonicalAuthMethodProvider(): array
+    {
+        return [
+            'connector.auth alias'            => ['connector.auth'],
+            'core action on other controller' => ['core.product.auth'],
+            'non-core on other controller'    => ['product.auth'],
+        ];
+    }
+
+    /**
+     * The auth request is also logged redacted for non-canonical spellings. All of them resolve to the auth action,
+     * and handleRequest() dispatches a core action to ConnectorController whatever the controller name, so each one
+     * reaches ConnectorController::auth() with a token. Keying the redaction off the resolved action instead of the
+     * literal method string (or the controller name) keeps the token out of the log for all of them (CO-3709).
+     *
+     * @param string $rpcMethod
+     *
+     * @return void
+     * @throws Throwable
+     */
+    #[DataProvider('nonCanonicalAuthMethodProvider')]
+    public function testRunDoesNotLogTheAuthTokenForNonCanonicalAuthMethods(string $rpcMethod): void
+    {
+        $token           = 'CO3709-alias-canary-token';
+        $_POST['jtlrpc'] = \sprintf(
+            '{"jtlrpc":"2.0","id":"co3709","method":"%s","params":{"token":"%s"}}',
+            $rpcMethod,
+            $token
+        );
+
+        $configSchema = $this->getMockBuilder(ConfigSchema::class)->onlyMethods(['validateConfig'])->getMock();
+        $app          = $this->getMockBuilder(Application::class)
+                             ->setConstructorArgs([$this->connectorDir, new ArrayConfig([]), $configSchema])
+                             ->onlyMethods(['startSession', 'loadPlugins', 'prepareContainer'])
+                             ->getMock();
+
+        $rpcLog = new TestHandler(Level::Debug);
+        $app->getLoggerService()->get(LoggerService::CHANNEL_RPC)->pushHandler($rpcLog);
+
+        \ob_start();
+        try {
+            $app->run($this->createConnector());
+        } catch (Throwable) {
+            // intentionally ignored, the assertion is only about what reached the RPC log
+        }
+        \ob_end_clean();
+
+        $this->assertNotEmpty($rpcLog->getRecords(), 'the auth request should have been logged at debug level');
+        foreach ($rpcLog->getRecords() as $record) {
+            $this->assertStringNotContainsString($token, $record->message);
+            $this->assertStringNotContainsString($token, (string)\json_encode($record->context));
+        }
     }
 
     /**

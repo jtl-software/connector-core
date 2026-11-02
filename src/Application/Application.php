@@ -114,6 +114,15 @@ class Application
 {
     public const int    PROTOCOL_VERSION = 7;
     public const string MIN_PHP_VERSION  = '8.3';
+
+    /**
+     * Session key set once a request has passed token authentication (core.connector.auth). Every other method
+     * requires it, so a session created by a failed or missing authentication can never be replayed as `jtlauth`.
+     * The key is namespaced so an endpoint's own session data cannot accidentally set or shadow it.
+     *
+     * @internal
+     */
+    public const string SESSION_AUTHENTICATED = 'jtlConnector.authenticated';
     /** @var array<string, string> */
     protected static array    $mimeTypeToExtensionMappings = [
         'image/bmp'                => 'bmp',
@@ -322,6 +331,9 @@ class Application
         $requestPacket = RequestPacket::createFromJtlrpc($jtlrpc, $this->serializer);
         $this->errorHandler->setRequestPacket($requestPacket);
         $responsePacket = null;
+        // A session that is already active (e.g. a shop session the endpoint was bootstrapped with) was not opened by
+        // this request. startSession() refuses to run inside it, and it is not ours to close or discard below.
+        $foreignSessionActive = \session_status() === \PHP_SESSION_ACTIVE;
 
         try {
             if (!$requestPacket->isValid()) {
@@ -350,14 +362,14 @@ class Application
             );
             $this->configSchema->validateConfig($this->config);
 
-            $logJtlrpc = $jtlrpc;
-            if ($requestPacket->getMethod() === RpcMethod::AUTH) {
-                $pattern     = '/\"token\":\s?\"(.*)\"/';
-                $replacement = '"token": "******************"';
-                $logJtlrpc   = \preg_replace($pattern, $replacement, $logJtlrpc);
-            }
-
-            // Log incoming request packet (debug only and configuration must be initialized)
+            // Log incoming request packet (debug only and configuration must be initialized). Redact every request that
+            // resolves to the auth action, not just the canonical method string: handleRequest() dispatches a core
+            // action to ConnectorController whatever the controller name, so "connector.auth", "core.product.auth" etc.
+            // all reach ConnectorController::auth() with a token. Matches the redaction of the logged auth response
+            // (HttpResponse::prepareAndSend()), so the submitted token is never logged for any spelling (CO-3709).
+            $logJtlrpc = $method->getAction() === Action::AUTH
+                ? $this->redactAuthRequestForLog($requestPacket)
+                : $jtlrpc;
             $this->loggerService->get(LoggerService::CHANNEL_RPC)->debug(Validate::string($logJtlrpc));
 
             $event = new RpcEvent($requestPacket->getParams(), $method->getController(), $method->getAction());
@@ -373,7 +385,6 @@ class Application
             if ($warnings->hasWarnings()) {
                 $responsePacket->addWarnings(...$warnings->getWarnings());
             }
-            \session_write_close();
         } catch (Throwable $ex) {
             if (\is_numeric($code = $ex->getCode())) {
                 $codeInt = (int)$code;
@@ -396,6 +407,14 @@ class Application
             $responsePacket = $responsePacket instanceof ResponsePacket
                 ? $responsePacket
                 : ResponsePacket::create($requestPacket->getId());
+            // Closing the session must not mask the original error or prevent the response from being sent.
+            if (!$foreignSessionActive) {
+                try {
+                    $this->closeSession();
+                } catch (Throwable $sessionException) {
+                    $this->loggerService->get(LoggerService::CHANNEL_SESSION)->error($sessionException->getMessage());
+                }
+            }
             $this->fileSystem->remove($this->deleteFromFileSystem);
             $this->httpResponse->prepareAndSend($requestPacket, Validate::responsePacket($responsePacket));
 
@@ -420,6 +439,16 @@ class Application
      */
     protected function startSession(string $rpcMethod): void
     {
+        // The connector must own the session it authenticates. With another session already active (e.g. a shop
+        // session the endpoint was bootstrapped with) session_start() would be a no-op and auth would mark and
+        // regenerate that foreign session instead, so refuse; run() leaves the foreign session untouched.
+        if (\session_status() === \PHP_SESSION_ACTIVE) {
+            throw new SessionException(
+                'Cannot start the connector session, another session is already active',
+                ErrorCode::SERVER_ERROR
+            );
+        }
+
         $sessionId   = $this->httpRequest->get('jtlauth');
         $sessionName = 'JtlConnector';
 
@@ -439,12 +468,85 @@ class Application
             }
         }
 
+        // The session id is transported in the jtlauth parameter, never a cookie. Not sending the cookie keeps the id
+        // of a (yet) unauthenticated session from leaking via Set-Cookie on, for example, a failed authentication.
+        // The cache limiter is disabled as well, so session_start() sends no headers of its own (the response headers
+        // are set in HttpResponse::prepareAndSend()). Guarded so these never warn if an endpoint already produced
+        // output (headers are then already committed, so no cookie can be sent anyway).
+        if (!\headers_sent()) {
+            \ini_set('session.use_cookies', '0');
+            \ini_set('session.cache_limiter', '');
+        }
         \session_set_save_handler($sessionHandler, true);
 
         \session_start();
+        // Log only a hash of the id: the plaintext id is the bearer credential replayed as jtlauth and must not leak
+        // into the logs (the handler hashes it the same way at rest).
         $this->loggerService
             ->get(LoggerService::CHANNEL_SESSION)
-            ->debug('Session started with id ({sessionId})', ['sessionId' => \session_id()]);
+            ->debug('Session started (id hash {idHash})', ['idHash' => \hash('sha256', (string)\session_id())]);
+
+        // A session only counts as authenticated once core.connector.auth has marked it (see ConnectorController::auth
+        // and markSessionAuthenticated). Without this, any session row created by a failed auth would be replayable.
+        if ($rpcMethod !== RpcMethod::AUTH && ($_SESSION[self::SESSION_AUTHENTICATED] ?? null) !== true) {
+            throw new SessionException('Session is invalid', ErrorCode::INVALID_SESSION);
+        }
+    }
+
+    /**
+     * Marks the active session as authenticated and gives it a fresh id (prevents session fixation). Called by the
+     * auth controller after the token was validated; the new id is the one returned to JTL-Wawi. If the id cannot be
+     * regenerated the session is left unmarked and authentication fails.
+     *
+     * @internal
+     *
+     * @return void
+     * @throws SessionException
+     */
+    public static function markSessionAuthenticated(): void
+    {
+        if (\session_status() !== \PHP_SESSION_ACTIVE) {
+            return;
+        }
+        // Fail closed: session_regenerate_id() only warns and returns false (e.g. once an endpoint flushed output and
+        // headers are sent, or the old session cannot be destroyed). Marking the session anyway would authenticate the
+        // unchanged pre-authentication id and defeat the anti-fixation protection.
+        if (!\session_regenerate_id(true)) {
+            throw new SessionException('Session id could not be regenerated', ErrorCode::SERVER_ERROR);
+        }
+        $_SESSION[self::SESSION_AUTHENTICATED] = true;
+    }
+
+    /**
+     * Builds the debug-log line for an auth request. The raw request body is never used, so no JSON formatting (extra
+     * whitespace, escaped keys, ...) can leak the submitted token into the log.
+     *
+     * @param RequestPacket $requestPacket
+     *
+     * @return string
+     */
+    private function redactAuthRequestForLog(RequestPacket $requestPacket): string
+    {
+        return (string)\json_encode(['method' => $requestPacket->getMethod(), 'params' => '***']);
+    }
+
+    /**
+     * Persists the session only when it is authenticated; an unauthenticated session (e.g. from a failed
+     * core.connector.auth) is discarded so no replayable row is left behind.
+     *
+     * @return void
+     */
+    protected function closeSession(): void
+    {
+        if (\session_status() !== \PHP_SESSION_ACTIVE) {
+            return;
+        }
+        if (($_SESSION[self::SESSION_AUTHENTICATED] ?? null) === true) {
+            \session_write_close();
+            return;
+        }
+        $_SESSION = [];
+        \session_destroy();
     }
 
     /**
