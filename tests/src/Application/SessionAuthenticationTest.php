@@ -84,10 +84,14 @@ class SessionAuthenticationTest extends TestCase
     {
         $this->seedAuthenticatedSession('auth-session');
         $_GET['jtlauth'] = 'auth-session';
+        // the seeding helper disables cookies itself, so restore the PHP defaults to exercise the production code
+        \ini_set('session.use_cookies', '1');
+        \ini_set('session.cache_limiter', 'nocache');
 
         $this->invokeStartSession($this->createApplication(), 'manufacturer.pull');
 
         $this->assertSame(\PHP_SESSION_ACTIVE, \session_status());
+        $this->assertSame('', \ini_get('session.cache_limiter'));
         // the session id is the bearer credential, so cookies must stay disabled (jtlauth is the transport)
         $this->assertSame('0', \ini_get('session.use_cookies'));
         \session_abort();

@@ -986,7 +986,7 @@ class ApplicationTest extends TestCase
         $this->assertStringContainsString('another session is already active', $output);
         $this->assertSame(\PHP_SESSION_ACTIVE, \session_status(), 'the endpoint session must not be closed');
         $this->assertSame('shop-session', \session_id(), 'the endpoint session must not be regenerated');
-        $this->assertSame(['shop-item'], $_SESSION['cart'] ?? null);
+        $this->assertSame(['shop-item'], $_SESSION['cart']);
         $this->assertArrayNotHasKey(Application::SESSION_AUTHENTICATED, $_SESSION);
         \session_abort();
     }
