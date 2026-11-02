@@ -6,10 +6,17 @@ declare(strict_types=1);
 
 namespace Jtl\Connector\MappingTables;
 
+use Doctrine\DBAL\Configuration;
+use Doctrine\DBAL\Driver;
+use Doctrine\DBAL\Driver\Middleware;
+use Doctrine\DBAL\Driver\Middleware\AbstractDriverMiddleware;
 use Doctrine\DBAL\Exception as DBALException;
 use Doctrine\DBAL\Exception;
+use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Platforms\SQLitePlatform;
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\SchemaException;
+use Doctrine\DBAL\ServerVersionProvider;
 use Doctrine\DBAL\Types\Types;
 use Jtl\Connector\Dbc\DbcRuntimeException;
 use Jtl\Connector\Dbc\DbManager;
@@ -454,6 +461,92 @@ class AbstractTableTest extends TestCase
         $notMappedActual = $tableStub->filterMappedEndpoints($endpoints);
         $this->assertCount(3, $notMappedActual);
         $this->assertEquals($notMappedExpected, $notMappedActual);
+    }
+
+    /**
+     * MySQL and MariaDB read "||" as logical OR, so the endpoint expression has to be built with the
+     * platform's concat expression (CONCAT() there) instead of a hard-coded "||".
+     *
+     * @return void
+     * @throws DBALException
+     * @throws DbcRuntimeException
+     * @throws MappingTablesException
+     * @throws Throwable
+     */
+    public function testFilterMappedEndpointsUsesPlatformConcatExpression(): void
+    {
+        $platform = new class extends SQLitePlatform {
+            /** @var list<list<string>> */
+            public array $concatExpressionParts = [];
+
+            /**
+             * @param string ...$string
+             *
+             * @return string
+             */
+            public function getConcatExpression(string ...$string): string
+            {
+                $this->concatExpressionParts[] = \array_values($string);
+
+                return parent::getConcatExpression(...$string);
+            }
+        };
+
+        $middleware = new class ($platform) implements Middleware {
+            /**
+             * @param AbstractPlatform $platform
+             */
+            public function __construct(private readonly AbstractPlatform $platform)
+            {
+            }
+
+            /**
+             * @param Driver $driver
+             *
+             * @return Driver
+             */
+            public function wrap(Driver $driver): Driver
+            {
+                return new class ($driver, $this->platform) extends AbstractDriverMiddleware {
+                    /**
+                     * @param Driver           $wrappedDriver
+                     * @param AbstractPlatform $platform
+                     */
+                    public function __construct(Driver $wrappedDriver, private readonly AbstractPlatform $platform)
+                    {
+                        parent::__construct($wrappedDriver);
+                    }
+
+                    /**
+                     * @param ServerVersionProvider $versionProvider
+                     *
+                     * @return AbstractPlatform
+                     */
+                    public function getDatabasePlatform(ServerVersionProvider $versionProvider): AbstractPlatform
+                    {
+                        return $this->platform;
+                    }
+                };
+            }
+        };
+
+        $dbManager = DbManager::createFromParams(
+            ['driver' => 'pdo_sqlite', 'memory' => true],
+            (new Configuration())->setMiddlewares([$middleware]),
+            self::TABLE_PREFIX
+        );
+        $table     = new TableStub($dbManager);
+        $dbManager->updateDatabaseSchema();
+        $this->insertFixtures($table, self::getTableStubFixtures());
+
+        $mapped    = \sprintf('1||1||foo||%s', TableStub::TYPE1);
+        $notMapped = \sprintf('2||1||yolo||%s', TableStub::TYPE1);
+
+        $this->assertSame([$notMapped], $table->filterMappedEndpoints([$mapped, $notMapped]));
+        $this->assertSame(
+            [[TableStub::COL_ID1, "'||'", TableStub::COL_ID2, "'||'", AbstractTable::IDENTITY_TYPE]],
+            $platform->concatExpressionParts
+        );
     }
 
     /**
