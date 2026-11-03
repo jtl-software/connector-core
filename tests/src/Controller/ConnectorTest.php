@@ -20,9 +20,11 @@ use Jtl\Connector\Core\Model\Authentication;
 use Jtl\Connector\Core\Model\Features;
 use Jtl\Connector\Core\Model\Session;
 use Jtl\Connector\Core\Test\TestCase;
+use PHPUnit\Framework\Attributes\RunInSeparateProcess;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\MockObject\CannotUseOnlyMethodsException;
+use Psr\Log\LoggerInterface;
 use SessionHandlerInterface;
 
 class ConnectorTest extends TestCase
@@ -194,6 +196,68 @@ class ConnectorTest extends TestCase
 
         $this->assertInstanceOf(Session::class, $session);
         $this->assertNotEmpty($session->getLifetime());
+    }
+
+    /**
+     * The submitted token must never be written to the log (CO-3709).
+     *
+     * @return void
+     * @throws AuthenticationException
+     * @throws \Psr\Log\InvalidArgumentException
+     */
+    public function testAuthDoesNotLogSubmittedToken(): void
+    {
+        $_SERVER['REMOTE_ADDR'] = '203.0.113.7';
+        $token                  = 'super-secret-token';
+
+        $tokenValidator = $this->createMock(TokenValidatorInterface::class);
+        $tokenValidator->method('validate')->willReturn(false);
+
+        $logger = $this->createMock(LoggerInterface::class);
+        $logger->expects($this->once())
+               ->method('warning')
+               ->with(
+                   $this->logicalNot($this->stringContains('token')),
+                   $this->callback(static fn(array $context): bool
+                       => !\array_key_exists('token', $context) && !\in_array($token, $context, true))
+               );
+
+        $connector = $this->createConnectorController(null, null, null, $tokenValidator);
+        $connector->setLogger($logger);
+
+        $this->expectExceptionObject(AuthenticationException::failed());
+        $connector->auth((new Authentication())->setToken($token));
+    }
+
+    /**
+     * On success the session is marked authenticated and gets a fresh id, which is the one returned to JTL-Wawi.
+     *
+     * @return void
+     * @throws AuthenticationException
+     * @throws Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \Psr\Log\InvalidArgumentException
+     */
+    #[RunInSeparateProcess]
+    public function testAuthMarksAndRegeneratesSessionOnSuccess(): void
+    {
+        \ini_set('session.use_cookies', '0');
+        \ini_set('session.cache_limiter', '');
+        \session_id('pre-auth');
+        \session_start();
+
+        $tokenValidator = $this->createMock(TokenValidatorInterface::class);
+        $tokenValidator->method('validate')->willReturn(true);
+        $connector = $this->createConnectorController(null, null, null, $tokenValidator);
+
+        $session = $connector->auth((new Authentication())->setToken(\md5((string)\time())));
+
+        $this->assertNotSame('pre-auth', $session->getSessionId());
+        $this->assertSame(\session_id(), $session->getSessionId());
+        $this->assertTrue($_SESSION[Application::SESSION_AUTHENTICATED] ?? null);
+        if (\session_status() === \PHP_SESSION_ACTIVE) {
+            \session_abort();
+        }
     }
 
     /**

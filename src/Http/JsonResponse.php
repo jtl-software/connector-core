@@ -11,6 +11,7 @@ use JMS\Serializer\Exception\NotAcceptableException;
 use JMS\Serializer\Exception\RuntimeException;
 use JMS\Serializer\Exception\UnsupportedFormatException;
 use JMS\Serializer\Serializer;
+use Jtl\Connector\Core\Definition\Action;
 use Jtl\Connector\Core\Definition\Event;
 use Jtl\Connector\Core\Event\RpcEvent;
 use Jtl\Connector\Core\Exception\DefinitionException;
@@ -81,7 +82,18 @@ class JsonResponse extends SymfonyJsonResponse implements LoggerAwareInterface
         $this->eventDispatcher->dispatch($event, Event::createRpcEventName(Event::AFTER));
         $responseData[$dataIndex] = $event->getData();
         $this->setData($responseData);
-        $this->logger->debug($this->content);
+        // The auth result carries the session id, which is the bearer credential replayed as jtlauth. It must never be
+        // logged in plaintext. Fail closed: a listener may reshape the result so the id sits at any depth or under any
+        // key, so for a successful auth the whole result is redacted from the logged copy rather than masking a single
+        // field. The response sent to JTL-Wawi still contains the real id. A failed auth has no result (only an error,
+        // which carries no id) and is logged as sent, like any other response.
+        if ($method->getAction() === Action::AUTH && ($responseData['result'] ?? null) !== null) {
+            $responseData['result'] = '***';
+            // Encode with the same options as the sent response, so the log matches it apart from the redaction.
+            $this->logger->debug((string)\json_encode($responseData, $this->getEncodingOptions()));
+        } else {
+            $this->logger->debug($this->content);
+        }
         return $this->send();
     }
 
