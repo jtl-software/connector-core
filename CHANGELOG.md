@@ -1,5 +1,8 @@
 unreleased
 ------
+
+6.0.1
+------
 - CO-3719 `AbstractTable::filterMappedEndpoints()` builds the endpoint expression with the platform's concat expression again (`CONCAT()` on MySQL/MariaDB, where `||` is a logical OR), so already linked endpoints are no longer reported as not linked
 - CO-3669 `Zip::extract()` no longer throws a `DivisionByZeroError` on zero-byte entries (empty files, directories); entries with `comp_size` 0 and `size` 0 are accepted, entries with `comp_size` 0 but `size` > 0 are rejected as zip bomb
 - CO-3709 SECURITY require an authenticated session for every method except `core.connector.auth`: a failed or missing authentication no longer leaves a session that can be replayed as `jtlauth`. `core.connector.auth` now marks and regenerates the session on success (and fails if the id cannot be regenerated, e.g. because the endpoint already flushed output) and discards it on failure, a request that starts while another PHP session is already active (e.g. an endpoint's shop session) is refused with `SERVER_ERROR` instead of authenticating that foreign session, and the foreign session is left untouched, the session id is no longer sent as a cookie, and the session credential is no longer written to the log — not the submitted token (for any method that resolves to the auth action), not the plaintext session id in the "session started" message, not the `sessionId` in the logged auth response, and not a (percent-encoded) `jtlauth` value in the logged request URI. Sessions created before the update carry no marker and are rejected once with `INVALID_SESSION`, so clients must re-run `core.connector.auth`.
