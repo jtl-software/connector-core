@@ -334,6 +334,7 @@ class Application
         // A session that is already active (e.g. a shop session the endpoint was bootstrapped with) was not opened by
         // this request. startSession() refuses to run inside it, and it is not ours to close or discard below.
         $foreignSessionActive = \session_status() === \PHP_SESSION_ACTIVE;
+        $isAuthAction         = false;
 
         try {
             if (!$requestPacket->isValid()) {
@@ -343,7 +344,8 @@ class Application
             // Authenticate before resolving the method, otherwise unauthenticated callers can probe which methods exist
             $this->startSession($requestPacket->getMethod());
 
-            $method = Method::createFromRequestPacket($requestPacket);
+            $method       = Method::createFromRequestPacket($requestPacket);
+            $isAuthAction = $method->getAction() === Action::AUTH;
             if (!Controller::isController($method->getController())) {
                 throw DefinitionException::unknownController($method->getController());
             }
@@ -367,7 +369,7 @@ class Application
             // action to ConnectorController whatever the controller name, so "connector.auth", "core.product.auth" etc.
             // all reach ConnectorController::auth() with a token. Matches the redaction of the logged auth response
             // (HttpResponse::prepareAndSend()), so the submitted token is never logged for any spelling (CO-3709).
-            $logJtlrpc = $method->getAction() === Action::AUTH
+            $logJtlrpc = $isAuthAction
                 ? $this->redactAuthRequestForLog($requestPacket)
                 : $jtlrpc;
             $this->loggerService->get(LoggerService::CHANNEL_RPC)->debug(Validate::string($logJtlrpc));
@@ -406,13 +408,26 @@ class Application
         } finally {
             $responsePacket = $responsePacket instanceof ResponsePacket
                 ? $responsePacket
-                : ResponsePacket::create($requestPacket->getId());
+                : Validate::responsePacket(ResponsePacket::create($requestPacket->getId()));
             // Closing the session must not mask the original error or prevent the response from being sent.
             if (!$foreignSessionActive) {
+                // A successful auth response hands out the session id as the credential for every following request,
+                // so it may only be sent once that session is saved. session_write_close() returns true even if the
+                // handler's write() failed, so check what the next request checks first: whether the id is valid.
+                $authSessionId = $isAuthAction && $responsePacket->getError() === null ? \session_id() : false;
                 try {
                     $this->closeSession();
+                    if ($authSessionId !== false && !$this->getSessionHandler()->validateId($authSessionId)) {
+                        throw new SessionException('Session could not be saved', ErrorCode::SERVER_ERROR);
+                    }
                 } catch (Throwable $sessionException) {
                     $this->loggerService->get(LoggerService::CHANNEL_SESSION)->error($sessionException->getMessage());
+                    if ($authSessionId !== false) {
+                        $responsePacket = Validate::responsePacket(ResponsePacket::create($requestPacket->getId()));
+                        $responsePacket->setError(
+                            (new Error())->setCode(ErrorCode::SERVER_ERROR)->setMessage('Session could not be saved')
+                        );
+                    }
                 }
             }
             $this->fileSystem->remove($this->deleteFromFileSystem);
@@ -479,7 +494,12 @@ class Application
         }
         \session_set_save_handler($sessionHandler, true);
 
-        \session_start();
+        // session_start() only warns and returns false, e.g. when the storage cannot be read or an endpoint already
+        // flushed output with the PHP default session settings. Fail closed before the auth exemption below: without a
+        // session, auth would carry on and hand out an empty or unusable session id.
+        if (!\session_start()) {
+            throw new SessionException('Session could not be started', ErrorCode::SERVER_ERROR);
+        }
         // Log only a hash of the id: the plaintext id is the bearer credential replayed as jtlauth and must not leak
         // into the logs (the handler hashes it the same way at rest).
         $this->loggerService

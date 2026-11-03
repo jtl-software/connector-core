@@ -15,6 +15,7 @@ use Jtl\Connector\Core\Session\SqliteSessionHandler;
 use Jtl\Connector\Core\Test\TestCase;
 use Monolog\Handler\TestHandler;
 use Monolog\Level;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\RunInSeparateProcess;
 
 /**
@@ -69,6 +70,7 @@ class SessionAuthenticationTest extends TestCase
      *
      * @return void
      * @throws \ReflectionException
+     * @throws SessionException
      */
     private function invokeStartSession(Application $application, string $rpcMethod): void
     {
@@ -170,6 +172,68 @@ class SessionAuthenticationTest extends TestCase
         $this->assertSame(\PHP_SESSION_ACTIVE, \session_status());
         $this->assertArrayNotHasKey(Application::SESSION_AUTHENTICATED, $_SESSION);
         \session_abort();
+    }
+
+    /**
+     * @return array<string, array{string, string|null}>
+     */
+    public static function sessionStartFailureProvider(): array
+    {
+        return [
+            'auth'     => [RpcMethod::AUTH, null],
+            'non-auth' => ['manufacturer.pull', 'auth-session'],
+        ];
+    }
+
+    /**
+     * When session_start() fails, no session is active and session_id() is empty. Auth must not carry on regardless:
+     * markSessionAuthenticated() would find no session and the auth response would hand out an unusable id. PHP
+     * returns false both when the storage cannot be read and when an endpoint already flushed output with the PHP
+     * default session settings ("Session cannot be started after headers have already been sent"). A handler that
+     * cannot read drives session_start() into that false return without committing headers in the test process.
+     *
+     * @param string      $rpcMethod
+     * @param string|null $jtlauth
+     *
+     * @return void
+     * @throws \Throwable
+     */
+    #[RunInSeparateProcess]
+    #[DataProvider('sessionStartFailureProvider')]
+    public function testStartSessionFailsClosedWhenTheSessionCannotBeStarted(string $rpcMethod, ?string $jtlauth): void
+    {
+        if ($jtlauth !== null) {
+            $this->seedAuthenticatedSession($jtlauth);
+            $_GET['jtlauth'] = $jtlauth;
+        } else {
+            unset($_GET['jtlauth']);
+        }
+
+        $application = $this->createApplication();
+        $application->setSessionHandler(new class ($this->connectorDir . '/var') extends SqliteSessionHandler {
+            /**
+             * @param string $sessionId
+             *
+             * @return bool|string
+             */
+            public function read(string $sessionId): bool|string
+            {
+                return false;
+            }
+        });
+
+        // swallow the expected "Failed to read session data" warning, as the core ErrorHandler does in run()
+        \set_error_handler(static fn (): bool => true, \E_WARNING);
+        try {
+            $this->invokeStartSession($application, $rpcMethod);
+            $this->fail('the request must fail when the session cannot be started');
+        } catch (SessionException $exception) {
+            $this->assertSame(ErrorCode::SERVER_ERROR, $exception->getCode());
+        } finally {
+            \restore_error_handler();
+        }
+
+        $this->assertNotSame(\PHP_SESSION_ACTIVE, \session_status());
     }
 
     /**

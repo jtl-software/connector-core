@@ -1034,6 +1034,157 @@ class ApplicationTest extends TestCase
     }
 
     /**
+     * Runs a core.connector.auth with a valid token through run() and returns the decoded response. Only loadPlugins
+     * and the config validation are stubbed; startSession, the auth controller and closeSession run for real.
+     *
+     * @param SessionHandlerInterface|null $sessionHandler
+     * @param bool                         $tokenIsValid
+     *
+     * @return array<mixed>
+     * @throws Throwable
+     */
+    private function runAuthRequest(?SessionHandlerInterface $sessionHandler = null, bool $tokenIsValid = true): array
+    {
+        unset($_GET['jtlauth']);
+        $_POST['jtlrpc'] = '{"jtlrpc":"2.0","id":"co3709","method":"core.connector.auth","params":{"token":"t"}}';
+
+        $configSchema = $this->getMockBuilder(ConfigSchema::class)->onlyMethods(['validateConfig'])->getMock();
+        $app          = $this->getMockBuilder(Application::class)
+                             ->setConstructorArgs([$this->connectorDir, new ArrayConfig([]), $configSchema])
+                             ->onlyMethods(['loadPlugins'])
+                             ->getMock();
+        if ($sessionHandler !== null) {
+            $app->setSessionHandler($sessionHandler);
+        }
+
+        \ob_start();
+        try {
+            $app->run($this->createConnector('', $tokenIsValid));
+        } catch (Throwable) {
+            // run() rethrows a failed request; the error response has already been written to the output buffer
+        }
+        $output = (string)\ob_get_clean();
+
+        $response = \json_decode($output, true, 512, \JSON_THROW_ON_ERROR);
+        if (!\is_array($response)) {
+            $this->fail('the response must be a JSON object: ' . $output);
+        }
+
+        return $response;
+    }
+
+    /**
+     * End-to-end through run(): a successful auth hands out a session id that the next request accepts, i.e. its
+     * session was saved with the authenticated marker (CO-3709). Also the control case for the save failures below.
+     *
+     * @return void
+     * @throws Throwable
+     */
+    #[RunInSeparateProcess]
+    public function testRunAuthHandsOutASessionIdTheNextRequestAccepts(): void
+    {
+        $response = $this->runAuthRequest();
+
+        $this->assertNull($response['error'] ?? null);
+        $result = $response['result'] ?? null;
+        if (!\is_array($result) || !\is_string($sessionId = $result['sessionId'] ?? null) || $sessionId === '') {
+            $this->fail('a successful auth must return a session id');
+        }
+
+        $_GET['jtlauth'] = $sessionId;
+        $application     = $this->createApplication();
+        (new \ReflectionMethod($application, 'startSession'))->invoke($application, 'manufacturer.pull');
+        $this->assertSame(\PHP_SESSION_ACTIVE, \session_status());
+        \session_abort();
+    }
+
+    /**
+     * @return array<string, array{bool}>
+     */
+    public static function sessionSaveFailureProvider(): array
+    {
+        return [
+            'write returns false' => [false],
+            'write throws'        => [true],
+        ];
+    }
+
+    /**
+     * The session id of an auth response is the client's credential for every following request. If its session is
+     * not saved, the next request is rejected with INVALID_SESSION, so auth must report SERVER_ERROR instead of
+     * handing out the unusable id. session_write_close() still returns true when the handler's write() returns false
+     * (it only warns), so this covers both failure modes of a handler (CO-3709).
+     *
+     * @param bool $writeThrows
+     *
+     * @return void
+     * @throws Throwable
+     */
+    #[RunInSeparateProcess]
+    #[DataProvider('sessionSaveFailureProvider')]
+    public function testRunFailsAuthWhenTheSessionCannotBeSaved(bool $writeThrows): void
+    {
+        $sessionHandler = new class ($this->connectorDir . '/var', $writeThrows) extends SqliteSessionHandler {
+            /**
+             * @param string $databaseDir
+             * @param bool   $writeThrows
+             *
+             * @throws Throwable
+             */
+            public function __construct(string $databaseDir, private readonly bool $writeThrows)
+            {
+                parent::__construct($databaseDir);
+            }
+
+            /**
+             * @param string $sessionId
+             * @param string $sessionData
+             *
+             * @return bool
+             * @throws \RuntimeException
+             */
+            public function write(string $sessionId, string $sessionData): bool
+            {
+                if ($this->writeThrows) {
+                    throw new \RuntimeException('session storage unavailable');
+                }
+
+                return false;
+            }
+        };
+
+        $response = $this->runAuthRequest($sessionHandler);
+
+        $this->assertArrayNotHasKey('sessionId', \is_array($response['result'] ?? null) ? $response['result'] : []);
+        $error = $response['error'] ?? null;
+        if (!\is_array($error)) {
+            $this->fail('auth must fail when its session cannot be saved');
+        }
+        $this->assertSame(ErrorCode::SERVER_ERROR, $error['code'] ?? null);
+        $this->assertSame('Session could not be saved', $error['message'] ?? null);
+    }
+
+    /**
+     * A failed auth discards its session, so its id is no longer valid afterwards either. The session-save check
+     * must not replace the authentication error in that case (CO-3709).
+     *
+     * @return void
+     * @throws Throwable
+     */
+    #[RunInSeparateProcess]
+    public function testRunKeepsTheAuthenticationErrorOfAFailedAuth(): void
+    {
+        $response = $this->runAuthRequest(null, false);
+
+        $error = $response['error'] ?? null;
+        if (!\is_array($error)) {
+            $this->fail('an auth with an invalid token must fail');
+        }
+        $this->assertSame(ErrorCode::AUTHENTICATION_FAILED, $error['code'] ?? null);
+        $this->assertSame('Authentication failed', $error['message'] ?? null);
+    }
+
+    /**
      * run() must never log the submitted auth token, regardless of the JSON formatting of the request (CO-3709). The
      * old regex-based redaction missed e.g. a space before the colon.
      *
